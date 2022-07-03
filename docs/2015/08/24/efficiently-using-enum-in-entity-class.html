@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Efficiently using Enum in entity class">
+    <meta name="author" content="Sakthi Priyan H">
+    <title>Efficiently using Enum in entity class - Sakthi Priyan H</title>
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" media="screen" href="/css/semantic.min.css">
+    <link rel="stylesheet" media="screen" href="/css/highlight-github.min.css">
+    <link rel="stylesheet" media="screen" href="/css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-27301991-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="ui inverted blue menu">
+      <div class="ui container">
+        <a href="/" class="header item" style="font-size:20px">
+          Sakthi Priyan H
+        </a>
+        <a href="/calendar.html" class="item"><i class="calendar icon"></i>Blogs</a>
+        <a href="/tags.html" class="item"><i class="tags icon"></i>Tags</a>
+      </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="ui two column doubling stackable grid container" id="page">
+        <div class="twelve wide column ">
+        
+<main>
+  <article>
+    <header>
+      <div class="ui stackable grid">
+        <div class="thirteen wide column">
+          <h1 class="ui header">
+            Efficiently using Enum in entity class
+            <div class="sub header">to improve code maintainability and database performance.</div>
+          </h1>
+        </div>
+        <div class="right aligned three wide column">
+          <i class="calendar icon"></i>
+          <time datetime="2015-08-24">
+            Aug 24, 2015
+          </time>
+        </div>
+      </div>
+    </header>
+    <div class="ui divider"></div>
+    <div class="blog-main">
+    <h3>Problems in using Enum in JPA</h3>
+<ul>
+<li>JPA implementations stores the ordinal number of the enum.</li>
+<li>It is problematic in many ways,<ul>
+<li>We cannot rearrange the enum values.</li>
+<li>We cannot remove unused enum value.</li>
+<li>We can add new enum values only at the end.</li>
+</ul>
+</li>
+<li>Alternatively, we can use the string representation of the enum.<ul>
+<li>It is too verbose, takes more space.</li>
+<li>Comparing <code>varchar</code> in database is costly compared to <code>int</code>. Moreover, this field will be used to filter results often.</li>
+</ul>
+</li>
+</ul>
+<h3>How to do it right?</h3>
+<p>In this post we will see how to efficiently use Enum using a <code>int value</code> for each enum value.</p>
+<ul>
+<li>Create an enum with an int value.</li>
+<li>Create a class that implements AttributeConverter.</li>
+<li>Now, simply use the enum wherever required in entity class.</li>
+</ul>
+<h3>Enum Status</h3>
+<p><code>Status</code> has enum values such <code>ACTIVE</code>,<code>INACTIVE</code>, etc.,</p>
+<pre><code>package com.sakthipriyan.example;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public enum Status {
+
+    // Add any enum values anywhere.
+    // Make sure not to repeat same int value.
+    // Changing values here, would require update in database as well.
+    // Now values stored in database is made explicit in code.
+    ACTIVE(1),
+    INACTIVE(2),
+    CREATED(3),
+    SUBMITTED(4),
+    ACCPETED(6),
+    REJECTED(7);
+
+    private final int value;
+
+    private Status(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    // This is look up map to get Enum value from int value.
+    private final static Map&lt;Integer, Status&gt; map = new HashMap&lt;&gt;();
+
+    // In Enum, static block will be executed after creating all Enum values.
+    static {
+        for (Status status : Status.values()) {
+            map.put(status.getValue(), status);
+        }
+    }
+
+    public final static Status getStatus(int value) {
+        return map.get(value);
+    }
+
+}
+</code></pre>
+<h3>StatusConverter implements AttributeConverter</h3>
+<p>AttributeConverter can be implemented to override the default behavior. This implementation say that, <code>Status</code> should be stored as <code>Integer</code> and also provides method to get the <code>Status</code> object from <code>Integer</code> value of the database.</p>
+<pre><code>package com.sakthipriyan.example;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+
+@Converter(autoApply = true)
+public class StatusConverter implements AttributeConverter&lt;Status, Integer&gt; {
+
+    @Override
+    public Integer convertToDatabaseColumn(Status status) {
+        return status.getValue();
+    }
+
+    @Override
+    public Status convertToEntityAttribute(Integer value) {
+        return Status.getStatus(value);
+    }
+}
+</code></pre>
+<h3>Enitity Langauge</h3>
+<p>Now, we can start using the enum <code>Status</code>.
+Here, Langauge entity has a Status field in it.</p>
+<pre><code>package com.sakthipriyan.example;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Language {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private short id;
+
+    @Column(nullable = false)
+    private String language;
+
+    @Column(nullable = false)
+    private Status status;
+
+    public Language(String language) {
+        super();
+        this.language = language;
+        this.status = Status.ACTIVE;
+    }
+
+    public Language() {
+        super();
+    }
+
+    public short getId() {
+        return id;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void deactivate() {
+        this.status = Status.INACTIVE;
+    }
+
+    public void activate() {
+        this.status = Status.ACTIVE;
+    }
+}
+</code></pre>
+<h3>Result</h3>
+<p>Now, whenever the Language object is stored in the database. It will persist the Integer equivalent of the Status object rather than using Ordinal number or String representation of the Enum value.</p>
+<h3>Further tuning</h3>
+<ul>
+<li>Based on the usage, you can even use <code>Short</code> in place of <code>Integer</code> in <code>Status</code> and <code>StatusConverter</code>.</li>
+<li>Also, you can specify the column size in <code>@Column</code> definition.</li>
+<li>Alternatively, with minor variations we should be able to easily stores enum values as <code>char(n)</code> say <code>n=2</code> or <code>n=3</code>.</li>
+</ul>
+    </div>
+    <div class="ui divider"></div>
+    <footer>      
+      <h3>Share</h3>
+      <p class="blog-main">
+      Great!! You read till this point, just go ahead and share this post to your followers, collegues and friends. Thanks!
+      </p>
+      <div class="ui one column grid">
+        <div class="center aligned column">
+          <i class="share alternate icon"></i>
+          <button class="ui small twitter button" id="twitter">
+            <i class="twitter icon"></i> Twitter
+          </button>
+          <button class="ui small linkedin button" id="linkedin">
+            <i class="linkedin icon"></i> LinkedIn
+          </button>
+          <button class="ui small google plus button" id="google">
+            <i class="google plus icon"></i> Google+
+          </button>  
+              <button class="ui small facebook button" id="facebook">
+            <i class="facebook icon"></i> Facebook
+          </button>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <nav>
+        <h3>Tags</h3>
+        <i class="tags icon"></i>
+        
+        <a href="/tags/java.html" class="ui small tag label with topspace">java</a>
+        
+        <a href="/tags/code.html" class="ui small tag label with topspace">code</a>
+        
+        <a href="/tags/jpa.html" class="ui small tag label with topspace">jpa</a>
+        
+        <a href="/tags/database.html" class="ui small tag label with topspace">database</a>
+        
+        <a href="/tags/enum.html" class="ui small tag label with topspace">enum</a>
+        
+        <a href="/tags/hibernate.html" class="ui small tag label with topspace">hibernate</a>
+          
+        <h3>Blogs</h3>
+        <div class="ui two column grid">
+          <div class="left aligned column">
+            
+            <a href="/2015/07/24/couchbase-setup-on-aws.html" class="ui basic blue button">
+              <i class="chevron circle left icon"></i> Couchbase setup on AWS
+            </a>
+            
+          </div>
+          <div class="right aligned column">
+            
+            <a href="/2015/12/09/listing-s3-top-level-folders.html" class="ui basic blue button">
+              Listing S3 Top level folders <i class="chevron circle right icon"></i>
+            </a>
+                  
+          </div>
+        </div>
+      </nav>
+      <h3>About Author</h3>
+      <div class="ui segment blue with bg">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="/img/sakthipriyan.jpg">
+          </div>
+          <div class="content">
+            <span class="header">Sakthi Priyan H</span>
+            <div class="meta">
+              <span>Passionate Programmer</span>
+            </div>
+            <div class="description">
+              <p>
+                <ul>
+                  <li>I am passionate about building excellent teams, processes and systems.</li>
+                  <li>Primarily I use <b>Java</b>, <b>Scala</b> and <b>Python</b> for building various systems and tools.</li>
+                  <li>Building <b>API services</b>, <b>Big data processing</b> and <b>Machine Learning systems</b> in <a target="_blank" href="https://www.crayondata.com">Crayon Data</a>.</li>
+                  <li>Also, interested in Golang and building web apps using Javascript ecosystem.</li>
+                  <li>I wrote my first program in BASIC in 1998, Passionate about computers since then.</li>
+                </ul> 
+              </p>
+            </div>
+            <div class="extra">
+              <a href="https://twitter.com/sakthipriyan">
+                <i class="large twitter icon"></i>
+              </a>
+              <a href="https://github.com/sakthipriyan">
+                <i class="large github icon"></i>
+              </a>
+              <a href="http://in.linkedin.com/in/sakthipriyans">
+                <i class="large linkedin icon"></i>
+              </a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+    </footer>
+  </article>
+</main>
+<div class="ui divider"></div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+        </div>
+        <div class="four wide column">
+          <aside>
+            <div class="ui fluid blue card">
+              <div class="content">
+                <span class="header">sakthipriyan.com</span>
+                <div class="meta">
+                  <span>About Website</span>
+                </div>
+              </div>
+              <div class="content">
+                <b>Blog Posts</b> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+                <br/>
+                <b>Code Snippets</b> are licensed under a <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>
+              </div>
+              <div class="content">
+                Created by <a href="https://github.com/sakthipriyan/webgen">webgen</a> from <a href="https://github.com/sakthipriyan/sakthipriyan.com">source</a>.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/js/highlight.min.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+  </body>
+</html>

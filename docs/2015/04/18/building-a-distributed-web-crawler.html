@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Building a scalable distributed web crawler">
+    <meta name="author" content="Sakthi Priyan H">
+    <title>Building a scalable distributed web crawler - Sakthi Priyan H</title>
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" media="screen" href="/css/semantic.min.css">
+    <link rel="stylesheet" media="screen" href="/css/highlight-github.min.css">
+    <link rel="stylesheet" media="screen" href="/css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-27301991-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="ui inverted blue menu">
+      <div class="ui container">
+        <a href="/" class="header item" style="font-size:20px">
+          Sakthi Priyan H
+        </a>
+        <a href="/calendar.html" class="item"><i class="calendar icon"></i>Blogs</a>
+        <a href="/tags.html" class="item"><i class="tags icon"></i>Tags</a>
+      </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="ui two column doubling stackable grid container" id="page">
+        <div class="twelve wide column ">
+        
+<main>
+  <article>
+    <header>
+      <div class="ui stackable grid">
+        <div class="thirteen wide column">
+          <h1 class="ui header">
+            Building a scalable distributed web crawler
+            <div class="sub header">which can perform both crawling and data extraction</div>
+          </h1>
+        </div>
+        <div class="right aligned three wide column">
+          <i class="calendar icon"></i>
+          <time datetime="2015-04-18">
+            Apr 18, 2015
+          </time>
+        </div>
+      </div>
+    </header>
+    <div class="ui divider"></div>
+    <div class="blog-main">
+    <h3>Crawling Website(s)</h3>
+<p>There are lot of tools like <a href="http://nutch.apache.org/">nutch</a>, <a href="https://github.com/yasserg/crawler4j">crawler4j</a> available for web crawling and data extraction. The problem lies in the scalability and usability of the tools. Following design  trying to address these issues.</p>
+<h3>Goals</h3>
+<ul>
+<li>Ability to scale horizontally by adding more machines.</li>
+<li>Crawl specified sites and pages.</li>
+<li>Simple API interface to develop extractors.</li>
+<li>Re-extraction of data in case, if few more fields are required.</li>
+</ul>
+<h3>Tech stack</h3>
+<ul>
+<li><em><a href="http://www.scala-lang.org/">scala</a></em> much cleaner functional-object programming language in JVM. Core project can be developed using Scala.</li>
+<li><em><a href="http://akka.io/">akka</a></em> actors are used to crawl and extract data. It provided the higher level abstraction over primitive threads. It has clean DSLs for scala than java due java's language limitations.</li>
+<li><em><a href="http://kafka.apache.org/">kafka</a></em> is a disk based efficient pub-sub system. Used as queue in this system. Between, Kafka is written in scala.</li>
+<li><em><a href="http://www.couchbase.com/">couchbase</a></em> is a RAM based fast JSON document store. Is is used for url cache as well as generated json.</li>
+<li><em><a href="http://jsoup.org/">jsoup</a></em> apparently best available dom parser in java.</li>
+<li><em>Proxy Servers</em> - Various proxy servers viz., <a href="http://www.haproxy.org/">HAProxy</a>, <a href="http://www.squid-cache.org/">Squid</a>, <a href="http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/">Polipo</a>, <a href="http://www.privoxy.org/">Privoxy</a>, <a href="https://www.torproject.org/">Tor</a> etc., can be used.</li>
+</ul>
+<h3>Design</h3>
+<p>JSON is the <em>flexible</em> data format that can be used for data extraction out of any web documents. Also, JSON can be used for queue items and url cache.</p>
+<p>Seed the url(s) for a specified website into <em>queue</em> (kafka topic).
+Run the Crawler/Extractor in as many instances as required.</p>
+<p>Crawler will dequeue the url json from queue and checks if the url already cached in couchbase <em>url bucket</em> or has to be reextracted. If it is not available, page is fetched via the proxy servers.</p>
+<p>Once a page is available, raw page is stored in <a href="http://aws.amazon.com/s3/">AWS S3</a> and an entry is made into <em>url bucket</em>.
+Then, extractor will extract two things, one set of documents and next set of url(s).
+Data is stored in couchbase <em>data bucket</em> and next set of url(s) are checked if it has to be crawled.
+Next set url(s) can also contain, required headers and also can carry data map to next level.
+Then, they are added to the same queue.</p>
+<p>In case if the url has to be re extracted, the page is retrieved from s3 and used.</p>
+<h3>Extractor</h3>
+<p>For each website, developer has to create single Java or Scala class.</p>
+<p>It will contain number of methods, each for different type of pages. Each method will accept a Response object and return a Extract object.</p>
+<p>Response object consists of, Request object which corresponds to queue json, Response Headers and Response Body. From response object developer can access html dom or even use raw response and handle it as xml or json.</p>
+<p>Extract object consists of set of JSON documents and set of Request objects.
+Here, JSON documents and Request objects are created from response.</p>
+<p>In short, for each site, developer has to focus on two things, one document extraction and two deciding navigation. For each page, she has to create a method. Framework will manage the rest of the things.</p>
+<h3>Infra</h3>
+<ul>
+<li><em>Couchbase clusters</em>: one for url cache and another one for extracted data. Each cluster has 2 or more nodes.</li>
+<li><em>Kafka cluster</em>: odd number of Kafka broker instances. One topic per website.</li>
+<li><em>Crawler Extractor</em>: <strong>n</strong> number of nodes each running the scala code.</li>
+<li><em>Proxy Servers</em> : It depends on how proxy servers are configured. It is explained below.</li>
+<li><em>AWS S3</em> : It can be used to store the crawled webpage for future reuse.</li>
+</ul>
+<h3>Proxy Servers</h3>
+<p>Proxy servers can be used in two different configurations.
+Both in effect uses more number of IPs, to minimize the risk of getting banned by any website.</p>
+<ol>
+<li>
+<p><strong>Anonymous Proxy</strong></p>
+<p>Tor network can be helpful for crawling a very large site anonymously. But, question on <em>morality</em> and <em>legality</em> arises.
+This set up requires HAProxy, Privoyx/Polipo &amp; Tor.</p>
+<p>HAProxy will be accessed from all crawlers. HAProxy in turn connects to multiple Tor via Polipo/Privoxy.
+Here, Polipo/Privoxy converts the http request into socks request which Tor can understand.</p>
+<p>HAProxy will be running multiple ports and each will be allocated for different sites.
+So, each website request is done round robin on Tor clients independently.
+Moreover, each Tor client will run with Exit nodes at different countries and changes IP every 10 minutes.</p>
+</li>
+<li>
+<p><strong>Distributed Proxy</strong></p>
+<p>This will be helpful when we have large pool of dynamic IPs. Say we can create numerous micro instances in AWS.
+This set up requires HAProxy and Squid.</p>
+<p>HAProxy runs on relatively larger instance. Each micro instances runs a Squid, which simply forwards the connection to the internet.
+HAProxy does a round robin to Squid which in turn connects to internet using the instance IPs.
+As said above, one port for each website in HAProxy.</p>
+<p>If we are doing dynamic allocation and deallocation of instances for Squid, then we are actually using more number of IPs to crawl the website.</p>
+</li>
+</ol>
+<h3>Keep in mind</h3>
+<ul>
+<li>Don't go big bang on small sites and make it appear as <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">DDoS</a>.</li>
+<li>Better declare as bot and link to a page, which explains why.</li>
+<li>It is always trade off between speed and being nice. Be nice.</li>
+<li>Last but not least, respect the robots.txt and website policies.</li>
+</ul>
+<h3>Footnote</h3>
+<p>This post is based on the experience of developing a scalable distributed web crawler.
+It has explained things at a higher level of abstractions.
+Hoping that in future, I will be able to contribute the relevant code for larger community benefits.
+Between, this was my <em>real scala project</em> and I enjoyed it. You can appreciate Scala better when you come from Java world.</p>
+<h3>Edits</h3>
+<h4>Appended on <em>Dec 12, 2015</em></h4>
+<p>Hurray! Read this, <a href="/2015/12/12/crawlpod-open-source-scalable-web-crawler.html">Crawlpod - open source scalable web crawler</a></p>
+    </div>
+    <div class="ui divider"></div>
+    <footer>      
+      <h3>Share</h3>
+      <p class="blog-main">
+      Great!! You read till this point, just go ahead and share this post to your followers, collegues and friends. Thanks!
+      </p>
+      <div class="ui one column grid">
+        <div class="center aligned column">
+          <i class="share alternate icon"></i>
+          <button class="ui small twitter button" id="twitter">
+            <i class="twitter icon"></i> Twitter
+          </button>
+          <button class="ui small linkedin button" id="linkedin">
+            <i class="linkedin icon"></i> LinkedIn
+          </button>
+          <button class="ui small google plus button" id="google">
+            <i class="google plus icon"></i> Google+
+          </button>  
+              <button class="ui small facebook button" id="facebook">
+            <i class="facebook icon"></i> Facebook
+          </button>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <nav>
+        <h3>Tags</h3>
+        <i class="tags icon"></i>
+        
+        <a href="/tags/web_crawler.html" class="ui small tag label with topspace">web crawler</a>
+        
+        <a href="/tags/scala.html" class="ui small tag label with topspace">scala</a>
+        
+        <a href="/tags/akka.html" class="ui small tag label with topspace">akka</a>
+        
+        <a href="/tags/kafka.html" class="ui small tag label with topspace">kafka</a>
+        
+        <a href="/tags/couchbase.html" class="ui small tag label with topspace">couchbase</a>
+        
+        <a href="/tags/jsoup.html" class="ui small tag label with topspace">jsoup</a>
+        
+        <a href="/tags/big_data.html" class="ui small tag label with topspace">big data</a>
+        
+        <a href="/tags/design.html" class="ui small tag label with topspace">design</a>
+        
+        <a href="/tags/distributed.html" class="ui small tag label with topspace">distributed</a>
+        
+        <a href="/tags/proxy.html" class="ui small tag label with topspace">proxy</a>
+          
+        <h3>Blogs</h3>
+        <div class="ui two column grid">
+          <div class="left aligned column">
+            
+            <a href="/2015/04/08/how-to-create-a-modern-blog.html" class="ui basic blue button">
+              <i class="chevron circle left icon"></i> How to create a modern blog?
+            </a>
+            
+          </div>
+          <div class="right aligned column">
+            
+            <a href="/2015/04/24/sbt-run-support-210-not-found.html" class="ui basic blue button">
+              sbt-run-support-210#sbt-run-support-210_2.10;0.1-SNAPSHOT <i class="chevron circle right icon"></i>
+            </a>
+                  
+          </div>
+        </div>
+      </nav>
+      <h3>About Author</h3>
+      <div class="ui segment blue with bg">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="/img/sakthipriyan.jpg">
+          </div>
+          <div class="content">
+            <span class="header">Sakthi Priyan H</span>
+            <div class="meta">
+              <span>Passionate Programmer</span>
+            </div>
+            <div class="description">
+              <p>
+                <ul>
+                  <li>I am passionate about building excellent teams, processes and systems.</li>
+                  <li>Primarily I use <b>Java</b>, <b>Scala</b> and <b>Python</b> for building various systems and tools.</li>
+                  <li>Building <b>API services</b>, <b>Big data processing</b> and <b>Machine Learning systems</b> in <a target="_blank" href="https://www.crayondata.com">Crayon Data</a>.</li>
+                  <li>Also, interested in Golang and building web apps using Javascript ecosystem.</li>
+                  <li>I wrote my first program in BASIC in 1998, Passionate about computers since then.</li>
+                </ul> 
+              </p>
+            </div>
+            <div class="extra">
+              <a href="https://twitter.com/sakthipriyan">
+                <i class="large twitter icon"></i>
+              </a>
+              <a href="https://github.com/sakthipriyan">
+                <i class="large github icon"></i>
+              </a>
+              <a href="http://in.linkedin.com/in/sakthipriyans">
+                <i class="large linkedin icon"></i>
+              </a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+    </footer>
+  </article>
+</main>
+<div class="ui divider"></div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+        </div>
+        <div class="four wide column">
+          <aside>
+            <div class="ui fluid blue card">
+              <div class="content">
+                <span class="header">sakthipriyan.com</span>
+                <div class="meta">
+                  <span>About Website</span>
+                </div>
+              </div>
+              <div class="content">
+                <b>Blog Posts</b> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+                <br/>
+                <b>Code Snippets</b> are licensed under a <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>
+              </div>
+              <div class="content">
+                Created by <a href="https://github.com/sakthipriyan/webgen">webgen</a> from <a href="https://github.com/sakthipriyan/sakthipriyan.com">source</a>.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/js/highlight.min.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+  </body>
+</html>
