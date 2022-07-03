@@ -1,0 +1,23 @@
+{
+	"base_dir" : "/root/sakthipriyan.com",
+	"web_copy" : ["css", "fonts", "img", "js", "resume"],
+	"gen_draft" : false,
+	"base_uri": "/",
+	"blogs_dir": "",
+	"tags_dir": "tags/",
+	"home_recent_count" : 6,
+	"html" : {
+		"css" : [
+			"bootstrap.min.css",
+			"font-awesome.min.css",
+			"highlight-github.min.css",
+			"main.css"
+		],
+		"js" : [
+			"jquery-1.11.2.min.js",
+			"bootstrap.min.js",
+			"highlight.min.js",
+			"main.js"
+		]
+	}
+}

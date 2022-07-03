@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Creating REST API Specification">
+    <meta name="author" content="Sakthi Priyan H">
+    <title>Creating REST API Specification - Sakthi Priyan H</title>
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" media="screen" href="/css/semantic.min.css">
+    <link rel="stylesheet" media="screen" href="/css/highlight-github.min.css">
+    <link rel="stylesheet" media="screen" href="/css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-27301991-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="ui inverted blue menu">
+      <div class="ui container">
+        <a href="/" class="header item" style="font-size:20px">
+          Sakthi Priyan H
+        </a>
+        <a href="/calendar.html" class="item"><i class="calendar icon"></i>Blogs</a>
+        <a href="/tags.html" class="item"><i class="tags icon"></i>Tags</a>
+      </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="ui two column doubling stackable grid container" id="page">
+        <div class="twelve wide column ">
+        
+<main>
+  <article>
+    <header>
+      <div class="ui stackable grid">
+        <div class="thirteen wide column">
+          <h1 class="ui header">
+            Creating REST API Specification
+            <div class="sub header">using Swagger Specification</div>
+          </h1>
+        </div>
+        <div class="right aligned three wide column">
+          <i class="calendar icon"></i>
+          <time datetime="2016-03-30">
+            Mar 30, 2016
+          </time>
+        </div>
+      </div>
+    </header>
+    <div class="ui divider"></div>
+    <div class="blog-main">
+    <h3>Intro</h3>
+<p><a href="http://swagger.io/">Swagger</a> specification is used to document RESTful API. It is immensely useful for defining, developing, testing and consuming the REST API. First release of the Swagger Specification was done on 4+ years ago. It has evolved a lot over these years.</p>
+<blockquote>
+<p>Swagger™ is a project used to describe and document RESTful APIs.<br />
+~ <a href="http://swagger.io/specification/">http://swagger.io/specification/</a></p>
+</blockquote>
+<p>Recently <a href="https://openapis.org">Open API Initiative (OAI)</a> was created which uses Swagger specification as baseline.</p>
+<blockquote>
+<p>The OAI is focused on creating, evolving and promoting a vendor neutral API Description Format based on the Swagger Specififcation.<br />
+~ <a href="https://openapis.org/">https://openapis.org/</a></p>
+</blockquote>
+<p>Focus of this post is to create Swagger specification for a simple use case.</p>
+<h3>Why Swagger?</h3>
+<ul>
+<li>It is much easier to document REST APIs using Swagger Specification</li>
+<li>Manual Documentation is done using simple <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> format.</li>
+<li>Now we can create server code and client code across languages and frameworks.  </li>
+<li>Also, we can create the Swagger Specification from the server code automatically using Java <code>@annotation</code>.</li>
+<li>Easier to communicate across teams and organizations with an industry standard specification.</li>
+<li>Code generated Swagger Spec is always up to date.</li>
+</ul>
+<h3>Creating Swagger Spec for Cricscore API</h3>
+<p>Earlier I had built a cricket score API known as <a href="http://cricscore-api.appspot.com/">Cricscore API</a>.
+Following documentation is equivalent to as is state of the Cricscore API.</p>
+<p>In short, Swagger specification contains 3 sections,</p>
+<ul>
+<li><strong>info &amp; endpoint</strong> - Contains general information and endpoint details.<ul>
+<li>info</li>
+<li>host</li>
+<li>basePath</li>
+<li>schemes</li>
+<li>produces and etc.,</li>
+</ul>
+</li>
+<li><strong>paths</strong> - All Input and Output details of each specific API.</li>
+<li><strong>definitions</strong> - Definitions of data models used across different APIs.</li>
+</ul>
+<h4>Swagger version</h4>
+<p>First Let us specify which version of the swagger we are using.
+Required field. Currently Value is '2.0'</p>
+<pre><code>swagger: '2.0'
+</code></pre>
+<h4>API info</h4>
+<p><code>info</code> is required root of the spec. Within <code>info</code>, <code>title</code> and <code>version</code> are required properties.<br />
+Other properties such as <code>termsOfService</code>, <code>contact</code>, <code>license</code> are optional, but I would suggest we add them as well.</p>
+<pre><code>info:
+  title: Cricscore API
+  version: '1.0'
+  description: Simple REST API to get cricket scores.
+  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
+  contact:
+    name: Sakthi Priyan H
+    url: 'http://sakthipriyan.com'
+    email: email@example.com
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: 'http://creativecommons.org/licenses/by/4.0/'
+</code></pre>
+<p>Refer the <a href="http://swagger.io/specification/#infoObject">info</a> section in the spec for more details.</p>
+<h4>Host name</h4>
+<p>The host (name or ip) serving the API.</p>
+<pre><code>host: cricscore-api.appspot.com
+</code></pre>
+<h4>Base path</h4>
+<p>Base path of the API. For, Cricscore API, currently there is no base path. So, using the <code>/</code>.</p>
+<pre><code>basePath: /
+</code></pre>
+<p>In case, if you are using say <code>https://example.com/api/v1/</code> as basePath, then it should be</p>
+<pre><code>basePath: /api/v1/
+</code></pre>
+<h4>Schemes</h4>
+<p>Schemes supported in the API.</p>
+<pre><code>schemes:
+    - http
+    - https
+</code></pre>
+<h4>Produces</h4>
+<p>List of content types produced by the API. Currently Cricscore API produce only JSON.</p>
+<pre><code>produces:
+    - application/json
+</code></pre>
+<p>Similarly, there is a <code>consumes</code> property as well in the Swagger spec.</p>
+<h4>Definitions</h4>
+<p>Let do definitions before getting into paths.
+We have two different JSON objects that are returned from the Cricscore API.</p>
+<p><strong>Match</strong></p>
+<pre><code>{"id":631136,"t2":"Kenya","t1":"Scotland"}
+</code></pre>
+<p>In Swagger Spec, it becomes.</p>
+<pre><code>definitions:
+    Match:
+        type: object
+        properties:
+        id:
+            type: integer
+            description: Match Id.
+        t1:
+            type: string
+            description: Name of the Team One
+        t2:
+            type: string
+            description: Name of the Team Two
+</code></pre>
+<p><strong>Score</strong></p>
+<pre><code>{
+    "id":597924,
+    "si":"West Indies 25/1 * v India 229/7",
+    "de":"WI 25/2 (3.1 ov, J Charles 12*, UT Yadav 2/7)"
+}
+</code></pre>
+<p>In Swagger Spec, it becomes.</p>
+<pre><code>definitions:
+    Score:
+        type: object
+        properties:
+        id:
+            type: integer
+            description: Match Id.
+        de:
+            type: string
+            description: detailed description of the match.
+        si:
+            type: string
+            description: simple description of the match.
+</code></pre>
+<p>With this we have defined over json format that is returned from the service.</p>
+<h4>Paths</h4>
+<p>In Cricscore API, only one path is available and it is simple get <a href="http://swagger.io/specification/#operationObject">operation</a> on <code>/csa</code></p>
+<p>Swagger Spec operation object contains following fields.</p>
+<ul>
+<li>summary - Summary of the operation.</li>
+<li>parameters -  List of parameters accepted across url path, query parameter, header and body.</li>
+<li>responses - All kind of http response returned by the API.</li>
+</ul>
+<p>Following spec should be fairly self explanatory.<br />
+Refer the original <a href="http://cricscore-api.appspot.com/">documentation</a> of the Cricscore API done earlier using HTTP request/response.</p>
+<pre><code>/csa:
+    get:
+        summary: Get currently playing matches or get scores of specific matches.
+        parameters:
+        - name: id
+            in: query
+            required: false
+            description: Match Ids separated by + sign.
+            type: string
+        - name: If-Modified-Since
+            in: header
+            required: false
+            description: Timestamp of the last response.
+            type: string
+        responses:
+            default:
+                description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
+                schema:
+                type: array
+                items:
+                    $ref: '#/definitions/Match'
+            200:
+                description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
+                headers:
+                Last-Modified:
+                    type: string
+                    description: Should be used for subsequent requests as If-Modified-Since request header.
+                schema:
+                    type: array
+                    items:
+                        $ref: '#/definitions/Score'
+            500:
+                description: Unexpected server error.
+</code></pre>
+<h4>Full Swagger Spec for Cricscore API</h4>
+<pre><code>swagger: '2.0'
+info:
+  title: Cricscore API
+  version: '1.0'
+  description: Simple REST API to get cricket scores.
+  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
+  contact:
+    name: Sakthi Priyan H
+    url: 'http://sakthipriyan.com'
+    email: email@example.com
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: 'http://creativecommons.org/licenses/by/4.0/'
+host: cricscore-api.appspot.com
+basePath: /
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+paths:
+  /csa:
+    get:
+      summary: Get currently playing matches.
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: Match Ids separated by + sign.
+          type: string
+        - name: If-Modified-Since
+          in: header
+          required: false
+          description: Timestamp of the last response.
+          type: string
+      responses:
+        default:
+          description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Match'
+        200:
+          description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
+          headers:
+            Last-Modified:
+              type: string
+              description: Should be used for subsequent requests as If-Modified-Since request header.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Score'
+        500:
+          description: Unexpected server error.
+
+definitions:
+  Match:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Match Id.
+      t1:
+        type: string
+        description: Name of the Team One
+      t2:
+        type: string
+        description: Name of the Team Two
+  Score:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Match Id.
+      de:
+        type: string
+        description: detailed description of the match.
+      si:
+        type: string
+        description: simple description of the match.
+</code></pre>
+<h3>Let's try it out online.</h3>
+<p>There is fantastic online swagger editor is available at <a href="http://editor.swagger.io/">http://editor.swagger.io/</a>.<br />
+Also, <a href="http://swagger.io/specification/">Swagger Specification documentation</a> is pretty good.<br />
+You can play around it.</p>
+<h3>Later</h3>
+<p>I will blog later on how to integrate Swagger into a Java project and auto generate the Swagger specification and additional documentation in html/pdf for offline distribution.</p>
+    </div>
+    <div class="ui divider"></div>
+    <footer>      
+      <h3>Share</h3>
+      <p class="blog-main">
+      Great!! You read till this point, just go ahead and share this post to your followers, collegues and friends. Thanks!
+      </p>
+      <div class="ui one column grid">
+        <div class="center aligned column">
+          <i class="share alternate icon"></i>
+          <button class="ui small twitter button" id="twitter">
+            <i class="twitter icon"></i> Twitter
+          </button>
+          <button class="ui small linkedin button" id="linkedin">
+            <i class="linkedin icon"></i> LinkedIn
+          </button>
+          <button class="ui small google plus button" id="google">
+            <i class="google plus icon"></i> Google+
+          </button>  
+              <button class="ui small facebook button" id="facebook">
+            <i class="facebook icon"></i> Facebook
+          </button>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <nav>
+        <h3>Tags</h3>
+        <i class="tags icon"></i>
+        
+        <a href="/tags/api.html" class="ui small tag label with topspace">api</a>
+        
+        <a href="/tags/swagger.html" class="ui small tag label with topspace">swagger</a>
+        
+        <a href="/tags/documentation.html" class="ui small tag label with topspace">documentation</a>
+        
+        <a href="/tags/design.html" class="ui small tag label with topspace">design</a>
+        
+        <a href="/tags/cricscore_api.html" class="ui small tag label with topspace">cricscore api</a>
+          
+        <h3>Blogs</h3>
+        <div class="ui two column grid">
+          <div class="left aligned column">
+            
+            <a href="/2016/02/23/set-up-g-wan-web-server.html" class="ui basic blue button">
+              <i class="chevron circle left icon"></i> Set up G-WAN web server
+            </a>
+            
+          </div>
+          <div class="right aligned column">
+            
+            <a href="/2016/07/20/documenting-play-framework-using-swagger.html" class="ui basic blue button">
+              Documenting Play Framework using Swagger <i class="chevron circle right icon"></i>
+            </a>
+                  
+          </div>
+        </div>
+      </nav>
+      <h3>About Author</h3>
+      <div class="ui segment blue with bg">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="/img/sakthipriyan.jpg">
+          </div>
+          <div class="content">
+            <span class="header">Sakthi Priyan H</span>
+            <div class="meta">
+              <span>Passionate Programmer</span>
+            </div>
+            <div class="description">
+              <p>
+                <ul>
+                  <li>I am passionate about building excellent teams, processes and systems.</li>
+                  <li>Primarily I use <b>Java</b>, <b>Scala</b> and <b>Python</b> for building various systems and tools.</li>
+                  <li>Building <b>API services</b>, <b>Big data processing</b> and <b>Machine Learning systems</b> in <a target="_blank" href="https://www.crayondata.com">Crayon Data</a>.</li>
+                  <li>Also, interested in Golang and bulding web apps using Javascript ecosystem.</li>
+                  <li>I wrote my first program in BASIC in 1998, Passionate about computers since then.</li>
+                </ul> 
+              </p>
+            </div>
+            <div class="extra">
+              <a href="https://twitter.com/sakthipriyan">
+                <i class="large twitter icon"></i>
+              </a>
+              <a href="https://github.com/sakthipriyan">
+                <i class="large github icon"></i>
+              </a>
+              <a href="http://in.linkedin.com/in/sakthipriyans">
+                <i class="large linkedin icon"></i>
+              </a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+    </footer>
+  </article>
+</main>
+<div class="ui divider"></div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+        </div>
+        <div class="four wide column">
+          <aside>
+            <div class="ui fluid blue card">
+              <div class="content">
+                <span class="header">sakthipriyan.com</span>
+                <div class="meta">
+                  <span>About Website</span>
+                </div>
+              </div>
+              <div class="content">
+                <b>Blog Posts</b> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+                <br/>
+                <b>Code Snippets</b> are licensed under a <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>
+              </div>
+              <div class="content">
+                Created by <a href="https://github.com/sakthipriyan/webgen">webgen</a> from <a href="https://github.com/sakthipriyan/sakthipriyan.com">source</a>.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/js/highlight.min.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+  </body>
+</html>

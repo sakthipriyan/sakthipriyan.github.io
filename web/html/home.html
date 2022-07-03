@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="ui stackable grid">
+  <div class="thirteen wide column">
+    <h1 class="ui header">
+      <a href="{{blog.current.href}}">{{blog.title}}</a>
+      <div class="sub header">{{blog.sub_title}}</div>
+    </h1>
+  </div>
+  <div class="right aligned three wide column">
+    <i class="calendar icon"></i>
+    <time datetime="{{blog.date.strftime('%Y-%m-%d')}}">
+      {{blog.date.strftime('%b %d, %Y')}}
+    </time>
+  </div>
+</div>
+<div class="ui divider"></div>
+<div class="blog-main">
+{{blog.html}}
+</div>
+<div class="ui one column grid">
+  <div class="center aligned column">
+    <i class="share alternate icon"></i>
+    <button class="ui small twitter button" id="twitter">
+      <i class="twitter icon"></i> Twitter
+    </button>
+    <button class="ui small linkedin button" id="linkedin">
+      <i class="linkedin icon"></i> LinkedIn
+    </button>
+    <button class="ui small google plus button" id="google">
+      <i class="google plus icon"></i> Google+
+    </button>
+        <button class="ui small facebook button" id="facebook">
+      <i class="facebook icon"></i> Facebook
+    </button>
+  </div>
+</div>
+<div class="ui divider"></div>
+<span>
+  <i class="tags icon"></i>
+  {% for tag in blog.tags %}
+    <a href="{{tag.href}}" class="ui small tag label with topspace">{{tag.title}}</a>
+  {% endfor %}
+</span>
+<h1 class="ui header">Recent blogs</h1>
+<table class="ui striped table">
+{% for item in blogs %}
+ <tr>
+    <td>
+      <i class="calendar icon"></i>
+      <time datetime="{{item.date.strftime('%Y-%m-%d')}}">
+        {{item.date.strftime('%b %d, %Y')}}
+      </time>
+    </td>
+    <td>
+      <h3 class="ui header without bottom margin">
+        <a href="{{item.current.href}}" class="list-item">{{item.title}}</a>
+        <div class="sub header">{{item.sub_title}}</div>
+      </h3>
+      <i class="tags icon"></i>
+      {% for tag in item.tags %}
+      <a href="{{tag.href}}" class="ui small tag label with topspace">{{tag.title}}</a>
+      {% endfor %}
+    </td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}
