@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Documenting Play Framework using Swagger">
+    <meta name="author" content="Sakthi Priyan H">
+    <title>Documenting Play Framework using Swagger - Sakthi Priyan H</title>
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" media="screen" href="/css/semantic.min.css">
+    <link rel="stylesheet" media="screen" href="/css/highlight-github.min.css">
+    <link rel="stylesheet" media="screen" href="/css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-27301991-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="ui inverted blue menu">
+      <div class="ui container">
+        <a href="/" class="header item" style="font-size:20px">
+          Sakthi Priyan H
+        </a>
+        <a href="/calendar.html" class="item"><i class="calendar icon"></i>Blogs</a>
+        <a href="/tags.html" class="item"><i class="tags icon"></i>Tags</a>
+      </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="ui two column doubling stackable grid container" id="page">
+        <div class="twelve wide column ">
+        
+<main>
+  <article>
+    <header>
+      <div class="ui stackable grid">
+        <div class="thirteen wide column">
+          <h1 class="ui header">
+            Documenting Play Framework using Swagger
+            <div class="sub header">Setting up live documentation for API</div>
+          </h1>
+        </div>
+        <div class="right aligned three wide column">
+          <i class="calendar icon"></i>
+          <time datetime="2016-07-20">
+            Jul 20, 2016
+          </time>
+        </div>
+      </div>
+    </header>
+    <div class="ui divider"></div>
+    <div class="blog-main">
+    <h3>Swagger Spec</h3>
+<p>Earlier I had explained the <a href="http://swagger.io/">Swagger</a> spec in this post, <a href="http://sakthipriyan.com/2016/03/30/creating-rest-api-specification.html">Creating REST API Specification.</a>  </p>
+<h3>Swagger Module</h3>
+<p>Over this post let us automate Swagger spec generation in <a href="https://playframework.com/">Play Framework</a> using <a href="https://github.com/swagger-api/swagger-play">swagger-play2</a> module.</p>
+<h3>Swagger UI</h3>
+<p><a href="http://swagger.io">Swagger.io</a> provides a <a href="http://swagger.io/swagger-ui/">Swagger UI</a> which consumes Swagger spec <code>json</code>.<br />
+It provides a dynamic web interface to learn, experiment and understand the API.</p>
+<h3>Configure Play</h3>
+<p>Now, let us start integrating the swagger module. Following is tested for Play Framework <code>2.4.6</code></p>
+<ol>
+<li>
+<p>Add plugin as dependency in build file <code>build.sbt</code></p>
+<pre><code>libraryDependencies += "io.swagger" %% "swagger-play2" % "1.5.2"
+</code></pre>
+</li>
+<li>
+<p>Enable the Swagger Module in <code>conf/application.conf</code></p>
+<pre><code>play.modules.enabled += "play.modules.swagger.SwaggerModule"
+
+api.version = "v1" // Specify the api version.
+</code></pre>
+<p><a href="https://github.com/swagger-api/swagger-play/tree/master/play-2.4/swagger-play2#applicationconf---config-options">More config</a> can be added to <code>conf/application.conf</code> to auto generate additional fields in Swagger Spec.</p>
+</li>
+</ol>
+<h3>Document API</h3>
+<ul>
+<li>Swagger annotations are available in package <code>io.swagger.annotations</code></li>
+<li>Swagger annotations are used to document API in Controller classes.  </li>
+</ul>
+<p>Sample code can be found below.
+Add following code to the controller class.</p>
+<pre><code>@Api(value = "Example Controller", produces = "application/json")
+</code></pre>
+<p>For each method we need to add documentation, we have to specify the following annotation.<br />
+Standard response class is provided. Here, we have <code>Response.class</code></p>
+<pre><code>@ApiOperation(value = "Get API", notes = "Get list of id &amp; values.", response = Response.class)
+</code></pre>
+<p>For each additional response, that API may return can be added using the following annotation.</p>
+<pre><code>@ApiResponses({
+    @ApiResponse(code = 403, message = "Invalid Authorization", response = ErrorStatus.class),
+    @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorStatus.class) })
+</code></pre>
+<p>Arguments in controller methods can be added using,</p>
+<pre><code>@ApiOperation(value = "Get User", response = User.class)
+public Promise&lt;Result&gt; getUser(
+    @ApiParam(value = "User Id", name = "userId") String userId){
+        User user = getUser(userId);
+        return ok(user);
+    }
+</code></pre>
+<h3>Routes</h3>
+<p>We can access the auto generated Swagger spec by adding a route to it in <code>conf/routes</code></p>
+<pre><code>GET     /docs/swagger.json              controllers.ApiHelpController.getResources
+</code></pre>
+<p>Now. we can access Swagger Spec from <code>/docs/swagger.json</code></p>
+<h3>Add Swagger UI to Play Framework</h3>
+<p>Since Swagger UI is just dynamic frontend with HTML/JS, it can be served directly in <a href="https://www.nginx.com/">Nginx</a> or <a href="https://httpd.apache.org/">httpd</a>.<br />
+Alternatively, we can serve Swagger UI in play framework as well.<br />
+This also, solves any CORS issues that might arise when API and Swagger UI on different domains.<br />
+Copy <a href="https://github.com/swagger-api/swagger-ui/tree/master/dist">dist</a> of Swagger UI to <code>/public/swagger-ui</code> in Play Project.</p>
+<pre><code>GET     /docs/              controllers.Assets.at(path="/public/swagger-ui",file="index.html")
+GET     /docs/swagger.json  controllers.ApiHelpController.getResources
+GET     /docs/*file         controllers.Assets.at(path="/public/swagger-ui",file)
+</code></pre>
+<p>Edit <code>index.html</code> to change the Swagger Spec url.</p>
+<p><strong>From</strong></p>
+<pre><code>var url = window.location.search.match(/url=([^&amp;]+)/);
+if (url &amp;&amp; url.length &gt; 1) {
+    url = decodeURIComponent(url[1]);
+} else {
+    url = "http://petstore.swagger.io/v2/swagger.json";
+}
+</code></pre>
+<p><strong>To</strong></p>
+<pre><code>var url = window.location.search.match(/url=([^&amp;]+)/);
+if (url &amp;&amp; url.length &gt; 1) {
+    url = decodeURIComponent(url[1]);
+} else {
+    url = "swagger.json";
+}
+</code></pre>
+<h3>Explore APIs</h3>
+<p>Once, sbt compiles and run the playframework, go to <code>http://localhost:9000/docs/</code> to see the live working Swagger UI.</p>
+<h3>Good</h3>
+<ul>
+<li>Using Swagger Spec, made it very easy to effectively communicate what API does to anyone who is going to use the API.</li>
+<li>Automated client code generation from Swagger spec made API Consumption and Testing a breeze.</li>
+</ul>
+<h3>Not good Yet</h3>
+<p>There are few glitches in Swagger UI.</p>
+<ul>
+<li>Some times you have to reload the page to make it work again.</li>
+<li>If there is no connection to the API service, UI doesn't explicitly says it.</li>
+<li>API url prefix path is not currently handled in the Swagger UI.</li>
+<li>Swagger Spec generation involving security configuration is not done correctly.</li>
+<li>You may have to use prior major version of Play Framework as there is a delay in support for latest version.</li>
+</ul>
+<h3>Overall</h3>
+<p>Overall Swagger Spec/UI is very good to have when we are exposing any API to be consumed.<br />
+Over time, I expect it to evolve to be a better shape and help people who are building and consuming REST APIs.</p>
+    </div>
+    <div class="ui divider"></div>
+    <footer>      
+      <h3>Share</h3>
+      <p class="blog-main">
+      Great!! You read till this point, just go ahead and share this post to your followers, collegues and friends. Thanks!
+      </p>
+      <div class="ui one column grid">
+        <div class="center aligned column">
+          <i class="share alternate icon"></i>
+          <button class="ui small twitter button" id="twitter">
+            <i class="twitter icon"></i> Twitter
+          </button>
+          <button class="ui small linkedin button" id="linkedin">
+            <i class="linkedin icon"></i> LinkedIn
+          </button>
+          <button class="ui small google plus button" id="google">
+            <i class="google plus icon"></i> Google+
+          </button>  
+              <button class="ui small facebook button" id="facebook">
+            <i class="facebook icon"></i> Facebook
+          </button>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <nav>
+        <h3>Tags</h3>
+        <i class="tags icon"></i>
+        
+        <a href="/tags/api.html" class="ui small tag label with topspace">api</a>
+        
+        <a href="/tags/swagger.html" class="ui small tag label with topspace">swagger</a>
+        
+        <a href="/tags/play_framework.html" class="ui small tag label with topspace">play framework</a>
+        
+        <a href="/tags/documentation.html" class="ui small tag label with topspace">documentation</a>
+        
+        <a href="/tags/design.html" class="ui small tag label with topspace">design</a>
+          
+        <h3>Blogs</h3>
+        <div class="ui two column grid">
+          <div class="left aligned column">
+            
+            <a href="/2016/03/30/creating-rest-api-specification.html" class="ui basic blue button">
+              <i class="chevron circle left icon"></i> Creating REST API Specification
+            </a>
+            
+          </div>
+          <div class="right aligned column">
+            
+            <a href="/2017/04/02/creating-base64-uuid-in-java.html" class="ui basic blue button">
+              Creating Base64 UUID in Java <i class="chevron circle right icon"></i>
+            </a>
+                  
+          </div>
+        </div>
+      </nav>
+      <h3>About Author</h3>
+      <div class="ui segment blue with bg">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="/img/sakthipriyan.jpg">
+          </div>
+          <div class="content">
+            <span class="header">Sakthi Priyan H</span>
+            <div class="meta">
+              <span>Passionate Programmer</span>
+            </div>
+            <div class="description">
+              <p>
+                <ul>
+                  <li>I am passionate about building excellent teams, processes and systems.</li>
+                  <li>Primarily I use <b>Java</b>, <b>Scala</b> and <b>Python</b> for building various systems and tools.</li>
+                  <li>Building <b>API services</b>, <b>Big data processing</b> and <b>Machine Learning systems</b> in <a target="_blank" href="https://www.crayondata.com">Crayon Data</a>.</li>
+                  <li>Also, interested in Golang and bulding web apps using Javascript ecosystem.</li>
+                  <li>I wrote my first program in BASIC in 1998, Passionate about computers since then.</li>
+                </ul> 
+              </p>
+            </div>
+            <div class="extra">
+              <a href="https://twitter.com/sakthipriyan">
+                <i class="large twitter icon"></i>
+              </a>
+              <a href="https://github.com/sakthipriyan">
+                <i class="large github icon"></i>
+              </a>
+              <a href="http://in.linkedin.com/in/sakthipriyans">
+                <i class="large linkedin icon"></i>
+              </a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+    </footer>
+  </article>
+</main>
+<div class="ui divider"></div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+        </div>
+        <div class="four wide column">
+          <aside>
+            <div class="ui fluid blue card">
+              <div class="content">
+                <span class="header">sakthipriyan.com</span>
+                <div class="meta">
+                  <span>About Website</span>
+                </div>
+              </div>
+              <div class="content">
+                <b>Blog Posts</b> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+                <br/>
+                <b>Code Snippets</b> are licensed under a <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>
+              </div>
+              <div class="content">
+                Created by <a href="https://github.com/sakthipriyan/webgen">webgen</a> from <a href="https://github.com/sakthipriyan/sakthipriyan.com">source</a>.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/js/highlight.min.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+  </body>
+</html>

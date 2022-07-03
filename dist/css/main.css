@@ -1,0 +1,45 @@
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 18px;
+  border-left: 5px solid #eee;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+
+
+pre {
+  background: #f8f8f8;
+}
+
+#page {
+  padding: 10px 15px 0;
+}
+
+.blog-main {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.with.topspace {
+  margin-top: 10px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.without.bottom.margin {
+  margin-bottom: 0px;
+}
+
+.with.bg {
+  background-color: #f8f8ff; 
+}

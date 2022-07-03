@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Set up G-WAN web server">
+    <meta name="author" content="Sakthi Priyan H">
+    <title>Set up G-WAN web server - Sakthi Priyan H</title>
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" media="screen" href="/css/semantic.min.css">
+    <link rel="stylesheet" media="screen" href="/css/highlight-github.min.css">
+    <link rel="stylesheet" media="screen" href="/css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-27301991-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="ui inverted blue menu">
+      <div class="ui container">
+        <a href="/" class="header item" style="font-size:20px">
+          Sakthi Priyan H
+        </a>
+        <a href="/calendar.html" class="item"><i class="calendar icon"></i>Blogs</a>
+        <a href="/tags.html" class="item"><i class="tags icon"></i>Tags</a>
+      </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="ui two column doubling stackable grid container" id="page">
+        <div class="twelve wide column ">
+        
+<main>
+  <article>
+    <header>
+      <div class="ui stackable grid">
+        <div class="thirteen wide column">
+          <h1 class="ui header">
+            Set up G-WAN web server
+            <div class="sub header">to serve static website</div>
+          </h1>
+        </div>
+        <div class="right aligned three wide column">
+          <i class="calendar icon"></i>
+          <time datetime="2016-02-23">
+            Feb 23, 2016
+          </time>
+        </div>
+      </div>
+    </header>
+    <div class="ui divider"></div>
+    <div class="blog-main">
+    <h3>What is G-WAN web server?</h3>
+<p>From G-WAN <a href="http://gwan.ch/">website</a>,</p>
+<pre><code>G-WAN runs C, C# or Java with less CPU and
+less RAM while handling more requests than other
+servers. Other languages (Go, PHP, Python, Ruby, JS...)
+benefit from G-WAN's multicore architecture.
+</code></pre>
+<p>G-WAN can be used for serving both static and dynamic contents.</p>
+<h4>Languages supported for dynamic content generation.</h4>
+<ul>
+<li>C</li>
+<li>C++</li>
+<li>C#</li>
+<li>Go</li>
+<li>Java</li>
+<li>Javascript</li>
+<li>Lua</li>
+<li>Objective-C</li>
+<li>Perl</li>
+<li>PHP</li>
+<li>Python</li>
+<li>Ruby</li>
+<li>Scala</li>
+</ul>
+<p>This post explains how to set up static website.</p>
+<h3>Set up</h3>
+<p>Just download and unpack the server.</p>
+<pre><code>wget "http://gwan.com/archives/gwan_linux64-bit.tar.bz2"
+tar -xjf gwan_linux64-bit.tar.bz2
+cd gwan_linux64-bit
+./gwan -h
+</code></pre>
+<p>Following output is shown,</p>
+<pre><code>  _________________________________________________________________
+  |                                                               |
+  | G-WAN Web App. Server v7.12.6   64-bit (Feb  8 2016 16:33:28) |
+  |_______________________________________________________________|
+  |                                                               |
+  | Usage: gwan [-b -d -g -t -w | -k | -r | -v] [argument]        |
+  |        (grouped options like '-bd' are ignored, use '-b -d')  |
+  |_______________________________________________________________|
+  |                                                               |
+  |   -b | use the TCP_DEFER_ACCEPT TCP option                    |
+  |      | (not for frontends: it disables the DoS shield)        |
+  |                                                               |
+  |   -d | daemon mode (default is '-d:www-data:www-data',        |
+  |      | use -d:group:user or just -d:account if user=group)    |
+  |                                                               |
+  |   -g | do not limit worker threads to physical CPU Cores      |
+  |      | (may be needed to bypass a faulty CPU detection but    |
+  |      | don't set more workers than you have physical Cores)   |
+  |                                                               |
+  |   -k | (gracefully) kill local gwan processes using the       |
+  |      | *.pid files found in the ./gwan directory              |
+  |                                                               |
+  |   -r | run the specified C script and exit (-r hello.c)       |
+  |      | (general-purpose source code here, not servlets)       |
+  |                                                               |
+  |   -t | store client requests in the 'gwan/trace' file         |
+  |                                                               |
+  |   -v | show the version number and build date, and exit       |
+  |                                                               |
+  |   -w | define the number of worker threads (ie: -g -w 1)      |
+  |_______________________________________________________________|
+
+G-WAN can listen on 3 local IP addresses:
+ 127.0.0.1 192.168.42.101 172.17.42.1
+</code></pre>
+<p>List of IPs which can be listened by G-WAN is shown above.</p>
+<h3>Starting and stopping the server</h3>
+<pre><code># Start the server in the background
+$ ./gwan &amp;
+
+# Stop the server
+$ ./gwan -k
+</code></pre>
+<h3>Directory Layout for static website</h3>
+<p>For serving static website following folder structure is needed.
+All, other folders comes with the downloaded archive are not required for serving static content.</p>
+<ul>
+<li>gwan_linux64-bit<ul>
+<li>127.0.0.1:8080 -&gt; 1<ul>
+<li>#127.0.0.1 -&gt; 2<ul>
+<li>gzip -&gt; 3<ul>
+<li>index.html</li>
+</ul>
+</li>
+<li>logs -&gt; 4<ul>
+<li>access_2016-02-22.log</li>
+<li>access.log</li>
+<li>error_2016-02-22.log</li>
+<li>error.log</li>
+</ul>
+</li>
+<li>www -&gt; 5<ul>
+<li>index.html</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>gwan -&gt; 6</li>
+<li>logs -&gt; 7<ul>
+<li>gwan_2016-02-22.log</li>
+<li>gwan.log</li>
+</ul>
+</li>
+<li>trace -&gt; 8</li>
+</ul>
+</li>
+</ul>
+<p>Numbers 1-8 marked above is explained as follows.</p>
+<ol>
+<li><code>127.0.0.1:8080</code> IP Address and Port to which this G-WAN web server will listen.</li>
+<li><code>#127.0.0.1</code> Prefix '#' used for "root" HOST (the default host) and
+prefix '$' for "virtual" HOSTS (identified by the "Host: xxx" HTTP header).</li>
+<li><code>gzip</code> content is automatically produced by the G-WAN to serve compressed files.</li>
+<li><code>logs</code> folder contains access and error logs.</li>
+<li>Place static html, js, css and other static files in <code>www</code> folder.<br />
+This is the root directory for the web server.</li>
+<li>Executable file <code>gwan</code> contains the server code.</li>
+<li>Server log files are stored in <code>logs</code> folder.</li>
+<li><code>trace</code> file contains the server start and stop timings.</li>
+</ol>
+<h3>Zero configuration files.</h3>
+<ul>
+<li>Yep! you read it right, G WAN uses directory structure to set up virtual hosts.</li>
+<li>You can override the defaults, by editing the <code>init.c_</code> and <code>main.c_</code> samples given in the tar.</li>
+<li>Virtual hosts can be added by adding folders into top level <code>127.0.0.1:8080</code>.<ul>
+<li>127.0.0.1:8080<ul>
+<li>#127.0.0.1</li>
+<li>$hostname1<ul>
+<li>www</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We can access contents of the <code>hostname1</code> by accessing the url <code>http://hostname1:8080</code>.</li>
+<li>Don't create the <code>logs</code> folder inside virtual host folder <code>$hostname1</code> to avoid creating logs.</li>
+</ul>
+<h3>Good things about G-WAN</h3>
+<ul>
+<li>No need to install any package/dependency for setting up the server.</li>
+<li>Easy to configure and deploy in linux servers.</li>
+<li>Since, <code>gwan</code> file is only <code>229KB</code>, can be embedded and checked into the repository (Say 'git')</li>
+<li>Gives comparable performance to <code>nginx</code> or more. Depends on the content served.</li>
+</ul>
+<h3>Low market share</h3>
+<ul>
+<li>G-WAN is relatively younger one in the web server market.</li>
+<li>Market share is much lower compared to <a href="https://www.nginx.com/">Nginx</a> or oldie <a href="https://httpd.apache.org/">Apache web server</a></li>
+<li>So, the availability of online resources apart from <a href="http://gwan.ch/">G-WAN website</a>.</li>
+</ul>
+<h3>Notes</h3>
+<p>I had tested <code>G-WAN v7.12.6</code> in <code>Ubuntu 14.04</code> and <code>Cent OS 7.1</code>.<br />
+Seems to be working well without any issues.</p>
+    </div>
+    <div class="ui divider"></div>
+    <footer>      
+      <h3>Share</h3>
+      <p class="blog-main">
+      Great!! You read till this point, just go ahead and share this post to your followers, collegues and friends. Thanks!
+      </p>
+      <div class="ui one column grid">
+        <div class="center aligned column">
+          <i class="share alternate icon"></i>
+          <button class="ui small twitter button" id="twitter">
+            <i class="twitter icon"></i> Twitter
+          </button>
+          <button class="ui small linkedin button" id="linkedin">
+            <i class="linkedin icon"></i> LinkedIn
+          </button>
+          <button class="ui small google plus button" id="google">
+            <i class="google plus icon"></i> Google+
+          </button>  
+              <button class="ui small facebook button" id="facebook">
+            <i class="facebook icon"></i> Facebook
+          </button>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <nav>
+        <h3>Tags</h3>
+        <i class="tags icon"></i>
+        
+        <a href="/tags/web_server.html" class="ui small tag label with topspace">web server</a>
+        
+        <a href="/tags/g_wan.html" class="ui small tag label with topspace">g wan</a>
+        
+        <a href="/tags/setup.html" class="ui small tag label with topspace">setup</a>
+          
+        <h3>Blogs</h3>
+        <div class="ui two column grid">
+          <div class="left aligned column">
+            
+            <a href="/2016/02/17/scala-code-to-access-documents-in-aws-s3-bucket.html" class="ui basic blue button">
+              <i class="chevron circle left icon"></i> Scala code to access documents in AWS S3 bucket
+            </a>
+            
+          </div>
+          <div class="right aligned column">
+            
+            <a href="/2016/03/30/creating-rest-api-specification.html" class="ui basic blue button">
+              Creating REST API Specification <i class="chevron circle right icon"></i>
+            </a>
+                  
+          </div>
+        </div>
+      </nav>
+      <h3>About Author</h3>
+      <div class="ui segment blue with bg">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="/img/sakthipriyan.jpg">
+          </div>
+          <div class="content">
+            <span class="header">Sakthi Priyan H</span>
+            <div class="meta">
+              <span>Passionate Programmer</span>
+            </div>
+            <div class="description">
+              <p>
+                <ul>
+                  <li>I am passionate about building excellent teams, processes and systems.</li>
+                  <li>Primarily I use <b>Java</b>, <b>Scala</b> and <b>Python</b> for building various systems and tools.</li>
+                  <li>Building <b>API services</b>, <b>Big data processing</b> and <b>Machine Learning systems</b> in <a target="_blank" href="https://www.crayondata.com">Crayon Data</a>.</li>
+                  <li>Also, interested in Golang and bulding web apps using Javascript ecosystem.</li>
+                  <li>I wrote my first program in BASIC in 1998, Passionate about computers since then.</li>
+                </ul> 
+              </p>
+            </div>
+            <div class="extra">
+              <a href="https://twitter.com/sakthipriyan">
+                <i class="large twitter icon"></i>
+              </a>
+              <a href="https://github.com/sakthipriyan">
+                <i class="large github icon"></i>
+              </a>
+              <a href="http://in.linkedin.com/in/sakthipriyans">
+                <i class="large linkedin icon"></i>
+              </a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+    </footer>
+  </article>
+</main>
+<div class="ui divider"></div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+        </div>
+        <div class="four wide column">
+          <aside>
+            <div class="ui fluid blue card">
+              <div class="content">
+                <span class="header">sakthipriyan.com</span>
+                <div class="meta">
+                  <span>About Website</span>
+                </div>
+              </div>
+              <div class="content">
+                <b>Blog Posts</b> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+                <br/>
+                <b>Code Snippets</b> are licensed under a <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>
+              </div>
+              <div class="content">
+                Created by <a href="https://github.com/sakthipriyan/webgen">webgen</a> from <a href="https://github.com/sakthipriyan/sakthipriyan.com">source</a>.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/js/highlight.min.js" type="text/javascript"></script>
+    <script src="/js/main.js" type="text/javascript"></script>
+  </body>
+</html>
