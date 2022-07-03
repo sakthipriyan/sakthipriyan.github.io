@@ -1,5 +1,5 @@
 {
-	"base_dir" : "/Users/sakthipriyan/Workspace/projects/sakthipriyan.com",
+	"base_dir" : "/Users/sakthipriyan/Workspace/projects/sakthipriyan.github.io",
 	"web_copy" : ["css", "fonts", "img", "js","resume"],
 	"gen_draft" : true,
 	"base_uri": "/",
