@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Home">
+    <meta name="description" content="Responsive exponential backoff in Go">
     <meta name="author" content="Sakthi Priyan H">
-    <title>Home - Sakthi Priyan H</title>
+    <title>Responsive exponential backoff in Go - Sakthi Priyan H</title>
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
     <link rel="stylesheet" media="screen" href="/css/semantic.min.css">
     <link rel="stylesheet" media="screen" href="/css/highlight-github.min.css">
@@ -41,23 +41,27 @@
     <div class="ui two column doubling stackable grid container" id="page">
         <div class="twelve wide column ">
         
-<div class="ui stackable grid">
-  <div class="thirteen wide column">
-    <h1 class="ui header">
-      <a href="/2022/11/13/responsive-auto-sleeper-in-go.html">Responsive exponential backoff in Go</a>
-      <div class="sub header">using exponentially scaling up and down the sleep time</div>
-    </h1>
-  </div>
-  <div class="right aligned three wide column">
-    <i class="calendar icon"></i>
-    <time datetime="2022-11-13">
-      Nov 13, 2022
-    </time>
-  </div>
-</div>
-<div class="ui divider"></div>
-<div class="blog-main">
-<h3>Rate Limiting</h3>
+<main>
+  <article>
+    <header>
+      <div class="ui stackable grid">
+        <div class="thirteen wide column">
+          <h1 class="ui header">
+            Responsive exponential backoff in Go
+            <div class="sub header">using exponentially scaling up and down the sleep time</div>
+          </h1>
+        </div>
+        <div class="right aligned three wide column">
+          <i class="calendar icon"></i>
+          <time datetime="2022-11-13">
+            Nov 13, 2022
+          </time>
+        </div>
+      </div>
+    </header>
+    <div class="ui divider"></div>
+    <div class="blog-main">
+    <h3>Rate Limiting</h3>
 <ul>
 <li>Often when we use various cloud services we end up seeing throttling or rate limiting from the service</li>
 <li>Various cloud services are often shared across multiple tenants and rate limiting mechanisms are used to prevent one tenant consuming much more resources than allocated/provisioned limits</li>
@@ -292,103 +296,112 @@ DownMultiplierThreshold = 5
 <li>Once requests are succeeding, it will try to reduce the delay</li>
 <li>This will be auto balancing as with the increase/decrease of workers as well as DynamoDB WCUs</li>
 </ul>
-</div>
-<div class="ui one column grid">
-  <div class="center aligned column">
-    <i class="share alternate icon"></i>
-    <button class="ui small twitter button" id="twitter">
-      <i class="twitter icon"></i> Twitter
-    </button>
-    <button class="ui small linkedin button" id="linkedin">
-      <i class="linkedin icon"></i> LinkedIn
-    </button>
-    <button class="ui small google plus button" id="google">
-      <i class="google plus icon"></i> Google+
-    </button>
-        <button class="ui small facebook button" id="facebook">
-      <i class="facebook icon"></i> Facebook
-    </button>
-  </div>
-</div>
+    </div>
+    <div class="ui divider"></div>
+    <footer>      
+      <h3>Share</h3>
+      <p class="blog-main">
+      Great!! You read till this point, just go ahead and share this post to your followers, collegues and friends. Thanks!
+      </p>
+      <div class="ui one column grid">
+        <div class="center aligned column">
+          <i class="share alternate icon"></i>
+          <button class="ui small twitter button" id="twitter">
+            <i class="twitter icon"></i> Twitter
+          </button>
+          <button class="ui small linkedin button" id="linkedin">
+            <i class="linkedin icon"></i> LinkedIn
+          </button>
+          <button class="ui small google plus button" id="google">
+            <i class="google plus icon"></i> Google+
+          </button>  
+              <button class="ui small facebook button" id="facebook">
+            <i class="facebook icon"></i> Facebook
+          </button>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <nav>
+        <h3>Tags</h3>
+        <i class="tags icon"></i>
+        
+        <a href="/tags/go.html" class="ui small tag label with topspace">go</a>
+        
+        <a href="/tags/exponential_backoff.html" class="ui small tag label with topspace">exponential backoff</a>
+        
+        <a href="/tags/sleep.html" class="ui small tag label with topspace">sleep</a>
+        
+        <a href="/tags/code.html" class="ui small tag label with topspace">code</a>
+        
+        <a href="/tags/cloud.html" class="ui small tag label with topspace">cloud</a>
+        
+        <a href="/tags/dynamodb.html" class="ui small tag label with topspace">dynamodb</a>
+          
+        <h3>Blogs</h3>
+        <div class="ui two column grid">
+          <div class="left aligned column">
+            
+            <a href="/2018/12/25/building-machine-learning-models-using-scala-spark.html" class="ui basic blue button">
+              <i class="chevron circle left icon"></i> Building machine learning models
+            </a>
+            
+          </div>
+          <div class="right aligned column">
+                  
+          </div>
+        </div>
+      </nav>
+      <h3>About Author</h3>
+      <div class="ui segment blue with bg">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="/img/sakthipriyan.jpg">
+          </div>
+          <div class="content">
+            <span class="header">Sakthi Priyan H</span>
+            <div class="meta">
+              <span>Passionate Programmer</span>
+            </div>
+            <div class="description">
+              <p>
+                <ul>
+                  <li>I am passionate about building excellent teams, processes and systems.</li>
+                  <li>Primarily I use <b>Java</b>, <b>Scala</b> and <b>Python</b> for building various systems and tools.</li>
+                  <li>Building <b>API services</b>, <b>Big data processing</b> and <b>Machine Learning systems</b> in <a target="_blank" href="https://www.crayondata.com">Crayon Data</a>.</li>
+                  <li>Also, interested in Golang and building web apps using Javascript ecosystem.</li>
+                  <li>I wrote my first program in BASIC in 1998, Passionate about computers since then.</li>
+                </ul> 
+              </p>
+            </div>
+            <div class="extra">
+              <a href="https://twitter.com/sakthipriyan">
+                <i class="large twitter icon"></i>
+              </a>
+              <a href="https://github.com/sakthipriyan">
+                <i class="large github icon"></i>
+              </a>
+              <a href="http://in.linkedin.com/in/sakthipriyans">
+                <i class="large linkedin icon"></i>
+              </a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      </div>
+    </footer>
+  </article>
+</main>
 <div class="ui divider"></div>
-<span>
-  <i class="tags icon"></i>
-  
-    <a href="/tags/go.html" class="ui small tag label with topspace">go</a>
-  
-    <a href="/tags/exponential_backoff.html" class="ui small tag label with topspace">exponential backoff</a>
-  
-    <a href="/tags/sleep.html" class="ui small tag label with topspace">sleep</a>
-  
-    <a href="/tags/code.html" class="ui small tag label with topspace">code</a>
-  
-    <a href="/tags/cloud.html" class="ui small tag label with topspace">cloud</a>
-  
-    <a href="/tags/dynamodb.html" class="ui small tag label with topspace">dynamodb</a>
-  
-</span>
-<h1 class="ui header">Recent blogs</h1>
-<table class="ui striped table">
-
- <tr>
-    <td>
-      <i class="calendar icon"></i>
-      <time datetime="2018-12-25">
-        Dec 25, 2018
-      </time>
-    </td>
-    <td>
-      <h3 class="ui header without bottom margin">
-        <a href="/2018/12/25/building-machine-learning-models-using-scala-spark.html" class="list-item">Building machine learning models</a>
-        <div class="sub header">using scala spark</div>
-      </h3>
-      <i class="tags icon"></i>
-      
-      <a href="/tags/spark.html" class="ui small tag label with topspace">spark</a>
-      
-      <a href="/tags/scala.html" class="ui small tag label with topspace">scala</a>
-      
-      <a href="/tags/sbt.html" class="ui small tag label with topspace">sbt</a>
-      
-      <a href="/tags/bigdata.html" class="ui small tag label with topspace">bigdata</a>
-      
-      <a href="/tags/code.html" class="ui small tag label with topspace">code</a>
-      
-      <a href="/tags/machine_learning.html" class="ui small tag label with topspace">machine learning</a>
-      
-    </td>
-  </tr>
-
- <tr>
-    <td>
-      <i class="calendar icon"></i>
-      <time datetime="2018-12-06">
-        Dec 06, 2018
-      </time>
-    </td>
-    <td>
-      <h3 class="ui header without bottom margin">
-        <a href="/2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html" class="list-item">Feature engineering for machine learning models</a>
-        <div class="sub header">using scala spark</div>
-      </h3>
-      <i class="tags icon"></i>
-      
-      <a href="/tags/spark.html" class="ui small tag label with topspace">spark</a>
-      
-      <a href="/tags/scala.html" class="ui small tag label with topspace">scala</a>
-      
-      <a href="/tags/sbt.html" class="ui small tag label with topspace">sbt</a>
-      
-      <a href="/tags/bigdata.html" class="ui small tag label with topspace">bigdata</a>
-      
-      <a href="/tags/code.html" class="ui small tag label with topspace">code</a>
-      
-      <a href="/tags/machine_learning.html" class="ui small tag label with topspace">machine learning</a>
-      
-    </td>
-  </tr>
-
-</table>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
 
         </div>
         <div class="four wide column">
