@@ -1,0 +1,53 @@
+# Building Wealth - Independent Hugo Site Configuration
+baseURL: "/building-wealth/"
+title: "Building Wealth | Sakthi Priyan"
+theme: "continuum"
+languageCode: "en-us"
+defaultContentLanguage: "en"
+
+params:
+  description: "Investment strategies, financial planning, and wealth building techniques to secure your financial future"
+  author: "Sakthi Priyan"
+  siteType: "building-wealth"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+# Menu configuration for building-wealth site
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 5
+    - name: "Blogs"
+      url: "/blogs/"
+      weight: 10
+    - name: "Videos"
+      url: "/videos/"
+      weight: 20
+    - name: "Slides"
+      url: "/slides/"
+      weight: 30
+    - name: "Tools"
+      url: "/tools/"
+      weight: 40
+    - name: "Tags"
+      url: "/tags/"
+      weight: 50
+
+outputFormats:
+  RSS:
+    mediatype: "application/rss"
+    baseName: "feed"
+
+outputs:
+  home: ["HTML", "RSS"]
+  page: ["HTML"]
+  section: ["HTML", "RSS"]
+
+# Taxonomies
+taxonomies:
+  tag: "tags"
+  category: "categories"

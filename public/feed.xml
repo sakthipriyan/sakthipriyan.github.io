@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sakthi Priyan on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/</link>
+    <description>Recent content in Sakthi Priyan on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Emergency Fund Setup</title>
+      <link>https://sakthipriyan.com/building-wealth/slides/emergency_fund/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/slides/emergency_fund/</guid>
+      <description>Setup emergency fund using liquid/hybrid Mutual funds</description>
+    </item>
+    <item>
+      <title>Emergency Fund Calculator</title>
+      <link>https://sakthipriyan.com/building-wealth/tools/emergency-fund/</link>
+      <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/tools/emergency-fund/</guid>
+      <description>Plan your emergency fund and calculate the timeline to reach your savings goal.</description>
+    </item>
+    <item>
+      <title>How I Manage My Money Flows 💰 | Bank Accounts, Credit Cards &amp; Mutual Funds Explained</title>
+      <link>https://sakthipriyan.com/building-wealth/videos/manage-money-flows/</link>
+      <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/videos/manage-money-flows/</guid>
+      <description>Complete breakdown of how to manage your money flows effectively using bank accounts, credit cards, and mutual funds.</description>
+    </item>
+    <item>
+      <title>Managing Money Flows</title>
+      <link>https://sakthipriyan.com/building-wealth/slides/manage-money-flows/</link>
+      <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/slides/manage-money-flows/</guid>
+      <description>Manage money flow via Bank Accounts, Credit Cards &amp;amp; Mutual Funds</description>
+    </item>
+    <item>
+      <title>Invest in NASDAQ 100 from India</title>
+      <link>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
+      <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
+      <description>Options to invest in NASDAQ 100, process, cost and taxation</description>
+    </item>
+    <item>
+      <title>Invest in NASDAQ 100 from India</title>
+      <link>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</link>
+      <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</guid>
+      <description>Complete guide on how Indian investors can invest in NASDAQ 100 index and benefit from US market growth.</description>
+    </item>
+    <item>
+      <title>Responsive exponential backoff in Go</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</guid>
+      <description>using exponentially scaling up and down the sleep time</description>
+    </item>
+    <item>
+      <title>Building machine learning models</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</guid>
+      <description>using scala spark</description>
+    </item>
+    <item>
+      <title>Feature engineering for machine learning models</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</link>
+      <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</guid>
+      <description>using scala spark</description>
+    </item>
+    <item>
+      <title>Learning Scala Spark basics</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/learning-scala-spark-basics/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/learning-scala-spark-basics/</guid>
+      <description>using spark shell in local</description>
+    </item>
+    <item>
+      <title>Migrating from http to https</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/migrating-from-http-to-https/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/migrating-from-http-to-https/</guid>
+      <description>using lets encrypt, certbot and configuring Nginx</description>
+    </item>
+    <item>
+      <title>Powerbot connecting real world to twitter</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/powerbot-connecting-real-world-to-twitter/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/powerbot-connecting-real-world-to-twitter/</guid>
+      <description>via Raspberry Pi using GPIO pins</description>
+    </item>
+    <item>
+      <title>Creating Base64 UUID in Java</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2017/creating-base64-uuid-in-java/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2017/creating-base64-uuid-in-java/</guid>
+      <description>Alphanumeric unique id using base64 charset</description>
+    </item>
+    <item>
+      <title>Documenting Play Framework using Swagger</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</guid>
+      <description>Setting up live documentation for API</description>
+    </item>
+    <item>
+      <title>Creating REST API Specification</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/creating-rest-api-specification/</link>
+      <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/creating-rest-api-specification/</guid>
+      <description>using Swagger Specification</description>
+    </item>
+    <item>
+      <title>Set up G-WAN web server</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/set-up-g-wan-web-server/</link>
+      <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/set-up-g-wan-web-server/</guid>
+      <description>to serve static website</description>
+    </item>
+    <item>
+      <title>Scala code to access documents in AWS S3 bucket</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <description>via http get and put requests</description>
+    </item>
+    <item>
+      <title>Auto refresh Chrome when files modified</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</link>
+      <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</guid>
+      <description>Using python pyinotify and chrome debugging</description>
+    </item>
+    <item>
+      <title>Salesforce Bulk API usage with an example</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/salesforce-bulk-api-usage-with-an-example/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/salesforce-bulk-api-usage-with-an-example/</guid>
+      <description>to show how to upsert records in batches.</description>
+    </item>
+    <item>
+      <title>Salesforce Rest API usage with an example</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/salesforce-rest-api-usage-with-an-example/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/salesforce-rest-api-usage-with-an-example/</guid>
+      <description>to show how to upsert records</description>
+    </item>
+    <item>
+      <title>Mounting external hard disk to Raspberry Pi</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/mounting-external-hard-disk-to-raspberry-pi/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/mounting-external-hard-disk-to-raspberry-pi/</guid>
+      <description>which contains NTFS and FAT file systems.</description>
+    </item>
+    <item>
+      <title>Raspberry Pi Benchmarking File IO</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-benchmarking-file-io/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-benchmarking-file-io/</guid>
+      <description>using sysbench, sd card and attached external hard disk</description>
+    </item>
+    <item>
+      <title>Cricket score in command line</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/cricket-score-in-command-line/</link>
+      <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/cricket-score-in-command-line/</guid>
+      <description>using python and open cricscore api</description>
+    </item>
+    <item>
+      <title>Setting up a 4 node Raspberry Pi 2 Cluster</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
+      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
+      <description>Setting up the right hardware.</description>
+    </item>
+    <item>
+      <title>Raspberry Pi 2 benchmarking</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-benchmarking/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-benchmarking/</guid>
+      <description>using sysbench and Java</description>
+    </item>
+    <item>
+      <title>Raspberry Pi 2 setup</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</guid>
+      <description>from micro SD card to JDK installation.</description>
+    </item>
+    <item>
+      <title>Experiment with Raspberry Pi</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/experiment-with-raspberry-pi/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/experiment-with-raspberry-pi/</guid>
+      <description>How I turned it to a electricity monitor, tweetbot and downloader.</description>
+    </item>
+    <item>
+      <title>Crawlpod - open source scalable web crawler</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/crawlpod-open-source-scalable-web-crawler/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/crawlpod-open-source-scalable-web-crawler/</guid>
+      <description>built on top of Scala and Akka framework.</description>
+    </item>
+    <item>
+      <title>Listing S3 Top level folders</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/listing-s3-top-level-folders/</link>
+      <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/listing-s3-top-level-folders/</guid>
+      <description>using simple Python code.</description>
+    </item>
+    <item>
+      <title>Efficiently using Enum in entity class</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/efficiently-using-enum-in-entity-class/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/efficiently-using-enum-in-entity-class/</guid>
+      <description>to improve code maintainability and database performance.</description>
+    </item>
+    <item>
+      <title>Couchbase setup on AWS</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/couchbase-setup-on-aws/</link>
+      <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/couchbase-setup-on-aws/</guid>
+      <description>EC2 instances</description>
+    </item>
+    <item>
+      <title>Encryption and Decryption in Java</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</guid>
+      <description>using a private key and AES algorithm.</description>
+    </item>
+    <item>
+      <title>Distributed forward proxy servers</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</guid>
+      <description>to crawl Internet via multiple cloud instances.</description>
+    </item>
+    <item>
+      <title>Setup Elasticsearch cluster on AWS</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/setup-elasticsearch-cluster-on-aws/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/setup-elasticsearch-cluster-on-aws/</guid>
+      <description>EC2 instances.</description>
+    </item>
+    <item>
+      <title>Lines of code inversely proportional to readability</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/loc-inversely-proportional-to-readability/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/loc-inversely-proportional-to-readability/</guid>
+      <description>Always code less to make it easily readable.</description>
+    </item>
+    <item>
+      <title>Testing Spring Application using JUnit</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</guid>
+      <description>How to test a Spring Application using JUnit? Explained with example test class.</description>
+    </item>
+    <item>
+      <title>Building a scalable recommendation engine</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-scalable-recommendation-engine/</link>
+      <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-scalable-recommendation-engine/</guid>
+      <description>using play framework, couchbase and elasticsearch</description>
+    </item>
+    <item>
+      <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</guid>
+      <description>Fixing unresolved dependency in playframework.</description>
+    </item>
+    <item>
+      <title>Building a scalable distributed web crawler</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-distributed-web-crawler/</link>
+      <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-distributed-web-crawler/</guid>
+      <description>which can perform both crawling and data extraction</description>
+    </item>
+    <item>
+      <title>How to create a modern blog?</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</link>
+      <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</guid>
+      <description>using markdown and python</description>
+    </item>
+    <item>
+      <title>Git Configuration</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/gitconfig-alias/</link>
+      <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/gitconfig-alias/</guid>
+      <description>Alias for generally used Git commands</description>
+    </item>
+  </channel>
+</rss>

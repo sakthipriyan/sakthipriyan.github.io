@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/software-engineering/tags/spring/</link>
+    <description>Recent content in Spring on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 03 Jun 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/spring/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Testing Spring Application using JUnit</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</guid>
+      <description>How to test a Spring Application using JUnit? Explained with example test class.</description>
+    </item>
+  </channel>
+</rss>

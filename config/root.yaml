@@ -1,0 +1,39 @@
+# Root Site - Independent Hugo Site Configuration (Aggregator)
+baseURL: "/"
+title: "Sakthi Priyan H"
+theme: "continuum"
+languageCode: "en-us"
+defaultContentLanguage: "en"
+
+params:
+  homepageTitle: "Sakthi Priyan H"
+  description: "Building Software. Building Wealth."
+  author: "Sakthi Priyan"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+# Menu configuration for root site
+menu:
+  main:
+    - name: "Software Engineering"
+      url: "/software-engineering/"
+      weight: 20
+    - name: "Building Wealth"
+      url: "/building-wealth/"
+      weight: 10
+
+outputFormats:
+  RSS:
+    mediatype: "application/rss"
+    baseName: "feed"
+
+outputs:
+  home: ["HTML", "RSS"]
+  page: ["HTML"]
+  section: ["HTML", "RSS"]
+
+# Disable taxonomies for aggregator site
+disableKinds: ["taxonomy"]

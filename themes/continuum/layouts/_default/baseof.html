@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+
+
+    {{ if or (eq .Section "slides") (eq .Type "slides") }}
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    {{ else if or (eq .Section "blogs") (eq .Type "blogs") }}
+    <!-- Highlight.js CSS for blogs only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    {{ end }}
+
+    {{ block "head" . }}{{ end }}
+</head>
+
+{{ $bodyClass := .Section }}
+<!-- Map taxonomy sections to actual sections for CSS -->
+{{ if eq .Section "se_tags" }}
+    {{ $bodyClass = "software-engineering" }}
+{{ else if eq .Section "bw_tags" }}
+    {{ $bodyClass = "building-wealth" }}
+{{ end }}
+
+<body class="{{ $bodyClass }}">
+    {{ partial "header.html" . }}
+
+    {{ partial "breadcrumb.html" . }}
+
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+
+    <!-- JavaScript -->
+
+        {{ if or (eq .Section "slides") (eq .Type "slides") }}
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+        {{ else if or (eq .Section "blogs") (eq .Type "blogs") }}
+        <!-- Highlight.js JS for blogs only -->
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        {{ end }}
+
+    {{ if or (eq .Section "tools") (eq .Type "tools") }}
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="{{ "js/tools.js" | absURL }}"></script>
+    {{ end }}
+
+    {{ block "scripts" . }}{{ end }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

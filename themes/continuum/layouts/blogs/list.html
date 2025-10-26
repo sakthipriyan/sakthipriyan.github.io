@@ -1,0 +1,73 @@
+{{ define "main" }}
+<section class="blog-list">
+    <h1>{{ .Title }}</h1>
+
+    <div class="posts-grid">
+        {{ range .Pages }}
+        <article class="content-card">
+            <a href="{{ .RelPermalink }}" class="card-link">
+                <!-- Image if specified -->
+                {{ if .Params.image }}
+                <div class="card-image">
+                    <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" loading="lazy">
+                </div>
+                {{ end }}
+                
+                <div class="card-content">
+                    <!-- Icon and Title -->
+                    <div class="card-header">
+                        <span class="content-icon">📝</span>
+                        <h2 class="card-title">{{ .Title }}</h2>
+                    </div>
+                    
+                    <!-- Summary -->
+                    {{ if .Summary }}
+                    <p class="card-summary">{{ .Summary }}</p>
+                    {{ end }}
+                    
+                    <!-- Meta information -->
+                    <div class="card-meta">
+                        {{ if .Date }}
+                        <span class="meta-item">
+                            <span class="meta-icon">📅</span>
+                            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                        </span>
+                        {{ end }}
+                        
+                        {{ if .Content }}
+                        {{ $words := len (split (plainify .Content) " ") }}
+                        {{ $readTime := math.Ceil (div $words 200.0) }}
+                        <span class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span class="read-time">{{ $readTime }} min read</span>
+                        </span>
+                        {{ end }}
+                    </div>
+                    
+                    <!-- Tags -->
+                    {{ $currentSection := .Section }}
+                    {{ $taxonomyName := "" }}
+                    {{ if eq $currentSection "software-engineering" }}
+                        {{ $taxonomyName = "se_tags" }}
+                    {{ else if eq $currentSection "building-wealth" }}
+                        {{ $taxonomyName = "bw_tags" }}
+                    {{ end }}
+                    
+                    {{ if $taxonomyName }}
+                        {{ $tags := index .Params $taxonomyName }}
+                        {{ if $tags }}
+                        <div class="card-tags">
+                            {{ range $tags }}
+                            {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
+                            <a href="{{ $tagUrl | absURL }}" class="tag-link">{{ . | title }}</a>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </a>
+        </article>
+        {{ end }}
+    </div>
+</section>
+{{ end }}

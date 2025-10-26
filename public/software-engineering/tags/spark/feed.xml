@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spark on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/software-engineering/tags/spark/</link>
+    <description>Recent content in Spark on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/spark/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building machine learning models</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</guid>
+      <description>using scala spark</description>
+    </item>
+    <item>
+      <title>Feature engineering for machine learning models</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</link>
+      <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</guid>
+      <description>using scala spark</description>
+    </item>
+    <item>
+      <title>Learning Scala Spark basics</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2018/learning-scala-spark-basics/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/learning-scala-spark-basics/</guid>
+      <description>using spark shell in local</description>
+    </item>
+  </channel>
+</rss>

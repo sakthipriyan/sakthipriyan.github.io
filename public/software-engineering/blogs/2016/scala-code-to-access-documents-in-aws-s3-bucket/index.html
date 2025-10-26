@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scala code to access documents in AWS S3 bucket | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Scala code to access documents in AWS S3 bucket</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Scala code to access documents in AWS S3 bucket
+                    
+                    <div class="post-subtitle">via http get and put requests</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-02-17">
+                    Feb 17, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="intro">Intro</h3>
+<p>AWS S3 documents in a specific bucket can be via Rest APIs.<br>
+<code>http</code> GET to retrieve documents and <code>http</code> PUT to store documents.</p>
+<h3 id="why-rest-api">Why Rest API?</h3>
+<ul>
+<li>Rest is simple and straight forward.</li>
+<li>We can use any preferred http client library.</li>
+<li>No need to include additional Java dependencies into the project by adding AWS SDK.</li>
+<li>We can use http client library that is already present in the project dependencies.</li>
+</ul>
+<h3 id="lets-go-async">Let&rsquo;s go Async</h3>
+<ul>
+<li>Though we can use any java/scala http client, Let&rsquo;s use an async http client.</li>
+<li>I had used Scala Dispatch library to send requests.</li>
+</ul>
+<h3 id="scala-code">Scala Code</h3>
+<p>In line comments for more explanations.</p>
+<pre><code>package com.sakthipriyan.aws
+
+import java.text.SimpleDateFormat
+import java.util.{ TimeZone, Date }
+import com.typesafe.config.ConfigFactory
+import javax.crypto.spec.SecretKeySpec
+
+// case class to represent the AWS S3 http request
+case class AwsS3Request(
+    url:String, // Request url
+    headers:Map[String,String], // Request Headers
+    requestBody:Option[String]) // Optional request body
+
+object AwsS3 {
+
+  // AWS configuration
+  private val awsConfig = ConfigFactory.load(&quot;aws.conf&quot;)
+  private val s3Uri = awsConfig.getString(&quot;s3.uri&quot;)
+  private val s3bucket = awsConfig.getString(&quot;s3.bucket&quot;)
+  private val s3Key = awsConfig.getString(&quot;s3.key&quot;)
+  private val s3Secret = awsConfig.getString(&quot;s3.secret&quot;)
+
+  // Config used for signing the request
+  private val utf8 = &quot;UTF-8&quot;
+  private val hmacsha1 = &quot;HMACSHA1&quot;
+  private val sdf = new SimpleDateFormat(&quot;EEE, dd MMM yyyy HH:mm:ss z&quot;)
+  sdf.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;))
+
+  // Create signingKey from s3Secret
+  private val signingKey = new SecretKeySpec(s3Secret.getBytes(utf8), hmacsha1)
+
+  // Creates required authorization header for http requests.
+  // Sign the input string using s3secret key.
+  private def auth(str2sign: String) = {
+    import javax.crypto.Mac
+    import org.apache.commons.codec.binary.Base64
+
+    val mac = Mac.getInstance(hmacsha1)
+    mac.init(signingKey)
+    val dataBytes = str2sign.getBytes(utf8)
+    val signature = mac.doFinal(dataBytes)
+    val sign = Base64.encodeBase64String(signature)
+
+    // Following string is used in the Authorization header.
+    s&quot;AWS $s3Key:$sign&quot;
+  }
+
+  // Creates AwsS3Request for retrieving document for the given path.
+  def get(path:String) = {
+    val date = sdf.format(new Date())
+    val authorization = auth(s&quot;GET\n\n\n$date\n/$s3bucket/$path&quot;)
+    AwsS3Request(
+        s&quot;$s3Uri/$path&quot;,
+        Map(&quot;Date&quot; -&gt; date, &quot;Authorization&quot; -&gt; authorization),
+        None)
+  }
+
+  // Creates AwsS3Request for storing given path and content
+  def put(path:String. content: String) = {
+    val date = sdf.format(new Date())
+    val authorization = auth(s&quot;PUT\n\ntext/html\n$date\n/$s3bucket/$path&quot;)
+    AwsS3Request(
+        s&quot;$s3Uri/$path&quot;,
+        Map(&quot;Date&quot; -&gt; date,
+          &quot;Authorization&quot; -&gt; authorization,
+          &quot;Content-Type&quot; -&gt; &quot;text/html&quot;,
+          &quot;Content-Length&quot; -&gt; content.length.toString),
+        Some(content))
+  }
+
+}
+</code></pre>
+<h3 id="sample-aws-configuration">Sample AWS configuration</h3>
+<p>Typesafe config is used for configuring the application.<br>
+Contents of the AWS config file <code>aws.conf</code> is shown below.</p>
+<pre><code>s3 {
+  key : &quot;9X8M6YC85BRUOXGJI1HE&quot;
+  secret : &quot;dGhlIHNlY3JldCB0aGF0IHlvdSBkb25gdCBrbm93IA==&quot;
+  bucket : &quot;bucket-name-here&quot;
+  uri : &quot;https://s3-ap-southeast-1.amazonaws.com/&quot;${s3.bucket}
+}
+</code></pre>
+<p>Make sure aws key and secret has only access to specified bucket.<br>
+It is a good practice to give only required permissions for aws access keys.</p>
+<h3 id="async-http-client">Async Http client</h3>
+<p>Following code snippets generates Dispatch Request for AwsS3Request object.
+package com.sakthipriyan.aws</p>
+<pre><code>import dispatch._, Defaults._
+class AsyncHttpClient {
+  def getDispatchReq(request:AwsS3Request) = {
+    request.requestBody match {
+      case Some(content) =&gt; {
+          val req = url(request.url) &lt;:&lt; request.headers &lt;&lt; content
+          req.PUT
+      }
+      case None =&gt; {
+        val req = url(request.url) &lt;:&lt; request.headers
+        req.GET
+      }
+    }
+  }
+}
+</code></pre>
+<p>Refer <a href="http://dispatch.databinder.net/Dispatch.html">Dispatch Documentation</a> to know more
+about processing http request/response in Dispatch.<br>
+It should be fairly easy to use <code>AwsS3Request</code> object and send http request using any http library.</p>
+<h3 id="example-usage">Example Usage</h3>
+<p>Usage example shown below.<br>
+Processing the http request/response is not shown.</p>
+<pre><code>import com.sakthipriyan.aws.{AwsS3, AsyncHttpClient}
+
+val path = &quot;path/to/store/the/content&quot;
+val content = &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello HTML World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;
+
+//Store an document into the given path.
+val putRequest = AsyncHttpClient.getDispatchReq(AwsS3.put(path, content))
+// TODO - send the http put request and process the response using Dispatch.
+
+//Retrieve the document for the specified path.
+val getRequest = AsyncHttpClient.getDispatchReq(AwsS3.get(path))
+// TODO - send the http get request and process the response using Dispatch.
+</code></pre>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>While processing http response, please make sure to handle non <code>200 OK</code> response.</li>
+<li>It will be wiser to use AWS SDK if you are using it already.</li>
+<li>Based on usage, you can use synchronous or asynchronous http client libraries.</li>
+<li>Still, It would be better to use async http client library to store or retrieve documents from s3 bucket.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/scala" class="tag">scala</a>
+        
+        <a href="/software-engineering/tags/aws" class="tag">aws</a>
+        
+        <a href="/software-engineering/tags/s3" class="tag">s3</a>
+        
+        <a href="/software-engineering/tags/http" class="tag">http</a>
+        
+        <a href="/software-engineering/tags/code" class="tag">code</a>
+        
+        <a href="/software-engineering/tags/dispatch" class="tag">dispatch</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

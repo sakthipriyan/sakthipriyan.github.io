@@ -1,0 +1,83 @@
+{{ define "main" }}
+<article class="tool">
+    <header class="tool-header">
+        <h1>{{ .Title }}</h1>
+        {{ if .Params.description }}
+        <p class="tool-description">{{ .Params.description }}</p>
+        {{ end }}
+    </header>
+
+    <!-- Custom HTML Tool Interface -->
+    {{ if .Params.custom_html }}
+    <div class="tool-interface custom-tool">
+        {{ $toolDir := printf "tools/%s/%s" .Section .File.BaseFileName }}
+        {{ $indexPath := printf "static/%s/index.html" $toolDir }}
+        {{ if fileExists $indexPath }}
+        {{ $indexPath | readFile | safeHTML }}
+        {{ else }}
+        <iframe src="{{ printf " /%s/index.html" $toolDir | absURL }}" width="100%" height="600" frameborder="0">
+            <p>Your browser does not support iframes. <a href="{{ printf " /%s/index.html" $toolDir | absURL }}">Open
+                    tool in new window</a></p>
+        </iframe>
+        {{ end }}
+    </div>
+    {{ else if .Params.tool_type }}
+    <!-- JavaScript Tool Interface -->
+    <div class="tool-interface">
+        <div id="tool-{{ .Params.tool_type }}" class="tool-widget">
+            <!-- Tool interface will be rendered here by JavaScript -->
+        </div>
+    </div>
+    {{ end }}
+
+    <div class="tool-content">
+        {{ .Content }}
+    </div>
+
+    {{ if .Params.source_code }}
+    <div class="tool-source">
+        <h3>Source Code</h3>
+        <a href="{{ .Params.source_code }}" target="_blank" rel="noopener">View Source</a>
+    </div>
+    {{ end }}
+
+    <!-- Related Tools in Same Section -->
+    {{ $currentPage := . }}
+    {{ $parentSection := .Parent }}
+    {{ if $parentSection }}
+    {{ $relatedTools := where $parentSection.Pages "Type" "in" (slice "tools") }}
+    {{ $relatedTools = where $relatedTools ".Title" "!=" .Title }}
+    {{ if $relatedTools }}
+    <section class="related-tools">
+        <h3>More {{ $parentSection.Title }} Tools</h3>
+        <div class="tools-grid">
+            {{ range first 3 $relatedTools }}
+            <article class="tool-card">
+                <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                {{ if .Params.description }}
+                <p>{{ .Params.description }}</p>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+    {{ end }}
+</article>
+{{ end }}
+
+{{ define "scripts" }}
+{{ if .Params.tool_type }}
+<script>
+    // Initialize tool based on type
+    document.addEventListener('DOMContentLoaded', function () {
+        const toolType = '{{ .Params.tool_type }}';
+        const toolContainer = document.getElementById('tool-' + toolType);
+
+        if (window.initializeTool && typeof window.initializeTool[toolType] === 'function') {
+            window.initializeTool[toolType](toolContainer, {{ .Params.tool_config | jsonify }});
+        }
+    });
+</script>
+{{ end }}
+{{ end }}

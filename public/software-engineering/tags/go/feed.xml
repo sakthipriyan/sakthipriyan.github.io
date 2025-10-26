@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/software-engineering/tags/go/</link>
+    <description>Recent content in Go on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/go/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Responsive exponential backoff in Go</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</guid>
+      <description>using exponentially scaling up and down the sleep time</description>
+    </item>
+  </channel>
+</rss>

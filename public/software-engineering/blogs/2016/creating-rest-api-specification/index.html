@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creating REST API Specification | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Creating REST API Specification</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Creating REST API Specification
+                    
+                    <div class="post-subtitle">using Swagger Specification</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-03-30">
+                    Mar 30, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="intro">Intro</h3>
+<p><a href="http://swagger.io/">Swagger</a> specification is used to document RESTful API. It is immensely useful for defining, developing, testing and consuming the REST API. First release of the Swagger Specification was done on 4+ years ago. It has evolved a lot over these years.</p>
+<blockquote>
+<p>Swagger™ is a project used to describe and document RESTful APIs.<br>
+~ <a href="http://swagger.io/specification/">http://swagger.io/specification/</a></p>
+</blockquote>
+<p>Recently <a href="https://openapis.org">Open API Initiative (OAI)</a> was created which uses Swagger specification as baseline.</p>
+<blockquote>
+<p>The OAI is focused on creating, evolving and promoting a vendor neutral API Description Format based on the Swagger Specififcation.<br>
+~ <a href="https://openapis.org/">https://openapis.org/</a></p>
+</blockquote>
+<p>Focus of this post is to create Swagger specification for a simple use case.</p>
+<h3 id="why-swagger">Why Swagger?</h3>
+<ul>
+<li>It is much easier to document REST APIs using Swagger Specification</li>
+<li>Manual Documentation is done using simple <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> format.</li>
+<li>Now we can create server code and client code across languages and frameworks.</li>
+<li>Also, we can create the Swagger Specification from the server code automatically using Java <code>@annotation</code>.</li>
+<li>Easier to communicate across teams and organizations with an industry standard specification.</li>
+<li>Code generated Swagger Spec is always up to date.</li>
+</ul>
+<h3 id="creating-swagger-spec-for-cricscore-api">Creating Swagger Spec for Cricscore API</h3>
+<p>Earlier I had built a cricket score API known as <a href="http://cricscore-api.appspot.com/">Cricscore API</a>.
+Following documentation is equivalent to as is state of the Cricscore API.</p>
+<p>In short, Swagger specification contains 3 sections,</p>
+<ul>
+<li><strong>info &amp; endpoint</strong> - Contains general information and endpoint details.
+<ul>
+<li>info</li>
+<li>host</li>
+<li>basePath</li>
+<li>schemes</li>
+<li>produces and etc.,</li>
+</ul>
+</li>
+<li><strong>paths</strong> - All Input and Output details of each specific API.</li>
+<li><strong>definitions</strong> - Definitions of data models used across different APIs.</li>
+</ul>
+<h4 id="swagger-version">Swagger version</h4>
+<p>First Let us specify which version of the swagger we are using.
+Required field. Currently Value is &lsquo;2.0&rsquo;</p>
+<pre><code>swagger: '2.0'
+</code></pre>
+<h4 id="api-info">API info</h4>
+<p><code>info</code> is required root of the spec. Within <code>info</code>, <code>title</code> and <code>version</code> are required properties.<br>
+Other properties such as <code>termsOfService</code>, <code>contact</code>, <code>license</code> are optional, but I would suggest we add them as well.</p>
+<pre><code>info:
+  title: Cricscore API
+  version: '1.0'
+  description: Simple REST API to get cricket scores.
+  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
+  contact:
+    name: Sakthi Priyan H
+    url: 'http://sakthipriyan.com'
+    email: email@example.com
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: 'http://creativecommons.org/licenses/by/4.0/'
+</code></pre>
+<p>Refer the <a href="http://swagger.io/specification/#infoObject">info</a> section in the spec for more details.</p>
+<h4 id="host-name">Host name</h4>
+<p>The host (name or ip) serving the API.</p>
+<pre><code>host: cricscore-api.appspot.com
+</code></pre>
+<h4 id="base-path">Base path</h4>
+<p>Base path of the API. For, Cricscore API, currently there is no base path. So, using the <code>/</code>.</p>
+<pre><code>basePath: /
+</code></pre>
+<p>In case, if you are using say <code>https://example.com/api/v1/</code> as basePath, then it should be</p>
+<pre><code>basePath: /api/v1/
+</code></pre>
+<h4 id="schemes">Schemes</h4>
+<p>Schemes supported in the API.</p>
+<pre><code>schemes:
+	- http
+	- https
+</code></pre>
+<h4 id="produces">Produces</h4>
+<p>List of content types produced by the API. Currently Cricscore API produce only JSON.</p>
+<pre><code>produces:
+	- application/json
+</code></pre>
+<p>Similarly, there is a <code>consumes</code> property as well in the Swagger spec.</p>
+<h4 id="definitions">Definitions</h4>
+<p>Let do definitions before getting into paths.
+We have two different JSON objects that are returned from the Cricscore API.</p>
+<p><strong>Match</strong></p>
+<pre><code>{&quot;id&quot;:631136,&quot;t2&quot;:&quot;Kenya&quot;,&quot;t1&quot;:&quot;Scotland&quot;}
+</code></pre>
+<p>In Swagger Spec, it becomes.</p>
+<pre><code>definitions:
+	Match:
+		type: object
+		properties:
+		id:
+			type: integer
+			description: Match Id.
+		t1:
+			type: string
+			description: Name of the Team One
+		t2:
+			type: string
+			description: Name of the Team Two
+</code></pre>
+<p><strong>Score</strong></p>
+<pre><code>{
+	&quot;id&quot;:597924,
+	&quot;si&quot;:&quot;West Indies 25/1 * v India 229/7&quot;,
+	&quot;de&quot;:&quot;WI 25/2 (3.1 ov, J Charles 12*, UT Yadav 2/7)&quot;
+}
+</code></pre>
+<p>In Swagger Spec, it becomes.</p>
+<pre><code>definitions:
+	Score:
+		type: object
+		properties:
+		id:
+			type: integer
+			description: Match Id.
+		de:
+			type: string
+			description: detailed description of the match.
+		si:
+			type: string
+			description: simple description of the match.
+</code></pre>
+<p>With this we have defined over json format that is returned from the service.</p>
+<h4 id="paths">Paths</h4>
+<p>In Cricscore API, only one path is available and it is simple get <a href="http://swagger.io/specification/#operationObject">operation</a> on <code>/csa</code></p>
+<p>Swagger Spec operation object contains following fields.</p>
+<ul>
+<li>summary - Summary of the operation.</li>
+<li>parameters -  List of parameters accepted across url path, query parameter, header and body.</li>
+<li>responses - All kind of http response returned by the API.</li>
+</ul>
+<p>Following spec should be fairly self explanatory.<br>
+Refer the original <a href="http://cricscore-api.appspot.com/">documentation</a> of the Cricscore API done earlier using HTTP request/response.</p>
+<pre><code>/csa:
+	get:
+		summary: Get currently playing matches or get scores of specific matches.
+		parameters:
+		- name: id
+			in: query
+			required: false
+			description: Match Ids separated by + sign.
+			type: string
+		- name: If-Modified-Since
+			in: header
+			required: false
+			description: Timestamp of the last response.
+			type: string
+		responses:
+			default:
+				description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
+				schema:
+				type: array
+				items:
+					$ref: '#/definitions/Match'
+			200:
+				description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
+				headers:
+				Last-Modified:
+					type: string
+					description: Should be used for subsequent requests as If-Modified-Since request header.
+				schema:
+					type: array
+					items:
+						$ref: '#/definitions/Score'
+			500:
+				description: Unexpected server error.
+</code></pre>
+<h4 id="full-swagger-spec-for-cricscore-api">Full Swagger Spec for Cricscore API</h4>
+<pre><code>swagger: '2.0'
+info:
+  title: Cricscore API
+  version: '1.0'
+  description: Simple REST API to get cricket scores.
+  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
+  contact:
+    name: Sakthi Priyan H
+    url: 'http://sakthipriyan.com'
+    email: email@example.com
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: 'http://creativecommons.org/licenses/by/4.0/'
+host: cricscore-api.appspot.com
+basePath: /
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+
+paths:
+  /csa:
+    get:
+      summary: Get currently playing matches.
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: Match Ids separated by + sign.
+          type: string
+        - name: If-Modified-Since
+          in: header
+          required: false
+          description: Timestamp of the last response.
+          type: string
+      responses:
+        default:
+          description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Match'
+        200:
+          description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
+          headers:
+            Last-Modified:
+              type: string
+              description: Should be used for subsequent requests as If-Modified-Since request header.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Score'
+        500:
+          description: Unexpected server error.
+
+definitions:
+  Match:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Match Id.
+      t1:
+        type: string
+        description: Name of the Team One
+      t2:
+        type: string
+        description: Name of the Team Two
+  Score:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Match Id.
+      de:
+        type: string
+        description: detailed description of the match.
+      si:
+        type: string
+        description: simple description of the match.
+</code></pre>
+<h3 id="lets-try-it-out-online">Let&rsquo;s try it out online.</h3>
+<p>There is fantastic online swagger editor is available at <a href="http://editor.swagger.io/">http://editor.swagger.io/</a>.<br>
+Also, <a href="http://swagger.io/specification/">Swagger Specification documentation</a> is pretty good.<br>
+You can play around it.</p>
+<h3 id="later">Later</h3>
+<p>I will blog later on how to integrate Swagger into a Java project and auto generate the Swagger specification and additional documentation in html/pdf for offline distribution.</p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/api" class="tag">api</a>
+        
+        <a href="/software-engineering/tags/swagger" class="tag">swagger</a>
+        
+        <a href="/software-engineering/tags/documentation" class="tag">documentation</a>
+        
+        <a href="/software-engineering/tags/design" class="tag">design</a>
+        
+        <a href="/software-engineering/tags/cricscore-api" class="tag">cricscore-api</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

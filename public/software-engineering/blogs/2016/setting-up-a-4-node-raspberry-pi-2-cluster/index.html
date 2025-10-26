@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setting up a 4 node Raspberry Pi 2 Cluster | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Setting up a 4 node Raspberry Pi 2 Cluster</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Setting up a 4 node Raspberry Pi 2 Cluster
+                    
+                    <div class="post-subtitle">Setting up the right hardware.</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-01-18">
+                    Jan 18, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="intro">Intro</h3>
+<p>Earlier I <a href="/2016/01/11/raspberry-pi-2-setup.html">talked</a> about, how I set up a single node Raspberry Pi.<br>
+This is post is about setting up, a 4 node Raspberry Pi 2 cluster <em>aka</em> <code>C4Rpi</code> based on this external <a href="http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/">post</a>.</p>
+<img class="ui fluid image"  src="/img/posts/rpi2/pic0.jpg">  
+<h3 id="components">Components</h3>
+<p>Cluster set up can be split into 3 different functionalities.</p>
+<ol>
+<li>Each <strong>node</strong> consist of a Raspberry Pi with Micro SD card and enclosed in a case.<br>
+In this cluster, we have 4 individual nodes.</li>
+<li><strong>Network switch</strong> to connect 4 nodes together and to provide an external link.<br>
+Chosen network switch has 5 slots in it.</li>
+<li><strong>Power supply</strong> to power individual nodes as well as the network.<br>
+Chosen power supply has 5 USB ports, 4 for powering 4 nodes and remaining 1 to power the Network switch.</li>
+</ol>
+<p>This cluster has two connections to outside world.</p>
+<ul>
+<li>Power supply cable, that can be connected to the mains power supply.</li>
+<li>Network cable, that can be connected to LAN.</li>
+</ul>
+<h3 id="pictures-speak-more">Pictures speak more</h3>
+<h4 id="4-raspberry-pi-nodes--1-power-supply--1-network-switch">4 Raspberry Pi nodes + 1 Power Supply + 1 Network Switch</h4>
+<img class="ui fluid image"  src="/img/posts/rpi2/pic1.jpg">
+<h4 id="with-required-cables">With required cables</h4>
+<img class="ui fluid image"  src="/img/posts/rpi2/pic2.jpg">  
+*Note*: Black wire and USB cable has to be linked.
+<h4 id="full-set-up-with-everything-connected">Full set up with everything connected</h4>
+<img class="ui fluid image"  src="/img/posts/rpi2/pic3.jpg">  
+<h3 id="bill-of-materials">Bill of Materials</h3>
+<h4 id="core-components">Core Components</h4>
+<ul>
+<li>4 x <a href="https://www.amazon.in/gp/product/B00T7EE3D0">Raspberry Pi 2 - MODB - 1GB - Quad core</a> - ₹ 2889.00</li>
+<li>4 x <a href="https://www.amazon.in/gp/product/B00VMYK3DM">Strontium Nitro 32GB 70MB/s UHS-1 Class 10 microsdhc Memory card</a> - ₹ 579.00</li>
+<li>4 x <a href="https://www.amazon.in/gp/product/B0110J9VOA">Raspberry pi 2 Model B/B+ ABS Glossy White Modular case</a> - ₹ 439.00</li>
+<li><strong>Total</strong> = ₹ 4 x (2889.00 + 579.00 + 439.00) = ₹ 15628.00</li>
+</ul>
+<h4 id="network">Network</h4>
+<ul>
+<li>1 x <a href="https://www.amazon.in/gp/product/B000FNFSPY">TP-Link TL-SF1005D 5-Port 10/100Mbps Desktop Switch</a> - ₹ 515.00</li>
+<li>1 x <a href="http://www.amazon.in/gp/product/B00UTRMNOK">CNCT White 1m (3.25ft) Cat 6 Network Patch Cord</a> - ₹ 114.95</li>
+<li>4 x <a href="https://www.amazon.in/gp/product/B00UP4SRHY">CNCT White 1ft Cat 6 Network Patch Cord (0.3M)</a> - ₹ 109.95</li>
+<li><strong>Total</strong> = ₹ 515.00 + 114.95 + 4 x 109.95 = ₹ 1069.75</li>
+</ul>
+<h4 id="power-supply">Power Supply</h4>
+<ul>
+<li>1 x <a href="https://www.amazon.in/gp/product/B00JZHEYBK">Anker 40W 5V / 8A 5-Port Family-Sized Desktop USB Charger</a> - ₹ 2530.00</li>
+<li>5 x <a href="https://www.amazon.in/gp/product/B016I5WHZG">SToK Micro USB Charging Cable for All Android Phone- 25cm</a> - ₹ 72.00</li>
+<li>1 x Cable to hack, a USB to barrel jack DC power supply converter - ₹ 30.00 - Bought it offline.</li>
+<li><strong>Total</strong> = ₹ 2530.00 + 5 x 72.00 + 30.00 = ₹ 2920.00</li>
+</ul>
+<h4 id="overall-cost">Overall Cost</h4>
+<p>So, overall cost is ₹ 15628.00 + 1069.75 + 2920.00 = ₹ 19617.75 (or $ 289.63 (at $1 = ₹67.64)).<br>
+This cost list is specific to Indian Market and based on <a href="http://amazon.in">Amazon.in</a> prices as on Jan 18, 2016.<br>
+If you are ready, for approx ₹ 20k you can set up a 4 node Raspberry Pi 2 cluster.</p>
+<h3 id="aesthetics">Aesthetics</h3>
+<ul>
+<li>I had chosen all components to have same colour.</li>
+<li>This includes, RJ45 network cable, USB cable, Raspberry Pi 2 case, Network switch and Power supply.</li>
+<li>But, Jack barrel pin cable that powers the network switch is still black. No alternatives found in Indian Market.</li>
+<li>In short, <code>White</code> everywhere, except one little piece.</li>
+</ul>
+<h3 id="footnote">Footnote</h3>
+<p>I will write about how to set up the required software and use this cluster.</p>
+<h3 id="update-on-jan-19-2016">Update on Jan 19, 2016</h3>
+<ul>
+<li>Added new pictures of the setup.</li>
+<li>Minor edit in footnote.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/raspberry-pi" class="tag">raspberry-pi</a>
+        
+        <a href="/software-engineering/tags/c4rpi" class="tag">c4rpi</a>
+        
+        <a href="/software-engineering/tags/hardware" class="tag">hardware</a>
+        
+        <a href="/software-engineering/tags/setup" class="tag">setup</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

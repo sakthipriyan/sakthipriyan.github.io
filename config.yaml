@@ -1,0 +1,50 @@
+baseURL: "https://sakthipriyan.com/"
+title: "Sakthi Priyan H"
+theme: "continuum"
+
+# Single Hugo site with sections
+build:
+  writeStats: true
+
+params:
+  description: "Building Software. Building Wealth."
+  author: "Sakthi Priyan"
+
+markup:
+  highlight:
+    noClasses: false
+    codeFences: false
+  goldmark:
+    renderer:
+      unsafe: true
+
+# Menu configuration
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 5
+    - name: "Building Wealth"
+      url: "/building-wealth/"
+      weight: 10
+    - name: "Software Engineering"
+      url: "/software-engineering/"
+      weight: 20
+
+outputFormats:
+  RSS:
+    mediatype: "application/rss"
+    baseName: "feed"
+
+outputs:
+  home: ["HTML", "RSS"]
+  page: ["HTML"]
+  section: ["HTML", "RSS"]
+
+# Taxonomies - global but filterable by section
+taxonomies:
+  bw_tag: "bw_tags"
+  se_tag: "se_tags"
+permalinks:
+  bw_tags: "/building-wealth/tags/:slug/"
+  se_tags: "/software-engineering/tags/:slug/"
