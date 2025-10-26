@@ -1,0 +1,68 @@
+{{ if not .IsHome }}
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="{{ "/" | absURL }}">Home</a>
+        </li>
+            
+            {{ if .Section }}
+                {{ $actualSection := .Section }}
+                {{ $sectionTitle := .Section | title | replaceRE "-" " " }}
+                
+                <!-- Map taxonomy sections to actual sections -->
+                {{ if eq .Section "se_tags" }}
+                    {{ $actualSection = "software-engineering" }}
+                    {{ $sectionTitle = "Software Engineering" }}
+                {{ else if eq .Section "bw_tags" }}
+                    {{ $actualSection = "building-wealth" }}
+                    {{ $sectionTitle = "Building Wealth" }}
+                {{ end }}
+                
+                {{ $sectionPage := .Site.GetPage $actualSection }}
+                {{ if $sectionPage }}
+                <li class="breadcrumb-item{{ if eq .RelPermalink $sectionPage.RelPermalink }} active{{ end }}"{{ if eq .RelPermalink $sectionPage.RelPermalink }} aria-current="page"{{ end }}>
+                    {{ if eq .RelPermalink $sectionPage.RelPermalink }}
+                        <span>{{ $sectionTitle }}</span>
+                    {{ else }}
+                        <a href="{{ $sectionPage.RelPermalink }}">{{ $sectionTitle }}</a>
+                    {{ end }}
+                </li>
+                {{ end }}
+                
+                <!-- Add subsection if applicable -->
+                {{ $pathParts := split .RelPermalink "/" }}
+                {{ if ge (len $pathParts) 4 }}
+                    {{ $subsection := index $pathParts 2 }}
+                    {{ if and $subsection (ne $subsection "tags") }}
+                        {{ $subsectionPage := .Site.GetPage (printf "/%s/%s/" $actualSection $subsection) }}
+                        {{ if $subsectionPage }}
+                        <li class="breadcrumb-item{{ if eq .RelPermalink $subsectionPage.RelPermalink }} active{{ end }}"{{ if eq .RelPermalink $subsectionPage.RelPermalink }} aria-current="page"{{ end }}>
+                            {{ if eq .RelPermalink $subsectionPage.RelPermalink }}
+                                <span>{{ $subsection | title }}</span>
+                            {{ else }}
+                                <a href="{{ $subsectionPage.RelPermalink }}">{{ $subsection | title }}</a>
+                            {{ end }}
+                        </li>
+                        {{ end }}
+                    {{ else if eq $subsection "tags" }}
+                        {{ $tagsPath := printf "/%s/tags/" $actualSection }}
+                        <li class="breadcrumb-item{{ if eq .RelPermalink $tagsPath }} active{{ end }}"{{ if eq .RelPermalink $tagsPath }} aria-current="page"{{ end }}>
+                            {{ if eq .RelPermalink $tagsPath }}
+                                <span>Tags</span>
+                            {{ else }}
+                                <a href="{{ printf "/%s/tags/" $actualSection | absURL }}">Tags</a>
+                            {{ end }}
+                        </li>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+            
+            <!-- Current page -->
+            {{ if not .IsSection }}
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>{{ .Title }}</span>
+            </li>
+            {{ end }}
+        </ol>
+</nav>
+{{ end }}

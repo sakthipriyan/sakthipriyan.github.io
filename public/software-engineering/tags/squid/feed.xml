@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Squid on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/software-engineering/tags/squid/</link>
+    <description>Recent content in Squid on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 20 Jul 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/squid/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distributed forward proxy servers</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</guid>
+      <description>to crawl Internet via multiple cloud instances.</description>
+    </item>
+  </channel>
+</rss>

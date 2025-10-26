@@ -1,0 +1,46 @@
+{{ define "main" }}
+<article class="video">
+    <header class="video-header">
+        <h1>{{ .Title }}</h1>
+        {{ if .Date }}
+        <time class="video-date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "January 2, 2006" }}
+        </time>
+        {{ end }}
+    </header>
+
+    {{ if .Params.youtube_id }}
+    <div class="video-embed">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/{{ .Params.youtube_id }}"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+    {{ else if .Params.youtube_url }}
+    <div class="video-link">
+        <a href="{{ .Params.youtube_url }}" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+    {{ end }}
+
+    <div class="video-content">
+        {{ .Content }}
+    </div>
+
+    {{ if .Params.duration }}
+    <div class="video-meta">
+        <p class="video-duration">Duration: {{ .Params.duration }}</p>
+    </div>
+    {{ end }}
+
+    {{ if .Params.tags }}
+    <div class="video-tags">
+        {{ range .Params.tags }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+    </div>
+    {{ end }}
+</article>
+{{ end }}

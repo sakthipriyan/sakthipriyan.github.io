@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/software-engineering/tags/java/</link>
+    <description>Recent content in Java on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 02 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/java/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating Base64 UUID in Java</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2017/creating-base64-uuid-in-java/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2017/creating-base64-uuid-in-java/</guid>
+      <description>Alphanumeric unique id using base64 charset</description>
+    </item>
+    <item>
+      <title>Raspberry Pi 2 benchmarking</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-benchmarking/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-benchmarking/</guid>
+      <description>using sysbench and Java</description>
+    </item>
+    <item>
+      <title>Raspberry Pi 2 setup</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</guid>
+      <description>from micro SD card to JDK installation.</description>
+    </item>
+    <item>
+      <title>Efficiently using Enum in entity class</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/efficiently-using-enum-in-entity-class/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/efficiently-using-enum-in-entity-class/</guid>
+      <description>to improve code maintainability and database performance.</description>
+    </item>
+    <item>
+      <title>Encryption and Decryption in Java</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</guid>
+      <description>using a private key and AES algorithm.</description>
+    </item>
+    <item>
+      <title>Lines of code inversely proportional to readability</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/loc-inversely-proportional-to-readability/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/loc-inversely-proportional-to-readability/</guid>
+      <description>Always code less to make it easily readable.</description>
+    </item>
+    <item>
+      <title>Testing Spring Application using JUnit</title>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</guid>
+      <description>How to test a Spring Application using JUnit? Explained with example test class.</description>
+    </item>
+  </channel>
+</rss>

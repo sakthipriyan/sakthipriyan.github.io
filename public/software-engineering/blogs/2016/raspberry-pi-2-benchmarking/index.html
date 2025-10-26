@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raspberry Pi 2 benchmarking | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Raspberry Pi 2 benchmarking</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Raspberry Pi 2 benchmarking
+                    
+                    <div class="post-subtitle">using sysbench and Java</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-01-11">
+                    Jan 11, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="benchmarking">Benchmarking</h3>
+<p>Benchmarking is done on three computers using <code>sysbench</code> and <code>Fibonacci sequence</code> program in <code>Java</code>.</p>
+<ol>
+<li><strong>Raspberry Pi</strong><br>
+Single core 700MHz, 512MB RAM</li>
+<li><strong>Raspberry Pi 2</strong><br>
+Quad core 900MHz, 1GB RAM</li>
+<li><strong>Laptop running Ubuntu 14.04</strong><br>
+Quad core 2.50GHz, 16GB RAM</li>
+</ol>
+<h3 id="benchmarking-using-sysbench">Benchmarking using sysbench</h3>
+<p>Install sysbench using <code>sudo apt-get install sysbench</code></p>
+<h4 id="single-threaded-benchmark">Single threaded benchmark</h4>
+<ol>
+<li>
+<p><strong>Raspberry Pi</strong></p>
+<pre><code> $ sysbench --test=cpu --cpu-max-prime=2000 run --num-threads=1
+
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 1
+
+ Doing CPU performance benchmark
+
+ Threads started!
+ Done.
+
+ Maximum prime number checked in CPU test: 2000
+
+
+ Test execution summary:
+     total time:                          64.2297s
+     total number of events:              10000
+     total time taken by event execution: 64.1675
+     per-request statistics:
+          min:                                  5.34ms
+          avg:                                  6.42ms
+          max:                                 30.93ms
+          approx.  95 percentile:              15.46ms
+
+ Threads fairness:
+     events (avg/stddev):           10000.0000/0.00
+     execution time (avg/stddev):   64.1675/0.00
+</code></pre>
+</li>
+<li>
+<p><strong>Raspberry Pi 2</strong></p>
+<pre><code> $ sysbench --test=cpu --cpu-max-prime=2000 run --num-threads=1
+
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 1
+
+ Doing CPU performance benchmark
+
+ Threads started!
+ Done.
+
+ Maximum prime number checked in CPU test: 2000
+
+
+ Test execution summary:
+     total time:                          31.0586s
+     total number of events:              10000
+     total time taken by event execution: 31.0443
+     per-request statistics:
+          min:                                  3.08ms
+          avg:                                  3.10ms
+          max:                                  4.94ms
+          approx.  95 percentile:               3.11ms
+
+ Threads fairness:
+     events (avg/stddev):           10000.0000/0.00
+     execution time (avg/stddev):   31.0443/0.00
+</code></pre>
+</li>
+<li>
+<p><strong>Laptop running Ubuntu 14.04</strong></p>
+<pre><code> $ sysbench --test=cpu --cpu-max-prime=2000 run --num-threads=1
+
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 1
+
+ Doing CPU performance benchmark
+
+ Threads started!
+
+ Done.
+
+ Maximum prime number checked in CPU test: 2000
+
+
+ Test execution summary:
+     total time:                          1.1415s
+     total number of events:              10000
+     total time taken by event execution: 1.1407
+     per-request statistics:
+          min:                                  0.11ms
+          avg:                                  0.11ms
+          max:                                  0.49ms
+          approx.  95 percentile:               0.12ms
+
+ Threads fairness:
+     events (avg/stddev):           10000.0000/0.00
+     execution time (avg/stddev):   1.1407/0.00
+</code></pre>
+</li>
+</ol>
+<h4 id="multi-threaded-benchmark">Multi-threaded benchmark</h4>
+<ol>
+<li>
+<p><strong>Raspberry Pi</strong><br>
+Oh No!, it has only one CPU.<br>
+No use in running with more threads.</p>
+</li>
+<li>
+<p><strong>Raspberry Pi 2</strong></p>
+<pre><code> $ sysbench --test=cpu --cpu-max-prime=20000 run --num-threads=4
+
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 4
+
+ Doing CPU performance benchmark
+
+ Threads started!
+ Done.
+
+ Maximum prime number checked in CPU test: 20000
+
+
+ Test execution summary:
+     total time:                          190.8656s
+     total number of events:              10000
+     total time taken by event execution: 763.3344
+     per-request statistics:
+          min:                                 75.89ms
+          avg:                                 76.33ms
+          max:                                 92.81ms
+          approx.  95 percentile:              76.91ms
+
+ Threads fairness:
+     events (avg/stddev):           2500.0000/13.00
+     execution time (avg/stddev):   190.8336/0.02
+</code></pre>
+</li>
+<li>
+<p><strong>Laptop running Ubuntu 14.04</strong></p>
+<pre><code> $ sysbench --test=cpu --cpu-max-prime=20000 run --num-threads=4
+
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 4
+
+ Doing CPU performance benchmark
+
+ Threads started!
+ Done.
+
+ Maximum prime number checked in CPU test: 20000
+
+
+ Test execution summary:
+     total time:                          8.4443s
+     total number of events:              10000
+     total time taken by event execution: 33.7718
+     per-request statistics:
+          min:                                  2.90ms
+          avg:                                  3.38ms
+          max:                                 11.35ms
+          approx.  95 percentile:               3.40ms
+
+ Threads fairness:
+     events (avg/stddev):           2500.0000/13.75
+     execution time (avg/stddev):   8.4429/0.00
+</code></pre>
+</li>
+</ol>
+<h3 id="benchmarking-using-java">Benchmarking using Java</h3>
+<p><em>Note:</em> See <a href="raspberry-pi-2-setup.html">Raspberry Pi 2 setup</a> to install <code>Java</code>.<br>
+Fibonacci Class shown below is used to benchmark.</p>
+<pre><code>public class Fibonacci {
+	public static void main(String[] args){
+		Fibonacci fib = new Fibonacci();
+		Long out = fib.fib(Long.parseLong(args[0]));
+		System.out.println(out);
+	}
+
+	public long fib(long n){
+		if(n==0L){
+			return 0L;
+		} else if(n==1L){
+			return 1L;
+		} else {
+			return fib(n-1) + fib(n-2);
+		}
+	}
+}
+</code></pre>
+<ol>
+<li>
+<p><strong>Raspberry Pi</strong></p>
+<pre><code> $ time java Fibonacci 10
+ 55
+
+ real	0m1.644s
+ user	0m1.350s
+ sys	0m0.200s
+
+ $ time java Fibonacci 20
+ 6765
+
+ real	0m2.118s
+ user	0m1.460s
+ sys	0m0.110s
+
+ $ time java Fibonacci 30
+ 832040
+
+ real	0m1.945s
+ user	0m1.580s
+ sys	0m0.120s
+
+ $ time java Fibonacci 40
+ 102334155
+
+ real	0m20.991s
+ user	0m18.160s
+ sys	0m0.200s
+</code></pre>
+</li>
+<li>
+<p><strong>Raspberry Pi 2</strong></p>
+<pre><code> $ time java Fibonacci 10
+ 55
+
+ real	0m0.535s
+ user	0m0.560s
+ sys	0m0.040s
+
+ $ time java Fibonacci 20
+ 6765
+
+ real	0m0.529s
+ user	0m0.500s
+ sys	0m0.100s
+
+ $ time java Fibonacci 30
+ 832040
+
+ real	0m0.575s
+ user	0m0.570s
+ sys	0m0.070s
+
+ $ time java Fibonacci 40
+ 102334155
+
+ real	0m10.035s
+ user	0m10.030s
+ sys	0m0.070s
+</code></pre>
+</li>
+<li>
+<p><strong>Laptop running Ubuntu 14.04</strong></p>
+<pre><code> $ time java Fibonacci 10
+ 55
+
+ real	0m0.077s
+ user	0m0.074s
+ sys	0m0.012s
+
+ $ time java Fibonacci 20
+ 6765
+
+ real	0m0.123s
+ user	0m0.073s
+ sys	0m0.025s
+
+ $ time java Fibonacci 30
+ 832040
+
+ real	0m0.091s
+ user	0m0.078s
+ sys	0m0.023s
+
+ $ time java Fibonacci 40
+ 102334155
+
+ real	0m0.890s
+ user	0m0.898s
+ sys	0m0.004s
+</code></pre>
+</li>
+</ol>
+<h3 id="conclusion">Conclusion</h3>
+<p>In one line, Raspberry Pi 2 is much faster than the Raspberry Pi, still it is many folds slower than the traditional laptop/desktop processors.<br>
+I think, If you are looking for 24x7 low cost computer, this is the one.<br>
+Beside, you can do lot of experiments with it, that cannot be done with laptop/desktop easily.</p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/raspberry-pi" class="tag">raspberry-pi</a>
+        
+        <a href="/software-engineering/tags/benchmark" class="tag">benchmark</a>
+        
+        <a href="/software-engineering/tags/java" class="tag">java</a>
+        
+        <a href="/software-engineering/tags/sysbench" class="tag">sysbench</a>
+        
+        <a href="/software-engineering/tags/code" class="tag">code</a>
+        
+        <a href="/software-engineering/tags/fibonacci" class="tag">fibonacci</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

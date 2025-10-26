@@ -1,0 +1,96 @@
+{{ define "main" }}
+<section class="videos-list">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <div class="section-content">
+        {{ .Content }}
+    </div>
+    {{ end }}
+
+    <div class="posts-grid">
+        {{ range .Pages }}
+        <article class="content-card">
+            <a href="{{ .RelPermalink }}" class="card-link">
+                <!-- Video thumbnail as card image -->
+                {{ if .Params.youtube_id }}
+                <div class="card-image video-image">
+                    <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg"
+                        alt="{{ .Title }}" loading="lazy">
+                    <div class="video-overlay">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="white">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                    {{ if .Params.duration }}
+                    <span class="duration-badge">{{ .Params.duration }}</span>
+                    {{ end }}
+                </div>
+                {{ else if .Params.image }}
+                <div class="card-image">
+                    <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" loading="lazy">
+                </div>
+                {{ end }}
+                
+                <div class="card-content">
+                    <!-- Icon and Title -->
+                    <div class="card-header">
+                        <span class="content-icon">🎥</span>
+                        <h2 class="card-title">{{ .Title }}</h2>
+                    </div>
+                    
+                    <!-- Summary -->
+                    {{ if or .Summary .Description .Params.summary }}
+                    <p class="card-summary">{{ or .Summary .Description .Params.summary }}</p>
+                    {{ end }}
+                    
+                    <!-- Meta information -->
+                    <div class="card-meta">
+                        {{ if .Date }}
+                        <span class="meta-item">
+                            <span class="meta-icon">📅</span>
+                            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                        </span>
+                        {{ end }}
+                        
+                        {{ if .Params.duration }}
+                        <span class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span class="duration">{{ .Params.duration }}</span>
+                        </span>
+                        {{ end }}
+                        
+                        {{ if .Params.platform }}
+                        <span class="meta-item">
+                            <span class="meta-icon">📺</span>
+                            <span class="platform">{{ .Params.platform }}</span>
+                        </span>
+                        {{ end }}
+                    </div>
+                    
+                    <!-- Tags -->
+                    {{ $currentSection := .Section }}
+                    {{ $taxonomyName := "" }}
+                    {{ if eq $currentSection "software-engineering" }}
+                        {{ $taxonomyName = "se_tags" }}
+                    {{ else if eq $currentSection "building-wealth" }}
+                        {{ $taxonomyName = "bw_tags" }}
+                    {{ end }}
+                    
+                    {{ if $taxonomyName }}
+                        {{ $tags := index .Params $taxonomyName }}
+                        {{ if $tags }}
+                        <div class="card-tags">
+                            {{ range $tags }}
+                            {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
+                            <a href="{{ $tagUrl | absURL }}" class="tag-link">{{ . | title }}</a>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </a>
+        </article>
+        {{ end }}
+    </div>
+</section>
+{{ end }}
