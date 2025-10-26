@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Se_tags on Sakthi Priyan H</title>
+    <link>http://localhost:1313/se_tags/</link>
+    <description>Recent content in Se_tags on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/se_tags/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloud</title>
+      <link>http://localhost:1313/software-engineering/tags/cloud/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/cloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Code</title>
+      <link>http://localhost:1313/software-engineering/tags/code/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dynamodb</title>
+      <link>http://localhost:1313/software-engineering/tags/dynamodb/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/dynamodb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Exponential-Backoff</title>
+      <link>http://localhost:1313/software-engineering/tags/exponential-backoff/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/exponential-backoff/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>http://localhost:1313/software-engineering/tags/go/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sleep</title>
+      <link>http://localhost:1313/software-engineering/tags/sleep/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/sleep/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bigdata</title>
+      <link>http://localhost:1313/software-engineering/tags/bigdata/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/bigdata/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Machine-Learning</title>
+      <link>http://localhost:1313/software-engineering/tags/machine-learning/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sbt</title>
+      <link>http://localhost:1313/software-engineering/tags/sbt/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/sbt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scala</title>
+      <link>http://localhost:1313/software-engineering/tags/scala/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/scala/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spark</title>
+      <link>http://localhost:1313/software-engineering/tags/spark/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/spark/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Learning</title>
+      <link>http://localhost:1313/software-engineering/tags/learning/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shell</title>
+      <link>http://localhost:1313/software-engineering/tags/shell/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cerbot</title>
+      <link>http://localhost:1313/software-engineering/tags/cerbot/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/cerbot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Https</title>
+      <link>http://localhost:1313/software-engineering/tags/https/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/https/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Letsencrypt</title>
+      <link>http://localhost:1313/software-engineering/tags/letsencrypt/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/letsencrypt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nginx</title>
+      <link>http://localhost:1313/software-engineering/tags/nginx/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/nginx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Circuit</title>
+      <link>http://localhost:1313/software-engineering/tags/circuit/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/circuit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hardware</title>
+      <link>http://localhost:1313/software-engineering/tags/hardware/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/hardware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Iot</title>
+      <link>http://localhost:1313/software-engineering/tags/iot/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/iot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/software-engineering/tags/python/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Raspberry-Pi</title>
+      <link>http://localhost:1313/software-engineering/tags/raspberry-pi/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Twitter</title>
+      <link>http://localhost:1313/software-engineering/tags/twitter/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/twitter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Base64</title>
+      <link>http://localhost:1313/software-engineering/tags/base64/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/base64/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/software-engineering/tags/java/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Uuid</title>
+      <link>http://localhost:1313/software-engineering/tags/uuid/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/uuid/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Api</title>
+      <link>http://localhost:1313/software-engineering/tags/api/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Design</title>
+      <link>http://localhost:1313/software-engineering/tags/design/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Documentation</title>
+      <link>http://localhost:1313/software-engineering/tags/documentation/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/documentation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Play-Framework</title>
+      <link>http://localhost:1313/software-engineering/tags/play-framework/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/play-framework/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Swagger</title>
+      <link>http://localhost:1313/software-engineering/tags/swagger/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/swagger/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cricscore-Api</title>
+      <link>http://localhost:1313/software-engineering/tags/cricscore-api/</link>
+      <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/cricscore-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>G-Wan</title>
+      <link>http://localhost:1313/software-engineering/tags/g-wan/</link>
+      <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/g-wan/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Setup</title>
+      <link>http://localhost:1313/software-engineering/tags/setup/</link>
+      <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/setup/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web-Server</title>
+      <link>http://localhost:1313/software-engineering/tags/web-server/</link>
+      <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/web-server/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Aws</title>
+      <link>http://localhost:1313/software-engineering/tags/aws/</link>
+      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dispatch</title>
+      <link>http://localhost:1313/software-engineering/tags/dispatch/</link>
+      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/dispatch/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Http</title>
+      <link>http://localhost:1313/software-engineering/tags/http/</link>
+      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/http/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>S3</title>
+      <link>http://localhost:1313/software-engineering/tags/s3/</link>
+      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/s3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Chrome</title>
+      <link>http://localhost:1313/software-engineering/tags/chrome/</link>
+      <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/chrome/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Webgen</title>
+      <link>http://localhost:1313/software-engineering/tags/webgen/</link>
+      <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/webgen/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Integration</title>
+      <link>http://localhost:1313/software-engineering/tags/integration/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/integration/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Salesforce</title>
+      <link>http://localhost:1313/software-engineering/tags/salesforce/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/salesforce/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Benchmark</title>
+      <link>http://localhost:1313/software-engineering/tags/benchmark/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/benchmark/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ext</title>
+      <link>http://localhost:1313/software-engineering/tags/ext/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/ext/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fat</title>
+      <link>http://localhost:1313/software-engineering/tags/fat/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/fat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hard-Disk</title>
+      <link>http://localhost:1313/software-engineering/tags/hard-disk/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/hard-disk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ntfs</title>
+      <link>http://localhost:1313/software-engineering/tags/ntfs/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/ntfs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sd-Card</title>
+      <link>http://localhost:1313/software-engineering/tags/sd-card/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/sd-card/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cricket</title>
+      <link>http://localhost:1313/software-engineering/tags/cricket/</link>
+      <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/cricket/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C4rpi</title>
+      <link>http://localhost:1313/software-engineering/tags/c4rpi/</link>
+      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/c4rpi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fibonacci</title>
+      <link>http://localhost:1313/software-engineering/tags/fibonacci/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/fibonacci/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sysbench</title>
+      <link>http://localhost:1313/software-engineering/tags/sysbench/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/sysbench/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Downloader</title>
+      <link>http://localhost:1313/software-engineering/tags/downloader/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/downloader/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kuralbot</title>
+      <link>http://localhost:1313/software-engineering/tags/kuralbot/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/kuralbot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Powerbot</title>
+      <link>http://localhost:1313/software-engineering/tags/powerbot/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/powerbot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Torrent</title>
+      <link>http://localhost:1313/software-engineering/tags/torrent/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/torrent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tweetbot</title>
+      <link>http://localhost:1313/software-engineering/tags/tweetbot/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/tweetbot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Youtube</title>
+      <link>http://localhost:1313/software-engineering/tags/youtube/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/youtube/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Akka</title>
+      <link>http://localhost:1313/software-engineering/tags/akka/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/akka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Crawlpod</title>
+      <link>http://localhost:1313/software-engineering/tags/crawlpod/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/crawlpod/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mongodb</title>
+      <link>http://localhost:1313/software-engineering/tags/mongodb/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Open-Source</title>
+      <link>http://localhost:1313/software-engineering/tags/open-source/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/open-source/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web-Crawler</title>
+      <link>http://localhost:1313/software-engineering/tags/web-crawler/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/web-crawler/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Boto</title>
+      <link>http://localhost:1313/software-engineering/tags/boto/</link>
+      <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/boto/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Export</title>
+      <link>http://localhost:1313/software-engineering/tags/export/</link>
+      <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/export/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Database</title>
+      <link>http://localhost:1313/software-engineering/tags/database/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/database/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Enum</title>
+      <link>http://localhost:1313/software-engineering/tags/enum/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/enum/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hibernate</title>
+      <link>http://localhost:1313/software-engineering/tags/hibernate/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/hibernate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jpa</title>
+      <link>http://localhost:1313/software-engineering/tags/jpa/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/jpa/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Couchbase</title>
+      <link>http://localhost:1313/software-engineering/tags/couchbase/</link>
+      <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/couchbase/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Aes</title>
+      <link>http://localhost:1313/software-engineering/tags/aes/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/aes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Decryption</title>
+      <link>http://localhost:1313/software-engineering/tags/decryption/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/decryption/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Encryption</title>
+      <link>http://localhost:1313/software-engineering/tags/encryption/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/encryption/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Distributed</title>
+      <link>http://localhost:1313/software-engineering/tags/distributed/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/distributed/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Haproxy</title>
+      <link>http://localhost:1313/software-engineering/tags/haproxy/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/haproxy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Proxy</title>
+      <link>http://localhost:1313/software-engineering/tags/proxy/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/proxy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Squid</title>
+      <link>http://localhost:1313/software-engineering/tags/squid/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/squid/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Elasticsearch</title>
+      <link>http://localhost:1313/software-engineering/tags/elasticsearch/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/elasticsearch/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Code-Less</title>
+      <link>http://localhost:1313/software-engineering/tags/code-less/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/code-less/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Optimization</title>
+      <link>http://localhost:1313/software-engineering/tags/optimization/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/optimization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Junit</title>
+      <link>http://localhost:1313/software-engineering/tags/junit/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/junit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spring</title>
+      <link>http://localhost:1313/software-engineering/tags/spring/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/spring/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing</title>
+      <link>http://localhost:1313/software-engineering/tags/testing/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/testing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Big-Data</title>
+      <link>http://localhost:1313/software-engineering/tags/big-data/</link>
+      <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/big-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Playframework</title>
+      <link>http://localhost:1313/software-engineering/tags/playframework/</link>
+      <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/playframework/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recommendation</title>
+      <link>http://localhost:1313/software-engineering/tags/recommendation/</link>
+      <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/recommendation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Debug</title>
+      <link>http://localhost:1313/software-engineering/tags/debug/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/debug/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nexus</title>
+      <link>http://localhost:1313/software-engineering/tags/nexus/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/nexus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jsoup</title>
+      <link>http://localhost:1313/software-engineering/tags/jsoup/</link>
+      <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/jsoup/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kafka</title>
+      <link>http://localhost:1313/software-engineering/tags/kafka/</link>
+      <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/kafka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Blog-Software</title>
+      <link>http://localhost:1313/software-engineering/tags/blog-software/</link>
+      <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/blog-software/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Markdown</title>
+      <link>http://localhost:1313/software-engineering/tags/markdown/</link>
+      <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/markdown/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>.Gitconfig</title>
+      <link>http://localhost:1313/software-engineering/tags/.gitconfig/</link>
+      <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/.gitconfig/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Config</title>
+      <link>http://localhost:1313/software-engineering/tags/config/</link>
+      <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/config/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/software-engineering/tags/git/</link>
+      <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Version-Control</title>
+      <link>http://localhost:1313/software-engineering/tags/version-control/</link>
+      <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/tags/version-control/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

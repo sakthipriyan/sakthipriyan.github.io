@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distributed forward proxy servers | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Distributed forward proxy servers</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Distributed forward proxy servers
+                    
+                    <div class="post-subtitle">to crawl Internet via multiple cloud instances.</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2015-07-20">
+                    Jul 20, 2015
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <p>Setting up a distributed forward proxy servers can be done as follows.</p>
+<ul>
+<li>Squid as forward proxy to Internet.</li>
+<li>Use HAproxy as a load balancer.</li>
+<li>Send all request to Internet via HAProxy as proxy server.</li>
+</ul>
+<h3 id="squid">Squid</h3>
+<h4 id="install">Install</h4>
+<pre><code># change to root user
+sudo su
+apt-get update
+# install squid
+apt-get install squid -y
+</code></pre>
+<h4 id="back-up-default-config-for-reference">Back up default config for reference</h4>
+<pre><code># backup current config
+mv /etc/squid3/squid.conf /etc/squid3/squid.conf.original
+# make backup copy as readonly
+chmod a-w /etc/squid3/squid.conf.original
+</code></pre>
+<h4 id="configure">Configure</h4>
+<pre><code>nano /etc/squid3/squid.conf
+
+### Add squid config shown below ###
+
+http_port 8001
+
+# visible_hostname should be the aws instance hostname.
+visible_hostname ip-10-XXX-XXX-149
+
+# IP address of the haproxy should be used.
+# Also, 127.0.0.1 can be removed if we don't need access from localhost.
+acl haproxy src 10.XXX.XXX.172 127.0.0.1
+
+http_access allow haproxy
+cache deny all
+</code></pre>
+<h4 id="reload-with-new-config">Reload with new config</h4>
+<pre><code># reload the new config
+service squid3 reload
+# To check if squid runs at port 8001
+netstat -tlnp | grep 8001
+</code></pre>
+<p>Repeat the same steps across instances where squid has to be set up.</p>
+<h3 id="haproxy">HAProxy</h3>
+<h4 id="install-1">Install</h4>
+<pre><code># change to root user
+sudo su
+apt-get update
+# install haproxy
+apt-get install haproxy -y
+</code></pre>
+<h4 id="back-up-default-config-for-reference-1">Back up default config for reference</h4>
+<pre><code># backup current config
+mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original  
+# make backup copy as readonly
+chmod a-w /etc/haproxy/haproxy.cfg.original
+</code></pre>
+<h4 id="enable-haproxy">Enable HAProxy</h4>
+<pre><code>nano /etc/default/haproxy #Enable the haproxy
+ENABLED=1
+</code></pre>
+<h4 id="configure-1">Configure</h4>
+<pre><code>nano /etc/haproxy/haproxy.cfg
+### Add haproxy config as shown below. ###
+
+/etc/haproxy/haproxy.cfg
+global
+ daemon
+ maxconn 256
+defaults
+ mode http
+ timeout connect 5000ms
+ timeout client 50000ms
+ timeout server 50000ms
+frontend squid_frontend
+ bind *:8000
+ default_backend squid_backend
+ option http_proxy
+backend squid_backend
+ option http_proxy
+ server squid0 10.XXX.XXX.172:8001
+ server squid1 10.XXX.XXX.248:8001
+ server squid2 10.XXX.XXX.149:8001
+ # Add more IPs here as required
+ balance roundrobin
+</code></pre>
+<h4 id="reload-with-new-config-1">Reload with new config</h4>
+<pre><code># Reload the new config
+service haproxy reload
+# To check if haproxy runs at port 8000
+netstat -tlnp | grep 8000
+</code></pre>
+<h3 id="test">Test</h3>
+<p>How to test the distributed proxy cluster?</p>
+<h4 id="squid-1">Squid</h4>
+<pre><code>curl -x localhost:8001 http://google.com
+# If you get the html as below, then it is working fine.
+</code></pre>
+<p>Console output</p>
+<pre><code>&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;TITLE&gt;302 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;302 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&quot;http://www.google.com&quot;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</code></pre>
+<h4 id="haproxy-1">Haproxy</h4>
+<p>In haproxy server execute the following command,</p>
+<pre><code>for i in {1..6}; do  curl -x localhost:8000  https://check.torproject.org 2&gt;/dev/null | grep IP; done
+</code></pre>
+<p>If IPs are changed in round robin then, the distributed proxy is working fine as expected.<br>
+Following output is shown in the console with IPs in roundrobin.<br>
+Set upper bound in for loop to twice the number of squid servers to test.</p>
+<pre><code>&lt;p&gt;Your IP address appears to be:  &lt;strong&gt;XXX.XXX.XXX.125&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Your IP address appears to be:  &lt;strong&gt;XXX.XXX.XXX.132&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Your IP address appears to be:  &lt;strong&gt;XXX.XXX.XXX.162&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Your IP address appears to be:  &lt;strong&gt;XXX.XXX.XXX.125&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Your IP address appears to be:  &lt;strong&gt;XXX.XXX.XXX.132&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Your IP address appears to be:  &lt;strong&gt;XXX.XXX.XXX.162&lt;/strong&gt;&lt;/p&gt;
+</code></pre>
+<h4 id="notes">Notes</h4>
+<ul>
+<li>We can add as many squid proxy servers as required to distribute the load across IPs.</li>
+<li>At an advanced level, we can automatically, add Squid nodes, update HAProxy config and reload it.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/squid" class="tag">squid</a>
+        
+        <a href="/software-engineering/tags/haproxy" class="tag">haproxy</a>
+        
+        <a href="/software-engineering/tags/proxy" class="tag">proxy</a>
+        
+        <a href="/software-engineering/tags/http" class="tag">http</a>
+        
+        <a href="/software-engineering/tags/setup" class="tag">setup</a>
+        
+        <a href="/software-engineering/tags/distributed" class="tag">distributed</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

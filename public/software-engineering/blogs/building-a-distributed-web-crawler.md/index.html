@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building a scalable distributed web crawler | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Building a scalable distributed web crawler</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Building a scalable distributed web crawler
+                    
+                    <div class="post-subtitle">which can perform both crawling and data extraction</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2015-04-18">
+                    Apr 18, 2015
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <p>###Crawling Website(s)
+There are lot of tools like <a href="http://nutch.apache.org/">nutch</a>, <a href="https://github.com/yasserg/crawler4j">crawler4j</a> available for web crawling and data extraction. The problem lies in the scalability and usability of the tools. Following design  trying to address these issues.</p>
+<p>###Goals</p>
+<ul>
+<li>Ability to scale horizontally by adding more machines.</li>
+<li>Crawl specified sites and pages.</li>
+<li>Simple API interface to develop extractors.</li>
+<li>Re-extraction of data in case, if few more fields are required.</li>
+</ul>
+<p>###Tech stack</p>
+<ul>
+<li><em><a href="http://www.scala-lang.org/">scala</a></em> much cleaner functional-object programming language in JVM. Core project can be developed using Scala.</li>
+<li><em><a href="http://akka.io/">akka</a></em> actors are used to crawl and extract data. It provided the higher level abstraction over primitive threads. It has clean DSLs for scala than java due java&rsquo;s language limitations.</li>
+<li><em><a href="http://kafka.apache.org/">kafka</a></em> is a disk based efficient pub-sub system. Used as queue in this system. Between, Kafka is written in scala.</li>
+<li><em><a href="http://www.couchbase.com/">couchbase</a></em> is a RAM based fast JSON document store. Is is used for url cache as well as generated json.</li>
+<li><em><a href="http://jsoup.org/">jsoup</a></em> apparently best available dom parser in java.</li>
+<li><em>Proxy Servers</em> - Various proxy servers viz., <a href="http://www.haproxy.org/">HAProxy</a>, <a href="http://www.squid-cache.org/">Squid</a>, <a href="http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/">Polipo</a>, <a href="http://www.privoxy.org/">Privoxy</a>, <a href="https://www.torproject.org/">Tor</a> etc., can be used.</li>
+</ul>
+<p>###Design
+JSON is the <em>flexible</em> data format that can be used for data extraction out of any web documents. Also, JSON can be used for queue items and url cache.</p>
+<p>Seed the url(s) for a specified website into <em>queue</em> (kafka topic).
+Run the Crawler/Extractor in as many instances as required.</p>
+<p>Crawler will dequeue the url json from queue and checks if the url already cached in couchbase <em>url bucket</em> or has to be reextracted. If it is not available, page is fetched via the proxy servers.</p>
+<p>Once a page is available, raw page is stored in <a href="http://aws.amazon.com/s3/">AWS S3</a> and an entry is made into <em>url bucket</em>.
+Then, extractor will extract two things, one set of documents and next set of url(s).
+Data is stored in couchbase <em>data bucket</em> and next set of url(s) are checked if it has to be crawled.
+Next set url(s) can also contain, required headers and also can carry data map to next level.
+Then, they are added to the same queue.</p>
+<p>In case if the url has to be re extracted, the page is retrieved from s3 and used.</p>
+<p>###Extractor
+For each website, developer has to create single Java or Scala class.</p>
+<p>It will contain number of methods, each for different type of pages. Each method will accept a Response object and return a Extract object.</p>
+<p>Response object consists of, Request object which corresponds to queue json, Response Headers and Response Body. From response object developer can access html dom or even use raw response and handle it as xml or json.</p>
+<p>Extract object consists of set of JSON documents and set of Request objects.
+Here, JSON documents and Request objects are created from response.</p>
+<p>In short, for each site, developer has to focus on two things, one document extraction and two deciding navigation. For each page, she has to create a method. Framework will manage the rest of the things.</p>
+<p>###Infra</p>
+<ul>
+<li><em>Couchbase clusters</em>: one for url cache and another one for extracted data. Each cluster has 2 or more nodes.</li>
+<li><em>Kafka cluster</em>: odd number of Kafka broker instances. One topic per website.</li>
+<li><em>Crawler Extractor</em>: <strong>n</strong> number of nodes each running the scala code.</li>
+<li><em>Proxy Servers</em> : It depends on how proxy servers are configured. It is explained below.</li>
+<li><em>AWS S3</em> : It can be used to store the crawled webpage for future reuse.</li>
+</ul>
+<p>###Proxy Servers
+Proxy servers can be used in two different configurations.
+Both in effect uses more number of IPs, to minimize the risk of getting banned by any website.</p>
+<ol>
+<li>
+<p><strong>Anonymous Proxy</strong></p>
+<p>Tor network can be helpful for crawling a very large site anonymously. But, question on <em>morality</em> and <em>legality</em> arises.
+This set up requires HAProxy, Privoyx/Polipo &amp; Tor.</p>
+<p>HAProxy will be accessed from all crawlers. HAProxy in turn connects to multiple Tor via Polipo/Privoxy.
+Here, Polipo/Privoxy converts the http request into socks request which Tor can understand.</p>
+<p>HAProxy will be running multiple ports and each will be allocated for different sites.
+So, each website request is done round robin on Tor clients independently.
+Moreover, each Tor client will run with Exit nodes at different countries and changes IP every 10 minutes.</p>
+</li>
+<li>
+<p><strong>Distributed Proxy</strong></p>
+<p>This will be helpful when we have large pool of dynamic IPs. Say we can create numerous micro instances in AWS.
+This set up requires HAProxy and Squid.</p>
+<p>HAProxy runs on relatively larger instance. Each micro instances runs a Squid, which simply forwards the connection to the internet.
+HAProxy does a round robin to Squid which in turn connects to internet using the instance IPs.
+As said above, one port for each website in HAProxy.</p>
+<p>If we are doing dynamic allocation and deallocation of instances for Squid, then we are actually using more number of IPs to crawl the website.</p>
+</li>
+</ol>
+<p>###Keep in mind</p>
+<ul>
+<li>Don&rsquo;t go big bang on small sites and make it appear as <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">DDoS</a>.</li>
+<li>Better declare as bot and link to a page, which explains why.</li>
+<li>It is always trade off between speed and being nice. Be nice.</li>
+<li>Last but not least, respect the robots.txt and website policies.</li>
+</ul>
+<p>###Footnote
+This post is based on the experience of developing a scalable distributed web crawler.
+It has explained things at a higher level of abstractions.
+Hoping that in future, I will be able to contribute the relevant code for larger community benefits.
+Between, this was my <em>real scala project</em> and I enjoyed it. You can appreciate Scala better when you come from Java world.</p>
+<h3 id="edits">Edits</h3>
+<h4 id="appended-on-dec-12-2015">Appended on <em>Dec 12, 2015</em></h4>
+<p>Hurray! Read this, <a href="/2015/12/12/crawlpod-open-source-scalable-web-crawler.html">Crawlpod - open source scalable web crawler</a></p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/web-crawler" class="tag">web-crawler</a>
+        
+        <a href="/software-engineering/tags/scala" class="tag">scala</a>
+        
+        <a href="/software-engineering/tags/akka" class="tag">akka</a>
+        
+        <a href="/software-engineering/tags/kafka" class="tag">kafka</a>
+        
+        <a href="/software-engineering/tags/couchbase" class="tag">couchbase</a>
+        
+        <a href="/software-engineering/tags/jsoup" class="tag">jsoup</a>
+        
+        <a href="/software-engineering/tags/big-data" class="tag">big-data</a>
+        
+        <a href="/software-engineering/tags/design" class="tag">design</a>
+        
+        <a href="/software-engineering/tags/distributed" class="tag">distributed</a>
+        
+        <a href="/software-engineering/tags/proxy" class="tag">proxy</a>
+        
+    </div>
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+</body>
+
+</html>

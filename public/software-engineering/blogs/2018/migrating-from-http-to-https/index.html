@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Migrating from http to https | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Migrating from http to https</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Migrating from http to https
+                    
+                    <div class="post-subtitle">using lets encrypt, certbot and configuring Nginx</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2018-11-17">
+                    Nov 17, 2018
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="lets-encrypt">Lets Encrypt</h3>
+<p>I wanted to migrate to https for long. Back then, we need to shell out extra bucks for SSL certificate.<br>
+Then, I heard about <a href="https://letsencrypt.org/">Letsencrypt</a>.</p>
+<h3 id="first-attempt">First Attempt</h3>
+<p>Earlier <a href="http://sakthipriyan.com">sakthipriyan.com</a> was running on a <strong>CentOS 6</strong>. I tried to install SSL certificates from Letsencrypt using the certbot. I had faced few issues. Then I got carried away with other things and didn&rsquo;t try to set it up.</p>
+<h3 id="taste-of-success">Taste of Success</h3>
+<p>I had another domain name which I hadn&rsquo;t used for anything. So, I tried setting it up with SSL in <strong>CentOS 7</strong>. It was like breeze. So simple and it worked out as it should be.</p>
+<h3 id="migration">Migration</h3>
+<p>I had to go through the following steps to set it up like old school way.</p>
+<h4 id="new-instance">New Instance</h4>
+<p>I had created a new CentOS 7 instance in <a href="https://www.vultr.com/?ref=6819343">Vultr</a> Cloud.<br>
+From price point it is very competitive compared more prominant cloud providers.</p>
+<h4 id="install-nginx-start-nginx-and-set-up-auto-start">Install Nginx, Start Nginx and Set up auto Start</h4>
+<pre><code>yum update
+yum -y install epel-release 
+yum -y install nginx
+service nginx start
+service nginx status
+systemctl enable nginx
+</code></pre>
+<h4 id="open-up-firewall">Open up firewall</h4>
+<pre><code>firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --reload
+</code></pre>
+<h4 id="setting-up-website-on-the-nginx">Setting up website on the Nginx</h4>
+<pre><code>mkdir -p /var/www/sakthipriyan.com
+nano /etc/nginx/conf.d/sakthipriyan.com.conf
+service nginx reload
+</code></pre>
+<p>Contents of the initial <code>/etc/nginx/conf.d/sakthipriyan.com.conf</code></p>
+<pre><code>#
+# HTTPS server configuration
+#
+
+server {
+	listen       80;
+	server_name  sakthipriyan.com;
+
+	location / {
+		root   /var/www/sakthipriyan.com/;
+		index  index.html index.htm;
+	}
+}
+
+server {
+	listen         80;
+	server_name    www.sakthipriyan.com;
+	return         301 http://sakthipriyan.com$request_uri;
+}
+</code></pre>
+<p>I had set up two server_names.</p>
+<ol>
+<li>Actual website will be served at <a href="http://sakthipriyan.com">sakthipriyan.com</a></li>
+<li><a href="http://www.sakthipriyan.com">www.sakthipriyan.com</a> will be redirected to <a href="http://sakthipriyan.com">sakthipriyan.com</a></li>
+</ol>
+<h4 id="installing-pip-jinja2-and-markdown">Installing PIP, Jinja2 and Markdown</h4>
+<p>Required for webgen to generate the website from markdown src files.</p>
+<pre><code>yum -y install python-pip
+pip install --upgrade pip
+pip install jinja2
+pip install markdown
+</code></pre>
+<h4 id="cloning-webgen-and-sakthipriyancom">Cloning webgen and sakthipriyan.com</h4>
+<pre><code>yum -y install git 
+git clone https://github.com/sakthipriyan/sakthipriyan.com.git
+git clone https://github.com/sakthipriyan/webgen.git
+</code></pre>
+<h4 id="generate-website-and-serve-via-nginx">Generate website and serve via Nginx</h4>
+<pre><code>cd webgen
+python webgen.py ../sakthipriyan.com/conf/prod.json
+cp -fr ../sakthipriyan.com/dist/* /var/www/sakthipriyan.com/
+</code></pre>
+<h4 id="changing-dns-records">Changing DNS records</h4>
+<p>I had to edit DNS <code>A Record</code>s to point to new instance&rsquo;s IP address for both <code>sakthipriyan.com</code> and <code>www.sakthipriyan.com</code></p>
+<h4 id="installing-certbot-and-installing-certificates-in-nginx">Installing certbot and installing certificates in Nginx</h4>
+<pre><code>yum -y install yum-utils
+yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+yum install certbot
+yum install python2-certbot-nginx
+certbot --nginx
+</code></pre>
+<p>If I remember correctly, I had used default options and directly I had updated the Website Nginx Config using the above certbot command.</p>
+<h4 id="updated-nginx-config">Updated Nginx Config</h4>
+<p>Nginx config after using <code>certbot --nginx</code></p>
+<pre><code>cat /etc/nginx/conf.d/sakthipriyan.com.conf
+#
+# HTTPS server configuration
+#
+
+server {
+	server_name  sakthipriyan.com;
+
+	location / {
+		root   /var/www/sakthipriyan.com/;
+		index  index.html index.htm;
+	}
+
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/sakthipriyan.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/sakthipriyan.com/privkey.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+	server_name    www.sakthipriyan.com;
+	return         301 https://sakthipriyan.com$request_uri;
+
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/sakthipriyan.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/sakthipriyan.com/privkey.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+	if ($host = sakthipriyan.com) {
+		return 301 https://$host$request_uri;
+	}
+	listen       80;
+	server_name  sakthipriyan.com;
+	return 404;
+}
+
+server {
+	if ($host = www.sakthipriyan.com) {
+		return 301 https://$host$request_uri;
+	}
+	listen         80;
+	server_name    www.sakthipriyan.com;
+	return 404;
+}
+</code></pre>
+<p>I had removed <code># managed by Certbot</code> in the above config for simplicity.</p>
+<p>In short, following redirections are set up in the above Nginx config</p>
+<ol>
+<li><a href="https://sakthipriyan.com">https://sakthipriyan.com</a> - Website served here, generated by webgen whenever I add new posts.</li>
+<li><a href="https://www.sakthipriyan.com">https://www.sakthipriyan.com</a> &gt; <a href="https://sakthipriyan.com">https://sakthipriyan.com</a></li>
+<li><a href="http://sakthipriyan.com">http://sakthipriyan.com</a> &gt; <a href="https://sakthipriyan.com">https://sakthipriyan.com</a></li>
+<li><a href="http://www.sakthipriyan.com">http://www.sakthipriyan.com</a> &gt; <a href="https://sakthipriyan.com">https://sakthipriyan.com</a></li>
+</ol>
+<h4 id="installing-in-crontab">Installing in Crontab</h4>
+<p>Two crontab items installed.</p>
+<ol>
+<li>For auto renewing the Certificate</li>
+<li>For auto updating the Website</li>
+</ol>
+<p><code>crontab -l</code> will list the installed crontabs. You have to use <code>crontab -e</code> to edit.</p>
+<pre><code>crontab -l
+0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' &amp;&amp; certbot renew 
+0,30 * * * * /root/sakthipriyan.com/update.sh
+</code></pre>
+<p>If you wonder, why we have random sleep here because this would prevent peak load to certbot services.</p>
+<h3 id="thank-you">Thank You</h3>
+<p>Thank you <a href="https://www.linkedin.com/in/somin-mithraa-45b22a1a/">Somin Mithraa</a> for insisting on setting up <code>https</code> whenever I referenced my website. Finally I made it!</p>
+<h3 id="references">References</h3>
+<ol>
+<li><a href="https://www.godaddy.com/garage/how-to-install-and-configure-nginx-on-centos-7/">https://www.godaddy.com/garage/how-to-install-and-configure-nginx-on-centos-7/</a></li>
+<li><a href="https://certbot.eff.org/lets-encrypt/centosrhel7-nginx">https://certbot.eff.org/lets-encrypt/centosrhel7-nginx</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/https" class="tag">https</a>
+        
+        <a href="/software-engineering/tags/code" class="tag">code</a>
+        
+        <a href="/software-engineering/tags/nginx" class="tag">nginx</a>
+        
+        <a href="/software-engineering/tags/cerbot" class="tag">cerbot</a>
+        
+        <a href="/software-engineering/tags/letsencrypt" class="tag">letsencrypt</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ntfs on Sakthi Priyan H</title>
+    <link>http://localhost:1313/software-engineering/tags/ntfs/</link>
+    <description>Recent content in Ntfs on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 31 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/software-engineering/tags/ntfs/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mounting external hard disk to Raspberry Pi</title>
+      <link>http://localhost:1313/software-engineering/blogs/2016/mounting-external-hard-disk-to-raspberry-pi/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/blogs/2016/mounting-external-hard-disk-to-raspberry-pi/</guid>
+      <description>which contains NTFS and FAT file systems.</description>
+    </item>
+    <item>
+      <title>Raspberry Pi Benchmarking File IO</title>
+      <link>http://localhost:1313/software-engineering/blogs/2016/raspberry-pi-benchmarking-file-io/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/blogs/2016/raspberry-pi-benchmarking-file-io/</guid>
+      <description>using sysbench, sd card and attached external hard disk</description>
+    </item>
+  </channel>
+</rss>

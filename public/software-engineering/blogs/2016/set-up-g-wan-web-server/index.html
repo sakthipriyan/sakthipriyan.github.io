@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Set up G-WAN web server | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Set up G-WAN web server</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Set up G-WAN web server
+                    
+                    <div class="post-subtitle">to serve static website</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-02-23">
+                    Feb 23, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="what-is-g-wan-web-server">What is G-WAN web server?</h3>
+<p>From G-WAN <a href="http://gwan.ch/">website</a>,</p>
+<pre><code>G-WAN runs C, C# or Java with less CPU and
+less RAM while handling more requests than other
+servers. Other languages (Go, PHP, Python, Ruby, JS...)
+benefit from G-WAN's multicore architecture.
+</code></pre>
+<p>G-WAN can be used for serving both static and dynamic contents.</p>
+<h4 id="languages-supported-for-dynamic-content-generation">Languages supported for dynamic content generation.</h4>
+<ul>
+<li>C</li>
+<li>C++</li>
+<li>C#</li>
+<li>Go</li>
+<li>Java</li>
+<li>Javascript</li>
+<li>Lua</li>
+<li>Objective-C</li>
+<li>Perl</li>
+<li>PHP</li>
+<li>Python</li>
+<li>Ruby</li>
+<li>Scala</li>
+</ul>
+<p>This post explains how to set up static website.</p>
+<h3 id="set-up">Set up</h3>
+<p>Just download and unpack the server.</p>
+<pre><code>wget &quot;http://gwan.com/archives/gwan_linux64-bit.tar.bz2&quot;
+tar -xjf gwan_linux64-bit.tar.bz2
+cd gwan_linux64-bit
+./gwan -h
+</code></pre>
+<p>Following output is shown,</p>
+<pre><code>  _________________________________________________________________
+  |                                                               |
+  | G-WAN Web App. Server v7.12.6   64-bit (Feb  8 2016 16:33:28) |
+  |_______________________________________________________________|
+  |                                                               |
+  | Usage: gwan [-b -d -g -t -w | -k | -r | -v] [argument]        |
+  |        (grouped options like '-bd' are ignored, use '-b -d')  |
+  |_______________________________________________________________|
+  |                                                               |
+  |   -b | use the TCP_DEFER_ACCEPT TCP option                    |
+  |      | (not for frontends: it disables the DoS shield)        |
+  |                                                               |
+  |   -d | daemon mode (default is '-d:www-data:www-data',        |
+  |      | use -d:group:user or just -d:account if user=group)    |
+  |                                                               |
+  |   -g | do not limit worker threads to physical CPU Cores      |
+  |      | (may be needed to bypass a faulty CPU detection but    |
+  |      | don't set more workers than you have physical Cores)   |
+  |                                                               |
+  |   -k | (gracefully) kill local gwan processes using the       |
+  |      | *.pid files found in the ./gwan directory              |
+  |                                                               |
+  |   -r | run the specified C script and exit (-r hello.c)       |
+  |      | (general-purpose source code here, not servlets)       |
+  |                                                               |
+  |   -t | store client requests in the 'gwan/trace' file         |
+  |                                                               |
+  |   -v | show the version number and build date, and exit       |
+  |                                                               |
+  |   -w | define the number of worker threads (ie: -g -w 1)      |
+  |_______________________________________________________________|
+
+G-WAN can listen on 3 local IP addresses:
+ 127.0.0.1 192.168.42.101 172.17.42.1
+</code></pre>
+<p>List of IPs which can be listened by G-WAN is shown above.</p>
+<h3 id="starting-and-stopping-the-server">Starting and stopping the server</h3>
+<pre><code># Start the server in the background
+$ ./gwan &amp;
+
+# Stop the server
+$ ./gwan -k
+</code></pre>
+<h3 id="directory-layout-for-static-website">Directory Layout for static website</h3>
+<p>For serving static website following folder structure is needed.
+All, other folders comes with the downloaded archive are not required for serving static content.</p>
+<ul>
+<li>gwan_linux64-bit
+<ul>
+<li>127.0.0.1:8080 -&gt; 1
+<ul>
+<li>#127.0.0.1 -&gt; 2
+<ul>
+<li>gzip -&gt; 3
+<ul>
+<li>index.html</li>
+</ul>
+</li>
+<li>logs -&gt; 4
+<ul>
+<li>access_2016-02-22.log</li>
+<li>access.log</li>
+<li>error_2016-02-22.log</li>
+<li>error.log</li>
+</ul>
+</li>
+<li>www -&gt; 5
+<ul>
+<li>index.html</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>gwan -&gt; 6</li>
+<li>logs -&gt; 7
+<ul>
+<li>gwan_2016-02-22.log</li>
+<li>gwan.log</li>
+</ul>
+</li>
+<li>trace -&gt; 8</li>
+</ul>
+</li>
+</ul>
+<p>Numbers 1-8 marked above is explained as follows.</p>
+<ol>
+<li><code>127.0.0.1:8080</code> IP Address and Port to which this G-WAN web server will listen.</li>
+<li><code>#127.0.0.1</code> Prefix &lsquo;#&rsquo; used for &ldquo;root&rdquo; HOST (the default host) and
+prefix &lsquo;$&rsquo; for &ldquo;virtual&rdquo; HOSTS (identified by the &ldquo;Host: xxx&rdquo; HTTP header).</li>
+<li><code>gzip</code> content is automatically produced by the G-WAN to serve compressed files.</li>
+<li><code>logs</code> folder contains access and error logs.</li>
+<li>Place static html, js, css and other static files in <code>www</code> folder.<br>
+This is the root directory for the web server.</li>
+<li>Executable file <code>gwan</code> contains the server code.</li>
+<li>Server log files are stored in <code>logs</code> folder.</li>
+<li><code>trace</code> file contains the server start and stop timings.</li>
+</ol>
+<h3 id="zero-configuration-files">Zero configuration files.</h3>
+<ul>
+<li>Yep! you read it right, G WAN uses directory structure to set up virtual hosts.</li>
+<li>You can override the defaults, by editing the <code>init.c_</code> and <code>main.c_</code> samples given in the tar.</li>
+<li>Virtual hosts can be added by adding folders into top level <code>127.0.0.1:8080</code>.
+<ul>
+<li>127.0.0.1:8080
+<ul>
+<li>#127.0.0.1</li>
+<li>$hostname1
+<ul>
+<li>www</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We can access contents of the <code>hostname1</code> by accessing the url <code>http://hostname1:8080</code>.</li>
+<li>Don&rsquo;t create the <code>logs</code> folder inside virtual host folder <code>$hostname1</code> to avoid creating logs.</li>
+</ul>
+<h3 id="good-things-about-g-wan">Good things about G-WAN</h3>
+<ul>
+<li>No need to install any package/dependency for setting up the server.</li>
+<li>Easy to configure and deploy in linux servers.</li>
+<li>Since, <code>gwan</code> file is only <code>229KB</code>, can be embedded and checked into the repository (Say &lsquo;git&rsquo;)</li>
+<li>Gives comparable performance to <code>nginx</code> or more. Depends on the content served.</li>
+</ul>
+<h3 id="low-market-share">Low market share</h3>
+<ul>
+<li>G-WAN is relatively younger one in the web server market.</li>
+<li>Market share is much lower compared to <a href="https://www.nginx.com/">Nginx</a> or oldie <a href="https://httpd.apache.org/">Apache web server</a></li>
+<li>So, the availability of online resources apart from <a href="http://gwan.ch/">G-WAN website</a>.</li>
+</ul>
+<h3 id="notes">Notes</h3>
+<p>I had tested <code>G-WAN v7.12.6</code> in <code>Ubuntu 14.04</code> and <code>Cent OS 7.1</code>.<br>
+Seems to be working well without any issues.</p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/web-server" class="tag">web-server</a>
+        
+        <a href="/software-engineering/tags/g-wan" class="tag">g-wan</a>
+        
+        <a href="/software-engineering/tags/setup" class="tag">setup</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

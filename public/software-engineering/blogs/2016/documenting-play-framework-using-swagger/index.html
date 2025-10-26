@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Documenting Play Framework using Swagger | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Documenting Play Framework using Swagger</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Documenting Play Framework using Swagger
+                    
+                    <div class="post-subtitle">Setting up live documentation for API</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-07-20">
+                    Jul 20, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="swagger-spec">Swagger Spec</h3>
+<p>Earlier I had explained the <a href="http://swagger.io/">Swagger</a> spec in this post, <a href="http://sakthipriyan.com/2016/03/30/creating-rest-api-specification.html">Creating REST API Specification.</a></p>
+<h3 id="swagger-module">Swagger Module</h3>
+<p>Over this post let us automate Swagger spec generation in <a href="https://playframework.com/">Play Framework</a> using <a href="https://github.com/swagger-api/swagger-play">swagger-play2</a> module.</p>
+<h3 id="swagger-ui">Swagger UI</h3>
+<p><a href="http://swagger.io">Swagger.io</a> provides a <a href="http://swagger.io/swagger-ui/">Swagger UI</a> which consumes Swagger spec <code>json</code>.<br>
+It provides a dynamic web interface to learn, experiment and understand the API.</p>
+<h3 id="configure-play">Configure Play</h3>
+<p>Now, let us start integrating the swagger module. Following is tested for Play Framework <code>2.4.6</code></p>
+<ol>
+<li>
+<p>Add plugin as dependency in build file <code>build.sbt</code></p>
+<pre><code> libraryDependencies += &quot;io.swagger&quot; %% &quot;swagger-play2&quot; % &quot;1.5.2&quot;
+</code></pre>
+</li>
+<li>
+<p>Enable the Swagger Module in <code>conf/application.conf</code></p>
+<pre><code> play.modules.enabled += &quot;play.modules.swagger.SwaggerModule&quot;
+
+ api.version = &quot;v1&quot; // Specify the api version.
+</code></pre>
+</li>
+</ol>
+<p><a href="https://github.com/swagger-api/swagger-play/tree/master/play-2.4/swagger-play2#applicationconf---config-options">More config</a> can be added to <code>conf/application.conf</code> to auto generate additional fields in Swagger Spec.</p>
+<h3 id="document-api">Document API</h3>
+<ul>
+<li>Swagger annotations are available in package <code>io.swagger.annotations</code></li>
+<li>Swagger annotations are used to document API in Controller classes.</li>
+</ul>
+<p>Sample code can be found below.
+Add following code to the controller class.</p>
+<pre><code>@Api(value = &quot;Example Controller&quot;, produces = &quot;application/json&quot;)
+</code></pre>
+<p>For each method we need to add documentation, we have to specify the following annotation.<br>
+Standard response class is provided. Here, we have <code>Response.class</code></p>
+<pre><code>@ApiOperation(value = &quot;Get API&quot;, notes = &quot;Get list of id &amp; values.&quot;, response = Response.class)
+</code></pre>
+<p>For each additional response, that API may return can be added using the following annotation.</p>
+<pre><code>@ApiResponses({
+	@ApiResponse(code = 403, message = &quot;Invalid Authorization&quot;, response = ErrorStatus.class),
+	@ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = ErrorStatus.class) })
+</code></pre>
+<p>Arguments in controller methods can be added using,</p>
+<pre><code>@ApiOperation(value = &quot;Get User&quot;, response = User.class)
+public Promise&lt;Result&gt; getUser(
+	@ApiParam(value = &quot;User Id&quot;, name = &quot;userId&quot;) String userId){
+		User user = getUser(userId);
+		return ok(user);
+	}
+</code></pre>
+<h3 id="routes">Routes</h3>
+<p>We can access the auto generated Swagger spec by adding a route to it in <code>conf/routes</code></p>
+<pre><code>GET		/docs/swagger.json				controllers.ApiHelpController.getResources
+</code></pre>
+<p>Now. we can access Swagger Spec from <code>/docs/swagger.json</code></p>
+<h3 id="add-swagger-ui-to-play-framework">Add Swagger UI to Play Framework</h3>
+<p>Since Swagger UI is just dynamic frontend with HTML/JS, it can be served directly in <a href="https://www.nginx.com/">Nginx</a> or <a href="https://httpd.apache.org/">httpd</a>.<br>
+Alternatively, we can serve Swagger UI in play framework as well.<br>
+This also, solves any CORS issues that might arise when API and Swagger UI on different domains.<br>
+Copy <a href="https://github.com/swagger-api/swagger-ui/tree/master/dist">dist</a> of Swagger UI to <code>/public/swagger-ui</code> in Play Project.</p>
+<pre><code>GET		/docs/				controllers.Assets.at(path=&quot;/public/swagger-ui&quot;,file=&quot;index.html&quot;)
+GET		/docs/swagger.json	controllers.ApiHelpController.getResources
+GET		/docs/*file			controllers.Assets.at(path=&quot;/public/swagger-ui&quot;,file)
+</code></pre>
+<p>Edit <code>index.html</code> to change the Swagger Spec url.</p>
+<p><strong>From</strong></p>
+<pre><code>var url = window.location.search.match(/url=([^&amp;]+)/);
+if (url &amp;&amp; url.length &gt; 1) {
+	url = decodeURIComponent(url[1]);
+} else {
+	url = &quot;http://petstore.swagger.io/v2/swagger.json&quot;;
+}
+</code></pre>
+<p><strong>To</strong></p>
+<pre><code>var url = window.location.search.match(/url=([^&amp;]+)/);
+if (url &amp;&amp; url.length &gt; 1) {
+	url = decodeURIComponent(url[1]);
+} else {
+	url = &quot;swagger.json&quot;;
+}
+</code></pre>
+<h3 id="explore-apis">Explore APIs</h3>
+<p>Once, sbt compiles and run the playframework, go to <code>http://localhost:9000/docs/</code> to see the live working Swagger UI.</p>
+<h3 id="good">Good</h3>
+<ul>
+<li>Using Swagger Spec, made it very easy to effectively communicate what API does to anyone who is going to use the API.</li>
+<li>Automated client code generation from Swagger spec made API Consumption and Testing a breeze.</li>
+</ul>
+<h3 id="not-good-yet">Not good Yet</h3>
+<p>There are few glitches in Swagger UI.</p>
+<ul>
+<li>Some times you have to reload the page to make it work again.</li>
+<li>If there is no connection to the API service, UI doesn&rsquo;t explicitly says it.</li>
+<li>API url prefix path is not currently handled in the Swagger UI.</li>
+<li>Swagger Spec generation involving security configuration is not done correctly.</li>
+<li>You may have to use prior major version of Play Framework as there is a delay in support for latest version.</li>
+</ul>
+<h3 id="overall">Overall</h3>
+<p>Overall Swagger Spec/UI is very good to have when we are exposing any API to be consumed.<br>
+Over time, I expect it to evolve to be a better shape and help people who are building and consuming REST APIs.</p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/api" class="tag">api</a>
+        
+        <a href="/software-engineering/tags/swagger" class="tag">swagger</a>
+        
+        <a href="/software-engineering/tags/play-framework" class="tag">play-framework</a>
+        
+        <a href="/software-engineering/tags/documentation" class="tag">documentation</a>
+        
+        <a href="/software-engineering/tags/design" class="tag">design</a>
+        
+    </div>
+    
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

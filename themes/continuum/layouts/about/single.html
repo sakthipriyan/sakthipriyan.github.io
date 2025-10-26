@@ -1,0 +1,33 @@
+{{ define "main" }}
+<article class="about-page">
+    <header class="about-header">
+        <h1>{{ .Title }}</h1>
+    </header>
+
+    <div class="about-content">
+        {{ .Content }}
+    </div>
+
+    {{ if .Params.social_links }}
+    <section class="social-links">
+        <h3>Connect</h3>
+        <ul>
+            {{ range .Params.social_links }}
+            <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+            {{ end }}
+        </ul>
+    </section>
+    {{ end }}
+
+    {{ if .Params.skills }}
+    <section class="skills">
+        <h3>Skills</h3>
+        <div class="skills-list">
+            {{ range .Params.skills }}
+            <span class="skill">{{ . }}</span>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+</article>
+{{ end }}
