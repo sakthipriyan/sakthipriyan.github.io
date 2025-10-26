@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-wealth/blogs/</link>
+    <link>https://sakthipriyan.com/building-wealth/blogs/</link>
     <description>Recent content in Blogs on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/building-wealth/blogs/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/building-wealth/blogs/feed.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

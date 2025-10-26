@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dispatch on Sakthi Priyan H</title>
-    <link>http://localhost:1313/software-engineering/tags/dispatch/</link>
+    <link>https://sakthipriyan.com/software-engineering/tags/dispatch/</link>
     <description>Recent content in Dispatch on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 17 Feb 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/software-engineering/tags/dispatch/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/dispatch/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scala code to access documents in AWS S3 bucket</title>
-      <link>http://localhost:1313/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
       <description>via http get and put requests</description>
     </item>
   </channel>

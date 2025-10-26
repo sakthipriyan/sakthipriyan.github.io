@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Slides on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-wealth/slides/</link>
+    <link>https://sakthipriyan.com/building-wealth/slides/</link>
     <description>Recent content in Slides on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-wealth/slides/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/building-wealth/slides/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emergency Fund Setup</title>
-      <link>http://localhost:1313/building-wealth/slides/emergency_fund/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/emergency_fund/</link>
       <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/emergency_fund/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/emergency_fund/</guid>
       <description>Setup emergency fund using liquid/hybrid Mutual funds</description>
     </item>
     <item>
       <title>Managing Money Flows</title>
-      <link>http://localhost:1313/building-wealth/slides/manage-money-flows/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/manage-money-flows/</link>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/manage-money-flows/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/manage-money-flows/</guid>
       <description>Manage money flow via Bank Accounts, Credit Cards &amp;amp; Mutual Funds</description>
     </item>
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
       <description>Options to invest in NASDAQ 100, process, cost and taxation</description>
     </item>
   </channel>
