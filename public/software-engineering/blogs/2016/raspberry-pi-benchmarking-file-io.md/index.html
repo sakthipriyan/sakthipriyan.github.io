@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raspberry Pi Benchmarking File IO | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Raspberry Pi Benchmarking File IO</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Raspberry Pi Benchmarking File IO
+                    
+                    <div class="post-subtitle">using sysbench, sd card and attached external hard disk</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-01-31">
+                    Jan 31, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="set-up-sysbench">Set up sysbench</h3>
+<ul>
+<li>
+<p>Earlier I used it to benchmark the <code>cpu</code> <a href="../11/raspberry-pi-2-benchmarking.html">here</a>.</p>
+</li>
+<li>
+<p>So, I used <code>sysbench</code> to benchmark the file system.</p>
+</li>
+<li>
+<p><code>sysbench</code> can be installed using <code>apt-get</code></p>
+<pre><code>  sudo apt-get update
+  sudo apt-get install sysbench
+</code></pre>
+</li>
+</ul>
+<h3 id="benchmarking-cases">Benchmarking cases</h3>
+<ol>
+<li>HDD - FAT32 mounted at <code>/mnt/storage/</code></li>
+<li>HDD - NTFS mounted at <code>/mnt/transfers/</code></li>
+<li>SD CARD - EXT4 mounted at <code>/</code></li>
+</ol>
+<h3 id="benchmarking-preparation">Benchmarking Preparation</h3>
+<ol>
+<li>
+<p>Create directory <code>benchmark</code> in all three locations</p>
+<pre><code> mkdir /mnt/storage/benchmark
+ mkdir /mnt/transfers/benchmark
+ mkdir ~/benchmark
+</code></pre>
+</li>
+<li>
+<p>Create required test files</p>
+<pre><code> $ cd /mnt/storage/benchmark
+ $ sysbench --test=fileio --file-total-size=5G prepare
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ 128 files, 40960Kb each, 5120Mb total
+ Creating files for the test...
+</code></pre>
+</li>
+<li>
+<p>Copy the files to other 2 locations</p>
+<pre><code> cp * /mnt/transfers/benchmark/
+ cp * ~/benchmark/
+</code></pre>
+</li>
+</ol>
+<h3 id="benchmark">Benchmark</h3>
+<ul>
+<li>Change to required directory.</li>
+<li>Run the benchmark.</li>
+<li>Do this for all 3 cases.</li>
+</ul>
+<h4 id="output-for-all-cases-shown-below">Output for all cases shown below.</h4>
+<ol>
+<li>
+<p>HDD - FAT32</p>
+<pre><code> $ cd /mnt/storage/benchmark
+ $ sysbench --test=fileio --file-total-size=5G \
+ --file-test-mode=rndrw --init-rng=on \
+ --max-time=300 --max-requests=0 run
+
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 1
+ Initializing random number generator from timer.
+
+
+ Extra file open flags: 0
+ 128 files, 40Mb each
+ 5Gb total file size
+ Block size 16Kb
+ Number of random requests for random IO: 0
+ Read/Write ratio for combined random IO test: 1.50
+ Periodic FSYNC enabled, calling fsync() each 100 requests.
+ Calling fsync() at the end of test, Enabled.
+ Using synchronous I/O mode
+ Doing random r/w test
+ Threads started!
+ Time limit exceeded, exiting...
+ Done.
+
+ Operations performed:  27810 Read, 18540 Write, 59264 Other = 105614 Total
+ Read 434.53Mb  Written 289.69Mb  Total transferred 724.22Mb  (2.414Mb/sec)
+   154.49 Requests/sec executed
+
+ Test execution summary:
+     total time:                          300.0140s
+     total number of events:              46350
+     total time taken by event execution: 226.9894
+     per-request statistics:
+          min:                                  0.08ms
+          avg:                                  4.90ms
+          max:                                 28.78ms
+          approx.  95 percentile:              11.81ms
+
+ Threads fairness:
+     events (avg/stddev):           46350.0000/0.00
+     execution time (avg/stddev):   226.9894/0.00
+</code></pre>
+</li>
+<li>
+<p>HDD - NTFS</p>
+<pre><code> $ cd /mnt/transfers/benchmark
+ $ sysbench --test=fileio --file-total-size=5G \
+          --file-test-mode=rndrw --init-rng=on \
+          --max-time=300 --max-requests=0 run
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 1
+ Initializing random number generator from timer.
+
+
+ Extra file open flags: 0
+ 128 files, 40Mb each
+ 5Gb total file size
+ Block size 16Kb
+ Number of random requests for random IO: 0
+ Read/Write ratio for combined random IO test: 1.50
+ Periodic FSYNC enabled, calling fsync() each 100 requests.
+ Calling fsync() at the end of test, Enabled.
+ Using synchronous I/O mode
+ Doing random r/w test
+ Threads started!
+ Time limit exceeded, exiting...
+ Done.
+
+ Operations performed:  20629 Read, 13752 Write, 43904 Other = 78285 Total
+ Read 322.33Mb  Written 214.88Mb  Total transferred 537.2Mb  (1.7906Mb/sec)
+   114.60 Requests/sec executed
+
+ Test execution summary:
+     total time:                          300.0108s
+     total number of events:              34381
+     total time taken by event execution: 241.7225
+     per-request statistics:
+          min:                                  0.09ms
+          avg:                                  7.03ms
+          max:                                 70.43ms
+          approx.  95 percentile:              12.80ms
+
+ Threads fairness:
+     events (avg/stddev):           34381.0000/0.00
+     execution time (avg/stddev):   241.7225/0.00
+</code></pre>
+</li>
+<li>
+<p>SD CARD - EXT4</p>
+<pre><code> $ cd ~/benchmark
+ $ sysbench --test=fileio --file-total-size=5G \
+ --file-test-mode=rndrw --init-rng=on \
+ --max-time=300 --max-requests=0 run
+ sysbench 0.4.12:  multi-threaded system evaluation benchmark
+
+ Running the test with following options:
+ Number of threads: 1
+ Initializing random number generator from timer.
+
+
+ Extra file open flags: 0
+ 128 files, 40Mb each
+ 5Gb total file size
+ Block size 16Kb
+ Number of random requests for random IO: 0
+ Read/Write ratio for combined random IO test: 1.50
+ Periodic FSYNC enabled, calling fsync() each 100 requests.
+ Calling fsync() at the end of test, Enabled.
+ Using synchronous I/O mode
+ Doing random r/w test
+ Threads started!
+ Time limit exceeded, exiting...
+ Done.
+
+ Operations performed:  1020 Read, 680 Write, 2122 Other = 3822 Total
+ Read 15.938Mb  Written 10.625Mb  Total transferred 26.562Mb  (90.526Kb/sec)
+ 5.66 Requests/sec executed
+
+ Test execution summary:
+ total time:                          300.4667s
+ total number of events:              1700
+ total time taken by event execution: 8.3414
+ per-request statistics:
+      min:                                  0.10ms
+      avg:                                  4.91ms
+      max:                                821.14ms
+      approx.  95 percentile:               2.32ms
+
+ Threads fairness:
+ events (avg/stddev):           1700.0000/0.00
+ execution time (avg/stddev):   8.3414/0.00
+</code></pre>
+</li>
+</ol>
+<h4 id="observation-and-notes">Observation and notes</h4>
+<ul>
+<li>HDD - FAT32(2.414Mb/sec) &gt; HDD - NTFS(1.7906Mb/sec) &raquo;&raquo;&gt; SD CARD - EXT4(90.526Kb/sec).</li>
+<li>So, in speed comparison,
+<ul>
+<li>HDD - FAT32 = 1.35 x HDD - NTFS</li>
+<li>HDD - FAT32 = 26.67 x SD CARD - EXT4</li>
+<li>HDD - NTFS = 19.77 x SD CARD - EXT4</li>
+</ul>
+</li>
+<li>In short, HDD is like 20x faster than SD card.</li>
+<li>As in any benchmark, take this with a pinch of salt.</li>
+<li>I repeated each case couple of times and didn&rsquo;t see much deviation in the overall speed.</li>
+</ul>
+<h3 id="clean-up">Clean up</h3>
+<ul>
+<li>Remove the <code>benchmark</code> folders.</li>
+<li>Or may be if you want empty <code>benchmark</code> folders, then run <code>sysbench --test=fileio cleanup</code> in each folder.</li>
+</ul>
+<h3 id="hardware-and-os">Hardware and OS</h3>
+<ul>
+<li>I was using <a href="https://www.raspberrypi.org/products/model-b/">Raspberry Pi 1 Model B</a> for this setup.</li>
+<li>It is running <a href="https://www.raspbian.org/">Raspbian</a> GNU/Linux 8 (jessie)</li>
+<li>Internal HDD - Seagate Barracuda 7200.12, 1TB - connected via USB enclosure.</li>
+<li>SD Card - Transcend 16 GB SDHC Class 10</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/raspberry-pi" class="tag">raspberry-pi</a>
+        
+        <a href="/software-engineering/tags/ntfs" class="tag">ntfs</a>
+        
+        <a href="/software-engineering/tags/fat" class="tag">fat</a>
+        
+        <a href="/software-engineering/tags/ext" class="tag">ext</a>
+        
+        <a href="/software-engineering/tags/hard-disk" class="tag">hard-disk</a>
+        
+        <a href="/software-engineering/tags/sd-card" class="tag">sd-card</a>
+        
+        <a href="/software-engineering/tags/benchmark" class="tag">benchmark</a>
+        
+    </div>
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+</body>
+
+</html>

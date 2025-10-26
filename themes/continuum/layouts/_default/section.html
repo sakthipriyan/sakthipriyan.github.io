@@ -1,0 +1,411 @@
+{{ define "main" }}
+<div class="container section-container">
+  {{ if and (in .RelPermalink "/tags/") (eq .Kind "section") }}
+    <!-- Tags List - Use tags template logic -->
+    {{ $currentSection := "" }}
+    {{ $sectionName := "" }}
+
+    <!-- Determine section from URL path -->
+    {{ $pathParts := split .RelPermalink "/" }}
+    {{ if ge (len $pathParts) 3 }}
+        {{ $currentSection = index $pathParts 1 }}
+        {{ $sectionName = $currentSection | title | replaceRE "-" " " }}
+    {{ end }}
+
+    <div class="content-list">
+        {{ if $currentSection }}
+        <div class="breadcrumb">
+            <a href="{{ "/" | absURL }}">Home</a> / 
+            <a href="{{ "/" | absURL }}{{ $currentSection }}/">{{ $sectionName }}</a> / 
+            <span>Tags</span>
+        </div>
+        {{ end }}
+        
+        <h1>{{ .Title }}</h1>
+        {{ if .Content }}
+        <div class="section-content">
+            {{ .Content }}
+        </div>
+        {{ end }}
+        
+        <!-- Manual tag collection and counting -->
+        {{ $tagMap := dict }}
+        {{ $totalTags := 0 }}
+        
+        {{ range .Site.RegularPages }}
+            {{ $pageSection := .Section }}
+            {{ if .Params.tags }}
+                {{ if or (not $currentSection) (eq $pageSection $currentSection) }}
+                    {{ range .Params.tags }}
+                        {{ $tagName := . }}
+                        {{ $currentCount := 0 }}
+                        {{ if isset $tagMap $tagName }}
+                            {{ $currentCount = index $tagMap $tagName }}
+                        {{ end }}
+                        {{ $tagMap = merge $tagMap (dict $tagName (add $currentCount 1)) }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        
+        {{ $sortedTags := slice }}
+        {{ range $tagName, $count := $tagMap }}
+            {{ $sortedTags = $sortedTags | append (dict "name" $tagName "count" $count) }}
+        {{ end }}
+        {{ $sortedTags = sort $sortedTags "name" }}
+        
+        {{ if $sortedTags }}
+        <div class="tags-cloud">
+            <!-- Calculate min/max counts for sizing -->
+            {{ $minCount := 1000 }}
+            {{ $maxCount := 0 }}
+            {{ range $sortedTags }}
+                {{ if lt .count $minCount }}{{ $minCount = .count }}{{ end }}
+                {{ if gt .count $maxCount }}{{ $maxCount = .count }}{{ end }}
+            {{ end }}
+            
+            {{ range $sortedTags }}
+                {{ $tagName := .name }}
+                {{ $count := .count }}
+                {{ $tagUrl := "" }}
+                {{ if $currentSection }}
+                    {{ $tagUrl = printf "/%s/tags/%s/" $currentSection ($tagName | urlize) }}
+                {{ else }}
+                    {{ $tagUrl = printf "/tags/%s/" ($tagName | urlize) }}
+                {{ end }}
+                
+                <!-- Calculate size class based on frequency -->
+                {{ $sizeClass := "tag-size-small" }}
+                {{ if gt $maxCount $minCount }}
+                    {{ $ratio := div (sub $count $minCount) (sub $maxCount $minCount) }}
+                    {{ if ge $ratio 0.8 }}{{ $sizeClass = "tag-size-xl" }}
+                    {{ else if ge $ratio 0.6 }}{{ $sizeClass = "tag-size-large" }}  
+                    {{ else if ge $ratio 0.4 }}{{ $sizeClass = "tag-size-medium" }}
+                    {{ else if ge $ratio 0.2 }}{{ $sizeClass = "tag-size-normal" }}
+                    {{ else }}{{ $sizeClass = "tag-size-small" }}{{ end }}
+                {{ end }}
+                
+                <a href="{{ $tagUrl | absURL }}" class="tag-cloud-item {{ $sizeClass }}" title="{{ $tagName }}: {{ $count }} {{ if eq $count 1 }}item{{ else }}items{{ end }}">
+                    {{ $tagName }}
+                    <span class="tag-count">({{ $count }})</span>
+                </a>
+            {{ end }}
+        </div>
+        
+        <div class="tags-stats">
+            <p>{{ len $sortedTags }} {{ if eq (len $sortedTags) 1 }}tag{{ else }}tags{{ end }} available{{ if $currentSection }} in {{ $sectionName }}{{ end }}.</p>
+        </div>
+        {{ else }}
+        <p class="no-content">No tags found{{ if $currentSection }} in {{ $sectionName }}{{ end }}.</p>
+        {{ end }}
+    </div>
+  {{ else if and (in .RelPermalink "/videos/") (eq .Kind "section") }}
+    <!-- Videos List -->
+    <div class="videos-list">
+      <h1>{{ .Title }}</h1>
+      {{ if .Description }}
+        <p class="section-description">{{ .Description }}</p>
+      {{ end }}
+      
+      <div class="videos-grid">
+        {{ range .Pages }}
+          <div class="video-card">
+            {{ if .Params.youtube_id }}
+              <div class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg" 
+                     alt="{{ .Title }}" loading="lazy">
+                {{ if .Params.duration }}
+                  <span class="duration-badge">{{ .Params.duration }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+            
+            <div class="video-info">
+              <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+              {{ if .Description }}
+                <p class="video-description">{{ .Description }}</p>
+              {{ end }}
+              
+              <div class="video-meta">
+                {{ if .Params.platform }}
+                  <span class="platform">{{ .Params.platform }}</span>
+                {{ end }}
+                {{ if .Date }}
+                  <span class="date">{{ .Date.Format "Jan 2, 2006" }}</span>
+                {{ end }}
+              </div>
+              
+              {{ if .Params.youtube_id }}
+                <a href="https://youtube.com/watch?v={{ .Params.youtube_id }}" 
+                   class="watch-button" target="_blank">Watch on YouTube</a>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ else if and (or (in .RelPermalink "/blogs/") (in .RelPermalink "/tools/") (in .RelPermalink "/slides/")) (eq .Kind "section") }}
+    <!-- Content List Pages (Blogs, Tools, Slides) -->
+    <div class="content-list">
+      <h1>{{ .Title }}</h1>
+      {{ if .Content }}
+        <div class="section-content">
+          {{ .Content }}
+        </div>
+      {{ end }}
+      
+      {{ if .Pages }}
+        <div class="posts-grid">
+          {{ range .Pages }}
+            <article class="content-card">
+              <a href="{{ .RelPermalink }}" class="card-link"{{ if in $.RelPermalink "/slides/" }} target="_blank"{{ end }}>
+                <!-- Image if specified -->
+                {{ if .Params.image }}
+                <div class="card-image">
+                  <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" loading="lazy">
+                </div>
+                {{ end }}
+                
+                <div class="card-content">
+                  <!-- Icon and Title -->
+                  <div class="card-header">
+                    {{ $contentIcon := "📄" }}
+                    {{ if in .RelPermalink "/videos/" }}{{ $contentIcon = "🎥" }}
+                    {{ else if in .RelPermalink "/blogs/" }}{{ $contentIcon = "📝" }}
+                    {{ else if in .RelPermalink "/tools/" }}{{ $contentIcon = "🛠️" }}
+                    {{ else if in .RelPermalink "/slides/" }}{{ $contentIcon = "🎯" }}
+                    {{ else if in .RelPermalink "/books/" }}{{ $contentIcon = "📚" }}
+                    {{ end }}
+                    <span class="content-icon">{{ $contentIcon }}</span>
+                    <h2 class="card-title">{{ .Title }}</h2>
+                  </div>
+                  
+                  <!-- Summary -->
+                  {{ if or .Summary .Description .Params.summary }}
+                  <p class="card-summary">{{ or .Summary .Description .Params.summary }}</p>
+                  {{ end }}
+                  
+                  <!-- Meta information -->
+                  <div class="card-meta">
+                    {{ if .Date }}
+                    <span class="meta-item">
+                      <span class="meta-icon">📅</span>
+                      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    </span>
+                    {{ end }}
+                    
+                    {{ if .Content }}
+                    {{ $words := len (split (plainify .Content) " ") }}
+                    {{ $readTime := math.Ceil (div $words 200.0) }}
+                    {{ if gt $readTime 0 }}
+                    <span class="meta-item">
+                      <span class="meta-icon">⏱️</span>
+                      <span class="read-time">{{ $readTime }} min read</span>
+                    </span>
+                    {{ end }}
+                    {{ end }}
+                  </div>
+                  
+                  <!-- Tags -->
+                  {{ $currentSection := .Section }}
+                  {{ $taxonomyName := "" }}
+                  {{ if eq $currentSection "software-engineering" }}
+                    {{ $taxonomyName = "se_tags" }}
+                  {{ else if eq $currentSection "building-wealth" }}
+                    {{ $taxonomyName = "bw_tags" }}
+                  {{ end }}
+                  
+                  {{ if $taxonomyName }}
+                    {{ $tags := index .Params $taxonomyName }}
+                    {{ if $tags }}
+                    <div class="card-tags">
+                      {{ range $tags }}
+                      {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
+                      <a href="{{ $tagUrl | absURL }}" class="tag-link">{{ . | title }}</a>
+                      {{ end }}
+                    </div>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              </a>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ else }}
+    <!-- Section Overview with Category Cards -->
+    <div class="section-overview">
+      <h1>{{ .Title }}</h1>
+      {{ if .Content }}
+        <div class="section-content">
+          {{ .Content }}
+        </div>
+      {{ end }}
+      
+      {{ if .Pages }}
+        <div class="category-sections">
+          {{/* Alphabetical: blogs, slides, tools, videos */}}
+          <!-- Blogs Section -->
+          {{ with .GetPage "blogs" }}
+            {{ $blogs := .Pages }}
+            {{ if $blogs }}
+              <div class="category-card">
+                <div class="category-header">
+                  <h2><a href="{{ .Permalink }}">Blogs</a></h2>
+                  <span class="item-count">({{ len $blogs }} {{ if eq (len $blogs) 1 }}blog{{ else }}blogs{{ end }})</span>
+                </div>
+                <div class="preview-list">
+                  {{ range first 3 $blogs }}
+                    <div class="preview-item">
+                      <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                      {{ if or .Summary .Description .Params.summary }}
+                        <p class="preview-description">{{ or .Summary .Description .Params.summary }}</p>
+                      {{ end }}
+                      <div class="preview-meta">
+                        <span class="date-small">{{ .Date.Format "Jan 2, 2006" }}</span>
+                        {{ if .Content }}
+                          {{ $words := len (split (plainify .Content) " ") }}
+                          {{ $readTime := math.Ceil (div $words 200.0) }}
+                          <span class="read-time">{{ $readTime }} min read</span>
+                        {{ end }}
+                        {{ if .Params.tags }}
+                          {{ range first 2 .Params.tags }}
+                            <span class="tag-small">{{ . }}</span>
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                    </div>
+                  {{ end }}
+                </div>
+                {{ if gt (len $blogs) 3 }}
+                  <div class="view-all">
+                    <a href="{{ .Permalink }}">View all {{ len $blogs }} blogs →</a>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+
+          <!-- Slides Section -->
+          {{ with .GetPage "slides" }}
+            {{ $slides := .Pages }}
+            {{ if $slides }}
+              <div class="category-card">
+                <div class="category-header">
+                  <h2><a href="{{ .Permalink }}">Slides</a></h2>
+                  <span class="item-count">({{ len $slides }} {{ if eq (len $slides) 1 }}slide{{ else }}slides{{ end }})</span>
+                </div>
+                <div class="preview-list">
+                  {{ range first 3 $slides }}
+                    <div class="preview-item">
+                      <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                      {{ if or .Summary .Description .Params.summary }}
+                        <p class="preview-description">{{ or .Summary .Description .Params.summary }}</p>
+                      {{ end }}
+                      <div class="preview-meta">
+                        <span class="date-small">{{ .Date.Format "Jan 2, 2006" }}</span>
+                        {{ if .Params.tags }}
+                          {{ range first 2 .Params.tags }}
+                            <span class="tag-small">{{ . }}</span>
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                    </div>
+                  {{ end }}
+                </div>
+                {{ if gt (len $slides) 3 }}
+                  <div class="view-all">
+                    <a href="{{ .Permalink }}">View all {{ len $slides }} slides →</a>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+
+          <!-- Tools Section -->
+          {{ with .GetPage "tools" }}
+            {{ $tools := .Pages }}
+            {{ if $tools }}
+              <div class="category-card">
+                <div class="category-header">
+                  <h2><a href="{{ .Permalink }}">Tools</a></h2>
+                  <span class="item-count">({{ len $tools }} {{ if eq (len $tools) 1 }}tool{{ else }}tools{{ end }})</span>
+                </div>
+                <div class="preview-list">
+                  {{ range first 3 $tools }}
+                    <div class="preview-item">
+                      <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                      {{ if or .Summary .Description .Params.summary }}
+                        <p class="preview-description">{{ or .Summary .Description .Params.summary }}</p>
+                      {{ end }}
+                      <div class="preview-meta">
+                        <span class="date-small">{{ .Date.Format "Jan 2, 2006" }}</span>
+                        {{ if .Params.tags }}
+                          {{ range first 2 .Params.tags }}
+                            <span class="tag-small">{{ . }}</span>
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                    </div>
+                  {{ end }}
+                </div>
+                {{ if gt (len $tools) 3 }}
+                  <div class="view-all">
+                    <a href="{{ .Permalink }}">View all {{ len $tools }} tools →</a>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+
+          <!-- Videos Section -->
+          {{ with .GetPage "videos" }}
+            {{ $videos := .Pages }}
+            {{ if $videos }}
+              <div class="category-card">
+                <div class="category-header">
+                  <h2><a href="{{ .Permalink }}">Videos</a></h2>
+                  <span class="item-count">({{ len $videos }} {{ if eq (len $videos) 1 }}video{{ else }}videos{{ end }})</span>
+                </div>
+                <div class="preview-grid videos-preview">
+                  {{ range first 2 $videos }}
+                    <div class="preview-item video-preview">
+                      {{ if .Params.youtube_id }}
+                        <div class="video-thumbnail-small">
+                          <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/mqdefault.jpg" 
+                               alt="{{ .Title }}" loading="lazy">
+                          {{ if .Params.duration }}
+                            <span class="duration-badge-small">{{ .Params.duration }}</span>
+                          {{ end }}
+                        </div>
+                      {{ end }}
+                      <div class="preview-content">
+                        <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                        {{ if or .Summary .Description .Params.summary }}
+                          <p class="preview-description">{{ or .Summary .Description .Params.summary }}</p>
+                        {{ end }}
+                        <div class="preview-meta">
+                          {{ if .Params.platform }}
+                            <span class="platform-small">{{ .Params.platform }}</span>
+                          {{ end }}
+                          <span class="date-small">{{ .Date.Format "Jan 2, 2006" }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  {{ end }}
+                </div>
+                {{ if gt (len $videos) 2 }}
+                  <div class="view-all">
+                    <a href="{{ .Permalink }}">View all {{ len $videos }} videos →</a>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+{{ end }}

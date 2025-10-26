@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Boto on Sakthi Priyan H</title>
+    <link>http://localhost:1313/software-engineering/tags/boto/</link>
+    <description>Recent content in Boto on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 09 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/software-engineering/tags/boto/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Listing S3 Top level folders</title>
+      <link>http://localhost:1313/software-engineering/blogs/2015/listing-s3-top-level-folders/</link>
+      <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/blogs/2015/listing-s3-top-level-folders/</guid>
+      <description>using simple Python code.</description>
+    </item>
+  </channel>
+</rss>

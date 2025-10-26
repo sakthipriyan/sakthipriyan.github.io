@@ -1,0 +1,66 @@
+<header class="site-header">
+    <nav class="main-nav">
+        {{ if .Section }}
+            <!-- Section-specific Header -->
+            {{ $actualSection := .Section }}
+            <!-- Map taxonomy sections to actual sections -->
+            {{ if eq .Section "se_tags" }}
+                {{ $actualSection = "software-engineering" }}
+            {{ else if eq .Section "bw_tags" }}
+                {{ $actualSection = "building-wealth" }}
+            {{ end }}
+            
+            <div class="logo">
+                <a href="{{ "/" | absURL }}" class="name-link">{{ .Site.Title }}</a>
+                <span class="separator"> | </span>
+                {{ $sectionPage := .Site.GetPage $actualSection }}
+                <a href="{{ $sectionPage.RelPermalink }}" class="name-link">{{ $sectionPage.Title }}</a>
+            </div>
+            <ul class="nav-links">
+                <!-- Dynamic navigation based on section structure -->
+                {{ $sectionPath := printf "/%s/" $actualSection }}
+                {{ $sectionRoot := .Site.GetPage $actualSection }}
+                
+                {{ range (slice "blogs" "books" "slides" "tags" "tools" "videos") }}
+                    {{ $subPath := printf "%s%s/" $sectionPath . }}
+                    {{ $subSection := $.Site.GetPage $subPath }}
+                    {{ if $subSection }}
+                        {{ if eq . "tags" }}
+                            <!-- For tags, check if taxonomy data exists -->
+                            {{ $hasTags := false }}
+                            {{ if eq $actualSection "software-engineering" }}
+                                {{ if isset $.Site.Taxonomies "se_tags" }}
+                                    {{ $hasTags = true }}
+                                {{ end }}
+                            {{ else if eq $actualSection "building-wealth" }}
+                                {{ if isset $.Site.Taxonomies "bw_tags" }}
+                                    {{ $hasTags = true }}
+                                {{ end }}
+                            {{ end }}
+                            {{ if $hasTags }}
+                                <li><a href="{{ $subPath | absURL }}">{{ title . }}</a></li>
+                            {{ end }}
+                        {{ else }}
+                            <!-- For other sections, check if they have pages -->
+                            {{ if $subSection.Pages }}
+                                <li><a href="{{ $subPath | absURL }}">{{ title . }}</a></li>
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            </ul>
+        {{ else }}
+            <!-- Default/Home Header -->
+            <a href="{{ "/" | absURL }}" class="logo">{{ .Site.Title }}</a>
+            <ul class="nav-links">
+                <!-- Main sections in preferred order -->
+                {{ range (slice "software-engineering" "building-wealth") }}
+                    {{ $sectionPage := $.Site.GetPage . }}
+                    {{ if $sectionPage }}
+                        <li><a href="{{ $sectionPage.RelPermalink }}" class="{{ . }}-link">{{ $sectionPage.Title }}</a></li>
+                    {{ end }}
+                {{ end }}
+            </ul>
+        {{ end }}
+    </nav>
+</header>

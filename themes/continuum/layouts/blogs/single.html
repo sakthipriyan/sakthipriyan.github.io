@@ -1,0 +1,59 @@
+{{ define "main" }}
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    {{ .Title }}
+                    {{ if .Params.summary }}
+                    <div class="post-subtitle">{{ .Params.summary }}</div>
+                    {{ end }}
+                </h1>
+            </div>
+            {{ if .Date }}
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "Jan 02, 2006" }}
+                </time>
+            </div>
+            {{ end }}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ .Content }}
+    </div>
+
+    {{ $tags := slice }}
+    {{ $tagPrefix := "" }}
+    {{ if .Params.bw_tags }}
+        {{ $tags = .Params.bw_tags }}
+        {{ $tagPrefix = "/building-wealth/tags/" }}
+    {{ else if .Params.se_tags }}
+        {{ $tags = .Params.se_tags }}
+        {{ $tagPrefix = "/software-engineering/tags/" }}
+    {{ else if .Params.tags }}
+        {{ $tags = .Params.tags }}
+        {{ $tagPrefix = "/tags/" }}
+    {{ end }}
+    
+    {{ if $tags }}
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        {{ range $tags }}
+        <a href="{{ $tagPrefix | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+        {{ end }}
+    </div>
+    {{ end }}
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sakthipriyan';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+{{ end }}

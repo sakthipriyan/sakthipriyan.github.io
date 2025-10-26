@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webgen on Sakthi Priyan H</title>
+    <link>http://localhost:1313/software-engineering/tags/webgen/</link>
+    <description>Recent content in Webgen on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 15 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/software-engineering/tags/webgen/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Auto refresh Chrome when files modified</title>
+      <link>http://localhost:1313/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</link>
+      <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</guid>
+      <description>Using python pyinotify and chrome debugging</description>
+    </item>
+    <item>
+      <title>How to create a modern blog?</title>
+      <link>http://localhost:1313/software-engineering/blogs/2015/how-to-create-a-modern-blog/</link>
+      <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/software-engineering/blogs/2015/how-to-create-a-modern-blog/</guid>
+      <description>using markdown and python</description>
+    </item>
+  </channel>
+</rss>

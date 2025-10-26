@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Efficiently using Enum in entity class | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Efficiently using Enum in entity class</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Efficiently using Enum in entity class
+                    
+                    <div class="post-subtitle">to improve code maintainability and database performance.</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2015-08-24">
+                    Aug 24, 2015
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="problems-in-using-enum-in-jpa">Problems in using Enum in JPA</h3>
+<ul>
+<li>JPA implementations stores the ordinal number of the enum.</li>
+<li>It is problematic in many ways,
+<ul>
+<li>We cannot rearrange the enum values.</li>
+<li>We cannot remove unused enum value.</li>
+<li>We can add new enum values only at the end.</li>
+</ul>
+</li>
+<li>Alternatively, we can use the string representation of the enum.
+<ul>
+<li>It is too verbose, takes more space.</li>
+<li>Comparing <code>varchar</code> in database is costly compared to <code>int</code>. Moreover, this field will be used to filter results often.</li>
+</ul>
+</li>
+</ul>
+<h3 id="how-to-do-it-right">How to do it right?</h3>
+<p>In this post we will see how to efficiently use Enum using a <code>int value</code> for each enum value.</p>
+<ul>
+<li>Create an enum with an int value.</li>
+<li>Create a class that implements AttributeConverter.</li>
+<li>Now, simply use the enum wherever required in entity class.</li>
+</ul>
+<h3 id="enum-status">Enum Status</h3>
+<p><code>Status</code> has enum values such <code>ACTIVE</code>,<code>INACTIVE</code>, etc.,</p>
+<pre><code>package com.sakthipriyan.example;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public enum Status {
+
+    // Add any enum values anywhere.
+    // Make sure not to repeat same int value.
+    // Changing values here, would require update in database as well.
+    // Now values stored in database is made explicit in code.
+    ACTIVE(1),
+    INACTIVE(2),
+    CREATED(3),
+    SUBMITTED(4),
+    ACCPETED(6),
+    REJECTED(7);
+
+    private final int value;
+
+    private Status(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    // This is look up map to get Enum value from int value.
+    private final static Map&lt;Integer, Status&gt; map = new HashMap&lt;&gt;();
+
+    // In Enum, static block will be executed after creating all Enum values.
+    static {
+        for (Status status : Status.values()) {
+            map.put(status.getValue(), status);
+        }
+    }
+
+    public final static Status getStatus(int value) {
+        return map.get(value);
+    }
+
+}
+</code></pre>
+<h3 id="statusconverter-implements-attributeconverter">StatusConverter implements AttributeConverter</h3>
+<p>AttributeConverter can be implemented to override the default behavior. This implementation say that, <code>Status</code> should be stored as <code>Integer</code> and also provides method to get the <code>Status</code> object from <code>Integer</code> value of the database.</p>
+<pre><code>package com.sakthipriyan.example;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+
+@Converter(autoApply = true)
+public class StatusConverter implements AttributeConverter&lt;Status, Integer&gt; {
+
+    @Override
+    public Integer convertToDatabaseColumn(Status status) {
+        return status.getValue();
+    }
+
+    @Override
+    public Status convertToEntityAttribute(Integer value) {
+        return Status.getStatus(value);
+    }
+}
+</code></pre>
+<h3 id="enitity-langauge">Enitity Langauge</h3>
+<p>Now, we can start using the enum <code>Status</code>.
+Here, Langauge entity has a Status field in it.</p>
+<pre><code>package com.sakthipriyan.example;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Language {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private short id;
+
+    @Column(nullable = false)
+    private String language;
+
+    @Column(nullable = false)
+    private Status status;
+
+    public Language(String language) {
+        super();
+        this.language = language;
+        this.status = Status.ACTIVE;
+    }
+
+    public Language() {
+        super();
+    }
+
+    public short getId() {
+        return id;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void deactivate() {
+        this.status = Status.INACTIVE;
+    }
+
+    public void activate() {
+        this.status = Status.ACTIVE;
+    }
+}
+</code></pre>
+<h3 id="result">Result</h3>
+<p>Now, whenever the Language object is stored in the database. It will persist the Integer equivalent of the Status object rather than using Ordinal number or String representation of the Enum value.</p>
+<h3 id="further-tuning">Further tuning</h3>
+<ul>
+<li>Based on the usage, you can even use <code>Short</code> in place of <code>Integer</code> in <code>Status</code> and <code>StatusConverter</code>.</li>
+<li>Also, you can specify the column size in <code>@Column</code> definition.</li>
+<li>Alternatively, with minor variations we should be able to easily stores enum values as <code>char(n)</code> say <code>n=2</code> or <code>n=3</code>.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/java" class="tag">java</a>
+        
+        <a href="/software-engineering/tags/code" class="tag">code</a>
+        
+        <a href="/software-engineering/tags/jpa" class="tag">jpa</a>
+        
+        <a href="/software-engineering/tags/database" class="tag">database</a>
+        
+        <a href="/software-engineering/tags/enum" class="tag">enum</a>
+        
+        <a href="/software-engineering/tags/hibernate" class="tag">hibernate</a>
+        
+    </div>
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+</body>
+
+</html>

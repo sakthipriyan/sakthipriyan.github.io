@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raspberry Pi 2 setup | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Raspberry Pi 2 setup</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    Raspberry Pi 2 setup
+                    
+                    <div class="post-subtitle">from micro SD card to JDK installation.</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2016-01-11">
+                    Jan 11, 2016
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h3 id="prepare-micro-sd-card">Prepare Micro SD card</h3>
+<p>This set up was done on <code>Ubuntu 14.04</code>, should work fine on most Linux systems.</p>
+<ol>
+<li>
+<p><strong>Micro SD Card</strong><br>
+Insert the Micro SD Card into the computer.
+Find the micro SD card device name and unmount it.</p>
+<pre><code> df -h
+ # Output line corresponding to micro SD card shown as below.
+ # /dev/mmcblk0p1   31G   32K   31G   1% /media/sakthipriyan/STRONTIUM
+ umount /dev/mmcblk0p1
+</code></pre>
+</li>
+<li>
+<p><strong>Raspbian Image</strong><br>
+Now download and unpack the Raspbian Lite latest Image</p>
+<pre><code> wget https://downloads.raspberrypi.org/raspbian_lite_latest
+ unzip 2015-11-21-raspbian-jessie-lite.zip
+</code></pre>
+</li>
+<li>
+<p><strong>Lets roll it</strong><br>
+Put the Raspbian image on the micro SD card.</p>
+<pre><code> sudo dd bs=4M if=2015-11-21-raspbian-jessie-lite.img of=/dev/mmcblk0
+ 347+1 records in
+ 347+1 records out
+ 1458569216 bytes (1.5 GB) copied, 200.461 s, 7.3 MB/s
+</code></pre>
+</li>
+</ol>
+<p>It took me <code>3m 20s</code>, please be patient.</p>
+<h3 id="boot-up-the-raspberry-pi">Boot up the Raspberry Pi</h3>
+<ol>
+<li>Insert the Micro SD card into the Raspberry Pi.</li>
+<li>Connect
+<ul>
+<li>USB Keyboard</li>
+<li>HDMI cable from the Monitor</li>
+<li>LAN cable</li>
+</ul>
+</li>
+<li>Now connect the power supply via Micro USB cable.</li>
+</ol>
+<h3 id="login-configuration-and-java-installation">Login, configuration and Java installation.</h3>
+<ul>
+<li>
+<p>Use, username <code>pi</code> and password <code>raspberry</code> to login to Raspberry Pi.</p>
+</li>
+<li>
+<p>Run, <code>sudo raspi-config</code> to config the system settings like timezone, disk partitions, etc.,</p>
+</li>
+<li>
+<p>Update/upgrade the system and install Java 8</p>
+<pre><code>  sudo apt-get update &amp;&amp; sudo apt-get upgrade
+  sudo apt-get install oracle-java8-jdk
+</code></pre>
+</li>
+<li>
+<p>By default, ssh server is enabled. Find the IP using <code>ifconfig</code> and login from any computer into this device using <code>ssh</code>.</p>
+</li>
+</ul>
+<h3 id="running-java">Running Java.</h3>
+<p>Apparently, Java 1.8.0 is available in Raspbian repository, but not the latest updates.</p>
+<pre><code># Create a Test.java file with content shown in `cat Test.java`.
+cat Test.java
+public class Test {
+	public static void main(String[] args){
+		System.out.println(&quot;Hello World from c4rpi&quot;);
+	}
+}
+
+# Compile it using Java Compiler (javac)
+javac Test.java
+
+# Run the Test class to see the output printed to the screen.
+java Test
+Hello World from c4rpi
+</code></pre>
+<p>Once the <code>Hello World</code> program is done, you can go ahead and do some serious stuff.</p>
+<h3 id="permanent-set-up">Permanent set up.</h3>
+<p>I generally use Raspberry Pi as low cost, low power 24x7 computer running in my house.<br>
+Only following two things are connected to Raspberry Pi,</p>
+<ol>
+<li><strong>Power Supply</strong>, use quality power adapter with good quality USB cable.</li>
+<li><strong>Network Cable</strong>, use quality RJ45 cable to connect it to a router.</li>
+</ol>
+<p>Login to Raspberry Pi via ssh from other computer and set up things to run as required.</p>
+<h3 id="c4rpi">C4Rpi</h3>
+<p><code>C4Rpi</code> is a simple 4 node Raspberry Pi 2 cluster, based out of <a href="http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/">this</a> post. Coming soon.</p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/raspberry-pi" class="tag">raspberry-pi</a>
+        
+        <a href="/software-engineering/tags/setup" class="tag">setup</a>
+        
+        <a href="/software-engineering/tags/java" class="tag">java</a>
+        
+        <a href="/software-engineering/tags/c4rpi" class="tag">c4rpi</a>
+        
+    </div>
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+</body>
+
+</html>

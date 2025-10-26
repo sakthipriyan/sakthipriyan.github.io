@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to create a modern blog? | Sakthi Priyan H</title>
+    <meta name="description" content="Building Software. Building Wealth.">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
+
+    
+</head>
+
+
+
+
+
+<body class="software-engineering">
+    <header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+
+    
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>How to create a modern blog?</span>
+            </li>
+            
+        </ol>
+</nav>
+
+
+    <main>
+        
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-header-grid">
+            <div class="title-column">
+                <h1 class="post-title">
+                    How to create a modern blog?
+                    
+                    <div class="post-subtitle">using markdown and python</div>
+                    
+                </h1>
+            </div>
+            
+            <div class="date-column">
+                <i class="calendar-icon">📅</i>
+                <time datetime="2015-04-08">
+                    Apr 08, 2015
+                </time>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+        <p>Over past few years I had tried various blogging platforms, say Live journal, wordpress (self hosted as well), tumblr, microsoft sharepoint etc., Everyone of these had only browser based editors. I was looking for simple text file based blogging software. I came across <a href="http://jekyllrb.com/">Jekyll</a>. But, instead of learning it, I wondered why don&rsquo;t I create simple one.</p>
+<p>###Primary Goals</p>
+<ol>
+<li>Write blog using <a href="http://daringfireball.net/projects/markdown/">Markdown</a>.</li>
+<li>Code highlighting.</li>
+<li>Responsive UI.</li>
+<li>Tagging posts.</li>
+<li>List blogs by date.</li>
+<li>Share link over social media.</li>
+</ol>
+<p>##<a href="https://github.com/sakthipriyan/webgen">webgen</a></p>
+<p>Initially, I started working with <a href="http://www.scala-lang.org/">scala</a> <a href="https://www.playframework.com">play framework</a>. I tried various storage systems from file system to couchbase server. Every option had different pros and cons.</p>
+<p>###Storage</p>
+<ol>
+<li><em>File system</em> : It is lowest level you can getting in to. It can be easily be part of a git repo.</li>
+<li><em>MySQL</em> : Most of the blogging software including wordpress use this one. Nothing new or special. Required some sort of ORM.</li>
+<li><em>Elastic search</em> : json document store with extensive search capabilities.</li>
+<li><em>Couchbase</em> : Fast RAM cached json document store. Json documents make easy for iterative devlopment.</li>
+</ol>
+<p>###Solution
+I was concerned about the server cost and i wanted to reduce the compute time for serving the blog files. So, decided to go for simple file based solution. Here, both source blog markdown as well as generated websites will be set of files. So, webgen has to generate set of html files from set of markdown files.</p>
+<p>###Tech stack</p>
+<ol>
+<li><em><a href="http://daringfireball.net/projects/markdown/">Markdown</a></em> format is the core of this static <strong>web</strong>site <strong>gen</strong>erator. Easier to create clean html from simple text styles.</li>
+<li><em>HTML5 + CSS3 + Javascript</em>: Browser can understand only these 3, No escaping right.</li>
+<li><em>Twitter <a href="http://getbootstrap.com/">bootstrap</a> + <a href="https://jquery.com/">jQuery</a></em>: Bootstrap is one of the awesome reponsive UI library available out there and jQuery is required for few of its functionalities.</li>
+<li><em><a href="http://fortawesome.github.io/Font-Awesome/">Font-Awesome</a></em> : Just love the font awesome icons over default one that comes along with bootstrap.</li>
+<li><em><a href="https://highlightjs.org">highlight.js</a></em> : Easily customizable javascript library available for code highlighting.</li>
+<li><em><a href="https://www.python.org/">Python</a></em> : Moved over to python from jvm langauges, so that i can learn more by using it.</li>
+<li><em><a href="http://jinja.pocoo.org">Jinja2</a></em> : Really handy html templating library for python. Comparable to one that comes along with django</li>
+<li><em>Python <a href="https://pypi.python.org/pypi/Markdown">Markdown</a></em> package is available in python which generates html out of the markdown text.</li>
+</ol>
+<p>Now, all the components are in place.</p>
+<p>###Repo</p>
+<ol>
+<li><strong><a href="https://github.com/sakthipriyan/webgen">webgen</a></strong> : It contained all python code required to generate the website.</li>
+<li><strong><a href="https://github.com/sakthipriyan/sakthipriyan.com">sakthipriyan.com</a></strong> : It contains 3 components,
+<ol>
+<li>Website template - used by the jinja2 and required css/js files.</li>
+<li>Markdown - all blog files in markdown.</li>
+<li>Config - config files used for generating the website.</li>
+</ol>
+</li>
+</ol>
+<p>###Website Generation
+Following set files are generated, when webgen is run.</p>
+<ol>
+<li>Home page</li>
+<li>Blog pages</li>
+<li>Tagcloud page</li>
+<li>Tags page</li>
+<li>Calendar pages</li>
+</ol>
+<p>###Deployment
+Generate the website using the following command.</p>
+<pre><code>#python webgen.py [location of the config file]
+python webgen.py ../sakthipriyan.com/conf/local.json
+</code></pre>
+<p>Once the blog is generated it can be easily deployed over any static webserver like <a href="http://nginx.org/">nginx</a> or <a href="http://httpd.apache.org/">apache webserver</a>. I prefer nginx for being thread less web server.</p>
+<p>###Conclusion
+Though webgen is able to generate website from markdown, it is far from perfect. Lot of things has to be done over coming months, so that it can smartly generate the website.</p>
+
+    </div>
+
+    
+    
+    
+        
+        
+    
+    
+    
+    <div class="post-tags-footer">
+        <span class="tags-label">🏷️ Tags:</span>
+        
+        <a href="/software-engineering/tags/blog-software" class="tag">blog-software</a>
+        
+        <a href="/software-engineering/tags/webgen" class="tag">webgen</a>
+        
+        <a href="/software-engineering/tags/design" class="tag">design</a>
+        
+        <a href="/software-engineering/tags/python" class="tag">python</a>
+        
+        <a href="/software-engineering/tags/markdown" class="tag">markdown</a>
+        
+    </div>
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+
+    
+
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+
+    
+
+    
+</body>
+
+</html>
