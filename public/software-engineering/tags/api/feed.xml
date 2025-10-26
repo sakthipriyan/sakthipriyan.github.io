@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Api on Sakthi Priyan H</title>
-    <link>http://localhost:1313/software-engineering/tags/api/</link>
+    <link>https://sakthipriyan.com/software-engineering/tags/api/</link>
     <description>Recent content in Api on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 20 Jul 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/software-engineering/tags/api/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/api/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Documenting Play Framework using Swagger</title>
-      <link>http://localhost:1313/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</guid>
       <description>Setting up live documentation for API</description>
     </item>
     <item>
       <title>Creating REST API Specification</title>
-      <link>http://localhost:1313/software-engineering/blogs/2016/creating-rest-api-specification/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/2016/creating-rest-api-specification/</link>
       <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/2016/creating-rest-api-specification/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/creating-rest-api-specification/</guid>
       <description>using Swagger Specification</description>
     </item>
   </channel>
