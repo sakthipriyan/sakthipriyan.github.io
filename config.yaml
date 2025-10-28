@@ -48,3 +48,5 @@ taxonomies:
 permalinks:
   bw_tags: "/building-wealth/tags/:slug/"
   se_tags: "/software-engineering/tags/:slug/"
+
+publishDir: docs
