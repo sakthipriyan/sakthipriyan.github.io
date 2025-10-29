@@ -45,7 +45,7 @@ bw_tags:
 4. Gold  
 5. Real Assets  
 6. Retirement  
-7. Credit & Liabilities  
+7. Credit Cards & Loans
 8. Summary  
 
 ---
@@ -150,7 +150,7 @@ bw_tags:
 
 ---
 
-### 7. Credit & Liabilities
+### 7. Credit Cards & Loans
 
 **Purpose:** Smart leverage and cash-flow management 💳  
 
@@ -164,18 +164,68 @@ bw_tags:
 ---
 
 ### 8. Summary
+#### 🟢 Core financial tools 
+```dot
+digraph FinancialTools {
+  rankdir=TB;
+  graph [fontsize=12, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=11, fillcolor="#ffffff"];
+  edge [color="#666666"];
 
-**Core financial tools to use 🟢**
+  /* Central Node */
+  core [label="🏦 Core Financial Tools", shape=box, style="filled", fillcolor="#f7f7f7", fontsize=13];
 
-|  |  |
-|-----------|--------|
-| 💧 Liquid | Cash & Bank Accounts |
-| 🛡️ Insurance | Medical, Term, Accident, Vehicle |
-| 📈 Market | Index Funds (IN/US), Arbitrage Funds,<br/> Gold ETF|
-| 🧱 Retirement | PPF |
-| 💳 Credit | Credit Cards |
+  /* Categories */
+  liquid [label="💧 Liquid", fillcolor="#eaf6ff"];
+  insurance [label="🛡️ Insurance", fillcolor="#effaf0"];
+  market [label="📈 Market Investments", fillcolor="#fff4e6"];
+  retirement [label="🧱 Retirement", fillcolor="#f6efff"];
+  credit [label="💳 Credit", fillcolor="#f0fbfb"];
 
-> 💡 *Focus stays on these core tools.*
+  /* Core Connections */
+  core -> liquid;
+  core -> insurance;
+  core -> market;
+  core -> retirement;
+  core -> credit;
+
+  /* Liquid Subnodes */
+  cash [label="Cash"];
+  bank [label="Bank Accounts"];
+  liquid -> cash;
+  liquid -> bank;
+
+  /* Insurance Subnodes */
+  medical [label="Medical"];
+  term [label="Term / Accident"];
+  vehicle [label="Vehicle"];
+  insurance -> medical;
+  insurance -> term;
+  insurance -> vehicle;
+
+  /* Market Subnodes */
+  index [label="Index Fund"];
+  index_in [label="India"];
+  index_us [label="US"];
+  market -> index;
+  index -> index_in;
+  index -> index_us;
+
+  arbitrage [label="Arbitrage Fund"];
+  gold [label="Gold ETF"];
+  market -> arbitrage;
+  market -> gold;
+
+  /* Retirement Subnodes */
+  ppf [label="PPF"];
+  retirement -> ppf;
+
+  /* Credit Subnodes */
+  creditcard [label="Credit Cards"];
+  credit -> creditcard;
+}
+
+```
 
 ---
 
