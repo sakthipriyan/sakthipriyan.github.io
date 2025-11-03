@@ -156,26 +156,25 @@
     <main>
         
 <article class="blog-post">
-    <header class="post-header">
-        <div class="post-header-grid">
-            <div class="title-column">
-                <h1 class="post-title">
-                    Responsive exponential backoff in Go
-                    
-                    <div class="post-subtitle">using exponentially scaling up and down the sleep time</div>
-                    
-                </h1>
-            </div>
-            
-            <div class="date-column">
-                <i class="calendar-icon">📅</i>
-                <time datetime="2022-11-13">
-                    Nov 13, 2022
-                </time>
-            </div>
-            
-        </div>
-    </header>
+    
+<header class="content-header">
+    <h1 class="content-title">Responsive exponential backoff in Go</h1>
+    <p class="content-summary">using exponentially scaling up and down the sleep time</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2022-11-13">Nov 13, 2022</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">6 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
 
     <div class="post-content">
         <h3 id="rate-limiting">Rate Limiting</h3>
@@ -417,40 +416,41 @@ DownMultiplierThreshold = 5
     </div>
 
     
+<footer class="content-footer">
+    <hr class="content-divider">
     
     
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
         
+        <a href="https://sakthipriyan.com/software-engineering/tags/go/" class="tag-link">Go</a>
         
-    
-    
-    
-    <div class="post-tags-footer">
-        <span class="tags-label">🏷️ Tags:</span>
+        <a href="https://sakthipriyan.com/software-engineering/tags/exponential-backoff/" class="tag-link">Exponential-Backoff</a>
         
-        <a href="/software-engineering/tags/go" class="tag">go</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/sleep/" class="tag-link">Sleep</a>
         
-        <a href="/software-engineering/tags/exponential-backoff" class="tag">exponential-backoff</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/code/" class="tag-link">Code</a>
         
-        <a href="/software-engineering/tags/sleep" class="tag">sleep</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/cloud/" class="tag-link">Cloud</a>
         
-        <a href="/software-engineering/tags/code" class="tag">code</a>
-        
-        <a href="/software-engineering/tags/cloud" class="tag">cloud</a>
-        
-        <a href="/software-engineering/tags/dynamodb" class="tag">dynamodb</a>
-        
+        <a href="https://sakthipriyan.com/software-engineering/tags/dynamodb/" class="tag-link">Dynamodb</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
     </div>
-    
+</footer>
 </article>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'sakthipriyan';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
 
     </main>
 

@@ -12,6 +12,9 @@
 
 
     
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    
 
     
 </head>
@@ -152,9 +155,29 @@
 
     <main>
         
-<article>
-    <h1>Building a scalable recommendation engine</h1>
-    <div><p>Note: <em>This article is more on technology stack selection than how to use different algorithms to generate recommendations.</em></p>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Building a scalable recommendation engine</h1>
+    <p class="content-summary">using play framework, couchbase and elasticsearch</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2015-05-30">May 30, 2015</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">3 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <p>Note: <em>This article is more on technology stack selection than how to use different algorithms to generate recommendations.</em></p>
 <h3 id="intro">Intro</h3>
 <p>Recommendation engines are everywhere trying to suggest relevant things to users and relevant recommendation increases the business value. Recommendation engine is usually built on top of insights data. Insights are generated as follows.</p>
 <ul>
@@ -192,7 +215,44 @@
 <li>More data, add more nodes to Couchbase and Elasticsearch clusters.</li>
 <li>More concurrent users, add more Play framework nodes.</li>
 </ul>
-</div>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/playframework/" class="tag-link">Playframework</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/couchbase/" class="tag-link">Couchbase</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/elasticsearch/" class="tag-link">Elasticsearch</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/design/" class="tag-link">Design</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/big-data/" class="tag-link">Big-Data</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/recommendation/" class="tag-link">Recommendation</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
 </article>
 
     </main>
@@ -203,6 +263,14 @@
 
     
 
+        
+        
+        <script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
         
 
     

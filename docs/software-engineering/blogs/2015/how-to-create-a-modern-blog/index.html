@@ -156,26 +156,25 @@
     <main>
         
 <article class="blog-post">
-    <header class="post-header">
-        <div class="post-header-grid">
-            <div class="title-column">
-                <h1 class="post-title">
-                    How to create a modern blog?
-                    
-                    <div class="post-subtitle">using markdown and python</div>
-                    
-                </h1>
-            </div>
-            
-            <div class="date-column">
-                <i class="calendar-icon">📅</i>
-                <time datetime="2015-04-08">
-                    Apr 08, 2015
-                </time>
-            </div>
-            
-        </div>
-    </header>
+    
+<header class="content-header">
+    <h1 class="content-title">How to create a modern blog?</h1>
+    <p class="content-summary">using markdown and python</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2015-04-08">Apr 8, 2015</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">3 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
 
     <div class="post-content">
         <p>Over past few years I had tried various blogging platforms, say Live journal, wordpress (self hosted as well), tumblr, microsoft sharepoint etc., Everyone of these had only browser based editors. I was looking for simple text file based blogging software. I came across <a href="http://jekyllrb.com/">Jekyll</a>. But, instead of learning it, I wondered why don&rsquo;t I create simple one.</p>
@@ -243,38 +242,39 @@ python webgen.py ../sakthipriyan.com/conf/local.json
     </div>
 
     
+<footer class="content-footer">
+    <hr class="content-divider">
     
     
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
         
+        <a href="https://sakthipriyan.com/software-engineering/tags/blog-software/" class="tag-link">Blog-Software</a>
         
-    
-    
-    
-    <div class="post-tags-footer">
-        <span class="tags-label">🏷️ Tags:</span>
+        <a href="https://sakthipriyan.com/software-engineering/tags/webgen/" class="tag-link">Webgen</a>
         
-        <a href="/software-engineering/tags/blog-software" class="tag">blog-software</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/design/" class="tag-link">Design</a>
         
-        <a href="/software-engineering/tags/webgen" class="tag">webgen</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/python/" class="tag-link">Python</a>
         
-        <a href="/software-engineering/tags/design" class="tag">design</a>
-        
-        <a href="/software-engineering/tags/python" class="tag">python</a>
-        
-        <a href="/software-engineering/tags/markdown" class="tag">markdown</a>
-        
+        <a href="https://sakthipriyan.com/software-engineering/tags/markdown/" class="tag-link">Markdown</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
     </div>
-    
+</footer>
 </article>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'sakthipriyan';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
 
     </main>
 

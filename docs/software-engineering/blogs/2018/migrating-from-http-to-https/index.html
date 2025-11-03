@@ -156,26 +156,25 @@
     <main>
         
 <article class="blog-post">
-    <header class="post-header">
-        <div class="post-header-grid">
-            <div class="title-column">
-                <h1 class="post-title">
-                    Migrating from http to https
-                    
-                    <div class="post-subtitle">using lets encrypt, certbot and configuring Nginx</div>
-                    
-                </h1>
-            </div>
-            
-            <div class="date-column">
-                <i class="calendar-icon">📅</i>
-                <time datetime="2018-11-17">
-                    Nov 17, 2018
-                </time>
-            </div>
-            
-        </div>
-    </header>
+    
+<header class="content-header">
+    <h1 class="content-title">Migrating from http to https</h1>
+    <p class="content-summary">using lets encrypt, certbot and configuring Nginx</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2018-11-17">Nov 17, 2018</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">4 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
 
     <div class="post-content">
         <h3 id="lets-encrypt">Lets Encrypt</h3>
@@ -343,38 +342,39 @@ server {
     </div>
 
     
+<footer class="content-footer">
+    <hr class="content-divider">
     
     
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
         
+        <a href="https://sakthipriyan.com/software-engineering/tags/https/" class="tag-link">Https</a>
         
-    
-    
-    
-    <div class="post-tags-footer">
-        <span class="tags-label">🏷️ Tags:</span>
+        <a href="https://sakthipriyan.com/software-engineering/tags/code/" class="tag-link">Code</a>
         
-        <a href="/software-engineering/tags/https" class="tag">https</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/nginx/" class="tag-link">Nginx</a>
         
-        <a href="/software-engineering/tags/code" class="tag">code</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/cerbot/" class="tag-link">Cerbot</a>
         
-        <a href="/software-engineering/tags/nginx" class="tag">nginx</a>
-        
-        <a href="/software-engineering/tags/cerbot" class="tag">cerbot</a>
-        
-        <a href="/software-engineering/tags/letsencrypt" class="tag">letsencrypt</a>
-        
+        <a href="https://sakthipriyan.com/software-engineering/tags/letsencrypt/" class="tag-link">Letsencrypt</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
     </div>
-    
+</footer>
 </article>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'sakthipriyan';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
 
     </main>
 
