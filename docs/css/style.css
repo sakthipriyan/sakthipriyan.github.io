@@ -263,6 +263,12 @@ main {
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.5rem;
+    align-items: center;
+}
+
+.card-tags .tags-icon {
+    font-size: 1.1rem;
+    margin-right: 0.25rem;
 }
 
 .card-tags .tag-link {
@@ -1687,11 +1693,57 @@ main {
     }
 }
 
-/* Video page styling */
-.video {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 2rem;
+/* Content Header Styles */
+.content-header {
+    margin-bottom: 2rem;
+}
+
+.content-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.content-summary {
+    font-size: 1.25rem;
+    color: var(--gray-medium);
+    font-style: italic;
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.content-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    color: var(--gray-medium);
+    font-size: 0.95rem;
+}
+
+.content-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.content-divider {
+    border: none;
+    border-top: 2px solid var(--gray-light);
+    margin: 1.5rem 0;
+}
+
+/* Content Footer Styles */
+.content-footer {
+    margin-top: 3rem;
+}
+
+.content-footer .card-tags {
+    margin: 1.5rem 0;
+}
+
+.content-comments {
+    margin-top: 2rem;
 }
 
 .video-header {
@@ -1783,7 +1835,10 @@ main {
 }
 
 @media (max-width: 768px) {
-    .video {
+
+    .video,
+    .blog-post,
+    .tool {
         padding: 0 1rem;
     }
 

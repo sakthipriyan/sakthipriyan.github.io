@@ -156,26 +156,25 @@
     <main>
         
 <article class="blog-post">
-    <header class="post-header">
-        <div class="post-header-grid">
-            <div class="title-column">
-                <h1 class="post-title">
-                    Scala code to access documents in AWS S3 bucket
-                    
-                    <div class="post-subtitle">via http get and put requests</div>
-                    
-                </h1>
-            </div>
-            
-            <div class="date-column">
-                <i class="calendar-icon">📅</i>
-                <time datetime="2016-02-17">
-                    Feb 17, 2016
-                </time>
-            </div>
-            
-        </div>
-    </header>
+    
+<header class="content-header">
+    <h1 class="content-title">Scala code to access documents in AWS S3 bucket</h1>
+    <p class="content-summary">via http get and put requests</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2016-02-17">Feb 17, 2016</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">4 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
 
     <div class="post-content">
         <h3 id="intro">Intro</h3>
@@ -328,40 +327,41 @@ val getRequest = AsyncHttpClient.getDispatchReq(AwsS3.get(path))
     </div>
 
     
+<footer class="content-footer">
+    <hr class="content-divider">
     
     
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
         
+        <a href="https://sakthipriyan.com/software-engineering/tags/scala/" class="tag-link">Scala</a>
         
-    
-    
-    
-    <div class="post-tags-footer">
-        <span class="tags-label">🏷️ Tags:</span>
+        <a href="https://sakthipriyan.com/software-engineering/tags/aws/" class="tag-link">Aws</a>
         
-        <a href="/software-engineering/tags/scala" class="tag">scala</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/s3/" class="tag-link">S3</a>
         
-        <a href="/software-engineering/tags/aws" class="tag">aws</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/http/" class="tag-link">Http</a>
         
-        <a href="/software-engineering/tags/s3" class="tag">s3</a>
+        <a href="https://sakthipriyan.com/software-engineering/tags/code/" class="tag-link">Code</a>
         
-        <a href="/software-engineering/tags/http" class="tag">http</a>
-        
-        <a href="/software-engineering/tags/code" class="tag">code</a>
-        
-        <a href="/software-engineering/tags/dispatch" class="tag">dispatch</a>
-        
+        <a href="https://sakthipriyan.com/software-engineering/tags/dispatch/" class="tag-link">Dispatch</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
     </div>
-    
+</footer>
 </article>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'sakthipriyan';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
 
     </main>
 

@@ -1,11 +1,6 @@
 {{ define "main" }}
 <article class="tool">
-    <header class="tool-header">
-        <h1>{{ .Title }}</h1>
-        {{ if .Params.description }}
-        <p class="tool-description">{{ .Params.description }}</p>
-        {{ end }}
-    </header>
+    {{ partial "content-header.html" . }}
 
     <!-- Custom HTML Tool Interface -->
     {{ if .Params.custom_html }}
@@ -40,6 +35,8 @@
         <a href="{{ .Params.source_code }}" target="_blank" rel="noopener">View Source</a>
     </div>
     {{ end }}
+
+    {{ partial "content-footer.html" . }}
 
     <!-- Related Tools in Same Section -->
     {{ $currentPage := . }}
