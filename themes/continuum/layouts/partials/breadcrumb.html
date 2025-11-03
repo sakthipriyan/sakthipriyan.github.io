@@ -43,6 +43,23 @@
                                 <a href="{{ $subsectionPage.RelPermalink }}">{{ $subsection | title }}</a>
                             {{ end }}
                         </li>
+                        
+                        {{- /* Add book name for book chapters */ -}}
+                        {{ if and (eq $subsection "books") (ge (len $pathParts) 5) }}
+                            {{ $bookSlug := index $pathParts 3 }}
+                            {{ if $bookSlug }}
+                                {{ $bookPage := .Site.GetPage (printf "/%s/%s/%s/" $actualSection $subsection $bookSlug) }}
+                                {{ if $bookPage }}
+                                <li class="breadcrumb-item{{ if eq .RelPermalink $bookPage.RelPermalink }} active{{ end }}"{{ if eq .RelPermalink $bookPage.RelPermalink }} aria-current="page"{{ end }}>
+                                    {{ if eq .RelPermalink $bookPage.RelPermalink }}
+                                        <span>{{ $bookPage.Title }}</span>
+                                    {{ else }}
+                                        <a href="{{ $bookPage.RelPermalink }}">{{ $bookPage.Title }}</a>
+                                    {{ end }}
+                                </li>
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
                         {{ end }}
                     {{ else if eq $subsection "tags" }}
                         {{ $tagsPath := printf "/%s/tags/" $actualSection }}

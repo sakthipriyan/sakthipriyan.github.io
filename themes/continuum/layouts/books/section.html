@@ -1,0 +1,91 @@
+{{ define "main" }}
+{{- /* This is the books list page - show all books */ -}}
+{{- $isBooksList := or (in .RelPermalink "/books/") (eq .Type "books") -}}
+{{- $isSpecificBook := and (gt (len .Pages) 0) (ne .RelPermalink "/software-engineering/books/") -}}
+
+{{- if and $isBooksList $isSpecificBook -}}
+{{- /* This is a specific book page - show book details and chapters */ -}}
+<article class="book">
+    <header class="book-header">
+        <h1>{{ .Title }}</h1>
+        {{- if .Params.subtitle }}
+        <h2 class="book-subtitle">{{ .Params.subtitle }}</h2>
+        {{- end }}
+
+        <div class="book-meta">
+            {{- if .Params.author }}
+            <p class="book-author">By {{ .Params.author }}</p>
+            {{- end }}
+            {{- if .Date }}
+            <p class="book-date">{{ .Date.Format "January 2006" }}</p>
+            {{- end }}
+        </div>
+    </header>
+
+    <div class="book-content">
+        {{ .Content }}
+    </div>
+
+    {{- /* List chapters - get pages with weight parameter */ -}}
+    {{- $chapterPages := where .Pages ".Params.weight" "!=" nil -}}
+    {{- if $chapterPages }}
+    <nav class="book-chapters">
+        <h2>Chapters</h2>
+        <ol class="chapters-list">
+            {{- range $chapterPages.ByWeight }}
+            <li class="chapter-item">
+                <a href="{{ .RelPermalink }}" class="chapter-link">
+                    <span class="chapter-title">{{ .Title }}</span>
+                    {{- with .Summary }}
+                    <span class="chapter-summary">{{ . | plainify | truncate 200 }}</span>
+                    {{- end }}
+                </a>
+            </li>
+            {{- end }}
+        </ol>
+    </nav>
+    {{- else -}}
+    {{- /* Debug: show all pages */ -}}
+    <div class="debug" style="display:none;">
+        Total pages: {{ len .Pages }}<br>
+        {{- range .Pages }}
+        - {{ .Title }} ({{ .RelPermalink }}), Weight: {{ .Params.weight }}<br>
+        {{- end }}
+    </div>
+    {{- end }}
+</article>
+{{- else -}}
+{{- /* This is the books list page - show all books */ -}}
+<section class="books-list">
+    <h1>{{ .Title }}</h1>
+    {{- if .Content }}
+    <div class="section-content">
+        {{ .Content }}
+    </div>
+    {{- end }}
+
+    <div class="books-grid">
+        {{- range .Pages }}
+        <article class="book-card">
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            {{- if .Params.subtitle }}
+            <h3 class="book-subtitle">{{ .Params.subtitle }}</h3>
+            {{- end }}
+            {{- if .Params.author }}
+            <p class="book-author">By {{ .Params.author }}</p>
+            {{- end }}
+            {{- if .Date }}
+            <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "January 2006" }}</time>
+            {{- end }}
+            {{- if .Summary }}
+            <p class="book-summary">{{ .Summary | truncate 200 }}</p>
+            {{- end }}
+            {{- if .Params.status }}
+            <span class="book-status status-{{ .Params.status }}">{{ .Params.status | title }}</span>
+            {{- end }}
+        </article>
+        {{- end }}
+    </div>
+</section>
+{{- end -}}
+{{ end }}
