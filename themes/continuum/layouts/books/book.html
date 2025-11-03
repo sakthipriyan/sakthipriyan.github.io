@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+    <link rel="stylesheet" href="{{ "/css/style.css" | absURL }}">
+</head>
+
+<body class="book-layout {{ .Section }}">
+    {{- partial "header.html" . }}
+    
+    <div class="book-page-wrapper">
+        {{- partial "breadcrumb.html" . }}
+
+        <div class="book-container">
+        {{- /* Sidebar navigation */ -}}
+        <aside class="book-sidebar">
+            {{- $currentBook := . -}}
+            {{- if .CurrentSection -}}
+            {{- $currentBook = .CurrentSection -}}
+            {{- else if .Parent -}}
+            {{- $currentBook = .Parent -}}
+            {{- end -}}
+
+            <div class="book-nav">
+                <h3 class="book-nav-title">
+                    <a href="{{ $currentBook.RelPermalink }}">{{ $currentBook.Title }}</a>
+                </h3>
+
+                {{- $chapters := where $currentBook.Pages ".Params.weight" "!=" nil -}}
+                {{- if $chapters }}
+                <nav class="book-toc">
+                    <ol class="book-toc-list">
+                        {{- range $chapters.ByWeight }}
+                        <li class="book-toc-item{{ if eq .RelPermalink $.RelPermalink }} active{{ end }}">
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </li>
+                        {{- end }}
+                    </ol>
+                </nav>
+                {{- end }}
+            </div>
+        </aside>
+
+        {{- /* Main content area */ -}}
+        <main class="book-main">
+            <article class="book-content">
+                {{- block "book-content" . }}
+                <header class="chapter-header">
+                    <h1>{{ .Title }}</h1>
+                    {{- if .Params.subtitle }}
+                    <p class="chapter-subtitle">{{ .Params.subtitle }}</p>
+                    {{- end }}
+                    {{- if .Date }}
+                    <p class="chapter-meta">
+                        <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                    </p>
+                    {{- end }}
+                </header>
+
+                <div class="chapter-content">
+                    {{ .Content }}
+                </div>
+                {{- end }}
+            </article>
+
+            {{- /* Navigation footer */ -}}
+            <div class="book-footer-nav">
+                {{- if .IsSection -}}
+                {{- /* For book index page, show link to first chapter */ -}}
+                {{- $chapters := where .Pages ".Params.weight" "!=" nil -}}
+                {{- with (index ($chapters.ByWeight) 0) }}
+                <a href="{{ .RelPermalink }}" class="book-nav-next">
+                    <span>Start Reading →</span>
+                    <span class="book-nav-title">{{ .Title }}</span>
+                </a>
+                {{- end }}
+                {{- else -}}
+                {{- /* For chapter pages, show prev/next */ -}}
+                {{- with .NextInSection }}
+                <a href="{{ .RelPermalink }}" class="book-nav-prev">
+                    <span>← Previous</span>
+                    <span class="book-nav-title">{{ .Title }}</span>
+                </a>
+                {{- end }}
+                {{- with .PrevInSection }}
+                <a href="{{ .RelPermalink }}" class="book-nav-next">
+                    <span>Next →</span>
+                    <span class="book-nav-title">{{ .Title }}</span>
+                </a>
+                {{- end }}
+                {{- end }}
+            </div>
+        </main>
+    </div>
+    </div>
+
+    {{- partial "footer.html" . }}
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

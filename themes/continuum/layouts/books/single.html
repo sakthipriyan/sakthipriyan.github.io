@@ -1,49 +1,17 @@
-{{ define "main" }}
-<article class="book">
-    <header class="book-header">
-        <h1>{{ .Title }}</h1>
-        {{ if .Params.subtitle }}
-        <h2 class="book-subtitle">{{ .Params.subtitle }}</h2>
-        {{ end }}
+{{ define "book-content" }}
+<header class="chapter-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Params.subtitle }}
+    <p class="chapter-subtitle">{{ .Params.subtitle }}</p>
+    {{- end }}
+    {{- if .Date }}
+    <p class="chapter-meta">
+        <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    </p>
+    {{- end }}
+</header>
 
-        <div class="book-meta">
-            {{ if .Params.author }}
-            <p class="book-author">By {{ .Params.author }}</p>
-            {{ end }}
-            {{ if .Params.publisher }}
-            <p class="book-publisher">Published by {{ .Params.publisher }}</p>
-            {{ end }}
-            {{ if .Date }}
-            <p class="book-date">{{ .Date.Format "January 2006" }}</p>
-            {{ end }}
-            {{ if .Params.isbn }}
-            <p class="book-isbn">ISBN: {{ .Params.isbn }}</p>
-            {{ end }}
-        </div>
-    </header>
-
-    <div class="book-content">
-        {{ .Content }}
-    </div>
-
-    {{ if .Params.chapters }}
-    <nav class="book-chapters">
-        <h3>Chapters</h3>
-        <ul>
-            {{ range .Params.chapters }}
-            <li><a href="#{{ .anchor }}">{{ .title }}</a></li>
-            {{ end }}
-        </ul>
-    </nav>
-    {{ end }}
-
-    {{ if .Params.download_links }}
-    <div class="book-downloads">
-        <h3>Download</h3>
-        {{ range .Params.download_links }}
-        <a href="{{ .url }}" class="download-link">{{ .format }}</a>
-        {{ end }}
-    </div>
-    {{ end }}
-</article>
+<div class="chapter-content">
+    {{ .Content }}
+</div>
 {{ end }}
