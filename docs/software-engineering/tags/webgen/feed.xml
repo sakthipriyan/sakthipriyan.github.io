@@ -10,16 +10,16 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/webgen/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Auto refresh Chrome when files modified</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</link>
       <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</guid>
       <description>Using python pyinotify and chrome debugging</description>
     </item>
     <item>
       <title>How to create a modern blog?</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</link>
       <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</guid>
       <description>using markdown and python</description>
     </item>
   </channel>

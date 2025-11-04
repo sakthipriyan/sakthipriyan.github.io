@@ -10,9 +10,9 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/git/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git Configuration</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/gitconfig-alias/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/git-configuration/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/gitconfig-alias/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/git-configuration/</guid>
       <description>Alias for generally used Git commands</description>
     </item>
   </channel>

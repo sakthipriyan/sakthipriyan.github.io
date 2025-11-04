@@ -2,11 +2,12 @@
 title: "Cloud First, Start Fast"
 subtitle: "Design, Build & Deploy Scalable Systems"
 description: "A practical guide for early stage startup founders and engineers to build scalable, cloud-native systems from the ground up."
+summary: "A practical guide for early stage startup founders and engineers to build scalable, cloud-native systems from the ground up."
 date: 2025-06-10
 author: "Sakthi Priyan H"
 type: books
 layout: book
-draft: false
+draft: true
 ---
 
 ## About This Book

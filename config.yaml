@@ -7,8 +7,8 @@ build:
   writeStats: true
 
 params:
-  description: "Building Software. Building Wealth."
-  author: "Sakthi Priyan"
+  description: "Systems that Scale. Wealth that Compounds."
+  author: "Sakthi Priyan H"
 
 markup:
   highlight:

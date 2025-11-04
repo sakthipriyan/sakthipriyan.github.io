@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsive exponential backoff in Go | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="software-engineering"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/software-engineering/" class="name-link">Software Engineering</a>
+            </div>
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/software-engineering/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/software-engineering/">Software Engineering</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/software-engineering/blogs/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Responsive exponential backoff in Go</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Responsive exponential backoff in Go</h1>
+    <p class="content-summary">using exponentially scaling up and down the sleep time</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2022-11-13">Nov 13, 2022</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">6 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h3 id="rate-limiting">Rate Limiting</h3>
+<ul>
+<li>Often when we use various cloud services we end up seeing throttling or rate limiting from the service</li>
+<li>Various cloud services are often shared across multiple tenants and rate limiting mechanisms are used to prevent one tenant consuming much more resources than allocated/provisioned limits</li>
+</ul>
+<h3 id="client-side-throttling">Client side throttling</h3>
+<ul>
+<li>In order to handle the service throttling, client needs to add a delay between subsequent calls</li>
+<li>This can achieved via a linear back off or an exponential back off</li>
+</ul>
+<h3 id="linear-back-off">Linear back off</h3>
+<ul>
+<li>Simplest approach is to start with a base sleep time and add sleep time for each failure</li>
+<li>Say 1 secs as base sleep time. For every request that is failed due to rate limiting, we add another 1 seconds</li>
+<li>So, it will go like this <code>1s, 2s, 3s, 4s, 5s, ...</code> and stops growing once request is successful</li>
+</ul>
+<h4 id="code">Code</h4>
+<pre><code>// for each failure we add interval to current delay
+func sleepTime(currentDelay, interval, maxInterval int64) int64 {
+    currentDelay += interval
+    if currentDelay &gt; maxInterval {
+        currentDelay = maxInterval
+    }
+    return currentDelay
+}
+</code></pre>
+<h3 id="exponential-back-off">Exponential back off</h3>
+<ul>
+<li>In this case, instead of increasing the sleep time by a constant time, it is multiplied by a factor</li>
+<li>If this multiplication factor is 2 and initial sleep is 1 second</li>
+<li>Then, it will grow exponentially as <code>1s, 2s, 4s, 8s, 16s, ...</code></li>
+<li>This will be the better than linear back off as it can get successful delay with less iterations</li>
+</ul>
+<h4 id="code-1">Code</h4>
+<pre><code>// for each failure we multiple the current delay by a multiplication factor
+func sleepTime(currentDelay, initialDelay, maxInterval int64, multiplier float64) int64 {
+    if currentDelay == 0 {
+       return initialDelay
+    }
+    currentDelay = int64(float64(currentDelay) * multiplier)
+    if currentDelay &gt; maxInterval {
+        return maxInterval
+    }
+    return currentDelay
+}
+</code></pre>
+<h3 id="rate-limiting-in-dynamodb">Rate Limiting in DynamoDB</h3>
+<ul>
+<li><a href="https://aws.amazon.com/dynamodb/">DynamoDB</a> is a Fast, flexible NoSQL database service from <a href="https://aws.amazon.com/">AWS</a></li>
+<li>DynamoDB provides two capacity modes for each table: on-demand and provisioned.</li>
+<li>Irrespective of the capacity mode, DynamoDB will reject incoming write requests when it exceeds WCUs (Write Capacity Units)</li>
+<li>I built this <code>responsive exponential back off</code> to handle this rate limiting</li>
+<li>But, same can be used for handling rate limiting from any service</li>
+<li>As part of a job, multiple workers are writing to the DynamoDB in parallel</li>
+</ul>
+<h3 id="responsive-exponential-back-off">Responsive Exponential back off</h3>
+<ul>
+<li>In addition to exponential back off, this one is responsive in nature</li>
+<li>As we see more and more requests succeeding it will start decreasing the delay time</li>
+<li>Down multiplier factor is used once down multiplier threshold is met. When we see N successful requests, down multiplier is applied</li>
+<li>Additionally a RandomizationFactor is applied while scaling up and down.</li>
+<li>Say <code>RandomizationFactor=0.2</code>, <code>current delay is 1s</code> and <code>up multiplier 2</code>, on next failure it can become <code>(1 x 2) +/- 0.2 * (1 x 2) = 1.6 to 2.4</code></li>
+<li>RandomizationFactor aids in getting slightly different new interval when applying multipliers</li>
+</ul>
+<h4 id="autosleeper">AutoSleeper</h4>
+<p>Following configurations are used for the sleeper.</p>
+<pre><code>type AutoSleeper struct {
+  InitialInterval         time.Duration  // Used for sleeping first time
+  MaxInterval             time.Duration  // Max interval for sleeping
+  MaxRandomization        time.Duration  // Max randomization interval
+  UpMultiplier            float64        // Multiplied for increasing the sleep time
+  DownMultiplier          float64        // Multiplied for decreasing the sleep time
+  RandomizationFactor     float64        // Randomize the new sleep value 
+  DownMultiplierThreshold int            // Threshold for triggering sleep time reduction
+}
+</code></pre>
+<h3 id="go-code">Go Code</h3>
+<h4 id="source">Source</h4>
+<blockquote>
+<p><a href="https://github.com/sakthipriyan/go-utils/blob/main/sleeper.go">https://github.com/sakthipriyan/go-utils/blob/main/sleeper.go</a></p>
+</blockquote>
+<pre><code>package main
+
+import (
+  &quot;math/rand&quot;
+  &quot;time&quot;
+)
+
+const (
+  DefaultMaxInterval             = 15 * time.Minute
+  DefaultInitialInterval         = 500 * time.Millisecond
+  DefaultRandomizationFactor     = 0.3
+  DefaultMaxRandomization        = 2 * time.Minute
+  DefaultUpMultiplier            = 1.5
+  DefaultDownMultiplier          = 0.9
+  DefaultDownMultiplierThreshold = 10
+)
+
+func NewAutoSleeper() *AutoSleeper {
+  return &amp;AutoSleeper{
+    MaxInterval:             DefaultMaxInterval,
+    InitialInterval:         DefaultInitialInterval,
+    RandomizationFactor:     DefaultRandomizationFactor,
+    MaxRandomization:        DefaultMaxRandomization,
+    UpMultiplier:            DefaultUpMultiplier,
+    DownMultiplier:          DefaultDownMultiplier,
+    DownMultiplierThreshold: DefaultDownMultiplierThreshold,
+  }
+}
+
+type AutoSleeperMetrics struct {
+  TotalInvocation int
+  TotalWentUp     int
+  TotalWentDown   int
+  TotalSlept      int
+  TotalSleepTime  time.Duration
+}
+
+type AutoSleeper struct {
+  InitialInterval         time.Duration
+  MaxInterval             time.Duration
+  MaxRandomization        time.Duration
+  UpMultiplier            float64
+  DownMultiplier          float64
+  RandomizationFactor     float64
+  DownMultiplierThreshold int
+
+  metrics         AutoSleeperMetrics
+  currentInterval time.Duration
+  currentSuccess  int
+}
+
+func (s *AutoSleeper) GetMetrics() AutoSleeperMetrics {
+  return s.metrics
+}
+
+func (s *AutoSleeper) SleepOnFailure() {
+  s.metrics.TotalInvocation += 1
+  s.goUp()
+  s.sleep()
+}
+
+func (s *AutoSleeper) SleepOnSuccess() {
+  s.metrics.TotalInvocation += 1
+  if s.currentInterval == 0 {
+    return
+  }
+  s.currentSuccess += 1
+  if s.currentSuccess == s.DownMultiplierThreshold {
+    s.goDown()
+    s.currentSuccess = 0
+  }
+  s.sleep()
+}
+
+func (s *AutoSleeper) sleep() {
+  s.metrics.TotalSleepTime += s.currentInterval
+  s.metrics.TotalSlept += 1
+  time.Sleep(s.currentInterval)
+}
+
+func (s *AutoSleeper) goDown() {
+  s.metrics.TotalWentDown += 1
+  interval := float64(s.currentInterval) * s.DownMultiplier
+  random := getNextRandomInterval(interval, s.RandomizationFactor, float64(s.MaxRandomization))
+  if random &lt; float64(s.InitialInterval) {
+    s.currentInterval = 0
+    return
+  }
+  s.currentInterval = time.Duration(random)
+}
+
+func (s *AutoSleeper) goUp() {
+  s.metrics.TotalWentUp += 1
+  if s.currentInterval == 0 {
+    s.currentInterval = s.InitialInterval
+    return
+  }
+  interval := float64(s.currentInterval) * s.UpMultiplier
+  random := getNextRandomInterval(interval, s.RandomizationFactor, float64(s.MaxRandomization))
+  if random &gt; float64(s.MaxInterval) {
+    s.currentInterval = s.MaxInterval
+    return
+  }
+  s.currentInterval = time.Duration(random)
+}
+
+func getNextRandomInterval(currentInterval, randomizationFactor, maxRandomization float64) float64 {
+  if randomizationFactor == 0 {
+    return currentInterval
+  }
+  delta := randomizationFactor * currentInterval
+  if delta &gt; maxRandomization {
+    delta = maxRandomization
+  }
+  randomization := 2 * delta * rand.Float64()
+  minInterval := currentInterval - delta
+  return minInterval + randomization
+}
+</code></pre>
+<h4 id="usage">Usage</h4>
+<pre><code>s := NewAutoSleeper()
+s.SleepOnFailure() // Uses up multiplier
+s.SleepOnSuccess() // Uses down multiplier on N threshold
+</code></pre>
+<h3 id="graph-of-delay-generated">Graph of delay generated</h3>
+<p>For the following configuration,</p>
+<pre><code>InitialInterval = 1 millisecond
+MaxInterval = 15 minutes
+MaxRandomization = 2 minutes
+UpMultiplier = 1.5
+DownMultiplier = 0.6
+RandomizationFactor = 0.0
+DownMultiplierThreshold = 5
+</code></pre>
+<img class="ui fluid image"  src="/img/posts/sleeper/failed_and_succeeded.png">  
+<ul>
+<li>Y axis represents the delay time generated for each request</li>
+<li>Responses succeeded are shown as blue and failed ones are shown in red</li>
+<li>Initially, requests were failing till it reached <code>291.9 ms</code></li>
+<li>Later point, delay of greater than <code>60 ms</code> were succeeding</li>
+<li>As shown in the graph, responsive exponential back off quickly generates suitable delay</li>
+<li>It goes up and down as the requests were failing and suceeding respectively</li>
+<li>Setting an appropriate value for <code>DownMultiplierThreshold</code> controls how frequently we want to reduce the delay</li>
+<li>Setting an appropriate value for <code>DownMultiplier</code> controls how fast we want to reduce the delay</li>
+<li>Setting an appropriate values for <code>RandomizationFactor</code> and <code>MaxRandomization</code> controls the noise introduced while scaling up/down</li>
+</ul>
+<h3 id="usage-of-responsive-exponential-back-off">Usage of Responsive Exponential back off</h3>
+<ul>
+<li>In Auto scaling DynamoDB use case, DynamoDB will increase the capacity as it sees more load, but this will take time, not instantaneous</li>
+<li>Each job is run by multiple workers. Workers count increase as the job started and decrease when individual tasks are completed</li>
+<li>So this back off, initially increases the delay and tries to succeed</li>
+<li>Once requests are succeeding, it will try to reduce the delay</li>
+<li>This will be auto balancing as with the increase/decrease of workers as well as DynamoDB WCUs</li>
+</ul>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/go/" class="tag-link">Go</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/exponential-backoff/" class="tag-link">Exponential-Backoff</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/sleep/" class="tag-link">Sleep</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/code/" class="tag-link">Code</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/cloud/" class="tag-link">Cloud</a>
+        
+        <a href="https://sakthipriyan.com/software-engineering/tags/dynamodb/" class="tag-link">Dynamodb</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>

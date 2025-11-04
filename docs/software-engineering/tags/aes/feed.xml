@@ -10,9 +10,9 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/aes/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Encryption and Decryption in Java</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/encryption-and-decryption-in-java/</link>
       <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/encryption-and-decryption-in-java/</guid>
       <description>using a private key and AES algorithm.</description>
     </item>
   </channel>
