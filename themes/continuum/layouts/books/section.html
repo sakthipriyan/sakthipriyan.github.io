@@ -1,9 +1,9 @@
 {{ define "main" }}
-{{- /* This is the books list page - show all books */ -}}
+{{- /* Check if this is the books list page or a specific book page */ -}}
 {{- $isBooksList := or (in .RelPermalink "/books/") (eq .Type "books") -}}
-{{- $isSpecificBook := and (gt (len .Pages) 0) (ne .RelPermalink "/software-engineering/books/") -}}
+{{- $isBooksListPage := or (eq .RelPermalink "/software-engineering/books/") (eq .RelPermalink "/building-wealth/books/") -}}
 
-{{- if and $isBooksList $isSpecificBook -}}
+{{- if and $isBooksList (not $isBooksListPage) -}}
 {{- /* This is a specific book page - show book details and chapters */ -}}
 <article class="book">
     <header class="book-header">
@@ -64,26 +64,9 @@
     </div>
     {{- end }}
 
-    <div class="books-grid">
+    <div class="posts-grid">
         {{- range .Pages }}
-        <article class="book-card">
-            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-            {{- if .Params.subtitle }}
-            <h3 class="book-subtitle">{{ .Params.subtitle }}</h3>
-            {{- end }}
-            {{- if .Params.author }}
-            <p class="book-author">By {{ .Params.author }}</p>
-            {{- end }}
-            {{- if .Date }}
-            <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "January 2006" }}</time>
-            {{- end }}
-            {{- if .Summary }}
-            <p class="book-summary">{{ .Summary | truncate 200 }}</p>
-            {{- end }}
-            {{- if .Params.status }}
-            <span class="book-status status-{{ .Params.status }}">{{ .Params.status | title }}</span>
-            {{- end }}
-        </article>
+        {{ partial "content-card.html" . }}
         {{- end }}
     </div>
 </section>

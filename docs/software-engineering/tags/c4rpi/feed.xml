@@ -10,16 +10,16 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/c4rpi/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up a 4 node Raspberry Pi 2 Cluster</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
       <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
       <description>Setting up the right hardware.</description>
     </item>
     <item>
       <title>Raspberry Pi 2 setup</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-setup/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-setup/</guid>
       <description>from micro SD card to JDK installation.</description>
     </item>
   </channel>

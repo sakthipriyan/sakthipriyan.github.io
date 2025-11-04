@@ -10,9 +10,9 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/cloud/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Responsive exponential backoff in Go</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/responsive-exponential-backoff-in-go/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/responsive-exponential-backoff-in-go/</guid>
       <description>using exponentially scaling up and down the sleep time</description>
     </item>
   </channel>

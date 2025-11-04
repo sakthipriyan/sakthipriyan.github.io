@@ -10,16 +10,16 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/http/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scala code to access documents in AWS S3 bucket</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
       <description>via http get and put requests</description>
     </item>
     <item>
       <title>Distributed forward proxy servers</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/distributed-forward-proxy-servers/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/distributed-forward-proxy-servers/</guid>
       <description>to crawl Internet via multiple cloud instances.</description>
     </item>
   </channel>

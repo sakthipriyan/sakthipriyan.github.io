@@ -10,16 +10,16 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/playframework/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building a scalable recommendation engine</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-scalable-recommendation-engine/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-scalable-recommendation-engine/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</guid>
       <description>using play framework, couchbase and elasticsearch</description>
     </item>
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
   </channel>

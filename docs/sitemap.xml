@@ -2,10 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sakthipriyan.com/building-wealth/tags/building-block/</loc>
-    <lastmod>2025-11-02T00:00:00+00:00</lastmod>
+    <loc>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/01-introduction-to-cloud-first-development/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/02-go-for-cloud-development/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/03-aws-infrastructure/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/books/</loc>
+    <lastmod>2025-11-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/</loc>
+    <lastmod>2025-11-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/</loc>
+    <lastmod>2025-11-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/building-block/</loc>
     <lastmod>2025-11-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/building-wealth/</loc>
@@ -21,9 +36,6 @@
     <lastmod>2025-11-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/videos/financial_tools/</loc>
-    <lastmod>2025-11-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/</loc>
     <lastmod>2025-11-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/slides/</loc>
@@ -71,10 +83,19 @@
     <loc>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</loc>
     <lastmod>2025-10-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/blogs/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/books/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/title/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/software-engineering/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/blogs/blogs/</loc>
     <lastmod>2024-10-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/blogs/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/cloud/</loc>
@@ -92,7 +113,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/go/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2022/responsive-exponential-back-off-in-go/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/responsive-exponential-backoff-in-go/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/se_tags/</loc>
@@ -101,13 +122,10 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/sleep/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/bigdata/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/building-machine-learning-models/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/machine-learning/</loc>
@@ -122,13 +140,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/spark/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/feature-engineering-for-machine-learning-models/</loc>
     <lastmod>2018-12-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/learning/</loc>
     <lastmod>2018-11-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2018/learning-scala-spark-basics/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/learning-scala-spark-basics/</loc>
     <lastmod>2018-11-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/shell/</loc>
@@ -143,7 +161,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/letsencrypt/</loc>
     <lastmod>2018-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2018/migrating-from-http-to-https/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/migrating-from-http-to-https/</loc>
     <lastmod>2018-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/nginx/</loc>
@@ -158,7 +176,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/iot/</loc>
     <lastmod>2018-05-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2018/powerbot-connecting-real-world-to-twitter/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</loc>
     <lastmod>2018-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/python/</loc>
@@ -173,7 +191,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/base64/</loc>
     <lastmod>2017-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2017/creating-base64-uuid-in-java/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/creating-base64-uuid-in-java/</loc>
     <lastmod>2017-04-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/java/</loc>
@@ -191,7 +209,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/documentation/</loc>
     <lastmod>2016-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/documenting-play-framework-using-swagger/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/documenting-play-framework-using-swagger/</loc>
     <lastmod>2016-07-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/play-framework/</loc>
@@ -200,7 +218,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/swagger/</loc>
     <lastmod>2016-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/creating-rest-api-specification/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/creating-rest-api-specification/</loc>
     <lastmod>2016-03-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/cricscore-api/</loc>
@@ -209,7 +227,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/g-wan/</loc>
     <lastmod>2016-02-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/set-up-g-wan-web-server/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/set-up-g-wan-web-server/</loc>
     <lastmod>2016-02-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/setup/</loc>
@@ -230,10 +248,10 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/s3/</loc>
     <lastmod>2016-02-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</loc>
     <lastmod>2016-02-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</loc>
     <lastmod>2016-02-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/chrome/</loc>
@@ -248,10 +266,10 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/salesforce/</loc>
     <lastmod>2016-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/salesforce-bulk-api-usage-with-an-example/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/salesforce-bulk-api-usage-with-an-example/</loc>
     <lastmod>2016-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/salesforce-rest-api-usage-with-an-example/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/salesforce-rest-api-usage-with-an-example/</loc>
     <lastmod>2016-02-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/benchmark/</loc>
@@ -266,13 +284,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/hard-disk/</loc>
     <lastmod>2016-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/mounting-external-hard-disk-to-raspberry-pi/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/mounting-external-hard-disk-to-raspberry-pi/</loc>
     <lastmod>2016-01-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/ntfs/</loc>
     <lastmod>2016-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-benchmarking-file-io/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</loc>
     <lastmod>2016-01-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/sd-card/</loc>
@@ -281,22 +299,22 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/cricket/</loc>
     <lastmod>2016-01-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/cricket-score-in-command-line/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/cricket-score-in-command-line/</loc>
     <lastmod>2016-01-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/c4rpi/</loc>
     <lastmod>2016-01-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/setting-up-a-4-node-raspberry-pi-2-cluster/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</loc>
     <lastmod>2016-01-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/fibonacci/</loc>
     <lastmod>2016-01-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-benchmarking/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-benchmarking/</loc>
     <lastmod>2016-01-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/raspberry-pi-2-setup/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-setup/</loc>
     <lastmod>2016-01-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/sysbench/</loc>
@@ -305,7 +323,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/downloader/</loc>
     <lastmod>2016-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2016/experiment-with-raspberry-pi/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/experiment-with-raspberry-pi/</loc>
     <lastmod>2016-01-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/kuralbot/</loc>
@@ -329,7 +347,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/crawlpod/</loc>
     <lastmod>2015-12-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/crawlpod-open-source-scalable-web-crawler/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</loc>
     <lastmod>2015-12-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/mongodb/</loc>
@@ -347,13 +365,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/export/</loc>
     <lastmod>2015-12-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/listing-s3-top-level-folders/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</loc>
     <lastmod>2015-12-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/database/</loc>
     <lastmod>2015-08-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/efficiently-using-enum-in-entity-class/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/efficiently-using-enum-in-entity-class/</loc>
     <lastmod>2015-08-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/enum/</loc>
@@ -368,7 +386,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/couchbase/</loc>
     <lastmod>2015-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/couchbase-setup-on-aws/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/couchbase-setup-on-aws/</loc>
     <lastmod>2015-07-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/aes/</loc>
@@ -380,13 +398,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/encryption/</loc>
     <lastmod>2015-07-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/encryption-and-decrption-in-java/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/encryption-and-decryption-in-java/</loc>
     <lastmod>2015-07-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/distributed/</loc>
     <lastmod>2015-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/distributed-forward-proxy-servers/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/distributed-forward-proxy-servers/</loc>
     <lastmod>2015-07-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/haproxy/</loc>
@@ -401,13 +419,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/elasticsearch/</loc>
     <lastmod>2015-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/setup-elasticsearch-cluster-on-aws/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/setup-elasticsearch-cluster-on-aws/</loc>
     <lastmod>2015-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/code-less/</loc>
     <lastmod>2015-07-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/loc-inversely-proportional-to-readability/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/lines-of-code-inversely-proportional-to-readability/</loc>
     <lastmod>2015-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/optimization/</loc>
@@ -422,13 +440,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/testing/</loc>
     <lastmod>2015-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/testing-spring-application-using-junit/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/testing-spring-application-using-junit/</loc>
     <lastmod>2015-06-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/big-data/</loc>
     <lastmod>2015-05-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-scalable-recommendation-engine/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</loc>
     <lastmod>2015-05-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/playframework/</loc>
@@ -443,10 +461,10 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/nexus/</loc>
     <lastmod>2015-04-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</loc>
     <lastmod>2015-04-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/building-a-distributed-web-crawler/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</loc>
     <lastmod>2015-04-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/jsoup/</loc>
@@ -458,7 +476,7 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/blog-software/</loc>
     <lastmod>2015-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</loc>
     <lastmod>2015-04-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/markdown/</loc>
@@ -473,11 +491,13 @@
     <loc>https://sakthipriyan.com/software-engineering/tags/git/</loc>
     <lastmod>2015-04-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/software-engineering/blogs/2015/gitconfig-alias/</loc>
+    <loc>https://sakthipriyan.com/software-engineering/blogs/git-configuration/</loc>
     <lastmod>2015-04-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/software-engineering/tags/version-control/</loc>
     <lastmod>2015-04-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/backcover/</loc>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/</loc>
   </url><url>

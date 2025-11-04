@@ -10,23 +10,23 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/sbt/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building machine learning models</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/building-machine-learning-models/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/building-machine-learning-models-using-scala-spark/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/building-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Feature engineering for machine learning models</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/feature-engineering-for-machine-learning-models/</link>
       <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/feature-engineering-for-machine-learning-models-using-scala-spark/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/feature-engineering-for-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/sbt-run-support-210-not-found/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
   </channel>

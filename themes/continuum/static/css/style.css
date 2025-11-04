@@ -159,6 +159,70 @@ main {
     height: auto;
 }
 
+/* Category Section Full Layout */
+.category-section-full {
+    margin-bottom: 4rem;
+    margin-top: 3rem;
+}
+
+.category-section-full:first-of-type {
+    margin-top: 2rem;
+}
+
+.category-header-full {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--gray-light);
+}
+
+.category-header-full h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--primary-color);
+}
+
+.view-all-section {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.view-all-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.view-all-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+}
+
+/* Section-specific view-all button colors */
+.software-engineering .view-all-link {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.software-engineering .view-all-link:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.building-wealth .view-all-link {
+    background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
+}
+
+.building-wealth .view-all-link:hover {
+    background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+}
+
 /* Cards */
 .post-card,
 .slide-card,
@@ -1222,7 +1286,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -1352,6 +1416,16 @@ main {
 .social-link.github:hover {
     background: #333;
     border-color: #333;
+    color: white;
+}
+
+.social-link.youtube {
+    color: #FF0000;
+}
+
+.social-link.youtube:hover {
+    background: #FF0000;
+    border-color: #FF0000;
     color: white;
 }
 
@@ -1504,106 +1578,6 @@ main {
 
 .section-card:nth-child(2) .section-link:hover {
     color: #fc4a1a;
-}
-
-/* Recent Activity */
-.recent-activity {
-    margin-top: 3rem;
-}
-
-.recent-activity h2 {
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 2rem;
-}
-
-.recent-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.recent-card {
-    background: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 1.5rem;
-    transition: var(--transition);
-    border-left: 4px solid var(--secondary-color);
-}
-
-.recent-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.content-type {
-    display: inline-block;
-    background: var(--secondary-color);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-}
-
-/* Section-specific content type colors using class-based targeting */
-.content-type.software_engineering_section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.content-type.building_wealth_section {
-    background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
-}
-
-.recent-card h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-}
-
-.recent-card h3 .content-icon {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    margin-right: 0.75rem;
-}
-
-.recent-card time {
-    font-size: 0.875rem;
-    color: var(--gray-medium);
-    display: block;
-    margin-bottom: 0.75rem;
-}
-
-.recent-card p {
-    font-size: 0.9rem;
-    color: var(--gray-medium);
-    line-height: 1.4;
-}
-
-/* Card link styling for clickable cards */
-.recent-card .card-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
-}
-
-.recent-card .card-link:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
-.recent-card .card-link h3 {
-    color: var(--text-color);
-}
-
-.recent-card:hover .card-link h3 {
-    color: var(--secondary-color);
 }
 
 /* Slides-specific styling */
@@ -2166,23 +2140,6 @@ main {
 .section-card:last-of-type {
     border-left: 4px solid #f7b733;
     /* Building Wealth gold */
-}
-
-/* Recent cards - section-specific colors and borders */
-.recent-card .content-type.software_engineering_section {
-    background: #667eea;
-}
-
-.recent-card .content-type.building_wealth_section {
-    background: #f7b733;
-}
-
-.recent-card.software-engineering-card {
-    border-left-color: #667eea;
-}
-
-.recent-card.building-wealth-card {
-    border-left-color: #f7b733;
 }
 
 /* Tag Cards Styles */

@@ -10,44 +10,44 @@
     <atom:link href="https://sakthipriyan.com/software-engineering/tags/python/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Powerbot connecting real world to twitter</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2018/powerbot-connecting-real-world-to-twitter/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2018/powerbot-connecting-real-world-to-twitter/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</guid>
       <description>via Raspberry Pi using GPIO pins</description>
     </item>
     <item>
       <title>Auto refresh Chrome when files modified</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</link>
       <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/auto-refresh-chrome-when-files-modified/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</guid>
       <description>Using python pyinotify and chrome debugging</description>
     </item>
     <item>
       <title>Cricket score in command line</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/cricket-score-in-command-line/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/cricket-score-in-command-line/</link>
       <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/cricket-score-in-command-line/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/cricket-score-in-command-line/</guid>
       <description>using python and open cricscore api</description>
     </item>
     <item>
       <title>Experiment with Raspberry Pi</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2016/experiment-with-raspberry-pi/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/experiment-with-raspberry-pi/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2016/experiment-with-raspberry-pi/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/experiment-with-raspberry-pi/</guid>
       <description>How I turned it to a electricity monitor, tweetbot and downloader.</description>
     </item>
     <item>
       <title>Listing S3 Top level folders</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/listing-s3-top-level-folders/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</link>
       <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/listing-s3-top-level-folders/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</guid>
       <description>using simple Python code.</description>
     </item>
     <item>
       <title>How to create a modern blog?</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</link>
       <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/2015/how-to-create-a-modern-blog/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</guid>
       <description>using markdown and python</description>
     </item>
   </channel>
