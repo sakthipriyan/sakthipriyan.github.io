@@ -144,9 +144,10 @@
     </div>
     {{ end }}
 
-    {{ if .Pages }}
+    {{ $allPages := .RegularPages }}
+    {{ if $allPages }}
     <div class="posts-grid">
-      {{ range .Pages }}
+      {{ range $allPages }}
       {{ partial "content-card.html" . }}
       {{ end }}
     </div>
