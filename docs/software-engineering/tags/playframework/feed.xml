@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Playframework on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/software-engineering/tags/playframework/</link>
+    <link>http://localhost:1313/software-engineering/tags/playframework/</link>
     <description>Recent content in Playframework on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 30 May 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/software-engineering/tags/playframework/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/software-engineering/tags/playframework/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building a scalable recommendation engine</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</link>
+      <link>http://localhost:1313/software-engineering/blogs/building-a-scalable-recommendation-engine/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</guid>
+      <guid>http://localhost:1313/software-engineering/blogs/building-a-scalable-recommendation-engine/</guid>
       <description>using play framework, couchbase and elasticsearch</description>
     </item>
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
+      <link>http://localhost:1313/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
+      <guid>http://localhost:1313/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
   </channel>

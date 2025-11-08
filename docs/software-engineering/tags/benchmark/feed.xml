@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Benchmark on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/software-engineering/tags/benchmark/</link>
+    <link>http://localhost:1313/software-engineering/tags/benchmark/</link>
     <description>Recent content in Benchmark on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 31 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/software-engineering/tags/benchmark/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/software-engineering/tags/benchmark/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raspberry Pi Benchmarking File IO</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</link>
+      <link>http://localhost:1313/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</guid>
+      <guid>http://localhost:1313/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</guid>
       <description>using sysbench, sd card and attached external hard disk</description>
     </item>
     <item>
       <title>Raspberry Pi 2 benchmarking</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-benchmarking/</link>
+      <link>http://localhost:1313/software-engineering/blogs/raspberry-pi-2-benchmarking/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-benchmarking/</guid>
+      <guid>http://localhost:1313/software-engineering/blogs/raspberry-pi-2-benchmarking/</guid>
       <description>using sysbench and Java</description>
     </item>
   </channel>

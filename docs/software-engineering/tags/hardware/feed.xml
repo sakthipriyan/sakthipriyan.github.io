@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hardware on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/software-engineering/tags/hardware/</link>
+    <link>http://localhost:1313/software-engineering/tags/hardware/</link>
     <description>Recent content in Hardware on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 06 May 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/software-engineering/tags/hardware/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/software-engineering/tags/hardware/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Powerbot connecting real world to twitter</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</link>
+      <link>http://localhost:1313/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</guid>
+      <guid>http://localhost:1313/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</guid>
       <description>via Raspberry Pi using GPIO pins</description>
     </item>
     <item>
       <title>Setting up a 4 node Raspberry Pi 2 Cluster</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
+      <link>http://localhost:1313/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
       <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
+      <guid>http://localhost:1313/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
       <description>Setting up the right hardware.</description>
     </item>
   </channel>
