@@ -16,6 +16,14 @@
                 {{ $sectionPage := .Site.GetPage $actualSection }}
                 <a href="{{ $sectionPage.RelPermalink }}" class="name-link">{{ $sectionPage.Title }}</a>
             </div>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
             <ul class="nav-links">
                 <!-- Dynamic navigation based on section structure -->
                 {{ $sectionPath := printf "/%s/" $actualSection }}
@@ -52,6 +60,14 @@
         {{ else }}
             <!-- Default/Home Header -->
             <a href="{{ "/" | absURL }}" class="logo">{{ .Site.Title }}</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
             <ul class="nav-links">
                 <!-- Main sections in preferred order -->
                 {{ range (slice "software-engineering" "building-wealth") }}

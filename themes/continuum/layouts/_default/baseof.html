@@ -52,6 +52,66 @@
     <script src="{{ "js/tools.js" | absURL }}"></script>
     {{- end }}
     {{- block "scripts" . }}{{- end }}
+    {{- /* Hamburger Menu JavaScript */ -}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                // Toggle menu
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    // Update aria-expanded
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Prevent body scroll when menu is open
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                });
+                
+                // Close menu when clicking overlay
+                overlay.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                // Close menu when clicking a link
+                const navLinksElements = navLinks.querySelectorAll('a');
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                // Close menu on window resize if open
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        });
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
