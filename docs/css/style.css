@@ -151,6 +151,9 @@ body.book-layout {
         padding: 1rem 2rem;
         border-radius: 0;
         width: 100%;
+        position: relative;
+        z-index: 1;
+        pointer-events: auto;
     }
 
     .nav-links a:hover {
@@ -169,11 +172,13 @@ body.book-layout {
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
         z-index: 999;
+        pointer-events: none;
     }
 
     .nav-overlay.active {
         opacity: 1;
         visibility: visible;
+        pointer-events: auto;
     }
 }
 
