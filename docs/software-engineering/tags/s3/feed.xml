@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>S3 on Sakthi Priyan H</title>
-    <link>http://localhost:1313/software-engineering/tags/s3/</link>
+    <link>https://sakthipriyan.com/software-engineering/tags/s3/</link>
     <description>Recent content in S3 on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 17 Feb 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/software-engineering/tags/s3/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/s3/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scala code to access documents in AWS S3 bucket</title>
-      <link>http://localhost:1313/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
       <description>via http get and put requests</description>
     </item>
     <item>
       <title>Listing S3 Top level folders</title>
-      <link>http://localhost:1313/software-engineering/blogs/listing-s3-top-level-folders/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</link>
       <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/listing-s3-top-level-folders/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</guid>
       <description>using simple Python code.</description>
     </item>
   </channel>
