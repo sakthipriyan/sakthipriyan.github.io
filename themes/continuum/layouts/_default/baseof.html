@@ -58,14 +58,21 @@
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
             if (hamburger && navLinks) {
                 // Create overlay
                 const overlay = document.createElement('div');
                 overlay.className = 'nav-overlay';
                 document.body.appendChild(overlay);
                 
+                console.log('Overlay created and added to body');
+                
                 // Toggle menu
-                hamburger.addEventListener('click', function() {
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
                     hamburger.classList.toggle('active');
                     navLinks.classList.toggle('active');
                     overlay.classList.toggle('active');
@@ -76,10 +83,13 @@
                     
                     // Prevent body scroll when menu is open
                     document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
                 });
                 
                 // Close menu when clicking overlay
                 overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('active');
                     overlay.classList.remove('active');
@@ -87,10 +97,15 @@
                     document.body.style.overflow = '';
                 });
                 
-                // Close menu when clicking a link
+                // Close menu when clicking a link (but allow navigation)
                 const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
                 navLinksElements.forEach(link => {
-                    link.addEventListener('click', function() {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        // Don't prevent default - allow navigation
+                        // Just close the menu
                         hamburger.classList.remove('active');
                         navLinks.classList.remove('active');
                         overlay.classList.remove('active');
@@ -102,6 +117,7 @@
                 // Close menu on window resize if open
                 window.addEventListener('resize', function() {
                     if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
                         hamburger.classList.remove('active');
                         navLinks.classList.remove('active');
                         overlay.classList.remove('active');
@@ -109,6 +125,8 @@
                         document.body.style.overflow = '';
                     }
                 });
+            } else {
+                console.warn('Hamburger menu elements not found');
             }
         });
     </script>
