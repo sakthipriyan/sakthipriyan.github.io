@@ -141,7 +141,7 @@ body.book-layout {
         transition: right 0.3s ease;
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
         overflow-y: auto;
-        z-index: 1000;
+        z-index: 1001;
         order: 3;
     }
 
@@ -160,7 +160,7 @@ body.book-layout {
         border-radius: 0;
         width: 100%;
         position: relative;
-        z-index: 1;
+        z-index: 1002;
         pointer-events: auto;
         color: white;
         text-align: left;
