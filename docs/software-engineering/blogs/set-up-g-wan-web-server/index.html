@@ -383,14 +383,21 @@ Seems to be working well without any issues.</p>
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
             if (hamburger && navLinks) {
                 
                 const overlay = document.createElement('div');
                 overlay.className = 'nav-overlay';
                 document.body.appendChild(overlay);
                 
+                console.log('Overlay created and added to body');
                 
-                hamburger.addEventListener('click', function() {
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
                     hamburger.classList.toggle('active');
                     navLinks.classList.toggle('active');
                     overlay.classList.toggle('active');
@@ -401,10 +408,13 @@ Seems to be working well without any issues.</p>
                     
                     
                     document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
                 });
                 
                 
                 overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('active');
                     overlay.classList.remove('active');
@@ -414,8 +424,13 @@ Seems to be working well without any issues.</p>
                 
                 
                 const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
                 navLinksElements.forEach(link => {
-                    link.addEventListener('click', function() {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
                         hamburger.classList.remove('active');
                         navLinks.classList.remove('active');
                         overlay.classList.remove('active');
@@ -427,6 +442,7 @@ Seems to be working well without any issues.</p>
                 
                 window.addEventListener('resize', function() {
                     if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
                         hamburger.classList.remove('active');
                         navLinks.classList.remove('active');
                         overlay.classList.remove('active');
@@ -434,6 +450,8 @@ Seems to be working well without any issues.</p>
                         document.body.style.overflow = '';
                     }
                 });
+            } else {
+                console.warn('Hamburger menu elements not found');
             }
         });
     </script>

@@ -114,10 +114,17 @@ body.book-layout {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
+        order: 2;
     }
 
     .main-nav {
         position: relative;
+        flex-wrap: nowrap;
+    }
+    
+    .logo {
+        order: 1;
+        flex: 1;
     }
 
     .nav-links {
@@ -135,6 +142,7 @@ body.book-layout {
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
         overflow-y: auto;
         z-index: 1000;
+        order: 3;
     }
 
     .nav-links.active {
@@ -154,10 +162,13 @@ body.book-layout {
         position: relative;
         z-index: 1;
         pointer-events: auto;
+        color: white;
+        text-align: left;
     }
 
     .nav-links a:hover {
         background: rgba(255, 255, 255, 0.15);
+        color: white;
     }
 
     /* Overlay for mobile menu */
