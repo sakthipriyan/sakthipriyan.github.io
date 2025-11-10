@@ -53,7 +53,6 @@ body.book-layout {
 
 .logo {
     font-size: 1.3rem;
-    font-weight: bold;
     color: white;
     text-decoration: none;
     white-space: nowrap;
@@ -1748,7 +1747,6 @@ main {
     color: white;
     text-decoration: none;
     transition: var(--transition);
-    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -1768,7 +1766,6 @@ main {
 .logo {
     display: flex;
     align-items: center;
-    font-weight: bold;
 }
 
 /* Responsive navigation for section headers */
