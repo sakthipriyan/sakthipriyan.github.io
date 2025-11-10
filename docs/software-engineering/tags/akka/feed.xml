@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Akka on Sakthi Priyan H</title>
-    <link>http://localhost:1313/software-engineering/tags/akka/</link>
+    <link>https://sakthipriyan.com/software-engineering/tags/akka/</link>
     <description>Recent content in Akka on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 12 Dec 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/software-engineering/tags/akka/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/software-engineering/tags/akka/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Crawlpod - open source scalable web crawler</title>
-      <link>http://localhost:1313/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
       <description>built on top of Scala and Akka framework.</description>
     </item>
     <item>
       <title>Building a scalable distributed web crawler</title>
-      <link>http://localhost:1313/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</link>
+      <link>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</link>
       <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</guid>
+      <guid>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</guid>
       <description>which can perform both crawling and data extraction</description>
     </item>
   </channel>
