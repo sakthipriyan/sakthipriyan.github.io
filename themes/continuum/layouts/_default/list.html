@@ -30,63 +30,137 @@
 
     {{ partial "tag-cloud.html" (dict "context" . "currentSection" $currentSection) }}
   </div>
-  {{ else if and (in .RelPermalink "/tags/") (eq .Kind "term") }}
-  <!-- Individual Tag Page - Show posts with this tag -->
-  {{ $currentTag := .Title }}
-  {{ $currentSection := "" }}
-  {{ $sectionName := "" }}
-  {{ $taxonomyField := "tags" }}
+  {{- else if and (in .RelPermalink "/tags/") (eq .Kind "term") -}}
+  {{- $currentTag := .Title -}}
+  {{- $currentSection := "" -}}
+  {{- $sectionName := "" -}}
+  {{- $taxonomyField := "tags" -}}
 
-  <!-- Determine section from URL path -->
-  {{ $pathParts := split .RelPermalink "/" }}
-  {{ if ge (len $pathParts) 4 }}
-  {{ $currentSection = index $pathParts 1 }}
-  {{ $sectionName = $currentSection | title | replaceRE "-" " " }}
-  {{ if eq $currentSection "software-engineering" }}
-  {{ $taxonomyField = "se_tags" }}
-  {{ else if eq $currentSection "building-wealth" }}
-  {{ $taxonomyField = "bw_tags" }}
-  {{ end }}
-  {{ end }}
+  {{- $pathParts := split .RelPermalink "/" -}}
+  {{- if ge (len $pathParts) 4 -}}
+  {{- $currentSection = index $pathParts 1 -}}
+  {{- $sectionName = $currentSection | title | replaceRE "-" " " -}}
+  {{- if eq $currentSection "software-engineering" -}}
+  {{- $taxonomyField = "se_tags" -}}
+  {{- else if eq $currentSection "building-wealth" -}}
+  {{- $taxonomyField = "bw_tags" -}}
+  {{- end -}}
+  {{- end -}}
 
-  <!-- Find articles with this specific tag -->
-  {{ $articlesWithTag := slice }}
-  {{ range .Site.RegularPages }}
-  {{ $pageSection := .Section }}
-  {{ $page := . }}
+  {{- $articlesWithTag := slice -}}
+  {{- range .Site.RegularPages -}}
+  {{- $pageSection := .Section -}}
+  {{- $page := . -}}
 
-  <!-- Check tags for the current section -->
-  {{ if or (not $currentSection) (eq $pageSection $currentSection) }}
-  {{ $tags := index .Params $taxonomyField }}
-  {{ if $tags }}
-  {{ range $tags }}
-  {{ if eq (. | urlize) ($currentTag | urlize) }}
-  {{ $articlesWithTag = $articlesWithTag | append $page }}
-  {{ end }}
-  {{ end }}
-  {{ end }}
-  {{ end }}
-  {{ end }}
+  {{- if or (not $currentSection) (eq $pageSection $currentSection) -}}
+  {{- $tags := index .Params $taxonomyField -}}
+  {{- if $tags -}}
+  {{- range $tags -}}
+  {{- if eq (. | urlize) ($currentTag | urlize) -}}
+  {{- $articlesWithTag = $articlesWithTag | append $page -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
 
   <div class="content-list">
     <h1>{{ $currentTag | title }}</h1>
-    {{ if .Content }}
+    {{- if .Content }}
     <div class="section-content">
       {{ .Content }}
     </div>
-    {{ end }}
+    {{- end }}
 
-    {{ if $articlesWithTag }}
-    <div class="posts-grid">
-      {{ range $articlesWithTag }}
-      {{ partial "content-card.html" . }}
-      {{ end }}
+    {{- if $articlesWithTag -}}
+    {{- $blogs := slice -}}
+    {{- $books := slice -}}
+    {{- $slides := slice -}}
+    {{- $tools := slice -}}
+    {{- $videos := slice -}}
+
+    {{- range $articlesWithTag -}}
+      {{- if in .RelPermalink "/blogs/" -}}
+        {{- $blogs = $blogs | append . -}}
+      {{- else if in .RelPermalink "/books/" -}}
+        {{- $books = $books | append . -}}
+      {{- else if in .RelPermalink "/slides/" -}}
+        {{- $slides = $slides | append . -}}
+      {{- else if in .RelPermalink "/tools/" -}}
+        {{- $tools = $tools | append . -}}
+      {{- else if in .RelPermalink "/videos/" -}}
+        {{- $videos = $videos | append . -}}
+      {{- end -}}
+    {{- end }}
+
+    {{- if $blogs }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Blogs</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $blogs }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
     </div>
+    {{- end }}
 
-    {{ else }}
-    <p class="no-content">No content found with the tag "{{ $currentTag | title }}"{{ if $currentSection }} in {{
-      $sectionName }}{{ end }}.</p>
-    {{ end }}
+    {{- if $books }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Books</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $books }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $slides }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Slides</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $slides }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $tools }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Tools</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $tools }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $videos }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Videos</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $videos }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- else }}
+    <p class="no-content">No content found with the tag "{{ $currentTag | title }}"{{- if $currentSection }} in {{ $sectionName }}{{- end }}.</p>
+    {{- end }}
   </div>
   {{ else if and (in .RelPermalink "/videos/") (eq .Kind "section") }}
   <!-- Videos List -->
