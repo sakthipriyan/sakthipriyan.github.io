@@ -4,7 +4,7 @@ date: "2025-11-15"
 draft: false
 layout: "slides"
 type: "slides"
-summary: "Learn the smartest ways to invest in Gold using ETFs, Mutual Funds, and more. Simple. Smart. Boring. Powerful."
+summary: "Learn the smartest ways to invest in Gold using ETFs, Mutual Funds and more."
 bw_tags:
   - Building Wealth
   - Gold

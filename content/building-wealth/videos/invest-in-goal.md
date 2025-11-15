@@ -1,7 +1,7 @@
 ---
 title: "How to Invest in Gold in India 2025"
 date: "2025-11-16"
-draft: "false"
+draft: false
 type: "videos"
 bw_tags:
   - Building Block
