@@ -5,7 +5,7 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "Quick overview of financial tools for building wealth"
-bw_tags:
+wealth_tags:
   - Building Wealth
   - Financial Tools
 ---

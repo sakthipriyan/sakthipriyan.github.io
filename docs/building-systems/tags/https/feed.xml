@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Https on Sakthi Priyan H</title>
+    <link>http://localhost:1313/building-systems/tags/https/</link>
+    <description>Recent content in Https on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 17 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/building-systems/tags/https/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migrating from http to https</title>
+      <link>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</guid>
+      <description>using lets encrypt, certbot and configuring Nginx</description>
+    </item>
+  </channel>
+</rss>

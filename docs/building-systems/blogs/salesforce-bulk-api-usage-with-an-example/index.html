@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Salesforce Bulk API usage with an example | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds."><link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Salesforce Bulk API usage with an example</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Salesforce Bulk API usage with an example</h1>
+    <p class="content-summary">to show how to upsert records in batches.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2016-02-07">Feb 7, 2016</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">4 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h3 id="get-ready-with">Get ready with</h3>
+<p>Get ready with <code>username</code>, <code>password</code> and <code>security token</code>. Refer <a href="salesforce-rest-api-usage-with-an-example.html">here</a> for more details.<br>
+I would recommend you to use a <a href="https://developer.salesforce.com/signup">developer account</a> to experiment.</p>
+<h3 id="bulk-api">Bulk API</h3>
+<p>Salesforce Bulk API can be used to do parallel batch operations.<br>
+Before getting into code, let us understand few terms used in context of Bulk API.</p>
+<p>We need to create a <code>Job</code> to do bulk processing.<br>
+For bulk processing, up to 10000 records can be submitted in a <code>Batch</code>.<br>
+Multiple batches can be submitted to the same Job.<br>
+However, you cannot submit a Batch to a Job older than 24 hours.</p>
+<p>In Short,</p>
+<ol>
+<li>Create a Job.</li>
+<li>Submit as many batches as required.</li>
+<li>Then, close the Job.</li>
+<li>Check batch status.</li>
+<li>Also, look into batch results.</li>
+</ol>
+<h3 id="sign-in">Sign In</h3>
+<p>First we need to sign in using soap request to obtain the <code>sessionId</code>.<br>
+<code>&lt;n1:username&gt;</code> should have <code>username</code>. For example, <code>user@domain.com</code>.<br>
+<code>&lt;n1:password&gt;</code> should have <code>password</code> and <code>secrettoken</code> concatenated.</p>
+<p><strong>Request</strong></p>
+<pre><code>POST /services/Soap/u/35.0 HTTP/1.1
+Host: login.salesforce.com
+Content-Type: text/xml
+SOAPAction: login
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;env:Envelope xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:env=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+  &lt;env:Body&gt;
+    &lt;n1:login xmlns:n1=&quot;urn:partner.soap.sforce.com&quot;&gt;
+      &lt;n1:username&gt;user@domain.com&lt;/n1:username&gt;
+      &lt;n1:password&gt;passwordsecrettoken&lt;/n1:password&gt;
+    &lt;/n1:login&gt;
+  &lt;/env:Body&gt;
+&lt;/env:Envelope&gt;
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns=&quot;urn:partner.soap.sforce.com&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;soapenv:Body&gt;
+        &lt;loginResponse&gt;
+            &lt;result&gt;
+                &lt;metadataServerUrl&gt;https://ap2.salesforce.com/services/Soap/m/35.0/XXXXXXXXXXXXXXX&lt;/metadataServerUrl&gt;
+                &lt;passwordExpired&gt;false&lt;/passwordExpired&gt;
+                &lt;sandbox&gt;false&lt;/sandbox&gt;
+                &lt;serverUrl&gt;https://ap2.salesforce.com/services/Soap/u/35.0/XXXXXXXXXXXXXX&lt;/serverUrl&gt;
+                &lt;sessionId&gt;sessionId&lt;/sessionId&gt;
+                &lt;userId&gt;userId&lt;/userId&gt;
+            &lt;/result&gt;
+        &lt;/loginResponse&gt;
+    &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;
+</code></pre>
+<ul>
+<li><code>&lt;userInfo&gt;</code> tag isn&rsquo;t shown in the response above.</li>
+<li>We have to parse this XML and read <code>&lt;sessionId&gt;</code></li>
+<li>Then,<code>sessionId</code> is used in further requests as <code>X-SFDC-Session</code> header.</li>
+</ul>
+<h3 id="create-a-job">Create a Job</h3>
+<p>Here, a <code>upsert</code> Job is created on <code>Mutual_Fund__c</code> object based on
+the external Id field <code>External_ID__c</code>.<br>
+It will accept only <code>CSV</code> file.</p>
+<p><strong>Request</strong></p>
+<pre><code>POST /services/async/35.0/job HTTP/1.1
+Host: ap2.salesforce.com
+Content-Type: application/xml
+X-SFDC-Session: sessionId
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;jobInfo xmlns=&quot;http://www.force.com/2009/06/asyncapi/dataload&quot;&gt;
+    &lt;operation&gt;upsert&lt;/operation&gt;
+    &lt;object&gt;Mutual_Fund__c&lt;/object&gt;
+    &lt;externalIdFieldName&gt;External_ID__c&lt;/externalIdFieldName&gt;
+    &lt;contentType&gt;CSV&lt;/contentType&gt;
+&lt;/jobInfo&gt;
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;jobInfo xmlns=&quot;http://www.force.com/2009/06/asyncapi/dataload&quot;&gt;
+    &lt;id&gt;750280000018ch2AAA&lt;/id&gt;
+    &lt;operation&gt;upsert&lt;/operation&gt;
+    &lt;object&gt;Mutual_Fund__c&lt;/object&gt;
+    &lt;createdById&gt;XXXXXXXXXXXXXXXXXX&lt;/createdById&gt;
+    &lt;createdDate&gt;2016-02-07T08:58:10.000Z&lt;/createdDate&gt;
+    &lt;systemModstamp&gt;2016-02-07T08:58:10.000Z&lt;/systemModstamp&gt;
+    &lt;state&gt;Open&lt;/state&gt;
+    &lt;externalIdFieldName&gt;External_ID__c&lt;/externalIdFieldName&gt;
+    &lt;concurrencyMode&gt;Parallel&lt;/concurrencyMode&gt;
+    &lt;contentType&gt;CSV&lt;/contentType&gt;
+    &lt;numberBatchesQueued&gt;0&lt;/numberBatchesQueued&gt;
+    &lt;numberBatchesInProgress&gt;0&lt;/numberBatchesInProgress&gt;
+    &lt;numberBatchesCompleted&gt;0&lt;/numberBatchesCompleted&gt;
+    &lt;numberBatchesFailed&gt;0&lt;/numberBatchesFailed&gt;
+    &lt;numberBatchesTotal&gt;0&lt;/numberBatchesTotal&gt;
+    &lt;numberRecordsProcessed&gt;0&lt;/numberRecordsProcessed&gt;
+    &lt;numberRetries&gt;0&lt;/numberRetries&gt;
+    &lt;apiVersion&gt;35.0&lt;/apiVersion&gt;
+    &lt;numberRecordsFailed&gt;0&lt;/numberRecordsFailed&gt;
+    &lt;totalProcessingTime&gt;0&lt;/totalProcessingTime&gt;
+    &lt;apiActiveProcessingTime&gt;0&lt;/apiActiveProcessingTime&gt;
+    &lt;apexProcessingTime&gt;0&lt;/apexProcessingTime&gt;
+&lt;/jobInfo&gt;
+</code></pre>
+<ul>
+<li>We have to use the <code>id</code> as <code>job id</code> for subsequent calls.</li>
+</ul>
+<h3 id="submit-batch">Submit Batch</h3>
+<p><strong>Request</strong><br>
+Here, <code>job id</code> is used as part of the URL.<br>
+Content of the CSV file is sent via POST request.</p>
+<pre><code>POST /services/async/35.0/job/750280000018ch2AAA/batch HTTP/1.1
+Host: ap2.salesforce.com
+Content-Type: text/csv; charset=UTF-8
+X-SFDC-Session: sessionId
+
+&quot;Name&quot;,&quot;External_ID__c&quot;
+&quot;SBI Small &amp; Midcap Fund -Direct (G)&quot;,100
+&quot;SBI Midcap Fund - Direct (G)&quot;,101
+&quot;Sundaram Select Micro Cap-Sr 5-DP-G&quot;,102
+&quot;DSP-BR Micro Cap Fund - Direct (G)&quot;,103
+&quot;Motilal Focused Midcap 30 - DP (G)&quot;,104
+&quot;SBI Magnum Midcap Fund (G)&quot;,105
+&quot;SBI Small &amp; Midcap Fund (G)&quot;,106
+&quot;DSP-BR Micro Cap Fund - RP (G)&quot;,107
+&quot;Motilal Focused Midcap 30 - RP (G)&quot;,108
+&quot;Sundaram Select Micro Cap-Sr 5-RP-G&quot;,109
+</code></pre>
+<p><strong>Response</strong><br>
+In response, <code>id</code> corresponds to the <code>batch id</code>.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;batchInfo xmlns=&quot;http://www.force.com/2009/06/asyncapi/dataload&quot;&gt;
+    &lt;id&gt;75128000001RukcAAC&lt;/id&gt;
+    &lt;jobId&gt;750280000018ch2AAA&lt;/jobId&gt;
+    &lt;state&gt;Queued&lt;/state&gt;
+    &lt;createdDate&gt;2016-02-07T09:02:14.000Z&lt;/createdDate&gt;
+    &lt;systemModstamp&gt;2016-02-07T09:02:14.000Z&lt;/systemModstamp&gt;
+    &lt;numberRecordsProcessed&gt;0&lt;/numberRecordsProcessed&gt;
+    &lt;numberRecordsFailed&gt;0&lt;/numberRecordsFailed&gt;
+    &lt;totalProcessingTime&gt;0&lt;/totalProcessingTime&gt;
+    &lt;apiActiveProcessingTime&gt;0&lt;/apiActiveProcessingTime&gt;
+    &lt;apexProcessingTime&gt;0&lt;/apexProcessingTime&gt;
+&lt;/batchInfo&gt;
+</code></pre>
+<h3 id="close-job">Close Job</h3>
+<p><strong>Request</strong><br>
+Here, <code>job id</code> is used in the URL.</p>
+<pre><code>POST /services/async/35.0/job/750280000018ch2AAA HTTP/1.1
+Host: ap2.salesforce.com
+Content-Type: application/xml
+X-SFDC-Session: sessionId
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;jobInfo xmlns=&quot;http://www.force.com/2009/06/asyncapi/dataload&quot;&gt;
+  &lt;state&gt;Closed&lt;/state&gt;
+&lt;/jobInfo&gt;
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;jobInfo xmlns=&quot;http://www.force.com/2009/06/asyncapi/dataload&quot;&gt;
+    &lt;id&gt;750280000018ch2AAA&lt;/id&gt;
+    &lt;operation&gt;upsert&lt;/operation&gt;
+    &lt;object&gt;Mutual_Fund__c&lt;/object&gt;
+    &lt;createdById&gt;XXXXXXXXXXXXXXXXXX&lt;/createdById&gt;
+    &lt;createdDate&gt;2016-02-07T08:58:10.000Z&lt;/createdDate&gt;
+    &lt;systemModstamp&gt;2016-02-07T08:58:10.000Z&lt;/systemModstamp&gt;
+    &lt;state&gt;Closed&lt;/state&gt;
+    &lt;externalIdFieldName&gt;External_ID__c&lt;/externalIdFieldName&gt;
+    &lt;concurrencyMode&gt;Parallel&lt;/concurrencyMode&gt;
+    &lt;contentType&gt;CSV&lt;/contentType&gt;
+    &lt;numberBatchesQueued&gt;0&lt;/numberBatchesQueued&gt;
+    &lt;numberBatchesInProgress&gt;0&lt;/numberBatchesInProgress&gt;
+    &lt;numberBatchesCompleted&gt;1&lt;/numberBatchesCompleted&gt;
+    &lt;numberBatchesFailed&gt;0&lt;/numberBatchesFailed&gt;
+    &lt;numberBatchesTotal&gt;1&lt;/numberBatchesTotal&gt;
+    &lt;numberRecordsProcessed&gt;10&lt;/numberRecordsProcessed&gt;
+    &lt;numberRetries&gt;0&lt;/numberRetries&gt;
+    &lt;apiVersion&gt;35.0&lt;/apiVersion&gt;
+    &lt;numberRecordsFailed&gt;0&lt;/numberRecordsFailed&gt;
+    &lt;totalProcessingTime&gt;137&lt;/totalProcessingTime&gt;
+    &lt;apiActiveProcessingTime&gt;65&lt;/apiActiveProcessingTime&gt;
+    &lt;apexProcessingTime&gt;0&lt;/apexProcessingTime&gt;
+&lt;/jobInfo&gt;
+</code></pre>
+<h3 id="batch-status">Batch Status</h3>
+<p><strong>Request</strong><br>
+Here, <code>job id</code> and <code>batch id</code> is used in the URL.</p>
+<pre><code>GET /services/async/35.0/job/750280000018ch2AAA/batch/75128000001RukcAAC HTTP/1.1
+Host: ap2.salesforce.com
+X-SFDC-Session: sessionId
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;batchInfo xmlns=&quot;http://www.force.com/2009/06/asyncapi/dataload&quot;&gt;
+    &lt;id&gt;75128000001RukcAAC&lt;/id&gt;
+    &lt;jobId&gt;750280000018ch2AAA&lt;/jobId&gt;
+    &lt;state&gt;Completed&lt;/state&gt;
+    &lt;createdDate&gt;2016-02-07T09:02:14.000Z&lt;/createdDate&gt;
+    &lt;systemModstamp&gt;2016-02-07T09:02:17.000Z&lt;/systemModstamp&gt;
+    &lt;numberRecordsProcessed&gt;10&lt;/numberRecordsProcessed&gt;
+    &lt;numberRecordsFailed&gt;0&lt;/numberRecordsFailed&gt;
+    &lt;totalProcessingTime&gt;137&lt;/totalProcessingTime&gt;
+    &lt;apiActiveProcessingTime&gt;65&lt;/apiActiveProcessingTime&gt;
+    &lt;apexProcessingTime&gt;0&lt;/apexProcessingTime&gt;
+&lt;/batchInfo&gt;
+</code></pre>
+<h3 id="batch-result">Batch Result</h3>
+<p><strong>Request</strong><br>
+Here, <code>job id</code> and <code>batch id</code> is used in the URL.</p>
+<pre><code>GET /services/async/35.0/job/750280000018ch2AAA/batch/75128000001RukcAAC/result HTTP/1.1
+Host: ap2.salesforce.com
+X-SFDC-Session: sessionId
+</code></pre>
+<p><strong>Response</strong><br>
+We get the status of each record submitted as part of the batch in CSV format.</p>
+<pre><code>&quot;Id&quot;,&quot;Success&quot;,&quot;Created&quot;,&quot;Error&quot;
+&quot;a002800000P9WeuAAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9WevAAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9WewAAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9WexAAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9WeyAAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9WezAAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9Wf0AAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9Wf1AAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9Wf2AAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+&quot;a002800000P9Wf3AAF&quot;,&quot;true&quot;,&quot;false&quot;,&quot;&quot;
+</code></pre>
+<h3 id="are-we-done">Are we done?</h3>
+<ol>
+<li>If the batch is completed successfully and <code>numberRecordsFailed</code> is <code>0</code>, then we are done.</li>
+<li>In case, if a batch failed, it will be due to header name mismatch between CSV file and SDFC object.</li>
+<li>In case, if a batch is completed, but, individual record(s) failed, likely due to invalid field value in the record.</li>
+</ol>
+<p>For last two cases, we may have to fix the data/code and redo the entire process (Say, step 1-5 mentioned earlier).</p>
+<h3 id="related">Related</h3>
+<ul>
+<li>Use <a href="salesforce-rest-api-usage-with-an-example.html">Rest API</a> to process individual records if few records has to be updated realtime.</li>
+</ul>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="http://localhost:1313/building-systems/tags/salesforce/" class="tag-link">Salesforce</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/integration/" class="tag-link">Integration</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/code/" class="tag-link">Code</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>

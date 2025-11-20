@@ -27,8 +27,8 @@ menu:
     - name: "Building Wealth"
       url: "/building-wealth/"
       weight: 10
-    - name: "Software Engineering"
-      url: "/software-engineering/"
+    - name: "Building Systems"
+      url: "/building-systems/"
       weight: 20
 
 outputFormats:
@@ -43,10 +43,10 @@ outputs:
 
 # Taxonomies - global but filterable by section
 taxonomies:
-  bw_tag: "bw_tags"
-  se_tag: "se_tags"
+  wealth_tag: "wealth_tags"
+  systems_tag: "systems_tags"
 permalinks:
-  bw_tags: "/building-wealth/tags/:slug/"
-  se_tags: "/software-engineering/tags/:slug/"
+  wealth_tags: "/building-wealth/tags/:slug/"
+  systems_tags: "/building-systems/tags/:slug/"
 
 publishDir: docs

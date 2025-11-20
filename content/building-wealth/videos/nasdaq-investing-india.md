@@ -3,7 +3,7 @@ title: "Invest in NASDAQ 100 from India"
 date: "2025-10-05"
 draft: "false"
 type: "videos"
-bw_tags:
+wealth_tags:
   - NASDAQ 100
   - International Investing
   - Advanced Investor

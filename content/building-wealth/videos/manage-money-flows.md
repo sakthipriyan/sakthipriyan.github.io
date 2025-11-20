@@ -3,7 +3,7 @@ title: "How I Manage My Money Flows 💰 | Bank Accounts, Credit Cards & Mutual 
 date: "2025-10-19"
 draft: "false"
 type: "videos"
-bw_tags:
+wealth_tags:
   - Money Flow 
   - Building Block
 author: "Sakthi Priyan H"
