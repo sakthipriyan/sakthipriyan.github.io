@@ -2,18 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ANTLR on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-systems/tags/antlr/</link>
+    <link>https://sakthipriyan.com/building-systems/tags/antlr/</link>
     <description>Recent content in ANTLR on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 20 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-systems/tags/antlr/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/building-systems/tags/antlr/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building SQL Translator using AI Coding Agents</title>
-      <link>http://localhost:1313/building-systems/slides/building-sql-translator-using-ai-coding-agents/</link>
+      <link>https://sakthipriyan.com/building-systems/slides/building-sql-translator-using-ai-coding-agents/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/slides/building-sql-translator-using-ai-coding-agents/</guid>
-      <description>Building SQL Translator Library using Agentic AI</description>
+      <guid>https://sakthipriyan.com/building-systems/slides/building-sql-translator-using-ai-coding-agents/</guid>
+      <description>A walkthrough of building a SQL translator using agentic AI, deterministic ANTLR grammars, unified IR, and YAML-driven testing.</description>
+    </item>
+    <item>
+      <title>Natural Language Data Processing</title>
+      <link>https://sakthipriyan.com/building-systems/slides/natural-language-data-processing/</link>
+      <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/slides/natural-language-data-processing/</guid>
+      <description>Prototype system that converts natural language into SQL and IR to drive dynamic DAG execution for Hetero Collate workloads.</description>
     </item>
   </channel>
 </rss>
