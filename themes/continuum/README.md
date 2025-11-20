@@ -31,7 +31,7 @@ The theme supports a hierarchical content structure with multiple top-level sect
 
 ```
 content/
-├── software-engineering/
+├── building-systems/
 │   ├── blog/
 │   ├── videos/
 │   ├── slides/
@@ -54,21 +54,21 @@ content/
 ### Hierarchical Blogs
 Create section-specific blog posts:
 ```bash
-hugo new software-engineering/blog/my-tech-post.md
+hugo new building-systems/blog/my-tech-post.md
 hugo new building-wealth/blog/investment-strategy.md
 ```
 
 ### Hierarchical Videos
 Create section-specific videos:
 ```bash
-hugo new software-engineering/videos/coding-tutorial.md
+hugo new building-systems/videos/coding-tutorial.md
 hugo new building-wealth/videos/sip-explained.md
 ```
 
 ### Hierarchical Slides
 Create section-specific presentations:
 ```bash
-hugo new software-engineering/slides/architecture-patterns.md
+hugo new building-systems/slides/architecture-patterns.md
 hugo new building-wealth/slides/portfolio-diversification.md
 ```
 
@@ -94,7 +94,7 @@ For complex tools, create standalone HTML files:
 
 ```bash
 # Create tool content
-hugo new software-engineering/tools/json-diff.md
+hugo new building-systems/tools/json-diff.md
 ```
 
 Front matter:
@@ -105,12 +105,12 @@ description: "Compare JSON objects"
 ```
 
 The theme will automatically load the tool from:
-`static/tools/software-engineering/json-diff/index.html`
+`static/tools/building-systems/json-diff/index.html`
 
 ### Books
 Create books in any section:
 ```bash
-hugo new software-engineering/books/clean-code-guide.md
+hugo new building-systems/books/clean-code-guide.md
 ```
 
 ### About Pages
@@ -120,7 +120,7 @@ hugo new about/_index.md
 
 ## Built-in Tools
 
-### Software Engineering Tools
+### Building Systems Tools
 - **JSON Diff**: Compare JSON objects and highlight differences
 - **Regex Tester**: Test regular expressions with live feedback and highlighting
 

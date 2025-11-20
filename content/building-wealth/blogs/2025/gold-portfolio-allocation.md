@@ -3,7 +3,7 @@ title: "Gold in Your Investment Portfolio"
 date: "2024-10-17"
 draft: true
 type: "blogs"
-bw_tags: 
+wealth_tags: 
   - "gold"
   - "portfolio"
   - "diversification"

@@ -11,12 +11,12 @@ Displays tags and Disqus comments
     {{ $currentSection := .Section }}
 
     {{- if eq $currentSection "building-wealth" }}
-    {{- if .Params.bw_tags }}
-    {{ $tags = .Params.bw_tags }}
+    {{- if .Params.wealth_tags }}
+    {{ $tags = .Params.wealth_tags }}
     {{- end }}
-    {{- else if eq $currentSection "software-engineering" }}
-    {{- if .Params.se_tags }}
-    {{ $tags = .Params.se_tags }}
+    {{- else if eq $currentSection "building-systems" }}
+    {{- if .Params.systems_tags }}
+    {{ $tags = .Params.systems_tags }}
     {{- end }}
     {{- else if .Params.tags }}
     {{ $tags = .Params.tags }}

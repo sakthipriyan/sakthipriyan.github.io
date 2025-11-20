@@ -5,7 +5,7 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "Simple. Smart. Boring. Powerful. Grow Wealth through Equity & Index Funds."
-bw_tags:
+wealth_tags:
   - Building Wealth
   - Equity
   - Index Fund

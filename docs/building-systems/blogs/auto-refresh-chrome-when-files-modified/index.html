@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auto refresh Chrome when files modified | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds."><link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Auto refresh Chrome when files modified</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Auto refresh Chrome when files modified</h1>
+    <p class="content-summary">Using python pyinotify and chrome debugging</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2016-02-15">Feb 15, 2016</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">5 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h3 id="why">Why?</h3>
+<p>I am using <a href="https://github.com/sakthipriyan/webgen">webgen</a> to generate static pages for <a href="http://sakthipriyan.com">sakthipriyan.com</a>.<br>
+It is a 3 step process to see the latest website from markdown source code.</p>
+<ol>
+<li>In text editor, say <a href="https://atom.io/">Atom</a> or <a href="https://www.sublimetext.com/">Sublime</a> save the markdown file using <code>Ctrl + S</code>.</li>
+<li>Kill the shell script using <code>Ctrl + C</code> and then rerun it by hitting <code>UP</code> and <code>ENTER</code> keys.</li>
+<li>Then go back to chrome browser and refresh it using <code>F5</code> or <code>Ctrl + R</code>.</li>
+</ol>
+<p>I really preferred to proof read the blog post on browser.<br>
+So, I had to repeat above steps for each edit.<br>
+I thought, it should be automated to save time and key stokes.</p>
+<h3 id="goal">Goal</h3>
+<p>Just save the markdown source for the blog post and then see the browser.<br>
+Everything should be done automatically under the hood.</p>
+<h3 id="how">How?</h3>
+<ol>
+<li>Monitor a given markdown source code folder using python <code>pyinotify</code> library.</li>
+<li>Once, changes are detected, trigger the static website generation.</li>
+<li>Then, refresh the Google Chrome using the remote debugging.</li>
+</ol>
+<h3 id="environment">Environment</h3>
+<ul>
+<li>Ubuntu 14.04 (It will work for any Linux distro)</li>
+<li>Atom or Sublime editor (Any text editor should be fine)</li>
+<li>Google Chrome (Code works only for Chrome Browser)</li>
+</ul>
+<h3 id="code">Code</h3>
+<p>Let&rsquo;s get into the code now.</p>
+<h4 id="monitorpy">monitor.py</h4>
+<ul>
+<li><code>monitor.py</code> will monitor a given directory for file deletion or change in content.</li>
+<li><code>pyinotify</code> uses kernel level mechanism to get notified when there is a change in given directory.</li>
+<li>In this example, <code>AsyncNotifier</code> is used to detect changes in a given directory.</li>
+<li><code>EventHandler</code> is used to process specific monitored events.</li>
+<li><code>mask</code> is used to monitor specific events. Here,
+<ul>
+<li><code>pyinotify.IN_DELETE</code> event occurs when file or directory is deleted.</li>
+<li><code>pyinotify.IN_CLOSE_WRITE</code> event occurs when a file is modified and closed.<br>
+This event will cover both new file creation and modification of existing files.</li>
+</ul>
+</li>
+<li><code>monitor(directory, callback)</code> method can be imported and called.
+<ul>
+<li>directory - string - absolute directory path to monitor.</li>
+<li>callback - method - which will be called, when file changes.</li>
+</ul>
+</li>
+</ul>
+<p>More comments inline.</p>
+<pre><code>import asyncore, pyinotify
+
+# Look for only these two events.
+mask =  pyinotify.IN_DELETE | pyinotify.IN_CLOSE_WRITE
+
+# Custom class to process the Event.
+class EventHandler(pyinotify.ProcessEvent):
+    def __init__(self, fn, *args, **kwargs):
+        super(EventHandler, self).__init__(*args, **kwargs)
+        self.function = fn
+
+    def process_IN_DELETE(self, event):
+        self.function()
+
+    def process_IN_CLOSE_WRITE(self, event):
+        self.function()
+
+# this method will monitor the given directory
+# it calls the callback() when the monitored event occurs.
+def monitor(directory, callback):
+    wm = pyinotify.WatchManager()
+    # rec=True, to monitor all sub directories recursively.
+    # auto_add=True, to monitor added new sub directories.
+    wm.add_watch(directory,mask,rec=True,auto_add=True)
+    # specify the event handler to process the events.
+    pyinotify.AsyncNotifier(wm,EventHandler(callback))
+    # start the asyncore loop to monitor and process events.
+    asyncore.loop()
+</code></pre>
+<h4 id="browserpy">browser.py</h4>
+<ul>
+<li>
+<p>First step is to launch chrome with remote debugging enabled. Example as follows,</p>
+<pre><code>  google-chrome \
+  --remote-debugging-port=9222 \
+  --user-data-dir=/home/sakthipriyan/.chrome-remote-profile \
+  http://localhost:8000
+</code></pre>
+</li>
+<li>
+<p>Following response is received for <code>http</code> GET request <code>http://localhost:9222/json</code>.</p>
+<pre><code>  [{
+     &quot;description&quot;: &quot;&quot;,
+     &quot;devtoolsFrontendUrl&quot;: &quot;/devtools/inspector.html?ws=localhost:9222/devtools/page/D02BE82A-7833-4408-93EB-E30644BF3378&quot;,
+     &quot;faviconUrl&quot;: &quot;http://localhost:8000/img/favicon.png&quot;,
+     &quot;id&quot;: &quot;D02BE82A-7833-4408-93EB-E30644BF3378&quot;,
+     &quot;title&quot;: &quot;Auto refresh Chrome when files modified - Sakthi Priyan H&quot;,
+     &quot;type&quot;: &quot;page&quot;,
+     &quot;url&quot;: &quot;http://localhost:8000/2016/02/15/auto-refresh-chrome-when-files-modified.html&quot;,
+     &quot;webSocketDebuggerUrl&quot;: &quot;ws://localhost:9222/devtools/page/D02BE82A-7833-4408-93EB-E30644BF3378&quot;
+  }]
+</code></pre>
+</li>
+<li>
+<p>To refresh any tab, we have to send following json via websocket connection.</p>
+<pre><code>  {&quot;params&quot;: {&quot;ignoreCache&quot;: true}, &quot;id&quot;: 0, &quot;method&quot;: &quot;Page.reload&quot;}
+</code></pre>
+</li>
+</ul>
+<p>Python implementation with comments below.</p>
+<pre><code>import os, subprocess, threading
+import requests, json
+from websocket import create_connection
+
+chrome_port = 9222
+chrome_json_url = 'http://localhost:%s/json' % (chrome_port)
+refresh_json = json.dumps({
+    &quot;id&quot;: 0,
+    &quot;method&quot;: &quot;Page.reload&quot;,
+    &quot;params&quot;: { &quot;ignoreCache&quot;: True }
+ })
+
+def open_browser(url):
+    # directory is used by Google Chrome to store profile for this remote user.
+    directory = os.path.expanduser('~/.chrome-remote-profile')
+    command = 'google-chrome --remote-debugging-port=%d --user-data-dir=%s %s' % \
+    (chrome_port,directory,url)
+    subprocess.call(command, shell=True)
+
+def refresh_browser():
+    # get response for the GET request.
+    response = requests.get(chrome_json_url)
+    # Process each item in the response.
+    for page in response.json():
+        # only if it is a page and interested urls.
+        if  page['type'] == 'page' and 'localhost:8000' in page['url']:
+            # Open websocket connection, send json and close it.
+            # This will refresh this specific tab.
+            ws = create_connection(page['webSocketDebuggerUrl'])
+            ws.send(refresh_json)
+            ws.close()
+
+def start_browser():
+    # Browser is launched via a daemon thread.
+    # It will terminate the browser when you close the python script.
+    thread = threading.Thread(target = open_browser, kwargs={'url':'http://localhost:8000'})
+    thread.daemon=True
+    thread.start()
+</code></pre>
+<h3 id="how-to-use-these-files">How to use these files?</h3>
+<ol>
+<li>Generate the website or do whatever you want to do before launching the browser.</li>
+<li>Launch the browser.</li>
+<li>Monitor a given folder, with specified callback.</li>
+<li>Callback does two jobs,
+<ol>
+<li>Say, generate the website or do what ever you want to do when files changed.</li>
+<li>Refresh the browser once previous step is complete.</li>
+</ol>
+</li>
+</ol>
+<h4 id="mainpy">main.py</h4>
+<pre><code>from monitor import monitor
+from browser import start_browser, refresh_browser
+
+# Import imagine function from a imagine file.
+from imagine import imagine
+
+# Callback does two things, as promised.
+def cb():
+    imagine() # Step 4.1
+    refresh_browser()  # Step 4.2
+
+my_directory = '/home/sakthipriyan/workspace/blog/sakthipriyan.com'
+# Set up for first time.
+imagine() # Step 1
+start_browser() # Step 2
+monitor(my_directory, cb) # Step 3
+</code></pre>
+<h3 id="it-works">It works!</h3>
+<p>When everything done correctly, it just works very well. Just loving it!</p>
+<ol>
+<li>Edit the page and save it.</li>
+<li>See the latest website in the browser.</li>
+</ol>
+<p>Between, this is the first post I had written using this auto refresh when file changed mechanism.</p>
+<h3 id="next">Next</h3>
+<p>Currently <code>webgen</code> does a dumb job of creating the whole website.<br>
+Next goal is to generate delta of website rather than the whole.</p>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="http://localhost:1313/building-systems/tags/chrome/" class="tag-link">Chrome</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/python/" class="tag-link">Python</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/webgen/" class="tag-link">Webgen</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/code/" class="tag-link">Code</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>
