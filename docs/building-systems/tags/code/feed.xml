@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on Sakthi Priyan H</title>
+    <link>http://localhost:1313/building-systems/tags/code/</link>
+    <description>Recent content in Code on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/building-systems/tags/code/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Responsive exponential backoff in Go</title>
+      <link>http://localhost:1313/building-systems/blogs/responsive-exponential-backoff-in-go/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/responsive-exponential-backoff-in-go/</guid>
+      <description>using exponentially scaling up and down the sleep time</description>
+    </item>
+    <item>
+      <title>Building machine learning models</title>
+      <link>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</guid>
+      <description>using scala spark</description>
+    </item>
+    <item>
+      <title>Feature engineering for machine learning models</title>
+      <link>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</link>
+      <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</guid>
+      <description>using scala spark</description>
+    </item>
+    <item>
+      <title>Learning Scala Spark basics</title>
+      <link>http://localhost:1313/building-systems/blogs/learning-scala-spark-basics/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/learning-scala-spark-basics/</guid>
+      <description>using spark shell in local</description>
+    </item>
+    <item>
+      <title>Migrating from http to https</title>
+      <link>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</guid>
+      <description>using lets encrypt, certbot and configuring Nginx</description>
+    </item>
+    <item>
+      <title>Powerbot connecting real world to twitter</title>
+      <link>http://localhost:1313/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</link>
+      <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</guid>
+      <description>via Raspberry Pi using GPIO pins</description>
+    </item>
+    <item>
+      <title>Creating Base64 UUID in Java</title>
+      <link>http://localhost:1313/building-systems/blogs/creating-base64-uuid-in-java/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/creating-base64-uuid-in-java/</guid>
+      <description>Alphanumeric unique id using base64 charset</description>
+    </item>
+    <item>
+      <title>Scala code to access documents in AWS S3 bucket</title>
+      <link>http://localhost:1313/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <description>via http get and put requests</description>
+    </item>
+    <item>
+      <title>Auto refresh Chrome when files modified</title>
+      <link>http://localhost:1313/building-systems/blogs/auto-refresh-chrome-when-files-modified/</link>
+      <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/auto-refresh-chrome-when-files-modified/</guid>
+      <description>Using python pyinotify and chrome debugging</description>
+    </item>
+    <item>
+      <title>Salesforce Bulk API usage with an example</title>
+      <link>http://localhost:1313/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</guid>
+      <description>to show how to upsert records in batches.</description>
+    </item>
+    <item>
+      <title>Salesforce Rest API usage with an example</title>
+      <link>http://localhost:1313/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</guid>
+      <description>to show how to upsert records</description>
+    </item>
+    <item>
+      <title>Cricket score in command line</title>
+      <link>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</link>
+      <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</guid>
+      <description>using python and open cricscore api</description>
+    </item>
+    <item>
+      <title>Raspberry Pi 2 benchmarking</title>
+      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-2-benchmarking/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-2-benchmarking/</guid>
+      <description>using sysbench and Java</description>
+    </item>
+    <item>
+      <title>Listing S3 Top level folders</title>
+      <link>http://localhost:1313/building-systems/blogs/listing-s3-top-level-folders/</link>
+      <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/listing-s3-top-level-folders/</guid>
+      <description>using simple Python code.</description>
+    </item>
+    <item>
+      <title>Efficiently using Enum in entity class</title>
+      <link>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</link>
+      <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</guid>
+      <description>to improve code maintainability and database performance.</description>
+    </item>
+    <item>
+      <title>Encryption and Decryption in Java</title>
+      <link>http://localhost:1313/building-systems/blogs/encryption-and-decryption-in-java/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/encryption-and-decryption-in-java/</guid>
+      <description>using a private key and AES algorithm.</description>
+    </item>
+    <item>
+      <title>Lines of code inversely proportional to readability</title>
+      <link>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
+      <description>Always code less to make it easily readable.</description>
+    </item>
+    <item>
+      <title>Testing Spring Application using JUnit</title>
+      <link>http://localhost:1313/building-systems/blogs/testing-spring-application-using-junit/</link>
+      <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/testing-spring-application-using-junit/</guid>
+      <description>How to test a Spring Application using JUnit? Explained with example test class.</description>
+    </item>
+  </channel>
+</rss>

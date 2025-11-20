@@ -3,7 +3,7 @@ title: "Financial Tools | Quick Overview for Building Wealth"
 date: "2025-11-02"
 draft: "false"
 type: "videos"
-bw_tags:
+wealth_tags:
   - Financial Tools
   - Building Block
 summary: "Quick overview of essential financial tools — cash, insurance, investments, and credit — for building long-term wealth."

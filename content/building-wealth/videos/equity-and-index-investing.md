@@ -3,7 +3,7 @@ title: "Equity & Index Funds for Building Wealth | Simple. Smart. Boring. Powerf
 date: "2025-11-09"
 draft: "false"
 type: "videos"
-bw_tags:
+wealth_tags:
   - Equity
   - Index Fund
   - Building Wealth

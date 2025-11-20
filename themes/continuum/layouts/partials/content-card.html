@@ -97,27 +97,27 @@ Renders a content card with image, title, summary, meta, and tags
                 {{ end }}
                 {{ end }}
             </div>
-
-            <!-- Tags -->
-            {{ $currentSection := .Section }}
-            {{ $taxonomyName := "" }}
-            {{ if eq $currentSection "software-engineering" }}
-            {{ $taxonomyName = "se_tags" }}
-            {{ else if eq $currentSection "building-wealth" }}
-            {{ $taxonomyName = "bw_tags" }}
-            {{ end }}
-
-            {{ if $taxonomyName }}
-            {{ $tags := index .Params $taxonomyName }}
-            {{ if $tags }}
-            <div class="card-tags">
-                {{ range $tags }}
-                {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
-                <a href="{{ $tagUrl | absURL }}" class="tag-link">{{ . | title }}</a>
-                {{ end }}
-            </div>
-            {{ end }}
-            {{ end }}
         </div>
     </a>
+
+    <!-- Tags outside the main link to avoid nested anchors -->
+    {{ $currentSection := .Section }}
+    {{ $taxonomyName := "" }}
+    {{ if eq $currentSection "building-systems" }}
+    {{ $taxonomyName = "systems_tags" }}
+    {{ else if eq $currentSection "building-wealth" }}
+    {{ $taxonomyName = "wealth_tags" }}
+    {{ end }}
+
+    {{ if $taxonomyName }}
+    {{ $tags := index .Params $taxonomyName }}
+    {{ if $tags }}
+    <div class="card-tags">
+        {{ range $tags }}
+        {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
+        <a href="{{ $tagUrl | absURL }}" class="tag-link" onclick="event.stopPropagation();">{{ . | title }}</a>
+        {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
 </article>

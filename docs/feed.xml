@@ -2,388 +2,395 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sakthi Priyan on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content in Sakthi Priyan on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 20 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Chapter 1: Introduction to Cloud-First Development</title>
-      <link>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/01-introduction-to-cloud-first-development/</link>
+      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/chapters/01-introduction-to-cloud-first-development/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/01-introduction-to-cloud-first-development/</guid>
+      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/chapters/01-introduction-to-cloud-first-development/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s rapidly evolving technological landscape, adopting a cloud-first approach has become essential for startups and businesses of all sizes. This chapter introduces the fundamental concepts of cloud-first development and explains why it&amp;rsquo;s crucial for building scalable, resilient systems.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-cloud-first-development&#34;&gt;What is Cloud-First Development?&lt;/h2&gt;&#xA;&lt;p&gt;Cloud-first development is a strategy that prioritizes cloud computing solutions over traditional on-premises infrastructure. It involves:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Building applications specifically for cloud environments&lt;/li&gt;&#xA;&lt;li&gt;Leveraging cloud-native services and features&lt;/li&gt;&#xA;&lt;li&gt;Embracing scalability and flexibility from day one&lt;/li&gt;&#xA;&lt;li&gt;Focusing on rapid development and deployment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;why-cloud-first-matters-for-startups&#34;&gt;Why Cloud-First Matters for Startups&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-cost-efficiency&#34;&gt;1. Cost Efficiency&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Pay-as-you-go pricing models&lt;/li&gt;&#xA;&lt;li&gt;Reduced upfront infrastructure costs&lt;/li&gt;&#xA;&lt;li&gt;Automatic scaling based on demand&lt;/li&gt;&#xA;&lt;li&gt;Lower maintenance overhead&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-speed-to-market&#34;&gt;2. Speed to Market&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Rapid provisioning of resources&lt;/li&gt;&#xA;&lt;li&gt;Automated deployment pipelines&lt;/li&gt;&#xA;&lt;li&gt;Built-in development tools and services&lt;/li&gt;&#xA;&lt;li&gt;Faster iteration cycles&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-scalability&#34;&gt;3. Scalability&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Horizontal and vertical scaling options&lt;/li&gt;&#xA;&lt;li&gt;Global reach with minimal effort&lt;/li&gt;&#xA;&lt;li&gt;Built-in redundancy and fault tolerance&lt;/li&gt;&#xA;&lt;li&gt;Elastic infrastructure that grows with demand&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;key-principles&#34;&gt;Key Principles&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Design for Failure&lt;/strong&gt;: Assume components will fail and build resilience into your architecture&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Automate Everything&lt;/strong&gt;: From deployment to scaling to recovery&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use Managed Services&lt;/strong&gt;: Leverage cloud provider services rather than managing infrastructure&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Monitor and Observe&lt;/strong&gt;: Implement comprehensive monitoring from day one&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Security First&lt;/strong&gt;: Build security into every layer of your application&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;&#xA;&lt;p&gt;The journey to cloud-first development begins with understanding your requirements and choosing the right cloud provider. In the following chapters, we&amp;rsquo;ll dive deeper into:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Chapter 2: Go for Cloud Development</title>
-      <link>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/02-go-for-cloud-development/</link>
+      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/chapters/02-go-for-cloud-development/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/02-go-for-cloud-development/</guid>
+      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/chapters/02-go-for-cloud-development/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Go (Golang) has emerged as a powerful language for cloud-native development, offering a unique combination of simplicity, performance, and built-in concurrency support. This chapter explores why Go is an excellent choice for building cloud applications and how to leverage its features effectively.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-choose-go&#34;&gt;Why Choose Go?&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-performance&#34;&gt;1. Performance&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Fast compilation and execution&lt;/li&gt;&#xA;&lt;li&gt;Efficient memory usage&lt;/li&gt;&#xA;&lt;li&gt;Native binary compilation&lt;/li&gt;&#xA;&lt;li&gt;No runtime dependencies&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-concurrency&#34;&gt;2. Concurrency&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Built-in goroutines for lightweight concurrency&lt;/li&gt;&#xA;&lt;li&gt;Channels for safe communication between goroutines&lt;/li&gt;&#xA;&lt;li&gt;Simple concurrency patterns&lt;/li&gt;&#xA;&lt;li&gt;Efficient handling of multiple concurrent operations&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-cloud-native-features&#34;&gt;3. Cloud-Native Features&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Excellent HTTP/2 support&lt;/li&gt;&#xA;&lt;li&gt;Native cloud SDK support&lt;/li&gt;&#xA;&lt;li&gt;Container-friendly binaries&lt;/li&gt;&#xA;&lt;li&gt;Great for microservices architecture&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;getting-started-with-go&#34;&gt;Getting Started with Go&lt;/h2&gt;&#xA;&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# macOS&#xA;brew install go&#xA;&#xA;# Linux&#xA;wget https://go.dev/dl/go1.21.linux-amd64.tar.gz&#xA;sudo tar -C /usr/local -xzf go1.21.linux-amd64.tar.gz&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;your-first-cloud-service&#34;&gt;Your First Cloud Service&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;fmt&amp;quot;&#xA;    &amp;quot;log&amp;quot;&#xA;    &amp;quot;net/http&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;    http.HandleFunc(&amp;quot;/&amp;quot;, func(w http.ResponseWriter, r *http.Request) {&#xA;        fmt.Fprintf(w, &amp;quot;Hello, Cloud!&amp;quot;)&#xA;    })&#xA;    &#xA;    log.Fatal(http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil))&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Error Handling&lt;/strong&gt;: Always check and handle errors explicitly&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Context Usage&lt;/strong&gt;: Use context for cancellation and timeouts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Struct Tags&lt;/strong&gt;: Leverage tags for JSON/XML marshalling&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Interface Design&lt;/strong&gt;: Keep interfaces small and focused&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: Write comprehensive unit and integration tests&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;cloud-deployment&#34;&gt;Cloud Deployment&lt;/h2&gt;&#xA;&lt;h3 id=&#34;containerization&#34;&gt;Containerization&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM golang:1.21 AS builder&#xA;WORKDIR /app&#xA;COPY . .&#xA;RUN go build -o main .&#xA;&#xA;FROM alpine:latest&#xA;COPY --from=builder /app/main /main&#xA;CMD [&amp;quot;/main&amp;quot;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;kubernetes-deployment&#34;&gt;Kubernetes Deployment&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: apps/v1&#xA;kind: Deployment&#xA;metadata:&#xA;  name: go-app&#xA;spec:&#xA;  replicas: 3&#xA;  selector:&#xA;    matchLabels:&#xA;      app: go-app&#xA;  template:&#xA;    metadata:&#xA;      labels:&#xA;        app: go-app&#xA;    spec:&#xA;      containers:&#xA;      - name: go-app&#xA;        image: your-registry/go-app:latest&#xA;        ports:&#xA;        - containerPort: 8080&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;&#xA;&lt;p&gt;Go provides an excellent foundation for cloud-native development with its simplicity, performance, and built-in concurrency features. Its growing ecosystem and strong community support make it an ideal choice for building scalable cloud applications.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Chapter 3: AWS Infrastructure Essentials</title>
-      <link>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/03-aws-infrastructure/</link>
+      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/chapters/03-aws-infrastructure/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/chapters/03-aws-infrastructure/</guid>
+      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/chapters/03-aws-infrastructure/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Amazon Web Services (AWS) is the leading cloud platform, offering a comprehensive suite of services for building scalable applications. This chapter covers the essential AWS services and best practices for infrastructure setup.&lt;/p&gt;&#xA;&lt;h2 id=&#34;core-aws-services&#34;&gt;Core AWS Services&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-compute-services&#34;&gt;1. Compute Services&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;EC2&lt;/strong&gt;: Virtual machines in the cloud&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Lambda&lt;/strong&gt;: Serverless compute&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ECS/EKS&lt;/strong&gt;: Container orchestration&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Fargate&lt;/strong&gt;: Serverless containers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-storage-services&#34;&gt;2. Storage Services&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;S3&lt;/strong&gt;: Object storage&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;EBS&lt;/strong&gt;: Block storage for EC2&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;EFS&lt;/strong&gt;: Elastic file system&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Glacier&lt;/strong&gt;: Archive storage&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-database-services&#34;&gt;3. Database Services&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;RDS&lt;/strong&gt;: Managed relational databases&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;DynamoDB&lt;/strong&gt;: NoSQL database&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ElastiCache&lt;/strong&gt;: In-memory caching&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Aurora&lt;/strong&gt;: High-performance MySQL/PostgreSQL&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;infrastructure-as-code&#34;&gt;Infrastructure as Code&lt;/h2&gt;&#xA;&lt;h3 id=&#34;cloudformation-template&#34;&gt;CloudFormation Template&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;AWSTemplateFormatVersion: &#39;2010-09-09&#39;&#xA;Description: &#39;Basic web application infrastructure&#39;&#xA;&#xA;Resources:&#xA;  WebServer:&#xA;    Type: AWS::EC2::Instance&#xA;    Properties:&#xA;      ImageId: ami-0c55b159cbfafe1f0&#xA;      InstanceType: t2.micro&#xA;      SecurityGroups:&#xA;        - !Ref WebServerSecurityGroup&#xA;        &#xA;  WebServerSecurityGroup:&#xA;    Type: AWS::EC2::SecurityGroup&#xA;    Properties:&#xA;      GroupDescription: Enable HTTP access&#xA;      SecurityGroupIngress:&#xA;        - IpProtocol: tcp&#xA;          FromPort: 80&#xA;          ToPort: 80&#xA;          CidrIp: 0.0.0.0/0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;terraform-configuration&#34;&gt;Terraform Configuration&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-hcl&#34;&gt;provider &amp;quot;aws&amp;quot; {&#xA;  region = &amp;quot;us-west-2&amp;quot;&#xA;}&#xA;&#xA;resource &amp;quot;aws_instance&amp;quot; &amp;quot;web&amp;quot; {&#xA;  ami           = &amp;quot;ami-0c55b159cbfafe1f0&amp;quot;&#xA;  instance_type = &amp;quot;t2.micro&amp;quot;&#xA;  &#xA;  tags = {&#xA;    Name = &amp;quot;WebServer&amp;quot;&#xA;  }&#xA;}&#xA;&#xA;resource &amp;quot;aws_s3_bucket&amp;quot; &amp;quot;assets&amp;quot; {&#xA;  bucket = &amp;quot;my-app-assets&amp;quot;&#xA;  &#xA;  versioning {&#xA;    enabled = true&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;networking&#34;&gt;Networking&lt;/h2&gt;&#xA;&lt;h3 id=&#34;vpc-setup&#34;&gt;VPC Setup&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Public and private subnets&lt;/li&gt;&#xA;&lt;li&gt;Internet Gateway for public access&lt;/li&gt;&#xA;&lt;li&gt;NAT Gateway for private subnet internet access&lt;/li&gt;&#xA;&lt;li&gt;Security Groups for access control&lt;/li&gt;&#xA;&lt;li&gt;Network ACLs for additional security&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;example-vpc-architecture&#34;&gt;Example VPC Architecture&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;VPC (10.0.0.0/16)&#xA;├── Public Subnet (10.0.1.0/24)&#xA;│   ├── Internet Gateway&#xA;│   └── Load Balancer&#xA;└── Private Subnet (10.0.2.0/24)&#xA;    ├── Application Servers&#xA;    ├── Database Servers&#xA;    └── NAT Gateway&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use Multiple Availability Zones&lt;/strong&gt;: Distribute resources across AZs for high availability&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Implement Auto Scaling&lt;/strong&gt;: Automatically adjust capacity based on demand&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Enable CloudWatch Monitoring&lt;/strong&gt;: Track metrics and set up alerts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use IAM Roles&lt;/strong&gt;: Grant permissions without hardcoded credentials&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Tag Resources&lt;/strong&gt;: Organize and track costs with meaningful tags&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Enable Encryption&lt;/strong&gt;: Encrypt data at rest and in transit&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Regular Backups&lt;/strong&gt;: Automate backup procedures for all critical data&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;cost-optimization&#34;&gt;Cost Optimization&lt;/h2&gt;&#xA;&lt;h3 id=&#34;strategies&#34;&gt;Strategies&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Use Reserved Instances for predictable workloads&lt;/li&gt;&#xA;&lt;li&gt;Implement Auto Scaling to match demand&lt;/li&gt;&#xA;&lt;li&gt;Use S3 lifecycle policies for data archival&lt;/li&gt;&#xA;&lt;li&gt;Monitor and eliminate unused resources&lt;/li&gt;&#xA;&lt;li&gt;Choose appropriate instance types&lt;/li&gt;&#xA;&lt;li&gt;Use Spot Instances for flexible workloads&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;&#xA;&lt;p&gt;AWS provides a robust and scalable infrastructure platform. By following best practices and leveraging infrastructure as code, you can build reliable, secure, and cost-effective cloud applications.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Building SQL Translator using AI Coding Agents</title>
-      <link>https://sakthipriyan.com/software-engineering/slides/building-sql-translator-using-ai-coding-agents/</link>
+      <link>http://localhost:1313/building-systems/slides/building-sql-translator-using-ai-coding-agents/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/slides/building-sql-translator-using-ai-coding-agents/</guid>
-      <description>Building SQL Translator Library using Agentic AI</description>
+      <guid>http://localhost:1313/building-systems/slides/building-sql-translator-using-ai-coding-agents/</guid>
+      <description>A walkthrough of building a SQL translator using agentic AI, deterministic ANTLR grammars, unified IR, and YAML-driven testing.</description>
     </item>
     <item>
       <title>How to Invest in Gold for Building Wealth</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</link>
+      <link>http://localhost:1313/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</guid>
       <description>Learn the smartest ways to invest in Gold using ETFs, Mutual Funds and more.</description>
     </item>
     <item>
       <title>How to Invest in Gold in India 2025</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/invest-in-goal/</link>
+      <link>http://localhost:1313/building-wealth/videos/invest-in-goal/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/invest-in-goal/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/invest-in-goal/</guid>
       <description>Invest in Gold via ETFs, Mutual Funds, SGB &amp;amp; Digital Gold</description>
     </item>
     <item>
+      <title>Natural Language Data Processing</title>
+      <link>http://localhost:1313/building-systems/slides/natural-language-data-processing/</link>
+      <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/slides/natural-language-data-processing/</guid>
+      <description>Prototype system that converts natural language into SQL and IR to drive dynamic DAG execution for Hetero Collate workloads.</description>
+    </item>
+    <item>
       <title>Equity &amp; Index Funds for Building Wealth | Simple. Smart. Boring. Powerful.</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/equity-and-index-investing/</link>
+      <link>http://localhost:1313/building-wealth/videos/equity-and-index-investing/</link>
       <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/equity-and-index-investing/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/equity-and-index-investing/</guid>
       <description>Understand how to build long-term wealth through Equity &amp;amp; Index Funds — simple, smart, and powerful investing without predictions.</description>
     </item>
     <item>
       <title>Equity &amp; Index Funds for Building Wealth</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/equity-index-funds-for-building-wealth/</link>
+      <link>http://localhost:1313/building-wealth/slides/equity-index-funds-for-building-wealth/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/equity-index-funds-for-building-wealth/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/equity-index-funds-for-building-wealth/</guid>
       <description>Simple. Smart. Boring. Powerful. Grow Wealth through Equity &amp;amp; Index Funds.</description>
     </item>
     <item>
       <title>Financial Tools</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/financial-tools/</link>
+      <link>http://localhost:1313/building-wealth/slides/financial-tools/</link>
       <pubDate>Sun, 02 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/financial-tools/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/financial-tools/</guid>
       <description>Quick overview of financial tools for building wealth</description>
     </item>
     <item>
       <title>Financial Tools | Quick Overview for Building Wealth</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/financial_tools/</link>
+      <link>http://localhost:1313/building-wealth/videos/financial_tools/</link>
       <pubDate>Sun, 02 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/financial_tools/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/financial_tools/</guid>
       <description>Quick overview of essential financial tools — cash, insurance, investments, and credit — for building long-term wealth.</description>
     </item>
     <item>
       <title>Emergency Fund Setup | Using Liquid/Hybrid/Arbitrage Mutual Funds</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/emergency_fund/</link>
+      <link>http://localhost:1313/building-wealth/videos/emergency_fund/</link>
       <pubDate>Tue, 28 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/emergency_fund/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/emergency_fund/</guid>
       <description>Learn how to set up your emergency fund using a mix of Liquid and Hybrid Mutual Funds for both liquidity and steady growth.</description>
     </item>
     <item>
       <title>Emergency Fund Setup</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/emergency-fund-setup/</link>
+      <link>http://localhost:1313/building-wealth/slides/emergency-fund-setup/</link>
       <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/emergency-fund-setup/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/emergency-fund-setup/</guid>
       <description>Setup emergency fund using liquid/hybrid Mutual funds</description>
     </item>
     <item>
       <title>Emergency Fund Calculator</title>
-      <link>https://sakthipriyan.com/building-wealth/tools/emergency-fund/</link>
+      <link>http://localhost:1313/building-wealth/tools/emergency-fund/</link>
       <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tools/emergency-fund/</guid>
+      <guid>http://localhost:1313/building-wealth/tools/emergency-fund/</guid>
       <description>Plan your emergency fund and calculate the timeline to reach your savings goal.</description>
     </item>
     <item>
       <title>How I Manage My Money Flows 💰 | Bank Accounts, Credit Cards &amp; Mutual Funds Explained</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/manage-money-flows/</link>
+      <link>http://localhost:1313/building-wealth/videos/manage-money-flows/</link>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/manage-money-flows/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/manage-money-flows/</guid>
       <description>Complete breakdown of how to manage your money flows effectively using bank accounts, credit cards, and mutual funds.</description>
     </item>
     <item>
       <title>Managing Money Flows</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/managing-money-flows/</link>
+      <link>http://localhost:1313/building-wealth/slides/managing-money-flows/</link>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/managing-money-flows/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/managing-money-flows/</guid>
       <description>Manage money flow via Bank Accounts, Credit Cards &amp;amp; Mutual Funds</description>
     </item>
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
+      <link>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
       <description>Options to invest in NASDAQ 100, process, cost and taxation</description>
     </item>
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</link>
+      <link>http://localhost:1313/building-wealth/videos/nasdaq-investing-india/</link>
       <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/nasdaq-investing-india/</guid>
       <description>Complete guide on how Indian investors can invest in NASDAQ 100 index and benefit from US market growth.</description>
     </item>
     <item>
       <title>Design, Build &amp; Deploy Scalable Cloud Systems</title>
-      <link>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/title/</link>
+      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/title/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/title/</guid>
+      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/title/</guid>
       <description>&lt;p&gt;\newpage&lt;/p&gt;&#xA;&lt;p&gt;\aftertochook&lt;/p&gt;&#xA;&lt;p&gt;\tableofcontents&lt;/p&gt;&#xA;&lt;p&gt;\beforemainhook&lt;/p&gt;</description>
     </item>
     <item>
       <title>Responsive exponential backoff in Go</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/responsive-exponential-backoff-in-go/</link>
+      <link>http://localhost:1313/building-systems/blogs/responsive-exponential-backoff-in-go/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/responsive-exponential-backoff-in-go/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/responsive-exponential-backoff-in-go/</guid>
       <description>using exponentially scaling up and down the sleep time</description>
     </item>
     <item>
       <title>Building machine learning models</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/building-machine-learning-models/</link>
+      <link>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/building-machine-learning-models/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Feature engineering for machine learning models</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/feature-engineering-for-machine-learning-models/</link>
+      <link>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</link>
       <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/feature-engineering-for-machine-learning-models/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Learning Scala Spark basics</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/learning-scala-spark-basics/</link>
+      <link>http://localhost:1313/building-systems/blogs/learning-scala-spark-basics/</link>
       <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/learning-scala-spark-basics/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/learning-scala-spark-basics/</guid>
       <description>using spark shell in local</description>
     </item>
     <item>
       <title>Migrating from http to https</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/migrating-from-http-to-https/</link>
+      <link>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</link>
       <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/migrating-from-http-to-https/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</guid>
       <description>using lets encrypt, certbot and configuring Nginx</description>
     </item>
     <item>
       <title>Powerbot connecting real world to twitter</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</link>
+      <link>http://localhost:1313/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/powerbot-connecting-real-world-to-twitter/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</guid>
       <description>via Raspberry Pi using GPIO pins</description>
     </item>
     <item>
       <title>Creating Base64 UUID in Java</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/creating-base64-uuid-in-java/</link>
+      <link>http://localhost:1313/building-systems/blogs/creating-base64-uuid-in-java/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/creating-base64-uuid-in-java/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/creating-base64-uuid-in-java/</guid>
       <description>Alphanumeric unique id using base64 charset</description>
     </item>
     <item>
       <title>Documenting Play Framework using Swagger</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/documenting-play-framework-using-swagger/</link>
+      <link>http://localhost:1313/building-systems/blogs/documenting-play-framework-using-swagger/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/documenting-play-framework-using-swagger/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/documenting-play-framework-using-swagger/</guid>
       <description>Setting up live documentation for API</description>
     </item>
     <item>
       <title>Creating REST API Specification</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/creating-rest-api-specification/</link>
+      <link>http://localhost:1313/building-systems/blogs/creating-rest-api-specification/</link>
       <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/creating-rest-api-specification/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/creating-rest-api-specification/</guid>
       <description>using Swagger Specification</description>
     </item>
     <item>
       <title>Set up G-WAN web server</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/set-up-g-wan-web-server/</link>
+      <link>http://localhost:1313/building-systems/blogs/set-up-g-wan-web-server/</link>
       <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/set-up-g-wan-web-server/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/set-up-g-wan-web-server/</guid>
       <description>to serve static website</description>
     </item>
     <item>
       <title>Scala code to access documents in AWS S3 bucket</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <link>http://localhost:1313/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
       <description>via http get and put requests</description>
     </item>
     <item>
       <title>Auto refresh Chrome when files modified</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</link>
+      <link>http://localhost:1313/building-systems/blogs/auto-refresh-chrome-when-files-modified/</link>
       <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/auto-refresh-chrome-when-files-modified/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/auto-refresh-chrome-when-files-modified/</guid>
       <description>Using python pyinotify and chrome debugging</description>
     </item>
     <item>
       <title>Salesforce Bulk API usage with an example</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/salesforce-bulk-api-usage-with-an-example/</link>
+      <link>http://localhost:1313/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</link>
       <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/salesforce-bulk-api-usage-with-an-example/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</guid>
       <description>to show how to upsert records in batches.</description>
     </item>
     <item>
       <title>Salesforce Rest API usage with an example</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/salesforce-rest-api-usage-with-an-example/</link>
+      <link>http://localhost:1313/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</link>
       <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/salesforce-rest-api-usage-with-an-example/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</guid>
       <description>to show how to upsert records</description>
     </item>
     <item>
       <title>Mounting external hard disk to Raspberry Pi</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/mounting-external-hard-disk-to-raspberry-pi/</link>
+      <link>http://localhost:1313/building-systems/blogs/mounting-external-hard-disk-to-raspberry-pi/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/mounting-external-hard-disk-to-raspberry-pi/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/mounting-external-hard-disk-to-raspberry-pi/</guid>
       <description>which contains NTFS and FAT file systems.</description>
     </item>
     <item>
       <title>Raspberry Pi Benchmarking File IO</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</link>
+      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-benchmarking-file-io/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-benchmarking-file-io/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-benchmarking-file-io/</guid>
       <description>using sysbench, sd card and attached external hard disk</description>
     </item>
     <item>
       <title>Cricket score in command line</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/cricket-score-in-command-line/</link>
+      <link>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</link>
       <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/cricket-score-in-command-line/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</guid>
       <description>using python and open cricscore api</description>
     </item>
     <item>
       <title>Setting up a 4 node Raspberry Pi 2 Cluster</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
+      <link>http://localhost:1313/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
       <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
       <description>Setting up the right hardware.</description>
     </item>
     <item>
       <title>Raspberry Pi 2 benchmarking</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-benchmarking/</link>
+      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-2-benchmarking/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-benchmarking/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-2-benchmarking/</guid>
       <description>using sysbench and Java</description>
     </item>
     <item>
       <title>Raspberry Pi 2 setup</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-setup/</link>
+      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-2-setup/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/raspberry-pi-2-setup/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-2-setup/</guid>
       <description>from micro SD card to JDK installation.</description>
     </item>
     <item>
       <title>Experiment with Raspberry Pi</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/experiment-with-raspberry-pi/</link>
+      <link>http://localhost:1313/building-systems/blogs/experiment-with-raspberry-pi/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/experiment-with-raspberry-pi/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/experiment-with-raspberry-pi/</guid>
       <description>How I turned it to a electricity monitor, tweetbot and downloader.</description>
     </item>
     <item>
       <title>Crawlpod - open source scalable web crawler</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</link>
+      <link>http://localhost:1313/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
       <description>built on top of Scala and Akka framework.</description>
     </item>
     <item>
       <title>Listing S3 Top level folders</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</link>
+      <link>http://localhost:1313/building-systems/blogs/listing-s3-top-level-folders/</link>
       <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/listing-s3-top-level-folders/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/listing-s3-top-level-folders/</guid>
       <description>using simple Python code.</description>
     </item>
     <item>
       <title>Efficiently using Enum in entity class</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/efficiently-using-enum-in-entity-class/</link>
+      <link>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/efficiently-using-enum-in-entity-class/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</guid>
       <description>to improve code maintainability and database performance.</description>
     </item>
     <item>
       <title>Couchbase setup on AWS</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/couchbase-setup-on-aws/</link>
+      <link>http://localhost:1313/building-systems/blogs/couchbase-setup-on-aws/</link>
       <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/couchbase-setup-on-aws/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/couchbase-setup-on-aws/</guid>
       <description>EC2 instances</description>
     </item>
     <item>
       <title>Encryption and Decryption in Java</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/encryption-and-decryption-in-java/</link>
+      <link>http://localhost:1313/building-systems/blogs/encryption-and-decryption-in-java/</link>
       <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/encryption-and-decryption-in-java/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/encryption-and-decryption-in-java/</guid>
       <description>using a private key and AES algorithm.</description>
     </item>
     <item>
       <title>Distributed forward proxy servers</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/distributed-forward-proxy-servers/</link>
+      <link>http://localhost:1313/building-systems/blogs/distributed-forward-proxy-servers/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/distributed-forward-proxy-servers/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/distributed-forward-proxy-servers/</guid>
       <description>to crawl Internet via multiple cloud instances.</description>
     </item>
     <item>
       <title>Setup Elasticsearch cluster on AWS</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/setup-elasticsearch-cluster-on-aws/</link>
+      <link>http://localhost:1313/building-systems/blogs/setup-elasticsearch-cluster-on-aws/</link>
       <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/setup-elasticsearch-cluster-on-aws/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/setup-elasticsearch-cluster-on-aws/</guid>
       <description>EC2 instances.</description>
     </item>
     <item>
       <title>Lines of code inversely proportional to readability</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/lines-of-code-inversely-proportional-to-readability/</link>
+      <link>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</link>
       <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
       <description>Always code less to make it easily readable.</description>
     </item>
     <item>
       <title>Testing Spring Application using JUnit</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/testing-spring-application-using-junit/</link>
+      <link>http://localhost:1313/building-systems/blogs/testing-spring-application-using-junit/</link>
       <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/testing-spring-application-using-junit/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/testing-spring-application-using-junit/</guid>
       <description>How to test a Spring Application using JUnit? Explained with example test class.</description>
     </item>
     <item>
       <title>Building a scalable recommendation engine</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</link>
+      <link>http://localhost:1313/building-systems/blogs/building-a-scalable-recommendation-engine/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-recommendation-engine/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/building-a-scalable-recommendation-engine/</guid>
       <description>using play framework, couchbase and elasticsearch</description>
     </item>
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
+      <link>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
     <item>
       <title>Building a scalable distributed web crawler</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</link>
+      <link>http://localhost:1313/building-systems/blogs/building-a-scalable-distributed-web-crawler/</link>
       <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/building-a-scalable-distributed-web-crawler/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/building-a-scalable-distributed-web-crawler/</guid>
       <description>which can perform both crawling and data extraction</description>
     </item>
     <item>
       <title>How to create a modern blog?</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</link>
+      <link>http://localhost:1313/building-systems/blogs/how-to-create-a-modern-blog/</link>
       <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/how-to-create-a-modern-blog/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/how-to-create-a-modern-blog/</guid>
       <description>using markdown and python</description>
     </item>
     <item>
       <title>Git Configuration</title>
-      <link>https://sakthipriyan.com/software-engineering/blogs/git-configuration/</link>
+      <link>http://localhost:1313/building-systems/blogs/git-configuration/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/blogs/git-configuration/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/git-configuration/</guid>
       <description>Alias for generally used Git commands</description>
     </item>
     <item>
       <title></title>
-      <link>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/backcover/</link>
+      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/backcover/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/software-engineering/books/cloud-first-start-fast/backcover/</guid>
+      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/backcover/</guid>
       <description>&lt;p&gt;\nobackpagenumbers&lt;/p&gt;&#xA;&lt;h1 id=&#34;about-the-author&#34;&gt;About the Author&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;Sakthi Priyan H&lt;/strong&gt; is a seasoned software engineer and technical leader based in Chennai, with over 16 years of industry experience and a lifelong passion for building systems that solve real-world problems. His journey in programming began at the age of 11, driven by a deep curiosity and a love for technology that continues to shape his work today.&lt;/p&gt;&#xA;&lt;p&gt;Currently serving as a Senior Technical Manager at Aqfer India Pvt Ltd, Sakthi leads engineering efforts on large-scale data platforms and distributed systems. His previous roles at companies like Crayon Data and Infosys have spanned domains from digital marketing to logistics, earning him recognition for both his technical depth and leadership.&lt;/p&gt;</description>
     </item>
   </channel>

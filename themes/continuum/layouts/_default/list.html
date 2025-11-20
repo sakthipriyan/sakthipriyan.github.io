@@ -40,10 +40,10 @@
   {{- if ge (len $pathParts) 4 -}}
   {{- $currentSection = index $pathParts 1 -}}
   {{- $sectionName = $currentSection | title | replaceRE "-" " " -}}
-  {{- if eq $currentSection "software-engineering" -}}
-  {{- $taxonomyField = "se_tags" -}}
+  {{- if eq $currentSection "building-systems" -}}
+  {{- $taxonomyField = "systems_tags" -}}
   {{- else if eq $currentSection "building-wealth" -}}
-  {{- $taxonomyField = "bw_tags" -}}
+  {{- $taxonomyField = "wealth_tags" -}}
   {{- end -}}
   {{- end -}}
 

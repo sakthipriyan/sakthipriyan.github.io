@@ -5,7 +5,7 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "Manage money flow via Bank Accounts, Credit Cards & Mutual Funds"
-bw_tags:
+wealth_tags:
   - Money Flow 
   - Building Block
 ---

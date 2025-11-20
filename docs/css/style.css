@@ -203,12 +203,12 @@ body.book-layout {
 }
 
 /* Section-specific navigation link backgrounds for homepage */
-.nav-links .software-engineering-link {
+.nav-links .building-systems-link {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
 }
 
-.nav-links .software-engineering-link:hover {
+.nav-links .building-systems-link:hover {
     background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     color: white;
     transform: translateY(-1px);
@@ -332,11 +332,11 @@ main {
 }
 
 /* Section-specific view-all button colors */
-.software-engineering .view-all-link {
+.building-systems .view-all-link {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.software-engineering .view-all-link:hover {
+.building-systems .view-all-link:hover {
     background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
@@ -1724,12 +1724,12 @@ main {
     transform: translateX(2px);
 }
 
-/* Software Engineering section branding */
-.software-engineering .site-header {
+/* Building Systems section branding */
+.building-systems .site-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.software-engineering .logo {
+.building-systems .logo {
     font-size: 1.3rem;
 }
 
@@ -1955,7 +1955,7 @@ main {
 }
 
 /* Section-specific card border colors */
-.software-engineering .category-card {
+.building-systems .category-card {
     border-left: 4px solid #667eea;
 }
 
@@ -1964,11 +1964,11 @@ main {
 }
 
 /* Section-specific colors for other card types */
-.software-engineering .post-card,
-.software-engineering .slide-card,
-.software-engineering .book-card,
-.software-engineering .video-card,
-.software-engineering .tool-card {
+.building-systems .post-card,
+.building-systems .slide-card,
+.building-systems .book-card,
+.building-systems .video-card,
+.building-systems .tool-card {
     border-left: 4px solid #667eea;
 }
 
@@ -1982,13 +1982,13 @@ main {
     border-left: 4px solid #f7b733;
 }
 
-.software-engineering .tag-card,
-.software-engineering .content-card {
+.building-systems .tag-card,
+.building-systems .content-card {
     border-left: 4px solid #667eea;
 }
 
 /* Section-specific tag colors */
-.software-engineering .card-tags .tag-link:hover {
+.building-systems .card-tags .tag-link:hover {
     background: #667eea;
 }
 
@@ -1999,7 +1999,7 @@ main {
 /* Homepage section cards - specific colors */
 .section-card:first-of-type {
     border-left: 4px solid #667eea;
-    /* Software Engineering blue */
+    /* Building Systems blue */
 }
 
 .section-card:last-of-type {
@@ -2243,7 +2243,7 @@ main {
 /* Homepage section cards - specific colors */
 .section-card:first-of-type {
     border-left: 4px solid #667eea;
-    /* Software Engineering blue */
+    /* Building Systems blue */
 }
 
 .section-card:last-of-type {
@@ -2340,7 +2340,7 @@ main {
 }
 
 /* Section-specific tag badge colors */
-.software-engineering .tag-count-badge {
+.building-systems .tag-count-badge {
     background: #667eea;
 }
 

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Salesforce Rest API usage with an example | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds."><link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Salesforce Rest API usage with an example</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Salesforce Rest API usage with an example</h1>
+    <p class="content-summary">to show how to upsert records</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2016-02-07">Feb 7, 2016</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">4 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h3 id="goal">Goal</h3>
+<p>To upsert records in to salesforce <a href="https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_concepts.htm">objects</a> using the REST API.</p>
+<h3 id="get-ready-with">Get ready with</h3>
+<p>I would recommend you to use a <a href="https://developer.salesforce.com/signup">developer account</a> to experiment.<br>
+Get ready with following things.</p>
+<ol>
+<li>User credentials
+<ul>
+<li><strong>Username</strong> of salesforce account. Let me use <code>user@domain.com</code>.</li>
+<li><strong>Password</strong> corresponding to the username.</li>
+<li><strong>Security Token</strong> of the user is required.<br>
+You can generate your security token as follows.
+<ol>
+<li>Go to user settings</li>
+<li>Search <code>security</code> and click <code>Reset My Security Token</code></li>
+<li>Click  <code>Reset Security Token</code> button.</li>
+<li>You will get it in the email.</li>
+</ol>
+</li>
+<li>Let me use <code>user@domain.com</code>, <code>password</code>, <code>securitytoken</code> for above 3.</li>
+</ul>
+</li>
+<li>Connected App
+<ul>
+<li><strong>Consumer Key</strong> of the Connected App.</li>
+<li><strong>Consumer Secret</strong> of the Connected App.</li>
+<li>In case, you don&rsquo;t have a Connected App. Follow below steps to set up one.
+<ol>
+<li>Go to <code>Setup</code></li>
+<li>Search <code>apps</code> and click on Create <code>apps</code> in the Build section.</li>
+<li>In <code>Connected Apps</code> section click <code>new</code> button.</li>
+<li>In Basic Information, fill in <em>Connected App Name</em>, <em>API Name</em>, <em>Contact Email</em></li>
+<li>In <code>API (Enable OAuth Settings)</code>,
+<ul>
+<li>Check Enable OAuth Settings.</li>
+<li>Callback URL, fill in some dummy url.</li>
+<li>In, Selected OAuth Scopes, Add relevant <code>Access and manage your data (api)</code>.</li>
+</ul>
+</li>
+<li>Save the Connected App.</li>
+<li>Then, <code>Continue</code> to next page.</li>
+<li>You can get Consumer Key and Consumer Secret from this page.</li>
+</ol>
+</li>
+<li>Let me use <code>consumerkey</code> and <code>consumersecret</code> for examples.</li>
+</ul>
+</li>
+</ol>
+<h3 id="rest-api">Rest API</h3>
+<ul>
+<li>HTTP Request
+<ul>
+<li>For simplicity, I have shown the HTTP request.</li>
+<li>It should be fairly easy to translate it in to any language.</li>
+<li>Also, I have manually added line breaks into request body for readability.</li>
+<li><code>X-PrettyPrint</code> header is used to get formatted <code>JSON</code> response from salesforce.</li>
+<li><code>https</code> is used for URLs.</li>
+</ul>
+</li>
+<li>HTTP Response
+<ul>
+<li>Only response body is shown in the response section.</li>
+<li>Also, response code is shown in case of upsert api.</li>
+</ul>
+</li>
+</ul>
+<h3 id="access-token">Access Token</h3>
+<p>First step is to login and get the access token.</p>
+<p><strong>Request</strong></p>
+<pre><code>POST /services/oauth2/token HTTP/1.1
+Host: login.salesforce.com
+X-PrettyPrint: 1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&amp;
+client_id=consumerkey&amp;
+client_secret=consumersecret&amp;
+username=user%40domain.com&amp;
+password=passwordsecuritytoken
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>{
+  &quot;access_token&quot; : &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;,
+  &quot;instance_url&quot; : &quot;https://ap2.salesforce.com&quot;,
+  &quot;id&quot; : &quot;https://login.salesforce.com/id/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXX&quot;,
+  &quot;token_type&quot; : &quot;Bearer&quot;,
+  &quot;issued_at&quot; : &quot;1454735969118&quot;,
+  &quot;signature&quot; : &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=&quot;
+}
+</code></pre>
+<ul>
+<li>We have to use <code>access_token</code> in <code>Authorization</code> Header as <code>Authorization: Bearer access_token</code></li>
+<li>We have to use the instance_url returned for accessing all resources.</li>
+<li><code>id</code> contains more information of the user</li>
+<li>For further requests, I am going to use <code>access_token</code> for access_token.</li>
+</ul>
+<h3 id="get-an-object">Get an object</h3>
+<p>Here, I am retrieving a custom object, Mutual Fund.</p>
+<p><strong>Request</strong></p>
+<pre><code>GET /services/data/v35.0/sobjects/Mutual_Fund__c HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>{
+  &quot;objectDescribe&quot;: {
+    &quot;activateable&quot;: false,
+    &quot;createable&quot;: true,
+    &quot;custom&quot;: true,
+    &quot;customSetting&quot;: false,
+    &quot;deletable&quot;: true,
+    &quot;deprecatedAndHidden&quot;: false,
+    &quot;feedEnabled&quot;: true,
+    &quot;keyPrefix&quot;: &quot;a00&quot;,
+    &quot;label&quot;: &quot;Mutual Fund&quot;,
+    &quot;labelPlural&quot;: &quot;Mutual Funds&quot;,
+    &quot;layoutable&quot;: true,
+    &quot;mergeable&quot;: false,
+    &quot;name&quot;: &quot;Mutual_Fund__c&quot;,
+    &quot;queryable&quot;: true,
+    &quot;replicateable&quot;: true,
+    &quot;retrieveable&quot;: true,
+    &quot;searchable&quot;: true,
+    &quot;triggerable&quot;: true,
+    &quot;undeletable&quot;: true,
+    &quot;updateable&quot;: true,
+    &quot;urls&quot;: {
+      &quot;compactLayouts&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/describe/compactLayouts&quot;,
+      &quot;rowTemplate&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/{ID}&quot;,
+      &quot;approvalLayouts&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/describe/approvalLayouts&quot;,
+      &quot;describe&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/describe&quot;,
+      &quot;quickActions&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/quickActions&quot;,
+      &quot;layouts&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/describe/layouts&quot;,
+      &quot;sobject&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c&quot;
+    }
+  },
+  &quot;recentItems&quot;: [
+    {
+      &quot;attributes&quot;: {
+        &quot;type&quot;: &quot;Mutual_Fund__c&quot;,
+        &quot;url&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF&quot;
+      },
+      &quot;Id&quot;: &quot;a002800000P9WeyAAF&quot;,
+      &quot;Name&quot;: &quot;Motilal Focused Midcap 30 - DP G&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="get-a-record">Get a record</h3>
+<p>Here, I am getting a specific record from the Mutual Funds object.</p>
+<p><strong>Request</strong></p>
+<pre><code>GET /services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>{
+  &quot;attributes&quot;: {
+    &quot;type&quot;: &quot;Mutual_Fund__c&quot;,
+    &quot;url&quot;: &quot;/services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF&quot;
+  },
+  &quot;Id&quot;: &quot;a002800000P9WeyAAF&quot;,
+  &quot;OwnerId&quot;: &quot;00528000002A6JaAAK&quot;,
+  &quot;IsDeleted&quot;: false,
+  &quot;Name&quot;: &quot;Motilal Focused Midcap 30 - DP G&quot;,
+  &quot;CreatedDate&quot;: &quot;2016-02-05T09:50:59.000+0000&quot;,
+  &quot;CreatedById&quot;: &quot;00528000002A6JaAAK&quot;,
+  &quot;LastModifiedDate&quot;: &quot;2016-02-05T10:46:48.000+0000&quot;,
+  &quot;LastModifiedById&quot;: &quot;00528000002A6JaAAK&quot;,
+  &quot;SystemModstamp&quot;: &quot;2016-02-05T10:46:48.000+0000&quot;,
+  &quot;LastViewedDate&quot;: &quot;2016-02-05T10:32:24.000+0000&quot;,
+  &quot;LastReferencedDate&quot;: &quot;2016-02-05T10:32:24.000+0000&quot;,
+  &quot;checked__c&quot;: false,
+  &quot;External_ID__c&quot;: 104
+}
+</code></pre>
+<h3 id="upsert-a-record">Upsert a record</h3>
+<ul>
+<li><code>Upsert</code> operation will update the existing record or create a new record, if is not available.</li>
+<li>Request format is same for both update and insert operation done via upsert operation.</li>
+<li>An <code>External ID</code> field is required to perform this operation,</li>
+<li>Here, <code>External_ID__c</code> is the custom numeric field which is checked as <code>External ID</code>.</li>
+<li><code>External ID</code> and its <code>value</code> should be specified in the url.<br>
+Example: /services/data/v35.0/sobjects/Mutual_Fund__c/<code>External_ID__c</code>/<code>104</code></li>
+<li>Different response for update and insert operation as shown below.</li>
+</ul>
+<h4 id="updating-an-existing-record">Updating an existing record.</h4>
+<p><strong>Request</strong></p>
+<pre><code>PATCH /services/data/v35.0/sobjects/Mutual_Fund__c/External_ID__c/104 HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+Content-Type: application/json
+
+{
+    &quot;Name&quot;: &quot;Motilal Focused Midcap 30 - DP (G)&quot;
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>204 No Content
+</code></pre>
+<p>Response code <code>204</code> is returned in case of update operation.</p>
+<h4 id="inserting-a-new-record">Inserting a new record.</h4>
+<p><strong>Request</strong></p>
+<pre><code>PATCH /services/data/v35.0/sobjects/Mutual_Fund__c/External_ID__c/111 HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+Content-Type: application/json
+
+{
+    &quot;Name&quot;: &quot;SBI Blue Chip Fund - Direct (G)&quot;
+}
+</code></pre>
+<p><strong>Response</strong></p>
+<pre><code>201 Created
+
+{
+    &quot;id&quot;: &quot;a002800000PA0AzAAL&quot;,
+    &quot;success&quot;: true,
+    &quot;errors&quot;: []
+}
+</code></pre>
+<p>Response code <code>201</code> is returned in case of insert operation.</p>
+<h3 id="footnotes">Footnotes</h3>
+<ul>
+<li>It should be fairly simple to <code>upsert</code> records using the Upsert REST API.</li>
+<li>Other operations such as <code>insert</code>, <code>update</code>, <code>delete</code> are similar to <code>upsert</code> using relevant http verb.</li>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.200.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm">Rest API</a> approach is right one when number of records involved is low and if it has to be real time.</li>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.198.0.api_asynch.meta/api_asynch/asynch_api_intro.htm">Bulk API</a> should be used, if you are dealing with 1000s of records and batch mode.</li>
+</ul>
+<h3 id="related">Related</h3>
+<ul>
+<li><a href="salesforce-bulk-api-usage-with-an-example.html">Salesforce Bulk API usage with an example</a></li>
+</ul>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="http://localhost:1313/building-systems/tags/salesforce/" class="tag-link">Salesforce</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/integration/" class="tag-link">Integration</a>
+        
+        <a href="http://localhost:1313/building-systems/tags/code/" class="tag-link">Code</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>
