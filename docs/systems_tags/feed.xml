@@ -2,752 +2,745 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Systems_tags on Sakthi Priyan H</title>
-    <link>http://localhost:1313/systems_tags/</link>
+    <link>https://sakthipriyan.com/systems_tags/</link>
     <description>Recent content in Systems_tags on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 20 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/systems_tags/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/systems_tags/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI Engineering</title>
-      <link>http://localhost:1313/building-systems/tags/ai-engineering/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/ai-engineering/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/ai-engineering/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/ai-engineering/</guid>
       <description></description>
     </item>
     <item>
       <title>ANTLR</title>
-      <link>http://localhost:1313/building-systems/tags/antlr/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/antlr/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/antlr/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/antlr/</guid>
       <description></description>
     </item>
     <item>
       <title>Athena</title>
-      <link>http://localhost:1313/building-systems/tags/athena/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/athena/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/athena/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/athena/</guid>
       <description></description>
     </item>
     <item>
       <title>BigQuery</title>
-      <link>http://localhost:1313/building-systems/tags/bigquery/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/bigquery/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/bigquery/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/bigquery/</guid>
       <description></description>
     </item>
     <item>
       <title>IR</title>
-      <link>http://localhost:1313/building-systems/tags/ir/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/ir/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/ir/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/ir/</guid>
       <description></description>
     </item>
     <item>
       <title>SQL Translation</title>
-      <link>http://localhost:1313/building-systems/tags/sql-translation/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/sql-translation/</link>
       <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/sql-translation/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/sql-translation/</guid>
       <description></description>
     </item>
     <item>
-      <title>Building Wealth</title>
-      <link>http://localhost:1313/building-systems/tags/building-wealth/</link>
+      <title>DAG</title>
+      <link>https://sakthipriyan.com/building-systems/tags/dag/</link>
       <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/building-wealth/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/dag/</guid>
       <description></description>
     </item>
     <item>
-      <title>Equity</title>
-      <link>http://localhost:1313/building-systems/tags/equity/</link>
+      <title>SQL</title>
+      <link>https://sakthipriyan.com/building-systems/tags/sql/</link>
       <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/equity/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Index Fund</title>
-      <link>http://localhost:1313/building-systems/tags/index-fund/</link>
-      <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/index-fund/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/sql/</guid>
       <description></description>
     </item>
     <item>
       <title>Cloud</title>
-      <link>http://localhost:1313/building-systems/tags/cloud/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/cloud/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/cloud/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/cloud/</guid>
       <description></description>
     </item>
     <item>
       <title>Code</title>
-      <link>http://localhost:1313/building-systems/tags/code/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/code/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/code/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/code/</guid>
       <description></description>
     </item>
     <item>
       <title>Dynamodb</title>
-      <link>http://localhost:1313/building-systems/tags/dynamodb/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/dynamodb/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/dynamodb/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/dynamodb/</guid>
       <description></description>
     </item>
     <item>
       <title>Exponential-Backoff</title>
-      <link>http://localhost:1313/building-systems/tags/exponential-backoff/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/exponential-backoff/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/exponential-backoff/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/exponential-backoff/</guid>
       <description></description>
     </item>
     <item>
       <title>Go</title>
-      <link>http://localhost:1313/building-systems/tags/go/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/go/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/go/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/go/</guid>
       <description></description>
     </item>
     <item>
       <title>Sleep</title>
-      <link>http://localhost:1313/building-systems/tags/sleep/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/sleep/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/sleep/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/sleep/</guid>
       <description></description>
     </item>
     <item>
       <title>Bigdata</title>
-      <link>http://localhost:1313/building-systems/tags/bigdata/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/bigdata/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/bigdata/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/bigdata/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
-      <link>http://localhost:1313/building-systems/tags/machine-learning/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/machine-learning/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/machine-learning/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/machine-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Sbt</title>
-      <link>http://localhost:1313/building-systems/tags/sbt/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/sbt/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/sbt/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/sbt/</guid>
       <description></description>
     </item>
     <item>
       <title>Scala</title>
-      <link>http://localhost:1313/building-systems/tags/scala/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/scala/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/scala/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/scala/</guid>
       <description></description>
     </item>
     <item>
       <title>Spark</title>
-      <link>http://localhost:1313/building-systems/tags/spark/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/spark/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/spark/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/spark/</guid>
       <description></description>
     </item>
     <item>
       <title>Learning</title>
-      <link>http://localhost:1313/building-systems/tags/learning/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/learning/</link>
       <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/learning/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Shell</title>
-      <link>http://localhost:1313/building-systems/tags/shell/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/shell/</link>
       <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/shell/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/shell/</guid>
       <description></description>
     </item>
     <item>
       <title>Cerbot</title>
-      <link>http://localhost:1313/building-systems/tags/cerbot/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/cerbot/</link>
       <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/cerbot/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/cerbot/</guid>
       <description></description>
     </item>
     <item>
       <title>Https</title>
-      <link>http://localhost:1313/building-systems/tags/https/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/https/</link>
       <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/https/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/https/</guid>
       <description></description>
     </item>
     <item>
       <title>Letsencrypt</title>
-      <link>http://localhost:1313/building-systems/tags/letsencrypt/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/letsencrypt/</link>
       <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/letsencrypt/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/letsencrypt/</guid>
       <description></description>
     </item>
     <item>
       <title>Nginx</title>
-      <link>http://localhost:1313/building-systems/tags/nginx/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/nginx/</link>
       <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/nginx/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/nginx/</guid>
       <description></description>
     </item>
     <item>
       <title>Circuit</title>
-      <link>http://localhost:1313/building-systems/tags/circuit/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/circuit/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/circuit/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/circuit/</guid>
       <description></description>
     </item>
     <item>
       <title>Hardware</title>
-      <link>http://localhost:1313/building-systems/tags/hardware/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/hardware/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/hardware/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/hardware/</guid>
       <description></description>
     </item>
     <item>
       <title>Iot</title>
-      <link>http://localhost:1313/building-systems/tags/iot/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/iot/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/iot/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/iot/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/building-systems/tags/python/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/python/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/python/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Raspberry-Pi</title>
-      <link>http://localhost:1313/building-systems/tags/raspberry-pi/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/raspberry-pi/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/raspberry-pi/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/raspberry-pi/</guid>
       <description></description>
     </item>
     <item>
       <title>Twitter</title>
-      <link>http://localhost:1313/building-systems/tags/twitter/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/twitter/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/twitter/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/twitter/</guid>
       <description></description>
     </item>
     <item>
       <title>Base64</title>
-      <link>http://localhost:1313/building-systems/tags/base64/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/base64/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/base64/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/base64/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>http://localhost:1313/building-systems/tags/java/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/java/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/java/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/java/</guid>
       <description></description>
     </item>
     <item>
       <title>Uuid</title>
-      <link>http://localhost:1313/building-systems/tags/uuid/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/uuid/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/uuid/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/uuid/</guid>
       <description></description>
     </item>
     <item>
       <title>Api</title>
-      <link>http://localhost:1313/building-systems/tags/api/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/api/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/api/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/api/</guid>
       <description></description>
     </item>
     <item>
       <title>Design</title>
-      <link>http://localhost:1313/building-systems/tags/design/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/design/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/design/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/design/</guid>
       <description></description>
     </item>
     <item>
       <title>Documentation</title>
-      <link>http://localhost:1313/building-systems/tags/documentation/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/documentation/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/documentation/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/documentation/</guid>
       <description></description>
     </item>
     <item>
       <title>Play-Framework</title>
-      <link>http://localhost:1313/building-systems/tags/play-framework/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/play-framework/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/play-framework/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/play-framework/</guid>
       <description></description>
     </item>
     <item>
       <title>Swagger</title>
-      <link>http://localhost:1313/building-systems/tags/swagger/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/swagger/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/swagger/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/swagger/</guid>
       <description></description>
     </item>
     <item>
       <title>Cricscore-Api</title>
-      <link>http://localhost:1313/building-systems/tags/cricscore-api/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/cricscore-api/</link>
       <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/cricscore-api/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/cricscore-api/</guid>
       <description></description>
     </item>
     <item>
       <title>G-Wan</title>
-      <link>http://localhost:1313/building-systems/tags/g-wan/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/g-wan/</link>
       <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/g-wan/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/g-wan/</guid>
       <description></description>
     </item>
     <item>
       <title>Setup</title>
-      <link>http://localhost:1313/building-systems/tags/setup/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/setup/</link>
       <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/setup/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/setup/</guid>
       <description></description>
     </item>
     <item>
       <title>Web-Server</title>
-      <link>http://localhost:1313/building-systems/tags/web-server/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/web-server/</link>
       <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/web-server/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/web-server/</guid>
       <description></description>
     </item>
     <item>
       <title>Aws</title>
-      <link>http://localhost:1313/building-systems/tags/aws/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/aws/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/aws/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/aws/</guid>
       <description></description>
     </item>
     <item>
       <title>Dispatch</title>
-      <link>http://localhost:1313/building-systems/tags/dispatch/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/dispatch/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/dispatch/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/dispatch/</guid>
       <description></description>
     </item>
     <item>
       <title>Http</title>
-      <link>http://localhost:1313/building-systems/tags/http/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/http/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/http/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/http/</guid>
       <description></description>
     </item>
     <item>
       <title>S3</title>
-      <link>http://localhost:1313/building-systems/tags/s3/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/s3/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/s3/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/s3/</guid>
       <description></description>
     </item>
     <item>
       <title>Chrome</title>
-      <link>http://localhost:1313/building-systems/tags/chrome/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/chrome/</link>
       <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/chrome/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/chrome/</guid>
       <description></description>
     </item>
     <item>
       <title>Webgen</title>
-      <link>http://localhost:1313/building-systems/tags/webgen/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/webgen/</link>
       <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/webgen/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/webgen/</guid>
       <description></description>
     </item>
     <item>
       <title>Integration</title>
-      <link>http://localhost:1313/building-systems/tags/integration/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/integration/</link>
       <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/integration/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/integration/</guid>
       <description></description>
     </item>
     <item>
       <title>Salesforce</title>
-      <link>http://localhost:1313/building-systems/tags/salesforce/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/salesforce/</link>
       <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/salesforce/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/salesforce/</guid>
       <description></description>
     </item>
     <item>
       <title>Benchmark</title>
-      <link>http://localhost:1313/building-systems/tags/benchmark/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/benchmark/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/benchmark/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/benchmark/</guid>
       <description></description>
     </item>
     <item>
       <title>Ext</title>
-      <link>http://localhost:1313/building-systems/tags/ext/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/ext/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/ext/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/ext/</guid>
       <description></description>
     </item>
     <item>
       <title>Fat</title>
-      <link>http://localhost:1313/building-systems/tags/fat/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/fat/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/fat/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/fat/</guid>
       <description></description>
     </item>
     <item>
       <title>Hard-Disk</title>
-      <link>http://localhost:1313/building-systems/tags/hard-disk/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/hard-disk/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/hard-disk/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/hard-disk/</guid>
       <description></description>
     </item>
     <item>
       <title>Ntfs</title>
-      <link>http://localhost:1313/building-systems/tags/ntfs/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/ntfs/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/ntfs/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/ntfs/</guid>
       <description></description>
     </item>
     <item>
       <title>Sd-Card</title>
-      <link>http://localhost:1313/building-systems/tags/sd-card/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/sd-card/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/sd-card/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/sd-card/</guid>
       <description></description>
     </item>
     <item>
       <title>Cricket</title>
-      <link>http://localhost:1313/building-systems/tags/cricket/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/cricket/</link>
       <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/cricket/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/cricket/</guid>
       <description></description>
     </item>
     <item>
       <title>C4rpi</title>
-      <link>http://localhost:1313/building-systems/tags/c4rpi/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/c4rpi/</link>
       <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/c4rpi/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/c4rpi/</guid>
       <description></description>
     </item>
     <item>
       <title>Fibonacci</title>
-      <link>http://localhost:1313/building-systems/tags/fibonacci/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/fibonacci/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/fibonacci/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/fibonacci/</guid>
       <description></description>
     </item>
     <item>
       <title>Sysbench</title>
-      <link>http://localhost:1313/building-systems/tags/sysbench/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/sysbench/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/sysbench/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/sysbench/</guid>
       <description></description>
     </item>
     <item>
       <title>Downloader</title>
-      <link>http://localhost:1313/building-systems/tags/downloader/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/downloader/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/downloader/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/downloader/</guid>
       <description></description>
     </item>
     <item>
       <title>Kuralbot</title>
-      <link>http://localhost:1313/building-systems/tags/kuralbot/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/kuralbot/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/kuralbot/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/kuralbot/</guid>
       <description></description>
     </item>
     <item>
       <title>Powerbot</title>
-      <link>http://localhost:1313/building-systems/tags/powerbot/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/powerbot/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/powerbot/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/powerbot/</guid>
       <description></description>
     </item>
     <item>
       <title>Torrent</title>
-      <link>http://localhost:1313/building-systems/tags/torrent/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/torrent/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/torrent/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/torrent/</guid>
       <description></description>
     </item>
     <item>
       <title>Tweetbot</title>
-      <link>http://localhost:1313/building-systems/tags/tweetbot/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/tweetbot/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/tweetbot/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/tweetbot/</guid>
       <description></description>
     </item>
     <item>
       <title>Youtube</title>
-      <link>http://localhost:1313/building-systems/tags/youtube/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/youtube/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/youtube/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/youtube/</guid>
       <description></description>
     </item>
     <item>
       <title>Akka</title>
-      <link>http://localhost:1313/building-systems/tags/akka/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/akka/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/akka/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/akka/</guid>
       <description></description>
     </item>
     <item>
       <title>Crawlpod</title>
-      <link>http://localhost:1313/building-systems/tags/crawlpod/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/crawlpod/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/crawlpod/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/crawlpod/</guid>
       <description></description>
     </item>
     <item>
       <title>Mongodb</title>
-      <link>http://localhost:1313/building-systems/tags/mongodb/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/mongodb/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/mongodb/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/mongodb/</guid>
       <description></description>
     </item>
     <item>
       <title>Open-Source</title>
-      <link>http://localhost:1313/building-systems/tags/open-source/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/open-source/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/open-source/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/open-source/</guid>
       <description></description>
     </item>
     <item>
       <title>Web-Crawler</title>
-      <link>http://localhost:1313/building-systems/tags/web-crawler/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/web-crawler/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/web-crawler/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/web-crawler/</guid>
       <description></description>
     </item>
     <item>
       <title>Boto</title>
-      <link>http://localhost:1313/building-systems/tags/boto/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/boto/</link>
       <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/boto/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/boto/</guid>
       <description></description>
     </item>
     <item>
       <title>Export</title>
-      <link>http://localhost:1313/building-systems/tags/export/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/export/</link>
       <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/export/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/export/</guid>
       <description></description>
     </item>
     <item>
       <title>Database</title>
-      <link>http://localhost:1313/building-systems/tags/database/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/database/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/database/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/database/</guid>
       <description></description>
     </item>
     <item>
       <title>Enum</title>
-      <link>http://localhost:1313/building-systems/tags/enum/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/enum/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/enum/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/enum/</guid>
       <description></description>
     </item>
     <item>
       <title>Hibernate</title>
-      <link>http://localhost:1313/building-systems/tags/hibernate/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/hibernate/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/hibernate/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/hibernate/</guid>
       <description></description>
     </item>
     <item>
       <title>Jpa</title>
-      <link>http://localhost:1313/building-systems/tags/jpa/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/jpa/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/jpa/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/jpa/</guid>
       <description></description>
     </item>
     <item>
       <title>Couchbase</title>
-      <link>http://localhost:1313/building-systems/tags/couchbase/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/couchbase/</link>
       <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/couchbase/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/couchbase/</guid>
       <description></description>
     </item>
     <item>
       <title>Aes</title>
-      <link>http://localhost:1313/building-systems/tags/aes/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/aes/</link>
       <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/aes/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/aes/</guid>
       <description></description>
     </item>
     <item>
       <title>Decryption</title>
-      <link>http://localhost:1313/building-systems/tags/decryption/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/decryption/</link>
       <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/decryption/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/decryption/</guid>
       <description></description>
     </item>
     <item>
       <title>Encryption</title>
-      <link>http://localhost:1313/building-systems/tags/encryption/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/encryption/</link>
       <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/encryption/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/encryption/</guid>
       <description></description>
     </item>
     <item>
       <title>Distributed</title>
-      <link>http://localhost:1313/building-systems/tags/distributed/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/distributed/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/distributed/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/distributed/</guid>
       <description></description>
     </item>
     <item>
       <title>Haproxy</title>
-      <link>http://localhost:1313/building-systems/tags/haproxy/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/haproxy/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/haproxy/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/haproxy/</guid>
       <description></description>
     </item>
     <item>
       <title>Proxy</title>
-      <link>http://localhost:1313/building-systems/tags/proxy/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/proxy/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/proxy/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/proxy/</guid>
       <description></description>
     </item>
     <item>
       <title>Squid</title>
-      <link>http://localhost:1313/building-systems/tags/squid/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/squid/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/squid/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/squid/</guid>
       <description></description>
     </item>
     <item>
       <title>Elasticsearch</title>
-      <link>http://localhost:1313/building-systems/tags/elasticsearch/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/elasticsearch/</link>
       <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/elasticsearch/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/elasticsearch/</guid>
       <description></description>
     </item>
     <item>
       <title>Code-Less</title>
-      <link>http://localhost:1313/building-systems/tags/code-less/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/code-less/</link>
       <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/code-less/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/code-less/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
-      <link>http://localhost:1313/building-systems/tags/optimization/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/optimization/</link>
       <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/optimization/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/optimization/</guid>
       <description></description>
     </item>
     <item>
       <title>Junit</title>
-      <link>http://localhost:1313/building-systems/tags/junit/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/junit/</link>
       <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/junit/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/junit/</guid>
       <description></description>
     </item>
     <item>
       <title>Spring</title>
-      <link>http://localhost:1313/building-systems/tags/spring/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/spring/</link>
       <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/spring/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/spring/</guid>
       <description></description>
     </item>
     <item>
       <title>Testing</title>
-      <link>http://localhost:1313/building-systems/tags/testing/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/testing/</link>
       <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/testing/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/testing/</guid>
       <description></description>
     </item>
     <item>
       <title>Big-Data</title>
-      <link>http://localhost:1313/building-systems/tags/big-data/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/big-data/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/big-data/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/big-data/</guid>
       <description></description>
     </item>
     <item>
       <title>Playframework</title>
-      <link>http://localhost:1313/building-systems/tags/playframework/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/playframework/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/playframework/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/playframework/</guid>
       <description></description>
     </item>
     <item>
       <title>Recommendation</title>
-      <link>http://localhost:1313/building-systems/tags/recommendation/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/recommendation/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/recommendation/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/recommendation/</guid>
       <description></description>
     </item>
     <item>
       <title>Debug</title>
-      <link>http://localhost:1313/building-systems/tags/debug/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/debug/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/debug/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/debug/</guid>
       <description></description>
     </item>
     <item>
       <title>Nexus</title>
-      <link>http://localhost:1313/building-systems/tags/nexus/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/nexus/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/nexus/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/nexus/</guid>
       <description></description>
     </item>
     <item>
       <title>Jsoup</title>
-      <link>http://localhost:1313/building-systems/tags/jsoup/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/jsoup/</link>
       <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/jsoup/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/jsoup/</guid>
       <description></description>
     </item>
     <item>
       <title>Kafka</title>
-      <link>http://localhost:1313/building-systems/tags/kafka/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/kafka/</link>
       <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/kafka/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/kafka/</guid>
       <description></description>
     </item>
     <item>
       <title>Blog-Software</title>
-      <link>http://localhost:1313/building-systems/tags/blog-software/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/blog-software/</link>
       <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/blog-software/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/blog-software/</guid>
       <description></description>
     </item>
     <item>
       <title>Markdown</title>
-      <link>http://localhost:1313/building-systems/tags/markdown/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/markdown/</link>
       <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/markdown/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/markdown/</guid>
       <description></description>
     </item>
     <item>
       <title>.Gitconfig</title>
-      <link>http://localhost:1313/building-systems/tags/.gitconfig/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/.gitconfig/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/.gitconfig/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/.gitconfig/</guid>
       <description></description>
     </item>
     <item>
       <title>Config</title>
-      <link>http://localhost:1313/building-systems/tags/config/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/config/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/config/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/config/</guid>
       <description></description>
     </item>
     <item>
       <title>Git</title>
-      <link>http://localhost:1313/building-systems/tags/git/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/git/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/git/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/git/</guid>
       <description></description>
     </item>
     <item>
       <title>Version-Control</title>
-      <link>http://localhost:1313/building-systems/tags/version-control/</link>
+      <link>https://sakthipriyan.com/building-systems/tags/version-control/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/tags/version-control/</guid>
+      <guid>https://sakthipriyan.com/building-systems/tags/version-control/</guid>
       <description></description>
     </item>
   </channel>
