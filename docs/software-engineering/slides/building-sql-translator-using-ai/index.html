@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building SQL Translator using AI | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds.">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
+
+    
+    <style>
+         
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .reveal {
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+
+        .reveal section {
+            font-size: 1.4em;
+            line-height: 1.5;
+        }
+
+        .reveal .slides>section>section {
+            font-size: 1.0em;
+        }
+
+        .reveal .progress {
+            position: fixed;
+            height: 12px;
+            bottom: 10px;
+            width: 90%;
+            left: 5%;
+            border-radius: 6px;
+        }
+
+        .graphviz {
+            width: 100%;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .graphviz svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+         
+        pre code.dot,
+        pre.language-dot,
+        pre.dot {
+            display: none;
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown data-separator="^---$" data-separator-vertical="^--$" data-separator-notes="^Note:" data-charset="utf-8">
+            <textarea data-template>
+## Building SQL Translator 
+## using Coding Agents
+
+&lt;br/&gt;
+
+### Sakthi Priyan H  
+#### Nov 20, 2025
+&lt;br/&gt;
+&lt;br/&gt;
+---
+
+### 🎯 Goal
+&gt; 1. Using AI Coding Agents
+&gt; 2. Create an **Extensible** 
+&gt; 3. Grammer based 
+&gt; 4. **SQL Translator framework** 
+
+**Status**
+- Current: Athena ➜ BigQuery, BigQuery ➜ Athena  
+- Future: Snowflake, SparkSQL, Aqfer Fusion Job
+
+---
+
+### 🗺️ Architecture Overview
+```dot
+digraph SQLTranslatorClustered {
+  rankdir=LR;
+  bgcolor=transparent;
+  node [shape=box, style=&#34;rounded,filled&#34;, fillcolor=white, fontname=&#34;Arial&#34;];
+
+  // ======================================================
+  // === TEST CASES (Inputs &#43; Outputs) =====================
+  // ======================================================
+  subgraph cluster_testcases {
+    label=&#34;Test Cases (Developer)&#34;;
+    style=&#34;rounded,bold&#34;;
+    color=&#34;#a0c4ff&#34;;
+
+    // SQL Inputs
+    subgraph cluster_inputs {
+      label=&#34;SQL Inputs&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#a0c4ff&#34;;
+      AthenaIn [label=&#34;Athena SQL&#34;];
+      BigQueryIn [label=&#34;BigQuery SQL&#34;];
+    }
+
+    // SQL Outputs
+    subgraph cluster_outputs {
+      label=&#34;Generated Outputs&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#ffc6ff&#34;;
+      OutAthena [label=&#34;Athena SQL&#34;];
+      OutBigQuery [label=&#34;BigQuery SQL&#34;];
+    }
+  }
+
+  // ======================================================
+  // === CORE SYSTEM (GRAMMAR → PARSER → IR → GENERATOR) ===
+  // ======================================================
+  subgraph cluster_core {
+    label=&#34;SQL Translator Core (AI Agent)&#34;;
+    style=&#34;rounded,bold&#34;;
+    color=&#34;#90caf9&#34;;
+
+    // === GRAMMARS ===
+    subgraph cluster_grammars {
+      label=&#34;ANTLR Grammars&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#f4a261&#34;;
+      AthenaGrammar [label=&#34;Athena.g4\n(Grammar)&#34;];
+      BigQueryGrammar [label=&#34;BigQuery.g4\n(Grammar)&#34;];
+    }
+
+    // === PARSERS ===
+    subgraph cluster_parsers {
+      label=&#34;Parsers (ANTLR Generated)&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#ffd6a5&#34;;
+      AthenaParser [label=&#34;Athena Parser&#34;];
+      BigQueryParser [label=&#34;BigQuery Parser&#34;];
+    }
+
+    // === CONVERTERS ===
+    subgraph cluster_converters {
+      label=&#34;Converters (AST → IR)&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#b9fbc0&#34;;
+      AthenaConverter [label=&#34;Athena Converter&#34;];
+      BigQueryConverter [label=&#34;BigQuery Converter&#34;];
+    }
+
+    // === IR CORE ===
+    subgraph cluster_ir {
+      label=&#34;Unified Intermediate Representation (IR)&#34;;
+      style=&#34;rounded,bold&#34;;
+      color=&#34;#fff3b0&#34;;
+      IR [label=&#34;Unified IR\n(Go structs / Substrait)&#34;,
+          shape=box,
+          style=&#34;rounded,filled,bold&#34;,
+          fillcolor=&#34;#fffbea&#34;];
+    }
+
+    // === GENERATORS ===
+    subgraph cluster_generators {
+      label=&#34;SQL Generators&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#dab6fc&#34;;
+      AthenaGen [label=&#34;Athena Generator&#34;];
+      BigQueryGen [label=&#34;BigQuery Generator&#34;];
+    }
+  }
+
+  // === GRAMMAR → PARSER (DOTTED) ===
+  AthenaGrammar -&gt; AthenaParser [style=dotted];
+  BigQueryGrammar -&gt; BigQueryParser [style=dotted];
+
+  // === SQL → IR PATHS ===
+  AthenaIn -&gt; AthenaParser -&gt; AthenaConverter -&gt; IR;
+  BigQueryIn -&gt; BigQueryParser -&gt; BigQueryConverter -&gt; IR;
+
+  // === IR → OUTPUTS PATHS ===
+  IR -&gt; AthenaGen -&gt; OutAthena;
+  IR -&gt; BigQueryGen -&gt; OutBigQuery;
+}
+```
+
+---
+### 🧩 Why This Approach?
+
+- Unified IR enables multi-dialect SQL translation  
+- Easy addition of new dialects  
+- Consistent testing via YAML test cases  
+- Uses deterministic grammar autogenerated via ANTLR  
+
+---
+
+### 📦 CLI-Based Dev &amp; Testing
+
+#### YAML format
+```yaml
+test_cases:
+  - name: simple_select
+    bigquery: SELECT id, name, age FROM `dataset.users` WHERE age &gt; 18
+    athena: SELECT id, name, age FROM &#34;dataset&#34;.&#34;users&#34; WHERE age &gt; 18
+```
+
+#### Test Runs via YAML files/dir &amp; Slice Notation
+```bash
+sqltranslate --yaml examples/ --yaml-run 3
+sqltranslate --yaml examples/ --yaml-run :3
+sqltranslate --yaml examples/ --yaml-run 2:5
+```
+
+--
+
+### 🧪 Test Case Reusability
+
+The same test case is used for:
+
+- BigQuery → Athena  
+- Athena → BigQuery  
+- (Potentially) Same dialect → same dialect
+
+New dialects can be added easily to YAML.
+
+--
+
+### CLI Output
+
+```yaml
+summary:
+  total_test_cases: 101
+  athena_to_bigquery_succeeded: 96
+  bigquery_to_athena_succeeded: 96
+details:
+  - name: negative_numbers
+    index: 83
+    athena_to_bigquery:
+      input: SELECT * FROM accounts WHERE balance &lt; -100
+      expected: SELECT * FROM accounts WHERE balance &lt; -100
+      output: &#39;Parse error: line 1:39 token recognition error at: &#39;&#39;-&#39;&#39;&#39;
+      status: failed_to_parse
+    bigquery_to_athena:
+      input: SELECT * FROM accounts WHERE balance &lt; -100
+      expected: SELECT * FROM accounts WHERE balance &lt; -100
+      output: SELECT * FROM accounts WHERE balance &lt; - 100
+      status: failed_mismatch
+```
+
+--
+
+### 📘 The Importance of a Strong CLI
+
+- Deterministic testing environment  
+- Re-runnable test cases  
+- YAML output helped track exact failures  
+- Potentially **TOON** format can be used instead of YAML
+
+---
+
+### ⚙️ Development Workflow
+```dot
+digraph SQLTranslatorWorkflow {
+  bgcolor=transparent;
+  rankdir=TB;
+  nodesep=0.3;
+  ranksep=0.3;
+  node [shape=box, style=&#34;rounded,filled&#34;, fontname=&#34;Arial&#34;];
+
+  // Developer &#43; Test Suite
+  Dev [label=&#34;👤 Developer&#34;, fillcolor=&#34;#e3f2fd&#34;];
+  TestSuite [label=&#34;🧪 Test Suite&#34;, shape=folder, fillcolor=&#34;#fff3cd&#34;];
+
+  // === Coding Agent Subgraph ===
+  subgraph cluster_agent {
+    label=&#34;🤖 Coding Agent&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#888888&#34;;
+    fontname=&#34;Arial Bold&#34;;
+
+    Start [label=&#34;🏁 Start\n(initial N)&#34;, shape=oval, fillcolor=&#34;#c8e6c9&#34;];
+
+    RunN [label=&#34;▶️ Run Test Case N&#34;, fillcolor=&#34;#e8f5e9&#34;];
+
+    Regression [label=&#34;🔁 Regression Check :N&#34;, fillcolor=&#34;#f3e5f5&#34;];
+
+    Fix [label=&#34;🛠️ Fix Issues&#34;, fillcolor=&#34;#ffebee&#34;];
+
+    Inc [label=&#34;➕ Increment N&#34;, fillcolor=&#34;#f1f8e9&#34;];
+
+    Stop [label=&#34;🛑 Stop\n(final N)&#34;, shape=oval, fillcolor=&#34;#ffcdd2&#34;];
+  }
+
+  // Developer workflow
+  Dev -&gt; TestSuite [label=&#34;Add/Update Tests/Prompt/Generated&#34;];
+  Dev -&gt; Start [label=&#34;Prompt&#34;];
+
+  // Core flow (compact)
+  Start -&gt; RunN;
+
+  RunN -&gt; Fix [label=&#34; Failed&#34;];
+  RunN -&gt; Regression [label=&#34; Passed&#34;];
+
+  Regression -&gt; Fix [label=&#34; Failed&#34;];
+  Regression -&gt; Inc [label=&#34; Passed&#34;];
+
+  Inc -&gt; RunN [label=&#34;More tests&#34;];
+  Inc -&gt; Stop [label=&#34;Done&#34;];
+
+  Fix -&gt; RunN;
+
+  // Dotted: Test Suite influence
+  edge [style=dotted, color=&#34;gray40&#34;];
+  TestSuite -&gt; RunN;
+  TestSuite -&gt; Regression;
+
+  edge [style=solid, color=black];
+}
+
+```
+
+---
+
+### 📚 Test Suite
+
+- Auto-generated tests from AI were **NOT reliable**  
+- Needed manual corrections  
+- Eventually curated a high-quality test suite
+
+---
+
+### 📄 Docs / README.md
+
+- Without README, model starts rediscovering:  
+  - *“How to run ANTLR?”*
+  - *“Where is go:generate?”*
+  - *“How to build?”*
+- Leads to unnecssary **credit burn**  
+
+&gt; Once README had detailed steps →  AI executed faster with less discovery
+
+---
+
+### 🔂 Agent-Aided Iteration
+
+Sometimes results were inaccurate:
+- Agents claimed “fixed”
+- But CLI showed mismatch  
+- Running via IDE runnable configs allowed quick re-execution  
+- CLI was modified to output YAML including index → Fed into Agent →
+  So exact failing case could be re-run
+--
+
+### 💬 Prompts To Agent
+&lt;div class=&#34;r-stack&#34;&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Use Development step in guidelines.md in aqfer-ir. Start developing from test case 0&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Continue testing use case 3 and so on&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Fix 10&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Proceed building 11, 12 and so on... till 15&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;14, 15 as well&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;&lt;pre&gt;&lt;code class=&#34;yaml&#34;&gt;summary:
+  total_test_cases: 15
+  athena_to_bigquery_succeeded: 12
+  bigquery_to_athena_succeeded: 13
+  ...&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;continue&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Run array_agg_order&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Run with :20 and fix issues&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Let&#39;s do 20:25&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Run :35&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Run :36, :37,.... :40&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;Let&#39;s fix 40 and run :40 as well after fix&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;40 is failing?&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;run till :80&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;... eventually ...&lt;/blockquote&gt;
+&lt;blockquote class=&#34;fragment fade-in-then-out&#34;&gt;&gt; All 101 test cases for both Athena to BigQuery and BigQuery to Athena conversions passed successfully, confirming the fixes work as intended.&lt;/blockquote&gt;
+&lt;/div&gt;
+
+--
+
+### 💬 Prompt with CLI output
+
+```
+GOROOT=/usr/local/go #gosetup
+GOPATH=/Users/sakthipriyan/go #gosetup
+/usr/local/go/bin/go build -o /Users/sakthipriyan/Library/Caches/JetBrains/GoLand2025.1/tmp/GoLand/___1go_build_main_go /Users/sakthipriyan/Workspace/aqfer-ir/cmd/sqltranslate/main.go #gosetup
+/Users/sakthipriyan/Library/Caches/JetBrains/GoLand2025.1/tmp/GoLand/___1go_build_main_go --yaml examples/test_cases.yaml --yaml-run :15 #gosetup
+summary:
+  total_test_cases: 15
+  athena_to_bigquery_succeeded: 12
+  bigquery_to_athena_succeeded: 13
+details:
+  - name: array_syntax
+    athena_to_bigquery:
+      input: SELECT ARRAY[1, 2, 3, 4, 5] as numbers, ARRAY[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] as letters FROM dataset
+      expected: SELECT [1, 2, 3, 4, 5] as numbers, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] as letters FROM dataset
+      output: SELECT [1,2,3,4,5] AS numbers, [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;] AS letters FROM dataset
+      status: failed_mismatch
+    bigquery_to_athena:
+      input: SELECT [1, 2, 3, 4, 5] as numbers, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] as letters FROM dataset
+      expected: SELECT ARRAY[1, 2, 3, 4, 5] as numbers, ARRAY[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] as letters FROM dataset
+      output: SELECT ARRAY[1,2,3,4,5] AS numbers, ARRAY[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;] AS letters FROM dataset
+      status: failed_mismatch
+  - name: unnest_from
+    athena_to_bigquery:
+      input: SELECT u.id, tag FROM users u CROSS JOIN UNNEST(u.tags) AS t(tag)
+      expected: SELECT u.id, tag FROM users u, UNNEST(u.tags) AS tag
+      output: SELECT u.id, tag FROM users u CROSS JOIN UNNEST(u.tags) AS tag
+      status: failed_mismatch
+  - name: arrays_overlap_where
+    athena_to_bigquery:
+      input: SELECT * FROM t WHERE ARRAYS_OVERLAP(arr1, arr2)
+      expected: SELECT * FROM t WHERE ARRAY_LENGTH(ARRAY_INTERSECT(arr1, arr2)) &gt; 0
+      output: SELECT * FROM t WHERE ARRAYS_OVERLAP(arr1, arr2)
+      status: failed_mismatch
+    bigquery_to_athena:
+      input: SELECT * FROM t WHERE ARRAY_LENGTH(ARRAY_INTERSECT(arr1, arr2)) &gt; 0
+      expected: SELECT * FROM t WHERE ARRAYS_OVERLAP(arr1, arr2)
+      output: SELECT * FROM t WHERE CARDINALITY(ARRAY_INTERSECT(arr1, arr2)) &gt; 0
+      status: failed_mismatch
+Process finished with the exit code 0
+```
+--
+
+### 🧠 Key AI Learning
+
+&gt; AI-generated engineering requires &lt;br/&gt; 
+&gt; **waterfall-like upfront design**.
+
+- Less upfront planning → more iterations/rewrites → more credits burned  
+- More detailed designs → more quicker output with lesser credits used
+- Make CLI input/output easier for AI Agents → faster/higher order iteration
+
+--
+
+### 🧠 Context Reloading Costs
+
+Starting fresh made the model:
+- Relearn grammar
+- Relearn code base
+- Relearn generators/converters/IR 
+- Relearn CLI
+- ...
+
+Good persistent docs prevent this.
+
+--
+
+### 🤖 Tools Used Over Time
+
+- **JetBrains Goland &#43; Junie**  
+- **VS Code &#43; GitHub Copilot** (strong summarizer)  
+- **Cursor**  
+
+All powered by **Claude Sonnet 4.5** underneath.
+
+--
+
+### 🧮 Code Composition (On Nov 7)
+|                      |        |            |
+|----------------------|-------:|-----------:|
+| **Grammar**          |    763 |  **2.38%** |
+| **Parser (Gen Go)**  | 27,580 | **85.96%** |
+| **Converters**       |  1,930 |  **6.01%** |
+| **IR Code**          |    344 |  **1.07%** |
+| **Generators**       |  1,470 |  **4.58%** |
+
+- **~86%** - ANTLR auto-generated → fully deterministic
+- **~14%** - AI-generated (Grammar / Converters / IR / Generators) → guided, manual oversight needed
+
+---
+
+### 🏗️ Actual Human Contribution
+
+- Architectural design  
+- Test case design  
+- CLI input/output design
+- High-level direction  
+- Correcting failures  
+- Guiding agent behavior
+- Reviewing agent progress
+- Reviewing generated code
+
+---
+
+### 🤔 Downsides
+- Parallel progress very difficult (1&#43; team size)
+- Sometimes, AI Agent says work is done but, it isn&#39;t
+- Lower upfront planing, higher time/credits required
+- Not efficient for an iterative/incremental work
+- Risk of lossing progress if, it not committed into git
+- Give up control and use English rather than high level programming language 
+- Difficult/More prompts required for anything that is not available in its knowledge base
+
+---
+
+### 🧭 Next Steps
+- Test with Production SQLs (In Progress)
+- Review IR (In Progress)
+- Integrate with PAIL
+- Expand/Refine docs  
+- Add Snowflake
+- Add SparkSQL  
+- Add Aqfer Fusion Job
+- ...
+---
+
+### 🙏 Thank You
+</textarea>
+        </section>
+    </div>
+</div>
+
+
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+    
+
+    
+
+        
+<script>
+    
+    function renderGraphviz(slide = null) {
+        const slides = slide ? [slide] : Array.from(Reveal.getSlides());
+        slides.forEach(slideEl => {
+            slideEl.querySelectorAll('pre code.dot, pre.language-dot, pre.dot').forEach(codeEl => {
+                if (codeEl.dataset.rendered) return;
+
+                const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                console.log('[DEBUG] Rendering DOT block:\n', dotCode);
+
+                const viz = new Viz();
+                viz.renderSVGElement(dotCode)
+                    .then(svg => {
+                        
+                        svg.removeAttribute('width');
+                        svg.removeAttribute('height');
+                        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                        
+                        const container = document.createElement('div');
+                        container.className = 'graphviz';
+                        container.appendChild(svg);
+
+                        
+                        const preEl = codeEl.parentNode;
+                        preEl.parentNode.replaceChild(container, preEl);
+
+                        codeEl.dataset.rendered = true;
+                        console.log('[DEBUG] Diagram rendered and pre replaced.');
+                    })
+                    .catch(err => {
+                        console.error('[DEBUG] Viz.js error:', err);
+                        codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                    });
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        Reveal.initialize({
+            hash: true,
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+            transition: 'slide',
+            slideNumber: false,
+            margin: 0.05,
+            width: "100%",
+            height: "100%",
+            minScale: 1,
+            maxScale: 1,
+            progress: true
+        });
+
+        
+        Reveal.addEventListener('ready', event => {
+            console.log('[DEBUG] Reveal ready, rendering all slides...');
+            
+            Reveal.getSlides().forEach(slideEl => {
+                if (slideEl.dataset.parsed) return;
+                if (slideEl.querySelector('textarea[data-template]')) {
+                    RevealMarkdown.parseSlide(slideEl);
+                    slideEl.dataset.parsed = true;
+                }
+            });
+            renderGraphviz(); 
+        });
+
+        
+        Reveal.on('slidechanged', event => {
+            console.log('[DEBUG] Slide changed to index', event.indexh);
+            renderGraphviz(event.currentSlide);
+        });
+
+        
+        Reveal.addEventListener('markdown', event => {
+            console.log('[DEBUG] Markdown parsed for slide', event.slide);
+            renderGraphviz(event.slide);
+        });
+    });
+</script>
+
+
+            <script>
+            
+            (function() {
+                function getQueryParam(name) {
+                    return new URLSearchParams(window.location.search).get(name);
+                }
+                const obsParam = getQueryParam('obs');
+                if (obsParam) {
+                    
+                    const parts = obsParam.split(":");
+                    let host = parts[0] || "";
+                    let port = parts[1] || "";
+                    let password = "";
+                    if (parts.length > 2) {
+                        
+                        password = parts.slice(2).join(":");
+                    }
+                    if (!host || !port) {
+                        host = prompt("Enter OBS host (e.g. 192.168.1.100):", "localhost") || "localhost";
+                        port = prompt("Enter OBS port (e.g. 4455):", "4455") || "4455";
+                    }
+                    const obsWsUrl = `ws://${host}:${port}`;
+
+                    
+                    var obsScript = document.createElement('script');
+                    obsScript.src = 'https://cdn.jsdelivr.net/npm/obs-websocket-js';
+                    obsScript.onload = function() {
+                        const obs = new OBSWebSocket();
+
+                        const connectToObs = async () => {
+                            try {
+                                await obs.connect(obsWsUrl, password);
+                                console.log('Connected to OBS!');
+                            } catch (error) {
+                                console.error('Failed to connect:', error);
+                            }
+                        };
+
+                        const switchScene = async (sceneName) => {
+                            try {
+                                await obs.call('SetCurrentProgramScene', { sceneName });
+                                console.log(`Switched to scene: ${sceneName}`);
+                            } catch (error) {
+                                console.error('Failed to switch scene:', error);
+                            }
+                        };
+
+                        connectToObs();
+
+                        let obsSceneIndex = 0;
+                        const obsScenes = ["Screen Only", "Video RB", "Video Only"];
+
+                        document.addEventListener("keydown", (e) => {
+                            const key = e.key;
+                            if (key != "b" && key != "Escape" && key != "Shift" &&
+                                    key != "F5" && key != "Alt" && key != "Meta" && key != "π") {
+                                    return;
+                            }
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            if (key === "b") {
+                                    obsSceneIndex = (obsSceneIndex - 1 + obsScenes.length) % obsScenes.length;
+                            } else if (key === "Escape" || key === "π") {
+                                    obsSceneIndex = (obsSceneIndex + 1) % obsScenes.length;
+                            }
+                            if (key === "b" || key === "Escape" || key === "π") {
+                                    const currentScene = obsScenes[obsSceneIndex];
+                                    switchScene(currentScene);
+                            }
+                        }, true);
+                    };
+                    document.body.appendChild(obsScript);
+                }
+            })();
+            </script>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>
