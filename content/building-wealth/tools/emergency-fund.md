@@ -6,7 +6,7 @@ description: "Calculate how long it takes to build your emergency fund and creat
 type: "tools"
 tool_type: "emergencyFund"
 summary: "Plan your emergency fund and calculate the timeline to reach your savings goal."
-bw_tags:
+wealth_tags:
   - Emergency Fund
   - Building Block
 ---

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open-Source on Sakthi Priyan H</title>
+    <link>http://localhost:1313/building-systems/tags/open-source/</link>
+    <description>Recent content in Open-Source on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 12 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/building-systems/tags/open-source/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crawlpod - open source scalable web crawler</title>
+      <link>http://localhost:1313/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
+      <description>built on top of Scala and Akka framework.</description>
+    </item>
+  </channel>
+</rss>

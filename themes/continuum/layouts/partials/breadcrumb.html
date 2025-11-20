@@ -10,10 +10,10 @@
                 {{ $sectionTitle := .Section | title | replaceRE "-" " " }}
                 
                 <!-- Map taxonomy sections to actual sections -->
-                {{ if eq .Section "se_tags" }}
-                    {{ $actualSection = "software-engineering" }}
-                    {{ $sectionTitle = "Software Engineering" }}
-                {{ else if eq .Section "bw_tags" }}
+                {{ if eq .Section "systems_tags" }}
+                    {{ $actualSection = "building-systems" }}
+                    {{ $sectionTitle = "Building Systems" }}
+                {{ else if eq .Section "wealth_tags" }}
                     {{ $actualSection = "building-wealth" }}
                     {{ $sectionTitle = "Building Wealth" }}
                 {{ end }}

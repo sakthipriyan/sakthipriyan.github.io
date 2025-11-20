@@ -13,10 +13,10 @@ Renders a tag cloud with frequency-based sizing
 {{ range $context.Site.RegularPages }}
 {{ $pageSection := .Section }}
 {{ $taxonomyField := "tags" }}
-{{ if eq $pageSection "software-engineering" }}
-{{ $taxonomyField = "se_tags" }}
+{{ if eq $pageSection "building-systems" }}
+{{ $taxonomyField = "systems_tags" }}
 {{ else if eq $pageSection "building-wealth" }}
-{{ $taxonomyField = "bw_tags" }}
+{{ $taxonomyField = "wealth_tags" }}
 {{ end }}
 
 {{ $tags := index .Params $taxonomyField }}

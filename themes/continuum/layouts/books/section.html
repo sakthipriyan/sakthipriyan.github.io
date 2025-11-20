@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{- /* Check if this is the books list page or a specific book page */ -}}
 {{- $isBooksList := or (in .RelPermalink "/books/") (eq .Type "books") -}}
-{{- $isBooksListPage := or (eq .RelPermalink "/software-engineering/books/") (eq .RelPermalink "/building-wealth/books/") -}}
+{{- $isBooksListPage := or (eq .RelPermalink "/building-systems/books/") (eq .RelPermalink "/building-wealth/books/") -}}
 
 {{- if and $isBooksList (not $isBooksListPage) -}}
 {{- /* This is a specific book page - show book details and chapters */ -}}

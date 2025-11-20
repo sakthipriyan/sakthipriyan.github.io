@@ -4,9 +4,9 @@
             <!-- Section-specific Header -->
             {{ $actualSection := .Section }}
             <!-- Map taxonomy sections to actual sections -->
-            {{ if eq .Section "se_tags" }}
-                {{ $actualSection = "software-engineering" }}
-            {{ else if eq .Section "bw_tags" }}
+            {{ if eq .Section "systems_tags" }}
+                {{ $actualSection = "building-systems" }}
+            {{ else if eq .Section "wealth_tags" }}
                 {{ $actualSection = "building-wealth" }}
             {{ end }}
             
@@ -36,12 +36,12 @@
                         {{ if eq . "tags" }}
                             <!-- For tags, check if taxonomy data exists -->
                             {{ $hasTags := false }}
-                            {{ if eq $actualSection "software-engineering" }}
-                                {{ if isset $.Site.Taxonomies "se_tags" }}
+                            {{ if eq $actualSection "building-systems" }}
+                                {{ if isset $.Site.Taxonomies "systems_tags" }}
                                     {{ $hasTags = true }}
                                 {{ end }}
                             {{ else if eq $actualSection "building-wealth" }}
-                                {{ if isset $.Site.Taxonomies "bw_tags" }}
+                                {{ if isset $.Site.Taxonomies "wealth_tags" }}
                                     {{ $hasTags = true }}
                                 {{ end }}
                             {{ end }}
@@ -70,7 +70,7 @@
             
             <ul class="nav-links">
                 <!-- Main sections in preferred order -->
-                {{ range (slice "software-engineering" "building-wealth") }}
+                {{ range (slice "building-systems" "building-wealth") }}
                     {{ $sectionPage := $.Site.GetPage . }}
                     {{ if $sectionPage }}
                         <li><a href="{{ $sectionPage.RelPermalink }}" class="{{ . }}-link">{{ $sectionPage.Title }}</a></li>

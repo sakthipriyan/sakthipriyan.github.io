@@ -15,21 +15,21 @@
 {{ end }}
 
 <!-- Set taxonomy based on section -->
-{{ if eq $currentSection "software-engineering" }}
-    {{ $taxonomyName = "se_tags" }}
-    {{ if isset .Site.Taxonomies "se_tags" }}
-        {{ $taxonomyData = .Site.Taxonomies.se_tags.ByCount }}
+{{ if eq $currentSection "building-systems" }}
+    {{ $taxonomyName = "systems_tags" }}
+    {{ if isset .Site.Taxonomies "systems_tags" }}
+        {{ $taxonomyData = .Site.Taxonomies.systems_tags.ByCount }}
     {{ end }}
 {{ else if eq $currentSection "building-wealth" }}
-    {{ $taxonomyName = "bw_tags" }}
-    {{ if isset .Site.Taxonomies "bw_tags" }}
-        {{ $taxonomyData = .Site.Taxonomies.bw_tags.ByCount }}
+    {{ $taxonomyName = "wealth_tags" }}
+    {{ if isset .Site.Taxonomies "wealth_tags" }}
+        {{ $taxonomyData = .Site.Taxonomies.wealth_tags.ByCount }}
     {{ end }}
 {{ else }}
     <!-- Global fallback -->
-    {{ $taxonomyName = "se_tags" }}
-    {{ if isset .Site.Taxonomies "se_tags" }}
-        {{ $taxonomyData = .Site.Taxonomies.se_tags.ByCount }}
+    {{ $taxonomyName = "systems_tags" }}
+    {{ if isset .Site.Taxonomies "systems_tags" }}
+        {{ $taxonomyData = .Site.Taxonomies.systems_tags.ByCount }}
     {{ end }}
 {{ end }}
 
@@ -46,12 +46,12 @@
         <div class="tags-grid">
             {{ range $taxonomyData }}
                 {{ $tagUrl := "" }}
-                {{ if eq $currentSection "software-engineering" }}
-                    {{ $tagUrl = printf "/software-engineering/tags/%s/" (.Name | urlize) }}
+                {{ if eq $currentSection "building-systems" }}
+                    {{ $tagUrl = printf "/building-systems/tags/%s/" (.Name | urlize) }}
                 {{ else if eq $currentSection "building-wealth" }}
                     {{ $tagUrl = printf "/building-wealth/tags/%s/" (.Name | urlize) }}
                 {{ else }}
-                    {{ $tagUrl = printf "/software-engineering/tags/%s/" (.Name | urlize) }}
+                    {{ $tagUrl = printf "/building-systems/tags/%s/" (.Name | urlize) }}
                 {{ end }}
                 
                 <div class="tag-card">
