@@ -1924,12 +1924,222 @@ main {
     font-size: 0.8rem;
 }
 
-@media (max-width: 768px) {
+/* Blog Post Content Styling */
+.blog-post {
+    margin: 0 auto;
+}
 
+/* Graphviz diagrams in blogs */
+.graphviz-diagram {
+    width: 100%;
+    margin: 2rem 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.graphviz-diagram svg {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.post-content,
+main article {
+    font-size: 1.125rem;
+    line-height: 1.56;
+    color: var(--text-color);
+}
+
+.post-content p,
+main article p {
+    margin: 1.25rem 0;
+    line-height: 1.56;
+}
+
+.post-content ul,
+.post-content ol,
+main article ul,
+main article ol {
+    margin: 1.5rem 0 !important;
+    padding-left: 0 !important;
+    line-height: 1.56;
+    list-style-position: inside !important;
+}
+
+.post-content li,
+main article li {
+    margin: 0.25rem 0 !important;
+    line-height: 1.56;
+    padding-left: 0 !important;
+}
+
+.post-content ul li,
+main article ul li {
+    list-style-type: disc !important;
+}
+
+.post-content ol li,
+main article ol li {
+    list-style-type: decimal !important;
+}
+
+.post-content ul ul,
+.post-content ol ul,
+.post-content ul ol,
+.post-content ol ol,
+main article ul ul,
+main article ol ul,
+main article ul ol,
+main article ol ol {
+    margin: 0.5rem 0 !important;
+    padding-left: 2rem !important;
+}
+
+.post-content li > ul,
+.post-content li > ol,
+main article li > ul,
+main article li > ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-content h2,
+main article h2 {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    line-height: 1.3;
+}
+
+.post-content h3,
+main article h3 {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+    line-height: 1.4;
+}
+
+.post-content h4,
+main article h4 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    line-height: 1.4;
+}
+
+.post-content blockquote,
+main article blockquote {
+    border-left: 4px solid var(--secondary-color);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: var(--gray-light);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Section-specific blockquote colors */
+.building-systems .post-content blockquote,
+.building-systems main article blockquote {
+    border-left-color: #667eea;
+}
+
+.building-wealth .post-content blockquote,
+.building-wealth main article blockquote {
+    border-left-color: #f7b733;
+}
+
+.post-content code,
+main article code {
+    background: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.95em;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    color: #c7254e;
+}
+
+.post-content pre,
+main article pre {
+    background: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--secondary-color);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    line-height: 1.6;
+}
+
+/* Section-specific pre code border colors */
+.building-systems .post-content pre,
+.building-systems main article pre {
+    border-color: #667eea;
+}
+
+.building-wealth .post-content pre,
+.building-wealth main article pre {
+    border-color: #f7b733;
+}
+
+.post-content pre code,
+main article pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+.post-content table,
+main article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.post-content table th,
+.post-content table td,
+main article table th,
+main article table td {
+    padding: 0.75rem;
+    border: 1px solid var(--gray-light);
+    text-align: left;
+}
+
+.post-content table th,
+main article table th {
+    background: var(--gray-light);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
     .video,
     .blog-post,
     .tool {
         padding: 0 1rem;
+    }
+
+    .post-content,
+    main article {
+        font-size: 1.0625rem;
+    }
+
+    .post-content h2,
+    main article h2 {
+        font-size: 1.5rem;
+    }
+
+    .post-content h3,
+    main article h3 {
+        font-size: 1.25rem;
+    }
+
+    .post-content ul,
+    .post-content ol,
+    main article ul,
+    main article ol {
+        padding-left: 0 !important;
     }
 
     .video-header h1 {

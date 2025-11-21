@@ -14,8 +14,6 @@ systems_tags:
   - Athena
 ---
 
-<small>sakthipriyan.com/building-systems</small>
-
 ## Building SQL Translator 
 ## using AI Coding Agents
 
