@@ -45,6 +45,42 @@
             }
         </script>
         <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        {{- /* Viz.js for Graphviz diagrams in blogs */ -}}
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Render DOT diagrams in blog posts
+                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
+                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                    console.log('[DEBUG] Rendering DOT block in blog');
+
+                    const viz = new Viz();
+                    viz.renderSVGElement(dotCode)
+                        .then(svg => {
+                            // Remove width/height attributes from SVG for auto-scaling
+                            svg.removeAttribute('width');
+                            svg.removeAttribute('height');
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                            // Wrap in a container
+                            const container = document.createElement('div');
+                            container.className = 'graphviz-diagram';
+                            container.appendChild(svg);
+
+                            // Replace the <pre> entirely
+                            const preEl = codeEl.parentNode;
+                            preEl.parentNode.replaceChild(container, preEl);
+
+                            console.log('[DEBUG] Diagram rendered in blog');
+                        })
+                        .catch(err => {
+                            console.error('[DEBUG] Viz.js error:', err);
+                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                        });
+                });
+            });
+        </script>
         {{- end }}
     {{- if or (eq .Section "tools") (eq .Type "tools") }}
     {{- /* Vue.js */ -}}

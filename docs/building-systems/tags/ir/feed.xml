@@ -6,8 +6,15 @@
     <description>Recent content in IR on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 20 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/building-systems/tags/ir/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building SQL Translator using AI Coding Agents</title>
+      <link>https://sakthipriyan.com/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</guid>
+      <description>A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing.</description>
+    </item>
     <item>
       <title>Building SQL Translator using AI Coding Agents</title>
       <link>https://sakthipriyan.com/building-systems/slides/building-sql-translator-using-ai-coding-agents/</link>

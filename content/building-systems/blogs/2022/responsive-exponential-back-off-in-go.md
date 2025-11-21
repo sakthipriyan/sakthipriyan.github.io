@@ -10,7 +10,6 @@ systems_tags:
 - code
 - cloud
 - dynamodb
-author: Sakthi Priyan H
 summary: using exponentially scaling up and down the sleep time
 aliases:
 - /2022/11/13/responsive-exponential-back-off-in-go.html

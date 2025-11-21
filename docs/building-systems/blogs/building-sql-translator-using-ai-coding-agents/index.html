@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building SQL Translator using AI Coding Agents | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Building SQL Translator using AI Coding Agents</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Building SQL Translator using AI Coding Agents</h1>
+    <p class="content-summary">A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2025-11-21">Nov 21, 2025</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">12 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <p>Originally <a href="../../slides/building-sql-translator-using-ai-coding-agents/">presented</a> as part of <a href="https://aqfer.com/">Aqfer</a>&rsquo;s internal tech talk.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Building a SQL translator might sound daunting, but with the right architecture and AI coding agents, it becomes a manageable and even enjoyable engineering challenge. In this post, I&rsquo;ll walk you through my journey of building an extensible, grammar-based SQL translator framework that currently supports Athena ↔ BigQuery translation, with plans to expand to Snowflake, SparkSQL and etc.,</p>
+<p>This is an on-going project, where we are expanding Grammar for more coverage. Probably, I can come back in future and write more on what happened further. Excited by good progress made so far, I ended up creating this article.</p>
+<h2 id="the-goal">The Goal</h2>
+<p>The project had two key requirements:</p>
+<ol>
+<li>Leverage AI Coding Agents for development</li>
+<li>Create an <strong>extensible</strong>, <strong>grammar-based parsing</strong>, <strong>SQL translator</strong> that works across multiple dialects</li>
+</ol>
+<p><strong>Current Status:</strong></p>
+<ul>
+<li>✅ Athena → BigQuery</li>
+<li>✅ BigQuery → Athena</li>
+<li>🔜 SparkSQL, Snowflake, etc.,</li>
+</ul>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<p>The architecture follows a clean, modular design.</p>
+<pre><code class="language-dot">digraph SQLTranslatorClustered {
+  rankdir=LR;
+  bgcolor=transparent;
+  node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=white, fontname=&quot;Arial&quot;];
+
+  // ======================================================
+  // === TEST CASES (Inputs + Outputs) =====================
+  // ======================================================
+  subgraph cluster_testcases {
+    label=&quot;Test Cases (Developer)&quot;;
+    style=&quot;rounded,bold&quot;;
+    color=&quot;#a0c4ff&quot;;
+
+    // SQL Inputs
+    subgraph cluster_inputs {
+      label=&quot;SQL Inputs&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=&quot;#a0c4ff&quot;;
+      AthenaIn [label=&quot;Athena SQL&quot;];
+      BigQueryIn [label=&quot;BigQuery SQL&quot;];
+    }
+
+    // SQL Outputs
+    subgraph cluster_outputs {
+      label=&quot;Generated Outputs&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=&quot;#ffc6ff&quot;;
+      OutAthena [label=&quot;Athena SQL&quot;];
+      OutBigQuery [label=&quot;BigQuery SQL&quot;];
+    }
+  }
+
+  // ======================================================
+  // === CORE SYSTEM (GRAMMAR → PARSER → IR → GENERATOR) ===
+  // ======================================================
+  subgraph cluster_core {
+    label=&quot;SQL Translator Core (AI Agent)&quot;;
+    style=&quot;rounded,bold&quot;;
+    color=&quot;#90caf9&quot;;
+
+    // === GRAMMARS ===
+    subgraph cluster_grammars {
+      label=&quot;ANTLR Grammars&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=&quot;#f4a261&quot;;
+      AthenaGrammar [label=&quot;Athena.g4\n(Grammar)&quot;];
+      BigQueryGrammar [label=&quot;BigQuery.g4\n(Grammar)&quot;];
+    }
+
+    // === PARSERS ===
+    subgraph cluster_parsers {
+      label=&quot;Parsers (ANTLR Generated)&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=&quot;#ffd6a5&quot;;
+      AthenaParser [label=&quot;Athena Parser&quot;];
+      BigQueryParser [label=&quot;BigQuery Parser&quot;];
+    }
+
+    // === CONVERTERS ===
+    subgraph cluster_converters {
+      label=&quot;Converters (AST → IR)&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=&quot;#b9fbc0&quot;;
+      AthenaConverter [label=&quot;Athena Converter&quot;];
+      BigQueryConverter [label=&quot;BigQuery Converter&quot;];
+    }
+
+    // === IR CORE ===
+    subgraph cluster_ir {
+      label=&quot;Unified Intermediate Representation (IR)&quot;;
+      style=&quot;rounded,bold&quot;;
+      color=&quot;#fff3b0&quot;;
+      IR [label=&quot;Unified IR\n(Go structs / Substrait)&quot;,
+          shape=box,
+          style=&quot;rounded,filled,bold&quot;,
+          fillcolor=&quot;#fffbea&quot;];
+    }
+
+    // === GENERATORS ===
+    subgraph cluster_generators {
+      label=&quot;SQL Generators&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=&quot;#dab6fc&quot;;
+      AthenaGen [label=&quot;Athena Generator&quot;];
+      BigQueryGen [label=&quot;BigQuery Generator&quot;];
+    }
+  }
+
+  // === GRAMMAR → PARSER (DOTTED) ===
+  AthenaGrammar -&gt; AthenaParser [style=dotted];
+  BigQueryGrammar -&gt; BigQueryParser [style=dotted];
+
+  // === SQL → IR PATHS ===
+  AthenaIn -&gt; AthenaParser -&gt; AthenaConverter -&gt; IR;
+  BigQueryIn -&gt; BigQueryParser -&gt; BigQueryConverter -&gt; IR;
+
+  // === IR → OUTPUTS PATHS ===
+  IR -&gt; AthenaGen -&gt; OutAthena;
+  IR -&gt; BigQueryGen -&gt; OutBigQuery;
+}
+</code></pre>
+<h3 id="core-system-layer-ai-agent-built">Core System Layer (AI Agent Built)</h3>
+<p><strong>ANTLR Grammars:</strong><br>
+By using a mature grammar framework like <a href="https://www.antlr.org/">ANTLR</a>, we avoided having to build a custom lexer and parser through AI agents.</p>
+<ul>
+<li><code>Athena.g4</code> - Grammar definition for Athena SQL</li>
+<li><code>BigQuery.g4</code> - Grammar definition for BigQuery SQL</li>
+<li>Grammar generated via two approaches,
+<ul>
+<li>Pointing to source documentation and asking AI tools to generate them</li>
+<li>By using various test cases, AI Agents discover grammar required on the fly</li>
+</ul>
+</li>
+</ul>
+<p><strong>Parsers (Auto-generated):</strong></p>
+<ul>
+<li>At Aqfer <a href="https://go.dev/">Go</a> is the predominant language and ANTLR supported Go as well</li>
+<li>ANTLR generates parsers from grammars</li>
+<li>These parsers are fully deterministic (~86% of total codebase)</li>
+<li>Athena/BigQuery parsers generates AST from the input SQL dialect</li>
+</ul>
+<p><strong>Converters (AST → IR):</strong></p>
+<ul>
+<li>Transform parsed Abstract Syntax Trees into Intermediate Representation (IR)</li>
+<li>Athena Converter takes Athena AST and converts that into IR</li>
+<li>BigQuery Converter takes BigQuery AST and converts that into IR</li>
+</ul>
+<p><strong>Unified Intermediate Representation (IR):</strong></p>
+<ul>
+<li>Core abstraction layer using Go structs (considering Substrait)</li>
+<li>Enables multi-dialect translation</li>
+<li>Single source of truth for SQL semantics</li>
+<li>This will be superset of the SQL semantics that need to be supported</li>
+</ul>
+<p><strong>SQL Generators:</strong></p>
+<ul>
+<li>Generate target SQL from IR</li>
+<li>Athena Generator converts IR to Athena dialect</li>
+<li>BigQuery Generator converts IR to BigQuery dialect</li>
+</ul>
+<h3 id="test-cases-layer-developer-input">Test Cases Layer (Developer Input)</h3>
+<p>This layer contains SQL inputs and expected outputs in YAML format:</p>
+<ul>
+<li>Contains SQL dialects for different representation</li>
+<li>For a given test case, it has pair of Athena SQL and BigQuery SQL</li>
+<li>For same test case, test can be performed on both directions</li>
+</ul>
+<h2 id="why-this-approach">Why This Approach?</h2>
+<p>This architecture offers several compelling advantages:</p>
+<ol>
+<li><strong>Unified IR enables multi-dialect translation</strong> - Add a new dialect by implementing just a parser/converter and generator</li>
+<li><strong>Easy addition of new dialects</strong> - The IR abstracts away dialect-specific quirks</li>
+<li><strong>Consistent testing via YAML</strong> - All test cases are version-controlled and reusable</li>
+<li><strong>Deterministic grammar via ANTLR</strong> - Auto-generated parsers eliminate manual parsing bugs</li>
+<li><strong>Separation of concerns</strong> - Each component has a single, well-defined responsibility</li>
+</ol>
+<h2 id="cli-based-development--testing">CLI-Based Development &amp; Testing</h2>
+<p>A robust CLI was crucial for the development workflow. Here&rsquo;s how it works:</p>
+<h3 id="yaml-test-format">YAML Test Format</h3>
+<pre><code class="language-yaml">test_cases:
+  - name: simple_select
+    bigquery: SELECT id, name, age FROM `dataset.users` WHERE age &gt; 18
+    athena: SELECT id, name, age FROM &quot;dataset&quot;.&quot;users&quot; WHERE age &gt; 18
+</code></pre>
+<h3 id="running-tests-with-slice-notation">Running Tests with Slice Notation</h3>
+<p>The CLI supports flexible test execution:</p>
+<pre><code class="language-sh"># Run test case 3 only
+sqltranslate --yaml examples/ --yaml-run 3
+
+# Run first 3 test cases, i.e., 0, 1, 2
+sqltranslate --yaml examples/ --yaml-run :3
+
+# Run test cases 2 to 4, i.e., 2, 3, 4
+sqltranslate --yaml examples/ --yaml-run 2:5
+</code></pre>
+<h3 id="test-case-reusability">Test Case Reusability</h3>
+<p>One of the beautiful aspects of this design is that the same test case validates <strong>both directions</strong>:</p>
+<ul>
+<li>BigQuery → Athena</li>
+<li>Athena → BigQuery</li>
+<li>Potentially same dialect → same dialect (for validation)</li>
+<li>If N dialects are supported, a given Test Case need to be run N<sup>2</sup> times.</li>
+</ul>
+<p>Adding new dialects to the YAML is straightforward - just add the SQL for that dialect.</p>
+<h3 id="cli-output-example">CLI Output Example</h3>
+<p>The CLI provides detailed YAML output showing exactly what passed and failed:</p>
+<pre><code class="language-yaml">summary:
+  total_test_cases: 101
+  athena_to_bigquery_succeeded: 96
+  bigquery_to_athena_succeeded: 96
+details:
+  - name: negative_numbers
+    index: 83 # Enabled AI tools to find the failing test case pretty fast
+    athena_to_bigquery:
+      input: SELECT * FROM accounts WHERE balance &lt; -100
+      expected: SELECT * FROM accounts WHERE balance &lt; -100
+      output: 'Parse error: line 1:39 token recognition error at: ''-'''
+      status: failed_to_parse
+    bigquery_to_athena:
+      input: SELECT * FROM accounts WHERE balance &lt; -100
+      expected: SELECT * FROM accounts WHERE balance &lt; -100
+      output: SELECT * FROM accounts WHERE balance &lt; - 100
+      status: failed_mismatch
+</code></pre>
+<h3 id="the-importance-of-a-strong-cli">The Importance of a Strong CLI</h3>
+<p>A well-designed CLI was essential:</p>
+<ul>
+<li><strong>Deterministic testing environment</strong> - Same inputs always produce same outputs</li>
+<li><strong>Re-runnable test cases</strong> - Critical for iterative development</li>
+<li><strong>YAML output for tracking</strong> - Exact failure details fed back to AI agents</li>
+<li><strong>Automation-friendly</strong> - Easy to integrate into CI/CD pipelines</li>
+</ul>
+<h2 id="development-workflow-with-ai-agents">Development Workflow with AI Agents</h2>
+<p>The development process followed an iterative pattern:</p>
+<pre><code class="language-dot">digraph SQLTranslatorWorkflow {
+  bgcolor=transparent;
+  rankdir=TB;
+  nodesep=0.3;
+  ranksep=0.3;
+  node [shape=box, style=&quot;rounded,filled&quot;, fontname=&quot;Arial&quot;];
+
+  // Developer + Test Suite
+  Dev [label=&quot;👤 Developer&quot;, fillcolor=&quot;#e3f2fd&quot;];
+  TestSuite [label=&quot;🧪 Test Suite&quot;, shape=folder, fillcolor=&quot;#fff3cd&quot;];
+
+  // === Coding Agent Subgraph ===
+  subgraph cluster_agent {
+    label=&quot;🤖 Coding Agent&quot;;
+    style=&quot;rounded,dashed&quot;;
+    color=&quot;#888888&quot;;
+    fontname=&quot;Arial Bold&quot;;
+
+    Start [label=&quot;🏁 Start\n(initial N)&quot;, shape=oval, fillcolor=&quot;#c8e6c9&quot;];
+
+    RunN [label=&quot;▶️ Run Test Case N&quot;, fillcolor=&quot;#e8f5e9&quot;];
+
+    Regression [label=&quot;🔁 Regression Check :N&quot;, fillcolor=&quot;#f3e5f5&quot;];
+
+    Fix [label=&quot;🛠️ Fix Issues&quot;, fillcolor=&quot;#ffebee&quot;];
+
+    Inc [label=&quot;➕ Increment N&quot;, fillcolor=&quot;#f1f8e9&quot;];
+
+    Stop [label=&quot;🛑 Stop\n(final N)&quot;, shape=oval, fillcolor=&quot;#ffcdd2&quot;];
+  }
+
+  // Developer workflow
+  Dev -&gt; TestSuite [label=&quot;Add/Update Tests/Prompt/Generated&quot;];
+  Dev -&gt; Start [label=&quot;Prompt&quot;];
+
+  // Core flow (compact)
+  Start -&gt; RunN;
+
+  RunN -&gt; Fix [label=&quot; Failed&quot;];
+  RunN -&gt; Regression [label=&quot; Passed&quot;];
+
+  Regression -&gt; Fix [label=&quot; Failed&quot;];
+  Regression -&gt; Inc [label=&quot; Passed&quot;];
+
+  Inc -&gt; RunN [label=&quot;More tests&quot;];
+  Inc -&gt; Stop [label=&quot;Done&quot;];
+
+  Fix -&gt; RunN;
+
+  // Dotted: Test Suite influence
+  edge [style=dotted, color=&quot;gray40&quot;];
+  TestSuite -&gt; RunN;
+  TestSuite -&gt; Regression;
+
+  edge [style=solid, color=black];
+}
+</code></pre>
+<ol>
+<li><strong>Developer</strong> creates/updates test cases and provides prompts</li>
+<li><strong>AI Agent starts</strong> with initial test case N</li>
+<li><strong>Run test case N</strong> to validate</li>
+<li>If <strong>passed</strong>, run <strong>regression check</strong> on all tests up to N</li>
+<li>If <strong>failed</strong> (either new test or regression), <strong>fix issues</strong></li>
+<li>Once all tests pass, <strong>increment N</strong> and repeat</li>
+<li><strong>Stop</strong> when all test cases pass</li>
+</ol>
+<p>The workflow was highly iterative, with the AI agent fixing issues and re-running regressions after each change. The CLI&rsquo;s slice notation made it easy to run specific subsets of tests quickly.</p>
+<h2 id="the-test-suite-challenge">The Test Suite Challenge</h2>
+<p>One important lesson: <strong>AI-generated tests were NOT reliable</strong>.</p>
+<p>Initially, I had the AI generate test cases, but they:</p>
+<ul>
+<li>Contained subtle errors</li>
+<li>Missed edge cases</li>
+<li>Had incorrect expected outputs</li>
+</ul>
+<p>This required significant manual correction. Eventually, we curated a high-quality test suite through:</p>
+<ul>
+<li>Manual review and correction</li>
+<li>Validating against actual database behavior</li>
+</ul>
+<p>The curated test suite became invaluable for guiding the AI agent and ensuring correctness.</p>
+<h2 id="documentation-readmemd-as-the-north-star">Documentation: README.md as the North Star</h2>
+<p>Without a comprehensive README, the AI model kept rediscovering basics:</p>
+<ul>
+<li><em>&ldquo;How do I run ANTLR?&rdquo;</em></li>
+<li><em>&ldquo;Where is the go:generate command?&rdquo;</em></li>
+<li><em>&ldquo;How do I build the project?&rdquo;</em></li>
+</ul>
+<p>This led to unnecessary <strong>credit burn</strong> as the model wasted time on setup rather than solving problems.</p>
+<p><strong>Solution:</strong> Once the README had detailed step-by-step instructions, the AI executed tasks much faster with minimal discovery overhead.</p>
+<p>Key sections in the README:</p>
+<ul>
+<li>Setup instructions</li>
+<li>Build commands</li>
+<li>Test execution</li>
+<li>Architecture overview</li>
+<li>Development guidelines</li>
+</ul>
+<p>Interestingly, large part of README was also auto generated.<br>
+Customization done at Development workflow to match the development model explained earlier.</p>
+<h2 id="agent-aided-iteration">Agent-Aided Iteration</h2>
+<p>The iterative process with AI agents had some challenges:</p>
+<ul>
+<li>Agents sometimes claimed work was &ldquo;fixed&rdquo; when it wasn&rsquo;t</li>
+<li>CLI validation caught these false positives</li>
+<li>Modified CLI to output YAML with test indices</li>
+<li>Fed failing case details back to agent</li>
+<li>Agent could then re-run exact failing cases</li>
+</ul>
+<h3 id="sample-prompts-to-agent">Sample Prompts to Agent</h3>
+<p>The prompts evolved from verbose to terse as the project progressed:</p>
+<ul>
+<li>&ldquo;Use Development step in guidelines.md in aqfer-ir. Start developing from test case 0&rdquo;</li>
+<li>&ldquo;Continue testing use case 3 and so on&rdquo;</li>
+<li>&ldquo;Fix 10&rdquo;</li>
+<li>&ldquo;Proceed building 11, 12 and so on&hellip; till 15&rdquo;</li>
+<li>&ldquo;14, 15 as well&rdquo;</li>
+<li>Simply pasting CLI output showing failures</li>
+<li>&ldquo;continue&rdquo;</li>
+<li>&ldquo;Run array_agg_order&rdquo;</li>
+<li>&ldquo;Run with :20 and fix issues&rdquo;</li>
+<li>&ldquo;Let&rsquo;s do 20:25&rdquo;</li>
+<li>&ldquo;Run :35&rdquo;</li>
+<li>&ldquo;Run :36, :37,&hellip;. :40&rdquo;</li>
+<li>&ldquo;Let&rsquo;s fix 40 and run :40 as well after fix&rdquo;</li>
+<li>&ldquo;40 is failing?&rdquo;</li>
+<li>&ldquo;run till :80&rdquo;</li>
+</ul>
+<p>Eventually AI Agent (Junie/Goland) printed the following:</p>
+<blockquote>
+<p><em>&ldquo;All 101 test cases for both Athena to BigQuery and BigQuery to Athena conversions passed successfully, confirming the fixes work as intended.&rdquo;</em></p>
+</blockquote>
+<h3 id="feeding-cli-output-to-ai">Feeding CLI Output to AI</h3>
+<p>A particularly effective technique was feeding the CLI output directly to the AI especially when it stopped or claimed successful completion.</p>
+<pre><code>summary:
+  total_test_cases: 15
+  athena_to_bigquery_succeeded: 12
+  bigquery_to_athena_succeeded: 13
+details:
+  - name: array_syntax
+    athena_to_bigquery:
+      input: SELECT ARRAY[1, 2, 3, 4, 5] as numbers...
+      expected: SELECT [1, 2, 3, 4, 5] as numbers...
+      output: SELECT [1,2,3,4,5] AS numbers...
+      status: failed_mismatch
+</code></pre>
+<p>This gave the AI precise context about what failed and why, leading to faster fixes.</p>
+<h2 id="key-ai-engineering-learnings">Key AI Engineering Learnings</h2>
+<h3 id="1-upfront-design-matters">1. Upfront Design Matters</h3>
+<blockquote>
+<p><em>&ldquo;AI-generated engineering requires <strong>waterfall-like upfront design</strong> to built it faster/cheaper.&rdquo;</em><br>
+~ Sakthi Priyan H</p>
+</blockquote>
+<p>Counter-intuitively, working with AI coding agents required more upfront planning, not less:</p>
+<ul>
+<li><strong>Less upfront planning</strong> → more iterations/rewrites → more credits burned</li>
+<li><strong>More detailed designs</strong> → quicker output → fewer credits used</li>
+<li><strong>CLI optimization for AI</strong> → faster iteration → higher-order problem solving</li>
+</ul>
+<h3 id="2-context-reloading-costs">2. Context Reloading Costs</h3>
+<p>Starting a fresh AI session without good docs made the model:</p>
+<ul>
+<li>Relearn grammar syntax</li>
+<li>Relearn code base structure</li>
+<li>Relearn generators/converters/IR patterns</li>
+<li>Relearn CLI usage</li>
+<li>Repeat previous mistakes</li>
+</ul>
+<p><strong>Good persistent documentation prevents this wasteful relearning.</strong></p>
+<h3 id="3-tools-used">3. Tools Used</h3>
+<p>I used different tools throughout the project:</p>
+<ul>
+<li><strong>JetBrains GoLand + Junie</strong> - Strong IDE integration</li>
+<li><strong>VS Code + GitHub Copilot</strong> - Excellent summarizer</li>
+<li><strong>Cursor</strong> - Felt credits were used up faster</li>
+</ul>
+<p>All powered by <strong>Claude Sonnet 4.5</strong> underneath.</p>
+<h2 id="code-composition">Code Composition</h2>
+<p>As of November 7, 2025 here&rsquo;s the breakdown (in lines of code):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th style="text-align: right">Lines</th>
+          <th style="text-align: right">Percentage</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Grammar</td>
+          <td style="text-align: right">763</td>
+          <td style="text-align: right">2.38%</td>
+      </tr>
+      <tr>
+          <td>Parser (Auto-generated Go)</td>
+          <td style="text-align: right">27,580</td>
+          <td style="text-align: right">85.96%</td>
+      </tr>
+      <tr>
+          <td>Converters</td>
+          <td style="text-align: right">1,930</td>
+          <td style="text-align: right">6.01%</td>
+      </tr>
+      <tr>
+          <td>IR Code</td>
+          <td style="text-align: right">344</td>
+          <td style="text-align: right">1.07%</td>
+      </tr>
+      <tr>
+          <td>Generators</td>
+          <td style="text-align: right">1,470</td>
+          <td style="text-align: right">4.58%</td>
+      </tr>
+  </tbody>
+</table>
+<p>Key insights:</p>
+<ul>
+<li><strong>~86%</strong> ANTLR auto-generated → fully deterministic, no bugs</li>
+<li><strong>~14%</strong> AI-generated (Grammar/Converters/IR/Generators) → required guided oversight</li>
+</ul>
+<p>This composition validates the architecture: most code is auto-generated from grammars, minimizing manual coding and potential bugs.</p>
+<h2 id="actual-human-contribution">Actual Human Contribution</h2>
+<p>Despite heavy AI involvement, human expertise was critical for:</p>
+<ul>
+<li><strong>Architectural design</strong> - Choosing ANTLR, IR pattern, CLI approach</li>
+<li><strong>Test case design</strong> - Curating accurate, comprehensive tests</li>
+<li><strong>CLI input/output design</strong> - Making it AI-friendly</li>
+<li><strong>High-level direction</strong> - Setting goals, priorities</li>
+<li><strong>Correcting failures</strong> - Identifying when AI was wrong</li>
+<li><strong>Guiding agent behavior</strong> - Crafting effective prompts</li>
+<li><strong>Reviewing agent progress</strong> - Catching subtle bugs</li>
+<li><strong>Reviewing generated code</strong> - Ensuring quality and correctness</li>
+</ul>
+<p>The human role shifted from coding to <strong>engineering leadership</strong> and <strong>quality assurance</strong>.</p>
+<blockquote>
+<p>“Working with AI Agents at some point, I felt like I was just keeping my hand on the steering wheel of a self-driving car — not really driving, but still carefully watching what it was doing.”<br>
+~ Sakthi Priyan H</p>
+</blockquote>
+<h2 id="downsides-and-challenges">Downsides and Challenges</h2>
+<p>Being honest about the limitations:</p>
+<ol>
+<li><strong>Parallel progress very difficult</strong> - Hard to work in large team setup</li>
+<li><strong>False completion claims</strong> - AI sometimes says work is done when it isn&rsquo;t</li>
+<li><strong>Lower upfront planning costs more</strong> - Higher time and credits required</li>
+<li><strong>Not efficient for iterative work</strong> - Better suited for greenfield projects</li>
+<li><strong>Risk of losing progress</strong> - Must commit to git frequently</li>
+<li><strong>Loss of control</strong> - Using English instead of high-level programming language</li>
+<li><strong>Knowledge base limitations</strong> - Requires more prompts for novel approaches</li>
+</ol>
+<p>But still,</p>
+<blockquote>
+<p>&ldquo;The amount of work getting done is far greater than the effort it takes to simply type.&rdquo; <br>
+~ Sakthi Priyan H</p>
+</blockquote>
+<h2 id="conclusion">Conclusion</h2>
+<p>Building a SQL translator with AI coding agents proved to be a fascinating experiment in modern software engineering.</p>
+<p>The key takeaways:</p>
+<ol>
+<li><strong>Architecture matters more, not less</strong> - AI doesn&rsquo;t replace good design</li>
+<li><strong>Deterministic components are your friend</strong> - ANTLR auto-generation provided a solid foundation</li>
+<li><strong>Testing drives everything</strong> - A strong test suite guided the AI effectively</li>
+<li><strong>CLI is the interface</strong> - Both for humans and AI agents</li>
+<li><strong>Documentation prevents waste</strong> - Good docs save credits and time</li>
+<li><strong>Human expertise evolves</strong> - From coding to architecture and review</li>
+</ol>
+<p>The future of software engineering might not be about writing less code, but about writing the <em>right kind</em> of code - grammars, tests, and documentation that guide AI agents to build robust systems.</p>
+<p>AI coding agents are powerful tools, but they work best when given strong constraints, clear tests, and solid architectural guardrails. The result? A 32,000+ line codebase where 86% is deterministically generated and 14% is AI-assisted, all validated by a comprehensive test suite.</p>
+<p>Not bad for a couple of weeks of iterative prompting and architectural thinking.</p>
+<hr>
+<h2 id="human--ai-tools-used-in-building-this-blog-post">Human + AI tools used in building this blog post</h2>
+<ul>
+<li>Human: Presentation content was originally written in English</li>
+<li>AI: Converted above to Reveal.js Markdown</li>
+<li>Human: Markdown was edited for better content, flow and organizing them to horizontal/vertical slides</li>
+<li>AI: Slide is converted to blog specific markdown</li>
+<li>Human: Manually edited/refined further for simplicity, flow and correctness</li>
+</ul>
+<p>Between <a href="/">sakthipriyan.com</a>, a <a href="https://gohugo.io/">Hugo</a> generated static website + Continuum theme is generated using AI tools. Diagrams are AI generated in <a href="https://graphviz.org/">Graphviz</a> format embedded in the markdown and images are created on the fly in browser.</p>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/sql-translation/" class="tag-link">SQL Translation</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/antlr/" class="tag-link">ANTLR</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/ai-engineering/" class="tag-link">AI Engineering</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/ir/" class="tag-link">IR</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/bigquery/" class="tag-link">BigQuery</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/athena/" class="tag-link">Athena</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script><script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
+                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                    console.log('[DEBUG] Rendering DOT block in blog');
+
+                    const viz = new Viz();
+                    viz.renderSVGElement(dotCode)
+                        .then(svg => {
+                            
+                            svg.removeAttribute('width');
+                            svg.removeAttribute('height');
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                            
+                            const container = document.createElement('div');
+                            container.className = 'graphviz-diagram';
+                            container.appendChild(svg);
+
+                            
+                            const preEl = codeEl.parentNode;
+                            preEl.parentNode.replaceChild(container, preEl);
+
+                            console.log('[DEBUG] Diagram rendered in blog');
+                        })
+                        .catch(err => {
+                            console.error('[DEBUG] Viz.js error:', err);
+                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                        });
+                });
+            });
+        </script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>
