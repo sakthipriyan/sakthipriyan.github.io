@@ -48,12 +48,14 @@ for
 <ol class="fragment grow">
   <li>Asset Classes</li>
   <li>What is Debt?</li>
-  <li>Forms of Debt/Hybrid</li>
-  <li>Debt/Hybrid Mutual Funds</li>
-  <li>Usage</li>
+  <li>Debt & Hybrid Products</li>
+  <li>Debt & Hybrid Mutual Funds</li>
+  <li>My Usage</li>
   <li>Taxation</li>
 </ol>
-
+<br/>
+<br/>
+<br/>
 ---
 
 ### 1️⃣ Asset Classes
@@ -64,7 +66,7 @@ for
 |---------------|----------------|------------------------|-----|
 | 🟢 **Equity** | Ownership      | Index Funds / ETFs     | 80% |
 | 🟢 **Debt**   | Lending        | Debt / Hybrid / PPF    | 10% |
-| 🟢 **Gold**   | Store of Value | ETF / MF / SGB         | 10% |
+| 🟢 **Gold**   | Store of Value | ETF / MF               | 10% |
 
 > Debt is **not** a wealth creator — it is a  
 > **wealth stabilizer + risk reducer**.
@@ -91,7 +93,7 @@ for
 
 ---
 
-### 3️⃣ Forms of Debt/Hybrid
+### 3️⃣ Debt & Hybrid Products
 
 ```dot
 digraph Debt {
@@ -106,7 +108,7 @@ digraph Debt {
   ];
 
   // Top Level
-  Debt         [label="🟢 Debt / Hybrid", fillcolor="#D1FAE5"];
+  Debt         [label="🟢 Debt & Hybrid", fillcolor="#D1FAE5"];
 
   // Bank (replacing Cash & Cash Equivalents)
   Bank         [label="🏦 Bank", fillcolor="#F0FDF4"];
@@ -156,7 +158,7 @@ digraph Debt {
 }
 ```
 ---
-### 4️⃣ Debt/Hybrid Mutual Funds
+### 4️⃣ Debt & Hybrid Mutual Funds
 > Let's dive deep into the Debt/Hybrid Mutual Funds I am using.
 
 | |
@@ -190,12 +192,12 @@ digraph Debt {
 
 ### 4️⃣ D. Arbitrage Fund
 > A hybrid-equity strategy that earns low-risk returns by exploiting **price differences** between cash and futures markets.
-<div style="display: flex; gap: 40px; justify-content: center; align-items: flex-start;"> <div style="display: flex; flex-direction: column;"> <table> <thead> <tr><th>Pros</th></tr> </thead> <tbody> <tr><td>Taxed as equity (favorable for >1 year)
-</td></tr> <tr><td>Low volatility (similar to liquid fund)</td></tr> <tr><td>Good for parking money 3-12 months</td></tr> <tr><td>No credit risk</td></tr> </tbody> </table> </div> <div style="display: flex; flex-direction: column;" class="fragment fade-left"> <table> <thead> <tr><th>Cons</th></tr> </thead> <tbody> <tr><td>Returns depend on market arbitrage spreads</td></tr> <tr><td>Not ideal in extremely low-vol periods</td></tr> <tr><td>Slightly more complex product</td></tr> </tbody> </table> </div> </div>
+<div style="display: flex; gap: 40px; justify-content: center; align-items: flex-start;"> <div style="display: flex; flex-direction: column;"> <table> <thead> <tr><th>Pros</th></tr> </thead> <tbody> <tr><td>Taxed as equity
+</td></tr> <tr><td>Low volatility<td></tr> <tr><td>Good for parking money 3-12 months</td></tr> <tr><td>No credit risk</td></tr> </tbody> </table> </div> <div style="display: flex; flex-direction: column;" class="fragment fade-left"> <table> <thead> <tr><th>Cons</th></tr> </thead> <tbody> <tr><td>Returns depend on market arbitrage spreads</td></tr> <tr><td>Not ideal in extremely low-vol periods</td></tr> <tr><td>Slightly more complex product</td></tr> </tbody> </table> </div> </div>
 
 --
 
-### 4️⃣ Debt/Hybrid Mutual Funds / Performance
+### 4️⃣ Debt & Hybrid / Performance
 <div class="r-stack">
   <div>
     <table>
