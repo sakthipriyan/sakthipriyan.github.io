@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+    {{- if .Summary }}
+    <meta name="description" content="{{ .Summary }}">
+    {{- end }}
     {{- /* CSS */ -}}
     <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
     {{- if or (eq .Section "slides") (eq .Type "slides") }}
