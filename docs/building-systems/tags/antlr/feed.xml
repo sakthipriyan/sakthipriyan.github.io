@@ -15,19 +15,5 @@
       <guid>https://sakthipriyan.com/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</guid>
       <description>A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing.</description>
     </item>
-    <item>
-      <title>Building SQL Translator using AI Coding Agents</title>
-      <link>https://sakthipriyan.com/building-systems/slides/building-sql-translator-using-ai-coding-agents/</link>
-      <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/slides/building-sql-translator-using-ai-coding-agents/</guid>
-      <description>A walkthrough of building a SQL translator using agentic AI, deterministic ANTLR grammars, unified IR, and YAML-driven testing.</description>
-    </item>
-    <item>
-      <title>Natural Language Data Processing</title>
-      <link>https://sakthipriyan.com/building-systems/slides/natural-language-data-processing/</link>
-      <pubDate>Thu, 13 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/slides/natural-language-data-processing/</guid>
-      <description>Prototype system that converts natural language into SQL and IR to drive dynamic DAG execution for Hetero Collate workloads.</description>
-    </item>
   </channel>
 </rss>

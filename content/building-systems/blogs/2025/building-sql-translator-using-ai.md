@@ -13,7 +13,7 @@ systems_tags:
   - Athena
 ---
 
-Originally [presented](../../slides/building-sql-translator-using-ai-coding-agents/) as part of [Aqfer](https://aqfer.com/)'s internal tech talk.
+Originally presented as part of [Aqfer](https://aqfer.com/)'s internal tech talk.
 
 ## Introduction
 
@@ -444,14 +444,9 @@ Starting a fresh AI session without good docs made the model:
 
 **Good persistent documentation prevents this wasteful relearning.**
 
-### 3. Tools Used
+### 3. Model Used
 
-I used different tools throughout the project:
-- **JetBrains GoLand + Junie** - Strong IDE integration
-- **VS Code + GitHub Copilot** - Excellent summarizer
-- **Cursor** - Felt credits were used up faster
-
-All powered by **Claude Sonnet 4.5** underneath.
+I used various AI agents throughout the project, but all powered by **Claude Sonnet 4.5** underneath.
 
 ## Code Composition
 
