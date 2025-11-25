@@ -1,7 +1,7 @@
 ---
 title: "Natural Language Data Processing"
 date: "2025-11-13"
-draft: false
+draft: true
 layout: "slides"
 type: "slides"
 summary: "Prototype system that converts natural language into SQL and IR to drive dynamic DAG execution for Hetero Collate workloads."

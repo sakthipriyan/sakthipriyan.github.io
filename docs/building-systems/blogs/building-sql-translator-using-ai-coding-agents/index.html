@@ -60,8 +60,6 @@
                         
                             
                             
-                                <li><a href="https://sakthipriyan.com/building-systems/slides/">Slides</a></li>
-                            
                         
                     
                 
@@ -175,7 +173,7 @@
 </header>
 
     <div class="post-content">
-        <p>Originally <a href="../../slides/building-sql-translator-using-ai-coding-agents/">presented</a> as part of <a href="https://aqfer.com/">Aqfer</a>&rsquo;s internal tech talk.</p>
+        <p>Originally presented as part of <a href="https://aqfer.com/">Aqfer</a>&rsquo;s internal tech talk.</p>
 <h2 id="introduction">Introduction</h2>
 <p>Building a SQL translator might sound daunting, but with the right architecture and AI coding agents, it becomes a manageable and even enjoyable engineering challenge. In this post, I&rsquo;ll walk you through my journey of building an extensible, grammar-based SQL translator framework that currently supports Athena ↔ BigQuery translation, with plans to expand to Snowflake, SparkSQL and etc.,</p>
 <p>This is an on-going project, where we are expanding Grammar for more coverage. Probably, I can come back in future and write more on what happened further. Excited by good progress made so far, I ended up creating this article.</p>
@@ -576,14 +574,8 @@ details:
 <li>Repeat previous mistakes</li>
 </ul>
 <p><strong>Good persistent documentation prevents this wasteful relearning.</strong></p>
-<h3 id="3-tools-used">3. Tools Used</h3>
-<p>I used different tools throughout the project:</p>
-<ul>
-<li><strong>JetBrains GoLand + Junie</strong> - Strong IDE integration</li>
-<li><strong>VS Code + GitHub Copilot</strong> - Excellent summarizer</li>
-<li><strong>Cursor</strong> - Felt credits were used up faster</li>
-</ul>
-<p>All powered by <strong>Claude Sonnet 4.5</strong> underneath.</p>
+<h3 id="3-model-used">3. Model Used</h3>
+<p>I used various AI agents throughout the project, but all powered by <strong>Claude Sonnet 4.5</strong> underneath.</p>
 <h2 id="code-composition">Code Composition</h2>
 <p>As of November 7, 2025 here&rsquo;s the breakdown (in lines of code):</p>
 <table>
