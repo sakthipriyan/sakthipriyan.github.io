@@ -4,7 +4,7 @@ Usage: {{ partial "content-card.html" . }}
 Renders a content card with image, title, summary, meta, and tags
 */}}
 <article class="content-card">
-    <a href="{{ .RelPermalink }}" class="card-link" {{- if in .RelPermalink "/slides/" }} target="_blank" {{- end }}>
+    <a href="{{ .RelPermalink }}" class="card-link" {{- if or (in .RelPermalink "/slides/") (in .RelPermalink "/books/") }} target="_blank" {{- end }}>
         <!-- Image if specified -->
         {{ if .Params.image }}
         <div class="card-image">

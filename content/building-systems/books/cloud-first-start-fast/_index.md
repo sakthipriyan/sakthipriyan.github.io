@@ -5,8 +5,7 @@ description: "A practical guide for early stage startup founders and engineers t
 summary: "A practical guide for early stage startup founders and engineers to build scalable, cloud-native systems from the ground up."
 date: 2025-06-10
 author: "Sakthi Priyan H"
-type: books
-layout: book
+type: "books"
 draft: true
 ---
 

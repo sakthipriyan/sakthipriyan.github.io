@@ -26,6 +26,11 @@
 {{- else if eq .Section "wealth_tags" }}
     {{- $bodyClass = "building-wealth" }}
 {{- end }}
+{{- /* Use book reader layout for books */ -}}
+{{- if eq .Type "books" }}
+<body class="book-reader {{ $bodyClass }}">
+    {{- block "book-layout" . }}{{- end }}
+{{- else }}
 <body class="{{ $bodyClass }}">
     {{- partial "header.html" . }}
     {{- partial "breadcrumb.html" . }}
@@ -33,6 +38,7 @@
         {{- block "main" . }}{{- end }}
     </main>
     {{- partial "footer.html" . }}
+{{- end }}
     {{- /* JavaScript */ -}}
         {{- if or (eq .Section "slides") (eq .Type "slides") }}
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>

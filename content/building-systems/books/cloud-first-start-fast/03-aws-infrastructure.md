@@ -1,9 +1,10 @@
 ---
-title: "Chapter 3: AWS Infrastructure Essentials"
+title: "AWS Infrastructure Essentials"
+subtitle: "Core Services for Cloud Applications"
+type: "books"
+chapter: 3
 date: 2025-06-10
-weight: 3
-type: books
-layout: book
+author: "Sakthi Priyan H"
 draft: false
 ---
 

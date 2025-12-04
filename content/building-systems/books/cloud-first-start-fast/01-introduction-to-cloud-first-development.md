@@ -1,9 +1,10 @@
 ---
-title: "Chapter 1: Introduction to Cloud-First Development"
+title: "Introduction to Cloud-First Development"
+subtitle: "Understanding Cloud-Native Principles"
+type: "books"
+chapter: 1
 date: 2025-06-10
-weight: 1
-type: books
-layout: book
+author: "Sakthi Priyan H"
 draft: false
 ---
 

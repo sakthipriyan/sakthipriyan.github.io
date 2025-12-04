@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/chapters/01-introduction-to-cloud-first-development/</loc>
-    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/chapters/02-go-for-cloud-development/</loc>
-    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/chapters/03-aws-infrastructure/</loc>
-    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/</loc>
     <lastmod>2025-11-30T00:00:00+00:00</lastmod>
   </url><url>
@@ -116,6 +107,15 @@
     <loc>https://sakthipriyan.com/building-wealth/books/</loc>
     <lastmod>2025-11-04T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/03-emergency-fund/</loc>
+    <lastmod>2025-11-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/01-introduction/</loc>
+    <lastmod>2025-11-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/02-compound-interest/</loc>
+    <lastmod>2025-11-04T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/slides/financial-tools/</loc>
     <lastmod>2025-11-02T00:00:00+00:00</lastmod>
   </url><url>
@@ -164,10 +164,16 @@
     <loc>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</loc>
     <lastmod>2025-10-05T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/03-aws-infrastructure/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://sakthipriyan.com/building-systems/books/</loc>
     <lastmod>2025-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/title/</loc>
+    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/02-go-for-cloud-development/</loc>
+    <lastmod>2025-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/01-introduction-to-cloud-first-development/</loc>
     <lastmod>2025-06-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/blogs/</loc>
@@ -568,8 +574,6 @@
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/version-control/</loc>
     <lastmod>2015-04-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/backcover/</loc>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/</loc>
   </url><url>

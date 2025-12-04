@@ -1,0 +1,32 @@
+{{- /* Sidebar TOC */ -}}
+<aside class="book-toc-sidebar">
+    <div class="book-toc-content">
+        {{- $currentBook := . -}}
+        {{- if .CurrentSection -}}
+            {{- $currentBook = .CurrentSection -}}
+        {{- else if .Parent -}}
+            {{- $currentBook = .Parent -}}
+        {{- end -}}
+
+        <div class="book-toc-header">
+            <h2>Table of Contents</h2>
+            <button class="book-toc-close" aria-label="Close Table of Contents">×</button>
+        </div>
+
+        {{- $chapters := where $currentBook.Pages ".Params.chapter" "!=" nil -}}
+        {{- if $chapters }}
+        <nav class="book-toc-nav">
+            <ol class="book-toc-list">
+                {{- range sort $chapters ".Params.chapter" }}
+                <li class="book-toc-item{{ if eq .RelPermalink $.RelPermalink }} active{{ end }}">
+                    <a href="{{ .RelPermalink }}">
+                        {{- if .Params.chapter }}<span class="chapter-number">{{ .Params.chapter }}.</span> {{ end -}}
+                        {{ .Title }}
+                    </a>
+                </li>
+                {{- end }}
+            </ol>
+        </nav>
+        {{- end }}
+    </div>
+</aside>

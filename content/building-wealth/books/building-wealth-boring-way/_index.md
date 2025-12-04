@@ -6,7 +6,6 @@ summary: "A practical guide to building sustainable wealth through simple, prove
 date: 2025-11-04
 author: "Sakthi Priyan H"
 type: books
-layout: book
 draft: true
 ---
 
