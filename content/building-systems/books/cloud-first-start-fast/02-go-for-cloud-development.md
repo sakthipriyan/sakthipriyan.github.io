@@ -1,9 +1,10 @@
 ---
-title: "Chapter 2: Go for Cloud Development"
+title: "Go for Cloud Development"
+subtitle: "Building Cloud-Native Apps with Golang"
+type: "books"
+chapter: 2
 date: 2025-06-10
-weight: 2
-type: books
-layout: book
+author: "Sakthi Priyan H"
 draft: false
 ---
 

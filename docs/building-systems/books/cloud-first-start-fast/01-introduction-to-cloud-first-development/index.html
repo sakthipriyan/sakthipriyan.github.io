@@ -1,15 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Design, Build &amp; Deploy Scalable Cloud Systems | Sakthi Priyan H</title>
-    <meta name="description" content="\newpage
-\aftertochook
-\tableofcontents
-\beforemainhook"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <title>Introduction to Cloud-First Development | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds.">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/book-layout.css">
+    
 </head>
-<body class="building-systems"><header class="site-header">
+
+<body class="book-reader building-systems" data-template="single.html"><header class="site-header">
     <nav class="main-nav">
         
             
@@ -105,6 +107,7 @@
         
     </nav>
 </header>
+    
 <nav class="breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item">
@@ -159,107 +162,20 @@
             
             
             <li class="breadcrumb-item active" aria-current="page">
-                <span>Design, Build &amp; Deploy Scalable Cloud Systems</span>
+                <span>Introduction to Cloud-First Development</span>
             </li>
             
         </ol>
 </nav>
 
     <main>
-<article>
-    <h1>Design, Build &amp; Deploy Scalable Cloud Systems</h1>
-    <div><p>\newpage</p>
-<p>\aftertochook</p>
-<p>\tableofcontents</p>
-<p>\beforemainhook</p>
-</div>
-</article>
-
-    </main><footer class="site-footer">
+        <section class="draft-notice">
+            <h1>Cloud First, Start Fast</h1>
+            <p>This book is currently in draft mode and not yet published.</p>
+        </section>
+    </main>
+    <footer class="site-footer">
     <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
-</footer><script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            
-            console.log('Hamburger menu initialized', { hamburger, navLinks });
-            
-            if (hamburger && navLinks) {
-                
-                const overlay = document.createElement('div');
-                overlay.className = 'nav-overlay';
-                document.body.appendChild(overlay);
-                
-                console.log('Overlay created and added to body');
-                
-                
-                hamburger.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    
-                    
-                    const isExpanded = hamburger.classList.contains('active');
-                    hamburger.setAttribute('aria-expanded', isExpanded);
-                    
-                    
-                    document.body.style.overflow = isExpanded ? 'hidden' : '';
-                    
-                    console.log('Menu toggled', { isExpanded });
-                });
-                
-                
-                overlay.addEventListener('click', function() {
-                    console.log('Overlay clicked - closing menu');
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    overlay.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                });
-                
-                
-                const navLinksElements = navLinks.querySelectorAll('a');
-                console.log('Found nav links:', navLinksElements.length);
-                
-                navLinksElements.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        console.log('Link clicked:', link.href);
-                        
-                        
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        overlay.classList.remove('active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    });
-                });
-                
-                
-                window.addEventListener('resize', function() {
-                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
-                        console.log('Window resized - closing menu');
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        overlay.classList.remove('active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    }
-                });
-            } else {
-                console.warn('Hamburger menu elements not found');
-            }
-        });
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5NGEJ767SK');
-    </script>
-</body>
+</footer></body>
 </html>
+
