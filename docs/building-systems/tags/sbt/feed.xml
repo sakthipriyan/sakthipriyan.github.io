@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sbt on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/sbt/</link>
+    <link>http://localhost:1313/building-systems/tags/sbt/</link>
     <description>Recent content in Sbt on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/sbt/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/sbt/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building machine learning models</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/building-machine-learning-models/</link>
+      <link>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/building-machine-learning-models/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Feature engineering for machine learning models</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/feature-engineering-for-machine-learning-models/</link>
+      <link>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</link>
       <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/feature-engineering-for-machine-learning-models/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
+      <link>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
   </channel>

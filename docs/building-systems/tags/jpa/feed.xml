@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jpa on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/jpa/</link>
+    <link>http://localhost:1313/building-systems/tags/jpa/</link>
     <description>Recent content in Jpa on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Mon, 24 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/jpa/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/jpa/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Efficiently using Enum in entity class</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/efficiently-using-enum-in-entity-class/</link>
+      <link>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/efficiently-using-enum-in-entity-class/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</guid>
       <description>to improve code maintainability and database performance.</description>
     </item>
   </channel>

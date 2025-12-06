@@ -9,8 +9,8 @@
         {{- end -}}
 
         <div class="book-toc-header">
-            <h2>Table of Contents</h2>
-            <button class="book-toc-close" aria-label="Close Table of Contents">×</button>
+            <h2>Chapters</h2>
+            <button class="book-toc-close" aria-label="Close Chapters">×</button>
         </div>
 
         {{- $chapters := where $currentBook.Pages ".Params.chapter" "!=" nil -}}
