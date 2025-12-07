@@ -5,6 +5,8 @@ draft: true
 layout: "slides"
 type: "slides"
 summary: "A walkthrough of building a SQL translator using agentic AI, deterministic ANTLR grammars, unified IR, and YAML-driven testing."
+js_tools:
+  - viz
 systems_tags:
   - SQL Translation
   - ANTLR
