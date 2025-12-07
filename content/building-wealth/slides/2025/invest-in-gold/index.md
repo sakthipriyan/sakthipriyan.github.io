@@ -5,6 +5,8 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "Learn the smartest ways to invest in Gold using ETFs, Mutual Funds and more."
+js_tools:
+  - viz
 wealth_tags:
   - Building Wealth
   - Gold

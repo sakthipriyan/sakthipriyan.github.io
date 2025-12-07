@@ -11,6 +11,8 @@ systems_tags:
   - IR
   - BigQuery
   - Athena
+js_tools:
+  - viz
 ---
 
 Originally presented as part of [Aqfer](https://aqfer.com/)'s internal tech talk.

@@ -13,6 +13,8 @@
 
 {{ define "scripts" }}
 <script>
+    let isInitialLoad = true;
+    
     // Render DOT diagrams in a slide (or all slides if slide=null)
     function renderGraphviz(slide = null) {
         const slides = slide ? [slide] : Array.from(Reveal.getSlides());
@@ -51,6 +53,131 @@
         });
     }
 
+    // Initialize ECharts in containers with data-chart attribute
+    function initializeECharts(slide = null) {
+        if (typeof echarts === 'undefined') return;
+        
+        // If initializing a specific slide, wait for it to be visible
+        if (slide) {
+            // Use requestAnimationFrame to ensure the slide transition is complete
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    slide.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                        console.log('[DEBUG] Processing chart container:', container.id, 'has instance:', !!container._chartInstance);
+                        
+                        // Always dispose and recreate to replay animation
+                        if (container._chartInstance) {
+                            console.log('[DEBUG] Disposing existing chart instance:', container.id);
+                            container._chartInstance.dispose();
+                            container._chartInstance = null;
+                        }
+                        
+                        try {
+                            const config = JSON.parse(container.dataset.chart);
+                            
+                            console.log('[DEBUG] Creating new chart instance:', container.id);
+                            
+                            // Get existing instance or create new one
+                            // This prevents multiple instances on the same DOM element
+                            let chart = echarts.getInstanceByDom(container);
+                            
+                            if (chart) {
+                                console.log('[DEBUG] Found existing ECharts instance, disposing it:', container.id);
+                                chart.dispose();
+                                chart = null;
+                            }
+                            
+                            // Clear the container completely
+                            container.innerHTML = '';
+                            
+                            // Initialize fresh chart
+                            chart = echarts.init(container);
+                            
+                            // Set option with notMerge=true to force complete refresh and replay animation
+                            chart.setOption(config, true);
+                            
+                            // Store chart instance
+                            container._chartInstance = chart;
+                            container.dataset.initialized = true;
+                            
+                            // Force resize after initialization
+                            setTimeout(() => chart.resize(), 100);
+                            
+                            console.log('[DEBUG] ECharts initialized with animation:', container.id);
+                        } catch (err) {
+                            console.error('[DEBUG] ECharts error:', err);
+                        }
+                    });
+                });
+            });
+        } else {
+            // Initial render for all slides - only initialize current slide
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                initializeECharts(currentSlide);
+            }
+        }
+        
+        // Handle window resize
+        window.removeEventListener('resize', handleChartResize);
+        window.addEventListener('resize', handleChartResize);
+    }
+    
+    function handleChartResize() {
+        document.querySelectorAll('.echarts-container[data-initialized]').forEach(container => {
+            if (container._chartInstance) {
+                container._chartInstance.resize();
+            }
+        });
+    }
+
+    // Trigger GSAP animations on slide change
+    function triggerGSAPAnimations(slide) {
+        if (typeof gsap === 'undefined') {
+            console.log('[DEBUG] GSAP not loaded');
+            return;
+        }
+        if (!slide) {
+            console.log('[DEBUG] No slide provided to triggerGSAPAnimations');
+            return;
+        }
+        
+        // Use requestAnimationFrame to ensure slide is visible
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                // Reset animations on all slides first
+                document.querySelectorAll('[data-gsap]').forEach(el => {
+                    delete el.dataset.gsapAnimated;
+                    // Reset element to original state
+                    gsap.set(el, { clearProps: "all" });
+                });
+                
+                // Auto-animate elements with data-gsap attribute on current slide
+                const elements = slide.querySelectorAll('[data-gsap]');
+                console.log('[DEBUG] Found', elements.length, 'elements with data-gsap on current slide');
+                
+                elements.forEach(el => {
+                    if (el.dataset.gsapAnimated) return;
+                    
+                    try {
+                        const config = JSON.parse(el.dataset.gsap);
+                        console.log('[DEBUG] Animating element with config:', config);
+                        
+                        // Extract 'from' properties and other options
+                        const { from, ...options } = config;
+                        const animationVars = { ...from, ...options };
+                        
+                        gsap.from(el, animationVars);
+                        el.dataset.gsapAnimated = true;
+                        console.log('[DEBUG] GSAP animation triggered for element:', el);
+                    } catch (err) {
+                        console.error('[DEBUG] GSAP error:', err);
+                    }
+                });
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         Reveal.initialize({
             hash: true,
@@ -76,19 +203,43 @@
                     slideEl.dataset.parsed = true;
                 }
             });
-            renderGraphviz(); // render all slides
+            renderGraphviz(); // render all slides (diagrams don't have animations)
+            triggerGSAPAnimations(event.currentSlide); // trigger initial animations
+            // Don't initialize charts on ready - let slidechanged handle it
         });
 
         // Render diagrams on slide change (for dynamically added slides)
         Reveal.on('slidechanged', event => {
             console.log('[DEBUG] Slide changed to index', event.indexh);
+            
+            // Clean up charts on previous slide
+            if (event.previousSlide) {
+                event.previousSlide.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                    if (container._chartInstance) {
+                        console.log('[DEBUG] Disposing chart on previous slide:', container.id);
+                        container._chartInstance.dispose();
+                        container._chartInstance = null;
+                        container.innerHTML = '';
+                        delete container.dataset.initialized;
+                    }
+                });
+            }
+            
+            // Render new slide
             renderGraphviz(event.currentSlide);
+            triggerGSAPAnimations(event.currentSlide);
+            
+            // Delay chart initialization to make animation visible
+            setTimeout(() => {
+                initializeECharts(event.currentSlide);
+            }, 300);
         });
 
         // Render diagrams when Markdown plugin parses a slide
         Reveal.addEventListener('markdown', event => {
             console.log('[DEBUG] Markdown parsed for slide', event.slide);
             renderGraphviz(event.slide);
+            // Don't initialize charts here - let slidechanged handle it to preserve animations
         });
     });
 </script>
