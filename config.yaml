@@ -9,6 +9,18 @@ build:
 params:
   description: "Systems that Scale. Wealth that Compounds."
   author: "Sakthi Priyan H"
+  # Default JavaScript tools site-wide (can be overridden per-page)
+  # Options: echarts, gsap, viz, all
+  # Set to [] to disable by default (recommended for performance)
+  default_js_tools: []  
+  # Example to enable all: default_js_tools: ["all"]
+  # Example selective: default_js_tools: ["echarts", "viz"]
+  
+  # Default JavaScript tools for slides specifically (overrides default_js_tools for slides)
+  slides:
+    default_js_tools: []  
+    # Set to ["all"] to enable all tools by default for all slides
+    # Or specify individually: ["echarts", "gsap", "viz"]
 
 markup:
   highlight:
