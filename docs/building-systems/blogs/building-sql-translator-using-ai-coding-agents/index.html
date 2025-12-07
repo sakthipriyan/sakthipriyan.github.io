@@ -724,14 +724,21 @@ details:
                 if (window.hljs) { hljs.highlightAll(); }
             }
         </script>
-        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script><script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 
                 document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
                     const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
-                    console.log('[DEBUG] Rendering DOT block in blog');
+                    console.log('[DEBUG] Rendering DOT block');
 
                     const viz = new Viz();
                     viz.renderSVGElement(dotCode)
@@ -750,7 +757,7 @@ details:
                             const preEl = codeEl.parentNode;
                             preEl.parentNode.replaceChild(container, preEl);
 
-                            console.log('[DEBUG] Diagram rendered in blog');
+                            console.log('[DEBUG] Diagram rendered');
                         })
                         .catch(err => {
                             console.error('[DEBUG] Viz.js error:', err);
@@ -758,7 +765,12 @@ details:
                         });
                 });
             });
-        </script><script>
+        </script>
+        
+        
+        
+        
+        <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');

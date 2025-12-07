@@ -5,6 +5,8 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "Learn the best ways to use Debt investment for short term, long term and portfolio asset allocation"
+js_tools:
+  - viz
 wealth_tags:
   - Building Block
   - Debt

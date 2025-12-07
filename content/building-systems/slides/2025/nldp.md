@@ -5,6 +5,8 @@ draft: true
 layout: "slides"
 type: "slides"
 summary: "Prototype system that converts natural language into SQL and IR to drive dynamic DAG execution for Hetero Collate workloads."
+js_tools:
+  - viz
 systems_tags:
   - SQL
   - AI Engineering
