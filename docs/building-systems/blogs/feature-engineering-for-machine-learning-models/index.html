@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Feature engineering for machine learning models | Sakthi Priyan H</title>
-    <meta name="description" content="using scala spark"><link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+    <meta name="description" content="using scala spark"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
 </head>
 <body class="building-systems"><header class="site-header">
     <nav class="main-nav">
@@ -15,7 +15,7 @@
             
             
             <div class="logo">
-                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
                 <span class="separator"> | </span>
                 
                 <a href="/building-systems/" class="name-link">Building Systems</a>
@@ -40,7 +40,7 @@
                         
                             
                             
-                                <li><a href="http://localhost:1313/building-systems/blogs/">Blogs</a></li>
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
                             
                         
                     
@@ -75,7 +75,7 @@
                                 
                             
                             
-                                <li><a href="http://localhost:1313/building-systems/tags/">Tags</a></li>
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
                             
                         
                     
@@ -105,7 +105,7 @@
 <nav class="breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item">
-            <a href="http://localhost:1313/">Home</a>
+            <a href="https://sakthipriyan.com/">Home</a>
         </li>
             
             
@@ -672,17 +672,17 @@ Ready to be consumed by ML models.</p>
     <div class="card-tags">
         <span class="tags-icon">🏷️</span>
         
-        <a href="http://localhost:1313/building-systems/tags/spark/" class="tag-link">Spark</a>
+        <a href="https://sakthipriyan.com/building-systems/tags/spark/" class="tag-link">Spark</a>
         
-        <a href="http://localhost:1313/building-systems/tags/scala/" class="tag-link">Scala</a>
+        <a href="https://sakthipriyan.com/building-systems/tags/scala/" class="tag-link">Scala</a>
         
-        <a href="http://localhost:1313/building-systems/tags/sbt/" class="tag-link">Sbt</a>
+        <a href="https://sakthipriyan.com/building-systems/tags/sbt/" class="tag-link">Sbt</a>
         
-        <a href="http://localhost:1313/building-systems/tags/bigdata/" class="tag-link">Bigdata</a>
+        <a href="https://sakthipriyan.com/building-systems/tags/bigdata/" class="tag-link">Bigdata</a>
         
-        <a href="http://localhost:1313/building-systems/tags/code/" class="tag-link">Code</a>
+        <a href="https://sakthipriyan.com/building-systems/tags/code/" class="tag-link">Code</a>
         
-        <a href="http://localhost:1313/building-systems/tags/machine-learning/" class="tag-link">Machine-Learning</a>
+        <a href="https://sakthipriyan.com/building-systems/tags/machine-learning/" class="tag-link">Machine-Learning</a>
     </div><div class="content-comments">
         <div id="disqus_thread"></div>
         <script type="text/javascript">
@@ -708,41 +708,18 @@ Ready to be consumed by ML models.</p>
                 if (window.hljs) { hljs.highlightAll(); }
             }
         </script>
-        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script><script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                
-                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
-                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
-                    console.log('[DEBUG] Rendering DOT block in blog');
-
-                    const viz = new Viz();
-                    viz.renderSVGElement(dotCode)
-                        .then(svg => {
-                            
-                            svg.removeAttribute('width');
-                            svg.removeAttribute('height');
-                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-
-                            
-                            const container = document.createElement('div');
-                            container.className = 'graphviz-diagram';
-                            container.appendChild(svg);
-
-                            
-                            const preEl = codeEl.parentNode;
-                            preEl.parentNode.replaceChild(container, preEl);
-
-                            console.log('[DEBUG] Diagram rendered in blog');
-                        })
-                        .catch(err => {
-                            console.error('[DEBUG] Viz.js error:', err);
-                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
-                        });
-                });
-            });
-        </script><script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
