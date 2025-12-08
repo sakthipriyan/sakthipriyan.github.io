@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Asset Allocation &amp; Rebalancing | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds.">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
+
+    
+    <style>
+         
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .reveal {
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+
+        .reveal section {
+            font-size: 1.4em;
+            line-height: 1.5;
+        }
+
+        .reveal .slides>section>section {
+            font-size: 1.0em;
+        }
+
+        .reveal .progress {
+            position: fixed;
+            height: 12px;
+            bottom: 10px;
+            width: 90%;
+            left: 5%;
+            border-radius: 6px;
+        }
+
+        .graphviz {
+            width: 100%;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .graphviz svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+         
+        pre code.dot,
+        pre.language-dot,
+        pre.dot {
+            display: none;
+        }
+
+         
+        .echarts-container {
+            width: 100%;
+            height: 80vh;
+        }
+
+         
+        .gsap-fade-in {
+            opacity: 0;
+        }
+
+        .gsap-slide-in {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown data-separator="^---$" data-separator-vertical="^--$" data-separator-notes="^Note:" data-charset="utf-8">
+            <textarea data-template>
+&lt;span style=&#34;
+  display:inline-block;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  color: #fff;
+  padding: 4px 30px;
+  border-radius: 30px;
+&#34;&gt;
+sakthipriyan.com/building-wealth
+&lt;/span&gt;
+
+## My Asset Allocation &lt;br/&gt;&amp; Rebalancing
+&lt;br/&gt;
+
+#### What is my asset allocation and How do I manage it?
+#### Dec 06, 2025
+&lt;br/&gt;&lt;br/&gt;
+&lt;br/&gt;
+--
+
+### Disclaimer
+|                    |                                                             |
+|--------------------|-------------------------------------------------------------|
+| **Personal Fit**   | Based on my experience &amp; comfort.                     |
+| **Purpose**        | Educational — not financial advice.                    |
+| **Risk**           | Markets involve capital risk.                    |
+| **Rules**          | Verify tax/regulatory details.                        |
+| **Responsibility** | Make decisions aligned with your goals.                     |
+
+--
+
+### Contents
+&lt;br/&gt;
+&lt;ol class=&#34;fragment grow&#34;&gt;
+  &lt;li&gt;⚖️ What is Asset Allocation?&lt;/li&gt;
+  &lt;li&gt;🎯 My Asset Allocation&lt;/li&gt;
+  &lt;li&gt;🔄 Rebalancing&lt;/li&gt;
+  &lt;li&gt;🛠️ How I manage Rebalancing?&lt;/li&gt;
+  &lt;li&gt;📝 Summary&lt;/li&gt;
+&lt;/ol&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+
+---
+
+### 1️⃣ What is Asset Allocation? ⚖️ 
+
+&gt; 📊 Asset allocation is how you **divide your portfolio** across different asset types 
+&gt; based on your **time horizon** and **risk comfort** —  
+&gt; such as **Equity (India, US)**, **Debt** and **Gold**.
+
+🍲 It is the **portfolio’s recipe**. The mix determines, 
+
+&lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt; 
+
+- ⚖️ Risk level &amp; Return potential &lt;!-- .element: class=&#34;fragment fade-up&#34; style=&#34;margin-right:500px&#34; --&gt; 
+- 🌊 Volatility &lt;!-- .element: class=&#34;fragment fade-up&#34; style=&#34;margin-right:400px&#34; --&gt;  
+- 🚀 Smooth compounding &lt;!-- .element: class=&#34;fragment fade-up&#34;  style=&#34;margin-right:400px&#34;--&gt;  
+&lt;br/&gt;&lt;br/&gt;
+
+---
+
+### 2️⃣ My Asset Allocation
+&lt;div id=&#34;asset-treemap&#34; class=&#34;echarts-container&#34; data-chart=&#39;{
+  &#34;baseOption&#34;: {
+    &#34;timeline&#34;: {
+      &#34;loop&#34;: false,
+      &#34;axisType&#34;: &#34;category&#34;,
+      &#34;autoPlay&#34;: true,
+      &#34;playInterval&#34;: 10000,
+      &#34;bottom&#34;: 0,
+      &#34;data&#34;: [&#34;FY 2022-24&#34;, &#34;FY 2024-25&#34;, &#34;FY 2025-26&#34;, &#34;FY 2026-27&#34;]
+    },
+    &#34;tooltip&#34;: {
+      &#34;formatter&#34;: &#34;{b}: {c}%&#34;
+    },
+    &#34;series&#34;: [
+      {
+        &#34;type&#34;: &#34;treemap&#34;,
+        &#34;roam&#34;: false,
+        &#34;nodeClick&#34;: false,
+        &#34;levels&#34;: [
+          {
+            &#34;upperLabel&#34;: { &#34;show&#34;: false },
+            &#34;label&#34;: { &#34;show&#34;: false }
+          }
+        ],
+        &#34;breadcrumb&#34;: { &#34;show&#34;: false },
+        &#34;label&#34;: {
+          &#34;show&#34;: true,
+          &#34;formatter&#34;: &#34;{b} {c}%&#34;,
+          &#34;fontWeight&#34;: &#34;bold&#34;,
+          &#34;height&#34;: 36,
+          &#34;fontSize&#34;: 30,
+          &#34;overflow&#34;: &#34;break&#34;,
+          &#34;ellipsis&#34;: &#34;&#34;,
+          &#34;lineHeight&#34;: 36
+        },
+        &#34;upperLabel&#34;: {
+          &#34;show&#34;: true,
+          &#34;height&#34;: 36,
+          &#34;fontSize&#34;: 30,
+          &#34;fontWeight&#34;: &#34;bold&#34;,
+          &#34;overflow&#34;: &#34;break&#34;,
+          &#34;ellipsis&#34;: &#34;&#34;
+        },
+        &#34;itemStyle&#34;: {
+          &#34;borderWidth&#34;: 2,
+          &#34;borderRadius&#34;: 14,
+          &#34;borderColor&#34;: &#34;transparent&#34;
+        }
+      }
+    ]
+  },
+  &#34;options&#34;: [
+    {
+      &#34;title&#34;: { 
+        &#34;text&#34;: &#34;FY 2022–24&#34;, 
+        &#34;left&#34;: &#34;center&#34;,
+        &#34;textStyle&#34;: {
+          &#34;fontSize&#34;: 48,
+          &#34;fontWeight&#34;: &#34;bold&#34;
+        } 
+      },
+      &#34;series&#34;: [{
+        &#34;data&#34;: [
+          {
+            &#34;name&#34;: &#34;US Equity&#34;,
+            &#34;value&#34;: 25,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#3B82F6&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Nasdaq 100 Fund&#34;, &#34;value&#34;: 25, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#60A5FA&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;India Equity&#34;,
+            &#34;value&#34;: 50,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#10B981&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Sensex Fund&#34;, &#34;value&#34;: 25, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#059669&#34; } },
+              { &#34;name&#34;: &#34;Multicap Fund&#34;, &#34;value&#34;: 15, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#7E57C2&#34; } },
+              { &#34;name&#34;: &#34;IT Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#FF6F61&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;Non-Equity&#34;,
+            &#34;value&#34;: 25,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#F59E0B&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Debt (Dynamic) Fund&#34;, &#34;value&#34;: 15, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#9CA3AF&#34; } },
+              { &#34;name&#34;: &#34;Gold Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#FBBF24&#34; } }
+            ]
+          }
+        ]
+      }]
+    },
+    {
+      &#34;title&#34;: { &#34;text&#34;: &#34;FY 2024–25&#34;, &#34;left&#34;: &#34;center&#34; },
+      &#34;series&#34;: [{
+        &#34;data&#34;: [
+          {
+            &#34;name&#34;: &#34;US Equity&#34;,
+            &#34;value&#34;: 30,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#3B82F6&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Nasdaq 100 Fund&#34;, &#34;value&#34;: 30, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#60A5FA&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;India Equity&#34;,
+            &#34;value&#34;: 50,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#10B981&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Sensex Fund&#34;, &#34;value&#34;: 30, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#059669&#34; } },
+              { &#34;name&#34;: &#34;Midcap Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#34D399&#34; } },
+              { &#34;name&#34;: &#34;Smallcap Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#6EE7B7&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;Non-Equity&#34;,
+            &#34;value&#34;: 20,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#F59E0B&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Debt (Dynamic) Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#9CA3AF&#34; } },
+              { &#34;name&#34;: &#34;Gold Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#FBBF24&#34; } }
+            ]
+          }
+        ]
+      }]
+    },
+    {
+      &#34;title&#34;: { &#34;text&#34;: &#34;FY 2025–26&#34;, &#34;left&#34;: &#34;center&#34; },
+      &#34;series&#34;: [{
+        &#34;data&#34;: [
+          {
+            &#34;name&#34;: &#34;US Equity&#34;,
+            &#34;value&#34;: 35,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#3B82F6&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Nasdaq 100 ETF&#34;, &#34;value&#34;: 35, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#60A5FA&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;India Equity&#34;,
+            &#34;value&#34;: 45,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#10B981&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Nifty 50 Fund&#34;, &#34;value&#34;: 20, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#059669&#34; } },
+              { &#34;name&#34;: &#34;Next 50 Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#34D399&#34; } },
+              { &#34;name&#34;: &#34;Midcap 150 Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#6EE7B7&#34; } },
+              { &#34;name&#34;: &#34;Smallcap 250 Fund&#34;, &#34;value&#34;: 5, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#A7F3D0&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;Non-Equity&#34;,
+            &#34;value&#34;: 20,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#F59E0B&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Debt (Dynamic) Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#9CA3AF&#34; } },
+              { &#34;name&#34;: &#34;Gold Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#FBBF24&#34; } }
+            ]
+          }
+        ]
+      }]
+    },
+    {
+      &#34;title&#34;: { &#34;text&#34;: &#34;FY 2026–27&#34;, &#34;left&#34;: &#34;center&#34; },
+      &#34;series&#34;: [{
+        &#34;data&#34;: [
+          {
+            &#34;name&#34;: &#34;US Equity&#34;,
+            &#34;value&#34;: 40,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#3B82F6&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Nasdaq 100 ETF&#34;, &#34;value&#34;: 40, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#60A5FA&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;India Equity&#34;,
+            &#34;value&#34;: 40,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#10B981&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Nifty 50 Fund&#34;, &#34;value&#34;: 20, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#059669&#34; } },
+              { &#34;name&#34;: &#34;Next 50 Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#34D399&#34; } },
+              { &#34;name&#34;: &#34;Midcap 150 Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#6EE7B7&#34; } }
+            ]
+          },
+          {
+            &#34;name&#34;: &#34;Non-Equity&#34;,
+            &#34;value&#34;: 20,
+            &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#F59E0B&#34; },
+            &#34;children&#34;: [
+              { &#34;name&#34;: &#34;Debt (Arbitrage) Fund&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#9CA3AF&#34; } },
+              { &#34;name&#34;: &#34;Gold ETF&#34;, &#34;value&#34;: 10, &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#FBBF24&#34; } }
+            ]
+          }
+        ]
+      }]
+    }
+  ]
+}&#39;&gt;&lt;/div&gt;
+
+
+--
+
+### 2️⃣ My Asset Allocation / Why?
+- Strong long-term equity focus (80%) &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Diversified across asset classes, geography/currency &amp; market cap &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Equity Exposure via index funds only &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- 20% Non-equity provides drawdown protection and dry powder &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- 6 target buckets to manage and rebalance &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Simple to maintain yet optimized for compounding &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+---
+### 3️⃣ Rebalancing 🔄 
+|                |                                                                  |
+|--------------------|------------------------------------------------------------------------|
+| **What** | Adjusting your portfolio periodically to maintain your target asset allocation. |
+| **Why** | Prevents overweighting in high-performing assets. Maintains desired risk profile. |
+| **When** | Time-based (e.g. annually) or &lt;br/&gt; Threshold-based (e.g drifts beyond 5%). |
+| **How** | Sell overweight assets &amp; Buy underweight assets. |
+| **Taxation** | Consider tax implications and cost-effective strategies. |
+
+---
+
+### 4️⃣ How I Manage Rebalancing? 🛠️
+
+&gt; 💡 I use monthly **Cash-Flow** to do &lt;br/&gt; **Threshold based** rebalancing.
+
+What does it mean?
+
+- If an asset is above its target → I stop buying it.
+- I invest new money only into underweight assets.
+- The split is proportional to how underweight each asset is.
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+### 4️⃣ How I Manage Rebalancing? 🛠️
+Steps to allocate monthly investment
+1. Calculate deviation (Target ₹ – Current ₹) for each asset
+2. Exclude anything that is negative
+3. Allocate new money based on these deviation ratios
+
+&gt; 💡 This fixes imbalance without selling.
+
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+### 4️⃣ Rebalancing Example
+Current Portfolio:  ₹ 5,00,000 - Monthly Inflow: ₹ 20,000 
+
+|Asset|Current|Target| ₹ Current | ₹  Target |
+|-|-|-|-:|-:|
+|Nifty 50	| 39.00%| 40.00% | 1,95,000 | 2,08,000 |
+|Nasdaq 100	| 39.90%| 40.00% | 1,99,500 | 2,08,000 |
+|Debt	|  10.50%| 10.00% | 52,500 | 52,000 |
+|Gold	| 10.60%| 10.00% | 53,000 | 52,000 |
+|Total | 100.00% | 100.00% | 5,00,000 | 5,20,000 |
+
+&lt;small&gt;Target Total is ₹ 5,20,000 after this month’s ₹ 20,000 investment.&lt;/small&gt;
+
+
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+### 4️⃣ Rebalancing Example
+Current Portfolio:  ₹ 5,00,000 - Monthly Inflow: ₹ 20,000 
+
+|Asset| ₹ Current | ₹  Target | ₹ Diff | ₹ Adjusted|
+|-|-:|-:|-:|-:|
+|Nifty 50	| 1,95,000 | 2,08,000 | 13,000 | 12,000 |
+|Nasdaq 100	| 1,99,500 | 2,08,000 | 8,500 | 8,000 |
+|Debt	 | 52,500 | 52,000 |  |  |
+|Gold	| 53,000 | 52,000 |  |  |
+|Total | 100.00% | 100.00% | 21,500 | 20,000 |
+
+&lt;small&gt;₹ Diff = ₹ Target – ₹ Current. &lt;br/&gt; ₹ Adjusted = Apply ₹ Diff ratio and round off &lt;/small&gt;
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+### 4️⃣ Rebalancing Example
+Comparing Dynamic monthly purchase vs Static SIP
+
+|Asset| ₹ Current | ₹  Target | ₹ Dynamic| ₹ Static |
+|-|-:|-:|-:|-:|
+|Nifty 50	| 1,95,000 | 2,08,000 | 12,000 | 8,000 |
+|Nasdaq 100	| 1,99,500 | 2,08,000 | 8,000 | 8,000 |
+|Debt	 | 52,500 | 52,000 |  | 2,000 | 
+|Gold	| 53,000 | 52,000 |  | 2,000 |
+|Total | 100.00% | 100.00% | 20,000 | 20,000 |
+
+&lt;small&gt;Static SIP = Fixed investment into each asset&lt;/small&gt;
+
+--
+
+### 4️⃣ Why This Works Well ⭐
+
+- No selling → No taxes &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Automatically maintains target allocation  &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Emotion-free &amp; rules-based &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Buys low, avoids buying high &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Best suited for the accumulation stage &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+---
+
+### 5️⃣ Summary 📝 
+
+- Allocation: 80% Equity / 20% Non-Equity &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Diversified across India, US, Debt and Gold &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;
+- Rebalancing uses cash-flow &#43; deviation ratios &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Zero selling unless absolutely necessary &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt;  
+- Clean, mathematically precise, tax-efficient strategy &lt;!-- .element: class=&#34;fragment fade-up&#34; --&gt; 
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+---
+
+&lt;span style=&#34;
+  display:inline-block;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  color: #fff;
+  padding: 4px 30px;
+  border-radius: 30px;
+&#34;&gt;
+sakthipriyan.com/building-wealth
+&lt;/span&gt;
+
+**Found this useful? 🙂**
+| |
+|-|
+|👍 Like | 
+|💬 Comment|
+|🔄 Share |
+| 📌 Subscribe  |
+for more videos...
+
+**✨ Thank You 🙏**
+</textarea>
+        </section>
+    </div>
+</div>
+
+
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    
+    
+    
+    
+
+    
+
+        
+<script>
+    let isInitialLoad = true;
+    
+    
+    function renderGraphviz(slide = null) {
+        const slides = slide ? [slide] : Array.from(Reveal.getSlides());
+        slides.forEach(slideEl => {
+            slideEl.querySelectorAll('pre code.dot, pre.language-dot, pre.dot').forEach(codeEl => {
+                if (codeEl.dataset.rendered) return;
+
+                const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                console.log('[DEBUG] Rendering DOT block:\n', dotCode);
+
+                const viz = new Viz();
+                viz.renderSVGElement(dotCode)
+                    .then(svg => {
+                        
+                        svg.removeAttribute('width');
+                        svg.removeAttribute('height');
+                        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                        
+                        const container = document.createElement('div');
+                        container.className = 'graphviz';
+                        container.appendChild(svg);
+
+                        
+                        const preEl = codeEl.parentNode;
+                        preEl.parentNode.replaceChild(container, preEl);
+
+                        codeEl.dataset.rendered = true;
+                        console.log('[DEBUG] Diagram rendered and pre replaced.');
+                    })
+                    .catch(err => {
+                        console.error('[DEBUG] Viz.js error:', err);
+                        codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                    });
+            });
+        });
+    }
+
+    
+    function initializeECharts(slide = null) {
+        if (typeof echarts === 'undefined') return;
+        
+        
+        if (slide) {
+            
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    slide.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                        console.log('[DEBUG] Processing chart container:', container.id, 'has instance:', !!container._chartInstance);
+                        
+                        
+                        if (container._chartInstance) {
+                            console.log('[DEBUG] Disposing existing chart instance:', container.id);
+                            container._chartInstance.dispose();
+                            container._chartInstance = null;
+                        }
+                        
+                        try {
+                            const config = JSON.parse(container.dataset.chart);
+                            
+                            console.log('[DEBUG] Creating new chart instance:', container.id);
+                            
+                            
+                            
+                            let chart = echarts.getInstanceByDom(container);
+                            
+                            if (chart) {
+                                console.log('[DEBUG] Found existing ECharts instance, disposing it:', container.id);
+                                chart.dispose();
+                                chart = null;
+                            }
+                            
+                            
+                            container.innerHTML = '';
+                            
+                            
+                            chart = echarts.init(container);
+                            
+                            
+                            chart.setOption(config, true);
+                            
+                            
+                            container._chartInstance = chart;
+                            container.dataset.initialized = true;
+                            
+                            
+                            setTimeout(() => chart.resize(), 100);
+                            
+                            console.log('[DEBUG] ECharts initialized with animation:', container.id);
+                        } catch (err) {
+                            console.error('[DEBUG] ECharts error:', err);
+                        }
+                    });
+                });
+            });
+        } else {
+            
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                initializeECharts(currentSlide);
+            }
+        }
+        
+        
+        window.removeEventListener('resize', handleChartResize);
+        window.addEventListener('resize', handleChartResize);
+    }
+    
+    function handleChartResize() {
+        document.querySelectorAll('.echarts-container[data-initialized]').forEach(container => {
+            if (container._chartInstance) {
+                container._chartInstance.resize();
+            }
+        });
+    }
+
+    
+    function triggerGSAPAnimations(slide) {
+        if (typeof gsap === 'undefined') {
+            console.log('[DEBUG] GSAP not loaded');
+            return;
+        }
+        if (!slide) {
+            console.log('[DEBUG] No slide provided to triggerGSAPAnimations');
+            return;
+        }
+        
+        
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                
+                document.querySelectorAll('[data-gsap]').forEach(el => {
+                    delete el.dataset.gsapAnimated;
+                    
+                    gsap.set(el, { clearProps: "all" });
+                });
+                
+                
+                const elements = slide.querySelectorAll('[data-gsap]');
+                console.log('[DEBUG] Found', elements.length, 'elements with data-gsap on current slide');
+                
+                elements.forEach(el => {
+                    if (el.dataset.gsapAnimated) return;
+                    
+                    try {
+                        const config = JSON.parse(el.dataset.gsap);
+                        console.log('[DEBUG] Animating element with config:', config);
+                        
+                        
+                        const { from, ...options } = config;
+                        const animationVars = { ...from, ...options };
+                        
+                        gsap.from(el, animationVars);
+                        el.dataset.gsapAnimated = true;
+                        console.log('[DEBUG] GSAP animation triggered for element:', el);
+                    } catch (err) {
+                        console.error('[DEBUG] GSAP error:', err);
+                    }
+                });
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        Reveal.initialize({
+            hash: true,
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+            transition: 'slide',
+            slideNumber: false,
+            margin: 0.05,
+            width: "100%",
+            height: "100%",
+            minScale: 1,
+            maxScale: 1,
+            progress: true
+        });
+
+        
+        Reveal.addEventListener('ready', event => {
+            console.log('[DEBUG] Reveal ready, rendering all slides...');
+            
+            Reveal.getSlides().forEach(slideEl => {
+                if (slideEl.dataset.parsed) return;
+                if (slideEl.querySelector('textarea[data-template]')) {
+                    RevealMarkdown.parseSlide(slideEl);
+                    slideEl.dataset.parsed = true;
+                }
+            });
+            renderGraphviz(); 
+            triggerGSAPAnimations(event.currentSlide); 
+            
+        });
+
+        
+        Reveal.on('slidechanged', event => {
+            console.log('[DEBUG] Slide changed to index', event.indexh);
+            
+            
+            if (event.previousSlide) {
+                event.previousSlide.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                    if (container._chartInstance) {
+                        console.log('[DEBUG] Disposing chart on previous slide:', container.id);
+                        container._chartInstance.dispose();
+                        container._chartInstance = null;
+                        container.innerHTML = '';
+                        delete container.dataset.initialized;
+                    }
+                });
+            }
+            
+            
+            renderGraphviz(event.currentSlide);
+            triggerGSAPAnimations(event.currentSlide);
+            
+            
+            setTimeout(() => {
+                initializeECharts(event.currentSlide);
+            }, 300);
+        });
+
+        
+        Reveal.addEventListener('markdown', event => {
+            console.log('[DEBUG] Markdown parsed for slide', event.slide);
+            renderGraphviz(event.slide);
+            
+        });
+    });
+</script>
+
+
+            <script>
+            
+            (function() {
+                function getQueryParam(name) {
+                    return new URLSearchParams(window.location.search).get(name);
+                }
+                const obsParam = getQueryParam('obs');
+                if (obsParam) {
+                    
+                    const parts = obsParam.split(":");
+                    let host = parts[0] || "";
+                    let port = parts[1] || "";
+                    let password = "";
+                    if (parts.length > 2) {
+                        
+                        password = parts.slice(2).join(":");
+                    }
+                    if (!host || !port) {
+                        host = prompt("Enter OBS host (e.g. 192.168.1.100):", "localhost") || "localhost";
+                        port = prompt("Enter OBS port (e.g. 4455):", "4455") || "4455";
+                    }
+                    const obsWsUrl = `ws://${host}:${port}`;
+
+                    
+                    var obsScript = document.createElement('script');
+                    obsScript.src = 'https://cdn.jsdelivr.net/npm/obs-websocket-js';
+                    obsScript.onload = function() {
+                        const obs = new OBSWebSocket();
+
+                        const connectToObs = async () => {
+                            try {
+                                await obs.connect(obsWsUrl, password);
+                                console.log('Connected to OBS!');
+                                
+                                
+                                try {
+                                    const { scenes } = await obs.call('GetSceneList');
+                                    obsScenes = scenes.map(scene => scene.sceneName).reverse();
+                                    console.log('Available OBS scenes:', obsScenes);
+                                    
+                                    if (obsScenes.length === 0) {
+                                        console.warn('No scenes found in OBS, using default scenes');
+                                        obsScenes = ["Screen Only", "Video RB", "Video Only"];
+                                    }
+                                    
+                                    
+                                    const { currentProgramSceneName } = await obs.call('GetCurrentProgramScene');
+                                    obsSceneIndex = obsScenes.indexOf(currentProgramSceneName);
+                                    if (obsSceneIndex === -1) obsSceneIndex = 0;
+                                    console.log(`Current scene: ${currentProgramSceneName}, index: ${obsSceneIndex}`);
+                                } catch (error) {
+                                    console.error('Failed to fetch scenes from OBS:', error);
+                                    obsScenes = ["Screen Only", "Video RB", "Video Only"];
+                                }
+                            } catch (error) {
+                                console.error('Failed to connect:', error);
+                            }
+                        };
+
+                        const switchScene = async (sceneName) => {
+                            try {
+                                await obs.call('SetCurrentProgramScene', { sceneName });
+                                console.log(`Switched to scene: ${sceneName}`);
+                            } catch (error) {
+                                console.error('Failed to switch scene:', error);
+                            }
+                        };
+
+                        connectToObs();
+
+                        let obsSceneIndex = 0;
+                        let obsScenes = ["Screen Only", "Video RB", "Video Only"]; 
+
+                        document.addEventListener("keydown", (e) => {
+                            const key = e.key;
+                            if (key != "b" && key != "Escape" && key != "Shift" &&
+                                    key != "F5" && key != "Alt" && key != "Meta" && key != "π") {
+                                    return;
+                            }
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            if (key === "b") {
+                                    obsSceneIndex = (obsSceneIndex - 1 + obsScenes.length) % obsScenes.length;
+                            } else if (key === "Escape" || key === "π") {
+                                    obsSceneIndex = (obsSceneIndex + 1) % obsScenes.length;
+                            }
+                            if (key === "b" || key === "Escape" || key === "π") {
+                                    const currentScene = obsScenes[obsSceneIndex];
+                                    switchScene(currentScene);
+                            }
+                        }, true);
+                    };
+                    document.body.appendChild(obsScript);
+                }
+            })();
+            </script>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+{{- /* Book Reader Scripts */ -}}
+<script>
+    // Clear old auto theme immediately
+    if (localStorage.getItem('book-theme') === 'auto') {
+        localStorage.removeItem('book-theme');
+        localStorage.removeItem('book-theme-manual');
+    }
+    
+    // Theme Toggle Functionality
+    (function() {
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        const body = document.body;
+        const lightIcon = document.querySelector('.theme-icon-light');
+        const darkIcon = document.querySelector('.theme-icon-dark');
+        
+        if (!themeToggle) return;
+        
+        // Detect system theme preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Get saved theme or default to system preference
+        let currentTheme = localStorage.getItem('book-theme');
+        
+        // Clear old "auto" theme if it exists
+        if (currentTheme === 'auto') {
+            localStorage.removeItem('book-theme');
+            currentTheme = null;
+        }
+        
+        if (!currentTheme) {
+            currentTheme = prefersDark.matches ? 'dark' : 'light';
+        }
+        
+        function applyTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem('book-theme', theme);
+            
+            // Remove all theme classes from both html and body
+            html.classList.remove('theme-auto', 'theme-light', 'theme-dark');
+            body.classList.remove('theme-auto', 'theme-light', 'theme-dark');
+            
+            // Add current theme class to both html and body
+            html.classList.add('theme-' + theme);
+            body.classList.add('theme-' + theme);
+            
+            console.log('Applied theme:', theme, 'HTML classes:', html.className, 'Body classes:', body.className);
+            
+            // Show opposite icon (if dark theme, show light icon to switch to light)
+            if (theme === 'dark') {
+                lightIcon.classList.add('active');
+                darkIcon.classList.remove('active');
+            } else {
+                darkIcon.classList.add('active');
+                lightIcon.classList.remove('active');
+            }
+        }
+        
+        // Apply saved theme on load
+        applyTheme(currentTheme);
+        
+        // Theme toggle click handler - just toggle between light and dark
+        themeToggle.addEventListener('click', function() {
+            // Mark that user has manually set theme
+            localStorage.setItem('book-theme-manual', 'true');
+            
+            // Toggle only between light and dark (no auto)
+            const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(nextTheme);
+        });
+        
+        // Listen for system theme changes and auto-apply if no manual preference set
+        prefersDark.addEventListener('change', function(e) {
+            // Only auto-switch if user hasn't manually set a preference
+            const wasAuto = !localStorage.getItem('book-theme-manual');
+            if (wasAuto) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    })();
+
+    // TOC Sidebar Functionality
+    (function() {
+        const tocToggle = document.querySelector('.book-toc-toggle');
+        const tocSidebar = document.querySelector('.book-toc-sidebar');
+        const tocClose = document.querySelector('.book-toc-close');
+        const tocOverlay = document.querySelector('.book-toc-overlay');
+        const body = document.body;
+        
+        if (!tocToggle || !tocSidebar) return;
+        
+        function openTOC() {
+            tocSidebar.classList.add('active');
+            tocOverlay.classList.add('active');
+            tocToggle.classList.add('active');
+            tocToggle.setAttribute('aria-expanded', 'true');
+            body.style.overflow = 'hidden';
+        }
+        
+        function closeTOC() {
+            tocSidebar.classList.remove('active');
+            tocOverlay.classList.remove('active');
+            tocToggle.classList.remove('active');
+            tocToggle.setAttribute('aria-expanded', 'false');
+            body.style.overflow = '';
+        }
+        
+        tocToggle.addEventListener('click', function() {
+            if (tocSidebar.classList.contains('active')) {
+                closeTOC();
+            } else {
+                openTOC();
+            }
+        });
+        
+        if (tocClose) {
+            tocClose.addEventListener('click', closeTOC);
+        }
+        
+        if (tocOverlay) {
+            tocOverlay.addEventListener('click', closeTOC);
+        }
+        
+        // Close TOC on link click (mobile)
+        const tocLinks = document.querySelectorAll('.book-toc-list a');
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    closeTOC();
+                }
+            });
+        });
+        
+        // Close TOC on window resize if open
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && tocSidebar.classList.contains('active')) {
+                closeTOC();
+            }
+        });
+    })();
+</script>
