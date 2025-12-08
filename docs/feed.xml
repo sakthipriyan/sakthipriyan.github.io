@@ -2,472 +2,486 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sakthi Priyan on Sakthi Priyan H</title>
-    <link>http://localhost:1313/</link>
+    <link>https://sakthipriyan.com/</link>
     <description>Recent content in Sakthi Priyan on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 04 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Asset Allocation &amp; Rebalancing Explained</title>
+      <link>https://sakthipriyan.com/building-wealth/videos/asset-allocation/</link>
+      <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/videos/asset-allocation/</guid>
+      <description>A practical breakdown of how I allocate my portfolio across India, US, Debt, and Gold — and my simple, tax-efficient rebalancing method using monthly cash flow.</description>
+    </item>
+    <item>
+      <title>My Asset Allocation &amp; Rebalancing</title>
+      <link>https://sakthipriyan.com/building-wealth/slides/my-asset-allocation-rebalancing/</link>
+      <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/slides/my-asset-allocation-rebalancing/</guid>
+      <description>How early financial decisions can create huge long-term opportunity costs.</description>
+    </item>
     <item>
       <title>Building Your Emergency Fund</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/03-emergency-fund/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/03-emergency-fund/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/03-emergency-fund/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/03-emergency-fund/</guid>
       <description>&lt;h2 id=&#34;why-you-need-an-emergency-fund&#34;&gt;Why You Need an Emergency Fund&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Because life is uncertain.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Before you start investing aggressively, you need a financial cushion. An emergency fund is a building block for equity investing and provides peace of mind. It&amp;rsquo;s money set aside for unexpected expenses like:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Job loss or business slowdown&lt;/li&gt;&#xA;&lt;li&gt;Medical emergencies&lt;/li&gt;&#xA;&lt;li&gt;Home or car repairs&lt;/li&gt;&#xA;&lt;li&gt;Family emergencies&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;An emergency fund serves as your first line of defense, allowing you to handle life&amp;rsquo;s uncertainties without disrupting your long-term wealth-building strategy.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Equity &amp; Index Funds for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/06-equity-index-funds/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/06-equity-index-funds/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/06-equity-index-funds/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/06-equity-index-funds/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If there&amp;rsquo;s one investment that separates wealth builders from wealth dreamers, it&amp;rsquo;s equity. But not just any equity—&lt;strong&gt;index funds&lt;/strong&gt; that track the market systematically, without emotion, without timing, without guessing.&lt;/p&gt;&#xA;&lt;p&gt;This chapter explains why boring index fund investing is the most powerful tool for building wealth.&lt;/p&gt;&#xA;&lt;h2 id=&#34;understanding-asset-classes&#34;&gt;Understanding Asset Classes&lt;/h2&gt;&#xA;&lt;p&gt;Before diving into equity, let&amp;rsquo;s understand the three main asset classes for building wealth:&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Asset Class&lt;/th&gt;&#xA;          &lt;th&gt;Nature&lt;/th&gt;&#xA;          &lt;th&gt;Example&lt;/th&gt;&#xA;          &lt;th&gt;Typical Allocation&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;Equity&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Ownership in companies&lt;/td&gt;&#xA;          &lt;td&gt;Infosys shares / Nifty 50&lt;/td&gt;&#xA;          &lt;td&gt;70-80%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;Debt&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Lending to institutions&lt;/td&gt;&#xA;          &lt;td&gt;Bonds / Debt Fund&lt;/td&gt;&#xA;          &lt;td&gt;10-20%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;Gold&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Store of value&lt;/td&gt;&#xA;          &lt;td&gt;ETF / Jewellery&lt;/td&gt;&#xA;          &lt;td&gt;5-10%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;Key Principle&lt;/strong&gt;: Diversify across asset classes to manage risk, but equity is the primary wealth creator.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Financial Tools for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/05-financial-tools/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/05-financial-tools/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/05-financial-tools/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/05-financial-tools/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Building wealth requires the right tools. Just as a craftsman needs quality instruments, you need appropriate financial tools—each serving a specific purpose in your wealth-building journey. This chapter provides a comprehensive overview of the financial tools available and how to use them effectively.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-cash--bank-accounts&#34;&gt;1. Cash &amp;amp; Bank Accounts&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Purpose&lt;/strong&gt;: Liquidity and easy access 💧&lt;/p&gt;&#xA;&lt;h3 id=&#34;bank-accounts&#34;&gt;Bank Accounts&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Status&lt;/strong&gt;: 🟢 Continue&lt;br&gt;&#xA;&lt;strong&gt;Purpose&lt;/strong&gt;: Salary credit, bill payments, and daily expenses&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Why Essential&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Primary interface with the financial system&lt;/li&gt;&#xA;&lt;li&gt;Enables UPI, NEFT, RTGS transfers&lt;/li&gt;&#xA;&lt;li&gt;Debit card facility&lt;/li&gt;&#xA;&lt;li&gt;Free banking services&lt;/li&gt;&#xA;&lt;li&gt;Safe and insured up to ₹5 lakhs per bank (DICGC)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Best Practices&lt;/strong&gt;:&lt;/p&gt;</description>
     </item>
     <item>
       <title>How to Invest in Debt for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/07-invest-in-debt/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/07-invest-in-debt/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/07-invest-in-debt/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/07-invest-in-debt/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Debt investments are often misunderstood. They&amp;rsquo;re not as exciting as equity, they don&amp;rsquo;t make headlines, and they won&amp;rsquo;t make you rich quickly. But they serve a critical role in your wealth-building journey.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;The Truth&lt;/strong&gt;: Debt is &lt;strong&gt;not&lt;/strong&gt; a wealth creator—it is a &lt;strong&gt;wealth stabilizer and risk reducer&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;understanding-asset-classes-revisited&#34;&gt;Understanding Asset Classes (Revisited)&lt;/h2&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s see where debt fits in your portfolio:&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Asset Class&lt;/th&gt;&#xA;          &lt;th&gt;Role&lt;/th&gt;&#xA;          &lt;th&gt;Example&lt;/th&gt;&#xA;          &lt;th&gt;Typical Allocation&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🟢 &lt;strong&gt;Equity&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Ownership - Growth&lt;/td&gt;&#xA;          &lt;td&gt;Index Funds / ETFs&lt;/td&gt;&#xA;          &lt;td&gt;70-80%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🟢 &lt;strong&gt;Debt&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Lending - Stability&lt;/td&gt;&#xA;          &lt;td&gt;Debt / Hybrid / PPF&lt;/td&gt;&#xA;          &lt;td&gt;10-20%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🟢 &lt;strong&gt;Gold&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Store of Value - Hedge&lt;/td&gt;&#xA;          &lt;td&gt;ETF / MF&lt;/td&gt;&#xA;          &lt;td&gt;5-10%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;Key Principle&lt;/strong&gt;: Equity builds wealth, debt protects wealth, gold hedges wealth.&lt;/p&gt;</description>
     </item>
     <item>
       <title>How to Invest in Gold for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/08-invest-in-gold/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/08-invest-in-gold/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/08-invest-in-gold/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/08-invest-in-gold/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Gold has fascinated humanity for millennia. It&amp;rsquo;s been currency, jewelry, status symbol, and investment. But in the context of building wealth, gold plays a very specific role—one that&amp;rsquo;s often misunderstood.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;The Truth&lt;/strong&gt;: Gold is &lt;strong&gt;not a wealth creator&lt;/strong&gt;—it&amp;rsquo;s a &lt;strong&gt;wealth protector&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;understanding-golds-role&#34;&gt;Understanding Gold&amp;rsquo;s Role&lt;/h2&gt;&#xA;&lt;h3 id=&#34;asset-allocation-revisited&#34;&gt;Asset Allocation Revisited&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Asset Class&lt;/th&gt;&#xA;          &lt;th&gt;Role&lt;/th&gt;&#xA;          &lt;th&gt;Example&lt;/th&gt;&#xA;          &lt;th&gt;Typical Allocation&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🟢 &lt;strong&gt;Equity&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Ownership - Growth&lt;/td&gt;&#xA;          &lt;td&gt;Index Funds / ETFs&lt;/td&gt;&#xA;          &lt;td&gt;70-80%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🟢 &lt;strong&gt;Debt&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Lending - Stability&lt;/td&gt;&#xA;          &lt;td&gt;Debt Funds / Arbitrage&lt;/td&gt;&#xA;          &lt;td&gt;10-20%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🟢 &lt;strong&gt;Gold&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Store of Value - Hedge&lt;/td&gt;&#xA;          &lt;td&gt;ETF / MF / Jewellery&lt;/td&gt;&#xA;          &lt;td&gt;5-10%&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;why-gold&#34;&gt;Why Gold?&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Gold serves three purposes&lt;/strong&gt;:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Investing in NASDAQ 100 from India</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/09-invest-in-nasdaq-100/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/09-invest-in-nasdaq-100/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/09-invest-in-nasdaq-100/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/09-invest-in-nasdaq-100/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re serious about building wealth, you cannot ignore international diversification. And when it comes to international equity, the NASDAQ 100 stands out as one of the most powerful wealth-creation engines in history.&lt;/p&gt;&#xA;&lt;p&gt;This chapter explains why and how to invest in NASDAQ 100 from India.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-nasdaq-100&#34;&gt;What is NASDAQ 100?&lt;/h2&gt;&#xA;&lt;h3 id=&#34;the-index&#34;&gt;The Index&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;NASDAQ 100&lt;/strong&gt; is an index of the top 100 non-financial companies listed on the NASDAQ stock exchange in the United States.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Managing Money Flows</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/04-managing-money-flows/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/04-managing-money-flows/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/04-managing-money-flows/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/04-managing-money-flows/</guid>
       <description>&lt;h2 id=&#34;the-core-idea&#34;&gt;The Core Idea&lt;/h2&gt;&#xA;&lt;p&gt;The secret to stress-free financial management isn&amp;rsquo;t earning more—it&amp;rsquo;s organizing what you have. Money separated by &lt;strong&gt;purpose&lt;/strong&gt;, &lt;strong&gt;budgeted&lt;/strong&gt; yearly, and &lt;strong&gt;allocated&lt;/strong&gt; monthly creates clarity and control.&lt;/p&gt;&#xA;&lt;p&gt;Each bank account or credit card serves a specific purpose, eliminating confusion and ensuring every rupee has a job.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-purpose-based-banking-system&#34;&gt;The Purpose-Based Banking System&lt;/h2&gt;&#xA;&lt;h3 id=&#34;my-bank-account-structure&#34;&gt;My Bank Account Structure&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Account Type&lt;/th&gt;&#xA;          &lt;th&gt;Purpose&lt;/th&gt;&#xA;          &lt;th&gt;Usage&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;💰 &lt;strong&gt;Income Account&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Where salary or income lands&lt;/td&gt;&#xA;          &lt;td&gt;Primary receiving point&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;📈 &lt;strong&gt;Investment Account&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;For long-term wealth building&lt;/td&gt;&#xA;          &lt;td&gt;All investments flow from here&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🧾 &lt;strong&gt;Expense Account&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;For all regular bills and daily expenses&lt;/td&gt;&#xA;          &lt;td&gt;Monthly living costs&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;🏥 &lt;strong&gt;Medical Account&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;For health-related expenses&lt;/td&gt;&#xA;          &lt;td&gt;Medical bills and insurance&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;✈️ &lt;strong&gt;Travel Account&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;For trips, vacations, and experiences&lt;/td&gt;&#xA;          &lt;td&gt;Holiday fund&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;This structure ensures that money flows purposefully from income to its designated use, preventing the common problem of &amp;ldquo;where did my money go?&amp;rdquo;&lt;/p&gt;</description>
     </item>
     <item>
       <title>The ₹1.58 Crore Lesson</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/10-opportunity-cost/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/10-opportunity-cost/</link>
       <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/10-opportunity-cost/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/10-opportunity-cost/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is a personal story about a phone, a decision, and a ₹1.58 crore opportunity cost. It&amp;rsquo;s about understanding that every financial decision today has massive implications for your future wealth.&lt;/p&gt;&#xA;&lt;p&gt;This chapter is different—it&amp;rsquo;s my journey, my mistakes, and the profound lessons I learned about building wealth over time.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-story-samsung-galaxy-s&#34;&gt;The Story: Samsung Galaxy S&lt;/h2&gt;&#xA;&lt;h3 id=&#34;march-14-2011&#34;&gt;March 14, 2011&lt;/h3&gt;&#xA;&lt;p&gt;I was 22 years old, fresh out of college, first job, first salary. And I bought a &lt;strong&gt;Samsung Galaxy S&lt;/strong&gt; for &lt;strong&gt;₹24,999&lt;/strong&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>How I missed a Crore</title>
-      <link>http://localhost:1313/building-wealth/slides/how-i-missed-a-crore/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/how-i-missed-a-crore/</link>
       <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/how-i-missed-a-crore/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/how-i-missed-a-crore/</guid>
       <description>How early financial decisions can create huge long-term opportunity costs.</description>
     </item>
     <item>
       <title>How I Missed a Crore</title>
-      <link>http://localhost:1313/building-wealth/videos/how-i-lost-a-crore/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/how-i-lost-a-crore/</link>
       <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/how-i-lost-a-crore/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/how-i-lost-a-crore/</guid>
       <description>How one early decision at age 22 created a ₹1 crore opportunity difference — and the lessons for long-term wealth building.</description>
     </item>
     <item>
       <title>How to Invest in Debt in India 2025 for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/videos/invest-in-debt/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/invest-in-debt/</link>
       <pubDate>Sun, 23 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/invest-in-debt/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/invest-in-debt/</guid>
       <description>How to Invest in Debt in India 2025 for Building Wealth using Arbitrage, Liquid, Hybrid &amp;amp; Dynamic Bond funds</description>
     </item>
     <item>
       <title>How to Invest in Debt for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/slides/how-to-invest-in-debt-for-building-wealth/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-debt-for-building-wealth/</link>
       <pubDate>Sat, 22 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/how-to-invest-in-debt-for-building-wealth/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-debt-for-building-wealth/</guid>
       <description>Learn the best ways to use Debt investment for short term, long term and portfolio asset allocation</description>
     </item>
     <item>
       <title>Building SQL Translator using AI Coding Agents</title>
-      <link>http://localhost:1313/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</link>
       <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</guid>
       <description>A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing.</description>
     </item>
     <item>
       <title>How to Invest in Gold for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</guid>
       <description>Learn the smartest ways to invest in Gold using ETFs, Mutual Funds and more.</description>
     </item>
     <item>
       <title>How to Invest in Gold in India 2025</title>
-      <link>http://localhost:1313/building-wealth/videos/invest-in-goal/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/invest-in-goal/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/invest-in-goal/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/invest-in-goal/</guid>
       <description>Invest in Gold via ETFs, Mutual Funds, SGB &amp;amp; Digital Gold</description>
     </item>
     <item>
       <title>Equity &amp; Index Funds for Building Wealth | Simple. Smart. Boring. Powerful.</title>
-      <link>http://localhost:1313/building-wealth/videos/equity-and-index-investing/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/equity-and-index-investing/</link>
       <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/equity-and-index-investing/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/equity-and-index-investing/</guid>
       <description>Understand how to build long-term wealth through Equity &amp;amp; Index Funds — simple, smart, and powerful investing without predictions.</description>
     </item>
     <item>
       <title>Equity &amp; Index Funds for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/slides/equity-index-funds-for-building-wealth/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/equity-index-funds-for-building-wealth/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/equity-index-funds-for-building-wealth/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/equity-index-funds-for-building-wealth/</guid>
       <description>Simple. Smart. Boring. Powerful. Grow Wealth through Equity &amp;amp; Index Funds.</description>
     </item>
     <item>
       <title>Introduction to Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/01-introduction/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/01-introduction/</link>
       <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/01-introduction/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/01-introduction/</guid>
       <description>&lt;h2 id=&#34;welcome-to-your-wealth-building-journey&#34;&gt;Welcome to Your Wealth-Building Journey&lt;/h2&gt;&#xA;&lt;p&gt;Building wealth doesn&amp;rsquo;t have to be complicated, risky, or exciting. In fact, the most successful wealth-building strategies are often the most boring ones. This book will guide you through time-tested, proven methods that have helped millions of people achieve financial independence.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-makes-this-approach-boring&#34;&gt;What Makes This Approach &amp;ldquo;Boring&amp;rdquo;?&lt;/h2&gt;&#xA;&lt;p&gt;When we say &amp;ldquo;boring,&amp;rdquo; we mean:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Predictable&lt;/strong&gt;: No get-rich-quick schemes or market timing&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Consistent&lt;/strong&gt;: Regular, disciplined actions over time&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Simple&lt;/strong&gt;: Easy to understand and implement&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Proven&lt;/strong&gt;: Backed by decades of research and real-world results&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;what-youll-learn&#34;&gt;What You&amp;rsquo;ll Learn&lt;/h2&gt;&#xA;&lt;p&gt;Throughout this book, you&amp;rsquo;ll discover:&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Magic of Compound Interest</title>
-      <link>http://localhost:1313/building-wealth/books/building-wealth-boring-way/02-compound-interest/</link>
+      <link>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/02-compound-interest/</link>
       <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/books/building-wealth-boring-way/02-compound-interest/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/books/building-wealth-boring-way/02-compound-interest/</guid>
       <description>&lt;h2 id=&#34;understanding-compound-interest&#34;&gt;Understanding Compound Interest&lt;/h2&gt;&#xA;&lt;p&gt;Albert Einstein allegedly called compound interest &amp;ldquo;the eighth wonder of the world.&amp;rdquo; Whether he said it or not, the sentiment is absolutely true. Compound interest is the interest earned on both your initial investment and the accumulated interest from previous periods.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-formula&#34;&gt;The Formula&lt;/h2&gt;&#xA;&lt;p&gt;The basic formula for compound interest is:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;A = P(1 + r/n)^(nt)&#xA;&#xA;Where:&#xA;A = Final amount&#xA;P = Principal (initial investment)&#xA;r = Annual interest rate (decimal)&#xA;n = Number of times interest is compounded per year&#xA;t = Time in years&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;real-world-example&#34;&gt;Real-World Example&lt;/h2&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s say you invest ₹10,000 per month starting at age 25, with an average annual return of 12%:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Financial Tools</title>
-      <link>http://localhost:1313/building-wealth/slides/financial-tools/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/financial-tools/</link>
       <pubDate>Sun, 02 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/financial-tools/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/financial-tools/</guid>
       <description>Quick overview of financial tools for building wealth</description>
     </item>
     <item>
       <title>Financial Tools | Quick Overview for Building Wealth</title>
-      <link>http://localhost:1313/building-wealth/videos/financial_tools/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/financial_tools/</link>
       <pubDate>Sun, 02 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/financial_tools/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/financial_tools/</guid>
       <description>Quick overview of essential financial tools — cash, insurance, investments, and credit — for building long-term wealth.</description>
     </item>
     <item>
       <title>Emergency Fund Setup | Using Liquid/Hybrid/Arbitrage Mutual Funds</title>
-      <link>http://localhost:1313/building-wealth/videos/emergency_fund/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/emergency_fund/</link>
       <pubDate>Tue, 28 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/emergency_fund/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/emergency_fund/</guid>
       <description>Learn how to set up your emergency fund using a mix of Liquid and Hybrid Mutual Funds for both liquidity and steady growth.</description>
     </item>
     <item>
       <title>Emergency Fund Setup</title>
-      <link>http://localhost:1313/building-wealth/slides/emergency-fund-setup/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/emergency-fund-setup/</link>
       <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/emergency-fund-setup/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/emergency-fund-setup/</guid>
       <description>Setup emergency fund using liquid/hybrid Mutual funds</description>
     </item>
     <item>
       <title>Emergency Fund Calculator</title>
-      <link>http://localhost:1313/building-wealth/tools/emergency-fund/</link>
+      <link>https://sakthipriyan.com/building-wealth/tools/emergency-fund/</link>
       <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/tools/emergency-fund/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/tools/emergency-fund/</guid>
       <description>Plan your emergency fund and calculate the timeline to reach your savings goal.</description>
     </item>
     <item>
       <title>How I Manage My Money Flows 💰 | Bank Accounts, Credit Cards &amp; Mutual Funds Explained</title>
-      <link>http://localhost:1313/building-wealth/videos/manage-money-flows/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/manage-money-flows/</link>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/manage-money-flows/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/manage-money-flows/</guid>
       <description>Complete breakdown of how to manage your money flows effectively using bank accounts, credit cards, and mutual funds.</description>
     </item>
     <item>
       <title>Managing Money Flows</title>
-      <link>http://localhost:1313/building-wealth/slides/managing-money-flows/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/managing-money-flows/</link>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/managing-money-flows/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/managing-money-flows/</guid>
       <description>Manage money flow via Bank Accounts, Credit Cards &amp;amp; Mutual Funds</description>
     </item>
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
       <description>Options to invest in NASDAQ 100, process, cost and taxation</description>
     </item>
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>http://localhost:1313/building-wealth/videos/nasdaq-investing-india/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</link>
       <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/nasdaq-investing-india/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/nasdaq-investing-india/</guid>
       <description>Complete guide on how Indian investors can invest in NASDAQ 100 index and benefit from US market growth.</description>
     </item>
     <item>
       <title>AWS Infrastructure Essentials</title>
-      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/03-aws-infrastructure/</link>
+      <link>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/03-aws-infrastructure/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/03-aws-infrastructure/</guid>
+      <guid>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/03-aws-infrastructure/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Amazon Web Services (AWS) is the leading cloud platform, offering a comprehensive suite of services for building scalable applications. This chapter covers the essential AWS services and best practices for infrastructure setup.&lt;/p&gt;&#xA;&lt;h2 id=&#34;core-aws-services&#34;&gt;Core AWS Services&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-compute-services&#34;&gt;1. Compute Services&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;EC2&lt;/strong&gt;: Virtual machines in the cloud&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Lambda&lt;/strong&gt;: Serverless compute&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ECS/EKS&lt;/strong&gt;: Container orchestration&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Fargate&lt;/strong&gt;: Serverless containers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-storage-services&#34;&gt;2. Storage Services&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;S3&lt;/strong&gt;: Object storage&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;EBS&lt;/strong&gt;: Block storage for EC2&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;EFS&lt;/strong&gt;: Elastic file system&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Glacier&lt;/strong&gt;: Archive storage&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-database-services&#34;&gt;3. Database Services&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;RDS&lt;/strong&gt;: Managed relational databases&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;DynamoDB&lt;/strong&gt;: NoSQL database&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ElastiCache&lt;/strong&gt;: In-memory caching&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Aurora&lt;/strong&gt;: High-performance MySQL/PostgreSQL&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;infrastructure-as-code&#34;&gt;Infrastructure as Code&lt;/h2&gt;&#xA;&lt;h3 id=&#34;cloudformation-template&#34;&gt;CloudFormation Template&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;AWSTemplateFormatVersion: &#39;2010-09-09&#39;&#xA;Description: &#39;Basic web application infrastructure&#39;&#xA;&#xA;Resources:&#xA;  WebServer:&#xA;    Type: AWS::EC2::Instance&#xA;    Properties:&#xA;      ImageId: ami-0c55b159cbfafe1f0&#xA;      InstanceType: t2.micro&#xA;      SecurityGroups:&#xA;        - !Ref WebServerSecurityGroup&#xA;        &#xA;  WebServerSecurityGroup:&#xA;    Type: AWS::EC2::SecurityGroup&#xA;    Properties:&#xA;      GroupDescription: Enable HTTP access&#xA;      SecurityGroupIngress:&#xA;        - IpProtocol: tcp&#xA;          FromPort: 80&#xA;          ToPort: 80&#xA;          CidrIp: 0.0.0.0/0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;terraform-configuration&#34;&gt;Terraform Configuration&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-hcl&#34;&gt;provider &amp;quot;aws&amp;quot; {&#xA;  region = &amp;quot;us-west-2&amp;quot;&#xA;}&#xA;&#xA;resource &amp;quot;aws_instance&amp;quot; &amp;quot;web&amp;quot; {&#xA;  ami           = &amp;quot;ami-0c55b159cbfafe1f0&amp;quot;&#xA;  instance_type = &amp;quot;t2.micro&amp;quot;&#xA;  &#xA;  tags = {&#xA;    Name = &amp;quot;WebServer&amp;quot;&#xA;  }&#xA;}&#xA;&#xA;resource &amp;quot;aws_s3_bucket&amp;quot; &amp;quot;assets&amp;quot; {&#xA;  bucket = &amp;quot;my-app-assets&amp;quot;&#xA;  &#xA;  versioning {&#xA;    enabled = true&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;networking&#34;&gt;Networking&lt;/h2&gt;&#xA;&lt;h3 id=&#34;vpc-setup&#34;&gt;VPC Setup&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Public and private subnets&lt;/li&gt;&#xA;&lt;li&gt;Internet Gateway for public access&lt;/li&gt;&#xA;&lt;li&gt;NAT Gateway for private subnet internet access&lt;/li&gt;&#xA;&lt;li&gt;Security Groups for access control&lt;/li&gt;&#xA;&lt;li&gt;Network ACLs for additional security&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;example-vpc-architecture&#34;&gt;Example VPC Architecture&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;VPC (10.0.0.0/16)&#xA;├── Public Subnet (10.0.1.0/24)&#xA;│   ├── Internet Gateway&#xA;│   └── Load Balancer&#xA;└── Private Subnet (10.0.2.0/24)&#xA;    ├── Application Servers&#xA;    ├── Database Servers&#xA;    └── NAT Gateway&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use Multiple Availability Zones&lt;/strong&gt;: Distribute resources across AZs for high availability&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Implement Auto Scaling&lt;/strong&gt;: Automatically adjust capacity based on demand&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Enable CloudWatch Monitoring&lt;/strong&gt;: Track metrics and set up alerts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use IAM Roles&lt;/strong&gt;: Grant permissions without hardcoded credentials&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Tag Resources&lt;/strong&gt;: Organize and track costs with meaningful tags&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Enable Encryption&lt;/strong&gt;: Encrypt data at rest and in transit&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Regular Backups&lt;/strong&gt;: Automate backup procedures for all critical data&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;cost-optimization&#34;&gt;Cost Optimization&lt;/h2&gt;&#xA;&lt;h3 id=&#34;strategies&#34;&gt;Strategies&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Use Reserved Instances for predictable workloads&lt;/li&gt;&#xA;&lt;li&gt;Implement Auto Scaling to match demand&lt;/li&gt;&#xA;&lt;li&gt;Use S3 lifecycle policies for data archival&lt;/li&gt;&#xA;&lt;li&gt;Monitor and eliminate unused resources&lt;/li&gt;&#xA;&lt;li&gt;Choose appropriate instance types&lt;/li&gt;&#xA;&lt;li&gt;Use Spot Instances for flexible workloads&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;&#xA;&lt;p&gt;AWS provides a robust and scalable infrastructure platform. By following best practices and leveraging infrastructure as code, you can build reliable, secure, and cost-effective cloud applications.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Go for Cloud Development</title>
-      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/02-go-for-cloud-development/</link>
+      <link>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/02-go-for-cloud-development/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/02-go-for-cloud-development/</guid>
+      <guid>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/02-go-for-cloud-development/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Go (Golang) has emerged as a powerful language for cloud-native development, offering a unique combination of simplicity, performance, and built-in concurrency support. This chapter explores why Go is an excellent choice for building cloud applications and how to leverage its features effectively.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-choose-go&#34;&gt;Why Choose Go?&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-performance&#34;&gt;1. Performance&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Fast compilation and execution&lt;/li&gt;&#xA;&lt;li&gt;Efficient memory usage&lt;/li&gt;&#xA;&lt;li&gt;Native binary compilation&lt;/li&gt;&#xA;&lt;li&gt;No runtime dependencies&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-concurrency&#34;&gt;2. Concurrency&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Built-in goroutines for lightweight concurrency&lt;/li&gt;&#xA;&lt;li&gt;Channels for safe communication between goroutines&lt;/li&gt;&#xA;&lt;li&gt;Simple concurrency patterns&lt;/li&gt;&#xA;&lt;li&gt;Efficient handling of multiple concurrent operations&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-cloud-native-features&#34;&gt;3. Cloud-Native Features&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Excellent HTTP/2 support&lt;/li&gt;&#xA;&lt;li&gt;Native cloud SDK support&lt;/li&gt;&#xA;&lt;li&gt;Container-friendly binaries&lt;/li&gt;&#xA;&lt;li&gt;Great for microservices architecture&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;getting-started-with-go&#34;&gt;Getting Started with Go&lt;/h2&gt;&#xA;&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# macOS&#xA;brew install go&#xA;&#xA;# Linux&#xA;wget https://go.dev/dl/go1.21.linux-amd64.tar.gz&#xA;sudo tar -C /usr/local -xzf go1.21.linux-amd64.tar.gz&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;your-first-cloud-service&#34;&gt;Your First Cloud Service&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;fmt&amp;quot;&#xA;    &amp;quot;log&amp;quot;&#xA;    &amp;quot;net/http&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;    http.HandleFunc(&amp;quot;/&amp;quot;, func(w http.ResponseWriter, r *http.Request) {&#xA;        fmt.Fprintf(w, &amp;quot;Hello, Cloud!&amp;quot;)&#xA;    })&#xA;    &#xA;    log.Fatal(http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil))&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Error Handling&lt;/strong&gt;: Always check and handle errors explicitly&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Context Usage&lt;/strong&gt;: Use context for cancellation and timeouts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Struct Tags&lt;/strong&gt;: Leverage tags for JSON/XML marshalling&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Interface Design&lt;/strong&gt;: Keep interfaces small and focused&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: Write comprehensive unit and integration tests&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;cloud-deployment&#34;&gt;Cloud Deployment&lt;/h2&gt;&#xA;&lt;h3 id=&#34;containerization&#34;&gt;Containerization&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM golang:1.21 AS builder&#xA;WORKDIR /app&#xA;COPY . .&#xA;RUN go build -o main .&#xA;&#xA;FROM alpine:latest&#xA;COPY --from=builder /app/main /main&#xA;CMD [&amp;quot;/main&amp;quot;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;kubernetes-deployment&#34;&gt;Kubernetes Deployment&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: apps/v1&#xA;kind: Deployment&#xA;metadata:&#xA;  name: go-app&#xA;spec:&#xA;  replicas: 3&#xA;  selector:&#xA;    matchLabels:&#xA;      app: go-app&#xA;  template:&#xA;    metadata:&#xA;      labels:&#xA;        app: go-app&#xA;    spec:&#xA;      containers:&#xA;      - name: go-app&#xA;        image: your-registry/go-app:latest&#xA;        ports:&#xA;        - containerPort: 8080&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;&#xA;&lt;p&gt;Go provides an excellent foundation for cloud-native development with its simplicity, performance, and built-in concurrency features. Its growing ecosystem and strong community support make it an ideal choice for building scalable cloud applications.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Introduction to Cloud-First Development</title>
-      <link>http://localhost:1313/building-systems/books/cloud-first-start-fast/01-introduction-to-cloud-first-development/</link>
+      <link>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/01-introduction-to-cloud-first-development/</link>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/books/cloud-first-start-fast/01-introduction-to-cloud-first-development/</guid>
+      <guid>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/01-introduction-to-cloud-first-development/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s rapidly evolving technological landscape, adopting a cloud-first approach has become essential for startups and businesses of all sizes. This chapter introduces the fundamental concepts of cloud-first development and explains why it&amp;rsquo;s crucial for building scalable, resilient systems.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-cloud-first-development&#34;&gt;What is Cloud-First Development?&lt;/h2&gt;&#xA;&lt;p&gt;Cloud-first development is a strategy that prioritizes cloud computing solutions over traditional on-premises infrastructure. It involves:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Building applications specifically for cloud environments&lt;/li&gt;&#xA;&lt;li&gt;Leveraging cloud-native services and features&lt;/li&gt;&#xA;&lt;li&gt;Embracing scalability and flexibility from day one&lt;/li&gt;&#xA;&lt;li&gt;Focusing on rapid development and deployment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;why-cloud-first-matters-for-startups&#34;&gt;Why Cloud-First Matters for Startups&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-cost-efficiency&#34;&gt;1. Cost Efficiency&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Pay-as-you-go pricing models&lt;/li&gt;&#xA;&lt;li&gt;Reduced upfront infrastructure costs&lt;/li&gt;&#xA;&lt;li&gt;Automatic scaling based on demand&lt;/li&gt;&#xA;&lt;li&gt;Lower maintenance overhead&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-speed-to-market&#34;&gt;2. Speed to Market&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Rapid provisioning of resources&lt;/li&gt;&#xA;&lt;li&gt;Automated deployment pipelines&lt;/li&gt;&#xA;&lt;li&gt;Built-in development tools and services&lt;/li&gt;&#xA;&lt;li&gt;Faster iteration cycles&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-scalability&#34;&gt;3. Scalability&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Horizontal and vertical scaling options&lt;/li&gt;&#xA;&lt;li&gt;Global reach with minimal effort&lt;/li&gt;&#xA;&lt;li&gt;Built-in redundancy and fault tolerance&lt;/li&gt;&#xA;&lt;li&gt;Elastic infrastructure that grows with demand&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;key-principles&#34;&gt;Key Principles&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Design for Failure&lt;/strong&gt;: Assume components will fail and build resilience into your architecture&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Automate Everything&lt;/strong&gt;: From deployment to scaling to recovery&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use Managed Services&lt;/strong&gt;: Leverage cloud provider services rather than managing infrastructure&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Monitor and Observe&lt;/strong&gt;: Implement comprehensive monitoring from day one&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Security First&lt;/strong&gt;: Build security into every layer of your application&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;&#xA;&lt;p&gt;The journey to cloud-first development begins with understanding your requirements and choosing the right cloud provider. In the following chapters, we&amp;rsquo;ll dive deeper into:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Responsive exponential backoff in Go</title>
-      <link>http://localhost:1313/building-systems/blogs/responsive-exponential-backoff-in-go/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/responsive-exponential-backoff-in-go/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/responsive-exponential-backoff-in-go/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/responsive-exponential-backoff-in-go/</guid>
       <description>using exponentially scaling up and down the sleep time</description>
     </item>
     <item>
       <title>Building machine learning models</title>
-      <link>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/building-machine-learning-models/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/building-machine-learning-models/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/building-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Feature engineering for machine learning models</title>
-      <link>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/feature-engineering-for-machine-learning-models/</link>
       <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/feature-engineering-for-machine-learning-models/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/feature-engineering-for-machine-learning-models/</guid>
       <description>using scala spark</description>
     </item>
     <item>
       <title>Learning Scala Spark basics</title>
-      <link>http://localhost:1313/building-systems/blogs/learning-scala-spark-basics/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/learning-scala-spark-basics/</link>
       <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/learning-scala-spark-basics/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/learning-scala-spark-basics/</guid>
       <description>using spark shell in local</description>
     </item>
     <item>
       <title>Migrating from http to https</title>
-      <link>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/migrating-from-http-to-https/</link>
       <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/migrating-from-http-to-https/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/migrating-from-http-to-https/</guid>
       <description>using lets encrypt, certbot and configuring Nginx</description>
     </item>
     <item>
       <title>Powerbot connecting real world to twitter</title>
-      <link>http://localhost:1313/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</link>
       <pubDate>Sun, 06 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/powerbot-connecting-real-world-to-twitter/</guid>
       <description>via Raspberry Pi using GPIO pins</description>
     </item>
     <item>
       <title>Creating Base64 UUID in Java</title>
-      <link>http://localhost:1313/building-systems/blogs/creating-base64-uuid-in-java/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/creating-base64-uuid-in-java/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/creating-base64-uuid-in-java/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/creating-base64-uuid-in-java/</guid>
       <description>Alphanumeric unique id using base64 charset</description>
     </item>
     <item>
       <title>Documenting Play Framework using Swagger</title>
-      <link>http://localhost:1313/building-systems/blogs/documenting-play-framework-using-swagger/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/documenting-play-framework-using-swagger/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/documenting-play-framework-using-swagger/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/documenting-play-framework-using-swagger/</guid>
       <description>Setting up live documentation for API</description>
     </item>
     <item>
       <title>Creating REST API Specification</title>
-      <link>http://localhost:1313/building-systems/blogs/creating-rest-api-specification/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/creating-rest-api-specification/</link>
       <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/creating-rest-api-specification/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/creating-rest-api-specification/</guid>
       <description>using Swagger Specification</description>
     </item>
     <item>
       <title>Set up G-WAN web server</title>
-      <link>http://localhost:1313/building-systems/blogs/set-up-g-wan-web-server/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/set-up-g-wan-web-server/</link>
       <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/set-up-g-wan-web-server/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/set-up-g-wan-web-server/</guid>
       <description>to serve static website</description>
     </item>
     <item>
       <title>Scala code to access documents in AWS S3 bucket</title>
-      <link>http://localhost:1313/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</link>
       <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/scala-code-to-access-documents-in-aws-s3-bucket/</guid>
       <description>via http get and put requests</description>
     </item>
     <item>
       <title>Auto refresh Chrome when files modified</title>
-      <link>http://localhost:1313/building-systems/blogs/auto-refresh-chrome-when-files-modified/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/auto-refresh-chrome-when-files-modified/</link>
       <pubDate>Mon, 15 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/auto-refresh-chrome-when-files-modified/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/auto-refresh-chrome-when-files-modified/</guid>
       <description>Using python pyinotify and chrome debugging</description>
     </item>
     <item>
       <title>Salesforce Bulk API usage with an example</title>
-      <link>http://localhost:1313/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</link>
       <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</guid>
       <description>to show how to upsert records in batches.</description>
     </item>
     <item>
       <title>Salesforce Rest API usage with an example</title>
-      <link>http://localhost:1313/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</link>
       <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</guid>
       <description>to show how to upsert records</description>
     </item>
     <item>
       <title>Mounting external hard disk to Raspberry Pi</title>
-      <link>http://localhost:1313/building-systems/blogs/mounting-external-hard-disk-to-raspberry-pi/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/mounting-external-hard-disk-to-raspberry-pi/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/mounting-external-hard-disk-to-raspberry-pi/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/mounting-external-hard-disk-to-raspberry-pi/</guid>
       <description>which contains NTFS and FAT file systems.</description>
     </item>
     <item>
       <title>Raspberry Pi Benchmarking File IO</title>
-      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-benchmarking-file-io/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-benchmarking-file-io/</link>
       <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-benchmarking-file-io/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-benchmarking-file-io/</guid>
       <description>using sysbench, sd card and attached external hard disk</description>
     </item>
     <item>
       <title>Cricket score in command line</title>
-      <link>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/cricket-score-in-command-line/</link>
       <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/cricket-score-in-command-line/</guid>
       <description>using python and open cricscore api</description>
     </item>
     <item>
       <title>Setting up a 4 node Raspberry Pi 2 Cluster</title>
-      <link>http://localhost:1313/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
       <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
       <description>Setting up the right hardware.</description>
     </item>
     <item>
       <title>Raspberry Pi 2 benchmarking</title>
-      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-2-benchmarking/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-2-benchmarking/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-2-benchmarking/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-2-benchmarking/</guid>
       <description>using sysbench and Java</description>
     </item>
     <item>
       <title>Raspberry Pi 2 setup</title>
-      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-2-setup/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-2-setup/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-2-setup/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-2-setup/</guid>
       <description>from micro SD card to JDK installation.</description>
     </item>
     <item>
       <title>Experiment with Raspberry Pi</title>
-      <link>http://localhost:1313/building-systems/blogs/experiment-with-raspberry-pi/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/experiment-with-raspberry-pi/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/experiment-with-raspberry-pi/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/experiment-with-raspberry-pi/</guid>
       <description>How I turned it to a electricity monitor, tweetbot and downloader.</description>
     </item>
     <item>
       <title>Crawlpod - open source scalable web crawler</title>
-      <link>http://localhost:1313/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</link>
       <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/crawlpod-open-source-scalable-web-crawler/</guid>
       <description>built on top of Scala and Akka framework.</description>
     </item>
     <item>
       <title>Listing S3 Top level folders</title>
-      <link>http://localhost:1313/building-systems/blogs/listing-s3-top-level-folders/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/listing-s3-top-level-folders/</link>
       <pubDate>Wed, 09 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/listing-s3-top-level-folders/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/listing-s3-top-level-folders/</guid>
       <description>using simple Python code.</description>
     </item>
     <item>
       <title>Efficiently using Enum in entity class</title>
-      <link>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/efficiently-using-enum-in-entity-class/</link>
       <pubDate>Mon, 24 Aug 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/efficiently-using-enum-in-entity-class/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/efficiently-using-enum-in-entity-class/</guid>
       <description>to improve code maintainability and database performance.</description>
     </item>
     <item>
       <title>Couchbase setup on AWS</title>
-      <link>http://localhost:1313/building-systems/blogs/couchbase-setup-on-aws/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/couchbase-setup-on-aws/</link>
       <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/couchbase-setup-on-aws/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/couchbase-setup-on-aws/</guid>
       <description>EC2 instances</description>
     </item>
     <item>
       <title>Encryption and Decryption in Java</title>
-      <link>http://localhost:1313/building-systems/blogs/encryption-and-decryption-in-java/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/encryption-and-decryption-in-java/</link>
       <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/encryption-and-decryption-in-java/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/encryption-and-decryption-in-java/</guid>
       <description>using a private key and AES algorithm.</description>
     </item>
     <item>
       <title>Distributed forward proxy servers</title>
-      <link>http://localhost:1313/building-systems/blogs/distributed-forward-proxy-servers/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/distributed-forward-proxy-servers/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/distributed-forward-proxy-servers/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/distributed-forward-proxy-servers/</guid>
       <description>to crawl Internet via multiple cloud instances.</description>
     </item>
     <item>
       <title>Setup Elasticsearch cluster on AWS</title>
-      <link>http://localhost:1313/building-systems/blogs/setup-elasticsearch-cluster-on-aws/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/setup-elasticsearch-cluster-on-aws/</link>
       <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/setup-elasticsearch-cluster-on-aws/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/setup-elasticsearch-cluster-on-aws/</guid>
       <description>EC2 instances.</description>
     </item>
     <item>
       <title>Lines of code inversely proportional to readability</title>
-      <link>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</link>
       <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
       <description>Always code less to make it easily readable.</description>
     </item>
     <item>
       <title>Testing Spring Application using JUnit</title>
-      <link>http://localhost:1313/building-systems/blogs/testing-spring-application-using-junit/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/testing-spring-application-using-junit/</link>
       <pubDate>Wed, 03 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/testing-spring-application-using-junit/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/testing-spring-application-using-junit/</guid>
       <description>How to test a Spring Application using JUnit? Explained with example test class.</description>
     </item>
     <item>
       <title>Building a scalable recommendation engine</title>
-      <link>http://localhost:1313/building-systems/blogs/building-a-scalable-recommendation-engine/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/building-a-scalable-recommendation-engine/</link>
       <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/building-a-scalable-recommendation-engine/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/building-a-scalable-recommendation-engine/</guid>
       <description>using play framework, couchbase and elasticsearch</description>
     </item>
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
     <item>
       <title>Building a scalable distributed web crawler</title>
-      <link>http://localhost:1313/building-systems/blogs/building-a-scalable-distributed-web-crawler/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/building-a-scalable-distributed-web-crawler/</link>
       <pubDate>Sat, 18 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/building-a-scalable-distributed-web-crawler/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/building-a-scalable-distributed-web-crawler/</guid>
       <description>which can perform both crawling and data extraction</description>
     </item>
     <item>
       <title>How to create a modern blog?</title>
-      <link>http://localhost:1313/building-systems/blogs/how-to-create-a-modern-blog/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/how-to-create-a-modern-blog/</link>
       <pubDate>Wed, 08 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/how-to-create-a-modern-blog/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/how-to-create-a-modern-blog/</guid>
       <description>using markdown and python</description>
     </item>
     <item>
       <title>Git Configuration</title>
-      <link>http://localhost:1313/building-systems/blogs/git-configuration/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/git-configuration/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/git-configuration/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/git-configuration/</guid>
       <description>Alias for generally used Git commands</description>
     </item>
   </channel>

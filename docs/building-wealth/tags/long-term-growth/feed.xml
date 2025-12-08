@@ -2,24 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Long Term Growth on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-wealth/tags/long-term-growth/</link>
+    <link>https://sakthipriyan.com/building-wealth/tags/long-term-growth/</link>
     <description>Recent content in Long Term Growth on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 30 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-wealth/tags/long-term-growth/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/building-wealth/tags/long-term-growth/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Asset Allocation &amp; Rebalancing Explained</title>
+      <link>https://sakthipriyan.com/building-wealth/videos/asset-allocation/</link>
+      <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/videos/asset-allocation/</guid>
+      <description>A practical breakdown of how I allocate my portfolio across India, US, Debt, and Gold — and my simple, tax-efficient rebalancing method using monthly cash flow.</description>
+    </item>
     <item>
       <title>How I missed a Crore</title>
-      <link>http://localhost:1313/building-wealth/slides/how-i-missed-a-crore/</link>
+      <link>https://sakthipriyan.com/building-wealth/slides/how-i-missed-a-crore/</link>
       <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/slides/how-i-missed-a-crore/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/slides/how-i-missed-a-crore/</guid>
       <description>How early financial decisions can create huge long-term opportunity costs.</description>
     </item>
     <item>
       <title>How I Missed a Crore</title>
-      <link>http://localhost:1313/building-wealth/videos/how-i-lost-a-crore/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/how-i-lost-a-crore/</link>
       <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/how-i-lost-a-crore/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/how-i-lost-a-crore/</guid>
       <description>How one early decision at age 22 created a ₹1 crore opportunity difference — and the lessons for long-term wealth building.</description>
     </item>
   </channel>

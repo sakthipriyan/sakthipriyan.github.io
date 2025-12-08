@@ -5,6 +5,8 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "Quick overview of financial tools for building wealth"
+js_tools:
+  - viz
 wealth_tags:
   - Building Wealth
   - Financial Tools

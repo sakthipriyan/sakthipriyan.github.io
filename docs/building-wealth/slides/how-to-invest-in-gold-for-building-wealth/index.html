@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>How to Invest in Gold for Building Wealth | Sakthi Priyan H</title>
@@ -63,6 +63,22 @@
         pre.language-dot,
         pre.dot {
             display: none;
+        }
+
+         
+        .echarts-container {
+            width: 100%;
+            height: 80vh;
+        }
+
+         
+        .gsap-fade-in {
+            opacity: 0;
+        }
+
+        .gsap-slide-in {
+            transform: translateX(-50px);
+            opacity: 0;
         }
     </style>
 
@@ -461,14 +477,27 @@ for more videos...
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
     
     
+    
+    
+    
+    
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+    
+    
+    
+    
+    
     
 
     
 
         
 <script>
+    let isInitialLoad = true;
+    
     
     function renderGraphviz(slide = null) {
         const slides = slide ? [slide] : Array.from(Reveal.getSlides());
@@ -507,6 +536,131 @@ for more videos...
         });
     }
 
+    
+    function initializeECharts(slide = null) {
+        if (typeof echarts === 'undefined') return;
+        
+        
+        if (slide) {
+            
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    slide.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                        console.log('[DEBUG] Processing chart container:', container.id, 'has instance:', !!container._chartInstance);
+                        
+                        
+                        if (container._chartInstance) {
+                            console.log('[DEBUG] Disposing existing chart instance:', container.id);
+                            container._chartInstance.dispose();
+                            container._chartInstance = null;
+                        }
+                        
+                        try {
+                            const config = JSON.parse(container.dataset.chart);
+                            
+                            console.log('[DEBUG] Creating new chart instance:', container.id);
+                            
+                            
+                            
+                            let chart = echarts.getInstanceByDom(container);
+                            
+                            if (chart) {
+                                console.log('[DEBUG] Found existing ECharts instance, disposing it:', container.id);
+                                chart.dispose();
+                                chart = null;
+                            }
+                            
+                            
+                            container.innerHTML = '';
+                            
+                            
+                            chart = echarts.init(container);
+                            
+                            
+                            chart.setOption(config, true);
+                            
+                            
+                            container._chartInstance = chart;
+                            container.dataset.initialized = true;
+                            
+                            
+                            setTimeout(() => chart.resize(), 100);
+                            
+                            console.log('[DEBUG] ECharts initialized with animation:', container.id);
+                        } catch (err) {
+                            console.error('[DEBUG] ECharts error:', err);
+                        }
+                    });
+                });
+            });
+        } else {
+            
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                initializeECharts(currentSlide);
+            }
+        }
+        
+        
+        window.removeEventListener('resize', handleChartResize);
+        window.addEventListener('resize', handleChartResize);
+    }
+    
+    function handleChartResize() {
+        document.querySelectorAll('.echarts-container[data-initialized]').forEach(container => {
+            if (container._chartInstance) {
+                container._chartInstance.resize();
+            }
+        });
+    }
+
+    
+    function triggerGSAPAnimations(slide) {
+        if (typeof gsap === 'undefined') {
+            console.log('[DEBUG] GSAP not loaded');
+            return;
+        }
+        if (!slide) {
+            console.log('[DEBUG] No slide provided to triggerGSAPAnimations');
+            return;
+        }
+        
+        
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                
+                document.querySelectorAll('[data-gsap]').forEach(el => {
+                    delete el.dataset.gsapAnimated;
+                    
+                    gsap.set(el, { clearProps: "all" });
+                });
+                
+                
+                const elements = slide.querySelectorAll('[data-gsap]');
+                console.log('[DEBUG] Found', elements.length, 'elements with data-gsap on current slide');
+                
+                elements.forEach(el => {
+                    if (el.dataset.gsapAnimated) return;
+                    
+                    try {
+                        const config = JSON.parse(el.dataset.gsap);
+                        console.log('[DEBUG] Animating element with config:', config);
+                        
+                        
+                        const { from, ...options } = config;
+                        const animationVars = { ...from, ...options };
+                        
+                        gsap.from(el, animationVars);
+                        el.dataset.gsapAnimated = true;
+                        console.log('[DEBUG] GSAP animation triggered for element:', el);
+                    } catch (err) {
+                        console.error('[DEBUG] GSAP error:', err);
+                    }
+                });
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         Reveal.initialize({
             hash: true,
@@ -533,18 +687,42 @@ for more videos...
                 }
             });
             renderGraphviz(); 
+            triggerGSAPAnimations(event.currentSlide); 
+            
         });
 
         
         Reveal.on('slidechanged', event => {
             console.log('[DEBUG] Slide changed to index', event.indexh);
+            
+            
+            if (event.previousSlide) {
+                event.previousSlide.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                    if (container._chartInstance) {
+                        console.log('[DEBUG] Disposing chart on previous slide:', container.id);
+                        container._chartInstance.dispose();
+                        container._chartInstance = null;
+                        container.innerHTML = '';
+                        delete container.dataset.initialized;
+                    }
+                });
+            }
+            
+            
             renderGraphviz(event.currentSlide);
+            triggerGSAPAnimations(event.currentSlide);
+            
+            
+            setTimeout(() => {
+                initializeECharts(event.currentSlide);
+            }, 300);
         });
 
         
         Reveal.addEventListener('markdown', event => {
             console.log('[DEBUG] Markdown parsed for slide', event.slide);
             renderGraphviz(event.slide);
+            
         });
     });
 </script>
