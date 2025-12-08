@@ -1,0 +1,57 @@
+{{/*
+Content Header Partial
+Usage: {{ partial "content-header.html" . }}
+Displays title, summary, date, and reading/watching/use time
+*/}}
+<header class="content-header">
+    <h1 class="content-title">{{ .Title }}</h1>
+
+    {{- if or .Params.summary .Description }}
+    <p class="content-summary">{{ or .Params.summary .Description }}</p>
+    {{- end }}
+
+    <div class="content-meta">
+        {{- if .Date }}
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        </span>
+        {{- end }}
+
+        {{- if .Params.duration }}
+        {{- /* For videos - watch time */ -}}
+        <span class="meta-item">
+            <span class="meta-icon">⏱️</span>
+            <span class="watch-time">{{ .Params.duration }}</span>
+        </span>
+        {{- else if and .Content (not (in .RelPermalink "/tools/")) }}
+        {{- /* For blogs - read time */ -}}
+        {{ $words := len (split (plainify .Content) " ") }}
+        {{ $readTime := math.Ceil (div $words 200.0) }}
+        {{- if gt $readTime 0 }}
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">{{ $readTime }} min read</span>
+        </span>
+        {{- end }}
+        {{- end }}
+
+        {{- if .Params.tool_type }}
+        {{- /* For tools - use time */ -}}
+        <span class="meta-item">
+            <span class="meta-icon">🔧</span>
+            <span class="use-time">Interactive Tool</span>
+        </span>
+        {{- end }}
+
+        {{- if .Params.platform }}
+        {{- /* For videos - platform */ -}}
+        <span class="meta-item">
+            <span class="meta-icon">📺</span>
+            <span class="platform">{{ .Params.platform }}</span>
+        </span>
+        {{- end }}
+    </div>
+
+    <hr class="content-divider">
+</header>

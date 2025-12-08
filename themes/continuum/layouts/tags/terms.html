@@ -1,0 +1,72 @@
+{{ define "main" }}
+{{ $currentSection := "" }}
+{{ $sectionName := "" }}
+{{ $taxonomyName := "" }}
+{{ $taxonomyData := slice }}
+
+<!-- Determine section from URL path -->
+{{ $pathParts := split .RelPermalink "/" }}
+{{ if ge (len $pathParts) 3 }}
+    <!-- Path like /section/tags/ -->
+    {{ if eq (index $pathParts 2) "tags" }}
+        {{ $currentSection = index $pathParts 1 }}
+        {{ $sectionName = $currentSection | title | replaceRE "-" " " }}
+    {{ end }}
+{{ end }}
+
+<!-- Set taxonomy based on section -->
+{{ if eq $currentSection "building-systems" }}
+    {{ $taxonomyName = "systems_tags" }}
+    {{ if isset .Site.Taxonomies "systems_tags" }}
+        {{ $taxonomyData = .Site.Taxonomies.systems_tags.ByCount }}
+    {{ end }}
+{{ else if eq $currentSection "building-wealth" }}
+    {{ $taxonomyName = "wealth_tags" }}
+    {{ if isset .Site.Taxonomies "wealth_tags" }}
+        {{ $taxonomyData = .Site.Taxonomies.wealth_tags.ByCount }}
+    {{ end }}
+{{ else }}
+    <!-- Global fallback -->
+    {{ $taxonomyName = "systems_tags" }}
+    {{ if isset .Site.Taxonomies "systems_tags" }}
+        {{ $taxonomyData = .Site.Taxonomies.systems_tags.ByCount }}
+    {{ end }}
+{{ end }}
+
+<div class="container section-container">
+    <div class="content-list">
+        <h1>{{ .Title }}</h1>
+        {{ if .Content }}
+        <div class="section-content">
+            {{ .Content }}
+        </div>
+        {{ end }}
+        
+        {{ if $taxonomyData }}
+        <div class="tags-grid">
+            {{ range $taxonomyData }}
+                {{ $tagUrl := "" }}
+                {{ if eq $currentSection "building-systems" }}
+                    {{ $tagUrl = printf "/building-systems/tags/%s/" (.Name | urlize) }}
+                {{ else if eq $currentSection "building-wealth" }}
+                    {{ $tagUrl = printf "/building-wealth/tags/%s/" (.Name | urlize) }}
+                {{ else }}
+                    {{ $tagUrl = printf "/building-systems/tags/%s/" (.Name | urlize) }}
+                {{ end }}
+                
+                <div class="tag-card">
+                    <a href="{{ $tagUrl | absURL }}">
+                        <h3 class="tag-name">{{ replace .Name "-" " " | title }}</h3>
+                        <div class="tag-meta">
+                            <span class="tag-count-badge">{{ .Count }}</span>
+                        </div>
+                    </a>
+                </div>
+            {{ end }}
+        </div>
+        {{ else }}
+        <p class="no-content">No tags found{{ if $currentSection }} in {{ $sectionName }}{{ end }}.</p>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

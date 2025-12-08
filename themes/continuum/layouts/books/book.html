@@ -1,0 +1,17 @@
+{{- define "book-content" }}
+<article class="book-chapter">
+    <header class="chapter-header">
+        {{- if .Params.chapter }}
+        <div class="chapter-number-display">Chapter {{ .Params.chapter }}</div>
+        {{- end }}
+        <h1 class="chapter-title">{{ .Title }}</h1>
+        {{- if .Params.subtitle }}
+        <p class="chapter-subtitle">{{ .Params.subtitle }}</p>
+        {{- end }}
+    </header>
+
+    <div class="chapter-body">
+        {{ .Content }}
+    </div>
+</article>
+{{- end }}

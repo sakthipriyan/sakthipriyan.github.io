@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article class="blog-post">
+    {{ partial "content-header.html" . }}
+
+    <div class="post-content">
+        {{ .Content }}
+    </div>
+
+    {{ partial "content-footer.html" . }}
+</article>
+{{ end }}

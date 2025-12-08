@@ -1,0 +1,88 @@
+{{/*
+Tag Cloud Partial
+Usage: {{ partial "tag-cloud.html" (dict "context" . "currentSection" $currentSection) }}
+Renders a tag cloud with frequency-based sizing
+*/}}
+{{ $context := .context }}
+{{ $currentSection := .currentSection }}
+{{ $sectionName := $currentSection | title | replaceRE "-" " " }}
+
+<!-- Manual tag collection and counting -->
+{{ $tagMap := dict }}
+
+{{ range $context.Site.RegularPages }}
+{{ $pageSection := .Section }}
+{{ $taxonomyField := "tags" }}
+{{ if eq $pageSection "building-systems" }}
+{{ $taxonomyField = "systems_tags" }}
+{{ else if eq $pageSection "building-wealth" }}
+{{ $taxonomyField = "wealth_tags" }}
+{{ end }}
+
+{{ $tags := index .Params $taxonomyField }}
+{{ if $tags }}
+{{ if or (not $currentSection) (eq $pageSection $currentSection) }}
+{{ range $tags }}
+{{ $tagName := . }}
+{{ $currentCount := 0 }}
+{{ if isset $tagMap $tagName }}
+{{ $currentCount = index $tagMap $tagName }}
+{{ end }}
+{{ $tagMap = merge $tagMap (dict $tagName (add $currentCount 1)) }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ $sortedTags := slice }}
+{{ range $tagName, $count := $tagMap }}
+{{ $sortedTags = $sortedTags | append (dict "name" $tagName "count" $count) }}
+{{ end }}
+{{ $sortedTags = sort $sortedTags "name" }}
+
+{{ if $sortedTags }}
+<div class="tags-cloud">
+    <!-- Calculate min/max counts for sizing -->
+    {{ $minCount := 1000 }}
+    {{ $maxCount := 0 }}
+    {{ range $sortedTags }}
+    {{ if lt .count $minCount }}{{ $minCount = .count }}{{ end }}
+    {{ if gt .count $maxCount }}{{ $maxCount = .count }}{{ end }}
+    {{ end }}
+
+    {{ range $sortedTags }}
+    {{ $tagName := .name }}
+    {{ $count := .count }}
+    {{ $tagUrl := "" }}
+    {{ if $currentSection }}
+    {{ $tagUrl = printf "/%s/tags/%s/" $currentSection ($tagName | urlize) }}
+    {{ else }}
+    {{ $tagUrl = printf "/tags/%s/" ($tagName | urlize) }}
+    {{ end }}
+
+    <!-- Calculate size class based on frequency -->
+    {{ $sizeClass := "tag-size-small" }}
+    {{ if gt $maxCount $minCount }}
+    {{ $ratio := div (sub $count $minCount) (sub $maxCount $minCount) }}
+    {{ if ge $ratio 0.8 }}{{ $sizeClass = "tag-size-xl" }}
+    {{ else if ge $ratio 0.6 }}{{ $sizeClass = "tag-size-large" }}
+    {{ else if ge $ratio 0.4 }}{{ $sizeClass = "tag-size-medium" }}
+    {{ else if ge $ratio 0.2 }}{{ $sizeClass = "tag-size-normal" }}
+    {{ else }}{{ $sizeClass = "tag-size-small" }}{{ end }}
+    {{ end }}
+
+    <a href="{{ $tagUrl | absURL }}" class="tag-cloud-item {{ $sizeClass }}"
+        title="{{ $tagName }}: {{ $count }} {{ if eq $count 1 }}item{{ else }}items{{ end }}">
+        {{ $tagName }}
+        <span class="tag-count">({{ $count }})</span>
+    </a>
+    {{ end }}
+</div>
+
+<div class="tags-stats">
+    <p>{{ len $sortedTags }} {{ if eq (len $sortedTags) 1 }}tag{{ else }}tags{{ end }} available{{ if $currentSection }}
+        in {{ $sectionName }}{{ end }}.</p>
+</div>
+{{ else }}
+<p class="no-content">No tags found{{ if $currentSection }} in {{ $sectionName }}{{ end }}.</p>
+{{ end }}

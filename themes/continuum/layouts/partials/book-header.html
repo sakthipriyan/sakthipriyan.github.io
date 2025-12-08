@@ -1,0 +1,43 @@
+{{- /* Book Header with hamburger, title, author, and theme toggle */ -}}
+<header class="book-header">
+    <div class="book-header-content">
+        {{- /* TOC Hamburger Menu */ -}}
+        <button class="book-toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        {{- /* Book Title */ -}}
+        <div class="book-title-area">
+            {{- $currentBook := . -}}
+            {{- if .CurrentSection -}}
+                {{- $currentBook = .CurrentSection -}}
+            {{- else if .Parent -}}
+                {{- $currentBook = .Parent -}}
+            {{- end -}}
+            {{- /* Determine books section URL based on current section */ -}}
+            {{- $booksUrl := "" -}}
+            {{- if in .RelPermalink "/building-systems/" -}}
+                {{- $booksUrl = "/building-systems/books/" -}}
+            {{- else if in .RelPermalink "/building-wealth/" -}}
+                {{- $booksUrl = "/building-wealth/books/" -}}
+            {{- end -}}
+            <h1 class="book-header-title">
+                <a href="{{ $booksUrl }}" class="book-icon-link" title="Back to Books">📖</a>
+                <a href="{{ $currentBook.RelPermalink }}">{{ $currentBook.Title }}</a>
+            </h1>
+        </div>
+
+        {{- /* Author */ -}}
+        <div class="book-author">
+            by <a href="/" class="author-link">{{ .Params.author | default "Sakthi Priyan H" }}</a>
+        </div>
+
+        {{- /* Theme Toggle */ -}}
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+            <span class="theme-icon theme-icon-light" data-theme="light">☀</span>
+            <span class="theme-icon theme-icon-dark" data-theme="dark">☾</span>
+        </button>
+    </div>
+</header>

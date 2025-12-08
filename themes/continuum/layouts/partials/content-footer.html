@@ -1,0 +1,51 @@
+{{/*
+Content Footer Partial
+Usage: {{ partial "content-footer.html" . }}
+Displays tags and Disqus comments
+*/}}
+<footer class="content-footer">
+    <hr class="content-divider">
+
+    {{- /* Determine taxonomy based on section */ -}}
+    {{ $tags := slice }}
+    {{ $currentSection := .Section }}
+
+    {{- if eq $currentSection "building-wealth" }}
+    {{- if .Params.wealth_tags }}
+    {{ $tags = .Params.wealth_tags }}
+    {{- end }}
+    {{- else if eq $currentSection "building-systems" }}
+    {{- if .Params.systems_tags }}
+    {{ $tags = .Params.systems_tags }}
+    {{- end }}
+    {{- else if .Params.tags }}
+    {{ $tags = .Params.tags }}
+    {{- end }}
+
+    {{- if $tags }}
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        {{- range $tags }}
+        {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
+        <a href="{{ $tagUrl | absURL }}" class="tag-link">{{ . | title }}</a>
+        {{- end }}
+    </div>
+    {{- end }}
+
+    {{- /* Disqus Comments Section */ -}}
+    <div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>

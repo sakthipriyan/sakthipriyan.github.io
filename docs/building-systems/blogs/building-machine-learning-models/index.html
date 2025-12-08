@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building machine learning models | Sakthi Priyan H</title>
+    <meta name="description" content="using scala spark"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Building machine learning models</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Building machine learning models</h1>
+    <p class="content-summary">using scala spark</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2018-12-25">Dec 25, 2018</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">13 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h3 id="intro">Intro</h3>
+<p>This is continuation with the previous posts,</p>
+<ul>
+<li><a href="../../../2018/11/24/learning-scala-spark-basics.html">Learning Scala Spark basics</a></li>
+<li><a href="../../../2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html">Feature engineering for machine learning models</a></li>
+</ul>
+<blockquote>
+<p>You need to complete <a href="../../../2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html">Feature engineering for machine learning models</a> before proceeding.</p>
+</blockquote>
+<h3 id="handson2scala">HandsOn2.scala</h3>
+<p>This is the file used in previous post, where, at the end we had single feature engineered DataFrame.</p>
+<p>At the end we will add storeDF method</p>
+<pre><code>def storeDF(dataFrame: DataFrame, path: String) = {
+  dataFrame.write.option(&quot;header&quot;, &quot;true&quot;).csv(path)
+}
+</code></pre>
+<p>In the main method, we will store the moviesFeaturedDF at the end.</p>
+<pre><code>val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
+storeDF(moviesFeaturedDF.repartition(1), moviesFeaturedFile)
+</code></pre>
+<p>We are repartitioning it so that it is stored as a single file. We shouldn&rsquo;t do this in most of the cases.</p>
+<h3 id="lets-inspect-the-output">Let&rsquo;s inspect the output</h3>
+<pre><code>$ ls -lh ../../../Downloads/ml-latest-small/movies-featured.csv
+total 600
+-rw-r--r--  1 sakthipriyan  staff     0B Dec 25 12:19 _SUCCESS
+-rw-r--r--  1 sakthipriyan  staff   298K Dec 25 12:19 part-00000-538b57a1-58c0-4801-9258-fbd806151d80-c000.csv
+
+$ head ../../../Downloads/ml-latest-small/movies-featured.csv/part-00000-538b57a1-58c0-4801-9258-fbd806151d80-c000.csv
+movieId,title,label,gCount,tCount,Drama,Comedy,Romance,Thriller,Action,Adventure,Crime,Sci-Fi,Mystery,Fantasy,Children,Horror,Animation,Musical,War,Documentary,Film-Noir,IMAX,Western,In Netflix queue,atmospheric,superhero,Disney,religion,funny,quirky,surreal,psychology,thought-provoking,tCrime,suspense,politics,visually appealing,tSci-fi,dark comedy,twist ending,dark,mental illness,tComedy
+1,Toy Story (1995),0.0,5,2,0.0,1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2,Jumanji (1995),0.0,3,4,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+3,Grumpier Old Men (1995),1.0,2,2,0.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+5,Father of the Bride Part II (1995),1.0,1,2,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+7,Sabrina (1995),1.0,2,1,0.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+11,&quot;American President, The (1995)&quot;,0.0,3,2,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+14,Nixon (1995),0.0,1,2,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+16,Casino (1995),0.0,2,1,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+17,Sense and Sensibility (1995),0.0,2,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+</code></pre>
+<p>As you can see, the <code>moviesFeaturedFile</code> is written as CSV file in the output.<br>
+Without repartition, it might have been multiple files as output.</p>
+<h3 id="handson3scala">HandsOn3.scala</h3>
+<p>Let&rsquo;s move on to the building the machine learning models now.</p>
+<p>Following is the scala source code for <code>HandsOn3.scala</code>.<br>
+We will be writing all the new steps into the <code>def main(args: Array[String])</code></p>
+<pre><code>import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.functions._
+
+object HandsOn3 {
+  // Method to load data from csv to dataframes 
+  def loadDF(spark: SparkSession, path: String): DataFrame = {
+    spark.read.format(&quot;com.databricks.spark.csv&quot;)
+      .option(&quot;header&quot;, &quot;true&quot;)
+      .option(&quot;inferSchema&quot;, &quot;true&quot;)
+      .load(path)
+  }
+
+  // Method to create Spark Session.
+  def getSpark() = {
+    val spark = SparkSession.builder
+      .appName(&quot;Simple Application&quot;)
+      .master(&quot;local[*]&quot;)
+      .getOrCreate()
+    spark.sparkContext.setLogLevel(&quot;WARN&quot;)
+    spark
+  }
+
+  def main(args: Array[String]) {
+    // Get Spark
+    val spark = getSpark()
+    val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
+    val moviesFeaturedDF = loadDF(spark,moviesFeaturedFile)
+
+    // More code goes here.
+  }
+}
+</code></pre>
+<h3 id="train-and-test-dataframes">Train and Test DataFrames</h3>
+<h4 id="moviesfeatureddf">moviesFeaturedDF</h4>
+<p>Which will be used for training and testing the model.</p>
+<p><strong>Schema</strong></p>
+<pre><code>moviesFeaturedDF.printSchema()
+root
+|-- movieId: integer (nullable = true)
+|-- title: string (nullable = true)
+|-- label: double (nullable = true)
+|-- gCount: integer (nullable = true)
+|-- tCount: integer (nullable = true)
+|-- Drama: double (nullable = true)
+|-- Comedy: double (nullable = true)
+|-- Romance: double (nullable = true)
+|-- Thriller: double (nullable = true)
+|-- Action: double (nullable = true)
+|-- Adventure: double (nullable = true)
+|-- Crime: double (nullable = true)
+|-- Sci-Fi: double (nullable = true)
+|-- Mystery: double (nullable = true)
+|-- Fantasy: double (nullable = true)
+|-- Children: double (nullable = true)
+|-- Horror: double (nullable = true)
+|-- Animation: double (nullable = true)
+|-- Musical: double (nullable = true)
+|-- War: double (nullable = true)
+|-- Documentary: double (nullable = true)
+|-- Film-Noir: double (nullable = true)
+|-- IMAX: double (nullable = true)
+|-- Western: double (nullable = true)
+|-- In Netflix queue: double (nullable = true)
+|-- atmospheric: double (nullable = true)
+|-- superhero: double (nullable = true)
+|-- Disney: double (nullable = true)
+|-- religion: double (nullable = true)
+|-- funny: double (nullable = true)
+|-- quirky: double (nullable = true)
+|-- surreal: double (nullable = true)
+|-- psychology: double (nullable = true)
+|-- thought-provoking: double (nullable = true)
+|-- tCrime: double (nullable = true)
+|-- suspense: double (nullable = true)
+|-- politics: double (nullable = true)
+|-- visually appealing: double (nullable = true)
+|-- tSci-fi: double (nullable = true)
+|-- dark comedy: double (nullable = true)
+|-- twist ending: double (nullable = true)
+|-- dark: double (nullable = true)
+|-- mental illness: double (nullable = true)
+|-- tComedy: double (nullable = true)
+</code></pre>
+<p><strong>Sample Data</strong></p>
+<pre><code>moviesFeaturedDF.show(5)
++-------+--------------------+-----+------+------+-----+------+-------+--------+------+---------+-----+------+-------+-------+--------+------+---------+-------+---+-----------+---------+----+-------+----------------+-----------+---------+------+--------+-----+------+-------+----------+-----------------+------+--------+--------+------------------+-------+-----------+------------+----+--------------+-------+
+|movieId|               title|label|gCount|tCount|Drama|Comedy|Romance|Thriller|Action|Adventure|Crime|Sci-Fi|Mystery|Fantasy|Children|Horror|Animation|Musical|War|Documentary|Film-Noir|IMAX|Western|In Netflix queue|atmospheric|superhero|Disney|religion|funny|quirky|surreal|psychology|thought-provoking|tCrime|suspense|politics|visually appealing|tSci-fi|dark comedy|twist ending|dark|mental illness|tComedy|
++-------+--------------------+-----+------+------+-----+------+-------+--------+------+---------+-----+------+-------+-------+--------+------+---------+-------+---+-----------+---------+----+-------+----------------+-----------+---------+------+--------+-----+------+-------+----------+-----------------+------+--------+--------+------------------+-------+-----------+------------+----+--------------+-------+
+|      1|    Toy Story (1995)|  0.0|     5|     2|  0.0|   1.0|    0.0|     0.0|   0.0|      1.0|  0.0|   0.0|    0.0|    1.0|     1.0|   0.0|      1.0|    0.0|0.0|        0.0|      0.0| 0.0|    0.0|             0.0|        0.0|      0.0|   0.0|     0.0|  0.0|   0.0|    0.0|       0.0|              0.0|   0.0|     0.0|     0.0|               0.0|    0.0|        0.0|         0.0| 0.0|           0.0|    0.0|
+|      2|      Jumanji (1995)|  0.0|     3|     4|  0.0|   0.0|    0.0|     0.0|   0.0|      1.0|  0.0|   0.0|    0.0|    1.0|     1.0|   0.0|      0.0|    0.0|0.0|        0.0|      0.0| 0.0|    0.0|             0.0|        0.0|      0.0|   0.0|     0.0|  0.0|   0.0|    0.0|       0.0|              0.0|   0.0|     0.0|     0.0|               0.0|    0.0|        0.0|         0.0| 0.0|           0.0|    0.0|
+|      3|Grumpier Old Men ...|  1.0|     2|     2|  0.0|   1.0|    1.0|     0.0|   0.0|      0.0|  0.0|   0.0|    0.0|    0.0|     0.0|   0.0|      0.0|    0.0|0.0|        0.0|      0.0| 0.0|    0.0|             0.0|        0.0|      0.0|   0.0|     0.0|  0.0|   0.0|    0.0|       0.0|              0.0|   0.0|     0.0|     0.0|               0.0|    0.0|        0.0|         0.0| 0.0|           0.0|    0.0|
+|      5|Father of the Bri...|  1.0|     1|     2|  0.0|   1.0|    0.0|     0.0|   0.0|      0.0|  0.0|   0.0|    0.0|    0.0|     0.0|   0.0|      0.0|    0.0|0.0|        0.0|      0.0| 0.0|    0.0|             0.0|        0.0|      0.0|   0.0|     0.0|  0.0|   0.0|    0.0|       0.0|              0.0|   0.0|     0.0|     0.0|               0.0|    0.0|        0.0|         0.0| 0.0|           0.0|    0.0|
+|      7|      Sabrina (1995)|  1.0|     2|     1|  0.0|   1.0|    1.0|     0.0|   0.0|      0.0|  0.0|   0.0|    0.0|    0.0|     0.0|   0.0|      0.0|    0.0|0.0|        0.0|      0.0| 0.0|    0.0|             0.0|        0.0|      0.0|   0.0|     0.0|  0.0|   0.0|    0.0|       0.0|              0.0|   0.0|     0.0|     0.0|               0.0|    0.0|        0.0|         0.0| 0.0|           0.0|    0.0|
++-------+--------------------+-----+------+------+-----+------+-------+--------+------+---------+-----+------+-------+-------+--------+------+---------+-------+---+-----------+---------+----+-------+----------------+-----------+---------+------+--------+-----+------+-------+----------+-----------------+------+--------+--------+------------------+-------+-----------+------------+----+--------------+-------+
+only showing top 5 rows
+</code></pre>
+<h4 id="lets-create-train-and-test">Let&rsquo;s create train and test</h4>
+<pre><code>def trainAndTest(df:DataFrame, features: Array[String]): (DataFrame,DataFrame) = {
+
+  // Data Transformation
+  val assembler = new VectorAssembler().setInputCols(features).setOutputCol(&quot;features&quot;)
+
+  // Only movieId, features, label selected here.
+  val data = assembler.transform(df).select(&quot;movieId&quot;,&quot;features&quot;,&quot;label&quot;)
+
+  // Split the data into train and test
+  val splits = data.randomSplit(Array(0.8, 0.2), seed = 1234L)
+  val train = splits(0)
+  val test = splits(1)
+
+  // Return train and test as Tuple
+  (train,test)
+}
+</code></pre>
+<ul>
+<li>We will use <a href="https://spark.apache.org/docs/2.2.0/ml-features.html#vectorassembler">VectorAssembler</a> to transform the input as required by most Machine Learning models in Spark.</li>
+<li>We will use <code>data.randomSplit</code> to split input dataFrame into train and test.</li>
+</ul>
+<h4 id="in-main-method">In main method</h4>
+<pre><code>val features = Array(&quot;gCount&quot;,&quot;tCount&quot;, &quot;Drama&quot;)
+val (train,test) = trainAndTest(moviesFeaturedDF, features)
+</code></pre>
+<ul>
+<li>List of features used for training the model.</li>
+<li>In this case, I had picked <code>gCount</code>, <code>tCount</code> and <code>Drama</code></li>
+</ul>
+<h3 id="machine-learning-model">Machine Learning Model</h3>
+<p>We will go through <a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#multilayer-perceptron-classifier">Multilayer perceptron classifier</a> machine learning models as part of this post.</p>
+<h4 id="multilayer-perceptron-classifier-mlpc">Multilayer perceptron classifier (MLPC)</h4>
+<p>Multilayer perceptron classifier (MLPC) is a classifier based on the <a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feedforward artificial neural network</a>.</p>
+<h4 id="train-mlpc-model-using-given-features-and-train-dataframe">Train MLPC model using given features and train DataFrame</h4>
+<pre><code>def trainMLPC(train:DataFrame, features: Array[String]) : MultilayerPerceptronClassificationModel = {
+
+  // Setting up Hyper Parameters. Specify layers for the neural network:
+  // Input layer of size (features.length), 
+  // Two intermediate layers of size (features.length + 2) and (features.length + 1)
+  // Output of size 4 (classes)
+  val layers = Array[Int](features.length, features.length + 2, features.length + 1, 4)
+
+  // create the trainer and set its parameters
+  val trainer = new MultilayerPerceptronClassifier()
+    .setLabelCol(&quot;label&quot;)
+    .setFeaturesCol(&quot;features&quot;)
+    .setLayers(layers)
+    .setBlockSize(128)
+    .setSeed(1234L)
+    .setMaxIter(100)
+    
+  // This would train the MultilayerPerceptronClassifier for the given data and hyper parameters.
+  trainer.fit(train)
+}
+</code></pre>
+<ul>
+<li>In the <code>layers</code> we can change the intermediate hidden layers</li>
+<li>Next we have to invoke this one in main.</li>
+</ul>
+<h4 id="train-mlpc-using-train-dataset-and-selected-features">Train MLPC using train dataset and selected features</h4>
+<p>In the main, add following.</p>
+<pre><code>val mlpcModel =  trainMLPC(train,features)
+</code></pre>
+<h4 id="lets-test-the-model-for-accuracy">Let&rsquo;s test the model for accuracy.</h4>
+<pre><code>// Here, we apply the MLPC model built using train data on the test dataset.
+val resultMLPC = mlpcModel.transform(test)
+
+// This method detailed below will print the accuracy of the model on the test data.
+printAccuracy(resultMLPC)
+</code></pre>
+<p>Following is the <code>printAccuracy</code> that will print the accuracy of the model by comparing the actual vs predicted class.</p>
+<pre><code>def printAccuracy(dataFrame: DataFrame, features: Array[String]): Unit = {
+  val predictionAndLabels = dataFrame.select(&quot;prediction&quot;, &quot;label&quot;)
+  val evaluator = new MulticlassClassificationEvaluator().setMetricName(&quot;accuracy&quot;)
+  println(&quot;Accuracy = &quot; +
+    s&quot;${(100 * evaluator.evaluate(predictionAndLabels)).formatted(&quot;%.2f&quot;)}%&quot; +
+    s&quot; Features: ${features.mkString(&quot;, &quot;)}. &quot;)
+}
+</code></pre>
+<h4 id="full-main-method">Full main method</h4>
+<pre><code>def main(args: Array[String]): Unit = {
+  
+  // Init spark and load dataframe
+  val spark = getSpark()
+  val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
+  val moviesFeaturedDF = loadDF(spark,moviesFeaturedFile)
+
+  // Select features and create train and test dataFrames
+  val features = Array(&quot;gCount&quot;,&quot;tCount&quot;, &quot;Drama&quot;)
+  val (train,test) = trainAndTest(moviesFeaturedDF, features)
+
+  // Train Model using train data for the selected features.
+  val mlpcModel =  trainMLPC(train,features)
+
+  // Apply trained model on the test and predict the class.
+  val resultMLPC = mlpcModel.transform(test)
+  
+  // Print the accuracy of the model.
+  printAccuracy(resultMLPC, features)
+}
+</code></pre>
+<h4 id="automated-run-using-various-combinations-of-the-features">Automated run using various combinations of the features</h4>
+<p>In this function, all subset of the given features are derived and empty set is filtered out.</p>
+<pre><code>def getFeatures(features: Array[String]): List[Array[String]] = {
+  features.toSet.subsets().toList.filter(set =&gt; set.size &gt; 0).map(set =&gt; set.toArray)
+}
+</code></pre>
+<p>Updated main method with iterations.</p>
+<pre><code>def main(args: Array[String]): Unit = {
+  // Init spark and load dataFrame
+  val spark = getSpark()
+  val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
+  val moviesFeaturedDF = loadDF(spark,moviesFeaturedFile)
+
+  // Select set of features
+  val featuresArray = Array(&quot;gCount&quot;, &quot;tCount&quot;, &quot;Drama&quot;, &quot;Comedy&quot;, &quot;Romance&quot;, &quot;Thriller&quot;, &quot;Action&quot;)
+
+  for (features &lt;- getFeatures(featuresArray)) {
+
+    val (train,test) = trainAndTest(moviesFeaturedDF, features)
+
+    // Train Model using train data for the selected features.
+    val mlpcModel =  trainMLPC(train,features)
+
+    // Apply trained model on the test and predict the class.
+    val resultMLPC = mlpcModel.transform(test)
+
+    // Print the accuracy of the model.
+    printAccuracy(resultMLPC, features)
+  }
+}
+</code></pre>
+<h4 id="iterations">Iterations</h4>
+<p>Output of the above program with given set of features.</p>
+<pre><code>Accuracy = 38.46% Features: Thriller. 
+Accuracy = 45.79% Features: tCount. 
+Accuracy = 40.29% Features: Comedy. 
+Accuracy = 47.25% Features: Romance. 
+Accuracy = 47.25% Features: Drama. 
+Accuracy = 47.25% Features: gCount. 
+Accuracy = 40.29% Features: Action. 
+Accuracy = 45.79% Features: Thriller, tCount. 
+Accuracy = 39.56% Features: Thriller, Comedy. 
+Accuracy = 41.39% Features: Thriller, Romance. 
+Accuracy = 43.22% Features: Thriller, Drama. 
+Accuracy = 49.08% Features: Thriller, gCount. 
+Accuracy = 42.12% Features: Thriller, Action. 
+Accuracy = 48.72% Features: tCount, Comedy. 
+Accuracy = 46.15% Features: tCount, Romance. 
+Accuracy = 43.96% Features: tCount, Drama. 
+Accuracy = 53.85% Features: tCount, gCount. 
+Accuracy = 50.92% Features: tCount, Action. 
+Accuracy = 42.12% Features: Comedy, Romance. 
+Accuracy = 42.49% Features: Comedy, Drama. 
+Accuracy = 51.28% Features: Comedy, gCount. 
+Accuracy = 46.52% Features: Comedy, Action. 
+Accuracy = 41.76% Features: Romance, Drama. 
+Accuracy = 45.79% Features: Romance, gCount. 
+Accuracy = 40.29% Features: Romance, Action. 
+Accuracy = 49.45% Features: Drama, gCount. 
+Accuracy = 41.76% Features: Drama, Action. 
+Accuracy = 46.15% Features: gCount, Action. 
+Accuracy = 50.92% Features: Thriller, tCount, Comedy. 
+Accuracy = 43.96% Features: Thriller, tCount, Romance. 
+Accuracy = 46.52% Features: Thriller, tCount, Drama. 
+Accuracy = 54.58% Features: Thriller, tCount, gCount. 
+Accuracy = 51.28% Features: Thriller, tCount, Action. 
+Accuracy = 40.29% Features: Thriller, Comedy, Romance. 
+Accuracy = 39.19% Features: Thriller, Comedy, Drama. 
+Accuracy = 50.92% Features: Thriller, Comedy, gCount. 
+Accuracy = 48.35% Features: Thriller, Comedy, Action. 
+Accuracy = 41.39% Features: Thriller, Romance, Drama. 
+Accuracy = 49.82% Features: Thriller, Romance, gCount. 
+Accuracy = 42.12% Features: Thriller, Romance, Action. 
+Accuracy = 50.18% Features: Thriller, Drama, gCount. 
+Accuracy = 40.29% Features: Thriller, Drama, Action. 
+Accuracy = 50.55% Features: Thriller, gCount, Action. 
+Accuracy = 48.72% Features: tCount, Comedy, Romance. 
+Accuracy = 46.52% Features: tCount, Comedy, Drama. 
+Accuracy = 56.78% Features: tCount, Comedy, gCount. 
+Accuracy = 52.38% Features: tCount, Comedy, Action. 
+Accuracy = 45.42% Features: tCount, Romance, Drama. 
+Accuracy = 51.65% Features: tCount, Romance, gCount. 
+Accuracy = 49.45% Features: tCount, Romance, Action. 
+Accuracy = 53.85% Features: tCount, Drama, gCount. 
+Accuracy = 48.72% Features: tCount, Drama, Action. 
+Accuracy = 58.24% Features: tCount, gCount, Action. 
+Accuracy = 42.86% Features: Comedy, Romance, Drama. 
+Accuracy = 52.01% Features: Comedy, Romance, gCount. 
+Accuracy = 46.15% Features: Comedy, Romance, Action. 
+Accuracy = 50.92% Features: Comedy, Drama, gCount. 
+Accuracy = 43.22% Features: Comedy, Drama, Action. 
+Accuracy = 51.28% Features: Comedy, gCount, Action. 
+Accuracy = 49.82% Features: Romance, Drama, gCount. 
+Accuracy = 41.76% Features: Romance, Drama, Action. 
+Accuracy = 50.55% Features: Romance, gCount, Action. 
+Accuracy = 50.55% Features: Drama, gCount, Action. 
+Accuracy = 50.92% Features: Thriller, tCount, Comedy, Romance. 
+Accuracy = 52.01% Features: Thriller, tCount, Comedy, Drama. 
+Accuracy = 51.65% Features: Thriller, tCount, Comedy, gCount. 
+Accuracy = 54.95% Features: Thriller, tCount, Comedy, Action. 
+Accuracy = 45.42% Features: Thriller, tCount, Romance, Drama. 
+Accuracy = 52.01% Features: Thriller, tCount, Romance, gCount. 
+Accuracy = 49.82% Features: Thriller, tCount, Romance, Action. 
+Accuracy = 57.14% Features: Thriller, tCount, Drama, gCount. 
+Accuracy = 49.45% Features: Thriller, tCount, Drama, Action. 
+Accuracy = 54.21% Features: Thriller, tCount, gCount, Action. 
+Accuracy = 39.56% Features: Thriller, Comedy, Romance, Drama. 
+Accuracy = 51.65% Features: Thriller, Comedy, Romance, gCount. 
+Accuracy = 48.35% Features: Thriller, Comedy, Romance, Action. 
+Accuracy = 51.28% Features: Thriller, Comedy, Drama, gCount. 
+Accuracy = 48.72% Features: Thriller, Comedy, Drama, Action. 
+Accuracy = 51.65% Features: Thriller, Comedy, gCount, Action. 
+Accuracy = 51.28% Features: Thriller, Romance, Drama, gCount. 
+Accuracy = 42.49% Features: Thriller, Romance, Drama, Action. 
+Accuracy = 50.55% Features: Thriller, Romance, gCount, Action. 
+Accuracy = 50.92% Features: Thriller, Drama, gCount, Action. 
+Accuracy = 49.08% Features: tCount, Comedy, Romance, Drama. 
+Accuracy = 52.75% Features: tCount, Comedy, Romance, gCount. 
+Accuracy = 54.21% Features: tCount, Comedy, Romance, Action. 
+Accuracy = 57.14% Features: tCount, Comedy, Drama, gCount. 
+Accuracy = 50.92% Features: tCount, Comedy, Drama, Action. 
+Accuracy = 57.51% Features: tCount, Comedy, gCount, Action. 
+Accuracy = 54.58% Features: tCount, Romance, Drama, gCount. 
+Accuracy = 47.99% Features: tCount, Romance, Drama, Action. 
+Accuracy = 54.21% Features: tCount, Romance, gCount, Action. 
+Accuracy = 56.78% Features: tCount, Drama, gCount, Action. 
+Accuracy = 52.01% Features: Comedy, Romance, Drama, gCount. 
+Accuracy = 43.96% Features: Comedy, Romance, Drama, Action. 
+Accuracy = 52.38% Features: Comedy, Romance, gCount, Action. 
+Accuracy = 52.01% Features: Comedy, Drama, gCount, Action. 
+Accuracy = 49.82% Features: Romance, Drama, gCount, Action. 
+Accuracy = 50.55% Features: Thriller, tCount, Comedy, Romance, Drama. 
+Accuracy = 53.11% Features: Thriller, tCount, Comedy, Romance, gCount. 
+Accuracy = 55.31% Features: Thriller, tCount, Comedy, Romance, Action. 
+Accuracy = 55.68% Features: Thriller, tCount, Comedy, Drama, gCount. 
+Accuracy = 54.95% Features: Thriller, tCount, Comedy, Drama, Action. 
+Accuracy = 56.41% Features: Thriller, tCount, Comedy, gCount, Action. 
+Accuracy = 54.95% Features: Thriller, tCount, Romance, Drama, gCount. 
+Accuracy = 48.35% Features: Thriller, tCount, Romance, Drama, Action. 
+Accuracy = 51.65% Features: Thriller, tCount, Romance, gCount, Action. 
+Accuracy = 57.14% Features: Thriller, tCount, Drama, gCount, Action. 
+Accuracy = 51.65% Features: Thriller, Comedy, Romance, Drama, gCount. 
+Accuracy = 48.72% Features: Thriller, Comedy, Romance, Drama, Action. 
+Accuracy = 52.01% Features: Thriller, Comedy, Romance, gCount, Action. 
+Accuracy = 51.65% Features: Thriller, Comedy, Drama, gCount, Action. 
+Accuracy = 51.65% Features: Thriller, Romance, Drama, gCount, Action. 
+Accuracy = 54.58% Features: tCount, Comedy, Romance, Drama, gCount. 
+Accuracy = 48.72% Features: tCount, Comedy, Romance, Drama, Action. 
+Accuracy = 57.51% Features: tCount, Comedy, Romance, gCount, Action. 
+Accuracy = 55.68% Features: tCount, Comedy, Drama, gCount, Action. 
+Accuracy = 56.04% Features: tCount, Romance, Drama, gCount, Action. 
+Accuracy = 52.75% Features: Comedy, Romance, Drama, gCount, Action. 
+Accuracy = 54.58% Features: Thriller, tCount, Comedy, Romance, Drama, gCount. 
+Accuracy = 53.48% Features: Thriller, tCount, Comedy, Romance, Drama, Action. 
+Accuracy = 56.78% Features: Thriller, tCount, Comedy, Romance, gCount, Action. 
+Accuracy = 57.88% Features: Thriller, tCount, Comedy, Drama, gCount, Action. 
+Accuracy = 53.85% Features: Thriller, tCount, Romance, Drama, gCount, Action. 
+Accuracy = 52.75% Features: Thriller, Comedy, Romance, Drama, gCount, Action. 
+Accuracy = 54.58% Features: tCount, Comedy, Romance, Drama, gCount, Action. 
+Accuracy = 57.88% Features: Thriller, tCount, Comedy, Romance, Drama, gCount, Action. 
+</code></pre>
+<p><strong>Accuracy = 58.24% Features: tCount, gCount, Action.</strong>
+As you can see, this one has given most accuracy so for.</p>
+<h3 id="next">Next</h3>
+<p>In next post, we can simplify this problem to binary classification instead of multi class classification. We will be using both <a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#random-forest-classifier">Random forest classifier</a> and <a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#multilayer-perceptron-classifier">Multilayer perceptron classifier</a> machine learning models to compare against each other.</p>
+<h3 id="code-download">Code Download</h3>
+<ul>
+<li><a href="https://github.com/sakthipriyan/learning-spark">https://github.com/sakthipriyan/learning-spark</a> has full source code.</li>
+</ul>
+<h3 id="references">References</h3>
+<ol>
+<li><a href="https://spark.apache.org/docs/2.2.0/sql-programming-guide.html">https://spark.apache.org/docs/2.2.0/sql-programming-guide.html</a></li>
+<li><a href="https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset">https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset</a></li>
+<li><a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html">https://spark.apache.org/docs/2.2.0/ml-classification-regression.html</a></li>
+<li><a href="https://spark.apache.org/docs/2.2.0/ml-features.html">https://spark.apache.org/docs/2.2.0/ml-features.html</a></li>
+</ol>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/spark/" class="tag-link">Spark</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/scala/" class="tag-link">Scala</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/sbt/" class="tag-link">Sbt</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/bigdata/" class="tag-link">Bigdata</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/code/" class="tag-link">Code</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/machine-learning/" class="tag-link">Machine-Learning</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>
