@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Menu Test</title>
+    <link rel="stylesheet" href="docs/css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .test-info {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-info h1 {
+            color: #2c3e50;
+        }
+        .test-info ul {
+            line-height: 2;
+        }
+        .resize-note {
+            background: #fff3cd;
+            padding: 1rem;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="building-systems">
+    <header class="site-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <a href="/" class="name-link">Sakthi Priyan</a>
+                <span class="separator"> | </span>
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="/building-systems/blogs/">Blogs</a></li>
+                <li><a href="/building-systems/books/">Books</a></li>
+                <li><a href="/building-systems/tags/">Tags</a></li>
+                <li><a href="/building-systems/tools/">Tools</a></li>
+                <li><a href="/building-systems/videos/">Videos</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="test-info">
+            <h1>🍔 Hamburger Menu Test Page</h1>
+            
+            <div class="resize-note">
+                <strong>📱 To test mobile view:</strong> Resize your browser window to less than 768px width or use browser DevTools to simulate a mobile device.
+            </div>
+            
+            <h2>How to test:</h2>
+            <ol>
+                <li>Resize browser window to mobile size (< 768px) or use DevTools</li>
+                <li>Click the hamburger menu icon (☰) in the top right</li>
+                <li>Menu should slide in from the right</li>
+                <li>Click any menu item - it should navigate</li>
+                <li>Click outside menu (on overlay) - menu should close</li>
+                <li>Open browser console (F12) to see debug messages</li>
+            </ol>
+            
+            <h2>What to check:</h2>
+            <ul>
+                <li>✅ Hamburger icon appears on mobile (< 768px)</li>
+                <li>✅ Hamburger icon is hidden on desktop (> 768px)</li>
+                <li>✅ Clicking hamburger opens the menu</li>
+                <li>✅ Menu slides in smoothly from the right</li>
+                <li>✅ Overlay appears behind the menu</li>
+                <li>✅ Menu items are clickable and navigate correctly</li>
+                <li>✅ Clicking overlay closes the menu</li>
+                <li>✅ Hamburger icon animates to X when open</li>
+            </ul>
+            
+            <h2>Console Messages:</h2>
+            <p>Open your browser's developer console (F12) to see debugging messages that show:</p>
+            <ul>
+                <li>When the hamburger menu is initialized</li>
+                <li>When the menu is toggled open/closed</li>
+                <li>When links are clicked</li>
+                <li>Number of navigation links found</li>
+            </ul>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                // Toggle menu
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    // Update aria-expanded
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Prevent body scroll when menu is open
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                // Close menu when clicking overlay
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                // Close menu when clicking a link (but allow navigation)
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        // Don't prevent default - allow navigation
+                        // Just close the menu
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                // Close menu on window resize if open
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+</body>
+</html>

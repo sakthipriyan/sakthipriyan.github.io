@@ -1,0 +1,128 @@
+{{ define "book-layout" }}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+    <link rel="stylesheet" href="{{ "/css/style.css" | absURL }}">
+    <link rel="stylesheet" href="{{ "/css/book-layout.css" | absURL }}">
+    <!-- Book Reader Layout Active -->
+</head>
+
+<body class="book-reader {{ .Section }}" data-template="single.html">
+    {{- /* Check if parent book is in draft mode */ -}}
+    {{- $parentBook := . -}}
+    {{- if .CurrentSection -}}
+        {{- $parentBook = .CurrentSection -}}
+    {{- else if .Parent -}}
+        {{- $parentBook = .Parent -}}
+    {{- end -}}
+    
+    {{- if $parentBook.Draft -}}
+    {{- /* Parent book is in draft - show message */ -}}
+    {{ partial "header.html" . }}
+    {{ partial "breadcrumb.html" . }}
+    <main>
+        <section class="draft-notice">
+            <h1>{{ $parentBook.Title }}</h1>
+            <p>This book is currently in draft mode and not yet published.</p>
+        </section>
+    </main>
+    {{ partial "footer.html" . }}
+    {{- else -}}
+    {{- /* Book is published - show chapter */ -}}
+    
+    {{ partial "book-header.html" . }}
+    {{ partial "book-toc.html" . }}
+
+    {{- /* Main Content */ -}}
+    <main class="book-main-content">
+        <div class="book-content-wrapper">
+            <article class="book-chapter">
+                <header class="chapter-header">
+                    {{- if .Params.chapter }}
+                    <div class="chapter-number-display">Chapter {{ .Params.chapter }}</div>
+                    {{- end }}
+                    <h1 class="chapter-title">{{ .Title }}</h1>
+                    {{- if .Params.subtitle }}
+                    <p class="chapter-subtitle">{{ .Params.subtitle }}</p>
+                    {{- end }}
+                </header>
+
+                <div class="chapter-body">
+                    {{ .Content }}
+                </div>
+            </article>
+
+            {{- /* Chapter Navigation */ -}}
+            <nav class="chapter-navigation">
+                {{- $currentBook := . -}}
+                {{- if .CurrentSection -}}
+                    {{- $currentBook = .CurrentSection -}}
+                {{- else if .Parent -}}
+                    {{- $currentBook = .Parent -}}
+                {{- end -}}
+                
+                {{- $chapters := where $currentBook.Pages ".Params.chapter" "!=" nil -}}
+                {{- $sortedChapters := sort $chapters ".Params.chapter" -}}
+                {{- $currentIndex := 0 -}}
+                
+                {{- range $index, $chapter := $sortedChapters -}}
+                    {{- if eq $chapter.RelPermalink $.RelPermalink -}}
+                        {{- $currentIndex = $index -}}
+                    {{- end -}}
+                {{- end -}}
+                
+                {{- $prevChapter := index $sortedChapters (sub $currentIndex 1) -}}
+                {{- $nextChapter := index $sortedChapters (add $currentIndex 1) -}}
+                
+                {{- if and (ge $currentIndex 1) $prevChapter }}
+                <a href="{{ $prevChapter.RelPermalink }}" class="chapter-nav-link chapter-nav-prev">
+                    <span class="nav-direction">← CHAPTER {{ $prevChapter.Params.chapter }}</span>
+                    <span class="nav-title">{{ $prevChapter.Title }}</span>
+                </a>
+                {{- else if eq $currentIndex 0 }}
+                {{- /* First chapter - link back to book home */ -}}
+                <a href="{{ $currentBook.RelPermalink }}" class="chapter-nav-link chapter-nav-prev">
+                    <span class="nav-direction">← Introduction</span>
+                    <span class="nav-title">{{ $currentBook.Title }}</span>
+                </a>
+                {{- else }}
+                <span class="chapter-nav-placeholder"></span>
+                {{- end }}
+
+                {{- if and (lt $currentIndex (sub (len $sortedChapters) 1)) $nextChapter }}
+                <a href="{{ $nextChapter.RelPermalink }}" class="chapter-nav-link chapter-nav-next">
+                    <span class="nav-direction">CHAPTER {{ $nextChapter.Params.chapter }} →</span>
+                    <span class="nav-title">{{ $nextChapter.Title }}</span>
+                </a>
+                {{- else if eq $currentIndex (sub (len $sortedChapters) 1) }}
+                {{- /* Last chapter - show THE END */ -}}
+                <div class="chapter-nav-link chapter-nav-next chapter-nav-end">
+                    <span class="nav-direction">Thank You!</span>
+                    <span class="nav-title">I'd Love Your Feedback</span>
+                </div>
+                {{- end }}
+            </nav>
+        </div>
+    </main>
+
+    {{- /* Overlay for mobile TOC */ -}}
+    <div class="book-toc-overlay"></div>
+
+    {{- /* Scripts */ -}}
+    {{ partial "book-scripts.html" . }}
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    </script>
+    {{- end -}}
+</body>
+</html>
+{{ end }}

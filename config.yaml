@@ -1,0 +1,64 @@
+baseURL: "https://sakthipriyan.com/"
+title: "Sakthi Priyan H"
+theme: "continuum"
+
+# Single Hugo site with sections
+build:
+  writeStats: true
+
+params:
+  description: "Systems that Scale. Wealth that Compounds."
+  author: "Sakthi Priyan H"
+  # Default JavaScript tools site-wide (can be overridden per-page)
+  # Options: echarts, gsap, viz, all
+  # Set to [] to disable by default (recommended for performance)
+  default_js_tools: []  
+  # Example to enable all: default_js_tools: ["all"]
+  # Example selective: default_js_tools: ["echarts", "viz"]
+  
+  # Default JavaScript tools for slides specifically (overrides default_js_tools for slides)
+  slides:
+    default_js_tools: []  
+    # Set to ["all"] to enable all tools by default for all slides
+    # Or specify individually: ["echarts", "gsap", "viz"]
+
+markup:
+  highlight:
+    noClasses: false
+    codeFences: false
+  goldmark:
+    renderer:
+      unsafe: true
+
+# Menu configuration
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 5
+    - name: "Building Wealth"
+      url: "/building-wealth/"
+      weight: 10
+    - name: "Building Systems"
+      url: "/building-systems/"
+      weight: 20
+
+outputFormats:
+  RSS:
+    mediatype: "application/rss"
+    baseName: "feed"
+
+outputs:
+  home: ["HTML", "RSS"]
+  page: ["HTML"]
+  section: ["HTML"]
+
+# Taxonomies - global but filterable by section
+taxonomies:
+  wealth_tag: "wealth_tags"
+  systems_tag: "systems_tags"
+permalinks:
+  wealth_tags: "/building-wealth/tags/:slug/"
+  systems_tags: "/building-systems/tags/:slug/"
+
+publishDir: docs

@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="books-list">
+    <h1>{{ .Title }}</h1>
+    {{- if .Content }}
+    <div class="section-content">
+        {{ .Content }}
+    </div>
+    {{- end }}
+
+    <div class="posts-grid">
+        {{- range .Pages }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+    </div>
+</section>
+{{ end }}

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setup Elasticsearch cluster on AWS | Sakthi Priyan H</title>
+    <meta name="description" content="EC2 instances."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Setup Elasticsearch cluster on AWS</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Setup Elasticsearch cluster on AWS</h1>
+    <p class="content-summary">EC2 instances.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2015-07-15">Jul 15, 2015</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">2 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <p>Elasticsearch cluster can be set up on AWS ec2 instance as shown below.</p>
+<h3 id="setup">Setup</h3>
+<p>The following configuration details are for Ubuntu distro.</p>
+<ol>
+<li>
+<p><a href="www.webupd8.org/2012/01/install-oracle-java-jdk-7-in-ubuntu-via.html">Install</a> Java.</p>
+<pre><code> sudo add-apt-repository ppa:webupd8team/java
+ sudo apt-get update
+ sudo apt-get install oracle-java7-installer
+</code></pre>
+</li>
+<li>
+<p>Install <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></p>
+<pre><code> wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+ echo &quot;deb http://packages.elastic.co/elasticsearch/1.6/debian stable main&quot; | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.6.list
+ sudo apt-get update
+ sudo apt-get install elasticsearch
+</code></pre>
+</li>
+<li>
+<p>Setup EBS.</p>
+<pre><code> # Mounting EBS to /mnt  
+ sudo mkfs.ext4 /dev/xvdf
+ sudo mkdir /mnt
+ sudo mount /dev/xvdf /mnt
+
+ # Configure fstab
+ # Add following line in /etc/fstab document
+ # /dev/xvdf       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2
+ echo &quot;/dev/xvdf       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2&quot; | sudo tee -a /etc/fstab
+</code></pre>
+</li>
+<li>
+<p>Create folder for Elasticsearch in EBS.</p>
+<pre><code> # create a folder &quot;data&quot; in /mnt
+ sudo mkdir -p /mnt/data
+ # change the ownership to elasticsearch user
+ sudo chown elasticsearch:elasticsearch /mnt/data
+</code></pre>
+</li>
+<li>
+<p>Configure Elasticsearch.</p>
+<pre><code> # Edit Elasticsearch config file /etc/elasticsearch/elasticsearch.yml
+ # Cluster name should be same across all nodes.
+ cluster.name: es-cluster
+ # Set data path to correct folder in attached drive.
+ path.data: /mnt/data
+ # Disable Multicast Discovery. Amazon doesn't allow multicast. So, we discover cluster with Unicast
+ discovery.zen.ping.multicast.enabled: false
+ # Config at least two IP in all machines. These two machines will be pinged by other machines in the cluster for discovery
+ discovery.zen.ping.unicast.hosts: [&quot;machine1&quot;, &quot;machine2&quot;]  
+
+ # Automatically start during bootup
+ sudo update-rc.d elasticsearch defaults 95 10
+</code></pre>
+</li>
+<li>
+<p>Optionally setup Head Plugin to view status of Elasticsearch.</p>
+<pre><code> # Install Elastic-Head Plugin
+ sudo /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head
+</code></pre>
+</li>
+</ol>
+<p>Now, open <code>http://instance-ip:9200/_plugin/head/</code> to view the Elasticsearch status</p>
+<p>Repeat same procedure in all nodes to manually set up Elasticsearch cluster.</p>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>Create EC2 instances for each node required in the cluster, in the same availability zone.</li>
+<li>Let all the nodes be of same EC2 instance type.</li>
+<li>Better to create all instances within same security group.</li>
+<li>Security Group of the machines must allow ICMP packets between the machines.</li>
+<li>SSD EBS storage is attached for better performance.</li>
+<li>Http REST API access is relatively faster than native Java based client.</li>
+<li>Better to do round robin access to nodes to avoid overloading a single node for all queries from clients.</li>
+</ul>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/aws/" class="tag-link">Aws</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/elasticsearch/" class="tag-link">Elasticsearch</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/setup/" class="tag-link">Setup</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>

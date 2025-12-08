@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ext on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/building-systems/tags/ext/</link>
+    <description>Recent content in Ext on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 31 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/building-systems/tags/ext/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Raspberry Pi Benchmarking File IO</title>
+      <link>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-benchmarking-file-io/</link>
+      <pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-benchmarking-file-io/</guid>
+      <description>using sysbench, sd card and attached external hard disk</description>
+    </item>
+  </channel>
+</rss>
