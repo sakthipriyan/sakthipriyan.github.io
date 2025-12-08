@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": false,
+  "files.trimTrailingWhitespace": false,
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  }
+}

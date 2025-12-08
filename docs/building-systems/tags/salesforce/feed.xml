@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Salesforce on Sakthi Priyan H</title>
+    <link>https://sakthipriyan.com/building-systems/tags/salesforce/</link>
+    <description>Recent content in Salesforce on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 07 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/building-systems/tags/salesforce/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Salesforce Bulk API usage with an example</title>
+      <link>https://sakthipriyan.com/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/blogs/salesforce-bulk-api-usage-with-an-example/</guid>
+      <description>to show how to upsert records in batches.</description>
+    </item>
+    <item>
+      <title>Salesforce Rest API usage with an example</title>
+      <link>https://sakthipriyan.com/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</link>
+      <pubDate>Sun, 07 Feb 2016 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/blogs/salesforce-rest-api-usage-with-an-example/</guid>
+      <description>to show how to upsert records</description>
+    </item>
+  </channel>
+</rss>

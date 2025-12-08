@@ -1,0 +1,354 @@
+{{ define "main" }}
+<div class="container section-container">
+  {{ if and (in .RelPermalink "/tags/") (eq .Kind "section") }}
+  <!-- Tags List - Use tags template logic -->
+  {{ $currentSection := "" }}
+  {{ $sectionName := "" }}
+
+  <!-- Determine section from URL path -->
+  {{ $pathParts := split .RelPermalink "/" }}
+  {{ if ge (len $pathParts) 3 }}
+  {{ $currentSection = index $pathParts 1 }}
+  {{ $sectionName = $currentSection | title | replaceRE "-" " " }}
+  {{ end }}
+
+  <div class="content-list">
+    {{ if $currentSection }}
+    <div class="breadcrumb">
+      <a href="{{ " /" | absURL }}">Home</a> /
+      <a href="{{ " /" | absURL }}{{ $currentSection }}/">{{ $sectionName }}</a> /
+      <span>Tags</span>
+    </div>
+    {{ end }}
+
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <div class="section-content">
+      {{ .Content }}
+    </div>
+    {{ end }}
+
+    {{ partial "tag-cloud.html" (dict "context" . "currentSection" $currentSection) }}
+  </div>
+  {{- else if and (in .RelPermalink "/tags/") (eq .Kind "term") -}}
+  {{- $currentTag := .Title -}}
+  {{- $currentSection := "" -}}
+  {{- $sectionName := "" -}}
+  {{- $taxonomyField := "tags" -}}
+
+  {{- $pathParts := split .RelPermalink "/" -}}
+  {{- if ge (len $pathParts) 4 -}}
+  {{- $currentSection = index $pathParts 1 -}}
+  {{- $sectionName = $currentSection | title | replaceRE "-" " " -}}
+  {{- if eq $currentSection "building-systems" -}}
+  {{- $taxonomyField = "systems_tags" -}}
+  {{- else if eq $currentSection "building-wealth" -}}
+  {{- $taxonomyField = "wealth_tags" -}}
+  {{- end -}}
+  {{- end -}}
+
+  {{- $articlesWithTag := slice -}}
+  {{- range .Site.RegularPages -}}
+  {{- $pageSection := .Section -}}
+  {{- $page := . -}}
+
+  {{- if or (not $currentSection) (eq $pageSection $currentSection) -}}
+  {{- $tags := index .Params $taxonomyField -}}
+  {{- if $tags -}}
+  {{- range $tags -}}
+  {{- if eq (. | urlize) ($currentTag | urlize) -}}
+  {{- $articlesWithTag = $articlesWithTag | append $page -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+
+  <div class="content-list">
+    <h1>{{ $currentTag | title }}</h1>
+    {{- if .Content }}
+    <div class="section-content">
+      {{ .Content }}
+    </div>
+    {{- end }}
+
+    {{- if $articlesWithTag -}}
+    {{- $blogs := slice -}}
+    {{- $books := slice -}}
+    {{- $slides := slice -}}
+    {{- $tools := slice -}}
+    {{- $videos := slice -}}
+
+    {{- range $articlesWithTag -}}
+      {{- if in .RelPermalink "/blogs/" -}}
+        {{- $blogs = $blogs | append . -}}
+      {{- else if in .RelPermalink "/books/" -}}
+        {{- $books = $books | append . -}}
+      {{- else if in .RelPermalink "/slides/" -}}
+        {{- $slides = $slides | append . -}}
+      {{- else if in .RelPermalink "/tools/" -}}
+        {{- $tools = $tools | append . -}}
+      {{- else if in .RelPermalink "/videos/" -}}
+        {{- $videos = $videos | append . -}}
+      {{- end -}}
+    {{- end }}
+
+    {{- if $blogs }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Blogs</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $blogs }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $books }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Books</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $books }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $slides }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Slides</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $slides }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $tools }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Tools</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $tools }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- if $videos }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Videos</h2>
+      </div>
+      <div class="posts-grid">
+        {{- range $videos }}
+        {{ partial "content-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- else }}
+    <p class="no-content">No content found with the tag "{{ $currentTag | title }}"{{- if $currentSection }} in {{ $sectionName }}{{- end }}.</p>
+    {{- end }}
+  </div>
+  {{ else if and (in .RelPermalink "/videos/") (eq .Kind "section") }}
+  <!-- Videos List -->
+  <div class="videos-list">
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}
+    <p class="section-description">{{ .Description }}</p>
+    {{ end }}
+
+    <div class="videos-grid">
+      {{ range .Pages }}
+      <div class="video-card">
+        {{ if .Params.youtube_id }}
+        <div class="video-thumbnail">
+          <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg" alt="{{ .Title }}"
+            loading="lazy">
+          {{ if .Params.duration }}
+          <span class="duration-badge">{{ .Params.duration }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+
+        <div class="video-info">
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          {{ if .Description }}
+          <p class="video-description">{{ .Description }}</p>
+          {{ end }}
+
+          <div class="video-meta">
+            {{ if .Params.platform }}
+            <span class="platform">{{ .Params.platform }}</span>
+            {{ end }}
+            {{ if .Date }}
+            <span class="date">{{ .Date.Format "Jan 2, 2006" }}</span>
+            {{ end }}
+          </div>
+
+          {{ if .Params.youtube_id }}
+          <a href="https://youtube.com/watch?v={{ .Params.youtube_id }}" class="watch-button" target="_blank">Watch on
+            YouTube</a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ else if and (or (in .RelPermalink "/blogs/") (in .RelPermalink "/tools/") (in .RelPermalink "/slides/")) (eq .Kind
+  "section") }}
+  <!-- Content List Pages (Blogs, Tools, Slides) -->
+  <div class="content-list">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <div class="section-content">
+      {{ .Content }}
+    </div>
+    {{ end }}
+
+    {{ $allPages := .RegularPages }}
+    {{ if $allPages }}
+    <div class="posts-grid">
+      {{ range $allPages }}
+      {{ partial "content-card.html" . }}
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ else }}
+  <!-- Section Homepage with All Category Items -->
+  <div class="content-list">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <div class="section-content">
+      {{ .Content }}
+    </div>
+    {{ end }}
+
+    {{ if .Pages }}
+    <!-- Blogs Section -->
+    {{ with .GetPage "blogs" }}
+    {{ $blogs := .Pages }}
+    {{ if $blogs }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Blogs</h2>
+      </div>
+      <div class="posts-grid">
+        {{ range first 6 $blogs }}
+        {{ partial "content-card.html" . }}
+        {{ end }}
+      </div>
+      {{ if gt (len $blogs) 6 }}
+      <div class="view-all-section">
+        <a href="{{ .Permalink }}" class="view-all-link">View all {{ len $blogs }} blogs →</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <!-- Books Section -->
+    {{ with .GetPage "books" }}
+    {{ $books := .Pages }}
+    {{ if $books }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Books</h2>
+      </div>
+      <div class="posts-grid">
+        {{ range first 6 $books }}
+        {{ partial "content-card.html" . }}
+        {{ end }}
+      </div>
+      {{ if gt (len $books) 6 }}
+      <div class="view-all-section">
+        <a href="{{ .Permalink }}" class="view-all-link">View all {{ len $books }} books →</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <!-- Slides Section -->
+    {{ with .GetPage "slides" }}
+    {{ $slides := .Pages }}
+    {{ if $slides }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Slides</h2>
+      </div>
+      <div class="posts-grid">
+        {{ range first 6 $slides }}
+        {{ partial "content-card.html" . }}
+        {{ end }}
+      </div>
+      {{ if gt (len $slides) 6 }}
+      <div class="view-all-section">
+        <a href="{{ .Permalink }}" class="view-all-link">View all {{ len $slides }} slides →</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <!-- Tools Section -->
+    {{ with .GetPage "tools" }}
+    {{ $tools := .Pages }}
+    {{ if $tools }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Tools</h2>
+      </div>
+      <div class="posts-grid">
+        {{ range first 6 $tools }}
+        {{ partial "content-card.html" . }}
+        {{ end }}
+      </div>
+      {{ if gt (len $tools) 6 }}
+      <div class="view-all-section">
+        <a href="{{ .Permalink }}" class="view-all-link">View all {{ len $tools }} tools →</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <!-- Videos Section -->
+    {{ with .GetPage "videos" }}
+    {{ $videos := .Pages }}
+    {{ if $videos }}
+    <div class="category-section-full">
+      <div class="category-header-full">
+        <h2>Videos</h2>
+      </div>
+      <div class="posts-grid">
+        {{ range first 6 $videos }}
+        {{ partial "content-card.html" . }}
+        {{ end }}
+      </div>
+      {{ if gt (len $videos) 6 }}
+      <div class="view-all-section">
+        <a href="{{ .Permalink }}" class="view-all-link">View all {{ len $videos }} videos →</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

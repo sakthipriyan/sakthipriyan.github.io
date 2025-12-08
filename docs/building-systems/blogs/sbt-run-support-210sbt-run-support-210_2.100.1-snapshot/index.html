@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT | Sakthi Priyan H</title>
+    <meta name="description" content="Fixing unresolved dependency in playframework."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</h1>
+    <p class="content-summary">Fixing unresolved dependency in playframework.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2015-04-24">Apr 24, 2015</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">2 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h3 id="unresolved-dependency">Unresolved dependency</h3>
+<p>I started working on one of the play framework projects in my <a href="http://crayondata.com">current company</a>. I faced the following issue in local.</p>
+<pre><code>sakthipriyan@Sakthi-Lap:api$ sbt
+[info] Loading project definition from /home/sakthipriyan/workspace/java/api/project
+[info] Updating {file:/home/sakthipriyan/workspace/java/api/project/}api-build...
+[info] Resolving sbt-run-support-210#sbt-run-support-210_2.10;0.1-SNAPSHOT ...
+[warn] 	module not found: sbt-run-support-210#sbt-run-support-210_2.10;0.1-SNAPSHOT
+[warn] ==== typesafe-ivy-releases: tried
+[warn]   http://repo.typesafe.com/typesafe/ivy-releases/sbt-run-support-210/sbt-run-support-210_2.10/0.1-SNAPSHOT/ivys/ivy.xml
+[warn] ==== sbt-plugin-releases: tried
+[warn]   http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/sbt-run-support-210/sbt-run-support-210_2.10/0.1-SNAPSHOT/ivys/ivy.xml
+[warn] ==== local: tried
+[warn]   /home/sakthipriyan/.ivy2/local/sbt-run-support-210/sbt-run-support-210_2.10/0.1-SNAPSHOT/ivys/ivy.xml
+[warn] ==== public: tried
+[warn]   http://repo1.maven.org/maven2/sbt-run-support-210/sbt-run-support-210_2.10/0.1-SNAPSHOT/sbt-run-support-210_2.10-0.1-SNAPSHOT.pom
+[warn] ==== Typesafe repository: tried
+[warn]   http://repo.typesafe.com/typesafe/releases/sbt-run-support-210/sbt-run-support-210_2.10/0.1-SNAPSHOT/sbt-run-support-210_2.10-0.1-SNAPSHOT.pom
+[info] Resolving org.fusesource.jansi#jansi;1.4 ...
+[warn] 	::::::::::::::::::::::::::::::::::::::::::::::
+[warn] 	::          UNRESOLVED DEPENDENCIES         ::
+[warn] 	::::::::::::::::::::::::::::::::::::::::::::::
+[warn] 	:: sbt-run-support-210#sbt-run-support-210_2.10;0.1-SNAPSHOT: not found
+[warn] 	::::::::::::::::::::::::::::::::::::::::::::::
+sbt.ResolveException: unresolved dependency: sbt-run-support-210#sbt-run-support-210_2.10;0.1-SNAPSHOT: not found
+	at sbt.IvyActions$.sbt$IvyActions$$resolve(IvyActions.scala:217)
+	at sbt.IvyActions$$anonfun$update$1.apply(IvyActions.scala:126)
+	at sbt.IvyActions$$anonfun$update$1.apply(IvyActions.scala:125)
+	at sbt.IvySbt$Module$$anonfun$withModule$1.apply(Ivy.scala:115)
+	at sbt.IvySbt$Module$$anonfun$withModule$1.apply(Ivy.scala:115)
+	at sbt.IvySbt$$anonfun$withIvy$1.apply(Ivy.scala:103)
+	at sbt.IvySbt.sbt$IvySbt$$action$1(Ivy.scala:48)
+	at sbt.IvySbt$$anon$3.call(Ivy.scala:57)
+	.....
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:724)
+[error] (*:update) sbt.ResolveException: unresolved dependency: sbt-run-support-210#sbt-run-support-210_2.10;0.1-SNAPSHOT: not found
+Project loading failed: (r)etry, (q)uit, (l)ast, or (i)gnore?
+</code></pre>
+<h3 id="solution">Solution</h3>
+<p>Though it didn&rsquo;t work in local, sbt build worked seemlessly in Jenkins CI server.
+So, I determined that issue is due to non availability of dependency jar.
+I tried to upgrade the minor version to next one, ie., from <code>2.3.5</code> to <code>2.3.6</code>, it fixed the issue and it built successfully.</p>
+<h3 id="update-projectpluginssbt">Update project/plugins.sbt</h3>
+<p>To upgrade the playframework version, update the project/plugins.sbt file.</p>
+<h4 id="original-plugins-file">Original plugins file</h4>
+<pre><code>sakthipriyan@Sakthi-Lap:api$ head -n4 project/plugins.sbt
+resolvers += &quot;Typesafe repository&quot; at &quot;http://repo.typesafe.com/typesafe/releases/&quot;
+
+// The Play plugin
+addSbtPlugin(&quot;com.typesafe.play&quot; % &quot;sbt-plugin&quot; % &quot;2.3.5&quot;)
+</code></pre>
+<h4 id="updated-plugins-file">Updated plugins file</h4>
+<pre><code>sakthipriyan@Sakthi-Lap:api$ head -n4 project/plugins.sbt
+resolvers += &quot;Typesafe repository&quot; at &quot;http://repo.typesafe.com/typesafe/releases/&quot;
+
+// The Play plugin
+addSbtPlugin(&quot;com.typesafe.play&quot; % &quot;sbt-plugin&quot; % &quot;2.3.6&quot;)
+</code></pre>
+<h3 id="actual-issue">Actual Issue</h3>
+<p>It seems that SNAPSHOT jar was erroneously published into public releases repository.
+<code>Play framework 2.3.5</code> had dependency of this erroneously published jar file.
+Apparently people in typesafe deleted the wrongly published denpendency jar later.
+This is why it worked in systems which cached deleted artifact in local.</p>
+<h3 id="better-solution">Better solution</h3>
+<p>Always use a <a href="http://www.sonatype.org/nexus/">Sonatype Nexus</a> proxy repository between your projects and actual repositories.
+This will save your build system against,</p>
+<ul>
+<li>Downtime of remote third party repo servers.</li>
+<li>Deletion of artifacts from remote third party repo servers.</li>
+</ul>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/playframework/" class="tag-link">Playframework</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/sbt/" class="tag-link">Sbt</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/debug/" class="tag-link">Debug</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/nexus/" class="tag-link">Nexus</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+</html>

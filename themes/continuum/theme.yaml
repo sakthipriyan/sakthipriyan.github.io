@@ -1,0 +1,31 @@
+name: "Continuum"
+license: "MIT"
+licenselink: "https://github.com/yourusername/continuum-theme/blob/main/LICENSE"
+description: "A comprehensive Hugo theme supporting blogs, slides, books, videos, and interactive tools"
+homepage: "https://github.com/yourusername/continuum-theme"
+demosite: "https://continuum-theme-demo.netlify.app"
+tags:
+  - "blog"
+  - "portfolio"
+  - "slides"
+  - "books"
+  - "tools"
+  - "responsive"
+  - "clean"
+features:
+  - "responsive"
+  - "blog"
+  - "slides"
+  - "videos"
+  - "tools"
+  - "books"
+min_version: "0.80.0"
+
+author:
+  name: "Your Name"
+  homepage: "https://yourwebsite.com"
+
+original:
+  name: "Continuum Theme"
+  homepage: "https://github.com/yourusername/continuum-theme"
+  repo: "https://github.com/yourusername/continuum-theme"

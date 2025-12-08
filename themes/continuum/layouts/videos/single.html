@@ -1,0 +1,27 @@
+{{ define "main" }}
+<article class="video">
+    {{ partial "content-header.html" . }}
+
+    {{ if .Params.youtube_id }}
+    <div class="video-embed">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/{{ .Params.youtube_id }}" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+    {{ else if .Params.youtube_url }}
+    <div class="video-link">
+        <a href="{{ .Params.youtube_url }}" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+    {{ end }}
+
+    <div class="video-content">
+        {{ .Content }}
+    </div>
+
+    {{ partial "content-footer.html" . }}
+</article>
+{{ end }}

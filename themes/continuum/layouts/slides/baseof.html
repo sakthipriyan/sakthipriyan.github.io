@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
+
+    <!-- Custom slides styling -->
+    <style>
+        /* Full screen styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .reveal {
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+
+        .reveal section {
+            font-size: 1.4em;
+            line-height: 1.5;
+        }
+
+        .reveal .slides>section>section {
+            font-size: 1.0em;
+        }
+
+        .reveal .progress {
+            position: fixed;
+            height: 12px;
+            bottom: 10px;
+            width: 90%;
+            left: 5%;
+            border-radius: 6px;
+        }
+
+        .graphviz {
+            width: 100%;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .graphviz svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Hide raw DOT code blocks */
+        pre code.dot,
+        pre.language-dot,
+        pre.dot {
+            display: none;
+        }
+
+        /* ECharts container styles */
+        .echarts-container {
+            width: 100%;
+            height: 80vh;
+        }
+
+        /* GSAP animation helpers */
+        .gsap-fade-in {
+            opacity: 0;
+        }
+
+        .gsap-slide-in {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+    </style>
+
+    {{ block "head" . }}{{ end }}
+</head>
+
+<body>
+    {{ block "main" . }}{{ end }}
+
+    <!-- JavaScript -->
+    {{ if or (eq .Section "slides") (eq .Type "slides") }}
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+    
+    {{/* Merge site-wide defaults with page-specific js_tools */}}
+    {{ $defaultTools := slice }}
+    {{ if .Site.Params.slides.default_js_tools }}
+        {{ $defaultTools = .Site.Params.slides.default_js_tools }}
+    {{ end }}
+    {{ $jsTools := .Params.js_tools | default $defaultTools }}
+    
+    {{ if or (in $jsTools "viz") (in $jsTools "all") }}
+    <!-- Viz.js for Graphviz diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+    {{ end }}
+    
+    {{ if or (in $jsTools "echarts") (in $jsTools "all") }}
+    <!-- ECharts for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    {{ end }}
+    
+    {{ if or (in $jsTools "gsap") (in $jsTools "all") }}
+    <!-- GSAP for animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    {{ end }}
+    {{ end }}
+
+    {{ if or (eq .Section "tools") (eq .Type "tools") }}
+    <script src="{{ "js/tools.js" | absURL }}"></script>
+    {{ end }}
+
+        {{ block "scripts" . }}{{ end }}
+
+            <script>
+            // Enable OBS support if ?obs=host:port or ?obs=host:port:password is present in the URL
+            (function() {
+                function getQueryParam(name) {
+                    return new URLSearchParams(window.location.search).get(name);
+                }
+                const obsParam = getQueryParam('obs');
+                if (obsParam) {
+                    // obsParam format: host:port or host:port:password (password may contain colons)
+                    const parts = obsParam.split(":");
+                    let host = parts[0] || "";
+                    let port = parts[1] || "";
+                    let password = "";
+                    if (parts.length > 2) {
+                        // Join everything after the second part as password (to support colons in password)
+                        password = parts.slice(2).join(":");
+                    }
+                    if (!host || !port) {
+                        host = prompt("Enter OBS host (e.g. 192.168.1.100):", "localhost") || "localhost";
+                        port = prompt("Enter OBS port (e.g. 4455):", "4455") || "4455";
+                    }
+                    const obsWsUrl = `ws://${host}:${port}`;
+
+                    // Inject obs-websocket-js
+                    var obsScript = document.createElement('script');
+                    obsScript.src = 'https://cdn.jsdelivr.net/npm/obs-websocket-js';
+                    obsScript.onload = function() {
+                        const obs = new OBSWebSocket();
+
+                        const connectToObs = async () => {
+                            try {
+                                await obs.connect(obsWsUrl, password);
+                                console.log('Connected to OBS!');
+                                
+                                // Fetch available scenes from OBS
+                                try {
+                                    const { scenes } = await obs.call('GetSceneList');
+                                    obsScenes = scenes.map(scene => scene.sceneName).reverse();
+                                    console.log('Available OBS scenes:', obsScenes);
+                                    
+                                    if (obsScenes.length === 0) {
+                                        console.warn('No scenes found in OBS, using default scenes');
+                                        obsScenes = ["Screen Only", "Video RB", "Video Only"];
+                                    }
+                                    
+                                    // Get current scene and set index
+                                    const { currentProgramSceneName } = await obs.call('GetCurrentProgramScene');
+                                    obsSceneIndex = obsScenes.indexOf(currentProgramSceneName);
+                                    if (obsSceneIndex === -1) obsSceneIndex = 0;
+                                    console.log(`Current scene: ${currentProgramSceneName}, index: ${obsSceneIndex}`);
+                                } catch (error) {
+                                    console.error('Failed to fetch scenes from OBS:', error);
+                                    obsScenes = ["Screen Only", "Video RB", "Video Only"];
+                                }
+                            } catch (error) {
+                                console.error('Failed to connect:', error);
+                            }
+                        };
+
+                        const switchScene = async (sceneName) => {
+                            try {
+                                await obs.call('SetCurrentProgramScene', { sceneName });
+                                console.log(`Switched to scene: ${sceneName}`);
+                            } catch (error) {
+                                console.error('Failed to switch scene:', error);
+                            }
+                        };
+
+                        connectToObs();
+
+                        let obsSceneIndex = 0;
+                        let obsScenes = ["Screen Only", "Video RB", "Video Only"]; // Default fallback
+
+                        document.addEventListener("keydown", (e) => {
+                            const key = e.key;
+                            if (key != "b" && key != "Escape" && key != "Shift" &&
+                                    key != "F5" && key != "Alt" && key != "Meta" && key != "π") {
+                                    return;
+                            }
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            if (key === "b") {
+                                    obsSceneIndex = (obsSceneIndex - 1 + obsScenes.length) % obsScenes.length;
+                            } else if (key === "Escape" || key === "π") {
+                                    obsSceneIndex = (obsSceneIndex + 1) % obsScenes.length;
+                            }
+                            if (key === "b" || key === "Escape" || key === "π") {
+                                    const currentScene = obsScenes[obsSceneIndex];
+                                    switchScene(currentScene);
+                            }
+                        }, true);
+                    };
+                    document.body.appendChild(obsScript);
+                }
+            })();
+            </script>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGEJ767SK');
+    </script>
+</body>
+
+</html>
