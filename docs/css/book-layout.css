@@ -475,6 +475,44 @@ body.book-reader {
     padding: 0;
 }
 
+/* Tables */
+.chapter-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border: 1px solid var(--book-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chapter-body table th,
+.chapter-body table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--book-border);
+    text-align: left;
+}
+
+.chapter-body table th {
+    background: var(--book-toc-bg);
+    font-weight: 600;
+    color: var(--book-text);
+    border-bottom: 2px solid var(--book-border);
+}
+
+.chapter-body table tr:hover {
+    background: var(--book-toc-bg);
+}
+
+/* Dark theme table overrides */
+.theme-dark .chapter-body table th {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.theme-dark .chapter-body table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* Chapter Navigation */
 .chapter-navigation {
     display: flex;
