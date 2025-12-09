@@ -33,10 +33,9 @@ This book is designed to help you build wealth through simple, boring and proven
 - **Opportunity Cost**: Real-world lessons about the long-term impact of financial decisions
 
 ### Part 4: Practical Implementation
+- **Asset Allocation & Rebalancing**: The portfolio recipe that determines 90% of your success
 - **Systematic Investment Plans**: The discipline of regular, automated investing
-- **Asset Allocation**: Balancing risk and returns across equity, debt, and gold
 - **Tax-Efficient Investing**: Keeping more of what you earn through smart structuring
-- **Rebalancing**: Maintaining your target allocation through market cycles
 
 ## Who This Book Is For
 
@@ -79,6 +78,9 @@ Global diversification through international investing—process, costs, taxatio
 ### Chapter 10: [The ₹1.58 Crore Lesson](10-opportunity-cost.md)
 A personal journey about opportunity cost, compounding, and the long-term impact of financial decisions.
 
+### Chapter 11: [Asset Allocation & Rebalancing](11-asset-allocation-rebalancing.md)
+The portfolio recipe that determines 90% of your success—how to build and maintain your target allocation through market cycles.
+
 ## Key Principles
 
 This book is built on time-tested principles:
@@ -120,7 +122,7 @@ This book shares my personal approach:
 
 ## Book Status
 
-✅ **Complete** - All 10 chapters published!  
+✅ **Growing** - 11 chapters published, more coming!  
 📚 **Living Document** - Updated with new insights and market changes  
 🎯 **Practical** - Real strategies, real data, real examples
 
