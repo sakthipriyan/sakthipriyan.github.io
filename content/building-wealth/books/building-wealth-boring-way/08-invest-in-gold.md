@@ -1,6 +1,6 @@
 ---
 title: "How to Invest in Gold for Building Wealth"
-subtitle: "The Wealth Protector, Not Creator"
+subtitle: "Understanding gold as a wealth protector—ETFs, mutual funds, and avoiding common mistakes."
 type: "books"
 chapter: 8
 date: 2025-12-04

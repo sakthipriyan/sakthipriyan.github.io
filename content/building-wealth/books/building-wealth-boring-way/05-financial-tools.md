@@ -1,6 +1,6 @@
 ---
 title: "Financial Tools for Building Wealth"
-subtitle: "Your Complete Financial Toolkit"
+subtitle: "Your complete financial toolkit—from bank accounts and insurance to equity, debt, and gold investments."
 type: "books"
 chapter: 5
 date: 2025-12-04

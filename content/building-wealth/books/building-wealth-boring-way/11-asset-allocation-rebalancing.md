@@ -1,6 +1,6 @@
 ---
 title: "Asset Allocation & Rebalancing"
-subtitle: "The Portfolio Recipe That Determines Your Success"
+subtitle: "The portfolio recipe that determines 90% of your success—how to build and maintain your target allocation through market cycles."
 type: "books"
 chapter: 11
 date: 2025-12-06

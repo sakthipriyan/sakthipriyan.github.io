@@ -1,6 +1,6 @@
 ---
 title: "Equity & Index Funds for Building Wealth"
-subtitle: "Simple. Smart. Boring. Powerful."
+subtitle: "Simple. Smart. Boring. Powerful. Building wealth through Indian and global index funds."
 type: "books"
 chapter: 6
 date: 2025-12-04

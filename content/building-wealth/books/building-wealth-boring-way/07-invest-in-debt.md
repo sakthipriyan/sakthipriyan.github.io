@@ -1,6 +1,6 @@
 ---
 title: "How to Invest in Debt for Building Wealth"
-subtitle: "Stability, Safety, and Strategic Allocation"
+subtitle: "Stability, safety, and strategic allocation using debt mutual funds, PPF, and arbitrage funds."
 type: "books"
 chapter: 7
 date: 2025-12-04

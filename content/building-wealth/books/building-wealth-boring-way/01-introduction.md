@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Building Wealth"
-subtitle: "Why Boring Works"
+subtitle: "Welcome to your wealth-building journey and why boring works."
 type: "books"
 chapter: 1
 date: 2025-11-04
