@@ -1,6 +1,6 @@
 ---
 title: "The Magic of Compound Interest"
-subtitle: "Time is Your Best Friend"
+subtitle: "Time is your best friend—understanding the eighth wonder of the world."
 type: "books"
 chapter: 2
 date: 2025-11-04

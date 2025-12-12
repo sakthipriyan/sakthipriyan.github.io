@@ -1,6 +1,6 @@
 ---
 title: "Building Your Emergency Fund"
-subtitle: "Your Financial Safety Net"
+subtitle: "Your financial safety net using liquid funds, arbitrage funds, and conservative hybrid funds."
 type: "books"
 chapter: 3
 date: 2025-12-04

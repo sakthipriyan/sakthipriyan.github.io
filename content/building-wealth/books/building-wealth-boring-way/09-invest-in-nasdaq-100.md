@@ -1,6 +1,6 @@
 ---
 title: "Investing in NASDAQ 100 from India"
-subtitle: "Global Diversification for Wealth Building"
+subtitle: "Global diversification through international investing—process, costs, taxation, and strategy."
 type: "books"
 chapter: 9
 date: 2025-12-04

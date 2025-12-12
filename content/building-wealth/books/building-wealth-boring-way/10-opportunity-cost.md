@@ -1,6 +1,6 @@
 ---
 title: "The ₹1.58 Crore Lesson"
-subtitle: "Understanding Opportunity Cost and Long-Term Wealth"
+subtitle: "A personal journey about opportunity cost, compounding, and the long-term impact of financial decisions."
 type: "books"
 chapter: 10
 date: 2025-12-04

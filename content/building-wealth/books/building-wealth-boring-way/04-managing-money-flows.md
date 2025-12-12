@@ -1,6 +1,6 @@
 ---
 title: "Managing Money Flows"
-subtitle: "Organizing Your Financial Life"
+subtitle: "Organizing your financial life with purpose-based bank accounts, credit cards, and systematic allocations."
 type: "books"
 chapter: 4
 date: 2025-12-04
@@ -257,7 +257,6 @@ This structure ensures that money flows purposefully from income to its designat
 5. **Ignoring Review**: Monthly check-ins essential
 
 ## The Psychological Benefits
-
 Beyond the mechanical benefits, this system provides:
 
 ### Peace of Mind
