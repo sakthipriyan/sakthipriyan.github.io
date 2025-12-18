@@ -1,10 +1,10 @@
 ---
-title: "Credit Card Usage & Compact Guide"
+title: "💳 Credit Cards: Usage, Risks & Smart Practices"
 date: "2025-12-12"
 draft: false
 layout: "slides"
 type: "slides"
-summary: "TODO"
+summary: "Credit cards can be powerful tools for rewards, convenience, and short-term liquidity when used with discipline."
 js_tools:
  - echarts
  - gsap
