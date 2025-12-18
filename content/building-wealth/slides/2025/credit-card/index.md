@@ -1,4 +1,4 @@
- ---
+---
 title: "Credit Card Usage & Compact Guide"
 date: "2025-12-12"
 draft: false
