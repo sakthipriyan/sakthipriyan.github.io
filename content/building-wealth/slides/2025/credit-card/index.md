@@ -154,7 +154,7 @@ If this list describes you today, avoid credit cards until habits change.
 - Petrol Pumps: If you buy petrol worth ₹1,000 using a credit card,  
   - Fuel surcharge (1%) = ₹ 10.00 + GST @18% on ₹10 = ₹ 1.80  
   - Total extra charged = ₹ 11.80 (1.18% effectively)
-  - Some cards refund<sup>*<sup> surcharge, but not GST 
+  - Some cards refund<sup>*</sup> surcharge, but not GST 
 - Categories With No Reward Points
 --
 
