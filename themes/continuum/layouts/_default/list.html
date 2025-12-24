@@ -164,46 +164,17 @@
   </div>
   {{ else if and (in .RelPermalink "/videos/") (eq .Kind "section") }}
   <!-- Videos List -->
-  <div class="videos-list">
+  <div class="content-list">
     <h1>{{ .Title }}</h1>
-    {{ if .Description }}
-    <p class="section-description">{{ .Description }}</p>
+    {{ if .Content }}
+    <div class="section-content">
+      {{ .Content }}
+    </div>
     {{ end }}
 
-    <div class="videos-grid">
+    <div class="posts-grid">
       {{ range .Pages }}
-      <div class="video-card">
-        {{ if .Params.youtube_id }}
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg" alt="{{ .Title }}"
-            loading="lazy">
-          {{ if .Params.duration }}
-          <span class="duration-badge">{{ .Params.duration }}</span>
-          {{ end }}
-        </div>
-        {{ end }}
-
-        <div class="video-info">
-          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-          {{ if .Description }}
-          <p class="video-description">{{ .Description }}</p>
-          {{ end }}
-
-          <div class="video-meta">
-            {{ if .Params.platform }}
-            <span class="platform">{{ .Params.platform }}</span>
-            {{ end }}
-            {{ if .Date }}
-            <span class="date">{{ .Date.Format "Jan 2, 2006" }}</span>
-            {{ end }}
-          </div>
-
-          {{ if .Params.youtube_id }}
-          <a href="https://youtube.com/watch?v={{ .Params.youtube_id }}" class="watch-button" target="_blank">Watch on
-            YouTube</a>
-          {{ end }}
-        </div>
-      </div>
+        {{ partial "content-card.html" . }}
       {{ end }}
     </div>
   </div>
