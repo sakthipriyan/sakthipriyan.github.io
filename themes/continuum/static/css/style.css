@@ -1958,6 +1958,8 @@ main article p {
 
 .post-content ul,
 .post-content ol,
+.section-content ul,
+.section-content ol,
 main article ul,
 main article ol {
     margin: 1.5rem 0 !important;
@@ -1967,6 +1969,7 @@ main article ol {
 }
 
 .post-content li,
+.section-content li,
 main article li {
     margin: 0.25rem 0 !important;
     line-height: 1.56;
@@ -1974,11 +1977,13 @@ main article li {
 }
 
 .post-content ul li,
+.section-content ul li,
 main article ul li {
     list-style-type: disc !important;
 }
 
 .post-content ol li,
+.section-content ol li,
 main article ol li {
     list-style-type: decimal !important;
 }
@@ -1987,6 +1992,10 @@ main article ol li {
 .post-content ol ul,
 .post-content ul ol,
 .post-content ol ol,
+.section-content ul ul,
+.section-content ol ul,
+.section-content ul ol,
+.section-content ol ol,
 main article ul ul,
 main article ol ul,
 main article ul ol,
@@ -1997,6 +2006,8 @@ main article ol ol {
 
 .post-content li > ul,
 .post-content li > ol,
+.section-content li > ul,
+.section-content li > ol,
 main article li > ul,
 main article li > ol {
     margin-top: 0.5rem;
@@ -2004,6 +2015,7 @@ main article li > ol {
 }
 
 .post-content h2,
+.section-content h2,
 main article h2 {
     font-size: 1.75rem;
     margin-top: 2.5rem;
@@ -2013,6 +2025,7 @@ main article h2 {
 }
 
 .post-content h3,
+.section-content h3,
 main article h3 {
     font-size: 1.4rem;
     margin-top: 2rem;
@@ -2126,11 +2139,13 @@ main article table th {
     }
 
     .post-content h2,
+    .section-content h2,
     main article h2 {
         font-size: 1.5rem;
     }
 
     .post-content h3,
+    .section-content h3,
     main article h3 {
         font-size: 1.25rem;
     }
