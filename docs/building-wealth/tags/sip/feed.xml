@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SIP on Sakthi Priyan H</title>
+    <link>http://localhost:1313/building-wealth/tags/sip/</link>
+    <description>Recent content in SIP on Sakthi Priyan H</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 25 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/building-wealth/tags/sip/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SIP Calculator</title>
+      <link>http://localhost:1313/building-wealth/tools/sip-calculator/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-wealth/tools/sip-calculator/</guid>
+      <description>Plan your systematic investment with CAGR projections and inflation-adjusted returns.</description>
+    </item>
+  </channel>
+</rss>

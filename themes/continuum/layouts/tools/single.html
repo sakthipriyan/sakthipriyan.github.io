@@ -65,6 +65,18 @@
 
 {{ define "scripts" }}
 {{ if .Params.tool_type }}
+{{- /* Load Vue.js for tools */ -}}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+{{- /* Load ECharts if tool needs it */ -}}
+{{ if eq .Params.tool_type "sipCalculator" }}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+{{ end }}
+{{- /* Load tool-specific JavaScript */ -}}
+{{ if eq .Params.tool_type "emergencyFund" }}
+<script src="{{ "js/emergency-fund.js" | absURL }}"></script>
+{{ else if eq .Params.tool_type "sipCalculator" }}
+<script src="{{ "js/sip-calculator.js" | absURL }}"></script>
+{{ end }}
 <script>
     // Initialize tool based on type
     document.addEventListener('DOMContentLoaded', function () {

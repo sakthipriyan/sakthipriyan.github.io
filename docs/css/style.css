@@ -729,9 +729,6 @@ main {
 
 /* Tools Specific */
 .tool-interface {
-    background: var(--gray-light);
-    border-radius: var(--border-radius);
-    padding: 2rem;
     margin: 2rem 0;
 }
 
@@ -739,10 +736,117 @@ main {
     margin-bottom: 1rem;
 }
 
-.input-group label {
-    display: block;
+/* Target Fields Background */
+.target-group {
+    background-color: #e3f2fd;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    margin-bottom: 20px;
+}
+
+/* Investment Parameters Background */
+.investment-params-group {
+    background-color: #fff3e0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ffb74d;
+}
+
+.input-group-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-group-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group-col label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    position: relative;
+}
+
+.input-group-col input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-medium);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.input-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.help-icon {
+    cursor: help;
+    font-size: 1rem;
+    margin-left: auto;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    position: relative;
+}
+
+.help-icon:hover {
+    opacity: 1;
+}
+
+.help-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    white-space: pre-line;
+    width: 280px;
+    max-width: 280px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-weight: normal;
+}
+
+.help-icon::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 2px);
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: #333;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 1001;
+}
+
+.help-icon:hover::after,
+.help-icon:hover::before {
+    opacity: 1;
+    transition-delay: 0.1s;
 }
 
 .input-group input,
@@ -752,6 +856,149 @@ main {
     border: 1px solid var(--gray-medium);
     border-radius: var(--border-radius);
     font-size: 1rem;
+}
+
+.unit-selector-input {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.unit-selector-input input {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+.unit-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.unit-buttons button {
+    padding: 0.5rem;
+    border: 2px solid var(--gray-medium);
+    background: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.unit-buttons button:hover {
+    border-color: var(--secondary-color);
+    background: #f8f9fa;
+}
+
+.unit-buttons button.active {
+    border-color: var(--secondary-color);
+    background: var(--secondary-color);
+    color: white;
+}
+
+/* Mode Toggle Styles */
+.mode-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.mode-toggle button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gray-medium);
+    background: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.mode-toggle button:hover {
+    border-color: var(--secondary-color);
+    background: #f8f9fa;
+}
+
+.mode-toggle button.active {
+    border-color: var(--secondary-color);
+    background: var(--secondary-color);
+    color: white;
+}
+
+.summary-item .value.highlight {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.multi-unit-input {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.unit-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.unit-box input {
+    text-align: center;
+    font-weight: 600;
+}
+
+.unit-label {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.combo-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}
+
+.combo-input input {
+    width: 100%;
+}
+
+.combo-input select {
+    width: auto;
+    min-width: 120px;
+}
+
+/* Button Row for Start Month and Calculate */
+.button-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-top: 1rem;
+}
+
+.start-month-selector {
+    flex: 1;
+}
+
+.start-month-selector label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.start-month-selector input[type="month"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
 }
 
 .calculate-btn,
@@ -765,8 +1012,9 @@ main {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: 0;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .calculate-btn:hover,
@@ -786,6 +1034,60 @@ main {
 .results h4 {
     margin-bottom: 1rem;
     color: var(--primary-color);
+}
+
+/* Investment Plan Table */
+.investment-plan {
+    margin-top: 2rem;
+}
+
+.investment-plan h4 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.plan-table-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.plan-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.plan-table thead {
+    position: sticky;
+    top: 0;
+    background: var(--secondary-color);
+    color: white;
+    z-index: 10;
+}
+
+.plan-table th,
+.plan-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.plan-table th {
+    font-weight: bold;
+}
+
+.plan-table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+.plan-table td:nth-child(3),
+.plan-table td:nth-child(4),
+.plan-table td:nth-child(5),
+.plan-table th:nth-child(3),
+.plan-table th:nth-child(4),
+.plan-table th:nth-child(5) {
+    text-align: right;
 }
 
 /* Emergency Fund Tool - Two Column Layout */
@@ -1050,9 +1352,60 @@ main {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* SIP Calculator Styling */
+.sip-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sip-inputs {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid #4ECDC4;
+}
+
+.sip-inputs h4 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.sip-outputs {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid #FF6B6B;
+}
+
+.sip-outputs h4 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.sip-summary {
+    margin-bottom: 1.5rem;
+}
+
+.chart-container {
+    margin-top: 1rem;
+}
+
+#sip-chart {
+    width: 100%;
+    height: 350px;
+    min-height: 300px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    .ef-container {
+    .ef-container,
+    .sip-container {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
