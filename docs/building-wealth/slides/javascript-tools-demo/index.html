@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60644&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JavaScript Tools Demo | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds.">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="/css/slides.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
+
+    
+</head>
+
+<body>
+    
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown data-separator="^---$" data-separator-vertical="^--$" data-separator-notes="^Note:" data-charset="utf-8">
+            <textarea data-template>
+---
+
+## JavaScript Tools Demo
+### ECharts • GSAP • Viz.js
+&lt;p class=&#34;demo-subtitle&#34; data-gsap=&#39;{&#34;opacity&#34;: 0,&#34;y&#34;: 300,&#34;duration&#34;: 1}&#39;&gt;
+    Interactive visualizations and animations in Reveal.js
+&lt;/p&gt;
+
+---
+
+### GSAP Animations
+
+&lt;div class=&#34;animation-demo&#34;&gt;
+    &lt;p class=&#34;fade-in-text&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0}, &#34;duration&#34;: 2}&#39;&gt;✨ Fade in&lt;/p&gt;
+    &lt;p class=&#34;slide-in-text&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;x&#34;: -100, &#34;opacity&#34;: 0}, &#34;duration&#34;: 0.5, &#34;delay&#34;: 0.5}&#39;&gt;➡️ Slide in&lt;/p&gt;
+    &lt;p class=&#34;scale-in-text&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;scale&#34;: 0}, &#34;duration&#34;: 0.5, &#34;delay&#34;: 1}&#39;&gt;🎯 Scale in&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+### ECharts - Bar Chart
+
+&lt;div id=&#34;bar-chart&#34; class=&#34;echarts-container&#34; data-chart=&#39;{
+    &#34;title&#34;: { &#34;text&#34;: &#34;Monthly Revenue&#34;, &#34;left&#34;: &#34;center&#34; },
+    &#34;tooltip&#34;: { &#34;trigger&#34;: &#34;axis&#34; },
+    &#34;xAxis&#34;: {
+        &#34;type&#34;: &#34;category&#34;,
+        &#34;data&#34;: [&#34;Jan&#34;, &#34;Feb&#34;, &#34;Mar&#34;, &#34;Apr&#34;, &#34;May&#34;, &#34;Jun&#34;]
+    },
+    &#34;yAxis&#34;: { &#34;type&#34;: &#34;value&#34; },
+    &#34;series&#34;: [{
+        &#34;name&#34;: &#34;Revenue&#34;,
+        &#34;type&#34;: &#34;bar&#34;,
+        &#34;data&#34;: [120, 200, 150, 80, 70, 110],
+        &#34;itemStyle&#34;: { &#34;color&#34;: &#34;#5470c6&#34; }
+    }],
+    &#34;animation&#34;: true,
+    &#34;animationDuration&#34;: 3000,
+    &#34;animationEasing&#34;: &#34;elasticOut&#34;,
+    &#34;animationDelay&#34;: 0
+}&#39;&gt;&lt;/div&gt;
+
+---
+
+### ECharts - Line Chart
+
+&lt;div id=&#34;line-chart&#34; class=&#34;echarts-container&#34; data-chart=&#39;{
+    &#34;title&#34;: { &#34;text&#34;: &#34;Portfolio Growth&#34;, &#34;left&#34;: &#34;center&#34; },
+    &#34;tooltip&#34;: { &#34;trigger&#34;: &#34;axis&#34; },
+    &#34;legend&#34;: { &#34;data&#34;: [&#34;Equity&#34;, &#34;Debt&#34;, &#34;Gold&#34;], &#34;bottom&#34;: 10 },
+    &#34;xAxis&#34;: {
+        &#34;type&#34;: &#34;category&#34;,
+        &#34;data&#34;: [&#34;2020&#34;, &#34;2021&#34;, &#34;2022&#34;, &#34;2023&#34;, &#34;2024&#34;, &#34;2025&#34;]
+    },
+    &#34;yAxis&#34;: { &#34;type&#34;: &#34;value&#34; },
+    &#34;series&#34;: [
+        {
+            &#34;name&#34;: &#34;Equity&#34;,
+            &#34;type&#34;: &#34;line&#34;,
+            &#34;data&#34;: [100, 120, 110, 140, 160, 190],
+            &#34;smooth&#34;: true
+        },
+        {
+            &#34;name&#34;: &#34;Debt&#34;,
+            &#34;type&#34;: &#34;line&#34;,
+            &#34;data&#34;: [100, 105, 110, 116, 122, 128],
+            &#34;smooth&#34;: true
+        },
+        {
+            &#34;name&#34;: &#34;Gold&#34;,
+            &#34;type&#34;: &#34;line&#34;,
+            &#34;data&#34;: [100, 110, 105, 115, 120, 125],
+            &#34;smooth&#34;: true
+        }
+    ],
+    &#34;animationDuration&#34;: 2000,
+    &#34;animationEasing&#34;: &#34;cubicOut&#34;
+}&#39;&gt;&lt;/div&gt;
+
+---
+
+### ECharts - Pie Chart
+
+&lt;div id=&#34;pie-chart&#34; class=&#34;echarts-container&#34; data-chart=&#39;{
+    &#34;title&#34;: { &#34;text&#34;: &#34;Asset Allocation&#34;, &#34;left&#34;: &#34;center&#34; },
+    &#34;tooltip&#34;: { &#34;trigger&#34;: &#34;item&#34; },
+    &#34;legend&#34;: { &#34;orient&#34;: &#34;vertical&#34;, &#34;left&#34;: &#34;left&#34; },
+    &#34;series&#34;: [{
+        &#34;name&#34;: &#34;Assets&#34;,
+        &#34;type&#34;: &#34;pie&#34;,
+        &#34;radius&#34;: &#34;50%&#34;,
+        &#34;data&#34;: [
+            { &#34;value&#34;: 40, &#34;name&#34;: &#34;Nasdaq 100&#34; },
+            { &#34;value&#34;: 20, &#34;name&#34;: &#34;Nifty 50&#34; },
+            { &#34;value&#34;: 10, &#34;name&#34;: &#34;Next 50&#34; },
+            { &#34;value&#34;: 10, &#34;name&#34;: &#34;Midcap&#34; },
+            { &#34;value&#34;: 10, &#34;name&#34;: &#34;Debt&#34; },
+            { &#34;value&#34;: 10, &#34;name&#34;: &#34;Gold&#34; }
+        ],
+        &#34;emphasis&#34;: {
+            &#34;itemStyle&#34;: {
+                &#34;shadowBlur&#34;: 10,
+                &#34;shadowOffsetX&#34;: 0,
+                &#34;shadowColor&#34;: &#34;rgba(0, 0, 0, 0.5)&#34;
+            }
+        }
+    }],
+    &#34;animationDuration&#34;: 2000,
+    &#34;animationEasing&#34;: &#34;cubicOut&#34;
+}&#39;&gt;&lt;/div&gt;
+
+---
+
+### Viz.js - Flowchart
+
+```dot
+digraph investment_flow {
+    rankdir=TB;
+    node [shape=box, style=&#34;rounded,filled&#34;, fillcolor=lightblue];
+    
+    Income [label=&#34;Monthly Income&#34;];
+    Emergency [label=&#34;Emergency Fund&#34;];
+    Invest [label=&#34;Investments&#34;];
+    Expenses [label=&#34;Expenses&#34;];
+    
+    Income -&gt; Emergency [label=&#34;Step 1&#34;];
+    Emergency -&gt; Invest [label=&#34;Step 2&#34;];
+    Invest -&gt; Expenses [label=&#34;Step 3&#34;];
+}
+```
+
+---
+
+### Viz.js - System Architecture
+
+```dot
+digraph system {
+    rankdir=LR;
+    node [shape=box, style=filled];
+    
+    subgraph cluster_0 {
+        label=&#34;Frontend&#34;;
+        style=filled;
+        color=lightgrey;
+        node [style=filled, color=white];
+        Web [label=&#34;Web App&#34;];
+        Mobile [label=&#34;Mobile App&#34;];
+    }
+    
+    subgraph cluster_1 {
+        label=&#34;Backend&#34;;
+        style=filled;
+        color=lightgrey;
+        node [style=filled, color=white];
+        API [label=&#34;API Server&#34;];
+        Cache [label=&#34;Redis Cache&#34;];
+    }
+    
+    subgraph cluster_2 {
+        label=&#34;Data&#34;;
+        style=filled;
+        color=lightgrey;
+        node [style=filled, color=white];
+        DB [label=&#34;PostgreSQL&#34;];
+        S3 [label=&#34;Object Storage&#34;];
+    }
+    
+    Web -&gt; API;
+    Mobile -&gt; API;
+    API -&gt; Cache;
+    API -&gt; DB;
+    API -&gt; S3;
+    Cache -&gt; DB;
+}
+```
+
+---
+
+### Combined: Animation &#43; Chart
+
+&lt;h2 class=&#34;chart-title&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;y&#34;: -50}, &#34;duration&#34;: 1}&#39;&gt;Investment Returns&lt;/h2&gt;
+&lt;div id=&#34;animated-chart&#34; class=&#34;echarts-container&#34; data-chart=&#39;{
+    &#34;title&#34;: { &#34;text&#34;: &#34;Growth Over Time&#34;, &#34;left&#34;: &#34;center&#34; },
+    &#34;tooltip&#34;: { &#34;trigger&#34;: &#34;axis&#34; },
+    &#34;xAxis&#34;: {
+        &#34;type&#34;: &#34;category&#34;,
+        &#34;data&#34;: [&#34;Year 1&#34;, &#34;Year 5&#34;, &#34;Year 10&#34;, &#34;Year 15&#34;, &#34;Year 20&#34;]
+    },
+    &#34;yAxis&#34;: { &#34;type&#34;: &#34;value&#34; },
+    &#34;series&#34;: [{
+        &#34;data&#34;: [100000, 180000, 320000, 580000, 1050000],
+        &#34;type&#34;: &#34;line&#34;,
+        &#34;smooth&#34;: true,
+        &#34;areaStyle&#34;: {
+            &#34;color&#34;: &#34;rgba(84, 112, 198, 0.3)&#34;
+        }
+    }],
+    &#34;animationDuration&#34;: 2000
+}&#39;&gt;&lt;/div&gt;
+
+---
+
+## Summary
+
+✅ **GSAP** - Smooth animations  
+✅ **ECharts** - Interactive charts  
+✅ **Viz.js** - Diagram rendering  
+
+All can be enabled via front matter:
+
+```yaml
+js_tools:
+  - all
+```
+
+---
+
+## Thank You! 🙏
+
+&lt;p class=&#34;final-message&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;scale&#34;: 0, &#34;rotation&#34;: 360}, &#34;duration&#34;: 1, &#34;ease&#34;: &#34;back.out(1.7)&#34;}&#39;&gt;Start creating amazing presentations!&lt;/p&gt;
+
+</textarea>
+        </section>
+    </div>
+</div>
+
+
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    
+    
+
+    
+
+    
+<script src="/js/slides.js"></script>
+
+
+    <script src="http://localhost:60644/js/main.js"></script>
+</body>
+
+</html>

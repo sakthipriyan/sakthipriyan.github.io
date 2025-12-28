@@ -272,5 +272,392 @@ window.initializeTool = {
                 }
             }
         }).mount('#emergency-fund-app');
+    },
+
+    // SIP Calculator Tool (Vue.js + ECharts)
+    sipCalculator: function (container, config) {
+        // Create Vue app template
+        container.innerHTML = `
+            <div id="sip-calculator-app">
+                <div class="sip-calculator">
+                    <div class="sip-container">
+                        <!-- Left Column: Input Fields -->
+                        <div class="sip-inputs">
+                            <h4>📈 SIP Calculator</h4>
+                            
+                            <div class="input-group">
+                                <label>Current Investment (₹):</label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.currentInvestment" 
+                                    min="0" 
+                                    step="10000"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            
+                            <div class="input-group">
+                                <label>Monthly Investment (₹):</label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.monthlyInvestment" 
+                                    min="500" 
+                                    step="1000"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            
+                            <div class="input-group">
+                                <label>Expected CAGR (%):</label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.cagr" 
+                                    min="1" 
+                                    max="30" 
+                                    step="0.5"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            
+                            <div class="input-group">
+                                <label>Yearly Hike in Investment (%):</label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.yearlyHike" 
+                                    min="0" 
+                                    max="50" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            
+                            <div class="input-group">
+                                <label>Inflation Rate (%):</label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.inflationRate" 
+                                    min="0" 
+                                    max="15" 
+                                    step="0.5"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            
+                            <div class="input-group">
+                                <label>Investment Period (Years):</label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.numberOfYears" 
+                                    min="1" 
+                                    max="50" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            
+                            <button @click="calculateResults" class="calculate-btn" :disabled="!isFormValid">
+                                <span v-if="calculating">Calculating...</span>
+                                <span v-else>{{ results.calculated ? 'Recalculate' : 'Calculate SIP Returns' }}</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Right Column: Output Results and Chart -->
+                        <div class="sip-outputs" v-if="results.calculated">
+                            <h4>📊 Investment Growth Analysis</h4>
+                            
+                            <div class="sip-summary">
+                                <div class="summary-item">
+                                    <span class="label">Total Investment:</span>
+                                    <span class="value">₹{{ formatCurrency(results.totalInvestment) }}</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Expected Value:</span>
+                                    <span class="value">₹{{ formatCurrency(results.expectedValue) }}</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Total Returns:</span>
+                                    <span class="value">₹{{ formatCurrency(results.totalReturns) }}</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Inflation Adjusted Value:</span>
+                                    <span class="value">₹{{ formatCurrency(results.inflationAdjustedValue) }}</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Real Returns:</span>
+                                    <span class="value">₹{{ formatCurrency(results.realReturns) }}</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">CAGR:</span>
+                                    <span class="value">{{ formData.cagr }}%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container">
+                                <div id="sip-chart" style="width: 100%; height: 400px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sip-outputs placeholder" v-else>
+                            <div class="placeholder-content">
+                                <h4>🎯 Your Results Will Appear Here</h4>
+                                <p>Fill in your SIP details on the left to see your investment growth projection</p>
+                                <div class="placeholder-features">
+                                    <p>✅ Investment vs Returns calculation</p>
+                                    <p>✅ Inflation adjusted returns</p>
+                                    <p>✅ Year-by-year growth visualization</p>
+                                    <p>✅ Interactive ECharts graph</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Initialize Vue app
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    formData: {
+                        currentInvestment: 1000000,
+                        monthlyInvestment: 20000,
+                        cagr: 12,
+                        yearlyHike: 10,
+                        inflationRate: 6,
+                        numberOfYears: 25
+                    },
+                    results: {
+                        calculated: false,
+                        totalInvestment: 0,
+                        expectedValue: 0,
+                        totalReturns: 0,
+                        inflationAdjustedValue: 0,
+                        realReturns: 0
+                    },
+                    yearlyData: [],
+                    calculating: false,
+                    debounceTimer: null,
+                    chart: null
+                }
+            },
+            computed: {
+                isFormValid() {
+                    const { monthlyInvestment, cagr, numberOfYears } = this.formData;
+                    return monthlyInvestment > 0 && cagr > 0 && numberOfYears > 0;
+                }
+            },
+            mounted() {
+                this.calculateResults();
+            },
+            methods: {
+                debouncedCalculate() {
+                    clearTimeout(this.debounceTimer);
+                    this.debounceTimer = setTimeout(() => {
+                        this.calculateResults();
+                    }, 300);
+                },
+
+                calculateResults() {
+                    this.calculating = true;
+                    const { currentInvestment, monthlyInvestment, cagr, yearlyHike, inflationRate, numberOfYears } = this.formData;
+
+                    // Calculate year-by-year growth
+                    this.yearlyData = [];
+                    let totalInvested = currentInvestment;
+                    let portfolioValue = currentInvestment;
+                    let currentMonthlyInvestment = monthlyInvestment;
+
+                    for (let year = 1; year <= numberOfYears; year++) {
+                        // Add monthly investments for the year with growth
+                        for (let month = 1; month <= 12; month++) {
+                            totalInvested += currentMonthlyInvestment;
+                            // Apply monthly CAGR
+                            portfolioValue = portfolioValue * (1 + cagr / 100 / 12) + currentMonthlyInvestment;
+                        }
+
+                        // Calculate inflation adjusted value
+                        const inflationFactor = Math.pow(1 - inflationRate / 100, year);
+                        const inflationAdjustedValue = portfolioValue * inflationFactor;
+
+                        this.yearlyData.push({
+                            year: year,
+                            investment: totalInvested,
+                            value: portfolioValue,
+                            inflationAdjustedValue: inflationAdjustedValue
+                        });
+
+                        // Apply yearly hike to monthly investment for next year
+                        currentMonthlyInvestment *= (1 + yearlyHike / 100);
+                    }
+
+                    // Final results
+                    const finalData = this.yearlyData[this.yearlyData.length - 1];
+                    this.results = {
+                        calculated: true,
+                        totalInvestment: finalData.investment,
+                        expectedValue: finalData.value,
+                        totalReturns: finalData.value - finalData.investment,
+                        inflationAdjustedValue: finalData.inflationAdjustedValue,
+                        realReturns: finalData.inflationAdjustedValue - finalData.investment
+                    };
+
+                    // Render chart after Vue updates DOM
+                    this.$nextTick(() => {
+                        this.renderChart();
+                        this.calculating = false;
+                    });
+                },
+
+                renderChart() {
+                    // Dispose existing chart if any
+                    if (this.chart) {
+                        this.chart.dispose();
+                    }
+
+                    const chartDom = document.getElementById('sip-chart');
+                    if (!chartDom) return;
+
+                    this.chart = echarts.init(chartDom);
+
+                    const option = {
+                        title: {
+                            text: 'Investment Growth Over Time',
+                            left: 'center',
+                            textStyle: {
+                                fontSize: 16,
+                                fontWeight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross'
+                            },
+                            formatter: function(params) {
+                                let result = `<strong>Year ${params[0].axisValue}</strong><br/>`;
+                                params.forEach(param => {
+                                    result += `${param.marker} ${param.seriesName}: ₹${param.value.toLocaleString('en-IN')}<br/>`;
+                                });
+                                return result;
+                            }
+                        },
+                        legend: {
+                            data: ['Total Investment', 'Portfolio Value', 'Inflation Adjusted Value'],
+                            bottom: 10,
+                            textStyle: {
+                                fontSize: 12
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '15%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: this.yearlyData.map(d => d.year),
+                            name: 'Years',
+                            nameLocation: 'middle',
+                            nameGap: 30,
+                            axisLabel: {
+                                fontSize: 11
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: 'Amount (₹)',
+                            nameLocation: 'middle',
+                            nameGap: 50,
+                            axisLabel: {
+                                formatter: function(value) {
+                                    if (value >= 10000000) {
+                                        return (value / 10000000).toFixed(1) + ' Cr';
+                                    } else if (value >= 100000) {
+                                        return (value / 100000).toFixed(1) + ' L';
+                                    }
+                                    return value.toLocaleString('en-IN');
+                                },
+                                fontSize: 11
+                            }
+                        },
+                        series: [
+                            {
+                                name: 'Total Investment',
+                                type: 'line',
+                                data: this.yearlyData.map(d => Math.round(d.investment)),
+                                smooth: true,
+                                lineStyle: {
+                                    width: 3,
+                                    color: '#FF6B6B'
+                                },
+                                itemStyle: {
+                                    color: '#FF6B6B'
+                                },
+                                areaStyle: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                        { offset: 0, color: 'rgba(255, 107, 107, 0.3)' },
+                                        { offset: 1, color: 'rgba(255, 107, 107, 0.05)' }
+                                    ])
+                                }
+                            },
+                            {
+                                name: 'Portfolio Value',
+                                type: 'line',
+                                data: this.yearlyData.map(d => Math.round(d.value)),
+                                smooth: true,
+                                lineStyle: {
+                                    width: 3,
+                                    color: '#4ECDC4'
+                                },
+                                itemStyle: {
+                                    color: '#4ECDC4'
+                                },
+                                areaStyle: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                        { offset: 0, color: 'rgba(78, 205, 196, 0.3)' },
+                                        { offset: 1, color: 'rgba(78, 205, 196, 0.05)' }
+                                    ])
+                                }
+                            },
+                            {
+                                name: 'Inflation Adjusted Value',
+                                type: 'line',
+                                data: this.yearlyData.map(d => Math.round(d.inflationAdjustedValue)),
+                                smooth: true,
+                                lineStyle: {
+                                    width: 3,
+                                    color: '#95E1D3',
+                                    type: 'dashed'
+                                },
+                                itemStyle: {
+                                    color: '#95E1D3'
+                                }
+                            }
+                        ]
+                    };
+
+                    this.chart.setOption(option);
+
+                    // Make chart responsive
+                    window.addEventListener('resize', () => {
+                        if (this.chart) {
+                            this.chart.resize();
+                        }
+                    });
+                },
+
+                formatCurrency(amount) {
+                    return amount.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+                }
+            },
+            beforeUnmount() {
+                if (this.chart) {
+                    this.chart.dispose();
+                }
+            }
+        }).mount('#sip-calculator-app');
     }
 };
