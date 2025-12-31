@@ -9,6 +9,10 @@
     {{- end }}
     {{- /* CSS */ -}}
     <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    {{- /* Tools CSS for calculator pages */ -}}
+    {{- if eq .Type "tools" }}
+    <link rel="stylesheet" href="{{ "css/tools.css" | absURL }}">
+    {{- end }}
     {{- if .Site.Params.googleAnalyticsId }}
     <script>window.googleAnalyticsId = "{{ .Site.Params.googleAnalyticsId }}";</script>
     {{- end }}

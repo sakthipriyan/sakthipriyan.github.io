@@ -1,4 +1,4 @@
-// SIP Calculator Tool (Vue.js + ECharts)
+// RealValue SIP Engine (Vue.js + ECharts)
 window.initializeTool = window.initializeTool || {};
 
 window.initializeTool.sipCalculator = function (container, config) {
@@ -360,6 +360,56 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         </table>
                     </div>
                 </div>
+                
+                <!-- Contribution Table - Full Width Below -->
+                <div class="contribution-table-section" v-if="results.calculated && contributionTable.length > 0">
+                    <hr>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0;">ðŸ’° Contribution Table</h4>
+                        <div class="mode-toggle">
+                            <button 
+                                type="button"
+                                :class="{'active': contributionViewMode === 'nominal'}"
+                                @click="contributionViewMode = 'nominal'">
+                                Nominal
+                            </button>
+                            <button 
+                                type="button"
+                                :class="{'active': contributionViewMode === 'real'}"
+                                @click="contributionViewMode = 'real'">
+                                Real
+                            </button>
+                        </div>
+                    </div>
+                    <table class="plan-table contribution-grid" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: right;">Year</th>
+                                <th style="text-align: right;">Jan</th>
+                                <th style="text-align: right;">Feb</th>
+                                <th style="text-align: right;">Mar</th>
+                                <th style="text-align: right;">Apr</th>
+                                <th style="text-align: right;">May</th>
+                                <th style="text-align: right;">Jun</th>
+                                <th style="text-align: right;">Jul</th>
+                                <th style="text-align: right;">Aug</th>
+                                <th style="text-align: right;">Sep</th>
+                                <th style="text-align: right;">Oct</th>
+                                <th style="text-align: right;">Nov</th>
+                                <th style="text-align: right;">Dec</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(yearRow, index) in contributionTable" :key="index">
+                                <td style="text-align: right;"><strong>{{ yearRow.year }}</strong></td>
+                                <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex" style="text-align: right;">
+                                    <span v-if="amount !== null" :title="'â‚¹ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
+                                    <span v-else style="color: #999;">-</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     `;
@@ -402,6 +452,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 },
                 yearlyData: [],
                 monthlyPlan: [],
+                contributionTable: [],
+                contributionViewMode: 'nominal',
                 calculating: false,
                 debounceTimer: null,
                 chart: null,
@@ -520,7 +572,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     }
                 };
                 
-                console.log('SIP Calculator Results:', data);
+                console.log('RealValue SIP Engine Results:', data);
                 return JSON.stringify(data, null, 2);
             }
         },
@@ -703,6 +755,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 this.$nextTick(() => {
                     this.renderChart();
+                    this.generateContributionTable();
                     this.calculating = false;
                 });
             },
@@ -803,10 +856,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 this.$nextTick(() => {
                     this.renderChart();
+                    this.generateContributionTable();
                     this.calculating = false;
                 });
             },
-            
+
             calculateMonthlyInvestment() {
                 const { cagr, yearlyHike, inflationRate } = this.formData;
                 const numberOfYears = this.numberOfYears;
@@ -908,6 +962,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     
                     this.$nextTick(() => {
                         this.renderChart();
+                        this.generateContributionTable();
                         this.calculating = false;
                     });
                     return;
@@ -996,6 +1051,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 this.$nextTick(() => {
                     this.renderChart();
+                    this.generateContributionTable();
                     this.calculating = false;
                 });
             },
@@ -1148,6 +1204,45 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 // Make chart responsive
                 this.resizeHandler = () => this.chart?.resize();
                 window.addEventListener('resize', this.resizeHandler);
+            },
+            
+            generateContributionTable() {
+                if (!this.monthlyPlan || this.monthlyPlan.length === 0) {
+                    this.contributionTable = [];
+                    return;
+                }
+                
+                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
+                const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
+                
+                // Group contributions by year
+                const yearMap = new Map();
+                
+                this.monthlyPlan.forEach((plan, index) => {
+                    const year = plan.year;
+                    
+                    if (!yearMap.has(year)) {
+                        yearMap.set(year, Array(12).fill(null));
+                    }
+                    
+                    const monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(plan.month);
+                    const nominalContribution = plan.contribution;
+                    
+                    // Calculate real contribution (present value)
+                    const inflationFactor = Math.pow(1 + monthlyInflation, index);
+                    const realContribution = nominalContribution / inflationFactor;
+                    
+                    yearMap.get(year)[monthIndex] = {
+                        nominal: nominalContribution,
+                        real: Math.round(realContribution)
+                    };
+                });
+                
+                // Convert map to array
+                this.contributionTable = Array.from(yearMap.entries()).map(([year, months]) => ({
+                    year,
+                    months
+                }));
             },
 
             formatCurrency(amount) {
