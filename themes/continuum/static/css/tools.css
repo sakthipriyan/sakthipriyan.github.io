@@ -80,9 +80,9 @@
     border-radius: 6px;
     font-size: 0.95rem;
     line-height: 1.4;
-    white-space: pre-line;
-    width: 280px;
-    max-width: 280px;
+    white-space: nowrap;
+    width: auto;
+    max-width: none;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.15s ease;
@@ -109,6 +109,32 @@
 .help-icon:hover::before {
     opacity: 1;
     transition-delay: 0.1s;
+}
+
+/* Show tooltip above for last row in plan tables */
+.plan-table tbody tr:last-child .help-icon::after {
+    top: auto;
+    bottom: calc(100% + 8px);
+}
+
+.plan-table tbody tr:last-child .help-icon::before {
+    top: auto;
+    bottom: calc(100% + 2px);
+    border-bottom-color: transparent;
+    border-top-color: #333;
+}
+
+/* Show tooltip on the left for last column */
+.plan-table td:last-child .help-icon::after {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+}
+
+.plan-table td:last-child .help-icon::before {
+    left: auto;
+    right: 12px;
+    transform: translateX(0);
 }
 
 /* Unit Selector Input */
@@ -161,12 +187,12 @@
 
 .mode-toggle button {
     flex: 1;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.875rem;
     border: 2px solid var(--gray-medium);
     background: white;
     border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.2s ease;
 }
@@ -379,6 +405,7 @@
 .plan-table {
     width: 100%;
     border-collapse: collapse;
+    display: table;
 }
 
 .plan-table thead {
@@ -716,6 +743,7 @@
 /* Contribution Table Section */
 .contribution-table-section {
     margin-top: 2rem;
+    margin-bottom: 0;
 }
 
 .contribution-grid {

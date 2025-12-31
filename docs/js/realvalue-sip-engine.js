@@ -296,23 +296,23 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tbody>
                                     <tr>
                                         <td><strong>Investment</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.totalInvestment.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.totalInvestment) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.realInvestment.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.realInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.totalInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.totalInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.realInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.realInvestment) }}</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Growth</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.expectedValue - results.totalInvestment).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.expectedValue - results.totalInvestment) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.inflationAdjustedValue - results.realInvestment).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.inflationAdjustedValue - results.realInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.expectedValue - results.totalInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.expectedValue - results.totalInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.inflationAdjustedValue - results.realInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.inflationAdjustedValue - results.realInvestment) }}</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Portfolio Value</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.expectedValue) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.inflationAdjustedValue.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.inflationAdjustedValue) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.expectedValue) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.inflationAdjustedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.inflationAdjustedValue) }}</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Post Tax</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -338,10 +338,29 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     </div>
                 </div>
                 
-                <!-- Monthly Investment Plan - Full Width Below -->
+                <!-- Investment and Growth - Full Width Below -->
                 <div class="investment-plan" v-if="results.calculated && monthlyPlan.length > 0">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
-                        <h2 style="margin: 0;">📊 Investment and Growth</h2>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">📊 Investment and Growth</h2>
+                            <!-- Tab Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': investmentGrowthTab === 'chart'}"
+                                    @click="investmentGrowthTab = 'chart'; $nextTick(() => $nextTick(() => renderChart()))"
+                                    style="white-space: nowrap;">
+                                    📊 Chart
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': investmentGrowthTab === 'data'}"
+                                    @click="investmentGrowthTab = 'data'"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
                         <div style="display: flex; gap: 1rem; align-items: center;">
                             <!-- Time Granularity Toggle -->
                             <div class="mode-toggle">
@@ -383,12 +402,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         </div>
                     </div>
                     
-                    <!-- Chart -->
-                    <div style="margin-bottom: 2rem;">
+                    <!-- Chart Tab -->
+                    <div v-if="investmentGrowthTab === 'chart'" style="margin-bottom: 2rem;">
                         <div id="sip-chart" style="width: 100%; height: 400px;"></div>
                     </div>
                     
-                    <div class="plan-table-wrapper">
+                    <!-- Data Tab -->
+                    <div v-if="investmentGrowthTab === 'data'" class="plan-table-wrapper">
                         <table class="plan-table" style="margin: 0;">
                             <thead>
                                 <tr>
@@ -418,11 +438,31 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     </div>
                 </div>
                 
-                <!-- Contribution Table - Full Width Below -->
-                <div class="contribution-table-section" v-if="results.calculated && contributionTable.length > 0">
+                <!-- Monthly Investment Plan - Full Width Below -->
+                <div class="investment-plan" v-if="results.calculated && contributionTable.length > 0">
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <h2 style="margin: 0;">📅 Monthly Investment Plan</h2>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">📅 Monthly Investment Plan</h2>
+                            <!-- Tab Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': monthlyPlanTab === 'chart'}"
+                                    @click="monthlyPlanTab = 'chart'; $nextTick(() => renderContributionChart())"
+                                    style="white-space: nowrap;">
+                                    📊 Chart
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': monthlyPlanTab === 'data'}"
+                                    @click="monthlyPlanTab = 'data'"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <!-- View Mode Toggle -->
                         <div class="mode-toggle">
                             <button 
                                 type="button"
@@ -439,13 +479,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         </div>
                     </div>
                     
-                    <!-- Contribution Chart -->
-                    <div style="margin-bottom: 2rem;">
+                    <!-- Chart Tab -->
+                    <div v-if="monthlyPlanTab === 'chart'" style="margin-bottom: 2rem;">
                         <div id="contributionChart" style="width: 100%; height: 400px;"></div>
                     </div>
                     
-                    <div class="plan-table-wrapper">
-                        <table class="plan-table contribution-grid" style="margin: 0;">
+                    <!-- Data Tab -->
+                    <div v-if="monthlyPlanTab === 'data'" class="plan-table-wrapper">
+                        <table class="plan-table" style="margin: 0;">
                             <thead>
                                 <tr>
                                     <th style="text-align: right;">Year</th>
@@ -467,7 +508,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tr v-for="(yearRow, index) in contributionTable" :key="index">
                                     <td style="text-align: right;"><strong>{{ yearRow.year }}</strong></td>
                                     <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex" style="text-align: right;">
-                                        <span v-if="amount !== null" class="help-icon" :data-tooltip="'₹ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})" style="cursor: default; opacity: 1;">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
+                                        <span v-if="amount !== null" class="help-icon" :data-tooltip="'₹ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
                                         <span v-else style="color: #999;">-</span>
                                     </td>
                                 </tr>
@@ -521,6 +562,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 contributionViewMode: 'nominal',
                 planViewMode: 'nominal',
                 planGranularity: 'yearly',
+                investmentGrowthTab: 'chart',
+                monthlyPlanTab: 'chart',
                 calculating: false,
                 debounceTimer: null,
                 chart: null,
@@ -557,7 +600,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
             monthlyInvestment() {
                 const { monthlyInvestmentValue, monthlyInvestmentUnit } = this.formData;
                 return monthlyInvestmentValue * CURRENCY_MULTIPLIERS[monthlyInvestmentUnit];
-                return monthlyInvestmentValue * multipliers[monthlyInvestmentUnit];
             },
             numberOfYears() {
                 const { timePeriodValue, timePeriodUnit } = this.formData;
@@ -589,8 +631,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 if (!this.monthlyPlan || this.monthlyPlan.length === 0) return [];
                 
                 const taxRate = this.formData.taxRate / 100;
-                const monthlyInflation = this.formData.inflationRate / 100 / 12;
-                
+                const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
+
                 // Filter based on granularity
                 let filteredPlan = this.monthlyPlan;
                 if (this.planGranularity === 'yearly') {
@@ -611,41 +653,53 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     
                     if (this.planGranularity === 'yearly') {
                         period = row.year;
-                        
                         // For yearly view, aggregate all months in this year
                         const yearRows = this.monthlyPlan.filter(r => r.year === row.year);
                         const yearlyContribution = yearRows.reduce((sum, r) => sum + (r.contribution || 0), 0);
                         const yearlyGrowth = yearRows.reduce((sum, r) => sum + (r.growth || 0), 0);
-                        
                         // Get accumulated values from the last month of this year (current row)
                         const totalInvested = row.accumulatedContribution || row.totalInvested || 0;
                         const nominalPortfolio = row.nominalPortfolio || 0;
                         const realPortfolio = row.realPortfolio || 0;
-                        
+                        const realInvestmentPV = row.totalInvestedPresentValue || 0;
                         if (this.planViewMode === 'nominal') {
                             contribution = yearlyContribution;
                             growth = yearlyGrowth;
                             accumulatedContribution = totalInvested;
                             accumulatedGrowth = nominalPortfolio - totalInvested;
                             portfolioValue = nominalPortfolio;
-                        } else if (this.planViewMode === 'real') {
-                            contribution = yearlyContribution / discountFactor;
-                            growth = yearlyGrowth / discountFactor;
-                            accumulatedContribution = totalInvested / discountFactor;
-                            accumulatedGrowth = (nominalPortfolio - totalInvested) / discountFactor;
-                            portfolioValue = realPortfolio;
-                        } else { // postTax - use same calculation as simulation
-                            // realPortfolio already has correct inflation adjustment
-                            // totalInvestedPresentValue accounts for when each contribution was made
-                            const realValue = realPortfolio;
-                            const realInvestmentPV = row.totalInvestedPresentValue || totalInvested / discountFactor;
-                            const realGrowthValue = realValue - realInvestmentPV;
-                            const postTaxGrowth = realGrowthValue * (1 - taxRate);
-                            contribution = yearlyContribution / discountFactor;
-                            growth = yearlyGrowth / discountFactor;
+                        } else {
+                            // Fix: If monthly SIP is zero, show present value and growth for initial investment
+                            let realYearlyContribution, realYearlyGrowth;
+                            if (yearlyContribution === 0 && totalInvested > 0) {
+                                // Only initial investment, no SIP
+                                realYearlyContribution = 0;
+                                realYearlyGrowth = realPortfolio - realInvestmentPV;
+                            } else {
+                                realYearlyContribution = yearRows.reduce((sum, r) => {
+                                    const mIdx = r.monthIndex;
+                                    const mInflation = Math.pow(1 + monthlyInflation, mIdx);
+                                    return sum + (r.contribution || 0) / mInflation;
+                                }, 0);
+                                realYearlyGrowth = yearRows.reduce((sum, r) => {
+                                    const mIdx = r.monthIndex;
+                                    const mInflation = Math.pow(1 + monthlyInflation, mIdx + 1);
+                                    return sum + (r.growth || 0) / mInflation;
+                                }, 0);
+                            }
+                            contribution = realYearlyContribution;
+                            growth = realYearlyGrowth;
                             accumulatedContribution = realInvestmentPV;
-                            accumulatedGrowth = realGrowthValue;
-                            portfolioValue = realInvestmentPV + postTaxGrowth;
+                            accumulatedGrowth = realPortfolio - realInvestmentPV;
+                            if (this.planViewMode === 'postTax') {
+                                const realValue = realPortfolio;
+                                const realInvestmentPV = row.totalInvestedPresentValue || totalInvested / discountFactor;
+                                const realGrowthValue = realValue - realInvestmentPV;
+                                const postTaxGrowth = realGrowthValue * (1 - taxRate);
+                                portfolioValue = realInvestmentPV + postTaxGrowth;
+                            } else {
+                                portfolioValue = realPortfolio;
+                            }
                         }
                     } else {
                         // Monthly view - use individual month values
@@ -654,6 +708,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         const totalInvested = row.accumulatedContribution || row.totalInvested || 0;
                         const nominalPortfolio = row.nominalPortfolio || 0;
                         const realPortfolio = row.realPortfolio || 0;
+                        const realInvestmentPV = row.totalInvestedPresentValue || 0;
                         
                         if (this.planViewMode === 'nominal') {
                             contribution = row.contribution || 0;
@@ -661,24 +716,32 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                             accumulatedContribution = totalInvested;
                             accumulatedGrowth = nominalPortfolio - totalInvested;
                             portfolioValue = nominalPortfolio;
-                        } else if (this.planViewMode === 'real') {
-                            contribution = (row.contribution || 0) / discountFactor;
-                            growth = (row.growth || 0) / discountFactor;
-                            accumulatedContribution = totalInvested / discountFactor;
-                            accumulatedGrowth = (nominalPortfolio - totalInvested) / discountFactor;
-                            portfolioValue = realPortfolio;
-                        } else { // postTax - use same calculation as simulation
-                            // realPortfolio already has correct inflation adjustment
-                            // totalInvestedPresentValue accounts for when each contribution was made
-                            const realValue = realPortfolio;
-                            const realInvestmentPV = row.totalInvestedPresentValue || totalInvested / discountFactor;
-                            const realGrowthValue = realValue - realInvestmentPV;
-                            const postTaxGrowth = realGrowthValue * (1 - taxRate);
-                            contribution = (row.contribution || 0) / discountFactor;
-                            growth = (row.growth || 0) / discountFactor;
+                        } else {
+                            // Fix: If monthly SIP is zero, show present value and growth for initial investment
+                            let realContribution, realGrowth;
+                            if ((row.contribution || 0) === 0 && totalInvested > 0) {
+                                // Only initial investment, no SIP
+                                realContribution = 0;
+                                realGrowth = realPortfolio - realInvestmentPV;
+                            } else {
+                                const inflationAtContribution = Math.pow(1 + monthlyInflation, monthIndex);
+                                const inflationAtEnd = Math.pow(1 + monthlyInflation, monthIndex + 1);
+                                realContribution = (row.contribution || 0) / inflationAtContribution;
+                                realGrowth = (row.growth || 0) / inflationAtEnd;
+                            }
+                            contribution = realContribution;
+                            growth = realGrowth;
                             accumulatedContribution = realInvestmentPV;
-                            accumulatedGrowth = realGrowthValue;
-                            portfolioValue = realInvestmentPV + postTaxGrowth;
+                            accumulatedGrowth = realPortfolio - realInvestmentPV;
+                            if (this.planViewMode === 'postTax') {
+                                const realValue = realPortfolio;
+                                const realInvestmentPV = row.totalInvestedPresentValue || 0;
+                                const realGrowthValue = realValue - realInvestmentPV;
+                                const postTaxGrowth = realGrowthValue * (1 - taxRate);
+                                portfolioValue = realInvestmentPV + postTaxGrowth;
+                            } else {
+                                portfolioValue = realPortfolio;
+                            }
                         }
                     }
                     
@@ -948,6 +1011,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     const accumulatedGrowth = data.portfolioValue - data.totalInvested;
                     
                     return {
+                        monthIndex: data.monthIndex,
                         year: currentYear,
                         month: monthNames[currentMonthNum],
                         contribution: data.contribution,
@@ -1160,6 +1224,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         const accumulatedGrowth = data.portfolioValue - data.totalInvested;
                         
                         return {
+                            monthIndex: data.monthIndex,
                             year: currentYear,
                             month: monthNames[currentMonthNum],
                             contribution: data.contribution,
@@ -1256,6 +1321,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     const accumulatedGrowth = data.portfolioValue - data.totalInvested;
                     
                     return {
+                        monthIndex: data.monthIndex,
                         year: currentYear,
                         month: monthNames[currentMonthNum],
                         contribution: data.contribution,
@@ -1385,7 +1451,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                         focus: 'series'
                                     }
                                 }
-                            ]
+                            ],
+                            lineStyle: {
+                                width: 1,
+                                opacity: 0
+                            }
                         };
 
                         this.chart.setOption(option);
@@ -1440,13 +1510,15 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
 
                 const option = {
                     tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow'
-                        },
+                        trigger: 'item',
                         formatter: function(params) {
-                            const param = params[0];
-                            return `<strong>${param.axisValue}</strong><br/>${param.marker} Contribution: ₹${param.value.toLocaleString('en-IN')}`;
+                            return `<strong>${params.name}</strong><br/>${params.marker} Contribution: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                        },
+                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
+                        borderColor: '#333',
+                        borderWidth: 1,
+                        textStyle: {
+                            color: '#fff'
                         }
                     },
                     grid: {
