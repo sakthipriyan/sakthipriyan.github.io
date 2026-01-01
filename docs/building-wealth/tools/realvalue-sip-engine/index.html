@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RealValue SIP Engine | Sakthi Priyan H</title>
-    <meta name="description" content="Plan your systematic investment with real (inflation-adjusted) value projections and comprehensive growth visualizations."><link rel="stylesheet" href="http://localhost:1313/css/style.css">
-    <link rel="stylesheet" href="http://localhost:1313/css/tools.css">
+    <meta name="description" content="Plan your systematic investment with real (inflation-adjusted) value projections and comprehensive growth visualizations."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/tools.css">
     <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
 </head>
 <body class="building-wealth"><header class="site-header">
@@ -17,7 +17,7 @@
             
             
             <div class="logo">
-                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
                 <span class="separator"> | </span>
                 
                 <a href="/building-wealth/" class="name-link">Building Wealth</a>
@@ -41,7 +41,7 @@
                     
                         
                             
-                            <li><a href="http://localhost:1313/building-wealth/about/">About</a></li>
+                            <li><a href="https://sakthipriyan.com/building-wealth/about/">About</a></li>
                         
                     
                 
@@ -51,16 +51,7 @@
                         
                             
                             
-                                <li><a href="http://localhost:1313/building-wealth/blogs/">Blogs</a></li>
-                            
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/blogs/">Blogs</a></li>
                             
                         
                     
@@ -71,7 +62,16 @@
                         
                             
                             
-                                <li><a href="http://localhost:1313/building-wealth/slides/">Slides</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/slides/">Slides</a></li>
                             
                         
                     
@@ -88,7 +88,7 @@
                                 
                             
                             
-                                <li><a href="http://localhost:1313/building-wealth/tags/">Tags</a></li>
+                                <li><a href="https://sakthipriyan.com/building-wealth/tags/">Tags</a></li>
                             
                         
                     
@@ -99,7 +99,7 @@
                         
                             
                             
-                                <li><a href="http://localhost:1313/building-wealth/tools/">Tools</a></li>
+                                <li><a href="https://sakthipriyan.com/building-wealth/tools/">Tools</a></li>
                             
                         
                     
@@ -110,7 +110,7 @@
                         
                             
                             
-                                <li><a href="http://localhost:1313/building-wealth/videos/">Videos</a></li>
+                                <li><a href="https://sakthipriyan.com/building-wealth/videos/">Videos</a></li>
                             
                         
                     
@@ -122,7 +122,7 @@
 <nav class="breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item">
-            <a href="http://localhost:1313/">Home</a>
+            <a href="https://sakthipriyan.com/">Home</a>
         </li>
             
             
@@ -177,7 +177,7 @@
     <div class="content-meta">
         <span class="meta-item">
             <span class="meta-icon">📅</span>
-            <time datetime=" 2025-12-25">Dec 25, 2025</time>
+            <time datetime=" 2026-01-01">Jan 1, 2026</time>
         </span><span class="meta-item">
             <span class="meta-icon">🔧</span>
             <span class="use-time">Interactive Tool</span>
@@ -198,7 +198,237 @@
     
 
     <div class="tool-content">
-        
+        <h2 id="help">Help</h2>
+<h3 id="input-fields">Input Fields</h3>
+<h4 id="current-investment">Current Investment</h4>
+<ul>
+<li><strong>Current Investment Value</strong>: Your existing investment amount today</li>
+<li><strong>Unit</strong>: Choose between Crores (Cr), Lakhs (L), or Thousands (K)</li>
+<li>Set to 0 if you&rsquo;re starting fresh with no existing investment</li>
+</ul>
+<h4 id="monthly-sip-investment">Monthly SIP Investment</h4>
+<ul>
+<li><strong>Monthly Investment Value</strong>: Amount you plan to invest every month</li>
+<li><strong>Unit</strong>: Choose between Crores, Lakhs, or Thousands</li>
+<li>This field is used when calculating by Time or Money targets</li>
+<li>For &ldquo;Both Targets&rdquo; mode, this becomes an output field (required monthly SIP)</li>
+</ul>
+<h4 id="growth-parameters">Growth Parameters</h4>
+<ul>
+<li><strong>Expected CAGR (%)</strong>: Your estimated annual growth rate (e.g., 12% for equity funds)</li>
+<li><strong>Yearly Hike (%)</strong>: Annual increase in your SIP amount (e.g., 10% means ₹20,000 becomes ₹22,000 next year)</li>
+<li><strong>Inflation Rate (%)</strong>: Expected annual inflation to calculate real value (typically 5-7% in India)</li>
+<li><strong>Tax Rate (%)</strong>: Capital gains tax rate for post-tax calculations (15% for equity LTCG above ₹1.25L)</li>
+</ul>
+<h4 id="target-selection">Target Selection</h4>
+<p>Toggle between three modes:</p>
+<ul>
+<li><strong>Target by Time</strong>: Calculate portfolio value after a specific time period</li>
+<li><strong>Target by Money</strong>: Calculate time needed to reach a target amount</li>
+<li><strong>Target by Both</strong>: Calculate required monthly SIP to reach target amount in given time</li>
+</ul>
+<h4 id="time-period">Time Period</h4>
+<ul>
+<li><strong>Time Period Value</strong>: Duration for investment</li>
+<li><strong>Unit</strong>: Choose Years or Months</li>
+<li>Used in &ldquo;Time&rdquo; and &ldquo;Both&rdquo; target modes</li>
+</ul>
+<h4 id="target-amount">Target Amount</h4>
+<ul>
+<li><strong>Target Amount Value</strong>: Your financial goal amount</li>
+<li><strong>Unit</strong>: Choose between Crores, Lakhs, or Thousands</li>
+<li>Used in &ldquo;Money&rdquo; and &ldquo;Both&rdquo; target modes</li>
+</ul>
+<h4 id="start-month">Start Month</h4>
+<ul>
+<li>Select the month when you plan to start/started investing</li>
+<li>Helps in generating monthly contribution schedule</li>
+</ul>
+<h3 id="understanding-the-results">Understanding the Results</h3>
+<h4 id="investment-inputs-section">Investment Inputs Section</h4>
+<p>Shows all your input parameters in an organized format</p>
+<h4 id="target-results-section">Target Results Section</h4>
+<ul>
+<li><strong>Total Investment (Nominal)</strong>: Sum of all contributions without inflation adjustment</li>
+<li><strong>Portfolio Value (Nominal)</strong>: Expected value at the end without inflation adjustment</li>
+<li><strong>Total Investment (Real)</strong>: Present value of all contributions adjusted for inflation</li>
+<li><strong>Portfolio Value (Real)</strong>: Inflation-adjusted value showing actual purchasing power</li>
+<li><strong>Portfolio Value (Post-Tax Real)</strong>: Real value after accounting for capital gains tax</li>
+</ul>
+<p>Toggle <strong>Post Tax</strong> to see after-tax values across all views.</p>
+<h4 id="investment-and-growth-chart">Investment and Growth Chart</h4>
+<ul>
+<li>Visual representation of investment accumulation vs portfolio growth</li>
+<li><strong>Accumulated Investment</strong>: Your cumulative contributions (golden line)</li>
+<li><strong>Portfolio Value</strong>: Total value including growth (green line)</li>
+<li>Toggle between <strong>Yearly</strong> and <strong>Monthly</strong> granularity</li>
+<li>Switch between <strong>Nominal</strong> (face value) and <strong>Real</strong> (inflation-adjusted) views</li>
+</ul>
+<h4 id="monthly-investment-plan">Monthly Investment Plan</h4>
+<ul>
+<li>Detailed breakdown of each period&rsquo;s contribution and growth</li>
+<li>Export data as JSON for further analysis</li>
+<li>Switch between table and chart views</li>
+</ul>
+<h4 id="monthly-contribution-chart">Monthly Contribution Chart</h4>
+<ul>
+<li>Bar chart showing contribution amounts over time</li>
+<li>Helps visualize the impact of yearly SIP hikes</li>
+<li>Toggle between Nominal and Real views</li>
+</ul>
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="1-retirement-planning-target-by-time">1. Retirement Planning (Target by Time)</h3>
+<p><strong>Scenario</strong>: You&rsquo;re 35 years old, want to plan for retirement at 60 (25 years away)</p>
+<p><strong>Setup</strong>:</p>
+<ul>
+<li>Current Investment: ₹10 lakhs (existing mutual fund portfolio)</li>
+<li>Monthly Investment: ₹25,000 (increasing 10% yearly with salary hikes)</li>
+<li>Expected CAGR: 12% (equity mutual funds)</li>
+<li>Yearly Hike: 10%</li>
+<li>Inflation: 6%</li>
+<li>Tax Rate: 15%</li>
+<li>Time Period: 25 years</li>
+<li>Target Mode: <strong>Time</strong></li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>How much corpus you&rsquo;ll accumulate in 25 years</li>
+<li>Real value (purchasing power) of that corpus</li>
+<li>After-tax real value for accurate planning</li>
+<li>Monthly breakdown of investments and growth</li>
+</ul>
+<h3 id="2-childs-education-goal-target-by-money">2. Child&rsquo;s Education Goal (Target by Money)</h3>
+<p><strong>Scenario</strong>: Need ₹1 crore (today&rsquo;s value) for your child&rsquo;s higher education</p>
+<p><strong>Setup</strong>:</p>
+<ul>
+<li>Current Investment: ₹5 lakhs (existing education fund)</li>
+<li>Monthly Investment: ₹30,000 (with 8% annual increment)</li>
+<li>Expected CAGR: 12%</li>
+<li>Yearly Hike: 8%</li>
+<li>Inflation: 6%</li>
+<li>Tax Rate: 15%</li>
+<li>Target Amount: ₹1 crore</li>
+<li>Target Mode: <strong>Money</strong></li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>How many years/months to reach your goal</li>
+<li>Whether your current SIP amount is sufficient</li>
+<li>Exact timeline for goal achievement</li>
+<li>Inflation-adjusted real value throughout the journey</li>
+</ul>
+<h3 id="3-down-payment-for-house-target-by-both">3. Down Payment for House (Target by Both)</h3>
+<p><strong>Scenario</strong>: Need ₹50 lakhs in 5 years for house down payment</p>
+<p><strong>Setup</strong>:</p>
+<ul>
+<li>Current Investment: ₹2 lakhs (current savings)</li>
+<li>Expected CAGR: 10% (debt+equity hybrid)</li>
+<li>Yearly Hike: 10%</li>
+<li>Inflation: 6%</li>
+<li>Tax Rate: 15%</li>
+<li>Time Period: 5 years</li>
+<li>Target Amount: ₹50 lakhs</li>
+<li>Target Mode: <strong>Both</strong></li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>Required starting monthly SIP amount</li>
+<li>How the SIP will increase each year</li>
+<li>Whether the goal is achievable in the given timeframe</li>
+<li>If target can&rsquo;t be met, adjust time period or target amount</li>
+</ul>
+<h3 id="4-early-retirement-aggressive-savings">4. Early Retirement (Aggressive Savings)</h3>
+<p><strong>Scenario</strong>: 30-year-old aiming for financial independence at 45 (15 years)</p>
+<p><strong>Setup</strong>:</p>
+<ul>
+<li>Current Investment: ₹20 lakhs</li>
+<li>Monthly Investment: ₹1 lakh (aggressive savings)</li>
+<li>Expected CAGR: 13%</li>
+<li>Yearly Hike: 12%</li>
+<li>Inflation: 6%</li>
+<li>Tax Rate: 15%</li>
+<li>Time Period: 15 years</li>
+<li>Target Mode: <strong>Time</strong></li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>Corpus size for early retirement</li>
+<li>Impact of high savings rate and step-ups</li>
+<li>Real value to ensure lifestyle maintenance</li>
+<li>Whether the corpus is sufficient for retirement</li>
+</ul>
+<h3 id="5-wealth-creation-with-zero-sip-existing-investment-growth">5. Wealth Creation with Zero SIP (Existing Investment Growth)</h3>
+<p><strong>Scenario</strong>: You have a lump sum but can&rsquo;t do SIP, want to see growth</p>
+<p><strong>Setup</strong>:</p>
+<ul>
+<li>Current Investment: ₹50 lakhs (inheritance or bonus)</li>
+<li>Monthly Investment: ₹0 (no additional SIP)</li>
+<li>Expected CAGR: 12%</li>
+<li>Yearly Hike: 0%</li>
+<li>Inflation: 6%</li>
+<li>Tax Rate: 15%</li>
+<li>Time Period: 20 years</li>
+<li>Target Mode: <strong>Time</strong></li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>Power of compounding on lump sum</li>
+<li>How existing investment grows over time</li>
+<li>Real vs nominal value difference</li>
+<li>Whether lump sum alone is sufficient for your goal</li>
+</ul>
+<h3 id="6-career-break-planning-money-target-with-no-current-investment">6. Career Break Planning (Money Target with No Current Investment)</h3>
+<p><strong>Scenario</strong>: Planning a career break, need to know how long to save first</p>
+<p><strong>Setup</strong>:</p>
+<ul>
+<li>Current Investment: ₹0 (starting fresh)</li>
+<li>Monthly Investment: ₹40,000</li>
+<li>Expected CAGR: 11%</li>
+<li>Yearly Hike: 8%</li>
+<li>Inflation: 6%</li>
+<li>Tax Rate: 15%</li>
+<li>Target Amount: ₹30 lakhs (for 2-year break)</li>
+<li>Target Mode: <strong>Money</strong></li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>Years needed to accumulate the corpus</li>
+<li>How to plan the career break timeline</li>
+<li>Real value to ensure purchasing power</li>
+<li>Impact of SIP step-ups on goal achievement</li>
+</ul>
+<h3 id="7-comparing-investment-strategies">7. Comparing Investment Strategies</h3>
+<p><strong>Scenario</strong>: Compare flat SIP vs step-up SIP</p>
+<p><strong>Run the tool twice</strong>:</p>
+<p><strong>Strategy A</strong>: Flat SIP</p>
+<ul>
+<li>Monthly Investment: ₹30,000</li>
+<li>Yearly Hike: 0%</li>
+<li>Time Period: 20 years</li>
+</ul>
+<p><strong>Strategy B</strong>: Step-up SIP</p>
+<ul>
+<li>Monthly Investment: ₹25,000</li>
+<li>Yearly Hike: 10%</li>
+<li>Time Period: 20 years</li>
+</ul>
+<p><strong>What You&rsquo;ll Learn</strong>:</p>
+<ul>
+<li>Which strategy builds more wealth</li>
+<li>Behavioral ease vs mathematical optimization</li>
+<li>Impact of salary increases on wealth building</li>
+</ul>
+<h3 id="tips-for-using-the-tool">Tips for Using the Tool</h3>
+<ol>
+<li><strong>Use Real Values for Planning</strong>: Always check the &ldquo;Real&rdquo; view to understand actual purchasing power</li>
+<li><strong>Consider Post-Tax</strong>: Enable &ldquo;Post Tax&rdquo; toggle for more realistic retirement/goal planning</li>
+<li><strong>Experiment with Hikes</strong>: Even a 5-8% annual SIP increase significantly boosts wealth</li>
+<li><strong>Review Yearly Data</strong>: Switch to yearly granularity for long-term clarity</li>
+<li><strong>Start Month</strong>: Use actual start month for accurate contribution schedules</li>
+<li><strong>Conservative CAGR</strong>: Use 10-11% for equity, not 15-18%, for realistic planning</li>
+<li><strong>Inflation Buffer</strong>: Use 6-7% inflation for India, not 4-5%, for safety margin</li>
+</ol>
+
     </div>
 
     
@@ -211,11 +441,11 @@
     <div class="card-tags">
         <span class="tags-icon">🏷️</span>
         
-        <a href="http://localhost:1313/building-wealth/tags/sip/" class="tag-link">SIP</a>
+        <a href="https://sakthipriyan.com/building-wealth/tags/sip/" class="tag-link">SIP</a>
         
-        <a href="http://localhost:1313/building-wealth/tags/investment/" class="tag-link">Investment</a>
+        <a href="https://sakthipriyan.com/building-wealth/tags/investment/" class="tag-link">Investment</a>
         
-        <a href="http://localhost:1313/building-wealth/tags/wealth-creation/" class="tag-link">Wealth Creation</a>
+        <a href="https://sakthipriyan.com/building-wealth/tags/wealth-creation/" class="tag-link">Wealth Creation</a>
     </div><div class="content-comments">
         <div id="disqus_thread"></div>
         <script type="text/javascript">
@@ -232,33 +462,10 @@
                 Disqus.</a></noscript>
     </div>
 </footer>
-
-    
-    
-    
-    
-    
-    
-    
-    <section class="related-tools">
-        <h3>More Tools Tools</h3>
-        <div class="tools-grid">
-            
-            <article class="tool-card">
-                <h4><a href="/building-wealth/tools/emergency-fund/">Emergency Fund Calculator</a></h4>
-                
-                <p>Calculate how long it takes to build your emergency fund and create a savings plan.</p>
-                
-            </article>
-            
-        </div>
-    </section>
-    
-    
 </article>
 
     </main><footer class="site-footer">
-    <p>&copy; 2025 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
 </footer>
         
         
@@ -274,7 +481,7 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
-<script src="http://localhost:1313/js/realvalue-sip-engine.js"></script>
+<script src="https://sakthipriyan.com/js/realvalue-sip-engine.js"></script>
 
 <script>
     
@@ -365,6 +572,6 @@
             }
         });
     </script>
-    <script src="http://localhost:1313/js/main.js"></script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
 </body>
 </html>

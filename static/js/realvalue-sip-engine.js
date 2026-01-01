@@ -391,10 +391,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                     @click="planViewMode = 'real'">
                                     Real
                                 </button>
+                            </div>
+                            <!-- Post Tax Toggle -->
+                            <div class="mode-toggle">
                                 <button 
                                     type="button"
-                                    :class="{'active': planViewMode === 'postTax'}"
-                                    @click="planViewMode = 'postTax'"
+                                    :class="{'active': applyPostTax}"
+                                    @click="applyPostTax = !applyPostTax"
                                     style="white-space: nowrap;">
                                     Post Tax
                                 </button>
@@ -415,7 +418,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                     <th rowspan="2">{{ planGranularity === 'yearly' ? 'Year' : 'Year/Month' }}</th>
                                     <th colspan="2" style="text-align: center;">Investment</th>
                                     <th colspan="2" style="text-align: center;">Growth</th>
-                                    <th rowspan="2" style="text-align: right;">Portfolio Value</th>
+                                    <th rowspan="2" style="text-align: right;">Portfolio Value<span v-if="applyPostTax"><br/>(Post Tax)</span></th>
                                 </tr>
                                 <tr>
                                     <th style="text-align: right;">{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
@@ -561,6 +564,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 contributionTable: [],
                 contributionViewMode: 'nominal',
                 planViewMode: 'nominal',
+                applyPostTax: false,
                 planGranularity: 'yearly',
                 investmentGrowthTab: 'chart',
                 monthlyPlanTab: 'chart',
@@ -667,7 +671,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = yearlyGrowth;
                             accumulatedContribution = totalInvested;
                             accumulatedGrowth = nominalPortfolio - totalInvested;
-                            portfolioValue = nominalPortfolio;
+                            // Apply post-tax adjustment if Post Tax toggle is active
+                            if (this.applyPostTax) {
+                                const nominalGrowthValue = nominalPortfolio - totalInvested;
+                                const postTaxGrowth = nominalGrowthValue * (1 - taxRate);
+                                portfolioValue = totalInvested + postTaxGrowth;
+                            } else {
+                                portfolioValue = nominalPortfolio;
+                            }
                         } else {
                             // Fix: If monthly SIP is zero, show present value and growth for initial investment
                             let realYearlyContribution, realYearlyGrowth;
@@ -691,7 +702,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = realYearlyGrowth;
                             accumulatedContribution = realInvestmentPV;
                             accumulatedGrowth = realPortfolio - realInvestmentPV;
-                            if (this.planViewMode === 'postTax') {
+                            // Apply post-tax adjustment if in Real mode and Post Tax toggle is active
+                            if (this.applyPostTax) {
                                 const realValue = realPortfolio;
                                 const realInvestmentPV = row.totalInvestedPresentValue || totalInvested / discountFactor;
                                 const realGrowthValue = realValue - realInvestmentPV;
@@ -715,7 +727,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = row.growth || 0;
                             accumulatedContribution = totalInvested;
                             accumulatedGrowth = nominalPortfolio - totalInvested;
-                            portfolioValue = nominalPortfolio;
+                            // Apply post-tax adjustment if Post Tax toggle is active
+                            if (this.applyPostTax) {
+                                const nominalGrowthValue = nominalPortfolio - totalInvested;
+                                const postTaxGrowth = nominalGrowthValue * (1 - taxRate);
+                                portfolioValue = totalInvested + postTaxGrowth;
+                            } else {
+                                portfolioValue = nominalPortfolio;
+                            }
                         } else {
                             // Fix: If monthly SIP is zero, show present value and growth for initial investment
                             let realContribution, realGrowth;
@@ -733,7 +752,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = realGrowth;
                             accumulatedContribution = realInvestmentPV;
                             accumulatedGrowth = realPortfolio - realInvestmentPV;
-                            if (this.planViewMode === 'postTax') {
+                            // Apply post-tax adjustment if in Real mode and Post Tax toggle is active
+                            if (this.applyPostTax) {
                                 const realValue = realPortfolio;
                                 const realInvestmentPV = row.totalInvestedPresentValue || 0;
                                 const realGrowthValue = realValue - realInvestmentPV;
@@ -818,6 +838,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 this.renderChart();
             },
             planViewMode() {
+                this.renderChart();
+            },
+            applyPostTax() {
                 this.renderChart();
             }
         },
@@ -916,7 +939,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     const month = (monthIndex % 12) + 1;
                     
                     // Contribution at start of month (doesn't include currentInvestment)
-                    const contribution = monthlyInvestmentFn(year, month);
+                    const contribution = Math.round(monthlyInvestmentFn(year, month));
                     
                     // Track present value of this contribution
                     totalInvestedPresentValue += contribution / inflationFactorForContribution;
@@ -931,10 +954,10 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         year,
                         month,
                         contribution,
-                        portfolioValue,
-                        totalInvested,
-                        totalInvestedPresentValue,
-                        realValue
+                        portfolioValue: Math.round(portfolioValue),
+                        totalInvested: Math.round(totalInvested),
+                        totalInvestedPresentValue: Math.round(totalInvestedPresentValue),
+                        realValue: Math.round(realValue)
                     });
                     
                     // Increment inflation factors for next iteration
@@ -960,7 +983,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 
                 // Calculate post-tax real value
                 const taxRate = this.formData.taxRate;
-                const postTaxRealValue = finalMonth.totalInvestedPresentValue + (finalMonth.realValue - finalMonth.totalInvestedPresentValue) * (1 - taxRate / 100);
+                const postTaxRealValue = Math.round(finalMonth.totalInvestedPresentValue + (finalMonth.realValue - finalMonth.totalInvestedPresentValue) * (1 - taxRate / 100));
                 
                 return {
                     monthlyData,
@@ -1121,6 +1144,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     const accumulatedGrowth = data.portfolioValue - data.totalInvested;
                     
                     return {
+                        monthIndex: data.monthIndex,
                         year: currentYear,
                         month: monthNames[currentMonthNum],
                         contribution: data.contribution,
@@ -1366,30 +1390,37 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         
                         const option = {
                             tooltip: {
-                                trigger: 'axis',
+                                trigger: 'item',
+                                formatter: function(params) {
+                                    return `<strong>${params.name}</strong><br/>${params.marker} ${params.seriesName}: â‚¹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                                },
                                 axisPointer: {
                                     type: 'cross',
                                     label: {
                                         backgroundColor: '#6a7985'
                                     }
+                                },
+                                backgroundColor: 'rgba(50, 50, 50, 0.9)',
+                                borderColor: '#333',
+                                borderWidth: 1,
+                                textStyle: {
+                                    color: '#fff'
                                 }
                             },
                             legend: {
-                                data: ['Accumulated Investment', 'Accumulated Growth']
+                                data: ['Accumulated Investment', 'Portfolio Value']
                             },
                             grid: {
                                 left: '3%',
-                                right: '4%',
-                                bottom: '15%',
+                                right: '2%',
+                                bottom: '2%',
+                                top: '2%',
                                 containLabel: true
                             },
                             xAxis: {
                                 type: 'category',
                                 boundaryGap: false,
                                 data: this.displayedPlan.map(d => d.period),
-                                name: granularityLabel === 'Yearly' ? 'Years' : 'Periods',
-                                nameLocation: 'middle',
-                                nameGap: 30,
                                 axisLabel: {
                                     fontSize: 11,
                                     rotate: this.planGranularity === 'monthly' ? 45 : 0
@@ -1416,46 +1447,52 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 {
                                     name: 'Accumulated Investment',
                                     type: 'line',
-                                    stack: 'Total',
-                                    data: this.displayedPlan.map(d => Math.round(d.accumulatedContribution)),
+                                    data: this.displayedPlan.map(d => d.accumulatedContribution),
                                     smooth: true,
                                     areaStyle: {
-                                        color: 'rgba(255, 107, 107, 0.6)'
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: 'rgba(255, 193, 7, 0.5)' },
+                                            { offset: 1, color: 'rgba(255, 193, 7, 0.1)' }
+                                        ])
                                     },
                                     lineStyle: {
-                                        width: 0
+                                        width: 2,
+                                        color: '#FFC107'
                                     },
                                     itemStyle: {
-                                        color: '#FF6B6B'
+                                        color: '#FFC107'
                                     },
+                                    symbol: 'circle',
+                                    symbolSize: 6,
                                     emphasis: {
                                         focus: 'series'
                                     }
                                 },
                                 {
-                                    name: 'Accumulated Growth',
+                                    name: 'Portfolio Value',
                                     type: 'line',
-                                    stack: 'Total',
-                                    data: this.displayedPlan.map(d => Math.round(d.accumulatedGrowth)),
+                                    data: this.displayedPlan.map(d => d.portfolioValue),
                                     smooth: true,
                                     areaStyle: {
-                                        color: 'rgba(78, 205, 196, 0.6)'
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: 'rgba(76, 175, 80, 0.5)' },
+                                            { offset: 1, color: 'rgba(76, 175, 80, 0.1)' }
+                                        ])
                                     },
                                     lineStyle: {
-                                        width: 0
+                                        width: 3,
+                                        color: '#4CAF50'
                                     },
                                     itemStyle: {
-                                        color: '#4ECDC4'
+                                        color: '#4CAF50'
                                     },
+                                    symbol: 'circle',
+                                    symbolSize: 6,
                                     emphasis: {
                                         focus: 'series'
                                     }
                                 }
-                            ],
-                            lineStyle: {
-                                width: 1,
-                                opacity: 0
-                            }
+                            ]
                         };
 
                         this.chart.setOption(option);
@@ -1523,9 +1560,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     },
                     grid: {
                         left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        top: '15%',
+                        right: '2%',
+                        bottom: '2%',
+                        top: '2%',
                         containLabel: true
                     },
                     xAxis: {
