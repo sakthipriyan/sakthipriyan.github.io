@@ -9,6 +9,10 @@
     {{- end }}
     {{- /* CSS */ -}}
     <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    {{- /* Tools CSS for calculator pages */ -}}
+    {{- if eq .Type "tools" }}
+    <link rel="stylesheet" href="{{ "css/tools.css" | absURL }}">
+    {{- end }}
     {{- if .Site.Params.googleAnalyticsId }}
     <script>window.googleAnalyticsId = "{{ .Site.Params.googleAnalyticsId }}";</script>
     {{- end }}
@@ -115,11 +119,7 @@
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
         {{ end }}
-    {{- if or (eq .Section "tools") (eq .Type "tools") }}
-    {{- /* Vue.js */ -}}
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="{{ "js/tools.js" | absURL }}"></script>
-    {{- end }}
+    {{- /* Tool scripts are now loaded per-tool in tools/single.html */ -}}
     {{- block "scripts" . }}{{- end }}
     {{- /* Hamburger Menu JavaScript */ -}}
     <script>
