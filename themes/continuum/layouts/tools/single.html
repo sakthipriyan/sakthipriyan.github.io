@@ -37,29 +37,6 @@
     {{ end }}
 
     {{ partial "content-footer.html" . }}
-
-    <!-- Related Tools in Same Section -->
-    {{ $currentPage := . }}
-    {{ $parentSection := .Parent }}
-    {{ if $parentSection }}
-    {{ $relatedTools := where $parentSection.Pages "Type" "in" (slice "tools") }}
-    {{ $relatedTools = where $relatedTools ".Title" "!=" .Title }}
-    {{ if $relatedTools }}
-    <section class="related-tools">
-        <h3>More {{ $parentSection.Title }} Tools</h3>
-        <div class="tools-grid">
-            {{ range first 3 $relatedTools }}
-            <article class="tool-card">
-                <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-                {{ if .Params.description }}
-                <p>{{ .Params.description }}</p>
-                {{ end }}
-            </article>
-            {{ end }}
-        </div>
-    </section>
-    {{ end }}
-    {{ end }}
 </article>
 {{ end }}
 
