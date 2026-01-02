@@ -634,7 +634,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
             displayedPlan() {
                 if (!this.monthlyPlan || this.monthlyPlan.length === 0) return [];
                 
-                const taxRate = this.formData.taxRate / 100;
                 const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
 
                 // Filter based on granularity
@@ -649,9 +648,10 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 }
                 
                 // Transform based on view mode
+                // Note: Post-tax calculations are only applied at exit (final value in results),
+                // not during accumulation. This matches real-world LTCG tax behavior.
                 return filteredPlan.map((row, index) => {
                     const monthIndex = row.monthIndex;
-                    const discountFactor = Math.pow(1 + monthlyInflation, monthIndex + 1);
                     
                     let period, contribution, growth, accumulatedContribution, accumulatedGrowth, portfolioValue;
                     
@@ -666,21 +666,15 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         const nominalPortfolio = row.nominalPortfolio || 0;
                         const realPortfolio = row.realPortfolio || 0;
                         const realInvestmentPV = row.totalInvestedPresentValue || 0;
+                        
                         if (this.planViewMode === 'nominal') {
                             contribution = yearlyContribution;
                             growth = yearlyGrowth;
                             accumulatedContribution = totalInvested;
                             accumulatedGrowth = nominalPortfolio - totalInvested;
-                            // Apply post-tax adjustment if Post Tax toggle is active
-                            if (this.applyPostTax) {
-                                const nominalGrowthValue = nominalPortfolio - totalInvested;
-                                const postTaxGrowth = nominalGrowthValue * (1 - taxRate);
-                                portfolioValue = totalInvested + postTaxGrowth;
-                            } else {
-                                portfolioValue = nominalPortfolio;
-                            }
+                            portfolioValue = nominalPortfolio;
                         } else {
-                            // Fix: If monthly SIP is zero, show present value and growth for initial investment
+                            // Real mode: discount by inflation
                             let realYearlyContribution, realYearlyGrowth;
                             if (yearlyContribution === 0 && totalInvested > 0) {
                                 // Only initial investment, no SIP
@@ -702,16 +696,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = realYearlyGrowth;
                             accumulatedContribution = realInvestmentPV;
                             accumulatedGrowth = realPortfolio - realInvestmentPV;
-                            // Apply post-tax adjustment if in Real mode and Post Tax toggle is active
-                            if (this.applyPostTax) {
-                                const realValue = realPortfolio;
-                                const realInvestmentPV = row.totalInvestedPresentValue || totalInvested / discountFactor;
-                                const realGrowthValue = realValue - realInvestmentPV;
-                                const postTaxGrowth = realGrowthValue * (1 - taxRate);
-                                portfolioValue = realInvestmentPV + postTaxGrowth;
-                            } else {
-                                portfolioValue = realPortfolio;
-                            }
+                            portfolioValue = realPortfolio;
                         }
                     } else {
                         // Monthly view - use individual month values
@@ -727,16 +712,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = row.growth || 0;
                             accumulatedContribution = totalInvested;
                             accumulatedGrowth = nominalPortfolio - totalInvested;
-                            // Apply post-tax adjustment if Post Tax toggle is active
-                            if (this.applyPostTax) {
-                                const nominalGrowthValue = nominalPortfolio - totalInvested;
-                                const postTaxGrowth = nominalGrowthValue * (1 - taxRate);
-                                portfolioValue = totalInvested + postTaxGrowth;
-                            } else {
-                                portfolioValue = nominalPortfolio;
-                            }
+                            portfolioValue = nominalPortfolio;
                         } else {
-                            // Fix: If monthly SIP is zero, show present value and growth for initial investment
+                            // Real mode: discount by inflation
                             let realContribution, realGrowth;
                             if ((row.contribution || 0) === 0 && totalInvested > 0) {
                                 // Only initial investment, no SIP
@@ -752,16 +730,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             growth = realGrowth;
                             accumulatedContribution = realInvestmentPV;
                             accumulatedGrowth = realPortfolio - realInvestmentPV;
-                            // Apply post-tax adjustment if in Real mode and Post Tax toggle is active
-                            if (this.applyPostTax) {
-                                const realValue = realPortfolio;
-                                const realInvestmentPV = row.totalInvestedPresentValue || 0;
-                                const realGrowthValue = realValue - realInvestmentPV;
-                                const postTaxGrowth = realGrowthValue * (1 - taxRate);
-                                portfolioValue = realInvestmentPV + postTaxGrowth;
-                            } else {
-                                portfolioValue = realPortfolio;
-                            }
+                            portfolioValue = realPortfolio;
                         }
                     }
                     
@@ -839,10 +808,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
             },
             planViewMode() {
                 this.renderChart();
-            },
-            applyPostTax() {
-                this.renderChart();
             }
+            // Note: applyPostTax removed - it only affects summary display, not chart data
+            // Tax is applied only at exit (final value), not during accumulation
         },
         mounted() {
             this.calculateResults();
