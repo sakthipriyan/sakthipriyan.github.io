@@ -26,7 +26,7 @@ window.initializeTool.sipCalculator = function (container, config) {
                             <div class="input-group">
                                 <label>
                                     Target Mode:
-                                    <span class="help-icon" data-tooltip="Time: Calculate portfolio value for a fixed investment period.
+                                    <span class="help-icon help-icon-wide" data-tooltip="Time: Calculate portfolio value for a fixed investment period.
 Money: Calculate time needed to reach a target amount.
 Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚ÑπÔ∏è</span>
                                 </label>
@@ -50,7 +50,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group" v-if="formData.targetTime">
                                 <label>
                                     Target Time Period:&nbsp;<strong>{{ formattedTimePeriod }}</strong>
-                                    <span class="help-icon" data-tooltip="Duration of your SIP investment. Long-term investing (10+ years) helps ride out market volatility">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Duration of your SIP investment. Long-term investing (10+ years) helps ride out market volatility">‚ÑπÔ∏è</span>
                                 </label>
                                 <div class="unit-selector-input">
                                     <input 
@@ -81,7 +81,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group" v-if="formData.targetMoney">
                                 <label>
                                     Target Amount:&nbsp;<strong>‚Çπ {{ formatCurrencyFull(targetAmount) }}</strong>
-                                    <span class="help-icon" data-tooltip="üéØ Target in today's money (Real). The final portfolio value you want to achieve adjusted for inflation">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="üéØ Target in today's money (Real). The final portfolio value you want to achieve adjusted for inflation">‚ÑπÔ∏è</span>
                                 </label>
                                 <div class="unit-selector-input">
                                     <input 
@@ -118,7 +118,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group">
                                 <label>
                                     Start Month:
-                                    <span class="help-icon" data-tooltip="Choose when you want to start your SIP. This determines the calendar dates in your investment plan">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Choose when you want to start your SIP. This determines the calendar dates in your investment plan">‚ÑπÔ∏è</span>
                                 </label>
                                 <input type="month" v-model="formData.startMonth" @input="debouncedCalculate">
                             </div>
@@ -129,7 +129,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group">
                                 <label>
                                     Current Investment:&nbsp;<strong>‚Çπ {{ formatCurrencyFull(currentInvestment) }}</strong>
-                                    <span class="help-icon" data-tooltip="The lump sum amount you already have invested or plan to invest today">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="The lump sum amount you already have invested or plan to invest today">‚ÑπÔ∏è</span>
                                 </label>
                             <div class="unit-selector-input">
                                 <input 
@@ -166,7 +166,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group" v-if="!isBothTargetsMode">
                             <label>
                                 Monthly Investment:&nbsp;<strong>‚Çπ {{ formatCurrencyFull(monthlyInvestment) }}</strong>
-                                <span class="help-icon" data-tooltip="The fixed amount you plan to invest every month through SIP">‚ÑπÔ∏è</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="The fixed amount you plan to invest every month through SIP">‚ÑπÔ∏è</span>
                             </label>
                             <div class="unit-selector-input">
                                 <input 
@@ -203,7 +203,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Expected Growth:&nbsp;<strong>{{ formData.cagr }}%</strong>
-                                    <span class="help-icon" data-tooltip="Expected annual return rate (Compound Annual Growth Rate). Typical equity funds: 10-15%, Debt funds: 6-8%">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Expected annual return rate (Compound Annual Growth Rate). Typical equity funds: 10-15%, Debt funds: 6-8%">‚ÑπÔ∏è</span>
                                 </label>
                                 <input 
                                     type="number" 
@@ -218,7 +218,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Yearly Hike:&nbsp;<strong>{{ formData.yearlyHike }}%</strong>
-                                    <span class="help-icon" data-tooltip="Annual percentage increase in your monthly SIP amount. Helps you invest more as your income grows">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Annual percentage increase in your monthly SIP amount. Helps you invest more as your income grows">‚ÑπÔ∏è</span>
                                 </label>
                                 <input 
                                     type="number" 
@@ -235,7 +235,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Yearly Inflation:&nbsp;<strong>{{ formData.inflationRate }}%</strong>
-                                    <span class="help-icon" data-tooltip="Expected average inflation rate per year. Used to calculate real returns in today's money. Historical India average: 5-7%">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Expected average inflation rate per year. Used to calculate real returns in today's money. Historical India average: 5-7%">‚ÑπÔ∏è</span>
                                 </label>
                                 <input 
                                     type="number" 
@@ -250,7 +250,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Exit Tax:&nbsp;<strong>{{ formData.taxRate }}%</strong>
-                                    <span class="help-icon" data-tooltip="Applied on total real gains at exit. Equity: 13-14.95% (LTCG + Dividend), Debt: 5.2-42.74% (based on tax slab). Actual taxation may differ">‚ÑπÔ∏è</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Applied on total real gains at exit. Equity: 13-14.95% (LTCG + Dividend), Debt: 5.2-42.74% (based on tax slab). Actual taxation may differ">‚ÑπÔ∏è</span>
                                 </label>
                                 <input 
                                     type="number" 
@@ -348,7 +348,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 <button 
                                     type="button"
                                     :class="{'active': investmentGrowthTab === 'chart'}"
-                                    @click="investmentGrowthTab = 'chart'; $nextTick(() => $nextTick(() => renderChart()))"
+                                    @click="investmentGrowthTab = 'chart'"
                                     style="white-space: nowrap;">
                                     üìä Chart
                                 </button>
@@ -406,35 +406,35 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     </div>
                     
                     <!-- Chart Tab -->
-                    <div v-if="investmentGrowthTab === 'chart'" style="margin-bottom: 2rem;">
+                    <div v-show="investmentGrowthTab === 'chart'" style="margin-bottom: 2rem;">
                         <div id="sip-chart" style="width: 100%; height: 400px;"></div>
                     </div>
                     
                     <!-- Data Tab -->
-                    <div v-if="investmentGrowthTab === 'data'" class="plan-table-wrapper">
+                    <div v-show="investmentGrowthTab === 'data'" class="plan-table-wrapper">
                         <table class="plan-table" style="margin: 0;">
                             <thead>
                                 <tr>
                                     <th rowspan="2">{{ planGranularity === 'yearly' ? 'Year' : 'Year/Month' }}</th>
-                                    <th colspan="2" style="text-align: center;">Investment</th>
-                                    <th colspan="2" style="text-align: center;">Growth</th>
-                                    <th rowspan="2" style="text-align: right;">Portfolio Value<span v-if="applyPostTax"><br/>(Post Tax)</span></th>
+                                    <th colspan="2">Investment</th>
+                                    <th colspan="2">Growth</th>
+                                    <th rowspan="2">Portfolio Value</th>
                                 </tr>
                                 <tr>
-                                    <th style="text-align: right;">{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
-                                    <th style="text-align: right;">Accumulated</th>
-                                    <th style="text-align: right;">{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
-                                    <th style="text-align: right;">Accumulated</th>
+                                    <th>{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
+                                    <th>Accumulated</th>
+                                    <th>{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
+                                    <th>Accumulated</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(row, index) in displayedPlan" :key="index">
                                     <td>{{ row.period }}</td>
-                                    <td style="text-align: right;">‚Çπ{{ formatCurrencyFull(row.contribution) }}</td>
-                                    <td style="text-align: right;">‚Çπ{{ formatCurrencyFull(row.accumulatedContribution) }}</td>
-                                    <td style="text-align: right;">‚Çπ{{ formatCurrencyFull(row.growth) }}</td>
-                                    <td style="text-align: right;">‚Çπ{{ formatCurrencyFull(row.accumulatedGrowth) }}</td>
-                                    <td style="text-align: right;">‚Çπ{{ formatCurrencyFull(row.portfolioValue) }}</td>
+                                    <td>‚Çπ{{ formatCurrencyFull(row.contribution) }}</td>
+                                    <td>‚Çπ{{ formatCurrencyFull(row.accumulatedContribution) }}</td>
+                                    <td>‚Çπ{{ formatCurrencyFull(row.growth) }}</td>
+                                    <td>‚Çπ{{ formatCurrencyFull(row.accumulatedGrowth) }}</td>
+                                    <td>‚Çπ{{ formatCurrencyFull(row.portfolioValue) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -452,7 +452,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 <button 
                                     type="button"
                                     :class="{'active': monthlyPlanTab === 'chart'}"
-                                    @click="monthlyPlanTab = 'chart'; $nextTick(() => renderContributionChart())"
+                                    @click="monthlyPlanTab = 'chart'; $nextTick(() => renderContributionChart(false))"
                                     style="white-space: nowrap;">
                                     üìä Chart
                                 </button>
@@ -483,34 +483,34 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     </div>
                     
                     <!-- Chart Tab -->
-                    <div v-if="monthlyPlanTab === 'chart'" style="margin-bottom: 2rem;">
+                    <div v-show="monthlyPlanTab === 'chart'" style="margin-bottom: 2rem;">
                         <div id="contributionChart" style="width: 100%; height: 400px;"></div>
                     </div>
                     
                     <!-- Data Tab -->
-                    <div v-if="monthlyPlanTab === 'data'" class="plan-table-wrapper">
+                    <div v-show="monthlyPlanTab === 'data'" class="plan-table-wrapper">
                         <table class="plan-table" style="margin: 0;">
                             <thead>
                                 <tr>
-                                    <th style="text-align: right;">Year</th>
-                                    <th style="text-align: right;">Jan</th>
-                                    <th style="text-align: right;">Feb</th>
-                                    <th style="text-align: right;">Mar</th>
-                                    <th style="text-align: right;">Apr</th>
-                                    <th style="text-align: right;">May</th>
-                                    <th style="text-align: right;">Jun</th>
-                                    <th style="text-align: right;">Jul</th>
-                                    <th style="text-align: right;">Aug</th>
-                                    <th style="text-align: right;">Sep</th>
-                                    <th style="text-align: right;">Oct</th>
-                                    <th style="text-align: right;">Nov</th>
-                                    <th style="text-align: right;">Dec</th>
+                                    <th>Year</th>
+                                    <th>Jan</th>
+                                    <th>Feb</th>
+                                    <th>Mar</th>
+                                    <th>Apr</th>
+                                    <th>May</th>
+                                    <th>Jun</th>
+                                    <th>Jul</th>
+                                    <th>Aug</th>
+                                    <th>Sep</th>
+                                    <th>Oct</th>
+                                    <th>Nov</th>
+                                    <th>Dec</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(yearRow, index) in contributionTable" :key="index">
-                                    <td style="text-align: right;"><strong>{{ yearRow.year }}</strong></td>
-                                    <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex" style="text-align: right;">
+                                    <td><strong>{{ yearRow.year }}</strong></td>
+                                    <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex">
                                         <span v-if="amount !== null" class="help-icon" :data-tooltip="'‚Çπ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
                                         <span v-else style="color: #999;">-</span>
                                     </td>
@@ -572,6 +572,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 debounceTimer: null,
                 chart: null,
                 contributionChart: null,
+                contributionChartCategories: [],
                 contributionResizeHandler: null,
                 copyButtonText: 'Copy JSON'
             }
@@ -634,8 +635,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
             displayedPlan() {
                 if (!this.monthlyPlan || this.monthlyPlan.length === 0) return [];
                 
-                const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
-
                 // Filter based on granularity
                 let filteredPlan = this.monthlyPlan;
                 if (this.planGranularity === 'yearly') {
@@ -647,101 +646,57 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     });
                 }
                 
-                // Transform based on view mode
-                // Note: Post-tax calculations are only applied at exit (final value in results),
-                // not during accumulation. This matches real-world LTCG tax behavior.
-                return filteredPlan.map((row, index) => {
-                    const monthIndex = row.monthIndex;
-                    
-                    let period, contribution, growth, accumulatedContribution, accumulatedGrowth, portfolioValue;
-                    
+                // Simply map pre-computed data based on view mode
+                // Note: All values (including post-tax) are pre-computed in monthlyPlan by simulateSIP
+                // UI layer just switches between pre-computed fields
+                return filteredPlan.map(row => {
                     if (this.planGranularity === 'yearly') {
-                        period = row.year;
                         // For yearly view, aggregate all months in this year
                         const yearRows = this.monthlyPlan.filter(r => r.year === row.year);
-                        const yearlyContribution = yearRows.reduce((sum, r) => sum + (r.contribution || 0), 0);
-                        const yearlyGrowth = yearRows.reduce((sum, r) => sum + (r.growth || 0), 0);
-                        // Get accumulated values from the last month of this year (current row)
-                        const totalInvested = row.accumulatedContribution || row.totalInvested || 0;
-                        const nominalPortfolio = row.nominalPortfolio || 0;
-                        const realPortfolio = row.realPortfolio || 0;
-                        const realInvestmentPV = row.totalInvestedPresentValue || 0;
                         
                         if (this.planViewMode === 'nominal') {
-                            contribution = yearlyContribution;
-                            growth = yearlyGrowth;
-                            accumulatedContribution = totalInvested;
-                            accumulatedGrowth = nominalPortfolio - totalInvested;
-                            portfolioValue = nominalPortfolio;
+                            return {
+                                period: row.year,
+                                contribution: yearRows.reduce((sum, r) => sum + (r.nominalContribution || 0), 0),
+                                growth: yearRows.reduce((sum, r) => sum + (r.nominalGrowth || 0), 0),
+                                accumulatedContribution: row.nominalInvestment,
+                                accumulatedGrowth: row.nominalCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.nominalPostTaxPortfolio : row.nominalPortfolio
+                            };
                         } else {
-                            // Real mode: discount by inflation
-                            let realYearlyContribution, realYearlyGrowth;
-                            if (yearlyContribution === 0 && totalInvested > 0) {
-                                // Only initial investment, no SIP
-                                realYearlyContribution = 0;
-                                realYearlyGrowth = realPortfolio - realInvestmentPV;
-                            } else {
-                                realYearlyContribution = yearRows.reduce((sum, r) => {
-                                    const mIdx = r.monthIndex;
-                                    const mInflation = Math.pow(1 + monthlyInflation, mIdx);
-                                    return sum + (r.contribution || 0) / mInflation;
-                                }, 0);
-                                realYearlyGrowth = yearRows.reduce((sum, r) => {
-                                    const mIdx = r.monthIndex;
-                                    const mInflation = Math.pow(1 + monthlyInflation, mIdx + 1);
-                                    return sum + (r.growth || 0) / mInflation;
-                                }, 0);
-                            }
-                            contribution = realYearlyContribution;
-                            growth = realYearlyGrowth;
-                            accumulatedContribution = realInvestmentPV;
-                            accumulatedGrowth = realPortfolio - realInvestmentPV;
-                            portfolioValue = realPortfolio;
+                            // Real mode - use pre-computed present values
+                            return {
+                                period: row.year,
+                                contribution: yearRows.reduce((sum, r) => sum + (r.realContribution || 0), 0),
+                                growth: yearRows.reduce((sum, r) => sum + (r.realGrowth || 0), 0),
+                                accumulatedContribution: row.realInvestment,
+                                accumulatedGrowth: row.realCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.realPostTaxPortfolio : row.realPortfolio
+                            };
                         }
                     } else {
-                        // Monthly view - use individual month values
-                        period = `${row.year} ${row.month}`;
-                        
-                        const totalInvested = row.accumulatedContribution || row.totalInvested || 0;
-                        const nominalPortfolio = row.nominalPortfolio || 0;
-                        const realPortfolio = row.realPortfolio || 0;
-                        const realInvestmentPV = row.totalInvestedPresentValue || 0;
-                        
+                        // Monthly view - directly use pre-computed values
                         if (this.planViewMode === 'nominal') {
-                            contribution = row.contribution || 0;
-                            growth = row.growth || 0;
-                            accumulatedContribution = totalInvested;
-                            accumulatedGrowth = nominalPortfolio - totalInvested;
-                            portfolioValue = nominalPortfolio;
+                            return {
+                                period: `${row.year} ${row.month}`,
+                                contribution: row.nominalContribution,
+                                growth: row.nominalGrowth,
+                                accumulatedContribution: row.nominalInvestment,
+                                accumulatedGrowth: row.nominalCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.nominalPostTaxPortfolio : row.nominalPortfolio
+                            };
                         } else {
-                            // Real mode: discount by inflation
-                            let realContribution, realGrowth;
-                            if ((row.contribution || 0) === 0 && totalInvested > 0) {
-                                // Only initial investment, no SIP
-                                realContribution = 0;
-                                realGrowth = realPortfolio - realInvestmentPV;
-                            } else {
-                                const inflationAtContribution = Math.pow(1 + monthlyInflation, monthIndex);
-                                const inflationAtEnd = Math.pow(1 + monthlyInflation, monthIndex + 1);
-                                realContribution = (row.contribution || 0) / inflationAtContribution;
-                                realGrowth = (row.growth || 0) / inflationAtEnd;
-                            }
-                            contribution = realContribution;
-                            growth = realGrowth;
-                            accumulatedContribution = realInvestmentPV;
-                            accumulatedGrowth = realPortfolio - realInvestmentPV;
-                            portfolioValue = realPortfolio;
+                            // Real mode
+                            return {
+                                period: `${row.year} ${row.month}`,
+                                contribution: row.realContribution,
+                                growth: row.realGrowth,
+                                accumulatedContribution: row.realInvestment,
+                                accumulatedGrowth: row.realCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.realPostTaxPortfolio : row.realPortfolio
+                            };
                         }
                     }
-                    
-                    return {
-                        period,
-                        contribution,
-                        growth,
-                        accumulatedContribution,
-                        accumulatedGrowth,
-                        portfolioValue
-                    };
                 });
             },
             targetAmount() {
@@ -803,11 +758,61 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
             }
         },
         watch: {
+            // Watch computed properties to efficiently re-render charts
+            displayedPlan: {
+                handler() {
+                    if (this.results.calculated && this.displayedPlan?.length > 0) {
+                        // Only render if chart tab is active
+                        if (this.investmentGrowthTab === 'chart') {
+                            this.$nextTick(() => {
+                                this.renderChart();
+                            });
+                        }
+                    }
+                },
+                deep: false  // displayedPlan is replaced entirely, not mutated
+            },
+            investmentGrowthTab() {
+                // When switching to chart tab, render or resize chart
+                if (this.investmentGrowthTab === 'chart' && this.displayedPlan?.length > 0) {
+                    this.$nextTick(() => {
+                        // Always render to ensure data is up-to-date
+                        // (chart may be stale if user changed view mode while on data tab)
+                        this.renderChart();
+                    });
+                }
+            },
+            monthlyPlan: {
+                handler() {
+                    if (this.monthlyPlan?.length > 0) {
+                        // Render chart (element persists with v-show, so always safe to render)
+                        this.$nextTick(() => {
+                            this.renderContributionChart(true); // true = rebuild categories
+                        });
+                        this.generateContributionTable();
+                    }
+                },
+                deep: false
+            },
+            contributionViewMode() {
+                // Only update data, not categories
+                if (this.monthlyPlan?.length > 0) {
+                    this.renderContributionChart(false); // false = reuse categories
+                }
+            },
+            monthlyPlanTab() {
+                // When switching to chart tab, resize cached chart
+                if (this.monthlyPlanTab === 'chart' && this.contributionChart) {
+                    this.$nextTick(() => {
+                        this.contributionChart.resize();
+                    });
+                }
+            },
             planGranularity() {
-                this.renderChart();
+                // displayedPlan watcher will handle chart update
             },
             planViewMode() {
-                this.renderChart();
+                // displayedPlan watcher will handle chart update
             }
             // Note: applyPostTax removed - it only affects summary display, not chart data
             // Tax is applied only at exit (final value), not during accumulation
@@ -875,7 +880,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
             },
             
             // Core SIP simulation engine - computes monthly then rolls up to yearly
-            simulateSIP({ years, monthlyInvestmentFn, currentInvestment, cagr, inflationRate }) {
+            simulateSIP({ years, monthlyInvestmentFn, currentInvestment, cagr, inflationRate, taxRate }) {
                 // Validation
                 if (cagr <= -100) {
                     throw new Error('Expected Growth must be greater than -100%');
@@ -897,40 +902,67 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 
                 const totalMonths = Math.ceil(years * 12);
                 
-                // Optimized: Calculate inflation factors incrementally
-                let inflationFactorForContribution = 1;
-                let inflationFactor = 1 + monthlyInflation;
-                
                 // Monthly computation
+                let cumulativeNominalGrowth = 0; // Track cumulative nominal growth
+                let cumulativeRealGrowth = 0; // Track cumulative real growth
                 for (let monthIndex = 0; monthIndex < totalMonths; monthIndex++) {
                     const year = Math.floor(monthIndex / 12) + 1;
                     const month = (monthIndex % 12) + 1;
                     
+                    // Store portfolio value before this month's growth and contribution
+                    const prevPortfolioValue = portfolioValue;
+                    
                     // Contribution at start of month (doesn't include currentInvestment)
                     const contribution = Math.round(monthlyInvestmentFn(year, month));
                     
+                    // Calculate inflation factors:
+                    // - Contribution happens at month start: discount from start of month
+                    // - Portfolio value measured at month end: discount from end of month (1 month later)
+                    const inflationFactorForContribution = Math.pow(1 + monthlyInflation, monthIndex);
+                    const inflationFactorForPortfolio = Math.pow(1 + monthlyInflation, monthIndex + 1);
+                    
+                    // Calculate real contribution (present value at month start)
+                    const realContribution = contribution / inflationFactorForContribution;
+                    
                     // Track present value of this contribution
-                    totalInvestedPresentValue += contribution / inflationFactorForContribution;
+                    totalInvestedPresentValue += realContribution;
                     
                     totalInvested += contribution;
                     portfolioValue = portfolioValue * (1 + monthlyCagr) + contribution;
                     
-                    const realValue = portfolioValue / inflationFactor;
+                    // Calculate real portfolio value (present value at month end)
+                    const realValue = portfolioValue / inflationFactorForPortfolio;
+                    
+                    // Calculate nominal growth for this month (portfolio change minus contribution)
+                    const nominalGrowthThisMonth = portfolioValue - prevPortfolioValue - contribution;
+                    cumulativeNominalGrowth += nominalGrowthThisMonth;
+                    
+                    // Calculate real growth (nominal growth adjusted for inflation at month end)
+                    const realGrowthThisMonth = nominalGrowthThisMonth / inflationFactorForPortfolio;
+                    cumulativeRealGrowth += realGrowthThisMonth;
+                    
+                    // Calculate post-tax values for both nominal and real
+                    const nominalGrowth = portfolioValue - totalInvested;
+                    const postTaxNominal = totalInvested + nominalGrowth * (1 - taxRate / 100);
+                    const realGains = realValue - totalInvestedPresentValue;
+                    const postTaxReal = totalInvestedPresentValue + realGains * (1 - taxRate / 100);
                     
                     monthlyData.push({
                         monthIndex,
                         year,
                         month,
                         contribution,
+                        realContribution: realContribution,
+                        realGrowth: realGrowthThisMonth,
+                        cumulativeNominalGrowth: Math.round(cumulativeNominalGrowth),
+                        cumulativeRealGrowth: Math.round(cumulativeRealGrowth),
                         portfolioValue: Math.round(portfolioValue),
                         totalInvested: Math.round(totalInvested),
                         totalInvestedPresentValue: Math.round(totalInvestedPresentValue),
-                        realValue: Math.round(realValue)
+                        realValue: Math.round(realValue),
+                        postTaxPortfolioValue: Math.round(postTaxNominal),
+                        postTaxRealValue: Math.round(postTaxReal)
                     });
-                    
-                    // Increment inflation factors for next iteration
-                    inflationFactorForContribution *= (1 + monthlyInflation);
-                    inflationFactor *= (1 + monthlyInflation);
                 }
                 
                 // Roll up to yearly data
@@ -949,8 +981,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 
                 const finalMonth = monthlyData[monthlyData.length - 1];
                 
-                // Calculate post-tax real value
-                const taxRate = this.formData.taxRate;
+                // Calculate post-tax real value (taxRate passed as parameter)
                 const postTaxRealValue = Math.round(finalMonth.totalInvestedPresentValue + (finalMonth.realValue - finalMonth.totalInvestedPresentValue) * (1 - taxRate / 100));
                 
                 return {
@@ -965,15 +996,45 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 };
             },
             
+            buildMonthlyPlan(simulation, currentInvestment) {
+                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                return simulation.monthlyData.map((data, index) => {
+                    const currentMonthNum = (startMonth - 1 + index) % 12;
+                    const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
+                    
+                    // Nominal growth = change in portfolio minus contribution
+                    const prevNominal = index > 0 ? simulation.monthlyData[index - 1].portfolioValue : currentInvestment;
+                    const nominalGrowth = data.portfolioValue - prevNominal - data.contribution;
+                    
+                    return {
+                        monthIndex: data.monthIndex,
+                        year: currentYear,
+                        month: monthNames[currentMonthNum],
+                        // Nominal values
+                        nominalContribution: data.contribution,
+                        nominalGrowth: nominalGrowth,
+                        nominalCumulativeGrowth: data.cumulativeNominalGrowth,
+                        nominalInvestment: data.totalInvested,
+                        nominalPortfolio: data.portfolioValue,
+                        nominalPostTaxPortfolio: data.postTaxPortfolioValue,
+                        // Real values (pre-computed by simulateSIP)
+                        realContribution: data.realContribution,
+                        realGrowth: data.realGrowth,
+                        realCumulativeGrowth: data.cumulativeRealGrowth,
+                        realInvestment: data.totalInvestedPresentValue,
+                        realPortfolio: data.realValue,
+                        realPostTaxPortfolio: data.postTaxRealValue
+                    };
+                });
+            },
+            
             calculateByTargetYears() {
                 const { cagr, yearlyHike, inflationRate } = this.formData;
                 const numberOfYears = this.numberOfYears;
                 const currentInvestment = this.currentInvestment;
                 const monthlyInvestment = this.monthlyInvestment;
-
-                // Parse start month for display
-                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
-                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
                 // Use simulateSIP for calculations
                 const startingMonthly = monthlyInvestment;
@@ -987,33 +1048,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     monthlyInvestmentFn,
                     currentInvestment,
                     cagr,
-                    inflationRate
+                    inflationRate,
+                    taxRate: this.formData.taxRate
                 });
 
                 this.yearlyData = simulation.yearlyData;
                 
-                // Use monthly data from simulation instead of recomputing
-                this.monthlyPlan = simulation.monthlyData.map((data, index) => {
-                    const currentMonthNum = (startMonth - 1 + index) % 12;
-                    const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
-                    const prevValue = index > 0 ? simulation.monthlyData[index - 1].portfolioValue : currentInvestment;
-                    const prevInvested = index > 0 ? simulation.monthlyData[index - 1].totalInvested : 0;
-                    const monthlyGrowth = data.portfolioValue - prevValue - data.contribution;
-                    const accumulatedGrowth = data.portfolioValue - data.totalInvested;
-                    
-                    return {
-                        monthIndex: data.monthIndex,
-                        year: currentYear,
-                        month: monthNames[currentMonthNum],
-                        contribution: data.contribution,
-                        growth: monthlyGrowth,
-                        accumulatedContribution: data.totalInvested,
-                        accumulatedGrowth: accumulatedGrowth,
-                        nominalPortfolio: data.portfolioValue,
-                        realPortfolio: data.realValue,
-                        totalInvestedPresentValue: data.totalInvestedPresentValue
-                    };
-                });
+                // Build monthly plan using shared method
+                this.monthlyPlan = this.buildMonthlyPlan(simulation, currentInvestment);
 
                 this.results = {
                     calculated: true,
@@ -1026,14 +1068,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     postTaxRealValue: simulation.postTaxRealValue
                 };
 
-                this.$nextTick(() => {
-                    this.renderChart();
-                    this.generateContributionTable();
-                    this.$nextTick(() => {
-                        this.renderContributionChart();
-                    });
-                    this.calculating = false;
-                });
+                // Watchers will handle chart rendering automatically
+                this.calculating = false;
             },
             
             calculateByTargetAmount() {
@@ -1057,7 +1093,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             monthlyInvestmentFn,
                             currentInvestment,
                             cagr,
-                            inflationRate
+                            inflationRate,
+                            taxRate: this.formData.taxRate
                         });
                         return simulation.postTaxRealValue;
                     },
@@ -1071,7 +1108,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     monthlyInvestmentFn,
                     currentInvestment,
                     cagr,
-                    inflationRate
+                    inflationRate,
+                    taxRate: this.formData.taxRate
                 });
 
                 this.yearlyData = simulation.yearlyData;
@@ -1100,39 +1138,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     postTaxRealValue: simulation.postTaxRealValue
                 };
                 
-                // Generate monthly plan from simulation monthly data
-                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
-                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                
-                this.monthlyPlan = simulation.monthlyData.map((data, index) => {
-                    const currentMonthNum = (startMonth - 1 + index) % 12;
-                    const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
-                    const prevValue = index > 0 ? simulation.monthlyData[index - 1].portfolioValue : currentInvestment;
-                    const monthlyGrowth = data.portfolioValue - prevValue - data.contribution;
-                    const accumulatedGrowth = data.portfolioValue - data.totalInvested;
-                    
-                    return {
-                        monthIndex: data.monthIndex,
-                        year: currentYear,
-                        month: monthNames[currentMonthNum],
-                        contribution: data.contribution,
-                        growth: monthlyGrowth,
-                        accumulatedContribution: data.totalInvested,
-                        accumulatedGrowth: accumulatedGrowth,
-                        nominalPortfolio: data.portfolioValue,
-                        realPortfolio: data.realValue,
-                        totalInvestedPresentValue: data.totalInvestedPresentValue
-                    };
-                });
+                // Build monthly plan using shared method
+                this.monthlyPlan = this.buildMonthlyPlan(simulation, currentInvestment);
 
-                this.$nextTick(() => {
-                    this.renderChart();
-                    this.generateContributionTable();
-                    this.$nextTick(() => {
-                        this.renderContributionChart();
-                    });
-                    this.calculating = false;
-                });
+                // Watchers will handle chart rendering automatically
+                this.calculating = false;
             },
 
             calculateMonthlyInvestment() {
@@ -1147,7 +1157,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     monthlyInvestmentFn: () => 0,
                     currentInvestment,
                     cagr,
-                    inflationRate
+                    inflationRate,
+                    taxRate: this.formData.taxRate
                 });
                 
                 // If current investment alone exceeds or meets target, no monthly SIP needed
@@ -1160,7 +1171,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 monthlyInvestmentFn: () => 0,
                                 currentInvestment,
                                 cagr,
-                                inflationRate
+                                inflationRate,
+                                taxRate: this.formData.taxRate
                             });
                             return testResult.postTaxRealValue;
                         },
@@ -1175,7 +1187,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         monthlyInvestmentFn: () => 0,
                         currentInvestment,
                         cagr,
-                        inflationRate
+                        inflationRate,
+                        taxRate: this.formData.taxRate
                     });
                     
                     // Format time required
@@ -1204,39 +1217,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         postTaxRealValue: finalSimulation.postTaxRealValue
                     };
                     
-                    // Generate monthly plan
-                    const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
-                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    // Build monthly plan using shared method
+                    this.monthlyPlan = this.buildMonthlyPlan(finalSimulation, currentInvestment);
                     
-                    this.monthlyPlan = finalSimulation.monthlyData.map((data, index) => {
-                        const currentMonthNum = (startMonth - 1 + index) % 12;
-                        const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
-                        const prevValue = index > 0 ? finalSimulation.monthlyData[index - 1].portfolioValue : currentInvestment;
-                        const monthlyGrowth = data.portfolioValue - prevValue - data.contribution;
-                        const accumulatedGrowth = data.portfolioValue - data.totalInvested;
-                        
-                        return {
-                            monthIndex: data.monthIndex,
-                            year: currentYear,
-                            month: monthNames[currentMonthNum],
-                            contribution: data.contribution,
-                            growth: monthlyGrowth,
-                            accumulatedContribution: data.totalInvested,
-                            accumulatedGrowth: accumulatedGrowth,
-                            nominalPortfolio: data.portfolioValue,
-                            realPortfolio: data.realValue,
-                            totalInvestedPresentValue: data.totalInvestedPresentValue
-                        };
-                    });
-                    
-                    this.$nextTick(() => {
-                        this.renderChart();
-                        this.generateContributionTable();
-                        this.$nextTick(() => {
-                            this.renderContributionChart();
-                        });
-                        this.calculating = false;
-                    });
+                    // Watchers will handle chart rendering automatically
+                    this.calculating = false;
                     return;
                 }
                 
@@ -1244,9 +1229,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 let low = 0;
                 let high = targetAmount / Math.pow(1 + cagr/100, numberOfYears);
                 let requiredMonthly = 0;
-                const tolerance = 100;
+                const relativeTolerance = 0.001; // 0.1% relative tolerance
                 
-                while (high - low > tolerance) {
+                while ((high - low) / Math.max(high, 1) > relativeTolerance) {
                     requiredMonthly = (low + high) / 2;
                     
                     // Use simulateSIP with test monthly amount
@@ -1261,7 +1246,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         monthlyInvestmentFn: testFn,
                         currentInvestment,
                         cagr,
-                        inflationRate
+                        inflationRate,
+                        taxRate: this.formData.taxRate
                     });
                     
                     if (testResult.postTaxRealValue < targetAmount) {
@@ -1285,7 +1271,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     monthlyInvestmentFn: finalFn,
                     currentInvestment,
                     cagr,
-                    inflationRate
+                    inflationRate,
+                    taxRate: this.formData.taxRate
                 });
 
                 this.yearlyData = simulation.yearlyData;
@@ -1301,57 +1288,31 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     postTaxRealValue: simulation.postTaxRealValue
                 };
 
-                // Generate monthly plan from simulation monthly data
-                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
-                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                
-                this.monthlyPlan = simulation.monthlyData.map((data, index) => {
-                    const currentMonthNum = (startMonth - 1 + index) % 12;
-                    const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
-                    const prevValue = index > 0 ? simulation.monthlyData[index - 1].portfolioValue : currentInvestment;
-                    const monthlyGrowth = data.portfolioValue - prevValue - data.contribution;
-                    const accumulatedGrowth = data.portfolioValue - data.totalInvested;
-                    
-                    return {
-                        monthIndex: data.monthIndex,
-                        year: currentYear,
-                        month: monthNames[currentMonthNum],
-                        contribution: data.contribution,
-                        growth: monthlyGrowth,
-                        accumulatedContribution: data.totalInvested,
-                        accumulatedGrowth: accumulatedGrowth,
-                        nominalPortfolio: data.portfolioValue,
-                        realPortfolio: data.realValue,
-                        totalInvestedPresentValue: data.totalInvestedPresentValue
-                    };
-                });
+                // Build monthly plan using shared method
+                this.monthlyPlan = this.buildMonthlyPlan(simulation, currentInvestment);
 
-                this.$nextTick(() => {
-                    this.renderChart();
-                    this.generateContributionTable();
-                    this.$nextTick(() => {
-                        this.renderContributionChart();
-                    });
-                    this.calculating = false;
-                });
+                // Watchers will handle chart rendering automatically
+                this.calculating = false;
             },
 
             renderChart() {
-                this.$nextTick(() => {
-                    this.$nextTick(() => {
-                        if (!this.results.calculated || !this.displayedPlan || this.displayedPlan.length === 0) {
-                            return;
-                        }
+                if (!this.results.calculated || !this.displayedPlan || this.displayedPlan.length === 0) {
+                    return;
+                }
 
-                        // Dispose existing chart if any
-                        if (this.chart) {
-                            this.chart.dispose();
-                        }
+                const chartDom = document.getElementById('sip-chart');
+                if (!chartDom) return;
 
-                        const chartDom = document.getElementById('sip-chart');
-                        if (!chartDom) return;
-
-                        this.chart = echarts.init(chartDom);
+                // Initialize chart only once, reuse instance for updates
+                if (!this.chart) {
+                    this.chart = echarts.init(chartDom);
+                    
+                    // Setup resize handler once
+                    if (!this.resizeHandler) {
+                        this.resizeHandler = () => this.chart?.resize();
+                        window.addEventListener('resize', this.resizeHandler);
+                    }
+                }
 
                         // Get view mode label
                         const granularityLabel = this.planGranularity === 'yearly' ? 'Yearly' : 'Monthly';
@@ -1463,54 +1424,53 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             ]
                         };
 
-                        this.chart.setOption(option);
-
-                        // Make chart responsive
-                        if (this.resizeHandler) {
-                            window.removeEventListener('resize', this.resizeHandler);
-                        }
-                        this.resizeHandler = () => this.chart?.resize();
-                        window.addEventListener('resize', this.resizeHandler);
-                    });
-                });
+                        // Use setOption with notMerge=true for clean replacement
+                        this.chart.setOption(option, true);
             },
 
-            renderContributionChart() {
-                // Dispose existing chart if any
-                if (this.contributionChart) {
-                    this.contributionChart.dispose();
-                }
-
+            renderContributionChart(rebuildCategories = true) {
                 const chartDom = document.getElementById('contributionChart');
                 if (!chartDom) return;
 
-                this.contributionChart = echarts.init(chartDom);
+                // Initialize chart only once, reuse instance for updates
+                if (!this.contributionChart) {
+                    this.contributionChart = echarts.init(chartDom);
+                    
+                    // Setup resize handler once
+                    if (!this.contributionResizeHandler) {
+                        this.contributionResizeHandler = () => this.contributionChart?.resize();
+                        window.addEventListener('resize', this.contributionResizeHandler);
+                    }
+                }
 
-                // Prepare data for bar chart - monthly contributions
-                const categories = [];
+                // Cache categories to avoid rebuilding on every view mode change
+                if (rebuildCategories) {
+                    this.contributionChartCategories = [];
+                    this.monthlyPlan.forEach((plan) => {
+                        // Skip entries with 0 contribution
+                        if (!plan.nominalContribution || plan.nominalContribution === 0) {
+                            return;
+                        }
+                        this.contributionChartCategories.push(`${plan.year} ${plan.month}`);
+                    });
+                }
+
+                // Always rebuild contributions data (changes with view mode)
                 const contributions = [];
-                
-                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
-                const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
-                
-                this.monthlyPlan.forEach((plan, index) => {
+                this.monthlyPlan.forEach((plan) => {
                     // Skip entries with 0 contribution
-                    if (!plan.contribution || plan.contribution === 0) {
+                    if (!plan.nominalContribution || plan.nominalContribution === 0) {
                         return;
                     }
                     
-                    const label = `${plan.year} ${plan.month}`;
-                    categories.push(label);
-                    
+                    // Use pre-computed values from monthlyPlan
                     let value;
                     if (this.contributionViewMode === 'nominal') {
-                        value = plan.contribution;
+                        value = plan.nominalContribution;
                     } else {
-                        // Real value - discount by inflation
-                        const inflationFactor = Math.pow(1 + monthlyInflation, index);
-                        value = plan.contribution / inflationFactor;
+                        value = Math.round(plan.realContribution);
                     }
-                    contributions.push(Math.round(value));
+                    contributions.push(value);
                 });
 
                 const option = {
@@ -1535,11 +1495,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     },
                     xAxis: {
                         type: 'category',
-                        data: categories,
+                        data: this.contributionChartCategories,
                         axisLabel: {
                             rotate: 45,
                             fontSize: 10,
-                            interval: Math.max(0, Math.floor(categories.length / 24)) // Show ~24 labels max
+                            interval: Math.max(0, Math.floor(this.contributionChartCategories.length / 24)) // Show ~24 labels max
                         }
                     },
                     yAxis: {
@@ -1575,30 +1535,22 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     }]
                 };
 
-                this.contributionChart.setOption(option);
-
-                // Make chart responsive
-                if (!this.contributionResizeHandler) {
-                    this.contributionResizeHandler = () => this.contributionChart?.resize();
-                    window.addEventListener('resize', this.contributionResizeHandler);
-                }
+                // Use notMerge=true only when rebuilding categories, otherwise merge for efficiency
+                this.contributionChart.setOption(option, rebuildCategories);
             },
-            
+
             generateContributionTable() {
                 if (!this.monthlyPlan || this.monthlyPlan.length === 0) {
                     this.contributionTable = [];
                     return;
                 }
                 
-                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
-                const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
-                
-                // Group contributions by year, excluding entries with 0 contribution
+                // Group contributions by year using pre-computed values
                 const yearMap = new Map();
                 
-                this.monthlyPlan.forEach((plan, index) => {
-                    // Skip entries with 0 contribution (like the final growth-only month)
-                    if (!plan.contribution || plan.contribution === 0) {
+                this.monthlyPlan.forEach((plan) => {
+                    // Skip entries with 0 contribution
+                    if (!plan.nominalContribution || plan.nominalContribution === 0) {
                         return;
                     }
                     
@@ -1609,15 +1561,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     }
                     
                     const monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(plan.month);
-                    const nominalContribution = plan.contribution;
                     
-                    // Calculate real contribution (present value)
-                    const inflationFactor = Math.pow(1 + monthlyInflation, index);
-                    const realContribution = nominalContribution / inflationFactor;
-                    
+                    // Use pre-computed values from monthlyPlan
                     yearMap.get(year)[monthIndex] = {
-                        nominal: nominalContribution,
-                        real: Math.round(realContribution)
+                        nominal: plan.nominalContribution,
+                        real: Math.round(plan.realContribution)
                     };
                 });
                 

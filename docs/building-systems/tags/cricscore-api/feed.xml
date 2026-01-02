@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cricscore-Api on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/cricscore-api/</link>
+    <link>http://localhost:1313/building-systems/tags/cricscore-api/</link>
     <description>Recent content in Cricscore-Api on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 30 Mar 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/cricscore-api/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/cricscore-api/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating REST API Specification</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/creating-rest-api-specification/</link>
+      <link>http://localhost:1313/building-systems/blogs/creating-rest-api-specification/</link>
       <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/creating-rest-api-specification/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/creating-rest-api-specification/</guid>
       <description>using Swagger Specification</description>
     </item>
     <item>
       <title>Cricket score in command line</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/cricket-score-in-command-line/</link>
+      <link>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</link>
       <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/cricket-score-in-command-line/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/cricket-score-in-command-line/</guid>
       <description>using python and open cricscore api</description>
     </item>
   </channel>
