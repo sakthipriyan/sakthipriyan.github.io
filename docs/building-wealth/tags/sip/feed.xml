@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SIP on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-wealth/tags/sip/</link>
+    <link>https://sakthipriyan.com/building-wealth/tags/sip/</link>
     <description>Recent content in SIP on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-wealth/tags/sip/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/building-wealth/tags/sip/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RealValue SIP Engine</title>
-      <link>http://localhost:1313/building-wealth/tools/realvalue-sip-engine/</link>
+      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/</link>
       <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/tools/realvalue-sip-engine/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/</guid>
       <description>Plan your systematic investment with real (inflation-adjusted) value projections and comprehensive growth visualizations.</description>
     </item>
   </channel>
