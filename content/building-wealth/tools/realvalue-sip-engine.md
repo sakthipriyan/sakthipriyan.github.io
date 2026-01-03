@@ -38,6 +38,7 @@ Looking for practical examples? Check out our comprehensive guide with [8 Real-W
 - Career Break Planning
 - Investment Strategy Comparison
 - Opportunity Cost Analysis
+- Etc.,
 
 Each use case includes pre-configured scenarios you can explore with a single click.
 
@@ -46,7 +47,7 @@ Each use case includes pre-configured scenarios you can explore with a single cl
 |Target Mode|What does it answer?|
 |-|-|
 | **Time**  | “If I invest for 10 years, how much will my portfolio be worth in real terms?”|
-| **Money** | “How long I need to reach ₹5 Cr for starting SIP of ₹50k ?” |
+| **Money** | “How long I need to reach ₹5 Cr for starting SIP of ₹50k?” |
 | **Time & Money** | “How much should I invest monthly to reach ₹5 Cr in 15 years?”|
 
 ### 🔹 Multi-Dimensional Investment Engine

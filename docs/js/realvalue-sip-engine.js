@@ -1166,11 +1166,15 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     const year = Math.floor(monthIndex / 12) + 1;
                     const month = (monthIndex % 12) + 1;
                     
-                    // Store portfolio value before this month's growth and contribution
+                    // Store portfolio value before this month's contribution and growth
                     const prevPortfolioValue = portfolioValue;
                     
                     // Contribution at start of month (doesn't include currentInvestment)
                     const contribution = Math.round(monthlyInvestmentFn(year, month));
+                    
+                    // Add contribution at month start, then apply growth for the full month
+                    totalInvested += contribution;
+                    portfolioValue = (portfolioValue + contribution) * (1 + monthlyCagr);
                     
                     // Calculate inflation factors:
                     // - Contribution happens at month start: discount from start of month
@@ -1183,9 +1187,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     
                     // Track present value of this contribution
                     totalInvestedPresentValue += realContribution;
-                    
-                    totalInvested += contribution;
-                    portfolioValue = portfolioValue * (1 + monthlyCagr) + contribution;
                     
                     // Calculate real portfolio value (present value at month end)
                     const realValue = portfolioValue / inflationFactorForPortfolio;
