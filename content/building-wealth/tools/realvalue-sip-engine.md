@@ -17,7 +17,29 @@ wealth_tags:
 
 ## Help
 
-### Input Fields
+### 🎯 Define Your Investment Goals
+
+#### Target Selection
+Toggle between three modes
+|Mode|Usage|
+|-|-|
+|**Target by Time**| Calculate portfolio value after a specific time period|
+|**Target by Money**| Calculate time needed to reach a target amount|
+|**Target by Both**| Calculate required monthly SIP to reach target amount in given time|
+
+#### Time Period
+- **Time Period Value**: Duration for investment
+- **Unit**: Choose Years or Months
+- Used in "Time" and "Both" target modes
+
+#### Target Amount
+- **Target Amount Value**: Your financial goal amount
+- **Unit**: Choose between Crores, Lakhs, or Thousands
+- Used in "Money" and "Both" target modes
+
+#### Start Month
+- Select the month when you plan to start/started investing
+- Helps in generating monthly contribution schedule
 
 #### Current Investment
 - **Current Investment Value**: Your existing investment amount today
@@ -36,25 +58,6 @@ wealth_tags:
 - **Inflation Rate (%)**: Expected annual inflation to calculate real value (typically 5-7% in India)
 - **Tax Rate (%)**: Capital gains tax rate for post-tax calculations (15% for equity LTCG above ₹1.25L)
 
-#### Target Selection
-Toggle between three modes:
-- **Target by Time**: Calculate portfolio value after a specific time period
-- **Target by Money**: Calculate time needed to reach a target amount
-- **Target by Both**: Calculate required monthly SIP to reach target amount in given time
-
-#### Time Period
-- **Time Period Value**: Duration for investment
-- **Unit**: Choose Years or Months
-- Used in "Time" and "Both" target modes
-
-#### Target Amount
-- **Target Amount Value**: Your financial goal amount
-- **Unit**: Choose between Crores, Lakhs, or Thousands
-- Used in "Money" and "Both" target modes
-
-#### Start Month
-- Select the month when you plan to start/started investing
-- Helps in generating monthly contribution schedule
 
 ### Understanding the Results
 

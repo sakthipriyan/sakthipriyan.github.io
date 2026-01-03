@@ -654,11 +654,18 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         // For yearly view, aggregate all months in this year
                         const yearRows = this.monthlyPlan.filter(r => r.year === row.year);
                         
+                        // Get accumulated growth at start of year (0 for first year)
+                        const yearStartIndex = yearRows[0].monthIndex;
+                        const prevYearAccumulatedNominal = yearStartIndex > 0 ? 
+                            this.monthlyPlan[yearStartIndex - 1].nominalCumulativeGrowth : 0;
+                        const prevYearAccumulatedReal = yearStartIndex > 0 ? 
+                            this.monthlyPlan[yearStartIndex - 1].realCumulativeGrowth : 0;
+                        
                         if (this.planViewMode === 'nominal') {
                             return {
                                 period: row.year,
                                 contribution: yearRows.reduce((sum, r) => sum + (r.nominalContribution || 0), 0),
-                                growth: yearRows.reduce((sum, r) => sum + (r.nominalGrowth || 0), 0),
+                                growth: row.nominalCumulativeGrowth - prevYearAccumulatedNominal,
                                 accumulatedContribution: row.nominalInvestment,
                                 accumulatedGrowth: row.nominalCumulativeGrowth,
                                 portfolioValue: this.applyPostTax ? row.nominalPostTaxPortfolio : row.nominalPortfolio
@@ -668,7 +675,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             return {
                                 period: row.year,
                                 contribution: yearRows.reduce((sum, r) => sum + (r.realContribution || 0), 0),
-                                growth: yearRows.reduce((sum, r) => sum + (r.realGrowth || 0), 0),
+                                growth: row.realCumulativeGrowth - prevYearAccumulatedReal,
                                 accumulatedContribution: row.realInvestment,
                                 accumulatedGrowth: row.realCumulativeGrowth,
                                 portfolioValue: this.applyPostTax ? row.realPostTaxPortfolio : row.realPortfolio
@@ -904,7 +911,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 
                 // Monthly computation
                 let cumulativeNominalGrowth = 0; // Track cumulative nominal growth
-                let cumulativeRealGrowth = 0; // Track cumulative real growth
+                let prevRealValue = currentInvestment; // Track previous real portfolio value
                 for (let monthIndex = 0; monthIndex < totalMonths; monthIndex++) {
                     const year = Math.floor(monthIndex / 12) + 1;
                     const month = (monthIndex % 12) + 1;
@@ -937,9 +944,12 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     const nominalGrowthThisMonth = portfolioValue - prevPortfolioValue - contribution;
                     cumulativeNominalGrowth += nominalGrowthThisMonth;
                     
-                    // Calculate real growth (nominal growth adjusted for inflation at month end)
-                    const realGrowthThisMonth = nominalGrowthThisMonth / inflationFactorForPortfolio;
-                    cumulativeRealGrowth += realGrowthThisMonth;
+                    // Calculate real growth from real values (not by deflating nominal growth)
+                    const realGrowthThisMonth = realValue - prevRealValue - realContribution;
+                    prevRealValue = realValue; // Update for next iteration
+                    
+                    // Cumulative real growth is the total real gains (real portfolio - real investment)
+                    const cumulativeRealGrowth = realValue - totalInvestedPresentValue;
                     
                     // Calculate post-tax values for both nominal and real
                     const nominalGrowth = portfolioValue - totalInvested;
@@ -952,8 +962,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         year,
                         month,
                         contribution,
-                        realContribution: realContribution,
-                        realGrowth: realGrowthThisMonth,
+                        realContribution: Math.round(realContribution),
+                        realGrowth: Math.round(realGrowthThisMonth),
                         cumulativeNominalGrowth: Math.round(cumulativeNominalGrowth),
                         cumulativeRealGrowth: Math.round(cumulativeRealGrowth),
                         portfolioValue: Math.round(portfolioValue),
