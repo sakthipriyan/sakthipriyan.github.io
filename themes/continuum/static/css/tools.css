@@ -111,6 +111,14 @@
     transition-delay: 0.1s;
 }
 
+/* Wide tooltip for multi-line content with fixed width */
+.help-icon-wide::after {
+    white-space: pre-line;
+    width: 350px;
+    max-width: 350px;
+    text-align: left;
+}
+
 /* Show tooltip above for last row in plan tables */
 .plan-table tbody tr:last-child .help-icon::after {
     top: auto;
@@ -206,6 +214,32 @@
     border-color: var(--secondary-color);
     background: var(--secondary-color);
     color: white;
+}
+
+/* Share Button */
+.share-button {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--secondary-color);
+    background: white;
+    color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.share-button:hover:not(:disabled) {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.share-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Multi-Unit Input */
@@ -423,25 +457,27 @@
 
 .plan-table th,
 .plan-table td {
-    padding: 0.5rem 0.75rem;
-    text-align: left;
+    padding: 0.35rem 0.5rem;
+    vertical-align: middle;
     border-bottom: 1px solid #ddd;
 }
 
 .plan-table th {
     font-weight: bold;
+    text-align: center;
 }
 
 .plan-table tbody tr:hover {
     background: #f5f5f5;
 }
 
-.plan-table td:nth-child(3),
-.plan-table td:nth-child(4),
-.plan-table td:nth-child(5),
-.plan-table th:nth-child(3),
-.plan-table th:nth-child(4),
-.plan-table th:nth-child(5) {
+/* First column (Year/Period) - center aligned */
+.plan-table td:first-child {
+    text-align: center;
+}
+
+/* All other columns (numbers) - right aligned */
+.plan-table td:not(:first-child) {
     text-align: right;
 }
 
