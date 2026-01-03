@@ -150,7 +150,7 @@ The [RealValue SIP Engine](/building-wealth/tools/realvalue-sip-engine/) is a po
 - Time Period: 20 years
 
 **Strategy A**: Flat SIP
-- Monthly Investment: ₹30,000
+- Monthly Investment: ₹25,000
 - Yearly Hike: 0%
 
 <a href="/building-wealth/tools/realvalue-sip-engine/#v1otd20yf202601c0km25kg12h0i6t15" target="_blank" rel="noopener noreferrer" class="button" style="display: inline-block; margin-top: 1rem; margin-right: 0.5rem; padding: 0.5rem 1rem; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 4px;">📊 Check Strategy A (Flat SIP)</a>
