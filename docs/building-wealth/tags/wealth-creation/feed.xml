@@ -2,17 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wealth Creation on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-wealth/tags/wealth-creation/</link>
+    <link>https://sakthipriyan.com/building-wealth/tags/wealth-creation/</link>
     <description>Recent content in Wealth Creation on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-wealth/tags/wealth-creation/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sakthipriyan.com/building-wealth/tags/wealth-creation/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>8 Practical Use Cases for RealValue SIP Engine</title>
+      <link>https://sakthipriyan.com/building-wealth/blogs/8-practical-use-cases-for-realvalue-sip-engine/</link>
+      <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/blogs/8-practical-use-cases-for-realvalue-sip-engine/</guid>
+      <description>Discover 8 real-world scenarios showing how to use the RealValue SIP Engine for retirement planning, education goals, house down payments, and more.</description>
+    </item>
     <item>
       <title>RealValue SIP Engine</title>
-      <link>http://localhost:1313/building-wealth/tools/realvalue-sip-engine/</link>
+      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/</link>
       <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/tools/realvalue-sip-engine/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/</guid>
       <description>Plan your systematic investment with real (inflation-adjusted) value projections and comprehensive growth visualizations.</description>
     </item>
   </channel>

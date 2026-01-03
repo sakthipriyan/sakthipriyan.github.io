@@ -15,6 +15,82 @@ wealth_tags:
   - Wealth Creation
 ---
 
+## About RealValue SIP Engine  
+
+> **RealValue SIP Engine** helps you plan **how much to invest, for how long and with what step-up**, while clearly showing the **post-inflation, post-tax outcome**.
+
+
+The **RealValue SIP Engine** is not just another SIP calculator — it is a **goal-driven, real-world investment engine** built for serious Indian investors. Unlike traditional SIP calculators that show inflated future numbers, RealValue focuses on **what your money is actually worth** after **inflation and taxes**.
+
+### One Engine. Every SIP Use Case.
+
+Whether your goal is **time-based**, **money-based** or a **combination of both**, RealValue adapts automatically.
+
+#### Use Cases
+
+Looking for practical examples? Check out our comprehensive guide with [8 Real-World Use Cases](/building-wealth/blogs/8-practical-use-cases-for-realvalue-sip-engine/) covering:
+
+- Retirement Planning
+- Child's Education Goals
+- House Down Payment
+- Early Retirement (FIRE)
+- Lumpsum Investment Growth
+- Career Break Planning
+- Investment Strategy Comparison
+- Opportunity Cost Analysis
+
+Each use case includes pre-configured scenarios you can explore with a single click.
+
+### 🔹 Supported Goal Modes
+
+|Target Mode|What does it answer?|
+|-|-|
+| **Time**  | “If I invest for 10 years, how much will my portfolio be worth in real terms?”|
+| **Money** | “How long I need to reach ₹5 Cr for starting SIP of ₹50k ?” |
+| **Time & Money** | “How much should I invest monthly to reach ₹5 Cr in 15 years?”|
+
+### 🔹 Multi-Dimensional Investment Engine
+
+RealValue SIP Engine replaces multiple calculators with a single intelligent engine.  
+It dynamically combines multiple dimensions:
+
+- **SIP**, **Lumpsum**, or **SIP + Lumpsum**
+- Target **Time**, Target **Money**, or **Both**
+- SIP **Step-Up** (included)
+
+One RealValue SIP Engine replaces 14 SIP/Lumpsum Calculators,
+
+- SIP Calculator  
+- Step-Up SIP Calculator  
+- Target Amount SIP Calculator  
+- Target Amount Step-Up SIP Calculator  
+- Target Time & Target Amount SIP Calculator  
+- Target Time & Target Amount Step-Up SIP Calculator  
+- Lumpsum Calculator
+- Target Amount Lumpsum Calculator
+- Lumpsum + SIP Calculator
+- Lumpsum + Step-Up SIP Calculator
+- Target Amount Lumpsum + SIP Calculator
+- Target Amount Lumpsum + Step-Up SIP Calculator
+- Target Time & Target Amount Lumpsum + SIP Calculator
+- Target Time & Target Amount Lumpsum + Step-Up SIP Calculator
+
+### 🔹 Built for Real Life (Not Marketing Numbers)
+
+- Inflation-adjusted **real value** results  
+- **Exit tax** applied at the end  
+- **Annual salary hike** & SIP step-up support  
+- Month-wise **contribution and growth tracking**
+
+### Why RealValue SIP Engine?
+
+- Designed specifically for **Indian investors**
+- Supports **crores, lakhs** and real Indian tax scenarios
+- Shows **true purchasing power**, not misleading future values
+- One engine for **every financial goal**
+
+> **Because wealth is not about big numbers — it’s about real value.**
+
 ## Help
 
 ### 🎯 Define Your Investment Goals
@@ -89,142 +165,6 @@ Toggle **Post Tax** to see after-tax values across all views.
 - Bar chart showing contribution amounts over time
 - Helps visualize the impact of yearly SIP hikes
 - Toggle between Nominal and Real views
-
-## Use Cases
-
-### 1. Retirement Planning (Target by Time)
-**Scenario**: You're 35 years old, want to plan for retirement at 60 (25 years away)
-
-**Setup**:
-- Current Investment: ₹10 lakhs (existing mutual fund portfolio)
-- Monthly Investment: ₹25,000 (increasing 10% yearly with salary hikes)
-- Expected CAGR: 12% (equity mutual funds)
-- Yearly Hike: 10%
-- Inflation: 6%
-- Tax Rate: 15%
-- Time Period: 25 years
-- Target Mode: **Time**
-
-**What You'll Learn**: 
-- How much corpus you'll accumulate in 25 years
-- Real value (purchasing power) of that corpus
-- After-tax real value for accurate planning
-- Monthly breakdown of investments and growth
-
-### 2. Child's Education Goal (Target by Money)
-**Scenario**: Need ₹1 crore (today's value) for your child's higher education
-
-**Setup**:
-- Current Investment: ₹5 lakhs (existing education fund)
-- Monthly Investment: ₹30,000 (with 8% annual increment)
-- Expected CAGR: 12%
-- Yearly Hike: 8%
-- Inflation: 6%
-- Tax Rate: 15%
-- Target Amount: ₹1 crore
-- Target Mode: **Money**
-
-**What You'll Learn**:
-- How many years/months to reach your goal
-- Whether your current SIP amount is sufficient
-- Exact timeline for goal achievement
-- Inflation-adjusted real value throughout the journey
-
-### 3. Down Payment for House (Target by Both)
-**Scenario**: Need ₹50 lakhs in 5 years for house down payment
-
-**Setup**:
-- Current Investment: ₹2 lakhs (current savings)
-- Expected CAGR: 10% (debt+equity hybrid)
-- Yearly Hike: 10%
-- Inflation: 6%
-- Tax Rate: 15%
-- Time Period: 5 years
-- Target Amount: ₹50 lakhs
-- Target Mode: **Both**
-
-**What You'll Learn**:
-- Required starting monthly SIP amount
-- How the SIP will increase each year
-- Whether the goal is achievable in the given timeframe
-- If target can't be met, adjust time period or target amount
-
-### 4. Early Retirement (Aggressive Savings)
-**Scenario**: 30-year-old aiming for financial independence at 45 (15 years)
-
-**Setup**:
-- Current Investment: ₹20 lakhs
-- Monthly Investment: ₹1 lakh (aggressive savings)
-- Expected CAGR: 13%
-- Yearly Hike: 12%
-- Inflation: 6%
-- Tax Rate: 15%
-- Time Period: 15 years
-- Target Mode: **Time**
-
-**What You'll Learn**:
-- Corpus size for early retirement
-- Impact of high savings rate and step-ups
-- Real value to ensure lifestyle maintenance
-- Whether the corpus is sufficient for retirement
-
-### 5. Wealth Creation with Zero SIP (Existing Investment Growth)
-**Scenario**: You have a lump sum but can't do SIP, want to see growth
-
-**Setup**:
-- Current Investment: ₹50 lakhs (inheritance or bonus)
-- Monthly Investment: ₹0 (no additional SIP)
-- Expected CAGR: 12%
-- Yearly Hike: 0%
-- Inflation: 6%
-- Tax Rate: 15%
-- Time Period: 20 years
-- Target Mode: **Time**
-
-**What You'll Learn**:
-- Power of compounding on lump sum
-- How existing investment grows over time
-- Real vs nominal value difference
-- Whether lump sum alone is sufficient for your goal
-
-### 6. Career Break Planning (Money Target with No Current Investment)
-**Scenario**: Planning a career break, need to know how long to save first
-
-**Setup**:
-- Current Investment: ₹0 (starting fresh)
-- Monthly Investment: ₹40,000
-- Expected CAGR: 11%
-- Yearly Hike: 8%
-- Inflation: 6%
-- Tax Rate: 15%
-- Target Amount: ₹30 lakhs (for 2-year break)
-- Target Mode: **Money**
-
-**What You'll Learn**:
-- Years needed to accumulate the corpus
-- How to plan the career break timeline
-- Real value to ensure purchasing power
-- Impact of SIP step-ups on goal achievement
-
-### 7. Comparing Investment Strategies
-**Scenario**: Compare flat SIP vs step-up SIP
-
-**Run the tool twice**:
-
-**Strategy A**: Flat SIP
-- Monthly Investment: ₹30,000
-- Yearly Hike: 0%
-- Time Period: 20 years
-
-**Strategy B**: Step-up SIP
-- Monthly Investment: ₹25,000
-- Yearly Hike: 10%
-- Time Period: 20 years
-
-**What You'll Learn**:
-- Which strategy builds more wealth
-- Behavioral ease vs mathematical optimization
-- Impact of salary increases on wealth building
 
 ### Tips for Using the Tool
 
