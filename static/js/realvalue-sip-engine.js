@@ -271,12 +271,16 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
                             <!-- Share Button -->
-                            <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; flex: 1;">
+                                    Share your investment plan via URL. The link captures all your inputs for easy collaboration.
+                                </p>
                                 <button 
                                     type="button" 
                                     class="share-button"
                                     @click="shareCalculation"
-                                    :disabled="!results.calculated">
+                                    :disabled="!results.calculated"
+                                    style="flex-shrink: 0;">
                                     {{ shareButtonText }}
                                 </button>
                             </div>
@@ -838,7 +842,17 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
         },
         mounted() {
             this.loadFromUrl();
-            this.calculateResults();
+            this.$nextTick(() => {
+                this.calculateResults();
+            });
+            
+            // Listen for hash changes (when Apply buttons are clicked)
+            window.addEventListener('hashchange', () => {
+                this.loadFromUrl();
+                this.$nextTick(() => {
+                    this.calculateResults();
+                });
+            });
         },
         methods: {
             // URL Sharing Methods
@@ -904,23 +918,64 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     return null;
                 }
                 
-                const state = {};
+                // Initialize state with explicit default values for target modes
+                const state = {
+                    targetTime: false,
+                    targetMoney: false
+                };
                 let i = 2; // Skip 'v1'
                 
                 while (i < hash.length) {
                     const prefix = hash[i];
                     i++;
                     
-                    // Extract value until next prefix or end
+                    // Extract value based on prefix type
                     let value = '';
-                    while (i < hash.length && !/[ofdacmghit]/.test(hash[i])) {
-                        value += hash[i];
-                        i++;
+                    
+                    // Special handling for 'o' prefix - it's always a single character
+                    if (prefix === 'o') {
+                        if (i < hash.length) {
+                            value = hash[i];
+                            i++;
+                        }
+                    } else if (prefix === 'f') {
+                        // 'f' prefix is always exactly 6 digits (YYYYMM)
+                        for (let j = 0; j < 6 && i < hash.length; j++) {
+                            value += hash[i];
+                            i++;
+                        }
+                    } else {
+                        // Fields with unit suffixes: d (time), a (amount), c (current), m (monthly)
+                        const hasUnitSuffix = ['d', 'a', 'c', 'm'].includes(prefix);
+                        
+                        // For other prefixes, extract value
+                        while (i < hash.length) {
+                            const char = hash[i];
+                            const prevChar = value.slice(-1);
+                            
+                            // If current char is a potential prefix
+                            if (/[ofdacmghit]/.test(char)) {
+                                // If this field can have unit suffixes AND previous char is a digit,
+                                // then this might be a unit suffix, continue
+                                if (hasUnitSuffix && /\d/.test(prevChar)) {
+                                    value += char;
+                                    i++;
+                                    break; // Unit suffix is always the last character
+                                } else {
+                                    // This is a new prefix, stop here
+                                    break;
+                                }
+                            }
+                            
+                            value += char;
+                            i++;
+                        }
                     }
                     
                     // Parse based on prefix
                     switch(prefix) {
                         case 'o': // Target mode
+                            console.log(`  Parsing 'o' with value: "${value}"`);
                             if (value === 't') {
                                 state.targetTime = true;
                                 state.targetMoney = false;
@@ -933,14 +988,17 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             }
                             break;
                         case 'd': // Time period
+                            console.log(`  Parsing 'd' with value: "${value}"`);
                             const timeUnit = value.slice(-1);
                             const timeValue = parseFloat(value.slice(0, -1));
                             state.timePeriodValue = timeValue;
                             state.timePeriodUnit = timeUnit === 'y' ? 'years' : 'months';
                             break;
                         case 'a': // Target amount
+                            console.log(`  Parsing 'a' with value: "${value}"`);
                             const amtUnit = value.slice(-1);
                             const amtValue = parseFloat(value.slice(0, -1));
+                            console.log(`    amtUnit: "${amtUnit}", amtValue: ${amtValue}`);
                             state.targetAmountValue = amtValue;
                             state.targetAmountUnit = amtUnit === 'c' ? 'crores' : 
                                                      amtUnit === 'l' ? 'lakhs' : 'thousands';
@@ -979,16 +1037,21 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     }
                 }
                 
+                console.log('üìä Decoded state from URL:', state);
                 return state;
             },
             
             loadFromUrl() {
                 const hash = window.location.hash.slice(1); // Remove '#'
+                console.log('üîó Loading from URL hash:', hash);
                 if (!hash) return;
                 
                 const state = this.decodeState(hash);
                 if (state) {
+                    console.log('üìù Before Object.assign, formData.targetTime:', this.formData.targetTime, 'formData.targetMoney:', this.formData.targetMoney);
                     Object.assign(this.formData, state);
+                    console.log('‚úÖ After Object.assign, formData.targetTime:', this.formData.targetTime, 'formData.targetMoney:', this.formData.targetMoney);
+                    console.log('üéØ isBothTargetsMode computed:', this.isBothTargetsMode);
                 }
             },
             
