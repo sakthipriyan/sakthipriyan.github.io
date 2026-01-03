@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ETF on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/etf/</link>
+    <link>http://localhost:1313/building-wealth/tags/etf/</link>
     <description>Recent content in ETF on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/etf/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-wealth/tags/etf/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Invest in Gold for Building Wealth</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</link>
+      <link>http://localhost:1313/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/how-to-invest-in-gold-for-building-wealth/</guid>
       <description>Learn the smartest ways to invest in Gold using ETFs, Mutual Funds and more.</description>
     </item>
     <item>
       <title>How to Invest in Gold in India 2025</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/2025/invest-in-goal/</link>
+      <link>http://localhost:1313/building-wealth/videos/2025/invest-in-goal/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/2025/invest-in-goal/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/2025/invest-in-goal/</guid>
       <description>Invest in Gold via ETFs, Mutual Funds, SGB &amp;amp; Digital Gold</description>
     </item>
   </channel>

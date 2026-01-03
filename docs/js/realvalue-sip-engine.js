@@ -270,6 +270,17 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     <!-- Right Column: Output Results and Chart -->
                     <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
+                            <!-- Share Button -->
+                            <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+                                <button 
+                                    type="button" 
+                                    class="share-button"
+                                    @click="shareCalculation"
+                                    :disabled="!results.calculated">
+                                    {{ shareButtonText }}
+                                </button>
+                            </div>
+                            
                             <h3 v-if="isBothTargetsMode || results.timeRequired" style="margin-top: 0;">🎯 Target Results</h3>
                             <table class="summary-table" v-if="isBothTargetsMode || results.timeRequired">
                                 <tbody>
@@ -574,7 +585,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 contributionChart: null,
                 contributionChartCategories: [],
                 contributionResizeHandler: null,
-                copyButtonText: 'Copy JSON'
+                copyButtonText: 'Copy JSON',
+                shareButtonText: '🔗 Share'
             }
         },
         computed: {
@@ -825,9 +837,184 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
             // Tax is applied only at exit (final value), not during accumulation
         },
         mounted() {
+            this.loadFromUrl();
             this.calculateResults();
         },
         methods: {
+            // URL Sharing Methods
+            encodeState() {
+                const f = this.formData;
+                let url = 'v1';
+                
+                // Target mode (o)
+                if (f.targetTime && f.targetMoney) {
+                    url += 'ob';
+                } else if (f.targetTime) {
+                    url += 'ot';
+                } else if (f.targetMoney) {
+                    url += 'om';
+                }
+                
+                // Target time period (d)
+                if (f.targetTime) {
+                    const unit = f.timePeriodUnit === 'years' ? 'y' : 'm';
+                    url += `d${f.timePeriodValue}${unit}`;
+                }
+                
+                // Target amount (a)
+                if (f.targetMoney) {
+                    const unit = f.targetAmountUnit === 'crores' ? 'c' : 
+                                 f.targetAmountUnit === 'lakhs' ? 'l' : 'k';
+                    url += `a${f.targetAmountValue}${unit}`;
+                }
+                
+                // Start month (f) - format YYYYMM
+                if (f.startMonth) {
+                    const ym = f.startMonth.replace('-', '');
+                    url += `f${ym}`;
+                }
+                
+                // Current investment (c)
+                const cUnit = f.currentInvestmentUnit === 'crores' ? 'c' : 
+                              f.currentInvestmentUnit === 'lakhs' ? 'l' : 'k';
+                url += `c${f.currentInvestmentValue}${cUnit}`;
+                
+                // Monthly investment (m)
+                const mUnit = f.monthlyInvestmentUnit === 'crores' ? 'c' : 
+                              f.monthlyInvestmentUnit === 'lakhs' ? 'l' : 'k';
+                url += `m${f.monthlyInvestmentValue}${mUnit}`;
+                
+                // Growth rate (g)
+                url += `g${f.cagr}`;
+                
+                // Yearly hike (h)
+                url += `h${f.yearlyHike}`;
+                
+                // Inflation (i)
+                url += `i${f.inflationRate}`;
+                
+                // Tax rate (t)
+                url += `t${f.taxRate}`;
+                
+                return url;
+            },
+            
+            decodeState(hash) {
+                if (!hash || !hash.startsWith('v1')) {
+                    return null;
+                }
+                
+                const state = {};
+                let i = 2; // Skip 'v1'
+                
+                while (i < hash.length) {
+                    const prefix = hash[i];
+                    i++;
+                    
+                    // Extract value until next prefix or end
+                    let value = '';
+                    while (i < hash.length && !/[ofdacmghit]/.test(hash[i])) {
+                        value += hash[i];
+                        i++;
+                    }
+                    
+                    // Parse based on prefix
+                    switch(prefix) {
+                        case 'o': // Target mode
+                            if (value === 't') {
+                                state.targetTime = true;
+                                state.targetMoney = false;
+                            } else if (value === 'm') {
+                                state.targetTime = false;
+                                state.targetMoney = true;
+                            } else if (value === 'b') {
+                                state.targetTime = true;
+                                state.targetMoney = true;
+                            }
+                            break;
+                        case 'd': // Time period
+                            const timeUnit = value.slice(-1);
+                            const timeValue = parseFloat(value.slice(0, -1));
+                            state.timePeriodValue = timeValue;
+                            state.timePeriodUnit = timeUnit === 'y' ? 'years' : 'months';
+                            break;
+                        case 'a': // Target amount
+                            const amtUnit = value.slice(-1);
+                            const amtValue = parseFloat(value.slice(0, -1));
+                            state.targetAmountValue = amtValue;
+                            state.targetAmountUnit = amtUnit === 'c' ? 'crores' : 
+                                                     amtUnit === 'l' ? 'lakhs' : 'thousands';
+                            break;
+                        case 'f': // Start month YYYYMM
+                            if (value.length === 6) {
+                                state.startMonth = `${value.slice(0,4)}-${value.slice(4,6)}`;
+                            }
+                            break;
+                        case 'c': // Current investment
+                            const curUnit = value.slice(-1);
+                            const curValue = parseFloat(value.slice(0, -1));
+                            state.currentInvestmentValue = curValue;
+                            state.currentInvestmentUnit = curUnit === 'c' ? 'crores' : 
+                                                          curUnit === 'l' ? 'lakhs' : 'thousands';
+                            break;
+                        case 'm': // Monthly investment
+                            const monUnit = value.slice(-1);
+                            const monValue = parseFloat(value.slice(0, -1));
+                            state.monthlyInvestmentValue = monValue;
+                            state.monthlyInvestmentUnit = monUnit === 'c' ? 'crores' : 
+                                                          monUnit === 'l' ? 'lakhs' : 'thousands';
+                            break;
+                        case 'g': // Growth rate
+                            state.cagr = parseFloat(value);
+                            break;
+                        case 'h': // Yearly hike
+                            state.yearlyHike = parseFloat(value);
+                            break;
+                        case 'i': // Inflation
+                            state.inflationRate = parseFloat(value);
+                            break;
+                        case 't': // Tax rate
+                            state.taxRate = parseFloat(value);
+                            break;
+                    }
+                }
+                
+                return state;
+            },
+            
+            loadFromUrl() {
+                const hash = window.location.hash.slice(1); // Remove '#'
+                if (!hash) return;
+                
+                const state = this.decodeState(hash);
+                if (state) {
+                    Object.assign(this.formData, state);
+                }
+            },
+            
+            async shareCalculation() {
+                const encoded = this.encodeState();
+                const url = `${window.location.origin}${window.location.pathname}#${encoded}`;
+                
+                try {
+                    await navigator.clipboard.writeText(url);
+                    this.shareButtonText = '✅ Copied!';
+                    
+                    // Update URL without reload
+                    window.history.replaceState(null, '', `#${encoded}`);
+                    
+                    setTimeout(() => {
+                        this.shareButtonText = '🔗 Share';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    this.shareButtonText = '❌ Failed';
+                    setTimeout(() => {
+                        this.shareButtonText = '🔗 Share';
+                    }, 2000);
+                }
+            },
+            
             toggleTarget(type) {
                 if (type === 'time') {
                     // If trying to deselect Time, only allow if Money is selected

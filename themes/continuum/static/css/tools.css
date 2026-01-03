@@ -216,6 +216,32 @@
     color: white;
 }
 
+/* Share Button */
+.share-button {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--secondary-color);
+    background: white;
+    color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.share-button:hover:not(:disabled) {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.share-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Multi-Unit Input */
 .multi-unit-input {
     display: grid;
