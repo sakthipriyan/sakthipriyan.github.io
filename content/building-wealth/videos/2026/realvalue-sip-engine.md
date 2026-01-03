@@ -12,7 +12,7 @@ wealth_tags:
 summary: "Complete walkthrough of the RealValue SIP Engine — a powerful investment planning tool that shows real (inflation-adjusted) returns, handles multiple goal types, and provides comprehensive financial projections."
 youtube_id: "FLlgRaUAG_o"
 youtube_url: "https://youtu.be/FLlgRaUAG_o"
-duration: "TBD"
+duration: "18:40"
 platform: "YouTube"
 ---
 
