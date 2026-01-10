@@ -6,8 +6,43 @@
     <description>Recent content in Systems_tags on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 21 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/systems_tags/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloud</title>
+      <link>https://sakthipriyan.com/building-systems/tags/cloud/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/cloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Design</title>
+      <link>https://sakthipriyan.com/building-systems/tags/design/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://sakthipriyan.com/building-systems/tags/docker/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>https://sakthipriyan.com/building-systems/tags/go/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Optimization</title>
+      <link>https://sakthipriyan.com/building-systems/tags/optimization/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/optimization/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AI Engineering</title>
       <link>https://sakthipriyan.com/building-systems/tags/ai-engineering/</link>
@@ -51,13 +86,6 @@
       <description></description>
     </item>
     <item>
-      <title>Cloud</title>
-      <link>https://sakthipriyan.com/building-systems/tags/cloud/</link>
-      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/tags/cloud/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Code</title>
       <link>https://sakthipriyan.com/building-systems/tags/code/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
@@ -76,13 +104,6 @@
       <link>https://sakthipriyan.com/building-systems/tags/exponential-backoff/</link>
       <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/exponential-backoff/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Go</title>
-      <link>https://sakthipriyan.com/building-systems/tags/go/</link>
-      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/tags/go/</guid>
       <description></description>
     </item>
     <item>
@@ -237,13 +258,6 @@
       <link>https://sakthipriyan.com/building-systems/tags/api/</link>
       <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/api/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Design</title>
-      <link>https://sakthipriyan.com/building-systems/tags/design/</link>
-      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/tags/design/</guid>
       <description></description>
     </item>
     <item>
@@ -608,13 +622,6 @@
       <link>https://sakthipriyan.com/building-systems/tags/code-less/</link>
       <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/code-less/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Optimization</title>
-      <link>https://sakthipriyan.com/building-systems/tags/optimization/</link>
-      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/tags/optimization/</guid>
       <description></description>
     </item>
     <item>

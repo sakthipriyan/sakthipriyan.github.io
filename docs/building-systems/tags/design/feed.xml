@@ -6,8 +6,15 @@
     <description>Recent content in Design on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Jul 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/building-systems/tags/design/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Uber Binary Pattern in Go: Build Once, Run Everywhere</title>
+      <link>https://sakthipriyan.com/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</guid>
+      <description>How using a single uber binary with symbolic links can reduce container image size, build time &amp;amp; build infrastructure costs and image initialization time for Go applications across server/serverless deployment modes</description>
+    </item>
     <item>
       <title>Documenting Play Framework using Swagger</title>
       <link>https://sakthipriyan.com/building-systems/blogs/documenting-play-framework-using-swagger/</link>
