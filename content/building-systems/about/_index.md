@@ -8,10 +8,12 @@ summary: "About the author and what this content covers."
 ## Author
 
 - Based in Chennai; 16+ years building complex software systems and products
+- Lifelong passion for building systems that solve real-world problems
+- Programming journey began at age 11; deep curiosity and love for technology
 - Experience across Big Data Systems, Distributed Systems, API Services, Web/Mobile apps
 - Quick learner with strong analytical abilities, team player with a can-do attitude
 - Passionate about building excellent systems, teams, and processes
-- Interests: software engineering, distributed systems, automation, tool-building
+- Interests: software engineering, distributed systems, automation, tool-building, blogging, reading, photography, economics & history
 
 ## Core Principles
 
@@ -47,18 +49,22 @@ summary: "About the author and what this content covers."
 ## Background
 
 **Professional:**
-- Senior Technical Manager at Aqfer (2019-Present)
+- Senior Technical Manager at Aqfer India Pvt Ltd (2019-Present)
   - Leading backlog grooming, architecture design, and team mentoring
   - Building data processing pipelines, API services, and integrations
+  - Recognized for both technical depth and leadership
 - Lead Engineer at Crayon Data (2013-2019)
   - Platform team, AI Studio, recommendation engines
   - Developed distributed web crawler framework
+  - Worked across domains from digital marketing to logistics
 - Senior Systems Engineer at Infosys (2009-2013)
   - Multiple client projects across retail and insurance domains
 
 **Education:**
 - B.E. in Electronics & Communication Engineering
 - Coimbatore Institute of Technology - Anna University (8.03/10.00 CGPA)
+- Won Bosch Best Project award for "Home Area Networking" final year project
+- Events Manager for Interface2k8 technical symposium
 
 **Side Projects:**
 - Open source web crawler: [Crawlpod](https://github.com/sakthipriyan)
