@@ -2,6 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sakthipriyan.com/building-systems/blogs/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/tags/cloud/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/tags/design/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/tags/docker/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/tags/go/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/tags/optimization/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/systems_tags/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/blogs/8-practical-use-cases-for-realvalue-sip-engine/</loc>
     <lastmod>2026-01-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -26,9 +56,6 @@
     <loc>https://sakthipriyan.com/building-wealth/tags/retirement/</loc>
     <lastmod>2026-01-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/</loc>
-    <lastmod>2026-01-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/sip/</loc>
     <lastmod>2026-01-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -51,9 +78,6 @@
     <lastmod>2025-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/about/</loc>
-    <lastmod>2025-12-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/</loc>
     <lastmod>2025-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/videos/credit-cards-usage-risks-smart-practices/</loc>
@@ -131,9 +155,6 @@
     <loc>https://sakthipriyan.com/building-systems/tags/bigquery/</loc>
     <lastmod>2025-11-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/building-systems/blogs/</loc>
-    <lastmod>2025-11-21T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-systems/blogs/building-sql-translator-using-ai-coding-agents/</loc>
     <lastmod>2025-11-21T00:00:00+00:00</lastmod>
   </url><url>
@@ -141,9 +162,6 @@
     <lastmod>2025-11-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/sql-translation/</loc>
-    <lastmod>2025-11-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/systems_tags/</loc>
     <lastmod>2025-11-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/slides/</loc>
@@ -242,9 +260,6 @@
     <loc>https://sakthipriyan.com/building-systems/books/cloud-first-start-fast/01-introduction-to-cloud-first-development/</loc>
     <lastmod>2025-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/building-systems/tags/cloud/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/code/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
@@ -252,9 +267,6 @@
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/exponential-backoff/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/tags/go/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/blogs/responsive-exponential-backoff-in-go/</loc>
@@ -342,9 +354,6 @@
     <lastmod>2017-04-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/api/</loc>
-    <lastmod>2016-07-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/tags/design/</loc>
     <lastmod>2016-07-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/documentation/</loc>
@@ -567,9 +576,6 @@
     <lastmod>2015-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</loc>
-    <lastmod>2015-07-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-systems/tags/optimization/</loc>
     <lastmod>2015-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/tags/junit/</loc>
