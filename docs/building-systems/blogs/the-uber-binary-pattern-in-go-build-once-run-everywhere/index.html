@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Uber Binary Pattern in Go: Build Once, Run Everywhere | Sakthi Priyan H</title>
+    <meta name="description" content="How using a single uber binary with symbolic links can reduce container image size, build time &amp; build infrastructure costs and image initialization time for Go applications across server/serverless deployment modes"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-systems/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>The Uber Binary Pattern in Go: Build Once, Run Everywhere</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">The Uber Binary Pattern in Go: Build Once, Run Everywhere</h1>
+    <p class="content-summary">How using a single uber binary with symbolic links can reduce container image size, build time &amp; build infrastructure costs and image initialization time for Go applications across server/serverless deployment modes</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-01-10">Jan 10, 2026</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">9 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h2 id="the-problem">The Problem</h2>
+<p>In modern cloud-native applications, we often build multiple binaries or docker images for different services/jobs/commands.</p>
+<ul>
+<li>A single docker image may contain one or more binaries</li>
+<li>Each binary needs to be built separately</li>
+<li>Different binaries and/or images for various deployment options</li>
+</ul>
+<p>This leads to:</p>
+<ul>
+<li><strong>Larger container images</strong> — multiple binaries consuming storage</li>
+<li><strong>Greater storage costs</strong> — duplicated dependencies across binaries</li>
+<li><strong>Higher build infrastructure costs</strong> — building and storing multiple artifacts</li>
+</ul>
+<h2 id="the-solution-uber-binary-pattern">The Solution: Uber Binary Pattern</h2>
+<p><strong>Uber Binary Pattern is a design where a single compiled binary executes different behaviors based on how it is invoked (binary name, arguments, or environment).</strong></p>
+<p>The uber binary pattern consolidates multiple command-line tools or services into a single binary. The actual command executed is determined by the name used to invoke the binary.</p>
+<h3 id="how-it-works">How It Works</h3>
+<p>Instead of building separate binaries:</p>
+<pre><code>/bin/foo      # 10 MB
+/bin/bar      # 12 MB
+/bin/baz      # 11 MB
+Total: 33 MB
+</code></pre>
+<p>You build one uber binary with symbolic links:</p>
+<pre><code>/bin/uber-binary    # 15 MB (shared code optimized)
+/bin/foo -&gt; uber-binary  (symlink)
+/bin/bar -&gt; uber-binary  (symlink)
+/bin/baz -&gt; uber-binary  (symlink)
+Total: 15 MB
+</code></pre>
+<p>The uber binary detects which command was invoked by checking <code>os.Args[0]</code> (the program name) and routes to the appropriate logic.</p>
+<pre><code class="language-dot">digraph uber_binary {
+  rankdir=LR;
+  bgcolor=transparent;
+  node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=white, fontname=&quot;Arial&quot;];
+  
+  // Symlinks
+  foo [label=&quot;/bin/foo\n(symlink)&quot;, style=&quot;rounded,dashed&quot;, fillcolor=white, color=blue];
+  bar [label=&quot;/bin/bar\n(symlink)&quot;, style=&quot;rounded,dashed&quot;, fillcolor=white, color=blue];
+  baz [label=&quot;/bin/baz\n(symlink)&quot;, style=&quot;rounded,dashed&quot;, fillcolor=white, color=blue];
+  
+  // Main binary
+  uber [label=&quot;/bin/uber-binary\n(15 MB)&quot;, fillcolor=&quot;#c8f7c5&quot;];
+  
+  // Runtime routing
+  router [label=&quot;Init Router\nos.Args[0]&quot;, shape=diamond, fillcolor=lightyellow];
+  
+  // Implementations
+  fooImpl [label=&quot;runFoo()&quot;, fillcolor=lightblue];
+  barImpl [label=&quot;runBar()&quot;, fillcolor=lightblue];
+  bazImpl [label=&quot;runBaz()&quot;, fillcolor=lightblue];
+  
+  // Connections
+  foo -&gt; uber [label=&quot;points to&quot;, style=dashed];
+  bar -&gt; uber [label=&quot;points to&quot;, style=dashed];
+  baz -&gt; uber [label=&quot;points to&quot;, style=dashed];
+  
+  uber -&gt; router [label=&quot;detects invocation&quot;];
+  
+  router -&gt; fooImpl [label=&quot;'foo'&quot;];
+  router -&gt; barImpl [label=&quot;'bar'&quot;];
+  router -&gt; bazImpl [label=&quot;'baz'&quot;];
+}
+</code></pre>
+<blockquote>
+<p>All code is statically linked at build time; routing happens at runtime.</p>
+</blockquote>
+<h2 id="implementation-in-go">Implementation in Go</h2>
+<h3 id="basic-structure">Basic Structure</h3>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;os&quot;
+    &quot;path/filepath&quot;
+)
+
+func main() {
+    // Get the name used to invoke this binary
+    invokeName := filepath.Base(os.Args[0])
+    
+    // Route to the appropriate command
+    switch invokeName {
+    case &quot;foo&quot;:
+        runFoo(os.Args[1:])
+    case &quot;bar&quot;:
+        runBar(os.Args[1:])
+    case &quot;baz&quot;:
+        runBaz(os.Args[1:])
+    case &quot;uber-binary&quot;:
+        // Direct invocation - show help or run default
+        showHelp()
+    default:
+        fmt.Fprintf(os.Stderr, &quot;Unknown command: %s\n&quot;, invokeName)
+        os.Exit(1)
+    }
+}
+
+func runFoo(args []string) {
+    fmt.Println(&quot;Running foo command with args:&quot;, args)
+    // Foo implementation
+}
+
+func runBar(args []string) {
+    fmt.Println(&quot;Running bar command with args:&quot;, args)
+    // Bar implementation
+}
+
+func runBaz(args []string) {
+    fmt.Println(&quot;Running baz command with args:&quot;, args)
+    // Baz implementation
+}
+
+func showHelp() {
+    fmt.Println(&quot;Usage: create symlinks named foo, bar, or baz pointing to this binary&quot;)
+}
+</code></pre>
+<h3 id="dockerfile-example">Dockerfile Example</h3>
+<pre><code class="language-dockerfile">FROM alpine:latest
+
+WORKDIR /app
+
+# Copy the pre-built binary
+COPY uber-binary /usr/local/bin/uber-binary
+
+# Create symbolic links
+RUN ln -s /usr/local/bin/uber-binary /usr/local/bin/foo &amp;&amp; \
+    ln -s /usr/local/bin/uber-binary /usr/local/bin/bar &amp;&amp; \
+    ln -s /usr/local/bin/uber-binary /usr/local/bin/baz
+
+</code></pre>
+<h3 id="running-different-commands">Running Different Commands</h3>
+<p><strong>Note:</strong> This works because the container command overrides the invoked binary name, allowing symlink-based routing to function correctly.</p>
+<pre><code class="language-bash"># Run foo command
+docker run myapp:latest foo arg1 arg2
+
+# Run bar command  
+docker run myapp:latest bar --input file.txt
+
+# Run baz command
+docker run myapp:latest baz --port 9090
+</code></pre>
+<h3 id="kubernetes-deployment-in-eks">Kubernetes Deployment in EKS</h3>
+<pre><code class="language-yaml"># foo-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: foo-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: foo
+    spec:
+      containers:
+      - name: foo
+        image: myapp:latest
+        command: [&quot;foo&quot;]
+        args: [&quot;arg1&quot;, &quot;arg2&quot;]
+      restartPolicy: OnFailure
+---
+# bar-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bar-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: bar
+    spec:
+      containers:
+      - name: bar
+        image: myapp:latest
+        command: [&quot;bar&quot;]
+        args: [&quot;--input&quot;, &quot;file.txt&quot;]
+      restartPolicy: OnFailure
+---
+# baz-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: baz-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: baz
+    spec:
+      containers:
+      - name: baz
+        image: myapp:latest
+        command: [&quot;baz&quot;]
+        args: [&quot;--port&quot;, &quot;9090&quot;]
+      restartPolicy: OnFailure
+</code></pre>
+<h3 id="subcommand-based-approach">Subcommand-Based Approach</h3>
+<p>Instead of Symlink-based entrypoint we can use an explicit subcommands approach using one of the following libraries,</p>
+<ul>
+<li><a href="https://github.com/spf13/cobra">https://github.com/spf13/cobra</a></li>
+<li><a href="https://github.com/alecthomas/kong">https://github.com/alecthomas/kong</a></li>
+<li><a href="https://github.com/urfave/cli">https://github.com/urfave/cli</a></li>
+</ul>
+<p>Then each command can be run as a sub command instead.</p>
+<pre><code class="language-sh"># Run foo command
+uber-binary foo arg1 arg2
+
+# Run bar command  
+uber-binary bar --input file.txt
+
+# Run baz command
+uber-binary baz --port 9090
+</code></pre>
+<h2 id="why-uber-binaries-unlock-true-build-once-deploy-everywhere">Why Uber Binaries Unlock True Build-Once-Deploy-Everywhere</h2>
+<p>The uber binary pattern&rsquo;s true power emerges when combined with multi-architecture builds and cross-platform deployment capabilities. This section demonstrates how a single binary can serve multiple cloud platforms and processor architectures.</p>
+<pre><code class="language-dot">digraph UberBinary {
+  rankdir=TB;
+  bgcolor=transparent;
+  node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=white, fontname=&quot;Arial&quot;];
+
+  /* Build stage */
+  Build [
+    label=&quot;Build Once\n\n• Single Go Binary\n• Multi-arch (amd64 / arm64)\n• Versioned &amp; Immutable&quot;,
+    fillcolor=&quot;#c8f7c5&quot;
+  ];
+
+  /* Artifact */
+  Artifact [
+    label=&quot;Docker Image / Uber Binary \n\nOne Executable\nMultiple Entry Points&quot;,
+    fillcolor=lightyellow
+  ];
+
+  /* Deployment platforms */
+  subgraph cluster_platforms {
+    label=&quot;Deployment Platforms&quot;;
+    style=&quot;rounded,bold&quot;;
+    color=black;
+
+    subgraph cluster_kubernetes {
+      label=&quot;Kubernetes&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=blue;
+
+      EKS [label=&quot;AWS EKS&quot;, fillcolor=lightblue];
+      GKE [label=&quot;GCP GKE&quot;, fillcolor=lightblue];
+    }
+
+    subgraph cluster_serverless {
+      label=&quot;Serverless&quot;;
+      style=&quot;rounded,dashed&quot;;
+      color=orange;
+
+      Lambda [label=&quot;AWS Lambda&quot;, fillcolor=lightcoral];
+      CloudRun [label=&quot;GCP Cloud Run&quot;, fillcolor=lightcoral];
+    }
+  }
+
+  /* Runtime initialization */
+  subgraph cluster_runtime {
+    label=&quot;Runtime Initialization&quot;;
+    style=&quot;rounded,dashed&quot;;
+    color=gray;
+
+    CTAS [
+      label=&quot;Run as CTAS Job&quot;,
+      fillcolor=lightyellow
+    ];
+
+    Transform [
+      label=&quot;Run as Transform Job&quot;,
+      fillcolor=lightyellow
+    ];
+
+    ControlPlane [
+      label=&quot;Control Plane&quot;,
+      fillcolor=lightyellow
+    ];
+
+    Driver [
+      label=&quot;Job Driver&quot;,
+      fillcolor=lightyellow
+    ];
+
+    Executor [
+      label=&quot;Job Executor&quot;,
+      fillcolor=lightyellow
+    ];
+  }
+
+  /* Connections */
+  Build -&gt; Artifact [label=&quot;produces&quot;];
+
+  Artifact -&gt; EKS;
+  Artifact -&gt; GKE;
+  Artifact -&gt; Lambda;
+  Artifact -&gt; CloudRun;
+
+  EKS -&gt; Transform [label=&quot; command / args&quot;];
+  GKE -&gt; CTAS [label=&quot; command / args&quot;];
+
+  Lambda -&gt; ControlPlane [label=&quot; command / ENV&quot;];
+  Lambda -&gt; Driver [label=&quot; command / ENV&quot;];
+  Lambda -&gt; Executor [label=&quot; command / ENV&quot;];
+}
+
+</code></pre>
+<h3 id="multi-architecture-build-impact">Multi-Architecture Build Impact</h3>
+<p>With dual-architecture images:</p>
+<pre><code class="language-bash"># Build for both architectures
+docker buildx build --platform linux/amd64,linux/arm64 -t myapp:latest .
+
+# Result: Two manifests, one image tag
+myapp:latest
+  ├── linux/amd64  (~90 MB)
+  └── linux/arm64  (~85 MB)
+
+# Deploy anywhere:
+- EKS (amd64/arm64)
+- GKE (amd64/arm64)  
+- AWS Lambda (amd64/arm64)
+- Google Cloud Run (amd64/arm64)
+</code></pre>
+<h3 id="cloud-platform-deployment">Cloud Platform Deployment</h3>
+<p>Single uber binary enables unified deployment:</p>
+<p><strong>Without uber binary:</strong></p>
+<pre><code>- eks-service-binary
+- lambda-function-binary
+- cloud-run-service-binary
+= 3 separate builds, 3 images, 3 maintenance paths
+</code></pre>
+<p><strong>With uber binary:</strong></p>
+<pre><code>- uber-binary (with symlinks for different entry points)
+= 1 build, 2 images (arm64 + amd64), 1 image manifest
+= Works on EKS, GKE, Lambda, Cloud Run
+</code></pre>
+<h3 id="environment-variable-based-mode-detection">Environment Variable Based Mode Detection</h3>
+<p>Environment variables can be used to control command execution. This approach is particularly useful when:</p>
+<ul>
+<li>Deployed across multi runtimes such as K8S, Lambda and Cloud Run</li>
+<li>Need dynamic mode switching for the same invoked command</li>
+</ul>
+<blockquote>
+<p>Invocation name takes priority, ENV overrides when required.</p>
+</blockquote>
+<h4 id="use-case-lambda-driverexecutor-pattern">Use Case: Lambda Driver/Executor Pattern</h4>
+<p>In AWS Lambda deployments, the same binary can run in different modes:</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;os&quot;
+)
+
+func main() {
+    // Check environment variable for run mode
+    runMode := os.Getenv(&quot;RUN_MODE&quot;)
+    
+    switch runMode {
+    case &quot;driver&quot;:
+        runDriver()
+    case &quot;executor&quot;:
+        runExecutor()
+    default:
+        fmt.Fprintf(os.Stderr, &quot;Unknown RUN_MODE: %s\n&quot;, runMode)
+        os.Exit(1)
+    }
+}
+
+func runDriver() {
+    fmt.Println(&quot;Running in Driver mode - orchestrating tasks&quot;)
+    // Driver implementation
+}
+
+func runExecutor() {
+    fmt.Println(&quot;Running in Executor mode - processing tasks&quot;)
+    // Executor implementation
+}
+</code></pre>
+<h4 id="platform-specific-configuration">Platform-Specific Configuration</h4>
+<p>Environment variables can also control platform-specific behavior:</p>
+<pre><code class="language-go">func main() {
+    platform := os.Getenv(&quot;PLATFORM&quot;) // &quot;eks&quot;, &quot;lambda&quot;, &quot;cloud-run&quot;
+    runMode := os.Getenv(&quot;RUN_MODE&quot;)  // &quot;driver&quot;, &quot;executor&quot;, &quot;worker&quot;
+    
+    // Platform-specific initialization
+    switch platform {
+    case &quot;eks&quot;, &quot;gke&quot;:
+        initKubernetes()
+    case &quot;lambda&quot;:
+        initLambda()
+    case &quot;cloud-run&quot;:
+        initCloudRun()
+    }
+    
+    // Mode-specific execution
+    switch runMode {
+    case &quot;driver&quot;:
+        runDriver()
+    case &quot;executor&quot;:
+        runExecutor()
+    }
+}
+</code></pre>
+<h4 id="lambda-configuration-example">Lambda Configuration Example</h4>
+<pre><code class="language-yaml"># serverless.yml or AWS SAM template
+Functions:
+  Driver:
+    ImageUri: myapp:latest
+    Environment:
+      RUN_MODE: driver
+      PLATFORM: lambda
+  
+  Executor:
+    ImageUri: myapp:latest
+    Environment:
+      RUN_MODE: executor
+      PLATFORM: lambda
+</code></pre>
+<h2 id="benefits">Benefits</h2>
+<h3 id="1-cost-reduction">1. Cost Reduction</h3>
+<ul>
+<li><strong>Smaller container images</strong> — shared code compiled once instead of duplicated across binaries; typical savings: 40-60% reduction in total binary size</li>
+<li><strong>Lower storage costs</strong> — reduced ECR/Container Registry consumption</li>
+<li><strong>Faster builds</strong> — compile once instead of N times, less storage for build artifacts, faster CI/CD pipelines</li>
+</ul>
+<h3 id="2-faster-initialization">2. Faster Initialization</h3>
+<ul>
+<li><strong>Improved Lambda performance</strong> — reduced image size directly translates to faster cold start times</li>
+<li>When multiple commands run on same instance:
+<ul>
+<li>Reduced memory footprint</li>
+<li>Shared libraries loaded once</li>
+<li>Better CPU cache utilization</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-operational-simplicity">3. Operational Simplicity</h3>
+<ul>
+<li><strong>Single artifact to maintain</strong> — one binary to version, distribute, and ensure synchronization</li>
+<li><strong>Cross-platform deployment</strong> — same binary works on EKS, GKE, AWS Lambda, and GCP Cloud Run</li>
+<li><strong>Multi-architecture support</strong> — build once for both arm64 and amd64 architectures</li>
+<li><strong>Two images cover all scenarios</strong> — just two multi-arch images (arm64 + amd64) enable deployment across:
+<ul>
+<li>Kubernetes: EKS (AWS) and GKE (Google Cloud)</li>
+<li>Serverless: Lambda (AWS) and Cloud Run (Google Cloud)</li>
+<li>Architectures: arm64 (ARM-based: Graviton, Axion) and amd64 (x86_64)</li>
+</ul>
+</li>
+<li><strong>Simplified deployment pipelines</strong> — one build process serves all deployment targets</li>
+<li><strong>Flexible runtime control</strong> — run mode can be controlled via environment variables</li>
+</ul>
+<h2 id="when-this-pattern-shines">When This Pattern Shines</h2>
+<p>This pattern is <strong>best suited for</strong>:</p>
+<ul>
+<li><strong>Job-based systems</strong> — ETL pipelines, batch processing, async task workers</li>
+<li><strong>Platform teams maintaining shared tooling</strong> — Internal CLI tools, developer utilities, infrastructure automation</li>
+<li><strong>Serverless-heavy architectures</strong> — Lambda functions, Cloud Run services where cold start time and image size matter</li>
+<li><strong>Cost-sensitive large-scale deployments</strong> — High-volume workloads where storage, transfer, and build costs add up</li>
+</ul>
+<h2 id="trade-offs">Trade-offs</h2>
+<h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>Multiple related commands sharing significant code</li>
+<li>Container-based deployments where size matters</li>
+<li>Build time and infrastructure costs are important</li>
+<li>Commands are part of the same logical toolset</li>
+</ul>
+<h3 id="when-not-to-use">When NOT to Use</h3>
+<ul>
+<li>Completely independent tools with no shared code</li>
+<li>Security concerns requiring process isolation</li>
+<li>Need for independent versioning of different commands</li>
+<li>Commands have vastly different dependencies</li>
+<li>Have conflicting dependency versions</li>
+</ul>
+<h2 id="real-world-examples">Real-World Examples</h2>
+<p>This pattern is used by several popular tools:</p>
+<ul>
+<li><strong>BusyBox</strong>: Unix utilities combined into a single binary</li>
+<li><strong>Git</strong>: Many git commands are symlinks to the same binary</li>
+<li><strong>Docker</strong>: Various docker CLI tools use this pattern</li>
+<li><strong>Kubernetes</strong>: kubectl plugins can use this approach</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>The uber binary pattern consolidates multiple binaries into one, reducing container image size by 40-60%, lowering build infrastructure costs, and improving Lambda cold start times. The implementation is straightforward in Go using <code>os.Args[0]</code> to detect the invocation name.</p>
+<blockquote>
+<p>If your commands share significant code (say ≥50%) and are deployed together, an uber binary is almost always the right default.</p>
+</blockquote>
+<p>The real power comes from <strong>build once, deploy everywhere</strong>: two multi-architecture images (arm64 and amd64) work across Kubernetes (EKS, GKE), serverless platforms (Lambda, Cloud Run), and both processor architectures. This dramatically simplifies deployment pipelines and reduces operational costs.</p>
+<p>Use this pattern when tools are related and share code, but keep them separate when they need true independence.</p>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/go/" class="tag-link">Go</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/optimization/" class="tag-link">Optimization</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/docker/" class="tag-link">Docker</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/cloud/" class="tag-link">Cloud</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/design/" class="tag-link">Design</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
+                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                    console.log('[DEBUG] Rendering DOT block');
+
+                    const viz = new Viz();
+                    viz.renderSVGElement(dotCode)
+                        .then(svg => {
+                            
+                            svg.removeAttribute('width');
+                            svg.removeAttribute('height');
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                            
+                            const container = document.createElement('div');
+                            container.className = 'graphviz-diagram';
+                            container.appendChild(svg);
+
+                            
+                            const preEl = codeEl.parentNode;
+                            preEl.parentNode.replaceChild(container, preEl);
+
+                            console.log('[DEBUG] Diagram rendered');
+                        })
+                        .catch(err => {
+                            console.error('[DEBUG] Viz.js error:', err);
+                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                        });
+                });
+            });
+        </script>
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>
