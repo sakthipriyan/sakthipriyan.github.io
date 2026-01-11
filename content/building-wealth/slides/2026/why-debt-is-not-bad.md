@@ -1,5 +1,5 @@
 ---
-title: "Why Debt is NOT bad"
+title: "Why Debt is NOT your enemy?"
 date: "2026-01-11"
 draft: false
 layout: "slides"
@@ -24,7 +24,7 @@ wealth_tags:
 sakthipriyan.com/building-wealth
 </span>
 
-<h2 class="title-scramble">Why Debt is NOT bad</h2>
+<h2 class="title-scramble">Why Debt is NOT your enemy?</h2>
 <br/>
 <h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Strategic approach to debt management</h4>
 <h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Jan 11, 2026</h4>
@@ -62,7 +62,8 @@ sakthipriyan.com/building-wealth
 ---
 
 ### 1️⃣ Arbitrage Opportunity 💰
-**Arbitrage** is earning more from your investments than you pay in interest on debt
+> **Arbitrage** is  
+> investments growth > interest on debt
 
 --
 
@@ -73,16 +74,13 @@ sakthipriyan.com/building-wealth
 | Scenario | Details |
 |----------|---------|
 | Home Loan Interest | 8% per year |
-| Investment Returns | 12% per year (equity/index funds) |
+| Portfolio Returns | 12% per year |
 | Arbitrage Gain | 4% per year |
 
 <br/>
 
-#### Key Points  <!-- .element: class="fragment fade-up" -->
 - <!-- .element: class="fragment fade-up" --> Keep money invested instead of prepaying low-interest loans
-- <!-- .element: class="fragment fade-up" --> Tax benefits on home loan interest (₹2L/year on interest)
 - <!-- .element: class="fragment fade-up" --> Your money grows faster than loan interest accumulates
-- <!-- .element: class="fragment fade-up" --> Only works when investment returns > loan interest rate
 
 </div>
 
@@ -90,30 +88,24 @@ sakthipriyan.com/building-wealth
 
 ### 2️⃣ When to Take Debt ✅
 
-<div style="font-size: 0.95em;">
-
 | Purpose | Reasoning |
 |---------|-----------|
-| **Home Loan** | Asset creation + Tax benefits + Low interest rates |
-| **Education Loan** | Investment in future earning potential |
-| **Vehicle Loan** | For genuine need + EMI within budget |
-| **Business Loan** | When ROI > Interest cost |
+| **Home Loan** | Asset creation + Low interest |
+| **Vehicle Loan** | For genuine need + within budget |
+| **Education&nbsp;Loan** | Future earning potential |
 
-<br/>
+--
 
-#### Prerequisites  <!-- .element: class="fragment fade-up" -->
+### 2️⃣ When to Take Debt ✅ / Prerequisites
+
 - <!-- .element: class="fragment fade-up" --> Stable income & job security
 - <!-- .element: class="fragment fade-up" --> Emergency fund in place
 - <!-- .element: class="fragment fade-up" --> Insurance coverage (health, term, accidental)
 - <!-- .element: class="fragment fade-up" --> EMI should be much lower than income (ideally <40%)
 
-</div>
-
 ---
 
 ### 3️⃣ When NOT to Take Debt ❌
-
-<div style="font-size: 0.9em;">
 
 | ❌ Avoid | Why |
 |---------|-----|
@@ -123,9 +115,9 @@ sakthipriyan.com/building-wealth
 | **Credit Card Debt** | 30-48% interest rates will destroy wealth |
 | **Peer Pressure** | Social status purchases you can't afford |
 
-<br/>
+--
 
-#### Red Flags  <!-- .element: class="fragment fade-up" -->
+### 3️⃣ When NOT to Take Debt ❌ / Red Flags
 - <!-- .element: class="fragment fade-up" --> No emergency fund
 - <!-- .element: class="fragment fade-up" --> Unstable income
 - <!-- .element: class="fragment fade-up" --> Already high EMI burden
@@ -135,29 +127,32 @@ sakthipriyan.com/building-wealth
 
 ---
 
-### 4️⃣ Interest Rates Matter 📊
+### 4️⃣ Personal Experience 🔄
 
-<div style="font-size: 0.85em;">
+> **I treated debt as the enemy**
 
-#### Loan Interest Rates Comparison
+- <!-- .element: class="fragment fade-up" --> Originated from exposure to non-institutional loans (2-3% per month)
+- <!-- .element: class="fragment fade-up" --> Foreclosed home loan early rather than letting it run it course
+- <!-- .element: class="fragment fade-up" --> Liquidated investments to buy vehicle instead of taking loan
+- <!-- .element: class="fragment fade-up" --> Avoided credit cards for a long time
 
-| Loan Type | Typical Rate | Strategy |
-|-----------|--------------|----------|
-| Home Loan | 8-9% | ✅ Keep if rate <10%, invest surplus |
-| Education Loan | 8-12% | ⚖️ Evaluate based on career growth |
-| Vehicle Loan | 8-11% | ⚖️ Prepay if rate >10% |
-| Personal Loan | 11-18% | 🔴 Avoid or prepay ASAP |
-| Credit Card | 30-48% | 🚨 Never carry balance |
-
-<br/>
-
-#### Key Principle  <!-- .element: class="fragment fade-up" -->
-<p data-gsap='{"from": {"opacity": 0, "scale": 1.5}, "duration": 1, "delay": 0.5}' style="font-size: 1.2em;">
-<strong>Loan Interest Rate < Investment Return Rate</strong>
+<p class="fragment fade-up" style="color: #f59e0b;">
+<strong>Result: Lost opportunity for better wealth growth</strong>
 </p>
-<p class="fragment fade-up">Otherwise, prepaying debt is the better investment</p>
 
-</div>
+--
+
+### 4️⃣ Personal Experience 🔄 / Current Approach
+
+- **With Emergency Fund & Insurance in place**
+- **Multi-asset global portfolio growing faster than typical loan rates**
+- <!-- .element: class="fragment fade-up" --> More comfortable with strategic debt now
+- <!-- .element: class="fragment fade-up" --> Future vehicle purchases: Considering loans over liquidation
+- <!-- .element: class="fragment fade-up" --> Using credit cards responsibly for rewards
+
+<p class="fragment fade-up" style="color: #10b981;">
+<strong>Outcome: Better balance between liquidity & growth</strong>
+</p>
 
 ---
 
