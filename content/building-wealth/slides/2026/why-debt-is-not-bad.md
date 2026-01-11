@@ -118,12 +118,10 @@ sakthipriyan.com/building-wealth
 --
 
 ### 3️⃣ When NOT to Take Debt ❌ / Red Flags
-- <!-- .element: class="fragment fade-up" --> No emergency fund
 - <!-- .element: class="fragment fade-up" --> Unstable income
+- <!-- .element: class="fragment fade-up" --> No emergency fund or insurance coverage
 - <!-- .element: class="fragment fade-up" --> Already high EMI burden
-- <!-- .element: class="fragment fade-up" --> Using debt to pay other debts
-
-</div>
+- <!-- .element: class="fragment fade-up" --> Using debt to fund lifestyle
 
 ---
 
@@ -144,8 +142,8 @@ sakthipriyan.com/building-wealth
 
 ### 4️⃣ Personal Experience 🔄 / Current Approach
 
-- **With Emergency Fund & Insurance in place**
-- **Multi-asset global portfolio growing faster than typical loan rates**
+- <!-- .element: class="fragment fade-up" -->  With Emergency Fund & Insurance in place
+- <!-- .element: class="fragment fade-up" -->  Multi-asset global portfolio growing faster than typical loan rates
 - <!-- .element: class="fragment fade-up" --> More comfortable with strategic debt now
 - <!-- .element: class="fragment fade-up" --> Future vehicle purchases: Considering loans over liquidation
 - <!-- .element: class="fragment fade-up" --> Using credit cards responsibly for rewards
