@@ -270,19 +270,29 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     <!-- Right Column: Output Results and Chart -->
                     <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
-                            <!-- Share Button -->
+                            <!-- Share and JSON Buttons -->
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem;">
                                 <p style="margin: 0; font-size: 0.85rem; color: #666; flex: 1;">
-                                    Share your investment plan via URL. The link captures all your inputs for easy collaboration.
+                                    Share your investment plan via URL or copy complete input/output data as JSON.
                                 </p>
-                                <button 
-                                    type="button" 
-                                    class="share-button"
-                                    @click="shareCalculation"
-                                    :disabled="!results.calculated"
-                                    style="flex-shrink: 0;">
-                                    {{ shareButtonText }}
-                                </button>
+                                <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="shareCalculation"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ shareButtonText }}
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="copyJSON"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ copyButtonText }}
+                                    </button>
+                                </div>
                             </div>
                             
                             <h3 v-if="isBothTargetsMode || results.timeRequired" style="margin-top: 0;">ðŸŽ¯ Target Results</h3>
@@ -467,7 +477,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 <button 
                                     type="button"
                                     :class="{'active': monthlyPlanTab === 'chart'}"
-                                    @click="monthlyPlanTab = 'chart'; $nextTick(() => renderContributionChart(false))"
+                                    @click="monthlyPlanTab = 'chart'"
                                     style="white-space: nowrap;">
                                     ðŸ“Š Chart
                                 </button>
@@ -589,7 +599,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 contributionChart: null,
                 contributionChartCategories: [],
                 contributionResizeHandler: null,
-                copyButtonText: 'Copy JSON',
+                copyButtonText: 'ðŸ“‹ JSON',
                 shareButtonText: 'ðŸ”— Share'
             }
         },
@@ -729,6 +739,21 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
             exportJSON() {
                 if (!this.results.calculated) return '';
                 
+                // Helper function to remove null/undefined values
+                const removeNulls = (obj) => {
+                    if (Array.isArray(obj)) {
+                        return obj.map(removeNulls).filter(v => v != null);
+                    } else if (obj !== null && typeof obj === 'object') {
+                        return Object.entries(obj)
+                            .filter(([_, v]) => v != null)
+                            .reduce((acc, [k, v]) => {
+                                acc[k] = removeNulls(v);
+                                return acc;
+                            }, {});
+                    }
+                    return obj;
+                };
+                
                 const data = {
                     input: {
                         targetMode: {
@@ -776,8 +801,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     }
                 };
                 
-                console.log('RealValue SIP Engine Results:', data);
-                return JSON.stringify(data, null, 2);
+                const cleanData = removeNulls(data);
+                console.log('RealValue SIP Engine Results:', cleanData);
+                return JSON.stringify(cleanData, null, 2);
             }
         },
         watch: {
@@ -808,26 +834,53 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
             monthlyPlan: {
                 handler() {
                     if (this.monthlyPlan?.length > 0) {
-                        // Render chart (element persists with v-show, so always safe to render)
-                        this.$nextTick(() => {
-                            this.renderContributionChart(true); // true = rebuild categories
-                        });
+                        // Generate contribution table (this will trigger contributionTable watcher)
                         this.generateContributionTable();
                     }
                 },
                 deep: false
             },
+            contributionTable: {
+                handler(newVal, oldVal) {
+                    // When contributionTable changes, DOM may have been recreated by v-if
+                    if (this.contributionTable?.length > 0) {
+                        // Clear the chart instance since DOM may have been recreated
+                        if (this.contributionChart) {
+                            this.contributionChart.dispose();
+                            this.contributionChart = null;
+                        }
+                        
+                        // If we're on chart tab, render immediately
+                        if (this.monthlyPlanTab === 'chart') {
+                            this.$nextTick(() => {
+                                setTimeout(() => {
+                                    this.renderContributionChart(true);
+                                }, 100);
+                            });
+                        }
+                    }
+                },
+                deep: false
+            },
             contributionViewMode() {
-                // Only update data, not categories
-                if (this.monthlyPlan?.length > 0) {
+                // Only update data if chart exists, not categories
+                if (this.contributionChart && this.monthlyPlan?.length > 0) {
                     this.renderContributionChart(false); // false = reuse categories
                 }
             },
             monthlyPlanTab() {
-                // When switching to chart tab, resize cached chart
-                if (this.monthlyPlanTab === 'chart' && this.contributionChart) {
+                // When switching to chart tab
+                if (this.monthlyPlanTab === 'chart' && this.contributionTable?.length > 0) {
                     this.$nextTick(() => {
-                        this.contributionChart.resize();
+                        if (this.contributionChart) {
+                            // Chart exists, just resize
+                            this.contributionChart.resize();
+                        } else {
+                            // Chart doesn't exist, render it
+                            setTimeout(() => {
+                                this.renderContributionChart(true);
+                            }, 100);
+                        }
                     });
                 }
             },
@@ -1858,15 +1911,15 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
             },
             copyJSON() {
                 navigator.clipboard.writeText(this.exportJSON).then(() => {
-                    this.copyButtonText = 'Copied!';
+                    this.copyButtonText = 'âœ… Copied!';
                     setTimeout(() => {
-                        this.copyButtonText = 'Copy JSON';
+                        this.copyButtonText = 'ðŸ“‹ JSON';
                     }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy:', err);
-                    this.copyButtonText = 'Copy Failed';
+                    this.copyButtonText = 'âŒ Failed';
                     setTimeout(() => {
-                        this.copyButtonText = 'Copy JSON';
+                        this.copyButtonText = 'ðŸ“‹ JSON';
                     }, 2000);
                 });
             }
