@@ -22,6 +22,10 @@ wealth_tags:
 
 The **RealValue SIP Engine** is not just another SIP calculator — it is a **goal-driven, real-world investment engine** built for serious Indian investors. Unlike traditional SIP calculators that show inflated future numbers, RealValue focuses on **what your money is actually worth** after **inflation and taxes**.
 
+### Why Your SIP Calculator Is Lying | RealValue SIP Engine (Inflation + Tax Adjusted)
+
+{{< youtube FLlgRaUAG_o >}}
+
 ### One Engine. Every SIP Use Case.
 
 Whether your goal is **time-based**, **money-based** or a **combination of both**, RealValue adapts automatically.
