@@ -321,23 +321,35 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tbody>
                                     <tr>
                                         <td><strong>Investment</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.totalInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.totalInvestment) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.realInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.realInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.totalInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.realInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.realInvestment) }}</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Growth</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.expectedValue - results.totalInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.expectedValue - results.totalInvestment) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.inflationAdjustedValue - results.realInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.inflationAdjustedValue - results.realInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.expectedValue - results.totalInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.expectedValue - results.totalInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.inflationAdjustedValue - results.realInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.inflationAdjustedValue - results.realInvestment) }}</span></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Portfolio Value</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.expectedValue) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.inflationAdjustedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.inflationAdjustedValue) }}</span></td>
+                                        <td style="background-color: #fff3cd; font-weight: 600;">
+                                            <span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.expectedValue) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.expectedValue / results.totalInvestment).toFixed(2) }}x</div>
+                                        </td>
+                                        <td>
+                                            <span class="help-icon" :data-tooltip="'₹ ' + results.inflationAdjustedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.inflationAdjustedValue) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.inflationAdjustedValue / results.realInvestment).toFixed(2) }}x</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><strong>Post Tax</strong></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span></td>
-                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span></td>
+                                        <td>
+                                            <span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ ((results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) / results.totalInvestment).toFixed(2) }}x</div>
+                                        </td>
+                                        <td style="background-color: #d4edda; font-weight: 600;">
+                                            <span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.postTaxRealValue / results.realInvestment).toFixed(2) }}x</div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -346,6 +358,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <li><strong>Nominal:</strong> Future value without adjusting for inflation.</li>
                                 <li><strong>Real:</strong> Today's purchasing power after adjusting for inflation.</li>
                             </ul>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
+                                📚 Learn more: <a href="/building-wealth/blogs/realvalue-sip-engine-use-cases/" style="color: #0066cc; text-decoration: none;">Use Cases</a> | 
+                                <a href="#frequently-asked-questions-faqs" style="color: #0066cc; text-decoration: none;">FAQs</a> | 
+                                <a href="#help" style="color: #0066cc; text-decoration: none;">Help</a>
+                            </p>
                         </div>
                     </div>
                     
@@ -1893,13 +1910,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
             formatCurrency(amount) {
                 // Format large numbers in Crores, Lakhs, or Thousands
                 if (amount >= 10000000) { // 1 crore or more
-                    return (amount / 10000000).toFixed(1) + ' Cr';
+                    return (amount / 10000000).toFixed(2) + ' Cr';
                 } else if (amount >= 100000) { // 1 lakh or more
-                    return (amount / 100000).toFixed(1) + ' L';
+                    return (amount / 100000).toFixed(2) + ' L';
                 } else if (amount >= 1000) { // 1 thousand or more
-                    return (amount / 1000).toFixed(1) + ' K';
+                    return (amount / 1000).toFixed(2) + ' K';
                 } else {
-                    return amount.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+                    return amount.toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 });
                 }
             },
             formatCurrencyFull(amount) {
