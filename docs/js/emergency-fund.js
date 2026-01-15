@@ -6,6 +6,21 @@ window.initializeTool.emergencyFund = function (container, config) {
     container.innerHTML = `
         <div id="emergency-fund-app">
             <div class="emergency-fund">
+                <!-- Deprecation Notice -->
+                <div style="background-color: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <h3 style="margin-top: 0; color: #856404;">⚠️ DEPRECATED</h3>
+                    <p style="margin-bottom: 1rem; color: #856404; font-size: 1.05em;">
+                        This calculator has been superseded by the more powerful 
+                        <a href="/building-wealth/tools/realvalue-sip-engine/#v1oma3lf202601c0lm10kg7h10i6t15" style="color: #0066cc; font-weight: bold; text-decoration: underline;">RealValue SIP Engine</a>. 
+                        <br/>
+                        The new engine provides inflation-adjusted real values, tax calculations, and comprehensive visualizations.
+                    </p>
+                    <p style="margin-bottom: 0; color: #856404;">
+                        <strong>I recommend using it for all financial planning.</strong> 
+                        See various <a href="/building-wealth/blogs/realvalue-sip-engine-use-cases/" style="color: #0066cc; text-decoration: underline;">Use Cases</a>.
+                    </p>
+                </div>
+                
                 <div class="ef-container">
                     <!-- Left Column: Input Fields -->
                     <div class="ef-inputs">
