@@ -94,7 +94,7 @@ This is typically different from your regular EMI by ₹50-500 due to rounding.
 
 **Example:** ₹50 lakh loan at 9% for 20 years
 - Regular EMI: ₹44,986 (same for 239 months)
-- Last EMI: ₹44,723 (adjusted to close the loan precisely)
+- Last EMI: ₹45,185 (adjusted to close the loan precisely)
 - This matches actual loan closure statements from Indian banks
 
 While some bank websites show the same EMI for marketing simplicity, **actual loan settlement** always has this adjustment. This tool shows the accurate picture.
