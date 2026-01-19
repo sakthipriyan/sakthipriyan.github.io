@@ -588,15 +588,9 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 
                 let filteredPlan = this.monthlyPlan;
                 
-                // Calculate total EMI
-                let totalEMI = 0;
-                if (this.planViewMode === 'nominal') {
-                    totalEMI = this.monthlyPlan.reduce((sum, r) => sum + (r.emi || 0), 0);
-                } else {
-                    totalEMI = this.monthlyPlan.reduce((sum, r) => sum + (r.realEMI || 0), 0);
-                }
-                
-                let accumulatedEMI = 0;
+                // Get the standard monthly EMI (not the last potentially different one)
+                const standardEMI = this.monthlyPlan[0].emi;
+                const standardRealEMI = this.monthlyPlan[0].realEMI;
                 
                 if (this.planGranularity === 'yearly') {
                     filteredPlan = this.monthlyPlan.filter((row, index) => {
@@ -605,54 +599,53 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         return isDecember || isLastMonth;
                     });
                     
-                    return filteredPlan.map(row => {
+                    return filteredPlan.map((row, index) => {
                         const yearRows = this.monthlyPlan.filter(r => r.year === row.year);
+                        const isLastYear = index === filteredPlan.length - 1;
                         
                         if (this.planViewMode === 'nominal') {
                             const yearlyPrincipal = yearRows.reduce((sum, r) => sum + (r.principal || 0), 0);
                             const yearlyInterest = yearRows.reduce((sum, r) => sum + (r.interest || 0), 0);
                             const yearlyEMI = yearlyPrincipal + yearlyInterest;
-                            accumulatedEMI += yearlyEMI;
+                            
                             return {
                                 period: row.year,
                                 emi: yearlyEMI,
                                 principal: yearlyPrincipal,
                                 interest: yearlyInterest,
                                 outstanding: row.outstanding,
-                                outstandingEMI: Math.round(totalEMI - accumulatedEMI)
+                                outstandingEMI: row.outstandingEMI
                             };
                         } else {
                             // Real mode
                             const yearlyRealPrincipal = Math.round(yearRows.reduce((sum, r) => sum + (r.realPrincipal || 0), 0));
                             const yearlyRealInterest = Math.round(yearRows.reduce((sum, r) => sum + (r.realInterest || 0), 0));
                             const yearlyRealEMI = yearlyRealPrincipal + yearlyRealInterest;
-                            accumulatedEMI += yearlyRealEMI;
                             const inflationFactor = this.getInflationFactor(row.monthIndex + 1);
+                            
                             return {
                                 period: row.year,
                                 emi: yearlyRealEMI,
                                 principal: yearlyRealPrincipal,
                                 interest: yearlyRealInterest,
                                 outstanding: Math.round(row.outstanding / inflationFactor),
-                                outstandingEMI: Math.round(totalEMI - accumulatedEMI)
+                                outstandingEMI: row.realOutstandingEMI
                             };
                         }
                     });
                 } else {
                     return this.monthlyPlan.map((row, index) => {
                         if (this.planViewMode === 'nominal') {
-                            accumulatedEMI += row.emi;
                             return {
                                 period: row.year + ' ' + row.month,
                                 emi: row.emi,
                                 principal: row.principal,
                                 interest: row.interest,
                                 outstanding: row.outstanding,
-                                outstandingEMI: Math.round(totalEMI - accumulatedEMI)
+                                outstandingEMI: row.outstandingEMI
                             };
                         } else {
                             // Real mode
-                            accumulatedEMI += row.realEMI;
                             const inflationFactor = this.getInflationFactor(row.monthIndex + 1);
                             return {
                                 period: row.year + ' ' + row.month,
@@ -660,7 +653,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 principal: row.realPrincipal,
                                 interest: row.realInterest,
                                 outstanding: Math.round(row.outstanding / inflationFactor),
-                                outstandingEMI: Math.round(totalEMI - accumulatedEMI)
+                                outstandingEMI: row.realOutstandingEMI
                             };
                         }
                     });
@@ -774,16 +767,31 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 const monthlyRate = interestRate / 100 / 12;
                 const monthlyInflation = Math.pow(1 + inflationRate / 100, 1 / 12) - 1;
                 
+                // Round EMI to whole rupee like banks do
+                const roundedEMI = Math.round(emi);
+                
                 const monthlyData = [];
                 let outstanding = loanAmount;
                 let totalRealEMIs = 0;
                 
                 for (let i = 0; i < months; i++) {
                     const interest = outstanding * monthlyRate;
-                    const principal = Math.min(emi - interest, outstanding);
-                    const actualEMI = interest + principal;
                     
-                    outstanding = Math.max(0, outstanding - principal);
+                    // Check if this is the last payment
+                    const isLastPayment = (i === months - 1) || (outstanding <= roundedEMI);
+                    
+                    let actualEMI, principal;
+                    if (isLastPayment) {
+                        // Last EMI: pay exactly what's remaining (outstanding + interest)
+                        actualEMI = outstanding + interest;
+                        principal = outstanding;
+                        outstanding = 0;
+                    } else {
+                        // Regular EMI
+                        actualEMI = roundedEMI;
+                        principal = roundedEMI - interest;
+                        outstanding = outstanding - principal;
+                    }
                     
                     const inflationFactor = Math.pow(1 + monthlyInflation, i);
                     const realEMI = actualEMI / inflationFactor;
@@ -805,9 +813,12 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     if (outstanding === 0) break;
                 }
                 
+                // Calculate total nominal EMIs (sum of actual EMIs paid)
+                const totalNominalEMIs = monthlyData.reduce((sum, d) => sum + d.emi, 0);
+                
                 return {
                     monthlyData: monthlyData,
-                    totalNominalEMIs: emi * monthlyData.length,
+                    totalNominalEMIs: totalNominalEMIs,
                     totalRealEMIs: totalRealEMIs
                 };
             },
@@ -818,7 +829,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 const startMonth = parseInt(parts[1]);
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 
-                return simulation.monthlyData.map((data, index) => {
+                const plan = simulation.monthlyData.map((data, index) => {
                     const currentMonthNum = (startMonth - 1 + index) % 12;
                     const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
                     
@@ -835,6 +846,27 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         realInterest: Math.round(data.realInterest)
                     };
                 });
+                
+                // Precompute outstanding EMI for each month
+                const standardEMI = plan[0].emi;
+                for (let i = 0; i < plan.length; i++) {
+                    const remainingMonths = plan.length - (i + 1);
+                    const isLastMonth = i === plan.length - 1;
+                    
+                    // Nominal outstanding EMI
+                    plan[i].outstandingEMI = isLastMonth ? 0 : Math.round(remainingMonths * standardEMI);
+                    
+                    // Real outstanding EMI: sum of all future real EMIs
+                    if (isLastMonth) {
+                        plan[i].realOutstandingEMI = 0;
+                    } else {
+                        plan[i].realOutstandingEMI = Math.round(
+                            plan.slice(i + 1).reduce((sum, m) => sum + m.realEMI, 0)
+                        );
+                    }
+                }
+                
+                return plan;
             },
             
             calculateResults() {
