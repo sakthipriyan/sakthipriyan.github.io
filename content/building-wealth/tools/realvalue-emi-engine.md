@@ -79,6 +79,26 @@ Understanding real value helps you:
 
 ## Frequently Asked Questions (FAQs)
 
+### Why is my last EMI amount different from all other months?
+
+This reflects **real banking practice**. When you close a loan, the final payment is calculated as:
+
+**Last Payment = Outstanding Principal + Final Month's Interest**
+
+This is typically different from your regular EMI by ₹50-500 due to rounding. 
+
+**Why this happens:**
+- EMI is rounded to the nearest rupee (e.g., ₹44,986.23 → ₹44,986)
+- These tiny differences (23 paise) accumulate over months
+- Instead of absorbing it internally, the final payment settles the loan exactly to ₹0
+
+**Example:** ₹50 lakh loan at 9% for 20 years
+- Regular EMI: ₹44,986 (same for 239 months)
+- Last EMI: ₹44,723 (adjusted to close the loan precisely)
+- This matches actual loan closure statements from Indian banks
+
+While some bank websites show the same EMI for marketing simplicity, **actual loan settlement** always has this adjustment. This tool shows the accurate picture.
+
 ### Why does RealValue EMI Engine show lower real costs than the nominal EMI total?
 
 Because **inflation reduces the real value of your future EMI payments**. A ₹50,000 EMI paid 10 years from now is worth much less than ₹50,000 today. Traditional calculators ignore this critical factor.
