@@ -99,6 +99,11 @@ Each use case includes detailed setup, accurate calculations, and key insights o
 
 ## Frequently Asked Questions (FAQs)
 
+### What is "Real EMI" vs "Nominal EMI"?
+
+- **Nominal EMI**: The actual amount you pay each month (₹50,000 is ₹50,000)
+- **Real EMI**: What that payment is worth in today's purchasing power after discounting for inflation
+
 ### Why is my last EMI amount different from all other months?
 
 This reflects **real banking practice**. When you close a loan, the final payment is calculated as:
@@ -119,17 +124,6 @@ This is typically different from your regular EMI by ₹50-500 due to rounding.
 
 While some bank websites show the same EMI for marketing simplicity, **actual loan settlement** always has this adjustment. This tool shows the accurate picture.
 
-### Why does RealValue EMI Engine show lower real costs than the nominal EMI total?
-
-Because **inflation reduces the real value of your future EMI payments**. A ₹50,000 EMI paid 10 years from now is worth much less than ₹50,000 today. Traditional calculators ignore this critical factor.
-
-### What is "Real EMI" vs "Nominal EMI"?
-
-- **Nominal EMI**: The actual amount you pay each month (₹50,000 is ₹50,000)
-- **Real EMI**: What that payment is actually worth in today's purchasing power
-
-Example: ₹50,000 paid in 2035 might only have the purchasing power of ₹30,000 in 2025 terms.
-
 ### Should I always choose the longest loan tenure?
 
 Not necessarily. While inflation reduces your real burden over time, longer tenure means:
@@ -141,11 +135,13 @@ Use this tool to understand the trade-offs and make an informed decision.
 
 ### Why doesn't this tool include tax benefits or salary hikes?
 
-To keep it **simple, neutral, and educational**. Tax benefits vary by loan type and individual circumstances. Salary hikes are uncertain. We focus only on:
-- Interest rate (known)
-- Inflation rate (estimated but historical data available)
+To keep it **simple, neutral, and educational**. Tax benefits vary by loan type and individual circumstances, and under India's **new tax regime (Section 115BAC)** many traditional home-loan deductions are not available (for example, principal repayment under 80C and interest on self-occupied property under 24(b)). Salary hikes are uncertain and highly individualized.
 
-This gives you the **core truth** without speculation.
+We therefore focus only on:
+- Interest rate (known)
+- Inflation rate (estimated but supported by historical data)
+
+This gives you the **core truth** in today's money without speculative assumptions or regime-dependent exceptions.
 
 ### What inflation rate should I use?
 
@@ -172,11 +168,7 @@ The tool shows three key outputs:
 2. **RealValue Cost of Loan**: What the loan actually costs in today's money (inflation-adjusted)
 3. **Real Interest Paid**: The real cost of interest after accounting for inflation
 
-### Mode Selection Guide
-
-- **Loan EMI**: Know the loan amount and desired tenure? Find out your monthly EMI.
-- **Loan Tenure**: Know the loan amount and your monthly budget? Find out how long it will take.
-- **Loan Amount**: Know your budget and tenure? Find out how much you can borrow.
+<!-- Mode Selection Guide removed to avoid duplication; see Supported Calculation Modes table above. -->
 
 ### Tips
 
@@ -195,7 +187,3 @@ This is an **educational tool**, not financial advice.
 - Consult a financial advisor for personalized advice
 
 The tool helps you understand the **real economics of debt**. Use it to make informed decisions, but always verify with your lender and consider your complete financial situation.
-
----
-
-**Built with clarity. Powered by real value. No marketing BS.**
