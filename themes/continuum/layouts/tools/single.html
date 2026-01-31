@@ -55,6 +55,10 @@
 <script src="{{ "js/realvalue-sip-engine.js" | absURL }}"></script>
 {{ else if eq .Params.tool_type "emiCalculator" }}
 <script src="{{ "js/realvalue-emi-engine.js" | absURL }}"></script>
+{{ else if eq .Params.tool_type "multiAssetAllocator" }}
+{{/* Load ECharts for charts */}}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="{{ "js/multi-asset-allocator.js" | absURL }}"></script>
 {{ end }}
 <script>
     // Initialize tool based on type

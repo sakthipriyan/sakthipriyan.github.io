@@ -1,0 +1,23 @@
+[
+  {
+    "symbol": "NIFTYBEES",
+    "effective_date": "2020-01-24",
+    "ratio_numerator": 10,
+    "ratio_denominator": 1,
+    "note": "Unit split; values approximately scaled down by 10 after effective date. Original cached values retained."
+  },
+  {
+    "symbol": "GOLDBEES",
+    "effective_date": "2020-01-24",
+    "ratio_numerator": 100,
+    "ratio_denominator": 1,
+    "note": "Unit split; values approximately scaled down by 100 after effective date. Original cached values retained."
+  },
+  {
+    "symbol": "JUNIORBEES",
+    "effective_date": "2004-03-01",
+    "ratio_numerator": 10,
+    "ratio_denominator": 1,
+    "note": "Unit split; values approximately scaled down by 10 after effective date. Original cached values retained."
+  }
+]

@@ -1,0 +1,1 @@
+{"request":{"ric":"CNDX.L","fromDate":"2006-01-01T00:00:00","toDate":"2006-12-31T23:59:59","fids":["_DATE_END","CLOSE_PRC","HIGH_1","OPEN_PRC","LOW_1"],"samples":"D","appendRecentData":"all"},"data":[],"status":"OK","metadata":{}}
