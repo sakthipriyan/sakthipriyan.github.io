@@ -5,18 +5,24 @@
 window.initializeTool = window.initializeTool || {};
 
 (function() {
+  const CURRENCY_MULTIPLIERS = {
+    crores: 10000000,
+    lakhs: 100000,
+    thousands: 1000
+  };
   const DEBOUNCE_DELAY_MS = 300;
-  const DEFAULT_START_MONTHLY_INVESTMENT = 10000;
+  const DEFAULT_START_MONTHLY_INVESTMENT_VALUE = 10;
+  const DEFAULT_START_MONTHLY_INVESTMENT_UNIT = 'thousands';
   const DEFAULT_YEARLY_HIKE = 10; // percent
   const DEFAULT_INFLATION = 6; // percent annual
   const SUPPORTED_ASSETS = [
-    { key: 'NASDAQ100_TRI_USD', label: 'Nasdaq 100 (TRI, USD)', currency: 'USD' },
-    { key: 'NIFTY50_TRI_INR', label: 'Nifty 50 TRI', currency: 'INR' },
-    { key: 'NIFTY_NEXT50_TRI_INR', label: 'Nifty Next 50 TRI', currency: 'INR' },
-    { key: 'NIFTY_MIDCAP150_TRI_INR', label: 'Midcap 150 TRI', currency: 'INR' },
-    { key: 'NIFTY_SMALLCAP250_TRI_INR', label: 'Smallcap 250 TRI', currency: 'INR' },
+    { key: 'NASDAQ100_TRI_USD', label: 'Nasdaq 100', currency: 'INR' },
+    { key: 'NIFTY50_TRI_INR', label: 'Nifty 50', currency: 'INR' },
+    { key: 'NIFTY_NEXT50_TRI_INR', label: 'Nifty Next 50', currency: 'INR' },
+    { key: 'NIFTY_MIDCAP150_TRI_INR', label: 'Nifty Midcap 150', currency: 'INR' },
+    { key: 'NIFTY_SMALLCAP250_TRI_INR', label: 'Nifty Smallcap 250', currency: 'INR' },
     { key: 'GOLD_INR', label: 'Gold', currency: 'INR' },
-    { key: 'DEBT_TRI_INR', label: 'Debt (TRI)', currency: 'INR' },
+    { key: 'DEBT_TRI_INR', label: 'Debt', currency: 'INR' },
   ];
   const ASSET_COLORS = {
     NASDAQ100_TRI_USD: '#9467bd',
@@ -128,12 +134,51 @@ window.initializeTool = window.initializeTool || {};
     return monthlySharpe * Math.sqrt(12); // annualized Sharpe
   }
 
-  // Data loader: expects /data/asset-series.json
+  // Data loader: expects /data/multi-asset-allocation.json
   async function loadAssetData() {
-    const resp = await fetch('/data/asset-series.json');
+    const resp = await fetch('/data/multi-asset-allocation.json');
     if (!resp.ok) throw new Error('Failed to load asset data');
     const json = await resp.json();
-    return json; // { key: [{date:'YYYY-MM', value:number}, ...], USDINR: [...] }
+    
+    // Transform columnar format to series format
+    // json = { symbols: ["cpi", "niftybees", ...], start: "2002-01", data: [[val1, val2, ...], ...] }
+    const result = {};
+    const symbolMap = {
+      'niftybees': 'NIFTY50_TRI_INR',
+      'juniorbees': 'NIFTY_NEXT50_TRI_INR',
+      'mid150bees': 'NIFTY_MIDCAP150_TRI_INR',
+      'hdfcsml250': 'NIFTY_SMALLCAP250_TRI_INR',
+      'goldbees': 'GOLD_INR',
+      'ltgiltbees': 'DEBT_TRI_INR',
+      'cndx.l': 'NASDAQ100_TRI_USD',
+      'cpi': 'CPI'
+    };
+    
+    // Create arrays for each symbol
+    json.symbols.forEach((sym, idx) => {
+      const mappedKey = symbolMap[sym] || sym;
+      result[mappedKey] = [];
+    });
+    
+    // Parse start date
+    const [startYear, startMonth] = json.start.split('-').map(Number);
+    
+    // Fill data month by month
+    json.data.forEach((row, monthOffset) => {
+      const year = startYear + Math.floor((startMonth - 1 + monthOffset) / 12);
+      const month = ((startMonth - 1 + monthOffset) % 12) + 1;
+      const dateStr = `${year}-${String(month).padStart(2, '0')}`;
+      
+      json.symbols.forEach((sym, idx) => {
+        const mappedKey = symbolMap[sym] || sym;
+        const value = row[idx];
+        if (value !== null && value !== undefined) {
+          result[mappedKey].push({ date: dateStr, value });
+        }
+      });
+    });
+    
+    return result;
   }
 
   function buildIndex(valuesByMonth) {
@@ -327,165 +372,140 @@ window.initializeTool = window.initializeTool || {};
             <div class="sip-inputs">
               <h3 style="margin-top:0;">📊 Multi Asset Allocator</h3>
               <div class="target-group">
+                <!-- Backtest Period Selection -->
                 <div class="input-group">
-                  <label>Asset Classes (select any combination)</label>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
-                    ${SUPPORTED_ASSETS.map(a => `
-                      <label style="display:flex;align-items:center;gap:0.5rem;">
-                        <input type="checkbox" v-model="form.assets['${a.key}'].selected" @change="onSelectionChange">
-                        <span style="display:inline-block;width:12px;height:12px;background:${ASSET_COLORS[a.key]};border-radius:2px;"></span>
-                        ${a.label}
-                      </label>
-                    `).join('')}
-                  </div>
-                </div>
-                <div class="input-group">
-                  <label>Allocations (%) for selected assets</label>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
-                    ${SUPPORTED_ASSETS.map(a => `
-                      <div style="display:flex;align-items:center;gap:0.5rem;">
-                        <span style="min-width:160px;">${a.label}</span>
-                        <input type="number" min="0" max="100" step="1" v-model.number="form.assets['${a.key}'].alloc" @input="onAllocInputAsset('${a.key}')">
-                      </div>
-                    `).join('')}
-                  </div>
-                  <div style="font-size:0.85rem;color:#666;margin-top:0.25rem;">Selected allocations should sum to 100%. Non-selected assets are ignored.</div>
-                  <div style="margin-top:0.5rem;display:flex;gap:0.5rem;">
-                    <button type="button" @click="equalWeight">Equal Weight</button>
-                    <button type="button" @click="normalizeAlloc">Normalize to 100%</button>
-                  </div>
-                  <div style="margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;">
-                    <span style="font-size:0.9rem;color:#333;">Auto-adjust:</span>
-                    <select v-model="form.balancerKey" @change="onBalancerChange" style="padding:0.25rem 0.5rem;">
-                      <option v-for="opt in selectedAssets()" :value="opt.key">{{ opt.label }}</option>
-                    </select>
-                    <span style="font-size:0.85rem;color:#666;">Changes auto-adjust {{ balancerLabel }}</span>
-                  </div>
-                  <div style="margin-top:0.75rem;">
-                    <label>Interactive Allocation Editor (drag the separators)</label>
-                    <div class="alloc-bar" ref="allocBar" style="display:flex;width:100%;height:44px;border:1px solid #ddd;border-radius:4px;overflow:hidden;">
-                          <div v-for="(asset, i) in selectedAssets()" :key="asset.key" class="segment"
-                            :style="segmentStyle(asset)">
-                        <span class="label">{{ asset.label }} {{ form.assets[asset.key].alloc || 0 }}%</span>
-                        <div v-if="i < selectedAssets().length - 1" class="handle"
-                             @pointerdown="startDrag(i, $event)"
-                             style="position:absolute; right:0; top:0; width:10px; height:100%; cursor:col-resize; background: rgba(0,0,0,0.25);"></div>
-                      </div>
+                  <label>
+                    Backtest Period:&nbsp;<strong>{{ formattedPeriod }}</strong>
+                    <span class="help-icon help-icon-wide" data-tooltip="Historical period for backtesting your portfolio allocation. Longer periods provide more reliable results but require assets with sufficient historical data">ℹ️</span>
+                  </label>
+                  <div class="unit-selector-input">
+                    <input type="number" min="1" max="30" step="1" v-model.number="form.period.value" @input="onPeriodChange">
+                    <div class="unit-buttons">
+                      <button type="button" :class="{'active': form.period.unit === 'years'}" @click="form.period.unit = 'years'; onPeriodChange()">Years</button>
+                      <button type="button" :class="{'active': form.period.unit === 'months'}" @click="form.period.unit = 'months'; onPeriodChange()">Months</button>
                     </div>
                   </div>
                 </div>
-                <div class="input-group-row">
-                  <div class="input-group-col" style="flex:1;">
-                    <label>Rebalancing</label>
-                    <div class="mode-toggle">
-                      <button type="button" :class="{'active': form.rebalance}" @click="form.rebalance = true; calculate()">Monthly to allocation</button>
-                      <button type="button" :class="{'active': !form.rebalance}" @click="form.rebalance = false; calculate()">No rebalancing</button>
+
+                <!-- Asset Allocation -->
+                <div class="input-group" v-if="availableAssets.length > 0">
+                  <label>
+                    Asset Allocation
+                    <span class="help-icon help-icon-wide" data-tooltip="Distribute your investment across different asset classes. Total allocation must equal 100%. Diversification helps reduce risk while maintaining growth potential">ℹ️</span>
+                  </label>
+                  <div style="font-size:0.85rem;color:#666;margin-top:0.25rem;margin-bottom:0.5rem;">
+                    Following assets available for {{ formattedPeriod }} backtest
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
+                    <div v-for="asset in availableAssets" :key="asset.key" style="display:flex;align-items:center;gap:0.75rem;">
+                      <span style="display:inline-block;width:16px;height:16px;border-radius:3px;flex-shrink:0;" :style="{background: colors[asset.key]}"></span>
+                      <span style="flex:1;min-width:180px;font-size:0.9rem;">{{ asset.label }}</span>
+                      <input type="range" min="0" max="100" step="1" v-model.number="form.allocations[asset.key]" @input="onAllocationChange" style="flex:2;">
+                      <input type="number" min="0" max="100" step="1" v-model.number="form.allocations[asset.key]" @input="onAllocationChange" style="width:70px;">
+                      <span style="width:30px;text-align:right;font-weight:600;">%</span>
                     </div>
                   </div>
-                  <div class="input-group-col" style="flex:1;">
-                    <label>Lookback Period</label>
-                    <div class="unit-selector-input">
-                      <input type="number" min="1" step="1" v-model.number="form.years" @input="debouncedCalculate">
-                      <div class="unit-buttons"><button type="button" class="active">Years</button></div>
+                  <div style="margin-top:0.75rem;display:flex;justify-content:space-between;align-items:center;padding:0.75rem;border-radius:4px;" :style="{background: totalAllocation === 100 ? '#d4edda' : '#fff3cd', border: '1px solid ' + (totalAllocation === 100 ? '#c3e6cb' : '#ffeeba')}">
+                    <div style="font-size:0.95rem;font-weight:600;" :style="{color: totalAllocation === 100 ? '#155724' : '#856404'}">
+                      Total Allocation: {{ totalAllocation }}% {{ totalAllocation === 100 ? '✓' : '(must be 100%)' }}
                     </div>
-                  </div>
-                </div>
-                <div class="input-group-row">
-                  <div class="input-group-col" style="flex:1;">
-                    <label>Starting Monthly Investment: <strong>₹ {{ formatCurrencyFull(form.monthly) }}</strong></label>
-                    <input type="number" min="0" step="100" v-model.number="form.monthly" @input="debouncedCalculate">
-                  </div>
-                  <div class="input-group-col" style="flex:1;">
-                    <label>Yearly Hike: <strong>{{ form.hike }}%</strong></label>
-                    <input type="number" min="0" max="50" step="0.5" v-model.number="form.hike" @input="debouncedCalculate">
-                  </div>
-                </div>
-                <div class="input-group-row">
-                  <div class="input-group-col" style="flex:1;">
-                    <label>Inflation: <strong>{{ form.inflation }}%</strong></label>
-                    <input type="number" min="0" max="20" step="0.5" v-model.number="form.inflation" @input="debouncedCalculate">
+                    <button type="button" @click="equalWeight" style="padding:0.4rem 1rem;">Equal Weight</button>
                   </div>
                 </div>
               </div>
+
+              <!-- Investment Parameters -->
+              <div class="investment-params-group" v-if="availableAssets.length > 0">
+                <div class="input-group">
+                  <label>
+                    Initial Monthly Investment:&nbsp;<strong>₹ {{ formatCurrency(initialInvestment) }}</strong>
+                    <span class="help-icon help-icon-wide" data-tooltip="The starting monthly SIP amount. This will be split across selected assets according to your allocation percentages">ℹ️</span>
+                  </label>
+                  <div class="unit-selector-input">
+                    <input type="number" min="0" step="0.1" v-model.number="form.initialInvestmentValue" @input="debouncedCalculate">
+                    <div class="unit-buttons">
+                      <button type="button" :class="{'active': form.initialInvestmentUnit === 'crores'}" @click="form.initialInvestmentUnit = 'crores'; debouncedCalculate()">Crores</button>
+                      <button type="button" :class="{'active': form.initialInvestmentUnit === 'lakhs'}" @click="form.initialInvestmentUnit = 'lakhs'; debouncedCalculate()">Lakhs</button>
+                      <button type="button" :class="{'active': form.initialInvestmentUnit === 'thousands'}" @click="form.initialInvestmentUnit = 'thousands'; debouncedCalculate()">Thousands</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="input-group">
+                  <label>
+                    Yearly Hike:&nbsp;<strong>{{ form.yearlyHike }}%</strong>
+                    <span class="help-icon help-icon-wide" data-tooltip="Annual percentage increase in your monthly SIP amount. Simulates increasing contributions as your income grows over time">ℹ️</span>
+                  </label>
+                  <input type="number" min="0" max="50" step="0.5" v-model.number="form.yearlyHike" @input="debouncedCalculate" style="width:100%;">
+                </div>
+
+                <!-- Calculate Button -->
+                <div class="input-group">
+                  <button type="button" @click="calculate" :disabled="!canCalculate" 
+                    style="width:100%;padding:0.75rem;font-size:1.1rem;font-weight:bold;background:#1f77b4;color:white;border:none;border-radius:4px;" 
+                    :style="{opacity: canCalculate ? 1 : 0.5, cursor: canCalculate ? 'pointer' : 'not-allowed'}">
+                    {{ canCalculate ? '🚀 Run Backtest' : '⚠️ Set Allocation to 100%' }}
+                  </button>
+                </div>
+              </div>
+              
+              <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Adjust allocations and parameters to see different scenarios</p>
             </div>
+
+            <!-- Results Section -->
             <div class="sip-outputs" v-if="results.ready">
               <div class="sip-summary">
-                <div class="summary-row">
-                  <div class="summary-cell">
-                    <div class="summary-label">Final Real Value</div>
-                    <span class="help-icon" style="cursor:default;opacity:1;font-size:1.2em;">₹ {{ formatCurrency(results.blend.finalRealValue) }}</span>
-                  </div>
-                  <div class="summary-cell">
-                    <div class="summary-label">XIRR</div>
-                    <strong>{{ (results.blend.xirr*100).toFixed(2) }}%</strong>
-                  </div>
-                  <div class="summary-cell">
-                    <div class="summary-label">Sharpe</div>
-                    <strong>{{ results.blend.sharpe.toFixed(2) }}</strong>
-                  </div>
-                  <div class="summary-cell">
-                    <div class="summary-label">Std Dev (monthly)</div>
-                    <strong>{{ (results.blend.stdDev*100).toFixed(2) }}%</strong>
-                  </div>
-                  <div class="summary-cell">
-                    <div class="summary-label">Max Drawdown</div>
-                    <strong>{{ (results.blend.maxDrawdown*100).toFixed(1) }}%</strong>
-                  </div>
-                </div>
-              </div>
-              <div style="margin-top:1rem;">
-                <h4>Comparison: 100% in each asset vs blended</h4>
+                <h3 style="margin-top: 0; margin-bottom: 0.5rem;">📊 Backtest Results</h3>
                 <table class="summary-table">
-                  <thead>
-                    <tr>
-                      <th>Asset</th><th>Final Real Value</th><th>XIRR</th><th>Sharpe</th><th>Std Dev</th><th>Max DD</th>
-                    </tr>
-                  </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Blended Allocation</strong></td>
-                      <td>₹ {{ formatCurrency(results.blend.finalRealValue) }}</td>
-                      <td>{{ (results.blend.xirr*100).toFixed(2) }}%</td>
-                      <td>{{ results.blend.sharpe.toFixed(2) }}</td>
-                      <td>{{ (results.blend.stdDev*100).toFixed(2) }}%</td>
-                      <td>{{ (results.blend.maxDrawdown*100).toFixed(1) }}%</td>
+                      <td><strong>Final Value</strong></td>
+                      <td class="highlight">
+                        <span class="help-icon" :data-tooltip="'₹ ' + results.finalValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">
+                          ₹ {{ formatCurrency(results.finalValue) }}
+                        </span>
+                      </td>
                     </tr>
-                    <tr v-for="row in results.singles" :key="row.key">
-                      <td>{{ row.label }}</td>
-                      <td>₹ {{ formatCurrency(row.metrics.finalRealValue) }}</td>
-                      <td>{{ (row.metrics.xirr*100).toFixed(2) }}%</td>
-                      <td>{{ row.metrics.sharpe.toFixed(2) }}</td>
-                      <td>{{ (row.metrics.stdDev*100).toFixed(2) }}%</td>
-                      <td>{{ (row.metrics.maxDrawdown*100).toFixed(1) }}%</td>
+                    <tr>
+                      <td><strong>Total Invested</strong></td>
+                      <td>
+                        <span class="help-icon" :data-tooltip="'₹ ' + results.totalInvested.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">
+                          ₹ {{ formatCurrency(results.totalInvested) }}
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>XIRR (Returns)</strong></td>
+                      <td style="background-color: #d4edda; font-weight: 600;">
+                        <span style="font-size: 1.1em;">{{ results.returns.toFixed(2) }}%</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Absolute Returns</strong></td>
+                      <td>
+                        {{ ((results.finalValue / results.totalInvested - 1) * 100).toFixed(2) }}% ({{ (results.finalValue / results.totalInvested).toFixed(2) }}x)
+                      </td>
                     </tr>
                   </tbody>
                 </table>
+                
+                <p style="font-size: 0.9em; color: #666; margin-top: 1rem;">
+                  ℹ️ Results based on historical data. Past performance does not guarantee future returns.
+                </p>
               </div>
-              <div style="margin-top:1rem;">
-                <h4>Contribution Table</h4>
-                <table class="summary-table">
-                  <thead>
-                    <tr>
-                      <th>Year-Month</th>
-                      ${SUPPORTED_ASSETS.map(a => `<th>${a.label}</th>`).join('')}
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="row in results.blend.contributionByMonth">
-                      <td>{{ row.date }}</td>
-                      ${SUPPORTED_ASSETS.map(a => `
-                        <td>{{ row.assets['${a.key}'] ? formatCurrency(row.assets['${a.key}']) : '-' }}</td>
-                      `).join('')}
-                      <td>₹ {{ formatCurrency(row.total) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="maa-chart" style="width:100%;height:400px;margin-top:1rem;"></div>
             </div>
             <div class="sip-outputs placeholder" v-else>
-              <p>Fill the allocations (sum 100%) and select assets to run the simulation.</p>
+              <div class="placeholder-content">
+                <h3 style="margin-top: 0;">🎯 Your Results Will Appear Here</h3>
+                <p v-if="availableAssets.length > 0">Set allocations to 100% and click "Run Backtest" to see results</p>
+                <p v-else>Select a backtest period to begin</p>
+                <div class="placeholder-features" v-if="availableAssets.length > 0">
+                  <p>✅ Historical performance analysis</p>
+                  <p>✅ Multi-asset portfolio simulation</p>
+                  <p>✅ SIP with yearly hike support</p>
+                  <p>✅ XIRR-based returns calculation</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -494,214 +514,141 @@ window.initializeTool = window.initializeTool || {};
 
     const app = Vue.createApp({
       data() {
-        const assetsState = {};
-        for (const a of SUPPORTED_ASSETS) {
-          assetsState[a.key] = { selected: false, alloc: 0 };
-        }
         return {
           form: {
-            assets: assetsState,
-            rebalance: true,
-            years: 10,
-            monthly: DEFAULT_START_MONTHLY_INVESTMENT,
-            hike: DEFAULT_YEARLY_HIKE,
-            inflation: DEFAULT_INFLATION,
-            balancerKey: 'DEBT_TRI_INR'
+            period: {
+              value: 10,
+              unit: 'years' // 'years' or 'months'
+            },
+            allocations: {}, // Will be populated based on available assets
+            initialInvestmentValue: DEFAULT_START_MONTHLY_INVESTMENT_VALUE,
+            initialInvestmentUnit: DEFAULT_START_MONTHLY_INVESTMENT_UNIT,
+            yearlyHike: DEFAULT_YEARLY_HIKE
           },
-          results: { ready: false, blend: {}, singles: [] },
           assetData: null,
-          chart: null,
-          dragging: null,
-          _dragMoveHandler: null,
-          _dragUpHandler: null,
+          availableAssets: [], // Assets that have sufficient data for selected period
+          results: { 
+            ready: false, 
+            finalValue: 0,
+            totalInvested: 0,
+            returns: 0
+          },
           colors: ASSET_COLORS
         };
       },
       computed: {
-        selectedAllocations() {
-          const out = {};
-          for (const a of SUPPORTED_ASSETS) {
-            const s = this.form.assets[a.key];
-            if (s.selected && s.alloc > 0) out[a.key] = s.alloc / 100;
-          }
-          return out;
+        totalMonths() {
+          return this.form.period.unit === 'years' 
+            ? this.form.period.value * 12 
+            : this.form.period.value;
         },
-        balancerLabel() {
-          const a = SUPPORTED_ASSETS.find(x => x.key === this.form.balancerKey);
-          return a ? a.label : '—';
+        formattedPeriod() {
+          const months = this.totalMonths;
+          const years = Math.floor(months / 12);
+          const remainingMonths = months % 12;
+          
+          if (years === 0) {
+            return `${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}`;
+          } else if (remainingMonths === 0) {
+            return `${years} year${years !== 1 ? 's' : ''}`;
+          } else {
+            return `${years} year${years !== 1 ? 's' : ''} ${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}`;
+          }
+        },
+        initialInvestment() {
+          return this.form.initialInvestmentValue * CURRENCY_MULTIPLIERS[this.form.initialInvestmentUnit];
+        },
+        totalAllocation() {
+          return sum(Object.values(this.form.allocations));
+        },
+        canCalculate() {
+          return this.availableAssets.length > 0 && this.totalAllocation === 100;
         }
       },
       methods: {
-        formatCurrency(n) { return n.toLocaleString('en-IN', { maximumFractionDigits: 0 }); },
-        formatCurrencyFull(n) { return n.toLocaleString('en-IN', { maximumFractionDigits: 0 }); },
-        segmentStyle(asset) {
-          const pct = this.form.assets[asset.key].alloc || 0;
-          const bg = this.colors[asset.key] || '#6aa0ff';
-          return {
-            width: pct + '%',
-            background: bg,
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontSize: '0.85rem'
-          };
+        formatCurrency(n) { 
+          return n.toLocaleString('en-IN', { maximumFractionDigits: 0 }); 
         },
-        onSelectionChange() {
-          this.normalizeAlloc();
-          this.onBalancerChange();
-          this.debouncedCalculate();
-        },
-        onAllocInputAsset(key) {
-          this.rebalanceTo100UsingBalancer(key);
-          this.debouncedCalculate();
-        },
-        onBalancerChange() {
-          // Ensure balancer is among selected; if not, pick first selected
-          const sel = this.selectedAssets();
-          if (!sel.find(s => s.key === this.form.balancerKey)) {
-            this.form.balancerKey = sel.length ? sel[0].key : this.form.balancerKey;
-          }
-        },
-        rebalanceTo100UsingBalancer(changedKey) {
-          const sel = this.selectedAssets();
-          if (sel.length === 0) return;
-          let balKey = this.form.balancerKey;
-          const balIsSelected = !!sel.find(s => s.key === balKey);
-          if (!balIsSelected) {
-            // Fallback to largest selected asset
-            balKey = this.largestNonKeySelected(changedKey);
-          }
-          const total = this.totalAllocSelected();
-          if (changedKey !== balKey) {
-            // Set balancer to remaining so total = 100
-            const others = sel.filter(s => s.key !== balKey);
-            const sumOthers = others.reduce((acc, s) => acc + (this.form.assets[s.key].alloc || 0), 0);
-            this.form.assets[balKey].alloc = clamp(100 - sumOthers, 0, 100);
-            // If clamped caused mismatch, normalize
-            const sumNow = this.totalAllocSelected();
-            if (sumNow !== 100) this.normalizeAlloc();
-          } else {
-            // Balancer edited: adjust largest other asset
-            const largest = this.largestNonKeySelected(balKey);
-            if (!largest) return;
-            const diff = 100 - total;
-            const cur = this.form.assets[largest].alloc || 0;
-            this.form.assets[largest].alloc = clamp(cur + diff, 0, 100);
-            const sumNow = this.totalAllocSelected();
-            if (sumNow !== 100) this.normalizeAlloc();
-          }
-        },
-        largestNonKeySelected(excludeKey) {
-          const sel = this.selectedAssets();
-          let maxK = null; let maxV = -1;
-          for (const s of sel) {
-            if (s.key === excludeKey) continue;
-            const v = this.form.assets[s.key].alloc || 0;
-            if (v > maxV) { maxV = v; maxK = s.key; }
-          }
-          return maxK;
-        },
-        equalWeight() {
-          const sel = this.selectedAssets();
-          if (sel.length === 0) return;
-          const w = 100 / sel.length;
-          for (const s of sel) this.form.assets[s.key].alloc = Math.round(w);
-          const sumNow = this.totalAllocSelected();
-          const diff = 100 - sumNow;
-          if (diff !== 0) this.form.assets[sel[0].key].alloc += diff;
-          this.refreshAllocEditor();
-          this.debouncedCalculate();
-        },
-        normalizeAlloc() {
-          const total = this.totalAllocSelected();
-          const sel = this.selectedAssets();
-          if (sel.length === 0) return;
-          if (total <= 0) {
-            const w = 100 / sel.length;
-            for (const s of sel) this.form.assets[s.key].alloc = Math.round(w);
-          } else {
-            for (const s of sel) {
-              const cur = this.form.assets[s.key].alloc;
-              this.form.assets[s.key].alloc = Math.round((cur / total) * 100);
-            }
-            const sumNow = this.totalAllocSelected();
-            if (sumNow !== 100) this.form.assets[sel[0].key].alloc += (100 - sumNow);
-          }
-          this.refreshAllocEditor();
-          this.debouncedCalculate();
-        },
-        totalAllocSelected() {
-          return this.selectedAssets().reduce((acc, s) => acc + (this.form.assets[s.key].alloc || 0), 0);
-        },
-        selectedAssets() {
-          const arr = [];
-          for (const a of SUPPORTED_ASSETS) {
-            const s = this.form.assets[a.key];
-            if (s.selected) arr.push({ key: a.key, label: a.label, alloc: s.alloc });
-          }
-          return arr;
-        },
-        startDrag(index, event) {
-          const bar = this.$refs.allocBar;
-          if (!bar) return;
-          const rect = bar.getBoundingClientRect();
-          const barWidth = rect.width;
-          const sel = this.selectedAssets();
-          if (index >= sel.length - 1) return;
-          const leftKey = sel[index].key;
-          const rightKey = sel[index + 1].key;
-          const leftStart = this.form.assets[leftKey].alloc || 0;
-          const rightStart = this.form.assets[rightKey].alloc || 0;
-
-          this.dragging = { index, leftKey, rightKey, startX: event.clientX, barWidth, leftStart, rightStart, pairTotal: leftStart + rightStart };
-
-          this._dragMoveHandler = (e) => this.onDrag(e);
-          this._dragUpHandler = (e) => this.stopDrag(e);
-          window.addEventListener('pointermove', this._dragMoveHandler);
-          window.addEventListener('pointerup', this._dragUpHandler, { once: true });
-        },
-        onDrag(e) {
-          if (!this.dragging) return;
-          const dx = e.clientX - this.dragging.startX;
-          const deltaPct = (dx / this.dragging.barWidth) * 100;
-          const minPct = 0; // could be 1 for minimum segment
-          let left = this.dragging.leftStart + deltaPct;
-          left = clamp(left, minPct, this.dragging.pairTotal - minPct);
-          let right = this.dragging.pairTotal - left;
-          // Snap to 1%
-          const leftRounded = Math.round(left);
-          const rightRounded = this.dragging.pairTotal - leftRounded;
-          if (rightRounded < minPct) return;
-          this.form.assets[this.dragging.leftKey].alloc = leftRounded;
-          this.form.assets[this.dragging.rightKey].alloc = rightRounded;
-        },
-        stopDrag() {
-          window.removeEventListener('pointermove', this._dragMoveHandler);
-          this.dragging = null;
-          this.debouncedCalculate();
-        },
+        
         async ensureDataLoaded() {
           if (!this.assetData) {
             try {
               this.assetData = await loadAssetData();
             } catch (e) {
               console.error(e);
-              alert('Asset data not found. Please add /static/data/asset-series.json with monthly TRI values.');
+              alert('Asset data not found. Please add /data/asset-series.json with monthly TRI values.');
               return false;
             }
           }
           return true;
         },
-        debouncedCalculate: null,
-        async calculate() {
-          // Validate allocations
-          const weight = sum(Object.values(this.selectedAllocations));
-          if (weight <= 0 || Math.abs(weight - 1) > 1e-6) {
-            this.results.ready = false;
-            return;
+
+        async onPeriodChange() {
+          const ok = await this.ensureDataLoaded();
+          if (!ok) return;
+
+          const requiredMonths = this.totalMonths;
+          const available = [];
+
+          // Check each asset for data availability
+          for (const asset of SUPPORTED_ASSETS) {
+            let dataLength = 0;
+            
+            if (this.assetData[asset.key]) {
+              // buildIndex reduces length by 1 (calculating returns from consecutive values)
+              dataLength = this.assetData[asset.key].length - 1;
+            }
+
+            // Check if asset has at least requiredMonths of return data
+            if (dataLength >= requiredMonths) {
+              available.push({
+                key: asset.key,
+                label: asset.label,
+                dataPoints: dataLength
+              });
+            }
           }
+
+          this.availableAssets = available;
+
+          // Initialize allocations for available assets
+          const newAllocations = {};
+          const defaultAlloc = available.length > 0 ? Math.floor(100 / available.length) : 0;
+          let remainder = available.length > 0 ? 100 - (defaultAlloc * available.length) : 0;
+          
+          for (let i = 0; i < available.length; i++) {
+            const asset = available[i];
+            newAllocations[asset.key] = defaultAlloc + (i === 0 ? remainder : 0);
+          }
+          
+          this.form.allocations = newAllocations;
+          this.results.ready = false;
+        },
+
+        onAllocationChange() {
+          // User manually changed allocation
+          // We'll let them manage it themselves
+          this.debouncedCalculate();
+        },
+
+        equalWeight() {
+          if (this.availableAssets.length === 0) return;
+          
+          const weight = Math.floor(100 / this.availableAssets.length);
+          const remainder = 100 - (weight * this.availableAssets.length);
+          
+          for (let i = 0; i < this.availableAssets.length; i++) {
+            const asset = this.availableAssets[i];
+            this.form.allocations[asset.key] = weight + (i === 0 ? remainder : 0);
+          }
+          
+          this.debouncedCalculate();
+        },
+
+        debouncedCalculate: null,
+
+        async calculate() {
+          if (!this.canCalculate) return;
 
           const ok = await this.ensureDataLoaded();
           if (!ok) return;
@@ -709,103 +656,69 @@ window.initializeTool = window.initializeTool || {};
           // Build monthly return series in INR for each asset
           const seriesByAsset = {};
 
-          // USD→INR conversion for Nasdaq 100
-          if (this.assetData['NASDAQ100_TRI_USD'] && this.assetData['USDINR']) {
-            const converted = convertUSDToINR(this.assetData['NASDAQ100_TRI_USD'], this.assetData['USDINR']);
-            // Use the same key as selection so allocations resolve
-            seriesByAsset['NASDAQ100_TRI_USD'] = converted;
+          // All assets are already in INR or INR-adjusted terms
+          for (const key of Object.keys(this.assetData)) {
+            if (key !== 'CPI') { // Skip CPI for now
+              seriesByAsset[key] = buildIndex(this.assetData[key]);
+            }
           }
 
-          // INR series direct
-          const directKeys = ['NIFTY50_TRI_INR','NIFTY_NEXT50_TRI_INR','NIFTY_MIDCAP150_TRI_INR','NIFTY_SMALLCAP250_TRI_INR','GOLD_INR','DEBT_TRI_INR'];
-          for (const k of directKeys) {
-            if (this.assetData[k]) seriesByAsset[k] = buildIndex(this.assetData[k]);
-          }
-
-          const months = this.form.years * 12;
-          // Determine startYYYYMM by picking the latest possible start such that months exist in most series
-          // For simplicity: use min last date across selected assets minus months
-          const selectedKeys = Object.keys(this.selectedAllocations);
+          // Determine start date (most recent possible date minus required months)
+          const selectedKeys = Object.keys(this.form.allocations);
           const lastDates = selectedKeys.map(k => {
             const s = seriesByAsset[k] || [];
             return s.length ? s[s.length - 1].date : null;
           }).filter(Boolean);
+          
           if (!lastDates.length) {
             alert('No overlapping data for selected assets.');
-            this.results.ready = false;
             return;
           }
+          
           lastDates.sort();
-          const minLast = lastDates[0]; // earliest last date among selected
+          const minLast = lastDates[0];
           const minLastDate = parseMonth(minLast);
-          const startDate = addMonths(minLastDate, -months);
+          const startDate = addMonths(minLastDate, -this.totalMonths);
           const startYYYYMM = toYYYYMM(startDate);
 
-          const blend = simulatePortfolio({
-            seriesByAsset,
-            allocations: this.selectedAllocations,
-            months,
-            startYYYYMM,
-            rebalancing: this.form.rebalance,
-            inflationAnnual: this.form.inflation,
-            baseMonthly: this.form.monthly,
-            yearlyHikePct: this.form.hike
-          });
-
-          const singles = simulateSingleAssetComparisons({
-            seriesByAsset,
-            months,
-            startYYYYMM,
-            inflationAnnual: this.form.inflation,
-            baseMonthly: this.form.monthly,
-            yearlyHikePct: this.form.hike
-          });
-
-          this.results = { ready: true, blend, singles };
-          this.renderChart();
-        },
-        renderChart() {
-          // Plot real portfolio value over time for blended vs a couple of assets
-          const dom = document.getElementById('maa-chart');
-          if (!dom) return;
-          if (!this.chart) this.chart = echarts.init(dom);
-
-          const months = this.results.blend.portfolioValues.length;
-          const x = [];
-          const startDate = new Date();
-          for (let i = 0; i < months; i++) {
-            x.push(i + 1);
+          // Normalize allocations to weights (sum to 1)
+          const allocations = {};
+          for (const key of selectedKeys) {
+            allocations[key] = this.form.allocations[key] / 100;
           }
 
-          const series = [
-            {
-              name: 'Blended (Real)', type: 'line', data: this.results.blend.portfolioValues.map(round0)
-            }
-          ];
-          // Add up to 2 single-asset series for comparison
-          for (let i = 0; i < Math.min(2, this.results.singles.length); i++) {
-            series.push({ name: this.results.singles[i].label, type: 'line', data: this.results.singles[i].metrics.portfolioValues.map(round0) });
-          }
-
-          this.chart.setOption({
-            tooltip: { trigger: 'axis' },
-            legend: {},
-            xAxis: { type: 'category', data: x },
-            yAxis: { type: 'value' },
-            series
+          // Run simulation (simplified - no rebalancing, no inflation for now)
+          const result = simulatePortfolio({
+            seriesByAsset,
+            allocations,
+            months: this.totalMonths,
+            startYYYYMM,
+            rebalancing: false,
+            inflationAnnual: 0, // Simplified: no inflation adjustment
+            baseMonthly: this.initialInvestment,
+            yearlyHikePct: this.form.yearlyHike
           });
+
+          this.results = {
+            ready: true,
+            finalValue: result.finalRealValue,
+            totalInvested: result.totalContributions,
+            returns: result.xirr * 100
+          };
         }
       },
       async mounted() {
-        // debounce
+        // Setup debounced calculate
         this.debouncedCalculate = (() => {
           let t = null;
-          return () => { clearTimeout(t); t = setTimeout(() => this.calculate(), DEBOUNCE_DELAY_MS); };
+          return () => { 
+            clearTimeout(t); 
+            t = setTimeout(() => this.calculate(), DEBOUNCE_DELAY_MS); 
+          };
         })();
-        // Defaults: select Nifty50 + Debt 50/50
-        this.form.assets['NIFTY50_TRI_INR'].selected = true; this.form.assets['NIFTY50_TRI_INR'].alloc = 50;
-        this.form.assets['DEBT_TRI_INR'].selected = true; this.form.assets['DEBT_TRI_INR'].alloc = 50;
-        this.calculate();
+
+        // Load data and determine available assets for default period
+        await this.onPeriodChange();
       }
     });
 
