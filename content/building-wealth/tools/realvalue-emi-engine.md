@@ -21,6 +21,10 @@ wealth_tags:
 
 The **RealValue EMI Engine** is not just another EMI calculator — it is a **real-world debt analysis tool** built for serious financial planning. Unlike traditional EMI calculators that show only nominal numbers, RealValue focuses on **what your loan actually costs** after **adjusting for inflation**.
 
+### See the TRUE Cost of Loans After Inflation (India)
+
+{{< youtube 54pc2SyETg0 >}}
+
 ### One Engine. Every Loan Scenario.
 
 Whether you want to know **how much you can borrow**, **how long it will take to repay**, or **what EMI you need**, RealValue adapts automatically.

@@ -12,7 +12,7 @@ wealth_tags:
 summary: "Understanding the difference between smart loans and bad loans. Learn when debt can be a powerful tool for wealth creation and when it becomes a burden."
 youtube_id: "CC79fl-zFKY"
 youtube_url: "https://youtu.be/CC79fl-zFKY"
-duration: ""
+duration: "15:13"
 platform: "YouTube"
 ---
 

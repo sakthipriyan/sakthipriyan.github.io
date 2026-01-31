@@ -2,19 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sakthipriyan.com/building-wealth/blogs/</loc>
-    <lastmod>2026-01-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/emi/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/financial-tools/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/inflation/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/loans/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/real-value/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/videos/real-value-emi-engine-see-the-true-cost-of-loans-after-inflation-india/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/videos/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/wealth_tags/</loc>
+    <lastmod>2026-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/blogs/</loc>
     <lastmod>2026-01-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/car-loan/</loc>
     <lastmod>2026-01-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/debt-management/</loc>
-    <lastmod>2026-01-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/tags/emi/</loc>
     <lastmod>2026-01-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/financial-planning/</loc>
@@ -29,12 +53,6 @@
     <loc>https://sakthipriyan.com/building-wealth/blogs/realvalue-emi-engine-use-cases/</loc>
     <lastmod>2026-01-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/</loc>
-    <lastmod>2026-01-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/wealth_tags/</loc>
-    <lastmod>2026-01-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tools/realvalue-emi-engine/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -47,13 +65,7 @@
     <loc>https://sakthipriyan.com/building-wealth/tags/financial-literacy/</loc>
     <lastmod>2026-01-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/tags/loans/</loc>
-    <lastmod>2026-01-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/personal-finance/</loc>
-    <lastmod>2026-01-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/videos/</loc>
     <lastmod>2026-01-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/debt/</loc>
@@ -91,9 +103,6 @@
   </url><url>
     <loc>https://sakthipriyan.com/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</loc>
     <lastmod>2026-01-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/tags/financial-tools/</loc>
-    <lastmod>2026-01-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/investment/</loc>
     <lastmod>2026-01-03T00:00:00+00:00</lastmod>
