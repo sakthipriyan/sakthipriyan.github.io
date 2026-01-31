@@ -6,8 +6,15 @@
     <description>Recent content in Sakthi Priyan on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 23 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Multi Asset Allocator</title>
+      <link>https://sakthipriyan.com/building-wealth/tools/multi-asset-allocator/</link>
+      <pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/tools/multi-asset-allocator/</guid>
+      <description>Allocate across Nasdaq 100, Nifty 50, Nifty Next 50, Midcap 150, Smallcap 250, Gold, Debt; simulate SIP with rebalancing and metrics.</description>
+    </item>
     <item>
       <title>RealValue EMI Engine Use Cases</title>
       <link>https://sakthipriyan.com/building-wealth/blogs/realvalue-emi-engine-use-cases/</link>

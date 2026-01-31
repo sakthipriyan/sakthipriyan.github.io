@@ -1,0 +1,519 @@
+{
+  "request": {
+    "ric": "CNDX.L",
+    "fromDate": "2010-01-01T00:00:00",
+    "toDate": "2010-12-31T23:59:59",
+    "fids": [
+      "_DATE_END",
+      "CLOSE_PRC",
+      "HIGH_1",
+      "OPEN_PRC",
+      "LOW_1"
+    ],
+    "samples": "D",
+    "appendRecentData": "all"
+  },
+  "data": [
+    {
+      "_DATE_END": "2010-09-15",
+      "LOW_1": "102.15",
+      "CLOSE_PRC": "102.15",
+      "HIGH_1": "102.15",
+      "OPEN_PRC": "102.15"
+    },
+    {
+      "_DATE_END": "2010-09-27",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.4",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-09-28",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.15",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-09-29",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.06",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-09-30",
+      "LOW_1": "-",
+      "CLOSE_PRC": "104.99",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-01",
+      "LOW_1": "-",
+      "CLOSE_PRC": "105.24",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-04",
+      "LOW_1": "-",
+      "CLOSE_PRC": "104.07",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-05",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.43",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-06",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.25",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-07",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.18",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-08",
+      "LOW_1": "-",
+      "CLOSE_PRC": "106.88",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-11",
+      "LOW_1": "-",
+      "CLOSE_PRC": "107.26",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-12",
+      "LOW_1": "-",
+      "CLOSE_PRC": "107.27",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-13",
+      "LOW_1": "-",
+      "CLOSE_PRC": "108.82",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-14",
+      "LOW_1": "-",
+      "CLOSE_PRC": "108.5",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-15",
+      "LOW_1": "109.24",
+      "CLOSE_PRC": "110.0",
+      "HIGH_1": "109.24",
+      "OPEN_PRC": "109.24"
+    },
+    {
+      "_DATE_END": "2010-10-18",
+      "LOW_1": "-",
+      "CLOSE_PRC": "110.54",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-19",
+      "LOW_1": "109.89",
+      "CLOSE_PRC": "109.61",
+      "HIGH_1": "109.89",
+      "OPEN_PRC": "109.89"
+    },
+    {
+      "_DATE_END": "2010-10-20",
+      "LOW_1": "-",
+      "CLOSE_PRC": "110.51",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-21",
+      "LOW_1": "-",
+      "CLOSE_PRC": "110.78",
+      "HIGH_1": "-",
+      "OPEN_PRC": "110.0208"
+    },
+    {
+      "_DATE_END": "2010-10-22",
+      "LOW_1": "-",
+      "CLOSE_PRC": "110.84",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-25",
+      "LOW_1": "-",
+      "CLOSE_PRC": "111.89",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-26",
+      "LOW_1": "-",
+      "CLOSE_PRC": "111.69",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-27",
+      "LOW_1": "-",
+      "CLOSE_PRC": "111.26",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-28",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.01",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-10-29",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.24",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-01",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.49",
+      "HIGH_1": "-",
+      "OPEN_PRC": "111.7915"
+    },
+    {
+      "_DATE_END": "2010-11-02",
+      "LOW_1": "113.41",
+      "CLOSE_PRC": "113.23",
+      "HIGH_1": "113.41",
+      "OPEN_PRC": "113.41"
+    },
+    {
+      "_DATE_END": "2010-11-03",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.99",
+      "HIGH_1": "-",
+      "OPEN_PRC": "111.7915"
+    },
+    {
+      "_DATE_END": "2010-11-04",
+      "LOW_1": "115.04",
+      "CLOSE_PRC": "115.42",
+      "HIGH_1": "115.14",
+      "OPEN_PRC": "115.14"
+    },
+    {
+      "_DATE_END": "2010-11-05",
+      "LOW_1": "115.35",
+      "CLOSE_PRC": "115.23",
+      "HIGH_1": "115.35",
+      "OPEN_PRC": "115.35"
+    },
+    {
+      "_DATE_END": "2010-11-08",
+      "LOW_1": "-",
+      "CLOSE_PRC": "115.44",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-09",
+      "LOW_1": "-",
+      "CLOSE_PRC": "115.49",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-10",
+      "LOW_1": "114.39",
+      "CLOSE_PRC": "114.76",
+      "HIGH_1": "114.39",
+      "OPEN_PRC": "114.39"
+    },
+    {
+      "_DATE_END": "2010-11-11",
+      "LOW_1": "-",
+      "CLOSE_PRC": "114.01",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-12",
+      "LOW_1": "-",
+      "CLOSE_PRC": "113.5",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-15",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.81",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-16",
+      "LOW_1": "-",
+      "CLOSE_PRC": "110.68",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-17",
+      "LOW_1": "-",
+      "CLOSE_PRC": "111.27",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-18",
+      "LOW_1": "-",
+      "CLOSE_PRC": "113.05",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-19",
+      "LOW_1": "112.85",
+      "CLOSE_PRC": "112.53",
+      "HIGH_1": "112.85",
+      "OPEN_PRC": "112.85"
+    },
+    {
+      "_DATE_END": "2010-11-22",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.86",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-23",
+      "LOW_1": "-",
+      "CLOSE_PRC": "111.29",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-24",
+      "LOW_1": "113.15",
+      "CLOSE_PRC": "114.2",
+      "HIGH_1": "113.15",
+      "OPEN_PRC": "113.15"
+    },
+    {
+      "_DATE_END": "2010-11-25",
+      "LOW_1": "-",
+      "CLOSE_PRC": "-",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-26",
+      "LOW_1": "-",
+      "CLOSE_PRC": "113.81",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-29",
+      "LOW_1": "-",
+      "CLOSE_PRC": "112.18",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-11-30",
+      "LOW_1": "-",
+      "CLOSE_PRC": "111.8",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-01",
+      "LOW_1": "-",
+      "CLOSE_PRC": "114.38",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-02",
+      "LOW_1": "-",
+      "CLOSE_PRC": "115.15",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-03",
+      "LOW_1": "-",
+      "CLOSE_PRC": "115.3",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-06",
+      "LOW_1": "115.69",
+      "CLOSE_PRC": "115.53",
+      "HIGH_1": "115.69",
+      "OPEN_PRC": "115.69"
+    },
+    {
+      "_DATE_END": "2010-12-07",
+      "LOW_1": "-",
+      "CLOSE_PRC": "116.35",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-08",
+      "LOW_1": "-",
+      "CLOSE_PRC": "115.78",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-09",
+      "LOW_1": "-",
+      "CLOSE_PRC": "116.19",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-10",
+      "LOW_1": "-",
+      "CLOSE_PRC": "116.55",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-13",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.31",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-14",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.19",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-15",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.07",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-16",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.23",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-17",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.39",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-20",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.09",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-21",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.96",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-22",
+      "LOW_1": "118.03",
+      "CLOSE_PRC": "118.12",
+      "HIGH_1": "118.03",
+      "OPEN_PRC": "118.03"
+    },
+    {
+      "_DATE_END": "2010-12-23",
+      "LOW_1": "117.98",
+      "CLOSE_PRC": "117.8",
+      "HIGH_1": "117.98",
+      "OPEN_PRC": "117.98"
+    },
+    {
+      "_DATE_END": "2010-12-24",
+      "LOW_1": "117.39",
+      "CLOSE_PRC": "117.39",
+      "HIGH_1": "117.39",
+      "OPEN_PRC": "117.39"
+    },
+    {
+      "_DATE_END": "2010-12-29",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.94",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-30",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.51",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    },
+    {
+      "_DATE_END": "2010-12-31",
+      "LOW_1": "-",
+      "CLOSE_PRC": "117.49",
+      "HIGH_1": "-",
+      "OPEN_PRC": "-"
+    }
+  ],
+  "status": "OK",
+  "metadata": {
+    "h._DATE_END": {
+      "type": "date"
+    },
+    "h.CLOSE_PRC": {
+      "type": "float.price"
+    },
+    "h.HIGH_1": {
+      "type": "float.price"
+    },
+    "h.OPEN_PRC": {
+      "type": "float.price"
+    },
+    "h.LOW_1": {
+      "type": "float.price"
+    }
+  }
+}
