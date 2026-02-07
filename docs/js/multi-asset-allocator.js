@@ -398,9 +398,12 @@ window.initializeTool = window.initializeTool || {};
                   </div>
                   <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
                     <div v-for="asset in availableAssets" :key="asset.key" style="display:flex;align-items:center;gap:0.75rem;">
-                      <span style="display:inline-block;width:16px;height:16px;border-radius:3px;flex-shrink:0;" :style="{background: colors[asset.key]}"></span>
-                      <span style="flex:1;min-width:180px;font-size:0.9rem;">{{ asset.label }}</span>
-                      <input type="range" min="0" max="100" step="1" v-model.number="form.allocations[asset.key]" @input="onAllocationChange" style="flex:2;">
+                      <span style="display:inline-block;width:16px;height:16px;border-radius:3px;flex-shrink:0;align-self:flex-start;margin-top:0.25rem;" :style="{background: colors[asset.key]}"></span>
+                      <div style="flex:1;min-width:180px;display:flex;flex-direction:column;">
+                        <span style="font-size:1rem;font-weight:500;">{{ asset.label }}</span>
+                        <span style="font-size:0.85rem;color:#666;margin-top:0.1rem;">{{ formatDataDuration(asset.dataPoints) }}</span>
+                      </div>
+                      <input type="range" min="0" max="100" step="1" :value="form.allocations[asset.key] || 0" @input="e => { form.allocations[asset.key] = Number(e.target.value); onAllocationChange(); }" style="flex:2;margin:0;padding:0;">
                       <input type="number" min="0" max="100" step="1" v-model.number="form.allocations[asset.key]" @input="onAllocationChange" style="width:70px;">
                       <span style="width:30px;text-align:right;font-weight:600;">%</span>
                     </div>
@@ -570,6 +573,20 @@ window.initializeTool = window.initializeTool || {};
           return n.toLocaleString('en-IN', { maximumFractionDigits: 0 }); 
         },
         
+        formatDataDuration(dataPoints) {
+          // dataPoints is number of months of data available
+          const years = Math.floor(dataPoints / 12);
+          const months = dataPoints % 12;
+          
+          if (years === 0) {
+            return `(${months} month${months !== 1 ? 's' : ''})`;
+          } else if (months === 0) {
+            return `(${years} year${years !== 1 ? 's' : ''})`;
+          } else {
+            return `(${years} year${years !== 1 ? 's' : ''} ${months} month${months !== 1 ? 's' : ''})`;
+          }
+        },
+        
         async ensureDataLoaded() {
           if (!this.assetData) {
             try {
@@ -618,9 +635,11 @@ window.initializeTool = window.initializeTool || {};
           
           for (let i = 0; i < available.length; i++) {
             const asset = available[i];
+            // Ensure the value is explicitly set (not undefined)
             newAllocations[asset.key] = defaultAlloc + (i === 0 ? remainder : 0);
           }
           
+          // Use Vue.set or direct assignment to ensure reactivity
           this.form.allocations = newAllocations;
           this.results.ready = false;
         },
