@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Advanced Investor on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/advanced-investor/</link>
+    <link>http://localhost:1313/building-wealth/tags/advanced-investor/</link>
     <description>Recent content in Advanced Investor on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 12 Oct 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/advanced-investor/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-wealth/tags/advanced-investor/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
+      <link>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/invest-in-nasdaq-100-from-india/</guid>
       <description>Options to invest in NASDAQ 100, process, cost and taxation</description>
     </item>
     <item>
       <title>Invest in NASDAQ 100 from India</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/invest-in-nasdaq-100-from-india/</link>
+      <link>http://localhost:1313/building-wealth/videos/invest-in-nasdaq-100-from-india/</link>
       <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/invest-in-nasdaq-100-from-india/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/invest-in-nasdaq-100-from-india/</guid>
       <description>Complete guide on how Indian investors can invest in NASDAQ 100 index and benefit from US market growth.</description>
     </item>
   </channel>

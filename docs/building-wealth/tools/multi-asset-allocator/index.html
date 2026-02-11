@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multi Asset Allocator | Sakthi Priyan H</title>
+    <meta name="description" content="Smart rebalancing tool that allocates new investments to underweight assets based on deviation from target allocation."><link rel="stylesheet" href="http://localhost:1313/css/style.css">
+    <link rel="stylesheet" href="http://localhost:1313/css/tools.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="http://localhost:1313/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/tools/">Tools</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Multi Asset Allocator</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="tool">
+    
+<header class="content-header">
+    <h1 class="content-title">Multi Asset Allocator</h1>
+    <p class="content-summary">Smart rebalancing tool that allocates new investments to underweight assets based on deviation from target allocation.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-02-08">Feb 8, 2026</time>
+        </span><span class="meta-item">
+            <span class="meta-icon">🔧</span>
+            <span class="use-time">Interactive Tool</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    
+    
+    
+    <div class="tool-interface">
+        <div id="tool-multiAssetAllocator" class="tool-widget">
+            
+        </div>
+    </div>
+    
+
+    <div class="tool-content">
+        <h2 id="about-multi-asset-allocator">About Multi Asset Allocator</h2>
+<blockquote>
+<p><strong>Multi Asset Allocator</strong> helps you <strong>rebalance your portfolio dynamically</strong> by allocating new monthly investments to underweight assets based on deviation from target allocation.</p>
+</blockquote>
+<p>The <strong>Multi Asset Allocator</strong> implements a cash-flow based rebalancing strategy that maintains your target asset allocation without selling any holdings. Instead of static SIPs into each asset, it intelligently directs new money only to underweight assets proportional to their deviation.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>Smart Rebalancing</strong>: Automatically calculates allocation for multiple investors</li>
+<li><strong>Tax-Efficient</strong>: No selling required — rebalancing via new investments only</li>
+<li><strong>Multi-Investor Support</strong>: Handle allocations for multiple family members</li>
+<li><strong>International Assets</strong>: Tracks TCS (Tax Collected at Source) for international investments</li>
+<li><strong>Flexible Rounding</strong>: Configurable round-off values for practical investing</li>
+<li><strong>Detailed Reports</strong>: See before and after allocation percentages</li>
+</ul>
+<h3 id="how-it-works">How It Works</h3>
+<ol>
+<li><strong>Define Asset Classes</strong>: Set your target allocation percentages (e.g., 40% Nifty 50, 35% Nasdaq 100)</li>
+<li><strong>Current Portfolio</strong>: Enter current portfolio values for each asset class</li>
+<li><strong>Add Investors</strong>: Input monthly investment amounts for each family member</li>
+<li><strong>Smart Allocation</strong>: The tool calculates optimal allocation to bring portfolio closer to target</li>
+<li><strong>Review Report</strong>: See detailed breakdown of allocations and updated percentages</li>
+</ol>
+<h3 id="the-methodology">The Methodology</h3>
+<p>Based on the <strong>threshold-based cash-flow rebalancing</strong> strategy:</p>
+<ul>
+<li>Calculate deviation: <code>Target ₹ - Current ₹</code> for each asset</li>
+<li>Exclude any negative deviations (overweight assets)</li>
+<li>Allocate new money proportional to positive deviations</li>
+<li>Apply rounding for practical transaction amounts</li>
+</ul>
+<p>This approach:</p>
+<ul>
+<li>✅ Avoids tax implications from selling</li>
+<li>✅ Automatically buys low (underweight assets)</li>
+<li>✅ Maintains target allocation over time</li>
+<li>✅ Emotion-free, rules-based investing</li>
+</ul>
+<h3 id="learn-more">Learn More</h3>
+<p>For detailed explanation of the methodology, check out: <a href="/building-wealth/slides/2025/asset-allocation/">My Asset Allocation &amp; Rebalancing</a></p>
+<hr>
+<h2 id="frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</h2>
+<h3 id="why-allocate-based-on-deviation-instead-of-fixed-sips">Why allocate based on deviation instead of fixed SIPs?</h3>
+<p>Fixed SIPs invest the same amount into each asset regardless of market movements. Over time, winning assets become overweight and losing assets underweight. Deviation-based allocation automatically corrects this by directing more money to underweight assets, maintaining your target allocation without selling.</p>
+<h3 id="what-if-all-assets-are-overweight">What if all assets are overweight?</h3>
+<p>If all assets are above target (rare), the tool will show zero allocations. In this case, you could either skip investing this month or manually invest in the least overweight asset.</p>
+<h3 id="how-is-international-investment-handled">How is international investment handled?</h3>
+<p>When you mark an investor&rsquo;s investment as international and TCS applicable, the tool will only allocate to international assets (like Nasdaq 100) for that investor, respecting tax regulations.</p>
+<h3 id="what-round-off-value-should-i-use">What round-off value should I use?</h3>
+<p>Common values:</p>
+<ul>
+<li>₹5,000 - For smaller monthly investments (₹50K-₹1L)</li>
+<li>₹10,000 - For medium investments (₹1L-₹2L)</li>
+<li>₹25,000 - For larger investments (₹2L+)</li>
+</ul>
+<p>Round-off makes transactions practical and reduces brokerage costs.</p>
+<h3 id="can-i-save-my-portfolio-configuration">Can I save my portfolio configuration?</h3>
+<p>Currently, you can export your configuration as JSON using the &ldquo;Export Data&rdquo; button. Save this file and import it later to quickly load your settings.</p>
+<hr>
+<h2 id="help">Help</h2>
+<h3 id="input-section">Input Section</h3>
+<h4 id="investors">Investors</h4>
+<ul>
+<li><strong>Name</strong>: Investor&rsquo;s name for identification</li>
+<li><strong>Amount</strong>: Monthly investment amount available</li>
+<li><strong>International</strong>: Check if this investor can invest in international assets</li>
+<li><strong>TCS</strong>: Applicable if international investment is subject to Tax Collected at Source</li>
+</ul>
+<p>You can add multiple investors by clicking &ldquo;Add Investor&rdquo;.</p>
+<h4 id="round-off">Round Off</h4>
+<ul>
+<li>Set the rounding value for allocation amounts</li>
+<li>Example: If set to ₹5,000, all allocations will be multiples of ₹5,000</li>
+<li>Higher values = fewer transactions, Lower values = more precise allocation</li>
+</ul>
+<h4 id="asset-classes">Asset Classes</h4>
+<ul>
+<li><strong>Asset Class</strong>: Name of the asset (e.g., Nifty 50, Nasdaq 100, Gold)</li>
+<li><strong>Target (%)</strong>: Your desired allocation percentage for this asset</li>
+<li><strong>Current (Rs)</strong>: Current portfolio value in this asset</li>
+</ul>
+<p>Mark international assets (like Nasdaq 100) so they can be allocated to investors with international access.</p>
+<h3 id="output-section">Output Section</h3>
+<h4 id="individual-allocations">Individual Allocations</h4>
+<p>Shows allocation for each investor across asset classes, respecting their constraints (international access, TCS rules).</p>
+<h4 id="summary-report">Summary Report</h4>
+<p>Comprehensive view showing:</p>
+<ul>
+<li>Asset class names</li>
+<li>Target percentages</li>
+<li>Current values and percentages</li>
+<li>New allocation amounts</li>
+<li>Post-allocation values and percentages</li>
+<li>Deviation from target (final gap)</li>
+</ul>
+<h3 id="tips-for-using-the-tool">Tips for Using the Tool</h3>
+<ol>
+<li><strong>Update Monthly</strong>: Run this allocation every month before investing</li>
+<li><strong>Maintain Targets</strong>: Ensure target percentages sum to 100%</li>
+<li><strong>Review Gaps</strong>: Check &ldquo;Diff (%)&rdquo; column to see remaining deviations</li>
+<li><strong>Export Data</strong>: Save your configuration for next month</li>
+<li><strong>Adjust Rounding</strong>: Balance between precision and transaction convenience</li>
+<li><strong>International Rules</strong>: Mark international assets correctly for TCS compliance</li>
+</ol>
+<h3 id="example-use-case">Example Use Case</h3>
+<p><strong>Portfolio</strong>: ₹50L with 40% target in Nifty 50 (currently ₹18L = 36%), 40% target in Nasdaq 100 (currently ₹22L = 44%), 20% in Gold (₹10L = 20%)</p>
+<p><strong>New Investment</strong>: ₹50K this month</p>
+<p><strong>Static Approach</strong>: ₹20K to Nifty, ₹20K to Nasdaq, ₹10K to Gold</p>
+<ul>
+<li>Result: Nasdaq remains overweight, Nifty stays underweight</li>
+</ul>
+<p><strong>Smart Allocation</strong>:</p>
+<ul>
+<li>Nasdaq is overweight (+4%) → ₹0 allocation</li>
+<li>Nifty is underweight (-4%) → Full ₹50K to Nifty</li>
+<li>Gold is on target → ₹0 allocation</li>
+<li>Result: Portfolio moves closer to target without selling anything</li>
+</ul>
+<hr>
+<h2 id="technical-details">Technical Details</h2>
+<h3 id="allocation-algorithm">Allocation Algorithm</h3>
+<pre><code>For each asset class:
+  deviation = (target% × total_portfolio) - current_value
+  
+If deviation &gt; 0 (underweight):
+  eligible_assets.add(asset, deviation)
+
+For each investor:
+  total_deviation = sum(all positive deviations)
+  
+  For each eligible asset:
+    raw_allocation = (asset_deviation / total_deviation) × investor_amount
+    rounded_allocation = round(raw_allocation, round_off_value)
+</code></pre>
+<h3 id="constraints-handled">Constraints Handled</h3>
+<ol>
+<li><strong>Total allocation cannot exceed investor&rsquo;s amount</strong></li>
+<li><strong>International assets only to investors with international access</strong></li>
+<li><strong>TCS considerations for applicable investors</strong></li>
+<li><strong>Rounding must maintain total investment amount</strong></li>
+<li><strong>Only underweight assets receive allocation</strong></li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>Remember</strong>: Asset allocation is personal. This tool implements one methodology. Adjust based on your comfort, goals, and market conditions.</p>
+</blockquote>
+
+    </div>
+
+    
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="http://localhost:1313/building-wealth/tags/asset-allocation/" class="tag-link">Asset Allocation</a>
+        
+        <a href="http://localhost:1313/building-wealth/tags/rebalancing/" class="tag-link">Rebalancing</a>
+        
+        <a href="http://localhost:1313/building-wealth/tags/portfolio-management/" class="tag-link">Portfolio Management</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+<script src="http://localhost:1313/js/multi-asset-allocator.js"></script>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const toolType = 'multiAssetAllocator';
+        const toolContainer = document.getElementById('tool-' + toolType);
+
+        if (window.initializeTool && typeof window.initializeTool[toolType] === 'function') {
+            window.initializeTool[toolType](toolContainer, "null");
+        }
+    });
+</script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="http://localhost:1313/js/main.js"></script>
+</body>
+</html>
