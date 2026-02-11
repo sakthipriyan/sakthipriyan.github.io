@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Loan on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/loan/</link>
+    <link>http://localhost:1313/building-wealth/tags/loan/</link>
     <description>Recent content in Loan on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 23 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/loan/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-wealth/tags/loan/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RealValue EMI Engine Use Cases</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/realvalue-emi-engine-use-cases/</link>
+      <link>http://localhost:1313/building-wealth/blogs/realvalue-emi-engine-use-cases/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/realvalue-emi-engine-use-cases/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/realvalue-emi-engine-use-cases/</guid>
       <description>Discover real-world scenarios showing how to use the RealValue EMI Engine for home loans, car loans, personal loans, and understanding the true cost of debt with inflation-adjusted calculations.</description>
     </item>
     <item>
       <title>RealValue EMI Engine</title>
-      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-emi-engine/</link>
+      <link>http://localhost:1313/building-wealth/tools/realvalue-emi-engine/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-emi-engine/</guid>
+      <guid>http://localhost:1313/building-wealth/tools/realvalue-emi-engine/</guid>
       <description>Understand your loan&amp;rsquo;s true cost with real (inflation-adjusted) value projections and EMI burden visualizations.</description>
     </item>
   </channel>

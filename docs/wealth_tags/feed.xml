@@ -2,262 +2,276 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wealth_tags on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/wealth_tags/</link>
+    <link>http://localhost:1313/wealth_tags/</link>
     <description>Recent content in Wealth_tags on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 24 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/wealth_tags/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/wealth_tags/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Asset Allocation</title>
+      <link>http://localhost:1313/building-wealth/tags/asset-allocation/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-wealth/tags/asset-allocation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Portfolio Management</title>
+      <link>http://localhost:1313/building-wealth/tags/portfolio-management/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-wealth/tags/portfolio-management/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rebalancing</title>
+      <link>http://localhost:1313/building-wealth/tags/rebalancing/</link>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-wealth/tags/rebalancing/</guid>
+      <description></description>
+    </item>
     <item>
       <title>EMI</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/emi/</link>
+      <link>http://localhost:1313/building-wealth/tags/emi/</link>
       <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/emi/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/emi/</guid>
       <description></description>
     </item>
     <item>
       <title>Financial Tools</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/financial-tools/</link>
+      <link>http://localhost:1313/building-wealth/tags/financial-tools/</link>
       <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/financial-tools/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/financial-tools/</guid>
       <description></description>
     </item>
     <item>
       <title>Inflation</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/inflation/</link>
+      <link>http://localhost:1313/building-wealth/tags/inflation/</link>
       <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/inflation/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/inflation/</guid>
       <description></description>
     </item>
     <item>
       <title>Loans</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/loans/</link>
+      <link>http://localhost:1313/building-wealth/tags/loans/</link>
       <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/loans/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/loans/</guid>
       <description></description>
     </item>
     <item>
       <title>Real Value</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/real-value/</link>
+      <link>http://localhost:1313/building-wealth/tags/real-value/</link>
       <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/real-value/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/real-value/</guid>
       <description></description>
     </item>
     <item>
       <title>Car Loan</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/car-loan/</link>
+      <link>http://localhost:1313/building-wealth/tags/car-loan/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/car-loan/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/car-loan/</guid>
       <description></description>
     </item>
     <item>
       <title>Debt Management</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/debt-management/</link>
+      <link>http://localhost:1313/building-wealth/tags/debt-management/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/debt-management/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/debt-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Financial Planning</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/financial-planning/</link>
+      <link>http://localhost:1313/building-wealth/tags/financial-planning/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/financial-planning/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/financial-planning/</guid>
       <description></description>
     </item>
     <item>
       <title>Home Loan</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/home-loan/</link>
+      <link>http://localhost:1313/building-wealth/tags/home-loan/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/home-loan/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/home-loan/</guid>
       <description></description>
     </item>
     <item>
       <title>Loan</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/loan/</link>
+      <link>http://localhost:1313/building-wealth/tags/loan/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/loan/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/loan/</guid>
       <description></description>
     </item>
     <item>
       <title>Financial Literacy</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/financial-literacy/</link>
+      <link>http://localhost:1313/building-wealth/tags/financial-literacy/</link>
       <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/financial-literacy/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/financial-literacy/</guid>
       <description></description>
     </item>
     <item>
       <title>Personal Finance</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/personal-finance/</link>
+      <link>http://localhost:1313/building-wealth/tags/personal-finance/</link>
       <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/personal-finance/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/personal-finance/</guid>
       <description></description>
     </item>
     <item>
       <title>Debt</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/debt/</link>
+      <link>http://localhost:1313/building-wealth/tags/debt/</link>
       <pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/debt/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/debt/</guid>
       <description></description>
     </item>
     <item>
       <title>Investment</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/investment/</link>
+      <link>http://localhost:1313/building-wealth/tags/investment/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/investment/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/investment/</guid>
       <description></description>
     </item>
     <item>
       <title>Retirement</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/retirement/</link>
+      <link>http://localhost:1313/building-wealth/tags/retirement/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/retirement/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/retirement/</guid>
       <description></description>
     </item>
     <item>
       <title>SIP</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/sip/</link>
+      <link>http://localhost:1313/building-wealth/tags/sip/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/sip/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/sip/</guid>
       <description></description>
     </item>
     <item>
       <title>Wealth Creation</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/wealth-creation/</link>
+      <link>http://localhost:1313/building-wealth/tags/wealth-creation/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/wealth-creation/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/wealth-creation/</guid>
       <description></description>
     </item>
     <item>
       <title>Building Block</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/building-block/</link>
+      <link>http://localhost:1313/building-wealth/tags/building-block/</link>
       <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/building-block/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/building-block/</guid>
       <description></description>
     </item>
     <item>
       <title>Credit Card</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/credit-card/</link>
+      <link>http://localhost:1313/building-wealth/tags/credit-card/</link>
       <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/credit-card/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Asset Allocation</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/asset-allocation/</link>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/asset-allocation/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/credit-card/</guid>
       <description></description>
     </item>
     <item>
       <title>Index Funds</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/index-funds/</link>
+      <link>http://localhost:1313/building-wealth/tags/index-funds/</link>
       <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/index-funds/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/index-funds/</guid>
       <description></description>
     </item>
     <item>
       <title>Investing</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/investing/</link>
+      <link>http://localhost:1313/building-wealth/tags/investing/</link>
       <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/investing/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/investing/</guid>
       <description></description>
     </item>
     <item>
       <title>Portfolio Construction</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/portfolio-construction/</link>
+      <link>http://localhost:1313/building-wealth/tags/portfolio-construction/</link>
       <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/portfolio-construction/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/portfolio-construction/</guid>
       <description></description>
     </item>
     <item>
       <title>Long Term Growth</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/long-term-growth/</link>
+      <link>http://localhost:1313/building-wealth/tags/long-term-growth/</link>
       <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/long-term-growth/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/long-term-growth/</guid>
       <description></description>
     </item>
     <item>
       <title>Personal Journey</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/personal-journey/</link>
+      <link>http://localhost:1313/building-wealth/tags/personal-journey/</link>
       <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/personal-journey/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/personal-journey/</guid>
       <description></description>
     </item>
     <item>
       <title>Mutual Fund</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/mutual-fund/</link>
+      <link>http://localhost:1313/building-wealth/tags/mutual-fund/</link>
       <pubDate>Sun, 23 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/mutual-fund/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/mutual-fund/</guid>
       <description></description>
     </item>
     <item>
       <title>Building Wealth</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/building-wealth/</link>
+      <link>http://localhost:1313/building-wealth/tags/building-wealth/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/building-wealth/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/building-wealth/</guid>
       <description></description>
     </item>
     <item>
       <title>ETF</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/etf/</link>
+      <link>http://localhost:1313/building-wealth/tags/etf/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/etf/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/etf/</guid>
       <description></description>
     </item>
     <item>
       <title>Gold</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/gold/</link>
+      <link>http://localhost:1313/building-wealth/tags/gold/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/gold/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/gold/</guid>
       <description></description>
     </item>
     <item>
       <title>Equity</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/equity/</link>
+      <link>http://localhost:1313/building-wealth/tags/equity/</link>
       <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/equity/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/equity/</guid>
       <description></description>
     </item>
     <item>
       <title>Index Fund</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/index-fund/</link>
+      <link>http://localhost:1313/building-wealth/tags/index-fund/</link>
       <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/index-fund/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/index-fund/</guid>
       <description></description>
     </item>
     <item>
       <title>Emergency Fund</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/emergency-fund/</link>
+      <link>http://localhost:1313/building-wealth/tags/emergency-fund/</link>
       <pubDate>Tue, 28 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/emergency-fund/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/emergency-fund/</guid>
       <description></description>
     </item>
     <item>
       <title>Money Flow</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/money-flow/</link>
+      <link>http://localhost:1313/building-wealth/tags/money-flow/</link>
       <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/money-flow/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/money-flow/</guid>
       <description></description>
     </item>
     <item>
       <title>Advanced Investor</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/advanced-investor/</link>
+      <link>http://localhost:1313/building-wealth/tags/advanced-investor/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/advanced-investor/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/advanced-investor/</guid>
       <description></description>
     </item>
     <item>
       <title>International Investing</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/international-investing/</link>
+      <link>http://localhost:1313/building-wealth/tags/international-investing/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/international-investing/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/international-investing/</guid>
       <description></description>
     </item>
     <item>
       <title>NASDAQ 100</title>
-      <link>https://sakthipriyan.com/building-wealth/tags/nasdaq-100/</link>
+      <link>http://localhost:1313/building-wealth/tags/nasdaq-100/</link>
       <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tags/nasdaq-100/</guid>
+      <guid>http://localhost:1313/building-wealth/tags/nasdaq-100/</guid>
       <description></description>
     </item>
   </channel>

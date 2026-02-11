@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Financial Planning on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/financial-planning/</link>
+    <link>http://localhost:1313/building-wealth/tags/financial-planning/</link>
     <description>Recent content in Financial Planning on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 23 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/financial-planning/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-wealth/tags/financial-planning/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RealValue EMI Engine Use Cases</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/realvalue-emi-engine-use-cases/</link>
+      <link>http://localhost:1313/building-wealth/blogs/realvalue-emi-engine-use-cases/</link>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/realvalue-emi-engine-use-cases/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/realvalue-emi-engine-use-cases/</guid>
       <description>Discover real-world scenarios showing how to use the RealValue EMI Engine for home loans, car loans, personal loans, and understanding the true cost of debt with inflation-adjusted calculations.</description>
     </item>
     <item>
       <title>Debt Is a Tool, Not an Enemy | Smart Loans vs Bad Loans Explained</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/debt-is-a-tool-not-an-enemy-smart-loans-vs-bad-loans-explained/</link>
+      <link>http://localhost:1313/building-wealth/videos/debt-is-a-tool-not-an-enemy-smart-loans-vs-bad-loans-explained/</link>
       <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/debt-is-a-tool-not-an-enemy-smart-loans-vs-bad-loans-explained/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/debt-is-a-tool-not-an-enemy-smart-loans-vs-bad-loans-explained/</guid>
       <description>Understanding the difference between smart loans and bad loans. Learn when debt can be a powerful tool for wealth creation and when it becomes a burden.</description>
     </item>
     <item>
       <title>Why Debt Is a Tool — Not an Enemy</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/why-debt-is-a-tool-not-an-enemy/</link>
+      <link>http://localhost:1313/building-wealth/slides/why-debt-is-a-tool-not-an-enemy/</link>
       <pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/why-debt-is-a-tool-not-an-enemy/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/why-debt-is-a-tool-not-an-enemy/</guid>
       <description>Understanding when and how to use debt strategically for building wealth.</description>
     </item>
     <item>
       <title>RealValue SIP Engine | Investment Planning Tool for India</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</link>
+      <link>http://localhost:1313/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</guid>
       <description>Complete walkthrough of the RealValue SIP Engine — a powerful investment planning tool that shows real (inflation-adjusted) returns, handles multiple goal types, and provides comprehensive financial projections.</description>
     </item>
     <item>
       <title>RealValue SIP Engine Use Cases</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/realvalue-sip-engine-use-cases/</link>
+      <link>http://localhost:1313/building-wealth/blogs/realvalue-sip-engine-use-cases/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/realvalue-sip-engine-use-cases/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/realvalue-sip-engine-use-cases/</guid>
       <description>Discover real-world scenarios showing how to use the RealValue SIP Engine for retirement planning, education goals, house down payments, emergency funds, and more.</description>
     </item>
   </channel>
