@@ -147,7 +147,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                         <th>Asset Class</th>
                                         <th>Target %</th>
                                         <th>Current (₹)</th>
-                                        <th>LTCG</th>
+                                        <th>Slab rate</th>
                                         <th>Intl.</th>
                                         <th></th>
                                     </tr>
@@ -196,7 +196,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                         <td style="text-align: center;">
                                             <input 
                                                 type="checkbox" 
-                                                v-model="asset.hasLtcg"
+                                                v-model="asset.hasSlabRate"
                                                 @change="calculate"
                                                 style="cursor: pointer;"
                                             >
@@ -488,9 +488,9 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 roundOffValue: 5,
                 roundOffUnit: 'thousands',
                 assets: [
-                    { name: 'Nifty 50', targetPercent: 40, currentValue: 500000, hasLtcg: true, isInternational: false },
-                    { name: 'Nasdaq 100', targetPercent: 40, currentValue: 500000, hasLtcg: true, isInternational: true },
-                    { name: 'Gold', targetPercent: 20, currentValue: 250000, hasLtcg: false, isInternational: false }
+                    { name: 'Nifty 50', targetPercent: 40, currentValue: 500000, hasSlabRate: false, isInternational: false },
+                    { name: 'Nasdaq 100', targetPercent: 40, currentValue: 500000, hasSlabRate: false, isInternational: true },
+                    { name: 'Gold', targetPercent: 20, currentValue: 250000, hasSlabRate: true, isInternational: false }
                 ],
                 assetGroups: [],
                 results: {
@@ -594,7 +594,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     name: `Asset ${this.assets.length + 1}`,
                     targetPercent: 0,
                     currentValue: 0,
-                    hasLtcg: false,
+                    hasSlabRate: false,
                     isInternational: false
                 });
             },
@@ -629,7 +629,19 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 }
             },
             getAvailableAssetsForGroup(group) {
-                return this.assets.filter(asset => !group.assetNames.includes(asset.name));
+                // Get all assets that are already in any group (excluding current group)
+                const assetsInOtherGroups = new Set();
+                this.assetGroups.forEach(g => {
+                    if (g !== group) {
+                        g.assetNames.forEach(name => assetsInOtherGroups.add(name));
+                    }
+                });
+                
+                // Filter out assets already in current group or in other groups
+                return this.assets.filter(asset => 
+                    !group.assetNames.includes(asset.name) && 
+                    !assetsInOtherGroups.has(asset.name)
+                );
             },
             getGroupMaxPercent(group) {
                 return group.assetNames.reduce((sum, assetName) => {
@@ -807,9 +819,9 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     return this.getInvestorAmount(a) - this.getInvestorAmount(b);
                 });
                 
-                // Separate assets by LTCG status
-                const nonLtcgAssets = eligibleAssetDeviations.filter(a => !a.hasLtcg);
-                const ltcgAssets = eligibleAssetDeviations.filter(a => a.hasLtcg);
+                // Separate assets by tax treatment: Slab rate assets (allocated first to lower contributors) and flat rate assets
+                const slabRateAssets = eligibleAssetDeviations.filter(a => a.hasSlabRate);
+                const flatRateAssets = eligibleAssetDeviations.filter(a => !a.hasSlabRate);
                 
                 // Track remaining allocation needed per asset
                 const remainingAllocation = {};
@@ -819,6 +831,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 
                 // Allocate for each investor
                 const investorAllocations = [];
+                const investorAllocationMap = {}; // Map to store allocations by investor name
                 const assetTotals = {};
                 const roundOff = this.getRoundOff();
                 
@@ -862,14 +875,22 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     
                     // For the lowest contributor, try to allocate single largest asset to minimize transactions
                     if (investorIndex === 0) {
-                        // Get all eligible assets for this investor (non-LTCG first for tax optimization)
-                        const eligibleAssets = [...nonLtcgAssets, ...ltcgAssets].filter(asset => {
+                        // Get eligible slab rate and flat rate assets separately for tax optimization
+                        const eligibleSlabRate = slabRateAssets.filter(asset => {
+                            if (asset.isInternational && !investor.international) return false;
+                            return remainingAllocation[asset.name] > roundOff;
+                        });
+                        const eligibleFlatRate = flatRateAssets.filter(asset => {
                             if (asset.isInternational && !investor.international) return false;
                             return remainingAllocation[asset.name] > roundOff;
                         });
                         
-                        // Sort by allocation need (descending)
-                        eligibleAssets.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
+                        // Sort each group by allocation need (descending)
+                        eligibleSlabRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
+                        eligibleFlatRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
+                        
+                        // Combine with slab rate assets first (tax optimization priority maintained)
+                        const eligibleAssets = [...eligibleSlabRate, ...eligibleFlatRate];
                         
                         // Try to find a single asset that can absorb most/all of investor's budget
                         for (const asset of eligibleAssets) {
@@ -900,18 +921,18 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         
                         // If we still have remaining amount and no allocation was made, fall back to proportional
                         if (allocations.length === 0 && remainingInvestorAmount >= roundOff) {
-                            const eligibleNonLtcg = nonLtcgAssets.filter(asset => {
+                            const eligibleSlabRate = slabRateAssets.filter(asset => {
                                 if (asset.isInternational && !investor.international) return false;
                                 return remainingAllocation[asset.name] > roundOff;
                             });
                             
-                            eligibleNonLtcg.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
+                            eligibleSlabRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
                             
-                            for (const asset of eligibleNonLtcg) {
+                            for (const asset of eligibleSlabRate) {
                                 if (remainingInvestorAmount < roundOff) break;
                                 
                                 const assetNeed = remainingAllocation[asset.name];
-                                const totalNeed = eligibleNonLtcg.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
+                                const totalNeed = eligibleSlabRate.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
                                 const proportion = assetNeed / totalNeed;
                                 const maxForThis = investor.tcs && asset.isInternational 
                                     ? (remainingInvestorAmount / 1.2) * proportion
@@ -936,15 +957,15 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     } else {
                         // For higher contributors, use normal proportional allocation
                         
-                        // Phase 1: Allocate non-LTCG assets
-                        const eligibleNonLtcg = nonLtcgAssets.filter(asset => {
+                        // Phase 1: Allocate slab rate assets first for tax optimization
+                        const eligibleSlabRate = slabRateAssets.filter(asset => {
                             if (asset.isInternational && !investor.international) return false;
                             return remainingAllocation[asset.name] > roundOff;
                         });
                         
-                        eligibleNonLtcg.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
+                        eligibleSlabRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
                         
-                        for (const asset of eligibleNonLtcg) {
+                        for (const asset of eligibleSlabRate) {
                             if (remainingInvestorAmount < roundOff) break;
                             
                             const assetNeed = remainingAllocation[asset.name];
@@ -964,8 +985,8 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
                                 remainingAllocation[asset.name] -= roundedInvestment;
                             } else if (remainingInvestorAmount >= roundOff) {
-                                const totalNonLtcgNeed = eligibleNonLtcg.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
-                                const proportion = remainingAllocation[asset.name] / totalNonLtcgNeed;
+                                const totalSlabRateNeed = eligibleSlabRate.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
+                                const proportion = remainingAllocation[asset.name] / totalSlabRateNeed;
                                 const maxForThis = investor.tcs && asset.isInternational 
                                     ? (remainingInvestorAmount / 1.2) * proportion
                                     : remainingInvestorAmount * proportion;
@@ -987,15 +1008,15 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             }
                         }
                         
-                        // Phase 2: Allocate LTCG assets
-                        const eligibleLtcg = ltcgAssets.filter(asset => {
+                        // Phase 2: Allocate flat rate assets (LTCG)
+                        const eligibleFlatRate = flatRateAssets.filter(asset => {
                             if (asset.isInternational && !investor.international) return false;
                             return remainingAllocation[asset.name] > roundOff;
                         });
                         
-                        eligibleLtcg.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
+                        eligibleFlatRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
                         
-                        for (const asset of eligibleLtcg) {
+                        for (const asset of eligibleFlatRate) {
                             if (remainingInvestorAmount < roundOff) break;
                             
                             const assetNeed = remainingAllocation[asset.name];
@@ -1015,8 +1036,8 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
                                 remainingAllocation[asset.name] -= roundedInvestment;
                             } else if (remainingInvestorAmount >= roundOff) {
-                                const totalLtcgNeed = eligibleLtcg.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
-                                const proportion = remainingAllocation[asset.name] / totalLtcgNeed;
+                                const totalFlatRateNeed = eligibleFlatRate.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
+                                const proportion = remainingAllocation[asset.name] / totalFlatRateNeed;
                                 const maxForThis = investor.tcs && asset.isInternational 
                                     ? (remainingInvestorAmount / 1.2) * proportion
                                     : remainingInvestorAmount * proportion;
@@ -1068,13 +1089,20 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         }
                     }
                     
-                    investorAllocations.push({
+                    investorAllocationMap[investor.name] = {
                         name: investor.name,
                         amount: investorAmount,
                         allocations,
                         total: totalAllocated,
                         tcs: totalTcs
-                    });
+                    };
+                });
+                
+                // Reorder investorAllocations to match original investor order
+                this.investors.forEach(investor => {
+                    if (investorAllocationMap[investor.name]) {
+                        investorAllocations.push(investorAllocationMap[investor.name]);
+                    }
                 });
                 
                 // Calculate totals first
