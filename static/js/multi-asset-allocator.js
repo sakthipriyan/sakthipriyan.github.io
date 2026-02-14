@@ -4,13 +4,26 @@ window.initializeTool = window.initializeTool || {};
 window.initializeTool.multiAssetAllocator = function (container, config) {
     // Create Vue app template
     container.innerHTML = `
+        <style>
+            .multi-asset-allocator th,
+            .multi-asset-allocator .summary-table th,
+            .multi-asset-allocator .allocation-table th,
+            .multi-asset-allocator .asset-table th {
+                text-align: center !important;
+            }
+            .chart-container {
+                width: 100%;
+                height: 400px;
+                min-height: 400px;
+            }
+        </style>
         <div id="multi-asset-app">
             <div class="multi-asset-allocator">
                 <div class="sip-container">
                     <!-- Left Column: Input Fields -->
                     <div class="sip-inputs">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 style="margin: 0;">📋 Portfolio Configuration</h3>
+                            <h3 style="margin: 0;">⚙️ Portfolio Configuration</h3>
                             <div style="display: flex; gap: 0.5rem;">
                                 <input 
                                     type="file" 
@@ -37,12 +50,29 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         
                         <!-- Investors Section -->
                         <div class="investors-group">
+                            <!-- Round Off -->
+                            <div class="input-group" style="margin-bottom: 1.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    Round Off (K):
+                                    <input 
+                                        type="number" 
+                                        v-model.number="roundOffValue" 
+                                        min="1"
+                                        step="1"
+                                        @input="calculate"
+                                        style="width: 80px; padding: 0.4rem; text-align: center;"
+                                    >
+                                    <span class="help-icon" :data-tooltip="'₹' + formatRoundOff() + ' - Investor allocations and asset allocations will be rounded to multiples of this value'">ℹ️</span>
+                                </label>
+                            </div>
+                            
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                                 <h4 style="margin: 0;">👥 Investors</h4>
                                 <button type="button" class="unit-buttons-btn" @click="addInvestor">
                                     ➕ Add
                                 </button>
                             </div>
+                            
                             <table class="asset-table" style="margin-bottom: 1rem;">
                                 <thead>
                                     <tr>
@@ -79,7 +109,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 type="number" 
                                                 v-model.number="investor.amountValue" 
                                                 min="0"
-                                                step="0.1"
+                                                :step="roundOffValue"
                                                 @input="calculate"
                                                 style="width: 80px; padding: 0.25rem;"
                                             >
@@ -114,27 +144,8 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 </tbody>
                             </table>
                             
-                            <!-- Round Off within Investors Block -->
-                            <div class="input-group" style="margin-top: 1.5rem;">
-                                <label>
-                                    Round Off Amount (K):&nbsp;<strong>₹ {{ formatRoundOff() }}</strong>
-                                    <span class="help-icon" data-tooltip="All allocations will be rounded to this value">ℹ️</span>
-                                </label>
-                                <input 
-                                    type="number" 
-                                    v-model.number="roundOffValue" 
-                                    min="0.1"
-                                    step="0.1"
-                                    @input="calculate"
-                                    style="width: 100%;"
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Asset Classes & Groups Section -->
-                        <div class="assets-group">
                             <!-- Asset Classes -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; margin-top: 2rem;">
                                 <h4 style="margin: 0;">🎯 Asset Classes</h4>
                                 <button type="button" class="unit-buttons-btn" @click="addAsset">
                                     ➕ Add
@@ -301,15 +312,12 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 </tbody>
                             </table>
                         </div>
-
                         
                         <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Allocations update automatically as you adjust inputs</p>
                     </div>
                     
                     <!-- Right Column: Output Results -->
                     <div class="sip-outputs">
-                        <h3 style="margin-top: 0;">📋 Allocation Results</h3>
-                        
                         
                         <!-- Validation Messages -->
                         <div v-if="validationErrors.length > 0" class="validation-errors">
@@ -317,49 +325,102 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 ⚠️ {{ error }}
                             </div>
                         </div>
-
-                        <!-- Individual Allocations -->
+                        
+                        <!-- Summary Metrics -->
                         <div v-if="results.investorAllocations.length > 0">
-                            <div v-for="allocation in results.investorAllocations" :key="allocation.name" style="margin-bottom: 1.5rem;">
-                                <h4 style="margin-top: 0; margin-bottom: 0.5rem;">
-                                    {{ allocation.name }} (₹{{ formatNumber(allocation.amount) }})
-                                </h4>
-                                <table class="allocation-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Asset Class</th>
-                                            <th>Allocation</th>
-                                        </tr>
-                                    </thead>
+                            <h3 style="margin-top: 0;">📈 Summary</h3>
+                            <div style="margin-bottom: 2rem;">
+                                <table class="summary-table">
                                     <tbody>
-                                        <template v-for="item in allocation.allocations" :key="item.asset">
-                                            <tr>
-                                                <td>{{ item.asset }}</td>
-                                                <td>₹{{ formatNumber(item.amount) }}</td>
-                                            </tr>
-                                            <tr v-if="item.tcs > 0" style="opacity: 0.6;">
-                                                <td style="padding-left: 1.5rem;">{{ item.asset }} (TCS)</td>
-                                                <td>₹{{ formatNumber(item.tcs) }}</td>
-                                            </tr>
-                                        </template>
-                                        <tr class="total-row">
-                                            <td><strong>Total</strong></td>
-                                            <td><strong>₹{{ formatNumber(allocation.total + allocation.tcs) }}</strong></td>
+                                        <tr>
+                                            <td><strong>New Allocation</strong></td>
+                                            <td class="highlight">{{ formatNewAllocationPercent() }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Drift Correction</strong></td>
+                                            <td class="highlight">{{ formatDriftCorrection() }}</td>
+                                        </tr>
+                                        <tr v-if="getTotalTCS() > 0">
+                                            <td><strong>TCS Drag</strong></td>
+                                            <td class="highlight">{{ formatTCSDrag() }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+                            
+                            <h3 style="margin-top: 2rem;">📋 Allocation Results</h3>
+                        </div>
+
+                        <!-- Individual Allocations -->
+                        <div v-if="results.investorAllocations.length > 0">
+                            
+                            <div class="table-responsive" style="margin-bottom: 2rem;">
+                                <table class="allocation-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Asset Class</th>
+                                            <th v-for="allocation in results.investorAllocations" :key="allocation.name" style="text-align: right;">
+                                                {{ allocation.name }}
+                                            </th>
+                                            <th v-if="results.investorAllocations.length > 1" style="text-align: right;">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="assetClass in getAllocatedAssetClasses()" :key="assetClass">
+                                            <td>{{ assetClass }}</td>
+                                            <td v-for="allocation in results.investorAllocations" :key="allocation.name" style="text-align: right;">
+                                                {{ getInvestorAssetAllocation(allocation, assetClass) }}
+                                            </td>
+                                            <td v-if="results.investorAllocations.length > 1" style="text-align: right;"><strong>{{ getAssetClassTotal(assetClass) }}</strong></td>
+                                        </tr>
+                                        <tr class="total-row">
+                                            <td><strong>Net Total</strong></td>
+                                            <td v-for="allocation in results.investorAllocations" :key="allocation.name" style="text-align: right;">
+                                                <strong>₹{{ formatNumber(allocation.total) }}</strong>
+                                            </td>
+                                            <td v-if="results.investorAllocations.length > 1" style="text-align: right;"><strong>₹{{ formatNumber(results.totalNewAllocation) }}</strong></td>
+                                        </tr>
+                                        <tr v-for="assetClass in getAllocatedAssetClassesWithTCS()" :key="assetClass + '-tcs'">
+                                            <td>{{ assetClass }} (TCS)</td>
+                                            <td v-for="allocation in results.investorAllocations" :key="allocation.name" style="text-align: right;">
+                                                {{ getInvestorAssetTCS(allocation, assetClass) }}
+                                            </td>
+                                            <td v-if="results.investorAllocations.length > 1" style="text-align: right;"><strong>{{ getAssetClassTCSTotal(assetClass) }}</strong></td>
+                                        </tr>
+                                        <tr class="total-row" v-if="getAllocatedAssetClassesWithTCS().length > 0">
+                                            <td><strong>Gross Total</strong></td>
+                                            <td v-for="allocation in results.investorAllocations" :key="allocation.name" style="text-align: right;">
+                                                <strong>₹{{ formatNumber(allocation.total + allocation.tcs) }}</strong>
+                                            </td>
+                                            <td v-if="results.investorAllocations.length > 1" style="text-align: right;"><strong>₹{{ formatNumber(results.totalNewAllocation + getTotalTCS()) }}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Terms</h3>
+                            <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
+                                <li><strong>Pre Allocation:</strong> Portfolio state before new investments.</li>
+                                <li><strong>Post Allocation:</strong> Portfolio state after new investments.</li>
+                                <li><strong>Drift:</strong> Deviation from target allocation.</li>
+                                <li><strong>TCS:</strong> Tax Collected at Source on international investments.</li>
+                            </ul>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
+                                📚 Learn more: <a href="/building-wealth/tools/multi-asset-allocator/#how-it-works" style="color: #0066cc; text-decoration: none;">How It Works</a> | 
+                                <a href="/building-wealth/tools/multi-asset-allocator/#frequently-asked-questions" style="color: #0066cc; text-decoration: none;">FAQs</a> | 
+                                <a href="/building-wealth/tools/multi-asset-allocator/#features" style="color: #0066cc; text-decoration: none;">Features</a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Summary Report - Full Width Below -->
+                <!-- 📈 Summary Report - Full Width Below -->
                 <div class="investment-plan" v-if="results.summary.length > 0">
                     
-                    <!-- Portfolio Summary with toggles -->
+                    <!-- Portfolio 📈 Summary with toggles -->
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                         <div style="display: flex; gap: 1rem; align-items: center;">
-                            <h2 style="margin: 0;">📊 Portfolio Summary Report</h2>
+                            <h2 style="margin: 0;">📊 Allocation Report</h2>
                             <!-- Chart/Table Toggle -->
                             <div class="mode-toggle">
                                 <button 
@@ -400,22 +461,32 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         <table class="summary-table">
                             <thead>
                                 <tr v-if="portfolioViewMode === 'percentage'">
-                                    <th>Asset Class</th>
-                                    <th>Target</th>
-                                    <th>Current</th>
-                                    <th>Drift</th>
-                                    <th>Allocation</th>
-                                    <th>Post Allocation</th>
-                                    <th>New Drift</th>
+                                    <th rowspan="2">Asset Class</th>
+                                    <th colspan="3">Pre Allocation</th>
+                                    <th rowspan="2">Allocation</th>
+                                    <th colspan="3">Post Allocation</th>
                                 </tr>
-                                <tr v-else>
-                                    <th>Asset Class</th>
+                                <tr v-if="portfolioViewMode === 'percentage'">
                                     <th>Target</th>
-                                    <th>Current</th>
+                                    <th>Actual</th>
                                     <th>Drift</th>
-                                    <th>Allocation</th>
-                                    <th>Post Allocation</th>
-                                    <th>New Drift</th>
+                                    <th>Target</th>
+                                    <th>Actual</th>
+                                    <th>Drift</th>
+                                </tr>
+                                <tr v-if="portfolioViewMode === 'amount'">
+                                    <th rowspan="2">Asset Class</th>
+                                    <th colspan="3">Pre Allocation</th>
+                                    <th rowspan="2">Allocation</th>
+                                    <th colspan="3">Post Allocation</th>
+                                </tr>
+                                <tr v-if="portfolioViewMode === 'amount'">
+                                    <th>Target</th>
+                                    <th>Actual</th>
+                                    <th>Drift</th>
+                                    <th>Target</th>
+                                    <th>Actual</th>
+                                    <th>Drift</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -423,26 +494,28 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     <td><strong>{{ row.assetClass }}</strong></td>
                                     <template v-if="portfolioViewMode === 'percentage'">
                                         <td>{{ row.targetPercent.toFixed(2) }}%</td>
-                                        <td>{{ row.currentPercent.toFixed(2) }}%</td>
-                                        <td :class="getDiffClass(row.currentDrift)">
-                                            {{ formatDrift(row.currentDrift) }}
+                                        <td>{{ row.preActualPercent.toFixed(2) }}%</td>
+                                        <td :class="getDiffClass(row.preDrift)">
+                                            {{ formatDrift(row.preDrift) }}
                                         </td>
                                         <td>{{ row.newAllocationPercent.toFixed(2) }}%</td>
+                                        <td>{{ row.targetPercent.toFixed(2) }}%</td>
                                         <td>{{ row.postPercent.toFixed(2) }}%</td>
                                         <td :class="getDiffClass(row.postDrift)">
                                             {{ formatDrift(row.postDrift) }}
                                         </td>
                                     </template>
                                     <template v-else>
-                                        <td>₹{{ formatNumber(row.targetValue) }}</td>
+                                        <td>₹{{ formatNumber(row.preTargetValue) }}</td>
                                         <td>₹{{ formatNumber(row.currentValue) }}</td>
-                                        <td :class="getDiffClass(row.currentDrift)">
-                                            {{ row.currentDrift >= 0 ? '+' : '-' }}₹{{ formatNumber(Math.abs(row.currentValue - row.targetValue)) }}
+                                        <td :class="getDiffClass(row.currentValue - row.preTargetValue)">
+                                            {{ (row.currentValue - row.preTargetValue) >= 0 ? '+' : '-' }}₹{{ formatNumber(Math.abs(row.currentValue - row.preTargetValue)) }}
                                         </td>
                                         <td>₹{{ formatNumber(row.newAllocation) }}</td>
+                                        <td>₹{{ formatNumber(row.targetValue) }}</td>
                                         <td>₹{{ formatNumber(row.postValue) }}</td>
-                                        <td :class="getDiffClass(row.postDrift)">
-                                            {{ row.postDrift >= 0 ? '+' : '-' }}₹{{ formatNumber(Math.abs(row.postValue - row.targetValue)) }}
+                                        <td :class="getDiffClass(row.postValue - row.targetValue)">
+                                            {{ (row.postValue - row.targetValue) >= 0 ? '+' : '-' }}₹{{ formatNumber(Math.abs(row.postValue - row.targetValue)) }}
                                         </td>
                                     </template>
                                 </tr>
@@ -451,18 +524,20 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     <template v-if="portfolioViewMode === 'percentage'">
                                         <td>{{ results.totalTargetPercent.toFixed(2) }}%</td>
                                         <td>100.00%</td>
-                                        <td>-</td>
+                                        <td><strong>{{ results.totalPreDriftPercent.toFixed(2) }}%</strong></td>
                                         <td>100.00%</td>
+                                        <td>{{ results.totalTargetPercent.toFixed(2) }}%</td>
                                         <td>100.00%</td>
-                                        <td>-</td>
+                                        <td><strong>{{ results.totalPostDriftPercent.toFixed(2) }}%</strong></td>
                                     </template>
                                     <template v-else>
-                                        <td>₹{{ formatNumber(results.totalTarget) }}</td>
                                         <td>₹{{ formatNumber(results.totalCurrent) }}</td>
-                                        <td>-</td>
+                                        <td>₹{{ formatNumber(results.totalCurrent) }}</td>
+                                        <td><strong>₹{{ formatNumber(results.totalPreDriftRupee) }}</strong></td>
                                         <td>₹{{ formatNumber(results.totalNewAllocation) }}</td>
+                                        <td>₹{{ formatNumber(results.totalTarget) }}</td>
                                         <td>₹{{ formatNumber(results.totalPost) }}</td>
-                                        <td>-</td>
+                                        <td><strong>₹{{ formatNumber(results.totalPostDriftRupee) }}</strong></td>
                                     </template>
                                 </tr>
                             </tbody>
@@ -471,7 +546,16 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     
                     <!-- Chart View -->
                     <div v-show="portfolioViewTab === 'chart'" style="margin-bottom: 2rem;">
-                        <div id="allocation-chart" class="chart-container"></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                            <div>
+                                <h3 style="text-align: center; margin-bottom: 1rem;">📊 Portfolio Allocation</h3>
+                                <div id="allocation-chart" class="chart-container"></div>
+                            </div>
+                            <div>
+                                <h3 style="text-align: center; margin-bottom: 1rem;">📉 Drift Analysis</h3>
+                                <div id="drift-chart" class="chart-container"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -503,6 +587,9 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 },
                 validationErrors: [],
                 chart: null,
+                driftChart: null,
+                resizeHandler: null,
+                driftResizeHandler: null,
                 portfolioViewMode: 'percentage',
                 portfolioViewTab: 'chart',
                 draggedIndex: null,
@@ -511,6 +598,48 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
         },
         mounted() {
             this.calculate();
+        },
+        watch: {
+            'results.summary': {
+                handler(newVal, oldVal) {
+                    // When results disappear (validation error), dispose charts
+                    if ((!newVal || newVal.length === 0) && oldVal && oldVal.length > 0) {
+                        if (this.chart) {
+                            this.chart.dispose();
+                            this.chart = null;
+                        }
+                        if (this.driftChart) {
+                            this.driftChart.dispose();
+                            this.driftChart = null;
+                        }
+                    }
+                    // When results become available and we're on chart view, render charts
+                    else if (newVal && newVal.length > 0 && this.portfolioViewTab === 'chart') {
+                        this.$nextTick(() => {
+                            setTimeout(() => {
+                                this.updateChart();
+                            }, 100);
+                        });
+                    }
+                },
+                deep: false
+            },
+            portfolioViewTab() {
+                // When switching to chart tab, render charts
+                if (this.portfolioViewTab === 'chart' && this.results.summary.length > 0) {
+                    this.$nextTick(() => {
+                        setTimeout(() => {
+                            this.updateChart();
+                        }, 100);
+                    });
+                }
+            },
+            portfolioViewMode() {
+                // When view mode changes, update charts if on chart view
+                if (this.portfolioViewTab === 'chart' && this.results.summary.length > 0) {
+                    this.updateChart();
+                }
+            }
         },
         methods: {
             dragStart(event, index, type) {
@@ -588,6 +717,13 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             removeInvestor(index) {
                 this.investors.splice(index, 1);
                 this.calculate();
+                // Resize charts after data change
+                this.$nextTick(() => {
+                    setTimeout(() => {
+                        this.chart?.resize();
+                        this.driftChart?.resize();
+                    }, 150);
+                });
             },
             addAsset() {
                 this.assets.push({
@@ -649,6 +785,95 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     return sum + (asset ? asset.targetPercent : 0);
                 }, 0).toFixed(2);
             },
+            getAllocatedAssetClasses() {
+                // Get unique asset classes that have allocations
+                const assetClasses = new Set();
+                this.results.investorAllocations.forEach(allocation => {
+                    allocation.allocations.forEach(item => {
+                        assetClasses.add(item.asset);
+                    });
+                });
+                return Array.from(assetClasses);
+            },
+            getAllocatedAssetClassesWithTCS() {
+                // Get unique asset classes that have TCS
+                const assetClasses = new Set();
+                this.results.investorAllocations.forEach(allocation => {
+                    allocation.allocations.forEach(item => {
+                        if (item.tcs > 0) {
+                            assetClasses.add(item.asset);
+                        }
+                    });
+                });
+                return Array.from(assetClasses);
+            },
+            getInvestorAssetAllocation(allocation, assetClass) {
+                const item = allocation.allocations.find(a => a.asset === assetClass);
+                if (item && item.amount > 0) {
+                    return '₹' + this.formatNumber(item.amount);
+                }
+                return '-';
+            },
+            getInvestorAssetTCS(allocation, assetClass) {
+                const item = allocation.allocations.find(a => a.asset === assetClass);
+                if (item && item.tcs > 0) {
+                    return '₹' + this.formatNumber(item.tcs);
+                }
+                return '-';
+            },
+            getAssetClassTotal(assetClass) {
+                let total = 0;
+                this.results.investorAllocations.forEach(allocation => {
+                    const item = allocation.allocations.find(a => a.asset === assetClass);
+                    if (item) {
+                        total += item.amount;
+                    }
+                });
+                return '₹' + this.formatNumber(total);
+            },
+            getAssetClassTCSTotal(assetClass) {
+                let total = 0;
+                this.results.investorAllocations.forEach(allocation => {
+                    const item = allocation.allocations.find(a => a.asset === assetClass);
+                    if (item) {
+                        total += item.tcs;
+                    }
+                });
+                return '₹' + this.formatNumber(total);
+            },
+            getTotalTCS() {
+                let total = 0;
+                this.results.investorAllocations.forEach(allocation => {
+                    total += allocation.tcs;
+                });
+                return total;
+            },
+            getTotalTransactions() {
+                let count = 0;
+                this.results.investorAllocations.forEach(allocation => {
+                    allocation.allocations.forEach(item => {
+                        if (item.amount > 0) {
+                            count++;
+                        }
+                    });
+                });
+                return count;
+            },
+            formatDriftCorrection() {
+                const correction = this.results.totalPreDriftPercent - this.results.totalPostDriftPercent;
+                return correction.toFixed(2) + '%';
+            },
+            formatNewAllocationPercent() {
+                if (this.results.totalCurrent === 0) return '100%';
+                const percent = (this.results.totalNewAllocation / this.results.totalCurrent) * 100;
+                return percent.toFixed(2) + '%';
+            },
+            formatTCSDrag() {
+                const totalTCS = this.getTotalTCS();
+                if (totalTCS === 0) return '0%';
+                const drag = (totalTCS / (this.results.totalNewAllocation + totalTCS)) * 100;
+                return drag.toFixed(2) + '%';
+            },
             validate() {
                 const errors = [];
                 
@@ -705,15 +930,13 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 // Calculate current total portfolio value
                 const currentTotal = this.assets.reduce((sum, asset) => sum + this.getAssetCurrentValue(asset), 0);
                 
-                // Calculate total new investment
+                // Calculate total new investment budget (includes TCS for planning)
                 const totalNewInvestment = this.investors.reduce((sum, inv) => sum + this.getInvestorAmount(inv), 0);
                 
-                // Calculate new total portfolio value
-                const newTotal = currentTotal + totalNewInvestment;
-                
-                // Calculate deviations for each asset
+                // Calculate deviations for each asset (use total investment for planning)
+                const planningTotal = currentTotal + totalNewInvestment;
                 const assetDeviations = this.assets.map(asset => {
-                    const targetValue = (asset.targetPercent / 100) * newTotal;
+                    const targetValue = (asset.targetPercent / 100) * planningTotal;
                     const currentValue = this.getAssetCurrentValue(asset);
                     const deviation = targetValue - currentValue;
                     return {
@@ -736,7 +959,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         const asset = assetDeviations.find(a => a.name === assetName);
                         return sum + (asset ? asset.targetValue - asset.deviation : 0); // current value
                     }, 0);
-                    const groupCurrentPercent = newTotal > 0 ? (groupCurrent / newTotal) * 100 : 0;
+                    const groupCurrentPercent = planningTotal > 0 ? (groupCurrent / planningTotal) * 100 : 0;
                     groupCurrentValues[group.name] = {
                         currentPercent: groupCurrentPercent,
                         targetPercent: groupTargetPercent,
@@ -767,24 +990,30 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     // No assets to allocate
                     this.results = {
                         investorAllocations: [],
-                        summary: this.assets.map(asset => ({
-                            assetClass: asset.name,
-                            targetPercent: asset.targetPercent,
-                            targetValue: Math.round((asset.targetPercent / 100) * newTotal),
-                            currentValue: this.getAssetCurrentValue(asset),
-                            currentPercent: currentTotal > 0 ? (this.getAssetCurrentValue(asset) / currentTotal) * 100 : 0,
-                            currentDrift: currentTotal > 0 ? ((this.getAssetCurrentValue(asset) / currentTotal) * 100) - asset.targetPercent : 0,
-                            newAllocation: 0,
-                            newAllocationPercent: 0,
-                            postValue: this.getAssetCurrentValue(asset),
-                            postPercent: newTotal > 0 ? (this.getAssetCurrentValue(asset) / newTotal) * 100 : 0,
-                            postDrift: newTotal > 0 ? ((this.getAssetCurrentValue(asset) / newTotal) * 100) - asset.targetPercent : 0,
-                            diffPercent: 0
-                        })),
+                        summary: this.assets.map(asset => {
+                            const currentValue = this.getAssetCurrentValue(asset);
+                            const preActualPercent = currentTotal > 0 ? (currentValue / currentTotal) * 100 : 0;
+                            const preTargetValue = Math.round((asset.targetPercent / 100) * currentTotal);
+                            const preDrift = preActualPercent - asset.targetPercent;
+                            return {
+                                assetClass: asset.name,
+                                targetPercent: asset.targetPercent,
+                                preTargetValue,
+                                targetValue: preTargetValue,
+                                currentValue,
+                                preActualPercent,
+                                preDrift,
+                                newAllocation: 0,
+                                newAllocationPercent: 0,
+                                postValue: currentValue,
+                                postPercent: preActualPercent,
+                                postDrift: preDrift
+                            };
+                        }),
                         totalCurrent: currentTotal,
                         totalNewAllocation: 0,
                         totalPost: currentTotal,
-                        totalTarget: Math.round(newTotal),
+                        totalTarget: currentTotal,
                         totalTargetPercent: this.assets.reduce((sum, a) => sum + a.targetPercent, 0)
                     };
                     return;
@@ -814,285 +1043,238 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         : budgetShare;
                 });
                 
-                // Sort investors by contribution (lower first for tax optimization)
-                const sortedInvestors = [...this.investors].sort((a, b) => {
-                    return this.getInvestorAmount(a) - this.getInvestorAmount(b);
-                });
+                // ============================================================
+                // DETERMINISTIC ALLOCATION ENGINE
+                // Asset-centric approach using constrained transportation problem
+                // ============================================================
                 
-                // Separate assets by tax treatment: Slab rate assets (allocated first to lower contributors) and flat rate assets
-                const slabRateAssets = eligibleAssetDeviations.filter(a => a.hasSlabRate);
-                const flatRateAssets = eligibleAssetDeviations.filter(a => !a.hasSlabRate);
-                
-                // Track remaining allocation needed per asset
-                const remainingAllocation = {};
-                Object.keys(assetTargetAllocations).forEach(assetName => {
-                    remainingAllocation[assetName] = assetTargetAllocations[assetName];
-                });
-                
-                // Allocate for each investor
-                const investorAllocations = [];
-                const investorAllocationMap = {}; // Map to store allocations by investor name
-                const assetTotals = {};
                 const roundOff = this.getRoundOff();
                 
-                sortedInvestors.forEach((investor, investorIndex) => {
-                    let investorAmount = this.getInvestorAmount(investor);
-                    if (investorAmount === 0) return;
+                // STEP 1: Calculate exact asset allocations (with rounding adjustment)
+                const assetAllocations = [];
+                let totalRounded = 0;
+                
+                adjustedDeviations.forEach(asset => {
+                    const targetAmount = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
+                    // For international with TCS, the actual investment is budget / 1.2
+                    const investmentAmount = (anyInvestorHasTcs && asset.isInternational)
+                        ? targetAmount / 1.2
+                        : targetAmount;
+                    const roundedAmount = Math.round(investmentAmount / roundOff) * roundOff;
                     
-                    const allocations = [];
-                    let totalAllocated = 0;
-                    let totalTcs = 0;
-                    let remainingInvestorAmount = investorAmount;
-                    
-                    // Helper function to calculate allocation amount considering TCS for international assets
-                    const calculateAllocation = (asset, desiredAmount) => {
-                        if (investor.tcs && asset.isInternational) {
-                            const maxInvestment = remainingInvestorAmount / 1.2;
-                            const actualInvestment = Math.min(desiredAmount, maxInvestment);
-                            const tcsAmount = Math.round(actualInvestment * 0.2);
-                            return { investment: actualInvestment, tcs: tcsAmount, total: actualInvestment + tcsAmount };
-                        } else {
-                            return { investment: Math.min(desiredAmount, remainingInvestorAmount), tcs: 0, total: Math.min(desiredAmount, remainingInvestorAmount) };
-                        }
-                    };
-                    
-                    // Helper function to round allocation considering TCS (ensures total outflow is multiple of roundOff)
-                    const roundAllocation = (asset, amount) => {
-                        if (investor.tcs && asset.isInternational) {
-                            // For TCS: investment + TCS = investment × 1.2 must be multiple of roundOff
-                            // And investment must be whole rupees
-                            // So find nearest investment where (investment × 1.2) is multiple of roundOff
-                            const desiredTotal = amount * 1.2;
-                            const roundedTotal = Math.round(desiredTotal / roundOff) * roundOff;
-                            // Investment must be whole rupees, so round it
-                            const investment = Math.round(roundedTotal / 1.2);
-                            return investment;
-                        } else {
-                            // For non-TCS, just round the investment
-                            return Math.round(amount / roundOff) * roundOff;
-                        }
-                    };
-                    
-                    // For the lowest contributor, try to allocate single largest asset to minimize transactions
-                    if (investorIndex === 0) {
-                        // Get eligible slab rate and flat rate assets separately for tax optimization
-                        const eligibleSlabRate = slabRateAssets.filter(asset => {
-                            if (asset.isInternational && !investor.international) return false;
-                            return remainingAllocation[asset.name] > roundOff;
+                    if (roundedAmount > 0) {
+                        assetAllocations.push({
+                            name: asset.name,
+                            amount: roundedAmount,
+                            isSlabAsset: asset.hasSlabRate,
+                            isInternational: asset.isInternational,
+                            originalAsset: asset
                         });
-                        const eligibleFlatRate = flatRateAssets.filter(asset => {
-                            if (asset.isInternational && !investor.international) return false;
-                            return remainingAllocation[asset.name] > roundOff;
-                        });
-                        
-                        // Sort each group by allocation need (descending)
-                        eligibleSlabRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
-                        eligibleFlatRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
-                        
-                        // Combine with slab rate assets first (tax optimization priority maintained)
-                        const eligibleAssets = [...eligibleSlabRate, ...eligibleFlatRate];
-                        
-                        // Try to find a single asset that can absorb most/all of investor's budget
-                        for (const asset of eligibleAssets) {
-                            const assetNeed = remainingAllocation[asset.name];
-                            const allocationCalc = calculateAllocation(asset, assetNeed);
-                            
-                            // If this asset can absorb at least 80% of investor's budget, allocate it fully to this investor
-                            if (allocationCalc.total >= investorAmount * 0.8) {
-                                const maxPossible = calculateAllocation(asset, assetNeed);
-                                const roundedInvestment = roundAllocation(asset, Math.floor(maxPossible.investment / roundOff) * roundOff);
-                                
-                                if (roundedInvestment > 0) {
-                                    const finalCalc = calculateAllocation(asset, roundedInvestment);
-                                    allocations.push({ 
-                                        asset: asset.name, 
-                                        amount: roundedInvestment,
-                                        tcs: finalCalc.tcs
-                                    });
-                                    totalAllocated += roundedInvestment;
-                                    totalTcs += finalCalc.tcs;
-                                    remainingInvestorAmount -= finalCalc.total;
-                                    assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
-                                    remainingAllocation[asset.name] -= roundedInvestment;
-                                    break; // Single transaction achieved
-                                }
-                            }
+                        totalRounded += roundedAmount;
+                    }
+                });
+                
+                // Adjust for rounding error: allocate remaining to asset with highest positive difference
+                const roundingDiff = totalNewInvestment - totalRounded;
+                if (Math.abs(roundingDiff) >= roundOff && assetAllocations.length > 0) {
+                    // Find asset with highest unrounded remainder
+                    let maxDiff = 0;
+                    let maxIdx = 0;
+                    adjustedDeviations.forEach((asset, idx) => {
+                        const targetAmount = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
+                        const investmentAmount = (anyInvestorHasTcs && asset.isInternational)
+                            ? targetAmount / 1.2
+                            : targetAmount;
+                        const roundedAmount = Math.round(investmentAmount / roundOff) * roundOff;
+                        const diff = investmentAmount - roundedAmount;
+                        if (diff > maxDiff) {
+                            maxDiff = diff;
+                            maxIdx = idx;
                         }
+                    });
+                    const adjustmentAmount = Math.round(roundingDiff / roundOff) * roundOff;
+                    const assetToAdjust = assetAllocations.find(a => a.name === adjustedDeviations[maxIdx].name);
+                    if (assetToAdjust) {
+                        assetToAdjust.amount += adjustmentAmount;
+                    }
+                }
+                
+                // STEP 2: Prepare investor metadata with priorities
+                const investorData = this.investors.map((inv, index) => ({
+                    investor: inv,
+                    name: inv.name,
+                    capacity: this.getInvestorAmount(inv),
+                    remaining: this.getInvestorAmount(inv),
+                    internationalEnabled: inv.international || false,
+                    taxSlab: inv.taxSlab || 0,  // Lower slab preferred for slab assets
+                    uiOrder: index,
+                    hasTcs: inv.tcs && inv.international,
+                    allocations: []
+                })).filter(invData => invData.capacity > 0);
+                
+                // STEP 3: Sort assets and investors for deterministic allocation
+                
+                // Separate slab and non-slab assets
+                const slabAssets = assetAllocations.filter(a => a.isSlabAsset);
+                const nonSlabAssets = assetAllocations.filter(a => !a.isSlabAsset);
+                
+                // Sort investors by priority (for use during allocation)
+                const sortInvestors = () => {
+                    investorData.sort((a, b) => {
+                        // Priority 1: Non-international investors first (constrained)
+                        if (!a.internationalEnabled && b.internationalEnabled) return -1;
+                        if (a.internationalEnabled && !b.internationalEnabled) return 1;
+                        // Priority 2: Lower tax slab first (for slab assets)
+                        if (a.taxSlab !== b.taxSlab) return a.taxSlab - b.taxSlab;
+                        // Priority 3: Smaller remaining capacity first
+                        if (a.remaining !== b.remaining) return a.remaining - b.remaining;
+                        // Priority 4: UI order for deterministic tie-breaking
+                        return a.uiOrder - b.uiOrder;
+                    });
+                };
+                
+                // Helper: Check if investor can invest in asset
+                const canInvest = (invData, asset) => {
+                    if (asset.isInternational && !invData.internationalEnabled) return false;
+                    if (invData.remaining < roundOff) return false;
+                    if (asset.amount <= 0) return false;
+                    return true;
+                };
+                
+                // Helper: Allocate to investor (handles TCS and rounding)
+                const allocate = (invData, asset, amount) => {
+                    const maxAmount = Math.min(amount, asset.amount);
+                    let investment, tcs, total;
+                    
+                    if (invData.hasTcs && asset.isInternational) {
+                        // TCS calculation: total outflow (investment + TCS) must be multiple of roundOff
+                        // TCS = 20% of investment, so total = investment × 1.2
+                        const maxInvestmentWithTcs = invData.remaining / 1.2;
+                        const desiredInvestment = Math.min(maxAmount, maxInvestmentWithTcs);
                         
-                        // If we still have remaining amount and no allocation was made, fall back to proportional
-                        if (allocations.length === 0 && remainingInvestorAmount >= roundOff) {
-                            const eligibleSlabRate = slabRateAssets.filter(asset => {
-                                if (asset.isInternational && !investor.international) return false;
-                                return remainingAllocation[asset.name] > roundOff;
-                            });
-                            
-                            eligibleSlabRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
-                            
-                            for (const asset of eligibleSlabRate) {
-                                if (remainingInvestorAmount < roundOff) break;
-                                
-                                const assetNeed = remainingAllocation[asset.name];
-                                const totalNeed = eligibleSlabRate.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
-                                const proportion = assetNeed / totalNeed;
-                                const maxForThis = investor.tcs && asset.isInternational 
-                                    ? (remainingInvestorAmount / 1.2) * proportion
-                                    : remainingInvestorAmount * proportion;
-                                const roundedInvestment = roundAllocation(asset, Math.floor(maxForThis / roundOff) * roundOff);
-                                
-                                if (roundedInvestment > 0) {
-                                    const finalCalc = calculateAllocation(asset, roundedInvestment);
-                                    allocations.push({ 
-                                        asset: asset.name, 
-                                        amount: roundedInvestment,
-                                        tcs: finalCalc.tcs
-                                    });
-                                    totalAllocated += roundedInvestment;
-                                    totalTcs += finalCalc.tcs;
-                                    remainingInvestorAmount -= finalCalc.total;
-                                    assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
-                                    remainingAllocation[asset.name] -= roundedInvestment;
-                                }
-                            }
-                        }
+                        // Round total outflow to multiple of roundOff
+                        const desiredTotal = desiredInvestment * 1.2;
+                        total = Math.round(desiredTotal / roundOff) * roundOff;
+                        
+                        if (total <= 0) return;
+                        
+                        // Back-calculate investment (must be whole rupees)
+                        investment = Math.round(total / 1.2);
+                        tcs = total - investment;
                     } else {
-                        // For higher contributors, use normal proportional allocation
+                        investment = Math.min(maxAmount, invData.remaining);
+                        investment = Math.round(investment / roundOff) * roundOff;
                         
-                        // Phase 1: Allocate slab rate assets first for tax optimization
-                        const eligibleSlabRate = slabRateAssets.filter(asset => {
-                            if (asset.isInternational && !investor.international) return false;
-                            return remainingAllocation[asset.name] > roundOff;
-                        });
+                        if (investment <= 0) return;
                         
-                        eligibleSlabRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
-                        
-                        for (const asset of eligibleSlabRate) {
-                            if (remainingInvestorAmount < roundOff) break;
-                            
-                            const assetNeed = remainingAllocation[asset.name];
-                            const allocationCalc = calculateAllocation(asset, assetNeed);
-                            const roundedInvestment = roundAllocation(asset, allocationCalc.investment);
-                            
-                            if (roundedInvestment > 0 && calculateAllocation(asset, roundedInvestment).total <= remainingInvestorAmount + roundOff) {
-                                const finalCalc = calculateAllocation(asset, roundedInvestment);
-                                allocations.push({ 
-                                    asset: asset.name, 
-                                    amount: roundedInvestment,
-                                    tcs: finalCalc.tcs
-                                });
-                                totalAllocated += roundedInvestment;
-                                totalTcs += finalCalc.tcs;
-                                remainingInvestorAmount -= finalCalc.total;
-                                assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
-                                remainingAllocation[asset.name] -= roundedInvestment;
-                            } else if (remainingInvestorAmount >= roundOff) {
-                                const totalSlabRateNeed = eligibleSlabRate.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
-                                const proportion = remainingAllocation[asset.name] / totalSlabRateNeed;
-                                const maxForThis = investor.tcs && asset.isInternational 
-                                    ? (remainingInvestorAmount / 1.2) * proportion
-                                    : remainingInvestorAmount * proportion;
-                                const roundedInvestment = roundAllocation(asset, Math.floor(maxForThis / roundOff) * roundOff);
-                                
-                                if (roundedInvestment > 0) {
-                                    const finalCalc = calculateAllocation(asset, roundedInvestment);
-                                    allocations.push({ 
-                                        asset: asset.name, 
-                                        amount: roundedInvestment,
-                                        tcs: finalCalc.tcs
-                                    });
-                                    totalAllocated += roundedInvestment;
-                                    totalTcs += finalCalc.tcs;
-                                    remainingInvestorAmount -= finalCalc.total;
-                                    assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
-                                    remainingAllocation[asset.name] -= roundedInvestment;
-                                }
-                            }
-                        }
-                        
-                        // Phase 2: Allocate flat rate assets (LTCG)
-                        const eligibleFlatRate = flatRateAssets.filter(asset => {
-                            if (asset.isInternational && !investor.international) return false;
-                            return remainingAllocation[asset.name] > roundOff;
-                        });
-                        
-                        eligibleFlatRate.sort((a, b) => remainingAllocation[b.name] - remainingAllocation[a.name]);
-                        
-                        for (const asset of eligibleFlatRate) {
-                            if (remainingInvestorAmount < roundOff) break;
-                            
-                            const assetNeed = remainingAllocation[asset.name];
-                            const allocationCalc = calculateAllocation(asset, assetNeed);
-                            const roundedInvestment = roundAllocation(asset, allocationCalc.investment);
-                            
-                            if (roundedInvestment > 0 && calculateAllocation(asset, roundedInvestment).total <= remainingInvestorAmount + roundOff) {
-                                const finalCalc = calculateAllocation(asset, roundedInvestment);
-                                allocations.push({ 
-                                    asset: asset.name, 
-                                    amount: roundedInvestment,
-                                    tcs: finalCalc.tcs
-                                });
-                                totalAllocated += roundedInvestment;
-                                totalTcs += finalCalc.tcs;
-                                remainingInvestorAmount -= finalCalc.total;
-                                assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
-                                remainingAllocation[asset.name] -= roundedInvestment;
-                            } else if (remainingInvestorAmount >= roundOff) {
-                                const totalFlatRateNeed = eligibleFlatRate.reduce((sum, a) => sum + remainingAllocation[a.name], 0);
-                                const proportion = remainingAllocation[asset.name] / totalFlatRateNeed;
-                                const maxForThis = investor.tcs && asset.isInternational 
-                                    ? (remainingInvestorAmount / 1.2) * proportion
-                                    : remainingInvestorAmount * proportion;
-                                const roundedInvestment = roundAllocation(asset, Math.floor(maxForThis / roundOff) * roundOff);
-                                
-                                if (roundedInvestment > 0) {
-                                    const finalCalc = calculateAllocation(asset, roundedInvestment);
-                                    allocations.push({ 
-                                        asset: asset.name, 
-                                        amount: roundedInvestment,
-                                        tcs: finalCalc.tcs
-                                    });
-                                    totalAllocated += roundedInvestment;
-                                    totalTcs += finalCalc.tcs;
-                                    remainingInvestorAmount -= finalCalc.total;
-                                    assetTotals[asset.name] = (assetTotals[asset.name] || 0) + roundedInvestment;
-                                    remainingAllocation[asset.name] -= roundedInvestment;
-                                }
-                            }
-                        }
+                        tcs = 0;
+                        total = investment;
                     }
                     
-                    // Top up: If there's remaining budget after rounding, add it to the largest allocation
-                    if (remainingInvestorAmount >= roundOff && allocations.length > 0) {
-                        // Find the largest allocation that's not international with TCS issues
-                        const sortedAllocs = [...allocations].sort((a, b) => b.amount - a.amount);
+                    // Apply allocation
+                    invData.allocations.push({
+                        asset: asset.name,
+                        amount: investment,
+                        tcs: tcs
+                    });
+                    invData.remaining -= total;
+                    asset.amount -= investment;
+                };
+                
+                // PHASE 1: Allocate slab assets (column-first greedy with priority)
+                for (const asset of slabAssets) {
+                    while (asset.amount >= roundOff) {
+                        sortInvestors(); // Re-sort for priority
                         
-                        for (const alloc of sortedAllocs) {
-                            const asset = this.assets.find(a => a.name === alloc.asset);
-                            if (!asset) continue;
+                        let allocated = false;
+                        for (const invData of investorData) {
+                            if (!canInvest(invData, asset)) continue;
                             
-                            // Check if we can add more to this asset
-                            const rawTopUp = Math.floor(remainingInvestorAmount / roundOff) * roundOff;
-                            const topUpAmount = roundAllocation(asset, rawTopUp);
-                            if (topUpAmount > 0) {
-                                const testCalc = calculateAllocation(asset, topUpAmount);
-                                
-                                if (testCalc.total <= remainingInvestorAmount) {
-                                    alloc.amount += topUpAmount;
-                                    alloc.tcs += testCalc.tcs;
-                                    totalAllocated += topUpAmount;
-                                    totalTcs += testCalc.tcs;
-                                    remainingInvestorAmount -= testCalc.total;
-                                    assetTotals[asset.name] = (assetTotals[asset.name] || 0) + topUpAmount;
-                                    remainingAllocation[asset.name] -= topUpAmount;
-                                    break;
-                                }
-                            }
+                            allocate(invData, asset, asset.amount); // Try to allocate all remaining
+                            allocated = true;
+                            
+                            if (asset.amount < roundOff) break; // Asset fully allocated
+                        }
+                        
+                        if (!allocated) break; // No investor can take more
+                    }
+                }
+                
+                // PHASE 2: Allocate non-slab assets (transaction minimization + greedy)
+                
+                // Step 2a: For small investors, try to allocate entire budget to single asset
+                sortInvestors();
+                for (const invData of investorData) {
+                    if (invData.remaining < roundOff) continue;
+                    
+                    // Try to find a single non-slab asset that can absorb this investor's entire budget
+                    for (const asset of nonSlabAssets) {
+                        if (!canInvest(invData, asset)) continue;
+                        if (asset.amount < roundOff) continue;
+                        
+                        const requiredAssetAmount = invData.hasTcs && asset.isInternational
+                            ? invData.remaining / 1.2
+                            : invData.remaining;
+                        
+                        // If asset has enough need to absorb 80%+ of investor's budget, allocate it all here
+                        if (asset.amount >= requiredAssetAmount * 0.8) {
+                            allocate(invData, asset, invData.remaining);
+                            break; // Move to next investor
                         }
                     }
+                }
+                
+                // Step 2b: Allocate remaining asset needs using greedy distribution
+                for (const asset of nonSlabAssets) {
+                    while (asset.amount >= roundOff) {
+                        sortInvestors();
+                        
+                        let allocated = false;
+                        for (const invData of investorData) {
+                            if (!canInvest(invData, asset)) continue;
+                            
+                            allocate(invData, asset, asset.amount);
+                            allocated = true;
+                            
+                            if (asset.amount < roundOff) break;
+                        }
+                        
+                        if (!allocated) break;
+                    }
+                }
+                
+                // STEP 4: Build results in original investor order
+                const investorAllocations = [];
+                const investorAllocationMap = {};
+                const assetTotals = {};
+                
+                // Create asset order map for sorting
+                const assetOrderMap = {};
+                this.assets.forEach((asset, index) => {
+                    assetOrderMap[asset.name] = index;
+                });
+                
+                // Build allocation map and totals
+                investorData.forEach(invData => {
+                    if (invData.allocations.length === 0) return;
                     
-                    investorAllocationMap[investor.name] = {
-                        name: investor.name,
-                        amount: investorAmount,
-                        allocations,
+                    // Sort allocations by original asset order
+                    invData.allocations.sort((a, b) => {
+                        return assetOrderMap[a.asset] - assetOrderMap[b.asset];
+                    });
+                    
+                    const totalAllocated = invData.allocations.reduce((sum, a) => sum + a.amount, 0);
+                    const totalTcs = invData.allocations.reduce((sum, a) => sum + a.tcs, 0);
+                    
+                    // Update asset totals
+                    invData.allocations.forEach(alloc => {
+                        assetTotals[alloc.asset] = (assetTotals[alloc.asset] || 0) + alloc.amount;
+                    });
+                    
+                    investorAllocationMap[invData.name] = {
+                        name: invData.name,
+                        amount: invData.capacity,
+                        allocations: invData.allocations,
                         total: totalAllocated,
                         tcs: totalTcs
                     };
@@ -1105,40 +1287,52 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     }
                 });
                 
-                // Calculate totals first
+                // Calculate totals
                 const totalTargetPercent = this.assets.reduce((sum, a) => sum + a.targetPercent, 0);
                 const totalNewAllocation = Object.values(assetTotals).reduce((sum, val) => sum + val, 0);
                 const totalPost = currentTotal + totalNewAllocation;
-                const totalTarget = Math.round((totalTargetPercent / 100) * (currentTotal + totalNewAllocation));
+                const totalTarget = totalPost; // Target equals actual portfolio value
                 
                 // Build summary table
                 const summary = this.assets.map(asset => {
                     const currentValue = this.getAssetCurrentValue(asset);
-                    const currentPercent = currentTotal > 0 ? (currentValue / currentTotal) * 100 : 0;
                     const newAllocation = assetTotals[asset.name] || 0;
                     const postValue = currentValue + newAllocation;
-                    const postPercent = newTotal > 0 ? (postValue / newTotal) * 100 : 0;
-                    const diffPercent = postPercent - asset.targetPercent;
-                    const targetValue = Math.round((asset.targetPercent / 100) * newTotal);
-                    const newAllocationPercent = totalNewAllocation > 0 ? (newAllocation / totalNewAllocation) * 100 : 0;
-                    const currentDrift = currentPercent - asset.targetPercent;
+                    
+                    // Pre allocation (current portfolio)
+                    const preActualPercent = currentTotal > 0 ? (currentValue / currentTotal) * 100 : 0;
+                    const preTargetValue = Math.round((asset.targetPercent / 100) * currentTotal);
+                    const preDrift = preActualPercent - asset.targetPercent;
+                    
+                    // Post allocation (new portfolio)
+                    const postPercent = totalPost > 0 ? (postValue / totalPost) * 100 : 0;
+                    const targetValue = Math.round((asset.targetPercent / 100) * totalPost);
                     const postDrift = postPercent - asset.targetPercent;
+                    
+                    // Allocation percentage
+                    const newAllocationPercent = totalNewAllocation > 0 ? (newAllocation / totalNewAllocation) * 100 : 0;
                     
                     return {
                         assetClass: asset.name,
                         targetPercent: asset.targetPercent,
-                        targetValue,
+                        preTargetValue,
                         currentValue,
-                        currentPercent,
-                        currentDrift,
+                        preActualPercent,
+                        preDrift,
                         newAllocation,
                         newAllocationPercent,
+                        targetValue,
                         postValue,
                         postPercent,
-                        postDrift,
-                        diffPercent
+                        postDrift
                     };
                 });
+                
+                // Calculate total absolute drifts
+                const totalPreDriftPercent = summary.reduce((sum, row) => sum + Math.abs(row.preDrift), 0);
+                const totalPostDriftPercent = summary.reduce((sum, row) => sum + Math.abs(row.postDrift), 0);
+                const totalPreDriftRupee = summary.reduce((sum, row) => sum + Math.abs(row.currentValue - row.preTargetValue), 0);
+                const totalPostDriftRupee = summary.reduce((sum, row) => sum + Math.abs(row.postValue - row.targetValue), 0);
                 
                 this.results = {
                     investorAllocations,
@@ -1147,7 +1341,11 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     totalNewAllocation,
                     totalPost,
                     totalTarget,
-                    totalTargetPercent
+                    totalTargetPercent,
+                    totalPreDriftPercent,
+                    totalPostDriftPercent,
+                    totalPreDriftRupee,
+                    totalPostDriftRupee
                 };
                 
                 // Update chart
@@ -1156,16 +1354,33 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 });
             },
             updateChart() {
+                // Check if results exist
+                if (!this.results || !this.results.summary || this.results.summary.length === 0) {
+                    return;
+                }
+                
+                // Portfolio Chart
                 const chartDom = document.getElementById('allocation-chart');
                 if (!chartDom) return;
                 
                 if (!this.chart) {
                     this.chart = echarts.init(chartDom);
+                    
+                    // Setup resize handler once
+                    if (!this.resizeHandler) {
+                        this.resizeHandler = () => this.chart?.resize();
+                        window.addEventListener('resize', this.resizeHandler);
+                    }
+                    
+                    // Explicitly resize after initialization to ensure correct dimensions
+                    this.$nextTick(() => {
+                        this.chart?.resize();
+                    });
                 }
                 
                 const isPercentage = this.portfolioViewMode === 'percentage';
                 
-                const option = {
+                const portfolioOption = {
                     tooltip: {
                         trigger: 'item',
                         formatter: (params) => {
@@ -1173,16 +1388,28 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             const formattedValue = isPercentage 
                                 ? parseFloat(value).toFixed(2) + '%' 
                                 : '₹' + Math.round(parseFloat(value)).toLocaleString('en-IN');
-                            return params.marker + ' ' + params.seriesName + '<br/>' + 
+                            return params.marker + ' <strong>' + params.seriesName + '</strong><br/>' +
                                    params.name + ': <strong>' + formattedValue + '</strong>';
                         }
                     },
                     legend: {
-                        data: ['Target', 'Current', 'Post Allocation']
+                        data: isPercentage ? ['Pre Allocation', 'Post Allocation', 'Target'] : ['Pre Allocation', 'Post Allocation'],
+                        bottom: 0
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '15%',
+                        containLabel: true
                     },
                     xAxis: {
                         type: 'category',
-                        data: this.results.summary.map(s => s.assetClass)
+                        data: this.results.summary.map(s => s.assetClass),
+                        axisLabel: {
+                            interval: 0,
+                            rotate: 45,
+                            fontSize: 11
+                        }
                     },
                     yAxis: {
                         type: 'value',
@@ -1198,46 +1425,132 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     },
                     series: isPercentage ? [
                         {
-                            name: 'Target',
+                            name: 'Pre Allocation',
                             type: 'bar',
-                            data: this.results.summary.map(s => s.targetPercent.toFixed(2)),
+                            data: this.results.summary.map(s => s.preActualPercent.toFixed(2)),
                             itemStyle: { color: '#3b82f6' }
-                        },
-                        {
-                            name: 'Current',
-                            type: 'bar',
-                            data: this.results.summary.map(s => s.currentPercent.toFixed(2)),
-                            itemStyle: { color: '#10b981' }
                         },
                         {
                             name: 'Post Allocation',
                             type: 'bar',
                             data: this.results.summary.map(s => s.postPercent.toFixed(2)),
+                            itemStyle: { color: '#10b981' }
+                        },
+                        {
+                            name: 'Target',
+                            type: 'bar',
+                            data: this.results.summary.map(s => s.targetPercent.toFixed(2)),
                             itemStyle: { color: '#fbbf24' }
                         }
                     ] : [
                         {
-                            name: 'Target',
-                            type: 'bar',
-                            data: this.results.summary.map(s => s.targetValue),
-                            itemStyle: { color: '#3b82f6' }
-                        },
-                        {
-                            name: 'Current',
+                            name: 'Pre Allocation',
                             type: 'bar',
                             data: this.results.summary.map(s => s.currentValue),
-                            itemStyle: { color: '#10b981' }
+                            itemStyle: { color: '#3b82f6' }
                         },
                         {
                             name: 'Post Allocation',
                             type: 'bar',
                             data: this.results.summary.map(s => s.postValue),
-                            itemStyle: { color: '#fbbf24' }
+                            itemStyle: { color: '#10b981' }
                         }
                     ]
                 };
                 
-                this.chart.setOption(option);
+                this.chart.setOption(portfolioOption, true);
+                
+                // Drift Chart
+                const driftChartDom = document.getElementById('drift-chart');
+                if (!driftChartDom) return;
+                
+                if (!this.driftChart) {
+                    this.driftChart = echarts.init(driftChartDom);
+                    
+                    // Setup resize handler once
+                    if (!this.driftResizeHandler) {
+                        this.driftResizeHandler = () => this.driftChart?.resize();
+                        window.addEventListener('resize', this.driftResizeHandler);
+                    }
+                    
+                    // Explicitly resize after initialization to ensure correct dimensions
+                    this.$nextTick(() => {
+                        this.driftChart?.resize();
+                    });
+                }
+                
+                const driftOption = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: (params) => {
+                            const value = params.value;
+                            const formattedValue = isPercentage 
+                                ? (value >= 0 ? '+' : '') + parseFloat(value).toFixed(2) + '%' 
+                                : (value >= 0 ? '+' : '-') + '₹' + Math.abs(Math.round(parseFloat(value))).toLocaleString('en-IN');
+                            return params.marker + ' <strong>' + params.seriesName + '</strong><br/>' +
+                                   params.name + ': <strong>' + formattedValue + '</strong>';
+                        }
+                    },
+                    legend: {
+                        data: ['Pre Allocation Drift', 'Post Allocation Drift'],
+                        bottom: 0
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '15%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        name: isPercentage ? 'Drift (%)' : 'Drift (₹)',
+                        axisLabel: {
+                            formatter: isPercentage ? '{value}%' : (value) => {
+                                const absValue = Math.abs(value);
+                                if (absValue >= 10000000) return (value >= 0 ? '+' : '-') + (absValue / 10000000).toFixed(1) + 'Cr';
+                                if (absValue >= 100000) return (value >= 0 ? '+' : '-') + (absValue / 100000).toFixed(1) + 'L';
+                                if (absValue >= 1000) return (value >= 0 ? '+' : '-') + (absValue / 1000).toFixed(1) + 'K';
+                                return value;
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: { type: 'dashed' }
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: this.results.summary.map(s => s.assetClass).reverse()
+                    },
+                    series: isPercentage ? [
+                        {
+                            name: 'Pre Allocation Drift',
+                            type: 'bar',
+                            data: this.results.summary.map(s => s.preDrift.toFixed(2)).reverse(),
+                            itemStyle: { color: '#3b82f6' }
+                        },
+                        {
+                            name: 'Post Allocation Drift',
+                            type: 'bar',
+                            data: this.results.summary.map(s => s.postDrift.toFixed(2)).reverse(),
+                            itemStyle: { color: '#10b981' }
+                        }
+                    ] : [
+                        {
+                            name: 'Pre Allocation Drift',
+                            type: 'bar',
+                            data: this.results.summary.map(s => s.currentValue - s.preTargetValue).reverse(),
+                            itemStyle: { color: '#3b82f6' }
+                        },
+                        {
+                            name: 'Post Allocation Drift',
+                            type: 'bar',
+                            data: this.results.summary.map(s => s.postValue - s.targetValue).reverse(),
+                            itemStyle: { color: '#10b981' }
+                        }
+                    ]
+                };
+                
+                this.driftChart.setOption(driftOption, true);
             },
             formatNumber(value) {
                 if (value === 0) return '0';

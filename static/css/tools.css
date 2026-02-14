@@ -378,7 +378,6 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
-    table-layout: fixed;
 }
 
 .summary-table th,
@@ -396,7 +395,6 @@
 .summary-table th:first-child,
 .summary-table td:first-child {
     text-align: left;
-    width: 15%;
 }
 
 .summary-table th:not(:first-child),
