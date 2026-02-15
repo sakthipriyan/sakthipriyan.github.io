@@ -320,9 +320,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             </div>
                         </div>
                         
-                        <blockquote style="border-left: 4px solid #3b82f6; padding-left: 1rem; margin: 1.5rem 0; color: #666; font-size: 0.9em;">
-                            💡 Allocations update automatically as you adjust inputs
-                        </blockquote>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Allocations update automatically as you adjust inputs</p>
                     </div>
                     
                     <!-- Right Column: Output Results -->
@@ -415,9 +413,9 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 <li><strong>TCS:</strong> Tax Collected at Source on international investments.</li>
                             </ul>
                             <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
-                                📚 Learn more: <a href="/building-wealth/tools/multi-asset-allocator/#how-it-works" style="color: #0066cc; text-decoration: none;">How It Works</a> | 
-                                <a href="/building-wealth/tools/multi-asset-allocator/#frequently-asked-questions" style="color: #0066cc; text-decoration: none;">FAQs</a> | 
-                                <a href="/building-wealth/tools/multi-asset-allocator/#features" style="color: #0066cc; text-decoration: none;">Features</a>
+                                📚 Learn more: <a href="/building-wealth/tools/realvalue-family-sip-allocator/#algorithm" style="color: #0066cc; text-decoration: none;">Algorithm</a> | 
+                                <a href="/building-wealth/tools/realvalue-family-sip-allocator/#faq" style="color: #0066cc; text-decoration: none;">FAQ</a> | 
+                                <a href="/building-wealth/tools/realvalue-family-sip-allocator/#usage-guide" style="color: #0066cc; text-decoration: none;">Usage Guide</a>
                             </p>
                         </div>
                     </div>
@@ -615,8 +613,9 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
         watch: {
             'results.summary': {
                 handler(newVal, oldVal) {
-                    // When results disappear (validation error), dispose charts
-                    if ((!newVal || newVal.length === 0) && oldVal && oldVal.length > 0) {
+                    // When results change, DOM may have been recreated by v-if
+                    if (newVal && newVal.length > 0) {
+                        // Clear chart instances since DOM may have been recreated
                         if (this.chart) {
                             this.chart.dispose();
                             this.chart = null;
@@ -625,14 +624,13 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             this.driftChart.dispose();
                             this.driftChart = null;
                         }
-                    }
-                    // When results become available and we're on chart view, render charts
-                    else if (newVal && newVal.length > 0 && this.portfolioViewTab === 'chart') {
-                        this.$nextTick(() => {
-                            setTimeout(() => {
+                        
+                        // If we're on chart tab, render immediately
+                        if (this.portfolioViewTab === 'chart') {
+                            this.$nextTick(() => {
                                 this.updateChart();
-                            }, 100);
-                        });
+                            });
+                        }
                     }
                 },
                 deep: false
@@ -641,9 +639,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 // When switching to chart tab, render charts
                 if (this.portfolioViewTab === 'chart' && this.results.summary.length > 0) {
                     this.$nextTick(() => {
-                        setTimeout(() => {
-                            this.updateChart();
-                        }, 100);
+                        this.updateChart();
                     });
                 }
             },
@@ -1121,6 +1117,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     internationalEnabled: inv.international || false,
                     taxSlab: inv.taxSlab || 0,  // Lower slab preferred for slab assets
                     uiOrder: index,
+                    uiOrderReversed: this.investors.length - 1 - index,  // For bottom-to-top priority
                     hasTcs: inv.tcs && inv.international,
                     allocations: []
                 })).filter(invData => invData.capacity > 0);
@@ -1132,16 +1129,21 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 const nonSlabAssets = assetAllocations.filter(a => !a.isSlabAsset);
                 
                 // Sort investors by priority (for use during allocation)
-                const sortInvestors = () => {
+                const sortInvestorsForSlab = () => {
+                    investorData.sort((a, b) => {
+                        // Priority 1: Bottom-to-top UI order (user-controlled via drag-drop)
+                        return a.uiOrderReversed - b.uiOrderReversed;
+                    });
+                };
+                
+                const sortInvestorsForNonSlab = () => {
                     investorData.sort((a, b) => {
                         // Priority 1: Non-international investors first (constrained)
                         if (!a.internationalEnabled && b.internationalEnabled) return -1;
                         if (a.internationalEnabled && !b.internationalEnabled) return 1;
-                        // Priority 2: Lower tax slab first (for slab assets)
-                        if (a.taxSlab !== b.taxSlab) return a.taxSlab - b.taxSlab;
-                        // Priority 3: Smaller remaining capacity first
+                        // Priority 2: Smaller remaining capacity first
                         if (a.remaining !== b.remaining) return a.remaining - b.remaining;
-                        // Priority 4: UI order for deterministic tie-breaking
+                        // Priority 3: UI order for deterministic tie-breaking
                         return a.uiOrder - b.uiOrder;
                     });
                 };
@@ -1194,10 +1196,10 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     asset.amount -= investment;
                 };
                 
-                // PHASE 1: Allocate slab assets (column-first greedy with priority)
+                // PHASE 1: Allocate slab assets (bottom-to-top investor priority)
                 for (const asset of slabAssets) {
                     while (asset.amount >= roundOff) {
-                        sortInvestors(); // Re-sort for priority
+                        sortInvestorsForSlab(); // Bottom-to-top order
                         
                         let allocated = false;
                         for (const invData of investorData) {
@@ -1216,7 +1218,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 // PHASE 2: Allocate non-slab assets (transaction minimization + greedy)
                 
                 // Step 2a: For small investors, try to allocate entire budget to single asset
-                sortInvestors();
+                sortInvestorsForNonSlab();
                 for (const invData of investorData) {
                     if (invData.remaining < roundOff) continue;
                     
@@ -1240,7 +1242,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 // Step 2b: Allocate remaining asset needs using greedy distribution
                 for (const asset of nonSlabAssets) {
                     while (asset.amount >= roundOff) {
-                        sortInvestors();
+                        sortInvestorsForNonSlab();
                         
                         let allocated = false;
                         for (const invData of investorData) {
@@ -1372,23 +1374,47 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     return;
                 }
                 
+                // Only update if on chart tab
+                if (this.portfolioViewTab !== 'chart') {
+                    return;
+                }
+                
                 // Portfolio Chart
                 const chartDom = document.getElementById('allocation-chart');
                 if (!chartDom) return;
                 
+                // Initialize chart only once, reuse instance for updates
                 if (!this.chart) {
                     this.chart = echarts.init(chartDom);
                     
                     // Setup resize handler once
                     if (!this.resizeHandler) {
-                        this.resizeHandler = () => this.chart?.resize();
+                        this.resizeHandler = () => {
+                            if (this.chart && this.portfolioViewTab === 'chart') {
+                                this.chart.resize();
+                            }
+                        };
                         window.addEventListener('resize', this.resizeHandler);
                     }
+                }
+                
+                // Drift Chart
+                const driftChartDom = document.getElementById('drift-chart');
+                if (!driftChartDom) return;
+                
+                // Initialize drift chart only once, reuse instance for updates
+                if (!this.driftChart) {
+                    this.driftChart = echarts.init(driftChartDom);
                     
-                    // Explicitly resize after initialization to ensure correct dimensions
-                    this.$nextTick(() => {
-                        this.chart?.resize();
-                    });
+                    // Setup resize handler once
+                    if (!this.driftResizeHandler) {
+                        this.driftResizeHandler = () => {
+                            if (this.driftChart && this.portfolioViewTab === 'chart') {
+                                this.driftChart.resize();
+                            }
+                        };
+                        window.addEventListener('resize', this.driftResizeHandler);
+                    }
                 }
                 
                 const isPercentage = this.portfolioViewMode === 'percentage';
@@ -1473,25 +1499,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 
                 this.chart.setOption(portfolioOption, true);
                 
-                // Drift Chart
-                const driftChartDom = document.getElementById('drift-chart');
-                if (!driftChartDom) return;
-                
-                if (!this.driftChart) {
-                    this.driftChart = echarts.init(driftChartDom);
-                    
-                    // Setup resize handler once
-                    if (!this.driftResizeHandler) {
-                        this.driftResizeHandler = () => this.driftChart?.resize();
-                        window.addEventListener('resize', this.driftResizeHandler);
-                    }
-                    
-                    // Explicitly resize after initialization to ensure correct dimensions
-                    this.$nextTick(() => {
-                        this.driftChart?.resize();
-                    });
-                }
-                
+                // Update Drift Chart
                 const driftOption = {
                     tooltip: {
                         trigger: 'item',
@@ -1585,6 +1593,14 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     roundOffUnit: this.roundOffUnit,
                     assets: this.assets,
                     assetGroups: this.assetGroups,
+                    results: {
+                        investorAllocations: this.results.investorAllocations,
+                        summary: this.results.summary,
+                        totalCurrent: this.results.totalCurrent,
+                        totalNewAllocation: this.results.totalNewAllocation,
+                        totalPost: this.results.totalPost,
+                        totalTargetPercent: this.results.totalTargetPercent
+                    },
                     exportDate: new Date().toISOString()
                 };
                 
