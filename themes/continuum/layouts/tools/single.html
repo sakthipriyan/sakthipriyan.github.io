@@ -56,7 +56,7 @@
 {{ else if eq .Params.tool_type "emiCalculator" }}
 <script src="{{ "js/realvalue-emi-engine.js" | absURL }}"></script>
 {{ else if eq .Params.tool_type "multiAssetAllocator" }}
-<script src="{{ "js/multi-asset-allocator.js" | absURL }}"></script>
+<script src="{{ "js/realvalue-family-sip-allocator.js" | absURL }}"></script>
 {{ end }}
 <script>
     // Initialize tool based on type

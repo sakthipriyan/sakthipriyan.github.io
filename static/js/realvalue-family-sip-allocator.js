@@ -24,7 +24,14 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     <div class="sip-inputs">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <h3 style="margin: 0;">⚙️ Portfolio Configuration</h3>
-                            <div style="display: flex; gap: 0.5rem;">
+                        </div>
+                        
+                        <!-- Import and Export Buttons -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem;">
+                            <p style="margin: 0; font-size: 0.85rem; color: #666; flex: 1;">
+                                Import your saved portfolio configuration or export current settings as JSON.
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
                                 <input 
                                     type="file" 
                                     id="import-file" 
@@ -34,13 +41,13 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 >
                                 <button 
                                     type="button" 
-                                    class="unit-buttons-btn"
+                                    class="share-button"
                                     @click="$el.querySelector('#import-file').click()">
                                     ⬆️ Import
                                 </button>
                                 <button 
                                     type="button" 
-                                    class="unit-buttons-btn"
+                                    class="share-button"
                                     @click="exportData"
                                     :disabled="results.summary.length === 0">
                                     ⬇️ Export
