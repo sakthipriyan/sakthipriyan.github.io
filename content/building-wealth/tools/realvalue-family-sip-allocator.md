@@ -1,11 +1,11 @@
 ---
-title: "Multi Asset Allocator"
+title: "RealValue Family SIP Allocator"
 date: "2026-02-08"
 draft: "false"
-description: "Allocate investments across multiple assets based on target allocation, current portfolio, and investor constraints with smart rebalancing."
+description: "Allocate monthly SIP investments across multiple assets and family members with intelligent rebalancing."
 type: "tools"
 tool_type: "multiAssetAllocator"
-tool_script: "js/multi-asset-allocator.js"
+tool_script: "js/realvalue-family-sip-allocator.js"
 tool_dependencies:
   - echarts
 summary: "Deterministic portfolio rebalancing tool that allocates new investments to minimize drift from target allocation across multiple investors with different constraints."
@@ -15,11 +15,11 @@ wealth_tags:
   - Portfolio Management
 ---
 
-## About Multi Asset Allocator
+## About RealValue Family SIP Allocator
 
-> **Multi Asset Allocator** helps you **rebalance your portfolio intelligently** by allocating new investments to underweight assets using a deterministic algorithm that respects investor constraints and minimizes transactions.
+> **RealValue Family SIP Allocator** helps you **rebalance your portfolio intelligently** by allocating new investments to underweight assets using a deterministic algorithm that respects investor constraints and minimizes transactions.
 
-The **Multi Asset Allocator** implements a sophisticated asset-centric allocation strategy that maintains your target asset allocation without selling any holdings. It handles complex scenarios including multiple investors, tax slab constraints, international assets with TCS, and asset group limits.
+The **RealValue Family SIP Allocator** implements a sophisticated asset-centric allocation strategy that maintains your target asset allocation without selling any holdings. It handles complex scenarios including multiple investors, tax slab constraints, international assets with TCS, and asset group limits.
 
 ### Key Features
 
