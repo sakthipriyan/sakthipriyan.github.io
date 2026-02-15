@@ -2,18 +2,19 @@
 title: "RealValue Family SIP Allocator"
 date: "2026-02-08"
 draft: "false"
-description: "Allocate monthly SIP investments across multiple assets and family members with intelligent rebalancing."
+description: "Smart portfolio rebalancing for families: allocates monthly SIPs across multiple investors, handles international assets with TCS, optimizes debt for lower tax slabs, and corrects drift proportionally."
 type: "tools"
 tool_type: "multiAssetAllocator"
 tool_script: "js/realvalue-family-sip-allocator.js"
 tool_dependencies:
   - echarts
-summary: "Deterministic portfolio rebalancing tool that allocates new investments to minimize drift from target allocation across multiple investors with different constraints."
+summary: "A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling."
 wealth_tags:
   - Asset Allocation
   - Rebalancing
   - Portfolio Management
 ---
+
 
 ## About RealValue Family SIP Allocator
 
