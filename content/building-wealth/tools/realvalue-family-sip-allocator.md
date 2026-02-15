@@ -1,6 +1,6 @@
 ---
 title: "RealValue Family SIP Allocator"
-date: "2026-02-08"
+date: "2026-02-15"
 draft: "false"
 description: "Smart portfolio rebalancing for families: allocates monthly SIPs across multiple investors, handles international assets with TCS, optimizes debt for lower tax slabs, and corrects drift proportionally."
 type: "tools"

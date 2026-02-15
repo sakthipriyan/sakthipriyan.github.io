@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SIP on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-wealth/tags/sip/</link>
+    <link>https://sakthipriyan.com/building-wealth/tags/sip/</link>
     <description>Recent content in SIP on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-wealth/tags/sip/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/building-wealth/tags/sip/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RealValue SIP Engine | Investment Planning Tool for India</title>
-      <link>http://localhost:1313/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</link>
+      <link>https://sakthipriyan.com/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/videos/realvalue-sip-engine-investment-planning-tool-for-india/</guid>
       <description>Complete walkthrough of the RealValue SIP Engine — a powerful investment planning tool that shows real (inflation-adjusted) returns, handles multiple goal types, and provides comprehensive financial projections.</description>
     </item>
     <item>
       <title>RealValue SIP Engine Use Cases</title>
-      <link>http://localhost:1313/building-wealth/blogs/realvalue-sip-engine-use-cases/</link>
+      <link>https://sakthipriyan.com/building-wealth/blogs/realvalue-sip-engine-use-cases/</link>
       <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/blogs/realvalue-sip-engine-use-cases/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/blogs/realvalue-sip-engine-use-cases/</guid>
       <description>Discover real-world scenarios showing how to use the RealValue SIP Engine for retirement planning, education goals, house down payments, emergency funds, and more.</description>
     </item>
     <item>
       <title>RealValue SIP Engine</title>
-      <link>http://localhost:1313/building-wealth/tools/realvalue-sip-engine/</link>
+      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/</link>
       <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/tools/realvalue-sip-engine/</guid>
+      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/</guid>
       <description>Plan your systematic investment with real (inflation-adjusted) value projections and comprehensive growth visualizations.</description>
     </item>
   </channel>
