@@ -45,7 +45,7 @@
 {{- /* Load Vue.js for tools */ -}}
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 {{- /* Load ECharts if tool needs it */ -}}
-{{ if or (eq .Params.tool_type "sipCalculator") (eq .Params.tool_type "emiCalculator") }}
+{{ if or (eq .Params.tool_type "sipCalculator") (eq .Params.tool_type "emiCalculator") (eq .Params.tool_type "multiAssetAllocator") }}
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 {{ end }}
 {{- /* Load tool-specific JavaScript */ -}}
@@ -55,6 +55,8 @@
 <script src="{{ "js/realvalue-sip-engine.js" | absURL }}"></script>
 {{ else if eq .Params.tool_type "emiCalculator" }}
 <script src="{{ "js/realvalue-emi-engine.js" | absURL }}"></script>
+{{ else if eq .Params.tool_type "multiAssetAllocator" }}
+<script src="{{ "js/realvalue-family-sip-allocator.js" | absURL }}"></script>
 {{ end }}
 <script>
     // Initialize tool based on type

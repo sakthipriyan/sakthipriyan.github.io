@@ -186,6 +186,28 @@
     color: white;
 }
 
+/* Inactive style button for Import/Export/Add */
+.unit-buttons-btn {
+    padding: 0.35rem 0.6rem;
+    border: 2px solid var(--gray-medium);
+    background: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.unit-buttons-btn:hover:not(:disabled) {
+    border-color: var(--secondary-color);
+    background: #f8f9fa;
+}
+
+.unit-buttons-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Mode Toggle Styles */
 .mode-toggle {
     display: flex;
@@ -358,9 +380,26 @@
     margin-bottom: 1rem;
 }
 
+.summary-table th,
 .summary-table td {
     padding: 0.75rem;
     border-bottom: 1px solid #eee;
+}
+
+.summary-table th {
+    background: transparent !important;
+    font-weight: 700;
+    color: #374151;
+}
+
+.summary-table th:first-child,
+.summary-table td:first-child {
+    text-align: left;
+}
+
+.summary-table th:not(:first-child),
+.summary-table td:not(:first-child) {
+    text-align: right;
 }
 
 .summary-table td:first-child {
@@ -372,6 +411,11 @@
     font-weight: bold;
     color: var(--secondary-color);
     font-size: 1.2rem;
+}
+
+.summary-table .total-row {
+    font-weight: 600;
+    border-top: 2px solid var(--gray-medium);
 }
 
 /* Target Fields Background */
@@ -822,6 +866,256 @@
     white-space: nowrap;
 }
 
+/* Multi Asset Allocator Styles */
+.multi-asset-allocator {
+    padding: 1rem;
+}
+
+.investors-group {
+    margin-bottom: 1.5rem;
+}
+
+.investors-group h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.assets-group {
+    margin-bottom: 1.5rem;
+}
+
+.assets-group h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.section-block {
+    background: var(--gray-light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+.section-block h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+/* Investor and Asset Row Styles */
+.investor-row,
+.asset-row {
+    margin-bottom: 1rem;
+}
+
+.investor-fields,
+.asset-fields {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr auto auto auto;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.investor-name-input,
+.asset-name-input {
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid var(--gray-medium);
+    border-radius: var(--border-radius);
+}
+
+.investor-amount-input,
+.asset-target-input,
+.asset-current-input {
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid var(--gray-medium);
+    border-radius: var(--border-radius);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.btn-remove {
+    background: var(--danger-color, #ef4444);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-remove:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+.btn-remove-subtle {
+    background: transparent;
+    color: #999;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition: all 0.2s ease;
+    opacity: 0.5;
+}
+
+.btn-remove-subtle:hover {
+    color: #ef4444;
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.btn-add {
+    background: var(--success-color, #10b981);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.btn-add:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+/* Validation Errors */
+.validation-errors {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.error-message:last-child {
+    margin-bottom: 0;
+}
+
+/* Asset Table */
+.asset-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.asset-table th,
+.asset-table td {
+    padding: 0.4rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
+}
+
+.asset-table th {
+    background: transparent !important;
+    font-weight: 700;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.asset-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* Investor Allocation */
+.investor-allocation {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--gray-light);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-medium);
+}
+
+/* Allocation Table */
+.allocation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border: 1px solid var(--gray-light);
+}
+
+.allocation-table th,
+.allocation-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-light);
+    font-size: 1rem;
+}
+
+.allocation-table th {
+    background: transparent;
+    font-weight: 600;
+    color: var(--text-dark);
+    border-bottom: 2px solid var(--gray-medium);
+}
+
+.allocation-table td:last-child,
+.allocation-table th:last-child {
+    text-align: right;
+}
+
+.allocation-table .total-row {
+    background: transparent;
+    font-weight: 600;
+}
+
+.allocation-table .total-row td {
+    border-top: 2px solid var(--gray-medium);
+}
+
+/* Diff Classes for Summary Table */
+.diff-neutral {
+    color: var(--gray-dark, #4b5563);
+}
+
+.diff-positive {
+    color: var(--danger-color, #ef4444);
+    font-weight: 600;
+}
+
+.diff-negative {
+    color: var(--success-color, #10b981);
+    font-weight: 600;
+}
+
+/* Chart Container */
+.chart-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 1rem;
+}
+
 /* Responsive Design for Tools */
 @media (max-width: 768px) {
     .ef-container,
@@ -851,4 +1145,40 @@
     .input-group-row {
         grid-template-columns: 1fr;
     }
+
+    .investor-fields,
+    .asset-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+}
+
+.asset-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: #1976d2;
+}
+
+.asset-badge-remove {
+    border: none;
+    background: transparent;
+    color: #1976d2;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: bold;
+}
+
+.asset-badge-remove:hover {
+    color: #d32f2f;
 }

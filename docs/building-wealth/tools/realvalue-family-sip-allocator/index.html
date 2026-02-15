@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RealValue Family SIP Allocator | Sakthi Priyan H</title>
+    <meta name="description" content="A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/tools.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/tools/">Tools</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>RealValue Family SIP Allocator</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="tool">
+    
+<header class="content-header">
+    <h1 class="content-title">RealValue Family SIP Allocator</h1>
+    <p class="content-summary">A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-02-15">Feb 15, 2026</time>
+        </span><span class="meta-item">
+            <span class="meta-icon">🔧</span>
+            <span class="use-time">Interactive Tool</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    
+    
+    
+    <div class="tool-interface">
+        <div id="tool-multiAssetAllocator" class="tool-widget">
+            
+        </div>
+    </div>
+    
+
+    <div class="tool-content">
+        <h2 id="overview">Overview</h2>
+<p>Intelligently rebalance your portfolio by allocating new investments to underweight assets. Handles multiple investors, international assets with TCS, tax slab optimization, and asset group constraints—all without selling existing holdings.</p>
+<h3 id="key-features">Key Features</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feature</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Tax-Efficient</strong></td>
+          <td>Rebalancing via new investments only (no selling)</td>
+      </tr>
+      <tr>
+          <td><strong>Multi-Investor</strong></td>
+          <td>Different amounts and constraints per investor</td>
+      </tr>
+      <tr>
+          <td><strong>Slab Assets</strong></td>
+          <td>User-controlled priority via drag-and-drop</td>
+      </tr>
+      <tr>
+          <td><strong>International TCS</strong></td>
+          <td>Automatic calculation and tracking</td>
+      </tr>
+      <tr>
+          <td><strong>Asset Groups</strong></td>
+          <td>Enforce max limits for related assets</td>
+      </tr>
+      <tr>
+          <td><strong>Transaction Minimization</strong></td>
+          <td>Prefers single-investor allocations</td>
+      </tr>
+      <tr>
+          <td><strong>Deterministic Algorithm</strong></td>
+          <td>Consistent, repeatable results with priority-based allocation</td>
+      </tr>
+      <tr>
+          <td><strong>Visual Analytics</strong></td>
+          <td>Charts for reviewing pre/post allocation and drift analysis</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="algorithm">Algorithm</h3>
+<p>The allocation engine works in two distinct phases to ensure optimal rebalancing:</p>
+<p><strong>Phase 1: Determine Asset Needs</strong></p>
+<p>First, the tool calculates how much should be invested in each asset class:</p>
+<ol>
+<li><strong>Calculate Target Values</strong>: For each asset, determine what its value should be based on your target percentage of the total portfolio</li>
+<li><strong>Identify Gaps</strong>: Compare target value against current holdings to find underweight assets (negative drift)</li>
+<li><strong>Prioritize Underweight Assets</strong>: Only assets below target receive new allocations</li>
+<li><strong>Account for TCS</strong>: For international assets where TCS applies, budget 20% extra (1.2× multiplier) since that money goes to tax collection</li>
+</ol>
+<p>At this stage, the tool knows exactly how much each asset needs, but hasn&rsquo;t decided which investor buys what.</p>
+<p><strong>Phase 2: Assign Investments to Investors</strong></p>
+<p>Now the tool distributes these asset needs across your investors using different strategies:</p>
+<p><strong>For Slab Rate Assets (e.g., Debt)</strong>:</p>
+<ul>
+<li>Uses bottom-to-top investor order from your table</li>
+<li>Last investor gets first priority, second-last gets next priority, and so on</li>
+<li>You control this by dragging investors in the table</li>
+<li>Useful for tax optimization—put lower tax slab investors at the bottom</li>
+</ul>
+<p><strong>For Regular Assets</strong>:</p>
+<ul>
+<li>Prefers investors without international access first (since they&rsquo;re constrained)</li>
+<li>Then prefers investors with smaller remaining capacity (to free them up)</li>
+<li>Uses transaction minimization: if one investor can cover 80%+ of an asset&rsquo;s need, gives them 100%</li>
+<li>Otherwise, distributes proportionally across available investors</li>
+</ul>
+<p><strong>Throughout Both Phases</strong>:</p>
+<ul>
+<li>Enforces asset group limits (e.g., max 30% in defensive assets)</li>
+<li>Respects international access restrictions</li>
+<li>Applies rounding to keep amounts manageable</li>
+<li>Handles TCS calculations automatically for eligible investors</li>
+</ul>
+<p>The result is a deterministic allocation that rebalances your portfolio efficiently while respecting all constraints and minimizing transaction costs.</p>
+<h3 id="rebalancing-explained">Rebalancing Explained</h3>
+<p>Earlier, part of this video explained in detail (without multi investor &amp; TCS complexities)</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mIHc2yV7nU0?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=456" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<br/>
+<hr>
+<h2 id="faq">FAQ</h2>
+<p><strong>What are slab rate assets?</strong><br>
+Tax-sensitive assets (e.g., debt) allocated by investor position (bottom-to-top). Drag to reorder for priority control.</p>
+<p><strong>What makes this deterministic?</strong><br>
+Strict priority order ensures identical results for identical inputs.</p>
+<p><strong>How does transaction minimization work?</strong><br>
+When allocating non-slab assets, if a single investor has capacity to take ≥80% of an asset&rsquo;s allocation need, the tool assigns 100% to that investor instead of splitting across multiple investors. This reduces the total number of buy transactions, saving on transaction costs and simplifying execution.</p>
+<p><strong>How is TCS calculated?</strong><br>
+Budgets 1.2× (investment + 20% TCS), rounds total outflow, back-calculates investment.</p>
+<p><strong>What are asset groups for?</strong><br>
+Set limits across related assets (e.g., total equity max 80%).</p>
+<p><strong>Can I save my configuration?</strong><br>
+Yes. Export as JSON, import next month.</p>
+<hr>
+<h2 id="usage-guide">Usage Guide</h2>
+<h3 id="inputs">Inputs</h3>
+<p><strong>Investors</strong></p>
+<ul>
+<li>Name, Amount, International access, TCS applicability</li>
+<li>Drag to reorder (controls slab asset priority)</li>
+</ul>
+<p><strong>Asset Classes</strong></p>
+<ul>
+<li>Name, Target %, Current value, Slab rate flag, International flag</li>
+<li>Targets must sum to 100%</li>
+</ul>
+<p><strong>Asset Groups</strong> (Optional)</p>
+<ul>
+<li>Group name, included assets, min/max % limits</li>
+</ul>
+<p><strong>Round Off</strong></p>
+<ul>
+<li>Allocation rounding value (e.g., ₹5K = multiples of ₹5,000)</li>
+<li>For TCS investors, total outflow (investment + TCS) is rounded</li>
+</ul>
+<h3 id="outputs">Outputs</h3>
+<p><strong>Summary Metrics</strong></p>
+<ul>
+<li>Percentages of New Allocation, Drift Correction, TCS Drag</li>
+</ul>
+<p><strong>Allocation Matrix</strong></p>
+<ul>
+<li>Investment per investor per asset</li>
+<li>Net Total (investments) and Gross Total (with TCS)</li>
+</ul>
+<p><strong>Charts/Table</strong></p>
+<ul>
+<li>Portfolio Allocation: Pre/Post vs Target</li>
+<li>Drift Analysis: Pre/Post drift per asset</li>
+<li>Toggle percentage/amount view</li>
+</ul>
+<h3 id="tips">Tips</h3>
+<ol>
+<li>Update current values before each period</li>
+<li>Drag investors to control slab asset priority</li>
+<li>Export configuration for reuse</li>
+<li>Check drift correction to verify rebalancing impact</li>
+<li>Use asset groups for defensive assets (debt/gold)</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>Note</strong>: This tool implements a sophisticated methodology. Adjust based on your goals, risk tolerance, and market conditions.</p>
+</blockquote>
+
+    </div>
+
+    
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/asset-allocation/" class="tag-link">Asset Allocation</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/rebalancing/" class="tag-link">Rebalancing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/portfolio-management/" class="tag-link">Portfolio Management</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+<script src="https://sakthipriyan.com/js/realvalue-family-sip-allocator.js"></script>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const toolType = 'multiAssetAllocator';
+        const toolContainer = document.getElementById('tool-' + toolType);
+
+        if (window.initializeTool && typeof window.initializeTool[toolType] === 'function') {
+            window.initializeTool[toolType](toolContainer, "null");
+        }
+    });
+</script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>
