@@ -872,10 +872,6 @@
 }
 
 .investors-group {
-    background-color: #e3f2fd;
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    border: 1px solid #90caf9;
     margin-bottom: 1.5rem;
 }
 
@@ -886,10 +882,6 @@
 }
 
 .assets-group {
-    background-color: #fff3e0;
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    border: 1px solid #ffb74d;
     margin-bottom: 1.5rem;
 }
 
@@ -1042,13 +1034,13 @@
     padding: 0.4rem;
     text-align: left;
     border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
 }
 
 .asset-table th {
     background: transparent !important;
     font-weight: 700;
     color: #374151;
-    font-size: 0.8rem;
     white-space: nowrap;
 }
 
@@ -1078,6 +1070,7 @@
     padding: 0.5rem;
     text-align: left;
     border-bottom: 1px solid var(--gray-light);
+    font-size: 1rem;
 }
 
 .allocation-table th {

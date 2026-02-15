@@ -13,7 +13,7 @@
       <link>http://localhost:1313/building-wealth/tools/realvalue-family-sip-allocator/</link>
       <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/building-wealth/tools/realvalue-family-sip-allocator/</guid>
-      <description>Deterministic portfolio rebalancing tool that allocates new investments to minimize drift from target allocation across multiple investors with different constraints.</description>
+      <description>A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling.</description>
     </item>
     <item>
       <title>Real Value EMI Engine: See the TRUE Cost of Loans After Inflation (India)</title>
