@@ -1,4 +1,4 @@
-// Multi Asset Allocator (Vue.js + ECharts)
+// RealValue Family SIP Allocator (Vue.js + ECharts)
 window.initializeTool = window.initializeTool || {};
 
 window.initializeTool.multiAssetAllocator = function (container, config) {
