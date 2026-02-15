@@ -22,8 +22,8 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 <div class="sip-container">
                     <!-- Left Column: Input Fields -->
                     <div class="sip-inputs">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 style="margin: 0;">⚙️ Portfolio Configuration</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3 style="margin: 0;">📝 Portfolio Setup</h3>
                             <div style="display: flex; gap: 0.5rem;">
                                 <input 
                                     type="file" 
@@ -34,13 +34,13 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 >
                                 <button 
                                     type="button" 
-                                    class="unit-buttons-btn"
+                                    class="share-button"
                                     @click="$el.querySelector('#import-file').click()">
                                     ⬆️ Import
                                 </button>
                                 <button 
                                     type="button" 
-                                    class="unit-buttons-btn"
+                                    class="share-button"
                                     @click="exportData"
                                     :disabled="results.summary.length === 0">
                                     ⬇️ Export
@@ -50,35 +50,19 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         
                         <!-- Investors Section -->
                         <div class="investors-group">
-                            <!-- Round Off -->
-                            <div class="input-group" style="margin-bottom: 1.5rem;">
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    Round Off (K):
-                                    <input 
-                                        type="number" 
-                                        v-model.number="roundOffValue" 
-                                        min="1"
-                                        step="1"
-                                        @input="calculate"
-                                        style="width: 80px; padding: 0.4rem; text-align: center;"
-                                    >
-                                    <span class="help-icon" :data-tooltip="'₹' + formatRoundOff() + ' - Investor allocations and asset allocations will be rounded to multiples of this value'">ℹ️</span>
-                                </label>
-                            </div>
+                            <h4 style="margin: 0; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                👥 Investors
+                                <span class="help-icon help-icon-wide" data-tooltip="Family members or entities. Each investor can have different investment amounts, international access, and TCS applicability.">ℹ️</span>
+                            </h4>
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <h4 style="margin: 0;">👥 Investors</h4>
-                                <button type="button" class="unit-buttons-btn" @click="addInvestor">
-                                    ➕ Add
-                                </button>
-                            </div>
-                            
-                            <table class="asset-table" style="margin-bottom: 1rem;">
+                            <table class="asset-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 30px;"></th>
+                                        <th style="width: 30px;">
+                                            <button type="button" class="share-button" @click="addInvestor" title="Add investor" style="padding: 0.25rem 0.5rem; font-size: 1rem;">+</button>
+                                        </th>
                                         <th>Name</th>
-                                        <th>Allocation (K)</th>
+                                        <th>New (₹'000)</th>
                                         <th>Intl.</th>
                                         <th>TCS</th>
                                         <th></th>
@@ -101,7 +85,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 v-model="investor.name" 
                                                 placeholder="Investor name"
                                                 @input="calculate"
-                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem;"
+                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit;"
                                             >
                                         </td>
                                         <td>
@@ -111,7 +95,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 min="0"
                                                 :step="roundOffValue"
                                                 @input="calculate"
-                                                style="width: 80px; padding: 0.25rem;"
+                                                style="width: 80px; padding: 0.25rem; font-size: inherit; text-align: right;"
                                             >
                                         </td>
                                         <td style="text-align: center;">
@@ -145,20 +129,21 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             </table>
                             
                             <!-- Asset Classes -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; margin-top: 2rem;">
-                                <h4 style="margin: 0;">🎯 Asset Classes</h4>
-                                <button type="button" class="unit-buttons-btn" @click="addAsset">
-                                    ➕ Add
-                                </button>
-                            </div>
+                            <h4 style="margin: 0; margin-bottom: 1rem; margin-top: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                                🎯 Asset Classes
+                                <span class="help-icon help-icon-wide" data-tooltip="Different types of investments (equity, debt, gold, etc.) with target allocations. Set current values to track drift and optimize new investments.">ℹ️</span>
+                            </h4>
+                            
                             <table class="asset-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 30px;"></th>
+                                        <th style="width: 30px;">
+                                            <button type="button" class="share-button" @click="addAsset" title="Add asset" style="padding: 0.25rem 0.5rem; font-size: 1rem;">+</button>
+                                        </th>
                                         <th>Asset Class</th>
                                         <th>Target %</th>
                                         <th>Current (₹)</th>
-                                        <th>Slab rate</th>
+                                        <th>Slab</th>
                                         <th>Intl.</th>
                                         <th></th>
                                     </tr>
@@ -180,7 +165,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 v-model="asset.name" 
                                                 placeholder="Asset name"
                                                 @input="calculate"
-                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem;"
+                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit;"
                                             >
                                         </td>
                                         <td>
@@ -191,7 +176,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 max="100"
                                                 step="0.1"
                                                 @input="calculate"
-                                                style="width: 70px; padding: 0.4rem; border: 1px solid var(--gray-medium); border-radius: 4px;"
+                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; text-align: right;"
                                             >
                                         </td>
                                         <td>
@@ -201,7 +186,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 min="0"
                                                 step="1000"
                                                 @input="calculate"
-                                                style="width: 100%; padding: 0.4rem; border: 1px solid var(--gray-medium); border-radius: 4px;"
+                                                style="width: 100%; padding: 0.4rem; border: 1px solid var(--gray-medium); border-radius: 4px; font-size: inherit; text-align: right;"
                                             >
                                         </td>
                                         <td style="text-align: center;">
@@ -236,23 +221,24 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             </table>
 
                             <!-- Asset Groups -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; margin-top: 2rem;">
-                                <h4 style="margin: 0;">🏷️ Asset Groups</h4>
-                                <button type="button" class="unit-buttons-btn" @click="addGroup">
-                                    ➕ Add
-                                </button>
-                            </div>
-                            <table class="asset-table" v-if="assetGroups.length > 0">
+                            <h4 style="margin: 0; margin-bottom: 1rem; margin-top: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                                🏷️ Asset Groups
+                                <span class="help-icon help-icon-wide" data-tooltip="Group related assets together to enforce maximum allocation limits. Useful for sector limits, regional caps, or risk concentration controls.">ℹ️</span>
+                            </h4>
+                            
+                            <table class="asset-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 30px;"></th>
+                                        <th style="width: 30px;">
+                                            <button type="button" class="share-button" @click="addGroup" title="Add group" style="padding: 0.25rem 0.5rem; font-size: 1rem;">+</button>
+                                        </th>
                                         <th style="width: 100px;">Name</th>
                                         <th>Assets</th>
                                         <th style="width: 70px; text-align: center;">Max %</th>
                                         <th style="width: 40px;"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-if="assetGroups.length > 0">
                                     <tr v-for="(group, index) in assetGroups" :key="index"
                                         draggable="true"
                                         @dragstart="dragStart($event, index, 'group')"
@@ -269,11 +255,11 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 v-model="group.name" 
                                                 placeholder="Group name"
                                                 @input="calculate"
-                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem;"
+                                                style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit;"
                                             >
                                         </td>
                                         <td>
-                                            <div style="display: flex; flex-wrap: nowrap; gap: 0.375rem; align-items: center;">
+                                            <div style="display: flex; flex-wrap: wrap; gap: 0.375rem; align-items: center;">
                                                 <span v-for="assetName in group.assetNames" :key="assetName" 
                                                       class="asset-badge">
                                                     {{ assetName }}
@@ -284,6 +270,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                         ✕
                                                     </button>
                                                 </span>
+                                                <div style="flex-basis: 100%; height: 0;"></div>
                                                 <select @change="addAssetToGroup(index, $event)" 
                                                         style="border: 1px solid #ddd; border-radius: 4px; padding: 0.25rem 0.5rem; font-size: 0.875rem; background: white; flex-shrink: 0;">
                                                     <option value="">+ Add</option>
@@ -311,9 +298,31 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     </tr>
                                 </tbody>
                             </table>
+                            
+                            <!-- Settings Section -->
+                            <h4 style="margin: 0; margin-bottom: 1rem; margin-top: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                                🔧 Settings
+                            </h4>
+                            
+                            <div class="input-group">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    Round Off (K):
+                                    <input 
+                                        type="number" 
+                                        v-model.number="roundOffValue" 
+                                        min="1"
+                                        step="1"
+                                        @input="calculate"
+                                        style="width: 80px; padding: 0.4rem; text-align: center;"
+                                    >
+                                    <span class="help-icon help-icon-wide" :data-tooltip="'₹' + formatRoundOff() + ' - Investor allocations and asset allocations will be rounded to multiples of this value'">ℹ️</span>
+                                </label>
+                            </div>
                         </div>
                         
-                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Allocations update automatically as you adjust inputs</p>
+                        <blockquote style="border-left: 4px solid #3b82f6; padding-left: 1rem; margin: 1.5rem 0; color: #666; font-size: 0.9em;">
+                            💡 Allocations update automatically as you adjust inputs
+                        </blockquote>
                     </div>
                     
                     <!-- Right Column: Output Results -->
@@ -567,16 +576,20 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
         data() {
             return {
                 investors: [
-                    { name: 'Investor 1', amountValue: 50, amountUnit: 'thousands', international: false, tcs: false }
+                    { name: 'Arjun', amountValue: 60, amountUnit: 'thousands', international: true, tcs: false },
+                    { name: 'Meera', amountValue: 20, amountUnit: 'thousands', international: false, tcs: false }
                 ],
-                roundOffValue: 5,
+                roundOffValue: 1,
                 roundOffUnit: 'thousands',
                 assets: [
-                    { name: 'Nifty 50', targetPercent: 40, currentValue: 500000, hasSlabRate: false, isInternational: false },
-                    { name: 'Nasdaq 100', targetPercent: 40, currentValue: 500000, hasSlabRate: false, isInternational: true },
-                    { name: 'Gold', targetPercent: 20, currentValue: 250000, hasSlabRate: true, isInternational: false }
+                    { name: 'India Equity', targetPercent: 50, currentValue: 450000, hasSlabRate: false, isInternational: false },
+                    { name: 'US Equity', targetPercent: 25, currentValue: 250000, hasSlabRate: false, isInternational: true },
+                    { name: 'Gold', targetPercent: 15, currentValue: 260000, hasSlabRate: false, isInternational: false },
+                    { name: 'Debt', targetPercent: 10, currentValue: 90000, hasSlabRate: true, isInternational: false }
                 ],
-                assetGroups: [],
+                assetGroups: [
+                    { name: 'Defensive', assetNames: ['Gold', 'Debt'] }
+                ],
                 results: {
                     investorAllocations: [],
                     summary: [],

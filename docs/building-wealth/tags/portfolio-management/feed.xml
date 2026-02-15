@@ -9,11 +9,11 @@
     <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/building-wealth/tags/portfolio-management/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Multi Asset Allocator</title>
-      <link>http://localhost:1313/building-wealth/tools/multi-asset-allocator/</link>
+      <title>RealValue Family SIP Allocator</title>
+      <link>http://localhost:1313/building-wealth/tools/realvalue-family-sip-allocator/</link>
       <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-wealth/tools/multi-asset-allocator/</guid>
-      <description>Smart rebalancing tool that allocates new investments to underweight assets based on deviation from target allocation.</description>
+      <guid>http://localhost:1313/building-wealth/tools/realvalue-family-sip-allocator/</guid>
+      <description>A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling.</description>
     </item>
   </channel>
 </rss>
