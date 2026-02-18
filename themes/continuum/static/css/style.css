@@ -1618,6 +1618,8 @@ main article p {
 .post-content ol,
 .section-content ul,
 .section-content ol,
+.video-content ul,
+.video-content ol,
 main article ul,
 main article ol {
     margin: 1.5rem 0 !important;
@@ -1628,6 +1630,7 @@ main article ol {
 
 .post-content li,
 .section-content li,
+.video-content li,
 main article li {
     margin: 0.25rem 0 !important;
     line-height: 1.56;
@@ -1636,12 +1639,14 @@ main article li {
 
 .post-content ul li,
 .section-content ul li,
+.video-content ul li,
 main article ul li {
     list-style-type: disc !important;
 }
 
 .post-content ol li,
 .section-content ol li,
+.video-content ol li,
 main article ol li {
     list-style-type: decimal !important;
 }
@@ -1654,6 +1659,10 @@ main article ol li {
 .section-content ol ul,
 .section-content ul ol,
 .section-content ol ol,
+.video-content ul ul,
+.video-content ol ul,
+.video-content ul ol,
+.video-content ol ol,
 main article ul ul,
 main article ol ul,
 main article ul ol,
@@ -1666,10 +1675,28 @@ main article ol ol {
 .post-content li > ol,
 .section-content li > ul,
 .section-content li > ol,
+.video-content li > ul,
+.video-content li > ol,
 main article li > ul,
 main article li > ol {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+}
+
+/* Fix for bold text in list items - prevent line break after number */
+.post-content ol > li > p,
+.section-content ol > li > p,
+.video-content ol > li > p,
+main article ol > li > p {
+    display: inline;
+    margin: 0;
+}
+
+.post-content ol > li > p:first-child,
+.section-content ol > li > p:first-child,
+.video-content ol > li > p:first-child,
+main article ol > li > p:first-child {
+    display: inline;
 }
 
 .post-content h2,
