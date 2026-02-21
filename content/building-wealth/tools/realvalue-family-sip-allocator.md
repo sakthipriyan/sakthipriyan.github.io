@@ -32,6 +32,10 @@ Intelligently rebalance your portfolio by allocating new investments to underwei
 | **Deterministic Algorithm** | Consistent, repeatable results with priority-based allocation |
 | **Visual Analytics** | Charts for reviewing pre/post allocation and drift analysis |
 
+### Intelligent Family SIP Allocator | Cashflow Rebalancing with Tax & TCS Optimization
+
+{{< youtube id="XGzQRKJPcYM" start="97" >}}
+
 ### Algorithm
 
 The allocation engine works in two distinct phases to ensure optimal rebalancing:
