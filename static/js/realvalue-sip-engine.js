@@ -1560,7 +1560,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 let low = 0;
                 let high = targetAmount / Math.pow(1 + cagr/100, numberOfYears);
                 let requiredMonthly = 0;
-                const relativeTolerance = 0.001; // 0.1% relative tolerance
+                const relativeTolerance = 0.00001; // 0.001% relative tolerance
                 
                 while ((high - low) / Math.max(high, 1) > relativeTolerance) {
                     requiredMonthly = (low + high) / 2;
