@@ -332,7 +332,7 @@ Strong plans scale with your earning power.
 </div>
 
 <p class="fragment fade-up" style="font-size: 1.3em;">
-Starting SIP. Month one. Not ₹83k.
+Starting SIP. Month one. Not ₹86k.
 </p>
 
 <div class="fragment fade-up" style="margin: 50px 0; font-size: 1.3em;">
@@ -437,6 +437,16 @@ Every rupee invested today reduces tomorrow's burden.
 <strong>"Am I modeling reality?"</strong>
 </p>
 </div>
+
+--
+
+### 🧮 Plan Your Own Goal in Real Value
+<div class="fragment fade-up" style="margin-top: 60px;">
+<iframe src="/building-wealth/tools/realvalue-sip-engine/#v1obd10ya1cf202602c10lm20kg12h10i6t15"
+        style="width: 100%; height: 1000px; border: 2px solid #e5e7eb; border-radius: 10px; box-shadow: 0 4px 6px rgba(36, 31, 31, 0.1);">
+</iframe>
+</div>
+
 ---
 
 ### 7️⃣ Summary 📝
@@ -463,15 +473,6 @@ Every rupee invested today reduces tomorrow's burden.
 <p data-gsap='{"from": {"opacity": 0, "scale": 2}, "duration": 1, "delay": 9}'>
 🎓 Model reality or fund disappointment
 </p>
-</div>
-
----
-
-### 🧮 Plan Your Own Goal in Real Value
-<div class="fragment fade-up" style="margin-top: 60px;">
-<iframe src="/building-wealth/tools/realvalue-sip-engine/#v1obd10ya1cf202602c10lm20kg12h10i6t15"
-        style="width: 100%; height: 1000px; border: 2px solid #e5e7eb; border-radius: 10px; box-shadow: 0 4px 6px rgba(36, 31, 31, 0.1);">
-</iframe>
 </div>
 
 ---
