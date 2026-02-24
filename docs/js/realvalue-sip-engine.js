@@ -250,7 +250,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Exit Tax:&nbsp;<strong>{{ formData.taxRate }}%</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="Applied on total real gains at exit. Equity: 13-14.95% (LTCG + Dividend), Debt: 5.2-42.74% (based on tax slab). Actual taxation may differ">ℹ️</span>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Applied on total nominal gains at exit. Equity: 13-14.95% (LTCG + Dividend), Debt: 5.2-42.74% (based on tax slab). Actual taxation may differ">ℹ️</span>
                                 </label>
                                 <input 
                                     type="number" 
@@ -300,7 +300,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tbody>
                                     <tr v-if="isBothTargetsMode && results.requiredMonthlyInvestment !== null && results.requiredMonthlyInvestment !== undefined">
                                         <td><strong>Starting Monthly Investment</strong></td>
-                                        <td class="highlight">₹ {{ formatCurrency(results.requiredMonthlyInvestment) }}</td>
+                                        <td class="highlight"><span class="help-icon" :data-tooltip="'₹ ' + results.requiredMonthlyInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.requiredMonthlyInvestment) }}</span></td>
                                     </tr>
                                     <tr v-if="results.timeRequired">
                                         <td><strong>Time Required</strong></td>
@@ -690,7 +690,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 }
                 
                 // Simply map pre-computed data based on view mode
-                // Note: All values (including post-tax) are pre-computed in monthlyPlan by simulateSIP
+                // Note: Post-tax values are computed per-row in buildMonthlyPlan (exit-at-this-month scenario)
                 // UI layer just switches between pre-computed fields
                 return filteredPlan.map(row => {
                     if (this.planGranularity === 'yearly') {
@@ -907,8 +907,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
             planViewMode() {
                 // displayedPlan watcher will handle chart update
             }
-            // Note: applyPostTax removed - it only affects summary display, not chart data
-            // Tax is applied only at exit (final value), not during accumulation
+            // Note: applyPostTax watcher not needed - toggling it triggers displayedPlan recomputation
+            // which in turn triggers the chart update via the displayedPlan watcher
         },
         mounted() {
             this.loadFromUrl();
@@ -1272,12 +1272,10 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     // Cumulative real growth is the total real gains (real portfolio - real investment)
                     const cumulativeRealGrowth = realValue - totalInvestedPresentValue;
                     
-                    // Calculate post-tax values for both nominal and real
-                    const nominalGrowth = portfolioValue - totalInvested;
-                    const postTaxNominal = totalInvested + nominalGrowth * (1 - taxRate / 100);
-                    const realGains = realValue - totalInvestedPresentValue;
-                    const postTaxReal = totalInvestedPresentValue + realGains * (1 - taxRate / 100);
-                    
+                    // Note: post-tax values are NOT computed per-month here.
+                    // Tax is a lump-sum liability settled at exit, levied on the total NOMINAL gain.
+                    // Per-row post-tax values are derived in buildMonthlyPlan using each row's own
+                    // cumulative nominal gain and inflation factor (exit-at-this-month scenario).
                     monthlyData.push({
                         monthIndex,
                         year,
@@ -1290,9 +1288,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         portfolioValue: Math.round(portfolioValue),
                         totalInvested: Math.round(totalInvested),
                         totalInvestedPresentValue: Math.round(totalInvestedPresentValue),
-                        realValue: Math.round(realValue),
-                        postTaxPortfolioValue: Math.round(postTaxNominal),
-                        postTaxRealValue: Math.round(postTaxReal)
+                        realValue: Math.round(realValue)
                     });
                 }
                 
@@ -1312,8 +1308,17 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 
                 const finalMonth = monthlyData[monthlyData.length - 1];
                 
-                // Calculate post-tax real value (taxRate passed as parameter)
-                const postTaxRealValue = Math.round(finalMonth.totalInvestedPresentValue + (finalMonth.realValue - finalMonth.totalInvestedPresentValue) * (1 - taxRate / 100));
+                // Post-tax final value (lump-sum exit tax on total nominal gain):
+                //   Step 1 – Total Nominal Gain  = Final Nominal Portfolio − Total Nominal Investment
+                //   Step 2 – Nominal Tax Liability = Total Nominal Gain × (taxRate / 100)
+                //   Step 3 – Nominal Post-Tax Portfolio = Final Nominal Portfolio − Nominal Tax Liability
+                //   Step 4 – Real Post-Tax Value  = Nominal Post-Tax Portfolio ÷ totalInflationFactor
+                // Dividing by Math.pow(1 + monthlyInflation, totalMonths) gives the correct purchasing-
+                // power equivalent in today's money WITHOUT granting any inflation credit on the tax bill.
+                const totalNominalGain = finalMonth.portfolioValue - finalMonth.totalInvested;
+                const nominalTaxLiability = totalNominalGain * (taxRate / 100);
+                const nominalPostTaxPortfolio = finalMonth.portfolioValue - nominalTaxLiability;
+                const postTaxRealValue = Math.round(nominalPostTaxPortfolio / Math.pow(1 + monthlyInflation, totalMonths));
                 
                 return {
                     monthlyData,
@@ -1331,13 +1336,27 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 
+                // Per-row post-tax uses the same lump-sum exit formula as simulateSIP:
+                //   nominalTaxLiability = cumulativeNominalGain × taxRate
+                //   postTaxNominal      = portfolioValue − nominalTaxLiability
+                //   postTaxReal         = postTaxNominal ÷ inflationFactor(monthIndex + 1)
+                const { inflationRate, taxRate } = this.formData;
+                const monthlyInflation = Math.pow(1 + inflationRate / 100, 1 / 12) - 1;
+                
                 return simulation.monthlyData.map((data, index) => {
                     const currentMonthNum = (startMonth - 1 + index) % 12;
                     const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
                     
-                    // Nominal growth = change in portfolio minus contribution
+                    // Nominal growth = change in portfolio minus contribution (monthly increment)
                     const prevNominal = index > 0 ? simulation.monthlyData[index - 1].portfolioValue : currentInvestment;
                     const nominalGrowth = data.portfolioValue - prevNominal - data.contribution;
+                    
+                    // Per-row post-tax (exit-at-this-month scenario)
+                    const cumulativeNominalGain = data.portfolioValue - data.totalInvested;
+                    const rowNominalTaxLiability = cumulativeNominalGain * (taxRate / 100);
+                    const rowPostTaxNominal = data.portfolioValue - rowNominalTaxLiability;
+                    const rowInflationFactor = Math.pow(1 + monthlyInflation, data.monthIndex + 1);
+                    const rowPostTaxReal = rowPostTaxNominal / rowInflationFactor;
                     
                     return {
                         monthIndex: data.monthIndex,
@@ -1349,14 +1368,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         nominalCumulativeGrowth: data.cumulativeNominalGrowth,
                         nominalInvestment: data.totalInvested,
                         nominalPortfolio: data.portfolioValue,
-                        nominalPostTaxPortfolio: data.postTaxPortfolioValue,
-                        // Real values (pre-computed by simulateSIP)
+                        nominalPostTaxPortfolio: Math.round(rowPostTaxNominal),
+                        // Real values
                         realContribution: data.realContribution,
                         realGrowth: data.realGrowth,
                         realCumulativeGrowth: data.cumulativeRealGrowth,
                         realInvestment: data.totalInvestedPresentValue,
                         realPortfolio: data.realValue,
-                        realPostTaxPortfolio: data.postTaxRealValue
+                        realPostTaxPortfolio: Math.round(rowPostTaxReal)
                     };
                 });
             },

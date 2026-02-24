@@ -252,7 +252,7 @@ The tax you ignore becomes the return you never keep.
 <tr><td><strong>Time</strong></td><td>10 years</td></tr>
 <tr><td><strong>Returns</strong></td><td>12%</td></tr>
 <tr><td><strong>Inflation</strong></td><td>6%</td></tr>
-<tr style="background: #fef3c7;"><td><strong>Exit Tax</strong></td><td>15%</td></tr>
+<tr style="background: #fef3c7;"><td><strong>Exit Tax</strong></td><td>15% <br/><small>(12.5% LTCG + Cess + Surcharge)</small></td></tr>
 </table>
 </div>
 
@@ -265,7 +265,7 @@ New number.
 ### 4️⃣ The Tax Factor 💸 / The Real Number
 
 <div style="font-size: 2.5em; margin: 80px 0;" data-gsap='{"from": {"opacity": 0, "scale": 3}, "duration": 1.2, "delay": 0.5}'>
-<strong style="color: #ef4444;">₹83,327 per month</strong>
+<strong style="color: #ef4444;">₹85,921 per month</strong>
 </div>
 
 <div class="fragment fade-up" style="margin: 60px 0;">
@@ -279,7 +279,7 @@ New number.
 </div>
 
 <p class="fragment fade-up" style="font-size: 1.6em; color: #10b981; margin-top: 40px;">
-<strong>You need to invest ₹83k every month.</strong>
+<strong>You need to invest ₹86k every month.</strong>
 </p>
 
 ---
@@ -328,7 +328,7 @@ Strong plans scale with your earning power.
 ### 5️⃣ The Growth Solution 📈 / Game Changer
 
 <div style="font-size: 2.5em; margin: 80px 0;" data-gsap='{"from": {"opacity": 0, "scale": 3}, "duration": 1.2, "delay": 0.5}'>
-<strong style="color: #10b981;">₹56,825 per month</strong>
+<strong style="color: #10b981;">₹58,421 per month</strong>
 </div>
 
 <p class="fragment fade-up" style="font-size: 1.3em;">
@@ -336,7 +336,7 @@ Starting SIP. Month one. Not ₹83k.
 </p>
 
 <div class="fragment fade-up" style="margin: 50px 0; font-size: 1.3em;">
-<p style="margin-top: 20px; font-size: 1.5em; color: #10b981;"><strong>₹57k.</strong></p>
+<p style="margin-top: 20px; font-size: 1.5em; color: #10b981;"><strong>₹58k.</strong></p>
 </div>
 
 <p class="fragment fade-up" style="font-size: 1.2em; margin-top: 50px; color: #6b7280;">
@@ -372,7 +372,7 @@ Your future self does the heavy lifting.
 ### 5️⃣ The Growth Solution 📈 / Already Ahead
 
 <div style="font-size: 2.5em; margin: 80px 0;" data-gsap='{"from": {"opacity": 0, "scale": 3}, "duration": 1.2, "delay": 0.5}'>
-<strong style="color: #10b981;">₹47,596 per month</strong>
+<strong style="color: #10b981;">₹49,320 per month</strong>
 </div>
 
 <p class="fragment fade-up" style="font-size: 1.3em;">
@@ -381,8 +381,8 @@ Already have ₹10L invested?
 
 <div class="fragment fade-up" style="margin: 40px 0;">
 <table style="font-size: 1.3em;">
-<tr><td><strong>No head start</strong></td><td style="color: #6b7280;">₹57k/month</td></tr>
-<tr><td><strong>With ₹10L head start</strong></td><td style="color: #10b981;">₹48k/month</td></tr>
+<tr><td><strong>No head start</strong></td><td style="color: #6b7280;">₹58k/month</td></tr>
+<tr><td><strong>With ₹10L head start</strong></td><td style="color: #10b981;">₹49k/month</td></tr>
 </table>
 </div>
 
@@ -452,13 +452,13 @@ Every rupee invested today reduces tomorrow's burden.
 📉 With inflation: ₹80k/month
 </p>
 <p data-gsap='{"from": {"opacity": 0, "y": 50}, "duration": 1, "delay": 4.5}'>
-💸 With tax: ₹83k/month
+💸 With tax: ₹86k/month
 </p>
 <p data-gsap='{"from": {"opacity": 0, "x": 100}, "duration": 1, "delay": 6}'>
-📈 With 10% hike: ₹57k/month
+📈 With 10% hike: ₹58k/month
 </p>
 <p data-gsap='{"from": {"opacity": 0, "scale": 1.5}, "duration": 1, "delay": 7.5}'>
-🚀 With ₹10L head start: ₹48k/month
+🚀 With ₹10L head start: ₹49k/month
 </p>
 <p data-gsap='{"from": {"opacity": 0, "scale": 2}, "duration": 1, "delay": 9}'>
 🎓 Model reality or fund disappointment
@@ -469,7 +469,7 @@ Every rupee invested today reduces tomorrow's burden.
 
 ### 🧮 Plan Your Own Goal in Real Value
 <div class="fragment fade-up" style="margin-top: 60px;">
-<iframe src="/building-wealth/tools/realvalue-sip-engine/#v1obd10ya1cf202602c0lm20kg12h10i6t15" 
+<iframe src="/building-wealth/tools/realvalue-sip-engine/#v1obd10ya1cf202602c10lm20kg12h10i6t15"
         style="width: 100%; height: 1000px; border: 2px solid #e5e7eb; border-radius: 10px; box-shadow: 0 4px 6px rgba(36, 31, 31, 0.1);">
 </iframe>
 </div>
