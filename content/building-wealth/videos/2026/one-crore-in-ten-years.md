@@ -1,6 +1,6 @@
 ---
 title: "₹1 Crore in 10 Years — The Real Math (With Inflation, Taxes & Growth Plan)"
-date: 2026-02-22
+date: 2026-02-25
 draft: false
 type: "videos"
 wealth_tags:
