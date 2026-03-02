@@ -2,6 +2,12 @@
 window.initializeTool = window.initializeTool || {};
 
 window.initializeTool.multiAssetAllocator = function (container, config) {
+    // Stable id generator for Vue :key bindings
+    let _nextId = 1;
+    const nextId = () => _nextId++;
+
+    // Config defaults
+    const cfg = config || {};
     // Create Vue app template
     container.innerHTML = `
         <style>
@@ -69,7 +75,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(investor, index) in investors" :key="index" 
+                                    <tr v-for="(investor, index) in investors" :key="investor.id" 
                                         draggable="true"
                                         @dragstart="dragStart($event, index, 'investor')"
                                         @dragend="dragEnd($event)"
@@ -149,7 +155,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(asset, index) in assets" :key="index"
+                                    <tr v-for="(asset, index) in assets" :key="asset.id"
                                         draggable="true"
                                         @dragstart="dragStart($event, index, 'asset')"
                                         @dragend="dragEnd($event)"
@@ -239,7 +245,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     </tr>
                                 </thead>
                                 <tbody v-if="assetGroups.length > 0">
-                                    <tr v-for="(group, index) in assetGroups" :key="index"
+                                    <tr v-for="(group, index) in assetGroups" :key="group.id"
                                         draggable="true"
                                         @dragstart="dragStart($event, index, 'group')"
                                         @dragend="dragEnd($event)"
@@ -573,20 +579,20 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
     const app = Vue.createApp({
         data() {
             return {
-                investors: [
-                    { name: 'Arjun', amountValue: 60, amountUnit: 'thousands', international: true, tcs: false },
-                    { name: 'Meera', amountValue: 20, amountUnit: 'thousands', international: false, tcs: false }
+                investors: cfg.investors || [
+                    { id: nextId(), name: 'Arjun', amountValue: 60, amountUnit: 'thousands', international: true, tcs: false },
+                    { id: nextId(), name: 'Meera', amountValue: 20, amountUnit: 'thousands', international: false, tcs: false }
                 ],
-                roundOffValue: 1,
-                roundOffUnit: 'thousands',
-                assets: [
-                    { name: 'India Equity', targetPercent: 50, currentValue: 450000, hasSlabRate: false, isInternational: false },
-                    { name: 'US Equity', targetPercent: 25, currentValue: 250000, hasSlabRate: false, isInternational: true },
-                    { name: 'Gold', targetPercent: 15, currentValue: 260000, hasSlabRate: false, isInternational: false },
-                    { name: 'Debt', targetPercent: 10, currentValue: 90000, hasSlabRate: true, isInternational: false }
+                roundOffValue: cfg.roundOffValue !== undefined ? cfg.roundOffValue : 1,
+                roundOffUnit: cfg.roundOffUnit || 'thousands',
+                assets: cfg.assets || [
+                    { id: nextId(), name: 'India Equity', targetPercent: 50, currentValue: 450000, hasSlabRate: false, isInternational: false },
+                    { id: nextId(), name: 'US Equity', targetPercent: 25, currentValue: 250000, hasSlabRate: false, isInternational: true },
+                    { id: nextId(), name: 'Gold', targetPercent: 15, currentValue: 260000, hasSlabRate: false, isInternational: false },
+                    { id: nextId(), name: 'Debt', targetPercent: 10, currentValue: 90000, hasSlabRate: true, isInternational: false }
                 ],
-                assetGroups: [
-                    { name: 'Defensive', assetNames: ['Gold', 'Debt'] }
+                assetGroups: cfg.assetGroups || [
+                    { id: nextId(), name: 'Defensive', assetNames: ['Gold', 'Debt'] }
                 ],
                 results: {
                     investorAllocations: [],
@@ -610,31 +616,17 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
         mounted() {
             this.calculate();
         },
+        unmounted() {
+            if (this.resizeHandler) {
+                window.removeEventListener('resize', this.resizeHandler);
+            }
+            if (this.driftResizeHandler) {
+                window.removeEventListener('resize', this.driftResizeHandler);
+            }
+            this.chart?.dispose();
+            this.driftChart?.dispose();
+        },
         watch: {
-            'results.summary': {
-                handler(newVal, oldVal) {
-                    // When results change, DOM may have been recreated by v-if
-                    if (newVal && newVal.length > 0) {
-                        // Clear chart instances since DOM may have been recreated
-                        if (this.chart) {
-                            this.chart.dispose();
-                            this.chart = null;
-                        }
-                        if (this.driftChart) {
-                            this.driftChart.dispose();
-                            this.driftChart = null;
-                        }
-                        
-                        // If we're on chart tab, render immediately
-                        if (this.portfolioViewTab === 'chart') {
-                            this.$nextTick(() => {
-                                this.updateChart();
-                            });
-                        }
-                    }
-                },
-                deep: false
-            },
             portfolioViewTab() {
                 // When switching to chart tab, render charts
                 if (this.portfolioViewTab === 'chart' && this.results.summary.length > 0) {
@@ -701,11 +693,6 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             getAssetCurrentValue(asset) {
                 return asset.currentValue || 0;
             },
-            formatInvestorAmount(investor) {
-                const amount = this.getInvestorAmount(investor);
-                if (amount === 0) return '0';
-                return amount.toLocaleString('en-IN');
-            },
             getRoundOff() {
                 return (this.roundOffValue || 0) * this.getUnitMultiplier(this.roundOffUnit);
             },
@@ -716,6 +703,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             },
             addInvestor() {
                 this.investors.push({
+                    id: nextId(),
                     name: `Investor ${this.investors.length + 1}`,
                     amountValue: 0,
                     amountUnit: 'thousands',
@@ -726,16 +714,10 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             removeInvestor(index) {
                 this.investors.splice(index, 1);
                 this.calculate();
-                // Resize charts after data change
-                this.$nextTick(() => {
-                    setTimeout(() => {
-                        this.chart?.resize();
-                        this.driftChart?.resize();
-                    }, 150);
-                });
             },
             addAsset() {
                 this.assets.push({
+                    id: nextId(),
                     name: `Asset ${this.assets.length + 1}`,
                     targetPercent: 0,
                     currentValue: 0,
@@ -749,6 +731,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             },
             addGroup() {
                 this.assetGroups.push({
+                    id: nextId(),
                     name: `Group ${this.assetGroups.length + 1}`,
                     assetNames: []
                 });
@@ -856,17 +839,6 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     total += allocation.tcs;
                 });
                 return total;
-            },
-            getTotalTransactions() {
-                let count = 0;
-                this.results.investorAllocations.forEach(allocation => {
-                    allocation.allocations.forEach(item => {
-                        if (item.amount > 0) {
-                            count++;
-                        }
-                    });
-                });
-                return count;
             },
             formatDriftCorrection() {
                 const correction = this.results.totalPreDriftPercent - this.results.totalPostDriftPercent;
@@ -1041,16 +1013,6 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 }));
                 
                 const totalBudgetNeed = adjustedDeviations.reduce((sum, a) => sum + a.budgetNeed, 0);
-                const assetTargetAllocations = {}; // Target allocation for each asset
-                
-                adjustedDeviations.forEach(asset => {
-                    // Allocate based on budget need ratio
-                    const budgetShare = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
-                    // For international with TCS, the actual investment is budget / 1.2
-                    assetTargetAllocations[asset.name] = (anyInvestorHasTcs && asset.isInternational)
-                        ? budgetShare / 1.2
-                        : budgetShare;
-                });
                 
                 // ============================================================
                 // DETERMINISTIC ALLOCATION ENGINE
@@ -1058,17 +1020,18 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 // ============================================================
                 
                 const roundOff = this.getRoundOff();
+                const TCS_MULTIPLIER = 1.2; // 20% TCS on international investments
                 
                 // STEP 1: Calculate exact asset allocations (with rounding adjustment)
                 const assetAllocations = [];
-                let totalRounded = 0;
+                let totalBudgetConsumed = 0; // gross budget used (investment + TCS cost for intl)
                 
                 adjustedDeviations.forEach(asset => {
-                    const targetAmount = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
-                    // For international with TCS, the actual investment is budget / 1.2
+                    const targetBudget = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
+                    // Net investment = budget / TCS_MULTIPLIER for intl with TCS, budget for others
                     const investmentAmount = (anyInvestorHasTcs && asset.isInternational)
-                        ? targetAmount / 1.2
-                        : targetAmount;
+                        ? targetBudget / TCS_MULTIPLIER
+                        : targetBudget;
                     const roundedAmount = Math.round(investmentAmount / roundOff) * roundOff;
                     
                     if (roundedAmount > 0) {
@@ -1079,33 +1042,47 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             isInternational: asset.isInternational,
                             originalAsset: asset
                         });
-                        totalRounded += roundedAmount;
+                        // Gross budget cost: investment * TCS_MULTIPLIER for intl, investment for others
+                        totalBudgetConsumed += (anyInvestorHasTcs && asset.isInternational)
+                            ? roundedAmount * TCS_MULTIPLIER
+                            : roundedAmount;
                     }
                 });
                 
-                // Adjust for rounding error: allocate remaining to asset with highest positive difference
-                const roundingDiff = totalNewInvestment - totalRounded;
-                if (Math.abs(roundingDiff) >= roundOff && assetAllocations.length > 0) {
-                    // Find asset with highest unrounded remainder
-                    let maxDiff = 0;
-                    let maxIdx = 0;
-                    adjustedDeviations.forEach((asset, idx) => {
-                        const targetAmount = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
+                // Adjust for rounding: add one roundOff unit at a time to the asset with
+                // the largest rounding remainder (ideal - rounded), until budget is consumed.
+                // remainingBudget is in gross terms (same unit as totalNewInvestment).
+                let remainingBudget = totalNewInvestment - totalBudgetConsumed;
+                while (remainingBudget >= roundOff && assetAllocations.length > 0) {
+                    let maxDiff = -Infinity;
+                    let bestAssetName = null;
+                    
+                    adjustedDeviations.forEach(asset => {
+                        const targetBudget = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
                         const investmentAmount = (anyInvestorHasTcs && asset.isInternational)
-                            ? targetAmount / 1.2
-                            : targetAmount;
+                            ? targetBudget / TCS_MULTIPLIER
+                            : targetBudget;
                         const roundedAmount = Math.round(investmentAmount / roundOff) * roundOff;
-                        const diff = investmentAmount - roundedAmount;
-                        if (diff > maxDiff) {
+                        const diff = investmentAmount - roundedAmount; // positive = was rounded down
+                        
+                        // Budget cost of adding one more roundOff to this asset
+                        const additionalBudget = (anyInvestorHasTcs && asset.isInternational)
+                            ? roundOff * TCS_MULTIPLIER
+                            : roundOff;
+                        
+                        const allocation = assetAllocations.find(a => a.name === asset.name);
+                        if (allocation && diff > maxDiff && additionalBudget <= remainingBudget) {
                             maxDiff = diff;
-                            maxIdx = idx;
+                            bestAssetName = asset.name;
                         }
                     });
-                    const adjustmentAmount = Math.round(roundingDiff / roundOff) * roundOff;
-                    const assetToAdjust = assetAllocations.find(a => a.name === adjustedDeviations[maxIdx].name);
-                    if (assetToAdjust) {
-                        assetToAdjust.amount += adjustmentAmount;
-                    }
+                    
+                    if (!bestAssetName) break; // No eligible asset fits in remaining budget
+                    
+                    const assetToAdjust = assetAllocations.find(a => a.name === bestAssetName);
+                    const isIntlWithTcs = anyInvestorHasTcs && assetToAdjust.isInternational;
+                    assetToAdjust.amount += roundOff;
+                    remainingBudget -= isIntlWithTcs ? roundOff * TCS_MULTIPLIER : roundOff;
                 }
                 
                 // STEP 2: Prepare investor metadata with priorities
@@ -1115,7 +1092,6 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     capacity: this.getInvestorAmount(inv),
                     remaining: this.getInvestorAmount(inv),
                     internationalEnabled: inv.international || false,
-                    taxSlab: inv.taxSlab || 0,  // Lower slab preferred for slab assets
                     uiOrder: index,
                     uiOrderReversed: this.investors.length - 1 - index,  // For bottom-to-top priority
                     hasTcs: inv.tcs && inv.international,
@@ -1130,10 +1106,9 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 
                 // Sort investors by priority (for use during allocation)
                 const sortInvestorsForSlab = () => {
-                    investorData.sort((a, b) => {
-                        // Priority 1: Bottom-to-top UI order (user-controlled via drag-drop)
-                        return a.uiOrderReversed - b.uiOrderReversed;
-                    });
+                    // Investors are ordered top-to-bottom: highest slab → lowest slab (user convention).
+                    // Bottom-to-top order ensures lowest-slab investor gets slab assets first.
+                    investorData.sort((a, b) => a.uiOrderReversed - b.uiOrderReversed);
                 };
                 
                 const sortInvestorsForNonSlab = () => {
@@ -1163,18 +1138,18 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     
                     if (invData.hasTcs && asset.isInternational) {
                         // TCS calculation: total outflow (investment + TCS) must be multiple of roundOff
-                        // TCS = 20% of investment, so total = investment × 1.2
-                        const maxInvestmentWithTcs = invData.remaining / 1.2;
+                        // TCS = TCS_RATE% of investment, so total = investment × TCS_MULTIPLIER
+                        const maxInvestmentWithTcs = invData.remaining / TCS_MULTIPLIER;
                         const desiredInvestment = Math.min(maxAmount, maxInvestmentWithTcs);
                         
                         // Round total outflow to multiple of roundOff
-                        const desiredTotal = desiredInvestment * 1.2;
+                        const desiredTotal = desiredInvestment * TCS_MULTIPLIER;
                         total = Math.round(desiredTotal / roundOff) * roundOff;
                         
                         if (total <= 0) return;
                         
                         // Back-calculate investment (must be whole rupees)
-                        investment = Math.round(total / 1.2);
+                        investment = Math.round(total / TCS_MULTIPLIER);
                         tcs = total - investment;
                     } else {
                         investment = Math.min(maxAmount, invData.remaining);
@@ -1344,10 +1319,10 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 });
                 
                 // Calculate total absolute drifts
-                const totalPreDriftPercent = summary.reduce((sum, row) => sum + Math.abs(row.preDrift), 0);
-                const totalPostDriftPercent = summary.reduce((sum, row) => sum + Math.abs(row.postDrift), 0);
-                const totalPreDriftRupee = summary.reduce((sum, row) => sum + Math.abs(row.currentValue - row.preTargetValue), 0);
-                const totalPostDriftRupee = summary.reduce((sum, row) => sum + Math.abs(row.postValue - row.targetValue), 0);
+                const totalPreDriftPercent = summary.reduce((sum, row) => sum + Math.max(0, row.preDrift), 0);
+                const totalPostDriftPercent = summary.reduce((sum, row) => sum + Math.max(0, row.postDrift), 0);
+                const totalPreDriftRupee = summary.reduce((sum, row) => sum + Math.max(0, row.currentValue - row.preTargetValue), 0);
+                const totalPostDriftRupee = summary.reduce((sum, row) => sum + Math.max(0, row.postValue - row.targetValue), 0);
                 
                 this.results = {
                     investorAllocations,
@@ -1626,7 +1601,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         
                         // Validate and import data
                         if (data.investors && Array.isArray(data.investors)) {
-                            this.investors = data.investors;
+                            this.investors = data.investors.map(i => ({ id: nextId(), ...i }));
                         }
                         if (data.roundOffValue !== undefined) {
                             this.roundOffValue = data.roundOffValue;
@@ -1635,10 +1610,10 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             this.roundOffUnit = data.roundOffUnit;
                         }
                         if (data.assets && Array.isArray(data.assets)) {
-                            this.assets = data.assets;
+                            this.assets = data.assets.map(a => ({ id: nextId(), ...a }));
                         }
                         if (data.assetGroups && Array.isArray(data.assetGroups)) {
-                            this.assetGroups = data.assetGroups;
+                            this.assetGroups = data.assetGroups.map(g => ({ id: nextId(), ...g }));
                         }
                         
                         // Recalculate
@@ -1656,19 +1631,21 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             resetData() {
                 if (confirm('Are you sure you want to reset all data?')) {
                     this.investors = [
-                        { name: 'Investor 1', amount: 50000, international: false, tcs: false }
+                        { id: nextId(), name: 'Investor 1', amountValue: 50, amountUnit: 'thousands', international: false, tcs: false }
                     ];
-                    this.roundOff = 5000;
+                    this.roundOffValue = 1;
+                    this.roundOffUnit = 'thousands';
                     this.assets = [
-                        { name: 'Nifty 50', targetPercent: 40, currentValue: 500000, isInternational: false },
-                        { name: 'Nasdaq 100', targetPercent: 40, currentValue: 500000, isInternational: true },
-                        { name: 'Gold', targetPercent: 20, currentValue: 250000, isInternational: false }
+                        { id: nextId(), name: 'Nifty 50', targetPercent: 40, currentValue: 500000, hasSlabRate: false, isInternational: false },
+                        { id: nextId(), name: 'Nasdaq 100', targetPercent: 40, currentValue: 500000, hasSlabRate: false, isInternational: true },
+                        { id: nextId(), name: 'Gold', targetPercent: 20, currentValue: 250000, hasSlabRate: false, isInternational: false }
                     ];
+                    this.assetGroups = [];
                     this.calculate();
                 }
             }
         }
     });
 
-    app.mount('#multi-asset-app');
+    app.mount(container);
 };
