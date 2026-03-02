@@ -152,4 +152,12 @@ Yes. Export as JSON, import next month.
 
 ---
 
+## Changelog
+
+### 2026-03-02
+- **Rounding gap fix**: Earlier, up to one round-off amount (e.g. ₹5,000 if round-off is set to ₹5K) could be left unallocated due to rounding across multiple assets. Now, the full budget is always utilised.
+- **Drift totals**: Earlier, the total drift was calculated as the sum of all deviations (both over and under target). Now, only assets that are *above* their target (overweight) are summed, giving a clearer picture of how much the portfolio is out of balance.
+
+---
+
 > **Note**: This tool implements a sophisticated methodology. Adjust based on your goals, risk tolerance, and market conditions.

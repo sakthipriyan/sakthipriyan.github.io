@@ -351,6 +351,13 @@ Yes. Export as JSON, import next month.</p>
 <li>Use asset groups for defensive assets (debt/gold)</li>
 </ol>
 <hr>
+<h2 id="changelog">Changelog</h2>
+<h3 id="2026-03-02">2026-03-02</h3>
+<ul>
+<li><strong>Rounding gap fix</strong>: Earlier, up to one round-off amount (e.g. ₹5,000 if round-off is set to ₹5K) could be left unallocated due to rounding across multiple assets. Now, the full budget is always utilised.</li>
+<li><strong>Drift totals</strong>: Earlier, the total drift was calculated as the sum of all deviations (both over and under target). Now, only assets that are <em>above</em> their target (overweight) are summed, giving a clearer picture of how much the portfolio is out of balance.</li>
+</ul>
+<hr>
 <blockquote>
 <p><strong>Note</strong>: This tool implements a sophisticated methodology. Adjust based on your goals, risk tolerance, and market conditions.</p>
 </blockquote>
