@@ -1007,6 +1007,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 });
                 
                 const option = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: { title: 'Save as Image' }
+                        }
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: function(params) {
@@ -1030,9 +1035,9 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     },
                     grid: {
                         left: '3%',
-                        right: '2%',
+                        right: '4%',
                         bottom: '2%',
-                        top: '2%',
+                        top: '8%',
                         containLabel: true
                     },
                     xAxis: {
@@ -1334,6 +1339,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 });
                 
                 const option = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: { title: 'Save as Image' }
+                        }
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: function(params) {
@@ -1348,9 +1358,9 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     },
                     grid: {
                         left: '3%',
-                        right: '2%',
+                        right: '4%',
                         bottom: '2%',
-                        top: '2%',
+                        top: '8%',
                         containLabel: true
                     },
                     xAxis: {

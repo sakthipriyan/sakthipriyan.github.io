@@ -1668,6 +1668,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         const granularityLabel = this.planGranularity === 'yearly' ? 'Yearly' : 'Monthly';
                         
                         const option = {
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: { title: 'Save as Image' }
+                                }
+                            },
                             tooltip: {
                                 trigger: 'item',
                                 formatter: function(params) {
@@ -1691,9 +1696,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             },
                             grid: {
                                 left: '3%',
-                                right: '2%',
+                                right: '4%',
                                 bottom: '2%',
-                                top: '2%',
+                                top: '8%',
                                 containLabel: true
                             },
                             xAxis: {
@@ -1824,6 +1829,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 });
 
                 const option = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: { title: 'Save as Image' }
+                        }
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: function(params) {
@@ -1838,9 +1848,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     },
                     grid: {
                         left: '3%',
-                        right: '2%',
+                        right: '4%',
                         bottom: '2%',
-                        top: '2%',
+                        top: '8%',
                         containLabel: true
                     },
                     xAxis: {
