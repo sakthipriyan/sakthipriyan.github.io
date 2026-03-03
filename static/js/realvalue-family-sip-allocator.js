@@ -1395,6 +1395,11 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 const isPercentage = this.portfolioViewMode === 'percentage';
                 
                 const portfolioOption = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: { title: 'Save as Image' }
+                        }
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: (params) => {
@@ -1414,6 +1419,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         left: '3%',
                         right: '4%',
                         bottom: '15%',
+                        top: '8%',
                         containLabel: true
                     },
                     xAxis: {
@@ -1476,6 +1482,11 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 
                 // Update Drift Chart
                 const driftOption = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: { title: 'Save as Image' }
+                        }
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: (params) => {
@@ -1495,6 +1506,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         left: '3%',
                         right: '4%',
                         bottom: '15%',
+                        top: '8%',
                         containLabel: true
                     },
                     xAxis: {
