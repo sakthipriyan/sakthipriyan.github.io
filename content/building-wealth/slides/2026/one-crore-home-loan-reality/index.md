@@ -138,6 +138,9 @@ sakthipriyan.com/building-wealth
 </ul>
 </div>
 
+--
+### 4️⃣ Key Insight 🧠 / Right Question
+
 <div class="fragment fade-up" style="margin-top: 15px;">
 <p style="font-size: 0.9em; color: #6b7280;">The wrong question: <span style="color: #ef4444;">"How much total interest will I pay?"</span></p>
 <p style="font-size: 0.95em; color: #10b981; margin-top: 8px;"><strong>The right question: "What EMI fits my cashflow — and can I invest the rest?"</strong></p>
