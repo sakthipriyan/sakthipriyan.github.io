@@ -173,16 +173,16 @@ sakthipriyan.com/building-wealth
 🏠 ₹1 Cr @ 8% — 10, 15, 20 year tenures
 </p>
 <p data-gsap='{"from": {"opacity": 0, "rotation": 180}, "duration": 1, "delay": 1.5}'>
-😱 Nominal interest: ₹46L → ₹1.01 Cr (illusion!)
+😱 Nominal interest: ₹46L → ₹1.01 Cr
 </p>
 <p data-gsap='{"from": {"opacity": 0, "scale": 0.5}, "duration": 1, "delay": 3}'>
-✅ Real interest: ₹11L → ₹19L (manageable)
+✅ Real interest: ₹11L → ₹19L
 </p>
 <p data-gsap='{"from": {"opacity": 0, "y": 50}, "duration": 1, "delay": 4.5}'>
-📉 Real burden shrinks every year — inflation works for you
+📉 Real burden shrinks every year
 </p>
 <p data-gsap='{"from": {"opacity": 0, "x": 100}, "duration": 1, "delay": 6}'>
-💰 Longer tenure = lower EMI = optionality/more to invest
+💰 Longer tenure = lower EMI = optionality
 </p>
 <p data-gsap='{"from": {"opacity": 0, "scale": 2}, "duration": 1, "delay": 7.5}'>
 🧠 Choose by cashflow, not nominal interest fear
