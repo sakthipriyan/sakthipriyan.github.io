@@ -49,17 +49,16 @@ sakthipriyan.com/building-wealth
 <table>
 <tr class="fragment fade-up"><td><strong>Loan Amount</strong></td><td>₹1 Crore</td></tr>
 <tr class="fragment fade-up"><td><strong>Interest Rate</strong></td><td>8% per annum</td></tr>
-<tr class="fragment fade-up"><td><strong>Inflation Rate</strong></td><td>6% per annum</td></tr>
 <tr class="fragment fade-up"><td><strong>Tenures</strong></td><td>20 Years</td></tr>
 <tr class="fragment fade-up"><td><strong>Monthly EMI</strong></td><td>₹83,644</td></tr>
-<tr class="fragment fade-up"><td><strong>Nominal Interest Paid</strong></td><td>₹1.01 Cr (101%)</td></tr>
+<tr class="fragment fade-up"><td><strong>Nominal Interest</strong></td><td>₹1.01 Cr (101%)</td></tr>
 </table>
 
 <div class="r-stack" style="margin-top: 30px;">
 
 <p class="fragment fade-in-then-out" style="font-size: 1.3em; color: #ef4444;">On a 20-year loan — you pay back <strong>₹2.01 Cr</strong> for a ₹1 Cr loan. Scary? 😱</p>
 
-<p class="fragment" style="font-size: 1.2em; color: #f59e0b;"><strong>That's the nominal story. Not the full story.</strong></p>
+<p class="fragment" style="font-size: 1.2em; color: #f59e0b;"><strong>That's the "nominal" story. Not the "real" story.</strong></p>
 
 </div>
 
@@ -76,7 +75,7 @@ sakthipriyan.com/building-wealth
 </div>
 
 <div class="fragment fade-in-then-out">
-<p style="font-size: 1.1em; color: #6b7280;">📊 Monthly EMI — Nominal (₹83,644 fixed amount)</p>
+<p style="font-size: 1.1em; color: #6b7280;">📊 Monthly EMI — Nominal (₹83,644 fixed)</p>
 <img src="emi_nominal.png" style="width: 100%; border-radius: 8px; margin-top: 8px;" alt="Nominal EMI over 15 years"/>
 </div>
 
@@ -126,12 +125,12 @@ sakthipriyan.com/building-wealth
 
 <div style="margin: 15px 0; font-size: 0.95em;">
 <ul style="list-style: none">
-<li class="fragment fade-up">📈 10yr vs 20yr EMI diff: <strong>₹38K/month</strong> — invest it at 12% (real, inflation-adjusted):
+<li class="fragment fade-up">📈 10yr vs 20yr EMI diff: <strong>₹38K/month</strong> — invest it at 12%:
   <ul style="list-style: none; margin-top: 6px; font-size: 0.9em; color: #6b7280;">
     <li style="color: #f59e0b;">⏱️ <strong>First 10 years</strong> — invest the ₹38K/month diff while repaying 20yr loan</li>
-    <li style="padding-left: 1.2em;">→ <a href="https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd10yf202603c0lm34kg12h0i6t0" target="_blank">Flat SIP × 10 yrs</a> → <strong style="color: #f59e0b;">₹42.53L</strong></li>
+    <li style="padding-left: 1.2em;">→ <a href="https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd10yf202603c0lm34kg12h0i6t0" target="_blank">Flat SIP × 10 yrs</a> → <strong style="color: #f59e0b;">₹42.53L (Real) |  76.17 L (Nominal)</strong></li>
     <li style="color: #10b981; margin-top: 6px;">⏱️ <strong>Next 10 years</strong> — corpus grows (no new SIP, just compounding)</li>
-    <li style="padding-left: 1.2em;">→ <a href="https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd10yf202603c4253.416km0kg12h0i6t0" target="_blank">Corpus × 10 yrs @ 12%</a> → <strong style="color: #10b981;">₹73.77L</strong></li>
+    <li style="padding-left: 1.2em;">→ <a href="https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd10yf202603c4253.416km0kg12h0i6t0" target="_blank">Corpus × 10 yrs @ 12%</a> → <strong style="color: #10b981;">₹73.77L (Real) | 1.32 Cr (Nominal)</strong></li>
     <li style="margin-top: 6px; color: #ef4444;">↳ vs real interest gap (10yr vs 20yr): just <strong>₹8.2L</strong></li>
   </ul>
 </li>
@@ -141,9 +140,9 @@ sakthipriyan.com/building-wealth
 --
 ### 4️⃣ Key Insight 🧠 / Right Question
 
-<div class="fragment fade-up" style="margin-top: 15px;">
-<p style="font-size: 0.9em; color: #6b7280;">The wrong question: <span style="color: #ef4444;">"How much total interest will I pay?"</span></p>
-<p style="font-size: 0.95em; color: #10b981; margin-top: 8px;"><strong>The right question: "What EMI fits my cashflow — and can I invest the rest?"</strong></p>
+<div style="margin-top: 15px;">
+<p  class="fragment fade-up" style="font-size: 0.9em; color: #6b7280;">The wrong question: <span style="color: #ef4444;">"How much total interest will I pay?"</span></p>
+<p  class="fragment fade-up" style="font-size: 0.95em; color: #10b981; margin-top: 8px;"><strong>The right question: "What EMI fits my cashflow — and can I invest the rest?"</strong></p>
 </div>
 
 ><!-- .element: class="fragment fade-up" --> 💡 <b>Choose tenure by cashflow, not nominal interest fear</b>
@@ -175,16 +174,16 @@ sakthipriyan.com/building-wealth
 <p data-gsap='{"from": {"opacity": 0, "rotation": 180}, "duration": 1, "delay": 1.5}'>
 😱 Nominal interest: ₹46L → ₹1.01 Cr
 </p>
-<p data-gsap='{"from": {"opacity": 0, "scale": 0.5}, "duration": 1, "delay": 3}'>
+<p data-gsap='{"from": {"opacity": 0, "scale": 0.5}, "duration": 1, "delay": 4.5}'>
 ✅ Real interest: ₹11L → ₹19L
 </p>
-<p data-gsap='{"from": {"opacity": 0, "y": 50}, "duration": 1, "delay": 4.5}'>
+<p data-gsap='{"from": {"opacity": 0, "y": 50}, "duration": 1, "delay": 7.5}'>
 📉 Real burden shrinks every year
 </p>
-<p data-gsap='{"from": {"opacity": 0, "x": 100}, "duration": 1, "delay": 6}'>
+<p data-gsap='{"from": {"opacity": 0, "x": 100}, "duration": 1, "delay": 10.5}'>
 💰 Longer tenure = lower EMI = optionality
 </p>
-<p data-gsap='{"from": {"opacity": 0, "scale": 2}, "duration": 1, "delay": 7.5}'>
+<p data-gsap='{"from": {"opacity": 0, "scale": 2}, "duration": 1, "delay": 13.5}'>
 🧠 Choose by cashflow, not nominal interest fear
 </p>
 </div>
