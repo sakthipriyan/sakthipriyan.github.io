@@ -1,6 +1,6 @@
 ---
 title: "₹1 Crore Home Loan — The Reality"
-date: "2026-03-03"
+date: "2026-03-04"
 draft: false
 layout: "slides"
 type: "slides"
