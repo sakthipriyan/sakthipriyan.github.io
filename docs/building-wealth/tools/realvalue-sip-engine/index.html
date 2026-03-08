@@ -200,7 +200,7 @@
     <div class="tool-content">
         <h2 id="about-realvalue-sip-engine">About RealValue SIP Engine</h2>
 <blockquote>
-<p><strong>RealValue SIP Engine</strong> helps you plan <strong>how much to invest, for how long and with what step-up</strong>, while clearly showing the <strong>post-inflation, post-tax outcome</strong>.</p>
+<p><strong>RealValue SIP Engine</strong> helps you plan <strong>how much to invest, for how long, with what step-up, and for how many years to contribute</strong>, while clearly showing the <strong>post-inflation, post-tax outcome</strong>.</p>
 </blockquote>
 <p>The <strong>RealValue SIP Engine</strong> is not just another SIP calculator — it is a <strong>goal-driven, real-world investment engine</strong> built for serious Indian investors. Unlike traditional SIP calculators that show inflated future numbers, RealValue focuses on <strong>what your money is actually worth</strong> after <strong>inflation and taxes</strong>.</p>
 <h3 id="why-your-sip-calculator-is-lying--realvalue-sip-engine-inflation--tax-adjusted">Why Your SIP Calculator Is Lying | RealValue SIP Engine (Inflation + Tax Adjusted)</h3>
@@ -235,15 +235,15 @@
   <tbody>
       <tr>
           <td><strong>Time</strong></td>
-          <td>“If I invest for 10 years, how much will my portfolio be worth in real terms?”</td>
+          <td>&ldquo;If I invest for 20 years (contributing for 10), how much will my portfolio be worth in real terms?&rdquo;</td>
       </tr>
       <tr>
           <td><strong>Money</strong></td>
-          <td>“How long I need to reach ₹5 Cr for starting SIP of ₹50k?”</td>
+          <td>&ldquo;How long to reach ₹5 Cr with a ₹50k SIP contributed for 10 years?&rdquo;</td>
       </tr>
       <tr>
           <td><strong>Time &amp; Money</strong></td>
-          <td>“How much should I invest monthly to reach ₹5 Cr in 15 years?”</td>
+          <td>&ldquo;How much should I invest monthly (for 10 years) to reach ₹5 Cr in 20 years?&rdquo;</td>
       </tr>
   </tbody>
 </table>
@@ -254,6 +254,7 @@ It dynamically combines multiple dimensions:</p>
 <li><strong>SIP</strong>, <strong>Lumpsum</strong>, or <strong>SIP + Lumpsum</strong></li>
 <li>Target <strong>Time</strong>, Target <strong>Money</strong>, or <strong>Both</strong></li>
 <li>SIP <strong>Step-Up</strong> (included)</li>
+<li><strong>Contribution Period</strong> shorter than target horizon (invest for N years, let corpus grow for M more)</li>
 </ul>
 <p>One RealValue SIP Engine replaces 14 SIP/Lumpsum Calculators,</p>
 <ul>
@@ -277,6 +278,7 @@ It dynamically combines multiple dimensions:</p>
 <li>Inflation-adjusted <strong>real value</strong> results</li>
 <li><strong>Exit tax</strong> applied at the end</li>
 <li><strong>Annual salary hike</strong> &amp; SIP step-up support</li>
+<li><strong>Contribution Period</strong> separate from target horizon — stop investing early, let corpus grow</li>
 <li>Month-wise <strong>contribution and growth tracking</strong></li>
 </ul>
 <h3 id="why-realvalue-sip-engine">Why RealValue SIP Engine?</h3>
@@ -359,11 +361,20 @@ It dynamically combines multiple dimensions:</p>
       </tr>
   </tbody>
 </table>
-<h4 id="time-period">Time Period</h4>
+<h4 id="target-time-period">Target Time Period</h4>
 <ul>
-<li><strong>Time Period Value</strong>: Duration for investment</li>
+<li><strong>Time Period Value</strong>: The total horizon — how long your money stays invested (including the coasting phase)</li>
 <li><strong>Unit</strong>: Choose Years or Months</li>
 <li>Used in &ldquo;Time&rdquo; and &ldquo;Both&rdquo; target modes</li>
+</ul>
+<h4 id="contribution-period">Contribution Period</h4>
+<ul>
+<li><strong>Contribution Period Value</strong>: How long you actively make monthly SIP contributions</li>
+<li><strong>Unit</strong>: Choose Years or Months</li>
+<li>Must be ≤ Target Time Period; auto-syncs when Target Time Period changes</li>
+<li>After the contribution period ends, no new investments are made — the accumulated corpus continues compounding until the target time</li>
+<li>Set equal to Target Time Period to invest throughout the entire horizon (default behaviour)</li>
+<li><strong>Example</strong>: Target Time = 20 years, Contribution Period = 10 years → invest actively for 10 years, then let the corpus grow for another 10 years</li>
 </ul>
 <h4 id="target-amount">Target Amount</h4>
 <ul>
@@ -437,7 +448,14 @@ It dynamically combines multiple dimensions:</p>
 <li><strong>Start Month</strong>: Use actual start month for accurate contribution schedules</li>
 <li><strong>Conservative CAGR</strong>: Use 10-11% for equity, not 15-18%, for realistic planning</li>
 <li><strong>Inflation Buffer</strong>: Use 6-7% inflation for India, not 4-5%, for safety margin</li>
+<li><strong>Contribution Period</strong>: Model an early retirement or career break by setting a shorter contribution period — see how your corpus coasts to the goal without further SIPs</li>
 </ol>
+<hr>
+<h2 id="changelog">Changelog</h2>
+<h3 id="2026-03-08">2026-03-08</h3>
+<ul>
+<li><strong>Contribution Period</strong>: New field to set how long monthly SIP contributions are made, independent of the target horizon. After the contribution period ends, the corpus continues to compound without new investments. Works across all three goal modes (Time, Money, Time+Money). Auto-syncs to Target Time Period by default and cannot exceed it.</li>
+</ul>
 
     </div>
 
