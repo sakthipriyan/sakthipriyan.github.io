@@ -19,149 +19,154 @@ window.initializeTool.sipCalculator = function (container, config) {
                 <div class="sip-container">
                     <!-- Left Column: Input Fields -->
                     <div class="sip-inputs">
-                        <h3 style="margin-top: 0;">🎯 Define Your Investment Goals</h3>
-                        <!-- Target Group with Background -->
-                        <div class="target-group">
-                            <!-- Target Mode Block -->
-                            <div class="input-group">
-                                <label>
-                                    Target Mode:
-                                    <span class="help-icon help-icon-wide" data-tooltip="Time: Calculate portfolio value for a fixed investment period.
+
+                        <!-- Section: Goal -->
+                        <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            🎯 Goal
+                            <span class="help-icon help-icon-wide" data-tooltip="Time: Calculate portfolio value for a fixed investment period.
 Money: Calculate time needed to reach a target amount.
 Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">ℹ️</span>
-                                </label>
-                                <div class="mode-toggle">
-                                    <button 
-                                        type="button"
-                                        :class="{'active': formData.targetTime}"
-                                        @click="toggleTarget('time')">
-                                        ⏱️ Time
-                                    </button>
-                                    <button 
-                                        type="button"
-                                        :class="{'active': formData.targetMoney}"
-                                        @click="toggleTarget('money')">
-                                        💰 Money
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Target Time Period Input - Show if Time is targeted -->
-                            <div class="input-group" v-if="formData.targetTime">
-                                <label>
-                                    Target Time Period:&nbsp;<strong>{{ formattedTimePeriod }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="Duration of your SIP investment. Long-term investing (10+ years) helps ride out market volatility">ℹ️</span>
-                                </label>
-                                <div class="unit-selector-input">
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.timePeriodValue" 
-                                        min="1" 
-                                        step="1"
-                                        @input="debouncedCalculate"
-                                    >
-                                    <div class="unit-buttons">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.timePeriodUnit === 'years'}"
-                                            @click="formData.timePeriodUnit = 'years'; calculateResults()">
-                                            Years
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.timePeriodUnit === 'months'}"
-                                            @click="formData.timePeriodUnit = 'months'; calculateResults()">
-                                            Months
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Contribution Period Input -->
-                            <div class="input-group">
-                                <label>
-                                    Contribution Period:&nbsp;<strong>{{ formattedInvestmentPeriod }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="Duration of active monthly SIP contributions. After this period, no new investments are made but the corpus continues to grow. Set equal to target time to invest throughout.">ℹ️</span>
-                                </label>
-                                <div class="unit-selector-input">
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.investmentPeriodValue" 
-                                        min="1" 
-                                        step="1"
-                                        @input="debouncedCalculate"
-                                    >
-                                    <div class="unit-buttons">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.investmentPeriodUnit === 'years'}"
-                                            @click="formData.investmentPeriodUnit = 'years'; calculateResults()">
-                                            Years
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.investmentPeriodUnit === 'months'}"
-                                            @click="formData.investmentPeriodUnit = 'months'; calculateResults()">
-                                            Months
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Target Amount Input - Show if Money is targeted -->
-                            <div class="input-group" v-if="formData.targetMoney">
-                                <label>
-                                    Target Amount:&nbsp;<strong>₹ {{ formatCurrencyFull(targetAmount) }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="🎯 Target in today's money (Real). The final portfolio value you want to achieve adjusted for inflation">ℹ️</span>
-                                </label>
-                                <div class="unit-selector-input">
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.targetAmountValue" 
-                                        min="0" 
-                                        step="0.1"
-                                        @input="debouncedCalculate"
-                                    >
-                                    <div class="unit-buttons">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.targetAmountUnit === 'crores'}"
-                                            @click="formData.targetAmountUnit = 'crores'; calculateResults()">
-                                            Crores
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.targetAmountUnit === 'lakhs'}"
-                                            @click="formData.targetAmountUnit = 'lakhs'; calculateResults()">
-                                            Lakhs
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.targetAmountUnit === 'thousands'}"
-                                            @click="formData.targetAmountUnit = 'thousands'; calculateResults()">
-                                            Thousands
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Start Month Selection -->
-                            <div class="input-group">
-                                <label>
-                                    Start Month:
-                                    <span class="help-icon help-icon-wide" data-tooltip="Choose when you want to start your SIP. This determines the calendar dates in your investment plan">ℹ️</span>
-                                </label>
-                                <input type="month" v-model="formData.startMonth" @input="debouncedCalculate">
+                        </h4>
+
+                        <!-- Target Mode -->
+                        <div class="input-group">
+                            <label>Target Mode:</label>
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': formData.targetTime}"
+                                    @click="toggleTarget('time')">
+                                    ⏱️ Time
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': formData.targetMoney}"
+                                    @click="toggleTarget('money')">
+                                    💰 Money
+                                </button>
                             </div>
                         </div>
-                        
-                        <!-- Investment Parameters Group -->
-                        <div class="investment-params-group">
-                            <div class="input-group">
-                                <label>
-                                    Current Investment:&nbsp;<strong>₹ {{ formatCurrencyFull(currentInvestment) }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="The lump sum amount you already have invested or plan to invest today">ℹ️</span>
-                                </label>
+
+                        <!-- Target Time Period - shown when Time is selected -->
+                        <div class="input-group" v-if="formData.targetTime">
+                            <label>
+                                Target Time Period:&nbsp;<strong>{{ formattedTimePeriod }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="Total horizon — how long your money stays invested, including any coasting phase after contributions stop. Long-term investing (10+ years) helps ride out market volatility">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.timePeriodValue" 
+                                    min="1" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.timePeriodUnit === 'years'}"
+                                        @click="formData.timePeriodUnit = 'years'; calculateResults()">
+                                        Years
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.timePeriodUnit === 'months'}"
+                                        @click="formData.timePeriodUnit = 'months'; calculateResults()">
+                                        Months
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contribution Period -->
+                        <div class="input-group">
+                            <label>
+                                Contribution Period:&nbsp;<strong>{{ formattedInvestmentPeriod }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="Duration of active monthly SIP contributions. After this period, no new investments are made but the corpus continues to grow. Set equal to target time to invest throughout.">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.investmentPeriodValue" 
+                                    min="1" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.investmentPeriodUnit === 'years'}"
+                                        @click="formData.investmentPeriodUnit = 'years'; calculateResults()">
+                                        Years
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.investmentPeriodUnit === 'months'}"
+                                        @click="formData.investmentPeriodUnit = 'months'; calculateResults()">
+                                        Months
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Target Amount - shown when Money is selected -->
+                        <div class="input-group" v-if="formData.targetMoney">
+                            <label>
+                                Target Amount:&nbsp;<strong>₹ {{ formatCurrencyFull(targetAmount) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="🎯 Target in today's money (Real). The final portfolio value you want to achieve adjusted for inflation">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.targetAmountValue" 
+                                    min="0" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.targetAmountUnit === 'crores'}"
+                                        @click="formData.targetAmountUnit = 'crores'; calculateResults()">
+                                        Crores
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.targetAmountUnit === 'lakhs'}"
+                                        @click="formData.targetAmountUnit = 'lakhs'; calculateResults()">
+                                        Lakhs
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.targetAmountUnit === 'thousands'}"
+                                        @click="formData.targetAmountUnit = 'thousands'; calculateResults()">
+                                        Thousands
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Start Month -->
+                        <div class="input-group">
+                            <label>
+                                Start Month:
+                                <span class="help-icon help-icon-wide" data-tooltip="Choose when you want to start your SIP. This determines the calendar dates in your investment plan">ℹ️</span>
+                            </label>
+                            <input type="month" v-model="formData.startMonth" @input="debouncedCalculate">
+                        </div>
+
+                        <!-- Section: Investment -->
+                        <h4 style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            💰 Investment
+                            <span class="help-icon help-icon-wide" data-tooltip="Your existing corpus and the monthly amount you plan to invest via SIP">ℹ️</span>
+                        </h4>
+
+                        <!-- Current Investment -->
+                        <div class="input-group">
+                            <label>
+                                Current Investment:&nbsp;<strong>₹ {{ formatCurrencyFull(currentInvestment) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="The lump sum amount you already have invested or plan to invest today">ℹ️</span>
+                            </label>
                             <div class="unit-selector-input">
                                 <input 
                                     type="number" 
@@ -191,10 +196,10 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     </button>
                                 </div>
                             </div>
-                            </div>
-                            
-                            <!-- Monthly Investment Input - Only show if not calculating it -->
-                            <div class="input-group" v-if="!isBothTargetsMode">
+                        </div>
+
+                        <!-- Monthly Investment - hidden in Both mode (it becomes an output) -->
+                        <div class="input-group" v-if="!isBothTargetsMode">
                             <label>
                                 Monthly Investment:&nbsp;<strong>₹ {{ formatCurrencyFull(monthlyInvestment) }}</strong>
                                 <span class="help-icon help-icon-wide" data-tooltip="The fixed amount you plan to invest every month through SIP">ℹ️</span>
@@ -228,9 +233,15 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     </button>
                                 </div>
                             </div>
-                            </div>
-                            
-                            <div class="input-group-row">
+                        </div>
+
+                        <!-- Section: Rates -->
+                        <h4 style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            📊 Rates
+                            <span class="help-icon help-icon-wide" data-tooltip="Growth, step-up, inflation, and tax rates used in the projection">ℹ️</span>
+                        </h4>
+
+                        <div class="input-group-row">
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Expected Growth:&nbsp;<strong>{{ formData.cagr }}%</strong>
@@ -245,7 +256,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     @input="debouncedCalculate"
                                 >
                             </div>
-                            
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Yearly Hike:&nbsp;<strong>{{ formData.yearlyHike }}%</strong>
@@ -260,9 +270,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     @input="debouncedCalculate"
                                 >
                             </div>
-                            </div>
-                            
-                            <div class="input-group-row">
+                        </div>
+
+                        <div class="input-group-row">
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Yearly Inflation:&nbsp;<strong>{{ formData.inflationRate }}%</strong>
@@ -277,7 +287,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     @input="debouncedCalculate"
                                 >
                             </div>
-                            
                             <div class="input-group-col" style="flex: 1;">
                                 <label>
                                     Exit Tax:&nbsp;<strong>{{ formData.taxRate }}%</strong>
@@ -292,9 +301,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     @input="debouncedCalculate"
                                 >
                             </div>
-                            </div>
                         </div>
-                        
+
                         <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
                     </div>
                     
