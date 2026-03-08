@@ -246,3 +246,4 @@ Toggle **Post Tax** to see after-tax values across all views.
 
 ### 2026-03-08
 - **Contribution Period**: New field to set how long monthly SIP contributions are made, independent of the target horizon. After the contribution period ends, the corpus continues to compound without new investments. Works across all three goal modes (Time, Money, Time+Money). Auto-syncs to Target Time Period by default and cannot exceed it.
+- **Input panel redesign**: Inputs are now organised into three clearly labelled sections — 🎯 Goal, 💰 Investment, and 📊 Rates — replacing the previous unlabelled div-based groupings.
