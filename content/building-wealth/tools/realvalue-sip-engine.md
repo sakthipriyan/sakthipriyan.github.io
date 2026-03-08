@@ -17,7 +17,7 @@ wealth_tags:
 
 ## About RealValue SIP Engine  
 
-> **RealValue SIP Engine** helps you plan **how much to invest, for how long and with what step-up**, while clearly showing the **post-inflation, post-tax outcome**.
+> **RealValue SIP Engine** helps you plan **how much to invest, for how long, with what step-up, and for how many years to contribute**, while clearly showing the **post-inflation, post-tax outcome**.
 
 
 The **RealValue SIP Engine** is not just another SIP calculator — it is a **goal-driven, real-world investment engine** built for serious Indian investors. Unlike traditional SIP calculators that show inflated future numbers, RealValue focuses on **what your money is actually worth** after **inflation and taxes**.
@@ -50,9 +50,9 @@ Each use case includes pre-configured scenarios you can explore with a single cl
 
 |Target Mode|What does it answer?|
 |-|-|
-| **Time**  | “If I invest for 10 years, how much will my portfolio be worth in real terms?”|
-| **Money** | “How long I need to reach ₹5 Cr for starting SIP of ₹50k?” |
-| **Time & Money** | “How much should I invest monthly to reach ₹5 Cr in 15 years?”|
+| **Time**  | "If I invest for 20 years (contributing for 10), how much will my portfolio be worth in real terms?"|
+| **Money** | "How long to reach ₹5 Cr with a ₹50k SIP contributed for 10 years?" |
+| **Time & Money** | "How much should I invest monthly (for 10 years) to reach ₹5 Cr in 20 years?"|
 
 ### 🔹 Multi-Dimensional Investment Engine
 
@@ -62,6 +62,7 @@ It dynamically combines multiple dimensions:
 - **SIP**, **Lumpsum**, or **SIP + Lumpsum**
 - Target **Time**, Target **Money**, or **Both**
 - SIP **Step-Up** (included)
+- **Contribution Period** shorter than target horizon (invest for N years, let corpus grow for M more)
 
 One RealValue SIP Engine replaces 14 SIP/Lumpsum Calculators,
 
@@ -85,6 +86,7 @@ One RealValue SIP Engine replaces 14 SIP/Lumpsum Calculators,
 - Inflation-adjusted **real value** results  
 - **Exit tax** applied at the end  
 - **Annual salary hike** & SIP step-up support  
+- **Contribution Period** separate from target horizon — stop investing early, let corpus grow  
 - Month-wise **contribution and growth tracking**
 
 ### Why RealValue SIP Engine?
@@ -156,10 +158,18 @@ Toggle between three modes
 |**Target by Money**| Calculate time needed to reach a target amount|
 |**Target by Both**| Calculate required monthly SIP to reach target amount in given time|
 
-#### Time Period
-- **Time Period Value**: Duration for investment
+#### Target Time Period
+- **Time Period Value**: The total horizon — how long your money stays invested (including the coasting phase)
 - **Unit**: Choose Years or Months
 - Used in "Time" and "Both" target modes
+
+#### Contribution Period
+- **Contribution Period Value**: How long you actively make monthly SIP contributions
+- **Unit**: Choose Years or Months
+- Must be ≤ Target Time Period; auto-syncs when Target Time Period changes
+- After the contribution period ends, no new investments are made — the accumulated corpus continues compounding until the target time
+- Set equal to Target Time Period to invest throughout the entire horizon (default behaviour)
+- **Example**: Target Time = 20 years, Contribution Period = 10 years → invest actively for 10 years, then let the corpus grow for another 10 years
 
 #### Target Amount
 - **Target Amount Value**: Your financial goal amount
@@ -228,3 +238,12 @@ Toggle **Post Tax** to see after-tax values across all views.
 5. **Start Month**: Use actual start month for accurate contribution schedules
 6. **Conservative CAGR**: Use 10-11% for equity, not 15-18%, for realistic planning
 7. **Inflation Buffer**: Use 6-7% inflation for India, not 4-5%, for safety margin
+8. **Contribution Period**: Model an early retirement or career break by setting a shorter contribution period — see how your corpus coasts to the goal without further SIPs
+
+---
+
+## Changelog
+
+### 2026-03-08
+- **Contribution Period**: New field to set how long monthly SIP contributions are made, independent of the target horizon. After the contribution period ends, the corpus continues to compound without new investments. Works across all three goal modes (Time, Money, Time+Money). Auto-syncs to Target Time Period by default and cannot exceed it.
+- **Input panel redesign**: Inputs are now organised into three clearly labelled sections — 🎯 Goal, 💰 Investment, and 📊 Rates — replacing the previous unlabelled div-based groupings.
