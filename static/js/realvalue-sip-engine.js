@@ -967,12 +967,19 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
             planViewMode() {
                 // displayedPlan watcher will handle chart update
             },
-            numberOfYears(newVal) {
-                // When Target Time Period changes, sync Contribution Period to match
-                if (this.formData.targetTime) {
+            numberOfYears(newVal, oldVal) {
+                if (!this.formData.targetTime) return;
+                const contribYears = this.numberOfInvestmentYears;
+                if (contribYears > newVal) {
+                    // Contribution period exceeds new target — clamp it down
+                    this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                    this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                } else if (Math.abs(contribYears - oldVal) < 0.001) {
+                    // Contribution period was equal to the old target — user hadn't customized it, keep in sync
                     this.formData.investmentPeriodValue = this.formData.timePeriodValue;
                     this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
                 }
+                // Otherwise contribution period is intentionally shorter — leave it untouched
             }
             // Note: applyPostTax watcher not needed - toggling it triggers displayedPlan recomputation
             // which in turn triggers the chart update via the displayedPlan watcher
