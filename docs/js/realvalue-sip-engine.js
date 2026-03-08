@@ -77,6 +77,37 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 </div>
                             </div>
                             
+                            <!-- Contribution Period Input -->
+                            <div class="input-group">
+                                <label>
+                                    Contribution Period:&nbsp;<strong>{{ formattedInvestmentPeriod }}</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Duration of active monthly SIP contributions. After this period, no new investments are made but the corpus continues to grow. Set equal to target time to invest throughout.">‚ÑπÔ∏è</span>
+                                </label>
+                                <div class="unit-selector-input">
+                                    <input 
+                                        type="number" 
+                                        v-model.number="formData.investmentPeriodValue" 
+                                        min="1" 
+                                        step="1"
+                                        @input="debouncedCalculate"
+                                    >
+                                    <div class="unit-buttons">
+                                        <button 
+                                            type="button"
+                                            :class="{'active': formData.investmentPeriodUnit === 'years'}"
+                                            @click="formData.investmentPeriodUnit = 'years'; calculateResults()">
+                                            Years
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            :class="{'active': formData.investmentPeriodUnit === 'months'}"
+                                            @click="formData.investmentPeriodUnit = 'months'; calculateResults()">
+                                            Months
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <!-- Target Amount Input - Show if Money is targeted -->
                             <div class="input-group" v-if="formData.targetMoney">
                                 <label>
@@ -585,6 +616,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     taxRate: 15,
                     timePeriodValue: 25,
                     timePeriodUnit: 'years',
+                    investmentPeriodValue: 25,
+                    investmentPeriodUnit: 'years',
                     targetAmountValue: 50,
                     targetAmountUnit: 'lakhs',
                     targetTime: true,
@@ -654,6 +687,10 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 // Convert to years (supporting fractional values)
                 return timePeriodUnit === 'months' ? timePeriodValue / 12 : timePeriodValue;
             },
+            numberOfInvestmentYears() {
+                const { investmentPeriodValue, investmentPeriodUnit } = this.formData;
+                return investmentPeriodUnit === 'months' ? investmentPeriodValue / 12 : investmentPeriodValue;
+            },
             formattedTimePeriod() {
                 const { timePeriodValue, timePeriodUnit } = this.formData;
                 
@@ -663,6 +700,25 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 } else {
                     // If months, convert to Years and Months format
                     const totalMonths = Math.floor(timePeriodValue);
+                    const years = Math.floor(totalMonths / 12);
+                    const months = totalMonths % 12;
+                    
+                    if (years === 0) {
+                        return `${months} ${months === 1 ? 'Month' : 'Months'}`;
+                    } else if (months === 0) {
+                        return `${years} ${years === 1 ? 'Year' : 'Years'}`;
+                    } else {
+                        return `${years} ${years === 1 ? 'Year' : 'Years'} ${months} ${months === 1 ? 'Month' : 'Months'}`;
+                    }
+                }
+            },
+            formattedInvestmentPeriod() {
+                const { investmentPeriodValue, investmentPeriodUnit } = this.formData;
+                
+                if (investmentPeriodUnit === 'years') {
+                    return `${investmentPeriodValue} ${investmentPeriodValue === 1 ? 'Year' : 'Years'}`;
+                } else {
+                    const totalMonths = Math.floor(investmentPeriodValue);
                     const years = Math.floor(totalMonths / 12);
                     const months = totalMonths % 12;
                     
@@ -800,7 +856,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         yearlyHike: this.formData.yearlyHike,
                         inflationRate: this.formData.inflationRate,
                         taxRate: this.formData.taxRate,
-                        startMonth: this.formData.startMonth
+                        startMonth: this.formData.startMonth,
+                        investmentPeriod: {
+                            value: this.formData.investmentPeriodValue,
+                            unit: this.formData.investmentPeriodUnit
+                        }
                     },
                     output: {
                         startingMonthlyInvestment: this.results.requiredMonthlyInvestment || null,
@@ -906,6 +966,20 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
             },
             planViewMode() {
                 // displayedPlan watcher will handle chart update
+            },
+            numberOfYears(newVal, oldVal) {
+                if (!this.formData.targetTime) return;
+                const contribYears = this.numberOfInvestmentYears;
+                if (contribYears > newVal) {
+                    // Contribution period exceeds new target ‚Äî clamp it down
+                    this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                    this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                } else if (Math.abs(contribYears - oldVal) < 0.001) {
+                    // Contribution period was equal to the old target ‚Äî user hadn't customized it, keep in sync
+                    this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                    this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                }
+                // Otherwise contribution period is intentionally shorter ‚Äî leave it untouched
             }
             // Note: applyPostTax watcher not needed - toggling it triggers displayedPlan recomputation
             // which in turn triggers the chart update via the displayedPlan watcher
@@ -980,6 +1054,10 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 // Tax rate (t)
                 url += `t${f.taxRate}`;
                 
+                // Investment period (p)
+                const pUnit = f.investmentPeriodUnit === 'years' ? 'y' : 'm';
+                url += `p${f.investmentPeriodValue}${pUnit}`;
+                
                 return url;
             },
             
@@ -1016,7 +1094,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         }
                     } else {
                         // Fields with unit suffixes: d (time), a (amount), c (current), m (monthly)
-                        const hasUnitSuffix = ['d', 'a', 'c', 'm'].includes(prefix);
+                        const hasUnitSuffix = ['d', 'a', 'c', 'm', 'p'].includes(prefix);
                         
                         // For other prefixes, extract value
                         while (i < hash.length) {
@@ -1024,7 +1102,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             const prevChar = value.slice(-1);
                             
                             // If current char is a potential prefix
-                            if (/[ofdacmghit]/.test(char)) {
+                            if (/[ofdacmghitp]/.test(char)) {
                                 // If this field can have unit suffixes AND previous char is a digit,
                                 // then this might be a unit suffix, continue
                                 if (hasUnitSuffix && /\d/.test(prevChar)) {
@@ -1104,6 +1182,12 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         case 't': // Tax rate
                             state.taxRate = parseFloat(value);
                             break;
+                        case 'p': // Investment period
+                            const invUnit = value.slice(-1);
+                            const invValue = parseFloat(value.slice(0, -1));
+                            state.investmentPeriodValue = invValue;
+                            state.investmentPeriodUnit = invUnit === 'y' ? 'years' : 'months';
+                            break;
                     }
                 }
                 
@@ -1119,6 +1203,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 const state = this.decodeState(hash);
                 if (state) {
                     console.log('üìù Before Object.assign, formData.targetTime:', this.formData.targetTime, 'formData.targetMoney:', this.formData.targetMoney);
+                    // If contribution period not in URL and Time mode is active, default it to target time period
+                    if (state.investmentPeriodValue === undefined && state.targetTime !== false && (state.targetTime || this.formData.targetTime)) {
+                        state.investmentPeriodValue = state.timePeriodValue ?? this.formData.timePeriodValue;
+                        state.investmentPeriodUnit = state.timePeriodUnit ?? this.formData.timePeriodUnit;
+                    }
                     Object.assign(this.formData, state);
                     console.log('‚úÖ After Object.assign, formData.targetTime:', this.formData.targetTime, 'formData.targetMoney:', this.formData.targetMoney);
                     console.log('üéØ isBothTargetsMode computed:', this.isBothTargetsMode);
@@ -1176,6 +1265,16 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
 
             calculateResults() {
                 this.calculating = true;
+                
+                // Clamp contribution period to target time period in Time modes
+                if (this.formData.targetTime) {
+                    const targetMonths = Math.ceil(this.numberOfYears * 12);
+                    const contribMonths = Math.ceil(this.numberOfInvestmentYears * 12);
+                    if (contribMonths > targetMonths) {
+                        this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                        this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                    }
+                }
                 
                 if (this.isBothTargetsMode) {
                     this.calculateMonthlyInvestment();
@@ -1385,10 +1484,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 const numberOfYears = this.numberOfYears;
                 const currentInvestment = this.currentInvestment;
                 const monthlyInvestment = this.monthlyInvestment;
+                const investmentMonths = Math.ceil(this.numberOfInvestmentYears * 12);
 
                 // Use simulateSIP for calculations
                 const startingMonthly = monthlyInvestment;
                 const monthlyInvestmentFn = (year, month) => {
+                    const currentMonthIndex = (year - 1) * 12 + (month - 1);
+                    if (currentMonthIndex >= investmentMonths) return 0;
                     const hikeMultiplier = Math.pow(1 + yearlyHike / 100, year - 1);
                     return startingMonthly * hikeMultiplier;
                 };
@@ -1427,10 +1529,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 const currentInvestment = this.currentInvestment;
                 const monthlyInvestment = this.monthlyInvestment;
                 const targetAmount = this.targetAmount;
+                const investmentMonths = Math.ceil(this.numberOfInvestmentYears * 12);
 
                 // Build monthly investment function with hike
                 const startingMonthly = monthlyInvestment;
                 const monthlyInvestmentFn = (yr, month) => {
+                    const currentMonthIndex = (yr - 1) * 12 + (month - 1);
+                    if (currentMonthIndex >= investmentMonths) return 0;
                     const hikeMultiplier = Math.pow(1 + yearlyHike / 100, yr - 1);
                     return startingMonthly * hikeMultiplier;
                 };
@@ -1500,6 +1605,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 const numberOfYears = this.numberOfYears;
                 const currentInvestment = this.currentInvestment;
                 const targetAmount = this.targetAmount;
+                const investmentMonths = Math.ceil(this.numberOfInvestmentYears * 12);
                 
                 // First check if current investment alone already exceeds target
                 const checkZeroSIP = this.simulateSIP({
@@ -1587,6 +1693,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     // Use simulateSIP with test monthly amount
                     const startingAmount = requiredMonthly;
                     const testFn = (year, month) => {
+                        const currentMonthIndex = (year - 1) * 12 + (month - 1);
+                        if (currentMonthIndex >= investmentMonths) return 0;
                         const hikeMultiplier = Math.pow(1 + yearlyHike / 100, year - 1);
                         return startingAmount * hikeMultiplier;
                     };
@@ -1612,6 +1720,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                 // Final simulation with found monthly investment
                 const startingAmount = requiredMonthly;
                 const finalFn = (year, month) => {
+                    const currentMonthIndex = (year - 1) * 12 + (month - 1);
+                    if (currentMonthIndex >= investmentMonths) return 0;
                     const hikeMultiplier = Math.pow(1 + yearlyHike / 100, year - 1);
                     return startingAmount * hikeMultiplier;
                 };
