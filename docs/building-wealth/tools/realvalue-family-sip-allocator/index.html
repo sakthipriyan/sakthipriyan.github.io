@@ -352,6 +352,10 @@ Yes. Export as JSON, import next month.</p>
 </ol>
 <hr>
 <h2 id="changelog">Changelog</h2>
+<h3 id="2026-03-09">2026-03-09</h3>
+<ul>
+<li><strong>Chart re-render fix</strong>: After importing data and adding a new asset class causing the total target % to become non-100, fixing the percentages did not re-render the allocation and drift charts. Root cause: when validation fails, the chart DOM containers are removed (via <code>v-if</code>), but stale ECharts instances were retained. On re-validation, <code>echarts.init()</code> was skipped and charts were bound to ghost elements. Fix: dispose and null both chart instances whenever validation fails, so they are cleanly re-initialized when valid data is entered.</li>
+</ul>
 <h3 id="2026-03-02">2026-03-02</h3>
 <ul>
 <li><strong>Rounding gap fix</strong>: Earlier, up to one round-off amount (e.g. ₹5,000 if round-off is set to ₹5K) could be left unallocated due to rounding across multiple assets. Now, the full budget is always utilised.</li>
