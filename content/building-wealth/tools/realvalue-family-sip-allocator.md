@@ -154,6 +154,9 @@ Yes. Export as JSON, import next month.
 
 ## Changelog
 
+### 2026-03-09
+- **Chart re-render fix**: After importing data and adding a new asset class causing the total target % to become non-100, fixing the percentages did not re-render the allocation and drift charts. Root cause: when validation fails, the chart DOM containers are removed (via `v-if`), but stale ECharts instances were retained. On re-validation, `echarts.init()` was skipped and charts were bound to ghost elements. Fix: dispose and null both chart instances whenever validation fails, so they are cleanly re-initialized when valid data is entered.
+
 ### 2026-03-02
 - **Rounding gap fix**: Earlier, up to one round-off amount (e.g. ₹5,000 if round-off is set to ₹5K) could be left unallocated due to rounding across multiple assets. Now, the full budget is always utilised.
 - **Drift totals**: Earlier, the total drift was calculated as the sum of all deviations (both over and under target). Now, only assets that are *above* their target (overweight) are summed, giving a clearer picture of how much the portfolio is out of balance.

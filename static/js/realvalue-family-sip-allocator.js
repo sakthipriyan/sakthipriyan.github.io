@@ -897,6 +897,17 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
             },
             calculate() {
                 if (!this.validate()) {
+                    // Dispose chart instances — the v-if on the chart section will destroy
+                    // their DOM containers, so stale references must be cleared to allow
+                    // fresh initialization when results become valid again.
+                    if (this.chart) {
+                        this.chart.dispose();
+                        this.chart = null;
+                    }
+                    if (this.driftChart) {
+                        this.driftChart.dispose();
+                        this.driftChart = null;
+                    }
                     this.results = {
                         investorAllocations: [],
                         summary: [],
