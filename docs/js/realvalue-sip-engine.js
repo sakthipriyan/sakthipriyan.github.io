@@ -309,11 +309,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     <!-- Right Column: Output Results and Chart -->
                     <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
-                            <!-- Share and JSON Buttons -->
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem;">
-                                <p style="margin: 0; font-size: 0.85rem; color: #666; flex: 1;">
-                                    Share your investment plan via URL or copy complete input/output data as JSON.
-                                </p>
+                            <div v-if="isBothTargetsMode || results.timeRequired" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem;">
+                                <h3 style="margin: 0;">ðŸŽ¯ Target Results</h3>
                                 <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
                                     <button 
                                         type="button" 
@@ -333,8 +330,6 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                     </button>
                                 </div>
                             </div>
-                            
-                            <h3 v-if="isBothTargetsMode || results.timeRequired" style="margin-top: 0;">ðŸŽ¯ Target Results</h3>
                             <table class="summary-table" v-if="isBothTargetsMode || results.timeRequired">
                                 <tbody>
                                     <tr v-if="isBothTargetsMode && results.requiredMonthlyInvestment !== null && results.requiredMonthlyInvestment !== undefined">
@@ -348,7 +343,27 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 </tbody>
                             </table>
                             
-                            <h3 style="margin-top: 0; margin-bottom: 0.5rem;">ðŸ“Š Investment Growth Analysis</h3>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem; margin-top: 1rem;">
+                                <h3 style="margin: 0;">ðŸ“Š Investment Analysis</h3>
+                                <div v-if="!(isBothTargetsMode || results.timeRequired)" style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="shareCalculation"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ shareButtonText }}
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="copyJSON"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ copyButtonText }}
+                                    </button>
+                                </div>
+                            </div>
                             <table class="summary-table">
                                 <thead>
                                     <tr>
@@ -392,6 +407,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                     </tr>
                                 </tbody>
                             </table>
+                            <div id="sip-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
                             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Values</h3>
                             <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
                                 <li><strong>Nominal:</strong> Future value without adjusting for inflation.</li>
@@ -1530,6 +1546,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 // Watchers will handle chart rendering automatically
                 this.calculating = false;
+                this.$nextTick(() => { this.renderBreakdownChart(); });
             },
             
             calculateByTargetAmount() {
@@ -1606,6 +1623,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 // Watchers will handle chart rendering automatically
                 this.calculating = false;
+                this.$nextTick(() => { this.renderBreakdownChart(); });
             },
 
             calculateMonthlyInvestment() {
@@ -1686,6 +1704,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     
                     // Watchers will handle chart rendering automatically
                     this.calculating = false;
+                    this.$nextTick(() => { this.renderBreakdownChart(); });
                     return;
                 }
                 
@@ -1761,6 +1780,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 // Watchers will handle chart rendering automatically
                 this.calculating = false;
+                this.$nextTick(() => { this.renderBreakdownChart(); });
             },
 
             renderChart() {
@@ -2017,6 +2037,101 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                 this.contributionChart.setOption(option, rebuildCategories);
             },
 
+            renderBreakdownChart() {
+                if (!this.results.calculated) return;
+
+                const chartDom = document.getElementById('sip-breakdown-chart');
+                if (!chartDom) return;
+
+                if (!this.breakdownChart) {
+                    this.breakdownChart = echarts.init(chartDom);
+
+                    if (!this.breakdownResizeHandler) {
+                        this.breakdownResizeHandler = () => this.breakdownChart?.resize();
+                        window.addEventListener('resize', this.breakdownResizeHandler);
+                    }
+                }
+
+                const r = this.results;
+                const taxRate = this.formData.taxRate / 100;
+                const nominalGrowth = (r.expectedValue - r.totalInvestment) * (1 - taxRate);
+                const nominalTax   = (r.expectedValue - r.totalInvestment) * taxRate;
+                const realGrowth   = r.postTaxRealValue - r.realInvestment;
+                const realTax      = r.inflationAdjustedValue - r.postTaxRealValue;
+
+                const fmt = v => {
+                    const n = Math.round(v);
+                    if (n >= 10000000) return 'â‚¹' + (n / 10000000).toFixed(2) + ' Cr';
+                    if (n >= 100000)   return 'â‚¹' + (n / 100000).toFixed(2) + ' L';
+                    if (n >= 1000)     return 'â‚¹' + (n / 1000).toFixed(2) + ' K';
+                    return 'â‚¹' + n.toLocaleString('en-IN');
+                };
+
+                const labelMap = {
+                    'Nominal|Invested':              'Nominal Invested',
+                    'Nominal|Growth':                'Nominal Net Growth',
+                    'Nominal|Tax':                   'Nominal Tax',
+                    'Real (Inflation Adjusted)|Invested': 'Real Invested',
+                    'Real (Inflation Adjusted)|Growth':   'Real Net Growth',
+                    'Real (Inflation Adjusted)|Tax':      'Real Tax'
+                };
+
+                this.breakdownChart.setOption({
+                    toolbox: {
+                        feature: { saveAsImage: { title: 'Save as Image' } }
+                    },
+                    tooltip: {
+                        formatter: function(p) {
+                            const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                            return p.marker + '<strong>' + label + '</strong><br>' +
+                                   fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                        }
+                    },
+                    legend: { bottom: 0 },
+                    series: [
+                        {
+                            name: 'Nominal',
+                            type: 'pie',
+                            radius: ['55%', '80%'],
+                            label: { formatter: function(p) {
+                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                            }},
+                            data: [
+                                { value: Math.round(r.totalInvestment), name: 'Invested', itemStyle: { color: '#FFE082' } },
+                                { value: Math.round(nominalGrowth),     name: 'Growth',   itemStyle: { color: '#81C784' } },
+                                { value: Math.round(nominalTax),        name: 'Tax',      itemStyle: { color: '#fca5a5' } }
+                            ]
+                        },
+                        {
+                            name: 'Real (Inflation Adjusted)',
+                            type: 'pie',
+                            radius: ['30%', '50%'],
+                            label: { formatter: function(p) {
+                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                            }},
+                            data: [
+                                { value: Math.round(r.realInvestment), name: 'Invested', itemStyle: { color: '#FFC107' } },
+                                { value: Math.round(realGrowth),       name: 'Growth',   itemStyle: { color: '#4CAF50' } },
+                                { value: Math.round(realTax),          name: 'Tax',      itemStyle: { color: '#dc2626' } }
+                            ]
+                        }
+                    ],
+                    graphic: {
+                        type: 'text',
+                        left: 'center',
+                        top: 'center',
+                        style: {
+                            text: 'Real vs\nNominal',
+                            textAlign: 'center',
+                            fontSize: 16,
+                            fontWeight: 600
+                        }
+                    }
+                }, true);
+            },
+
             generateContributionTable() {
                 if (!this.monthlyPlan || this.monthlyPlan.length === 0) {
                     this.contributionTable = [];
@@ -2095,11 +2210,17 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
             if (this.contributionChart) {
                 this.contributionChart.dispose();
             }
+            if (this.breakdownChart) {
+                this.breakdownChart.dispose();
+            }
             if (this.resizeHandler) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
             if (this.contributionResizeHandler) {
                 window.removeEventListener('resize', this.contributionResizeHandler);
+            }
+            if (this.breakdownResizeHandler) {
+                window.removeEventListener('resize', this.breakdownResizeHandler);
             }
         }
     }).mount('#sip-calculator-app');
