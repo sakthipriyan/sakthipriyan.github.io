@@ -144,7 +144,7 @@ sakthipriyan.com/building-wealth
 
 <table>
 <tr class="fragment fade-up"><th>Bank</th><th style="text-align:right">Default Markup</th><th style="text-align:right">Negotiated</th></tr>
-<tr class="fragment fade-up"><td>ICICI Bank</td><td style="text-align:right; color:#ef4444;">1.75% (~₹1.75/USD)</td><td style="text-align:right; color:#6b7280;">No response yet 🤐</td></tr>
+<tr class="fragment fade-up"><td>ICICI Bank</td><td style="text-align:right; color:#ef4444;">1.75% (~₹1.60/USD)</td><td style="text-align:right; color:#6b7280;">No response yet 🤐</td></tr>
 <tr class="fragment fade-up"><td>HDFC Bank</td><td style="text-align:right; color:#f59e0b;">1.20% (~₹1.10/USD)</td><td style="text-align:right; color:#10b981;"><strong>₹0.50/USD ✓</strong></td></tr>
 <tr class="fragment fade-up"><td>Bank of Baroda</td><td style="text-align:right; color:#6b7280;">—</td><td style="text-align:right; color:#10b981;"><strong>₹0.10/USD 🎯</strong></td></tr>
 </table>
