@@ -34,10 +34,7 @@ The NASDAQ 100 is an index of the top 100 non-financial companies listed on the 
 
 - Heavy tech concentration and limited sector diversification
 - Top-heavy with a few dominant companies
-
 - Sensitive to global regulatory or backlash events impacting US tech firms
-
-
 
 ## How to Buy NASDAQ 100 from India?
 
