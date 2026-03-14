@@ -19,204 +19,209 @@ window.initializeTool.emiCalculator = function (container, config) {
                 <div class="sip-container">
                     <!-- Left Column: Input Fields -->
                     <div class="sip-inputs">
-                        <h3 style="margin-top: 0;">🎯 Define Your Loan Parameters</h3>
-                        
-                        <!-- Calculation Mode -->
-                        <div class="target-group">
-                            <div class="input-group">
-                                <label>
-                                    Calculation Mode:
-                                    <span class="help-icon help-icon-wide" data-tooltip="Choose what you want to calculate:
+
+                        <!-- Section: Calculation Mode -->
+                        <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            🎯 Calculation Mode
+                            <span class="help-icon help-icon-wide" data-tooltip="Choose what you want to calculate:
 Loan EMI: Calculate monthly EMI required
 Loan Tenure: Calculate time needed to repay
 Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
-                                </label>
-                                <div class="mode-toggle" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
-                                    <button 
-                                        type="button"
-                                        :class="{'active': calculationMode === 'emi'}"
-                                        @click="setCalculationMode('emi')"
-                                        style="font-size: 0.85rem; padding: 0.5rem 0.5rem;">
-                                        Loan EMI
-                                    </button>
-                                    <button 
-                                        type="button"
-                                        :class="{'active': calculationMode === 'time'}"
-                                        @click="setCalculationMode('time')"
-                                        style="font-size: 0.85rem; padding: 0.5rem 0.5rem;">
-                                        Loan Tenure
-                                    </button>
-                                    <button 
-                                        type="button"
-                                        :class="{'active': calculationMode === 'loan'}"
-                                        @click="setCalculationMode('loan')"
-                                        style="font-size: 0.85rem; padding: 0.5rem 0.5rem;">
-                                        Loan Amount
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Time Period Input - Show if not calculating time -->
-                            <div class="input-group" v-if="calculationMode !== 'time'">
-                                <label>
-                                    Loan Tenure:&nbsp;<strong>{{ formattedTimePeriod }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="Duration of your loan. Longer tenure = lower EMI but more total interest">ℹ️</span>
-                                </label>
-                                <div class="unit-selector-input">
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.timePeriodValue" 
-                                        min="1" 
-                                        step="1"
-                                        @input="debouncedCalculate"
-                                    >
-                                    <div class="unit-buttons">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.timePeriodUnit === 'years'}"
-                                            @click="formData.timePeriodUnit = 'years'; calculateResults()">
-                                            Years
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.timePeriodUnit === 'months'}"
-                                            @click="formData.timePeriodUnit = 'months'; calculateResults()">
-                                            Months
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Loan Amount Input - Show if not calculating loan -->
-                            <div class="input-group" v-if="calculationMode !== 'loan'">
-                                <label>
-                                    Loan Amount:&nbsp;<strong>₹ {{ formatCurrencyFull(loanAmount) }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="The total amount you want to borrow">ℹ️</span>
-                                </label>
-                                <div class="unit-selector-input">
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.loanAmountValue" 
-                                        min="0" 
-                                        step="0.1"
-                                        @input="debouncedCalculate"
-                                    >
-                                    <div class="unit-buttons">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.loanAmountUnit === 'crores'}"
-                                            @click="formData.loanAmountUnit = 'crores'; calculateResults()">
-                                            Crores
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.loanAmountUnit === 'lakhs'}"
-                                            @click="formData.loanAmountUnit = 'lakhs'; calculateResults()">
-                                            Lakhs
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.loanAmountUnit === 'thousands'}"
-                                            @click="formData.loanAmountUnit = 'thousands'; calculateResults()">
-                                            Thousands
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- EMI Amount Input - Show if not calculating EMI -->
-                            <div class="input-group" v-if="calculationMode !== 'emi'">
-                                <label>
-                                    Monthly EMI:&nbsp;<strong>₹ {{ formatCurrencyFull(monthlyEMI) }}</strong>
-                                    <span class="help-icon help-icon-wide" data-tooltip="The fixed amount you will pay every month">ℹ️</span>
-                                </label>
-                                <div class="unit-selector-input">
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.emiValue" 
-                                        min="0" 
-                                        step="0.1"
-                                        @input="debouncedCalculate"
-                                    >
-                                    <div class="unit-buttons">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.emiUnit === 'crores'}"
-                                            @click="formData.emiUnit = 'crores'; calculateResults()">
-                                            Crores
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.emiUnit === 'lakhs'}"
-                                            @click="formData.emiUnit = 'lakhs'; calculateResults()">
-                                            Lakhs
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': formData.emiUnit === 'thousands'}"
-                                            @click="formData.emiUnit = 'thousands'; calculateResults()">
-                                            Thousands
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Start Month Selection -->
-                            <div class="input-group">
-                                <label>
-                                    Loan Start Month:
-                                    <span class="help-icon help-icon-wide" data-tooltip="When you plan to start the loan. This determines the calendar dates in your repayment plan">ℹ️</span>
-                                </label>
-                                <input type="month" v-model="formData.startMonth" @input="debouncedCalculate">
+                        </h4>
+
+                        <!-- Calculation Mode toggle -->
+                        <div class="input-group">
+                            <div class="mode-toggle" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+                                <button 
+                                    type="button"
+                                    :class="{'active': calculationMode === 'emi'}"
+                                    @click="setCalculationMode('emi')"
+                                    style="font-size: 0.85rem; padding: 0.5rem 0.5rem;">
+                                    Loan EMI
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': calculationMode === 'time'}"
+                                    @click="setCalculationMode('time')"
+                                    style="font-size: 0.85rem; padding: 0.5rem 0.5rem;">
+                                    Loan Tenure
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': calculationMode === 'loan'}"
+                                    @click="setCalculationMode('loan')"
+                                    style="font-size: 0.85rem; padding: 0.5rem 0.5rem;">
+                                    Loan Amount
+                                </button>
                             </div>
                         </div>
-                        
-                        <!-- Loan Parameters Group -->
-                        <div class="investment-params-group">
-                            <div class="input-group-row">
-                                <div class="input-group-col" style="flex: 1;">
-                                    <label>
-                                        Interest Rate:&nbsp;<strong>{{ formData.interestRate }}%</strong>
-                                        <span class="help-icon help-icon-wide" data-tooltip="Annual interest rate on your loan. Home loans: 8-9%, Personal loans: 10-15%, Car loans: 9-11%">ℹ️</span>
-                                    </label>
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.interestRate" 
-                                        min="0.1" 
-                                        max="30" 
-                                        step="0.1"
-                                        @input="debouncedCalculate"
-                                    >
-                                </div>
-                                
-                                <div class="input-group-col" style="flex: 1;">
-                                    <label>
-                                        Inflation Rate:&nbsp;<strong>{{ formData.inflationRate }}%</strong>
-                                        <span class="help-icon help-icon-wide" data-tooltip="Expected average inflation rate per year. Used to calculate real burden in today's money. Historical India average: 5-7%">ℹ️</span>
-                                    </label>
-                                    <input 
-                                        type="number" 
-                                        v-model.number="formData.inflationRate" 
-                                        min="0" 
-                                        max="15" 
-                                        step="0.5"
-                                        @input="debouncedCalculate"
-                                    >
+
+                        <!-- Section: Loan Details -->
+                        <h4 style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            💰 Loan Details
+                            <span class="help-icon help-icon-wide" data-tooltip="The core loan parameters: how much you borrow, for how long, and your monthly payment">ℹ️</span>
+                        </h4>
+
+                        <!-- Time Period Input - Show if not calculating time -->
+                        <div class="input-group" v-if="calculationMode !== 'time'">
+                            <label>
+                                Loan Tenure:&nbsp;<strong>{{ formattedTimePeriod }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="Duration of your loan. Longer tenure = lower EMI but more total interest">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.timePeriodValue" 
+                                    min="1" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.timePeriodUnit === 'years'}"
+                                        @click="formData.timePeriodUnit = 'years'; calculateResults()">
+                                        Years
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.timePeriodUnit === 'months'}"
+                                        @click="formData.timePeriodUnit = 'months'; calculateResults()">
+                                        Months
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        
+
+                        <!-- Loan Amount Input - Show if not calculating loan -->
+                        <div class="input-group" v-if="calculationMode !== 'loan'">
+                            <label>
+                                Loan Amount:&nbsp;<strong>₹ {{ formatCurrencyFull(loanAmount) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="The total amount you want to borrow">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.loanAmountValue" 
+                                    min="0" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.loanAmountUnit === 'crores'}"
+                                        @click="formData.loanAmountUnit = 'crores'; calculateResults()">
+                                        Crores
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.loanAmountUnit === 'lakhs'}"
+                                        @click="formData.loanAmountUnit = 'lakhs'; calculateResults()">
+                                        Lakhs
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.loanAmountUnit === 'thousands'}"
+                                        @click="formData.loanAmountUnit = 'thousands'; calculateResults()">
+                                        Thousands
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EMI Amount Input - Show if not calculating EMI -->
+                        <div class="input-group" v-if="calculationMode !== 'emi'">
+                            <label>
+                                Monthly EMI:&nbsp;<strong>₹ {{ formatCurrencyFull(monthlyEMI) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="The fixed amount you will pay every month">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.emiValue" 
+                                    min="0" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.emiUnit === 'crores'}"
+                                        @click="formData.emiUnit = 'crores'; calculateResults()">
+                                        Crores
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.emiUnit === 'lakhs'}"
+                                        @click="formData.emiUnit = 'lakhs'; calculateResults()">
+                                        Lakhs
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.emiUnit === 'thousands'}"
+                                        @click="formData.emiUnit = 'thousands'; calculateResults()">
+                                        Thousands
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Start Month Selection -->
+                        <div class="input-group">
+                            <label>
+                                Loan Start Month:
+                                <span class="help-icon help-icon-wide" data-tooltip="When you plan to start the loan. This determines the calendar dates in your repayment plan">ℹ️</span>
+                            </label>
+                            <input type="month" v-model="formData.startMonth" @input="debouncedCalculate">
+                        </div>
+
+                        <!-- Section: Rates -->
+                        <h4 style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            📊 Rates
+                            <span class="help-icon help-icon-wide" data-tooltip="Interest and inflation rates used in the calculation">ℹ️</span>
+                        </h4>
+
+                        <div class="input-group-row">
+                            <div class="input-group-col" style="flex: 1;">
+                                <label>
+                                    Interest Rate:&nbsp;<strong>{{ formData.interestRate }}%</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Annual interest rate on your loan. Home loans: 8-9%, Personal loans: 10-15%, Car loans: 9-11%">ℹ️</span>
+                                </label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.interestRate" 
+                                    min="0.1" 
+                                    max="30" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+
+                            <div class="input-group-col" style="flex: 1;">
+                                <label>
+                                    Inflation Rate:&nbsp;<strong>{{ formData.inflationRate }}%</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Expected average inflation rate per year. Used to calculate real burden in today's money. Historical India average: 5-7%">ℹ️</span>
+                                </label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.inflationRate" 
+                                    min="0" 
+                                    max="15" 
+                                    step="0.5"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                        </div>
+
                         <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
                     </div>
                     
                     <!-- Right Column: Output Results and Chart -->
                     <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
-                            <!-- Share and JSON Buttons -->
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem;">
-                                <p style="margin: 0; font-size: 0.85rem; color: #666; flex: 1;">
-                                    Share your loan plan via URL or copy complete input/output data as JSON.
-                                </p>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem;">
+                                <h3 style="margin: 0;">🎯 Calculated Result</h3>
                                 <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
                                     <button 
                                         type="button" 
@@ -236,9 +241,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                     </button>
                                 </div>
                             </div>
-                            
-                            <h3 v-if="results.calculatedValue !== null || results.timeRequired !== null" style="margin-top: 0;">🎯 Calculated Result</h3>
-                            <table class="summary-table" v-if="results.calculatedValue !== null || results.timeRequired !== null">
+                            <table class="summary-table">
                                 <tbody>
                                     <tr v-if="calculationMode === 'loan'">
                                         <td><strong>Maximum Loan Amount</strong></td>
@@ -259,7 +262,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 </tbody>
                             </table>
                             
-                            <h3 style="margin-top: 0; margin-bottom: 0.5rem;">📊 Loan Cost Analysis</h3>
+                            <h3 style="margin: 1rem 0 0.5rem 0;">📊 Loan Cost Analysis</h3>
                             <table class="summary-table">
                                 <thead>
                                     <tr>
@@ -303,6 +306,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 </tbody>
                             </table>
                             
+                            <div id="emi-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
                             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Values</h3>
                             <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
                                 <li><strong>Nominal:</strong> The actual rupee amounts without adjusting for inflation.</li>
@@ -547,6 +551,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 debounceTimer: null,
                 chart: null,
                 emiPlanChart: null,
+                breakdownChart: null,
                 copyButtonText: '📋 JSON',
                 shareButtonText: '🔗 Share'
             }
@@ -941,6 +946,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     this.$nextTick(() => {
                         this.updateChart();
                         this.renderEMIPlanChart();
+                        this.renderBreakdownChart();
                     });
                 } catch (error) {
                     console.error('Calculation error:', error);
@@ -1323,6 +1329,96 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 return Object.values(yearMap);
             },
             
+            renderBreakdownChart() {
+                if (!this.results.calculated) return;
+
+                const chartDom = document.getElementById('emi-breakdown-chart');
+                if (!chartDom) return;
+
+                if (!this.breakdownChart) {
+                    this.breakdownChart = echarts.init(chartDom);
+
+                    if (!this.breakdownResizeHandler) {
+                        this.breakdownResizeHandler = () => this.breakdownChart?.resize();
+                        window.addEventListener('resize', this.breakdownResizeHandler);
+                    }
+                }
+
+                const r = this.results;
+                const nominalPrincipal = r.nominalLoanAmount;
+                const nominalInterest  = r.totalNominalEMIs - r.nominalLoanAmount;
+                const realPrincipal    = r.realLoanAmount;
+                const realInterest     = r.totalRealEMIs - r.realLoanAmount;
+
+                const fmt = v => {
+                    const n = Math.round(v);
+                    if (n >= 10000000) return '₹' + (n / 10000000).toFixed(2) + ' Cr';
+                    if (n >= 100000)   return '₹' + (n / 100000).toFixed(2) + ' L';
+                    if (n >= 1000)     return '₹' + (n / 1000).toFixed(2) + ' K';
+                    return '₹' + n.toLocaleString('en-IN');
+                };
+
+                const labelMap = {
+                    'Nominal|Principal':              'Nominal Principal',
+                    'Nominal|Interest':               'Nominal Interest',
+                    'Real (Inflation Adjusted)|Principal': 'Real Principal',
+                    'Real (Inflation Adjusted)|Interest':  'Real Interest'
+                };
+
+                this.breakdownChart.setOption({
+                    toolbox: {
+                        feature: { saveAsImage: { title: 'Save as Image' } }
+                    },
+                    tooltip: {
+                        formatter: function(p) {
+                            const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                            return p.marker + '<strong>' + label + '</strong><br>' +
+                                   fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                        }
+                    },
+                    legend: { bottom: 0 },
+                    series: [
+                        {
+                            name: 'Nominal',
+                            type: 'pie',
+                            radius: ['55%', '80%'],
+                            label: { formatter: function(p) {
+                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                            }},
+                            data: [
+                                { value: Math.round(nominalPrincipal), name: 'Principal', itemStyle: { color: '#FFE082' } },
+                                { value: Math.round(nominalInterest),  name: 'Interest',  itemStyle: { color: '#fca5a5' } }
+                            ]
+                        },
+                        {
+                            name: 'Real (Inflation Adjusted)',
+                            type: 'pie',
+                            radius: ['30%', '50%'],
+                            label: { formatter: function(p) {
+                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                            }},
+                            data: [
+                                { value: Math.round(realPrincipal), name: 'Principal', itemStyle: { color: '#FFC107' } },
+                                { value: Math.round(realInterest),  name: 'Interest',  itemStyle: { color: '#dc2626' } }
+                            ]
+                        }
+                    ],
+                    graphic: {
+                        type: 'text',
+                        left: 'center',
+                        top: 'center',
+                        style: {
+                            text: 'Real vs\nNominal',
+                            textAlign: 'center',
+                            fontSize: 16,
+                            fontWeight: 600
+                        }
+                    }
+                });
+            },
+
             renderEMIPlanChart() {
                 if (!this.emiPlanChart) {
                     this.emiPlanChart = echarts.init(document.getElementById('emiPlanChart'));
@@ -1434,6 +1530,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
             this.handleResize = () => {
                 if (this.chart) this.chart.resize();
                 if (this.emiPlanChart) this.emiPlanChart.resize();
+                if (this.breakdownChart) this.breakdownChart.resize();
             };
             window.addEventListener('resize', this.handleResize);
         },
@@ -1451,6 +1548,13 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
             if (this.emiPlanChart) {
                 this.emiPlanChart.dispose();
                 this.emiPlanChart = null;
+            }
+            if (this.breakdownChart) {
+                this.breakdownChart.dispose();
+                this.breakdownChart = null;
+            }
+            if (this.breakdownResizeHandler) {
+                window.removeEventListener('resize', this.breakdownResizeHandler);
             }
             
             // Clear debounce timer
