@@ -866,6 +866,20 @@
     white-space: nowrap;
 }
 
+.summary-table .help-icon-wide::after {
+    white-space: pre-line;
+    width: 350px;
+    max-width: 350px;
+    text-align: left;
+}
+
+.summary-table .help-icon.help-icon-wide::after {
+    white-space: pre-line;
+    width: 350px;
+    max-width: 350px;
+    text-align: left;
+}
+
 /* Multi Asset Allocator Styles */
 .multi-asset-allocator {
     padding: 1rem;
