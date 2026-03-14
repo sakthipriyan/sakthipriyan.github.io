@@ -135,9 +135,15 @@ These ETFs are typically:
 - **Irish domiciled** — 15% US dividend withholding tax instead of 30%
 - Traded on European exchanges (e.g. London Stock Exchange) in USD
 - Available in **accumulating share classes** — dividends reinvested inside the ETF, no payout
+- Often lower TER
+- Regulatory framework designed for cross-border investors
 
 **Dividend flow:**
 US companies → ETF (15% withholding) → reinvested inside ETF → no payout to investor
+
+**No US estate tax exposure** as these are Irish-domiciled funds.
+
+This is why international investors from Europe, Asia, and the Middle East often prefer UCITS ETFs over US-domiciled ETFs.
 
 **Tax and reporting implications**:
 - Capital gains tax applies **only when selling**
@@ -145,7 +151,6 @@ US companies → ETF (15% withholding) → reinvested inside ETF → no payout t
 - Schedule FSI needs to be reported **only when selling the ETFs**
 - No yearly dividend tax drag
 
-**No US estate tax exposure** as these are Irish-domiciled funds.
 
 ## Comparison: Indian Apps vs IBKR
 
@@ -197,18 +202,6 @@ Here is a comparison of the available options (data as on 14 Mar 2026):
 | **ETF Domicile** | Ireland | Ireland | Ireland |
 | **Issuer / Manager** | DWS Group (Xtrackers), Germany | AXA IM, France | UBS Asset Management, Switzerland |
 | **Underlying Index** | NASDAQ 100, USA | NASDAQ 100, USA | NASDAQ 100, USA |
-
-### Why Many Global Investors Prefer UCITS ETFs
-
-UCITS ETFs are widely used by international investors outside the US because they offer several advantages:
-
-• No US estate tax exposure
-• Lower dividend withholding (15% vs 30%)
-• Accumulating share classes available
-• Often lower TER
-• Regulatory framework designed for cross-border investors
-
-This is why investors from Europe, Asia, and the Middle East often prefer UCITS ETFs over US-domiciled ETFs.
 
 ## Step-by-Step Process
 
