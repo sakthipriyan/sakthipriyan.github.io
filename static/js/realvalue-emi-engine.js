@@ -309,8 +309,8 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                             <div id="emi-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
                             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Values</h3>
                             <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
-                                <li><strong>Nominal:</strong> The actual rupee amounts without adjusting for inflation.</li>
-                                <li><strong>Real:</strong> Today's purchasing power after adjusting for inflation.</li>
+                                <li><strong>Nominal:</strong> Actual rupee amounts, unadjusted for inflation.</li>
+                                <li><strong>Real:</strong> Today's purchasing power, adjusted for inflation.</li>
                             </ul>
                             <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
                                 📚 Learn more: <a href="#frequently-asked-questions-faqs" style="color: #0066cc; text-decoration: none;">FAQs</a> | 
