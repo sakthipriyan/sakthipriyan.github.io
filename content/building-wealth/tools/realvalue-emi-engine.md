@@ -181,6 +181,11 @@ The tool shows three key outputs:
 - **Longer Tenure**: Generally reduces real burden but increases total interest
 - **Shorter Tenure**: Higher EMI but less total interest and faster freedom from debt
 
+## Changelog
+
+### 2026-03-14
+- **Input panel redesign & concentric donut chart**: Inputs reorganised into three labelled sections (🎯 Calculation Mode, 💰 Loan Details, 📊 Rates). Added a dual concentric donut chart showing Nominal vs Real Principal/Interest breakdown. Share/JSON buttons aligned inline with the result header.
+
 ## Disclaimer
 
 This is an **educational tool**, not financial advice. 
