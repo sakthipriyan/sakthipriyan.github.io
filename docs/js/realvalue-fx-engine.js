@@ -104,7 +104,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 <div>
                                     <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                                         <span>Interbank Rate:&nbsp;<strong v-if="form.interbankRate > 0">₹{{ parseFloat(form.interbankRate).toFixed(4) }}</strong></span>
-                                        <span class="help-icon help-icon-wide" data-tooltip="Mid-market rate (e.g. from Google or RBI reference rate). Auto-set to Bank Rate − 1.75. You can override it manually.">ℹ️</span>
+                                        <span class="help-icon help-icon-wide" data-tooltip="Mid-market rate (e.g. from Google or RBI reference rate). It auto-follows Bank Rate − 1.75 until you set a custom value.">ℹ️</span>
                                     </label>
                                     <div class="unit-buttons" style="align-items: center;">
                                         <input
@@ -197,14 +197,24 @@ window.initializeTool.fxTracker = function (container, config) {
                     <div class="sip-outputs">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                             <h3 style="margin: 0;">🧾 FX Analysis</h3>
-                            <button
-                                v-if="preview.valid"
-                                type="button"
-                                class="share-button"
-                                @click="shareCalculation"
-                                style="min-width: 110px;">
-                                {{ shareButtonText }}
-                            </button>
+                            <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                                <button
+                                    v-if="preview.valid"
+                                    type="button"
+                                    class="share-button"
+                                    @click="shareCalculation"
+                                    style="min-width: 110px;">
+                                    {{ shareButtonText }}
+                                </button>
+                                <button
+                                    v-if="preview.valid"
+                                    type="button"
+                                    class="share-button"
+                                    @click="copyJSON"
+                                    style="min-width: 110px;">
+                                    {{ copyButtonText }}
+                                </button>
+                            </div>
                         </div>
 
                         <div v-if="preview.valid">
@@ -426,6 +436,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 suppressAutoInterbankSync: false,
                 fxBreakdownChart: null,
                 fxBreakdownResizeHandler: null,
+                copyButtonText: '📋 JSON',
                 shareButtonText: '🔗 Share'
             };
         },
@@ -488,6 +499,39 @@ window.initializeTool.fxTracker = function (container, config) {
                     totalIBCost += t.ibCost || 0;
                 });
                 return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost };
+            },
+            exportJSON() {
+                if (!this.preview.valid) return '';
+
+                const data = {
+                    input: {
+                        amountUnit: this.form.amountUnit,
+                        amount: this.form.amount,
+                        date: this.form.date,
+                        bankRate: this.form.rate,
+                        interbankRate: this.form.interbankRate,
+                        processingFee: this.form.serviceFee,
+                        bank: this.form.bank,
+                        transactionId: this.form.txnId
+                    },
+                    output: {
+                        resultLabel: this.resultLabel,
+                        resultValue: this.preview.result,
+                        usdAmount: this.preview.usdAmount,
+                        inrDebit: this.preview.inrDebit,
+                        grossINR: this.preview.grossINR,
+                        ibCost: this.preview.ibCost,
+                        fxSpread: this.preview.fxSpread,
+                        fxConvGST: this.preview.fxConvGST,
+                        processingFeeGST: this.preview.processingFeeGST,
+                        totalCharges: this.preview.totalCharges,
+                        tcs: this.preview.tcs,
+                        effectiveRate: this.preview.effectiveRate,
+                        transactionCostPct: this.preview.chargesPct
+                    }
+                };
+
+                return JSON.stringify(data, null, 2);
             },
             fyGrossINR() {
                 // Sum of computed grossINR for all stored transactions in the same Indian FY.
@@ -564,15 +608,21 @@ window.initializeTool.fxTracker = function (container, config) {
                 },
                 deep: true
             },
-            'form.rate'(newRate) {
+            'form.rate'(newRate, oldRate) {
                 if (this.suppressAutoInterbankSync) return;
-                this.form.interbankRate = parseFloat((newRate - 1.75).toFixed(2));
+                const currentInterbank = Number(this.form.interbankRate);
+                const prevAuto = Number.isFinite(Number(oldRate)) ? parseFloat((Number(oldRate) - 1.75).toFixed(2)) : null;
+                const followsAuto = prevAuto !== null && Math.abs(currentInterbank - prevAuto) < 0.0001;
+                if (currentInterbank <= 0 || followsAuto) {
+                    this.form.interbankRate = parseFloat((Number(newRate) - 1.75).toFixed(2));
+                }
                 this.debouncedCalculate();
             }
         },
 
         mounted() {
-            this.loadFromStorage();
+            const hasSharedState = !!this.decodeState(window.location.hash.slice(1));
+            this.loadFromStorage(hasSharedState);
             this.loadFromUrl();
             this.calculate();
         },
@@ -931,7 +981,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 };
             },
 
-            loadFromStorage() {
+            loadFromStorage(skipFormPrefs) {
                 try {
                     const saved = localStorage.getItem(FX_STORAGE_KEY);
                     if (saved) {
@@ -941,7 +991,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             this.transactions = parsed.map(t => this.normalizeTxn(t));
                         } else {
                             this.transactions = Array.isArray(parsed.transactions) ? parsed.transactions.map(t => this.normalizeTxn(t)) : [];
-                            if (parsed.formPrefs && typeof parsed.formPrefs === 'object') {
+                            if (!skipFormPrefs && parsed.formPrefs && typeof parsed.formPrefs === 'object') {
                                 this.suppressAutoInterbankSync = true;
                                 this.form = Object.assign({}, this.form, {
                                     amountUnit: parsed.formPrefs.amountUnit || this.form.amountUnit,
@@ -1008,9 +1058,11 @@ window.initializeTool.fxTracker = function (container, config) {
                 if (!hash) return;
                 const state = this.decodeState(hash);
                 if (!state) return;
+                this.suppressAutoInterbankSync = true;
                 Object.keys(state).forEach(k => {
                     if (state[k] !== undefined) this.form[k] = state[k];
                 });
+                this.suppressAutoInterbankSync = false;
             },
 
             async shareCalculation() {
@@ -1024,6 +1076,18 @@ window.initializeTool.fxTracker = function (container, config) {
                     this.shareButtonText = '❌ Failed';
                 }
                 setTimeout(() => { this.shareButtonText = '🔗 Share'; }, 2000);
+            },
+
+            async copyJSON() {
+                const json = this.exportJSON;
+                if (!json) return;
+                try {
+                    await navigator.clipboard.writeText(json);
+                    this.copyButtonText = '✅ Copied!';
+                } catch (err) {
+                    this.copyButtonText = '❌ Failed';
+                }
+                setTimeout(() => { this.copyButtonText = '📋 JSON'; }, 2000);
             },
 
             exportData() {
