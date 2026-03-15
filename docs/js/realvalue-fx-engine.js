@@ -856,48 +856,24 @@ window.initializeTool.fxTracker = function (container, config) {
                 this.ibRateError = '';
                 try {
                     const target = this.form.date; // YYYY-MM-DD
-                    const d2 = target.replace(/-/g, '');
-                    const fromDate = new Date(target);
-                    fromDate.setDate(fromDate.getDate() - 4);
-                    const d1 = fromDate.toISOString().split('T')[0].replace(/-/g, '');
-                    const stooqUrl = `https://stooq.com/q/d/l/?s=usdinr&d1=${d1}&d2=${d2}&i=d`;
-                    const corsProxies = [
-                        u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-                        u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
-                        u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
-                    ];
+                    // Use fawazahmed0/currency-api via jsDelivr CDN — no proxy, no key needed
+                    const apiUrl = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${target}/v1/currencies/usd.json`;
+                    const fallbackUrl = `https://latest.currency-api.pages.dev/v1/currencies/usd.json`;
                     let resp = null;
-                    let lastErr = '';
-                    for (const proxy of corsProxies) {
-                        try {
-                            const r = await fetch(proxy(stooqUrl));
-                            if (r.ok) { resp = r; break; }
-                            lastErr = `HTTP ${r.status}`;
-                        } catch (err) {
-                            lastErr = err.message;
-                        }
+                    try {
+                        const r = await fetch(apiUrl);
+                        if (r.ok) resp = r;
+                    } catch (_) {}
+                    if (!resp) {
+                        const r = await fetch(fallbackUrl);
+                        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                        resp = r;
+                        this.ibRateError = `No data for ${target}; showing latest available rate`;
                     }
-                    if (!resp) throw new Error(lastErr + ' for all proxies');
-                    const text = await resp.text();
-                    const lines = text.trim().split('\n').filter(l => l.trim());
-                    if (lines.length < 2) throw new Error('No data available for this period');
-                    // Find exact date row; fallback to last available row
-                    const dataLines = lines.slice(1); // skip header
-                    const exactRow = dataLines.find(l => l.startsWith(target));
-                    if (exactRow) {
-                        const cols = exactRow.split(',');
-                        const open = parseFloat(cols[1]);
-                        if (isNaN(open) || open <= 0) throw new Error('Invalid rate received');
-                        this.form.interbankRate = open;
-                    } else {
-                        // Use Close of most recent available day
-                        const lastRow = dataLines[dataLines.length - 1];
-                        const cols = lastRow.split(',');
-                        const close = parseFloat(cols[4]);
-                        if (isNaN(close) || close <= 0) throw new Error('Invalid rate received');
-                        this.form.interbankRate = close;
-                        this.ibRateError = `No data for ${target}; using Close from ${cols[0]}`;
-                    }
+                    const json = await resp.json();
+                    const rate = json?.usd?.inr;
+                    if (!rate || isNaN(rate) || rate <= 0) throw new Error('INR rate not found in response');
+                    this.form.interbankRate = parseFloat(rate.toFixed(4));
                     this.debouncedCalculate();
                 } catch (e) {
                     this.ibRateError = 'Could not fetch rate: ' + e.message;
