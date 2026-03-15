@@ -1,6 +1,6 @@
 ---
 title: "RealValue FX Engine"
-date: "2026-03-14"
+date: "2026-03-15"
 draft: "false"
 description: "Track INR to USD conversions with accurate GST and TCS computation, effective-rate analysis, a full transaction log, and a live donut chart of your FX cost breakdown."
 type: "tools"
