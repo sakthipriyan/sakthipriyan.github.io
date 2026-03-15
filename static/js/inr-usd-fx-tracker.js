@@ -293,6 +293,8 @@ window.initializeTool.fxTracker = function (container, config) {
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <div id="fx-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
                         </div>
 
                         <div v-else style="color: #999; padding: 2rem; text-align: center;">
@@ -432,7 +434,9 @@ window.initializeTool.fxTracker = function (container, config) {
                 },
                 transactions: [],
                 debounceTimer: null,
-                suppressAutoInterbankSync: false
+                suppressAutoInterbankSync: false,
+                fxBreakdownChart: null,
+                fxBreakdownResizeHandler: null
             };
         },
 
@@ -527,6 +531,17 @@ window.initializeTool.fxTracker = function (container, config) {
         mounted() {
             this.loadFromStorage();
             this.calculate();
+        },
+
+        beforeUnmount() {
+            if (this.fxBreakdownResizeHandler) {
+                window.removeEventListener('resize', this.fxBreakdownResizeHandler);
+                this.fxBreakdownResizeHandler = null;
+            }
+            if (this.fxBreakdownChart) {
+                this.fxBreakdownChart.dispose();
+                this.fxBreakdownChart = null;
+            }
         },
 
         methods: {
@@ -637,6 +652,7 @@ window.initializeTool.fxTracker = function (container, config) {
                         tcs, tcsDrag,
                         hasSpread: true
                     };
+                    this.$nextTick(() => this.renderFXBreakdownChart());
                     return;
                 }
 
@@ -649,6 +665,99 @@ window.initializeTool.fxTracker = function (container, config) {
                     tcs, tcsDrag,
                     hasSpread: true
                 };
+                this.$nextTick(() => this.renderFXBreakdownChart());
+            },
+
+            renderFXBreakdownChart() {
+                if (!this.preview.valid) return;
+                if (typeof echarts === 'undefined') return;
+
+                const chartDom = document.getElementById('fx-breakdown-chart');
+                if (!chartDom) return;
+
+                if (!this.fxBreakdownChart) {
+                    this.fxBreakdownChart = echarts.init(chartDom);
+                    if (!this.fxBreakdownResizeHandler) {
+                        this.fxBreakdownResizeHandler = () => this.fxBreakdownChart?.resize();
+                        window.addEventListener('resize', this.fxBreakdownResizeHandler);
+                    }
+                }
+
+                const p = this.preview;
+                const data = [
+                    { value: Math.max(0, p.ibCost || 0), name: 'Forex Interbank Cost', itemStyle: { color: '#4CAF50' } },
+                    { value: Math.max(0, (p.fxSpread || 0) + (p.processingFee || 0)), name: 'FX Charges', itemStyle: { color: '#ef4444' } },
+                    { value: Math.max(0, (p.fxConvGST || 0) + (p.processingFeeGST || 0)), name: 'GST', itemStyle: { color: '#b91c1c' } }
+                ];
+                if ((p.tcs || 0) > 0) {
+                    data.push({ value: Math.max(0, p.tcs || 0), name: 'TCS', itemStyle: { color: '#FFC107' } });
+                }
+
+                const filtered = data.filter(d => d.value > 0);
+                const total = filtered.reduce((sum, d) => sum + d.value, 0);
+                const inrSpent = this.form.amountUnit === 'inr' ? (p.inrDebit || 0) : (p.result || 0);
+                const usdBought = this.form.amountUnit === 'inr' ? (p.result || 0) : (p.usdAmount || 0);
+                const inrSpentText = '₹' + Number(inrSpent).toLocaleString('en-IN', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                const usdBoughtText = '$' + Number(usdBought).toLocaleString('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+
+                const fmt = (v) => '₹' + Number(v).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                this.fxBreakdownChart.setOption({
+                    toolbox: {
+                        feature: { saveAsImage: { title: 'Save as Image' } }
+                    },
+                    tooltip: {
+                        formatter: function (x) {
+                            return x.marker + '<strong>' + x.name + '</strong><br>' + fmt(x.value) + ' (' + x.percent.toFixed(2) + '%)';
+                        }
+                    },
+                    legend: { bottom: 0 },
+                    series: [
+                        {
+                            name: 'FX Cost Composition',
+                            type: 'pie',
+                            radius: ['50%', '74%'],
+                            avoidLabelOverlap: true,
+                            label: {
+                                formatter: function (x) {
+                                    return x.name + '\n' + x.percent.toFixed(2) + '%';
+                                }
+                            },
+                            data: filtered
+                        }
+                    ],
+                    graphic: {
+                        type: 'text',
+                        left: 'center',
+                        top: 'middle',
+                        style: {
+                            text: '{value|' + inrSpentText + '}\n{mid|spent for}\n{value|' + usdBoughtText + '}',
+                            rich: {
+                                value: {
+                                    fontSize: 15,
+                                    fontWeight: 700,
+                                    fill: '#1f2937',
+                                    lineHeight: 18
+                                },
+                                mid: {
+                                    fontSize: 10,
+                                    fontWeight: 600,
+                                    fill: '#64748b',
+                                    lineHeight: 14
+                                }
+                            },
+                            textAlign: 'center',
+                            textVerticalAlign: 'middle',
+                            lineHeight: 15
+                        }
+                    }
+                });
             },
 
             addTransaction() {
