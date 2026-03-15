@@ -1,4 +1,4 @@
-// INR USD FX Tracker (Vue.js)
+// RealValue FX Engine (Vue.js)
 window.initializeTool = window.initializeTool || {};
 
 const FX_STORAGE_KEY = 'inr-usd-fx-tracker-v1';
@@ -179,42 +179,35 @@ window.initializeTool.fxTracker = function (container, config) {
                                 style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: monospace;">
                         </div>
 
-                        <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.75rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: 1.75rem;">
+                            <p style="font-size: 0.85em; color: #999; margin: 0; flex: 1;">
+                                💡 Transactions are saved in your browser automatically. Use Import/Export to back up or transfer data.
+                            </p>
                             <button
                                 @click="addTransaction"
                                 class="share-button"
+                                style="flex-shrink: 0;"
                                 :disabled="!isFormValid || !preview.valid">
                                 ➕ Transaction
                             </button>
                         </div>
-                        <p style="font-size: 0.85em; color: #999; margin-top: 0.85rem;">
-                            💡 Transactions are saved in your browser automatically. Use Import/Export to back up or transfer data.
-                        </p>
                     </div>
 
                     <!-- Right Column: FX Analysis -->
                     <div class="sip-outputs">
-                        <h3 style="margin-top: 0;">📈 Summary</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                            <h3 style="margin: 0;">🧾 FX Analysis</h3>
+                            <button
+                                v-if="preview.valid"
+                                type="button"
+                                class="share-button"
+                                @click="shareCalculation"
+                                style="min-width: 110px;">
+                                {{ shareButtonText }}
+                            </button>
+                        </div>
 
                         <div v-if="preview.valid">
-                            <table class="summary-table" style="margin-bottom: 1rem;">
-                                <tbody>
-                                    <tr>
-                                        <td style="display: flex; justify-content: space-between; align-items: center;"><strong>Effective Rate</strong> <span class="help-icon help-icon-wide" data-tooltip="Actual cost per USD after all charges including spread.">ℹ️</span></td>
-                                        <td class="highlight"><span style="cursor: default; opacity: 1; font-size: 1.2em;">₹{{ preview.effectiveRate.toFixed(2) }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="display: flex; justify-content: space-between; align-items: center;"><strong>Transaction Cost</strong> <span class="help-icon help-icon-wide" data-tooltip="All charges (markup + GST + processing fee) as a percentage of total INR spent.">ℹ️</span></td>
-                                        <td class="highlight"><span style="cursor: default; opacity: 1; font-size: 1.2em;">{{ preview.chargesPct.toFixed(2) }}%</span></td>
-                                    </tr>
-                                    <tr v-if="preview.tcs > 0">
-                                        <td style="display: flex; justify-content: space-between; align-items: center;"><strong>TCS Drag</strong> <span class="help-icon help-icon-wide" data-tooltip="TCS as a percentage of total permanent charges (markup + GST). Since TCS is refundable, this shows the temporary cash-flow burden it adds on top of your real costs.">ℹ️</span></td>
-                                        <td class="highlight"><span style="cursor: default; opacity: 1; font-size: 1.2em;">{{ preview.tcsDrag.toFixed(2) }}%</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <h3 style="margin: 0 0 0.5rem 0;">🧾 FX Analysis</h3>
                             <table class="summary-table">
                                 <tbody>
                                     <tr style="background: #fffde7;">
@@ -224,37 +217,41 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </td>
                                     </tr>
 
-                                    <!-- Forex Interbank Cost + Total Charges -->
+                                    <!-- FX Interbank Cost + Total Charges -->
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>💱 Forex Interbank Cost</span>
-                                            <span class="help-icon help-icon-wide" data-tooltip="What you'd pay at the mid-market (interbank) rate: USD amount × Interbank Rate. This is the baseline cost with no bank charges.">ℹ️</span>
+                                            <span>FX Interbank Cost</span>
+                                            <span class="help-icon help-icon-wide" data-tooltip="What you'd pay at the mid-market (interbank) rate: USD amount × Interbank Rate. This is the baseline cost with no provider charges.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.ibCost)"></td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>💸 Total Charges</span>
-                                            <span class="help-icon help-icon-wide" data-tooltip="Sum of all charges over the interbank cost: Forex Markup + Bank Processing Fee + FX Conversion GST + GST on Processing Fee.">ℹ️</span>
+                                            <span>FX Charges + Taxes</span>
+                                            <span class="help-icon help-icon-wide" data-tooltip="Sum of all charges over interbank cost: FX Markup + Processing Fee + FX Conversion GST + GST on Processing Fee.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.totalCharges)"></td>
                                     </tr>
+                                    <tr>
+                                        <td style="display: flex; justify-content: space-between; align-items: center;"><strong>Transaction Cost</strong> <span class="help-icon help-icon-wide" data-tooltip="FX Charges + Taxes as a percentage of FX Interbank Cost.">ℹ️</span></td>
+                                        <td class="highlight"><span style="cursor: default; opacity: 1; font-size: 1.05em;">{{ preview.chargesPct.toFixed(2) }}%</span></td>
+                                    </tr>
 
-                                    <!-- Bank Charges -->
+                                    <!-- FX Charges -->
                                     <tr style="background: #f0f7ff;">
-                                        <td colspan="2" style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">🏦 BANK CHARGES</td>
+                                        <td colspan="2" style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">💸 FX CHARGES</td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
                                             <span>Forex Markup</span>
-                                            <span class="help-icon help-icon-wide" data-tooltip="Bank's spread over the interbank rate: (Bank Rate − Interbank Rate) × USD amount.">ℹ️</span>
+                                            <span class="help-icon help-icon-wide" data-tooltip="Provider spread over the interbank rate: (Quoted Rate − Interbank Rate) × USD amount.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.fxSpread)"></td>
                                     </tr>
                                     <tr v-if="preview.processingFee > 0">
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>Bank Processing Fee</span>
-                                            <span class="help-icon help-icon-wide" data-tooltip="Flat fee charged by the bank for processing the forex transaction. 18% GST is charged separately on this.">ℹ️</span>
+                                            <span>Processing Fee</span>
+                                            <span class="help-icon help-icon-wide" data-tooltip="Flat fee charged by the provider for processing the forex transaction. 18% GST is charged separately on this.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.processingFee)"></td>
                                     </tr>
@@ -294,7 +291,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 </tbody>
                             </table>
 
-                            <div id="fx-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
+                            <div id="fx-breakdown-chart" style="width: 100%; height: 480px; margin-top: 1.5rem;"></div>
                         </div>
 
                         <div v-else style="color: #999; padding: 2rem; text-align: center;">
@@ -328,8 +325,13 @@ window.initializeTool.fxTracker = function (container, config) {
                             <div style="font-size: 1.1em; font-weight: 700; color: #e74c3c;" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
                             <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #e74c3c; margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
                         </div>
+                        <div style="background: #f3f0ff; border: 1px solid #c5b8f5; border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total TCS Paid</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #6c3fc0;" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #6c3fc0; margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
+                        </div>
                         <div style="background: #fff8e1; border: 1px solid #ffe08a; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total Charges</div>
+                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total FX Charges</div>
                             <div style="font-size: 1.1em; font-weight: 700; color: #e67e22;" v-html="'₹' + formatINRHtml(summary.totalCharges)"></div>
                             <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #e67e22; margin-top: 0.2rem;">{{ (summary.totalCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
@@ -338,11 +340,6 @@ window.initializeTool.fxTracker = function (container, config) {
                             <div style="font-size: 1.1em; font-weight: 700; color: #d35400;" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
                             <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #d35400; margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: #f3f0ff; border: 1px solid #c5b8f5; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total TCS Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #6c3fc0;" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #6c3fc0; margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
-                        </div>
                     </div>
 
                     <!-- Detail Table -->
@@ -350,43 +347,35 @@ window.initializeTool.fxTracker = function (container, config) {
                         <table class="summary-table">
                             <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Bank</th>
-                                    <th>Transaction ID</th>
-                                    <th>USD Bought</th>
-                                    <th>INR Spent</th>
-                                    <th>Bank Charges</th>
-                                    <th>GST Paid</th>
-                                    <th>TCS Paid</th>
-                                    <th>Transaction Cost</th>
-                                    <th></th>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">Bank</th>
+                                    <th style="text-align: center;">Trans ID</th>
+                                    <th style="text-align: center;">USD Bought</th>
+                                    <th style="text-align: center;">INR Spent</th>
+                                    <th style="text-align: center;">TCS</th>
+                                    <th style="text-align: center;">INR @ Interbank</th>
+                                    <th style="text-align: center;">Charges</th>
+                                    <th style="text-align: center;">GST</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(txn, i) in transactions" :key="txn.id">
+                                <tr v-for="(txn, i) in computedTransactions" :key="txn.id">
                                     <td style="white-space: nowrap;">{{ txn.date }}</td>
                                     <td>{{ txn.bank || '–' }}</td>
                                     <td style="font-family: monospace; font-size: 0.85em;">{{ txn.txnId || '–' }}</td>
                                     <td style="text-align: right;" v-html="'$' + formatUSDHtml(txn.usdReceived)"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.inrSpent)"></td>
-                                    <td style="text-align: right;" v-html="(txn.fxSpread != null) ? '₹' + formatINRHtml((txn.fxSpread || 0) + (txn.processingFee || 0)) : '–'"></td>
-                                    <td style="text-align: right;" v-html="txn.gst != null ? '₹' + formatINRHtml(txn.gst) : '–'"></td>
                                     <td style="text-align: right;" v-html="txn.tcs != null ? '₹' + formatINRHtml(txn.tcs) : '–'"></td>
-                                    <td style="text-align: right;">{{ (txn.interbankRate > 0 && txn.usdReceived > 0) ? (((txn.fxSpread || 0) + (txn.processingFee || 0) + (txn.gst || 0)) / (txn.interbankRate * txn.usdReceived) * 100).toFixed(2) + '%' : '–' }}</td>
-                                    <td style="text-align: center;">
-                                        <button
-                                            v-if="i === 0"
-                                            type="button"
-                                            class="btn-remove-subtle"
-                                            @click="removeTransaction(i)"
-                                            title="Remove transaction">
-                                            ✕
-                                        </button>
-                                    </td>
+                                    <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.ibCost)"></td>
+                                    <td style="text-align: right;" v-html="'₹' + formatINRHtml((txn.fxSpread || 0) + (txn.processingFee || 0))"></td>
+                                    <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.gst)"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
+                        ℹ️ There may be a difference of a couple of paise between the numbers shown here and your bank statement. This is because the table uses precise math internally, while banks apply their own rounding at each step.
+                    </p>
                 </div>
 
                 <div v-if="transactions.length === 0" class="investment-plan" style="text-align: center; padding: 2rem; color: #999;">
@@ -436,7 +425,8 @@ window.initializeTool.fxTracker = function (container, config) {
                 debounceTimer: null,
                 suppressAutoInterbankSync: false,
                 fxBreakdownChart: null,
-                fxBreakdownResizeHandler: null
+                fxBreakdownResizeHandler: null,
+                shareButtonText: '🔗 Share'
             };
         },
 
@@ -489,28 +479,81 @@ window.initializeTool.fxTracker = function (container, config) {
                 let totalCharges = 0;
                 let totalTCS = 0;
                 let totalIBCost = 0;
-                this.transactions.forEach(t => {
+                this.computedTransactions.forEach(t => {
                     totalGST += t.gst || 0;
                     totalINRSpent += t.inrSpent || 0;
                     totalUSDBought += t.usdReceived || 0;
                     totalCharges += t.totalCharges || 0;
                     totalTCS += t.tcs || 0;
-                    totalIBCost += (t.interbankRate || 0) * (t.usdReceived || 0);
+                    totalIBCost += t.ibCost || 0;
                 });
                 return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost };
             },
             fyGrossINR() {
-                // Sum of (rate × usdReceived) for all transactions in the same Indian financial year
-                // as the current form date (FY = Apr 1 – Mar 31).
+                // Sum of computed grossINR for all stored transactions in the same Indian FY.
                 const formDate = this.form.date ? new Date(this.form.date) : new Date();
                 const fy = formDate.getMonth() < 3 ? formDate.getFullYear() - 1 : formDate.getFullYear();
                 const fyStart = new Date(fy, 3, 1);       // Apr 1
                 const fyEnd   = new Date(fy + 1, 2, 31);  // Mar 31 next year
-                return this.transactions.reduce((sum, t) => {
+                return this.computedTransactions.reduce((sum, t) => {
                     const d = new Date(t.date);
-                    if (d >= fyStart && d <= fyEnd) sum += (t.rate || 0) * (t.usdReceived || 0);
+                    if (d >= fyStart && d <= fyEnd) sum += t.grossINR || 0;
                     return sum;
                 }, 0);
+            },
+            computedTransactions() {
+                // Process ascending by date so TCS accumulates correctly within each FY.
+                const sorted = [...this.transactions].sort((a, b) =>
+                    a.date.localeCompare(b.date) || (a.createdAt || '').localeCompare(b.createdAt || '')
+                );
+                const fyAccum = {}; // fy (number) → running grossINR
+                const enriched = sorted.map(t => {
+                    const rate = t.rate || 0;
+                    const ibRate = t.interbankRate > 0 ? t.interbankRate : rate;
+                    const processingFee = t.processingFee || 0;
+                    const processingFeeGST = this.trunc2(processingFee * 0.18);
+                    const d = new Date(t.date);
+                    const fy = d.getMonth() < 3 ? d.getFullYear() - 1 : d.getFullYear();
+                    const running = fyAccum[fy] || 0;
+
+                    const unit = t.amountUnit || 'usd';
+                    const rawAmount = t.amount != null ? t.amount : (t.usdReceived || 0);
+
+                    let usdReceived, grossINR;
+                    if (unit === 'usd') {
+                        usdReceived = rawAmount;
+                        const split = this.splitGrossAndMarkup(usdReceived, rate, ibRate);
+                        grossINR = split.grossINR;
+                    } else {
+                        const budget = rawAmount - processingFee - processingFeeGST;
+                        const calcTCSLocal = (g) => Math.min(g, Math.max(0, running + g - 1000000)) * 0.20;
+                        grossINR = budget > 0 ? this.solveGrossINR(budget, calcTCSLocal) : 0;
+                        usdReceived = Math.floor(grossINR > 0 ? grossINR / rate : 0);
+                        const split = this.splitGrossAndMarkup(usdReceived, rate, ibRate);
+                        grossINR = split.grossINR;
+                    }
+
+                    const split = this.splitGrossAndMarkup(usdReceived, rate, ibRate);
+                    const ibCost = split.ibCost;
+                    const rule32Val = this.calcRule32(grossINR);
+                    const fxConvGST = this.trunc2(rule32Val * 0.18);
+                    const fxSpread = split.fxSpread;
+                    const tcs = this.trunc2(Math.min(grossINR, Math.max(0, running + grossINR - 1000000)) * 0.20);
+                    const totalCharges = this.trunc2(fxSpread + fxConvGST + processingFee + processingFeeGST);
+                    const gst = this.trunc2(fxConvGST + processingFeeGST);
+                    const inrSpent = this.trunc2(grossINR + fxConvGST + processingFee + processingFeeGST + tcs);
+                    const effectiveRate = usdReceived > 0 ? (inrSpent - tcs) / usdReceived : 0;
+
+                    fyAccum[fy] = running + grossINR;
+
+                    return {
+                        ...t,
+                        usdReceived, grossINR, ibCost,
+                        rule32Val, fxConvGST, processingFeeGST,
+                        fxSpread, totalCharges, tcs, gst, inrSpent, effectiveRate
+                    };
+                });
+                return enriched.reverse(); // newest-first for display
             }
         },
 
@@ -530,6 +573,7 @@ window.initializeTool.fxTracker = function (container, config) {
 
         mounted() {
             this.loadFromStorage();
+            this.loadFromUrl();
             this.calculate();
         },
 
@@ -582,6 +626,21 @@ window.initializeTool.fxTracker = function (container, config) {
                 return (low + high) / 2;
             },
 
+            trunc2(value) {
+                // Add epsilon before flooring to avoid binary float artifacts like 250127.999999 -> 250127.99
+                return Math.floor(((Number(value) || 0) + 1e-9) * 100) / 100;
+            },
+
+            splitGrossAndMarkup(usdAmount, rate, ibRate) {
+                const usd = Number(usdAmount) || 0;
+                const bankRate = Number(rate) || 0;
+                const interbank = (Number(ibRate) || 0) > 0 ? Number(ibRate) : bankRate;
+                const grossINR = this.trunc2(usd * bankRate);
+                const ibCost = this.trunc2(usd * interbank);
+                const fxSpread = this.trunc2(grossINR - ibCost);
+                return { grossINR, ibCost, fxSpread };
+            },
+
             calculate() {
                 if (!this.isFormValid) {
                     this.preview.valid = false;
@@ -593,7 +652,9 @@ window.initializeTool.fxTracker = function (container, config) {
                 const amount = this.form.amount;
                 const unit = this.form.amountUnit;
                 const processingFee = this.form.serviceFee >= 0 ? this.form.serviceFee : 0;
-                const processingFeeGST = processingFee * 0.18;
+                // Banks truncate monetary values to paise (2 dp) — mirror that to avoid sub-paise drift
+                const trunc2 = this.trunc2;
+                const processingFeeGST = trunc2(processingFee * 0.18);
                 const fixedCharges = processingFee + processingFeeGST;
 
                 let usdAmount, grossINR, ibCost, rule32Val, fxConvGST, fxSpread, totalCharges,
@@ -602,20 +663,21 @@ window.initializeTool.fxTracker = function (container, config) {
                 if (unit === 'usd') {
                     // Given USD target → compute total INR to spend
                     usdAmount = amount;
-                    grossINR = usdAmount * rate;
-                    ibCost = usdAmount * ibRate;
+                    const split = this.splitGrossAndMarkup(usdAmount, rate, ibRate);
+                    grossINR = split.grossINR;
+                    ibCost = split.ibCost;
                     rule32Val = this.calcRule32(grossINR);
-                    fxConvGST = rule32Val * 0.18;
-                    fxSpread = (rate - ibRate) * usdAmount;
-                    totalCharges = fxSpread + fxConvGST + processingFee + processingFeeGST;
+                    fxConvGST = trunc2(rule32Val * 0.18);
+                    fxSpread = split.fxSpread;
+                    totalCharges = trunc2(fxSpread + fxConvGST + processingFee + processingFeeGST);
                     const runningUSD = this.fyGrossINR;
-                    tcs = Math.min(grossINR, Math.max(0, runningUSD + grossINR - 1000000)) * 0.20;
-                    result = grossINR + fxConvGST + processingFee + processingFeeGST + tcs;
-                    const inrExTCS = result - tcs;
+                    tcs = trunc2(Math.min(grossINR, Math.max(0, runningUSD + grossINR - 1000000)) * 0.20);
+                    result = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST + tcs);
+                    const inrExTCS = trunc2(result - tcs);
                     totalExtraCost = totalCharges;
                     effectiveRate = usdAmount > 0 ? inrExTCS / usdAmount : 0;
-                    effectiveOverInterbank = (ibRate > 0 && usdAmount > 0) ? ((inrExTCS - usdAmount * ibRate) / (usdAmount * ibRate)) * 100 : 0;
-                    chargesPct = inrExTCS > 0 ? (totalCharges / inrExTCS) * 100 : 0;
+                    effectiveOverInterbank = ibCost > 0 ? ((inrExTCS - ibCost) / ibCost) * 100 : 0;
+                    chargesPct = ibCost > 0 ? (totalCharges / ibCost) * 100 : 0;
                     tcsDrag = (ibCost + totalCharges) > 0 ? (tcs / (ibCost + totalCharges)) * 100 : 0;
 
                 } else {
@@ -627,20 +689,21 @@ window.initializeTool.fxTracker = function (container, config) {
                     const budget = amount - fixedCharges;
                     grossINR = budget > 0 ? this.solveGrossINR(budget, calcTCS) : 0;
                     usdAmount = Math.floor(grossINR > 0 ? grossINR / rate : 0);
-                    grossINR = usdAmount * rate; // recompute from whole-dollar USD
-                    ibCost = usdAmount * ibRate;
+                    const split = this.splitGrossAndMarkup(usdAmount, rate, ibRate);
+                    grossINR = split.grossINR; // recompute from whole-dollar USD
+                    ibCost = split.ibCost;
                     rule32Val = this.calcRule32(grossINR);
-                    fxConvGST = rule32Val * 0.18;
-                    fxSpread = (rate - ibRate) * usdAmount;
-                    totalCharges = fxSpread + fxConvGST + processingFee + processingFeeGST;
-                    tcs = calcTCS(grossINR);
+                    fxConvGST = trunc2(rule32Val * 0.18);
+                    fxSpread = split.fxSpread;
+                    totalCharges = trunc2(fxSpread + fxConvGST + processingFee + processingFeeGST);
+                    tcs = trunc2(calcTCS(grossINR));
                     result = usdAmount;
-                    const inrDebit = grossINR + fxConvGST + processingFee + processingFeeGST + tcs;
-                    const inrDebitExTCS = grossINR + fxConvGST + processingFee + processingFeeGST;
+                    const inrDebit = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST + tcs);
+                    const inrDebitExTCS = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST);
                     totalExtraCost = totalCharges;
                     effectiveRate = usdAmount > 0 ? inrDebitExTCS / usdAmount : 0;
-                    effectiveOverInterbank = (ibRate > 0 && usdAmount > 0) ? ((inrDebitExTCS - usdAmount * ibRate) / (usdAmount * ibRate)) * 100 : 0;
-                    chargesPct = inrDebitExTCS > 0 ? (totalCharges / inrDebitExTCS) * 100 : 0;
+                    effectiveOverInterbank = ibCost > 0 ? ((inrDebitExTCS - ibCost) / ibCost) * 100 : 0;
+                    chargesPct = ibCost > 0 ? (totalCharges / ibCost) * 100 : 0;
                     tcsDrag = (ibCost + totalCharges) > 0 ? (tcs / (ibCost + totalCharges)) * 100 : 0;
 
                     this.preview = {
@@ -685,7 +748,7 @@ window.initializeTool.fxTracker = function (container, config) {
 
                 const p = this.preview;
                 const data = [
-                    { value: Math.max(0, p.ibCost || 0), name: 'Forex Interbank Cost', itemStyle: { color: '#4CAF50' } },
+                    { value: Math.max(0, p.ibCost || 0), name: 'FX Interbank Cost', itemStyle: { color: '#4CAF50' } },
                     { value: Math.max(0, (p.fxSpread || 0) + (p.processingFee || 0)), name: 'FX Charges', itemStyle: { color: '#ef4444' } },
                     { value: Math.max(0, (p.fxConvGST || 0) + (p.processingFeeGST || 0)), name: 'GST', itemStyle: { color: '#b91c1c' } }
                 ];
@@ -694,21 +757,43 @@ window.initializeTool.fxTracker = function (container, config) {
                 }
 
                 const filtered = data.filter(d => d.value > 0);
-                const total = filtered.reduce((sum, d) => sum + d.value, 0);
-                const inrSpent = this.form.amountUnit === 'inr' ? (p.inrDebit || 0) : (p.result || 0);
-                const usdBought = this.form.amountUnit === 'inr' ? (p.result || 0) : (p.usdAmount || 0);
-                const inrSpentText = '₹' + Number(inrSpent).toLocaleString('en-IN', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-                const usdBoughtText = '$' + Number(usdBought).toLocaleString('en-US', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-
+                const ibRateText = Number(p.interbankRate > 0 ? p.interbankRate : (this.form.interbankRate || 0)).toFixed(4);
+                const effRateText = Number(p.effectiveRate || 0).toFixed(4);
                 const fmt = (v) => '₹' + Number(v).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
                 this.fxBreakdownChart.setOption({
+                    title: [
+                        {
+                            text: 'Interbank',
+                            left: '50%', top: '33%',
+                            textAlign: 'center',
+                            textStyle: { fontSize: 11, fontWeight: '600', color: '#64748b' }
+                        },
+                        {
+                            text: '₹' + ibRateText,
+                            left: '50%', top: '37%',
+                            textAlign: 'center',
+                            textStyle: { fontSize: 19, fontWeight: '700', color: '#1f2937' }
+                        },
+                        {
+                            text: 'vs',
+                            left: '50%', top: '44%',
+                            textAlign: 'center',
+                            textStyle: { fontSize: 10, fontWeight: '600', color: '#94a3b8' }
+                        },
+                        {
+                            text: 'Effective',
+                            left: '50%', top: '48%',
+                            textAlign: 'center',
+                            textStyle: { fontSize: 11, fontWeight: '600', color: '#64748b' }
+                        },
+                        {
+                            text: '₹' + effRateText,
+                            left: '50%', top: '52%',
+                            textAlign: 'center',
+                            textStyle: { fontSize: 19, fontWeight: '700', color: '#1f2937' }
+                        }
+                    ],
                     toolbox: {
                         feature: { saveAsImage: { title: 'Save as Image' } }
                     },
@@ -723,6 +808,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             name: 'FX Cost Composition',
                             type: 'pie',
                             radius: ['50%', '74%'],
+                            center: ['50%', '44%'],
                             avoidLabelOverlap: true,
                             label: {
                                 formatter: function (x) {
@@ -731,39 +817,13 @@ window.initializeTool.fxTracker = function (container, config) {
                             },
                             data: filtered
                         }
-                    ],
-                    graphic: {
-                        type: 'text',
-                        left: 'center',
-                        top: 'middle',
-                        style: {
-                            text: '{value|' + inrSpentText + '}\n{mid|spent for}\n{value|' + usdBoughtText + '}',
-                            rich: {
-                                value: {
-                                    fontSize: 15,
-                                    fontWeight: 700,
-                                    fill: '#1f2937',
-                                    lineHeight: 18
-                                },
-                                mid: {
-                                    fontSize: 10,
-                                    fontWeight: 600,
-                                    fill: '#64748b',
-                                    lineHeight: 14
-                                }
-                            },
-                            textAlign: 'center',
-                            textVerticalAlign: 'middle',
-                            lineHeight: 15
-                        }
-                    }
+                    ]
                 });
             },
 
             addTransaction() {
                 if (!this.isFormValid || !this.preview.valid) return;
 
-                const p = this.preview;
                 const txn = {
                     id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
                     operation: 'buy',
@@ -772,25 +832,11 @@ window.initializeTool.fxTracker = function (container, config) {
                     interbankRate: this.form.interbankRate || 0,
                     bank: this.form.bank,
                     txnId: this.form.txnId,
-                    processingFee: p.processingFee,
-                    processingFeeGST: p.processingFeeGST,
-                    fxConvGST: p.fxConvGST,
-                    rule32Val: p.rule32Val,
-                    fxSpread: p.fxSpread,
-                    totalCharges: p.totalCharges,
-                    tcs: p.tcs,
-                    gst: p.fxConvGST + p.processingFeeGST,   // total GST for summary
-                    effectiveRate: p.effectiveRate,
+                    processingFee: this.form.serviceFee >= 0 ? this.form.serviceFee : 0,
+                    amountUnit: this.form.amountUnit,
+                    amount: this.form.amount,
                     createdAt: new Date().toISOString()
                 };
-
-                if (this.form.amountUnit === 'inr') {
-                    txn.inrSpent = this.form.amount;
-                    txn.usdReceived = p.result;
-                } else {
-                    txn.inrSpent = p.result;        // computed INR needed
-                    txn.usdReceived = this.form.amount;
-                }
 
                 this.transactions.unshift(txn);
                 this.saveToStorage();
@@ -798,8 +844,8 @@ window.initializeTool.fxTracker = function (container, config) {
                 this.calculate();
             },
 
-            removeTransaction(index) {
-                this.transactions.splice(index, 1);
+            removeTransaction(id) {
+                this.transactions = this.transactions.filter(t => t.id !== id);
                 this.saveToStorage();
                 this.calculate();
             },
@@ -877,6 +923,24 @@ window.initializeTool.fxTracker = function (container, config) {
                 }
             },
 
+            normalizeTxn(t) {
+                // Convert pre-v2 fat-stored format to lean raw-input-only format.
+                if (t.amountUnit != null) return t; // already lean
+                return {
+                    id: t.id,
+                    operation: t.operation || 'buy',
+                    date: t.date,
+                    rate: t.rate || 0,
+                    interbankRate: t.interbankRate || 0,
+                    bank: t.bank || '',
+                    txnId: t.txnId || '',
+                    processingFee: t.processingFee || 0,
+                    amountUnit: 'usd',
+                    amount: t.usdReceived || 0,
+                    createdAt: t.createdAt || new Date().toISOString()
+                };
+            },
+
             loadFromStorage() {
                 try {
                     const saved = localStorage.getItem(FX_STORAGE_KEY);
@@ -884,9 +948,9 @@ window.initializeTool.fxTracker = function (container, config) {
                         const parsed = JSON.parse(saved);
                         // Backward compatibility: older versions stored only transactions array.
                         if (Array.isArray(parsed)) {
-                            this.transactions = parsed;
+                            this.transactions = parsed.map(t => this.normalizeTxn(t));
                         } else {
-                            this.transactions = Array.isArray(parsed.transactions) ? parsed.transactions : [];
+                            this.transactions = Array.isArray(parsed.transactions) ? parsed.transactions.map(t => this.normalizeTxn(t)) : [];
                             if (parsed.formPrefs && typeof parsed.formPrefs === 'object') {
                                 this.suppressAutoInterbankSync = true;
                                 this.form = Object.assign({}, this.form, {
@@ -909,9 +973,72 @@ window.initializeTool.fxTracker = function (container, config) {
                 }
             },
 
+            encodeState() {
+                const f = this.form;
+                let s = 'v1';
+                s += 'u' + (f.amountUnit === 'inr' ? 'i' : 'd');
+                s += 'd' + (f.date || '').replace(/-/g, '');
+                s += 'r' + (f.rate || 0);
+                s += 'b' + (f.interbankRate || 0);
+                s += 'a' + (f.amount || 0);
+                s += 'f' + (f.serviceFee || 0);
+                return s;
+            },
+
+            decodeState(hash) {
+                if (!hash || !hash.startsWith('v1')) return null;
+                const state = {};
+                let i = 2;
+                while (i < hash.length) {
+                    const prefix = hash[i]; i++;
+                    if (prefix === 'u') {
+                        state.amountUnit = hash[i] === 'i' ? 'inr' : 'usd'; i++;
+                    } else if (prefix === 'd') {
+                        const raw = hash.slice(i, i + 8); i += 8;
+                        if (raw.length === 8) {
+                            state.date = raw.slice(0, 4) + '-' + raw.slice(4, 6) + '-' + raw.slice(6, 8);
+                        }
+                    } else {
+                        let val = '';
+                        while (i < hash.length && /[\d.]/.test(hash[i])) val += hash[i++];
+                        const num = parseFloat(val);
+                        if (!isNaN(num)) {
+                            if (prefix === 'r') state.rate = num;
+                            else if (prefix === 'b') state.interbankRate = num;
+                            else if (prefix === 'a') state.amount = num;
+                            else if (prefix === 'f') state.serviceFee = num;
+                        }
+                    }
+                }
+                return state;
+            },
+
+            loadFromUrl() {
+                const hash = window.location.hash.slice(1);
+                if (!hash) return;
+                const state = this.decodeState(hash);
+                if (!state) return;
+                Object.keys(state).forEach(k => {
+                    if (state[k] !== undefined) this.form[k] = state[k];
+                });
+            },
+
+            async shareCalculation() {
+                const encoded = this.encodeState();
+                const url = `${window.location.origin}${window.location.pathname}#${encoded}`;
+                try {
+                    await navigator.clipboard.writeText(url);
+                    this.shareButtonText = '✅ Copied!';
+                    window.history.replaceState(null, '', `#${encoded}`);
+                } catch (err) {
+                    this.shareButtonText = '❌ Failed';
+                }
+                setTimeout(() => { this.shareButtonText = '🔗 Share'; }, 2000);
+            },
+
             exportData() {
                 const data = {
-                    tool: 'INR USD FX Tracker',
+                    tool: 'RealValue FX Engine',
                     version: '1.0',
                     exportDate: new Date().toISOString(),
                     transactions: this.transactions
@@ -948,12 +1075,14 @@ window.initializeTool.fxTracker = function (container, config) {
                             }
                             // Merge — skip duplicates by ID
                             const existingIds = new Set(this.transactions.map(t => t.id));
-                            const newTxns = data.transactions.filter(t => !existingIds.has(t.id));
+                            const newTxns = data.transactions
+                                .filter(t => !existingIds.has(t.id))
+                                .map(t => this.normalizeTxn(t));
                             this.transactions = [...this.transactions, ...newTxns];
                             // Re-sort by date descending
                             this.transactions.sort((a, b) => b.date.localeCompare(a.date));
                         } else {
-                            this.transactions = data.transactions;
+                            this.transactions = data.transactions.map(t => this.normalizeTxn(t));
                         }
                         this.saveToStorage();
                         event.target.value = '';
