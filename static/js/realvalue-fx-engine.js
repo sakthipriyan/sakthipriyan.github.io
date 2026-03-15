@@ -861,9 +861,23 @@ window.initializeTool.fxTracker = function (container, config) {
                     fromDate.setDate(fromDate.getDate() - 4);
                     const d1 = fromDate.toISOString().split('T')[0].replace(/-/g, '');
                     const stooqUrl = `https://stooq.com/q/d/l/?s=usdinr&d1=${d1}&d2=${d2}&i=d`;
-                    const url = `https://corsproxy.io/?url=${encodeURIComponent(stooqUrl)}`;
-                    const resp = await fetch(url);
-                    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                    const corsProxies = [
+                        u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+                        u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+                        u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+                    ];
+                    let resp = null;
+                    let lastErr = '';
+                    for (const proxy of corsProxies) {
+                        try {
+                            const r = await fetch(proxy(stooqUrl));
+                            if (r.ok) { resp = r; break; }
+                            lastErr = `HTTP ${r.status}`;
+                        } catch (err) {
+                            lastErr = err.message;
+                        }
+                    }
+                    if (!resp) throw new Error(lastErr + ' for all proxies');
                     const text = await resp.text();
                     const lines = text.trim().split('\n').filter(l => l.trim());
                     if (lines.length < 2) throw new Error('No data available for this period');
