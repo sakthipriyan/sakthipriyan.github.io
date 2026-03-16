@@ -181,7 +181,7 @@ window.initializeTool.fxTracker = function (container, config) {
 
                         <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: 1.75rem;">
                             <p style="font-size: 0.85em; color: #999; margin: 0; flex: 1;">
-                                💡 Transactions are saved in your browser automatically. Use Import/Export to back up or transfer data.
+                                💡 Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.
                             </p>
                             <button
                                 @click="addTransaction"
@@ -230,7 +230,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <!-- FX Interbank Cost + Total Charges -->
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>FX Interbank Cost</span>
+                                            <span>FX Interbank</span>
                                             <span class="help-icon help-icon-wide" data-tooltip="What you'd pay at the mid-market (interbank) rate: USD amount × Interbank Rate. This is the baseline cost with no provider charges.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.ibCost)"></td>
@@ -249,7 +249,8 @@ window.initializeTool.fxTracker = function (container, config) {
 
                                     <!-- FX Charges -->
                                     <tr style="background: #f0f7ff;">
-                                        <td colspan="2" style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">💸 FX CHARGES</td>
+                                        <td style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">💸 FX CHARGES</td>
+                                        <td style="padding: 0.4rem 0.75rem; text-align: right; font-size: 0.9em; color: #2980b9; font-weight: 700;" v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
@@ -268,7 +269,8 @@ window.initializeTool.fxTracker = function (container, config) {
 
                                     <!-- Taxes -->
                                     <tr style="background: #f0f7ff;">
-                                        <td colspan="2" style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">🏛️ TAXES</td>
+                                        <td style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">🏛️ TAXES</td>
+                                        <td style="padding: 0.4rem 0.75rem; text-align: right; font-size: 0.9em; color: #2980b9; font-weight: 700;" v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
@@ -284,12 +286,12 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.processingFeeGST)"></td>
                                     </tr>
-                                    <tr v-if="preview.tcs > 0">
-                                        <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>TCS @ 20% (refundable)</span>
-                                            <span class="help-icon help-icon-wide" data-tooltip="Tax Collected at Source under LRS. Levied at 20% on the gross INR amount exceeding ₹10,00,000 (Bank Rate × USD bought). Fully refundable when filing your ITR.">ℹ️</span>
+                                    <tr v-if="preview.tcs > 0" style="background: #f0f7ff;">
+                                        <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">
+                                            <span>💰 TCS @ 20% (refundable)</span>
+                                            <span class="help-icon help-icon-wide help-icon-above" data-tooltip="Tax Collected at Source under LRS. Levied at 20% on the gross INR amount exceeding ₹10,00,000 (Bank Rate × USD bought). You can claim this as tax credit in your ITR, and also submit Form 12BAA to your employer to adjust salary TDS where applicable.">ℹ️</span>
                                         </td>
-                                        <td v-html="'₹' + formatINRHtml(preview.tcs)"></td>
+                                        <td style="padding: 0.4rem 0.75rem; text-align: right; font-size: 0.9em; color: #2980b9; font-weight: 700;" v-html="'₹' + formatINRHtml(preview.tcs)"></td>
                                     </tr>
 
                                     <tr style="background: #e8f5e9;">
@@ -363,8 +365,8 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <th style="text-align: center;">USD Bought</th>
                                     <th style="text-align: center;">INR Spent</th>
                                     <th style="text-align: center;">TCS</th>
-                                    <th style="text-align: center;">INR @ Interbank</th>
-                                    <th style="text-align: center;">Charges</th>
+                                    <th style="text-align: center;">FX Interbank</th>
+                                    <th style="text-align: center;">FX Charges</th>
                                     <th style="text-align: center;">GST</th>
                                 </tr>
                             </thead>
@@ -384,7 +386,7 @@ window.initializeTool.fxTracker = function (container, config) {
                         </table>
                     </div>
                     <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
-                        ℹ️ There may be a difference of a couple of paise between the numbers shown here and your bank statement. This is because the table uses precise math internally, while banks apply their own rounding at each step.
+                            ℹ️ There may be a difference of a couple of paise between the numbers shown here and your bank statement due to how rounding is applied at each step.
                     </p>
                 </div>
 
@@ -788,6 +790,13 @@ window.initializeTool.fxTracker = function (container, config) {
                 const chartDom = document.getElementById('fx-breakdown-chart');
                 if (!chartDom) return;
 
+                // The chart container is under v-if. When preview becomes invalid, the DOM node is removed.
+                // Recreate the chart if the existing instance points to an old detached node.
+                if (this.fxBreakdownChart && this.fxBreakdownChart.getDom() !== chartDom) {
+                    this.fxBreakdownChart.dispose();
+                    this.fxBreakdownChart = null;
+                }
+
                 if (!this.fxBreakdownChart) {
                     this.fxBreakdownChart = echarts.init(chartDom);
                     if (!this.fxBreakdownResizeHandler) {
@@ -798,7 +807,7 @@ window.initializeTool.fxTracker = function (container, config) {
 
                 const p = this.preview;
                 const data = [
-                    { value: Math.max(0, p.ibCost || 0), name: 'FX Interbank Cost', itemStyle: { color: '#4CAF50' } },
+                    { value: Math.max(0, p.ibCost || 0), name: 'FX Interbank', itemStyle: { color: '#4CAF50' } },
                     { value: Math.max(0, (p.fxSpread || 0) + (p.processingFee || 0)), name: 'FX Charges', itemStyle: { color: '#ef4444' } },
                     { value: Math.max(0, (p.fxConvGST || 0) + (p.processingFeeGST || 0)), name: 'GST', itemStyle: { color: '#b91c1c' } }
                 ];
