@@ -119,6 +119,19 @@
     text-align: left;
 }
 
+/* Force selected tooltips to render above the icon */
+.help-icon-above::after {
+    top: auto;
+    bottom: calc(100% + 8px);
+}
+
+.help-icon-above::before {
+    top: auto;
+    bottom: calc(100% + 2px);
+    border-bottom-color: transparent;
+    border-top-color: #333;
+}
+
 /* Show tooltip above for last row in plan tables */
 .plan-table tbody tr:last-child .help-icon::after {
     top: auto;
