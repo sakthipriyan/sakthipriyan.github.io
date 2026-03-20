@@ -368,6 +368,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <th style="text-align: center;">FX Interbank</th>
                                     <th style="text-align: center;">FX Charges</th>
                                     <th style="text-align: center;">GST</th>
+                                    <th style="text-align: center; width: 40px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -381,12 +382,112 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.ibCost)"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml((txn.fxSpread || 0) + (txn.processingFee || 0))"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.gst)"></td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <button 
+                                            type="button"
+                                            @click.stop="removeTransaction(txn.id)" 
+                                            class="btn-remove-subtle"
+                                            title="Delete transaction"
+                                        >✕</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
                             ℹ️ There may be a difference of a couple of paise between the numbers shown here and your bank statement due to how rounding is applied at each step.
+                    </p>
+                </div>
+
+                <!-- TCS Drag Table -->
+                <div class="investment-plan" v-if="tcsDragSchedule.length > 0">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <h2 style="margin: 0;">📉 TCS Opportunity Cost</h2>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <div class="input-group" style="margin: 0; min-width: 200px;">
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                                <span>Your XIRR (%)</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="Your expected annual compound growth rate, used to compute the opportunity cost of locked TCS capital.">ℹ️</span>
+                            </label>
+                            <input 
+                                type="number" 
+                                v-model.number="form.cagr" 
+                                min="0" 
+                                max="50" 
+                                step="0.5"
+                                @input="debouncedCalculate"
+                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;"
+                            >
+                        </div>
+                        <div class="input-group" style="margin: 0; min-width: 200px;">
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                                <span>TCS Adjustment Method</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="When predicting the refund schedule, assume either Form 12BAA (monthly payroll adjustment) or standard ITR Filing.">ℹ️</span>
+                            </label>
+                            <div class="unit-buttons">
+                                <button 
+                                    type="button"
+                                    :class="{'active': form.use12BAA}"
+                                    @click="form.use12BAA = true; debouncedCalculate()">
+                                    Form 12BAA (Monthly)
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': !form.use12BAA}"
+                                    @click="form.use12BAA = false; debouncedCalculate()">
+                                    ITR Filing (July 31)
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="margin: 0; min-width: 200px;" v-if="!form.use12BAA">
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                                <span>Expected Refund By</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="When do you realistically expect the actual refund to be credited to your bank account after filing the ITR?">ℹ️</span>
+                            </label>
+                            <div class="unit-buttons">
+                                <button type="button" :class="{'active': form.refundDelay === 3}" @click="form.refundDelay = 3; debouncedCalculate()">Oct 31</button>
+                                <button type="button" :class="{'active': form.refundDelay === 6}" @click="form.refundDelay = 6; debouncedCalculate()">Jan 31</button>
+                                <button type="button" :class="{'active': form.refundDelay === 9}" @click="form.refundDelay = 9; debouncedCalculate()">Apr 30</button>
+                                <button type="button" :class="{'active': form.refundDelay === 12}" @click="form.refundDelay = 12; debouncedCalculate()">Jul 31</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem; max-width: 320px;">
+                        <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">TCS Opp. Cost ({{ form.cagr || 12 }}%)</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #db2777;" v-html="'₹' + formatINRHtml(summary.totalOppCost)"></div>
+                            <div v-if="summary.totalINRSpent > summary.totalTCS" style="font-size: 0.8em; color: #db2777; margin-top: 0.2rem;">{{ (summary.totalOppCost / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}% of Ex-TCS</div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">TCS Paid</th>
+                                    <th style="text-align: center;">TCS Adjusted</th>
+                                    <th style="text-align: center;">Pending TCS</th>
+                                    <th style="text-align: center;">Opp. Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(row, i) in tcsDragSchedule" :key="i">
+                                    <td style="white-space: nowrap;">{{ row.date }}</td>
+                                    <td style="text-align: right; color: #d35400;" v-html="row.paid > 0 ? '₹' + formatINRHtml(row.paid) : '–'"></td>
+                                    <td style="text-align: right; color: #27ae60;" v-html="row.adjusted > 0 ? '₹' + formatINRHtml(row.adjusted) : '–'"></td>
+                                    <td style="text-align: right; font-weight: 700; color: #2980b9;" v-html="'₹' + formatINRHtml(row.pending)"></td>
+                                    <td style="text-align: right; color: #db2777;" v-html="row.oppCost > 0 ? '₹' + formatINRHtml(row.oppCost) : '–'"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
+                        <span v-if="form.use12BAA">ℹ️ TCS is adjusted linearly over the remaining months of the financial year.</span>
+                        <span v-else>ℹ️ TCS adjustment date is computed as ITR Filing (July of next year) + Expected Refund Delay.</span>
                     </p>
                 </div>
 
@@ -408,7 +509,10 @@ window.initializeTool.fxTracker = function (container, config) {
                     amount: 100000,
                     serviceFee: 1000,
                     bank: '',
-                    txnId: ''
+                    txnId: '',
+                    use12BAA: false,
+                    cagr: 12,
+                    refundDelay: 3
                 },
                 ibRateLoading: false,
                 ibRateError: '',
@@ -500,7 +604,14 @@ window.initializeTool.fxTracker = function (container, config) {
                     totalTCS += t.tcs || 0;
                     totalIBCost += t.ibCost || 0;
                 });
-                return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost };
+
+                // Calculate Opportunity Cost directly from the schedule column
+                let totalOppCost = 0;
+                for (const row of this.tcsDragSchedule) {
+                    totalOppCost += row.oppCost || 0;
+                }
+
+                return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost, totalOppCost };
             },
             exportJSON() {
                 if (!this.preview.valid) return '';
@@ -599,7 +710,90 @@ window.initializeTool.fxTracker = function (container, config) {
                         fxSpread, totalCharges, tcs, gst, inrSpent, effectiveRate
                     };
                 });
-                return enriched.reverse(); // newest-first for display
+                return enriched; // oldest-first (top-down) for consistent horizontal display
+            },
+            tcsDragSchedule() {
+                const txns = this.computedTransactions.filter(t => t.tcs > 0);
+                if (txns.length === 0) return [];
+
+                // Group by FY
+                const fyGroups = {};
+                txns.forEach(t => {
+                    const d = new Date(t.date);
+                    const fy = d.getMonth() < 3 ? d.getFullYear() - 1 : d.getFullYear();
+                    if (!fyGroups[fy]) fyGroups[fy] = [];
+                    fyGroups[fy].push({ type: 'txn', date: t.date, paid: t.tcs, fy });
+                });
+
+                let events = [];
+                for (const fyStr in fyGroups) {
+                    const fy = parseInt(fyStr, 10);
+                    events.push(...fyGroups[fy]);
+
+                    if (this.form.use12BAA) {
+                        for (let monthOffset = 0; monthOffset < 12; monthOffset++) {
+                            const monthIndex = (3 + monthOffset) % 12; // April is 3
+                            const year = monthIndex < 3 ? fy + 1 : fy;
+                            // Last day of the month
+                            const lastDay = new Date(year, monthIndex + 1, 0);
+                            const ds = `${lastDay.getFullYear()}-${String(lastDay.getMonth() + 1).padStart(2, '0')}-${String(lastDay.getDate()).padStart(2, '0')}`;
+                            const rem = 12 - monthOffset;
+                            events.push({ type: 'adj', date: ds, fy, remMonths: rem });
+                        }
+                    } else {
+                        // ITR Filing (July of FY + 1) + Delay Months
+                        const ayYear = fy + 1;
+                        const delay = this.form.refundDelay || 3;
+                        const targetMonth = 6 + delay; // July is month 6 (0-indexed)
+                        const lastDay = new Date(ayYear, targetMonth + 1, 0); // End of target month
+                        const ds = `${lastDay.getFullYear()}-${String(lastDay.getMonth() + 1).padStart(2, '0')}-${String(lastDay.getDate()).padStart(2, '0')}`;
+                        events.push({ type: 'adj', date: ds, fy, remMonths: 1 });
+                    }
+                }
+
+                events.sort((a, b) => {
+                    if (a.date !== b.date) return a.date.localeCompare(b.date);
+                    return a.type === 'txn' ? -1 : 1;
+                });
+
+                const schedule = [];
+                let globalPending = 0;
+                let lastDate = null;
+                const fyPending = {};
+                const cagr = this.form.cagr || 0;
+
+                events.forEach(ev => {
+                    let rowOppCost = 0;
+                    const currentDate = new Date(ev.date);
+                    
+                    if (lastDate !== null && cagr > 0) {
+                        const days = (currentDate - lastDate) / (1000 * 60 * 60 * 24);
+                        if (days > 0 && globalPending > 0) {
+                            rowOppCost = globalPending * (Math.pow(1 + cagr / 100, days / 365.25) - 1);
+                        }
+                    }
+
+                    if (ev.type === 'txn') {
+                        globalPending += ev.paid;
+                        fyPending[ev.fy] = (fyPending[ev.fy] || 0) + ev.paid;
+                        schedule.push({ date: ev.date, paid: ev.paid, adjusted: 0, pending: globalPending, oppCost: rowOppCost, isPaid: true });
+                        lastDate = currentDate;
+                    } else if (ev.type === 'adj') {
+                        let currentFyPending = fyPending[ev.fy] || 0;
+                        if (currentFyPending > 0.001) { // fp tolerance
+                            let adj = currentFyPending / ev.remMonths;
+                            adj = Math.round((adj + Number.EPSILON) * 100) / 100;
+                            if (ev.remMonths === 1) adj = currentFyPending;
+                            
+                            fyPending[ev.fy] = Math.max(0, currentFyPending - adj);
+                            globalPending = Math.max(0, globalPending - adj);
+                            schedule.push({ date: ev.date, paid: 0, adjusted: adj, pending: globalPending, oppCost: rowOppCost, isPaid: false });
+                            lastDate = currentDate;
+                        }
+                    }
+                });
+
+                return schedule;
             }
         },
 
@@ -963,7 +1157,10 @@ window.initializeTool.fxTracker = function (container, config) {
                             interbankRate: this.form.interbankRate,
                             amount: this.form.amount,
                             serviceFee: this.form.serviceFee,
-                            bank: this.form.bank
+                            bank: this.form.bank,
+                            use12BAA: this.form.use12BAA,
+                            cagr: this.form.cagr,
+                            refundDelay: this.form.refundDelay
                         }
                     };
                     localStorage.setItem(FX_STORAGE_KEY, JSON.stringify(data));
@@ -1008,7 +1205,10 @@ window.initializeTool.fxTracker = function (container, config) {
                                     interbankRate: parsed.formPrefs.interbankRate || this.form.interbankRate,
                                     amount: parsed.formPrefs.amount || this.form.amount,
                                     serviceFee: parsed.formPrefs.serviceFee || this.form.serviceFee,
-                                    bank: parsed.formPrefs.bank || ''
+                                    bank: parsed.formPrefs.bank || '',
+                                    use12BAA: parsed.formPrefs.use12BAA ?? this.form.use12BAA,
+                                    cagr: parsed.formPrefs.cagr ?? this.form.cagr,
+                                    refundDelay: parsed.formPrefs.refundDelay ?? this.form.refundDelay
                                 });
                                 this.suppressAutoInterbankSync = false;
                             }
@@ -1031,6 +1231,9 @@ window.initializeTool.fxTracker = function (container, config) {
                 s += 'b' + (f.interbankRate || 0);
                 s += 'a' + (f.amount || 0);
                 s += 'f' + (f.serviceFee || 0);
+                s += 'y' + (f.use12BAA ? '1' : '0');
+                s += 'g' + (f.cagr || 0);
+                s += 'm' + (f.refundDelay || 3);
                 return s;
             },
 
@@ -1056,6 +1259,9 @@ window.initializeTool.fxTracker = function (container, config) {
                             else if (prefix === 'b') state.interbankRate = num;
                             else if (prefix === 'a') state.amount = num;
                             else if (prefix === 'f') state.serviceFee = num;
+                            else if (prefix === 'y') state.use12BAA = (num === 1);
+                            else if (prefix === 'g') state.cagr = num;
+                            else if (prefix === 'm') state.refundDelay = num;
                         }
                     }
                 }
