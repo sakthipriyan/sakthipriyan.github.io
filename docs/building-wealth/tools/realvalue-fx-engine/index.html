@@ -202,7 +202,13 @@
 <blockquote>
 <p><strong>RealValue FX Engine</strong> tells you exactly how many dollars your rupees buy — after the bank&rsquo;s hidden charges, GST, and TCS.</p>
 </blockquote>
-<p>Most people check the USD/INR rate on the bank&rsquo;s website and assume that is their cost. It is not. Every INR-USD transaction carries <strong>four distinct costs</strong>: the bank&rsquo;s FX spread over the interbank rate, an FX conversion GST computed per Rule 32(2)(b) of the CGST Rules, a flat processing fee, and 18% GST on that processing fee. RealValue FX Engine makes all four transparent in one place — and keeps a permanent log of every deal you&rsquo;ve booked.</p>
+<p>The engine is built around four core capabilities:</p>
+<ol>
+<li><strong>Finding Effective Rates &amp; Cost Breakdowns</strong>: Every INR-USD transaction carries distinct hidden costs—the bank&rsquo;s FX spread, Rule 32 conversion GST, and flat processing fees. The engine transparently maps out these costs to compute your true effective rate.</li>
+<li><strong>Compare Rates</strong>: A comprehensive side-by-side comparison matrix allowing you to evaluate multiple bank rates simultaneously, instantly identifying the lowest Transaction Cost and best Effective Rate among providers before executing a transfer.</li>
+<li><strong>Transaction History &amp; TCS Computation</strong>: It maintains a local, chronological log of all your past deals. This allows the engine to automatically track your cumulative gross INR and compute the exact 20% TCS applies to future transactions once you cross the ₹10 Lakhs FY limit.</li>
+<li><strong>Computing TCS Opportunity Cost</strong>: TCS taxes are eventually recovered, but the delay causes a cashflow drag. The engine calculates the precise opportunity cost of your locked-in capital over time by factoring in your expected return (XIRR) and your recovery schedule (Form 12BAA or ITR Filing).</li>
+</ol>
 <h3 id="why-realvalue-fx-engine">Why RealValue FX Engine?</h3>
 <p>Traditional bank FX calculators mislead you by:</p>
 <ul>
@@ -363,6 +369,13 @@
       </tr>
   </tbody>
 </table>
+<h3 id="tcs-opportunity-cost-cashflow-drag">TCS Opportunity Cost (Cashflow Drag)</h3>
+<p>Because Tax Collected at Source (TCS) is deducted immediately but only recovered later, that capital is temporarily locked away. This delay creates an <strong>opportunity cost</strong> (cashflow drag). RealValue FX Engine now tracks and quantifies this loss dynamically:</p>
+<ul>
+<li><strong>Adjustment Methods</strong>: You can configure how you plan to recover the TCS. Choose <strong>Form 12BAA (Monthly)</strong> if you&rsquo;ve submitted the TCS certificate to your employer to reduce your monthly TDS. Choose <strong>ITR Filing</strong> if you plan to claim it as a refund, along with your <strong>Expected Refund By</strong> date (e.g., Oct 31, Jan 31).</li>
+<li><strong>Your XIRR (%)</strong>: Enter your expected annual compound growth rate. The engine applies this rate daily to the pending TCS balance to compute exactly how much money you effectively lose while waiting for the tax credit.</li>
+<li><strong>TCS Opportunity Cost Table</strong>: A dedicated chronological schedule below the history table maps out every TCS payment and adjustment event, keeping a running tally of your pending TCS and calculating the accrued opportunity cost at every step.</li>
+</ul>
 <h3 id="built-for-real-life">Built for Real Life</h3>
 <ul>
 <li>Designed for <strong>Buy USD</strong> transactions (LRS remittances, tuition, travel)</li>
@@ -393,9 +406,18 @@
 <h3 id="what-is-lrs">What is LRS?</h3>
 <p>The Liberalised Remittance Scheme (LRS) allows resident Indians to remit up to <strong>USD 2,50,000 per financial year</strong> for permitted purposes (education, travel, investments, gifts, etc.) without prior RBI approval. Each USD Buy transaction you log here can be tracked toward your annual LRS limit.</p>
 <h3 id="how-is-tcs-calculated-across-multiple-transactions">How is TCS calculated across multiple transactions?</h3>
-<p>RealValue FX Engine sorts all your logged transactions by date in ascending order and walks the financial year cumulatively. Once the cumulative gross INR exceeds ₹10,00,000 in a FY, TCS at 20% applies on the excess for each subsequent transaction. TCS resets to zero at the start of each new financial year (April 1).</p>
+<p>RealValue FX Engine sorts all your logged transactions by date in ascending order and walks the financial year cumulatively. Once the cumulative gross INR exceeds ₹10,00,000 in a FY, TCS at 20% applies on the excess for each subsequent transaction. TCS resets to zero at the start of each new financial year (April 1). This accumulated history is then fed directly into the <strong>TCS Opportunity Cost</strong> schedule to visualize when that capital will be recovered.</p>
 <h3 id="my-transaction-data-is-stored-where">My transaction data is stored where?</h3>
 <p>All data is stored exclusively in your <strong>browser&rsquo;s localStorage</strong>. Nothing is sent to any server. Use the <strong>Export</strong> button to download a JSON backup before clearing browser data or switching devices.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="2026-03-21">2026-03-21</h3>
+<ul>
+<li><strong>Compare Rates Feature</strong>: Added a comprehensive side-by-side comparison engine. Evaluate multiple bank rates via horizontal summary cards and an exploded granular table displaying exact components like FX Spread, GST breakdowns, and Transaction Cost percentages. Highlights the best rate based on the lowest Transaction Cost. Improved UI and neutralized financial terminology across the tool.</li>
+</ul>
+<h3 id="2026-03-20">2026-03-20</h3>
+<ul>
+<li><strong>TCS Opportunity Cost Module</strong>: Added an interactive chronological schedule that dynamically tracks and visualizes the exact monetary opportunity cost (XIRR) of having your capital temporarily locked up by the government in TCS. The module explicitly contrasts the capital drag of the traditional <strong>ITR Refund</strong> timeline against using <strong>Form 12BAA</strong> for immediate employer salary TDS adjustment!</li>
+</ul>
 
     </div>
 

@@ -159,12 +159,28 @@ window.initializeTool.fxTracker = function (container, config) {
                         </h4>
 
                         <div class="input-group">
-                            <label>Bank Name:</label>
-                            <input
-                                type="text"
-                                v-model="form.bank"
-                                placeholder="e.g., HDFC Bank, SBI, Axis Bank"
-                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                            <label style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Bank Name:</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="This name identifies the institution in the Compare view as well as the final Transaction history.">ℹ️</span>
+                            </label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input
+                                    type="text"
+                                    v-model="form.bank"
+                                    placeholder="e.g., HDFC Bank, SBI, Axis Bank"
+                                    style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                                <button
+                                    type="button"
+                                    @click="addToCompare"
+                                    class="share-button"
+                                    style="flex-shrink: 0; min-width: 110px;"
+                                    :disabled="!isFormValid || !preview.valid">
+                                    ➕ Compare
+                                </button>
+                            </div>
+                            <p style="font-size: 0.82em; color: #999; margin: 0.5rem 0 0 0;">
+                                💡 Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.
+                            </p>
                         </div>
 
                         <div class="input-group">
@@ -172,24 +188,27 @@ window.initializeTool.fxTracker = function (container, config) {
                                 <span>Transaction ID:</span>
                                 <span class="help-icon help-icon-wide" data-tooltip="The transaction reference number on your bank statement or receipt.">ℹ️</span>
                             </label>
-                            <input
-                                type="text"
-                                v-model="form.txnId"
-                                placeholder="e.g., TXN-2026-001"
-                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: monospace;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input
+                                    type="text"
+                                    v-model="form.txnId"
+                                    placeholder="e.g., TXN-2026-001"
+                                    style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: monospace;">
+                                <button
+                                    type="button"
+                                    @click="addTransaction"
+                                    class="share-button"
+                                    style="flex-shrink: 0; min-width: 110px;"
+                                    :disabled="!isFormValid || !preview.valid">
+                                    ➕ Transaction
+                                </button>
+                            </div>
                         </div>
 
                         <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: 1.75rem;">
                             <p style="font-size: 0.85em; color: #999; margin: 0; flex: 1;">
                                 💡 Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.
                             </p>
-                            <button
-                                @click="addTransaction"
-                                class="share-button"
-                                style="flex-shrink: 0;"
-                                :disabled="!isFormValid || !preview.valid">
-                                ➕ Transaction
-                            </button>
                         </div>
                     </div>
 
@@ -254,7 +273,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>Forex Markup</span>
+                                            <span>FX Markup</span>
                                             <span class="help-icon help-icon-wide" data-tooltip="Provider spread over the interbank rate: (Quoted Rate − Interbank Rate) × USD amount.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.fxSpread)"></td>
@@ -312,45 +331,210 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
                 </div>
 
+                <div class="investment-plan" v-if="comparisonItems.length > 0" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">⚖️ Compare Rates</h2>
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': !showComparisonTable}"
+                                    @click="showComparisonTable = false"
+                                    style="white-space: nowrap;">
+                                    🎴 Cards
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': showComparisonTable}"
+                                    @click="showComparisonTable = true"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            @click="clearComparison"
+                            class="share-button btn-clear-all"
+                            style="white-space: nowrap;">
+                            🗑️ Clear All
+                        </button>
+                    </div>
+
+                    <div v-show="!showComparisonTable" style="display: flex; align-items: stretch; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                        <div
+                            v-for="(item, index) in comparisonItems"
+                            :key="item.id"
+                            :style="getCompareCardStyle(item)"
+                        >
+                            <button
+                                type="button"
+                                @click="removeCompare(item.id)"
+                                class="btn-remove-subtle"
+                                title="Remove Compare"
+                                style="position: absolute; top: 0.25rem; right: 0.25rem;"
+                            >✕</button>
+
+                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem; padding: 0 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                {{ item.inputs.bank || 'Bank ' + (index + 1) }}
+                            </div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #2980b9;" v-html="'&#36;' + formatUSDHtml(item.outputs.usdAmount)"></div>
+                            <div style="font-size: 0.8em; color: #2980b9; margin-top: 0.2rem;">{{ item.outputs.chargesPct.toFixed(2) }}%</div>
+                        </div>
+                    </div>
+
+                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 180px;"></th>
+                                    <th v-for="(item, index) in comparisonItems" :key="item.id" style="text-align: center; min-width: 120px; position: relative; padding: 0.5rem 1.5rem;">
+                                        {{ item.inputs.bank || 'Bank ' + (index + 1) }}
+                                        <button
+                                            type="button"
+                                            @click="removeCompare(item.id)"
+                                            class="btn-remove-subtle"
+                                            title="Remove Compare"
+                                            style="position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%);"
+                                        >✕</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>USD Amount</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" class="highlight" style="text-align: right; color: #2980b9;">
+                                        <strong style="font-size: 1.15em;" v-html="'&#36;' + formatUSDHtml(item.outputs.usdAmount)"></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Transaction Cost %</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" 
+                                        :style="[
+                                            { textAlign: 'right', fontWeight: 'bold' },
+                                            getCompareRank(item.outputs.chargesPct) === 0 ? { color: '#155724', background: '#d4edda', borderRadius: '4px' } : 
+                                            (getCompareRank(item.outputs.chargesPct) === 1 && comparisonItems.length > 2) ? { color: '#1e7e34', background: '#e8f5e9', borderRadius: '4px' } : 
+                                            {}
+                                        ]">
+                                        {{ item.outputs.chargesPct.toFixed(2) }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Effective Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; font-weight: bold;">
+                                        ₹{{ item.outputs.effectiveRate.toFixed(4) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bank Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;">₹{{ parseFloat(item.inputs.rate).toFixed(4) }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interbank Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; color: #666;">₹{{ parseFloat(item.inputs.interbankRate).toFixed(4) }}</td>
+                                </tr>
+                                <tr style="background: #f4f4f4; height: 16px;">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0;"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FX Interbank</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.ibCost)"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FX Markup</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.fxSpread)"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Processing Fee</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.inputs.serviceFee)"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FX Conversion GST</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.fxConvGST)"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GST on Processing Fee</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.processingFeeGST)"></td>
+                                </tr>
+                                <template v-if="comparisonItems.some(i => i.outputs.tcs > 0)">
+                                    <tr>
+                                        <td><strong>Net INR Amount</strong></td>
+                                        <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; font-weight: bold;" v-html="'₹' + formatINRHtml(item.outputs.inrDebit - item.outputs.tcs)"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>TCS @ 20% (refundable)</strong></td>
+                                        <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="item.outputs.tcs > 0 ? '₹' + formatINRHtml(item.outputs.tcs) : '–'"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Gross INR Amount</strong></td>
+                                        <td v-for="item in comparisonItems" :key="item.id" class="highlight" style="text-align: right; font-weight: bold;">
+                                            <strong style="font-size: 1.15em;" v-html="'₹' + formatINRHtml(item.outputs.inrDebit)"></strong>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template v-else>
+                                    <tr>
+                                        <td><strong>INR Amount</strong></td>
+                                        <td v-for="item in comparisonItems" :key="item.id" class="highlight" style="text-align: right; font-weight: bold;">
+                                            <strong style="font-size: 1.15em;" v-html="'₹' + formatINRHtml(item.outputs.inrDebit)"></strong>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div v-if="comparisonItems.length === 0" class="investment-plan" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">⚖️ Compare Rates</h2>
+                        </div>
+                    </div>
+                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                        <p>No rates to compare. Fill in the form and click <strong>Compare</strong> to get started.</p>
+                    </div>
+                </div>
+
                 <!-- Full-width: Transaction History -->
                 <div class="investment-plan" v-if="transactions.length > 0">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                         <h2 style="margin: 0;">📋 Transaction History</h2>
                         <button
                             type="button"
-                            class="share-button"
+                            class="share-button btn-clear-all"
                             @click="clearAll"
-                            style="background: #dc3545; border-color: #dc3545; color: white;">
+                            style="white-space: nowrap;">
                             🗑️ Clear All
                         </button>
                     </div>
 
                     <!-- Summary Tiles -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                        <div style="background: #f0f7ff; border: 1px solid #c3d9f5; border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total USD Bought</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #2980b9;" v-html="'$' + formatUSDHtml(summary.totalUSDBought)"></div>
-                            <div v-if="summary.totalUSDBought > 0" style="font-size: 0.8em; color: #2980b9; margin-top: 0.2rem;">Eff Rate: ₹{{ ((summary.totalINRSpent - summary.totalTCS) / summary.totalUSDBought).toFixed(4) }}</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #155724;" v-html="'$' + formatUSDHtml(summary.totalUSDBought)"></div>
+                            <div v-if="summary.totalUSDBought > 0" style="font-size: 0.8em; color: #155724; margin-top: 0.2rem;">Eff Rate: ₹{{ ((summary.totalINRSpent - summary.totalTCS) / summary.totalUSDBought).toFixed(4) }}</div>
                         </div>
-                        <div style="background: #fff3f3; border: 1px solid #f5c6c6; border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: #f0f7ff; border: 1px solid #c3d9f5; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total INR Spent</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #e74c3c;" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #e74c3c; margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #2980b9;" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #2980b9; margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
                         </div>
-                        <div style="background: #f3f0ff; border: 1px solid #c5b8f5; border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total TCS Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #6c3fc0;" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #6c3fc0; margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #d97706;" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #d97706; margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: #fff8e1; border: 1px solid #ffe08a; border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total FX Charges</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #e67e22;" v-html="'₹' + formatINRHtml(summary.totalCharges)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #e67e22; margin-top: 0.2rem;">{{ (summary.totalCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #ef4444;" v-html="'₹' + formatINRHtml(summary.totalCharges)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #ef4444; margin-top: 0.2rem;">{{ (summary.totalCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: #fff3e0; border: 1px solid #ffcc80; border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total GST Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #d35400;" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #d35400; margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #b91c1c;" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #b91c1c; margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
                     </div>
 
@@ -390,8 +574,105 @@ window.initializeTool.fxTracker = function (container, config) {
                     </p>
                 </div>
 
-                <div v-if="transactions.length === 0" class="investment-plan" style="text-align: center; padding: 2rem; color: #999;">
-                    <p>No transactions yet. Fill in the form and click <strong>Transaction</strong> to get started.</p>
+                <!-- TCS Drag Table -->
+                <div class="investment-plan" v-if="tcsDragSchedule.length > 0">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <h2 style="margin: 0;">📉 TCS Opportunity Cost</h2>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <div class="input-group" style="margin: 0; min-width: 200px;">
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                                <span>Your XIRR (%)</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="Your expected annual compound growth rate, used to compute the opportunity cost of locked TCS capital.">ℹ️</span>
+                            </label>
+                            <input 
+                                type="number" 
+                                v-model.number="form.cagr" 
+                                min="0" 
+                                max="50" 
+                                step="0.5"
+                                @input="debouncedCalculate"
+                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;"
+                            >
+                        </div>
+                        <div class="input-group" style="margin: 0; min-width: 200px;">
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                                <span>TCS Adjustment Method</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="When predicting the refund schedule, assume either Form 12BAA (monthly payroll adjustment) or standard ITR Filing.">ℹ️</span>
+                            </label>
+                            <div class="unit-buttons">
+                                <button 
+                                    type="button"
+                                    :class="{'active': form.use12BAA}"
+                                    @click="form.use12BAA = true; debouncedCalculate()">
+                                    Form 12BAA (Monthly)
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': !form.use12BAA}"
+                                    @click="form.use12BAA = false; debouncedCalculate()">
+                                    ITR Filing (July 31)
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="margin: 0; min-width: 200px;" v-if="!form.use12BAA">
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                                <span>Expected Refund By</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="When do you realistically expect the actual refund to be credited to your bank account after filing the ITR?">ℹ️</span>
+                            </label>
+                            <div class="unit-buttons">
+                                <button type="button" :class="{'active': form.refundDelay === 3}" @click="form.refundDelay = 3; debouncedCalculate()">Oct 31</button>
+                                <button type="button" :class="{'active': form.refundDelay === 6}" @click="form.refundDelay = 6; debouncedCalculate()">Jan 31</button>
+                                <button type="button" :class="{'active': form.refundDelay === 9}" @click="form.refundDelay = 9; debouncedCalculate()">Apr 30</button>
+                                <button type="button" :class="{'active': form.refundDelay === 12}" @click="form.refundDelay = 12; debouncedCalculate()">Jul 31</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem; max-width: 320px;">
+                        <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">TCS Opp. Cost ({{ form.cagr || 12 }}%)</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #db2777;" v-html="'₹' + formatINRHtml(summary.totalOppCost)"></div>
+                            <div v-if="summary.totalINRSpent > summary.totalTCS" style="font-size: 0.8em; color: #db2777; margin-top: 0.2rem;">{{ (summary.totalOppCost / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}% of Ex-TCS</div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">TCS Paid</th>
+                                    <th style="text-align: center;">TCS Adjusted</th>
+                                    <th style="text-align: center;">Pending TCS</th>
+                                    <th style="text-align: center;">Opp. Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(row, i) in tcsDragSchedule" :key="i">
+                                    <td style="white-space: nowrap;">{{ row.date }}</td>
+                                    <td style="text-align: right; color: #d35400;" v-html="row.paid > 0 ? '₹' + formatINRHtml(row.paid) : '–'"></td>
+                                    <td style="text-align: right; color: #27ae60;" v-html="row.adjusted > 0 ? '₹' + formatINRHtml(row.adjusted) : '–'"></td>
+                                    <td style="text-align: right; font-weight: 700; color: #2980b9;" v-html="'₹' + formatINRHtml(row.pending)"></td>
+                                    <td style="text-align: right; color: #db2777;" v-html="row.oppCost > 0 ? '₹' + formatINRHtml(row.oppCost) : '–'"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
+                        <span v-if="form.use12BAA">ℹ️ TCS is adjusted linearly over the remaining months of the financial year.</span>
+                        <span v-else>ℹ️ TCS adjustment date is computed as ITR Filing (July of next year) + Expected Refund Delay.</span>
+                    </p>
+                </div>
+
+                <div v-if="transactions.length === 0" class="investment-plan">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <h2 style="margin: 0;">📋 Transaction History</h2>
+                    </div>
+                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                        <p>No transactions yet. Fill in the form and click <strong>Transaction</strong> to get started.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -408,7 +689,10 @@ window.initializeTool.fxTracker = function (container, config) {
                     amount: 100000,
                     serviceFee: 1000,
                     bank: '',
-                    txnId: ''
+                    txnId: '',
+                    use12BAA: false,
+                    cagr: 12,
+                    refundDelay: 3
                 },
                 ibRateLoading: false,
                 ibRateError: '',
@@ -434,6 +718,8 @@ window.initializeTool.fxTracker = function (container, config) {
                     hasSpread: false
                 },
                 transactions: [],
+                comparisonItems: [],
+                showComparisonTable: false,
                 debounceTimer: null,
                 suppressAutoInterbankSync: false,
                 fxBreakdownChart: null,
@@ -500,7 +786,14 @@ window.initializeTool.fxTracker = function (container, config) {
                     totalTCS += t.tcs || 0;
                     totalIBCost += t.ibCost || 0;
                 });
-                return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost };
+
+                // Calculate Opportunity Cost directly from the schedule column
+                let totalOppCost = 0;
+                for (const row of this.tcsDragSchedule) {
+                    totalOppCost += row.oppCost || 0;
+                }
+
+                return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost, totalOppCost };
             },
             exportJSON() {
                 if (!this.preview.valid) return '';
@@ -600,16 +893,106 @@ window.initializeTool.fxTracker = function (container, config) {
                     };
                 });
                 return enriched.reverse(); // newest-first for display
+            },
+            tcsDragSchedule() {
+                const txns = this.computedTransactions.filter(t => t.tcs > 0);
+                if (txns.length === 0) return [];
+
+                // Group by FY
+                const fyGroups = {};
+                txns.forEach(t => {
+                    const d = new Date(t.date);
+                    const fy = d.getMonth() < 3 ? d.getFullYear() - 1 : d.getFullYear();
+                    if (!fyGroups[fy]) fyGroups[fy] = [];
+                    fyGroups[fy].push({ type: 'txn', date: t.date, paid: t.tcs, fy });
+                });
+
+                let events = [];
+                for (const fyStr in fyGroups) {
+                    const fy = parseInt(fyStr, 10);
+                    events.push(...fyGroups[fy]);
+
+                    if (this.form.use12BAA) {
+                        for (let monthOffset = 0; monthOffset < 12; monthOffset++) {
+                            const monthIndex = (3 + monthOffset) % 12; // April is 3
+                            const year = monthIndex < 3 ? fy + 1 : fy;
+                            // Last day of the month
+                            const lastDay = new Date(year, monthIndex + 1, 0);
+                            const ds = `${lastDay.getFullYear()}-${String(lastDay.getMonth() + 1).padStart(2, '0')}-${String(lastDay.getDate()).padStart(2, '0')}`;
+                            const rem = 12 - monthOffset;
+                            events.push({ type: 'adj', date: ds, fy, remMonths: rem });
+                        }
+                    } else {
+                        // ITR Filing (July of FY + 1) + Delay Months
+                        const ayYear = fy + 1;
+                        const delay = this.form.refundDelay || 3;
+                        const targetMonth = 6 + delay; // July is month 6 (0-indexed)
+                        const lastDay = new Date(ayYear, targetMonth + 1, 0); // End of target month
+                        const ds = `${lastDay.getFullYear()}-${String(lastDay.getMonth() + 1).padStart(2, '0')}-${String(lastDay.getDate()).padStart(2, '0')}`;
+                        events.push({ type: 'adj', date: ds, fy, remMonths: 1 });
+                    }
+                }
+
+                events.sort((a, b) => {
+                    if (a.date !== b.date) return a.date.localeCompare(b.date);
+                    return a.type === 'txn' ? -1 : 1;
+                });
+
+                const schedule = [];
+                let globalPending = 0;
+                let lastDate = null;
+                const fyPending = {};
+                const cagr = this.form.cagr || 0;
+
+                events.forEach(ev => {
+                    let rowOppCost = 0;
+                    const currentDate = new Date(ev.date);
+                    
+                    if (lastDate !== null && cagr > 0) {
+                        const days = (currentDate - lastDate) / (1000 * 60 * 60 * 24);
+                        if (days > 0 && globalPending > 0) {
+                            rowOppCost = globalPending * (Math.pow(1 + cagr / 100, days / 365.25) - 1);
+                        }
+                    }
+
+                    if (ev.type === 'txn') {
+                        globalPending += ev.paid;
+                        fyPending[ev.fy] = (fyPending[ev.fy] || 0) + ev.paid;
+                        schedule.push({ date: ev.date, paid: ev.paid, adjusted: 0, pending: globalPending, oppCost: rowOppCost, isPaid: true });
+                        lastDate = currentDate;
+                    } else if (ev.type === 'adj') {
+                        let currentFyPending = fyPending[ev.fy] || 0;
+                        if (currentFyPending > 0.001) { // fp tolerance
+                            let adj = currentFyPending / ev.remMonths;
+                            adj = Math.round((adj + Number.EPSILON) * 100) / 100;
+                            if (ev.remMonths === 1) adj = currentFyPending;
+                            
+                            fyPending[ev.fy] = Math.max(0, currentFyPending - adj);
+                            globalPending = Math.max(0, globalPending - adj);
+                            schedule.push({ date: ev.date, paid: 0, adjusted: adj, pending: globalPending, oppCost: rowOppCost, isPaid: false });
+                            lastDate = currentDate;
+                        }
+                    }
+                });
+
+                return schedule;
             }
         },
 
         watch: {
-            form: {
+            transactions: {
+                deep: true,
                 handler() {
-                    this.saveToStorage();
-                },
-                deep: true
+                    this.saveData();
+                }
             },
+            comparisonItems: {
+                deep: true,
+                handler() {
+                    this.saveData();
+                }
+            },
+            'form.amountUnit'() { this.debouncedCalculate(); },
             'form.rate'(newRate, oldRate) {
                 if (this.suppressAutoInterbankSync) return;
                 const currentInterbank = Number(this.form.interbankRate);
@@ -619,7 +1002,13 @@ window.initializeTool.fxTracker = function (container, config) {
                     this.form.interbankRate = parseFloat((Number(newRate) - 1.75).toFixed(2));
                 }
                 this.debouncedCalculate();
-            }
+            },
+            'form.interbankRate'() { this.debouncedCalculate(); },
+            'form.amount'() { this.debouncedCalculate(); },
+            'form.serviceFee'() { this.debouncedCalculate(); },
+            'form.date'() { this.debouncedCalculate(); },
+            'form.bank'() { this.saveData(); },
+            'form.txnId'() { this.saveData(); }
         },
 
         mounted() {
@@ -641,9 +1030,49 @@ window.initializeTool.fxTracker = function (container, config) {
         },
 
         methods: {
+            addToCompare() {
+                if (!this.preview.valid) return;
+                if (this.comparisonItems.length >= 6) {
+                    alert('You can only compare a maximum of 6 rates at a time.');
+                    return;
+                }
+                this.comparisonItems.push({
+                    id: Date.now().toString(36) + Math.random().toString(36).substring(2),
+                    inputs: JSON.parse(JSON.stringify(this.form)),
+                    outputs: JSON.parse(JSON.stringify(this.preview))
+                });
+            },
+            removeCompare(id) {
+                this.comparisonItems = this.comparisonItems.filter(item => item.id !== id);
+                if (this.comparisonItems.length === 0) {
+                    this.showComparisonTable = false;
+                }
+            },
+            clearComparison() {
+                if (confirm('Are you sure you want to clear all comparisons?')) {
+                    this.comparisonItems = [];
+                    this.showComparisonTable = false;
+                }
+            },
             debouncedCalculate() {
                 clearTimeout(this.debounceTimer);
                 this.debounceTimer = setTimeout(() => this.calculate(), FX_DEBOUNCE_DELAY_MS);
+            },
+            getCompareRank(val) {
+                if (this.comparisonItems.length <= 1) return -1;
+                const vals = [...new Set(this.comparisonItems.map(i => i.outputs.chargesPct))].sort((a, b) => a - b);
+                return vals.indexOf(val);
+            },
+            getCompareCardStyle(item) {
+                const rank = this.getCompareRank(item.outputs.chargesPct);
+                const baseStyle = { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'center', minWidth: '180px', flex: '1' };
+                if (rank === 0) {
+                    return { ...baseStyle, background: '#d4edda', border: '1px solid #c3e6cb' };
+                } else if (rank === 1 && this.comparisonItems.length > 2) {
+                    return { ...baseStyle, background: '#e8f5e9', border: '1px solid #c8e6c9' };
+                } else {
+                    return { ...baseStyle, background: '#f0f7ff', border: '1px solid #c3d9f5' };
+                }
             },
 
             // Rule 32(2)(b) CGST Rules – deemed taxable value for money-changing services
@@ -710,7 +1139,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 const fixedCharges = processingFee + processingFeeGST;
 
                 let usdAmount, grossINR, ibCost, rule32Val, fxConvGST, fxSpread, totalCharges,
-                    totalExtraCost, result, effectiveRate, effectiveOverInterbank, chargesPct, tcs, tcsDrag;
+                    totalExtraCost, result, inrDebit, effectiveRate, effectiveOverInterbank, chargesPct, tcs, tcsDrag;
 
                 if (unit === 'usd') {
                     // Given USD target → compute total INR to spend
@@ -725,6 +1154,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     const runningUSD = this.fyGrossINR;
                     tcs = trunc2(Math.min(grossINR, Math.max(0, runningUSD + grossINR - 1000000)) * 0.20);
                     result = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST + tcs);
+                    inrDebit = result;
                     const inrExTCS = trunc2(result - tcs);
                     totalExtraCost = totalCharges;
                     effectiveRate = usdAmount > 0 ? inrExTCS / usdAmount : 0;
@@ -750,7 +1180,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     totalCharges = trunc2(fxSpread + fxConvGST + processingFee + processingFeeGST);
                     tcs = trunc2(calcTCS(grossINR));
                     result = usdAmount;
-                    const inrDebit = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST + tcs);
+                    inrDebit = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST + tcs);
                     const inrDebitExTCS = trunc2(grossINR + fxConvGST + processingFee + processingFeeGST);
                     totalExtraCost = totalCharges;
                     effectiveRate = usdAmount > 0 ? inrDebitExTCS / usdAmount : 0;
@@ -776,7 +1206,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     usdAmount, grossINR, ibCost, rule32Val,
                     fxConvGST, processingFee, processingFeeGST,
                     fxSpread, totalCharges, totalExtraCost,
-                    result, inrDebit: null, effectiveRate, effectiveOverInterbank, chargesPct,
+                    result, inrDebit, effectiveRate, effectiveOverInterbank, chargesPct,
                     tcs, tcsDrag,
                     hasSpread: true
                 };
@@ -898,14 +1328,14 @@ window.initializeTool.fxTracker = function (container, config) {
                 };
 
                 this.transactions.unshift(txn);
-                this.saveToStorage();
+                this.saveData();
                 this.form.txnId = '';
                 this.calculate();
             },
 
             removeTransaction(id) {
                 this.transactions = this.transactions.filter(t => t.id !== id);
-                this.saveToStorage();
+                this.saveData();
                 this.calculate();
             },
 
@@ -944,7 +1374,7 @@ window.initializeTool.fxTracker = function (container, config) {
             clearAll() {
                 if (confirm('Clear all transactions? This cannot be undone.')) {
                     this.transactions = [];
-                    this.saveToStorage();
+                    this.saveData();
                 }
             },
 
@@ -953,17 +1383,22 @@ window.initializeTool.fxTracker = function (container, config) {
                 this.calculate();
             },
 
-            saveToStorage() {
+            saveData() {
                 try {
                     const data = {
                         transactions: this.transactions,
+                        comparisonItems: this.comparisonItems,
                         formPrefs: {
                             amountUnit: this.form.amountUnit,
                             rate: this.form.rate,
                             interbankRate: this.form.interbankRate,
                             amount: this.form.amount,
                             serviceFee: this.form.serviceFee,
-                            bank: this.form.bank
+                            bank: this.form.bank,
+                            txnId: this.form.txnId,
+                            use12BAA: this.form.use12BAA,
+                            cagr: this.form.cagr,
+                            refundDelay: this.form.refundDelay
                         }
                     };
                     localStorage.setItem(FX_STORAGE_KEY, JSON.stringify(data));
@@ -1000,6 +1435,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             this.transactions = parsed.map(t => this.normalizeTxn(t));
                         } else {
                             this.transactions = Array.isArray(parsed.transactions) ? parsed.transactions.map(t => this.normalizeTxn(t)) : [];
+                            this.comparisonItems = Array.isArray(parsed.comparisonItems) ? parsed.comparisonItems : [];
                             if (!skipFormPrefs && parsed.formPrefs && typeof parsed.formPrefs === 'object') {
                                 this.suppressAutoInterbankSync = true;
                                 this.form = Object.assign({}, this.form, {
@@ -1008,7 +1444,10 @@ window.initializeTool.fxTracker = function (container, config) {
                                     interbankRate: parsed.formPrefs.interbankRate || this.form.interbankRate,
                                     amount: parsed.formPrefs.amount || this.form.amount,
                                     serviceFee: parsed.formPrefs.serviceFee || this.form.serviceFee,
-                                    bank: parsed.formPrefs.bank || ''
+                                    bank: parsed.formPrefs.bank || '',
+                                    use12BAA: parsed.formPrefs.use12BAA ?? this.form.use12BAA,
+                                    cagr: parsed.formPrefs.cagr ?? this.form.cagr,
+                                    refundDelay: parsed.formPrefs.refundDelay ?? this.form.refundDelay
                                 });
                                 this.suppressAutoInterbankSync = false;
                             }
@@ -1031,6 +1470,9 @@ window.initializeTool.fxTracker = function (container, config) {
                 s += 'b' + (f.interbankRate || 0);
                 s += 'a' + (f.amount || 0);
                 s += 'f' + (f.serviceFee || 0);
+                s += 'y' + (f.use12BAA ? '1' : '0');
+                s += 'g' + (f.cagr || 0);
+                s += 'm' + (f.refundDelay || 3);
                 return s;
             },
 
@@ -1056,6 +1498,9 @@ window.initializeTool.fxTracker = function (container, config) {
                             else if (prefix === 'b') state.interbankRate = num;
                             else if (prefix === 'a') state.amount = num;
                             else if (prefix === 'f') state.serviceFee = num;
+                            else if (prefix === 'y') state.use12BAA = (num === 1);
+                            else if (prefix === 'g') state.cagr = num;
+                            else if (prefix === 'm') state.refundDelay = num;
                         }
                     }
                 }
