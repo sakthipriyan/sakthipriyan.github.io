@@ -277,6 +277,20 @@
     cursor: not-allowed;
 }
 
+/* Clear All Variant of Share Button */
+.share-button.btn-clear-all {
+    border-color: #e74c3c;
+    color: #c0392b;
+    background: transparent;
+}
+
+.share-button.btn-clear-all:hover:not(:disabled) {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+
 /* Multi-Unit Input */
 .multi-unit-input {
     display: grid;

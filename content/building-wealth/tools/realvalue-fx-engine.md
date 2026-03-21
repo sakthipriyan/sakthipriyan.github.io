@@ -21,7 +21,12 @@ wealth_tags:
 
 > **RealValue FX Engine** tells you exactly how many dollars your rupees buy — after the bank's hidden charges, GST, and TCS.
 
-Most people check the USD/INR rate on the bank's website and assume that is their cost. It is not. Every INR-USD transaction carries **four distinct costs**: the bank's FX spread over the interbank rate, an FX conversion GST computed per Rule 32(2)(b) of the CGST Rules, a flat processing fee, and 18% GST on that processing fee. RealValue FX Engine makes all four transparent in one place — and keeps a permanent log of every deal you've booked.
+The engine is built around four core capabilities:
+
+1. **Finding Effective Rates & Cost Breakdowns**: Every INR-USD transaction carries distinct hidden costs—the bank's FX spread, Rule 32 conversion GST, and flat processing fees. The engine transparently maps out these costs to compute your true effective rate.
+2. **Compare Rates**: A comprehensive side-by-side comparison matrix allowing you to evaluate multiple bank rates simultaneously, instantly identifying the lowest Transaction Cost and best Effective Rate among providers before executing a transfer.
+3. **Transaction History & TCS Computation**: It maintains a local, chronological log of all your past deals. This allows the engine to automatically track your cumulative gross INR and compute the exact 20% TCS applies to future transactions once you cross the ₹10 Lakhs FY limit.
+4. **Computing TCS Opportunity Cost**: TCS taxes are eventually recovered, but the delay causes a cashflow drag. The engine calculates the precise opportunity cost of your locked-in capital over time by factoring in your expected return (XIRR) and your recovery schedule (Form 12BAA or ITR Filing).
 
 ### Why RealValue FX Engine?
 
@@ -89,6 +94,14 @@ Every transaction you add is stored in your browser and displayed in a sortable 
 | **GST** | Total GST (FX conversion + processing fee) |
 | **TCS** | TCS collected (refundable in ITR) |
 
+### TCS Opportunity Cost (Cashflow Drag)
+
+Because Tax Collected at Source (TCS) is deducted immediately but only recovered later, that capital is temporarily locked away. This delay creates an **opportunity cost** (cashflow drag). RealValue FX Engine now tracks and quantifies this loss dynamically:
+
+- **Adjustment Methods**: You can configure how you plan to recover the TCS. Choose **Form 12BAA (Monthly)** if you've submitted the TCS certificate to your employer to reduce your monthly TDS. Choose **ITR Filing** if you plan to claim it as a refund, along with your **Expected Refund By** date (e.g., Oct 31, Jan 31).
+- **Your XIRR (%)**: Enter your expected annual compound growth rate. The engine applies this rate daily to the pending TCS balance to compute exactly how much money you effectively lose while waiting for the tax credit.
+- **TCS Opportunity Cost Table**: A dedicated chronological schedule below the history table maps out every TCS payment and adjustment event, keeping a running tally of your pending TCS and calculating the accrued opportunity cost at every step.
+
 ### Built for Real Life
 
 - Designed for **Buy USD** transactions (LRS remittances, tuition, travel)
@@ -127,8 +140,16 @@ The Liberalised Remittance Scheme (LRS) allows resident Indians to remit up to *
 
 ### How is TCS calculated across multiple transactions?
 
-RealValue FX Engine sorts all your logged transactions by date in ascending order and walks the financial year cumulatively. Once the cumulative gross INR exceeds ₹10,00,000 in a FY, TCS at 20% applies on the excess for each subsequent transaction. TCS resets to zero at the start of each new financial year (April 1).
+RealValue FX Engine sorts all your logged transactions by date in ascending order and walks the financial year cumulatively. Once the cumulative gross INR exceeds ₹10,00,000 in a FY, TCS at 20% applies on the excess for each subsequent transaction. TCS resets to zero at the start of each new financial year (April 1). This accumulated history is then fed directly into the **TCS Opportunity Cost** schedule to visualize when that capital will be recovered.
 
 ### My transaction data is stored where?
 
 All data is stored exclusively in your **browser's localStorage**. Nothing is sent to any server. Use the **Export** button to download a JSON backup before clearing browser data or switching devices.
+
+## Changelog
+
+### 2026-03-21
+- **Compare Rates Feature**: Added a comprehensive side-by-side comparison engine. Evaluate multiple bank rates via horizontal summary cards and an exploded granular table displaying exact components like FX Spread, GST breakdowns, and Transaction Cost percentages. Highlights the best rate based on the lowest Transaction Cost. Improved UI and neutralized financial terminology across the tool.
+
+### 2026-03-20
+- **TCS Opportunity Cost Module**: Added an interactive chronological schedule that dynamically tracks and visualizes the exact monetary opportunity cost (XIRR) of having your capital temporarily locked up by the government in TCS. The module explicitly contrasts the capital drag of the traditional **ITR Refund** timeline against using **Form 12BAA** for immediate employer salary TDS adjustment!
