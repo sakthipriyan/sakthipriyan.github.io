@@ -244,6 +244,9 @@ Toggle **Post Tax** to see after-tax values across all views.
 
 ## Changelog
 
+### 2026-03-22
+- **Compare Scenarios**: Save up to 6 SIP scenarios side-by-side using the new ⚖️ Compare Scenarios section. Compare in Cards or Table view with Monthly SIP, Time Required, Contribution Period, Growth Rate, Yearly Hike, Inflation, Exit Tax, Portfolio Value (Nominal), and Post Tax Real Value. The computed metric (Monthly SIP or Time Required) is highlighted based on target mode. Scenarios persist in your browser via localStorage.
+
 ### 2026-03-10
 - **Real vs Nominal Breakdown Chart**: Added a dual concentric donut chart below the Investment Analysis table showing Invested, Net Growth, and Tax split for both Nominal (outer ring) and Real inflation-adjusted (inner ring) values.
 
