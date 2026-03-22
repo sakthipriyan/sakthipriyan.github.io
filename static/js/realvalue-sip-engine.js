@@ -10,6 +10,7 @@ const CURRENCY_MULTIPLIERS = {
 const MAX_INVESTMENT_YEARS = 100;
 const MAX_INVESTMENT_MONTHS = MAX_INVESTMENT_YEARS * 12;
 const DEBOUNCE_DELAY_MS = 300;
+const SIP_STORAGE_KEY = 'sip-calculator-v1';
 
 window.initializeTool.sipCalculator = function (container, config) {
     // Create Vue app template
@@ -17,7 +18,9 @@ window.initializeTool.sipCalculator = function (container, config) {
         <div id="sip-calculator-app">
             <div class="sip-calculator">
                 <div class="sip-container">
-                    <!-- Left Column: Input Fields -->
+                    <!-- Left Column: Inputs + Compare -->
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Input Fields -->
                     <div class="sip-inputs">
 
                         <!-- Section: Goal -->
@@ -164,7 +167,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         <!-- Current Investment -->
                         <div class="input-group">
                             <label>
-                                Current Investment:&nbsp;<strong>₹ {{ formatCurrencyFull(currentInvestment) }}</strong>
+                                Lumpsum:&nbsp;<strong>₹ {{ formatCurrencyFull(currentInvestment) }}</strong>
                                 <span class="help-icon help-icon-wide" data-tooltip="The lump sum amount you already have invested or plan to invest today">ℹ️</span>
                             </label>
                             <div class="unit-selector-input">
@@ -201,7 +204,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         <!-- Monthly Investment - hidden in Both mode (it becomes an output) -->
                         <div class="input-group" v-if="!isBothTargetsMode">
                             <label>
-                                Monthly Investment:&nbsp;<strong>₹ {{ formatCurrencyFull(monthlyInvestment) }}</strong>
+                                Monthly SIP:&nbsp;<strong>₹ {{ formatCurrencyFull(monthlyInvestment) }}</strong>
                                 <span class="help-icon help-icon-wide" data-tooltip="The fixed amount you plan to invest every month through SIP">ℹ️</span>
                             </label>
                             <div class="unit-selector-input">
@@ -305,6 +308,38 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
 
                         <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
                     </div>
+
+                    <!-- Compare Scenarios Box (below inputs, same column) -->
+                    <div class="sip-inputs">
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
+                        <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                            <span>Scenario Name (Optional):</span>
+                        </label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="text"
+                                v-model="formData.scenarioName"
+                                placeholder="e.g., Scenario 1"
+                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                            <button
+                                type="button"
+                                @click="addToCompare"
+                                class="share-button"
+                                style="flex-shrink: 0; min-width: 90px;"
+                                :disabled="!results.calculated">
+                                ➕ Add
+                            </button>
+                            <button
+                                type="button"
+                                v-if="comparisonItems.length > 0"
+                                class="share-button"
+                                @click="scrollToCompare"
+                                style="flex-shrink: 0; min-width: 80px;">
+                                👁️ View ({{ comparisonItems.length }})
+                            </button>
+                        </div>
+                    </div>
+                    </div><!-- end left column wrapper -->
                     
                     <!-- Right Column: Output Results and Chart -->
                     <div class="sip-outputs" v-if="results.calculated">
@@ -616,6 +651,230 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         </table>
                     </div>
                 </div>
+
+                <!-- Compare Scenarios -->
+                <div id="sip-compare-scenarios" class="investment-plan" v-if="comparisonItems.length > 0" style="margin-bottom: 2rem; scroll-margin-top: 80px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': !showComparisonTable}"
+                                    @click="showComparisonTable = false"
+                                    style="white-space: nowrap;">
+                                    🎴 Cards
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': showComparisonTable}"
+                                    @click="showComparisonTable = true"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            @click="clearComparison"
+                            class="share-button btn-clear-all"
+                            style="white-space: nowrap;">
+                            🗑️ Clear All
+                        </button>
+                    </div>
+
+                    <!-- Cards View -->
+                    <div v-show="!showComparisonTable" style="display: flex; align-items: stretch; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                        <div
+                            v-for="(item, index) in comparisonItems"
+                            :key="item.id"
+                            :style="getCompareCardStyle(item)">
+                            <button
+                                type="button"
+                                @click="removeCompare(item.id)"
+                                class="btn-remove-subtle"
+                                title="Remove"
+                                style="position: absolute; top: 0.25rem; right: 0.25rem;">✕</button>
+
+                            <div style="font-size: 0.85em; font-weight: bold; color: #555; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;">
+                                {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
+                            </div>
+
+                            <div style="font-size: 0.95em; text-align: left; line-height: 1.4;">
+                                <div style="margin-top: 0.5rem;" v-if="item.inputs.currentInvestmentValue > 0">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Lumpsum</span>
+                                    ₹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                </div>
+
+                                <div :style="item.inputs.targetTime && item.inputs.targetMoney ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.5rem' } : { marginTop: '0.5rem' }">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Monthly SIP</span>
+                                    {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                </div>
+
+                                <div :style="item.inputs.targetMoney && !item.inputs.targetTime ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
+                                    {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
+                                </div>
+
+                                <div style="margin-top: 0.6rem;">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Growth / Inflation</span>
+                                    {{ item.inputs.cagr }}% / {{ item.inputs.inflationRate }}%
+                                </div>
+
+                                <div :style="item.inputs.targetTime && !item.inputs.targetMoney ? { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold', color: '#2980b9' } : { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold' }">
+                                    <span style="font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: normal; color: #666;">Post Tax Real Value</span>
+                                    ₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}
+                                    <span style="font-size: 0.8em; font-weight: normal; margin-left: 2px; color: #888;">({{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table View -->
+                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 180px;"></th>
+                                    <th v-for="(item, index) in comparisonItems" :key="item.id" style="text-align: center; min-width: 120px; position: relative; padding: 0.5rem 1.5rem;">
+                                        {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
+                                        <button
+                                            type="button"
+                                            @click="removeCompare(item.id)"
+                                            class="btn-remove-subtle"
+                                            title="Remove"
+                                            style="position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%);">✕</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Target Mode</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'mode-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.targetTime && item.inputs.targetMoney ? 'Time + Money' : item.inputs.targetTime ? 'Time' : 'Money' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Lumpsum</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'cur-'+item.id" style="text-align: right; color: #666;">
+                                        ₹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Monthly SIP</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'sip-'+item.id"
+                                        :style="item.inputs.targetTime && item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Time Required</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'time-'+item.id"
+                                        :style="item.inputs.targetMoney && !item.inputs.targetTime ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contribution Period</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'cont-'+item.id" style="text-align: right;">
+                                        {{ item.inputs.investmentPeriodValue }} {{ item.inputs.investmentPeriodValue === 1 ? item.inputs.investmentPeriodUnit.slice(0, -1) : item.inputs.investmentPeriodUnit }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Expected Growth</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'cagr-'+item.id" style="text-align: right;">
+                                        {{ item.inputs.cagr }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Yearly Hike</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'hike-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.yearlyHike }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inflation Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'inf-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.inflationRate }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Exit Tax</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'tax-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.taxRate }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Investment</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'inv-n-'+item.id" style="text-align: right;">
+                                        ₹{{ formatCurrencyFull(item.outputs.totalInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Growth</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'gro-n-'+item.id" style="text-align: right;">
+                                        ₹{{ formatCurrencyFull(item.outputs.expectedValue - item.outputs.totalInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portfolio Value</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pv-n-'+item.id" style="text-align: right;">
+                                        <div style="font-size: 1.05em;">₹{{ formatCurrencyFull(item.outputs.expectedValue) }}</div>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (item.outputs.expectedValue / item.outputs.totalInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Post Tax</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pt-n-'+item.id" style="text-align: right;">
+                                        <div>₹{{ formatCurrencyFull(item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) }}</div>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ ((item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) / item.outputs.totalInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888;">Real (Inflation Adjusted)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Investment</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'inv-r-'+item.id" style="text-align: right; color: #666;">
+                                        ₹{{ formatCurrencyFull(item.outputs.realInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Growth</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'gro-r-'+item.id" style="text-align: right; color: #666;">
+                                        ₹{{ formatCurrencyFull(item.outputs.inflationAdjustedValue - item.outputs.realInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portfolio Value</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pv-r-'+item.id" style="text-align: right; color: #666;">
+                                        <div>₹{{ formatCurrencyFull(item.outputs.inflationAdjustedValue) }}</div>
+                                        <div style="font-size: 0.85em; color: #888; margin-top: 2px;">{{ (item.outputs.inflationAdjustedValue / item.outputs.realInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Post Tax</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pt-r-'+item.id"
+                                        :style="item.inputs.targetTime && !item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        <div style="font-size: 1.1em;">₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}</div>
+                                        <div style="font-size: 0.85em; color: #999; margin-top: 2px; font-weight: normal;">{{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Empty Compare State -->
+                <div v-if="comparisonItems.length === 0" class="investment-plan" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
+                    </div>
+                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                        <p>No scenarios to compare yet. Click <strong>➕ Add</strong> under <strong>⚖️ Compare Scenarios</strong> with an optional scenario name to get started.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     `;
@@ -646,7 +905,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     targetAmountUnit: 'lakhs',
                     targetTime: true,
                     targetMoney: false,
-                    startMonth: `${year}-${month}`
+                    startMonth: `${year}-${month}`,
+                    scenarioName: ''
                 },
                 results: {
                     calculated: false,
@@ -674,7 +934,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 contributionChartCategories: [],
                 contributionResizeHandler: null,
                 copyButtonText: '📋 JSON',
-                shareButtonText: '🔗 Share'
+                shareButtonText: '🔗 Share',
+                comparisonItems: [],
+                showComparisonTable: false
             }
         },
         computed: {
@@ -1004,12 +1266,25 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
                 }
                 // Otherwise contribution period is intentionally shorter — leave it untouched
-            }
+            },
             // Note: applyPostTax watcher not needed - toggling it triggers displayedPlan recomputation
             // which in turn triggers the chart update via the displayedPlan watcher
+            comparisonItems: {
+                handler(newVal) {
+                    try {
+                        localStorage.setItem(SIP_STORAGE_KEY, JSON.stringify(newVal));
+                    } catch(e) {}
+                },
+                deep: true
+            }
         },
         mounted() {
             this.loadFromUrl();
+            // Restore comparison scenarios from localStorage
+            try {
+                const saved = localStorage.getItem(SIP_STORAGE_KEY);
+                if (saved) this.comparisonItems = JSON.parse(saved);
+            } catch(e) {}
             this.$nextTick(() => {
                 this.calculateResults();
             });
@@ -1023,6 +1298,46 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
             });
         },
         methods: {
+            // Compare Scenarios Methods
+            scrollToCompare() {
+                const el = document.getElementById('sip-compare-scenarios');
+                if (!el) return;
+                const navbarHeight = document.querySelector('header, nav, .navbar, [role="navigation"]')?.offsetHeight || 70;
+                const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                window.scrollTo({ top, behavior: 'smooth' });
+            },
+            addToCompare() {
+                if (!this.results.calculated) return;
+                if (this.comparisonItems.length >= 6) {
+                    alert('You can compare up to 6 scenarios at a time.');
+                    return;
+                }
+                this.comparisonItems.push({
+                    id: Date.now().toString(36) + Math.random().toString(36).substring(2),
+                    inputs: JSON.parse(JSON.stringify(this.formData)),
+                    outputs: JSON.parse(JSON.stringify(this.results))
+                });
+                this.comparisonItems = [...this.comparisonItems];
+            },
+            removeCompare(id) {
+                this.comparisonItems = this.comparisonItems.filter(item => item.id !== id);
+                if (this.comparisonItems.length === 0) this.showComparisonTable = false;
+            },
+            clearComparison() {
+                if (confirm('Are you sure you want to clear all comparisons?')) {
+                    this.comparisonItems = [];
+                    this.showComparisonTable = false;
+                }
+            },
+            getCompareRank(val) {
+                if (this.comparisonItems.length <= 1) return -1;
+                const vals = [...new Set(this.comparisonItems.map(i => i.outputs.postTaxRealValue))].sort((a, b) => b - a);
+                return Math.max(0, vals.indexOf(val));
+            },
+            getCompareCardStyle(item) {
+                return { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'left', minWidth: '180px', flex: '1', background: '#f8f9fa', border: '1px solid #dee2e6' };
+            },
+
             // URL Sharing Methods
             encodeState() {
                 const f = this.formData;
