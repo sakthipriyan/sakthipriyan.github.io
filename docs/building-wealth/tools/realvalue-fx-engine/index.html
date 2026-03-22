@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RealValue FX Engine | Sakthi Priyan H</title>
+    <meta name="description" content="Calculate exactly how much USD you get for your INR — including forex spread, GST (Rule 32), and TCS — and keep a searchable, browser-only log of every FX transaction."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/tools.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/tools/">Tools</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>RealValue FX Engine</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="tool">
+    
+<header class="content-header">
+    <h1 class="content-title">RealValue FX Engine</h1>
+    <p class="content-summary">Calculate exactly how much USD you get for your INR — including forex spread, GST (Rule 32), and TCS — and keep a searchable, browser-only log of every FX transaction.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-03-15">Mar 15, 2026</time>
+        </span><span class="meta-item">
+            <span class="meta-icon">🔧</span>
+            <span class="use-time">Interactive Tool</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    
+    
+    
+    <div class="tool-interface">
+        <div id="tool-fxTracker" class="tool-widget">
+            
+        </div>
+    </div>
+    
+
+    <div class="tool-content">
+        <h2 id="about-realvalue-fx-engine">About RealValue FX Engine</h2>
+<blockquote>
+<p><strong>RealValue FX Engine</strong> tells you exactly how many dollars your rupees buy — after the bank&rsquo;s hidden charges, GST, and TCS.</p>
+</blockquote>
+<p>The engine is built around four core capabilities:</p>
+<ol>
+<li><strong>Finding Effective Rates &amp; Cost Breakdowns</strong>: Every INR-USD transaction carries distinct hidden costs—the bank&rsquo;s FX spread, Rule 32 conversion GST, and flat processing fees. The engine transparently maps out these costs to compute your true effective rate.</li>
+<li><strong>Compare Rates</strong>: A comprehensive side-by-side comparison matrix allowing you to evaluate multiple bank rates simultaneously, instantly identifying the lowest Transaction Cost and best Effective Rate among providers before executing a transfer.</li>
+<li><strong>Transaction History &amp; TCS Computation</strong>: It maintains a local, chronological log of all your past deals. This allows the engine to automatically track your cumulative gross INR and compute the exact 20% TCS applies to future transactions once you cross the ₹10 Lakhs FY limit.</li>
+<li><strong>Computing TCS Opportunity Cost</strong>: TCS taxes are eventually recovered, but the delay causes a cashflow drag. The engine calculates the precise opportunity cost of your locked-in capital over time by factoring in your expected return (XIRR) and your recovery schedule (Form 12BAA or ITR Filing).</li>
+</ol>
+<h3 id="why-realvalue-fx-engine">Why RealValue FX Engine?</h3>
+<p>Traditional bank FX calculators mislead you by:</p>
+<ul>
+<li>Showing only the quoted exchange rate, ignoring service charges</li>
+<li>Hiding the GST amount in fine print</li>
+<li>Giving no way to compare the <strong>effective rate</strong> across transactions or banks</li>
+</ul>
+<p><strong>RealValue FX Engine</strong> solves this by:</p>
+<ul>
+<li>Breaking down <strong>all four cost components</strong> per transaction with per-USD cost and % over interbank</li>
+<li>Computing the FX conversion GST using the official Rule 32(2)(b) formula automatically</li>
+<li>Tracking <strong>TCS</strong> with correct financial-year accumulation (gross INR thresholds reset each April)</li>
+<li>Showing your <strong>effective rate</strong> (actual INR cost per USD) for every deal</li>
+<li>Storing every transaction in your browser so you always have a reconcilable log</li>
+<li>Visualising cost composition as a <strong>live donut chart</strong> with interbank vs. effective rate in the centre</li>
+</ul>
+<h3 id="how-the-four-costs-are-calculated">How the Four Costs Are Calculated</h3>
+<p>For a $1,000 transaction (interbank rate ₹91.85, bank rate ₹93.60, processing fee ₹1,000):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th>Calculation</th>
+          <th>Cost</th>
+          <th>Per $1</th>
+          <th>% vs Interbank</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Bank FX Spread</td>
+          <td>1,000 × (₹93.60 − ₹91.85)</td>
+          <td>₹1,750</td>
+          <td>₹1.75</td>
+          <td>1.90%</td>
+      </tr>
+      <tr>
+          <td>FX Conversion GST</td>
+          <td>18% × Rule-32 taxable value</td>
+          <td>₹168</td>
+          <td>₹0.17</td>
+          <td>0.18%</td>
+      </tr>
+      <tr>
+          <td>Processing Fee</td>
+          <td>Flat</td>
+          <td>₹1,000</td>
+          <td>₹1.00</td>
+          <td>1.09%</td>
+      </tr>
+      <tr>
+          <td>GST on Processing Fee</td>
+          <td>18% × ₹1,000</td>
+          <td>₹180</td>
+          <td>₹0.18</td>
+          <td>0.20%</td>
+      </tr>
+      <tr>
+          <td><strong>Total Extra Cost</strong></td>
+          <td></td>
+          <td><strong>₹3,098</strong></td>
+          <td><strong>₹3.10</strong></td>
+          <td><strong>3.37%</strong></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="rule-322b-cgst--fx-taxable-value">Rule 32(2)(b) CGST — FX Taxable Value</h4>
+<p>India&rsquo;s GST Act prescribes a deemed-value slab for the FX conversion service:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Transaction Amount (Gross INR)</th>
+          <th>Rule 32(2) Taxable Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Up to ₹1,00,000</td>
+          <td>1% of amount (minimum ₹45)</td>
+      </tr>
+      <tr>
+          <td>₹1,00,001 – ₹10,00,000</td>
+          <td>₹1,000 + 0.5% of amount above ₹1,00,000</td>
+      </tr>
+      <tr>
+          <td>Above ₹10,00,000</td>
+          <td>₹5,500 + 0.1% of amount above ₹10,00,000 (max ₹60,000)</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>18% GST</strong> is then levied on the taxable value above. This is separate from the flat processing fee which also attracts 18% GST.</p>
+<h4 id="tcs--tax-collected-at-source">TCS — Tax Collected at Source</h4>
+<p>Under Section 206C(1G) of the Income Tax Act, banks collect TCS on LRS remittances. The threshold and rate reset every financial year (April 1 – March 31):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Cumulative Gross INR in FY</th>
+          <th>TCS Rate</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Up to ₹10,00,000</td>
+          <td>0%</td>
+      </tr>
+      <tr>
+          <td>Above ₹10,00,000</td>
+          <td>20% on the excess</td>
+      </tr>
+  </tbody>
+</table>
+<p>RealValue FX Engine accumulates gross INR <strong>in chronological date order</strong> across all your logged Buy USD transactions for the current FY to determine the correct TCS for each deal. TCS is a refundable advance tax — it does not represent a permanent cost.</p>
+<h3 id="transaction-log--history">Transaction Log &amp; History</h3>
+<p>Every transaction you add is stored in your browser and displayed in a sortable history table with these columns:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Column</th>
+          <th>What it shows</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Date</strong></td>
+          <td>Trade settlement date</td>
+      </tr>
+      <tr>
+          <td><strong>Bank</strong></td>
+          <td>Bank or broker name</td>
+      </tr>
+      <tr>
+          <td><strong>Trans ID</strong></td>
+          <td>Your deal / transaction reference</td>
+      </tr>
+      <tr>
+          <td><strong>USD Bought</strong></td>
+          <td>Actual USD received for this transaction</td>
+      </tr>
+      <tr>
+          <td><strong>Gross INR Spent</strong></td>
+          <td>Total INR debited including TCS</td>
+      </tr>
+      <tr>
+          <td><strong>Net INR Spent</strong></td>
+          <td>INR spent excluding refundable TCS</td>
+      </tr>
+      <tr>
+          <td><strong>Charges</strong></td>
+          <td>FX spread + processing fee (permanent costs)</td>
+      </tr>
+      <tr>
+          <td><strong>GST</strong></td>
+          <td>Total GST (FX conversion + processing fee)</td>
+      </tr>
+      <tr>
+          <td><strong>TCS</strong></td>
+          <td>TCS collected (refundable in ITR)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="tcs-opportunity-cost-cashflow-drag">TCS Opportunity Cost (Cashflow Drag)</h3>
+<p>Because Tax Collected at Source (TCS) is deducted immediately but only recovered later, that capital is temporarily locked away. This delay creates an <strong>opportunity cost</strong> (cashflow drag). RealValue FX Engine now tracks and quantifies this loss dynamically:</p>
+<ul>
+<li><strong>Adjustment Methods</strong>: You can configure how you plan to recover the TCS. Choose <strong>Form 12BAA (Monthly)</strong> if you&rsquo;ve submitted the TCS certificate to your employer to reduce your monthly TDS. Choose <strong>ITR Filing</strong> if you plan to claim it as a refund, along with your <strong>Expected Refund By</strong> date (e.g., Oct 31, Jan 31).</li>
+<li><strong>Your XIRR (%)</strong>: Enter your expected annual compound growth rate. The engine applies this rate daily to the pending TCS balance to compute exactly how much money you effectively lose while waiting for the tax credit.</li>
+<li><strong>TCS Opportunity Cost Table</strong>: A dedicated chronological schedule below the history table maps out every TCS payment and adjustment event, keeping a running tally of your pending TCS and calculating the accrued opportunity cost at every step.</li>
+</ul>
+<h3 id="built-for-real-life">Built for Real Life</h3>
+<ul>
+<li>Designed for <strong>Buy USD</strong> transactions (LRS remittances, tuition, travel)</li>
+<li>Accepts <strong>interbank rate</strong> (optional) to compute and display FX spread per component</li>
+<li>Records <strong>bank name and transaction ID</strong> for bank-statement reconciliation</li>
+<li><strong>Auto-saves</strong> every transaction to your browser — no login, no cloud</li>
+<li><strong>Export to JSON</strong> for personal records; <strong>Import</strong> to restore or merge data across devices</li>
+<li><strong>Share</strong> button generates a shareable URL encoding the current calculator inputs</li>
+<li>Net USD position summary across all logged transactions</li>
+</ul>
+<h3 id="key-insights">Key Insights</h3>
+<blockquote>
+<p><strong>The effective rate is always higher than the quoted rate — the difference is your true cost.</strong></p>
+</blockquote>
+<p>For a $1,000 Buy USD at bank rate ₹93.60 (interbank ₹91.85), processing fee ₹1,000:</p>
+<ul>
+<li>FX conversion GST: ₹168 (18% × Rule-32 value)</li>
+<li>Processing fee: ₹1,000 + GST ₹180</li>
+<li>Bank FX spread: ₹1,750</li>
+<li>Total extra cost: <strong>₹3,098</strong> = <strong>₹3.10 per $1</strong> = 3.37% above interbank</li>
+</ul>
+<p>That compounds significantly over large remittances — knowing the breakdown lets you compare banks and timing decisions accurately.</p>
+<h2 id="frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</h2>
+<h3 id="why-is-my-effective-rate-higher-than-the-quoted-usdinr-rate">Why is my effective rate higher than the quoted USD/INR rate?</h3>
+<p>Two reasons: the bank&rsquo;s quoted rate already includes their spread over the interbank rate, and on top of that the bank charges a processing fee and collects FX conversion GST per Rule 32(2). Enter the interbank rate (RBI reference rate) to see the spread component explicitly.</p>
+<h3 id="what-is-the-interbank-rate-and-where-do-i-find-it">What is the interbank rate and where do I find it?</h3>
+<p>The interbank (mid-market) rate is the wholesale exchange rate between banks, published by the RBI as the reference rate. You can find it on the RBI website or financial data sites. The difference between the bank&rsquo;s quoted rate and this rate is the bank&rsquo;s FX spread — your first cost component.</p>
+<h3 id="what-is-lrs">What is LRS?</h3>
+<p>The Liberalised Remittance Scheme (LRS) allows resident Indians to remit up to <strong>USD 2,50,000 per financial year</strong> for permitted purposes (education, travel, investments, gifts, etc.) without prior RBI approval. Each USD Buy transaction you log here can be tracked toward your annual LRS limit.</p>
+<h3 id="how-is-tcs-calculated-across-multiple-transactions">How is TCS calculated across multiple transactions?</h3>
+<p>RealValue FX Engine sorts all your logged transactions by date in ascending order and walks the financial year cumulatively. Once the cumulative gross INR exceeds ₹10,00,000 in a FY, TCS at 20% applies on the excess for each subsequent transaction. TCS resets to zero at the start of each new financial year (April 1). This accumulated history is then fed directly into the <strong>TCS Opportunity Cost</strong> schedule to visualize when that capital will be recovered.</p>
+<h3 id="my-transaction-data-is-stored-where">My transaction data is stored where?</h3>
+<p>All data is stored exclusively in your <strong>browser&rsquo;s localStorage</strong>. Nothing is sent to any server. Use the <strong>Export</strong> button to download a JSON backup before clearing browser data or switching devices.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="2026-03-21">2026-03-21</h3>
+<ul>
+<li><strong>Compare Rates Feature</strong>: Added a comprehensive side-by-side comparison engine. Evaluate multiple bank rates via horizontal summary cards and an exploded granular table displaying exact components like FX Spread, GST breakdowns, and Transaction Cost percentages. Highlights the best rate based on the lowest Transaction Cost. Improved UI and neutralized financial terminology across the tool.</li>
+</ul>
+<h3 id="2026-03-20">2026-03-20</h3>
+<ul>
+<li><strong>TCS Opportunity Cost Module</strong>: Added an interactive chronological schedule that dynamically tracks and visualizes the exact monetary opportunity cost (XIRR) of having your capital temporarily locked up by the government in TCS. The module explicitly contrasts the capital drag of the traditional <strong>ITR Refund</strong> timeline against using <strong>Form 12BAA</strong> for immediate employer salary TDS adjustment!</li>
+</ul>
+
+    </div>
+
+    
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/international-investing/" class="tag-link">International Investing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/forex/" class="tag-link">Forex</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/usd/" class="tag-link">USD</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/gst/" class="tag-link">GST</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/tcs/" class="tag-link">TCS</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/currency-exchange/" class="tag-link">Currency Exchange</a>
+    </div><div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+<script src="https://sakthipriyan.com/js/realvalue-fx-engine.js"></script>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const toolType = 'fxTracker';
+        const toolContainer = document.getElementById('tool-' + toolType);
+
+        if (window.initializeTool && typeof window.initializeTool[toolType] === 'function') {
+            window.initializeTool[toolType](toolContainer, "null");
+        }
+    });
+</script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>

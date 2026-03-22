@@ -9,6 +9,7 @@ build:
 params:
   description: "Systems that Scale. Wealth that Compounds."
   author: "Sakthi Priyan H"
+  googleAnalyticsId: "G-5NGEJ767SK"
   # Default JavaScript tools site-wide (can be overridden per-page)
   # Options: echarts, gsap, viz, all
   # Set to [] to disable by default (recommended for performance)

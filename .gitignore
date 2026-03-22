@@ -1,3 +1,15 @@
 .hugo_build.lock
 .DS_Store
 hugo_stats.json
+
+# Local temp files and tokens
+.tmp/
+
+# Go build outputs/binaries
+tools/get-data/get-data
+tools/get-data/main
+tools/get-data/*.exe
+tools/get-data/*.dll
+tools/get-data/*.so
+tools/get-data/*.a
+tools/get-data/*.out

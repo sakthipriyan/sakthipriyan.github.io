@@ -47,7 +47,7 @@ wealth_tags:
 <div class="r-stack">
   <img src="nasdaq100.png"/>
   <img class="fragment" src="top10.png"/>
-  <span class="fragment" style="background: rgba(238, 238, 238, 0.8); font-size:4.0em;padding:1em 2em 1em 2em;">72%</span>
+  <span class="fragment" style="background: rgba(238, 238, 238, 0.8); font-size:4.0em;padding:1em 2em 1em 2em;">50-55%</span>
 </div>
 
 --

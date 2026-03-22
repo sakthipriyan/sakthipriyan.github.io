@@ -1,0 +1,2542 @@
+// RealValue SIP Engine (Vue.js + ECharts)
+window.initializeTool = window.initializeTool || {};
+
+// Constants
+const CURRENCY_MULTIPLIERS = {
+    crores: 10000000,
+    lakhs: 100000,
+    thousands: 1000
+};
+const MAX_INVESTMENT_YEARS = 100;
+const MAX_INVESTMENT_MONTHS = MAX_INVESTMENT_YEARS * 12;
+const DEBOUNCE_DELAY_MS = 300;
+const SIP_STORAGE_KEY = 'sip-calculator-v1';
+
+window.initializeTool.sipCalculator = function (container, config) {
+    // Create Vue app template
+    container.innerHTML = `
+        <div id="sip-calculator-app">
+            <div class="sip-calculator">
+                <div class="sip-container">
+                    <!-- Left Column: Inputs + Compare -->
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Input Fields -->
+                    <div class="sip-inputs">
+
+                        <!-- Section: Goal -->
+                        <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            🎯 Goal
+                            <span class="help-icon help-icon-wide" data-tooltip="Time: Calculate portfolio value for a fixed investment period.
+Money: Calculate time needed to reach a target amount.
+Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">ℹ️</span>
+                        </h4>
+
+                        <!-- Target Mode -->
+                        <div class="input-group">
+                            <label>Target Mode:</label>
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': formData.targetTime}"
+                                    @click="toggleTarget('time')">
+                                    ⏱️ Time
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': formData.targetMoney}"
+                                    @click="toggleTarget('money')">
+                                    💰 Money
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Target Time Period - shown when Time is selected -->
+                        <div class="input-group" v-if="formData.targetTime">
+                            <label>
+                                Target Time Period:&nbsp;<strong>{{ formattedTimePeriod }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="Total horizon — how long your money stays invested, including any coasting phase after contributions stop. Long-term investing (10+ years) helps ride out market volatility">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.timePeriodValue" 
+                                    min="1" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.timePeriodUnit === 'years'}"
+                                        @click="formData.timePeriodUnit = 'years'; calculateResults()">
+                                        Years
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.timePeriodUnit === 'months'}"
+                                        @click="formData.timePeriodUnit = 'months'; calculateResults()">
+                                        Months
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contribution Period -->
+                        <div class="input-group">
+                            <label>
+                                Contribution Period:&nbsp;<strong>{{ formattedInvestmentPeriod }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="Duration of active monthly SIP contributions. After this period, no new investments are made but the corpus continues to grow. Set equal to target time to invest throughout.">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.investmentPeriodValue" 
+                                    min="1" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.investmentPeriodUnit === 'years'}"
+                                        @click="formData.investmentPeriodUnit = 'years'; calculateResults()">
+                                        Years
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.investmentPeriodUnit === 'months'}"
+                                        @click="formData.investmentPeriodUnit = 'months'; calculateResults()">
+                                        Months
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Target Amount - shown when Money is selected -->
+                        <div class="input-group" v-if="formData.targetMoney">
+                            <label>
+                                Target Amount:&nbsp;<strong>₹ {{ formatCurrencyFull(targetAmount) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="🎯 Target in today's money (Real). The final portfolio value you want to achieve adjusted for inflation">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.targetAmountValue" 
+                                    min="0" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.targetAmountUnit === 'crores'}"
+                                        @click="formData.targetAmountUnit = 'crores'; calculateResults()">
+                                        Crores
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.targetAmountUnit === 'lakhs'}"
+                                        @click="formData.targetAmountUnit = 'lakhs'; calculateResults()">
+                                        Lakhs
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.targetAmountUnit === 'thousands'}"
+                                        @click="formData.targetAmountUnit = 'thousands'; calculateResults()">
+                                        Thousands
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Start Month -->
+                        <div class="input-group">
+                            <label>
+                                Start Month:
+                                <span class="help-icon help-icon-wide" data-tooltip="Choose when you want to start your SIP. This determines the calendar dates in your investment plan">ℹ️</span>
+                            </label>
+                            <input type="month" v-model="formData.startMonth" @input="debouncedCalculate">
+                        </div>
+
+                        <!-- Section: Investment -->
+                        <h4 style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            💰 Investment
+                            <span class="help-icon help-icon-wide" data-tooltip="Your existing corpus and the monthly amount you plan to invest via SIP">ℹ️</span>
+                        </h4>
+
+                        <!-- Current Investment -->
+                        <div class="input-group">
+                            <label>
+                                Lumpsum:&nbsp;<strong>₹ {{ formatCurrencyFull(currentInvestment) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="The lump sum amount you already have invested or plan to invest today">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.currentInvestmentValue" 
+                                    min="0" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.currentInvestmentUnit === 'crores'}"
+                                        @click="formData.currentInvestmentUnit = 'crores'; calculateResults()">
+                                        Crores
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.currentInvestmentUnit === 'lakhs'}"
+                                        @click="formData.currentInvestmentUnit = 'lakhs'; calculateResults()">
+                                        Lakhs
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.currentInvestmentUnit === 'thousands'}"
+                                        @click="formData.currentInvestmentUnit = 'thousands'; calculateResults()">
+                                        Thousands
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Monthly Investment - hidden in Both mode (it becomes an output) -->
+                        <div class="input-group" v-if="!isBothTargetsMode">
+                            <label>
+                                Monthly SIP:&nbsp;<strong>₹ {{ formatCurrencyFull(monthlyInvestment) }}</strong>
+                                <span class="help-icon help-icon-wide" data-tooltip="The fixed amount you plan to invest every month through SIP">ℹ️</span>
+                            </label>
+                            <div class="unit-selector-input">
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.monthlyInvestmentValue" 
+                                    min="0" 
+                                    step="0.1"
+                                    @input="debouncedCalculate"
+                                >
+                                <div class="unit-buttons">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.monthlyInvestmentUnit === 'crores'}"
+                                        @click="formData.monthlyInvestmentUnit = 'crores'; calculateResults()">
+                                        Crores
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.monthlyInvestmentUnit === 'lakhs'}"
+                                        @click="formData.monthlyInvestmentUnit = 'lakhs'; calculateResults()">
+                                        Lakhs
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': formData.monthlyInvestmentUnit === 'thousands'}"
+                                        @click="formData.monthlyInvestmentUnit = 'thousands'; calculateResults()">
+                                        Thousands
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section: Rates -->
+                        <h4 style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            📊 Rates
+                            <span class="help-icon help-icon-wide" data-tooltip="Growth, step-up, inflation, and tax rates used in the projection">ℹ️</span>
+                        </h4>
+
+                        <div class="input-group-row">
+                            <div class="input-group-col" style="flex: 1;">
+                                <label>
+                                    Expected Growth:&nbsp;<strong>{{ formData.cagr }}%</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Expected annual return rate (Compound Annual Growth Rate). Typical equity funds: 10-15%, Debt funds: 6-8%">ℹ️</span>
+                                </label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.cagr" 
+                                    min="1" 
+                                    max="30" 
+                                    step="0.5"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            <div class="input-group-col" style="flex: 1;">
+                                <label>
+                                    Yearly Hike:&nbsp;<strong>{{ formData.yearlyHike }}%</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Annual percentage increase in your monthly SIP amount. Helps you invest more as your income grows">ℹ️</span>
+                                </label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.yearlyHike" 
+                                    min="0" 
+                                    max="50" 
+                                    step="1"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="input-group-row">
+                            <div class="input-group-col" style="flex: 1;">
+                                <label>
+                                    Yearly Inflation:&nbsp;<strong>{{ formData.inflationRate }}%</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Expected average inflation rate per year. Used to calculate real returns in today's money. Historical India average: 5-7%">ℹ️</span>
+                                </label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.inflationRate" 
+                                    min="0" 
+                                    max="15" 
+                                    step="0.5"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                            <div class="input-group-col" style="flex: 1;">
+                                <label>
+                                    Exit Tax:&nbsp;<strong>{{ formData.taxRate }}%</strong>
+                                    <span class="help-icon help-icon-wide" data-tooltip="Applied on total nominal gains at exit. Equity: 13-14.95% (LTCG + Dividend), Debt: 5.2-42.74% (based on tax slab). Actual taxation may differ">ℹ️</span>
+                                </label>
+                                <input 
+                                    type="number" 
+                                    v-model.number="formData.taxRate" 
+                                    min="0" 
+                                    max="50" 
+                                    step="0.5"
+                                    @input="debouncedCalculate"
+                                >
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
+                    </div>
+
+                    <!-- Compare Scenarios Box (below inputs, same column) -->
+                    <div class="sip-inputs">
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
+                        <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                            <span>Scenario Name (Optional):</span>
+                        </label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="text"
+                                v-model="formData.scenarioName"
+                                placeholder="e.g., Scenario 1"
+                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                            <button
+                                type="button"
+                                @click="addToCompare"
+                                class="share-button"
+                                style="flex-shrink: 0; min-width: 90px;"
+                                :disabled="!results.calculated">
+                                ➕ Add
+                            </button>
+                            <button
+                                type="button"
+                                v-if="comparisonItems.length > 0"
+                                class="share-button"
+                                @click="scrollToCompare"
+                                style="flex-shrink: 0; min-width: 80px;">
+                                👁️ View ({{ comparisonItems.length }})
+                            </button>
+                        </div>
+                    </div>
+                    </div><!-- end left column wrapper -->
+                    
+                    <!-- Right Column: Output Results and Chart -->
+                    <div class="sip-outputs" v-if="results.calculated">
+                        <div class="sip-summary">
+                            <div v-if="isBothTargetsMode || results.timeRequired" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem;">
+                                <h3 style="margin: 0;">🎯 Target Results</h3>
+                                <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="shareCalculation"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ shareButtonText }}
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="copyJSON"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ copyButtonText }}
+                                    </button>
+                                </div>
+                            </div>
+                            <table class="summary-table" v-if="isBothTargetsMode || results.timeRequired">
+                                <tbody>
+                                    <tr v-if="isBothTargetsMode && results.requiredMonthlyInvestment !== null && results.requiredMonthlyInvestment !== undefined">
+                                        <td><strong>Starting Monthly Investment</strong></td>
+                                        <td class="highlight"><span class="help-icon" :data-tooltip="'₹ ' + results.requiredMonthlyInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.requiredMonthlyInvestment) }}</span></td>
+                                    </tr>
+                                    <tr v-if="results.timeRequired">
+                                        <td><strong>Time Required</strong></td>
+                                        <td class="highlight">{{ results.timeRequired }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem; margin-top: 1rem;">
+                                <h3 style="margin: 0;">📊 Investment Analysis</h3>
+                                <div v-if="!(isBothTargetsMode || results.timeRequired)" style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="shareCalculation"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ shareButtonText }}
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        class="share-button"
+                                        @click="copyJSON"
+                                        :disabled="!results.calculated"
+                                        style="min-width: 110px;">
+                                        {{ copyButtonText }}
+                                    </button>
+                                </div>
+                            </div>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nominal</th>
+                                        <th>Real</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Investment</strong></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.totalInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + results.realInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.realInvestment) }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Growth</strong></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.expectedValue - results.totalInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.expectedValue - results.totalInvestment) }}</span></td>
+                                        <td><span class="help-icon" :data-tooltip="'₹ ' + (results.inflationAdjustedValue - results.realInvestment).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.inflationAdjustedValue - results.realInvestment) }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Portfolio Value</strong></td>
+                                        <td style="background-color: #fff3cd; font-weight: 600;">
+                                            <span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.expectedValue) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.expectedValue / results.totalInvestment).toFixed(2) }}x</div>
+                                        </td>
+                                        <td>
+                                            <span class="help-icon" :data-tooltip="'₹ ' + results.inflationAdjustedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.inflationAdjustedValue) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.inflationAdjustedValue / results.realInvestment).toFixed(2) }}x</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Post Tax</strong></td>
+                                        <td>
+                                            <span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ ((results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) / results.totalInvestment).toFixed(2) }}x</div>
+                                        </td>
+                                        <td style="background-color: #d4edda; font-weight: 600;">
+                                            <span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span>
+                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.postTaxRealValue / results.realInvestment).toFixed(2) }}x</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="sip-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
+                            <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Values</h3>
+                            <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
+                                <li><strong>Nominal:</strong> Future value without adjusting for inflation.</li>
+                                <li><strong>Real:</strong> Today's purchasing power after adjusting for inflation.</li>
+                            </ul>
+                            <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
+                                📚 Learn more: <a href="/building-wealth/blogs/realvalue-sip-engine-use-cases/" style="color: #0066cc; text-decoration: none;">Use Cases</a> | 
+                                <a href="#frequently-asked-questions-faqs" style="color: #0066cc; text-decoration: none;">FAQs</a> | 
+                                <a href="#help" style="color: #0066cc; text-decoration: none;">Help</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="sip-outputs placeholder" v-else>
+                        <div class="placeholder-content">
+                            <h3 style="margin-top: 0;">🎯 Your Results Will Appear Here</h3>
+                            <p>Fill in your SIP details on the left to see your investment growth projection</p>
+                            <div class="placeholder-features">
+                                <p>✅ Investment vs Returns calculation</p>
+                                <p>✅ Inflation adjusted returns</p>
+                                <p>✅ Year-by-year growth visualization</p>
+                                <p>✅ Interactive ECharts graph</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Investment and Growth - Full Width Below -->
+                <div class="investment-plan" v-if="results.calculated && monthlyPlan.length > 0">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">📊 Investment and Growth</h2>
+                            <!-- Tab Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': investmentGrowthTab === 'chart'}"
+                                    @click="investmentGrowthTab = 'chart'"
+                                    style="white-space: nowrap;">
+                                    📊 Chart
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': investmentGrowthTab === 'data'}"
+                                    @click="investmentGrowthTab = 'data'"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <!-- Time Granularity Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': planGranularity === 'yearly'}"
+                                    @click="planGranularity = 'yearly'">
+                                    Yearly
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': planGranularity === 'monthly'}"
+                                    @click="planGranularity = 'monthly'">
+                                    Monthly
+                                </button>
+                            </div>
+                            <!-- Mode Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': planViewMode === 'nominal'}"
+                                    @click="planViewMode = 'nominal'">
+                                    Nominal
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': planViewMode === 'real'}"
+                                    @click="planViewMode = 'real'">
+                                    Real
+                                </button>
+                            </div>
+                            <!-- Post Tax Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': applyPostTax}"
+                                    @click="applyPostTax = !applyPostTax"
+                                    style="white-space: nowrap;">
+                                    Post Tax
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Tab -->
+                    <div v-show="investmentGrowthTab === 'chart'" style="margin-bottom: 2rem;">
+                        <div id="sip-chart" style="width: 100%; height: 400px;"></div>
+                    </div>
+                    
+                    <!-- Data Tab -->
+                    <div v-show="investmentGrowthTab === 'data'" class="plan-table-wrapper">
+                        <table class="plan-table" style="margin: 0;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">{{ planGranularity === 'yearly' ? 'Year' : 'Year/Month' }}</th>
+                                    <th colspan="2">Investment</th>
+                                    <th colspan="2">Growth</th>
+                                    <th rowspan="2">Portfolio Value</th>
+                                </tr>
+                                <tr>
+                                    <th>{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
+                                    <th>Accumulated</th>
+                                    <th>{{ planGranularity === 'yearly' ? 'Yearly' : 'Monthly' }}</th>
+                                    <th>Accumulated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(row, index) in displayedPlan" :key="index">
+                                    <td>{{ row.period }}</td>
+                                    <td>₹{{ formatCurrencyFull(row.contribution) }}</td>
+                                    <td>₹{{ formatCurrencyFull(row.accumulatedContribution) }}</td>
+                                    <td>₹{{ formatCurrencyFull(row.growth) }}</td>
+                                    <td>₹{{ formatCurrencyFull(row.accumulatedGrowth) }}</td>
+                                    <td>₹{{ formatCurrencyFull(row.portfolioValue) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Monthly Investment Plan - Full Width Below -->
+                <div class="investment-plan" v-if="results.calculated && contributionTable.length > 0">
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">📅 Monthly Investment Plan</h2>
+                            <!-- Tab Toggle -->
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': monthlyPlanTab === 'chart'}"
+                                    @click="monthlyPlanTab = 'chart'"
+                                    style="white-space: nowrap;">
+                                    📊 Chart
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': monthlyPlanTab === 'data'}"
+                                    @click="monthlyPlanTab = 'data'"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <!-- View Mode Toggle -->
+                        <div class="mode-toggle">
+                            <button 
+                                type="button"
+                                :class="{'active': contributionViewMode === 'nominal'}"
+                                @click="contributionViewMode = 'nominal'; renderContributionChart();">
+                                Nominal
+                            </button>
+                            <button 
+                                type="button"
+                                :class="{'active': contributionViewMode === 'real'}"
+                                @click="contributionViewMode = 'real'; renderContributionChart();">
+                                Real
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Tab -->
+                    <div v-show="monthlyPlanTab === 'chart'" style="margin-bottom: 2rem;">
+                        <div id="contributionChart" style="width: 100%; height: 400px;"></div>
+                    </div>
+                    
+                    <!-- Data Tab -->
+                    <div v-show="monthlyPlanTab === 'data'" class="plan-table-wrapper">
+                        <table class="plan-table" style="margin: 0;">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Jan</th>
+                                    <th>Feb</th>
+                                    <th>Mar</th>
+                                    <th>Apr</th>
+                                    <th>May</th>
+                                    <th>Jun</th>
+                                    <th>Jul</th>
+                                    <th>Aug</th>
+                                    <th>Sep</th>
+                                    <th>Oct</th>
+                                    <th>Nov</th>
+                                    <th>Dec</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(yearRow, index) in contributionTable" :key="index">
+                                    <td><strong>{{ yearRow.year }}</strong></td>
+                                    <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex">
+                                        <span v-if="amount !== null" class="help-icon" :data-tooltip="'₹ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
+                                        <span v-else style="color: #999;">-</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Compare Scenarios -->
+                <div id="sip-compare-scenarios" class="investment-plan" v-if="comparisonItems.length > 0" style="margin-bottom: 2rem; scroll-margin-top: 80px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': !showComparisonTable}"
+                                    @click="showComparisonTable = false"
+                                    style="white-space: nowrap;">
+                                    🎴 Cards
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': showComparisonTable}"
+                                    @click="showComparisonTable = true"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            @click="clearComparison"
+                            class="share-button btn-clear-all"
+                            style="white-space: nowrap;">
+                            🗑️ Clear All
+                        </button>
+                    </div>
+
+                    <!-- Cards View -->
+                    <div v-show="!showComparisonTable" style="display: flex; align-items: stretch; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                        <div
+                            v-for="(item, index) in comparisonItems"
+                            :key="item.id"
+                            :style="getCompareCardStyle(item)">
+                            <button
+                                type="button"
+                                @click="removeCompare(item.id)"
+                                class="btn-remove-subtle"
+                                title="Remove"
+                                style="position: absolute; top: 0.25rem; right: 0.25rem;">✕</button>
+
+                            <div style="font-size: 0.85em; font-weight: bold; color: #555; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;">
+                                {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
+                            </div>
+
+                            <div style="font-size: 0.95em; text-align: left; line-height: 1.4;">
+                                <div style="margin-top: 0.5rem;" v-if="item.inputs.currentInvestmentValue > 0">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Lumpsum</span>
+                                    ₹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                </div>
+
+                                <div :style="item.inputs.targetTime && item.inputs.targetMoney ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.5rem' } : { marginTop: '0.5rem' }">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Monthly SIP</span>
+                                    {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                </div>
+
+                                <div :style="item.inputs.targetMoney && !item.inputs.targetTime ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
+                                    {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
+                                </div>
+
+                                <div style="margin-top: 0.6rem;">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Growth / Inflation</span>
+                                    {{ item.inputs.cagr }}% / {{ item.inputs.inflationRate }}%
+                                </div>
+
+                                <div :style="item.inputs.targetTime && !item.inputs.targetMoney ? { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold', color: '#2980b9' } : { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold' }">
+                                    <span style="font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: normal; color: #666;">Post Tax Real Value</span>
+                                    ₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}
+                                    <span style="font-size: 0.8em; font-weight: normal; margin-left: 2px; color: #888;">({{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table View -->
+                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 180px;"></th>
+                                    <th v-for="(item, index) in comparisonItems" :key="item.id" style="text-align: center; min-width: 120px; position: relative; padding: 0.5rem 1.5rem;">
+                                        {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
+                                        <button
+                                            type="button"
+                                            @click="removeCompare(item.id)"
+                                            class="btn-remove-subtle"
+                                            title="Remove"
+                                            style="position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%);">✕</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Target Mode</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'mode-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.targetTime && item.inputs.targetMoney ? 'Time + Money' : item.inputs.targetTime ? 'Time' : 'Money' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Lumpsum</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'cur-'+item.id" style="text-align: right; color: #666;">
+                                        ₹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Monthly SIP</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'sip-'+item.id"
+                                        :style="item.inputs.targetTime && item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Time Required</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'time-'+item.id"
+                                        :style="item.inputs.targetMoney && !item.inputs.targetTime ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contribution Period</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'cont-'+item.id" style="text-align: right;">
+                                        {{ item.inputs.investmentPeriodValue }} {{ item.inputs.investmentPeriodValue === 1 ? item.inputs.investmentPeriodUnit.slice(0, -1) : item.inputs.investmentPeriodUnit }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Expected Growth</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'cagr-'+item.id" style="text-align: right;">
+                                        {{ item.inputs.cagr }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Yearly Hike</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'hike-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.yearlyHike }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inflation Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'inf-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.inflationRate }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Exit Tax</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'tax-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.taxRate }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Investment</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'inv-n-'+item.id" style="text-align: right;">
+                                        ₹{{ formatCurrencyFull(item.outputs.totalInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Growth</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'gro-n-'+item.id" style="text-align: right;">
+                                        ₹{{ formatCurrencyFull(item.outputs.expectedValue - item.outputs.totalInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portfolio Value</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pv-n-'+item.id" style="text-align: right;">
+                                        <div style="font-size: 1.05em;">₹{{ formatCurrencyFull(item.outputs.expectedValue) }}</div>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (item.outputs.expectedValue / item.outputs.totalInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Post Tax</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pt-n-'+item.id" style="text-align: right;">
+                                        <div>₹{{ formatCurrencyFull(item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) }}</div>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ ((item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) / item.outputs.totalInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888;">Real (Inflation Adjusted)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Investment</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'inv-r-'+item.id" style="text-align: right; color: #666;">
+                                        ₹{{ formatCurrencyFull(item.outputs.realInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Growth</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'gro-r-'+item.id" style="text-align: right; color: #666;">
+                                        ₹{{ formatCurrencyFull(item.outputs.inflationAdjustedValue - item.outputs.realInvestment) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portfolio Value</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pv-r-'+item.id" style="text-align: right; color: #666;">
+                                        <div>₹{{ formatCurrencyFull(item.outputs.inflationAdjustedValue) }}</div>
+                                        <div style="font-size: 0.85em; color: #888; margin-top: 2px;">{{ (item.outputs.inflationAdjustedValue / item.outputs.realInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Post Tax</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'pt-r-'+item.id"
+                                        :style="item.inputs.targetTime && !item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        <div style="font-size: 1.1em;">₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}</div>
+                                        <div style="font-size: 0.85em; color: #999; margin-top: 2px; font-weight: normal;">{{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Empty Compare State -->
+                <div v-if="comparisonItems.length === 0" class="investment-plan" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
+                    </div>
+                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                        <p>No scenarios to compare yet. Click <strong>➕ Add</strong> under <strong>⚖️ Compare Scenarios</strong> with an optional scenario name to get started.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    `;
+
+    // Initialize Vue app
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            return {
+                formData: {
+                    currentInvestmentValue: 10,
+                    currentInvestmentUnit: 'lakhs',
+                    monthlyInvestmentValue: 20,
+                    monthlyInvestmentUnit: 'thousands',
+                    cagr: 12,
+                    yearlyHike: 10,
+                    inflationRate: 6,
+                    taxRate: 15,
+                    timePeriodValue: 25,
+                    timePeriodUnit: 'years',
+                    investmentPeriodValue: 25,
+                    investmentPeriodUnit: 'years',
+                    targetAmountValue: 50,
+                    targetAmountUnit: 'lakhs',
+                    targetTime: true,
+                    targetMoney: false,
+                    startMonth: `${year}-${month}`,
+                    scenarioName: ''
+                },
+                results: {
+                    calculated: false,
+                    totalInvestment: 0,
+                    realInvestment: 0,
+                    expectedValue: 0,
+                    totalReturns: 0,
+                    inflationAdjustedValue: 0,
+                    realReturns: 0,
+                    postTaxRealValue: 0
+                },
+                yearlyData: [],
+                monthlyPlan: [],
+                contributionTable: [],
+                contributionViewMode: 'nominal',
+                planViewMode: 'nominal',
+                applyPostTax: false,
+                planGranularity: 'yearly',
+                investmentGrowthTab: 'chart',
+                monthlyPlanTab: 'chart',
+                calculating: false,
+                debounceTimer: null,
+                chart: null,
+                contributionChart: null,
+                contributionChartCategories: [],
+                contributionResizeHandler: null,
+                copyButtonText: '📋 JSON',
+                shareButtonText: '🔗 Share',
+                comparisonItems: [],
+                showComparisonTable: false
+            }
+        },
+        computed: {
+            isBothTargetsMode() {
+                return this.formData.targetTime && this.formData.targetMoney;
+            },
+            isFormValid() {
+                const { cagr, timePeriodValue, targetAmountValue, targetTime, targetMoney } = this.formData;
+                
+                // Both targets: need time period and target amount
+                if (this.isBothTargetsMode) {
+                    return cagr > 0 && timePeriodValue > 0 && targetAmountValue > 0;
+                }
+                // Only Time: need time period
+                if (targetTime && !targetMoney) {
+                    return cagr > 0 && timePeriodValue > 0;
+                }
+                // Only Money: need target amount
+                if (targetMoney && !targetTime) {
+                    return cagr > 0 && targetAmountValue > 0;
+                }
+                return false;
+            },
+            currentInvestment() {
+                const { currentInvestmentValue, currentInvestmentUnit } = this.formData;
+                return currentInvestmentValue * CURRENCY_MULTIPLIERS[currentInvestmentUnit];
+            },
+            monthlyInvestment() {
+                const { monthlyInvestmentValue, monthlyInvestmentUnit } = this.formData;
+                return monthlyInvestmentValue * CURRENCY_MULTIPLIERS[monthlyInvestmentUnit];
+            },
+            numberOfYears() {
+                const { timePeriodValue, timePeriodUnit } = this.formData;
+                // Convert to years (supporting fractional values)
+                return timePeriodUnit === 'months' ? timePeriodValue / 12 : timePeriodValue;
+            },
+            numberOfInvestmentYears() {
+                const { investmentPeriodValue, investmentPeriodUnit } = this.formData;
+                return investmentPeriodUnit === 'months' ? investmentPeriodValue / 12 : investmentPeriodValue;
+            },
+            formattedTimePeriod() {
+                const { timePeriodValue, timePeriodUnit } = this.formData;
+                
+                if (timePeriodUnit === 'years') {
+                    // If years, show as is (whole numbers only)
+                    return `${timePeriodValue} ${timePeriodValue === 1 ? 'Year' : 'Years'}`;
+                } else {
+                    // If months, convert to Years and Months format
+                    const totalMonths = Math.floor(timePeriodValue);
+                    const years = Math.floor(totalMonths / 12);
+                    const months = totalMonths % 12;
+                    
+                    if (years === 0) {
+                        return `${months} ${months === 1 ? 'Month' : 'Months'}`;
+                    } else if (months === 0) {
+                        return `${years} ${years === 1 ? 'Year' : 'Years'}`;
+                    } else {
+                        return `${years} ${years === 1 ? 'Year' : 'Years'} ${months} ${months === 1 ? 'Month' : 'Months'}`;
+                    }
+                }
+            },
+            formattedInvestmentPeriod() {
+                const { investmentPeriodValue, investmentPeriodUnit } = this.formData;
+                
+                if (investmentPeriodUnit === 'years') {
+                    return `${investmentPeriodValue} ${investmentPeriodValue === 1 ? 'Year' : 'Years'}`;
+                } else {
+                    const totalMonths = Math.floor(investmentPeriodValue);
+                    const years = Math.floor(totalMonths / 12);
+                    const months = totalMonths % 12;
+                    
+                    if (years === 0) {
+                        return `${months} ${months === 1 ? 'Month' : 'Months'}`;
+                    } else if (months === 0) {
+                        return `${years} ${years === 1 ? 'Year' : 'Years'}`;
+                    } else {
+                        return `${years} ${years === 1 ? 'Year' : 'Years'} ${months} ${months === 1 ? 'Month' : 'Months'}`;
+                    }
+                }
+            },
+            displayedPlan() {
+                if (!this.monthlyPlan || this.monthlyPlan.length === 0) return [];
+                
+                // Filter based on granularity
+                let filteredPlan = this.monthlyPlan;
+                if (this.planGranularity === 'yearly') {
+                    // Show only December of each year, plus the final month if it's not December
+                    filteredPlan = this.monthlyPlan.filter((row, index) => {
+                        const isDecember = row.month === 'Dec';
+                        const isLastMonth = index === this.monthlyPlan.length - 1;
+                        return isDecember || isLastMonth;
+                    });
+                }
+                
+                // Simply map pre-computed data based on view mode
+                // Note: Post-tax values are computed per-row in buildMonthlyPlan (exit-at-this-month scenario)
+                // UI layer just switches between pre-computed fields
+                return filteredPlan.map(row => {
+                    if (this.planGranularity === 'yearly') {
+                        // For yearly view, aggregate all months in this year
+                        const yearRows = this.monthlyPlan.filter(r => r.year === row.year);
+                        
+                        // Get accumulated growth at start of year (0 for first year)
+                        const yearStartIndex = yearRows[0].monthIndex;
+                        const prevYearAccumulatedNominal = yearStartIndex > 0 ? 
+                            this.monthlyPlan[yearStartIndex - 1].nominalCumulativeGrowth : 0;
+                        const prevYearAccumulatedReal = yearStartIndex > 0 ? 
+                            this.monthlyPlan[yearStartIndex - 1].realCumulativeGrowth : 0;
+                        
+                        if (this.planViewMode === 'nominal') {
+                            return {
+                                period: row.year,
+                                contribution: yearRows.reduce((sum, r) => sum + (r.nominalContribution || 0), 0),
+                                growth: row.nominalCumulativeGrowth - prevYearAccumulatedNominal,
+                                accumulatedContribution: row.nominalInvestment,
+                                accumulatedGrowth: row.nominalCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.nominalPostTaxPortfolio : row.nominalPortfolio
+                            };
+                        } else {
+                            // Real mode - use pre-computed present values
+                            return {
+                                period: row.year,
+                                contribution: yearRows.reduce((sum, r) => sum + (r.realContribution || 0), 0),
+                                growth: row.realCumulativeGrowth - prevYearAccumulatedReal,
+                                accumulatedContribution: row.realInvestment,
+                                accumulatedGrowth: row.realCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.realPostTaxPortfolio : row.realPortfolio
+                            };
+                        }
+                    } else {
+                        // Monthly view - directly use pre-computed values
+                        if (this.planViewMode === 'nominal') {
+                            return {
+                                period: `${row.year} ${row.month}`,
+                                contribution: row.nominalContribution,
+                                growth: row.nominalGrowth,
+                                accumulatedContribution: row.nominalInvestment,
+                                accumulatedGrowth: row.nominalCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.nominalPostTaxPortfolio : row.nominalPortfolio
+                            };
+                        } else {
+                            // Real mode
+                            return {
+                                period: `${row.year} ${row.month}`,
+                                contribution: row.realContribution,
+                                growth: row.realGrowth,
+                                accumulatedContribution: row.realInvestment,
+                                accumulatedGrowth: row.realCumulativeGrowth,
+                                portfolioValue: this.applyPostTax ? row.realPostTaxPortfolio : row.realPortfolio
+                            };
+                        }
+                    }
+                });
+            },
+            targetAmount() {
+                const { targetAmountValue, targetAmountUnit } = this.formData;
+                return targetAmountValue * CURRENCY_MULTIPLIERS[targetAmountUnit];
+            },
+            exportJSON() {
+                if (!this.results.calculated) return '';
+                
+                // Helper function to remove null/undefined values
+                const removeNulls = (obj) => {
+                    if (Array.isArray(obj)) {
+                        return obj.map(removeNulls).filter(v => v != null);
+                    } else if (obj !== null && typeof obj === 'object') {
+                        return Object.entries(obj)
+                            .filter(([_, v]) => v != null)
+                            .reduce((acc, [k, v]) => {
+                                acc[k] = removeNulls(v);
+                                return acc;
+                            }, {});
+                    }
+                    return obj;
+                };
+                
+                const data = {
+                    input: {
+                        targetMode: {
+                            time: this.formData.targetTime,
+                            money: this.formData.targetMoney
+                        },
+                        timePeriod: this.formData.targetTime ? {
+                            value: this.formData.timePeriodValue,
+                            unit: this.formData.timePeriodUnit
+                        } : null,
+                        targetAmount: this.formData.targetMoney ? {
+                            value: this.formData.targetAmountValue,
+                            unit: this.formData.targetAmountUnit,
+                            inRupees: this.targetAmount
+                        } : null,
+                        currentInvestment: {
+                            value: this.formData.currentInvestmentValue,
+                            unit: this.formData.currentInvestmentUnit,
+                            inRupees: this.currentInvestment
+                        },
+                        monthlyInvestment: !this.isBothTargetsMode ? {
+                            value: this.formData.monthlyInvestmentValue,
+                            unit: this.formData.monthlyInvestmentUnit,
+                            inRupees: this.monthlyInvestment
+                        } : null,
+                        expectedCAGR: this.formData.cagr,
+                        yearlyHike: this.formData.yearlyHike,
+                        inflationRate: this.formData.inflationRate,
+                        taxRate: this.formData.taxRate,
+                        startMonth: this.formData.startMonth,
+                        investmentPeriod: {
+                            value: this.formData.investmentPeriodValue,
+                            unit: this.formData.investmentPeriodUnit
+                        }
+                    },
+                    output: {
+                        startingMonthlyInvestment: this.results.requiredMonthlyInvestment || null,
+                        timeRequired: this.results.timeRequired || null,
+                        nominal: {
+                            investment: this.results.totalInvestment,
+                            portfolioValue: this.results.expectedValue,
+                            postTax: this.results.totalInvestment + (this.results.expectedValue - this.results.totalInvestment) * (1 - this.formData.taxRate / 100)
+                        },
+                        real: {
+                            investment: this.results.realInvestment,
+                            portfolioValue: this.results.inflationAdjustedValue,
+                            postTax: this.results.postTaxRealValue
+                        }
+                    }
+                };
+                
+                const cleanData = removeNulls(data);
+                console.log('RealValue SIP Engine Results:', cleanData);
+                return JSON.stringify(cleanData, null, 2);
+            }
+        },
+        watch: {
+            // Watch computed properties to efficiently re-render charts
+            displayedPlan: {
+                handler() {
+                    if (this.results.calculated && this.displayedPlan?.length > 0) {
+                        // Only render if chart tab is active
+                        if (this.investmentGrowthTab === 'chart') {
+                            this.$nextTick(() => {
+                                this.renderChart();
+                            });
+                        }
+                    }
+                },
+                deep: false  // displayedPlan is replaced entirely, not mutated
+            },
+            investmentGrowthTab() {
+                // When switching to chart tab, render or resize chart
+                if (this.investmentGrowthTab === 'chart' && this.displayedPlan?.length > 0) {
+                    this.$nextTick(() => {
+                        // Always render to ensure data is up-to-date
+                        // (chart may be stale if user changed view mode while on data tab)
+                        this.renderChart();
+                    });
+                }
+            },
+            monthlyPlan: {
+                handler() {
+                    if (this.monthlyPlan?.length > 0) {
+                        // Generate contribution table (this will trigger contributionTable watcher)
+                        this.generateContributionTable();
+                    }
+                },
+                deep: false
+            },
+            contributionTable: {
+                handler(newVal, oldVal) {
+                    // When contributionTable changes, DOM may have been recreated by v-if
+                    if (this.contributionTable?.length > 0) {
+                        // Clear the chart instance since DOM may have been recreated
+                        if (this.contributionChart) {
+                            this.contributionChart.dispose();
+                            this.contributionChart = null;
+                        }
+                        
+                        // If we're on chart tab, render immediately
+                        if (this.monthlyPlanTab === 'chart') {
+                            this.$nextTick(() => {
+                                setTimeout(() => {
+                                    this.renderContributionChart(true);
+                                }, 100);
+                            });
+                        }
+                    }
+                },
+                deep: false
+            },
+            contributionViewMode() {
+                // Only update data if chart exists, not categories
+                if (this.contributionChart && this.monthlyPlan?.length > 0) {
+                    this.renderContributionChart(false); // false = reuse categories
+                }
+            },
+            monthlyPlanTab() {
+                // When switching to chart tab
+                if (this.monthlyPlanTab === 'chart' && this.contributionTable?.length > 0) {
+                    this.$nextTick(() => {
+                        if (this.contributionChart) {
+                            // Chart exists, just resize
+                            this.contributionChart.resize();
+                        } else {
+                            // Chart doesn't exist, render it
+                            setTimeout(() => {
+                                this.renderContributionChart(true);
+                            }, 100);
+                        }
+                    });
+                }
+            },
+            planGranularity() {
+                // displayedPlan watcher will handle chart update
+            },
+            planViewMode() {
+                // displayedPlan watcher will handle chart update
+            },
+            numberOfYears(newVal, oldVal) {
+                if (!this.formData.targetTime) return;
+                const contribYears = this.numberOfInvestmentYears;
+                if (contribYears > newVal) {
+                    // Contribution period exceeds new target — clamp it down
+                    this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                    this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                } else if (Math.abs(contribYears - oldVal) < 0.001) {
+                    // Contribution period was equal to the old target — user hadn't customized it, keep in sync
+                    this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                    this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                }
+                // Otherwise contribution period is intentionally shorter — leave it untouched
+            },
+            // Note: applyPostTax watcher not needed - toggling it triggers displayedPlan recomputation
+            // which in turn triggers the chart update via the displayedPlan watcher
+            comparisonItems: {
+                handler(newVal) {
+                    try {
+                        localStorage.setItem(SIP_STORAGE_KEY, JSON.stringify(newVal));
+                    } catch(e) {}
+                },
+                deep: true
+            }
+        },
+        mounted() {
+            this.loadFromUrl();
+            // Restore comparison scenarios from localStorage
+            try {
+                const saved = localStorage.getItem(SIP_STORAGE_KEY);
+                if (saved) this.comparisonItems = JSON.parse(saved);
+            } catch(e) {}
+            this.$nextTick(() => {
+                this.calculateResults();
+            });
+            
+            // Listen for hash changes (when Apply buttons are clicked)
+            window.addEventListener('hashchange', () => {
+                this.loadFromUrl();
+                this.$nextTick(() => {
+                    this.calculateResults();
+                });
+            });
+        },
+        methods: {
+            // Compare Scenarios Methods
+            scrollToCompare() {
+                const el = document.getElementById('sip-compare-scenarios');
+                if (!el) return;
+                const navbarHeight = document.querySelector('header, nav, .navbar, [role="navigation"]')?.offsetHeight || 70;
+                const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                window.scrollTo({ top, behavior: 'smooth' });
+            },
+            addToCompare() {
+                if (!this.results.calculated) return;
+                if (this.comparisonItems.length >= 6) {
+                    alert('You can compare up to 6 scenarios at a time.');
+                    return;
+                }
+                this.comparisonItems.push({
+                    id: Date.now().toString(36) + Math.random().toString(36).substring(2),
+                    inputs: JSON.parse(JSON.stringify(this.formData)),
+                    outputs: JSON.parse(JSON.stringify(this.results))
+                });
+                this.comparisonItems = [...this.comparisonItems];
+            },
+            removeCompare(id) {
+                this.comparisonItems = this.comparisonItems.filter(item => item.id !== id);
+                if (this.comparisonItems.length === 0) this.showComparisonTable = false;
+            },
+            clearComparison() {
+                if (confirm('Are you sure you want to clear all comparisons?')) {
+                    this.comparisonItems = [];
+                    this.showComparisonTable = false;
+                }
+            },
+            getCompareRank(val) {
+                if (this.comparisonItems.length <= 1) return -1;
+                const vals = [...new Set(this.comparisonItems.map(i => i.outputs.postTaxRealValue))].sort((a, b) => b - a);
+                return Math.max(0, vals.indexOf(val));
+            },
+            getCompareCardStyle(item) {
+                return { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'left', minWidth: '180px', flex: '1', background: '#f8f9fa', border: '1px solid #dee2e6' };
+            },
+
+            // URL Sharing Methods
+            encodeState() {
+                const f = this.formData;
+                let url = 'v1';
+                
+                // Target mode (o)
+                if (f.targetTime && f.targetMoney) {
+                    url += 'ob';
+                } else if (f.targetTime) {
+                    url += 'ot';
+                } else if (f.targetMoney) {
+                    url += 'om';
+                }
+                
+                // Target time period (d)
+                if (f.targetTime) {
+                    const unit = f.timePeriodUnit === 'years' ? 'y' : 'm';
+                    url += `d${f.timePeriodValue}${unit}`;
+                }
+                
+                // Target amount (a)
+                if (f.targetMoney) {
+                    const unit = f.targetAmountUnit === 'crores' ? 'c' : 
+                                 f.targetAmountUnit === 'lakhs' ? 'l' : 'k';
+                    url += `a${f.targetAmountValue}${unit}`;
+                }
+                
+                // Start month (f) - format YYYYMM
+                if (f.startMonth) {
+                    const ym = f.startMonth.replace('-', '');
+                    url += `f${ym}`;
+                }
+                
+                // Current investment (c)
+                const cUnit = f.currentInvestmentUnit === 'crores' ? 'c' : 
+                              f.currentInvestmentUnit === 'lakhs' ? 'l' : 'k';
+                url += `c${f.currentInvestmentValue}${cUnit}`;
+                
+                // Monthly investment (m)
+                const mUnit = f.monthlyInvestmentUnit === 'crores' ? 'c' : 
+                              f.monthlyInvestmentUnit === 'lakhs' ? 'l' : 'k';
+                url += `m${f.monthlyInvestmentValue}${mUnit}`;
+                
+                // Growth rate (g)
+                url += `g${f.cagr}`;
+                
+                // Yearly hike (h)
+                url += `h${f.yearlyHike}`;
+                
+                // Inflation (i)
+                url += `i${f.inflationRate}`;
+                
+                // Tax rate (t)
+                url += `t${f.taxRate}`;
+                
+                // Investment period (p)
+                const pUnit = f.investmentPeriodUnit === 'years' ? 'y' : 'm';
+                url += `p${f.investmentPeriodValue}${pUnit}`;
+                
+                return url;
+            },
+            
+            decodeState(hash) {
+                if (!hash || !hash.startsWith('v1')) {
+                    return null;
+                }
+                
+                // Initialize state with explicit default values for target modes
+                const state = {
+                    targetTime: false,
+                    targetMoney: false
+                };
+                let i = 2; // Skip 'v1'
+                
+                while (i < hash.length) {
+                    const prefix = hash[i];
+                    i++;
+                    
+                    // Extract value based on prefix type
+                    let value = '';
+                    
+                    // Special handling for 'o' prefix - it's always a single character
+                    if (prefix === 'o') {
+                        if (i < hash.length) {
+                            value = hash[i];
+                            i++;
+                        }
+                    } else if (prefix === 'f') {
+                        // 'f' prefix is always exactly 6 digits (YYYYMM)
+                        for (let j = 0; j < 6 && i < hash.length; j++) {
+                            value += hash[i];
+                            i++;
+                        }
+                    } else {
+                        // Fields with unit suffixes: d (time), a (amount), c (current), m (monthly)
+                        const hasUnitSuffix = ['d', 'a', 'c', 'm', 'p'].includes(prefix);
+                        
+                        // For other prefixes, extract value
+                        while (i < hash.length) {
+                            const char = hash[i];
+                            const prevChar = value.slice(-1);
+                            
+                            // If current char is a potential prefix
+                            if (/[ofdacmghitp]/.test(char)) {
+                                // If this field can have unit suffixes AND previous char is a digit,
+                                // then this might be a unit suffix, continue
+                                if (hasUnitSuffix && /\d/.test(prevChar)) {
+                                    value += char;
+                                    i++;
+                                    break; // Unit suffix is always the last character
+                                } else {
+                                    // This is a new prefix, stop here
+                                    break;
+                                }
+                            }
+                            
+                            value += char;
+                            i++;
+                        }
+                    }
+                    
+                    // Parse based on prefix
+                    switch(prefix) {
+                        case 'o': // Target mode
+                            console.log(`  Parsing 'o' with value: "${value}"`);
+                            if (value === 't') {
+                                state.targetTime = true;
+                                state.targetMoney = false;
+                            } else if (value === 'm') {
+                                state.targetTime = false;
+                                state.targetMoney = true;
+                            } else if (value === 'b') {
+                                state.targetTime = true;
+                                state.targetMoney = true;
+                            }
+                            break;
+                        case 'd': // Time period
+                            console.log(`  Parsing 'd' with value: "${value}"`);
+                            const timeUnit = value.slice(-1);
+                            const timeValue = parseFloat(value.slice(0, -1));
+                            state.timePeriodValue = timeValue;
+                            state.timePeriodUnit = timeUnit === 'y' ? 'years' : 'months';
+                            break;
+                        case 'a': // Target amount
+                            console.log(`  Parsing 'a' with value: "${value}"`);
+                            const amtUnit = value.slice(-1);
+                            const amtValue = parseFloat(value.slice(0, -1));
+                            console.log(`    amtUnit: "${amtUnit}", amtValue: ${amtValue}`);
+                            state.targetAmountValue = amtValue;
+                            state.targetAmountUnit = amtUnit === 'c' ? 'crores' : 
+                                                     amtUnit === 'l' ? 'lakhs' : 'thousands';
+                            break;
+                        case 'f': // Start month YYYYMM
+                            if (value.length === 6) {
+                                state.startMonth = `${value.slice(0,4)}-${value.slice(4,6)}`;
+                            }
+                            break;
+                        case 'c': // Current investment
+                            const curUnit = value.slice(-1);
+                            const curValue = parseFloat(value.slice(0, -1));
+                            state.currentInvestmentValue = curValue;
+                            state.currentInvestmentUnit = curUnit === 'c' ? 'crores' : 
+                                                          curUnit === 'l' ? 'lakhs' : 'thousands';
+                            break;
+                        case 'm': // Monthly investment
+                            const monUnit = value.slice(-1);
+                            const monValue = parseFloat(value.slice(0, -1));
+                            state.monthlyInvestmentValue = monValue;
+                            state.monthlyInvestmentUnit = monUnit === 'c' ? 'crores' : 
+                                                          monUnit === 'l' ? 'lakhs' : 'thousands';
+                            break;
+                        case 'g': // Growth rate
+                            state.cagr = parseFloat(value);
+                            break;
+                        case 'h': // Yearly hike
+                            state.yearlyHike = parseFloat(value);
+                            break;
+                        case 'i': // Inflation
+                            state.inflationRate = parseFloat(value);
+                            break;
+                        case 't': // Tax rate
+                            state.taxRate = parseFloat(value);
+                            break;
+                        case 'p': // Investment period
+                            const invUnit = value.slice(-1);
+                            const invValue = parseFloat(value.slice(0, -1));
+                            state.investmentPeriodValue = invValue;
+                            state.investmentPeriodUnit = invUnit === 'y' ? 'years' : 'months';
+                            break;
+                    }
+                }
+                
+                console.log('📊 Decoded state from URL:', state);
+                return state;
+            },
+            
+            loadFromUrl() {
+                const hash = window.location.hash.slice(1); // Remove '#'
+                console.log('🔗 Loading from URL hash:', hash);
+                if (!hash) return;
+                
+                const state = this.decodeState(hash);
+                if (state) {
+                    console.log('📝 Before Object.assign, formData.targetTime:', this.formData.targetTime, 'formData.targetMoney:', this.formData.targetMoney);
+                    // If contribution period not in URL and Time mode is active, default it to target time period
+                    if (state.investmentPeriodValue === undefined && state.targetTime !== false && (state.targetTime || this.formData.targetTime)) {
+                        state.investmentPeriodValue = state.timePeriodValue ?? this.formData.timePeriodValue;
+                        state.investmentPeriodUnit = state.timePeriodUnit ?? this.formData.timePeriodUnit;
+                    }
+                    Object.assign(this.formData, state);
+                    console.log('✅ After Object.assign, formData.targetTime:', this.formData.targetTime, 'formData.targetMoney:', this.formData.targetMoney);
+                    console.log('🎯 isBothTargetsMode computed:', this.isBothTargetsMode);
+                }
+            },
+            
+            async shareCalculation() {
+                const encoded = this.encodeState();
+                const url = `${window.location.origin}${window.location.pathname}#${encoded}`;
+                
+                try {
+                    await navigator.clipboard.writeText(url);
+                    this.shareButtonText = '✅ Copied!';
+                    
+                    // Update URL without reload
+                    window.history.replaceState(null, '', `#${encoded}`);
+                    
+                    setTimeout(() => {
+                        this.shareButtonText = '🔗 Share';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    this.shareButtonText = '❌ Failed';
+                    setTimeout(() => {
+                        this.shareButtonText = '🔗 Share';
+                    }, 2000);
+                }
+            },
+            
+            toggleTarget(type) {
+                if (type === 'time') {
+                    // If trying to deselect Time, only allow if Money is selected
+                    if (this.formData.targetTime && this.formData.targetMoney) {
+                        this.formData.targetTime = false;
+                    } else if (!this.formData.targetTime) {
+                        this.formData.targetTime = true;
+                    }
+                } else if (type === 'money') {
+                    // If trying to deselect Money, only allow if Time is selected
+                    if (this.formData.targetMoney && this.formData.targetTime) {
+                        this.formData.targetMoney = false;
+                    } else if (!this.formData.targetMoney) {
+                        this.formData.targetMoney = true;
+                    }
+                }
+                this.calculateResults();
+            },
+            
+            debouncedCalculate() {
+                clearTimeout(this.debounceTimer);
+                this.debounceTimer = setTimeout(() => {
+                    this.calculateResults();
+                }, DEBOUNCE_DELAY_MS);
+            },
+
+            calculateResults() {
+                this.calculating = true;
+                
+                // Clamp contribution period to target time period in Time modes
+                if (this.formData.targetTime) {
+                    const targetMonths = Math.ceil(this.numberOfYears * 12);
+                    const contribMonths = Math.ceil(this.numberOfInvestmentYears * 12);
+                    if (contribMonths > targetMonths) {
+                        this.formData.investmentPeriodValue = this.formData.timePeriodValue;
+                        this.formData.investmentPeriodUnit = this.formData.timePeriodUnit;
+                    }
+                }
+                
+                if (this.isBothTargetsMode) {
+                    this.calculateMonthlyInvestment();
+                } else if (this.formData.targetTime && !this.formData.targetMoney) {
+                    this.calculateByTargetYears();
+                } else if (this.formData.targetMoney && !this.formData.targetTime) {
+                    this.calculateByTargetAmount();
+                }
+            },
+            
+            // Binary search helper to find required months
+            binarySearchMonths(testFn, targetValue, maxMonths, tolerance = 1) {
+                let low = 0;
+                let high = maxMonths;
+                
+                while (high - low > tolerance) {
+                    const testMonths = Math.floor((low + high) / 2);
+                    const testYears = testMonths / 12;
+                    const result = testFn(testYears);
+                    
+                    if (result < targetValue) {
+                        low = testMonths;
+                    } else {
+                        high = testMonths;
+                    }
+                }
+                
+                return high;
+            },
+            
+            // Core SIP simulation engine - computes monthly then rolls up to yearly
+            simulateSIP({ years, monthlyInvestmentFn, currentInvestment, cagr, inflationRate, taxRate }) {
+                // Validation
+                if (cagr <= -100) {
+                    throw new Error('Expected Growth must be greater than -100%');
+                }
+                if (years <= 0 || years > MAX_INVESTMENT_YEARS) {
+                    throw new Error(`Investment period must be between 0 and ${MAX_INVESTMENT_YEARS} years`);
+                }
+                if (currentInvestment < 0) {
+                    throw new Error('Current investment cannot be negative');
+                }
+                
+                const monthlyData = [];
+                const yearlyData = [];
+                let portfolioValue = currentInvestment; // Start with current investment
+                let totalInvested = currentInvestment; // Current investment is part of accumulated
+                let totalInvestedPresentValue = currentInvestment; // Current investment has no inflation discount
+                const monthlyCagr = Math.pow(1 + cagr / 100, 1 / 12) - 1;
+                const monthlyInflation = Math.pow(1 + inflationRate / 100, 1 / 12) - 1;
+                
+                const totalMonths = Math.ceil(years * 12);
+                
+                // Monthly computation
+                let cumulativeNominalGrowth = 0; // Track cumulative nominal growth
+                let prevRealValue = currentInvestment; // Track previous real portfolio value
+                for (let monthIndex = 0; monthIndex < totalMonths; monthIndex++) {
+                    const year = Math.floor(monthIndex / 12) + 1;
+                    const month = (monthIndex % 12) + 1;
+                    
+                    // Store portfolio value before this month's contribution and growth
+                    const prevPortfolioValue = portfolioValue;
+                    
+                    // Contribution at start of month (doesn't include currentInvestment)
+                    const contribution = Math.round(monthlyInvestmentFn(year, month));
+                    
+                    // Add contribution at month start, then apply growth for the full month
+                    totalInvested += contribution;
+                    portfolioValue = (portfolioValue + contribution) * (1 + monthlyCagr);
+                    
+                    // Calculate inflation factors:
+                    // - Contribution happens at month start: discount from start of month
+                    // - Portfolio value measured at month end: discount from end of month (1 month later)
+                    const inflationFactorForContribution = Math.pow(1 + monthlyInflation, monthIndex);
+                    const inflationFactorForPortfolio = Math.pow(1 + monthlyInflation, monthIndex + 1);
+                    
+                    // Calculate real contribution (present value at month start)
+                    const realContribution = contribution / inflationFactorForContribution;
+                    
+                    // Track present value of this contribution
+                    totalInvestedPresentValue += realContribution;
+                    
+                    // Calculate real portfolio value (present value at month end)
+                    const realValue = portfolioValue / inflationFactorForPortfolio;
+                    
+                    // Calculate nominal growth for this month (portfolio change minus contribution)
+                    const nominalGrowthThisMonth = portfolioValue - prevPortfolioValue - contribution;
+                    cumulativeNominalGrowth += nominalGrowthThisMonth;
+                    
+                    // Calculate real growth from real values (not by deflating nominal growth)
+                    const realGrowthThisMonth = realValue - prevRealValue - realContribution;
+                    prevRealValue = realValue; // Update for next iteration
+                    
+                    // Cumulative real growth is the total real gains (real portfolio - real investment)
+                    const cumulativeRealGrowth = realValue - totalInvestedPresentValue;
+                    
+                    // Note: post-tax values are NOT computed per-month here.
+                    // Tax is a lump-sum liability settled at exit, levied on the total NOMINAL gain.
+                    // Per-row post-tax values are derived in buildMonthlyPlan using each row's own
+                    // cumulative nominal gain and inflation factor (exit-at-this-month scenario).
+                    monthlyData.push({
+                        monthIndex,
+                        year,
+                        month,
+                        contribution,
+                        realContribution: Math.round(realContribution),
+                        realGrowth: Math.round(realGrowthThisMonth),
+                        cumulativeNominalGrowth: Math.round(cumulativeNominalGrowth),
+                        cumulativeRealGrowth: Math.round(cumulativeRealGrowth),
+                        portfolioValue: Math.round(portfolioValue),
+                        totalInvested: Math.round(totalInvested),
+                        totalInvestedPresentValue: Math.round(totalInvestedPresentValue),
+                        realValue: Math.round(realValue)
+                    });
+                }
+                
+                // Roll up to yearly data
+                for (let year = 1; year <= Math.ceil(years); year++) {
+                    const lastMonthOfYear = Math.min(year * 12 - 1, totalMonths - 1);
+                    const yearEndData = monthlyData[lastMonthOfYear];
+                    
+                    yearlyData.push({
+                        year: year,
+                        investment: yearEndData.totalInvested,
+                        investmentPresentValue: yearEndData.totalInvestedPresentValue,
+                        value: yearEndData.portfolioValue,
+                        inflationAdjustedValue: yearEndData.realValue
+                    });
+                }
+                
+                const finalMonth = monthlyData[monthlyData.length - 1];
+                
+                // Post-tax final value (lump-sum exit tax on total nominal gain):
+                //   Step 1 – Total Nominal Gain  = Final Nominal Portfolio − Total Nominal Investment
+                //   Step 2 – Nominal Tax Liability = Total Nominal Gain × (taxRate / 100)
+                //   Step 3 – Nominal Post-Tax Portfolio = Final Nominal Portfolio − Nominal Tax Liability
+                //   Step 4 – Real Post-Tax Value  = Nominal Post-Tax Portfolio ÷ totalInflationFactor
+                // Dividing by Math.pow(1 + monthlyInflation, totalMonths) gives the correct purchasing-
+                // power equivalent in today's money WITHOUT granting any inflation credit on the tax bill.
+                const totalNominalGain = finalMonth.portfolioValue - finalMonth.totalInvested;
+                const nominalTaxLiability = totalNominalGain * (taxRate / 100);
+                const nominalPostTaxPortfolio = finalMonth.portfolioValue - nominalTaxLiability;
+                const postTaxRealValue = Math.round(nominalPostTaxPortfolio / Math.pow(1 + monthlyInflation, totalMonths));
+                
+                return {
+                    monthlyData,
+                    yearlyData,
+                    finalPortfolioValue: finalMonth.portfolioValue,
+                    finalInvestment: finalMonth.totalInvested,
+                    finalInflationAdjustedValue: finalMonth.realValue,
+                    finalInvestmentPresentValue: finalMonth.totalInvestedPresentValue,
+                    postTaxRealValue: postTaxRealValue,
+                    totalMonths: monthlyData.length
+                };
+            },
+            
+            buildMonthlyPlan(simulation, currentInvestment) {
+                const [startYear, startMonth] = this.formData.startMonth.split('-').map(Number);
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                // Per-row post-tax uses the same lump-sum exit formula as simulateSIP:
+                //   nominalTaxLiability = cumulativeNominalGain × taxRate
+                //   postTaxNominal      = portfolioValue − nominalTaxLiability
+                //   postTaxReal         = postTaxNominal ÷ inflationFactor(monthIndex + 1)
+                const { inflationRate, taxRate } = this.formData;
+                const monthlyInflation = Math.pow(1 + inflationRate / 100, 1 / 12) - 1;
+                
+                return simulation.monthlyData.map((data, index) => {
+                    const currentMonthNum = (startMonth - 1 + index) % 12;
+                    const currentYear = startYear + Math.floor((startMonth - 1 + index) / 12);
+                    
+                    // Nominal growth = change in portfolio minus contribution (monthly increment)
+                    const prevNominal = index > 0 ? simulation.monthlyData[index - 1].portfolioValue : currentInvestment;
+                    const nominalGrowth = data.portfolioValue - prevNominal - data.contribution;
+                    
+                    // Per-row post-tax (exit-at-this-month scenario)
+                    const cumulativeNominalGain = data.portfolioValue - data.totalInvested;
+                    const rowNominalTaxLiability = cumulativeNominalGain * (taxRate / 100);
+                    const rowPostTaxNominal = data.portfolioValue - rowNominalTaxLiability;
+                    const rowInflationFactor = Math.pow(1 + monthlyInflation, data.monthIndex + 1);
+                    const rowPostTaxReal = rowPostTaxNominal / rowInflationFactor;
+                    
+                    return {
+                        monthIndex: data.monthIndex,
+                        year: currentYear,
+                        month: monthNames[currentMonthNum],
+                        // Nominal values
+                        nominalContribution: data.contribution,
+                        nominalGrowth: nominalGrowth,
+                        nominalCumulativeGrowth: data.cumulativeNominalGrowth,
+                        nominalInvestment: data.totalInvested,
+                        nominalPortfolio: data.portfolioValue,
+                        nominalPostTaxPortfolio: Math.round(rowPostTaxNominal),
+                        // Real values
+                        realContribution: data.realContribution,
+                        realGrowth: data.realGrowth,
+                        realCumulativeGrowth: data.cumulativeRealGrowth,
+                        realInvestment: data.totalInvestedPresentValue,
+                        realPortfolio: data.realValue,
+                        realPostTaxPortfolio: Math.round(rowPostTaxReal)
+                    };
+                });
+            },
+            
+            calculateByTargetYears() {
+                const { cagr, yearlyHike, inflationRate } = this.formData;
+                const numberOfYears = this.numberOfYears;
+                const currentInvestment = this.currentInvestment;
+                const monthlyInvestment = this.monthlyInvestment;
+                const investmentMonths = Math.ceil(this.numberOfInvestmentYears * 12);
+
+                // Use simulateSIP for calculations
+                const startingMonthly = monthlyInvestment;
+                const monthlyInvestmentFn = (year, month) => {
+                    const currentMonthIndex = (year - 1) * 12 + (month - 1);
+                    if (currentMonthIndex >= investmentMonths) return 0;
+                    const hikeMultiplier = Math.pow(1 + yearlyHike / 100, year - 1);
+                    return startingMonthly * hikeMultiplier;
+                };
+
+                const simulation = this.simulateSIP({
+                    years: numberOfYears,
+                    monthlyInvestmentFn,
+                    currentInvestment,
+                    cagr,
+                    inflationRate,
+                    taxRate: this.formData.taxRate
+                });
+
+                this.yearlyData = simulation.yearlyData;
+                
+                // Build monthly plan using shared method
+                this.monthlyPlan = this.buildMonthlyPlan(simulation, currentInvestment);
+
+                this.results = {
+                    calculated: true,
+                    totalInvestment: simulation.finalInvestment,
+                    realInvestment: simulation.finalInvestmentPresentValue,
+                    expectedValue: simulation.finalPortfolioValue,
+                    totalReturns: simulation.finalPortfolioValue - simulation.finalInvestment,
+                    inflationAdjustedValue: simulation.finalInflationAdjustedValue,
+                    realReturns: simulation.finalInflationAdjustedValue - simulation.finalInvestmentPresentValue,
+                    postTaxRealValue: simulation.postTaxRealValue
+                };
+
+                // Watchers will handle chart rendering automatically
+                this.calculating = false;
+                this.$nextTick(() => { this.renderBreakdownChart(); });
+            },
+            
+            calculateByTargetAmount() {
+                const { cagr, yearlyHike, inflationRate } = this.formData;
+                const currentInvestment = this.currentInvestment;
+                const monthlyInvestment = this.monthlyInvestment;
+                const targetAmount = this.targetAmount;
+                const investmentMonths = Math.ceil(this.numberOfInvestmentYears * 12);
+
+                // Build monthly investment function with hike
+                const startingMonthly = monthlyInvestment;
+                const monthlyInvestmentFn = (yr, month) => {
+                    const currentMonthIndex = (yr - 1) * 12 + (month - 1);
+                    if (currentMonthIndex >= investmentMonths) return 0;
+                    const hikeMultiplier = Math.pow(1 + yearlyHike / 100, yr - 1);
+                    return startingMonthly * hikeMultiplier;
+                };
+
+                // Binary search on months to find when Real Value reaches target
+                const requiredMonths = this.binarySearchMonths(
+                    (testYears) => {
+                        const simulation = this.simulateSIP({
+                            years: testYears,
+                            monthlyInvestmentFn,
+                            currentInvestment,
+                            cagr,
+                            inflationRate,
+                            taxRate: this.formData.taxRate
+                        });
+                        return simulation.postTaxRealValue;
+                    },
+                    targetAmount,
+                    MAX_INVESTMENT_MONTHS
+                );
+                const finalYears = requiredMonths / 12;
+                
+                const simulation = this.simulateSIP({
+                    years: finalYears,
+                    monthlyInvestmentFn,
+                    currentInvestment,
+                    cagr,
+                    inflationRate,
+                    taxRate: this.formData.taxRate
+                });
+
+                this.yearlyData = simulation.yearlyData;
+                
+                // Format time required
+                const years = Math.floor(requiredMonths / 12);
+                const months = requiredMonths % 12;
+                let timeRequiredStr = '';
+                if (years > 0) {
+                    timeRequiredStr += `${years} ${years === 1 ? 'year' : 'years'}`;
+                }
+                if (months > 0) {
+                    if (timeRequiredStr) timeRequiredStr += ' ';
+                    timeRequiredStr += `${months} ${months === 1 ? 'month' : 'months'}`;
+                }
+                
+                this.results = {
+                    calculated: true,
+                    totalInvestment: simulation.finalInvestment,
+                    realInvestment: simulation.finalInvestmentPresentValue,
+                    expectedValue: simulation.finalPortfolioValue,
+                    totalReturns: simulation.finalPortfolioValue - simulation.finalInvestment,
+                    inflationAdjustedValue: simulation.finalInflationAdjustedValue,
+                    realReturns: simulation.finalInflationAdjustedValue - simulation.finalInvestmentPresentValue,
+                    timeRequired: timeRequiredStr,
+                    postTaxRealValue: simulation.postTaxRealValue
+                };
+                
+                // Build monthly plan using shared method
+                this.monthlyPlan = this.buildMonthlyPlan(simulation, currentInvestment);
+
+                // Watchers will handle chart rendering automatically
+                this.calculating = false;
+                this.$nextTick(() => { this.renderBreakdownChart(); });
+            },
+
+            calculateMonthlyInvestment() {
+                const { cagr, yearlyHike, inflationRate } = this.formData;
+                const numberOfYears = this.numberOfYears;
+                const currentInvestment = this.currentInvestment;
+                const targetAmount = this.targetAmount;
+                const investmentMonths = Math.ceil(this.numberOfInvestmentYears * 12);
+                
+                // First check if current investment alone already exceeds target
+                const checkZeroSIP = this.simulateSIP({
+                    years: numberOfYears,
+                    monthlyInvestmentFn: () => 0,
+                    currentInvestment,
+                    cagr,
+                    inflationRate,
+                    taxRate: this.formData.taxRate
+                });
+                
+                // If current investment alone exceeds or meets target, no monthly SIP needed
+                if (checkZeroSIP.postTaxRealValue >= targetAmount) {
+                    // Calculate when target will be reached (binary search on time)
+                    const requiredMonths = this.binarySearchMonths(
+                        (testYears) => {
+                            const testResult = this.simulateSIP({
+                                years: testYears,
+                                monthlyInvestmentFn: () => 0,
+                                currentInvestment,
+                                cagr,
+                                inflationRate,
+                                taxRate: this.formData.taxRate
+                            });
+                            return testResult.postTaxRealValue;
+                        },
+                        targetAmount,
+                        numberOfYears * 12
+                    );
+                    const finalYears = requiredMonths / 12;
+                    
+                    // Run final simulation for the found time period
+                    const finalSimulation = this.simulateSIP({
+                        years: finalYears,
+                        monthlyInvestmentFn: () => 0,
+                        currentInvestment,
+                        cagr,
+                        inflationRate,
+                        taxRate: this.formData.taxRate
+                    });
+                    
+                    // Format time required
+                    const years = Math.floor(requiredMonths / 12);
+                    const months = requiredMonths % 12;
+                    let timeRequiredStr = '';
+                    if (years > 0) {
+                        timeRequiredStr += `${years} ${years === 1 ? 'year' : 'years'}`;
+                    }
+                    if (months > 0) {
+                        if (timeRequiredStr) timeRequiredStr += ' ';
+                        timeRequiredStr += `${months} ${months === 1 ? 'month' : 'months'}`;
+                    }
+                    
+                    this.yearlyData = finalSimulation.yearlyData;
+                    this.results = {
+                        calculated: true,
+                        totalInvestment: finalSimulation.finalInvestment,
+                        realInvestment: finalSimulation.finalInvestmentPresentValue,
+                        expectedValue: finalSimulation.finalPortfolioValue,
+                        totalReturns: finalSimulation.finalPortfolioValue - finalSimulation.finalInvestment,
+                        inflationAdjustedValue: finalSimulation.finalInflationAdjustedValue,
+                        realReturns: finalSimulation.finalInflationAdjustedValue - finalSimulation.finalInvestmentPresentValue,
+                        requiredMonthlyInvestment: 0,
+                        timeRequired: timeRequiredStr,
+                        postTaxRealValue: finalSimulation.postTaxRealValue
+                    };
+                    
+                    // Build monthly plan using shared method
+                    this.monthlyPlan = this.buildMonthlyPlan(finalSimulation, currentInvestment);
+                    
+                    // Watchers will handle chart rendering automatically
+                    this.calculating = false;
+                    this.$nextTick(() => { this.renderBreakdownChart(); });
+                    return;
+                }
+                
+                // Binary search for the required monthly investment
+                let low = 0;
+                let high = targetAmount / Math.pow(1 + cagr/100, numberOfYears);
+                let requiredMonthly = 0;
+                const relativeTolerance = 0.00001; // 0.001% relative tolerance
+                
+                while ((high - low) / Math.max(high, 1) > relativeTolerance) {
+                    requiredMonthly = (low + high) / 2;
+                    
+                    // Use simulateSIP with test monthly amount
+                    const startingAmount = requiredMonthly;
+                    const testFn = (year, month) => {
+                        const currentMonthIndex = (year - 1) * 12 + (month - 1);
+                        if (currentMonthIndex >= investmentMonths) return 0;
+                        const hikeMultiplier = Math.pow(1 + yearlyHike / 100, year - 1);
+                        return startingAmount * hikeMultiplier;
+                    };
+                    
+                    const testResult = this.simulateSIP({
+                        years: numberOfYears,
+                        monthlyInvestmentFn: testFn,
+                        currentInvestment,
+                        cagr,
+                        inflationRate,
+                        taxRate: this.formData.taxRate
+                    });
+                    
+                    if (testResult.postTaxRealValue < targetAmount) {
+                        low = requiredMonthly;
+                    } else {
+                        high = requiredMonthly;
+                    }
+                }
+                
+                requiredMonthly = high;
+                
+                // Final simulation with found monthly investment
+                const startingAmount = requiredMonthly;
+                const finalFn = (year, month) => {
+                    const currentMonthIndex = (year - 1) * 12 + (month - 1);
+                    if (currentMonthIndex >= investmentMonths) return 0;
+                    const hikeMultiplier = Math.pow(1 + yearlyHike / 100, year - 1);
+                    return startingAmount * hikeMultiplier;
+                };
+                
+                const simulation = this.simulateSIP({
+                    years: numberOfYears,
+                    monthlyInvestmentFn: finalFn,
+                    currentInvestment,
+                    cagr,
+                    inflationRate,
+                    taxRate: this.formData.taxRate
+                });
+
+                this.yearlyData = simulation.yearlyData;
+                this.results = {
+                    calculated: true,
+                    totalInvestment: simulation.finalInvestment,
+                    realInvestment: simulation.finalInvestmentPresentValue,
+                    expectedValue: simulation.finalPortfolioValue,
+                    totalReturns: simulation.finalPortfolioValue - simulation.finalInvestment,
+                    inflationAdjustedValue: simulation.finalInflationAdjustedValue,
+                    realReturns: simulation.finalInflationAdjustedValue - simulation.finalInvestmentPresentValue,
+                    requiredMonthlyInvestment: requiredMonthly,
+                    postTaxRealValue: simulation.postTaxRealValue
+                };
+
+                // Build monthly plan using shared method
+                this.monthlyPlan = this.buildMonthlyPlan(simulation, currentInvestment);
+
+                // Watchers will handle chart rendering automatically
+                this.calculating = false;
+                this.$nextTick(() => { this.renderBreakdownChart(); });
+            },
+
+            renderChart() {
+                if (!this.results.calculated || !this.displayedPlan || this.displayedPlan.length === 0) {
+                    return;
+                }
+
+                const chartDom = document.getElementById('sip-chart');
+                if (!chartDom) return;
+
+                // Initialize chart only once, reuse instance for updates
+                if (!this.chart) {
+                    this.chart = echarts.init(chartDom);
+                    
+                    // Setup resize handler once
+                    if (!this.resizeHandler) {
+                        this.resizeHandler = () => this.chart?.resize();
+                        window.addEventListener('resize', this.resizeHandler);
+                    }
+                }
+
+                        // Get view mode label
+                        const granularityLabel = this.planGranularity === 'yearly' ? 'Yearly' : 'Monthly';
+                        
+                        const option = {
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: { title: 'Save as Image' }
+                                }
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: function(params) {
+                                    return `<strong>${params.name}</strong><br/>${params.marker} ${params.seriesName}: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                                },
+                                axisPointer: {
+                                    type: 'cross',
+                                    label: {
+                                        backgroundColor: '#6a7985'
+                                    }
+                                },
+                                backgroundColor: 'rgba(50, 50, 50, 0.9)',
+                                borderColor: '#333',
+                                borderWidth: 1,
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            },
+                            legend: {
+                                data: ['Accumulated Investment', 'Portfolio Value']
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '2%',
+                                top: '8%',
+                                containLabel: true
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: this.displayedPlan.map(d => d.period),
+                                axisLabel: {
+                                    fontSize: 11,
+                                    rotate: this.planGranularity === 'monthly' ? 45 : 0
+                                }
+                            },
+                            yAxis: {
+                                type: 'value',
+                                name: 'Amount (₹)',
+                                nameLocation: 'middle',
+                                nameGap: 50,
+                                axisLabel: {
+                                    formatter: function(value) {
+                                        if (value >= 10000000) {
+                                            return (value / 10000000).toFixed(1) + ' Cr';
+                                        } else if (value >= 100000) {
+                                            return (value / 100000).toFixed(1) + ' L';
+                                        }
+                                        return value.toLocaleString('en-IN');
+                                    },
+                                    fontSize: 11
+                                }
+                            },
+                            series: [
+                                {
+                                    name: 'Accumulated Investment',
+                                    type: 'line',
+                                    data: this.displayedPlan.map(d => d.accumulatedContribution),
+                                    smooth: true,
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: 'rgba(255, 193, 7, 0.5)' },
+                                            { offset: 1, color: 'rgba(255, 193, 7, 0.1)' }
+                                        ])
+                                    },
+                                    lineStyle: {
+                                        width: 2,
+                                        color: '#FFC107'
+                                    },
+                                    itemStyle: {
+                                        color: '#FFC107'
+                                    },
+                                    symbol: 'circle',
+                                    symbolSize: 6,
+                                    emphasis: {
+                                        focus: 'series'
+                                    }
+                                },
+                                {
+                                    name: 'Portfolio Value',
+                                    type: 'line',
+                                    data: this.displayedPlan.map(d => d.portfolioValue),
+                                    smooth: true,
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: 'rgba(76, 175, 80, 0.5)' },
+                                            { offset: 1, color: 'rgba(76, 175, 80, 0.1)' }
+                                        ])
+                                    },
+                                    lineStyle: {
+                                        width: 3,
+                                        color: '#4CAF50'
+                                    },
+                                    itemStyle: {
+                                        color: '#4CAF50'
+                                    },
+                                    symbol: 'circle',
+                                    symbolSize: 6,
+                                    emphasis: {
+                                        focus: 'series'
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Use setOption with notMerge=true for clean replacement
+                        this.chart.setOption(option, true);
+            },
+
+            renderContributionChart(rebuildCategories = true) {
+                const chartDom = document.getElementById('contributionChart');
+                if (!chartDom) return;
+
+                // Initialize chart only once, reuse instance for updates
+                if (!this.contributionChart) {
+                    this.contributionChart = echarts.init(chartDom);
+                    
+                    // Setup resize handler once
+                    if (!this.contributionResizeHandler) {
+                        this.contributionResizeHandler = () => this.contributionChart?.resize();
+                        window.addEventListener('resize', this.contributionResizeHandler);
+                    }
+                }
+
+                // Cache categories to avoid rebuilding on every view mode change
+                if (rebuildCategories) {
+                    this.contributionChartCategories = [];
+                    this.monthlyPlan.forEach((plan) => {
+                        // Skip entries with 0 contribution
+                        if (!plan.nominalContribution || plan.nominalContribution === 0) {
+                            return;
+                        }
+                        this.contributionChartCategories.push(`${plan.year} ${plan.month}`);
+                    });
+                }
+
+                // Always rebuild contributions data (changes with view mode)
+                const contributions = [];
+                this.monthlyPlan.forEach((plan) => {
+                    // Skip entries with 0 contribution
+                    if (!plan.nominalContribution || plan.nominalContribution === 0) {
+                        return;
+                    }
+                    
+                    // Use pre-computed values from monthlyPlan
+                    let value;
+                    if (this.contributionViewMode === 'nominal') {
+                        value = plan.nominalContribution;
+                    } else {
+                        value = Math.round(plan.realContribution);
+                    }
+                    contributions.push(value);
+                });
+
+                const option = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: { title: 'Save as Image' }
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function(params) {
+                            return `<strong>${params.name}</strong><br/>${params.marker} Contribution: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                        },
+                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
+                        borderColor: '#333',
+                        borderWidth: 1,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '2%',
+                        top: '8%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: this.contributionChartCategories,
+                        axisLabel: {
+                            rotate: 45,
+                            fontSize: 10,
+                            interval: Math.max(0, Math.floor(this.contributionChartCategories.length / 24)) // Show ~24 labels max
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'Amount (₹)',
+                        nameLocation: 'middle',
+                        nameGap: 50,
+                        axisLabel: {
+                            formatter: function(value) {
+                                if (value >= 10000000) {
+                                    return (value / 10000000).toFixed(1) + ' Cr';
+                                } else if (value >= 100000) {
+                                    return (value / 100000).toFixed(1) + ' L';
+                                } else if (value >= 1000) {
+                                    return (value / 1000).toFixed(1) + 'K';
+                                }
+                                return value.toLocaleString('en-IN');
+                            },
+                            fontSize: 11
+                        }
+                    },
+                    series: [{
+                        name: 'Contribution',
+                        type: 'bar',
+                        data: contributions,
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#f39c12' },
+                                { offset: 1, color: '#f9c74f' }
+                            ])
+                        },
+                        barMaxWidth: 40
+                    }]
+                };
+
+                // Use notMerge=true only when rebuilding categories, otherwise merge for efficiency
+                this.contributionChart.setOption(option, rebuildCategories);
+            },
+
+            renderBreakdownChart() {
+                if (!this.results.calculated) return;
+
+                const chartDom = document.getElementById('sip-breakdown-chart');
+                if (!chartDom) return;
+
+                if (!this.breakdownChart) {
+                    this.breakdownChart = echarts.init(chartDom);
+
+                    if (!this.breakdownResizeHandler) {
+                        this.breakdownResizeHandler = () => this.breakdownChart?.resize();
+                        window.addEventListener('resize', this.breakdownResizeHandler);
+                    }
+                }
+
+                const r = this.results;
+                const taxRate = this.formData.taxRate / 100;
+                const nominalGrowth = (r.expectedValue - r.totalInvestment) * (1 - taxRate);
+                const nominalTax   = (r.expectedValue - r.totalInvestment) * taxRate;
+                const realGrowth   = r.postTaxRealValue - r.realInvestment;
+                const realTax      = r.inflationAdjustedValue - r.postTaxRealValue;
+
+                const fmt = v => {
+                    const n = Math.round(v);
+                    if (n >= 10000000) return '₹' + (n / 10000000).toFixed(2) + ' Cr';
+                    if (n >= 100000)   return '₹' + (n / 100000).toFixed(2) + ' L';
+                    if (n >= 1000)     return '₹' + (n / 1000).toFixed(2) + ' K';
+                    return '₹' + n.toLocaleString('en-IN');
+                };
+
+                const labelMap = {
+                    'Nominal|Invested':              'Nominal Invested',
+                    'Nominal|Growth':                'Nominal Net Growth',
+                    'Nominal|Tax':                   'Nominal Tax',
+                    'Real (Inflation Adjusted)|Invested': 'Real Invested',
+                    'Real (Inflation Adjusted)|Growth':   'Real Net Growth',
+                    'Real (Inflation Adjusted)|Tax':      'Real Tax'
+                };
+
+                this.breakdownChart.setOption({
+                    toolbox: {
+                        feature: { saveAsImage: { title: 'Save as Image' } }
+                    },
+                    tooltip: {
+                        formatter: function(p) {
+                            const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                            return p.marker + '<strong>' + label + '</strong><br>' +
+                                   fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                        }
+                    },
+                    legend: { bottom: 0 },
+                    series: [
+                        {
+                            name: 'Nominal',
+                            type: 'pie',
+                            radius: ['55%', '80%'],
+                            label: { formatter: function(p) {
+                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                            }},
+                            data: [
+                                { value: Math.round(r.totalInvestment), name: 'Invested', itemStyle: { color: '#FFE082' } },
+                                { value: Math.round(nominalGrowth),     name: 'Growth',   itemStyle: { color: '#81C784' } },
+                                { value: Math.round(nominalTax),        name: 'Tax',      itemStyle: { color: '#fca5a5' } }
+                            ]
+                        },
+                        {
+                            name: 'Real (Inflation Adjusted)',
+                            type: 'pie',
+                            radius: ['30%', '50%'],
+                            label: { formatter: function(p) {
+                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                            }},
+                            data: [
+                                { value: Math.round(r.realInvestment), name: 'Invested', itemStyle: { color: '#FFC107' } },
+                                { value: Math.round(realGrowth),       name: 'Growth',   itemStyle: { color: '#4CAF50' } },
+                                { value: Math.round(realTax),          name: 'Tax',      itemStyle: { color: '#dc2626' } }
+                            ]
+                        }
+                    ],
+                    graphic: {
+                        type: 'text',
+                        left: 'center',
+                        top: 'center',
+                        style: {
+                            text: 'Real vs\nNominal',
+                            textAlign: 'center',
+                            fontSize: 16,
+                            fontWeight: 600
+                        }
+                    }
+                }, true);
+            },
+
+            generateContributionTable() {
+                if (!this.monthlyPlan || this.monthlyPlan.length === 0) {
+                    this.contributionTable = [];
+                    return;
+                }
+                
+                // Group contributions by year using pre-computed values
+                const yearMap = new Map();
+                
+                this.monthlyPlan.forEach((plan) => {
+                    // Skip entries with 0 contribution
+                    if (!plan.nominalContribution || plan.nominalContribution === 0) {
+                        return;
+                    }
+                    
+                    const year = plan.year;
+                    
+                    if (!yearMap.has(year)) {
+                        yearMap.set(year, Array(12).fill(null));
+                    }
+                    
+                    const monthIndex = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(plan.month);
+                    
+                    // Use pre-computed values from monthlyPlan
+                    yearMap.get(year)[monthIndex] = {
+                        nominal: plan.nominalContribution,
+                        real: Math.round(plan.realContribution)
+                    };
+                });
+                
+                // Convert map to array
+                this.contributionTable = Array.from(yearMap.entries()).map(([year, months]) => ({
+                    year,
+                    months
+                }));
+            },
+
+            formatCurrency(amount) {
+                // Format large numbers in Crores, Lakhs, or Thousands
+                if (amount >= 10000000) { // 1 crore or more
+                    return (amount / 10000000).toFixed(2) + ' Cr';
+                } else if (amount >= 100000) { // 1 lakh or more
+                    return (amount / 100000).toFixed(2) + ' L';
+                } else if (amount >= 1000) { // 1 thousand or more
+                    return (amount / 1000).toFixed(2) + ' K';
+                } else {
+                    return amount.toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+                }
+            },
+            formatCurrencyFull(amount) {
+                // Full number format with Indian locale
+                if (amount === null || amount === undefined || isNaN(amount)) {
+                    return '0';
+                }
+                return amount.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            },
+            copyJSON() {
+                navigator.clipboard.writeText(this.exportJSON).then(() => {
+                    this.copyButtonText = '✅ Copied!';
+                    setTimeout(() => {
+                        this.copyButtonText = '📋 JSON';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                    this.copyButtonText = '❌ Failed';
+                    setTimeout(() => {
+                        this.copyButtonText = '📋 JSON';
+                    }, 2000);
+                });
+            }
+        },
+        beforeUnmount() {
+            if (this.chart) {
+                this.chart.dispose();
+            }
+            if (this.contributionChart) {
+                this.contributionChart.dispose();
+            }
+            if (this.breakdownChart) {
+                this.breakdownChart.dispose();
+            }
+            if (this.resizeHandler) {
+                window.removeEventListener('resize', this.resizeHandler);
+            }
+            if (this.contributionResizeHandler) {
+                window.removeEventListener('resize', this.contributionResizeHandler);
+            }
+            if (this.breakdownResizeHandler) {
+                window.removeEventListener('resize', this.breakdownResizeHandler);
+            }
+        }
+    }).mount('#sip-calculator-app');
+};
