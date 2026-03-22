@@ -310,7 +310,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     </div>
 
                     <!-- Compare Scenarios Box (below inputs, same column) -->
-                    <div style="padding: 1rem; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px;">
+                    <div class="sip-inputs">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Scenario Name (Optional):</span>
