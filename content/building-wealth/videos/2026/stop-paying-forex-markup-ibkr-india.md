@@ -4,6 +4,7 @@ date: 2026-03-19
 draft: false
 type: "videos"
 wealth_tags:
+  - International Investing
   - Forex
   - Currency Conversion
   - Cost Optimization
