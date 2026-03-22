@@ -10,6 +10,7 @@ tool_dependencies:
   - echarts
 summary: "Calculate exactly how much USD you get for your INR — including forex spread, GST (Rule 32), and TCS — and keep a searchable, browser-only log of every FX transaction."
 wealth_tags:
+  - International Investing
   - Forex
   - USD
   - GST
