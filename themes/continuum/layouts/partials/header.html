@@ -29,7 +29,7 @@
                 {{ $sectionPath := printf "/%s/" $actualSection }}
                 {{ $sectionRoot := .Site.GetPage $actualSection }}
                 
-                {{ range (slice "blogs" "books" "slides" "tags" "tools" "videos") }}
+                {{ range (slice "about" "blogs" "books" "slides" "tags" "tools" "videos") }}
                     {{ $subPath := printf "%s%s/" $sectionPath . }}
                     {{ $subSection := $.Site.GetPage $subPath }}
                     {{ if $subSection }}
@@ -48,6 +48,9 @@
                             {{ if $hasTags }}
                                 <li><a href="{{ $subPath | absURL }}">{{ title . }}</a></li>
                             {{ end }}
+                        {{ else if eq . "about" }}
+                            <!-- Always show about if it exists -->
+                            <li><a href="{{ $subPath | absURL }}">{{ title . }}</a></li>
                         {{ else }}
                             <!-- For other sections, check if they have pages -->
                             {{ if $subSection.Pages }}

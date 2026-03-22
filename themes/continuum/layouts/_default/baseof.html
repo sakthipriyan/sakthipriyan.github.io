@@ -9,6 +9,13 @@
     {{- end }}
     {{- /* CSS */ -}}
     <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    {{- /* Tools CSS for calculator pages */ -}}
+    {{- if eq .Type "tools" }}
+    <link rel="stylesheet" href="{{ "css/tools.css" | absURL }}">
+    {{- end }}
+    {{- if .Site.Params.googleAnalyticsId }}
+    <script>window.googleAnalyticsId = "{{ .Site.Params.googleAnalyticsId }}";</script>
+    {{- end }}
     {{- if or (eq .Section "slides") (eq .Type "slides") }}
     {{- /* Reveal.js CSS */ -}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
@@ -112,11 +119,7 @@
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
         {{ end }}
-    {{- if or (eq .Section "tools") (eq .Type "tools") }}
-    {{- /* Vue.js */ -}}
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="{{ "js/tools.js" | absURL }}"></script>
-    {{- end }}
+    {{- /* Tool scripts are now loaded per-tool in tools/single.html */ -}}
     {{- block "scripts" . }}{{- end }}
     {{- /* Hamburger Menu JavaScript */ -}}
     <script>
@@ -196,12 +199,6 @@
             }
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5NGEJ767SK');
-    </script>
+    <script src="{{ "js/main.js" | absURL }}"></script>
 </body>
 </html>
