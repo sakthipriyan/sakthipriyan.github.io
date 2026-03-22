@@ -10,6 +10,7 @@ const CURRENCY_MULTIPLIERS = {
 const MAX_LOAN_YEARS = 50;
 const MAX_LOAN_MONTHS = MAX_LOAN_YEARS * 12;
 const DEBOUNCE_DELAY_MS = 300;
+const EMI_STORAGE_KEY = 'emi-calculator-v1';
 
 window.initializeTool.emiCalculator = function (container, config) {
     // Create Vue app template
@@ -214,6 +215,36 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                             </div>
                         </div>
 
+                        <!-- Optional Compare Scenario -->
+                        <div style="margin-top: 0.75rem; padding-top: 0.75rem;">
+                            <h3 style="margin: 0 0 1rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
+                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                                <span>Scenario Name (Optional):</span>
+                            </label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input
+                                    type="text"
+                                    v-model="formData.scenarioName"
+                                    placeholder="e.g., Scenario 1"
+                                    style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                                <button
+                                    type="button"
+                                    @click="addToCompare"
+                                    class="share-button"
+                                    style="flex-shrink: 0; min-width: 90px;"
+                                    :disabled="!results.calculated">
+                                    ➕ Add
+                                </button>
+                                <button
+                                    type="button"
+                                    v-if="comparisonItems.length > 0"
+                                    class="share-button"
+                                    @click="scrollToCompare"
+                                    style="flex-shrink: 0; min-width: 80px;">
+                                    👁️ View ({{ comparisonItems.length }})
+                                </button>
+                            </div>
+                        </div>
                         <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
                     </div>
                     
@@ -332,7 +363,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- EMI Plan - Full Width Below -->
                 <div class="investment-plan" v-if="results.calculated && monthlyPlan.length > 0">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
@@ -503,6 +534,180 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         </table>
                     </div>
                 </div>
+                <!-- Compare Scenarios -->
+                <div id="compare-scenarios" class="investment-plan" v-if="comparisonItems.length > 0" style="margin-bottom: 2rem; scroll-margin-top: 80px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
+                            <div class="mode-toggle">
+                                <button 
+                                    type="button"
+                                    :class="{'active': !showComparisonTable}"
+                                    @click="showComparisonTable = false"
+                                    style="white-space: nowrap;">
+                                    🎴 Cards
+                                </button>
+                                <button 
+                                    type="button"
+                                    :class="{'active': showComparisonTable}"
+                                    @click="showComparisonTable = true"
+                                    style="white-space: nowrap;">
+                                    📋 Table
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            @click="clearComparison"
+                            class="share-button btn-clear-all"
+                            style="white-space: nowrap;">
+                            🗑️ Clear All
+                        </button>
+                    </div>
+
+                    <div v-show="!showComparisonTable" style="display: flex; align-items: stretch; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                        <div
+                            v-for="(item, index) in comparisonItems"
+                            :key="item.id"
+                            :style="getCompareCardStyle(item)"
+                        >
+                            <button
+                                type="button"
+                                @click="removeCompare(item.id)"
+                                class="btn-remove-subtle"
+                                title="Remove Compare"
+                                style="position: absolute; top: 0.25rem; right: 0.25rem;"
+                            >✕</button>
+
+                            <div style="font-size: 0.85em; font-weight: bold; color: #555; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;">
+                                {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
+                            </div>
+                            
+                            <div style="font-size: 0.95em; text-align: left; line-height: 1.4;">
+                                <div :style="item.inputs.calculationMode === 'loan' ? { fontWeight: 'bold', color: '#2980b9' } : {}">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Loan Amount</span>
+                                    ₹{{ formatCurrencyFull(item.outputs.nominalLoanAmount) }}
+                                </div>
+                                
+                                <div :style="item.inputs.calculationMode === 'time' ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Tenure</span>
+                                    <span style="text-transform: capitalize;">{{ item.inputs.calculationMode === 'time' ? item.outputs.timeRequired : item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}</span>
+                                </div>
+                                
+                                <div :style="item.inputs.calculationMode === 'emi' ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">EMI</span>
+                                    ₹{{ formatCurrencyFull(item.inputs.calculationMode === 'emi' ? item.outputs.calculatedValue : item.inputs.emiValue * (item.inputs.emiUnit === 'crores' ? 10000000 : item.inputs.emiUnit === 'lakhs' ? 100000 : 1000)) }}
+                                </div>
+                                
+                                <div style="margin-top: 0.6rem; border-top: 1px dashed rgba(0,0,0,0.15); padding-top: 0.5rem; font-weight: bold;">
+                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: normal;">Interest (Real)</span>
+                                    ₹{{ formatCurrencyFull(item.outputs.totalRealEMIs - item.outputs.realLoanAmount) }}
+                                    <span style="font-size: 0.8em; color: #888; font-weight: normal; margin-left: 2px;">({{ (((item.outputs.totalRealEMIs - item.outputs.realLoanAmount) / item.outputs.realLoanAmount) * 100).toFixed(1) }}%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <table class="summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 180px;"></th>
+                                    <th v-for="(item, index) in comparisonItems" :key="item.id" style="text-align: center; min-width: 120px; position: relative; padding: 0.5rem 1.5rem;">
+                                        {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
+                                        <button
+                                            type="button"
+                                            @click="removeCompare(item.id)"
+                                            class="btn-remove-subtle"
+                                            title="Remove Compare"
+                                            style="position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%);"
+                                        >✕</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Calculation Mode</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'mode-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.calculationMode === 'emi' ? 'Loan EMI' : item.inputs.calculationMode === 'time' ? 'Loan Tenure' : 'Loan Amount' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Loan Amount</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-loan-'+item.id" :style="item.inputs.calculationMode === 'loan' ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        ₹{{ formatCurrencyFull(item.outputs.nominalLoanAmount) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tenure</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-time-'+item.id" :style="item.inputs.calculationMode === 'time' ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', textTransform: 'capitalize', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', textTransform: 'capitalize', fontSize: '1.1em' }">
+                                        {{ item.inputs.calculationMode === 'time' ? item.outputs.timeRequired : item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EMI</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-emi-'+item.id" :style="item.inputs.calculationMode === 'emi' ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        ₹{{ formatCurrencyFull(item.inputs.calculationMode === 'emi' ? item.outputs.calculatedValue : item.inputs.emiValue * (item.inputs.emiUnit === 'crores' ? 10000000 : item.inputs.emiUnit === 'lakhs' ? 100000 : 1000)) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interest Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'in-rate-'+item.id" style="text-align: right;">
+                                        {{ item.inputs.interestRate }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inflation Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'in-inf-'+item.id" style="text-align: right; color: #666;">
+                                        {{ item.inputs.inflationRate }}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interest (Nominal)</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-nint-'+item.id" style="text-align: right;">
+                                        <div style="font-size: 1.05em;">₹{{ formatCurrencyFull(item.outputs.totalNominalEMIs - item.outputs.nominalLoanAmount) }}</div>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (((item.outputs.totalNominalEMIs - item.outputs.nominalLoanAmount) / item.outputs.nominalLoanAmount) * 100).toFixed(1) }}%</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interest (Real)</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-rint-'+item.id" style="text-align: right; font-weight: bold;">
+                                        <div style="font-size: 1.1em;">₹{{ formatCurrencyFull(item.outputs.totalRealEMIs - item.outputs.realLoanAmount) }}</div>
+                                        <div style="font-size: 0.85em; color: #999; margin-top: 2px; font-weight: normal;">{{ (((item.outputs.totalRealEMIs - item.outputs.realLoanAmount) / item.outputs.realLoanAmount) * 100).toFixed(1) }}%</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total EMI (Nominal)</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-temi-'+item.id" style="text-align: right;">
+                                        <div style="font-size: 1.05em;">₹{{ formatCurrencyFull(item.outputs.totalNominalEMIs) }}</div>
+                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (item.outputs.totalNominalEMIs / item.outputs.nominalLoanAmount).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total EMI (Real)</strong></td>
+                                    <td v-for="item in comparisonItems" :key="'out-tremi-'+item.id" style="text-align: right; color: #666;">
+                                        <div style="font-size: 1.05em;">₹{{ formatCurrencyFull(item.outputs.totalRealEMIs) }}</div>
+                                        <div style="font-size: 0.85em; color: #999; margin-top: 2px;">{{ (item.outputs.totalRealEMIs / item.outputs.realLoanAmount).toFixed(2) }}x</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div v-if="comparisonItems.length === 0" class="investment-plan" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
+                        </div>
+                    </div>
+                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                        <p>No scenarios to compare yet. Click <strong>➕ Add</strong> under <strong>⚖️ Compare Scenarios</strong> with an optional scenario name to get started.</p>
+                    </div>
+                </div>
+                
+
+
             </div>
         </div>
     `;
@@ -527,7 +732,8 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     emiUnit: 'thousands',
                     interestRate: 9,
                     inflationRate: 6,
-                    startMonth: currentYear + '-' + currentMonth
+                    startMonth: currentYear + '-' + currentMonth,
+                    scenarioName: ''
                 },
                 calculationMode: 'emi',
                 results: {
@@ -540,6 +746,8 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     totalRealEMIs: 0,
                     numberOfMonths: 0
                 },
+                comparisonItems: [],
+                showComparisonTable: false,
                 monthlyPlan: [],
                 emiTable: [],
                 emiBurdenTab: 'chart',
@@ -705,6 +913,16 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
             }
         },
         watch: {
+            comparisonItems: {
+                deep: true,
+                handler(newVal) {
+                    try {
+                        localStorage.setItem(EMI_STORAGE_KEY, JSON.stringify(newVal));
+                    } catch (e) {
+                        console.warn('EMI Calculator: could not save to localStorage:', e);
+                    }
+                }
+            },
             planViewMode() {
                 this.$nextTick(() => {
                     this.updateChart();
@@ -717,6 +935,52 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
             }
         },
         methods: {
+            scrollToCompare() {
+                const el = document.getElementById('compare-scenarios');
+                if (!el) return;
+                const navbarHeight = document.querySelector('header, nav, .navbar, [role="navigation"]')?.offsetHeight || 70;
+                const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                window.scrollTo({ top, behavior: 'smooth' });
+            },
+            addToCompare() {
+                if (!this.results.calculated) return;
+                if (this.comparisonItems.length >= 6) {
+                    alert('You can only compare a maximum of 6 scenarios at a time.');
+                    return;
+                }
+                this.comparisonItems.push({
+                    id: Date.now().toString(36) + Math.random().toString(36).substring(2),
+                    inputs: JSON.parse(JSON.stringify(this.formData)),
+                    outputs: JSON.parse(JSON.stringify(this.results))
+                });
+                // Ensure array triggers reactivity
+                this.comparisonItems = [...this.comparisonItems];
+            },
+            removeCompare(id) {
+                this.comparisonItems = this.comparisonItems.filter(item => item.id !== id);
+                if (this.comparisonItems.length === 0) {
+                    this.showComparisonTable = false;
+                }
+            },
+            clearComparison() {
+                if (confirm('Are you sure you want to clear all comparisons?')) {
+                    this.comparisonItems = [];
+                    this.showComparisonTable = false;
+                }
+            },
+            getCompareRank(val, type = 'nominal') {
+                if (this.comparisonItems.length <= 1) return -1;
+                // Rank based on lowest value
+                const vals = [...new Set(this.comparisonItems.map(i => {
+                    return type === 'real' 
+                        ? (i.outputs.totalRealEMIs - i.outputs.realLoanAmount)
+                        : (i.outputs.totalNominalEMIs - i.outputs.nominalLoanAmount);
+                }))].sort((a, b) => a - b);
+                return Math.max(0, vals.indexOf(val));
+            },
+            getCompareCardStyle(item) {
+                return { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'left', minWidth: '180px', flex: '1', background: '#f8f9fa', border: '1px solid #dee2e6' };
+            },
             getInflationFactor(monthIndex) {
                 const monthlyInflation = Math.pow(1 + this.formData.inflationRate / 100, 1 / 12) - 1;
                 return Math.pow(1 + monthlyInflation, monthIndex);
@@ -1523,6 +1787,15 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
             }
         },
         mounted() {
+            try {
+                const saved = localStorage.getItem(EMI_STORAGE_KEY);
+                if (saved) {
+                    this.comparisonItems = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.warn('EMI Calculator: could not load from localStorage:', e);
+            }
+
             this.loadFromUrl();
             this.calculateResults();
             
