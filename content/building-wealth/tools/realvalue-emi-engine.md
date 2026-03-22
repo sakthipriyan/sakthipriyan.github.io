@@ -183,6 +183,9 @@ The tool shows three key outputs:
 
 ## Changelog
 
+### 2026-03-22
+- **Compare Scenarios**: Save up to 6 scenarios side-by-side using the new ⚖️ Compare Scenarios section. Compare in Cards or Table view with Loan Amount, Tenure, EMI, Interest (Nominal/Real), and Total EMI (Nominal/Real). The computed metric (Loan Amount, Tenure, or EMI) is highlighted based on calculation mode. Scenarios persist in your browser via localStorage.
+
 ### 2026-03-14
 - **Input panel redesign & concentric donut chart**: Inputs reorganised into three labelled sections (🎯 Calculation Mode, 💰 Loan Details, 📊 Rates). Added a dual concentric donut chart showing Nominal vs Real Principal/Interest breakdown. Share/JSON buttons aligned inline with the result header.
 
