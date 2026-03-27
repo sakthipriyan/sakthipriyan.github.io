@@ -750,13 +750,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                             <tbody>
                                 <tr>
                                     <td><strong>Target Mode</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'mode-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'mode-'+item.id" style="text-align: right; font-weight: bold; font-size: 1.1em;">
                                         {{ item.inputs.targetTime && item.inputs.targetMoney ? 'Time + Money' : item.inputs.targetTime ? 'Time' : 'Money' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Lumpsum</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'cur-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'cur-'+item.id" style="text-align: right; font-weight: bold; font-size: 1.1em;">
                                         â‚¹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                     </td>
                                 </tr>
@@ -803,6 +803,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                     <td v-for="item in comparisonItems" :key="'tax-'+item.id" style="text-align: right; color: #666;">
                                         {{ item.inputs.taxRate }}%
                                     </td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888;">Nominal (Not Inflation Adjusted)</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Investment</strong></td>

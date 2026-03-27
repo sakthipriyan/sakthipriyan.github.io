@@ -18,7 +18,9 @@ window.initializeTool.emiCalculator = function (container, config) {
         <div id="emi-calculator-app">
             <div class="sip-calculator">
                 <div class="sip-container">
-                    <!-- Left Column: Input Fields -->
+                    <!-- Left Column: Inputs + Compare -->
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Input Fields -->
                     <div class="sip-inputs">
 
                         <!-- Section: Calculation Mode -->
@@ -215,38 +217,40 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                             </div>
                         </div>
 
-                        <!-- Optional Compare Scenario -->
-                        <div style="margin-top: 0.75rem; padding-top: 0.75rem;">
-                            <h3 style="margin: 0 0 1rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
-                            <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
-                                <span>Scenario Name (Optional):</span>
-                            </label>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <input
-                                    type="text"
-                                    v-model="formData.scenarioName"
-                                    placeholder="e.g., Scenario 1"
-                                    style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
-                                <button
-                                    type="button"
-                                    @click="addToCompare"
-                                    class="share-button"
-                                    style="flex-shrink: 0; min-width: 90px;"
-                                    :disabled="!results.calculated">
-                                    ➕ Add
-                                </button>
-                                <button
-                                    type="button"
-                                    v-if="comparisonItems.length > 0"
-                                    class="share-button"
-                                    @click="scrollToCompare"
-                                    style="flex-shrink: 0; min-width: 80px;">
-                                    👁️ View ({{ comparisonItems.length }})
-                                </button>
-                            </div>
-                        </div>
                         <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
                     </div>
+
+                    <!-- Compare Scenarios Box (below inputs, same column) -->
+                    <div class="sip-inputs">
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
+                        <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                            <span>Scenario Name (Optional):</span>
+                        </label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="text"
+                                v-model="formData.scenarioName"
+                                placeholder="e.g., Scenario 1"
+                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                            <button
+                                type="button"
+                                @click="addToCompare"
+                                class="share-button"
+                                style="flex-shrink: 0; min-width: 90px;"
+                                :disabled="!results.calculated">
+                                ➕ Add
+                            </button>
+                            <button
+                                type="button"
+                                v-if="comparisonItems.length > 0"
+                                class="share-button"
+                                @click="scrollToCompare"
+                                style="flex-shrink: 0; min-width: 80px;">
+                                👁️ View ({{ comparisonItems.length }})
+                            </button>
+                        </div>
+                    </div>
+                    </div><!-- end left column wrapper -->
                     
                     <!-- Right Column: Output Results and Chart -->
                     <div class="sip-outputs" v-if="results.calculated">
