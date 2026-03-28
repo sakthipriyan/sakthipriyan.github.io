@@ -411,6 +411,32 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 </table>
                             </div>
                             
+                            <div v-if="getTotalInternationalRequired() > 0" class="investment-plan" style="margin-bottom: 2rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1em; color: #2c3e50;">
+                                        💱 FX Transaction
+                                    </h3>
+                                    <a :href="getFxEngineLink()" target="_blank" class="share-button" style="text-decoration: none; white-space: nowrap;">
+                                        RealValue FX Engine ➔
+                                    </a>
+                                </div>
+                                
+                                <div class="table-responsive" style="margin-bottom: 1rem;">
+                                    <table class="summary-table">
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>INR Amount to Invest</strong></td>
+                                                <td class="highlight" style="text-align: right;"><strong>₹{{ formatNumber(getTotalInternationalRequired()) }}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <p style="margin: 0; font-size: 0.9em; color: #666;">
+                                    💡 Compute exact USD purchasable via the <a :href="getFxEngineLink()" target="_blank" style="color: #0066cc; text-decoration: none;">RealValue FX Engine</a>
+                                </p>
+                            </div>
+                            
                             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Terms</h3>
                             <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
                                 <li><strong>Pre Allocation:</strong> Portfolio state before new investments.</li>
@@ -839,6 +865,22 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     total += allocation.tcs;
                 });
                 return total;
+            },
+            getTotalInternationalRequired() {
+                let total = 0;
+                const intlAssets = new Set(this.assets.filter(a => a.isInternational).map(a => a.name));
+                this.results.investorAllocations.forEach(acc => {
+                    acc.allocations.forEach(item => {
+                        if (intlAssets.has(item.asset)) {
+                            total += item.amount + (item.tcs || 0);
+                        }
+                    });
+                });
+                return total;
+            },
+            getFxEngineLink() {
+                const amount = this.getTotalInternationalRequired();
+                return `/building-wealth/tools/realvalue-fx-engine/#v1uia${amount}`;
             },
             formatDriftCorrection() {
                 const correction = this.results.totalPreDriftPercent - this.results.totalPostDriftPercent;
