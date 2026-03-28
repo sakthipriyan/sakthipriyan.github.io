@@ -2,13 +2,13 @@
 title: "RealValue FX Engine"
 date: "2026-03-15"
 draft: "false"
-description: "Track INR to USD conversions with accurate GST and TCS computation, effective-rate analysis, a full transaction log, and a live donut chart of your FX cost breakdown."
+description: "Calculate your true effective FX rate, compare quotes across banks, track your ₹10L LRS limit via a browser-only transaction log, and compute your TCS refund opportunity cost."
 type: "tools"
 tool_type: "fxTracker"
 tool_script: "js/realvalue-fx-engine.js"
 tool_dependencies:
   - echarts
-summary: "Calculate exactly how much USD you get for your INR — including forex spread, GST (Rule 32), and TCS — and keep a searchable, browser-only log of every FX transaction."
+summary: "Calculate your true effective FX rate including hidden spreads and taxes, compare quotes across banks to minimize costs, track your ₹10L LRS limit via a browser-only transaction log, and compute your TCS refund opportunity cost."
 wealth_tags:
   - International Investing
   - Forex

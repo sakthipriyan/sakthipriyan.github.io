@@ -12,33 +12,12 @@ window.initializeTool.fxTracker = function (container, config) {
                 <div class="sip-container">
 
                     <!-- Left Column: Transaction Form -->
-                    <div class="sip-inputs">
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div class="sip-inputs">
 
-                        <!-- Header with Import / Export -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <!-- Header -->
+                        <div style="margin-bottom: 1.5rem;">
                             <h3 style="margin: 0;">💱 FX Transaction</h3>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <input
-                                    type="file"
-                                    id="fx-import-file"
-                                    accept=".json"
-                                    @change="importData"
-                                    style="display: none;"
-                                >
-                                <button
-                                    type="button"
-                                    class="share-button"
-                                    @click="$el.querySelector('#fx-import-file').click()">
-                                    ⬆️ Import
-                                </button>
-                                <button
-                                    type="button"
-                                    class="share-button"
-                                    @click="exportData"
-                                    :disabled="transactions.length === 0">
-                                    ⬇️ Export
-                                </button>
-                            </div>
                         </div>
 
                         <!-- Transaction Details -->
@@ -154,62 +133,86 @@ window.initializeTool.fxTracker = function (container, config) {
                         </div>
 
                         <!-- Bank & Reference -->
-                        <h4 style="margin: 1.75rem 0 0.75rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                            🏦 Bank &amp; Reference
-                        </h4>
-
-                        <div class="input-group">
+                        <div class="input-group" style="margin-top: 1rem;">
                             <label style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Bank Name:</span>
+                                <span>Bank Name (Optional):</span>
                                 <span class="help-icon help-icon-wide" data-tooltip="This name identifies the institution in the Compare view as well as the final Transaction history.">ℹ️</span>
                             </label>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <input
-                                    type="text"
-                                    v-model="form.bank"
-                                    placeholder="e.g., HDFC Bank, SBI, Axis Bank"
-                                    style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
-                                <button
-                                    type="button"
-                                    @click="addToCompare"
-                                    class="share-button"
-                                    style="flex-shrink: 0; min-width: 110px;"
-                                    :disabled="!isFormValid || !preview.valid">
-                                    ➕ Compare
-                                </button>
-                            </div>
-                            <p style="font-size: 0.82em; color: #999; margin: 0.5rem 0 0 0;">
-                                💡 Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.
-                            </p>
+                            <input
+                                type="text"
+                                v-model="form.bank"
+                                placeholder="e.g., HDFC Bank, SBI..."
+                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; box-sizing: border-box;">
                         </div>
 
-                        <div class="input-group">
-                            <label style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Transaction ID:</span>
-                                <span class="help-icon help-icon-wide" data-tooltip="The transaction reference number on your bank statement or receipt.">ℹ️</span>
-                            </label>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <input
-                                    type="text"
-                                    v-model="form.txnId"
-                                    placeholder="e.g., TXN-2026-001"
-                                    style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: monospace;">
-                                <button
-                                    type="button"
-                                    @click="addTransaction"
-                                    class="share-button"
-                                    style="flex-shrink: 0; min-width: 110px;"
-                                    :disabled="!isFormValid || !preview.valid">
-                                    ➕ Transaction
-                                </button>
-                            </div>
-                        </div>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; margin-bottom: 0; font-style: italic;">
+                            💡 Results update automatically as you adjust inputs
+                        </p>
+                    </div>
 
-                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: 1.75rem;">
-                            <p style="font-size: 0.85em; color: #999; margin: 0; flex: 1;">
-                                💡 Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.
-                            </p>
+                    <!-- Compare Rates Box (below inputs, same column) -->
+                    <div class="sip-inputs">
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Rates <span class="help-icon help-icon-wide" data-tooltip="Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.">ℹ️</span></h3>
+                        <p style="font-size: 0.85em; color: #666; margin: 0 0 0.75rem 0;">Uses the currently entered parameters. Overrides <strong>Bank Name</strong> if set.</p>
+                        <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                            <span>Scenario Name (Optional):</span>
+                        </label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="text"
+                                v-model="form.compareName"
+                                placeholder="e.g., Target Rate A"
+                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                            <button
+                                type="button"
+                                @click="addToCompare"
+                                class="share-button"
+                                style="flex-shrink: 0; min-width: 90px;"
+                                :disabled="!isFormValid || !preview.valid">
+                                ➕ Add
+                            </button>
+                            <button
+                                type="button"
+                                v-if="comparisonItems.length > 0"
+                                class="share-button"
+                                @click="scrollToCompare"
+                                style="flex-shrink: 0; min-width: 80px;">
+                                👁️ View ({{ comparisonItems.length }})
+                            </button>
                         </div>
+                    </div>
+
+                    <!-- Add Transaction Box -->
+                    <div class="sip-inputs">
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">📋 Add Transaction <span class="help-icon help-icon-wide" data-tooltip="Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.">ℹ️</span></h3>
+                        <p style="font-size: 0.85em; color: #666; margin: 0 0 0.75rem 0;">Uses the currently entered <strong>Bank Name</strong> and transaction details.</p>
+                        <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                            <span>Transaction ID (Optional):</span>
+                        </label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="text"
+                                v-model="form.txnId"
+                                placeholder="e.g., TXN-2026-001"
+                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: monospace;">
+                            <button
+                                type="button"
+                                @click="addTransaction"
+                                class="share-button"
+                                style="flex-shrink: 0; min-width: 90px;"
+                                :disabled="!isFormValid || !preview.valid">
+                                ➕ Add
+                            </button>
+                            <button
+                                type="button"
+                                v-if="transactions.length > 0"
+                                class="share-button"
+                                @click="scrollToTransactions"
+                                style="flex-shrink: 0; min-width: 80px;">
+                                👁️ View ({{ transactions.length }})
+                            </button>
+                        </div>
+                    </div>
                     </div>
 
                     <!-- Right Column: FX Analysis -->
@@ -239,37 +242,48 @@ window.initializeTool.fxTracker = function (container, config) {
                         <div v-if="preview.valid">
                             <table class="summary-table">
                                 <tbody>
-                                    <tr style="background: #fffde7;">
-                                        <td><strong>💸 {{ previewInputLabel }}</strong></td>
-                                        <td class="highlight">
-                                            <strong style="font-size: 1.15em;" v-html="previewInputDisplayHtml"></strong>
+                                    <tr :style="form.amountUnit === 'usd' ? 'background: #fffde7;' : 'background: #e8f5e9;'">
+                                        <td><strong>USD Amount</strong></td>
+                                        <td class="highlight" style="text-align: right;">
+                                            <strong style="font-size: 1.15em;" v-html="'&#36;' + formatUSDHtml(preview.usdAmount)"></strong>
                                         </td>
                                     </tr>
-
-                                    <!-- FX Interbank Cost + Total Charges -->
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>FX Interbank</span>
+                                            <strong>Transaction Cost</strong> 
+                                            <span class="help-icon help-icon-wide" data-tooltip="FX Charges + Taxes as a percentage of FX Interbank Cost.">ℹ️</span>
+                                        </td>
+                                        <td class="highlight" style="text-align: right; font-size: 1em; padding: 10px;">
+                                            <span :style="[getCostColorStyle(preview.chargesPct), { cursor: 'default', opacity: 1, display: 'inline-block' }]">
+                                                {{ preview.chargesPct.toFixed(2) }}%
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: flex; justify-content: space-between; align-items: center;">
+                                            <strong>Effective Rate</strong> 
+                                            <span class="help-icon help-icon-wide" data-tooltip="The true exchange rate you are paying per dollar, factoring in the base rate, all markups, fees, and taxes (excluding TCS).">ℹ️</span>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <strong style="color: #2980b9;">₹{{ preview.effectiveRate.toFixed(4) }}</strong>
+                                        </td>
+                                    </tr>
+                                    <tr style="background: #f0f7ff;">
+                                        <td style="padding: 0.4rem 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                                            <strong style="color: #2980b9;">🌐 FX Interbank</strong>
                                             <span class="help-icon help-icon-wide" data-tooltip="What you'd pay at the mid-market (interbank) rate: USD amount × Interbank Rate. This is the baseline cost with no provider charges.">ℹ️</span>
                                         </td>
-                                        <td v-html="'₹' + formatINRHtml(preview.ibCost)"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>FX Charges + Taxes</span>
-                                            <span class="help-icon help-icon-wide" data-tooltip="Sum of all charges over interbank cost: FX Markup + Processing Fee + FX Conversion GST + GST on Processing Fee.">ℹ️</span>
+                                        <td style="padding: 0.4rem 0.75rem; text-align: right;">
+                                            <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml(preview.ibCost)"></strong>
                                         </td>
-                                        <td v-html="'₹' + formatINRHtml(preview.totalCharges)"></td>
                                     </tr>
-                                    <tr>
-                                        <td style="display: flex; justify-content: space-between; align-items: center;"><strong>Transaction Cost</strong> <span class="help-icon help-icon-wide" data-tooltip="FX Charges + Taxes as a percentage of FX Interbank Cost.">ℹ️</span></td>
-                                        <td class="highlight"><span style="cursor: default; opacity: 1; font-size: 1.05em;">{{ preview.chargesPct.toFixed(2) }}%</span></td>
-                                    </tr>
-
-                                    <!-- FX Charges -->
                                     <tr style="background: #f0f7ff;">
-                                        <td style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">💸 FX CHARGES</td>
-                                        <td style="padding: 0.4rem 0.75rem; text-align: right; font-size: 0.9em; color: #2980b9; font-weight: 700;" v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></td>
+                                        <td style="padding: 0.4rem 0.75rem;">
+                                            <strong style="color: #2980b9;">💸 FX Charges</strong>
+                                        </td>
+                                        <td style="padding: 0.4rem 0.75rem; text-align: right;">
+                                            <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></strong>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
@@ -285,11 +299,13 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.processingFee)"></td>
                                     </tr>
-
-                                    <!-- Taxes -->
                                     <tr style="background: #f0f7ff;">
-                                        <td style="padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">🏛️ TAXES</td>
-                                        <td style="padding: 0.4rem 0.75rem; text-align: right; font-size: 0.9em; color: #2980b9; font-weight: 700;" v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></td>
+                                        <td style="padding: 0.4rem 0.75rem;">
+                                            <strong style="color: #2980b9;">🏛️ Taxes</strong>
+                                        </td>
+                                        <td style="padding: 0.4rem 0.75rem; text-align: right;">
+                                            <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></strong>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
@@ -300,25 +316,45 @@ window.initializeTool.fxTracker = function (container, config) {
                                     </tr>
                                     <tr v-if="preview.processingFeeGST > 0">
                                         <td style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span>GST on Processing Fee (18%)</span>
+                                            <span>Processing Fee GST @ 18%</span>
                                             <span class="help-icon help-icon-wide" data-tooltip="GST charged on the bank's flat processing fee at 18%. Separate from FX Conversion GST.">ℹ️</span>
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.processingFeeGST)"></td>
                                     </tr>
-                                    <tr v-if="preview.tcs > 0" style="background: #f0f7ff;">
-                                        <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem; font-size: 0.8em; color: #2980b9; font-weight: 700; letter-spacing: 0.04em;">
-                                            <span>💰 TCS @ 20% (refundable)</span>
-                                            <span class="help-icon help-icon-wide help-icon-above" data-tooltip="Tax Collected at Source under LRS. Levied at 20% on the gross INR amount exceeding ₹10,00,000 (Bank Rate × USD bought). You can claim this as tax credit in your ITR, and also submit Form 12BAA to your employer to adjust salary TDS where applicable.">ℹ️</span>
-                                        </td>
-                                        <td style="padding: 0.4rem 0.75rem; text-align: right; font-size: 0.9em; color: #2980b9; font-weight: 700;" v-html="'₹' + formatINRHtml(preview.tcs)"></td>
-                                    </tr>
-
-                                    <tr style="background: #e8f5e9;">
-                                        <td><strong>✅ {{ resultLabel }}</strong></td>
-                                        <td class="highlight">
-                                            <strong style="font-size: 1.15em;" v-html="resultDisplayHtml"></strong>
-                                        </td>
-                                    </tr>
+                                    <template v-if="preview.tcs > 0">
+                                        <tr style="background: #f0f7ff;">
+                                            <td style="padding: 0.4rem 0.75rem;">
+                                                <strong style="color: #2980b9;">Net INR Amount</strong>
+                                            </td>
+                                            <td style="padding: 0.4rem 0.75rem; text-align: right;">
+                                                <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml(preview.inrDebit - preview.tcs)"></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem;">
+                                                <span>TCS @ 20% (refundable)</span>
+                                                <span class="help-icon help-icon-wide help-icon-above" data-tooltip="Tax Collected at Source under LRS. Levied at 20% on the gross INR amount exceeding ₹10,00,000 (Bank Rate × USD bought). You can claim this as tax credit in your ITR, and also submit Form 12BAA to your employer to adjust salary TDS where applicable.">ℹ️</span>
+                                            </td>
+                                            <td style="padding: 0.4rem 0.75rem; text-align: right;" v-html="'₹' + formatINRHtml(preview.tcs)"></td>
+                                        </tr>
+                                        <tr :style="form.amountUnit === 'inr' ? 'background: #fffde7;' : 'background: #e8f5e9;'">
+                                            <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem;">
+                                                <span><strong>Gross INR Amount</strong></span>
+                                                <span class="help-icon help-icon-wide" data-tooltip="Total INR amount deducted from your account, including TCS.">ℹ️</span>
+                                            </td>
+                                            <td class="highlight" style="padding: 0.4rem 0.75rem; text-align: right;">
+                                                <strong style="font-size: 1.15em;" v-html="'₹' + formatINRHtml(preview.inrDebit)"></strong>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <template v-else>
+                                        <tr :style="form.amountUnit === 'inr' ? 'background: #fffde7;' : 'background: #e8f5e9;'">
+                                            <td style="padding: 0.4rem 0.75rem;"><strong>INR Amount</strong></td>
+                                            <td class="highlight" style="padding: 0.4rem 0.75rem; text-align: right;">
+                                                <strong style="font-size: 1.15em;" v-html="'₹' + formatINRHtml(preview.inrDebit)"></strong>
+                                            </td>
+                                        </tr>
+                                    </template>
                                 </tbody>
                             </table>
 
@@ -331,7 +367,8 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
                 </div>
 
-                <div class="investment-plan" v-if="comparisonItems.length > 0" style="margin-bottom: 2rem;">
+                <div id="compare-rates-section" style="scroll-margin-top: 80px;">
+                    <div class="investment-plan" v-if="comparisonItems.length > 0" style="margin-bottom: 2rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                         <div style="display: flex; gap: 1rem; align-items: center;">
                             <h2 style="margin: 0;">⚖️ Compare Rates</h2>
@@ -408,6 +445,21 @@ window.initializeTool.fxTracker = function (container, config) {
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td><strong>Bank Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;">₹{{ parseFloat(item.inputs.rate).toFixed(4) }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interbank Rate</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; color: #666;">₹{{ parseFloat(item.inputs.interbankRate).toFixed(4) }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Processing Fee</strong></td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.inputs.serviceFee)"></td>
+                                </tr>
+                                <tr style="background: #f4f4f4;">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888; font-weight: bold;">Computed</td>
+                                </tr>
+                                <tr>
                                     <td><strong>Transaction Cost %</strong></td>
                                     <td v-for="item in comparisonItems" :key="item.id" 
                                         :style="[
@@ -426,17 +478,6 @@ window.initializeTool.fxTracker = function (container, config) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Bank Rate</strong></td>
-                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;">₹{{ parseFloat(item.inputs.rate).toFixed(4) }}</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Interbank Rate</strong></td>
-                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; color: #666;">₹{{ parseFloat(item.inputs.interbankRate).toFixed(4) }}</td>
-                                </tr>
-                                <tr style="background: #f4f4f4; height: 16px;">
-                                    <td :colspan="1 + comparisonItems.length" style="padding: 0;"></td>
-                                </tr>
-                                <tr>
                                     <td><strong>FX Interbank</strong></td>
                                     <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.ibCost)"></td>
                                 </tr>
@@ -445,15 +486,11 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.fxSpread)"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Processing Fee</strong></td>
-                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.inputs.serviceFee)"></td>
-                                </tr>
-                                <tr>
                                     <td><strong>FX Conversion GST</strong></td>
                                     <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.fxConvGST)"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>GST on Processing Fee</strong></td>
+                                    <td><strong>Processing Fee GST @ 18%</strong></td>
                                     <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.outputs.processingFeeGST)"></td>
                                 </tr>
                                 <template v-if="comparisonItems.some(i => i.outputs.tcs > 0)">
@@ -485,28 +522,51 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
                 </div>
 
-                <div v-if="comparisonItems.length === 0" class="investment-plan" style="margin-bottom: 2rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                        <div style="display: flex; gap: 1rem; align-items: center;">
-                            <h2 style="margin: 0;">⚖️ Compare Rates</h2>
+                    <div v-if="comparisonItems.length === 0" class="investment-plan" style="margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <h2 style="margin: 0;">⚖️ Compare Rates</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div style="text-align: center; padding: 2rem 0; color: #999;">
-                        <p>No rates to compare. Fill in the form and click <strong>Compare</strong> to get started.</p>
+                        <div style="text-align: center; padding: 2rem 0; color: #999;">
+                            <p>No rates to compare. Fill in the form and click <strong>Compare</strong> to get started.</p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Full-width: Transaction History -->
-                <div class="investment-plan" v-if="transactions.length > 0">
+                <div id="transaction-history-section" style="scroll-margin-top: 80px;">
+                    <div class="investment-plan" v-if="transactions.length > 0" style="margin-bottom: 2rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                         <h2 style="margin: 0;">📋 Transaction History</h2>
-                        <button
-                            type="button"
-                            class="share-button btn-clear-all"
-                            @click="clearAll"
-                            style="white-space: nowrap;">
-                            🗑️ Clear All
-                        </button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="file"
+                                id="fx-import-file-populated"
+                                accept=".json"
+                                @change="importData"
+                                style="display: none;"
+                            >
+                            <button
+                                type="button"
+                                class="share-button"
+                                @click="$el.querySelector('#fx-import-file-populated').click()">
+                                ⬆️ Import
+                            </button>
+                            <button
+                                type="button"
+                                class="share-button"
+                                @click="exportData">
+                                ⬇️ Export
+                            </button>
+                            <button
+                                type="button"
+                                class="share-button btn-clear-all"
+                                @click="clearAll"
+                                style="white-space: nowrap;">
+                                🗑️ Clear All
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Summary Tiles -->
@@ -552,6 +612,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <th style="text-align: center;">FX Interbank</th>
                                     <th style="text-align: center;">FX Charges</th>
                                     <th style="text-align: center;">GST</th>
+                                    <th style="min-width: 30px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -565,6 +626,15 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.ibCost)"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml((txn.fxSpread || 0) + (txn.processingFee || 0))"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.gst)"></td>
+                                    <td style="text-align: center;">
+                                        <button
+                                            type="button"
+                                            @click="removeTransaction(txn.id)"
+                                            class="btn-remove-subtle"
+                                            style="position: relative; top: auto; right: auto; transform: none; display: inline-block;"
+                                            title="Remove Transaction"
+                                        >✕</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -572,6 +642,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
                             ℹ️ There may be a difference of a couple of paise between the numbers shown here and your bank statement due to how rounding is applied at each step.
                     </p>
+                </div>
                 </div>
 
                 <!-- TCS Drag Table -->
@@ -669,6 +740,27 @@ window.initializeTool.fxTracker = function (container, config) {
                 <div v-if="transactions.length === 0" class="investment-plan">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                         <h2 style="margin: 0;">📋 Transaction History</h2>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="file"
+                                id="fx-import-file-empty"
+                                accept=".json"
+                                @change="importData"
+                                style="display: none;"
+                            >
+                            <button
+                                type="button"
+                                class="share-button"
+                                @click="$el.querySelector('#fx-import-file-empty').click()">
+                                ⬆️ Import
+                            </button>
+                            <button
+                                type="button"
+                                class="share-button"
+                                disabled>
+                                ⬇️ Export
+                            </button>
+                        </div>
                     </div>
                     <div style="text-align: center; padding: 2rem 0; color: #999;">
                         <p>No transactions yet. Fill in the form and click <strong>Transaction</strong> to get started.</p>
@@ -689,6 +781,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     amount: 100000,
                     serviceFee: 1000,
                     bank: '',
+                    compareName: '',
                     txnId: '',
                     use12BAA: false,
                     cagr: 12,
@@ -748,7 +841,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 return 'Target USD you want to receive. The tool back-computes how much INR you need to spend including all charges.';
             },
             previewInputLabel() {
-                return this.form.amountUnit === 'inr' ? 'INR You Spend' : 'USD You Want';
+                return 'USD Amount';
             },
             previewInputDisplay() {
                 if (this.form.amountUnit === 'inr') return '₹' + this.formatINR(this.form.amount);
@@ -761,7 +854,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 return '$' + this.formatUSDHtml(this.form.amount);
             },
             resultLabel() {
-                return this.form.amountUnit === 'inr' ? 'USD You Receive' : 'INR You Must Spend';
+                return this.preview.tcs > 0 ? 'Net INR Amount' : 'INR Amount';
             },
             resultDisplay() {
                 if (this.form.amountUnit === 'inr') return '$' + this.formatUSD(this.preview.result);
@@ -1036,11 +1129,25 @@ window.initializeTool.fxTracker = function (container, config) {
                     alert('You can only compare a maximum of 6 rates at a time.');
                     return;
                 }
+
+                let name = this.form.compareName ? this.form.compareName.trim() : '';
+                if (!name && this.form.bank) {
+                    name = this.form.bank.trim();
+                }
+                if (!name) {
+                    name = 'Scenario ' + (this.comparisonItems.length + 1);
+                }
+
+                const inputs = JSON.parse(JSON.stringify(this.form));
+                inputs.bank = name; // Overwrite bank with the resolved scenario name preference
+
                 this.comparisonItems.push({
                     id: Date.now().toString(36) + Math.random().toString(36).substring(2),
-                    inputs: JSON.parse(JSON.stringify(this.form)),
+                    inputs: inputs,
                     outputs: JSON.parse(JSON.stringify(this.preview))
                 });
+                
+                this.form.compareName = ''; // clear input after adding
             },
             removeCompare(id) {
                 this.comparisonItems = this.comparisonItems.filter(item => item.id !== id);
@@ -1057,6 +1164,13 @@ window.initializeTool.fxTracker = function (container, config) {
             debouncedCalculate() {
                 clearTimeout(this.debounceTimer);
                 this.debounceTimer = setTimeout(() => this.calculate(), FX_DEBOUNCE_DELAY_MS);
+            },
+            getCostColorStyle(pct) {
+                if (pct <= 0.5) return { color: '#155724', background: '#d4edda', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 1.0) return { color: '#1e7e34', background: '#e8f5e9', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 1.5) return { color: '#856404', background: '#fff3cd', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 2.0) return { color: '#d35400', background: '#ffe8d6', padding: '2px 6px', borderRadius: '4px' };
+                return { color: '#721c24', background: '#f8d7da', padding: '2px 6px', borderRadius: '4px' };
             },
             getCompareRank(val) {
                 if (this.comparisonItems.length <= 1) return -1;
@@ -1337,6 +1451,20 @@ window.initializeTool.fxTracker = function (container, config) {
                 this.transactions = this.transactions.filter(t => t.id !== id);
                 this.saveData();
                 this.calculate();
+            },
+
+            scrollToCompare() {
+                setTimeout(() => {
+                    const el = document.getElementById('compare-rates-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            },
+
+            scrollToTransactions() {
+                setTimeout(() => {
+                    const el = document.getElementById('transaction-history-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
             },
 
             async fetchInterbankRate() {
