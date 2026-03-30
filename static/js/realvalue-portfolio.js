@@ -125,14 +125,21 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         <button type="button" class="share-button" @click="$refs.pdfInput.click()">
                             🔄 Upload CAS PDF
                         </button>
+                        <button type="button" class="share-button" @click="$refs.ibkrInput.click()" style="background: #0066cc;">
+                            📊 Upload IBKR CSV
+                        </button>
                     </div>
                 </div>
 
-                <!-- Hidden file input -->
+                <!-- Hidden file inputs -->
                 <input type="file" ref="pdfInput" accept="application/pdf" style="display: none;" @change="handleFileUpload" />
+                <input type="file" ref="ibkrInput" accept=".csv,text/csv" style="display: none;" @change="handleIbkrUpload" />
                 
                 <div v-if="isParsing" class="loading-text" style="margin-bottom: 1.5rem;">⏳ Loading and parsing PDF... Please wait securely in browser.</div>
                 <div v-if="parseError" class="error-text" style="margin-bottom: 1.5rem;">⚠️ {{ parseError }}</div>
+                <div v-if="isIbkrParsing" class="loading-text" style="margin-bottom: 1.5rem;">⏳ Parsing IBKR CSV and fetching SBI exchange rate...</div>
+                <div v-if="ibkrError" class="error-text" style="margin-bottom: 1.5rem;">⚠️ {{ ibkrError }}</div>
+                <div v-if="usdToInr && funds.some(f => f.source === 'IBKR')" style="margin-bottom: 1rem; font-size: 0.85em; color: #0284c7; background: #e0f2fe; padding: 0.4rem 0.8rem; border-radius: 4px; display: inline-block;">💱 USD/INR rate: ₹{{ usdToInr }} (SBI TT Buy, {{ usdRateDate }})</div>
 
                 <div v-if="funds.length > 0">
 
@@ -165,8 +172,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                             </div>
                                         </td>
                                         <td style="text-align: right; vertical-align: top;">
-                                            <div style="font-weight: 600; color: var(--text-primary);">{{ formatNumber(fund.marketValue) }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 3) }} units</div>
+                                            <template v-if="fund.source === 'IBKR'">
+                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
+                                                <div style="font-size: 0.8em; color: #0284c7;">\${{ formatNumber(fund.marketValueUsd, 2) }}</div>
+                                                <div style="font-size: 0.8em; color: var(--text-secondary);">{{ fund.closingUnits }} units</div>
+                                            </template>
+                                            <template v-else>
+                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatNumber(fund.marketValue) }}</div>
+                                                <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 3) }} units</div>
+                                            </template>
                                         </td>
                                         <td style="vertical-align: top;">
                                             <input 
@@ -307,6 +321,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             // Load from localStorage
             let storedTags = {};
             let storedFunds = [];
+            let storedUsdRate = null;
             try {
                 const rawTags = localStorage.getItem('realvalue-portfolio-tags');
                 if (rawTags) storedTags = JSON.parse(rawTags);
@@ -325,6 +340,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         return f;
                     });
                 }
+
+                const rawUsdRate = localStorage.getItem('realvalue-portfolio-usd-rate');
+                if (rawUsdRate) storedUsdRate = JSON.parse(rawUsdRate);
             } catch (e) {
                 console.warn("Failed to read from localStorage", e);
             }
@@ -333,6 +351,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 isParsing: false,
                 parseError: null,
                 pdfPassword: '',
+                isIbkrParsing: false,
+                ibkrError: null,
+                usdToInr: storedUsdRate ? storedUsdRate.rate : null,
+                usdRateDate: storedUsdRate ? storedUsdRate.date : null,
                 funds: storedFunds, // { fundName, isin, marketValue, closingUnits, fundHouse, folioNo }
                 tags: storedTags, // Map: isin -> { category, assetClass, status }
                 
@@ -367,7 +389,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             if (this.resizeHandler) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
-            this.chart?.dispose();
+            if (this.chart) this.chart.dispose();
         },
         watch: {
             portfolioViewTab() {
@@ -398,6 +420,144 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (value === null || value === undefined || isNaN(value)) return '0.00%';
                 return Number(value).toFixed(2) + '%';
             },
+            // IBKR CSV parsing
+            parseIbkrCsvLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const ch = line[i];
+                    if (ch === '"') {
+                        if (inQuotes && line[i + 1] === '"') {
+                            current += '"';
+                            i++;
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (ch === ',' && !inQuotes) {
+                        result.push(current.trim());
+                        current = '';
+                    } else {
+                        current += ch;
+                    }
+                }
+                result.push(current.trim());
+                return result;
+            },
+            parseMonthDateYear(str) {
+                // "March 27, 2026" -> "2026-03-27"
+                const months = { January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12 };
+                const m = str.trim().match(/(\w+)\s+(\d+),\s*(\d{4})/);
+                if (!m) return new Date().toISOString().slice(0, 10);
+                const month = String(months[m[1]] || 1).padStart(2, '0');
+                const day = m[2].padStart(2, '0');
+                return `${m[3]}-${month}-${day}`;
+            },
+            async fetchSbiRateForDate(dateStr) {
+                const year = dateStr.slice(0, 4);
+                const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error(`SBI rate fetch failed (HTTP ${resp.status})`);
+                const json = await resp.json();
+                // data is sorted ascending by date; find the last entry <= dateStr
+                let best = null;
+                for (const entry of json.data) {
+                    if (entry[0] <= dateStr) best = entry;
+                    else break;
+                }
+                if (!best) best = json.data[0];
+                return { rate: best[1], date: best[0], tt_buy: best[1], tt_sell: best[2] };
+            },
+            async handleIbkrUpload(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                this.isIbkrParsing = true;
+                this.ibkrError = null;
+                try {
+                    const text = await file.text();
+                    // Extract period end date from Statement section
+                    let targetDate = new Date().toISOString().slice(0, 10);
+                    const periodMatch = text.match(/Statement,Data,Period,"[^"]*-\s*([A-Za-z]+ \d+, \d{4})"/);
+                    if (periodMatch) {
+                        targetDate = this.parseMonthDateYear(periodMatch[1]);
+                    }
+                    const usdInfo = await this.fetchSbiRateForDate(targetDate);
+                    this.usdToInr = usdInfo.tt_buy;
+                    this.usdRateDate = usdInfo.date;
+                    try {
+                        localStorage.setItem('realvalue-portfolio-usd-rate', JSON.stringify({ rate: usdInfo.tt_buy, date: usdInfo.date }));
+                    } catch(e) { /* ignore */ }
+                    this.processIbkrCsv(text, usdInfo.tt_buy);
+                } catch (err) {
+                    console.error("IBKR CSV Error:", err);
+                    this.ibkrError = `Error processing IBKR report: ${err.message}`;
+                } finally {
+                    this.isIbkrParsing = false;
+                    this.$refs.ibkrInput.value = '';
+                }
+            },
+            processIbkrCsv(text, usdToInr) {
+                const lines = text.split(/\r?\n/);
+                const instruments = {}; // symbol -> { description, isin }
+                const positions = [];   // { symbol, quantity, value }
+                let accountNo = 'IBKR';
+                for (const line of lines) {
+                    if (!line.trim()) continue;
+                    const fields = this.parseIbkrCsvLine(line);
+                    if (fields.length < 3) continue;
+                    // Account Information: section,Data,Account,<account number>
+                    if (fields[0] === 'Account Information' && fields[1] === 'Data' && fields[2] === 'Account') {
+                        accountNo = fields[3] || 'IBKR';
+                    }
+                    // Financial Instrument Information: section,Data,AssetCat,Symbol(s),Description,Conid,ISIN,...
+                    if (fields[0] === 'Financial Instrument Information' && fields[1] === 'Data') {
+                        const symbols = fields[3].split(',').map(s => s.trim()).filter(Boolean);
+                        const description = fields[4];
+                        const isin = fields[6];
+                        for (const sym of symbols) {
+                            instruments[sym] = { description, isin };
+                        }
+                    }
+                    // Open Positions Summary rows: section,Data,Summary,Stocks,Currency,Symbol,Qty,Mult,CostPrice,CostBasis,ClosePrice,Value,UnrealizedPL,Code
+                    if (fields[0] === 'Open Positions' && fields[1] === 'Data' && fields[2] === 'Summary' && fields[3] === 'Stocks') {
+                        const symbol = fields[5];
+                        const quantity = parseFloat(fields[6]) || 0;
+                        const value = parseFloat(fields[11]) || 0;
+                        if (symbol) positions.push({ symbol, quantity, value });
+                    }
+                }
+                for (const pos of positions) {
+                    const info = instruments[pos.symbol] || { description: pos.symbol, isin: '' };
+                    const fundId = 'IBKR_' + pos.symbol;
+                    const marketValueInr = Math.round(pos.value * usdToInr);
+                    const fundObj = {
+                        id: fundId,
+                        fundHouse: 'IBKR',
+                        folioNo: accountNo,
+                        fundName: info.description,
+                        isin: info.isin,
+                        closingUnits: pos.quantity,
+                        marketValue: marketValueInr,
+                        marketValueUsd: pos.value,
+                        source: 'IBKR'
+                    };
+                    const existingIdx = this.funds.findIndex(f => f.id === fundId);
+                    if (existingIdx !== -1) {
+                        Object.assign(this.funds[existingIdx], fundObj);
+                    } else {
+                        this.funds.push(fundObj);
+                    }
+                    if (!this.tags[fundId]) {
+                        this.tags[fundId] = { category: '', assetClass: '', status: '' };
+                    }
+                }
+                if (positions.length === 0) {
+                    this.ibkrError = 'No open stock positions found in the IBKR CSV. Ensure the file includes the Open Positions section.';
+                    return;
+                }
+                this.saveTagsAndCalculate();
+            },
+
             clearPortfolio() {
                 if(confirm("Are you sure you want to clear your current portfolio list? Your custom tags are saved safely.")) {
                     this.funds = [];
