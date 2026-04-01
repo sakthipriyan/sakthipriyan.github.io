@@ -125,7 +125,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         <button type="button" class="share-button" @click="$refs.pdfInput.click()">
                             🔄 Upload CAS PDF
                         </button>
-                        <button type="button" class="share-button" @click="$refs.ibkrInput.click()" style="background: #0066cc;">
+                        <button type="button" class="share-button" @click="$refs.ibkrInput.click()">
                             📊 Upload IBKR CSV
                         </button>
                     </div>
@@ -157,10 +157,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <thead>
                                     <tr>
                                         <th style="width: 35%;">Fund Details</th>
-                                        <th style="width: 15%; text-align: right;">Value (₹)</th>
-                                        <th style="width: 20%;">Category</th>
-                                        <th style="width: 20%;">Asset Class</th>
-                                        <th style="width: 10%; text-align: center;">Status</th>
+                                        <th style="width: 13%; text-align: right;">Invested Value</th>
+                                        <th style="width: 13%; text-align: right;">Market Value</th>
+                                        <th style="width: 8%; text-align: right;">XIRR %</th>
+                                        <th style="width: 15%;">Category</th>
+                                        <th style="width: 15%;">Asset Class</th>
+                                        <th style="width: 6%; text-align: center;">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -173,13 +175,33 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </td>
                                         <td style="text-align: right; vertical-align: top;">
                                             <template v-if="fund.source === 'IBKR'">
+                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.investedValue) }}</div>
+                                                <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.investedValueUsd, 2) }}</div>
+                                            </template>
+                                            <template v-else>
+                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ fund.investedValue ? formatNumber(fund.investedValue) : '-' }}</div>
+                                            </template>
+                                        </td>
+                                        <td style="text-align: right; vertical-align: top;">
+                                            <template v-if="fund.source === 'IBKR'">
                                                 <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">\${{ formatNumber(fund.marketValueUsd, 2) }}</div>
+                                                <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.marketValueUsd, 2) }}</div>
                                                 <div style="font-size: 0.8em; color: var(--text-secondary);">{{ fund.closingUnits }} units</div>
                                             </template>
                                             <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatNumber(fund.marketValue) }}</div>
+                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
                                                 <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 3) }} units</div>
+                                            </template>
+                                        </td>
+                                        <td style="text-align: right; vertical-align: top;">
+                                            <template v-if="fund.source === 'IBKR'">
+                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatXirr(tags[fund.id].xirrInr) }}</div>
+                                                <div style="font-size: 0.8em; color: #0284c7;">{{ formatXirr(tags[fund.id].xirrUsd) }}</div>
+                                                <div v-if="tags[fund.id].xirrNote" style="font-size: 0.72em; color: #b45309; line-height: 1.3; margin-top: 0.2rem;">{{ tags[fund.id].xirrNote }}</div>
+                                            </template>
+                                            <template v-else>
+                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatXirr(tags[fund.id].xirrInr || tags[fund.id].xirr) }}</div>
+                                                <div v-if="tags[fund.id].xirrNote" style="font-size: 0.72em; color: #b45309; line-height: 1.3; margin-top: 0.2rem; text-align: left;">{{ tags[fund.id].xirrNote }}</div>
                                             </template>
                                         </td>
                                         <td style="vertical-align: top;">
@@ -282,19 +304,25 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <thead>
                                     <tr>
                                         <th>{{ selectedReportArea === 'overview' ? 'Category' : 'Asset Class' }}</th>
-                                        <th style="text-align: right;">Value (₹)</th>
+                                        <th style="text-align: right;">Invested Value</th>
+                                        <th style="text-align: right;">Market Value</th>
+                                        <th style="text-align: right;">XIRR %</th>
                                         <th style="text-align: right;">Allocation %</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="row in summaryData" :key="row.name">
                                         <td><strong>{{ row.name || 'Unclassified' }}</strong></td>
+                                        <td style="text-align: right;">₹{{ formatNumber(row.investedValue) }}</td>
                                         <td style="text-align: right;">₹{{ formatNumber(row.value) }}</td>
+                                        <td style="text-align: right; font-weight: 600; color: var(--text-primary);">{{ formatXirr(row.xirrInr) }}</td>
                                         <td style="text-align: right;">{{ formatPercent(row.percent) }}</td>
                                     </tr>
                                     <tr class="total-row">
                                         <td><strong>Total Portfolio</strong></td>
+                                        <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></td>
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></td>
+                                        <td style="text-align: right; font-weight: 600; color: var(--text-primary);"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></td>
                                         <td style="text-align: right;"><strong>100.00%</strong></td>
                                     </tr>
                                 </tbody>
@@ -332,11 +360,20 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     // Migration: ensure every fund has an id and tag map exists for it
                     storedFunds = storedFunds.map(f => {
                         if (!f.id) f.id = f.folioNo + '_' + f.isin;
+                        if (!Array.isArray(f.transactionCashflowsInr)) f.transactionCashflowsInr = [];
+                        if (!Array.isArray(f.transactionCashflowsUsd)) f.transactionCashflowsUsd = [];
+                        if (!Array.isArray(f.transactionUnitFlows)) f.transactionUnitFlows = [];
+                        if (!f.valuationDate) f.valuationDate = new Date().toISOString().slice(0, 10);
+                        if (f.investedValue === undefined) f.investedValue = 0;
                         
                         // Migrate old ISIN tags to the new ID if needed
                         if (!storedTags[f.id]) {
-                            storedTags[f.id] = storedTags[f.isin] ? { ...storedTags[f.isin] } : { category: '', assetClass: '', status: '' };
+                            storedTags[f.id] = storedTags[f.isin] ? { ...storedTags[f.isin] } : { category: '', assetClass: '', status: '', xirr: '', xirrInr: '', xirrUsd: '', xirrNote: '' };
                         }
+                        if (storedTags[f.id] && storedTags[f.id].xirr === undefined) storedTags[f.id].xirr = '';
+                        if (storedTags[f.id] && storedTags[f.id].xirrInr === undefined) storedTags[f.id].xirrInr = '';
+                        if (storedTags[f.id] && storedTags[f.id].xirrUsd === undefined) storedTags[f.id].xirrUsd = '';
+                        if (storedTags[f.id] && storedTags[f.id].xirrNote === undefined) storedTags[f.id].xirrNote = '';
                         return f;
                     });
                 }
@@ -369,6 +406,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 
                 summaryData: [],
                 totalPortfolioValue: 0,
+                totalPortfolioInvestedValue: 0,
+                totalPortfolioXirrInr: null,
+                totalPortfolioXirrUsd: null,
                 
                 portfolioViewTab: 'chart',
                 selectedReportArea: 'overview',
@@ -420,6 +460,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (value === null || value === undefined || isNaN(value)) return '0.00%';
                 return Number(value).toFixed(2) + '%';
             },
+            formatXirr(value) {
+                if (value === null || value === undefined || value === '') return '-';
+                const num = Number(value);
+                if (!isFinite(num) || isNaN(num)) return '-';
+                return num.toFixed(2) + '%';
+            },
             // IBKR CSV parsing
             parseIbkrCsvLine(line) {
                 const result = [];
@@ -453,6 +499,269 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const day = m[2].padStart(2, '0');
                 return `${m[3]}-${month}-${day}`;
             },
+            parseIbkrDateTime(str) {
+                // "2026-03-24, 06:25:10" -> "2026-03-24"
+                if (!str) return null;
+                const m = str.match(/(\d{4}-\d{2}-\d{2})/);
+                return m ? m[1] : null;
+            },
+            parseCasDate(str) {
+                if (!str) return null;
+                const months = { jan:1, feb:2, mar:3, apr:4, may:5, jun:6, jul:7, aug:8, sep:9, oct:10, nov:11, dec:12 };
+                const m = str.trim().match(/(\d{2})-([A-Za-z]{3})-(\d{4})/);
+                if (!m) return null;
+                const month = months[m[2].toLowerCase()];
+                if (!month) return null;
+                return `${m[3]}-${String(month).padStart(2, '0')}-${m[1]}`;
+            },
+            extractPdfPageText(textContent) {
+                // Y/X coordinate stitching (pdf1.html approach)
+                const rowThreshold = 5;
+                const items = [...(textContent.items || [])]
+                    .filter(item => item && item.str)
+                    .sort((a, b) => {
+                        const ay = a.transform ? a.transform[5] : 0;
+                        const by = b.transform ? b.transform[5] : 0;
+                        if (Math.abs(ay - by) > rowThreshold) {
+                            return by - ay; // top to bottom
+                        }
+                        const ax = a.transform ? a.transform[4] : 0;
+                        const bx = b.transform ? b.transform[4] : 0;
+                        return ax - bx; // left to right
+                    });
+
+                let currentY = null;
+                let line = [];
+                const lines = [];
+                for (const item of items) {
+                    if (currentY === null || Math.abs(item.transform[5] - currentY) > rowThreshold) {
+                        if (line.length > 0) lines.push(line.join(' '));
+                        line = [item.str];
+                        currentY = item.transform[5];
+                    } else {
+                        line.push(item.str);
+                    }
+                }
+                if (line.length > 0) lines.push(line.join(' '));
+                return lines.join('\n');
+            },
+            extractCasReportDate(rawText) {
+                const patterns = [
+                    /(?:as on|statement\s+for\s+the\s+period\s+ending|portfolio\s+valuation\s+as\s+on)\s*:?\s*(\d{2}-[A-Za-z]{3}-\d{4})/i,
+                    /(?:from|period)\s*:?\s*\d{2}-[A-Za-z]{3}-\d{4}\s*(?:to|-)\s*(\d{2}-[A-Za-z]{3}-\d{4})/i
+                ];
+
+                for (const pattern of patterns) {
+                    const match = rawText.match(pattern);
+                    if (match) {
+                        const parsed = this.parseCasDate(match[1]);
+                        if (parsed) return parsed;
+                    }
+                }
+
+                const allDates = rawText.match(/\b\d{2}-[A-Za-z]{3}-\d{4}\b/g) || [];
+                const parsedDates = allDates.map(d => this.parseCasDate(d)).filter(Boolean).sort();
+                return parsedDates.length ? parsedDates[parsedDates.length - 1] : new Date().toISOString().slice(0, 10);
+            },
+            extractCasTransactions(blockText) {
+                const rawTransactions = [];
+
+                const fullTrxnRegex = /(\d{2}-[A-Za-z]{3}-\d{4})\s+(\(?[\d,]+\.\d{2}\)?)\s+([\d,]+\.\d{2,4})\s+(\(?[\d,]+\.\d{1,4}\)?)\s+(.+?)\s+([\d,]+\.\d{1,4})(?=\s|$|\n)/g;
+                let trxMatch;
+                while ((trxMatch = fullTrxnRegex.exec(blockText)) !== null) {
+                    rawTransactions.push({
+                        type: 'TXN',
+                        date: trxMatch[1],
+                        amount: this.parseNumericStr(trxMatch[2]),
+                        nav: this.parseNumericStr(trxMatch[3]),
+                        units: this.parseNumericStr(trxMatch[4]),
+                        description: trxMatch[5].trim(),
+                        balance: this.parseNumericStr(trxMatch[6])
+                    });
+                }
+
+                const feeRegex = /(\d{2}-[A-Za-z]{3}-\d{4})\s+(\(?[\d,]+\.\d{2}\)?)\s+(\*+[A-Za-z\s]+\*+)/g;
+                while ((trxMatch = feeRegex.exec(blockText)) !== null) {
+                    rawTransactions.push({
+                        type: 'FEE',
+                        date: trxMatch[1],
+                        amount: this.parseNumericStr(trxMatch[2]),
+                        description: trxMatch[3].replace(/\*/g, '').trim()
+                    });
+                }
+
+                rawTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                const mergedTransactions = [];
+                rawTransactions.forEach(trx => {
+                    if (trx.type === 'FEE') {
+                        let parentFound = false;
+                        for (let index = mergedTransactions.length - 1; index >= 0; index--) {
+                            if (mergedTransactions[index].type === 'TXN' && mergedTransactions[index].date === trx.date) {
+                                mergedTransactions[index].feeAmount = (mergedTransactions[index].feeAmount || 0) + trx.amount;
+                                mergedTransactions[index].feeType = trx.description;
+                                parentFound = true;
+                                break;
+                            }
+                        }
+                        if (!parentFound) mergedTransactions.push(trx);
+                    } else {
+                        mergedTransactions.push(trx);
+                    }
+                });
+
+                const transactions = mergedTransactions.map(trx => {
+                    const copy = { ...trx };
+                    delete copy.type;
+                    return copy;
+                });
+
+                const cashflows = [];
+                const unitFlows = [];
+                for (const trx of transactions) {
+                    const date = this.parseCasDate(trx.date);
+                    if (!date) continue;
+
+                    if (trx.units !== null && trx.units !== undefined && isFinite(trx.units)) {
+                        unitFlows.push({ date, amount: trx.units });
+                    }
+
+                    if (trx.units === null || trx.units === undefined || !isFinite(trx.units) || trx.amount === null || trx.amount === undefined || !isFinite(trx.amount)) {
+                        continue;
+                    }
+
+                    let cashAmount = trx.units > 0 ? -Math.abs(trx.amount) : Math.abs(trx.amount);
+                    if (trx.feeAmount !== null && trx.feeAmount !== undefined && isFinite(trx.feeAmount)) {
+                        const fee = Math.abs(trx.feeAmount);
+                        cashAmount += trx.units > 0 ? -fee : -fee;
+                    }
+
+                    if (cashAmount !== 0) {
+                        cashflows.push({ date, amount: cashAmount });
+                    }
+                }
+
+                const normalizedUnitFlows = this.normalizeDatedFlows(unitFlows);
+                return { transactions, cashflows: this.normalizeDatedFlows(cashflows), unitFlows: normalizedUnitFlows };
+            },
+            normalizeDatedFlows(flows) {
+                const byDate = {};
+                (flows || []).forEach(flow => {
+                    if (!flow || !flow.date) return;
+                    const amount = Number(flow.amount);
+                    if (!isFinite(amount) || amount === 0) return;
+                    byDate[flow.date] = (byDate[flow.date] || 0) + amount;
+                });
+
+                return Object.entries(byDate)
+                    .map(([date, amount]) => ({ date, amount }))
+                    .filter(flow => Math.abs(flow.amount) > 1e-9)
+                    .sort((a, b) => (a.date < b.date ? -1 : (a.date > b.date ? 1 : 0)));
+            },
+            mergeFlowsByDate(existingFlows, newFlows) {
+                const existing = this.normalizeDatedFlows(existingFlows);
+                const incoming = this.normalizeDatedFlows(newFlows);
+                const merged = {};
+
+                existing.forEach(flow => {
+                    merged[flow.date] = flow.amount;
+                });
+
+                // Replace overlapping dates with latest upload values.
+                incoming.forEach(flow => {
+                    merged[flow.date] = flow.amount;
+                });
+
+                return this.normalizeDatedFlows(Object.entries(merged).map(([date, amount]) => ({ date, amount })));
+            },
+            sumFlowAmounts(flows) {
+                return (flows || []).reduce((sum, flow) => sum + (Number(flow.amount) || 0), 0);
+            },
+            buildFlowsWithTerminal(transactionFlows, terminalDate, terminalAmount) {
+                const flows = this.normalizeDatedFlows(transactionFlows);
+                if (terminalDate && isFinite(Number(terminalAmount)) && Number(terminalAmount) > 0) {
+                    flows.push({ date: terminalDate, amount: Number(terminalAmount) });
+                }
+                return this.normalizeDatedFlows(flows);
+            },
+            daysBetween(startDate, endDate) {
+                const d1 = new Date(startDate + 'T00:00:00Z');
+                const d2 = new Date(endDate + 'T00:00:00Z');
+                return (d2 - d1) / 86400000;
+            },
+            computeXirr(cashflows) {
+                if (!cashflows || cashflows.length < 2) return null;
+
+                const flows = [...cashflows].sort((a, b) => (a.date < b.date ? -1 : (a.date > b.date ? 1 : 0)));
+
+                let hasPositive = false;
+                let hasNegative = false;
+                for (const cf of flows) {
+                    if (cf.amount > 0) hasPositive = true;
+                    if (cf.amount < 0) hasNegative = true;
+                }
+                if (!hasPositive || !hasNegative) return null;
+
+                const baseDate = flows[0].date;
+                const npv = (rate) => {
+                    if (rate <= -0.999999) return Infinity;
+                    let sum = 0;
+                    for (const cf of flows) {
+                        const years = this.daysBetween(baseDate, cf.date) / 365;
+                        sum += cf.amount / Math.pow(1 + rate, years);
+                    }
+                    return sum;
+                };
+
+                // Newton-Raphson first
+                let rate = 0.12;
+                for (let i = 0; i < 50; i++) {
+                    const f = npv(rate);
+                    if (!isFinite(f)) break;
+                    if (Math.abs(f) < 1e-7) return rate * 100;
+
+                    const h = 1e-6;
+                    const fp = (npv(rate + h) - f) / h;
+                    if (!isFinite(fp) || Math.abs(fp) < 1e-12) break;
+
+                    const next = rate - (f / fp);
+                    if (!isFinite(next) || next <= -0.9999 || next > 1000) break;
+                    if (Math.abs(next - rate) < 1e-10) return next * 100;
+                    rate = next;
+                }
+
+                // Bisection fallback
+                let low = -0.9999;
+                let high = 1;
+                let fLow = npv(low);
+                let fHigh = npv(high);
+
+                // Expand upper bound until a sign change appears or we hit a hard limit.
+                let expandGuard = 0;
+                while (isFinite(fLow) && isFinite(fHigh) && fLow * fHigh > 0 && high < 1e6 && expandGuard < 40) {
+                    high *= 2;
+                    fHigh = npv(high);
+                    expandGuard++;
+                }
+
+                if (!isFinite(fLow) || !isFinite(fHigh) || (fLow * fHigh > 0)) return null;
+
+                for (let i = 0; i < 120; i++) {
+                    const mid = (low + high) / 2;
+                    const fMid = npv(mid);
+                    if (!isFinite(fMid)) return null;
+                    if (Math.abs(fMid) < 1e-7) return mid * 100;
+                    if (fLow * fMid < 0) {
+                        high = mid;
+                        fHigh = fMid;
+                    } else {
+                        low = mid;
+                        fLow = fMid;
+                    }
+                    if (Math.abs(high - low) < 1e-10) return mid * 100;
+                }
+                return null;
+            },
             async fetchSbiRateForDate(dateStr) {
                 const year = dateStr.slice(0, 4);
                 const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
@@ -467,6 +776,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
                 if (!best) best = json.data[0];
                 return { rate: best[1], date: best[0], tt_buy: best[1], tt_sell: best[2] };
+            },
+            async fetchSbiRateSeriesByYear(year) {
+                const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error(`SBI yearly rate fetch failed for ${year} (HTTP ${resp.status})`);
+                return await resp.json();
+            },
+            findSbiRateOnOrBefore(dateStr, seriesJson) {
+                if (!seriesJson || !seriesJson.data || seriesJson.data.length === 0) return null;
+                let best = null;
+                for (const entry of seriesJson.data) {
+                    if (entry[0] <= dateStr) best = entry;
+                    else break;
+                }
+                if (!best) best = seriesJson.data[0];
+                return { date: best[0], tt_buy: best[1], tt_sell: best[2] };
             },
             async handleIbkrUpload(e) {
                 const file = e.target.files[0];
@@ -487,7 +812,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     try {
                         localStorage.setItem('realvalue-portfolio-usd-rate', JSON.stringify({ rate: usdInfo.tt_buy, date: usdInfo.date }));
                     } catch(e) { /* ignore */ }
-                    this.processIbkrCsv(text, usdInfo.tt_buy);
+                    await this.processIbkrCsv(text, usdInfo.tt_buy, targetDate);
                 } catch (err) {
                     console.error("IBKR CSV Error:", err);
                     this.ibkrError = `Error processing IBKR report: ${err.message}`;
@@ -496,10 +821,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     this.$refs.ibkrInput.value = '';
                 }
             },
-            processIbkrCsv(text, usdToInr) {
+            async processIbkrCsv(text, usdToInr, reportEndDate) {
                 const lines = text.split(/\r?\n/);
                 const instruments = {}; // symbol -> { description, isin }
+                const symbolToGroup = {}; // symbol -> grouped key across aliases
+                const groupToSymbols = {}; // grouped key -> [symbols]
                 const positions = [];   // { symbol, quantity, value }
+                const tradeCashflows = {}; // symbol -> [{date, amount}]
+                const tradeQuantities = {}; // symbol -> net quantity from parsed trades
                 let accountNo = 'IBKR';
                 for (const line of lines) {
                     if (!line.trim()) continue;
@@ -514,22 +843,70 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         const symbols = fields[3].split(',').map(s => s.trim()).filter(Boolean);
                         const description = fields[4];
                         const isin = fields[6];
+
+                        const groupKey = (isin && isin.trim() !== '') ? `ISIN_${isin}` : `DESC_${description}`;
+                        if (!groupToSymbols[groupKey]) groupToSymbols[groupKey] = [];
+
                         for (const sym of symbols) {
                             instruments[sym] = { description, isin };
+                            symbolToGroup[sym] = groupKey;
+                            if (!groupToSymbols[groupKey].includes(sym)) groupToSymbols[groupKey].push(sym);
                         }
                     }
                     // Open Positions Summary rows: section,Data,Summary,Stocks,Currency,Symbol,Qty,Mult,CostPrice,CostBasis,ClosePrice,Value,UnrealizedPL,Code
                     if (fields[0] === 'Open Positions' && fields[1] === 'Data' && fields[2] === 'Summary' && fields[3] === 'Stocks') {
                         const symbol = fields[5];
                         const quantity = parseFloat(fields[6]) || 0;
+                        const costBasis = parseFloat(fields[9]) || 0;
                         const value = parseFloat(fields[11]) || 0;
-                        if (symbol) positions.push({ symbol, quantity, value });
+                        if (symbol) positions.push({ symbol, quantity, value, costBasis });
+                    }
+
+                    // Trades rows: section,Data,Order,Stocks,Currency,Symbol,Date/Time,...,Proceeds,Comm/Fee,...
+                    if (fields[0] === 'Trades' && fields[1] === 'Data' && fields[2] === 'Order' && fields[3] === 'Stocks') {
+                        const symbol = fields[5];
+                        const tradeDate = this.parseIbkrDateTime(fields[6]);
+                        const quantity = parseFloat(fields[7]) || 0;
+                        const proceeds = parseFloat(fields[10]) || 0;
+                        const commFee = parseFloat(fields[11]) || 0;
+                        // Net cashflow from investor perspective:
+                        // buy => negative outflow, sell => positive inflow (commission already signed)
+                        const amount = proceeds + commFee;
+                        if (symbol && tradeDate && amount !== 0) {
+                            if (!tradeCashflows[symbol]) tradeCashflows[symbol] = [];
+                            tradeCashflows[symbol].push({ date: tradeDate, amount });
+                            if (!tradeQuantities[symbol]) tradeQuantities[symbol] = [];
+                            tradeQuantities[symbol].push({ date: tradeDate, amount: quantity });
+                        }
                     }
                 }
+
+                const yearsNeeded = new Set();
+                yearsNeeded.add((reportEndDate || new Date().toISOString().slice(0, 10)).slice(0, 4));
+                for (const flows of Object.values(tradeCashflows)) {
+                    for (const flow of flows) {
+                        if (flow.date && flow.date.length >= 4) yearsNeeded.add(flow.date.slice(0, 4));
+                    }
+                }
+
+                const yearRateSeries = {};
+                const dateRateCache = {};
+                for (const year of yearsNeeded) {
+                    try {
+                        yearRateSeries[year] = await this.fetchSbiRateSeriesByYear(year);
+                    } catch (e) {
+                        // If yearly series is unavailable, fallback to per-date fetch.
+                        yearRateSeries[year] = null;
+                    }
+                }
+
                 for (const pos of positions) {
                     const info = instruments[pos.symbol] || { description: pos.symbol, isin: '' };
                     const fundId = 'IBKR_' + pos.symbol;
                     const marketValueInr = Math.round(pos.value * usdToInr);
+                    const investedValueInr = Math.round(pos.costBasis * usdToInr);
+                    const existingIdx = this.funds.findIndex(f => f.id === fundId);
+                    const existingFund = existingIdx !== -1 ? this.funds[existingIdx] : null;
                     const fundObj = {
                         id: fundId,
                         fundHouse: 'IBKR',
@@ -539,16 +916,92 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         closingUnits: pos.quantity,
                         marketValue: marketValueInr,
                         marketValueUsd: pos.value,
+                        investedValue: investedValueInr,
+                        investedValueUsd: pos.costBasis,
+                        valuationDate: reportEndDate,
+                        transactionCashflowsInr: existingFund && Array.isArray(existingFund.transactionCashflowsInr) ? existingFund.transactionCashflowsInr : [],
+                        transactionCashflowsUsd: existingFund && Array.isArray(existingFund.transactionCashflowsUsd) ? existingFund.transactionCashflowsUsd : [],
+                        transactionUnitFlows: existingFund && Array.isArray(existingFund.transactionUnitFlows) ? existingFund.transactionUnitFlows : [],
                         source: 'IBKR'
                     };
-                    const existingIdx = this.funds.findIndex(f => f.id === fundId);
                     if (existingIdx !== -1) {
                         Object.assign(this.funds[existingIdx], fundObj);
                     } else {
                         this.funds.push(fundObj);
                     }
+                    const targetFund = existingIdx !== -1 ? this.funds[existingIdx] : this.funds[this.funds.length - 1];
                     if (!this.tags[fundId]) {
-                        this.tags[fundId] = { category: '', assetClass: '', status: '' };
+                        this.tags[fundId] = { category: '', assetClass: '', status: '', xirr: '', xirrInr: '', xirrUsd: '', xirrNote: '' };
+                    }
+
+                    // Reset computed XIRR values on every fresh IBKR parse to avoid stale display.
+                    this.tags[fundId].xirrInr = '';
+                    this.tags[fundId].xirrUsd = '';
+                    this.tags[fundId].xirrNote = '';
+
+                    const groupKey = symbolToGroup[pos.symbol];
+                    const relatedSymbols = groupKey && groupToSymbols[groupKey] ? groupToSymbols[groupKey] : [pos.symbol];
+                    const symbolFlowsUsd = [];
+                    const symbolUnitFlows = [];
+                    for (const sym of relatedSymbols) {
+                        if (tradeCashflows[sym] && tradeCashflows[sym].length > 0) {
+                            symbolFlowsUsd.push(...tradeCashflows[sym]);
+                        }
+                        if (tradeQuantities[sym] && tradeQuantities[sym].length > 0) {
+                            symbolUnitFlows.push(...tradeQuantities[sym]);
+                        }
+                    }
+
+                    const mergedUnitFlows = this.mergeFlowsByDate(targetFund.transactionUnitFlows, symbolUnitFlows);
+                    targetFund.transactionUnitFlows = mergedUnitFlows;
+                    const mergedNetQuantity = this.sumFlowAmounts(mergedUnitFlows);
+
+                    if (Math.abs(mergedNetQuantity - pos.quantity) > 0.0001) {
+                        this.tags[fundId].xirrNote = 'Full trade history not present in this IBKR report';
+                        continue;
+                    }
+
+                    const mergedFlowsUsd = this.mergeFlowsByDate(targetFund.transactionCashflowsUsd, symbolFlowsUsd);
+                    targetFund.transactionCashflowsUsd = mergedFlowsUsd;
+
+                    const mergedFlowsInr = [];
+                    for (const flow of mergedFlowsUsd) {
+                        const year = (flow.date || '').slice(0, 4);
+                        const series = yearRateSeries[year];
+                        let rateObj = this.findSbiRateOnOrBefore(flow.date, series);
+
+                        // If yearly data couldn't be loaded, fetch the single-date reference rate.
+                        if ((!rateObj || !rateObj.tt_buy) && flow.date) {
+                            if (!dateRateCache[flow.date]) {
+                                try {
+                                    dateRateCache[flow.date] = await this.fetchSbiRateForDate(flow.date);
+                                } catch (e) {
+                                    dateRateCache[flow.date] = null;
+                                }
+                            }
+                            rateObj = dateRateCache[flow.date];
+                        }
+
+                        const fx = rateObj && rateObj.tt_buy ? rateObj.tt_buy : usdToInr;
+                        mergedFlowsInr.push({ date: flow.date, amount: flow.amount * fx });
+                    }
+                    targetFund.transactionCashflowsInr = this.normalizeDatedFlows(mergedFlowsInr);
+
+                    const usdXirrFlows = this.buildFlowsWithTerminal(targetFund.transactionCashflowsUsd, targetFund.valuationDate, pos.value);
+                    const inrXirrFlows = this.buildFlowsWithTerminal(targetFund.transactionCashflowsInr, targetFund.valuationDate, marketValueInr);
+
+                    if (usdXirrFlows.length >= 2) {
+                        const computedXirrUsd = this.computeXirr(usdXirrFlows);
+                        if (computedXirrUsd !== null) {
+                            this.tags[fundId].xirrUsd = computedXirrUsd.toFixed(2);
+                        }
+                    }
+                    if (inrXirrFlows.length >= 2) {
+                        const computedXirrInr = this.computeXirr(inrXirrFlows);
+                        if (computedXirrInr !== null) {
+                            this.tags[fundId].xirrInr = computedXirrInr.toFixed(2);
+                            this.tags[fundId].xirr = computedXirrInr.toFixed(2);
+                        }
                     }
                 }
                 if (positions.length === 0) {
@@ -565,7 +1018,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
             },
             toggleStatus(fundId, newStatus) {
-                const tag = this.tags[fundId] || { category: '', assetClass: '', status: '' };
+                const tag = this.tags[fundId] || { category: '', assetClass: '', status: '', xirr: '', xirrInr: '', xirrUsd: '', xirrNote: '' };
                 tag.status = (tag.status === newStatus) ? '' : newStatus;
                 this.tags[fundId] = tag;
                 this.saveTagsAndCalculate();
@@ -597,7 +1050,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                             const page = await pdf.getPage(pageNum);
                             const textContent = await page.getTextContent();
-                            const pageText = textContent.items.map(item => item.str).join(' ');
+                            const pageText = this.extractPdfPageText(textContent);
                             fullText += pageText + ' \n ';
                         }
 
@@ -625,6 +1078,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     this.parseError = "Could not find any Folio numbers in the document text.";
                     return;
                 }
+
+                const reportDate = this.extractCasReportDate(rawText);
 
                 let currentFundHouse = "Unknown Fund House";
                 const extractedFunds = [];
@@ -667,17 +1122,25 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                     // Values
                     const closingUnits = this.parseNumericStr((postBlock.match(/Closing Unit Balance:\s*([\d,.]+)/i) || [])[1]) || 0;
+                    const investedValue = this.parseNumericStr((postBlock.match(/Total Cost Value:\s*([\d,.]+)/i) || [])[1]) || 0;
                     const marketValue = this.parseNumericStr((postBlock.match(/Market Value.*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]) || 0;
+                    const transactionData = this.extractCasTransactions(postBlock);
 
                     if (isin !== "Unknown ISIN") {
                         const fundId = folioNo + '_' + isin;
-                        
                         const existingIdx = this.funds.findIndex(f => f.id === fundId);
+                        const existingFund = existingIdx !== -1 ? this.funds[existingIdx] : null;
+                        
                         if (existingIdx !== -1) {
                             // Update values of existing fund
                             this.funds[existingIdx].closingUnits = closingUnits;
+                            this.funds[existingIdx].investedValue = investedValue;
                             this.funds[existingIdx].marketValue = marketValue;
                             this.funds[existingIdx].fundName = fundName;
+                            this.funds[existingIdx].valuationDate = reportDate;
+                            if (!Array.isArray(this.funds[existingIdx].transactionCashflowsInr)) this.funds[existingIdx].transactionCashflowsInr = [];
+                            if (!Array.isArray(this.funds[existingIdx].transactionUnitFlows)) this.funds[existingIdx].transactionUnitFlows = [];
+                            this.funds[existingIdx].source = 'CAS';
                         } else {
                             // Append new fund
                             this.funds.push({
@@ -687,13 +1150,63 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 fundName: fundName,
                                 isin: isin,
                                 closingUnits: closingUnits,
-                                marketValue: marketValue
+                                investedValue: investedValue,
+                                marketValue: marketValue,
+                                valuationDate: reportDate,
+                                transactionCashflowsInr: [],
+                                transactionCashflowsUsd: [],
+                                transactionUnitFlows: [],
+                                source: 'CAS'
                             });
                         }
+                        const targetFund = existingIdx !== -1 ? this.funds[existingIdx] : this.funds[this.funds.length - 1];
 
                         // Initialize tag if not exists, try migrating old isin tag
                         if (!this.tags[fundId]) {
-                            this.tags[fundId] = this.tags[isin] ? { ...this.tags[isin] } : { category: '', assetClass: '', status: '' };
+                            this.tags[fundId] = this.tags[isin] ? { ...this.tags[isin] } : { category: '', assetClass: '', status: '', xirr: '', xirrInr: '', xirrUsd: '', xirrNote: '' };
+                        }
+                        if (this.tags[fundId] && this.tags[fundId].xirr === undefined) {
+                            this.tags[fundId].xirr = '';
+                        }
+                        if (this.tags[fundId] && this.tags[fundId].xirrInr === undefined) {
+                            this.tags[fundId].xirrInr = '';
+                        }
+                        if (this.tags[fundId] && this.tags[fundId].xirrUsd === undefined) {
+                            this.tags[fundId].xirrUsd = '';
+                        }
+                        if (this.tags[fundId] && this.tags[fundId].xirrNote === undefined) {
+                            this.tags[fundId].xirrNote = '';
+                        }
+
+                        this.tags[fundId].xirrInr = '';
+                        this.tags[fundId].xirrUsd = '';
+                        this.tags[fundId].xirrNote = '';
+
+                        const mergedUnitFlows = this.mergeFlowsByDate(targetFund.transactionUnitFlows, transactionData.unitFlows || []);
+                        targetFund.transactionUnitFlows = mergedUnitFlows;
+                        const mergedNetUnits = this.sumFlowAmounts(mergedUnitFlows);
+
+                        if (marketValue > 0) {
+                            const mergedCashflows = this.mergeFlowsByDate(targetFund.transactionCashflowsInr, transactionData.cashflows);
+                            targetFund.transactionCashflowsInr = mergedCashflows;
+
+                            const quantityTolerance = Math.max(0.01, closingUnits * 0.001);
+                            const quantityMatches = Math.abs(mergedNetUnits - closingUnits) <= quantityTolerance;
+
+                            if (quantityMatches && mergedCashflows.length >= 1) {
+                                const xirrCashflows = this.buildFlowsWithTerminal(mergedCashflows, reportDate, marketValue);
+                                const computedXirr = this.computeXirr(xirrCashflows);
+                                if (computedXirr !== null) {
+                                    this.tags[fundId].xirr = computedXirr.toFixed(2);
+                                    this.tags[fundId].xirrInr = computedXirr.toFixed(2);
+                                } else {
+                                    this.tags[fundId].xirrNote = 'Could not compute XIRR from parsed CAS transactions';
+                                }
+                            } else if (!quantityMatches) {
+                                this.tags[fundId].xirrNote = `CAS transactions could not be parsed fully (parsed units ${this.formatNumber(mergedNetUnits, 3)} vs closing ${this.formatNumber(closingUnits, 3)})`;
+                            } else if (mergedCashflows.length < 1) {
+                                this.tags[fundId].xirrNote = 'No cashflow transactions found in CAS section';
+                            }
                         }
                     }
                 }
@@ -761,40 +1274,60 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
             calculateSummary() {
                 let total = 0;
+                let totalInvested = 0;
+                const totalCashflowsInr = [];
                 const map = {};
+                const today = new Date().toISOString().slice(0, 10);
 
                 // Aggregate across all loaded funds
                 this.funds.forEach(f => {
                     const tag = this.tags[f.id] || {};
                     const val = f.marketValue || 0;
+                    const investedVal = f.investedValue || 0;
+                    const cat = (tag.category && tag.category.trim() !== '') ? tag.category.trim() : 'Uncategorized';
+                    const includeInScope = this.selectedReportArea === 'overview' || cat === this.selectedReportArea;
+                    const rowKey = this.selectedReportArea === 'overview'
+                        ? cat
+                        : (tag.assetClass && tag.assetClass.trim() !== '' ? tag.assetClass.trim() : 'Unclassified');
                     
-                    if (this.selectedReportArea === 'overview') {
-                        // Group by Category
-                        const cat = (tag.category && tag.category.trim() !== '') ? tag.category.trim() : 'Uncategorized';
+                    if (includeInScope) {
                         total += val;
-                        map[cat] = (map[cat] || 0) + val;
-                    } else {
-                        // Filter by specific category and group by Asset Class
-                        const cat = (tag.category && tag.category.trim() !== '') ? tag.category.trim() : 'Uncategorized';
-                        if (cat === this.selectedReportArea) {
-                            const ac = (tag.assetClass && tag.assetClass.trim() !== '') ? tag.assetClass.trim() : 'Unclassified';
-                            total += val;
-                            map[ac] = (map[ac] || 0) + val;
+                        totalInvested += investedVal;
+
+                        if (!map[rowKey]) {
+                            map[rowKey] = { value: 0, investedValue: 0, cashflowsInr: [] };
+                        }
+                        map[rowKey].value += val;
+                        map[rowKey].investedValue += investedVal;
+
+                        const valuationDate = f.valuationDate || today;
+                        const fundFlows = this.buildFlowsWithTerminal(f.transactionCashflowsInr || [], valuationDate, val);
+                        if (fundFlows.length >= 2) {
+                            map[rowKey].cashflowsInr.push(...fundFlows);
+                            totalCashflowsInr.push(...fundFlows);
                         }
                     }
                 });
 
                 this.totalPortfolioValue = total;
+                this.totalPortfolioInvestedValue = totalInvested;
+                const normalizedTotalFlows = this.normalizeDatedFlows(totalCashflowsInr);
+                this.totalPortfolioXirrInr = normalizedTotalFlows.length >= 2 ? this.computeXirr(normalizedTotalFlows) : null;
+                this.totalPortfolioXirrUsd = null;
 
                 // Create array and sort by value descending
                 const data = [];
-                for (const [name, value] of Object.entries(map)) {
+                for (const [name, row] of Object.entries(map)) {
                     // Only include in summary if there is actual value
-                    if (value > 0) {
+                    if (row.value > 0) {
+                        const normalizedRowFlows = this.normalizeDatedFlows(row.cashflowsInr || []);
                         data.push({
                             name,
-                            value,
-                            percent: total > 0 ? (value / total) * 100 : 0
+                            value: row.value,
+                            investedValue: row.investedValue,
+                            xirrInr: normalizedRowFlows.length >= 2 ? this.computeXirr(normalizedRowFlows) : null,
+                            xirrUsd: null,
+                            percent: total > 0 ? (row.value / total) * 100 : 0
                         });
                     }
                 }
