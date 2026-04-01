@@ -605,29 +605,75 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             },
             extractCasTransactions(blockText) {
                 const rawTransactions = [];
+                const lines = String(blockText || '')
+                    .split('\n')
+                    .map(line => line.trim())
+                    .filter(Boolean);
 
-                const fullTrxnRegex = /(\d{2}-[A-Za-z]{3}-\d{4})\s+(\(?[\d,]+\.\d{2}\)?)\s+([\d,]+\.\d{2,4})\s+(\(?[\d,]+\.\d{1,4}\)?)\s+(.+?)\s+([\d,]+\.\d{1,4})(?=\s|$|\n)/g;
-                let trxMatch;
-                while ((trxMatch = fullTrxnRegex.exec(blockText)) !== null) {
-                    rawTransactions.push({
-                        type: 'TXN',
-                        date: trxMatch[1],
-                        amount: this.parseNumericStr(trxMatch[2]),
-                        nav: this.parseNumericStr(trxMatch[3]),
-                        units: this.parseNumericStr(trxMatch[4]),
-                        description: trxMatch[5].trim(),
-                        balance: this.parseNumericStr(trxMatch[6])
-                    });
-                }
+                for (const line of lines) {
+                    // Ignore summary lines; only parse transaction-like lines with dates.
+                    if (/Opening Unit Balance|Closing Unit Balance|Total Cost Value|Market Value|NAV on/i.test(line)) {
+                        continue;
+                    }
 
-                const feeRegex = /(\d{2}-[A-Za-z]{3}-\d{4})\s+(\(?[\d,]+\.\d{2}\)?)\s+(\*+[A-Za-z\s]+\*+)/g;
-                while ((trxMatch = feeRegex.exec(blockText)) !== null) {
-                    rawTransactions.push({
-                        type: 'FEE',
-                        date: trxMatch[1],
-                        amount: this.parseNumericStr(trxMatch[2]),
-                        description: trxMatch[3].replace(/\*/g, '').trim()
+                    const dateMatch = line.match(/\b(\d{2}-[A-Za-z]{3}-\d{4})\b/);
+                    if (!dateMatch) continue;
+                    const date = dateMatch[1];
+
+                    const numRegex = /(?:\s|^)(\(?(?:\d+,)*\d+\.\d{2,4}\)?)(?=\s|$)/g;
+                    const nums = [];
+                    let match;
+                    while ((match = numRegex.exec(line)) !== null) {
+                        nums.push(match[1]);
+                    }
+
+                    let description = line.replace(date, '');
+                    nums.forEach(n => {
+                        description = description.replace(n, '');
                     });
+                    description = description.replace(/\s{2,}/g, ' ').trim();
+
+                    if (/closing unit|market value/i.test(description)) continue;
+
+                    // Full transaction: Amount, NAV, Units, Balance
+                    if (nums.length >= 4) {
+                        const amount = this.parseNumericStr(nums[0]);
+                        const balance = this.parseNumericStr(nums[3]);
+
+                        let nav;
+                        let units;
+                        const dec1 = ((nums[1].split('.')[1] || '').replace(')', '')).length;
+                        const dec2 = ((nums[2].split('.')[1] || '').replace(')', '')).length;
+
+                        // pdf1.html heuristic: NAV generally has 4 decimals, units generally fewer.
+                        if (dec1 === 4 && dec2 !== 4) {
+                            nav = this.parseNumericStr(nums[1]);
+                            units = this.parseNumericStr(nums[2]);
+                        } else if (dec2 === 4 && dec1 !== 4) {
+                            nav = this.parseNumericStr(nums[2]);
+                            units = this.parseNumericStr(nums[1]);
+                        } else {
+                            nav = this.parseNumericStr(nums[1]);
+                            units = this.parseNumericStr(nums[2]);
+                        }
+
+                        rawTransactions.push({
+                            type: 'TXN',
+                            date,
+                            amount,
+                            nav,
+                            units,
+                            description,
+                            balance
+                        });
+                    } else if (nums.length === 1 && /stamp duty|stt/i.test(description)) {
+                        rawTransactions.push({
+                            type: 'FEE',
+                            date,
+                            amount: this.parseNumericStr(nums[0]),
+                            description: description.replace(/\*/g, '').trim()
+                        });
+                    }
                 }
 
                 rawTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
