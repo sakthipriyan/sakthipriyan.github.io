@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/asset-allocation/</loc>
+    <lastmod>2026-03-29T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://sakthipriyan.com/building-wealth/</loc>
+    <lastmod>2026-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tags/portfolio-management/</loc>
+    <lastmod>2026-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/</loc>
     <lastmod>2026-03-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/</loc>
@@ -11,8 +20,8 @@
     <loc>https://sakthipriyan.com/building-wealth/tools/</loc>
     <lastmod>2026-03-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/tags/asset-allocation/</loc>
-    <lastmod>2026-03-24T00:00:00+00:00</lastmod>
+    <loc>https://sakthipriyan.com/wealth_tags/</loc>
+    <lastmod>2026-03-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/blogs/</loc>
     <lastmod>2026-03-24T00:00:00+00:00</lastmod>
@@ -24,9 +33,6 @@
     <lastmod>2026-03-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/sip/</loc>
-    <lastmod>2026-03-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/wealth_tags/</loc>
     <lastmod>2026-03-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tags/cashflow/</loc>
@@ -141,9 +147,6 @@
     <lastmod>2026-02-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/videos/intelligent-family-sip-allocator-cashflow-rebalancing-with-tax-tcs-optimization/</loc>
-    <lastmod>2026-02-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sakthipriyan.com/building-wealth/tags/portfolio-management/</loc>
     <lastmod>2026-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sakthipriyan.com/building-wealth/tools/realvalue-family-sip-allocator/</loc>

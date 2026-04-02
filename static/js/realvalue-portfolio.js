@@ -1314,145 +1314,257 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 fileReader.readAsArrayBuffer(file);
             },
 
-            // The core regex logic adapted from pdf.html
+            // CAS parsing engine (cas.html stateful line-by-line approach)
             processParsedText(rawText) {
-                const blocks = rawText.split(/Folio No:/i);
-                if (blocks.length <= 1) {
+                // --- ENHANCED SANITIZER (cas.html): remove Registrar column bleed + stray RTAs ---
+                rawText = rawText.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
+                rawText = rawText.replace(/Registrar\s*:/gi, '');
+                rawText = rawText.replace(/\b(KFINTECH|CAMS)\b/gi, '');
+
+                const reportDate = this.extractCasReportDate(rawText);
+                const lines = rawText.split('\n');
+
+                if (!lines.some(l => /Folio No:/i.test(l))) {
                     this.parseError = "Could not find any Folio numbers in the document text.";
                     return;
                 }
 
-                const reportDate = this.extractCasReportDate(rawText);
-
                 let currentFundHouse = "Unknown Fund House";
-                const extractedFunds = [];
+                let currentFolio = "Unknown Folio";
+                let currentFund = null; // { fundHouse, folioNo, fundName, isin, closingUnits, nav, investedValue, marketValue, rawTxns[] }
+                const parsedFunds = [];
 
-                for (let i = 0; i < blocks.length - 1; i++) {
-                    const preBlock = blocks[i];
-                    const postBlock = blocks[i + 1];
+                const finalizeCurrentFund = () => {
+                    if (currentFund && currentFund.isin && currentFund.isin.length === 12) {
+                        parsedFunds.push(currentFund);
+                    }
+                    currentFund = null;
+                };
 
-                    // Extract Fund House
-                    const fhMatch = preBlock.match(/([A-Za-z\s]+Mutual Fund)(?!.*Mutual Fund)/i);
-                    if (fhMatch) {
-                        currentFundHouse = fhMatch[1]
-                            .replace(/PORTFOLIO SUMMARY/i, '')
-                            .replace(/.*?Balance\s*/i, '')
-                            .trim();
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+
+                    // Track fund house context
+                    const fhMatch = line.match(/([A-Za-z\s]+Mutual Fund)/i);
+                    if (fhMatch && !/PORTFOLIO SUMMARY/i.test(line) && !/Total/i.test(line)) {
+                        currentFundHouse = fhMatch[1].trim();
                     }
 
-                    // Extract Fund Name & ISIN
-                    const isinMatch = preBlock.match(/([^\n\r]*?)\s*-\s*ISIN\s*:\s*([A-Z0-9\s]+)(?!.*ISIN\s*:)/i);
-                    let fundName = "Unknown Fund";
-                    let isin = "Unknown ISIN";
-                    
+                    // Track folio context
+                    const folioMatch = line.match(/Folio No:\s*([A-Za-z0-9\/\-]+)/i);
+                    if (folioMatch) {
+                        currentFolio = folioMatch[1].trim();
+                    }
+
+                    // Detect fund by ISIN line (cas.html: flexible regex handles ISIN:, ISIN -, ISIN without colon)
+                    const isinMatch = line.match(/(.*?)(?:\s*-\s*|\s+)ISIN\s*[:\-]?\s*([A-Z0-9\s]+)/i);
                     if (isinMatch) {
-                        fundName = isinMatch[1]
+                        finalizeCurrentFund();
+
+                        // --- Multi-line fund name repair (cas.html) ---
+                        let rawFundName = isinMatch[1].trim();
+                        if (rawFundName.startsWith('(') || rawFundName.length < 20) {
+                            const prevLine = i > 0 ? lines[i - 1].trim() : '';
+                            if (!prevLine.includes('PAN:') && !prevLine.includes('Folio No:') && !prevLine.includes('KYC:')) {
+                                rawFundName = prevLine + ' ' + rawFundName;
+                            }
+                        }
+                        const fundName = rawFundName
                             .replace(/.*(?:PAN|KYC).*?OK\s*/gi, '')
                             .replace(/^OK\s*/i, '')
                             .replace(/^[A-Z0-9\s]+\s*-\s*/, '')
                             .replace(/\s+/g, ' ')
-                            .trim();
-                        
-                        isin = isinMatch[2]
-                            .replace(/Registrar.*/i, '')
-                            .replace(/\s+/g, '')
-                            .trim(); 
+                            .trim() || 'Unknown Fund';
+
+                        // --- Multi-line ISIN repair (cas.html): builds up to 12 chars from following lines ---
+                        let isinStr = isinMatch[2].replace(/[^A-Z0-9]/gi, '');
+                        let offset = 1;
+                        while (isinStr.length < 12 && (i + offset) < lines.length) {
+                            const nextLine = lines[i + offset].trim();
+                            if (/\d{2}-[A-Za-z]{3}-\d{4}/.test(nextLine) || /Closing Unit/i.test(nextLine)) break;
+                            const cleanLine = nextLine
+                                .replace(/Nominee[\s\S]*/gi, ' ')
+                                .replace(/Advisor[\s\S]*/gi, ' ')
+                                .replace(/Registrar[\s\S]*/gi, ' ')
+                                .replace(/(KYC|PAN|Folio|Opening|Closing|CAMS|KFINTECH|Direct|Growth)/gi, ' ');
+                            const chunks = cleanLine.match(/[A-Z0-9]+/gi);
+                            if (chunks) {
+                                for (const chunk of chunks) {
+                                    if (/^[A-Z]+$/i.test(chunk) && chunk.length > 3) continue;
+                                    isinStr += chunk;
+                                    if (isinStr.length >= 12) break;
+                                }
+                            }
+                            offset++;
+                            if (offset > 4) break;
+                        }
+                        const isin = isinStr.substring(0, 12).toUpperCase();
+
+                        currentFund = {
+                            fundHouse: currentFundHouse,
+                            folioNo: currentFolio,
+                            fundName,
+                            isin,
+                            closingUnits: 0,
+                            nav: null,
+                            investedValue: 0,
+                            marketValue: 0,
+                            rawTxns: []
+                        };
+                        continue;
                     }
 
-                    // Get Folio Number
-                    const folioMatch = postBlock.match(/^\s*([A-Za-z0-9\/\-]+)/);
-                    const folioNo = folioMatch ? folioMatch[1].trim() : "Unknown Folio";
+                    if (!currentFund) continue;
 
-                    // Values
-                    const closingUnits = this.parseNumericStr((postBlock.match(/Closing Unit Balance:\s*([\d,.]+)/i) || [])[1]) || 0;
-                    const nav = this.parseNumericStr((postBlock.match(/NAV on .*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]);
-                    const investedValue = this.parseNumericStr((postBlock.match(/Total Cost Value:\s*([\d,.]+)/i) || [])[1]) || 0;
-                    const marketValue = this.parseNumericStr((postBlock.match(/Market Value.*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]) || 0;
-                    const transactionData = this.extractCasTransactions(postBlock);
+                    // Parse summary line
+                    if (/Closing Unit Balance/i.test(line)) {
+                        currentFund.closingUnits = this.parseNumericStr((line.match(/Closing Unit Balance:\s*([\d,.]+)/i) || [])[1]) || 0;
+                        currentFund.nav = this.parseNumericStr((line.match(/NAV on .*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]);
+                        currentFund.investedValue = this.parseNumericStr((line.match(/Total Cost Value:\s*([\d,.]+)/i) || [])[1]) || 0;
+                        currentFund.marketValue = this.parseNumericStr((line.match(/Market Value.*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]) || 0;
+                        continue;
+                    }
 
-                    if (isin !== "Unknown ISIN") {
-                        const fundId = folioNo + '_' + isin;
-                        const existingIdx = this.funds.findIndex(f => f.id === fundId);
-                        const existingFund = existingIdx !== -1 ? this.funds[existingIdx] : null;
-                        
-                        if (existingIdx !== -1) {
-                            // Update values of existing fund
-                            this.funds[existingIdx].closingUnits = closingUnits;
-                            this.funds[existingIdx].nav = nav;
-                            this.funds[existingIdx].investedValue = investedValue;
-                            this.funds[existingIdx].marketValue = marketValue;
-                            this.funds[existingIdx].fundName = fundName;
-                            this.funds[existingIdx].valuationDate = reportDate;
-                            if (!Array.isArray(this.funds[existingIdx].transactionCashflowsInr)) this.funds[existingIdx].transactionCashflowsInr = [];
-                            if (!Array.isArray(this.funds[existingIdx].transactionUnitFlows)) this.funds[existingIdx].transactionUnitFlows = [];
-                            this.funds[existingIdx].source = 'CAS';
-                        } else {
-                            // Append new fund
-                            this.funds.push({
-                                id: fundId,
-                                fundHouse: currentFundHouse,
-                                folioNo: folioNo,
-                                fundName: fundName,
-                                isin: isin,
-                                closingUnits: closingUnits,
-                                nav: nav,
-                                investedValue: investedValue,
-                                marketValue: marketValue,
-                                valuationDate: reportDate,
-                                transactionCashflowsInr: [],
-                                transactionCashflowsUsd: [],
-                                transactionUnitFlows: [],
-                                source: 'CAS'
-                            });
-                        }
-                        const targetFund = existingIdx !== -1 ? this.funds[existingIdx] : this.funds[this.funds.length - 1];
+                    // Parse transaction lines
+                    const dateMatch = line.match(/\b(\d{2}-[A-Za-z]{3}-\d{4})\b/);
+                    if (!dateMatch) continue;
+                    const date = dateMatch[1];
 
-                        // Initialize tag if not exists, try migrating old isin tag
-                        if (!this.tags[fundId]) {
-                            this.tags[fundId] = this.tags[isin] ? { ...this.tags[isin] } : { category: '', assetClass: '', status: '', xirr: '', xirrInr: '', xirrUsd: '', xirrNote: '' };
-                        }
-                        if (this.tags[fundId] && this.tags[fundId].xirr === undefined) {
-                            this.tags[fundId].xirr = '';
-                        }
-                        if (this.tags[fundId] && this.tags[fundId].xirrInr === undefined) {
-                            this.tags[fundId].xirrInr = '';
-                        }
-                        if (this.tags[fundId] && this.tags[fundId].xirrUsd === undefined) {
-                            this.tags[fundId].xirrUsd = '';
-                        }
-                        if (this.tags[fundId] && this.tags[fundId].xirrNote === undefined) {
-                            this.tags[fundId].xirrNote = '';
-                        }
+                    const numRegex = /(?:\s|^)(\(?(?:\d+,)*\d+\.\d{2,4}\)?)(?=\s|$)/g;
+                    const nums = [];
+                    let m;
+                    while ((m = numRegex.exec(line)) !== null) nums.push(m[1]);
 
-                        this.tags[fundId].xirrInr = '';
-                        this.tags[fundId].xirrUsd = '';
-                        this.tags[fundId].xirrNote = '';
+                    let description = line.replace(date, '');
+                    nums.forEach(n => { description = description.replace(n, ''); });
+                    description = description.replace(/\s{2,}/g, ' ').trim();
 
-                        const mergedUnitFlows = this.mergeFlowsByDate(targetFund.transactionUnitFlows, transactionData.unitFlows || []);
-                        targetFund.transactionUnitFlows = mergedUnitFlows;
-                        const mergedNetUnits = this.sumFlowAmounts(mergedUnitFlows);
+                    if (/closing unit|market value/i.test(description)) continue;
 
-                        if (marketValue > 0) {
-                            const mergedCashflows = this.mergeFlowsByDate(targetFund.transactionCashflowsInr, transactionData.cashflows);
-                            targetFund.transactionCashflowsInr = mergedCashflows;
+                    if (nums.length >= 4) {
+                        const amount = this.parseNumericStr(nums[0]);
+                        const balance = this.parseNumericStr(nums[3]);
+                        const dec1 = ((nums[1].split('.')[1] || '').replace(')', '')).length;
+                        const dec2 = ((nums[2].split('.')[1] || '').replace(')', '')).length;
+                        let nav, units;
+                        if (dec1 === 4 && dec2 !== 4) { nav = this.parseNumericStr(nums[1]); units = this.parseNumericStr(nums[2]); }
+                        else if (dec2 === 4 && dec1 !== 4) { nav = this.parseNumericStr(nums[2]); units = this.parseNumericStr(nums[1]); }
+                        else { nav = this.parseNumericStr(nums[1]); units = this.parseNumericStr(nums[2]); }
+                        currentFund.rawTxns.push({ type: 'TXN', date, amount, nav, units, description, balance });
+                    } else if (nums.length === 1 && /stamp duty|stt/i.test(description)) {
+                        currentFund.rawTxns.push({ type: 'FEE', date, amount: this.parseNumericStr(nums[0]), description: description.replace(/\*/g, '').trim() });
+                    }
+                }
 
-                            const quantityTolerance = Math.max(0.01, closingUnits * 0.001);
-                            const quantityMatches = Math.abs(mergedNetUnits - closingUnits) <= quantityTolerance;
+                finalizeCurrentFund();
 
-                            if (quantityMatches && mergedCashflows.length >= 1) {
-                                const xirrCashflows = this.buildFlowsWithTerminal(mergedCashflows, reportDate, marketValue);
-                                const computedXirr = this.computeXirr(xirrCashflows);
-                                if (computedXirr !== null) {
-                                    this.tags[fundId].xirr = computedXirr.toFixed(2);
-                                    this.tags[fundId].xirrInr = computedXirr.toFixed(2);
-                                } else {
-                                    this.tags[fundId].xirrNote = 'Could not compute XIRR from parsed CAS transactions';
+                if (parsedFunds.length === 0) {
+                    this.parseError = "Could not find any valid funds in the document.";
+                    return;
+                }
+
+                for (const pf of parsedFunds) {
+                    // Merge FEE rows into parent TXN rows (same logic as extractCasTransactions)
+                    pf.rawTxns.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    const mergedTxns = [];
+                    pf.rawTxns.forEach(trx => {
+                        if (trx.type === 'FEE') {
+                            let found = false;
+                            for (let j = mergedTxns.length - 1; j >= 0; j--) {
+                                if (mergedTxns[j].type === 'TXN' && mergedTxns[j].date === trx.date) {
+                                    mergedTxns[j].feeAmount = (mergedTxns[j].feeAmount || 0) + trx.amount;
+                                    mergedTxns[j].feeType = trx.description;
+                                    found = true;
+                                    break;
                                 }
-                            } else if (!quantityMatches) {
-                                this.tags[fundId].xirrNote = `CAS transactions could not be parsed fully (parsed units ${this.formatNumber(mergedNetUnits, 3)} vs closing ${this.formatNumber(closingUnits, 3)})`;
-                            } else if (mergedCashflows.length < 1) {
-                                this.tags[fundId].xirrNote = 'No cashflow transactions found in CAS section';
                             }
+                            if (!found) mergedTxns.push({ ...trx });
+                        } else {
+                            mergedTxns.push({ ...trx });
+                        }
+                    });
+                    const transactions = mergedTxns.map(t => { const c = { ...t }; delete c.type; return c; });
+
+                    // Build cashflows and unit flows for XIRR
+                    const cashflows = [];
+                    const unitFlows = [];
+                    for (const trx of transactions) {
+                        const date = this.parseCasDate(trx.date);
+                        if (!date) continue;
+                        if (trx.units !== null && trx.units !== undefined && isFinite(trx.units)) {
+                            unitFlows.push({ date, amount: trx.units });
+                        }
+                        if (trx.units == null || !isFinite(trx.units) || trx.amount == null || !isFinite(trx.amount)) continue;
+                        let cashAmount = trx.units > 0 ? -Math.abs(trx.amount) : Math.abs(trx.amount);
+                        if (trx.feeAmount != null && isFinite(trx.feeAmount)) cashAmount -= Math.abs(trx.feeAmount);
+                        if (cashAmount !== 0) cashflows.push({ date, amount: cashAmount });
+                    }
+                    const transactionData = {
+                        cashflows: this.normalizeDatedFlows(cashflows),
+                        unitFlows: this.normalizeDatedFlows(unitFlows)
+                    };
+
+                    const { fundHouse, folioNo, fundName, isin, closingUnits, nav, investedValue, marketValue } = pf;
+                    const fundId = folioNo + '_' + isin;
+                    const existingIdx = this.funds.findIndex(f => f.id === fundId);
+
+                    if (existingIdx !== -1) {
+                        this.funds[existingIdx].closingUnits = closingUnits;
+                        this.funds[existingIdx].nav = nav;
+                        this.funds[existingIdx].investedValue = investedValue;
+                        this.funds[existingIdx].marketValue = marketValue;
+                        this.funds[existingIdx].fundName = fundName;
+                        this.funds[existingIdx].fundHouse = fundHouse;
+                        this.funds[existingIdx].valuationDate = reportDate;
+                        if (!Array.isArray(this.funds[existingIdx].transactionCashflowsInr)) this.funds[existingIdx].transactionCashflowsInr = [];
+                        if (!Array.isArray(this.funds[existingIdx].transactionUnitFlows)) this.funds[existingIdx].transactionUnitFlows = [];
+                        this.funds[existingIdx].source = 'CAS';
+                    } else {
+                        this.funds.push({
+                            id: fundId, fundHouse, folioNo, fundName, isin,
+                            closingUnits, nav, investedValue, marketValue,
+                            valuationDate: reportDate,
+                            transactionCashflowsInr: [], transactionCashflowsUsd: [], transactionUnitFlows: [],
+                            source: 'CAS'
+                        });
+                    }
+                    const targetFund = existingIdx !== -1 ? this.funds[existingIdx] : this.funds[this.funds.length - 1];
+
+                    if (!this.tags[fundId]) {
+                        this.tags[fundId] = this.tags[isin] ? { ...this.tags[isin] } : { category: '', assetClass: '', status: '', xirr: '', xirrInr: '', xirrUsd: '', xirrNote: '' };
+                    }
+                    if (this.tags[fundId].xirr === undefined) this.tags[fundId].xirr = '';
+                    if (this.tags[fundId].xirrInr === undefined) this.tags[fundId].xirrInr = '';
+                    if (this.tags[fundId].xirrUsd === undefined) this.tags[fundId].xirrUsd = '';
+                    if (this.tags[fundId].xirrNote === undefined) this.tags[fundId].xirrNote = '';
+                    this.tags[fundId].xirrInr = '';
+                    this.tags[fundId].xirrUsd = '';
+                    this.tags[fundId].xirrNote = '';
+
+                    const mergedUnitFlows = this.mergeFlowsByDate(targetFund.transactionUnitFlows, transactionData.unitFlows || []);
+                    targetFund.transactionUnitFlows = mergedUnitFlows;
+                    const mergedNetUnits = this.sumFlowAmounts(mergedUnitFlows);
+
+                    if (marketValue > 0) {
+                        const mergedCashflows = this.mergeFlowsByDate(targetFund.transactionCashflowsInr, transactionData.cashflows);
+                        targetFund.transactionCashflowsInr = mergedCashflows;
+
+                        const quantityTolerance = Math.max(0.01, closingUnits * 0.001);
+                        const quantityMatches = Math.abs(mergedNetUnits - closingUnits) <= quantityTolerance;
+
+                        if (quantityMatches && mergedCashflows.length >= 1) {
+                            const xirrCashflows = this.buildFlowsWithTerminal(mergedCashflows, reportDate, marketValue);
+                            const computedXirr = this.computeXirr(xirrCashflows);
+                            if (computedXirr !== null) {
+                                this.tags[fundId].xirr = computedXirr.toFixed(2);
+                                this.tags[fundId].xirrInr = computedXirr.toFixed(2);
+                            } else {
+                                this.tags[fundId].xirrNote = 'Could not compute XIRR from parsed CAS transactions';
+                            }
+                        } else if (!quantityMatches) {
+                            this.tags[fundId].xirrNote = `CAS transactions could not be parsed fully (parsed units ${this.formatNumber(mergedNetUnits, 3)} vs closing ${this.formatNumber(closingUnits, 3)})`;
+                        } else {
+                            this.tags[fundId].xirrNote = 'No cashflow transactions found in CAS section';
                         }
                     }
                 }
@@ -1460,7 +1572,6 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 // Sync to localStorage
                 this.saveTagsAndCalculate();
             },
-
             debouncedSaveAndCalculate() {
                 clearTimeout(this.debounceTimer);
                 this.debounceTimer = setTimeout(() => {
