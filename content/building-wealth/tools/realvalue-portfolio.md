@@ -1,6 +1,6 @@
 ---
 title: "RealValue Portfolio"
-date: "2026-03-29"
+date: "2026-04-02"
 draft: false
 description: "Analyze mutual funds and IBKR holdings in one place with offline-friendly transaction exports, XIRR analytics, and rich allocation reporting."
 type: "tools"
