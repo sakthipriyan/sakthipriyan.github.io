@@ -6,8 +6,15 @@
     <description>Recent content in Asset Allocation on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/building-wealth/tags/asset-allocation/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RealValue Portfolio</title>
+      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/</guid>
+      <description>Analyze CAS PDFs and IBKR CSVs in one dashboard. Auto-extract holdings, compute transaction-based XIRR (INR/USD), review allocation views, and export cashflows for independent verification.</description>
+    </item>
     <item>
       <title>Perpetual Rebalancing: A Practical Framework for Long-Term Wealth</title>
       <link>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/</link>
