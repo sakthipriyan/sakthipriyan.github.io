@@ -13,3 +13,7 @@ tools/get-data/*.dll
 tools/get-data/*.so
 tools/get-data/*.a
 tools/get-data/*.out
+
+# test
+docs/test/
+static/test/
