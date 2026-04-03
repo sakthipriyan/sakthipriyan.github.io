@@ -22,7 +22,9 @@ summary: "Annual portfolio review for FY 2025–26: Three goal-based portfolios,
 > Currently supports CAMS + KFinTech combined PDF (Indian Mutual Funds) and IBKR (International Investments) 
 > You should check it out if you want to build your report!  
 
-This is my first post in publishing the state of my portfolio. Planning to do this yearly by April first week.  
+This is the first edition of my annual “State of the Portfolio” report.
+
+Every year in the first week of April, I plan to publish a transparent breakdown of my portfolio — including returns, allocation, and the strategy driving investment decisions.
 
 ## Portfolio Summary
 The portfolio is structured around ~~four~~ **three** distinct goal buckets, each with its own investment mandate and risk profile.  
@@ -47,7 +49,7 @@ Notes:
 
 100% equity on index funds/etfs now after a mega clean up and rebalancing. One time act to clean up my past behaviors.
 
-| Asset Class | XIRR | Current Allocation | Target FY 2025-26 | Target FY 2026-27 |
+| Asset Class | XIRR | Current Allocation | Target FY 2025-26 | Target TY 2026-27 |
 |-------------|-----:|-------------------:|------------------:|------------------:|
 | Nasdaq 100 | <span class="green">26.57%</span> | 36.08% | 35% | 40% |
 | Nifty 50 | <span class="yellow">1.45%</span> | 19.73% | 20% | 20% |
@@ -68,7 +70,7 @@ Notes:
 
 ### Nasdaq 100 — 26.57% XIRR
 
-The top equity performer, driven by sustained strength in US technology. I have very strong conviction that this will keep growing. I always wanted to own these tech companies but, actual journey started only in June 2022. Where as domestic equity investments started in Jan 2016. I started investing into Nasdaq 100 via Indian Mutual Funds. New investments were limited whenever industry limits are reached. This probably led to some lost opportunity till I understood and executed via LRS route. See [this video](/building-wealth/videos/invest-in-nasdaq-100-from-india/) for more details.
+The top equity performer, driven by sustained strength in US technology. I maintain strong conviction in long-term US technology leadership, which is why Nasdaq 100 forms the largest equity allocation in the portfolio. I always wanted to own these tech companies but, actual journey started only in June 2022. Where as domestic equity investments started in Jan 2016. I started investing into Nasdaq 100 via Indian Mutual Funds. New investments were limited whenever industry limits are reached. This probably led to some lost opportunity till I understood and executed via LRS route. See [this video](/building-wealth/videos/invest-in-nasdaq-100-from-india/) for more details.
 
 FY 2025-26 target was at 35%, due to Tax gain harvesting/TCS opportunity cost harvesting ended up slightly more than the target. But, given that current years target at 40% this is still fine. I will write about this new harvesting nobody talking about separately.
 
@@ -88,7 +90,7 @@ These three segments had a difficult FY 2025-26. Mid and small cap indices corre
 
 Steady, predictable returns. Debt is underweight at 7.05% vs the FY 2025-26 target of 10% and received minimal/no allocation in the investment cycle as I clubbed it with Gold. Essentially Gold + Debt target is at 20%, when Gold grown too much allocation system prevented my buying debt as well. Anyway, I am reducing debt allocation in Tax Year 2026-27 to 5%. So, most likely won't be buying debt further.
 
-Over years, my defensive assets Gold(10%) + Debt(15% -> 10% -> 5%) went from 25% to 15%. As I am growing the contribution/portfolio, I am reducing my debt allocation. Eventually to settle down at 90% max equity.
+Over years, my defensive assets Gold(10%) + Debt(15% -> 10% -> 5%) went from 25% to 15%. As I am growing the contribution/portfolio, I am reducing my debt allocation. Eventually to settle down at 90% max equity. One idea I am thinking of is to link savings rate to equity allocation.
 
 ## Emergency Fund
 
@@ -99,17 +101,17 @@ Over years, my defensive assets Gold(10%) + Debt(15% -> 10% -> 5%) went from 25%
 | Arbitrage | 6.56% | 3.55% |
 | **Total** | **7.46%** | **100.00%** |
 
+<img src="Portfolio_Report_Emergency.png" style="max-width:100%;">
+
 The emergency fund holds three layers, each calibrated for liquidity and capital safety:
 
 - **Hybrid funds** (conservative category): Core holding. Delivers stable 8.77% XIRR with very low volatility.
 - **Liquid funds**: For immediate access if needed. 6.93% XIRR.
 - **Arbitrage funds**: Tax-efficient short-term parking. 6.56% XIRR.
 
-Overall 7.46% XIRR is a solid outcome for a near-zero-risk allocation.
+Overall 7.46% XIRR is a strong outcome for a portfolio designed purely for liquidity and capital preservation rather than growth.
 
 Look at my emergency fund set up video [here](/building-wealth/videos/emergency-fund-setup-using-liquid/hybrid/arbitrage-mutual-funds/) or slide [here](/building-wealth/slides/emergency-fund-setup/)
-
----
 
 ## Travel Fund
 
@@ -122,8 +124,6 @@ Entirely held in arbitrage funds — providing near-debt returns with equity fun
 
 Setup details [here](/building-wealth/slides/managing-money-flows/#/7)
 
----
-
 ## Retirement Fund
 
 | Asset Class | XIRR | Allocation |
@@ -133,10 +133,15 @@ Setup details [here](/building-wealth/slides/managing-money-flows/#/7)
 
 Significant chunk was in funds tagged for retirement earlier. As part of the rebalancing I merged them into 1 Portfolio.
 
-I was supposed to buy a Gold Fund sometime back, I wrongly purchased this ELSS fund while I was multi tasking.
-Now locked with this for a while. Last standing active fund in our portfolio.
+This allocation exists due to a transactional mistake. While placing an order for a Gold fund, I accidentally purchased an ELSS fund during a multitasking moment.
 
-Using [other instruments](/building-wealth/slides/financial-tools/#/4/3) which not tracked currently.
+Since ELSS funds have a three-year lock-in, this position will remain until the lock-in period expires. It is currently the last actively managed fund remaining in the portfolio.
+
+Using [other instruments](/building-wealth/slides/financial-tools/#/4/3) which not tracked here as well.
+
+## Transparency Note
+
+> This portfolio reflects my personal investment strategy and risk tolerance. It is not investment advice.
 
 ---
 
@@ -144,95 +149,119 @@ Using [other instruments](/building-wealth/slides/financial-tools/#/4/3) which n
 
 > The 1 Portfolio uses the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. No selling occurs during normal market conditions. New money does the rebalancing.
 
-The table below consolidates the current state, next investment allocation, and the new Tax Year 2026-27 target allocation in one view:
+The table below consolidates the current state, next investment allocation and the new Tax Year 2026-27 target allocation in one view:
+
+| Asset Class | FY25-26 Target | Current | Pre Drift | New Invest | Post Alloc | Post Drift | TY26-27 Target |
+|-------------|---------------:|--------:|----------:|-----------:|-----------:|-----------:|---------------:|
+| Nasdaq 100 | 35.00% | 36.08% | −3.92% | 65.00% | 36.82% | −3.18% | 40.00% |
+| Nifty 50 | 20.00% | 19.73% | −0.27% | 10.71% | 19.50% | −0.50% | 20.00% |
+| Next 50 | 10.00% | 9.42% | −0.58% | 10.71% | 9.45% | −0.55% | 10.00% |
+| Midcap 150 | 10.00% | 9.57% | −0.43% | 9.29% | 9.56% | −0.44% | 10.00% |
+| Smallcap 250 | 5.00% | 4.80% | −0.20% | 4.29% | 4.79% | −0.21% | 5.00% |
+| Debt | 10.00% | 7.05% | +2.05% | 0.00% | 6.87% | +1.87% | 5.00% |
+| Gold | 10.00% | 13.36% | +3.36% | 0.00% | 13.02% | +3.02% | 10.00% |
+| **Total** | **100.00%** | **100.00%** | **5.41%** | **100.00%** | **100.00%** | **4.89%** | **100.00%** |
+
+<div style="display:flex; gap:1rem;">
+<img src="Portfolio_Drift.png" style="width:50%;">
+<img src="Portfolio_Allocation.png" style="width:50%;">
+</div>
 
 - **FY 2025-26 Target**: Target allocation under the outgoing financial year
 - **Current**: Actual allocation as of today
-- **Pre Drift**: Current deviation from FY 2025-26 target (sum of absolute values = total drift)
+- **Pre Drift**: Current deviation from FY 2025-26 target (sum of positive values = total drift)
 - **New Invest**: Percentage of next monthly investment directed to each asset
 - **Post Alloc**: Estimated allocation after the investment
 - **Post Drift**: Estimated drift after investment
-- **FY 2026-27 Target**: New target allocation effective this financial year
-
-| Asset Class | FY25-26 Target | Current | Pre Drift | New Invest | Post Alloc | Post Drift | FY26-27 Target |
-|-------------|---------------:|--------:|----------:|-----------:|-----------:|-----------:|---------------:|
-| Nasdaq 100 | 40.00% | 36.22% | −3.78% | 58.57% | 36.79% | −3.21% | 35.00% |
-| Nifty 50 | 20.00% | 19.04% | −0.96% | 17.86% | 19.01% | −0.99% | 20.00% |
-| Next 50 | 10.00% | 9.49% | −0.51% | 9.29% | 9.49% | −0.51% | 10.00% |
-| Midcap 150 | 10.00% | 9.55% | −0.45% | 8.57% | 9.52% | −0.48% | 10.00% |
-| Smallcap 250 | 5.00% | 4.69% | −0.31% | 5.71% | 4.72% | −0.28% | 5.00% |
-| Debt | 5.00% | 7.11% | +2.11% | 0.00% | 6.92% | +1.92% | 10.00% |
-| Gold | 10.00% | 13.91% | +3.91% | 0.00% | 13.55% | +3.55% | 10.00% |
-| **Total** | **100.00%** | **100.00%** | **6.02%** | **100.00%** | **100.00%** | **5.48%** | **100.00%** |
+- **TY 2026-27 Target**: New target allocation effective this tax year
 
 **Key observations from this month's allocation:**
 
-- **Nasdaq 100 receives 58.57%** of the next investment — the most underweight asset, and therefore the top priority
-- **Gold and Debt receive zero** — both are overweight relative to their FY 2025-26 targets
-- **Total portfolio drift reduces** from 6.02% to 5.48% after a single investment cycle — gradual, continuous improvement
-
----
-
-## Target Allocation Shift: FY 2026-27
-
-From April 2026, the 1 Portfolio target allocation is updated:
-
-| Asset Class | FY 2025-26 | FY 2026-27 | Change |
-|-------------|----------:|----------:|------:|
-| Nasdaq 100 | 40% | 35% | −5% |
-| Nifty 50 | 20% | 20% | — |
-| Next 50 | 10% | 10% | — |
-| Midcap 150 | 10% | 10% | — |
-| Smallcap 250 | 5% | 5% | — |
-| Debt | 5% | 10% | +5% |
-| Gold | 10% | 10% | — |
-| **Total** | **100%** | **100%** | |
-
-**Debt +5% → 10%**: As the total portfolio size grows, the case for more debt increases. A larger debt allocation provides portfolio stability, reduces volatility, and creates dry powder during equity dislocations. In the current environment — elevated global macro uncertainty, ongoing tariff risks, and geopolitical volatility — increasing the debt buffer adds meaningful balance.
-
-**Nasdaq −5% → 35%**: Nasdaq has been the standout performer, but its target is trimmed modestly to make room for the higher debt allocation. 35% is still a very meaningful allocation — the largest single position — and reflects continued conviction in international diversification and US technology growth. Notably, Nasdaq's current actual allocation of 36.22% is now only modestly above the new 35% target, meaning it will progressively receive less new investment compared to the prior year.
-
-**Impact on next allocation**: Under the FY 2026-27 targets, Debt's situation inverts dramatically — from +2.11% overweight (under 5% target) to −2.89% underweight (under 10% target). Starting from May 2026, Debt will begin receiving a portion of monthly investments for the first time in a while.
+- **Nasdaq 100 receives 65.00%** of the next investment — the most underweight asset, and therefore the top priority
+- **Gold and Debt receive zero** — both are overweight relative to their TY 2026-27 targets. By not buying them they drift towards the target allocation
+- **Total portfolio drift reduces** from 5.41% to 4.89% after a single investment cycle — gradual, continuous improvement
+- This is based on today's state of the portfolio. Will rerun the tools with latest NAVs and monthly allocation before investing
 
 ---
 
 ## FX Cost Optimization: Funding IBKR
 
-For international investments via [Interactive Brokers](https://www.interactivebrokers.com/), the foreign exchange transaction cost on INR-to-USD conversion is a recurring drag that compounds over years of regular funding. Optimizing it matters.
+> I use **[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** to find the true transaction cost and compare various rates.  
+> Using to compute/track TCS for 12BAA form and to find the TCS opportunity cost.
+
+For international investments via [Interactive Brokers](https://www.interactivebrokers.co.in/), the foreign exchange transaction cost on INR-to-USD conversion is a recurring drag that compounds over years of regular funding. Optimizing it matters.
+
+Following comparison for three thousand dollars. [ICICI (Current)](/building-wealth/tools/realvalue-fx-engine/#v1udd20260403r93.12b92.67a3000f1000y0g12m3) vs [FX Retail + BoB (Plan)](/building-wealth/tools/realvalue-fx-engine/#v1udd20260403r92.77b92.67a3000f1250y0g12m3)
 
 | Parameter | ICICI (Current) | FX Retail + BoB (Plan) |
 |-----------|----------------:|-----------------------:|
-| Interbank Rate | ₹92.98/USD | ₹92.98/USD |
-| Bank Rate | ₹93.43/USD | ₹93.08/USD |
+| Interbank Rate | ₹92.67/USD | ₹92.67/USD |
+| Bank Rate | ₹93.12/USD | ₹92.77/USD |
 | FX Spread | ₹0.45/USD | ₹0.10/USD |
 | Processing Fee | ₹1,000 + GST | ₹1,250 + GST |
-| Effective Rate | ₹93.80/USD | ₹93.52/USD |
-| **Transaction Cost** | **0.89%** | **0.58%** |
+| Effective Rate | ₹93.63/USD | ₹93.38/USD |
+| **Transaction Cost** | **1.03%** | **0.76%** |
+| Effective Rate | <img src="icici_forex.png" style="max-width:100%;"> | <img src="bob_forex.png" style="max-width:100%;"> |
 
-Switching to [FX Retail](/building-wealth/blogs/2026/funding-ibkr-from-india-fx-retail/) with Bank of Baroda reduces the effective transaction cost from **0.89% to 0.58%** — a saving of ~0.31% per transfer. The key driver is BoB's exceptionally low FX spread of just ₹0.10/USD through FX Retail, compared to ₹0.45/USD with ICICI's standard remittance rate.
+Switching to [FX Retail](https://fxretail.co.in) with Bank of Baroda reduces the effective transaction cost from **1.03% to 0.76%** — a saving of ~0.27% per transfer. The key driver is BoB's exceptionally low FX spread of just ₹0.10/USD through FX Retail, compared to ₹0.45/USD with ICICI's highly discounted rate on bank card rate.
 
-Note that BoB's processing fee is slightly higher (₹1,250 vs ₹1,000), but this is more than offset by the much lower FX spread on larger transfer amounts.
+Note that BoB's processing fee is slightly higher (₹1,250 vs ₹1,000), but this is more than offset by the much lower FX spread on larger transfer amounts. As the transaction volume increases, the transaction cost will come down.
 
 **Next step — Direct IBKR**: Currently operating via an indirect route. Moving to a direct IBKR account will reduce brokerage by an additional **$2–3 per transaction**, with no per-transaction intermediary overhead.
 
+Essentially trying to invest **$10/month** extra, as per [this projection](/building-wealth/tools/realvalue-sip-engine/#v1otd22yf202604c0lm0.01kg24h10i6t15p22y) this can lead to real (inflation adjusted) value of **$24,330** higher portfolio in **22 years**. Which is like **₹22 lakhs** extra in today's money. In long run optimizing these costs are very important.
+
+---
+## Key Lessons From FY 2025–26
+
+1. Asset allocation matters more than running behind momentum
+2. Index funds reduce behavioural mistakes (see [this](/building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/))
+3. New-money rebalancing works better than selling (see [this](/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/))
+4. FX costs compound significantly over long horizons (see [this](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/))
+5. Execution mistakes can happen, need to be careful
+
 ---
 
-## FY 2025-26 at a Glance
+## How I Manage This End to End
 
-| Dimension | Result |
-|-----------|--------|
-| Total Portfolio XIRR | 12.62% |
-| 1 Portfolio XIRR | 16.48% |
-| Best performer | Gold — 41.24% XIRR |
-| Worst performer | Smallcap 250 — −20.46% XIRR |
-| Loss harvesting | Done — Mid, Small, Next 50 |
-| Portfolio drift (end of year) | 6.02% |
-| FX cost — current | 0.89% via ICICI |
-| FX cost — target | 0.58% via FX Retail + BoB |
+Three tools work together to cover the full investment workflow — from performance visibility to capital deployment to international funding.
 
-For FY 2026-27, the priorities are:
+### 1. RealValue Portfolio — Multi-Asset XIRR Reporting
 
-1. Resume monthly SIPs under the new target allocation — Debt now becomes an active investment destination
-2. Activate FX Retail + BoB for all IBKR funding transfers
-3. Complete the transition to direct IBKR
-4. Continue the Perpetual Rebalancing framework — let markets recover mid/small segments without panic
+**[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** is the starting point every month. It ingests CAMS + KFinTech CAS PDFs (Indian mutual funds) and IBKR activity statements (international investments) directly in the browser — no data leaves the device.
+
+Funds are tagged to goal buckets (1 Portfolio, Emergency, Travel, Retirement) and asset classes (Nasdaq 100, Nifty 50, Gold, etc.). The tool computes **XIRR per category and asset class**, giving a unified view of a multi-asset, multi-goal portfolio spread across Indian mutual funds and a US brokerage.
+
+This is the report that drives everything in the sections above.
+
+### 2. RealValue Family SIP Allocator — Monthly Drift Correction
+
+**[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** takes the current allocation (from the Portfolio tool) and the target allocation as inputs. It then computes how the next monthly investment should be split across asset classes to minimise drift — directing capital only to underweight assets, proportional to their deficit.
+
+This is the [Perpetual Rebalancing](/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/) framework in practice:
+
+- No selling during normal conditions
+- New money does all the rebalancing
+- Drift shrinks gradually, month by month
+
+The drift correction table in this post is the direct output of this tool run against today's portfolio state.
+
+### 3. RealValue FX Engine — Forex Cost Estimation and Optimization
+
+**[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** computes the true all-in cost of an INR-to-USD transfer — bank rate, FX spread, GST on conversion, processing fee, and TCS — to arrive at the effective exchange rate and transaction cost percentage.
+
+It is used to:
+
+- Compare banks and routes (ICICI direct vs FX Retail + BoB) before executing a transfer
+- Track the effective rate and TCS for each transaction (feeds into Form 12BAA)
+- Quantify the long-run cost of suboptimal forex routing
+
+The FX comparison table in this post was built using this tool.
+
+### How I Did This Before
+
+Before building these tools, the same workflow was significantly more manual and error-prone.
+
+For **portfolio reporting and drift correction** (tools 1 and 2), I maintained a custom Google Sheet — manually entering current asset values, tweaking formulas, and deriving the target allocation split. It worked, but was fragile and time-consuming to update each month.
+
+For **forex cost estimation** (tool 3), I would navigate through the bank's remittance portal all the way to the payment confirmation page — just to see the TCS and total debit amount — then back out, adjust the transfer amount, and repeat. A semi-binary search by hand to find the right INR amount that fully utilises the monthly international investment budget. Tedious and easy to get wrong.

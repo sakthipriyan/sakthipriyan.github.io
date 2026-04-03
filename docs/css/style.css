@@ -2900,3 +2900,8 @@ main article table th {
         flex-direction: column;
     }
 }
+
+/* Color utility classes */
+.green  { color: #4CAF50; }
+.yellow { color: #f39c12; }
+.red    { color: #dc3545; }
