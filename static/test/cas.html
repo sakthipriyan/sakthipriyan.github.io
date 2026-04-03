@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAS Portfolio Extractor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        :root { --primary: #0066cc; --bg: #f4f6f8; --surface: #ffffff; --text: #333; }
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; color: var(--text); background: var(--bg); }
+        .upload-area { border: 2px dashed var(--primary); padding: 40px; text-align: center; border-radius: 8px; margin-bottom: 20px; background: var(--surface); cursor: pointer; transition: 0.2s; }
+        .upload-area:hover { background-color: #f0f7ff; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .tabs { display: flex; gap: 10px; }
+        button { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button.secondary { background: #e0e0e0; color: #333; }
+        button:hover { opacity: 0.9; }
+        button.active { background: #004c99; }
+        
+        .view-pane { display: none; background: var(--surface); padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .view-pane.active { display: block; }
+        
+        pre { background: #1e1e2f; color: #e0e0e0; padding: 20px; border-radius: 6px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; max-height: 600px; overflow-y: auto; }
+        
+        /* Table Styles */
+        .investor-card { background: #e8f4fd; padding: 15px; border-radius: 6px; margin-bottom: 20px; line-height: 1.6; }
+        .fund-house { border-left: 4px solid var(--primary); margin-bottom: 30px; padding-left: 15px; }
+        .folio-header { background: #f0f0f0; padding: 10px; border-radius: 4px; margin: 15px 0 10px 0; font-weight: bold; }
+        .fund-title { margin: 10px 0; color: var(--primary); font-size: 1.1em; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 13px; }
+        th, td { text-align: right; padding: 8px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f9fa; font-weight: 600; }
+        th:first-child, td:first-child { text-align: left; }
+        th:nth-child(2), td:nth-child(2) { text-align: left; }
+        .summary-row { background: #fdfdfd; font-weight: bold; color: #555; border-top: 2px solid #eee; padding-top: 10px; }
+        
+        .status { font-weight: bold; margin-top: 10px; }
+        .status.loading { color: #0066cc; }
+        .status.error { color: #ff5252; }
+    </style>
+</head>
+<body>
+
+    <h2>CAS PDF Data Extractor</h2>
+    
+    <div class="upload-area" onclick="document.getElementById('pdf-file').click()">
+        <h3>Select CAS PDF File</h3>
+        <p style="color: #666;">Extracts tabular transactions securely in your browser.</p>
+        <input type="file" id="pdf-file" accept="application/pdf" style="display: none;" />
+    </div>
+    
+    <div id="status-msg" class="status"></div>
+
+    <div class="controls" id="controls" style="display: none;">
+        <div class="tabs">
+            <button id="btn-json" class="active" onclick="switchTab('json')">JSON View</button>
+            <button id="btn-table" class="secondary" onclick="switchTab('table')">Table View</button>
+        </div>
+        <button onclick="copyJSON()">📋 Copy JSON</button>
+    </div>
+
+    <div id="view-json" class="view-pane active">
+        <pre id="json-output">Waiting for file...</pre>
+    </div>
+
+    <div id="view-table" class="view-pane">
+        <div id="table-output"></div>
+    </div>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        let extractedData = null;
+
+        function switchTab(tab) {
+            document.getElementById('btn-json').className = tab === 'json' ? 'active' : 'secondary';
+            document.getElementById('btn-table').className = tab === 'table' ? 'active' : 'secondary';
+            document.getElementById('view-json').classList.toggle('active', tab === 'json');
+            document.getElementById('view-table').classList.toggle('active', tab === 'table');
+        }
+
+        function copyJSON() {
+            if (!extractedData) return alert("No data to copy.");
+            navigator.clipboard.writeText(JSON.stringify(extractedData, null, 2))
+                .then(() => alert("JSON copied to clipboard!"))
+                .catch(() => alert("Failed to copy."));
+        }
+
+        function parseNumericStr(val) {
+            if (!val) return null;
+            const isNegative = val.includes('(') || val.includes('-');
+            const cleanVal = val.replace(/[^\d.]/g, '');
+            if (cleanVal === '') return null;
+            return isNegative ? -parseFloat(cleanVal) : parseFloat(cleanVal);
+        }
+
+        document.getElementById('pdf-file').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('status-msg').className = 'status loading';
+            document.getElementById('status-msg').innerText = 'Reading PDF and isolating columns...';
+            document.getElementById('controls').style.display = 'none';
+            
+            const fileReader = new FileReader();
+            fileReader.onload = async function() {
+                try {
+                    const typedarray = new Uint8Array(this.result);
+                    const loadingTask = pdfjsLib.getDocument({ data: typedarray });
+                    const pdf = await loadingTask.promise;
+                    
+                    let fullText = '';
+                    let leftColumnText = ''; 
+                    
+                    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                        const page = await pdf.getPage(pageNum);
+                        const textContent = await page.getTextContent();
+                        
+                        // --- 1. COLUMN ANCHORING FOR INVESTOR INFO (Page 1 Only) ---
+                        if (pageNum === 1) {
+                            const emailItem = textContent.items.find(item => item.str.toLowerCase().includes('email id:'));
+                            if (emailItem) {
+                                const leftMarginX = emailItem.transform[4];
+                                const leftItems = textContent.items.filter(item => 
+                                    item.transform[4] >= leftMarginX - 10 && 
+                                    item.transform[4] < leftMarginX + 250
+                                );
+                                
+                                leftItems.sort((a, b) => {
+                                    if (Math.abs(a.transform[5] - b.transform[5]) > 5) return b.transform[5] - a.transform[5];
+                                    return a.transform[4] - b.transform[4];
+                                });
+
+                                let currentY = null;
+                                let line = [];
+                                const lines = [];
+                                
+                                leftItems.forEach(item => {
+                                    if (currentY === null || Math.abs(item.transform[5] - currentY) > 5) {
+                                        if (line.length > 0) lines.push(line.join(' '));
+                                        line = [item.str.trim()];
+                                        currentY = item.transform[5];
+                                    } else {
+                                        line.push(item.str.trim());
+                                    }
+                                });
+                                if (line.length > 0) lines.push(line.join(' '));
+                                leftColumnText = lines.join('\n');
+                            }
+                        }
+
+                        // --- 2. Y-COORDINATE STITCHING ENGINE (For Tables/Transactions) ---
+                        const items = textContent.items.sort((a, b) => {
+                            if (Math.abs(a.transform[5] - b.transform[5]) > 5) return b.transform[5] - a.transform[5];
+                            return a.transform[4] - b.transform[4];
+                        });
+                        
+                        let currentY = null;
+                        let line = [];
+                        const lines = [];
+                        
+                        items.forEach(item => {
+                            if (currentY === null || Math.abs(item.transform[5] - currentY) > 5) {
+                                if (line.length > 0) lines.push(line.join(' '));
+                                line = [item.str];
+                                currentY = item.transform[5];
+                            } else {
+                                line.push(item.str);
+                            }
+                        });
+                        if (line.length > 0) lines.push(line.join(' '));
+                        fullText += lines.join('\n') + '\n';
+                    }
+
+                    extractedData = parseCASData(fullText, leftColumnText);
+                    
+                    // Populate UI
+                    document.getElementById('json-output').textContent = JSON.stringify(extractedData, null, 4);
+                    renderTables(extractedData);
+                    
+                    document.getElementById('status-msg').innerText = '';
+                    document.getElementById('controls').style.display = 'flex';
+
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById('status-msg').className = 'status error';
+                    document.getElementById('status-msg').innerText = `Error: ${error.message}`;
+                }
+            };
+            fileReader.readAsArrayBuffer(file);
+            e.target.value = ''; 
+        });
+
+        // Dedicated Text Parser for the Left-Column Investor Data
+        function extractInvestorInfo(rawText) {
+            const data = { name: "", email: "", phone: [], address: "" };
+            if (!rawText) return data;
+
+            const lines = rawText.split('\n').map(l => l.replace(/\s{2,}/g, ' ').trim()).filter(l => l.length > 0);
+            let nameIndex = -1;
+            let addressLines = [];
+            let contactNumbers = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const lowerLine = line.toLowerCase();
+                
+                if (lowerLine.startsWith("email id:")) {
+                    data.email = line.substring(9).trim();
+                    if (i + 1 < lines.length) {
+                        data.name = lines[i + 1];
+                        nameIndex = i + 1;
+                    }
+                } else if (lowerLine.startsWith("phone res:")) {
+                    contactNumbers.push(line.substring(10).trim());
+                } else if (lowerLine.startsWith("mobile:")) {
+                    contactNumbers.push(line.substring(7).trim());
+                } else if (nameIndex !== -1 && i > nameIndex && !lowerLine.startsWith("phone") && !lowerLine.startsWith("mobile") && !lowerLine.startsWith("pan")) {
+                    if (lowerLine.includes("portfolio summary") || lowerLine.includes("mutual fund") || lowerLine.includes("folio")) {
+                        nameIndex = -1; 
+                        continue;
+                    }
+                    addressLines.push(line);
+                }
+            }
+            data.address = addressLines.join(", ");
+            data.phone = [...new Set(contactNumbers.filter(Boolean))];
+            return data;
+        }
+
+        function parseCASData(fullText, leftColumnText) {
+            // --- GLOBAL TEXT SANITIZER ---
+            // Actively destroys "Registrar : CAMS" / "Registrar : KFINTECH" column bleed so ISINs snap back together
+            let sanitizedText = fullText.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
+            sanitizedText = sanitizedText.replace(/Registrar\s*:/gi, ''); 
+            sanitizedText = sanitizedText.replace(/\b(KFINTECH|CAMS)\b/gi, ''); 
+            
+            const lines = sanitizedText.split('\n');
+            const data = { investor: extractInvestorInfo(leftColumnText), fundHouses: [] };
+
+            const panMatch = sanitizedText.match(/PAN\s*[:\-]?\s*([A-Z]{5}[0-9]{4}[A-Z]{1})/i);
+            if (panMatch) data.investor.pan = panMatch[1];
+
+            const fundHouseMap = {}; 
+            let currentHouse = "Unknown Fund House";
+            let currentFolio = "Unknown Folio";
+            let currentFund = null; 
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+
+                const fhMatch = line.match(/([A-Za-z\s]+Mutual Fund)/i);
+                if (fhMatch && !line.includes("PORTFOLIO SUMMARY") && !line.includes("Total")) {
+                    currentHouse = fhMatch[1].trim();
+                }
+
+                const folioMatch = line.match(/Folio No:\s*([A-Za-z0-9\/\-]+)/i);
+                if (folioMatch) currentFolio = folioMatch[1].trim();
+
+                const isinMatch = line.match(/(.*?)(?:\s*-\s*|\s+)ISIN\s*[:\-]?\s*([A-Z0-9\s]+)/i);
+                
+if (isinMatch) {
+                    if (currentFund) {
+                        if (!fundHouseMap[currentFund.house]) fundHouseMap[currentFund.house] = {};
+                        if (!fundHouseMap[currentFund.house][currentFund.folio]) fundHouseMap[currentFund.house][currentFund.folio] = [];
+                        fundHouseMap[currentFund.house][currentFund.folio].push(currentFund.data);
+                    }
+
+                    // --- NEW: Multi-line Fund Name Repair ---
+                    let rawFundName = isinMatch[1].trim();
+                    
+                    // If the extracted name is just "(Non-Demat)" or very short, it probably broke across lines
+                    if (rawFundName.startsWith("(") || rawFundName.length < 20) {
+                        let prevLine = i > 0 ? lines[i - 1].trim() : "";
+                        // Ensure we aren't accidentally grabbing a PAN or Folio line
+                        if (!prevLine.includes("PAN:") && !prevLine.includes("Folio No:") && !prevLine.includes("KYC:")) {
+                            rawFundName = prevLine + " " + rawFundName; // Stitch it back together
+                        }
+                    }
+
+                    // Clean the newly stitched name
+                    let fundName = rawFundName
+                        .replace(/.*(?:PAN|KYC).*?OK\s*/gi, '')
+                        .replace(/^OK\s*/i, '')
+                        .replace(/^[A-Z0-9\s]+\s*-\s*/, '') // Removes the internal scheme codes like "P8188 -"
+                        .trim();
+
+                    // --- ENHANCED MULTI-LINE ISIN REPAIR (Keep your existing working code here) ---
+                    let isinStr = isinMatch[2].replace(/[^A-Z0-9]/gi, '');
+                    let offset = 1;
+                    while (isinStr.length < 12 && (i + offset) < lines.length) {
+                        let nextLine = lines[i + offset].trim();
+                        if (/\d{2}-[A-Za-z]{3}-\d{4}/.test(nextLine) || /Closing Unit/i.test(nextLine)) break; 
+
+                        let cleanLine = nextLine
+                            .replace(/Nominee[\s\S]*/gi, ' ') 
+                            .replace(/Advisor[\s\S]*/gi, ' ') 
+                            .replace(/Registrar[\s\S]*/gi, ' ') 
+                            .replace(/(KYC|PAN|Folio|Opening|Closing|CAMS|KFINTECH|Direct|Growth)/gi, ' ');
+                        
+                        let chunks = cleanLine.match(/[A-Z0-9]+/gi);
+                        if (chunks) {
+                            for (let chunk of chunks) {
+                                if (/^[A-Z]+$/i.test(chunk) && chunk.length > 3) continue;
+                                isinStr += chunk;
+                                if (isinStr.length >= 12) break;
+                            }
+                        }
+                        offset++;
+                        if (offset > 4) break; 
+                    }
+                    
+                    currentFund = {
+                        house: currentHouse,
+                        folio: currentFolio,
+                        data: { fundName: fundName, isin: isinStr.substring(0, 12).toUpperCase(), transactions: [], summary: {}, rawTxns: [] }
+                    };
+                    continue; 
+                }
+                if (currentFund) {
+                    if (line.includes("Closing Unit Balance")) {
+                        currentFund.data.summary.totalUnits = parseNumericStr((line.match(/Closing Unit Balance:\s*([\d,.]+)/i) || [])[1]);
+                        currentFund.data.summary.nav = parseNumericStr((line.match(/NAV on .*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]);
+                        const navDateMatch = line.match(/NAV on ([\d]{2}-[A-Za-z]{3}-[\d]{4})/i);
+                        if (navDateMatch) currentFund.data.summary.navDate = navDateMatch[1];
+                        currentFund.data.summary.investedValue = parseNumericStr((line.match(/Total Cost Value:\s*([\d,.]+)/i) || [])[1]);
+                        currentFund.data.summary.marketValue = parseNumericStr((line.match(/Market Value.*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]);
+                        continue; 
+                    }
+
+                    const dateMatch = line.match(/(\d{2}-[A-Za-z]{3}-\d{4})/);
+                    if (!dateMatch) continue;
+                    const date = dateMatch[1];
+
+                    const numRegex = /(?:\s|^)(\(?(?:\d+,)*\d+\.\d{2,4}\)?)(?=\s|$)/g;
+                    let nums = [];
+                    let m;
+                    while ((m = numRegex.exec(line)) !== null) nums.push(m[1]);
+
+                    let description = line.replace(date, '');
+                    nums.forEach(n => { description = description.replace(n, ''); });
+                    description = description.replace(/\s{2,}/g, ' ').trim();
+
+                    if (description.toLowerCase().includes("closing unit") || description.toLowerCase().includes("market value")) continue;
+
+                    if (nums.length >= 4) {
+                        let amount = parseNumericStr(nums[0]);
+                        let balance = parseNumericStr(nums[3]);
+                        let nav, units;
+
+                        const dec1 = (nums[1].split('.')[1] || "").replace(')', '').length;
+                        const dec2 = (nums[2].split('.')[1] || "").replace(')', '').length;
+
+                        if (dec1 === 4 && dec2 !== 4) { nav = parseNumericStr(nums[1]); units = parseNumericStr(nums[2]); } 
+                        else if (dec2 === 4 && dec1 !== 4) { nav = parseNumericStr(nums[2]); units = parseNumericStr(nums[1]); } 
+                        else { nav = parseNumericStr(nums[1]); units = parseNumericStr(nums[2]); } 
+
+                        currentFund.data.rawTxns.push({ type: "TXN", date, description, amount, units, nav, balance });
+                    } 
+                    else if (nums.length === 1 && (description.toLowerCase().includes('stamp duty') || description.toLowerCase().includes('stt'))) {
+                        currentFund.data.rawTxns.push({ type: "FEE", date, amount: parseNumericStr(nums[0]), description: description.replace(/\*/g, '').trim() });
+                    }
+                }
+            }
+
+            if (currentFund) {
+                if (!fundHouseMap[currentFund.house]) fundHouseMap[currentFund.house] = {};
+                if (!fundHouseMap[currentFund.house][currentFund.folio]) fundHouseMap[currentFund.house][currentFund.folio] = [];
+                fundHouseMap[currentFund.house][currentFund.folio].push(currentFund.data);
+            }
+
+            for (const [houseName, folios] of Object.entries(fundHouseMap)) {
+                const folioList = [];
+                for (const [folioNo, funds] of Object.entries(folios)) {
+                    funds.forEach(fund => {
+                        fund.rawTxns.sort((a, b) => new Date(a.date) - new Date(b.date));
+                        const mergedTxns = [];
+                        
+                        fund.rawTxns.forEach(trx => {
+                            if (trx.type === "FEE") {
+                                let merged = false;
+                                for (let j = mergedTxns.length - 1; j >= 0; j--) {
+                                    if (mergedTxns[j].date === trx.date) {
+                                        if (trx.description.toLowerCase().includes('stt')) {
+                                            mergedTxns[j].stt = (mergedTxns[j].stt || 0) + trx.amount;
+                                        } else {
+                                            mergedTxns[j].stampDuty = (mergedTxns[j].stampDuty || 0) + trx.amount;
+                                        }
+                                        merged = true; break;
+                                    }
+                                }
+                                if (!merged) { delete trx.type; mergedTxns.push(trx); }
+                            } else {
+                                delete trx.type; mergedTxns.push(trx);
+                            }
+                        });
+                        fund.transactions = mergedTxns;
+                        delete fund.rawTxns; 
+                    });
+                    folioList.push({ folioNumber: folioNo, funds: funds });
+                }
+                data.fundHouses.push({ name: houseName, folios: folioList });
+            }
+            return data;
+        }
+
+        function renderTables(data) {
+            let html = `
+                <div class="investor-card">
+                    <strong>Investor:</strong> ${data.investor.name || 'N/A'} <br>
+                    <strong>Email:</strong> ${data.investor.email || 'N/A'} &nbsp;|&nbsp; 
+                    <strong>PAN:</strong> ${data.investor.pan || 'N/A'} &nbsp;|&nbsp; 
+                    <strong>Contact:</strong> ${(data.investor.phone && data.investor.phone.length > 0) ? data.investor.phone.join(', ') : 'N/A'} <br>
+                    <strong>Address:</strong> ${data.investor.address || 'N/A'}
+                </div>
+            `;
+
+            data.fundHouses.forEach(house => {
+                html += `<div class="fund-house"><h3>${house.name}</h3>`;
+                
+                house.folios.forEach(folio => {
+                    html += `<div class="folio-header">Folio: ${folio.folioNumber}</div>`;
+                    
+                    folio.funds.forEach(fund => {
+                        html += `
+                            <h4 class="fund-title">${fund.fundName} <small style="color:#666;">(ISIN: ${fund.isin})</small></h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Units</th>
+                                        <th>NAV</th>
+                                        <th>Duty/STT</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        
+                        fund.transactions.forEach(txn => {
+                            let fees = [];
+                            if (txn.stampDuty) fees.push(`SD: ${txn.stampDuty}`);
+                            if (txn.stt) fees.push(`STT: ${txn.stt}`);
+                            
+                            html += `
+                                <tr>
+                                    <td>${txn.date || ''}</td>
+                                    <td>${txn.description || ''}</td>
+                                    <td>${txn.amount ? txn.amount.toLocaleString() : ''}</td>
+                                    <td>${txn.units || ''}</td>
+                                    <td>${txn.nav || ''}</td>
+                                    <td style="color: #d32f2f; font-size: 0.9em;">${fees.join('<br>') || '-'}</td>
+                                    <td>${txn.balance || ''}</td>
+                                </tr>
+                            `;
+                        });
+
+                        html += `
+                                </tbody>
+                            </table>
+                            <div class="summary-row" style="text-align: right; margin-bottom: 30px; font-size: 13px;">
+                                Total Units: <span>${fund.summary.totalUnits || 0}</span> &nbsp;|&nbsp; 
+                                Invested: <span>₹${fund.summary.investedValue?.toLocaleString() || 0}</span> &nbsp;|&nbsp; 
+                                Current NAV (${fund.summary.navDate || '-'}): <span>₹${fund.summary.nav || 0}</span> &nbsp;|&nbsp; 
+                                Market Value: <span style="color: #2e7d32;">₹${fund.summary.marketValue?.toLocaleString() || 0}</span>
+                            </div>
+                        `;
+                    });
+                });
+                html += `</div>`;
+            });
+            document.getElementById('table-output').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
