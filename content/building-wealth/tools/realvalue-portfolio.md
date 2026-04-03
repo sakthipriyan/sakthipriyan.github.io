@@ -77,7 +77,7 @@ For accurate XIRR and invested-value computation, your **first upload should inc
 </p>
 
 #### 1b. IBKR (International Holdings)
-1. Generate an IBKR statement/CSV that includes trade history from the first transaction date.
+1. Generate an [IBKR](https://www.interactivebrokers.co.in/en/home.php) statement/CSV that includes trade history from the first transaction date.
 2. Ensure the export includes open positions and trades.
 3. Use **Upload IBKR CSV** in this tool.
 
