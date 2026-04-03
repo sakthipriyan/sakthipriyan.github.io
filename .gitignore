@@ -15,5 +15,5 @@ tools/get-data/*.a
 tools/get-data/*.out
 
 # test
-docs/test/
-static/test/
+# docs/test/
+# static/test/
