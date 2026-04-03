@@ -12,14 +12,19 @@ wealth_tags:
   - "IBKR"
   - "FX Retail"
   - "LRS"
-  
-summary: "Annual portfolio review for FY 2025–26: 12.63% overall XIRR across four goal-based portfolios, with allocation strategy, drift correction, and forex cost optimization."
+
+summary: "Annual portfolio review for FY 2025–26: Three goal-based portfolios, allocation strategy, drift correction and forex cost optimization."
 ---
+
+> Used **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** to tag categories/asset classes to derive the XIRR.  
+> **Your data stays with you! All processing done in your browser!**
+>
+> Currently supports CAMS + KFinTech combined PDF (Indian Mutual Funds) and IBKR (International Investments) 
+> You should check it out if you want to build your report!  
+
 This is my first post in publishing the state of my portfolio. Planning to do this yearly by April first week.  
 
 ## Portfolio Summary
-  
-
 The portfolio is structured around ~~four~~ **three** distinct goal buckets, each with its own investment mandate and risk profile.  
 The overall portfolio delivered **12.63% XIRR**.
 
@@ -34,11 +39,13 @@ The overall portfolio delivered **12.63% XIRR**.
 
 <img src="Portfolio_Report_Overview.png" style="max-width:100%;">
 
-Note: *Data includes investment done till April 2, 2026. XIRR computed with latest available NAVs.*
+Notes: 
+- Data includes investment done till April 2, 2026. XIRR computed using latest NAVs as on April 3rd morning
+- Emergency Fund had significant historical volume in a liquid fund, so pulling down the overall XIRR
 
 ## 1 Portfolio — Asset Class Breakdown
 
-100% equity on index funds/etfs now after a mega clean up and rebalancing I did. One time act to clean up my past behaviors.
+100% equity on index funds/etfs now after a mega clean up and rebalancing. One time act to clean up my past behaviors.
 
 | Asset Class | XIRR | Current Allocation | Target FY 2025-26 | Target FY 2026-27 |
 |-------------|-----:|-------------------:|------------------:|------------------:|
@@ -53,44 +60,35 @@ Note: *Data includes investment done till April 2, 2026. XIRR computed with late
 
 <img src="Portfolio_Report_1_Portfolio.png" style="max-width:100%;">
 
+You can look at [this slide](/building-wealth/slides/my-asset-allocation-rebalancing/) or watch [this video](/building-wealth/videos/my-asset-allocation-rebalancing-explained/) to learn how I evolved asset allocation over time and also evolved after publishing the slide.
+
 Notes:
 - Target FY 2025-26 - Asset allocation target I set for Financial Year 2025-26
 - Target TY 2026-27 - Asset allocation target I am setting for Tax Year 2026-27
 
-
-
-You can look at [this slide](/building-wealth/slides/my-asset-allocation-rebalancing/) or watch [this video](/building-wealth/videos/my-asset-allocation-rebalancing-explained/) for how I evolved over time and also evolved after publishing the slide.
-
-
 ### Nasdaq 100 — 26.57% XIRR
 
-The top equity performer, driven by sustained strength in US technology through my journey.
-I started investing into Nasdaq 100 via Indian Mutual Fund route. I got struck when industry reached the limits. This probably led to some 
+The top equity performer, driven by sustained strength in US technology. I have very strong conviction that this will keep growing. I always wanted to own these tech companies but, actual journey started only in June 2022. Where as domestic equity investments started in Jan 2016. I started investing into Nasdaq 100 via Indian Mutual Funds. New investments were limited whenever industry limits are reached. This probably led to some lost opportunity till I understood and executed via LRS route. See [this video](/building-wealth/videos/invest-in-nasdaq-100-from-india/) for more details.
 
-
- Despite these returns, the current 36.08% allocation sits below the 40% target — Nasdaq remains underweight. This is because gold grew disproportionately, consuming its share of the total portfolio. As a result, Nasdaq continues to attract the largest share of new monthly investments via the drift-based allocation.
+FY 2025-26 target was at 35%, due to Tax gain harvesting/TCS opportunity cost harvesting ended up slightly more than the target. But, given that current years target at 40% this is still fine. I will write about this new harvesting nobody talking about separately.
 
 ### Gold — 41.24% XIRR
 
-The portfolio's standout performer for FY 2025-26. Driven by global macro uncertainty and continued central bank buying, gold stands at 13.36% of the core portfolio — significantly above the 10% target. Gold receives zero new allocation in the current investment cycle.
+The portfolio's standout performer. Driven by global macro uncertainty and continued central bank buying, gold stands at 13.36% of the core portfolio — above the 10% target. Gold received zero new allocation in the investment cycle. Asset allocation prevented me from buying Gold at higher cost. So, all of growth came from earlier allocations. Following a zero churn model till portfolio hits a 10% overall drift. Didn't sell the Gold as well. Will let it self correct naturally over the months.
 
 ### Nifty 50 — 1.45% XIRR
 
-Indian large-cap equities delivered near-flat returns, reflective of the broader Nifty 50 performance through the year. Allocation is at 19.73%, close to the 20% target.
+Indian large-cap equities delivered near-flat nominal returns, reflective of the broader Nifty 50 performance through the year. Allocation is at 19.73%, close to the 20% target.
 
 ### Midcap 150, Next 50, Smallcap 250 — Deeply Negative XIRR
 
-These three segments had a difficult FY 2025-26. Mid and small cap indices corrected 25–40% from their September 2024 peaks.
-
-The sharply negative XIRRs — particularly Smallcap 250 at −20.46% — reflect both the market correction and the loss harvesting executed under the [Perpetual Rebalancing](/building-wealth/blogs/2026/perpetual-rebalancing-framework/) framework. Under this framework, units purchased at higher prices were sold during the downturn to lock in capital losses (usable for LTCG offset), and fresh units were purchased at the prevailing lower prices. The XIRR now measures performance from this reset, lower cost basis — so the numbers look extreme negative but must be read in that context.
-
-This is the framework working as intended: losses are harvested and converted into tax-saving capital loss carryforwards, while the portfolio stays invested in the same asset classes in comparable funds.
+These three segments had a difficult FY 2025-26. Mid and small cap indices corrected 25–40% from their September 2024 peaks. I will keep investing till they are underweights. If market value drops further I will be buying more.
 
 ### Debt — 7.06% XIRR
 
-Steady, predictable returns. Debt is modestly overweight at 7.05% vs the FY 2025-26 target of 5%, and receives no allocation in the current investment cycle.
+Steady, predictable returns. Debt is underweight at 7.05% vs the FY 2025-26 target of 10% and received minimal/no allocation in the investment cycle as I clubbed it with Gold. Essentially Gold + Debt target is at 20%, when Gold grown too much allocation system prevented my buying debt as well. Anyway, I am reducing debt allocation in Tax Year 2026-27 to 5%. So, most likely won't be buying debt further.
 
----
+Over years, my defensive assets Gold(10%) + Debt(15% -> 10% -> 5%) went from 25% to 15%. As I am growing the contribution/portfolio, I am reducing my debt allocation. Eventually to settle down at 90% max equity.
 
 ## Emergency Fund
 
@@ -109,6 +107,8 @@ The emergency fund holds three layers, each calibrated for liquidity and capital
 
 Overall 7.46% XIRR is a solid outcome for a near-zero-risk allocation.
 
+Look at my emergency fund set up video [here](/building-wealth/videos/emergency-fund-setup-using-liquid/hybrid/arbitrage-mutual-funds/) or slide [here](/building-wealth/slides/emergency-fund-setup/)
+
 ---
 
 ## Travel Fund
@@ -120,6 +120,8 @@ Overall 7.46% XIRR is a solid outcome for a near-zero-risk allocation.
 
 Entirely held in arbitrage funds — providing near-debt returns with equity fund taxation (LTCG at 12.5% after one year, versus debt fund taxation at slab rate). Well-suited for a medium-term spending goal.
 
+Setup details [here](/building-wealth/slides/managing-money-flows/#/7)
+
 ---
 
 ## Retirement Fund
@@ -128,16 +130,21 @@ Entirely held in arbitrage funds — providing near-debt returns with equity fun
 |-------------|-----:|----------:|
 | Active | 5.66% | 100.00% |
 | **Total** | **5.66%** | **100.00%** |
-Planned is only 3 buckets, here 4th one is a mistake I made and I have to couple of years to clean it up.
-In its early stages — currently a single actively managed fund. This bucket will be built up meaningfully in successive financial years as the core portfolio matures.
+
+Significant chunk was in funds tagged for retirement earlier. As part of the rebalancing I merged them into 1 Portfolio.
+
+I was supposed to buy a Gold Fund sometime back, I wrongly purchased this ELSS fund while I was multi tasking.
+Now locked with this for a while. Last standing active fund in our portfolio.
+
+Using [other instruments](/building-wealth/slides/financial-tools/#/4/3) which not tracked currently.
 
 ---
 
 ## Drift Correction: Next Investment Allocation
 
-The 1 Portfolio uses the [Perpetual Rebalancing](/building-wealth/blogs/2026/perpetual-rebalancing-framework/) framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. No selling occurs during normal market conditions. New money does the rebalancing.
+> The 1 Portfolio uses the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. No selling occurs during normal market conditions. New money does the rebalancing.
 
-The table below consolidates the current state, next investment allocation, and the new FY 2026-27 target allocation in one view:
+The table below consolidates the current state, next investment allocation, and the new Tax Year 2026-27 target allocation in one view:
 
 - **FY 2025-26 Target**: Target allocation under the outgoing financial year
 - **Current**: Actual allocation as of today
