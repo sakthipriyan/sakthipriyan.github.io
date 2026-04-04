@@ -653,8 +653,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             nav = this.parseNumericStr(nums[2]);
                             units = this.parseNumericStr(nums[1]);
                         } else {
-                            nav = this.parseNumericStr(nums[1]);
-                            units = this.parseNumericStr(nums[2]);
+                            nav = this.parseNumericStr(nums[2]);
+                            units = this.parseNumericStr(nums[1]);
                         }
 
                         rawTransactions.push({
@@ -1449,7 +1449,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         let nav, units;
                         if (dec1 === 4 && dec2 !== 4) { nav = this.parseNumericStr(nums[1]); units = this.parseNumericStr(nums[2]); }
                         else if (dec2 === 4 && dec1 !== 4) { nav = this.parseNumericStr(nums[2]); units = this.parseNumericStr(nums[1]); }
-                        else { nav = this.parseNumericStr(nums[1]); units = this.parseNumericStr(nums[2]); }
+                        else { nav = this.parseNumericStr(nums[2]); units = this.parseNumericStr(nums[1]); }
                         currentFund.rawTxns.push({ type: 'TXN', date, amount, nav, units, description, balance });
                     } else if (nums.length === 1 && /stamp duty|stt/i.test(description)) {
                         currentFund.rawTxns.push({ type: 'FEE', date, amount: this.parseNumericStr(nums[0]), description: description.replace(/\*/g, '').trim() });
