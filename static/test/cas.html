@@ -370,7 +370,7 @@
 
                         if (dec1 === 4 && dec2 !== 4) { nav = parseNumericStr(nums[1]); units = parseNumericStr(nums[2]); } 
                         else if (dec2 === 4 && dec1 !== 4) { nav = parseNumericStr(nums[2]); units = parseNumericStr(nums[1]); } 
-                        else { nav = parseNumericStr(nums[1]); units = parseNumericStr(nums[2]); } 
+                        else { nav = parseNumericStr(nums[2]); units = parseNumericStr(nums[1]); } 
 
                         currentFund.data.rawTxns.push({ type: "TXN", date, description, amount, units, nav, balance });
                     } 
