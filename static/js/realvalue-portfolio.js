@@ -104,7 +104,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 </div>
 
                 <!-- Persistent Top Bar + Upload Trigger -->
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem;">
                     <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
                         📑 Mutual Fund Portfolio
                         <span v-if="funds.length > 0" style="font-size: 0.7em; background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
@@ -133,6 +133,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             📊 Upload IBKR CSV
                         </button>
                     </div>
+                </div>
+
+                <!-- CAS parser disclaimer -->
+                <div style="margin-bottom: 1.5rem; padding: 0.6rem 0.9rem; background: #fffbeb; border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 0.82em; color: #78350f; line-height: 1.5;">
+                    ⚠️ <strong>CAS Parser Disclaimer:</strong> Parsing is based on heuristics and has been tested with 3 CAS PDFs so far. I am working with friends &amp; family to improve parser quality.
+                    Transaction units and total units are validated, it will be shown in the UI if there are any discrepancies. 🙏
                 </div>
 
                 <!-- Hidden file inputs -->
