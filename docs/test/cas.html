@@ -8,6 +8,11 @@
     <style>
         :root { --primary: #0066cc; --bg: #f4f6f8; --surface: #ffffff; --text: #333; }
         body { font-family: system-ui, -apple-system, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; color: var(--text); background: var(--bg); }
+        
+        /* New Password Container Style */
+        .password-container { text-align: center; margin-bottom: 20px; background: var(--surface); padding: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        .password-container input { padding: 8px 12px; margin-left: 10px; border: 1px solid #ccc; border-radius: 4px; width: 200px; font-size: 14px; }
+        
         .upload-area { border: 2px dashed var(--primary); padding: 40px; text-align: center; border-radius: 8px; margin-bottom: 20px; background: var(--surface); cursor: pointer; transition: 0.2s; }
         .upload-area:hover { background-color: #f0f7ff; }
         .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -34,15 +39,20 @@
         th:nth-child(2), td:nth-child(2) { text-align: left; }
         .summary-row { background: #fdfdfd; font-weight: bold; color: #555; border-top: 2px solid #eee; padding-top: 10px; }
         
-        .status { font-weight: bold; margin-top: 10px; }
+        .status { font-weight: bold; margin-top: 10px; text-align: center; }
         .status.loading { color: #0066cc; }
         .status.error { color: #ff5252; }
     </style>
 </head>
 <body>
 
-    <h2>CAS PDF Data Extractor</h2>
+    <h2 style="text-align: center;">CAS PDF Data Extractor</h2>
     
+    <div class="password-container">
+        <label for="pdf-password"><strong>PDF Password:</strong></label>
+        <input type="password" id="pdf-password" placeholder="(Enter if PDF is locked)" />
+    </div>
+
     <div class="upload-area" onclick="document.getElementById('pdf-file').click()">
         <h3>Select CAS PDF File</h3>
         <p style="color: #666;">Extracts tabular transactions securely in your browser.</p>
@@ -105,7 +115,14 @@
             fileReader.onload = async function() {
                 try {
                     const typedarray = new Uint8Array(this.result);
-                    const loadingTask = pdfjsLib.getDocument({ data: typedarray });
+                    const pdfPassword = document.getElementById('pdf-password').value; // Get password
+                    
+                    // Pass the password to PDF.js
+                    const loadingTask = pdfjsLib.getDocument({ 
+                        data: typedarray,
+                        password: pdfPassword
+                    });
+                    
                     const pdf = await loadingTask.promise;
                     
                     let fullText = '';
@@ -183,7 +200,12 @@
                 } catch (error) {
                     console.error(error);
                     document.getElementById('status-msg').className = 'status error';
-                    document.getElementById('status-msg').innerText = `Error: ${error.message}`;
+                    // User-friendly password error handling
+                    if (error.name === 'PasswordException') {
+                        document.getElementById('status-msg').innerText = 'Error: Incorrect or missing password. Please enter the correct password and try again.';
+                    } else {
+                        document.getElementById('status-msg').innerText = `Error: ${error.message}`;
+                    }
                 }
             };
             fileReader.readAsArrayBuffer(file);
@@ -229,7 +251,6 @@
 
         function parseCASData(fullText, leftColumnText) {
             // --- GLOBAL TEXT SANITIZER ---
-            // Actively destroys "Registrar : CAMS" / "Registrar : KFINTECH" column bleed so ISINs snap back together
             let sanitizedText = fullText.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
             sanitizedText = sanitizedText.replace(/Registrar\s*:/gi, ''); 
             sanitizedText = sanitizedText.replace(/\b(KFINTECH|CAMS)\b/gi, ''); 
@@ -258,7 +279,7 @@
 
                 const isinMatch = line.match(/(.*?)(?:\s*-\s*|\s+)ISIN\s*[:\-]?\s*([A-Z0-9\s]+)/i);
                 
-if (isinMatch) {
+                if (isinMatch) {
                     if (currentFund) {
                         if (!fundHouseMap[currentFund.house]) fundHouseMap[currentFund.house] = {};
                         if (!fundHouseMap[currentFund.house][currentFund.folio]) fundHouseMap[currentFund.house][currentFund.folio] = [];
@@ -268,23 +289,20 @@ if (isinMatch) {
                     // --- NEW: Multi-line Fund Name Repair ---
                     let rawFundName = isinMatch[1].trim();
                     
-                    // If the extracted name is just "(Non-Demat)" or very short, it probably broke across lines
                     if (rawFundName.startsWith("(") || rawFundName.length < 20) {
                         let prevLine = i > 0 ? lines[i - 1].trim() : "";
-                        // Ensure we aren't accidentally grabbing a PAN or Folio line
                         if (!prevLine.includes("PAN:") && !prevLine.includes("Folio No:") && !prevLine.includes("KYC:")) {
-                            rawFundName = prevLine + " " + rawFundName; // Stitch it back together
+                            rawFundName = prevLine + " " + rawFundName; 
                         }
                     }
 
-                    // Clean the newly stitched name
                     let fundName = rawFundName
                         .replace(/.*(?:PAN|KYC).*?OK\s*/gi, '')
                         .replace(/^OK\s*/i, '')
-                        .replace(/^[A-Z0-9\s]+\s*-\s*/, '') // Removes the internal scheme codes like "P8188 -"
+                        .replace(/^[A-Z0-9\s]+\s*-\s*/, '') 
                         .trim();
 
-                    // --- ENHANCED MULTI-LINE ISIN REPAIR (Keep your existing working code here) ---
+                    // --- ENHANCED MULTI-LINE ISIN REPAIR ---
                     let isinStr = isinMatch[2].replace(/[^A-Z0-9]/gi, '');
                     let offset = 1;
                     while (isinStr.length < 12 && (i + offset) < lines.length) {
