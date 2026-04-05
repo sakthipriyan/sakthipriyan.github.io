@@ -322,6 +322,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <thead>
                                     <tr>
                                         <th>{{ selectedReportArea === 'overview' ? 'Category' : 'Asset Class' }}</th>
+                                        <th style="text-align: right;"># Funds</th>
                                         <th style="text-align: right;">Invested Value</th>
                                         <th style="text-align: right;">Market Value</th>
                                         <th style="text-align: right;">XIRR %</th>
@@ -331,6 +332,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <tbody>
                                     <tr v-for="row in summaryData" :key="row.name">
                                         <td><strong>{{ row.name || 'Unclassified' }}</strong></td>
+                                        <td style="text-align: right;">{{ row.fundCount }}</td>
                                         <td style="text-align: right;">₹{{ formatNumber(row.investedValue) }}</td>
                                         <td style="text-align: right;">₹{{ formatNumber(row.value) }}</td>
                                         <td style="text-align: right; font-weight: 600; color: var(--text-primary);">{{ formatXirr(row.xirrInr) }}</td>
@@ -338,6 +340,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     </tr>
                                     <tr class="total-row">
                                         <td><strong>Total Portfolio</strong></td>
+                                        <td style="text-align: right;"><strong>{{ totalPortfolioFundCount }}</strong></td>
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></td>
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></td>
                                         <td style="text-align: right; font-weight: 600; color: var(--text-primary);"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></td>
@@ -427,6 +430,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 summaryData: [],
                 totalPortfolioValue: 0,
                 totalPortfolioInvestedValue: 0,
+                totalPortfolioFundCount: 0,
                 totalPortfolioXirrInr: null,
                 totalPortfolioXirrUsd: null,
                 
@@ -1658,10 +1662,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         totalInvested += investedVal;
 
                         if (!map[rowKey]) {
-                            map[rowKey] = { value: 0, investedValue: 0, cashflowsInr: [] };
+                            map[rowKey] = { value: 0, investedValue: 0, cashflowsInr: [], fundCount: 0 };
                         }
                         map[rowKey].value += val;
                         map[rowKey].investedValue += investedVal;
+                        map[rowKey].fundCount++;
 
                         const valuationDate = f.valuationDate || today;
                         const fundFlows = this.buildFlowsWithTerminal(f.transactionCashflowsInr || [], valuationDate, val);
@@ -1674,6 +1679,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 this.totalPortfolioValue = total;
                 this.totalPortfolioInvestedValue = totalInvested;
+                this.totalPortfolioFundCount = this.funds.filter(f => {
+                    const tag = this.tags[f.id] || {};
+                    const cat = (tag.category && tag.category.trim() !== '') ? tag.category.trim() : 'Uncategorized';
+                    return this.selectedReportArea === 'overview' || cat === this.selectedReportArea;
+                }).length;
                 const normalizedTotalFlows = this.normalizeDatedFlows(totalCashflowsInr);
                 this.totalPortfolioXirrInr = normalizedTotalFlows.length >= 2 ? this.computeXirr(normalizedTotalFlows) : null;
                 this.totalPortfolioXirrUsd = null;
@@ -1688,6 +1698,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             name,
                             value: row.value,
                             investedValue: row.investedValue,
+                            fundCount: row.fundCount,
                             xirrInr: normalizedRowFlows.length >= 2 ? this.computeXirr(normalizedRowFlows) : null,
                             xirrUsd: null,
                             percent: total > 0 ? (row.value / total) * 100 : 0
@@ -1721,7 +1732,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 // Prepare data for ECharts Pie
                 const chartData = this.summaryData.map(item => ({
                     name: item.name,
-                    value: item.value
+                    value: item.value,
+                    fundCount: item.fundCount
                 }));
 
                 const option = {
@@ -1746,7 +1758,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         formatter: function(params) {
                             return `<strong>${params.name}</strong><br/>
                                    ₹${Number(params.value).toLocaleString('en-IN')}<br/>
-                                   ${params.percent}%`;
+                                   ${params.percent}%<br/>
+                                   ${params.data.fundCount} fund${params.data.fundCount !== 1 ? 's' : ''}`;
                         }
                     },
                     legend: {
