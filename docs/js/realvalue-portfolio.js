@@ -184,7 +184,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             <li>
                                 Ask any AI tool (ChatGPT, Gemini, etc.) — copy this prompt:
                                 <div style="display: flex; align-items: stretch; gap: 0; margin-top: 0.4rem; border: 1px solid #d1d5db; border-radius: 4px; overflow: hidden; font-size: 0.9em;">
-                                    <span style="flex: 1; padding: 0.4rem 0.6rem; background: #f9fafb; color: #374151; font-style: italic; line-height: 1.4;">I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js</span>
+                                    <span style="flex: 1; padding: 0.4rem 0.6rem; background: #f9fafb; color: #374151; font-style: italic; line-height: 1.4;">I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/index.html | https://sakthipriyan.com/js/realvalue-portfolio.js</span>
                                     <button type="button" @click="copyAiPrompt" style="flex-shrink: 0; border: none; border-left: 1px solid #d1d5db; background: #f3f4f6; padding: 0.4rem 0.7rem; cursor: pointer; font-size: 0.85em; color: #374151; white-space: nowrap;">{{ promptCopied ? '✅ Copied' : '📋 Copy' }}</button>
                                 </div>
                             </li>
@@ -957,7 +957,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (today < jan8OfCurrentYear) fetchAndStore(currentYear - 1);
             },
             async copyAiPrompt() {
-                const prompt = 'I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js';
+                const prompt = 'I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/index.html | https://sakthipriyan.com/js/realvalue-portfolio.js';
                 try {
                     await navigator.clipboard.writeText(prompt);
                     this.promptCopied = true;
