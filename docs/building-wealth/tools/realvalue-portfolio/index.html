@@ -294,14 +294,19 @@
       </tr>
   </tbody>
 </table>
+<h3 id="cas-parser-limitation">CAS Parser Limitation</h3>
+<blockquote>
+<p>⚠️ Parsing is based on heuristics and has been tested with 3 CAS PDFs so far. Working with friends &amp; family to improve parser quality. Transaction units and total units are validated — any discrepancies will be flagged in the UI. 🙏</p>
+</blockquote>
 <h3 id="exported-transactions-csv-format">Exported Transactions CSV Format</h3>
 <p>The <strong>Download Transactions</strong> button exports one row per normalized flow with these columns:</p>
-<p><code>fundId, fundName, source, folioNo, isin, category, assetClass, currency, flowType, date, amount</code></p>
+<p><code>fundId, fundName, source, folioNo, isin, category, assetClass, flowType, date, usdAmount, inrAmount</code></p>
 <p>Where:</p>
 <ul>
-<li><code>flowType</code> is either <code>TRANSACTION</code> or <code>TERMINAL</code></li>
-<li><code>currency</code> is <code>INR</code> and (for IBKR where available) <code>USD</code></li>
-<li><code>amount</code> uses sign convention suitable for XIRR: investments as negative outflows and terminal/redemption as positive inflows</li>
+<li><code>flowType</code> is either <code>TRANSACTION</code> (historical cashflow) or <code>TERMINAL</code> (current market value)</li>
+<li><code>inrAmount</code> is populated for all CAS funds and IBKR holdings with INR valuation</li>
+<li><code>usdAmount</code> is populated for IBKR holdings where USD transaction data is available</li>
+<li>Use <code>inrAmount</code> for INR XIRR and <code>usdAmount</code> for USD XIRR in Excel/Sheets/Python</li>
 </ul>
 <hr>
 <h2 id="usage-guide">Usage Guide</h2>
@@ -313,10 +318,10 @@
 <li>Request a <strong>Detailed</strong> statement (not Summary).</li>
 <li>Select a period starting from your earliest transaction date.</li>
 <li>Download the CAS PDF (password-protected is fine).</li>
-<li>Use <strong>Upload CAS PDF</strong> in this tool and enter the password if required.</li>
+<li>Use <strong>Import CAS PDF</strong> in this tool and enter the password if required.</li>
 </ol>
 <p style="text-align:center;">
-  <img src="/building-wealth/tools/img/cams.png" alt="CAS upload walkthrough" style="max-width: 640px; width: 75%; height: auto;" />
+  <img src="/building-wealth/tools/img/cams.png" alt="CAS upload walkthrough" style="max-width: 640px; width: 85%; height: auto;" />
 </p>
 <h4 id="1b-ibkr-international-holdings">1b. IBKR (International Holdings)</h4>
 <ol>
@@ -325,7 +330,7 @@
 <li>Use <strong>Upload IBKR CSV</strong> in this tool.</li>
 </ol>
 <p style="text-align:center;">
-  <img src="/building-wealth/tools/img/ibkr.png" alt="IBKR CSV upload walkthrough" style="max-width: 640px; width: 75%; height: auto;" />
+  <img src="/building-wealth/tools/img/ibkr.png" alt="IBKR CSV upload walkthrough" style="max-width: 640px; width: 85%; height: auto;" />
 </p>
 <h3 id="2-ongoing-updates-current-year-incremental-upload">2. Ongoing Updates (Current-Year Incremental Upload)</h3>
 <p>After the first full-history upload, you can upload only the current year or latest period.</p>
@@ -359,9 +364,80 @@
 <li>Your own audit scripts</li>
 </ul>
 <hr>
-<blockquote>
-<p><strong>Privacy &amp; Data Source Note</strong>: Portfolio file parsing and core computation run in your browser, and portfolio documents are not uploaded by this tool. For IBKR INR conversion, historical SBI reference rates are read from JSON endpoints published at <a href="https://data.sakthipriyan.com/">data.sakthipriyan.com</a>. You can verify all network calls in your browser dev tools.</p>
-</blockquote>
+<h2 id="privacy--trust">Privacy &amp; Trust</h2>
+<p>Your financial data never leaves your device.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Aspect</th>
+          <th>Detail</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>CAS PDF parsing</strong></td>
+          <td>Runs entirely in your browser using <a href="https://mozilla.github.io/pdf.js/">PDF.js</a> — no file is ever uploaded</td>
+      </tr>
+      <tr>
+          <td><strong>IBKR CSV parsing</strong></td>
+          <td>Processed locally in your browser</td>
+      </tr>
+      <tr>
+          <td><strong>Tags &amp; settings</strong></td>
+          <td>Saved only in your browser&rsquo;s local storage</td>
+      </tr>
+      <tr>
+          <td><strong>IBKR FX conversion</strong></td>
+          <td>SBI historical TT Buy rates pre-fetched and cached locally on page load from <a href="https://data.sakthipriyan.com/">data.sakthipriyan.com</a>; no network needed after initial load</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="how-it-works">How It Works</h3>
+<pre><code class="language-dot">digraph RealValueComplete {
+    rankdir=TB;
+    node [shape=box, style=filled, fontname=&quot;Arial&quot;, fontsize=10];
+    compound=true;
+
+    subgraph cluster_github {
+        label = &quot;GitHub Project Repositories&quot;;
+        style = filled; color = &quot;#f5f5f5&quot;;
+        RepoApp [label=&quot;sakthipriyan.github.io\n(Source: /docs)&quot;, shape=folder, fillcolor=&quot;#cfd8dc&quot;];
+        RepoData [label=&quot;financial-data\n(Source: /docs)&quot;, shape=folder, fillcolor=&quot;#cfd8dc&quot;];
+    }
+
+    subgraph cluster_hosting {
+        label = &quot;Static Hosting (Inbound Assets Only)&quot;;
+        style = dashed; color = &quot;#1976d2&quot;;
+        SiteApp [label=&quot;sakthipriyan.com\n(App Logic)&quot;, fillcolor=&quot;#e1f5fe&quot;];
+        SiteData [label=&quot;data.sakthipriyan.com\n(USD &amp; CPI JSON)&quot;, fillcolor=&quot;#e1f5fe&quot;];
+    }
+
+    subgraph cluster_browser {
+        label = &quot;User Browser Environment (Local Processing Only)&quot;;
+        labeljust = &quot;l&quot;;
+        style = bold; color = &quot;#2e7d32&quot;; fontcolor = &quot;#2e7d32&quot;; bgcolor = &quot;#f1f8e9&quot;;
+        Engine [label=&quot;RealValue JS Engine\n(In-Memory Calc)&quot;, fillcolor=&quot;#c8e6c9&quot;];
+        Storage [label=&quot;Browser LocalStorage\n(Saved Tags/State)&quot;, fillcolor=&quot;#fff9c4&quot;, shape=cylinder];
+        Parser [label=&quot;In-Browser Parser\n(Local File Access)&quot;, fillcolor=&quot;#c8e6c9&quot;];
+        Parser -&gt; Engine [label=&quot;Raw Data&quot;];
+        Engine -&gt; Storage [label=&quot;Save Tags&quot;, dir=both];
+    }
+
+    UserFiles [label=&quot;Local Portfolio Files\n(CAS PDF / IBKR CSV)&quot;, fillcolor=&quot;#ffe0b2&quot;, shape=note];
+    LocalCSV [label=&quot;Downloaded CSV\n(Normalized Transactions)&quot;, fillcolor=&quot;#d1c4e9&quot;, shape=note];
+
+    RepoApp -&gt; SiteApp [style=dotted];
+    RepoData -&gt; SiteData [style=dotted];
+
+    SiteApp -&gt; Engine [label=&quot;1. Loads HTML/JS&quot;];
+    SiteData -&gt; Engine [label=&quot;2. Fetches Ref Rates&quot;, color=&quot;#0288d1&quot;];
+    UserFiles -&gt; Parser [label=&quot;3. Reads Local Files&quot;, color=&quot;#e65100&quot;, penwidth=1.5];
+    Engine -&gt; LocalCSV [label=&quot;4. Exports CSV&quot;, color=&quot;#7b1fa2&quot;, penwidth=1.5];
+}
+</code></pre>
+<p>This tool uses <strong>PDF.js</strong> to parse the CAS file directly in your browser. No server is involved in reading or processing your document.</p>
+<h3 id="works-offline">Works Offline</h3>
+<p>SBI FX rates are pre-cached in your browser on page load. After that, you can disconnect the internet and all CAS and IBKR analysis runs fully offline.</p>
 
     </div>
 
@@ -378,20 +454,6 @@
         <a href="https://sakthipriyan.com/building-wealth/tags/portfolio-management/" class="tag-link">Portfolio Management</a>
         
         <a href="https://sakthipriyan.com/building-wealth/tags/asset-allocation/" class="tag-link">Asset Allocation</a>
-    </div><div class="content-comments">
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = 'sakthipriyan';
-            (function () {
-                var dsq = document.createElement('script');
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-                Disqus.</a></noscript>
     </div>
 </footer>
 </article>
@@ -405,6 +467,41 @@
         
         
         
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
+                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                    console.log('[DEBUG] Rendering DOT block');
+
+                    const viz = new Viz();
+                    viz.renderSVGElement(dotCode)
+                        .then(svg => {
+                            
+                            svg.removeAttribute('width');
+                            svg.removeAttribute('height');
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                            
+                            const container = document.createElement('div');
+                            container.className = 'graphviz-diagram';
+                            container.appendChild(svg);
+
+                            
+                            const preEl = codeEl.parentNode;
+                            preEl.parentNode.replaceChild(container, preEl);
+
+                            console.log('[DEBUG] Diagram rendered');
+                        })
+                        .catch(err => {
+                            console.error('[DEBUG] Viz.js error:', err);
+                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                        });
+                });
+            });
+        </script>
         
         
         
