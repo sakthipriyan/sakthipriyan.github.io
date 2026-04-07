@@ -32,7 +32,8 @@ Displays tags and Disqus comments
     </div>
     {{- end }}
 
-    {{- /* Disqus Comments Section */ -}}
+    {{- /* Disqus Comments Section (not shown on tools pages) */ -}}
+    {{- if ne .Type "tools" }}
     <div class="content-comments">
         <div id="disqus_thread"></div>
         <script type="text/javascript">
@@ -48,4 +49,5 @@ Displays tags and Disqus comments
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
                 Disqus.</a></noscript>
     </div>
+    {{- end }}
 </footer>
