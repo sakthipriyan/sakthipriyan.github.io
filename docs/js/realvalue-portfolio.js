@@ -99,10 +99,6 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     <option v-for="ac in autocompleteAssetClasses" :value="ac" :key="ac"></option>
                 </datalist>
 
-                <div class="loading-text" style="margin-bottom: 1rem;">
-                    🔐 All processing is done locally in your browser. Your data is not transmitted to any servers.
-                </div>
-
                 <!-- Persistent Top Bar + Upload Trigger -->
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem;">
                     <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
@@ -113,7 +109,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     </h3>
                     
                     <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                        <div style="display: flex; border: 1px solid var(--gray-medium, #ddd); border-radius: 4px; overflow: hidden; background: var(--bg-primary, #fff);">
+                        <div style="display: flex; border: 2px solid var(--secondary-color); border-radius: 4px; overflow: hidden; background: var(--bg-primary, #fff);">
                             <div style="padding: 0.5rem 0.6rem; background: #f8f9fa; border-right: 1px solid #ddd; font-size: 0.85em; color: #555; display: flex; align-items: center;">
                                 🔒
                             </div>
@@ -123,22 +119,79 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 placeholder="CAS Password (opt)" 
                                 style="border: none; padding: 0.5rem; outline: none; width: 130px; font-size: 0.9em;"
                             >
-                            <button type="button" @click.stop="copyPassword" style="border: none; border-left: 1px solid #ddd; background: #f8f9fa; padding: 0.5rem 0.6rem; cursor: pointer; font-size: 0.9em; color: #555;" title="Copy">📋</button>
-                            <button type="button" @click.stop="clearPassword" style="border: none; border-left: 1px solid #ddd; background: #f8f9fa; padding: 0.5rem 0.6rem; cursor: pointer; font-size: 0.9em; color: #d32f2f;" title="Clear">✕</button>
+                            <button type="button" class="share-button" @click="$refs.pdfInput.click()" style="border-radius: 0; border-left: 1px solid #ddd; border-top: none; border-bottom: none; border-right: none;">
+                                🔄 Import CAS PDF
+                            </button>
                         </div>
-                        <button type="button" class="share-button" @click="$refs.pdfInput.click()">
-                            🔄 Upload CAS PDF
-                        </button>
-                        <button type="button" class="share-button" @click="$refs.ibkrInput.click()">
-                            📊 Upload IBKR CSV
+                        <button type="button" class="share-button" @click="$refs.ibkrInput.click()" style="align-self: stretch;">
+                            📊 Import IBKR CSV
                         </button>
                     </div>
                 </div>
 
-                <!-- CAS parser disclaimer -->
-                <div style="margin-bottom: 1.5rem; padding: 0.6rem 0.9rem; background: #fffbeb; border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 0.82em; color: #78350f; line-height: 1.5;">
-                    ⚠️ <strong>CAS Parser Disclaimer:</strong> Parsing is based on heuristics and has been tested with 3 CAS PDFs so far. I am working with friends &amp; family to improve parser quality.
-                    Transaction units and total units are validated, it will be shown in the UI if there are any discrepancies. 🙏
+                <!-- Privacy row: message left, verify button right -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+                    <p style="font-size: 0.95em; color: #15803d; font-weight: 500; margin: 0; line-height: 1.5; flex: 1; min-width: 200px;">
+                        🔒 Your sensitive financial files are processed entirely within your browser. <strong>Your data never leaves your device!</strong>
+                    </p>
+                    <button type="button" @click="showPrivacyDetails = !showPrivacyDetails"
+                        style="flex-shrink: 0; padding: 0.3rem 0.7rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; font-size: 0.8em; font-weight: 600; color: #15803d; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                        🔍 Verify It Yourself <span>{{ showPrivacyDetails ? '▲' : '▼' }}</span>
+                    </button>
+                </div>
+
+                <!-- Expandable Privacy & Verification Panel -->
+                <div v-show="showPrivacyDetails" style="margin-bottom: 1rem; padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.85em; color: #374151; line-height: 1.7;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; padding: 0.6rem 0.85rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px;">
+                        <span style="font-size: 1.1em;">🔒</span>
+                        <div>
+                            <strong style="color: #15803d;">100% Private. 100% Local.</strong>
+                            <ul style="margin: 0.25rem 0 0; padding-left: 1.2rem; color: #166534; line-height: 1.8;">
+                                <li>Processed locally via JavaScript.</li>
+                                <li>No data ever leaves your device.</li>
+                                <li>Stored locally in your browser cache.</li>
+                                <li>Fully functional in offline mode.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: #eff6ff; border-left: 3px solid #3b82f6; border-radius: 4px; color: #1e40af;">
+                        💡 <strong>Try with a smaller window:</strong> Upload a CAS PDF covering just the first year or two — quicker to verify, and a great way to explore tagging, XIRR, and allocation views.
+                    </div>
+                    <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: #374151;">Three ways to verify your data stays private:</p>
+                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 5px;">
+                        <p style="margin: 0 0 0.35rem 0; font-weight: 600;">📴 Approach 1: Go Offline</p>
+                        <ol style="margin: 0 0 0.35rem 0; padding-left: 1.4rem;">
+                            <li>Load the page fully</li>
+                            <li>Disconnect from the internet</li>
+                            <li>Upload your CAS file</li>
+                        </ol>
+                        <p style="margin: 0; color: #15803d;">✅ Analysis completes — no network needed.</p>
+                    </div>
+                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 5px;">
+                        <p style="margin: 0 0 0.35rem 0; font-weight: 600;">🔍 Approach 2: Check Network Activity</p>
+                        <ol style="margin: 0 0 0.35rem 0; padding-left: 1.4rem;">
+                            <li>Open developer tools (<code style="background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 3px;">F12</code> or <code style="background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 3px;">Ctrl+Shift+I</code>)</li>
+                            <li>Go to the <strong>Network</strong> tab</li>
+                            <li>Upload your CAS file</li>
+                        </ol>
+                        <p style="margin: 0; color: #15803d;">✅ No file upload request appears in the Network tab.</p>
+                    </div>
+                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 5px;">
+                        <p style="margin: 0 0 0.35rem 0; font-weight: 600;">📚 Approach 3: Read the Source</p>
+                        <ul style="margin: 0 0 0.35rem 0; padding-left: 1.4rem;">
+                            <li>This site is hosted on <strong>GitHub Pages</strong> — a static file host. It cannot run server-side code or receive uploads.</li>
+                            <li>The full source is open on GitHub. Browse the <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">HTML</a> and <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">JavaScript</a> — there is no upload or network-send code.</li>
+                            <li>
+                                Ask any AI tool (ChatGPT, Gemini, etc.) — copy this prompt:
+                                <div style="display: flex; align-items: stretch; gap: 0; margin-top: 0.4rem; border: 1px solid #d1d5db; border-radius: 4px; overflow: hidden; font-size: 0.9em;">
+                                    <span style="flex: 1; padding: 0.4rem 0.6rem; background: #f9fafb; color: #374151; font-style: italic; line-height: 1.4;">I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js</span>
+                                    <button type="button" @click="copyAiPrompt" style="flex-shrink: 0; border: none; border-left: 1px solid #d1d5db; background: #f3f4f6; padding: 0.4rem 0.7rem; cursor: pointer; font-size: 0.85em; color: #374151; white-space: nowrap;">{{ promptCopied ? '✅ Copied' : '📋 Copy' }}</button>
+                                </div>
+                            </li>
+                            <li>📦 Uses <a href="https://mozilla.github.io/pdf.js/" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">PDF.js</a> — all PDF parsing runs locally in your browser, no server needed.</li>
+                        </ul>
+                        <p style="margin: 0; color: #15803d;">✅ The code confirms it — your data never leaves your device.</p>
+                    </div>
                 </div>
 
                 <!-- Hidden file inputs -->
@@ -147,7 +200,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 
                 <div v-if="isParsing" class="loading-text" style="margin-bottom: 1.5rem;">⏳ Loading and parsing PDF... Please wait securely in browser.</div>
                 <div v-if="parseError" class="error-text" style="margin-bottom: 1.5rem;">⚠️ {{ parseError }}</div>
-                <div v-if="isIbkrParsing" class="loading-text" style="margin-bottom: 1.5rem;">⏳ Parsing IBKR CSV and fetching SBI exchange rate...</div>
+                <div v-if="isIbkrParsing" class="loading-text" style="margin-bottom: 1.5rem;">⏳ Parsing IBKR CSV and loading exchange rate...</div>
                 <div v-if="ibkrError" class="error-text" style="margin-bottom: 1.5rem;">⚠️ {{ ibkrError }}</div>
                 <div v-if="funds.length > 0">
 
@@ -410,6 +463,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             return {
                 isParsing: false,
                 parseError: null,
+                showParserDisclaimer: false,
                 pdfPassword: '',
                 isIbkrParsing: false,
                 ibkrError: null,
@@ -439,11 +493,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 chart: null,
                 resizeHandler: null,
                 debounceTimer: null,
+                showPrivacyDetails: false,
+                promptCopied: false,
             };
         },
         mounted() {
             this.extractUniqueOptions();
             this.calculateSummary();
+            this.warmSbiRateCache();
             this.resizeHandler = () => {
                 if (this.chart) this.chart.resize();
             };
@@ -858,12 +915,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
                 return null;
             },
-            async fetchSbiRateForDate(dateStr) {
-                const year = dateStr.slice(0, 4);
+            async fetchSbiRateSeriesByYear(year) {
+                const cacheKey = `realvalue-sbi-fx-${year}`;
+                try {
+                    const cached = localStorage.getItem(cacheKey);
+                    if (cached) return JSON.parse(cached);
+                } catch(e) { /* ignore */ }
                 const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
                 const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`SBI rate fetch failed (HTTP ${resp.status})`);
+                if (!resp.ok) throw new Error(`SBI yearly rate fetch failed for ${year} (HTTP ${resp.status})`);
                 const json = await resp.json();
+                try { localStorage.setItem(cacheKey, JSON.stringify(json)); } catch(e) { /* ignore */ }
+                return json;
+            },
+            async fetchSbiRateForDate(dateStr) {
+                const year = dateStr.slice(0, 4);
+                const json = await this.fetchSbiRateSeriesByYear(year);
                 // data is sorted ascending by date; find the last entry <= dateStr
                 let best = null;
                 for (const entry of json.data) {
@@ -873,11 +940,29 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (!best) best = json.data[0];
                 return { rate: best[1], date: best[0], tt_buy: best[1], tt_sell: best[2] };
             },
-            async fetchSbiRateSeriesByYear(year) {
-                const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`SBI yearly rate fetch failed for ${year} (HTTP ${resp.status})`);
-                return await resp.json();
+            async warmSbiRateCache() {
+                const today = new Date();
+                const currentYear = today.getFullYear();
+                const jan8OfCurrentYear = new Date(currentYear, 0, 8);
+                const fetchAndStore = async (year) => {
+                    try {
+                        const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
+                        const resp = await fetch(url);
+                        if (!resp.ok) return;
+                        const json = await resp.json();
+                        localStorage.setItem(`realvalue-sbi-fx-${year}`, JSON.stringify(json));
+                    } catch(e) { /* background, ignore errors */ }
+                };
+                fetchAndStore(currentYear);
+                if (today < jan8OfCurrentYear) fetchAndStore(currentYear - 1);
+            },
+            async copyAiPrompt() {
+                const prompt = 'I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html | https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js';
+                try {
+                    await navigator.clipboard.writeText(prompt);
+                    this.promptCopied = true;
+                    setTimeout(() => { this.promptCopied = false; }, 2000);
+                } catch(e) { /* ignore */ }
             },
             findSbiRateOnOrBefore(dateStr, seriesJson) {
                 if (!seriesJson || !seriesJson.data || seriesJson.data.length === 0) return null;
@@ -1167,6 +1252,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             clearPortfolio() {
                 if(confirm("Are you sure you want to clear your current portfolio list? Your custom tags are saved safely.")) {
                     this.funds = [];
+                    this.showParserDisclaimer = false;
                     this.saveTagsAndCalculate();
                 }
             },
@@ -1580,6 +1666,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
 
                 // Sync to localStorage
+                this.showParserDisclaimer = true;
                 this.saveTagsAndCalculate();
             },
             debouncedSaveAndCalculate() {

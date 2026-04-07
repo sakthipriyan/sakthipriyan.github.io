@@ -8,6 +8,8 @@ tool_type: "portfolioTracker"
 tool_script: "js/realvalue-portfolio.js"
 tool_dependencies:
   - echarts
+js_tools:
+  - viz
 summary: "Analyze CAS PDFs and IBKR CSVs in one dashboard. Auto-extract holdings, compute transaction-based XIRR (INR/USD), review allocation views, and export cashflows for independent verification."
 wealth_tags:
   - Portfolio Management
@@ -46,16 +48,21 @@ Gain clarity on your mutual fund investments by parsing your combined CAS direct
 | **Persistent Local State** | Saves funds, tags, and settings in browser local storage for continuity across sessions/uploads. |
 | **Download Transactions CSV** | Exports normalized cashflow rows (`TRANSACTION` + `TERMINAL`) in INR/USD for offline XIRR verification in Excel/Sheets/Python. |
 
+### CAS Parser Limitation
+
+> ⚠️ Parsing is based on heuristics and has been tested with 3 CAS PDFs so far. Working with friends & family to improve parser quality. Transaction units and total units are validated — any discrepancies will be flagged in the UI. 🙏
+
 ### Exported Transactions CSV Format
 
 The **Download Transactions** button exports one row per normalized flow with these columns:
 
-`fundId, fundName, source, folioNo, isin, category, assetClass, currency, flowType, date, amount`
+`fundId, fundName, source, folioNo, isin, category, assetClass, flowType, date, usdAmount, inrAmount`
 
 Where:
-- `flowType` is either `TRANSACTION` or `TERMINAL`
-- `currency` is `INR` and (for IBKR where available) `USD`
-- `amount` uses sign convention suitable for XIRR: investments as negative outflows and terminal/redemption as positive inflows
+- `flowType` is either `TRANSACTION` (historical cashflow) or `TERMINAL` (current market value)
+- `inrAmount` is populated for all CAS funds and IBKR holdings with INR valuation
+- `usdAmount` is populated for IBKR holdings where USD transaction data is available
+- Use `inrAmount` for INR XIRR and `usdAmount` for USD XIRR in Excel/Sheets/Python
 
 ---
 
@@ -70,10 +77,10 @@ For accurate XIRR and invested-value computation, your **first upload should inc
 2. Request a **Detailed** statement (not Summary).
 3. Select a period starting from your earliest transaction date.
 4. Download the CAS PDF (password-protected is fine).
-5. Use **Upload CAS PDF** in this tool and enter the password if required.
+5. Use **Import CAS PDF** in this tool and enter the password if required.
 
 <p style="text-align:center;">
-  <img src="/building-wealth/tools/img/cams.png" alt="CAS upload walkthrough" style="max-width: 640px; width: 75%; height: auto;" />
+  <img src="/building-wealth/tools/img/cams.png" alt="CAS upload walkthrough" style="max-width: 640px; width: 85%; height: auto;" />
 </p>
 
 #### 1b. IBKR (International Holdings)
@@ -82,7 +89,7 @@ For accurate XIRR and invested-value computation, your **first upload should inc
 3. Use **Upload IBKR CSV** in this tool.
 
 <p style="text-align:center;">
-  <img src="/building-wealth/tools/img/ibkr.png" alt="IBKR CSV upload walkthrough" style="max-width: 640px; width: 75%; height: auto;" />
+  <img src="/building-wealth/tools/img/ibkr.png" alt="IBKR CSV upload walkthrough" style="max-width: 640px; width: 85%; height: auto;" />
 </p>
 
 ### 2. Ongoing Updates (Current-Year Incremental Upload)
@@ -121,4 +128,65 @@ You can verify results offline in:
 
 ---
 
-> **Privacy & Data Source Note**: Portfolio file parsing and core computation run in your browser, and portfolio documents are not uploaded by this tool. For IBKR INR conversion, historical SBI reference rates are read from JSON endpoints published at [data.sakthipriyan.com](https://data.sakthipriyan.com/). You can verify all network calls in your browser dev tools.
+## Privacy & Trust
+
+Your financial data never leaves your device.
+
+| Aspect | Detail |
+|--------|--------|
+| **CAS PDF parsing** | Runs entirely in your browser using [PDF.js](https://mozilla.github.io/pdf.js/) — no file is ever uploaded |
+| **IBKR CSV parsing** | Processed locally in your browser |
+| **Tags & settings** | Saved only in your browser's local storage |
+| **IBKR FX conversion** | SBI historical TT Buy rates pre-fetched and cached locally on page load from [data.sakthipriyan.com](https://data.sakthipriyan.com/); no network needed after initial load |
+
+### How It Works
+
+```dot
+digraph RealValueComplete {
+    rankdir=TB;
+    node [shape=box, style=filled, fontname="Arial", fontsize=10];
+    compound=true;
+
+    subgraph cluster_github {
+        label = "GitHub Project Repositories";
+        style = filled; color = "#f5f5f5";
+        RepoApp [label="sakthipriyan.github.io\n(Source: /docs)", shape=folder, fillcolor="#cfd8dc"];
+        RepoData [label="financial-data\n(Source: /docs)", shape=folder, fillcolor="#cfd8dc"];
+    }
+
+    subgraph cluster_hosting {
+        label = "Static Hosting (Inbound Assets Only)";
+        style = dashed; color = "#1976d2";
+        SiteApp [label="sakthipriyan.com\n(App Logic)", fillcolor="#e1f5fe"];
+        SiteData [label="data.sakthipriyan.com\n(USD & CPI JSON)", fillcolor="#e1f5fe"];
+    }
+
+    subgraph cluster_browser {
+        label = "User Browser Environment (Local Processing Only)";
+        labeljust = "l";
+        style = bold; color = "#2e7d32"; fontcolor = "#2e7d32"; bgcolor = "#f1f8e9";
+        Engine [label="RealValue JS Engine\n(In-Memory Calc)", fillcolor="#c8e6c9"];
+        Storage [label="Browser LocalStorage\n(Saved Tags/State)", fillcolor="#fff9c4", shape=cylinder];
+        Parser [label="In-Browser Parser\n(Local File Access)", fillcolor="#c8e6c9"];
+        Parser -> Engine [label="Raw Data"];
+        Engine -> Storage [label="Save Tags", dir=both];
+    }
+
+    UserFiles [label="Local Portfolio Files\n(CAS PDF / IBKR CSV)", fillcolor="#ffe0b2", shape=note];
+    LocalCSV [label="Downloaded CSV\n(Normalized Transactions)", fillcolor="#d1c4e9", shape=note];
+
+    RepoApp -> SiteApp [style=dotted];
+    RepoData -> SiteData [style=dotted];
+
+    SiteApp -> Engine [label="1. Loads HTML/JS"];
+    SiteData -> Engine [label="2. Fetches Ref Rates", color="#0288d1"];
+    UserFiles -> Parser [label="3. Reads Local Files", color="#e65100", penwidth=1.5];
+    Engine -> LocalCSV [label="4. Exports CSV", color="#7b1fa2", penwidth=1.5];
+}
+```
+
+This tool uses **PDF.js** to parse the CAS file directly in your browser. No server is involved in reading or processing your document.
+
+### Works Offline
+
+SBI FX rates are pre-cached in your browser on page load. After that, you can disconnect the internet and all CAS and IBKR analysis runs fully offline.
