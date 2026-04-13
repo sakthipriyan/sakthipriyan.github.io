@@ -228,62 +228,119 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                     <!-- TAB 1: OVERVIEW -->
                     <div v-show="activeTab === 'overview'">
-                        <!-- Investor Overview Cards -->
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem;" v-if="investorCards.length > 0">
-                            <div v-for="inv in investorCards" :key="inv.name" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                                <h3 style="margin: 0 0 1rem 0; color: var(--primary-color);">👤 {{ inv.name }}</h3>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: var(--text-secondary);">Market Value</span>
-                                    <strong style="font-size: 1.1em;">₹{{ formatNumber(inv.marketValue) }}</strong>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: var(--text-secondary);">Invested Value</span>
-                                    <span>₹{{ formatNumber(inv.investedValue) }}</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid #eee;">
-                                    <span style="color: var(--text-secondary);">Absolute Return</span>
-                                    <strong :style="{ color: inv.marketValue >= inv.investedValue ? 'var(--state-success, #4CAF50)' : 'var(--state-danger, #ff5252)' }">
-                                        {{ inv.marketValue >= inv.investedValue ? '+' : '' }}₹{{ formatNumber(inv.marketValue - inv.investedValue) }}
-                                    </strong>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Goal Progress Cards -->
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin-bottom: 2rem;" v-if="goals.length > 0">
-                            <div v-for="goal in goals" :key="goal.id" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                                <h3 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">🎯 {{ goal.name }}</h3>
-                                <p v-if="goal.description" style="margin: 0 0 1rem 0; color: var(--text-secondary); font-size: 0.9em;">{{ goal.description }}</p>
-                                
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: var(--text-secondary);">Current Value</span>
-                                    <strong style="font-size: 1.2em;">₹{{ formatNumber(goalCurrentValues[goal.id] || 0) }}</strong>
-                                </div>
-                                
-                                <template v-if="getGoalTargetAmount(goal) > 0">
+                        <!-- Goal Cards (above Investors) -->
+                        <div v-if="goals.length > 0" style="margin-bottom: 2rem;">
+                            <h3 style="margin: 0 0 1rem 0; color: var(--primary-color); font-size: 1.1em; letter-spacing: 0.02em;">
+                                🎯 Goal{{ goals.length > 1 ? 's' : '' }}
+                            </h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+
+                                <!-- Combined Goals card (only when multiple goals) -->
+                                <div v-if="goals.length > 1" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                    <h3 style="margin: 0 0 0.25rem 0; color: var(--primary-color);">✨ Combined Goals</h3>
+                                    <p style="margin: 0 0 0.75rem 0; color: var(--text-secondary); font-size: 0.85em;">Sum of all goal-assigned funds</p>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Target Amount</span>
-                                        <span>₹{{ formatNumber(getGoalTargetAmount(goal)) }}</span>
+                                        <span style="color: var(--text-secondary);">Total Value</span>
+                                        <strong style="font-size: 1.2em;">₹{{ formatNumber(Object.values(goalCurrentValues).reduce((s, v) => s + v, 0)) }}</strong>
                                     </div>
-                                    <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-top: 0.5rem;">
-                                        <div :style="{ width: Math.min(100, ((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) + '%', backgroundColor: 'var(--state-success, #4CAF50)', height: '100%', borderRadius: '4px' }"></div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <span style="color: var(--text-secondary); font-size: 0.85em;">Next Milestone</span>
+                                        <span style="font-size: 0.85em;">₹{{ formatNumber(calculateNextMilestone(Object.values(goalCurrentValues).reduce((s, v) => s + v, 0), 'INR')) }}</span>
                                     </div>
-                                    <div style="text-align: right; font-size: 0.8em; color: var(--text-secondary); margin-top: 0.25rem;">
-                                        {{ formatPercent(((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) }} Completed
+                                    <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem;">
+                                        <div :style="{ width: Math.min(100, (Object.values(goalCurrentValues).reduce((s,v) => s+v, 0) / calculateNextMilestone(Object.values(goalCurrentValues).reduce((s,v) => s+v, 0), 'INR')) * 100) + '%', backgroundColor: '#3b82f6', height: '100%', borderRadius: '4px' }"></div>
                                     </div>
-                                </template>
-                                <template v-else>
+                                    <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary);">
+                                        {{ formatPercent((Object.values(goalCurrentValues).reduce((s,v) => s+v, 0) / calculateNextMilestone(Object.values(goalCurrentValues).reduce((s,v) => s+v, 0), 'INR')) * 100) }} to milestone
+                                    </div>
+                                </div>
+
+                                <!-- Individual goal cards -->
+                                <div v-for="goal in goals" :key="goal.id" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                    <h3 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">🎯 {{ goal.name }}</h3>
+                                    <p v-if="goal.description" style="margin: 0 0 0.75rem 0; color: var(--text-secondary); font-size: 0.9em;">{{ goal.description }}</p>
+
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Next Milestone</span>
-                                        <span>₹{{ formatNumber(calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) }}</span>
+                                        <span style="color: var(--text-secondary);">Current Value</span>
+                                        <strong style="font-size: 1.2em;">₹{{ formatNumber(goalCurrentValues[goal.id] || 0) }}</strong>
                                     </div>
-                                    <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-top: 0.5rem;">
-                                        <div :style="{ width: Math.min(100, ((goalCurrentValues[goal.id] || 0) / calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) * 100) + '%', backgroundColor: '#3b82f6', height: '100%', borderRadius: '4px' }"></div>
-                                    </div>
-                                </template>
+
+                                    <!-- Has target amount → amount progress bar -->
+                                    <template v-if="getGoalTargetAmount(goal) > 0">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                            <span style="color: var(--text-secondary); font-size: 0.85em;">Target Amount</span>
+                                            <span style="font-size: 0.85em;">₹{{ formatNumber(getGoalTargetAmount(goal)) }}</span>
+                                        </div>
+                                        <!-- Two-segment bar: green up to target, amber for overflow -->
+                                        <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem; display: flex; overflow: hidden;">
+                                            <div :style="{ width: ((goalCurrentValues[goal.id] || 0) >= getGoalTargetAmount(goal) ? (getGoalTargetAmount(goal) / (goalCurrentValues[goal.id] || 1)) * 100 : ((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) + '%', backgroundColor: '#4CAF50', height: '100%', flexShrink: 0 }"></div>
+                                            <div v-if="(goalCurrentValues[goal.id] || 0) > getGoalTargetAmount(goal)" :style="{ width: (((goalCurrentValues[goal.id] || 0) - getGoalTargetAmount(goal)) / (goalCurrentValues[goal.id] || 1)) * 100 + '%', backgroundColor: '#f59e0b', height: '100%', flexShrink: 0 }"></div>
+                                        </div>
+                                        <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                            {{ formatPercent(((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) }} of target
+                                        </div>
+                                    </template>
+
+                                    <!-- No target amount AND no target date → next milestone bar -->
+                                    <template v-else-if="!goal.targetDate">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                            <span style="color: var(--text-secondary); font-size: 0.85em;">Next Milestone</span>
+                                            <span style="font-size: 0.85em;">₹{{ formatNumber(calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) }}</span>
+                                        </div>
+                                        <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem;">
+                                            <div :style="{ width: Math.min(100, ((goalCurrentValues[goal.id] || 0) / calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) * 100) + '%', backgroundColor: '#3b82f6', height: '100%', borderRadius: '4px' }"></div>
+                                        </div>
+                                        <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                            {{ formatPercent(((goalCurrentValues[goal.id] || 0) / calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) * 100) }} to milestone
+                                        </div>
+                                    </template>
+
+                                    <!-- Target date time progress bar -->
+                                    <template v-if="goal.targetDate">
+                                        <div style="margin-top: 0.25rem;">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                                <span style="color: var(--text-secondary); font-size: 0.85em;">⏱ Time Progress</span>
+                                                <span style="font-size: 0.85em; color: var(--text-secondary);">Target: {{ formatNavDate(goal.targetDate) }}</span>
+                                            </div>
+                                            <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem; display: flex; overflow: hidden;">
+                                                <div :style="{ width: (getGoalTimePercent(goal) >= 100 ? 85 : getGoalTimePercent(goal)) + '%', backgroundColor: '#4CAF50', height: '100%', flexShrink: 0 }"></div>
+                                                <div v-if="getGoalTimePercent(goal) >= 100" style="width: 15%; background-color: #f59e0b; height: 100%; flex-shrink: 0;"></div>
+                                            </div>
+                                            <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary);">
+                                                {{ formatPercent(getGoalTimePercent(goal)) }} elapsed
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+
                             </div>
                         </div>
 
+                        <!-- Investor Cards -->
+                        <div v-if="investorCards.length > 0" style="margin-bottom: 2rem;">
+                            <h3 style="margin: 0 0 1rem 0; color: var(--primary-color); font-size: 1.1em; letter-spacing: 0.02em;">
+                                👤 Investor{{ investorCards.length > 1 ? 's' : '' }}
+                            </h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                                <div v-for="inv in investorCards" :key="inv.name" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                    <h3 style="margin: 0 0 1rem 0; color: var(--primary-color);">👤 {{ inv.name }}</h3>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="color: var(--text-secondary);">Market Value</span>
+                                        <strong style="font-size: 1.1em;">₹{{ formatNumber(inv.marketValue) }}</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="color: var(--text-secondary);">Invested Value</span>
+                                        <span>₹{{ formatNumber(inv.investedValue) }}</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid #eee;">
+                                        <span style="color: var(--text-secondary);">Absolute Return</span>
+                                        <strong :style="{ color: inv.marketValue >= inv.investedValue ? 'var(--state-success, #4CAF50)' : 'var(--state-danger, #ff5252)' }">
+                                            {{ inv.marketValue >= inv.investedValue ? '+' : '' }}₹{{ formatNumber(inv.marketValue - inv.investedValue) }}
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 <!-- 📈 Summary Report -->
                     <div class="investment-plan" v-if="summaryData.length > 0">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
@@ -335,7 +392,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <th style="text-align: right;">Invested Value</th>
                                         <th style="text-align: right;">Market Value</th>
                                         <th style="text-align: right;">XIRR %</th>
-                                        <th style="text-align: right;">Allocation %</th>
+                                        <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;">Target %</th>
+                                        <th v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;">Allocation %</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -345,7 +403,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <td style="text-align: right;">₹{{ formatNumber(row.investedValue) }}</td>
                                         <td style="text-align: right;">₹{{ formatNumber(row.value) }}</td>
                                         <td style="text-align: right; font-weight: 600; color: var(--text-primary);">{{ formatXirr(row.xirrInr) }}</td>
-                                        <td style="text-align: right;">{{ formatPercent(row.percent) }}</td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--text-secondary);">{{ getTargetPercent(row.name) !== null ? formatPercent(getTargetPercent(row.name)) : '—' }}</td>
+                                        <td v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;">{{ formatPercent(row.percent) }}</td>
                                     </tr>
                                     <tr class="total-row">
                                         <td><strong>Total Portfolio</strong></td>
@@ -353,7 +412,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></td>
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></td>
                                         <td style="text-align: right; font-weight: 600; color: var(--text-primary);"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></td>
-                                        <td style="text-align: right;"><strong>100.00%</strong></td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong>100.00%</strong></td>
+                                        <td v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;"><strong>100.00%</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -507,7 +567,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <th style="width: 13%; text-align: right;">Invested Value</th>
                                         <th style="width: 13%; text-align: right;">Market Value</th>
                                         <th style="width: 8%; text-align: right;">XIRR %</th>
-                                        <th style="width: 15%;">Category</th>
+                                        <th style="width: 15%;">Goal</th>
                                         <th style="width: 15%;">Asset Class</th>
                                         <th style="width: 6%; text-align: center;">Status</th>
                                     </tr>
@@ -557,26 +617,24 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                             </template>
                                         </td>
                                         <td style="vertical-align: top;">
-                                            <input 
-                                                type="text" 
-                                                v-model="tags[fund.id].category" 
+                                            <select
+                                                v-model="tags[fund.id].goalId"
                                                 class="fund-input"
-                                                list="category-options"
-                                                placeholder="e.g. 1 Portfolio, Emergency"
                                                 @change="saveTagsAndCalculate"
-                                                @input="debouncedSaveAndCalculate"
                                             >
+                                                <option value="">— Unassigned —</option>
+                                                <option v-for="g in goals" :key="g.id" :value="g.id">{{ g.name }}</option>
+                                            </select>
                                         </td>
                                         <td style="vertical-align: top;">
-                                            <input 
-                                                type="text" 
-                                                v-model="tags[fund.id].assetClass" 
+                                            <select
+                                                v-model="tags[fund.id].assetClass"
                                                 class="fund-input"
-                                                list="asset-class-options"
-                                                placeholder="e.g. Equity, Debt, Gold"
                                                 @change="saveTagsAndCalculate"
-                                                @input="debouncedSaveAndCalculate"
                                             >
+                                                <option value="">— Unclassified —</option>
+                                                <option v-for="ac in getAssetClassesForGoal(tags[fund.id].goalId)" :key="ac" :value="ac">{{ ac }}</option>
+                                            </select>
                                         </td>
                                         <td style="vertical-align: top; text-align: center; min-width: 160px;">
                                             <div class="unit-buttons" style="justify-content: center;">
@@ -642,10 +700,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <span style="font-size: 0.9em; font-weight: bold;">₹{{ formatNumber(folio.marketValue) }}</span>
                                     </div>
                                     <div v-for="fund in folio.funds" :key="fund.id" style="padding: 0.5rem 1rem 0.5rem 2rem; border-top: 1px dotted #eee; overflow-x: auto;">
-                                        <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: center; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
+                                        <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: flex-start; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
                                             <div>
                                                 <div>{{ expandedDataRows[fund.id] ? '▼' : '▶' }} <strong>{{ fund.fundName }}</strong></div>
-                                                <div style="font-size: 0.8em; color: #666; margin-left: 1.2rem;">{{ formatNumber(fund.closingUnits, 3) }} units @ ₹{{ formatNumber(getFundNavInr(fund), 4) }}</div>
+                                                <div style="font-size: 0.8em; color: #666; margin-left: 1.2rem; margin-top: 0.2rem;">
+                                                    <span>{{ formatNumber(fund.closingUnits, 3) }} units</span>
+                                                    <span style="margin: 0 0.4rem;">·</span>
+                                                    <span>NAV ₹{{ formatNumber(getFundNavInr(fund), 4) }}</span>
+                                                    <span v-if="fund.valuationDate" style="margin: 0 0.4rem;">·</span>
+                                                    <span v-if="fund.valuationDate" style="color: #999;">as of {{ formatNavDate(fund.valuationDate) }}</span>
+                                                </div>
                                             </div>
                                             <div style="text-align: right;">
                                                 <div style="font-weight: bold;">₹{{ formatNumber(fund.marketValue) }}</div>
@@ -654,17 +718,31 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </div>
                                         
                                         <div v-if="expandedDataRows[fund.id]" style="margin-top: 0.5rem; margin-left: 1.2rem; background: #fdfdfd; border-radius: 4px; padding: 0.5rem; font-size: 0.85em;">
-                                            <table style="width: 100%; border-collapse: collapse; min-width: 250px;">
+                                            <table style="width: 100%; border-collapse: collapse; min-width: 300px;">
                                                 <tr style="border-bottom: 1px solid #ddd;">
                                                     <th style="text-align: left; padding: 2px;">Date</th>
+                                                    <th style="text-align: right; padding: 2px;">Units</th>
+                                                    <th style="text-align: right; padding: 2px;">NAV (₹)</th>
                                                     <th style="text-align: right; padding: 2px;">Value (₹)</th>
                                                 </tr>
-                                                <tr v-for="cf in fund.transactionCashflowsInr" :key="cf.date" :style="{ color: cf.amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                <tr v-for="(cf, idx) in fund.transactionCashflowsInr" :key="cf.date">
                                                     <td style="padding: 2px;">{{ formatNavDate(cf.date) }}</td>
-                                                    <td style="text-align: right; padding: 2px;">{{ cf.amount > 0 ? '-' : '+' }}₹{{ formatNumber(Math.abs(cf.amount)) }}</td>
+                                                    <td style="text-align: right; padding: 2px;" :style="{ color: cf.amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                        <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx]">
+                                                            {{ cf.amount > 0 ? '-' : '+' }}{{ formatNumber(Math.abs(fund.transactionUnitFlows[idx].amount), 3) }}
+                                                        </template>
+                                                        <template v-else>—</template>
+                                                    </td>
+                                                    <td style="text-align: right; padding: 2px; color: #666;">
+                                                        <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx] && fund.transactionUnitFlows[idx].amount !== 0">
+                                                            ₹{{ formatNumber(Math.abs(cf.amount) / Math.abs(fund.transactionUnitFlows[idx].amount), 4) }}
+                                                        </template>
+                                                        <template v-else>—</template>
+                                                    </td>
+                                                    <td style="text-align: right; padding: 2px;" :style="{ color: cf.amount > 0 ? '#c0392b' : '#27ae60' }">{{ cf.amount > 0 ? '-' : '+' }}₹{{ formatNumber(Math.abs(cf.amount)) }}</td>
                                                 </tr>
                                                 <tr v-if="!fund.transactionCashflowsInr || fund.transactionCashflowsInr.length === 0">
-                                                    <td colspan="2" style="text-align: center; color: #999; padding: 5px;">No transactions</td>
+                                                    <td colspan="4" style="text-align: center; color: #999; padding: 5px;">No transactions</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -688,10 +766,18 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <span style="font-weight: bold;">₹{{ formatNumber(account.marketValue) }} / &#36;{{ formatNumber(account.marketValueUsd) }}</span>
                                 </div>
                                 <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.5rem 1rem; border-top: 1px solid #eee; overflow-x: auto;">
-                                    <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: center; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
+                                    <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: flex-start; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
                                         <div>
                                             <div>{{ expandedDataRows[fund.id] ? '▼' : '▶' }} <strong>{{ fund.fundName }}</strong></div>
-                                            <div style="font-size: 0.8em; color: #666; margin-left: 1.2rem;">{{ formatNumber(fund.closingUnits, 0) }} shares @ &#36;{{ formatNumber(getFundNavUsd(fund), 4) }}</div>
+                                            <div style="font-size: 0.8em; color: #666; margin-left: 1.2rem; margin-top: 0.2rem;">
+                                                <span>{{ formatNumber(fund.closingUnits, 0) }} shares</span>
+                                                <span style="margin: 0 0.4rem;">·</span>
+                                                <span>&#36;{{ formatNumber(getFundNavUsd(fund), 4) }} / share</span>
+                                                <span v-if="fund.navUsd && fund.nav" style="margin: 0 0.4rem;">·</span>
+                                                <span v-if="fund.navUsd && fund.nav" style="color: #0284c7;">SBI Ref Rate ₹{{ formatNumber(fund.nav / fund.navUsd, 2) }}/&#36;</span>
+                                                <span v-if="fund.valuationDate" style="margin: 0 0.4rem;">·</span>
+                                                <span v-if="fund.valuationDate" style="color: #999;">as of {{ formatNavDate(fund.valuationDate) }}</span>
+                                            </div>
                                         </div>
                                         <div style="text-align: right;">
                                             <div style="font-weight: bold;">₹{{ formatNumber(fund.marketValue) }}</div>
@@ -699,25 +785,55 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </div>
                                     </div>
                                     <div v-if="expandedDataRows[fund.id]" style="margin-top: 0.5rem; margin-left: 1.2rem; background: #fdfdfd; border-radius: 4px; padding: 0.5rem; font-size: 0.85em;">
-                                        <table style="width: 100%; border-collapse: collapse; min-width: 250px;">
+                                        <table style="width: 100%; border-collapse: collapse; min-width: 500px;">
                                             <tr style="border-bottom: 1px solid #ddd;">
                                                 <th style="text-align: left; padding: 2px;">Date</th>
-                                                <th style="text-align: right; padding: 2px;">Inv USD ($)</th>
-                                                <th style="text-align: right; padding: 2px;">Inv INR (₹)</th>
+                                                <th style="text-align: right; padding: 2px;">Units</th>
+                                                <th style="text-align: right; padding: 2px;">NAV ($)</th>
+                                                <th style="text-align: right; padding: 2px;">Value ($)</th>
+                                                <th style="text-align: right; padding: 2px; color: #0284c7;">Rate (&#8377;/$)</th>
+                                                <th style="text-align: right; padding: 2px;">NAV (&#8377;)</th>
+                                                <th style="text-align: right; padding: 2px;">Value (&#8377;)</th>
                                             </tr>
                                             <tr v-for="(cfUsd, idx) in normalizeDatedFlows(fund.transactionCashflowsUsd)" :key="cfUsd.date">
                                                 <td style="padding: 2px;">{{ formatNavDate(cfUsd.date) }}</td>
-                                                <td style="text-align: right; padding: 2px; color: #c0392b;" v-if="cfUsd.amount > 0">-&#36;{{ formatNumber(Math.abs(cfUsd.amount), 2) }}</td>
-                                                <td style="text-align: right; padding: 2px; color: #27ae60;" v-else>+&#36;{{ formatNumber(Math.abs(cfUsd.amount), 2) }}</td>
-                                                
+                                                <!-- Units -->
+                                                <td style="text-align: right; padding: 2px;" :style="{ color: cfUsd.amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                    <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx]">
+                                                        {{ cfUsd.amount > 0 ? '-' : '+' }}{{ formatNumber(Math.abs(fund.transactionUnitFlows[idx].amount), 4) }}
+                                                    </template>
+                                                    <template v-else>&#8212;</template>
+                                                </td>
+                                                <!-- NAV ($) = Value($) / Units -->
+                                                <td style="text-align: right; padding: 2px;">
+                                                    <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx] && fund.transactionUnitFlows[idx].amount !== 0">
+                                                        &#36;{{ formatNumber(Math.abs(cfUsd.amount) / Math.abs(fund.transactionUnitFlows[idx].amount), 4) }}
+                                                    </template>
+                                                    <template v-else>&#8212;</template>
+                                                </td>
+                                                <!-- Value ($) -->
+                                                <td style="text-align: right; padding: 2px;" :style="{ color: cfUsd.amount > 0 ? '#c0392b' : '#27ae60' }">{{ cfUsd.amount > 0 ? '-' : '+' }}&#36;{{ formatNumber(Math.abs(cfUsd.amount), 2) }}</td>
                                                 <template v-if="normalizeDatedFlows(fund.transactionCashflowsInr)[idx]">
-                                                    <td style="text-align: right; padding: 2px; color: #c0392b;" v-if="normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount > 0">-₹{{ formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount)) }}</td>
-                                                    <td style="text-align: right; padding: 2px; color: #27ae60;" v-else>+₹{{ formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount)) }}</td>
+                                                    <!-- Rate (₹/$) = INR / USD -->
+                                                    <td style="text-align: right; padding: 2px; color: #0284c7;">
+                                                        {{ cfUsd.amount !== 0 ? '&#8377;' + formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount) / Math.abs(cfUsd.amount), 2) : '&#8212;' }}
+                                                    </td>
+                                                    <!-- NAV (₹) = INR / Units -->
+                                                    <td style="text-align: right; padding: 2px;">
+                                                        <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx] && fund.transactionUnitFlows[idx].amount !== 0">
+                                                            &#8377;{{ formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount) / Math.abs(fund.transactionUnitFlows[idx].amount), 4) }}
+                                                        </template>
+                                                        <template v-else>&#8212;</template>
+                                                    </td>
+                                                    <!-- Value (₹) -->
+                                                    <td style="text-align: right; padding: 2px;" :style="{ color: normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                        {{ normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount > 0 ? '-' : '+' }}&#8377;{{ formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount)) }}
+                                                    </td>
                                                 </template>
-                                                <td style="text-align: right; padding: 2px;" v-else>-</td>
+                                                <td style="text-align: right; padding: 2px;" v-else colspan="3">&#8212;</td>
                                             </tr>
                                             <tr v-if="!fund.transactionCashflowsUsd || fund.transactionCashflowsUsd.length === 0">
-                                                <td colspan="3" style="text-align: center; color: #999; padding: 5px;">No transactions</td>
+                                                <td colspan="7" style="text-align: center; color: #999; padding: 5px;">No transactions</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -825,7 +941,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 autocompleteAssetClasses: [],
                 
                 defaultCategories: ['1 Portfolio', 'Emergency', 'Travel', 'Retirement', 'Kids Education'],
-                defaultAssetClasses: ['Equity Large Cap', 'Equity Mid Cap', 'Equity Small Cap', 'Debt Liquid', 'Gold', 'International'],
+                defaultAssetClasses: [
+                        'Equity Large Cap', 'Equity Mid Cap', 'Equity Small Cap', 'Equity Flexi Cap', 'Equity ELSS',
+                        'Hybrid Aggressive', 'Hybrid Conservative', 'Hybrid Arbitrage',
+                        'Debt Liquid', 'Debt Ultra Short', 'Debt Short Duration', 'Debt Medium Duration', 'Debt Long Duration',
+                        'Gold ETF', 'Gold Fund of Fund', 'International Equity',
+                    ],
                 
                 summaryData: [],
                 totalPortfolioValue: 0,
@@ -915,6 +1036,53 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (goal.amountType === 'FLAT') return Number(goal.targetAmountFlat) || 0;
                 if (goal.amountType === 'MONTHS') return (Number(goal.months) || 0) * (Number(goal.monthlyAmount) || 0);
                 return 0;
+            },
+            getAssetClassesForGoal(goalId) {
+                if (!goalId) return this.defaultAssetClasses;
+                const goal = this.goals.find(g => g.id === goalId);
+                if (!goal || !goal.allocations || goal.allocations.length === 0) return this.defaultAssetClasses;
+                const classes = goal.allocations.map(a => a.assetClass).filter(ac => ac && ac.trim() !== '');
+                return classes.length > 0 ? classes : this.defaultAssetClasses;
+            },
+            getGoalEarliestDate(goal) {
+                // Find earliest transaction date across all funds tagged to this goal
+                let earliest = null;
+                this.funds.forEach(f => {
+                    const tag = this.tags[f.id] || {};
+                    if (tag.goalId !== goal.id) return;
+                    const flows = f.transactionCashflowsInr || [];
+                    flows.forEach(cf => {
+                        if (cf.date && (!earliest || cf.date < earliest)) earliest = cf.date;
+                    });
+                });
+                return earliest;
+            },
+            getGoalTimePercent(goal) {
+                if (!goal.targetDate) return 0;
+                const startStr = this.getGoalEarliestDate(goal);
+                if (!startStr) return 0;
+                const start = new Date(startStr).getTime();
+                const end = new Date(goal.targetDate).getTime();
+                const now = Date.now();
+                if (end <= start) return 100;
+                return Math.min(100, Math.max(0, ((now - start) / (end - start)) * 100));
+            },
+            getTargetPercent(rowName) {
+                // Overview mode: rowName is a goal name
+                if (this.selectedReportArea === 'overview') {
+                    const goal = this.goals.find(g => g.name === rowName);
+                    if (!goal || !goal.allocations || goal.allocations.length === 0) return null;
+                    // Sum all allocation percentages for this goal
+                    const total = goal.allocations.reduce((sum, _, idx) => sum + this.computeAllocationPercent(goal, idx), 0);
+                    return total > 0 ? total : null;
+                }
+                // Drill-down mode: selectedReportArea is a goal name, rowName is an asset class
+                const goal = this.goals.find(g => g.name === this.selectedReportArea);
+                if (!goal || !goal.allocations) return null;
+                const alloc = goal.allocations.find(a => a.assetClass === rowName);
+                if (!alloc) return null;
+                const idx = goal.allocations.indexOf(alloc);
+                return this.computeAllocationPercent(goal, idx);
             },
             computeAllocationPercent(goal, allocIndex) {
                 if (!goal || !goal.allocations || !goal.allocations[allocIndex]) return 0;
