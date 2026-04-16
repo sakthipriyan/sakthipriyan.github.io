@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealValue Family Portfolio Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 900px; margin: 0 auto; padding: 20px;
+            color: #333; background-color: #f4f6f8;
+        }
+        .upload-container {
+            border: 2px dashed #0066cc; padding: 40px; text-align: center;
+            border-radius: 8px; margin-bottom: 20px; background-color: #ffffff;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .upload-container:hover { background-color: #f0f7ff; }
+        .header-flex {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        button {
+            background: #0066cc; color: white; border: none; padding: 10px 20px;
+            border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;
+        }
+        button:hover { background: #0052a3; }
+        #output {
+            white-space: pre-wrap; background: #1e1e2f; color: #e0e0e0;
+            padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+            overflow-x: auto; min-height: 400px; font-size: 13px;
+        }
+        .loading { color: #4CAF50; font-weight: bold; }
+        .error { color: #ff5252; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>RealValue Family Portfolio Tracker - CAS Engine</h2>
+    
+    <div class="upload-container" onclick="document.getElementById('pdf-file').click()">
+        <h3>Click here to select your unlocked CAS PDF</h3>
+        <p style="color: #666;">Y-Coordinate Stitching Enabled. Parsing happens instantly in your browser.</p>
+        <input type="file" id="pdf-file" accept="application/pdf" style="display: none;" />
+    </div>
+
+    <div class="header-flex">
+        <h3>Extracted JSON Data:</h3>
+        <button onclick="copyJSON()">📋 Copy JSON</button>
+    </div>
+    <div id="output">Waiting for file upload...</div>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        let rawJsonOutput = "";
+
+        // Helper: Convert string with commas/parentheses to numbers safely
+        function parseNumericStr(val) {
+            if (!val) return null;
+            const isNegative = val.includes('(') || val.includes('-');
+            const cleanVal = val.replace(/[^\d.]/g, '');
+            if (cleanVal === '') return null;
+            return isNegative ? -parseFloat(cleanVal) : parseFloat(cleanVal);
+        }
+
+        // Helper: Copy to clipboard
+        function copyJSON() {
+            if (!rawJsonOutput) return alert("No data available to copy yet.");
+            navigator.clipboard.writeText(rawJsonOutput).then(() => {
+                alert("JSON copied to clipboard!");
+            }).catch(err => alert("Failed to copy. Check console."));
+        }
+
+        // Trigger on file upload
+        document.getElementById('pdf-file').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            const outputDiv = document.getElementById('output');
+            if (!file) return;
+            
+            outputDiv.innerHTML = '<span class="loading">Aligning columns and parsing PDF... Please wait.</span>';
+            const fileReader = new FileReader();
+            
+            fileReader.onload = async function() {
+                try {
+                    const typedarray = new Uint8Array(this.result);
+                    const loadingTask = pdfjsLib.getDocument({ data: typedarray });
+                    const pdf = await loadingTask.promise;
+                    
+                    let fullText = '';
+                    
+                    // --- THE Y-COORDINATE STITCHING ENGINE ---
+                    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                        const page = await pdf.getPage(pageNum);
+                        const textContent = await page.getTextContent();
+                        
+                        // 1. Sort all text items by Y-coordinate (top to bottom), then X-coordinate (left to right)
+                        const items = textContent.items.sort((a, b) => {
+                            // If items are within 5 pixels vertically, treat them as the same line
+                            if (Math.abs(a.transform[5] - b.transform[5]) > 5) { 
+                                return b.transform[5] - a.transform[5]; // Sort Y descending
+                            }
+                            return a.transform[4] - b.transform[4]; // Sort X ascending
+                        });
+                        
+                        // 2. Stitch the sorted items into horizontal rows
+                        let currentY = null;
+                        let line = [];
+                        const lines = [];
+                        
+                        items.forEach(item => {
+                            if (currentY === null || Math.abs(item.transform[5] - currentY) > 5) {
+                                if (line.length > 0) lines.push(line.join(' '));
+                                line = [item.str];
+                                currentY = item.transform[5];
+                            } else {
+                                line.push(item.str);
+                            }
+                        });
+                        if (line.length > 0) lines.push(line.join(' '));
+                        
+                        // 3. Add perfectly horizontal lines to our master text
+                        fullText += lines.join('\n') + '\n';
+                    }
+
+                    const parsedData = parseCASData(fullText);
+                    rawJsonOutput = JSON.stringify(parsedData, null, 4);
+                    outputDiv.textContent = rawJsonOutput;
+
+                } catch (error) {
+                    console.error("PDF Parsing Error:", error);
+                    outputDiv.innerHTML = `<span class="error">Execution Error: ${error.message}</span>`;
+                }
+            };
+            fileReader.readAsArrayBuffer(file);
+            e.target.value = ''; 
+        });
+
+// Core Parsing Engine
+function parseCASData(rawText) {
+    const data = { investorInfo: {}, fundHouses: [] };
+
+    // 1. Clean Investor Info
+    data.investorInfo.email = (rawText.match(/Email Id:\s*([^\s]+)/i) || [])[1];
+    data.investorInfo.mobile = (rawText.match(/Mobile:\s*(\d+)/i) || [])[1];
+    data.investorInfo.statementPeriod = (rawText.match(/(\d{2}-[A-Za-z]{3}-\d{4})\s*To\s*(\d{2}-[A-Za-z]{3}-\d{4})/i) || []).slice(1).join(' to ');
+
+    const fundHouseMap = {}; 
+    let currentHouse = "Unknown Fund House";
+    let currentFolio = "Unknown Folio";
+    let currentFund = null; 
+
+    // 2. Sequential Line-by-Line Parsing
+    const lines = rawText.split('\n');
+
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+
+        // --- THE FIX: Erase misaligned column text that gets stitched into the middle of the data ---
+        line = line.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
+
+        // Update Context state as we read down the page
+        const fhMatch = line.match(/([A-Za-z\s]+Mutual Fund)/i);
+        if (fhMatch && !line.includes("PORTFOLIO SUMMARY")) currentHouse = fhMatch[1].trim();
+
+        const folioMatch = line.match(/Folio No:\s*([A-Za-z0-9\/\-]+)/i);
+        if (folioMatch) currentFolio = folioMatch[1].trim();
+
+        // Detect the start of a New Fund
+        const isinMatch = line.match(/(.*?)(?:\s*-\s*|\s+)ISIN\s*[:\-]?\s*([A-Z0-9\s]+)/i);
+        
+        if (isinMatch) {
+            // Save previous fund to hierarchy before starting a new one
+            if (currentFund) {
+                if (!fundHouseMap[currentFund.house]) fundHouseMap[currentFund.house] = {};
+                if (!fundHouseMap[currentFund.house][currentFund.folio]) {
+                    fundHouseMap[currentFund.house][currentFund.folio] = { funds: [] };
+                }
+                fundHouseMap[currentFund.house][currentFund.folio].funds.push(currentFund.data);
+            }
+
+            // Scrub boilerplate text
+            let fundName = isinMatch[1]
+                .replace(/.*(?:PAN|KYC).*?OK\s*/gi, '')
+                .replace(/^OK\s*/i, '')
+                .replace(/^[A-Z0-9\s]+\s*-\s*/, '')
+                .trim();
+                
+            // Strip out any invisible characters or spaces from the ISIN base
+            let isinStr = isinMatch[2].replace(/[^A-Z0-9]/gi, '');
+
+            // MULTI-LINE STITCHING: If the ISIN broke across lines, look ahead to grab the rest
+            let offset = 1;
+            while (isinStr.length < 12 && (i + offset) < lines.length) {
+                let nextLine = lines[i + offset].trim();
+                
+                // ANTI-BUG: Prevent the regex from eating words like "Nominee:" if they appear below
+                if (/^(Registrar|Nominee|KYC|PAN|Folio|Advisor|Opening|Closing|CAMS|KFINTECH)/i.test(nextLine)) {
+                    offset++;
+                    continue;
+                }
+
+                let nextAlphanumericChunk = (nextLine.match(/^([A-Z0-9]+)/i) || [])[1];
+                if (nextAlphanumericChunk) {
+                    isinStr += nextAlphanumericChunk;
+                }
+                offset++;
+                if (offset > 4) break; // Circuit breaker
+            }
+            
+            // Standardize to the exact 12-character Indian ISIN length
+            isinStr = isinStr.substring(0, 12);
+
+            currentFund = {
+                house: currentHouse,
+                folio: currentFolio,
+                data: { fundName: fundName, isin: isinStr, transactions: [], rawTxns: [] }
+            };
+            continue; 
+        }
+
+        // If we are actively inside a fund, scan for balances and transactions
+        if (currentFund) {
+            if (line.includes("Closing Unit Balance")) {
+                currentFund.data.closingUnits = parseNumericStr((line.match(/Closing Unit Balance:\s*([\d,.]+)/i) || [])[1]);
+                currentFund.data.nav = parseNumericStr((line.match(/NAV on .*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]);
+                currentFund.data.totalCostValue = parseNumericStr((line.match(/Total Cost Value:\s*([\d,.]+)/i) || [])[1]);
+                currentFund.data.marketValue = parseNumericStr((line.match(/Market Value.*?:\s*(?:INR)?\s*([\d,.]+)/i) || [])[1]);
+                continue; 
+            }
+
+            const dateMatch = line.match(/(\d{2}-[A-Za-z]{3}-\d{4})/);
+            if (!dateMatch) continue;
+            const date = dateMatch[1];
+
+            const numRegex = /(?:\s|^)(\(?(?:\d+,)*\d+\.\d{2,4}\)?)(?=\s|$)/g;
+            let nums = [];
+            let m;
+            while ((m = numRegex.exec(line)) !== null) nums.push(m[1]);
+
+            let description = line.replace(date, '');
+            nums.forEach(n => { description = description.replace(n, ''); });
+            description = description.replace(/\s{2,}/g, ' ').trim();
+
+            if (description.toLowerCase().includes("closing unit") || description.toLowerCase().includes("market value")) continue;
+
+            if (nums.length >= 4) {
+                let amount = parseNumericStr(nums[0]);
+                let balance = parseNumericStr(nums[3]);
+                let nav, units;
+
+                const dec1 = (nums[1].split('.')[1] || "").replace(')', '').length;
+                const dec2 = (nums[2].split('.')[1] || "").replace(')', '').length;
+
+                if (dec1 === 4 && dec2 !== 4) { 
+                    nav = parseNumericStr(nums[1]); 
+                    units = parseNumericStr(nums[2]); 
+                } else if (dec2 === 4 && dec1 !== 4) { 
+                    nav = parseNumericStr(nums[2]); 
+                    units = parseNumericStr(nums[1]); 
+                } else { 
+                    nav = parseNumericStr(nums[1]); 
+                    units = parseNumericStr(nums[2]); 
+                } 
+
+                currentFund.data.rawTxns.push({ type: "TXN", date, amount, nav, units, description, balance });
+            } 
+            else if (nums.length === 1 && (description.toLowerCase().includes('stamp duty') || description.toLowerCase().includes('stt'))) {
+                currentFund.data.rawTxns.push({ type: "FEE", date, amount: parseNumericStr(nums[0]), description: description.replace(/\*/g, '').trim() });
+            }
+        }
+    }
+
+    // Save the very last fund in the document
+    if (currentFund) {
+        if (!fundHouseMap[currentFund.house]) fundHouseMap[currentFund.house] = {};
+        if (!fundHouseMap[currentFund.house][currentFund.folio]) fundHouseMap[currentFund.house][currentFund.folio] = { funds: [] };
+        fundHouseMap[currentFund.house][currentFund.folio].funds.push(currentFund.data);
+    }
+
+    // 3. Process Fees & Finalize Hierarchy
+    for (const [fundHouseName, folios] of Object.entries(fundHouseMap)) {
+        const folioArray = [];
+        for (const [folioNo, folioData] of Object.entries(folios)) {
+            
+            folioData.funds.forEach(fund => {
+                fund.rawTxns.sort((a, b) => new Date(a.date) - new Date(b.date));
+                const mergedTxns = [];
+                fund.rawTxns.forEach(trx => {
+                    if (trx.type === "FEE") {
+                        let parentFound = false;
+                        for (let j = mergedTxns.length - 1; j >= 0; j--) {
+                            if (mergedTxns[j].date === trx.date) {
+                                mergedTxns[j].feeAmount = (mergedTxns[j].feeAmount || 0) + trx.amount;
+                                mergedTxns[j].feeType = trx.description;
+                                parentFound = true; break;
+                            }
+                        }
+                        if (!parentFound) { delete trx.type; mergedTxns.push(trx); }
+                    } else {
+                        delete trx.type; mergedTxns.push(trx);
+                    }
+                });
+                fund.transactions = mergedTxns;
+                delete fund.rawTxns; 
+            });
+
+            folioArray.push({ folioNo, funds: folioData.funds });
+        }
+        data.fundHouses.push({ fundHouse: fundHouseName, folios: folioArray });
+    }
+    return data;
+}    </script>
+</body>
+</html>
