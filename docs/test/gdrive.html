@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LocalStorage Google Drive Sync</title>
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
+	<style>
+		:root {
+			--bg: #f5f7fb;
+			--panel: #ffffff;
+			--text: #152036;
+			--muted: #5e6a81;
+			--brand: #1a73e8;
+			--brand-dark: #135cbc;
+			--ok: #166534;
+			--warn: #b45309;
+			--err: #b91c1c;
+			--border: #dbe3f0;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			padding: 24px;
+			background: radial-gradient(circle at top left, #eef3ff, #f7fafc 55%);
+			color: var(--text);
+			font-family: "Segoe UI", Tahoma, sans-serif;
+		}
+
+		.wrap {
+			max-width: 980px;
+			margin: 0 auto;
+		}
+
+		.panel {
+			background: var(--panel);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 18px;
+			box-shadow: 0 10px 20px rgba(2, 32, 71, 0.05);
+			margin-bottom: 16px;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 1.6rem;
+		}
+
+		h2 {
+			margin: 0 0 10px;
+			font-size: 1.05rem;
+		}
+
+		p {
+			margin: 8px 0;
+		}
+
+		.muted {
+			color: var(--muted);
+			font-size: 0.95rem;
+		}
+
+		.status {
+			margin-top: 10px;
+			font-size: 0.95rem;
+			padding: 10px;
+			border-radius: 8px;
+			border: 1px solid #d6def0;
+			background: #f4f7ff;
+		}
+
+		.status.ok {
+			color: var(--ok);
+			border-color: #b7e5c6;
+			background: #f0fff4;
+		}
+
+		.status.warn {
+			color: var(--warn);
+			border-color: #f6ddb3;
+			background: #fff7ed;
+		}
+
+		.status.err {
+			color: var(--err);
+			border-color: #f8c7c7;
+			background: #fef2f2;
+		}
+
+		.btns {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 12px;
+		}
+
+		button {
+			border: 0;
+			border-radius: 8px;
+			padding: 10px 14px;
+			background: var(--brand);
+			color: #fff;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background 0.2s ease;
+		}
+
+		button:hover {
+			background: var(--brand-dark);
+		}
+
+		button.secondary {
+			background: #334155;
+		}
+
+		button.secondary:hover {
+			background: #1e293b;
+		}
+
+		button.ghost {
+			background: #eef2ff;
+			color: #1e3a8a;
+			border: 1px solid #c7d2fe;
+		}
+
+		button:disabled {
+			opacity: 0.55;
+			cursor: not-allowed;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.code {
+			font-family: Menlo, Consolas, monospace;
+			background: #f3f4f6;
+			border-radius: 6px;
+			padding: 2px 6px;
+		}
+
+		.backup-list {
+			margin-top: 10px;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		.backup-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px 12px;
+			border-top: 1px solid var(--border);
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.backup-item:first-child {
+			border-top: 0;
+		}
+
+		.meta {
+			font-size: 0.9rem;
+			color: var(--muted);
+		}
+
+		#log {
+			min-height: 180px;
+			max-height: 320px;
+			overflow-y: auto;
+			background: #0f172a;
+			color: #d7e1ff;
+			border-radius: 10px;
+			padding: 12px;
+			white-space: pre-wrap;
+			font-size: 0.9rem;
+			font-family: Menlo, Consolas, monospace;
+		}
+
+		.key-list {
+			padding-left: 16px;
+			margin: 10px 0;
+		}
+
+		@media (max-width: 800px) {
+			body {
+				padding: 14px;
+			}
+
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="panel">
+		<h1>Google Drive LocalStorage Sync</h1>
+		<p class="muted">Backs up known tool keys to Drive as one rolling file + timestamped snapshots, and restores with per-key conflict prompts.</p>
+		<p class="muted"><strong>Setup:</strong> Configure <span class="code">window.GDRIVE_SYNC_CONFIG.clientId</span> for Google OAuth sign-in.</p>
+		<h2>Auth & Sync</h2>
+		<div class="btns">
+			<button id="btnSignIn">Sign in with Google</button>
+			<button id="btnSignOut" class="secondary" disabled>Sign out</button>
+			<button id="btnBackup" disabled>Backup now</button>
+			<button id="btnRefresh" class="ghost" disabled>Refresh backup list</button>
+		</div>
+		<div id="status" class="status warn">Not signed in.</div>
+		<p id="accountInfo" class="muted">Account: not signed in</p>
+		<h2>Destination Folder</h2>
+		<p class="muted">Enter a Drive folder path. Missing folders in the path are created automatically.</p>
+		<input id="folderPathInput" type="text" value="/sakthipriyan.com/" style="width:100%; padding:10px 12px; border:1px solid #dbe3f0; border-radius:8px; font-family: Menlo, Consolas, monospace; font-size:0.95rem;" />
+		<p id="folderStatus" class="muted">Path: /sakthipriyan.com/</p>
+	</div>
+
+	<div class="grid">
+		<div class="panel">
+			<h2>Synced Keys</h2>
+			<ul id="keyList" class="key-list"></ul>
+		</div>
+
+		<div class="panel">
+			<h2>Last Backup Summary</h2>
+			<div id="backupSummary" class="muted">No backup run in this session.</div>
+		</div>
+	</div>
+
+	<div class="panel">
+		<h2>Drive Backups</h2>
+		<div class="muted">Click Restore on any file to preview and apply data to localStorage.</div>
+		<div id="backupList" class="backup-list"></div>
+	</div>
+
+	<div class="panel">
+		<h2>Activity Log</h2>
+		<div id="log"></div>
+	</div>
+</div>
+<!-- OPTIONAL: Configure your Google OAuth Client ID here (uncomment and update) -->
+<script>
+	window.GDRIVE_SYNC_CONFIG = {
+		clientId: "696963923490-gs5t7mh3en1qt9n2ksk4uhgelvhbpu2p.apps.googleusercontent.com"
+	};
+</script>
+
+
+<script>
+(() => {
+	"use strict";
+
+	const CLIENT_ID_FALLBACK = "696963923490-gs5t7mh3en1qt9n2ksk4uhgelvhbpu2p.apps.googleusercontent.com";
+	const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
+	const AUTH_GRANT_KEY = "gdrive-sync-auth-granted";
+	const TOKEN_REQUEST_TIMEOUT_MS = 8000;
+	const ROLLING_FILE_NAME = "localstorage-backup-latest.json";
+	const SNAPSHOT_PREFIX = "localstorage-backup-";
+
+	const KNOWN_KEYS = [
+		"emi-calculator-v1",
+		"sip-calculator-v1",
+		"inr-usd-fx-tracker-v1",
+		"realvalue-portfolio-tags",
+		"realvalue-portfolio-funds"
+	];
+
+	const dom = {
+		btnSignIn: document.getElementById("btnSignIn"),
+		btnSignOut: document.getElementById("btnSignOut"),
+		btnBackup: document.getElementById("btnBackup"),
+		btnRefresh: document.getElementById("btnRefresh"),
+		status: document.getElementById("status"),
+		accountInfo: document.getElementById("accountInfo"),
+		keyList: document.getElementById("keyList"),
+		backupSummary: document.getElementById("backupSummary"),
+		backupList: document.getElementById("backupList"),
+		log: document.getElementById("log")
+	};
+
+	const folderDom = {
+		folderPathInput: document.getElementById("folderPathInput"),
+		folderStatus: document.getElementById("folderStatus")
+	};
+
+	const state = {
+		accessToken: "",
+		tokenExpiresAt: 0,
+		tokenClient: null,
+		folderId: "",
+		busy: false,
+		selectedFolder: null,
+		selectedFolderPath: "/sakthipriyan.com/",
+		userProfile: null,
+		clientId: "696963923490-gs5t7mh3en1qt9n2ksk4uhgelvhbpu2p.apps.googleusercontent.com"
+	};
+
+	const METADATA_FILE_NAME = ".gdrive-sync-metadata.json";
+	const DEFAULT_BACKUP_PATH = "/sakthipriyan.com/";
+
+	function nowIso() {
+		return new Date().toISOString();
+	}
+
+	function fileTimestamp() {
+		return new Date().toISOString().replace(/[:.]/g, "-");
+	}
+
+	function setStatus(message, level) {
+		dom.status.textContent = message;
+		dom.status.className = "status " + (level || "warn");
+	}
+
+	function appendLog(message) {
+		const line = "[" + nowIso() + "] " + message;
+		dom.log.textContent += (dom.log.textContent ? "\n" : "") + line;
+		dom.log.scrollTop = dom.log.scrollHeight;
+	}
+
+	function setBusy(busy) {
+		state.busy = busy;
+		dom.btnSignIn.disabled = busy || !!state.accessToken;
+		dom.btnSignOut.disabled = busy || !state.accessToken;
+		dom.btnBackup.disabled = busy || !state.accessToken;
+		dom.btnRefresh.disabled = busy || !state.accessToken;
+		folderDom.folderPathInput.disabled = busy || !state.accessToken;
+	}
+
+	function getClientId() {
+		const cfg = window.GDRIVE_SYNC_CONFIG || {};
+		return cfg.clientId || CLIENT_ID_FALLBACK;
+	}
+
+	function hasStoredGrant() {
+		try {
+			return window.localStorage.getItem(AUTH_GRANT_KEY) === "1";
+		} catch (err) {
+			return false;
+		}
+	}
+
+	function storeGrantGranted() {
+		try {
+			window.localStorage.setItem(AUTH_GRANT_KEY, "1");
+		} catch (err) {
+			// Ignore storage failures; auth still works for the current page.
+		}
+	}
+
+	function renderKnownKeys() {
+		dom.keyList.innerHTML = "";
+		KNOWN_KEYS.forEach((key) => {
+			const li = document.createElement("li");
+			const exists = localStorage.getItem(key) !== null;
+			li.textContent = key + (exists ? " (present)" : " (missing)");
+			dom.keyList.appendChild(li);
+		});
+	}
+
+	function normalizeFolderPath(inputPath) {
+		let p = String(inputPath || "").trim().replace(/[\\/]+/g, "/");
+		if (!p) p = DEFAULT_BACKUP_PATH;
+		p = p.replace(/\/+/g, "/");
+		if (!p.startsWith("/")) p = "/" + p;
+		if (!p.endsWith("/")) p = p + "/";
+		return p;
+	}
+
+	function escapeDriveQueryValue(value) {
+		return String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+	}
+
+	function updateAccountInfo() {
+		if (!state.userProfile) {
+			dom.accountInfo.textContent = "Account: not signed in";
+			return;
+		}
+
+		const displayName = state.userProfile.displayName || "Google account";
+		const email = state.userProfile.emailAddress || "email unavailable";
+		dom.accountInfo.textContent = "Account: " + displayName + " (" + email + ")";
+	}
+
+	function updateFolderStatus() {
+		const currentPath = normalizeFolderPath(state.selectedFolderPath);
+		folderDom.folderStatus.textContent = "Path: " + currentPath + (state.selectedFolder && state.selectedFolder.id ? " | Resolved: " + state.selectedFolder.name : "");
+		folderDom.folderStatus.className = "muted";
+	}
+
+	async function getOrCreateMetadataFile() {
+			const q = "name='" + METADATA_FILE_NAME + "' and trashed=false";
+			const url = "https://www.googleapis.com/drive/v3/files?q=" + encodeURIComponent(q) + "&fields=files(id,name)&pageSize=1";
+			const result = await driveFetch(url);
+			return result.files && result.files.length > 0 ? result.files[0].id : null;
+		}
+
+		async function loadSelectedFolder() {
+			try {
+				const metadataId = await getOrCreateMetadataFile();
+				if (!metadataId) {
+					state.selectedFolderPath = normalizeFolderPath(state.selectedFolderPath);
+					folderDom.folderPathInput.value = state.selectedFolderPath;
+					appendLog("No saved folder metadata found. Using default path.");
+					return;
+				}
+				const url = "https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(metadataId) + "?alt=media";
+				const text = await driveFetch(url);
+				const metadata = JSON.parse(text);
+				if (metadata.selectedFolderPath) {
+					state.selectedFolderPath = normalizeFolderPath(metadata.selectedFolderPath);
+				}
+				if (metadata.selectedFolder && metadata.selectedFolder.id) {
+					state.selectedFolder = metadata.selectedFolder;
+				}
+				folderDom.folderPathInput.value = state.selectedFolderPath;
+				updateFolderStatus();
+				appendLog("Loaded saved destination path: " + state.selectedFolderPath);
+			} catch (e) {
+				console.warn("Failed to load folder metadata:", e);
+			}
+		}
+
+		async function saveSelectedFolder() {
+			const metadata = {
+				savedAt: nowIso(),
+				selectedFolderPath: normalizeFolderPath(state.selectedFolderPath),
+				selectedFolder: state.selectedFolder
+			};
+			const payloadText = JSON.stringify(metadata, null, 2);
+			const existing = await getOrCreateMetadataFile();
+			const mp = multipartBody({ name: METADATA_FILE_NAME, mimeType: "application/json" }, payloadText);
+			const base = "https://www.googleapis.com/upload/drive/v3/files";
+			const target = existing ? (base + "/" + existing) : base;
+			const method = existing ? "PATCH" : "POST";
+			try {
+				await driveFetch(target + "?uploadType=multipart&fields=id,name", {
+					method,
+					headers: { "Content-Type": "multipart/related; boundary=" + mp.boundary },
+					body: mp.body
+				});
+				appendLog("Folder selection saved to app metadata.");
+			} catch (e) {
+				console.warn("Failed to save folder metadata:", e);
+			}
+		}
+
+	async function requestAccessToken(promptValue) {
+		if (!state.tokenClient) {
+			throw new Error("Google token client is not initialized.");
+		}
+
+		return new Promise((resolve, reject) => {
+			const timer = window.setTimeout(() => {
+				reject(new Error("Token request timed out."));
+			}, TOKEN_REQUEST_TIMEOUT_MS);
+
+			state.tokenClient.callback = (resp) => {
+				window.clearTimeout(timer);
+				if (resp && resp.error) {
+					reject(new Error(resp.error + ": " + (resp.error_description || "OAuth failed")));
+					return;
+				}
+				state.accessToken = resp.access_token || "";
+				const expiresIn = Number(resp.expires_in || 0);
+				state.tokenExpiresAt = Date.now() + Math.max(expiresIn - 60, 0) * 1000;
+				storeGrantGranted();
+				resolve();
+			};
+
+			state.tokenClient.requestAccessToken({ prompt: promptValue || "" });
+		});
+	}
+
+	async function ensureValidToken() {
+		if (state.accessToken && Date.now() < state.tokenExpiresAt) {
+			return;
+		}
+		await requestAccessToken("");
+	}
+
+	async function driveFetch(url, options) {
+		await ensureValidToken();
+
+		const opts = Object.assign({}, options || {});
+		opts.headers = Object.assign({}, opts.headers || {}, {
+			Authorization: "Bearer " + state.accessToken
+		});
+
+		const res = await fetch(url, opts);
+		if (!res.ok) {
+			const text = await res.text();
+			throw new Error("Drive API " + res.status + " " + res.statusText + " -> " + text);
+		}
+
+		const contentType = res.headers.get("content-type") || "";
+		if (contentType.includes("application/json")) {
+			return res.json();
+		}
+		return res.text();
+	}
+
+	async function fetchUserProfile() {
+		try {
+			const profile = await driveFetch("https://www.googleapis.com/drive/v3/about?fields=user(displayName,emailAddress)");
+			state.userProfile = profile && profile.user ? profile.user : null;
+			updateAccountInfo();
+			if (state.userProfile && state.userProfile.emailAddress) {
+				appendLog("Signed in as: " + state.userProfile.emailAddress);
+			}
+		} catch (err) {
+			state.userProfile = null;
+			updateAccountInfo();
+			appendLog("Could not load signed-in account details: " + err.message);
+		}
+	}
+
+	async function finishSignedInState(statusMessage, logMessage) {
+		await fetchUserProfile();
+		setStatus(statusMessage, "ok");
+		appendLog(logMessage);
+		setBusy(false);
+		await refreshBackupList();
+		try {
+			await loadSelectedFolder();
+		} catch (e) {
+			console.warn("Failed to load saved folder:", e);
+		}
+	}
+
+	async function findFolderInParent(folderName, parentId) {
+		const safeName = escapeDriveQueryValue(folderName);
+		const q = "mimeType='application/vnd.google-apps.folder' and name='" + safeName + "' and '" + parentId + "' in parents and trashed=false";
+		const url = "https://www.googleapis.com/drive/v3/files?q=" + encodeURIComponent(q) + "&fields=files(id,name,mimeType)&pageSize=1";
+		const result = await driveFetch(url);
+		return result.files && result.files.length ? result.files[0] : null;
+	}
+
+	async function createFolderInParent(folderName, parentId) {
+		return driveFetch("https://www.googleapis.com/drive/v3/files?fields=id,name,mimeType", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				name: folderName,
+				mimeType: "application/vnd.google-apps.folder",
+				parents: [parentId]
+			})
+		});
+	}
+
+	async function resolveOrCreatePath(pathValue) {
+		const normalized = normalizeFolderPath(pathValue);
+		const segments = normalized.split("/").filter(Boolean);
+
+		if (!segments.length) {
+			return { id: "root", name: "My Drive (Root)", path: "/" };
+		}
+
+		let parentId = "root";
+		let currentName = "My Drive (Root)";
+
+		for (const segment of segments) {
+			const existing = await findFolderInParent(segment, parentId);
+			if (existing) {
+				parentId = existing.id;
+				currentName = existing.name;
+				continue;
+			}
+
+			const created = await createFolderInParent(segment, parentId);
+			parentId = created.id;
+			currentName = created.name;
+		}
+
+		return { id: parentId, name: currentName, path: normalized };
+	}
+
+	async function findOrCreateFolder() {
+		if (state.folderId) return state.folderId;
+
+		const targetPath = normalizeFolderPath(state.selectedFolderPath || DEFAULT_BACKUP_PATH);
+		state.selectedFolderPath = targetPath;
+		folderDom.folderPathInput.value = targetPath;
+
+		const resolved = await resolveOrCreatePath(targetPath);
+		state.selectedFolder = { id: resolved.id, name: resolved.name };
+		state.folderId = resolved.id;
+
+		appendLog("Using destination path: " + targetPath + " -> " + resolved.id);
+		return state.folderId;
+	}
+
+	function collectKnownLocalStorage() {
+		const data = {};
+		KNOWN_KEYS.forEach((key) => {
+			const raw = localStorage.getItem(key);
+			if (raw !== null) {
+				data[key] = raw;
+			}
+		});
+		return data;
+	}
+
+	function buildBackupPayload() {
+		return {
+			schemaVersion: 1,
+			generatedAt: nowIso(),
+			origin: window.location.origin,
+			path: window.location.pathname,
+			knownKeys: KNOWN_KEYS,
+			values: collectKnownLocalStorage()
+		};
+	}
+
+	function multipartBody(metadata, content) {
+		const boundary = "-------314159265358979323846";
+		const body =
+			"--" + boundary + "\r\n" +
+			"Content-Type: application/json; charset=UTF-8\r\n\r\n" +
+			JSON.stringify(metadata) + "\r\n" +
+			"--" + boundary + "\r\n" +
+			"Content-Type: application/json; charset=UTF-8\r\n\r\n" +
+			content + "\r\n" +
+			"--" + boundary + "--";
+		return { boundary, body };
+	}
+
+	async function listFilesByName(fileName) {
+		const folderId = await findOrCreateFolder();
+		const q = "name='" + fileName + "' and '" + folderId + "' in parents and trashed=false";
+		const url = "https://www.googleapis.com/drive/v3/files?q=" + encodeURIComponent(q) + "&fields=files(id,name,modifiedTime,size)&pageSize=10";
+		const data = await driveFetch(url);
+		return data.files || [];
+	}
+
+	async function uploadFileInFolder(fileName, payloadObject, updateExisting) {
+		const folderId = await findOrCreateFolder();
+		const payloadText = JSON.stringify(payloadObject, null, 2);
+		const existing = updateExisting ? await listFilesByName(fileName) : [];
+
+		const metadata = {
+			name: fileName,
+			mimeType: "application/json"
+		};
+
+		if (!existing.length) {
+			metadata.parents = [folderId];
+		}
+
+		const mp = multipartBody(metadata, payloadText);
+		const base = "https://www.googleapis.com/upload/drive/v3/files";
+		const target = existing.length ? (base + "/" + existing[0].id) : base;
+		const method = existing.length ? "PATCH" : "POST";
+
+		const result = await driveFetch(target + "?uploadType=multipart&fields=id,name,modifiedTime,size", {
+			method,
+			headers: {
+				"Content-Type": "multipart/related; boundary=" + mp.boundary
+			},
+			body: mp.body
+		});
+
+		return result;
+	}
+
+	async function backupNow() {
+		setBusy(true);
+		setStatus("Running backup to Google Drive...", "warn");
+
+		try {
+			const payload = buildBackupPayload();
+			const snapshotName = SNAPSHOT_PREFIX + fileTimestamp() + ".json";
+
+			const rolling = await uploadFileInFolder(ROLLING_FILE_NAME, payload, true);
+			const snapshot = await uploadFileInFolder(snapshotName, payload, false);
+
+			dom.backupSummary.textContent =
+				"Latest rolling file: " + (rolling.name || ROLLING_FILE_NAME) +
+				" | Snapshot: " + (snapshot.name || snapshotName) +
+				" | Keys backed up: " + Object.keys(payload.values).length;
+
+			appendLog("Backup complete. Rolling file id: " + rolling.id + ", snapshot id: " + snapshot.id);
+			setStatus("Backup complete.", "ok");
+			renderKnownKeys();
+			await refreshBackupList();
+		} catch (err) {
+			console.error("Backup failed", err);
+			appendLog("Backup failed: " + err.message);
+			setStatus("Backup failed: " + err.message, "err");
+		} finally {
+			setBusy(false);
+		}
+	}
+
+	async function listBackups() {
+		const folderId = await findOrCreateFolder();
+		const q =
+			"'" + folderId + "' in parents and trashed=false and (name='" + ROLLING_FILE_NAME +
+			"' or name contains '" + SNAPSHOT_PREFIX + "')";
+		const url = "https://www.googleapis.com/drive/v3/files?q=" + encodeURIComponent(q) +
+			"&orderBy=modifiedTime desc&fields=files(id,name,modifiedTime,size)&pageSize=50";
+		const result = await driveFetch(url);
+		return result.files || [];
+	}
+
+	async function downloadBackup(fileId) {
+		const url = "https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(fileId) + "?alt=media";
+		const text = await driveFetch(url);
+		let parsed;
+		try {
+			parsed = JSON.parse(text);
+		} catch (e) {
+			throw new Error("Backup JSON is invalid.");
+		}
+		if (!parsed || typeof parsed !== "object" || typeof parsed.values !== "object") {
+			throw new Error("Backup payload format is invalid.");
+		}
+		return parsed;
+	}
+
+	function restoreWithPrompts(payload) {
+		const incoming = payload.values || {};
+		const keys = Object.keys(incoming);
+		let applied = 0;
+		let skipped = 0;
+
+		for (const key of keys) {
+			const incomingRaw = String(incoming[key]);
+			const localRaw = localStorage.getItem(key);
+
+			if (localRaw !== null && localRaw !== incomingRaw) {
+				const overwrite = window.confirm(
+					"Conflict for key: " + key + "\n\n" +
+					"Local value and backup value differ.\n" +
+					"Press OK to overwrite local value, or Cancel to skip this key."
+				);
+				if (!overwrite) {
+					skipped += 1;
+					appendLog("Skipped key due to conflict: " + key);
+					continue;
+				}
+			}
+
+			localStorage.setItem(key, incomingRaw);
+			applied += 1;
+			appendLog("Restored key: " + key);
+		}
+
+		renderKnownKeys();
+		setStatus("Restore completed. Applied: " + applied + ", skipped: " + skipped, "ok");
+	}
+
+	async function refreshBackupList() {
+		setBusy(true);
+		setStatus("Refreshing backup list...", "warn");
+
+		try {
+			const files = await listBackups();
+			dom.backupList.innerHTML = "";
+
+			if (!files.length) {
+				const empty = document.createElement("div");
+				empty.className = "backup-item";
+				empty.textContent = "No backups found in Drive folder yet.";
+				dom.backupList.appendChild(empty);
+				setStatus("No backup files found.", "warn");
+				appendLog("No backup files found in Drive folder.");
+				return;
+			}
+
+			files.forEach((file) => {
+				const row = document.createElement("div");
+				row.className = "backup-item";
+
+				const left = document.createElement("div");
+				const title = document.createElement("div");
+				title.textContent = file.name;
+				const meta = document.createElement("div");
+				meta.className = "meta";
+				meta.textContent = "Modified: " + new Date(file.modifiedTime).toLocaleString() +
+					" | Size: " + (file.size || "?") + " bytes";
+				left.appendChild(title);
+				left.appendChild(meta);
+
+				const right = document.createElement("div");
+				const btnRestore = document.createElement("button");
+				btnRestore.className = "secondary";
+				btnRestore.textContent = "Restore";
+				btnRestore.addEventListener("click", async () => {
+					const proceed = window.confirm("Restore from file: " + file.name + " ?");
+					if (!proceed) return;
+
+					setBusy(true);
+					setStatus("Downloading backup for restore...", "warn");
+					try {
+						const payload = await downloadBackup(file.id);
+						restoreWithPrompts(payload);
+					} catch (err) {
+						console.error("Restore failed", err);
+						setStatus("Restore failed: " + err.message, "err");
+						appendLog("Restore failed for " + file.name + ": " + err.message);
+					} finally {
+						setBusy(false);
+					}
+				});
+
+				right.appendChild(btnRestore);
+				row.appendChild(left);
+				row.appendChild(right);
+				dom.backupList.appendChild(row);
+			});
+
+			setStatus("Backup list refreshed.", "ok");
+			appendLog("Backup list refreshed. Count: " + files.length);
+		} catch (err) {
+			console.error("Failed to refresh list", err);
+			setStatus("Failed to refresh list: " + err.message, "err");
+			appendLog("Failed to refresh list: " + err.message);
+		} finally {
+			setBusy(false);
+		}
+	}
+
+	async function signIn() {
+		setBusy(true);
+		setStatus("Signing in...", "warn");
+
+		try {
+			await requestAccessToken(hasStoredGrant() ? "" : "consent");
+			await finishSignedInState("Signed in to Google Drive scope.", "Sign-in successful.");
+		} catch (err) {
+			console.error("Sign-in failed", err);
+			setStatus("Sign-in failed: " + err.message, "err");
+			appendLog("Sign-in failed: " + err.message);
+			setBusy(false);
+		}
+	}
+
+	async function signInWithFolderLoad() {
+		await signIn();
+	}
+
+	function signOut() {
+		if (!state.accessToken) return;
+
+		state.accessToken = "";
+		state.tokenExpiresAt = 0;
+		state.folderId = "";
+		state.selectedFolder = null;
+		state.userProfile = null;
+		updateAccountInfo();
+		updateFolderStatus();
+
+		setBusy(false);
+		setStatus("Signed out on this page.", "warn");
+		appendLog("Signed out locally without revoking Drive access.");
+	}
+
+	function initAuthClient() {
+		state.clientId = getClientId();
+		if (!state.clientId || state.clientId.includes("YOUR_CLIENT_ID") || state.clientId.includes("YOUR_GOOGLE_OAUTH")) {
+			setStatus("Set a valid OAuth client ID before signing in.", "warn");
+			appendLog("Missing OAuth client ID. Configure window.GDRIVE_SYNC_CONFIG.clientId.");
+			return false;
+		}
+
+		if (!window.google || !google.accounts || !google.accounts.oauth2) {
+			setStatus("Google Identity Services script not loaded yet.", "err");
+			appendLog("GIS not loaded.");
+			return false;
+		}
+
+		state.tokenClient = google.accounts.oauth2.initTokenClient({
+			client_id: state.clientId,
+			scope: DRIVE_SCOPE,
+			callback: () => {}
+		});
+
+		return true;
+	}
+
+	function wireEvents() {
+		dom.btnSignIn.addEventListener("click", async () => {
+			if (!state.tokenClient && !initAuthClient()) {
+				return;
+			}
+			await signInWithFolderLoad();
+		});
+
+		dom.btnSignOut.addEventListener("click", () => {
+			signOut();
+		});
+
+		dom.btnBackup.addEventListener("click", async () => {
+			await backupNow();
+		});
+
+		dom.btnRefresh.addEventListener("click", async () => {
+			await refreshBackupList();
+		});
+
+		folderDom.folderPathInput.addEventListener("blur", async () => {
+			const normalized = normalizeFolderPath(folderDom.folderPathInput.value);
+			folderDom.folderPathInput.value = normalized;
+			state.selectedFolderPath = normalized;
+			state.folderId = "";
+			state.selectedFolder = null;
+			updateFolderStatus();
+			if (state.accessToken) {
+				await saveSelectedFolder();
+				appendLog("Saved destination path: " + normalized);
+			}
+		});
+	}
+	function init() {
+		dom.log.textContent = "";
+		appendLog("Page initialized.");
+		state.selectedFolderPath = normalizeFolderPath(state.selectedFolderPath);
+		folderDom.folderPathInput.value = state.selectedFolderPath;
+		updateAccountInfo();
+		renderKnownKeys();
+		updateFolderStatus();
+		wireEvents();
+		setBusy(false);
+
+		if (window.google && google.accounts && google.accounts.oauth2) {
+			if (initAuthClient()) {
+				setStatus("Not signed in.", "warn");
+				appendLog("Ready for sign-in.");
+			}
+		} else {
+			setStatus("Waiting for Google Identity Services to load.", "warn");
+			appendLog("GIS loading asynchronously.");
+		}
+	}
+
+	window.addEventListener("load", () => {
+		init();
+	});
+})();
+</script>
+</body>
+</html>

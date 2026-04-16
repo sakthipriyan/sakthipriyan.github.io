@@ -110,17 +110,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     
                     <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                         
-                        <div style="display: flex; border: 2px solid var(--secondary-color); border-radius: 4px; overflow: hidden; background: var(--bg-primary, #fff);">
-                            <div style="padding: 0.5rem 0.6rem; background: #f8f9fa; border-right: 1px solid #ddd; font-size: 0.85em; color: #555; display: flex; align-items: center;">
-                                👤
-                            </div>
-                            <input 
-                                type="text" 
-                                v-model="uploadInvestorName" 
-                                placeholder="Investor/Owner Name" 
-                                style="border: none; padding: 0.5rem; outline: none; width: 150px; font-size: 0.9em;"
-                            >
-                        </div>
+
 \n                        <div style="display: flex; border: 2px solid var(--secondary-color); border-radius: 4px; overflow: hidden; background: var(--bg-primary, #fff);">
                             <div style="padding: 0.5rem 0.6rem; background: #f8f9fa; border-right: 1px solid #ddd; font-size: 0.85em; color: #555; display: flex; align-items: center;">
                                 🔒
@@ -220,14 +210,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         
                     <!-- TABS NAVIGATION -->
                     <div class="mode-toggle" style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
-                        <button type="button" :class="{'active': activeTab === 'overview'}" @click="activeTab = 'overview'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🌍 Overview</button>
-                        <button type="button" :class="{'active': activeTab === 'goals'}" @click="activeTab = 'goals'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🎯 Goals</button>
+                        <button type="button" :class="{'active': activeTab === 'summary'}" @click="activeTab = 'summary'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🌍 Summary</button>
+                        <button type="button" :class="{'active': activeTab === 'explore'}" @click="activeTab = 'explore'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🧭 Explore</button>
                         <button type="button" :class="{'active': activeTab === 'tagging'}" @click="activeTab = 'tagging'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🏷️ Tagging</button>
                         <button type="button" :class="{'active': activeTab === 'data'}" @click="activeTab = 'data'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🗂️ Data</button>
+                        <button type="button" :class="{'active': activeTab === 'setup'}" @click="activeTab = 'setup'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">⚙️ Setup</button>
                     </div>
 
-                    <!-- TAB 1: OVERVIEW -->
-                    <div v-show="activeTab === 'overview'">
+                    <!-- TAB 1: SUMMARY -->
+                    <div v-show="activeTab === 'summary'">
                         <!-- Goal Cards (above Investors) -->
                         <div v-if="goals.length > 0" style="margin-bottom: 2rem;">
                             <h3 style="margin: 0 0 1rem 0; color: var(--primary-color); font-size: 1.1em; letter-spacing: 0.02em;">
@@ -341,8 +332,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 </div>
                             </div>
                         </div>
-<!-- 📈 Summary Report -->
-                    <div class="investment-plan" v-if="summaryData.length > 0">
+
+                    </div> <!-- End of SUMMARY TAB -->
+
+                    <!-- TAB 2: EXPLORE -->
+                    <div v-show="activeTab === 'explore'">
+
+                        <!-- 📈 Summary Report -->
+                        <div class="investment-plan" v-if="summaryData.length > 0">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
                             <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
                                 <h2 style="margin: 0;">📊 Allocation Report</h2>
@@ -427,6 +424,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             <div id="portfolio-allocation-chart" class="chart-container"></div>
                         </div>
                     </div>
+                    </div> <!-- End of EXPLORE TAB -->
                     
                 </div>
             </div>
@@ -434,8 +432,70 @@ window.initializeTool.portfolioTracker = async function (container, config) {
    
                     </div>
 
-                    <!-- TAB 2: GOALS -->
-                    <div v-show="activeTab === 'goals'">
+                    <!-- TAB 2: SETUP (Previously Goals) -->
+                    <div v-show="activeTab === 'setup'">
+                        <!-- INVESTORS SETUP -->
+                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin: 0;">👥 Investors Setup</h3>
+                                <button type="button" @click="addInvestor" style="padding: 0.5rem 1rem; background: var(--state-success, #4CAF50); border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">+ Add Investor</button>
+                            </div>
+                            <p style="color: #666; font-size: 0.9em; margin-top: 0; margin-bottom: 1.5rem;">Define investors and their full names to enable automated statement tagging.</p>
+                            
+                            <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.95em;">
+                                <thead>
+                                    <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                                        <th style="padding: 0.75rem; text-align: center; width: 40px; color: #6b7280;">↕</th>
+                                        <th style="padding: 0.75rem; text-align: left; width: 25%; color: #374151;">Name</th>
+                                        <th style="padding: 0.75rem; text-align: left; color: #374151;">Full Name(s)</th>
+                                        <th style="padding: 0.75rem; text-align: center; width: 50px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(inv, index) in investors" :key="inv.id"
+                                        draggable="true"
+                                        @dragstart="dragStart($event, index, 'investor')"
+                                        @dragend="dragEnd($event)"
+                                        @dragover.prevent
+                                        @drop="drop($event, index, 'investor')"
+                                        style="cursor: move; border-bottom: 1px solid #f3f4f6; transition: background-color 0.2s;">
+                                        
+                                        <td style="padding: 0.75rem; text-align: center; color: #9ca3af; cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">
+                                            ⋮⋮
+                                        </td>
+                                        
+                                        <td style="padding: 0.75rem;">
+                                            <input type="text" v-model="inv.name" placeholder="Investor Name" @change="saveSettings"
+                                                   style="width: 100%; padding: 0.4rem; border: 1px solid #d1d5db; border-radius: 4px;">
+                                        </td>
+                                        
+                                        <td style="padding: 0.75rem;">
+                                            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                                                <span v-for="(fName, fnIdx) in inv.fullNames" :key="fnIdx" 
+                                                      style="background-color: #e5e7eb; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; display: flex; align-items: center; gap: 0.3rem;">
+                                                    {{ fName }}
+                                                    <button type="button" @click="removeFullName(index, fnIdx)" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 0; font-size: 1.1em; line-height: 1;">&times;</button>
+                                                </span>
+                                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                                    <input type="text" v-model="inv.newFullName" placeholder="Add full name..." @keyup.enter="addFullName(index)"
+                                                           style="padding: 0.3rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.9em; width: 150px;">
+                                                    <button type="button" @click="addFullName(index)" style="background: #e5e7eb; border: none; border-radius: 4px; padding: 0.3rem 0.5rem; cursor: pointer;">+</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                        <td style="padding: 0.75rem; text-align: center;">
+                                            <button type="button" @click="removeInvestor(index)" style="background: none; border: none; color: #ef4444; font-size: 1.2em; cursor: pointer;" title="Remove Investor">&times;</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div v-if="investors.length === 0" style="text-align: center; padding: 1rem; color: #6b7280; font-style: italic;">
+                                No investors defined.
+                            </div>
+                        </div>
+
+                        <!-- GOALS DEFINITION -->
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <h3 style="margin: 0;">🎯 Financial Goals</h3>
                             <button type="button" @click="addNewGoal" style="padding: 0.5rem 1rem; background: var(--state-success, #4CAF50); border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">+ Add Goal</button>
@@ -693,8 +753,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                                             <span style="font-weight: 500;">Folio: {{ folio.folioNo }}</span>
                                             <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                                <span style="font-size: 0.85em; color: #666;">Investor:</span>
-                                                <input type="text" v-model="folioMappings[folio.folioNo]" @change="saveGoalsAndTags" placeholder="Assign Name" style="padding: 0.2rem 0.4rem; font-size: 0.85em; border: 1px solid #ccc; border-radius: 3px; max-width: 150px;">
+                                                <span style="font-weight: 500;">Investor: {{ folioMappings[folio.folioNo] || 'Unassigned' }}</span>
+                                                <span v-if="folio.funds.length > 0 && folio.funds[0].originalName" style="color: #6b7280; font-weight: normal; font-size: 0.85em;">({{ folio.funds[0].originalName }})</span>
                                             </div>
                                         </div>
                                         <span style="font-size: 0.9em; font-weight: bold;">₹{{ formatNumber(folio.marketValue) }}</span>
@@ -759,8 +819,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                                         <span style="font-weight: bold; font-size: 1.05em;">📂 Account: {{ account.accountNo }}</span>
                                         <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                            <span style="font-size: 0.85em; color: #666;">Investor:</span>
-                                            <input type="text" v-model="folioMappings[account.accountNo]" @change="saveGoalsAndTags" placeholder="Assign Name" style="padding: 0.2rem 0.4rem; font-size: 0.85em; border: 1px solid #ccc; border-radius: 3px; max-width: 150px;">
+                                            <span style="font-weight: bold; font-size: 1.05em;">Investor: {{ folioMappings[account.accountNo] || 'Unassigned' }}</span>
+                                            <span v-if="account.funds.length > 0 && account.funds[0].originalName" style="color: #6b7280; font-weight: normal; font-size: 0.85em;">({{ account.funds[0].originalName }})</span>
                                         </div>
                                     </div>
                                     <span style="font-weight: bold;">₹{{ formatNumber(account.marketValue) }} / &#36;{{ formatNumber(account.marketValueUsd) }}</span>
@@ -852,6 +912,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             let storedFunds = [];
             let storedUsdRate = null;
             let storedGoals = [];
+            let storedInvestors = [];
             let storedFolioMappings = {};
             try {
                 const rawTags = localStorage.getItem('realvalue-portfolio-tags');
@@ -882,6 +943,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 const rawGoals = localStorage.getItem('realvalue-portfolio-goals');
                 if (rawGoals) storedGoals = JSON.parse(rawGoals);
+
+                const rawInvestors = localStorage.getItem('realvalue-portfolio-investors');
+                if (rawInvestors) storedInvestors = JSON.parse(rawInvestors);
 
                 const rawFolioMappings = localStorage.getItem('realvalue-portfolio-foliomappings');
                 if (rawFolioMappings) storedFolioMappings = JSON.parse(rawFolioMappings);
@@ -915,9 +979,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
 
             return {
-                activeTab: 'overview',
+                activeTab: 'summary',
                 uploadInvestorName: '',
                 goals: storedGoals,
+                investors: storedInvestors,
                 folioMappings: storedFolioMappings,
                 investorCards: [],
                 goalCurrentValues: {},
@@ -987,6 +1052,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         this.updateChart();
                     });
                 }
+            },
+            activeTab(newVal) {
+                if (newVal === 'explore' && this.portfolioViewTab === 'chart') {
+                    this.$nextTick(() => {
+                        if (this.chart) {
+                            this.chart.resize();
+                        } else if (this.summaryData.length > 0) {
+                            this.updateChart();
+                        }
+                    });
+                }
             }
         },
         methods: {
@@ -1002,6 +1078,96 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings));
                 } catch(e) {}
                 this.saveTagsAndCalculate();
+            },
+            autoTagInvestor(extractedName) {
+                if (!extractedName) return "Unknown";
+                let matchedInv = this.investors.find(inv => 
+                    inv.fullNames.some(fn => fn.toLowerCase() === extractedName.toLowerCase())
+                );
+                if (matchedInv) {
+                    return matchedInv.name;
+                }
+                
+                // Fallback: Create new investor mapping
+                let firstName = extractedName.split(' ')[0] || extractedName;
+                firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+                
+                let targetInv = this.investors.find(inv => inv.name.toLowerCase() === firstName.toLowerCase());
+                if (!targetInv) {
+                    targetInv = {
+                        id: 'inv_' + Date.now() + Math.random().toString(36).substr(2, 5),
+                        name: firstName,
+                        newFullName: '',
+                        fullNames: [extractedName]
+                    };
+                    this.investors.push(targetInv);
+                } else {
+                    targetInv.fullNames.push(extractedName);
+                }
+                this.saveSettings();
+                return targetInv.name;
+            },
+            saveInvestors() {
+                try {
+                    localStorage.setItem('realvalue-portfolio-investors', JSON.stringify(this.investors));
+                } catch(e) {}
+            },
+            saveSettings() {
+                this.saveInvestors();
+            },
+            addInvestor() {
+                this.investors.push({
+                    id: 'inv_' + Date.now() + Math.random().toString(36).substr(2, 5),
+                    name: 'New Investor',
+                    newFullName: '',
+                    fullNames: []
+                });
+                this.saveSettings();
+            },
+            removeInvestor(index) {
+                if(confirm("Are you sure you want to delete this investor?")) {
+                    this.investors.splice(index, 1);
+                    this.saveSettings();
+                }
+            },
+            addFullName(index) {
+                if(this.investors[index].newFullName && this.investors[index].newFullName.trim() !== '') {
+                    this.investors[index].fullNames.push(this.investors[index].newFullName.trim());
+                    this.investors[index].newFullName = '';
+                    this.saveSettings();
+                }
+            },
+            removeFullName(index, fnIdx) {
+                this.investors[index].fullNames.splice(fnIdx, 1);
+                this.saveSettings();
+            },
+            dragStart(event, index, type) {
+                this.draggedIndex = index;
+                this.draggedType = type;
+                event.target.closest('tr').style.opacity = '0.5';
+            },
+            dragEnd(event) {
+                event.target.closest('tr').style.opacity = '1';
+            },
+            drop(event, dropIndex, type) {
+                event.preventDefault();
+                if (this.draggedType !== type || this.draggedIndex === null) return;
+                
+                let array;
+                if (type === 'investor') {
+                    array = this.investors;
+                } else {
+                    return;
+                }
+                
+                const draggedItem = array[this.draggedIndex];
+                array.splice(this.draggedIndex, 1);
+                array.splice(dropIndex, 0, draggedItem);
+                
+                this.draggedIndex = null;
+                this.draggedType = null;
+                
+                this.saveSettings();
             },
             addNewGoal() {
                 this.goals.push({
@@ -1658,13 +1824,20 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const tradeQuantities = {}; // symbol -> net quantity from parsed trades
                 const tradeRecords = {}; // symbol -> [{date, amount, quantity}]
                 let accountNo = 'IBKR';
+                let ibkrExtractedName = null;
+                
                 for (const line of lines) {
                     if (!line.trim()) continue;
                     const fields = this.parseIbkrCsvLine(line);
                     if (fields.length < 3) continue;
                     // Account Information: section,Data,Account,<account number>
-                    if (fields[0] === 'Account Information' && fields[1] === 'Data' && fields[2] === 'Account') {
-                        accountNo = fields[3] || 'IBKR';
+                    if (fields[0] === 'Account Information' && fields[1] === 'Data') {
+                        if (fields[2] === 'Account') {
+                            accountNo = fields[3] || 'IBKR';
+                        }
+                        if (fields[2] === 'Name') {
+                            ibkrExtractedName = fields[3];
+                        }
                     }
                     // Financial Instrument Information: section,Data,AssetCat,Symbol(s),Description,Conid,ISIN,...
                     if (fields[0] === 'Financial Instrument Information' && fields[1] === 'Data') {
@@ -1773,7 +1946,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         transactionCashflowsInr: existingFund && Array.isArray(existingFund.transactionCashflowsInr) ? existingFund.transactionCashflowsInr : [],
                         transactionCashflowsUsd: existingFund && Array.isArray(existingFund.transactionCashflowsUsd) ? existingFund.transactionCashflowsUsd : [],
                         transactionUnitFlows: existingFund && Array.isArray(existingFund.transactionUnitFlows) ? existingFund.transactionUnitFlows : [],
-                        source: 'IBKR'
+                        source: 'IBKR',
+                        originalName: ibkrExtractedName ? ibkrExtractedName.trim() : null
                     };
                     if (existingIdx !== -1) {
                         Object.assign(this.funds[existingIdx], fundObj);
@@ -1888,12 +2062,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         }
                     }
                 }
-                if (this.uploadInvestorName && this.uploadInvestorName.trim() !== '') {
-                    this.folioMappings[accountNo] = this.uploadInvestorName.trim();
-                    this.uploadInvestorName = ''; // reset
+                if (ibkrExtractedName && ibkrExtractedName.trim() !== '') {
+                    this.folioMappings[accountNo] = this.autoTagInvestor(ibkrExtractedName.trim());
                     try { localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings)); } catch(e){}
                 }
-
                 if (positions.length === 0) {
                     this.ibkrError = 'No open stock positions found in the IBKR CSV. Ensure the file includes the Open Positions section.';
                     return;
@@ -2038,14 +2210,58 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         const pdf = await loadingTask.promise;
                         
                         let fullText = '';
+                        let casExtractedName = null;
                         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                             const page = await pdf.getPage(pageNum);
                             const textContent = await page.getTextContent();
+                            
+                            if (pageNum === 1) {
+                                const emailItem = textContent.items.find(item => item.str.toLowerCase().includes('email id:'));
+                                if (emailItem) {
+                                    const leftMarginX = emailItem.transform[4];
+                                    const leftItems = textContent.items.filter(item => 
+                                        item.transform[4] >= leftMarginX - 10 && 
+                                        item.transform[4] < leftMarginX + 250
+                                    );
+                                    
+                                    leftItems.sort((a, b) => {
+                                        if (Math.abs(a.transform[5] - b.transform[5]) > 5) return b.transform[5] - a.transform[5];
+                                        return a.transform[4] - b.transform[4];
+                                    });
+
+                                    let currentY = null;
+                                    let line = [];
+                                    const lines = [];
+                                    
+                                    leftItems.forEach(item => {
+                                        if (currentY === null || Math.abs(item.transform[5] - currentY) > 5) {
+                                            if (line.length > 0) lines.push(line.join(' '));
+                                            line = [item.str.trim()];
+                                            currentY = item.transform[5];
+                                        } else {
+                                            line.push(item.str.trim());
+                                        }
+                                    });
+                                    if (line.length > 0) lines.push(line.join(' '));
+                                    
+                                    const cleanLines = lines.map(l => l.replace(/\s{2,}/g, ' ').trim()).filter(l => l.length > 0);
+                                    
+                                    for (let i = 0; i < cleanLines.length; i++) {
+                                        if (cleanLines[i].toLowerCase().startsWith("email id:")) {
+                                            if (i + 1 < cleanLines.length) {
+                                                casExtractedName = cleanLines[i + 1];
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
                             const pageText = this.extractPdfPageText(textContent);
                             fullText += pageText + ' \n ';
                         }
 
-                        this.processParsedText(fullText);
+                        this.processParsedText(fullText, casExtractedName);
                     } catch (error) {
                         console.error("PDF Parsing Error:", error);
                         if (error.name === 'PasswordException') {
@@ -2063,7 +2279,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             },
 
             // CAS parsing engine (cas.html stateful line-by-line approach)
-            processParsedText(rawText) {
+            processParsedText(rawText, casExtractedName) {
                 // --- ENHANCED SANITIZER (cas.html): remove Registrar column bleed + stray RTAs ---
                 rawText = rawText.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
                 rawText = rawText.replace(/Registrar\s*:/gi, '');
@@ -2267,13 +2483,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         if (!Array.isArray(this.funds[existingIdx].transactionCashflowsInr)) this.funds[existingIdx].transactionCashflowsInr = [];
                         if (!Array.isArray(this.funds[existingIdx].transactionUnitFlows)) this.funds[existingIdx].transactionUnitFlows = [];
                         this.funds[existingIdx].source = 'CAS';
+                        if (casExtractedName && casExtractedName.trim() !== '') {
+                            this.funds[existingIdx].originalName = casExtractedName.trim();
+                        }
                     } else {
                         this.funds.push({
                             id: fundId, fundHouse, folioNo, fundName, isin,
                             closingUnits, nav, investedValue, marketValue,
                             valuationDate: reportDate,
                             transactionCashflowsInr: [], transactionCashflowsUsd: [], transactionUnitFlows: [],
-                            source: 'CAS'
+                            source: 'CAS',
+                            originalName: casExtractedName ? casExtractedName.trim() : null
                         });
                     }
                     const targetFund = existingIdx !== -1 ? this.funds[existingIdx] : this.funds[this.funds.length - 1];
@@ -2317,11 +2537,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     }
                 }
 
-                if (this.uploadInvestorName && this.uploadInvestorName.trim() !== '') {
+                if (casExtractedName && casExtractedName.trim() !== '') {
+                    const mappedName = this.autoTagInvestor(casExtractedName.trim());
                     parsedFunds.forEach(pf => {
-                        this.folioMappings[pf.folioNo] = this.uploadInvestorName.trim();
+                        this.folioMappings[pf.folioNo] = mappedName;
                     });
-                    this.uploadInvestorName = ''; // reset after
                     try { localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings)); } catch(e){}
                 }
 
