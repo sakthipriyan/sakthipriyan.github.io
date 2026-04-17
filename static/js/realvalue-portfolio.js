@@ -454,12 +454,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
 
                         <!-- INVESTORS SETUP -->
-                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <h3 style="margin: 0;">👥 Investors Setup</h3>
-                                <button type="button" @click="addInvestor" style="padding: 0.5rem 1rem; background: var(--state-success, #4CAF50); border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">+ Add Investor</button>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <div style="display: flex; flex-direction: column;">
+                                <h3 style="margin: 0 0 0.2rem 0;">👥 Investors Setup</h3>
+                                <p style="color: #666; font-size: 0.85em; margin: 0;">Define investors and their full names to enable automated statement tagging.</p>
                             </div>
-                            <p style="color: #666; font-size: 0.9em; margin-top: 0; margin-bottom: 1.5rem;">Define investors and their full names to enable automated statement tagging.</p>
+                            <button type="button" class="share-button" @click="addInvestor">
+                                ➕ Investor
+                            </button>
+                        </div>
+                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
                             
                             <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.95em;">
                                 <thead>
@@ -515,9 +519,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
 
                         <!-- GOALS DEFINITION -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 style="margin: 0;">🎯 Financial Goals</h3>
-                            <button type="button" @click="addNewGoal" style="padding: 0.5rem 1rem; background: var(--state-success, #4CAF50); border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">+ Add Goal</button>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <div style="display: flex; flex-direction: column;">
+                                <h3 style="margin: 0 0 0.2rem 0;">🎯 Financial Goals</h3>
+                                <p style="color: #666; font-size: 0.85em; margin: 0;">Define your portfolio targets and asset allocation structures.</p>
+                            </div>
+                            <button type="button" class="share-button" @click="addNewGoal">
+                                ➕ Goal
+                            </button>
                         </div>
                         
                         <div v-if="goals.length === 0" style="padding: 2rem; text-align: center; background: white; border-radius: 8px; border: 1px dashed #ccc; color: #666;">
@@ -525,98 +534,139 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
 
                         <div v-for="(goal, index) in goals" :key="goal.id" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.5rem;">
+                                <!-- LEFT SIDE: Goal Metadata and Amount Setup -->
                                 <div>
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Name</label>
-                                    <input type="text" v-model="goal.name" class="fund-input" placeholder="e.g. Emergency Fund" @change="saveGoalsAndTags">
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Date (Optional)</label>
-                                    <input type="date" v-model="goal.targetDate" class="fund-input" @change="saveGoalsAndTags">
-                                </div>
-                                <div style="grid-column: span 2;">
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Description</label>
-                                    <input type="text" v-model="goal.description" class="fund-input" placeholder="What is this goal for?" @change="saveGoalsAndTags">
-                                </div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f9f9f9; border-radius: 6px;">
-                                <h4 style="margin: 0 0 0.5rem 0; font-size: 1em;">Target Amount Setup</h4>
-                                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                                    <label style="cursor: pointer;"><input type="radio" v-model="goal.amountType" value="NONE" @change="saveGoalsAndTags"> No Set Target (Track Milestones)</label>
-                                    <label style="cursor: pointer;"><input type="radio" v-model="goal.amountType" value="FLAT" @change="saveGoalsAndTags"> Flat Amount</label>
-                                    <label style="cursor: pointer;"><input type="radio" v-model="goal.amountType" value="MONTHS" @change="saveGoalsAndTags"> Contextual (Months × Monthly Amount)</label>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                                        <div style="grid-column: span 2;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Name</label>
+                                            <input type="text" v-model="goal.name" class="fund-input" placeholder="e.g. Emergency Fund" @change="saveGoalsAndTags">
+                                        </div>
+                                        <div style="grid-column: span 2;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Description</label>
+                                            <input type="text" v-model="goal.description" class="fund-input" placeholder="What is this goal for?" @change="saveGoalsAndTags">
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="margin-top: 1.5rem;">
+                                        <div>
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Mode</label>
+                                            <div class="mode-toggle">
+                                                <button type="button" :class="{'active': goal.targetMoney}" @click="toggleGoalTarget(goal, 'money')">💰 Money</button>
+                                                <button type="button" :class="{'active': goal.targetTime}" @click="toggleGoalTarget(goal, 'time')">⏱️ Time</button>
+                                            </div>
+                                        </div>
+
+                                        <div v-if="!goal.targetMoney && !goal.targetTime" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+                                            <p style="font-size: 0.85em; color: #666; margin: 0;">Just track the next milestone</p>
+                                        </div>
+
+                                        <div v-if="goal.targetTime" style="margin-top: 1.25rem;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Date</label>
+                                            <input type="date" v-model="goal.targetDate" class="fund-input" @change="saveGoalsAndTags">
+                                        </div>
+
+                                        <div v-if="goal.targetMoney" style="margin-top: 1.25rem;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Amount Type</label>
+                                            <div class="mode-toggle" style="margin-bottom: 0.5rem; justify-content: flex-start;">
+                                                <button type="button" :class="{'active': goal.amountType === 'FLAT'}" @click="goal.amountType = 'FLAT'; saveGoalsAndTags()">Flat</button>
+                                                <button type="button" :class="{'active': goal.amountType === 'MONTHS'}" @click="goal.amountType = 'MONTHS'; saveGoalsAndTags()">Contextual</button>
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 1.25rem;">
+                                                <p v-if="goal.amountType === 'FLAT'" style="font-size: 0.85em; color: #666; margin: 0;">Define a specific overall corpus size as your final target.</p>
+                                                <p v-if="goal.amountType === 'MONTHS'" style="font-size: 0.85em; color: #666; margin: 0;">Target is derived dynamically by multiplying an exact month count by a monthly expense.</p>
+                                            </div>
+                                            
+                                            <div v-if="goal.amountType === 'FLAT'">
+                                                <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Amount (₹):&nbsp;<strong>₹ {{ formatNumber(getGoalTargetAmount(goal)) }}</strong></label>
+                                                <div class="unit-selector-input">
+                                                    <input type="number" v-model.number="goal.targetAmountFlatValue" class="fund-input" placeholder="0" @input="saveGoalsAndTags">
+                                                    <div class="unit-buttons">
+                                                        <button type="button" :class="{'active': goal.targetAmountFlatUnit === 'crores'}" @click="goal.targetAmountFlatUnit = 'crores'; saveGoalsAndTags()">Crores</button>
+                                                        <button type="button" :class="{'active': goal.targetAmountFlatUnit === 'lakhs'}" @click="goal.targetAmountFlatUnit = 'lakhs'; saveGoalsAndTags()">Lakhs</button>
+                                                        <button type="button" :class="{'active': goal.targetAmountFlatUnit === 'thousands'}" @click="goal.targetAmountFlatUnit = 'thousands'; saveGoalsAndTags()">Thousands</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="goal.amountType === 'MONTHS'" style="display: flex; flex-direction: column; gap: 1rem;">
+                                                <div>
+                                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Number of Months</label>
+                                                    <input type="number" v-model.number="goal.months" class="fund-input" placeholder="e.g. 12" @input="saveGoalsAndTags">
+                                                </div>
+                                                <div>
+                                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Monthly Amount (₹):&nbsp;<strong>₹ {{ formatNumber(getGoalMonthlyAmount(goal)) }}</strong></label>
+                                                    <div class="unit-selector-input">
+                                                        <input type="number" v-model.number="goal.monthlyAmountValue" class="fund-input" placeholder="0" @input="saveGoalsAndTags">
+                                                        <div class="unit-buttons">
+                                                            <button type="button" :class="{'active': goal.monthlyAmountUnit === 'lakhs'}" @click="goal.monthlyAmountUnit = 'lakhs'; saveGoalsAndTags()">Lakhs</button>
+                                                            <button type="button" :class="{'active': goal.monthlyAmountUnit === 'thousands'}" @click="goal.monthlyAmountUnit = 'thousands'; saveGoalsAndTags()">Thousands</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="font-size: 0.95em; color: #15803d; margin-top: 0.2rem;">
+                                                    <strong>Computed Goal Target: </strong> ₹{{ formatNumber(getGoalTargetAmount(goal)) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                                <div v-if="goal.amountType === 'FLAT'">
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Amount (₹)</label>
-                                    <input type="number" v-model.number="goal.targetAmountFlat" class="fund-input" placeholder="0" @change="saveGoalsAndTags">
-                                </div>
-                                <div v-if="goal.amountType === 'MONTHS'" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                    <div>
-                                        <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Number of Months</label>
-                                        <input type="number" v-model.number="goal.months" class="fund-input" placeholder="e.g. 12" @change="saveGoalsAndTags">
+                                <!-- RIGHT SIDE: Target Asset Allocation Table -->
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                        <h4 style="margin: 0; font-size: 1em;">Asset Allocation</h4>
                                     </div>
-                                    <div>
-                                        <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Monthly Amount (₹)</label>
-                                        <input type="number" v-model.number="goal.monthlyAmount" class="fund-input" placeholder="e.g. 40000" @change="saveGoalsAndTags">
+                                    <div v-if="verifyTotalAllocation(goal) && goal.allocations.length > 0" style="color: var(--state-danger, #ff5252); font-size: 0.85em; margin-bottom: 1rem; font-weight: 500;">
+                                        ⚠️ Warning: Total computed allocation is {{ formatPercent(getTotalAllocationPercent(goal)) }}
                                     </div>
-                                    <div style="grid-column: span 2; font-size: 0.9em; color: #15803d;">
-                                        <strong>Computed Goal Target: </strong> ₹{{ formatNumber((goal.months || 0) * (goal.monthlyAmount || 0)) }}
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                                    <h4 style="margin: 0; font-size: 1em;">Target Asset Allocation (100% Total)</h4>
-                                    <button type="button" @click="addAllocationRow(goal)" style="padding: 0.25rem 0.5rem; font-size: 0.8em; cursor: pointer;">+ Add Asset Class</button>
-                                </div>
-                                <div class="table-responsive">
-                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                    <table class="asset-table">
                                         <thead>
-                                            <tr style="border-bottom: 1px solid #ddd;">
-                                                <th style="text-align: left; padding: 0.5rem;">Asset Class</th>
-                                                <th style="text-align: left; padding: 0.5rem;">Allocation Type</th>
-                                                <th style="text-align: left; padding: 0.5rem;">Value</th>
-                                                <th style="text-align: right; padding: 0.5rem;">Computed %</th>
-                                                <th style="width: 40px;"></th>
+                                            <tr>
+                                                <th style="width: 30px; text-align: center;">
+                                                    <button type="button" class="share-button" @click="addAllocationRow(goal)" title="Add asset class" style="padding: 0.25rem 0.5rem; font-size: 1rem;">+</button>
+                                                </th>
+                                                <th>Asset Class</th>
+                                                <th>
+                                                    <span v-if="goal.amountType === 'MONTHS'">Months</span>
+                                                    <span v-else>Target %</span>
+                                                </th>
+                                                <th v-if="goal.amountType === 'MONTHS'">Computed %</th>
+                                                <th style="width: 30px; text-align: center;"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(alloc, aIdx) in goal.allocations" :key="aIdx" style="border-bottom: 1px solid #eee;">
-                                                <td style="padding: 0.5rem;">
-                                                    <input type="text" v-model="alloc.assetClass" class="fund-input" list="asset-class-options" @change="saveGoalsAndTags" style="padding: 0.25rem;">
+                                            <tr v-for="(alloc, aIdx) in goal.allocations" :key="aIdx"
+                                                draggable="true"
+                                                @dragstart="dragStart($event, aIdx, 'allocation_' + goal.id)"
+                                                @dragend="dragEnd($event)"
+                                                @dragover.prevent
+                                                @drop="drop($event, aIdx, 'allocation_' + goal.id)"
+                                                style="cursor: move;">
+                                                <td style="text-align: center; color: #aaa; cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">⋮⋮</td>
+                                                <td>
+                                                    <input type="text" v-model="alloc.assetClass" list="asset-class-options" @change="saveGoalsAndTags" style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; outline: none;" placeholder="Asset name">
                                                 </td>
-                                                <td style="padding: 0.5rem;">
-                                                    <select v-model="alloc.type" class="fund-input" @change="saveGoalsAndTags" style="padding: 0.25rem;">
-                                                        <option value="PERCENT">Percentage %</option>
-                                                        <option value="MONTHS">Months</option>
-                                                    </select>
+                                                <td>
+                                                    <input type="number" v-model.number="alloc.value" @change="saveGoalsAndTags" style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; outline: none;">
                                                 </td>
-                                                <td style="padding: 0.5rem;">
-                                                    <input type="number" v-model.number="alloc.value" class="fund-input" @change="saveGoalsAndTags" style="padding: 0.25rem;">
-                                                </td>
-                                                <td style="padding: 0.5rem; text-align: right; font-weight: bold;">
+                                                <td v-if="goal.amountType === 'MONTHS'" style="font-weight: bold; color: var(--primary-color);">
                                                     {{ formatPercent(computeAllocationPercent(goal, aIdx)) }}
                                                 </td>
-                                                <td style="padding: 0.5rem; text-align: center;">
-                                                    <button type="button" @click="removeAllocationRow(goal, aIdx)" style="color: red; border: none; background: none; cursor: pointer; font-weight: bold; font-size: 1.2em;">&times;</button>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn-remove-subtle" @click="removeAllocationRow(goal, aIdx)" title="Remove">✕</button>
                                                 </td>
                                             </tr>
                                             <tr v-if="!goal.allocations || goal.allocations.length === 0">
-                                                <td colspan="5" style="padding: 1rem; text-align: center; color: #999; font-style: italic;">No asset class allocations defined</td>
+                                                <td :colspan="goal.amountType === 'MONTHS' ? 5 : 4" style="text-align: center; color: #999; font-style: italic; padding: 1rem;">No asset class allocations defined</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div v-if="verifyTotalAllocation(goal) && goal.allocations.length > 0" style="color: var(--state-danger, #ff5252); font-size: 0.85em; margin-top: 0.5rem; text-align: right;">
-                                    ⚠️ Warning: Total computed allocation is roughly {{ formatPercent(getTotalAllocationPercent(goal)) }} (should be 100%)
-                                </div>
                             </div>
                             
-                            <div style="text-align: right; border-top: 1px solid #ddd; padding-top: 1rem;">
-                                <button type="button" @click="deleteGoal(index)" style="padding: 0.4rem 1rem; background: var(--state-danger, #ff5252); border: none; border-radius: 4px; color: white; cursor: pointer; font-size: 0.85em;">🗑️ Delete Goal</button>
+                            <div style="text-align: right; border-top: 1px solid #ddd; padding-top: 1.25rem; margin-top: 1.5rem;">
+                                <button type="button" class="share-button btn-clear-all" @click="deleteGoal(index)">🗑️ Delete Goal</button>
                             </div>
                         </div>
 
@@ -916,7 +966,26 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
 
                 const rawGoals = localStorage.getItem('realvalue-portfolio-goals');
-                if (rawGoals) storedGoals = JSON.parse(rawGoals);
+                if (rawGoals) {
+                    storedGoals = JSON.parse(rawGoals);
+                    storedGoals = storedGoals.map(g => {
+                        if (g.targetAmountFlat && g.targetAmountFlatValue === undefined) {
+                            if (g.targetAmountFlat >= 10000000 && g.targetAmountFlat % 10000000 === 0) { g.targetAmountFlatValue = g.targetAmountFlat / 10000000; g.targetAmountFlatUnit = 'crores'; }
+                            else if (g.targetAmountFlat >= 100000 && g.targetAmountFlat % 100000 === 0) { g.targetAmountFlatValue = g.targetAmountFlat / 100000; g.targetAmountFlatUnit = 'lakhs'; }
+                            else { g.targetAmountFlatValue = g.targetAmountFlat; g.targetAmountFlatUnit = 'thousands'; }
+                        } else if (g.targetAmountFlatValue === undefined) { g.targetAmountFlatValue = null; g.targetAmountFlatUnit = 'lakhs'; }
+                        
+                        if (g.monthlyAmount && g.monthlyAmountValue === undefined) {
+                            if (g.monthlyAmount >= 100000 && g.monthlyAmount % 100000 === 0) { g.monthlyAmountValue = g.monthlyAmount / 100000; g.monthlyAmountUnit = 'lakhs'; }
+                            else { g.monthlyAmountValue = g.monthlyAmount; g.monthlyAmountUnit = 'thousands'; }
+                        } else if (g.monthlyAmountValue === undefined) { g.monthlyAmountValue = null; g.monthlyAmountUnit = 'thousands'; }
+                        
+                        if (g.targetTime === undefined) g.targetTime = !!g.targetDate;
+                        if (g.targetMoney === undefined) g.targetMoney = (g.amountType === 'FLAT' || g.amountType === 'MONTHS');
+                        
+                        return g;
+                    });
+                }
 
                 const rawInvestors = localStorage.getItem('realvalue-portfolio-investors');
                 if (rawInvestors) storedInvestors = JSON.parse(rawInvestors);
@@ -1075,7 +1144,24 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     try {
                         const config = JSON.parse(e.target.result);
                         if (config.goals) {
-                            this.goals = config.goals;
+                            this.goals = config.goals.map(g => {
+                                let res = { ...g, allocations: g.allocations || [] };
+                                if (res.targetAmountFlat && res.targetAmountFlatValue === undefined) {
+                                    if (res.targetAmountFlat >= 10000000 && res.targetAmountFlat % 10000000 === 0) { res.targetAmountFlatValue = res.targetAmountFlat / 10000000; res.targetAmountFlatUnit = 'crores'; }
+                                    else if (res.targetAmountFlat >= 100000 && res.targetAmountFlat % 100000 === 0) { res.targetAmountFlatValue = res.targetAmountFlat / 100000; res.targetAmountFlatUnit = 'lakhs'; }
+                                    else { res.targetAmountFlatValue = res.targetAmountFlat; res.targetAmountFlatUnit = 'thousands'; }
+                                } else if (res.targetAmountFlatValue === undefined) { res.targetAmountFlatValue = null; res.targetAmountFlatUnit = 'lakhs'; }
+                                
+                                if (res.monthlyAmount && res.monthlyAmountValue === undefined) {
+                                    if (res.monthlyAmount >= 100000 && res.monthlyAmount % 100000 === 0) { res.monthlyAmountValue = res.monthlyAmount / 100000; res.monthlyAmountUnit = 'lakhs'; }
+                                    else { res.monthlyAmountValue = res.monthlyAmount; res.monthlyAmountUnit = 'thousands'; }
+                                } else if (res.monthlyAmountValue === undefined) { res.monthlyAmountValue = null; res.monthlyAmountUnit = 'thousands'; }
+                                
+                                if (res.targetTime === undefined) res.targetTime = !!res.targetDate;
+                                if (res.targetMoney === undefined) res.targetMoney = (res.amountType === 'FLAT' || res.amountType === 'MONTHS');
+                                
+                                return res;
+                            });
                             localStorage.setItem('realvalue-portfolio-goals', JSON.stringify(this.goals));
                         }
                         if (config.investors) {
@@ -1190,6 +1276,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 let array;
                 if (type === 'investor') {
                     array = this.investors;
+                } else if (type.startsWith('allocation_')) {
+                    const goalId = type.replace('allocation_', '');
+                    const goal = this.goals.find(g => g.id === goalId);
+                    if (goal) array = goal.allocations;
+                    else return;
                 } else {
                     return;
                 }
@@ -1201,20 +1292,39 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 this.draggedIndex = null;
                 this.draggedType = null;
                 
-                this.saveSettings();
+                if (type.startsWith('allocation_')) {
+                    this.saveGoalsAndTags();
+                } else {
+                    this.saveSettings();
+                }
             },
             addNewGoal() {
                 this.goals.push({
                     id: 'goal_' + Date.now() + Math.random().toString(36).substr(2, 5),
                     name: 'New Goal',
                     description: '',
+                    targetTime: false,
+                    targetMoney: false,
                     amountType: 'NONE',
-                    targetAmountFlat: 0,
+                    targetAmountFlatValue: null,
+                    targetAmountFlatUnit: 'lakhs',
                     months: 0,
-                    monthlyAmount: 0,
+                    monthlyAmountValue: null,
+                    monthlyAmountUnit: 'thousands',
                     targetDate: '',
                     allocations: []
                 });
+                this.saveGoalsAndTags();
+            },
+            toggleGoalTarget(goal, type) {
+                if (type === 'time') {
+                    goal.targetTime = !goal.targetTime;
+                } else if (type === 'money') {
+                    goal.targetMoney = !goal.targetMoney;
+                    if (goal.targetMoney && (!goal.amountType || goal.amountType === 'NONE')) {
+                        goal.amountType = 'FLAT';
+                    }
+                }
                 this.saveGoalsAndTags();
             },
             deleteGoal(index) {
@@ -1232,9 +1342,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 goal.allocations.splice(index, 1);
                 this.saveGoalsAndTags();
             },
+            getGoalMonthlyAmount(goal) {
+                if (!goal.targetMoney || goal.amountType !== 'MONTHS') return 0;
+                const mult = goal.monthlyAmountUnit === 'crores' ? 10000000 : (goal.monthlyAmountUnit === 'lakhs' ? 100000 : (goal.monthlyAmountUnit === 'thousands' ? 1000 : 1));
+                return (Number(goal.monthlyAmountValue) || 0) * mult;
+            },
             getGoalTargetAmount(goal) {
-                if (goal.amountType === 'FLAT') return Number(goal.targetAmountFlat) || 0;
-                if (goal.amountType === 'MONTHS') return (Number(goal.months) || 0) * (Number(goal.monthlyAmount) || 0);
+                if (!goal.targetMoney) return 0;
+                if (goal.amountType === 'FLAT') {
+                    const mult = goal.targetAmountFlatUnit === 'crores' ? 10000000 : (goal.targetAmountFlatUnit === 'lakhs' ? 100000 : (goal.targetAmountFlatUnit === 'thousands' ? 1000 : 1));
+                    return (Number(goal.targetAmountFlatValue) || 0) * mult;
+                }
+                if (goal.amountType === 'MONTHS') {
+                    const mult = goal.monthlyAmountUnit === 'crores' ? 10000000 : (goal.monthlyAmountUnit === 'lakhs' ? 100000 : (goal.monthlyAmountUnit === 'thousands' ? 1000 : 1));
+                    const monthly = (Number(goal.monthlyAmountValue) || 0) * mult;
+                    return (goal.months && goal.months > 0) ? (goal.months * monthly) : 0;
+                }
                 return 0;
             },
             getAssetClassesForGoal(goalId) {
@@ -1287,20 +1410,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             computeAllocationPercent(goal, allocIndex) {
                 if (!goal || !goal.allocations || !goal.allocations[allocIndex]) return 0;
                 const alloc = goal.allocations[allocIndex];
-                if (alloc.type === 'PERCENT') return Number(alloc.value) || 0;
                 
-                let totalMonths = 0;
-                goal.allocations.forEach(a => { if (a.type === 'MONTHS') totalMonths += Number(a.value) || 0; });
-                
-                if (alloc.type === 'MONTHS') {
-                    if (goal.amountType === 'MONTHS' && goal.months > 0) {
+                if (goal.amountType === 'MONTHS') {
+                    if (goal.months && goal.months > 0) {
                         return ((Number(alloc.value) || 0) / goal.months) * 100;
                     }
-                    if (totalMonths > 0) {
-                        return ((Number(alloc.value) || 0) / totalMonths) * 100;
-                    }
+                    return 0;
                 }
-                return 0;
+                
+                // For FLAT or NONE, the value is inherently a percentage
+                return Number(alloc.value) || 0;
             },
             getTotalAllocationPercent(goal) {
                 if (!goal || !goal.allocations) return 0;
