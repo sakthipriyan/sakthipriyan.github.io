@@ -212,7 +212,6 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     <div class="mode-toggle" style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
                         <button type="button" :class="{'active': activeTab === 'summary'}" @click="activeTab = 'summary'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🌍 Summary</button>
                         <button type="button" :class="{'active': activeTab === 'explore'}" @click="activeTab = 'explore'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🧭 Explore</button>
-                        <button type="button" :class="{'active': activeTab === 'tagging'}" @click="activeTab = 'tagging'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🏷️ Tagging</button>
                         <button type="button" :class="{'active': activeTab === 'data'}" @click="activeTab = 'data'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🗂️ Data</button>
                         <button type="button" :class="{'active': activeTab === 'setup'}" @click="activeTab = 'setup'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">⚙️ Setup</button>
                     </div>
@@ -432,8 +431,28 @@ window.initializeTool.portfolioTracker = async function (container, config) {
    
                     </div>
 
-                    <!-- TAB 2: SETUP (Previously Goals) -->
+                    <!-- TAB 4: SETUP -->
                     <div v-show="activeTab === 'setup'">
+                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                                <h3 style="margin: 0;">💾 Export & Import Setup</h3>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="file" ref="configInput" accept=".json,application/json" style="display: none;" @change="importSetup">
+                                    <button type="button" class="share-button" @click="$refs.configInput.click()">
+                                        ⬆️ Import
+                                    </button>
+                                    <button type="button" class="share-button" @click="exportSetup">
+                                        ⬇️ Export
+                                    </button>
+                                </div>
+                            </div>
+                            <ul style="color: #666; font-size: 0.85em; margin: 0; padding-left: 1.5rem; line-height: 1.6;">
+                                <li>Export your Setup as a JSON file to safely back up your Investors, Goals, and Tagging mappings.</li>
+                                <li>Import this file to restore these configurations after clearing browser data or to sync across devices.</li>
+                                <li><em>Note: You must still re-upload your CAS/IBKR files to view your portfolio data.</em></li>
+                            </ul>
+                        </div>
+
                         <!-- INVESTORS SETUP -->
                         <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
@@ -600,134 +619,89 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <button type="button" @click="deleteGoal(index)" style="padding: 0.4rem 1rem; background: var(--state-danger, #ff5252); border: none; border-radius: 4px; color: white; cursor: pointer; font-size: 0.85em;">🗑️ Delete Goal</button>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- TAB 3: TAGGING -->
-                    <div v-show="activeTab === 'tagging'">
-                        <div style="margin-bottom: 2rem;">
-                            <!-- We inject the tagging table here, wrapped properly -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: var(--text-primary);">
-                                🏷️ Tag Your Holdings
-                            </h4>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                                <button type="button" class="share-button" @click="downloadTransactionsCsv" style="padding: 0.4rem 0.8rem; font-size: 0.85em;">
-                                    ⬇️ Download Transactions
-                                </button>
-                                <button type="button" class="share-button btn-clear-all" @click="clearPortfolio" style="padding: 0.4rem 0.8rem; font-size: 0.85em;">
-                                    🗑️ Clear Portfolio
-                                </button>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="asset-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 35%;">Fund Details</th>
-                                        <th style="width: 13%; text-align: right;">Invested Value</th>
-                                        <th style="width: 13%; text-align: right;">Market Value</th>
-                                        <th style="width: 8%; text-align: right;">XIRR %</th>
-                                        <th style="width: 15%;">Goal</th>
-                                        <th style="width: 15%;">Asset Class</th>
-                                        <th style="width: 6%; text-align: center;">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="fund in funds" :key="fund.id">
-                                        <td>
-                                            <div style="font-weight: 500; font-size: 0.95em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);">
-                                                {{ fund.fundHouse }} | Folio: {{ fund.folioNo }} <br> ISIN: {{ fund.isin }}
+                        <!-- TAGGING SETUP (Hierarchical) -->
+                        <div v-if="funds.length > 0" style="margin-top: 3rem; margin-bottom: 2rem;">
+                            <h3 style="margin: 0 0 1rem 0; border-bottom: 2px solid #ddd; padding-bottom: 0.5rem;">🏷️ Tag Your Holdings</h3>
+                            
+                            <div v-if="dataHierarchyCAS.length > 0" style="margin-bottom: 2rem;">
+                                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🇮🇳 India Mutual Funds (CAS)</h4>
+                                <div v-for="house in dataHierarchyCAS" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
+                                    <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em;">
+                                        🏦 {{ house.name }}
+                                    </div>
+                                    <div v-for="folio in house.folios" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
+                                        <div style="padding: 0.5rem 1rem; background: #fafafa; font-weight: 500; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                                <span>Folio: {{ folio.folioNo }}</span>
+                                                <span v-if="folioMappings[folio.folioNo]">Investor: {{ folioMappings[folio.folioNo] }}</span>
                                             </div>
-                                        </td>
-                                        <td style="text-align: right; vertical-align: top;">
-                                            <template v-if="fund.source === 'IBKR'">
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.investedValue) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.investedValueUsd, 2) }}</div>
-                                                <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 0) }} units</div>
-                                            </template>
-                                            <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ fund.investedValue ? formatNumber(fund.investedValue) : '-' }}</div>
-                                                <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 3) }} units</div>
-                                            </template>
-                                        </td>
-                                        <td style="text-align: right; vertical-align: top;">
-                                            <template v-if="fund.source === 'IBKR'">
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.marketValueUsd, 2) }}</div>
-                                                <div v-if="getFundNavInr(fund) !== null" style="font-size: 0.8em; color: var(--text-secondary);">₹{{ formatNumber(getFundNavInr(fund), 4) }}/unit</div>
-                                                <div v-if="getFundNavUsd(fund) !== null" style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(getFundNavUsd(fund), 4) }}/unit</div>
-                                                <div v-if="fund.valuationDate" style="font-size: 0.72em; color: var(--text-secondary);">{{ formatNavDate(fund.valuationDate) }}</div>
-                                            </template>
-                                            <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
-                                                <div v-if="getFundNavInr(fund) !== null" style="font-size: 0.8em; color: var(--text-secondary);">₹{{ formatNumber(getFundNavInr(fund), 4) }}/unit</div>
-                                                <div v-if="fund.valuationDate" style="font-size: 0.72em; color: var(--text-secondary);">{{ formatNavDate(fund.valuationDate) }}</div>
-                                            </template>
-                                        </td>
-                                        <td style="text-align: right; vertical-align: top;">
-                                            <template v-if="fund.source === 'IBKR'">
-                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatXirr(tags[fund.id].xirrInr) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">{{ formatXirr(tags[fund.id].xirrUsd) }}</div>
-                                                <div v-if="tags[fund.id].xirrNote" style="font-size: 0.72em; color: #b45309; line-height: 1.3; margin-top: 0.2rem;">{{ tags[fund.id].xirrNote }}</div>
-                                            </template>
-                                            <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatXirr(tags[fund.id].xirrInr || tags[fund.id].xirr) }}</div>
-                                                <div v-if="tags[fund.id].xirrNote" style="font-size: 0.72em; color: #b45309; line-height: 1.3; margin-top: 0.2rem; text-align: left;">{{ tags[fund.id].xirrNote }}</div>
-                                            </template>
-                                        </td>
-                                        <td style="vertical-align: top;">
-                                            <select
-                                                v-model="tags[fund.id].goalId"
-                                                class="fund-input"
-                                                @change="saveTagsAndCalculate"
-                                            >
-                                                <option value="">— Unassigned —</option>
+                                            <span>₹{{ formatNumber(folio.marketValue) }}</span>
+                                        </div>
+                                        <div v-for="fund in folio.funds" :key="fund.id" style="padding: 0.75rem 1rem 0.75rem 2rem; border-top: 1px dotted #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                            <div style="flex: 1; min-width: 250px;">
+                                                <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
+                                                <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
+                                                <div style="font-size: 0.85em; color: #555;">
+                                                    Market Value: <span style="font-weight: bold; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</span>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                                <select v-model="tags[fund.id].goalId" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                    <option value="">— Goal —</option>
+                                                    <option v-for="g in goals" :key="g.id" :value="g.id">{{ g.name }}</option>
+                                                </select>
+                                                <select v-model="tags[fund.id].assetClass" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                    <option value="">— Asset Class —</option>
+                                                    <option v-for="ac in getAssetClassesForGoal(tags[fund.id].goalId)" :key="ac" :value="ac">{{ ac }}</option>
+                                                </select>
+                                                <div class="unit-buttons" style="display: flex; min-width: 150px;">
+                                                    <button type="button" :class="{'active-buy': tags[fund.id].status === 'Buy'}" @click="toggleStatus(fund.id, 'Buy')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">BUY</button>
+                                                    <button type="button" :class="{'active-hold': tags[fund.id].status === 'Hold'}" @click="toggleStatus(fund.id, 'Hold')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">HOLD</button>
+                                                    <button type="button" :class="{'active-sell': tags[fund.id].status === 'Sell'}" @click="toggleStatus(fund.id, 'Sell')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">SELL</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div v-if="dataHierarchyIBKR.length > 0" style="margin-bottom: 2rem;">
+                                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🌎 International Stocks (IBKR)</h4>
+                                <div v-for="account in dataHierarchyIBKR" :key="account.accountNo" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
+                                    <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                            <span>📂 Account: {{ account.accountNo }}</span>
+                                            <span v-if="folioMappings[account.accountNo]">Investor: {{ folioMappings[account.accountNo] }}</span>
+                                        </div>
+                                        <span>₹{{ formatNumber(account.marketValue) }}</span>
+                                    </div>
+                                    <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.75rem 1rem; border-top: 1px solid #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                        <div style="flex: 1; min-width: 250px;">
+                                            <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
+                                            <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
+                                            <div style="font-size: 0.85em; color: #555;">
+                                                Market Value: <span style="font-weight: bold; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</span>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                            <select v-model="tags[fund.id].goalId" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                <option value="">— Goal —</option>
                                                 <option v-for="g in goals" :key="g.id" :value="g.id">{{ g.name }}</option>
                                             </select>
-                                        </td>
-                                        <td style="vertical-align: top;">
-                                            <select
-                                                v-model="tags[fund.id].assetClass"
-                                                class="fund-input"
-                                                @change="saveTagsAndCalculate"
-                                            >
-                                                <option value="">— Unclassified —</option>
+                                            <select v-model="tags[fund.id].assetClass" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                <option value="">— Asset Class —</option>
                                                 <option v-for="ac in getAssetClassesForGoal(tags[fund.id].goalId)" :key="ac" :value="ac">{{ ac }}</option>
                                             </select>
-                                        </td>
-                                        <td style="vertical-align: top; text-align: center; min-width: 160px;">
-                                            <div class="unit-buttons" style="justify-content: center;">
-                                                <button 
-                                                    type="button" 
-                                                    :class="{'active-buy': tags[fund.id].status === 'Buy'}" 
-                                                    @click="toggleStatus(fund.id, 'Buy')"
-                                                    style="padding: 0.35rem 0.5rem; font-size: 0.8em; flex: 1;">
-                                                    BUY
-                                                </button>
-                                                <button 
-                                                    type="button" 
-                                                    :class="{'active-hold': tags[fund.id].status === 'Hold'}" 
-                                                    @click="toggleStatus(fund.id, 'Hold')"
-                                                    style="padding: 0.35rem 0.5rem; font-size: 0.8em; flex: 1;">
-                                                    HOLD
-                                                </button>
-                                                <button 
-                                                    type="button" 
-                                                    :class="{'active-sell': tags[fund.id].status === 'Sell'}" 
-                                                    @click="toggleStatus(fund.id, 'Sell')"
-                                                    style="padding: 0.35rem 0.5rem; font-size: 0.8em; flex: 1;">
-                                                    SELL
-                                                </button>
+                                            <div class="unit-buttons" style="display: flex; min-width: 150px;">
+                                                <button type="button" :class="{'active-buy': tags[fund.id].status === 'Buy'}" @click="toggleStatus(fund.id, 'Buy')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">BUY</button>
+                                                <button type="button" :class="{'active-hold': tags[fund.id].status === 'Hold'}" @click="toggleStatus(fund.id, 'Hold')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">HOLD</button>
+                                                <button type="button" :class="{'active-sell': tags[fund.id].status === 'Sell'}" @click="toggleStatus(fund.id, 'Sell')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">SELL</button>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1066,6 +1040,66 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
         },
         methods: {
+            exportSetup() {
+                const cleanTags = {};
+                for (const fundId in this.tags) {
+                    if (fundId.includes('_') && this.tags[fundId].goalId) {
+                        cleanTags[fundId] = {
+                            assetClass: this.tags[fundId].assetClass || "",
+                            status: this.tags[fundId].status || "Hold",
+                            goalId: this.tags[fundId].goalId
+                        };
+                    }
+                }
+
+                const config = {
+                    goals: this.goals,
+                    investors: this.investors,
+                    foliomappings: this.folioMappings,
+                    tags: cleanTags
+                };
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
+                const downloadAnchorNode = document.createElement('a');
+                downloadAnchorNode.setAttribute("href",     dataStr);
+                const dateStr = new Date().toISOString().split('T')[0];
+                downloadAnchorNode.setAttribute("download", `realvalue-portfolio-config-${dateStr}.json`);
+                document.body.appendChild(downloadAnchorNode);
+                downloadAnchorNode.click();
+                downloadAnchorNode.remove();
+            },
+            importSetup(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const config = JSON.parse(e.target.result);
+                        if (config.goals) {
+                            this.goals = config.goals;
+                            localStorage.setItem('realvalue-portfolio-goals', JSON.stringify(this.goals));
+                        }
+                        if (config.investors) {
+                            this.investors = config.investors;
+                            localStorage.setItem('realvalue-portfolio-investors', JSON.stringify(this.investors));
+                        }
+                        if (config.foliomappings) {
+                            this.folioMappings = config.foliomappings;
+                            localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings));
+                        }
+                        if (config.tags) {
+                            this.tags = Object.assign(this.tags, config.tags);
+                            localStorage.setItem('realvalue-portfolio-tags', JSON.stringify(this.tags));
+                        }
+                        this.calculateSummary();
+                        alert('Configuration successfully imported!');
+                    } catch (err) {
+                        alert('Invalid JSON configuration file.');
+                        console.error('Import error:', err);
+                    }
+                    this.$refs.configInput.value = ''; // reset
+                };
+                reader.readAsText(file);
+            },
             saveMappings() {
                 try {
                     localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings));
