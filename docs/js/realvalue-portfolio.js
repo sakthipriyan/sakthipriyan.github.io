@@ -103,8 +103,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem;">
                     <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
                         📑 Mutual Fund Portfolio
-                        <span v-if="funds.length > 0" style="font-size: 0.7em; background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
-                            {{ funds.length }} Funds
+                        <span v-if="funds.filter(f => f.marketValue > 0).length > 0" style="font-size: 0.7em; background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
+                            {{ funds.filter(f => f.marketValue > 0).length }} Funds
                         </span>
                     </h3>
                     
@@ -388,6 +388,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <th style="text-align: right;">Invested Value</th>
                                         <th style="text-align: right;">Market Value</th>
                                         <th style="text-align: right;">XIRR %</th>
+                                        <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;">Contrib. %</th>
                                         <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;">Target %</th>
                                         <th v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;">Allocation %</th>
                                     </tr>
@@ -399,6 +400,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <td style="text-align: right;">₹{{ formatNumber(row.investedValue) }}</td>
                                         <td style="text-align: right;">₹{{ formatNumber(row.value) }}</td>
                                         <td style="text-align: right; font-weight: 600; color: var(--text-primary);">{{ formatXirr(row.xirrInr) }}</td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--text-secondary)' : (row.contributionPercent >= 0 ? '#15803d' : '#b91c1c') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</td>
                                         <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--text-secondary);">{{ getTargetPercent(row.name) !== null ? formatPercent(getTargetPercent(row.name)) : '—' }}</td>
                                         <td v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;">{{ formatPercent(row.percent) }}</td>
                                     </tr>
@@ -408,6 +410,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></td>
                                         <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></td>
                                         <td style="text-align: right; font-weight: 600; color: var(--text-primary);"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong>{{ totalPortfolioValue !== totalPortfolioInvestedValue ? '100.00%' : '—' }}</strong></td>
                                         <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong>100.00%</strong></td>
                                         <td v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;"><strong>100.00%</strong></td>
                                     </tr>
@@ -424,28 +427,63 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
                         </div>
                     
-                        <!-- INVESTMENT CALENDAR -->
+                        <!-- INVESTMENT HISTORY -->
                         <div class="investment-plan" style="margin-top: 3rem;" v-if="investmentCalendarData.length > 0">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
-                                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-                                    <h2 style="margin: 0;">📅 Investment Calendar</h2>
-                                    <div class="mode-toggle">
-                                        <button 
-                                            type="button"
-                                            :class="{'active': calendarViewTab === 'chart'}"
-                                            @click="calendarViewTab = 'chart'"
-                                            style="white-space: nowrap;">
-                                            📊 Chart
-                                        </button>
-                                        <button 
-                                            type="button"
-                                            :class="{'active': calendarViewTab === 'table'}"
-                                            @click="calendarViewTab = 'table'"
-                                            style="white-space: nowrap;">
-                                            📋 Table
-                                        </button>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="display: flex; gap: 1rem; align-items: center;">
+                                        <h2 style="margin: 0;">📅 Investment History</h2>
+                                        <div class="mode-toggle">
+                                            <button 
+                                                type="button"
+                                                :class="{'active': calendarViewTab === 'chart'}"
+                                                @click="calendarViewTab = 'chart'"
+                                                style="white-space: nowrap;">
+                                                📊 Chart
+                                            </button>
+                                            <button 
+                                                type="button"
+                                                :class="{'active': calendarViewTab === 'table'}"
+                                                @click="calendarViewTab = 'table'"
+                                                style="white-space: nowrap;">
+                                                📋 Table
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="mode-toggle" v-if="uniqueInvestorsCalendar.length > 0">
+                                    <div style="display: flex; gap: 1rem; align-items: center;">
+                                        <div class="mode-toggle">
+                                            <button 
+                                                type="button"
+                                                :class="{'active': calendarGranularity === 'yearly'}"
+                                                @click="calendarGranularity = 'yearly'">
+                                                Yearly
+                                            </button>
+                                            <button 
+                                                type="button"
+                                                :class="{'active': calendarGranularity === 'monthly'}"
+                                                @click="calendarGranularity = 'monthly'">
+                                                Monthly
+                                            </button>
+                                        </div>
+                                        <div class="mode-toggle">
+                                            <button 
+                                                type="button"
+                                                :class="{'active': calendarInflationMode === 'nominal'}"
+                                                @click="calendarInflationMode = 'nominal'">
+                                                Nominal
+                                            </button>
+                                            <button 
+                                                type="button"
+                                                :class="{'active': calendarInflationMode === 'real'}"
+                                                @click="calendarInflationMode = 'real'">
+                                                Real
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="uniqueInvestorsCalendar.length > 0" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem;">
+                                    <span style="font-size: 0.85em; color: var(--text-secondary);">Select Investors:</span>
+                                    <div class="mode-toggle">
                                         <button 
                                             type="button"
                                             :class="{'active': calendarInvestor === 'All'}"
@@ -463,20 +501,6 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </button>
                                     </div>
                                 </div>
-                                <div class="mode-toggle">
-                                    <button 
-                                        type="button"
-                                        :class="{'active': calendarInflationMode === 'nominal'}"
-                                        @click="calendarInflationMode = 'nominal'">
-                                        Nominal
-                                    </button>
-                                    <button 
-                                        type="button"
-                                        :class="{'active': calendarInflationMode === 'real'}"
-                                        @click="calendarInflationMode = 'real'">
-                                        Real
-                                    </button>
-                                </div>
                             </div>
                             
                             <!-- Chart View -->
@@ -484,8 +508,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <div id="portfolioCalendarChart" style="width: 100%; height: 400px;"></div>
                             </div>
                             
-                            <!-- Table View -->
-                            <div v-show="calendarViewTab === 'table'" class="plan-table-wrapper">
+                            <!-- Table View: Yearly -->
+                            <div v-show="calendarViewTab === 'table' && calendarGranularity === 'yearly'" class="plan-table-wrapper">
                                 <table class="plan-table" style="margin: 0;">
                                     <thead>
                                         <tr>
@@ -509,6 +533,53 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                     {{ formatCurrency(row.total) }}
                                                 </span>
                                             </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Table View: Monthly detail -->
+                            <div v-show="calendarViewTab === 'table' && calendarGranularity === 'monthly'" class="plan-table-wrapper">
+                                <table class="plan-table" style="margin: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th style="white-space: nowrap;">Date</th>
+                                            <th style="text-align: left; white-space: nowrap;">Investor</th>
+                                            <th style="text-align: right; white-space: nowrap;">Folio</th>
+                                            <th style="text-align: left;">Fund Name</th>
+                                            <th style="text-align: right; white-space: nowrap;">Amount (₹)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template v-for="(row, idx) in investmentCalendarMonthlyDetail" :key="row.date + row.fundName + idx">
+                                            <tr v-if="idx === 0 || investmentCalendarMonthlyDetail[idx - 1].monthKey !== row.monthKey">
+                                                <td style="background: #f5f5f5; font-weight: bold; color: var(--primary-color); padding: 0.4rem 0.6rem; white-space: nowrap;">
+                                                    {{ row.monthKey }}
+                                                </td>
+                                                <td colspan="3" style="background: #f5f5f5; padding: 0.4rem 0.6rem;"></td>
+                                                <td style="background: #f5f5f5; font-weight: bold; text-align: right; padding: 0.4rem 0.6rem; white-space: nowrap;"
+                                                    :style="investmentCalendarMonthlyDetail.filter(r => r.monthKey === row.monthKey).reduce((s, r) => s + r.amount, 0) < 0 ? 'color: #ef4444;' : 'color: var(--primary-color);'">
+                                                    <span class="help-icon"
+                                                        :data-tooltip="'₹ ' + formatNumber(Math.abs(investmentCalendarMonthlyDetail.filter(r => r.monthKey === row.monthKey).reduce((s, r) => s + r.amount, 0)), 0)"
+                                                        style="cursor: default; opacity: 1;">
+                                                        {{ formatCurrency(investmentCalendarMonthlyDetail.filter(r => r.monthKey === row.monthKey).reduce((s, r) => s + r.amount, 0)) }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="white-space: nowrap; font-size: 0.9em; color: #555;">{{ row.date }}</td>
+                                                <td style="text-align: left; font-size: 0.9em; white-space: nowrap; color: #555;">{{ row.investor || '—' }}</td>
+                                                <td style="text-align: right; font-size: 0.9em; white-space: nowrap; color: #555;">{{ row.folioNo || '—' }}</td>
+                                                <td style="text-align: left; font-size: 0.9em;">{{ row.fundName }}</td>
+                                                <td style="text-align: right; white-space: nowrap; font-weight: 500;" :style="row.amount < 0 ? 'color: #ef4444;' : ''">
+                                                    <span class="help-icon" :data-tooltip="(row.amount < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(row.amount), 0)" style="cursor: default; opacity: 1;">
+                                                        {{ formatCurrency(row.amount) }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <tr v-if="investmentCalendarMonthlyDetail.length === 0">
+                                            <td colspan="5" style="text-align: center; color: #999; padding: 1rem;">No transaction data available.</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -768,11 +839,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             
                             <div v-if="dataHierarchyCAS.length > 0" style="margin-bottom: 2rem;">
                                 <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🇮🇳 India Mutual Funds (CAS)</h4>
-                                <div v-for="house in dataHierarchyCAS" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
+                                <div v-for="house in dataHierarchyCAS.filter(h => h.marketValue > 0)" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
                                     <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em;">
                                         🏦 {{ house.name }}
                                     </div>
-                                    <div v-for="folio in house.folios" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
+                                    <div v-for="folio in house.folios.filter(f => f.marketValue > 0)" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
                                         <div style="padding: 0.5rem 1rem; background: #fafafa; font-weight: 500; display: flex; justify-content: space-between; flex-wrap: wrap;">
                                             <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
                                                 <span>Folio: {{ folio.folioNo }}</span>
@@ -780,7 +851,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                             </div>
                                             <span>₹{{ formatNumber(folio.marketValue) }}</span>
                                         </div>
-                                        <div v-for="fund in folio.funds" :key="fund.id" style="padding: 0.75rem 1rem 0.75rem 2rem; border-top: 1px dotted #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                        <div v-for="fund in folio.funds.filter(f => f.marketValue > 0)" :key="fund.id" style="padding: 0.75rem 1rem 0.75rem 2rem; border-top: 1px dotted #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
                                             <div style="flex: 1; min-width: 250px;">
                                                 <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
                                                 <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
@@ -851,20 +922,29 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     <div v-show="activeTab === 'data'">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <h3 style="margin: 0;">🗂️ Portfolio Raw Data</h3>
-                            <button type="button" class="share-button btn-clear-all" @click="clearPortfolio" style="padding: 0.4rem 0.8rem; font-size: 0.85em;">
-                                🗑️ Clear All Data
-                            </button>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <div class="mode-toggle">
+                                    <button type="button" :class="{'active': showZeroBalance}" @click="showZeroBalance = !showZeroBalance" style="white-space: nowrap;">
+                                        🚫 Zero Balance
+                                    </button>
+                                </div>
+                                <div class="mode-toggle">
+                                    <button type="button" class="btn-clear-all" @click="clearPortfolio" style="white-space: nowrap;">
+                                        🗑️ Clear All Data
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         
                         <div v-if="dataHierarchyCAS.length > 0" style="margin-bottom: 2rem;">
                             <h4 style="border-bottom: 2px solid var(--gray-medium, #ddd); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--primary-color);">🇮🇳 India Mutual Funds (CAS)</h4>
                             
-                            <div v-for="house in dataHierarchyCAS" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
+                            <div v-for="house in dataHierarchyCAS.filter(h => showZeroBalance || h.marketValue > 0)" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
                                 <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
                                     <span>🏦 {{ house.name }}</span>
                                     <span>₹{{ formatNumber(house.marketValue) }}</span>
                                 </div>
-                                <div v-for="folio in house.folios" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
+                                <div v-for="folio in house.folios.filter(f => showZeroBalance || f.marketValue > 0)" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
                                     <div style="padding: 0.5rem 1rem; background: #fafafa; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
                                         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                                             <span style="font-weight: 500;">Folio: {{ folio.folioNo }}</span>
@@ -875,7 +955,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </div>
                                         <span style="font-size: 0.9em; font-weight: bold;">₹{{ formatNumber(folio.marketValue) }}</span>
                                     </div>
-                                    <div v-for="fund in folio.funds" :key="fund.id" style="padding: 0.5rem 1rem 0.5rem 2rem; border-top: 1px dotted #eee; overflow-x: auto;">
+                                    <div v-for="fund in folio.funds.filter(f => showZeroBalance || f.marketValue > 0)" :key="fund.id" style="padding: 0.5rem 1rem 0.5rem 2rem; border-top: 1px dotted #eee; overflow-x: auto;">
                                         <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: flex-start; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
                                             <div>
                                                 <div>{{ expandedDataRows[fund.id] ? '▼' : '▶' }} <strong>{{ fund.fundName }}</strong></div>
@@ -1162,10 +1242,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 debounceTimer: null,
                 showPrivacyDetails: false,
                 promptCopied: false,
+                showZeroBalance: false,
                 
                 calendarViewTab: 'table',
                 calendarInvestor: 'All',
                 calendarInflationMode: 'nominal',
+                calendarGranularity: 'yearly',
                 inflationData: null,
                 latestCpi: null,
                 calendarChart: null,
@@ -1236,10 +1318,37 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 });
                 
                 return Object.values(yearMap).sort((a, b) => b.year - a.year);
+            },
+            investmentCalendarMonthlyDetail() {
+                const rows = [];
+                this.funds.forEach(f => {
+                    const fundInvestor = this.folioMappings[f.folioNo];
+                    if (this.calendarInvestor !== 'All' && fundInvestor !== this.calendarInvestor) return;
+                    if (!f.transactionCashflowsInr) return;
+                    f.transactionCashflowsInr.forEach(cf => {
+                        const amount = -cf.amount;
+                        if (amount === 0) return;
+                        const dateObj = new Date(cf.date);
+                        if (isNaN(dateObj.getTime())) return;
+                        const monthKey = cf.date.substring(0, 7);
+                        let adjustedAmount = amount;
+                        if (this.calendarInflationMode === 'real' && this.inflationData && this.latestCpi) {
+                            const transactionCpi = this.inflationData[monthKey] || this.latestCpi;
+                            adjustedAmount = amount * (this.latestCpi / transactionCpi);
+                        }
+                        rows.push({ date: cf.date, monthKey, fundName: f.fundName, folioNo: f.folioNo, investor: fundInvestor || '', amount: adjustedAmount });
+                    });
+                });
+                return rows.sort((a, b) => b.date < a.date ? -1 : b.date > a.date ? 1 : 0);
             }
         },
         watch: {
             investmentCalendarData() {
+                if (this.calendarViewTab === 'chart') {
+                    this.$nextTick(() => { this.renderCalendarChart(); });
+                }
+            },
+            calendarGranularity() {
                 if (this.calendarViewTab === 'chart') {
                     this.$nextTick(() => { this.renderCalendarChart(); });
                 }
@@ -2919,10 +3028,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     targetFund.transactionUnitFlows = mergedUnitFlows;
                     const mergedNetUnits = this.sumFlowAmounts(mergedUnitFlows);
 
-                    if (marketValue > 0) {
-                        const mergedCashflows = this.mergeFlowsByDate(targetFund.transactionCashflowsInr, transactionData.cashflows);
-                        targetFund.transactionCashflowsInr = mergedCashflows;
+                    // Always merge cashflows so 0-balance (fully redeemed) funds retain transaction history
+                    const mergedCashflows = this.mergeFlowsByDate(targetFund.transactionCashflowsInr, transactionData.cashflows);
+                    targetFund.transactionCashflowsInr = mergedCashflows;
 
+                    if (marketValue > 0) {
                         const quantityTolerance = Math.max(0.01, closingUnits * 0.001);
                         const quantityMatches = Math.abs(mergedNetUnits - closingUnits) <= quantityTolerance;
 
@@ -2981,6 +3091,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 let hasUncategorized = false;
                 
                 this.funds.forEach(f => {
+                    if (!(Number(f.marketValue) > 0)) return;
                     const t = this.tags[f.id] || {};
                     const goalOpt = this.goals.find(g => g.id === t.goalId);
                     if (goalOpt) {
@@ -3055,7 +3166,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         }
                         map[rowKey].value += val;
                         map[rowKey].investedValue += investedVal;
-                        map[rowKey].fundCount++;
+                        if (val > 0) map[rowKey].fundCount++;
 
                         const valuationDate = f.valuationDate || today;
                         const fundFlows = this.buildFlowsWithTerminal(f.transactionCashflowsInr || [], valuationDate, val);
@@ -3079,11 +3190,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     const tag = this.tags[f.id] || {};
                     const goalOpt = this.goals.find(g => g.id === tag.goalId);
                     const cat = goalOpt ? goalOpt.name : 'Unassigned';
-                    return this.selectedReportArea === 'overview' || cat === this.selectedReportArea;
+                    return (Number(f.marketValue) > 0) && (this.selectedReportArea === 'overview' || cat === this.selectedReportArea);
                 }).length;
                 const normalizedTotalFlows = this.normalizeDatedFlows(totalCashflowsInr);
                 this.totalPortfolioXirrInr = normalizedTotalFlows.length >= 2 ? this.computeXirr(normalizedTotalFlows) : null;
                 this.totalPortfolioXirrUsd = null;
+                const totalGrowth = total - totalInvested;
 
                 // Create array and sort by value descending
                 const data = [];
@@ -3091,11 +3203,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     // Only include in summary if there is actual value
                     if (row.value > 0) {
                         const normalizedRowFlows = this.normalizeDatedFlows(row.cashflowsInr || []);
+                        const growthValue = row.value - row.investedValue;
                         data.push({
                             name,
                             value: row.value,
                             investedValue: row.investedValue,
                             fundCount: row.fundCount,
+                            growthValue,
+                            contributionPercent: this.selectedReportArea !== 'overview' && totalGrowth !== 0 ? (growthValue / totalGrowth) * 100 : null,
                             xirrInr: normalizedRowFlows.length >= 2 ? this.computeXirr(normalizedRowFlows) : null,
                             xirrUsd: null,
                             percent: total > 0 ? (row.value / total) * 100 : 0
@@ -3213,17 +3328,26 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 const categories = [];
                 const data = [];
-                
-                const orderedData = [...this.investmentCalendarData].reverse();
                 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                
-                orderedData.forEach(yearRow => {
-                    yearRow.months.forEach((val, index) => {
-                        if (!val || val === 0) return;
-                        categories.push(`${yearRow.year} ${monthNames[index]}`);
-                        data.push(Math.round(val));
+
+                if (this.calendarGranularity === 'yearly') {
+                    // Yearly chart: one bar per year
+                    const orderedData = [...this.investmentCalendarData].reverse();
+                    orderedData.forEach(yearRow => {
+                        categories.push(String(yearRow.year));
+                        data.push(Math.round(yearRow.total));
                     });
-                });
+                } else {
+                    // Monthly chart: one bar per month that has data
+                    const orderedData = [...this.investmentCalendarData].reverse();
+                    orderedData.forEach(yearRow => {
+                        yearRow.months.forEach((val, index) => {
+                            if (!val || val === 0) return;
+                            categories.push(`${yearRow.year} ${monthNames[index]}`);
+                            data.push(Math.round(val));
+                        });
+                    });
+                }
 
                 const option = {
                     toolbox: {
