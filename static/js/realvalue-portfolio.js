@@ -422,7 +422,99 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             </h3>
                             <div id="portfolio-allocation-chart" class="chart-container"></div>
                         </div>
-                    </div>
+                        </div>
+                    
+                        <!-- INVESTMENT CALENDAR -->
+                        <div class="investment-plan" style="margin-top: 3rem;" v-if="investmentCalendarData.length > 0">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                    <h2 style="margin: 0;">📅 Investment Calendar</h2>
+                                    <div class="mode-toggle">
+                                        <button 
+                                            type="button"
+                                            :class="{'active': calendarViewTab === 'chart'}"
+                                            @click="calendarViewTab = 'chart'"
+                                            style="white-space: nowrap;">
+                                            📊 Chart
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            :class="{'active': calendarViewTab === 'table'}"
+                                            @click="calendarViewTab = 'table'"
+                                            style="white-space: nowrap;">
+                                            📋 Table
+                                        </button>
+                                    </div>
+                                    <div class="mode-toggle" v-if="uniqueInvestorsCalendar.length > 0">
+                                        <button 
+                                            type="button"
+                                            :class="{'active': calendarInvestor === 'All'}"
+                                            @click="calendarInvestor = 'All'"
+                                            style="white-space: nowrap;">
+                                            👥 All
+                                        </button>
+                                        <button 
+                                            v-for="inv in uniqueInvestorsCalendar" :key="inv"
+                                            type="button"
+                                            :class="{'active': calendarInvestor === inv}"
+                                            @click="calendarInvestor = inv"
+                                            style="white-space: nowrap;">
+                                            👤 {{ inv }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mode-toggle">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': calendarInflationMode === 'nominal'}"
+                                        @click="calendarInflationMode = 'nominal'">
+                                        Nominal
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': calendarInflationMode === 'real'}"
+                                        @click="calendarInflationMode = 'real'">
+                                        Real
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Chart View -->
+                            <div v-show="calendarViewTab === 'chart'" style="margin-bottom: 2rem;">
+                                <div id="portfolioCalendarChart" style="width: 100%; height: 400px;"></div>
+                            </div>
+                            
+                            <!-- Table View -->
+                            <div v-show="calendarViewTab === 'table'" class="plan-table-wrapper">
+                                <table class="plan-table" style="margin: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>Year</th>
+                                            <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
+                                            <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="row in investmentCalendarData" :key="row.year">
+                                            <td><strong>{{ row.year }}</strong></td>
+                                            <td v-for="(val, idx) in row.months" :key="idx">
+                                                <span v-if="val !== 0" class="help-icon" :data-tooltip="(val < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(val), 0)" style="cursor: default; opacity: 1;" :style="val < 0 ? 'color: #ef4444;' : ''">
+                                                    {{ formatCurrency(val) }}
+                                                </span>
+                                                <span v-else style="color: #999;">—</span>
+                                            </td>
+                                            <td style="font-weight: bold;" :style="row.total < 0 ? 'color: #ef4444;' : 'color: var(--primary-color);'">
+                                                <span class="help-icon" :data-tooltip="(row.total < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(row.total), 0)" style="cursor: default; opacity: 1;">
+                                                    {{ formatCurrency(row.total) }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div> <!-- End of EXPLORE TAB -->
                     
                 </div>
@@ -1070,6 +1162,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 debounceTimer: null,
                 showPrivacyDetails: false,
                 promptCopied: false,
+                
+                calendarViewTab: 'table',
+                calendarInvestor: 'All',
+                calendarInflationMode: 'nominal',
+                inflationData: null,
+                latestCpi: null,
+                calendarChart: null,
             };
         },
     
@@ -1077,8 +1176,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             this.extractUniqueOptions();
             this.calculateSummary();
             this.warmSbiRateCache();
+            this.fetchInflationData();
             this.resizeHandler = () => {
                 if (this.chart) this.chart.resize();
+                if (this.calendarChart) this.calendarChart.resize();
             };
             window.addEventListener('resize', this.resizeHandler);
         },
@@ -1087,8 +1188,67 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
             if (this.chart) this.chart.dispose();
+            if (this.calendarChart) this.calendarChart.dispose();
+        },
+        computed: {
+            uniqueInvestorsCalendar() {
+                const investors = new Set();
+                this.funds.forEach(f => {
+                    const inv = this.folioMappings[f.folioNo];
+                    if (inv) investors.add(inv);
+                });
+                return Array.from(investors).sort();
+            },
+            investmentCalendarData() {
+                const yearMap = {};
+                
+                this.funds.forEach(f => {
+                    const fundInvestor = this.folioMappings[f.folioNo];
+                    if (this.calendarInvestor !== 'All' && fundInvestor !== this.calendarInvestor) return;
+                    if (!f.transactionCashflowsInr) return;
+                    
+                    f.transactionCashflowsInr.forEach(cf => {
+                        // Investments are represented as negative cash flows; Redemptions are positive.
+                        // Accumulate net investments (-cf.amount)
+                        const amount = -cf.amount;
+                        if (amount === 0) return;
+                        
+                        const dateObj = new Date(cf.date);
+                        if (isNaN(dateObj.getTime())) return;
+                        
+                        const year = dateObj.getFullYear();
+                        const month = dateObj.getMonth();
+                        const monthKey = cf.date.substring(0, 7);
+                        
+                        let adjustedAmount = amount;
+                        if (this.calendarInflationMode === 'real' && this.inflationData && this.latestCpi) {
+                            const transactionCpi = this.inflationData[monthKey] || this.latestCpi;
+                            adjustedAmount = amount * (this.latestCpi / transactionCpi);
+                        }
+                        
+                        if (!yearMap[year]) {
+                            yearMap[year] = { year: year, months: new Array(12).fill(0), total: 0 };
+                        }
+                        
+                        yearMap[year].months[month] += adjustedAmount;
+                        yearMap[year].total += adjustedAmount;
+                    });
+                });
+                
+                return Object.values(yearMap).sort((a, b) => b.year - a.year);
+            }
         },
         watch: {
+            investmentCalendarData() {
+                if (this.calendarViewTab === 'chart') {
+                    this.$nextTick(() => { this.renderCalendarChart(); });
+                }
+            },
+            calendarViewTab(newVal) {
+                if (newVal === 'chart') {
+                    this.$nextTick(() => { this.renderCalendarChart(); });
+                }
+            },
             portfolioViewTab() {
                 if (this.portfolioViewTab === 'chart' && this.summaryData.length > 0) {
                     this.$nextTick(() => {
@@ -1109,6 +1269,48 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
         },
         methods: {
+            async fetchInflationData() {
+                try {
+                    const cachedRaw = localStorage.getItem('realvalue_inflation_cache');
+                    const cacheTime = localStorage.getItem('realvalue_inflation_cache_time');
+                    const now = Date.now();
+                    
+                    if (cachedRaw && cacheTime && now - parseInt(cacheTime) < 7 * 24 * 60 * 60 * 1000) {
+                        const parsed = JSON.parse(cachedRaw);
+                        this.inflationData = parsed.data;
+                        this.latestCpi = parsed.latestCpi;
+                        return;
+                    }
+
+                    const response = await fetch('https://data.sakthipriyan.com/inflation/IN.csv');
+                    const csvText = await response.text();
+                    
+                    const lines = csvText.trim().split('\n');
+                    const cpiMap = {};
+                    let latest = 0;
+                    
+                    for (let i = 1; i < lines.length; i++) {
+                        const cols = lines[i].split(',');
+                        if (cols.length >= 2) {
+                            const dateStr = cols[0].trim();
+                            const cpi = parseFloat(cols[1].trim());
+                            if (!isNaN(cpi)) {
+                                cpiMap[dateStr] = cpi;
+                                latest = cpi;
+                            }
+                        }
+                    }
+                    
+                    this.inflationData = cpiMap;
+                    this.latestCpi = latest;
+                    
+                    localStorage.setItem('realvalue_inflation_cache', JSON.stringify({ data: cpiMap, latestCpi: latest }));
+                    localStorage.setItem('realvalue_inflation_cache_time', now.toString());
+                    
+                } catch (err) {
+                    console.error('Failed to fetch inflation data:', err);
+                }
+            },
             exportSetup() {
                 const cleanTags = {};
                 for (const fundId in this.tags) {
@@ -1494,6 +1696,23 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const cleanVal = val.replace(/[^\d.]/g, '');
                 if (cleanVal === '') return null;
                 return isNegative ? -parseFloat(cleanVal) : parseFloat(cleanVal);
+            },
+            formatCurrency(amount) {
+                const isNegative = amount < 0;
+                const absAmount = Math.abs(amount);
+                let formatted = '';
+                
+                if (absAmount >= 10000000) {
+                    formatted = (absAmount / 10000000).toFixed(2) + ' Cr';
+                } else if (absAmount >= 100000) {
+                    formatted = (absAmount / 100000).toFixed(2) + ' L';
+                } else if (absAmount >= 1000) {
+                    formatted = (absAmount / 1000).toFixed(2) + ' K';
+                } else {
+                    formatted = absAmount.toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+                }
+                
+                return isNegative ? '-' + formatted : formatted;
             },
             formatNumber(value, decimals = 0) {
                 if (value === null || value === undefined || isNaN(value)) return '0';
@@ -2446,6 +2665,34 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     return;
                 }
 
+                // ====================================================================
+                // PHASE 1: DYNAMIC AMC EXTRACTION (Read the Summary Table)
+                // ====================================================================
+                const validFundHouses = new Set();
+                let inSummaryTable = false;
+
+                for (let line of lines) {
+                    let trimmed = line.trim();
+                    
+                    if (trimmed.includes("Cost Value") || trimmed.includes("Market Value")) {
+                        inSummaryTable = true;
+                        continue;
+                    }
+                    
+                    if (inSummaryTable) {
+                        if (trimmed.startsWith("Total") || trimmed.includes("Folio No")) {
+                            inSummaryTable = false;
+                            break;
+                        }
+                        const summaryRowMatch = trimmed.match(/^([A-Za-z\s&]+?)\s+(?:-?\(?[\d,]+\.\d{2}\)?)\s+(?:-?\(?[\d,]+\.\d{2}\)?)$/i);
+                        if (summaryRowMatch) {
+                            validFundHouses.add(summaryRowMatch[1].trim());
+                        } else if (trimmed.length > 3 && !/[\d]/.test(trimmed) && !trimmed.toLowerCase().includes("mutual fund")) {
+                            validFundHouses.add(trimmed);
+                        }
+                    }
+                }
+
                 let currentFundHouse = "Unknown Fund House";
                 let currentFolio = "Unknown Folio";
                 let currentFund = null; // { fundHouse, folioNo, fundName, isin, closingUnits, nav, investedValue, marketValue, rawTxns[] }
@@ -2460,11 +2707,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
+                    if (!line) continue;
 
-                    // Track fund house context
-                    const fhMatch = line.match(/([A-Za-z\s]+Mutual Fund)/i);
-                    if (fhMatch && !/PORTFOLIO SUMMARY/i.test(line) && !/Total/i.test(line)) {
-                        currentFundHouse = fhMatch[1].trim();
+                    // --- NEW: Dynamic Fund House Detection ---
+                    if (validFundHouses.has(line) && !line.includes("PORTFOLIO SUMMARY")) {
+                        currentFundHouse = line;
+                        continue;
+                    }
+                    
+                    const fhFallbackMatch = line.match(/^([A-Za-z\s]+Mutual Fund)$/i);
+                    if (fhFallbackMatch && validFundHouses.size === 0 && !line.includes("PORTFOLIO SUMMARY") && !/Total/i.test(line)) {
+                        currentFundHouse = fhFallbackMatch[1].trim();
                     }
 
                     // Track folio context
@@ -2482,7 +2735,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         let rawFundName = isinMatch[1].trim();
                         if (rawFundName.startsWith('(') || rawFundName.length < 20) {
                             const prevLine = i > 0 ? lines[i - 1].trim() : '';
-                            if (!prevLine.includes('PAN:') && !prevLine.includes('Folio No:') && !prevLine.includes('KYC:')) {
+                            if (!prevLine.includes('PAN:') && !prevLine.includes('Folio No:') && !prevLine.includes('KYC:') && !validFundHouses.has(prevLine)) {
                                 rawFundName = prevLine + ' ' + rawFundName;
                             }
                         }
@@ -2943,6 +3196,92 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 };
 
                 this.chart.setOption(option);
+            },
+            
+            renderCalendarChart() {
+                const chartDom = document.getElementById('portfolioCalendarChart');
+                if (!chartDom) return;
+                
+                if (!window.echarts) {
+                    console.warn("ECharts not loaded");
+                    return;
+                }
+
+                if (!this.calendarChart) {
+                    this.calendarChart = window.echarts.init(chartDom);
+                }
+
+                const categories = [];
+                const data = [];
+                
+                const orderedData = [...this.investmentCalendarData].reverse();
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                
+                orderedData.forEach(yearRow => {
+                    yearRow.months.forEach((val, index) => {
+                        if (!val || val === 0) return;
+                        categories.push(`${yearRow.year} ${monthNames[index]}`);
+                        data.push(Math.round(val));
+                    });
+                });
+
+                const option = {
+                    toolbox: {
+                        right: 15,
+                        feature: {
+                            saveAsImage: { title: 'Save as Image', name: 'Investment_Calendar' }
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function(params) {
+                            return `<strong>${params.name}</strong><br/>${params.marker} Investment: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                        },
+                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
+                        borderColor: '#333',
+                        borderWidth: 1,
+                        textStyle: { color: '#fff' }
+                    },
+                    grid: { left: '3%', right: '4%', bottom: '2%', top: '8%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: categories,
+                        axisLabel: {
+                            rotate: 45,
+                            fontSize: 10,
+                            interval: Math.max(0, Math.floor(categories.length / 24))
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'Amount (₹)',
+                        nameLocation: 'middle',
+                        nameGap: 50,
+                        axisLabel: {
+                            formatter: function(value) {
+                                if (value >= 10000000) return (value / 10000000).toFixed(1) + ' Cr';
+                                else if (value >= 100000) return (value / 100000).toFixed(1) + ' L';
+                                else if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
+                                return value.toLocaleString('en-IN');
+                            },
+                            fontSize: 11
+                        }
+                    },
+                    series: [{
+                        name: 'Investment',
+                        type: 'bar',
+                        data: data,
+                        itemStyle: {
+                            color: new window.echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#f39c12' },
+                                { offset: 1, color: '#f9c74f' }
+                            ])
+                        },
+                        barMaxWidth: 40
+                    }]
+                };
+
+                this.calendarChart.setOption(option, true);
             },
             
             copyPassword() {
