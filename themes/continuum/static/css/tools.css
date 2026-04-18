@@ -251,6 +251,18 @@
     color: white;
 }
 
+.mode-toggle button.btn-clear-all {
+    border-color: #e74c3c;
+    color: #c0392b;
+    background: white;
+}
+
+.mode-toggle button.btn-clear-all:hover {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
 /* Share Button */
 .share-button {
     padding: 0.5rem 1rem;
