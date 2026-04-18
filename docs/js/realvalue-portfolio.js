@@ -212,7 +212,6 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     <div class="mode-toggle" style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
                         <button type="button" :class="{'active': activeTab === 'summary'}" @click="activeTab = 'summary'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🌍 Summary</button>
                         <button type="button" :class="{'active': activeTab === 'explore'}" @click="activeTab = 'explore'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🧭 Explore</button>
-                        <button type="button" :class="{'active': activeTab === 'tagging'}" @click="activeTab = 'tagging'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🏷️ Tagging</button>
                         <button type="button" :class="{'active': activeTab === 'data'}" @click="activeTab = 'data'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">🗂️ Data</button>
                         <button type="button" :class="{'active': activeTab === 'setup'}" @click="activeTab = 'setup'" style="padding: 0.8rem 2rem; font-size: 1.1em; border-radius: 6px;">⚙️ Setup</button>
                     </div>
@@ -423,7 +422,99 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             </h3>
                             <div id="portfolio-allocation-chart" class="chart-container"></div>
                         </div>
-                    </div>
+                        </div>
+                    
+                        <!-- INVESTMENT CALENDAR -->
+                        <div class="investment-plan" style="margin-top: 3rem;" v-if="investmentCalendarData.length > 0">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                    <h2 style="margin: 0;">📅 Investment Calendar</h2>
+                                    <div class="mode-toggle">
+                                        <button 
+                                            type="button"
+                                            :class="{'active': calendarViewTab === 'chart'}"
+                                            @click="calendarViewTab = 'chart'"
+                                            style="white-space: nowrap;">
+                                            📊 Chart
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            :class="{'active': calendarViewTab === 'table'}"
+                                            @click="calendarViewTab = 'table'"
+                                            style="white-space: nowrap;">
+                                            📋 Table
+                                        </button>
+                                    </div>
+                                    <div class="mode-toggle" v-if="uniqueInvestorsCalendar.length > 0">
+                                        <button 
+                                            type="button"
+                                            :class="{'active': calendarInvestor === 'All'}"
+                                            @click="calendarInvestor = 'All'"
+                                            style="white-space: nowrap;">
+                                            👥 All
+                                        </button>
+                                        <button 
+                                            v-for="inv in uniqueInvestorsCalendar" :key="inv"
+                                            type="button"
+                                            :class="{'active': calendarInvestor === inv}"
+                                            @click="calendarInvestor = inv"
+                                            style="white-space: nowrap;">
+                                            👤 {{ inv }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mode-toggle">
+                                    <button 
+                                        type="button"
+                                        :class="{'active': calendarInflationMode === 'nominal'}"
+                                        @click="calendarInflationMode = 'nominal'">
+                                        Nominal
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        :class="{'active': calendarInflationMode === 'real'}"
+                                        @click="calendarInflationMode = 'real'">
+                                        Real
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Chart View -->
+                            <div v-show="calendarViewTab === 'chart'" style="margin-bottom: 2rem;">
+                                <div id="portfolioCalendarChart" style="width: 100%; height: 400px;"></div>
+                            </div>
+                            
+                            <!-- Table View -->
+                            <div v-show="calendarViewTab === 'table'" class="plan-table-wrapper">
+                                <table class="plan-table" style="margin: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>Year</th>
+                                            <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
+                                            <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="row in investmentCalendarData" :key="row.year">
+                                            <td><strong>{{ row.year }}</strong></td>
+                                            <td v-for="(val, idx) in row.months" :key="idx">
+                                                <span v-if="val !== 0" class="help-icon" :data-tooltip="(val < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(val), 0)" style="cursor: default; opacity: 1;" :style="val < 0 ? 'color: #ef4444;' : ''">
+                                                    {{ formatCurrency(val) }}
+                                                </span>
+                                                <span v-else style="color: #999;">—</span>
+                                            </td>
+                                            <td style="font-weight: bold;" :style="row.total < 0 ? 'color: #ef4444;' : 'color: var(--primary-color);'">
+                                                <span class="help-icon" :data-tooltip="(row.total < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(row.total), 0)" style="cursor: default; opacity: 1;">
+                                                    {{ formatCurrency(row.total) }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div> <!-- End of EXPLORE TAB -->
                     
                 </div>
@@ -432,15 +523,39 @@ window.initializeTool.portfolioTracker = async function (container, config) {
    
                     </div>
 
-                    <!-- TAB 2: SETUP (Previously Goals) -->
+                    <!-- TAB 4: SETUP -->
                     <div v-show="activeTab === 'setup'">
-                        <!-- INVESTORS SETUP -->
                         <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <h3 style="margin: 0;">👥 Investors Setup</h3>
-                                <button type="button" @click="addInvestor" style="padding: 0.5rem 1rem; background: var(--state-success, #4CAF50); border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">+ Add Investor</button>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                                <h3 style="margin: 0;">💾 Export & Import Setup</h3>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="file" ref="configInput" accept=".json,application/json" style="display: none;" @change="importSetup">
+                                    <button type="button" class="share-button" @click="$refs.configInput.click()">
+                                        ⬆️ Import
+                                    </button>
+                                    <button type="button" class="share-button" @click="exportSetup">
+                                        ⬇️ Export
+                                    </button>
+                                </div>
                             </div>
-                            <p style="color: #666; font-size: 0.9em; margin-top: 0; margin-bottom: 1.5rem;">Define investors and their full names to enable automated statement tagging.</p>
+                            <ul style="color: #666; font-size: 0.85em; margin: 0; padding-left: 1.5rem; line-height: 1.6;">
+                                <li>Export your Setup as a JSON file to safely back up your Investors, Goals, and Tagging mappings.</li>
+                                <li>Import this file to restore these configurations after clearing browser data or to sync across devices.</li>
+                                <li><em>Note: You must still re-upload your CAS/IBKR files to view your portfolio data.</em></li>
+                            </ul>
+                        </div>
+
+                        <!-- INVESTORS SETUP -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <div style="display: flex; flex-direction: column;">
+                                <h3 style="margin: 0 0 0.2rem 0;">👥 Investors Setup</h3>
+                                <p style="color: #666; font-size: 0.85em; margin: 0;">Define investors and their full names to enable automated statement tagging.</p>
+                            </div>
+                            <button type="button" class="share-button" @click="addInvestor">
+                                ➕ Investor
+                            </button>
+                        </div>
+                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
                             
                             <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.95em;">
                                 <thead>
@@ -496,9 +611,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
 
                         <!-- GOALS DEFINITION -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 style="margin: 0;">🎯 Financial Goals</h3>
-                            <button type="button" @click="addNewGoal" style="padding: 0.5rem 1rem; background: var(--state-success, #4CAF50); border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">+ Add Goal</button>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <div style="display: flex; flex-direction: column;">
+                                <h3 style="margin: 0 0 0.2rem 0;">🎯 Financial Goals</h3>
+                                <p style="color: #666; font-size: 0.85em; margin: 0;">Define your portfolio targets and asset allocation structures.</p>
+                            </div>
+                            <button type="button" class="share-button" @click="addNewGoal">
+                                ➕ Goal
+                            </button>
                         </div>
                         
                         <div v-if="goals.length === 0" style="padding: 2rem; text-align: center; background: white; border-radius: 8px; border: 1px dashed #ccc; color: #666;">
@@ -506,228 +626,224 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
 
                         <div v-for="(goal, index) in goals" :key="goal.id" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.5rem;">
+                                <!-- LEFT SIDE: Goal Metadata and Amount Setup -->
                                 <div>
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Name</label>
-                                    <input type="text" v-model="goal.name" class="fund-input" placeholder="e.g. Emergency Fund" @change="saveGoalsAndTags">
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Date (Optional)</label>
-                                    <input type="date" v-model="goal.targetDate" class="fund-input" @change="saveGoalsAndTags">
-                                </div>
-                                <div style="grid-column: span 2;">
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Description</label>
-                                    <input type="text" v-model="goal.description" class="fund-input" placeholder="What is this goal for?" @change="saveGoalsAndTags">
-                                </div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f9f9f9; border-radius: 6px;">
-                                <h4 style="margin: 0 0 0.5rem 0; font-size: 1em;">Target Amount Setup</h4>
-                                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                                    <label style="cursor: pointer;"><input type="radio" v-model="goal.amountType" value="NONE" @change="saveGoalsAndTags"> No Set Target (Track Milestones)</label>
-                                    <label style="cursor: pointer;"><input type="radio" v-model="goal.amountType" value="FLAT" @change="saveGoalsAndTags"> Flat Amount</label>
-                                    <label style="cursor: pointer;"><input type="radio" v-model="goal.amountType" value="MONTHS" @change="saveGoalsAndTags"> Contextual (Months × Monthly Amount)</label>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                                        <div style="grid-column: span 2;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Name</label>
+                                            <input type="text" v-model="goal.name" class="fund-input" placeholder="e.g. Emergency Fund" @change="saveGoalsAndTags">
+                                        </div>
+                                        <div style="grid-column: span 2;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Description</label>
+                                            <input type="text" v-model="goal.description" class="fund-input" placeholder="What is this goal for?" @change="saveGoalsAndTags">
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="margin-top: 1.5rem;">
+                                        <div>
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Mode</label>
+                                            <div class="mode-toggle">
+                                                <button type="button" :class="{'active': goal.targetMoney}" @click="toggleGoalTarget(goal, 'money')">💰 Money</button>
+                                                <button type="button" :class="{'active': goal.targetTime}" @click="toggleGoalTarget(goal, 'time')">⏱️ Time</button>
+                                            </div>
+                                        </div>
+
+                                        <div v-if="!goal.targetMoney && !goal.targetTime" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+                                            <p style="font-size: 0.85em; color: #666; margin: 0;">Just track the next milestone</p>
+                                        </div>
+
+                                        <div v-if="goal.targetTime" style="margin-top: 1.25rem;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Date</label>
+                                            <input type="date" v-model="goal.targetDate" class="fund-input" @change="saveGoalsAndTags">
+                                        </div>
+
+                                        <div v-if="goal.targetMoney" style="margin-top: 1.25rem;">
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Amount Type</label>
+                                            <div class="mode-toggle" style="margin-bottom: 0.5rem; justify-content: flex-start;">
+                                                <button type="button" :class="{'active': goal.amountType === 'FLAT'}" @click="goal.amountType = 'FLAT'; saveGoalsAndTags()">Flat</button>
+                                                <button type="button" :class="{'active': goal.amountType === 'MONTHS'}" @click="goal.amountType = 'MONTHS'; saveGoalsAndTags()">Contextual</button>
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 1.25rem;">
+                                                <p v-if="goal.amountType === 'FLAT'" style="font-size: 0.85em; color: #666; margin: 0;">Define a specific overall corpus size as your final target.</p>
+                                                <p v-if="goal.amountType === 'MONTHS'" style="font-size: 0.85em; color: #666; margin: 0;">Target is derived dynamically by multiplying an exact month count by a monthly expense.</p>
+                                            </div>
+                                            
+                                            <div v-if="goal.amountType === 'FLAT'">
+                                                <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Amount (₹):&nbsp;<strong>₹ {{ formatNumber(getGoalTargetAmount(goal)) }}</strong></label>
+                                                <div class="unit-selector-input">
+                                                    <input type="number" v-model.number="goal.targetAmountFlatValue" class="fund-input" placeholder="0" @input="saveGoalsAndTags">
+                                                    <div class="unit-buttons">
+                                                        <button type="button" :class="{'active': goal.targetAmountFlatUnit === 'crores'}" @click="goal.targetAmountFlatUnit = 'crores'; saveGoalsAndTags()">Crores</button>
+                                                        <button type="button" :class="{'active': goal.targetAmountFlatUnit === 'lakhs'}" @click="goal.targetAmountFlatUnit = 'lakhs'; saveGoalsAndTags()">Lakhs</button>
+                                                        <button type="button" :class="{'active': goal.targetAmountFlatUnit === 'thousands'}" @click="goal.targetAmountFlatUnit = 'thousands'; saveGoalsAndTags()">Thousands</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="goal.amountType === 'MONTHS'" style="display: flex; flex-direction: column; gap: 1rem;">
+                                                <div>
+                                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Number of Months</label>
+                                                    <input type="number" v-model.number="goal.months" class="fund-input" placeholder="e.g. 12" @input="saveGoalsAndTags">
+                                                </div>
+                                                <div>
+                                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Monthly Amount (₹):&nbsp;<strong>₹ {{ formatNumber(getGoalMonthlyAmount(goal)) }}</strong></label>
+                                                    <div class="unit-selector-input">
+                                                        <input type="number" v-model.number="goal.monthlyAmountValue" class="fund-input" placeholder="0" @input="saveGoalsAndTags">
+                                                        <div class="unit-buttons">
+                                                            <button type="button" :class="{'active': goal.monthlyAmountUnit === 'lakhs'}" @click="goal.monthlyAmountUnit = 'lakhs'; saveGoalsAndTags()">Lakhs</button>
+                                                            <button type="button" :class="{'active': goal.monthlyAmountUnit === 'thousands'}" @click="goal.monthlyAmountUnit = 'thousands'; saveGoalsAndTags()">Thousands</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="font-size: 0.95em; color: #15803d; margin-top: 0.2rem;">
+                                                    <strong>Computed Goal Target: </strong> ₹{{ formatNumber(getGoalTargetAmount(goal)) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                                <div v-if="goal.amountType === 'FLAT'">
-                                    <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Target Amount (₹)</label>
-                                    <input type="number" v-model.number="goal.targetAmountFlat" class="fund-input" placeholder="0" @change="saveGoalsAndTags">
-                                </div>
-                                <div v-if="goal.amountType === 'MONTHS'" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                    <div>
-                                        <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Number of Months</label>
-                                        <input type="number" v-model.number="goal.months" class="fund-input" placeholder="e.g. 12" @change="saveGoalsAndTags">
+                                <!-- RIGHT SIDE: Target Asset Allocation Table -->
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                        <h4 style="margin: 0; font-size: 1em;">Asset Allocation</h4>
                                     </div>
-                                    <div>
-                                        <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Monthly Amount (₹)</label>
-                                        <input type="number" v-model.number="goal.monthlyAmount" class="fund-input" placeholder="e.g. 40000" @change="saveGoalsAndTags">
+                                    <div v-if="verifyTotalAllocation(goal) && goal.allocations.length > 0" style="color: var(--state-danger, #ff5252); font-size: 0.85em; margin-bottom: 1rem; font-weight: 500;">
+                                        ⚠️ Warning: Total computed allocation is {{ formatPercent(getTotalAllocationPercent(goal)) }}
                                     </div>
-                                    <div style="grid-column: span 2; font-size: 0.9em; color: #15803d;">
-                                        <strong>Computed Goal Target: </strong> ₹{{ formatNumber((goal.months || 0) * (goal.monthlyAmount || 0)) }}
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                                    <h4 style="margin: 0; font-size: 1em;">Target Asset Allocation (100% Total)</h4>
-                                    <button type="button" @click="addAllocationRow(goal)" style="padding: 0.25rem 0.5rem; font-size: 0.8em; cursor: pointer;">+ Add Asset Class</button>
-                                </div>
-                                <div class="table-responsive">
-                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                    <table class="asset-table">
                                         <thead>
-                                            <tr style="border-bottom: 1px solid #ddd;">
-                                                <th style="text-align: left; padding: 0.5rem;">Asset Class</th>
-                                                <th style="text-align: left; padding: 0.5rem;">Allocation Type</th>
-                                                <th style="text-align: left; padding: 0.5rem;">Value</th>
-                                                <th style="text-align: right; padding: 0.5rem;">Computed %</th>
-                                                <th style="width: 40px;"></th>
+                                            <tr>
+                                                <th style="width: 30px; text-align: center;">
+                                                    <button type="button" class="share-button" @click="addAllocationRow(goal)" title="Add asset class" style="padding: 0.25rem 0.5rem; font-size: 1rem;">+</button>
+                                                </th>
+                                                <th>Asset Class</th>
+                                                <th>
+                                                    <span v-if="goal.amountType === 'MONTHS'">Months</span>
+                                                    <span v-else>Target %</span>
+                                                </th>
+                                                <th v-if="goal.amountType === 'MONTHS'">Computed %</th>
+                                                <th style="width: 30px; text-align: center;"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(alloc, aIdx) in goal.allocations" :key="aIdx" style="border-bottom: 1px solid #eee;">
-                                                <td style="padding: 0.5rem;">
-                                                    <input type="text" v-model="alloc.assetClass" class="fund-input" list="asset-class-options" @change="saveGoalsAndTags" style="padding: 0.25rem;">
+                                            <tr v-for="(alloc, aIdx) in goal.allocations" :key="aIdx"
+                                                draggable="true"
+                                                @dragstart="dragStart($event, aIdx, 'allocation_' + goal.id)"
+                                                @dragend="dragEnd($event)"
+                                                @dragover.prevent
+                                                @drop="drop($event, aIdx, 'allocation_' + goal.id)"
+                                                style="cursor: move;">
+                                                <td style="text-align: center; color: #aaa; cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">⋮⋮</td>
+                                                <td>
+                                                    <input type="text" v-model="alloc.assetClass" list="asset-class-options" @change="saveGoalsAndTags" style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; outline: none;" placeholder="Asset name">
                                                 </td>
-                                                <td style="padding: 0.5rem;">
-                                                    <select v-model="alloc.type" class="fund-input" @change="saveGoalsAndTags" style="padding: 0.25rem;">
-                                                        <option value="PERCENT">Percentage %</option>
-                                                        <option value="MONTHS">Months</option>
-                                                    </select>
+                                                <td>
+                                                    <input type="number" v-model.number="alloc.value" @change="saveGoalsAndTags" style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; outline: none;">
                                                 </td>
-                                                <td style="padding: 0.5rem;">
-                                                    <input type="number" v-model.number="alloc.value" class="fund-input" @change="saveGoalsAndTags" style="padding: 0.25rem;">
-                                                </td>
-                                                <td style="padding: 0.5rem; text-align: right; font-weight: bold;">
+                                                <td v-if="goal.amountType === 'MONTHS'" style="font-weight: bold; color: var(--primary-color);">
                                                     {{ formatPercent(computeAllocationPercent(goal, aIdx)) }}
                                                 </td>
-                                                <td style="padding: 0.5rem; text-align: center;">
-                                                    <button type="button" @click="removeAllocationRow(goal, aIdx)" style="color: red; border: none; background: none; cursor: pointer; font-weight: bold; font-size: 1.2em;">&times;</button>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn-remove-subtle" @click="removeAllocationRow(goal, aIdx)" title="Remove">✕</button>
                                                 </td>
                                             </tr>
                                             <tr v-if="!goal.allocations || goal.allocations.length === 0">
-                                                <td colspan="5" style="padding: 1rem; text-align: center; color: #999; font-style: italic;">No asset class allocations defined</td>
+                                                <td :colspan="goal.amountType === 'MONTHS' ? 5 : 4" style="text-align: center; color: #999; font-style: italic; padding: 1rem;">No asset class allocations defined</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div v-if="verifyTotalAllocation(goal) && goal.allocations.length > 0" style="color: var(--state-danger, #ff5252); font-size: 0.85em; margin-top: 0.5rem; text-align: right;">
-                                    ⚠️ Warning: Total computed allocation is roughly {{ formatPercent(getTotalAllocationPercent(goal)) }} (should be 100%)
+                            </div>
+                            
+                            <div style="text-align: right; border-top: 1px solid #ddd; padding-top: 1.25rem; margin-top: 1.5rem;">
+                                <button type="button" class="share-button btn-clear-all" @click="deleteGoal(index)">🗑️ Delete Goal</button>
+                            </div>
+                        </div>
+
+                        <!-- TAGGING SETUP (Hierarchical) -->
+                        <div v-if="funds.length > 0" style="margin-top: 3rem; margin-bottom: 2rem;">
+                            <h3 style="margin: 0 0 1rem 0; border-bottom: 2px solid #ddd; padding-bottom: 0.5rem;">🏷️ Tag Your Holdings</h3>
+                            
+                            <div v-if="dataHierarchyCAS.length > 0" style="margin-bottom: 2rem;">
+                                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🇮🇳 India Mutual Funds (CAS)</h4>
+                                <div v-for="house in dataHierarchyCAS" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
+                                    <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em;">
+                                        🏦 {{ house.name }}
+                                    </div>
+                                    <div v-for="folio in house.folios" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
+                                        <div style="padding: 0.5rem 1rem; background: #fafafa; font-weight: 500; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                                <span>Folio: {{ folio.folioNo }}</span>
+                                                <span v-if="folioMappings[folio.folioNo]">Investor: {{ folioMappings[folio.folioNo] }}</span>
+                                            </div>
+                                            <span>₹{{ formatNumber(folio.marketValue) }}</span>
+                                        </div>
+                                        <div v-for="fund in folio.funds" :key="fund.id" style="padding: 0.75rem 1rem 0.75rem 2rem; border-top: 1px dotted #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                            <div style="flex: 1; min-width: 250px;">
+                                                <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
+                                                <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
+                                                <div style="font-size: 0.85em; color: #555;">
+                                                    Market Value: <span style="font-weight: bold; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</span>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                                <select v-model="tags[fund.id].goalId" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                    <option value="">— Goal —</option>
+                                                    <option v-for="g in goals" :key="g.id" :value="g.id">{{ g.name }}</option>
+                                                </select>
+                                                <select v-model="tags[fund.id].assetClass" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                    <option value="">— Asset Class —</option>
+                                                    <option v-for="ac in getAssetClassesForGoal(tags[fund.id].goalId)" :key="ac" :value="ac">{{ ac }}</option>
+                                                </select>
+                                                <div class="unit-buttons" style="display: flex; min-width: 150px;">
+                                                    <button type="button" :class="{'active-buy': tags[fund.id].status === 'Buy'}" @click="toggleStatus(fund.id, 'Buy')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">BUY</button>
+                                                    <button type="button" :class="{'active-hold': tags[fund.id].status === 'Hold'}" @click="toggleStatus(fund.id, 'Hold')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">HOLD</button>
+                                                    <button type="button" :class="{'active-sell': tags[fund.id].status === 'Sell'}" @click="toggleStatus(fund.id, 'Sell')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">SELL</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div style="text-align: right; border-top: 1px solid #ddd; padding-top: 1rem;">
-                                <button type="button" @click="deleteGoal(index)" style="padding: 0.4rem 1rem; background: var(--state-danger, #ff5252); border: none; border-radius: 4px; color: white; cursor: pointer; font-size: 0.85em;">🗑️ Delete Goal</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 3: TAGGING -->
-                    <div v-show="activeTab === 'tagging'">
-                        <div style="margin-bottom: 2rem;">
-                            <!-- We inject the tagging table here, wrapped properly -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <h4 style="margin: 0; color: var(--text-primary);">
-                                🏷️ Tag Your Holdings
-                            </h4>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                                <button type="button" class="share-button" @click="downloadTransactionsCsv" style="padding: 0.4rem 0.8rem; font-size: 0.85em;">
-                                    ⬇️ Download Transactions
-                                </button>
-                                <button type="button" class="share-button btn-clear-all" @click="clearPortfolio" style="padding: 0.4rem 0.8rem; font-size: 0.85em;">
-                                    🗑️ Clear Portfolio
-                                </button>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="asset-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 35%;">Fund Details</th>
-                                        <th style="width: 13%; text-align: right;">Invested Value</th>
-                                        <th style="width: 13%; text-align: right;">Market Value</th>
-                                        <th style="width: 8%; text-align: right;">XIRR %</th>
-                                        <th style="width: 15%;">Goal</th>
-                                        <th style="width: 15%;">Asset Class</th>
-                                        <th style="width: 6%; text-align: center;">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="fund in funds" :key="fund.id">
-                                        <td>
-                                            <div style="font-weight: 500; font-size: 0.95em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);">
-                                                {{ fund.fundHouse }} | Folio: {{ fund.folioNo }} <br> ISIN: {{ fund.isin }}
+                            <div v-if="dataHierarchyIBKR.length > 0" style="margin-bottom: 2rem;">
+                                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🌎 International Stocks (IBKR)</h4>
+                                <div v-for="account in dataHierarchyIBKR" :key="account.accountNo" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
+                                    <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                            <span>📂 Account: {{ account.accountNo }}</span>
+                                            <span v-if="folioMappings[account.accountNo]">Investor: {{ folioMappings[account.accountNo] }}</span>
+                                        </div>
+                                        <span>₹{{ formatNumber(account.marketValue) }}</span>
+                                    </div>
+                                    <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.75rem 1rem; border-top: 1px solid #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                        <div style="flex: 1; min-width: 250px;">
+                                            <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
+                                            <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
+                                            <div style="font-size: 0.85em; color: #555;">
+                                                Market Value: <span style="font-weight: bold; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</span>
                                             </div>
-                                        </td>
-                                        <td style="text-align: right; vertical-align: top;">
-                                            <template v-if="fund.source === 'IBKR'">
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.investedValue) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.investedValueUsd, 2) }}</div>
-                                                <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 0) }} units</div>
-                                            </template>
-                                            <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ fund.investedValue ? formatNumber(fund.investedValue) : '-' }}</div>
-                                                <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatNumber(fund.closingUnits, 3) }} units</div>
-                                            </template>
-                                        </td>
-                                        <td style="text-align: right; vertical-align: top;">
-                                            <template v-if="fund.source === 'IBKR'">
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.marketValueUsd, 2) }}</div>
-                                                <div v-if="getFundNavInr(fund) !== null" style="font-size: 0.8em; color: var(--text-secondary);">₹{{ formatNumber(getFundNavInr(fund), 4) }}/unit</div>
-                                                <div v-if="getFundNavUsd(fund) !== null" style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(getFundNavUsd(fund), 4) }}/unit</div>
-                                                <div v-if="fund.valuationDate" style="font-size: 0.72em; color: var(--text-secondary);">{{ formatNavDate(fund.valuationDate) }}</div>
-                                            </template>
-                                            <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</div>
-                                                <div v-if="getFundNavInr(fund) !== null" style="font-size: 0.8em; color: var(--text-secondary);">₹{{ formatNumber(getFundNavInr(fund), 4) }}/unit</div>
-                                                <div v-if="fund.valuationDate" style="font-size: 0.72em; color: var(--text-secondary);">{{ formatNavDate(fund.valuationDate) }}</div>
-                                            </template>
-                                        </td>
-                                        <td style="text-align: right; vertical-align: top;">
-                                            <template v-if="fund.source === 'IBKR'">
-                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatXirr(tags[fund.id].xirrInr) }}</div>
-                                                <div style="font-size: 0.8em; color: #0284c7;">{{ formatXirr(tags[fund.id].xirrUsd) }}</div>
-                                                <div v-if="tags[fund.id].xirrNote" style="font-size: 0.72em; color: #b45309; line-height: 1.3; margin-top: 0.2rem;">{{ tags[fund.id].xirrNote }}</div>
-                                            </template>
-                                            <template v-else>
-                                                <div style="font-weight: 600; color: var(--text-primary);">{{ formatXirr(tags[fund.id].xirrInr || tags[fund.id].xirr) }}</div>
-                                                <div v-if="tags[fund.id].xirrNote" style="font-size: 0.72em; color: #b45309; line-height: 1.3; margin-top: 0.2rem; text-align: left;">{{ tags[fund.id].xirrNote }}</div>
-                                            </template>
-                                        </td>
-                                        <td style="vertical-align: top;">
-                                            <select
-                                                v-model="tags[fund.id].goalId"
-                                                class="fund-input"
-                                                @change="saveTagsAndCalculate"
-                                            >
-                                                <option value="">— Unassigned —</option>
+                                        </div>
+                                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                            <select v-model="tags[fund.id].goalId" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                <option value="">— Goal —</option>
                                                 <option v-for="g in goals" :key="g.id" :value="g.id">{{ g.name }}</option>
                                             </select>
-                                        </td>
-                                        <td style="vertical-align: top;">
-                                            <select
-                                                v-model="tags[fund.id].assetClass"
-                                                class="fund-input"
-                                                @change="saveTagsAndCalculate"
-                                            >
-                                                <option value="">— Unclassified —</option>
+                                            <select v-model="tags[fund.id].assetClass" class="fund-input" @change="saveTagsAndCalculate" style="min-width: 140px;">
+                                                <option value="">— Asset Class —</option>
                                                 <option v-for="ac in getAssetClassesForGoal(tags[fund.id].goalId)" :key="ac" :value="ac">{{ ac }}</option>
                                             </select>
-                                        </td>
-                                        <td style="vertical-align: top; text-align: center; min-width: 160px;">
-                                            <div class="unit-buttons" style="justify-content: center;">
-                                                <button 
-                                                    type="button" 
-                                                    :class="{'active-buy': tags[fund.id].status === 'Buy'}" 
-                                                    @click="toggleStatus(fund.id, 'Buy')"
-                                                    style="padding: 0.35rem 0.5rem; font-size: 0.8em; flex: 1;">
-                                                    BUY
-                                                </button>
-                                                <button 
-                                                    type="button" 
-                                                    :class="{'active-hold': tags[fund.id].status === 'Hold'}" 
-                                                    @click="toggleStatus(fund.id, 'Hold')"
-                                                    style="padding: 0.35rem 0.5rem; font-size: 0.8em; flex: 1;">
-                                                    HOLD
-                                                </button>
-                                                <button 
-                                                    type="button" 
-                                                    :class="{'active-sell': tags[fund.id].status === 'Sell'}" 
-                                                    @click="toggleStatus(fund.id, 'Sell')"
-                                                    style="padding: 0.35rem 0.5rem; font-size: 0.8em; flex: 1;">
-                                                    SELL
-                                                </button>
+                                            <div class="unit-buttons" style="display: flex; min-width: 150px;">
+                                                <button type="button" :class="{'active-buy': tags[fund.id].status === 'Buy'}" @click="toggleStatus(fund.id, 'Buy')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">BUY</button>
+                                                <button type="button" :class="{'active-hold': tags[fund.id].status === 'Hold'}" @click="toggleStatus(fund.id, 'Hold')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">HOLD</button>
+                                                <button type="button" :class="{'active-sell': tags[fund.id].status === 'Sell'}" @click="toggleStatus(fund.id, 'Sell')" style="padding: 0.35rem; flex: 1; font-size: 0.8em;">SELL</button>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -942,7 +1058,26 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
 
                 const rawGoals = localStorage.getItem('realvalue-portfolio-goals');
-                if (rawGoals) storedGoals = JSON.parse(rawGoals);
+                if (rawGoals) {
+                    storedGoals = JSON.parse(rawGoals);
+                    storedGoals = storedGoals.map(g => {
+                        if (g.targetAmountFlat && g.targetAmountFlatValue === undefined) {
+                            if (g.targetAmountFlat >= 10000000 && g.targetAmountFlat % 10000000 === 0) { g.targetAmountFlatValue = g.targetAmountFlat / 10000000; g.targetAmountFlatUnit = 'crores'; }
+                            else if (g.targetAmountFlat >= 100000 && g.targetAmountFlat % 100000 === 0) { g.targetAmountFlatValue = g.targetAmountFlat / 100000; g.targetAmountFlatUnit = 'lakhs'; }
+                            else { g.targetAmountFlatValue = g.targetAmountFlat; g.targetAmountFlatUnit = 'thousands'; }
+                        } else if (g.targetAmountFlatValue === undefined) { g.targetAmountFlatValue = null; g.targetAmountFlatUnit = 'lakhs'; }
+                        
+                        if (g.monthlyAmount && g.monthlyAmountValue === undefined) {
+                            if (g.monthlyAmount >= 100000 && g.monthlyAmount % 100000 === 0) { g.monthlyAmountValue = g.monthlyAmount / 100000; g.monthlyAmountUnit = 'lakhs'; }
+                            else { g.monthlyAmountValue = g.monthlyAmount; g.monthlyAmountUnit = 'thousands'; }
+                        } else if (g.monthlyAmountValue === undefined) { g.monthlyAmountValue = null; g.monthlyAmountUnit = 'thousands'; }
+                        
+                        if (g.targetTime === undefined) g.targetTime = !!g.targetDate;
+                        if (g.targetMoney === undefined) g.targetMoney = (g.amountType === 'FLAT' || g.amountType === 'MONTHS');
+                        
+                        return g;
+                    });
+                }
 
                 const rawInvestors = localStorage.getItem('realvalue-portfolio-investors');
                 if (rawInvestors) storedInvestors = JSON.parse(rawInvestors);
@@ -1027,6 +1162,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 debounceTimer: null,
                 showPrivacyDetails: false,
                 promptCopied: false,
+                
+                calendarViewTab: 'table',
+                calendarInvestor: 'All',
+                calendarInflationMode: 'nominal',
+                inflationData: null,
+                latestCpi: null,
+                calendarChart: null,
             };
         },
     
@@ -1034,8 +1176,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             this.extractUniqueOptions();
             this.calculateSummary();
             this.warmSbiRateCache();
+            this.fetchInflationData();
             this.resizeHandler = () => {
                 if (this.chart) this.chart.resize();
+                if (this.calendarChart) this.calendarChart.resize();
             };
             window.addEventListener('resize', this.resizeHandler);
         },
@@ -1044,8 +1188,67 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
             if (this.chart) this.chart.dispose();
+            if (this.calendarChart) this.calendarChart.dispose();
+        },
+        computed: {
+            uniqueInvestorsCalendar() {
+                const investors = new Set();
+                this.funds.forEach(f => {
+                    const inv = this.folioMappings[f.folioNo];
+                    if (inv) investors.add(inv);
+                });
+                return Array.from(investors).sort();
+            },
+            investmentCalendarData() {
+                const yearMap = {};
+                
+                this.funds.forEach(f => {
+                    const fundInvestor = this.folioMappings[f.folioNo];
+                    if (this.calendarInvestor !== 'All' && fundInvestor !== this.calendarInvestor) return;
+                    if (!f.transactionCashflowsInr) return;
+                    
+                    f.transactionCashflowsInr.forEach(cf => {
+                        // Investments are represented as negative cash flows; Redemptions are positive.
+                        // Accumulate net investments (-cf.amount)
+                        const amount = -cf.amount;
+                        if (amount === 0) return;
+                        
+                        const dateObj = new Date(cf.date);
+                        if (isNaN(dateObj.getTime())) return;
+                        
+                        const year = dateObj.getFullYear();
+                        const month = dateObj.getMonth();
+                        const monthKey = cf.date.substring(0, 7);
+                        
+                        let adjustedAmount = amount;
+                        if (this.calendarInflationMode === 'real' && this.inflationData && this.latestCpi) {
+                            const transactionCpi = this.inflationData[monthKey] || this.latestCpi;
+                            adjustedAmount = amount * (this.latestCpi / transactionCpi);
+                        }
+                        
+                        if (!yearMap[year]) {
+                            yearMap[year] = { year: year, months: new Array(12).fill(0), total: 0 };
+                        }
+                        
+                        yearMap[year].months[month] += adjustedAmount;
+                        yearMap[year].total += adjustedAmount;
+                    });
+                });
+                
+                return Object.values(yearMap).sort((a, b) => b.year - a.year);
+            }
         },
         watch: {
+            investmentCalendarData() {
+                if (this.calendarViewTab === 'chart') {
+                    this.$nextTick(() => { this.renderCalendarChart(); });
+                }
+            },
+            calendarViewTab(newVal) {
+                if (newVal === 'chart') {
+                    this.$nextTick(() => { this.renderCalendarChart(); });
+                }
+            },
             portfolioViewTab() {
                 if (this.portfolioViewTab === 'chart' && this.summaryData.length > 0) {
                     this.$nextTick(() => {
@@ -1066,6 +1269,125 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
         },
         methods: {
+            async fetchInflationData() {
+                try {
+                    const cachedRaw = localStorage.getItem('realvalue_inflation_cache');
+                    const cacheTime = localStorage.getItem('realvalue_inflation_cache_time');
+                    const now = Date.now();
+                    
+                    if (cachedRaw && cacheTime && now - parseInt(cacheTime) < 7 * 24 * 60 * 60 * 1000) {
+                        const parsed = JSON.parse(cachedRaw);
+                        this.inflationData = parsed.data;
+                        this.latestCpi = parsed.latestCpi;
+                        return;
+                    }
+
+                    const response = await fetch('https://data.sakthipriyan.com/inflation/IN.csv');
+                    const csvText = await response.text();
+                    
+                    const lines = csvText.trim().split('\n');
+                    const cpiMap = {};
+                    let latest = 0;
+                    
+                    for (let i = 1; i < lines.length; i++) {
+                        const cols = lines[i].split(',');
+                        if (cols.length >= 2) {
+                            const dateStr = cols[0].trim();
+                            const cpi = parseFloat(cols[1].trim());
+                            if (!isNaN(cpi)) {
+                                cpiMap[dateStr] = cpi;
+                                latest = cpi;
+                            }
+                        }
+                    }
+                    
+                    this.inflationData = cpiMap;
+                    this.latestCpi = latest;
+                    
+                    localStorage.setItem('realvalue_inflation_cache', JSON.stringify({ data: cpiMap, latestCpi: latest }));
+                    localStorage.setItem('realvalue_inflation_cache_time', now.toString());
+                    
+                } catch (err) {
+                    console.error('Failed to fetch inflation data:', err);
+                }
+            },
+            exportSetup() {
+                const cleanTags = {};
+                for (const fundId in this.tags) {
+                    if (fundId.includes('_') && this.tags[fundId].goalId) {
+                        cleanTags[fundId] = {
+                            assetClass: this.tags[fundId].assetClass || "",
+                            status: this.tags[fundId].status || "Hold",
+                            goalId: this.tags[fundId].goalId
+                        };
+                    }
+                }
+
+                const config = {
+                    goals: this.goals,
+                    investors: this.investors,
+                    foliomappings: this.folioMappings,
+                    tags: cleanTags
+                };
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
+                const downloadAnchorNode = document.createElement('a');
+                downloadAnchorNode.setAttribute("href",     dataStr);
+                const dateStr = new Date().toISOString().split('T')[0];
+                downloadAnchorNode.setAttribute("download", `realvalue-portfolio-config-${dateStr}.json`);
+                document.body.appendChild(downloadAnchorNode);
+                downloadAnchorNode.click();
+                downloadAnchorNode.remove();
+            },
+            importSetup(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const config = JSON.parse(e.target.result);
+                        if (config.goals) {
+                            this.goals = config.goals.map(g => {
+                                let res = { ...g, allocations: g.allocations || [] };
+                                if (res.targetAmountFlat && res.targetAmountFlatValue === undefined) {
+                                    if (res.targetAmountFlat >= 10000000 && res.targetAmountFlat % 10000000 === 0) { res.targetAmountFlatValue = res.targetAmountFlat / 10000000; res.targetAmountFlatUnit = 'crores'; }
+                                    else if (res.targetAmountFlat >= 100000 && res.targetAmountFlat % 100000 === 0) { res.targetAmountFlatValue = res.targetAmountFlat / 100000; res.targetAmountFlatUnit = 'lakhs'; }
+                                    else { res.targetAmountFlatValue = res.targetAmountFlat; res.targetAmountFlatUnit = 'thousands'; }
+                                } else if (res.targetAmountFlatValue === undefined) { res.targetAmountFlatValue = null; res.targetAmountFlatUnit = 'lakhs'; }
+                                
+                                if (res.monthlyAmount && res.monthlyAmountValue === undefined) {
+                                    if (res.monthlyAmount >= 100000 && res.monthlyAmount % 100000 === 0) { res.monthlyAmountValue = res.monthlyAmount / 100000; res.monthlyAmountUnit = 'lakhs'; }
+                                    else { res.monthlyAmountValue = res.monthlyAmount; res.monthlyAmountUnit = 'thousands'; }
+                                } else if (res.monthlyAmountValue === undefined) { res.monthlyAmountValue = null; res.monthlyAmountUnit = 'thousands'; }
+                                
+                                if (res.targetTime === undefined) res.targetTime = !!res.targetDate;
+                                if (res.targetMoney === undefined) res.targetMoney = (res.amountType === 'FLAT' || res.amountType === 'MONTHS');
+                                
+                                return res;
+                            });
+                            localStorage.setItem('realvalue-portfolio-goals', JSON.stringify(this.goals));
+                        }
+                        if (config.investors) {
+                            this.investors = config.investors;
+                            localStorage.setItem('realvalue-portfolio-investors', JSON.stringify(this.investors));
+                        }
+                        if (config.foliomappings) {
+                            this.folioMappings = config.foliomappings;
+                            localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings));
+                        }
+                        if (config.tags) {
+                            this.tags = Object.assign(this.tags, config.tags);
+                            localStorage.setItem('realvalue-portfolio-tags', JSON.stringify(this.tags));
+                        }
+                        this.calculateSummary();
+                        alert('Configuration successfully imported!');
+                    } catch (err) {
+                        alert('Invalid JSON configuration file.');
+                        console.error('Import error:', err);
+                    }
+                    this.$refs.configInput.value = ''; // reset
+                };
+                reader.readAsText(file);
+            },
             saveMappings() {
                 try {
                     localStorage.setItem('realvalue-portfolio-foliomappings', JSON.stringify(this.folioMappings));
@@ -1156,6 +1478,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 let array;
                 if (type === 'investor') {
                     array = this.investors;
+                } else if (type.startsWith('allocation_')) {
+                    const goalId = type.replace('allocation_', '');
+                    const goal = this.goals.find(g => g.id === goalId);
+                    if (goal) array = goal.allocations;
+                    else return;
                 } else {
                     return;
                 }
@@ -1167,20 +1494,39 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 this.draggedIndex = null;
                 this.draggedType = null;
                 
-                this.saveSettings();
+                if (type.startsWith('allocation_')) {
+                    this.saveGoalsAndTags();
+                } else {
+                    this.saveSettings();
+                }
             },
             addNewGoal() {
                 this.goals.push({
                     id: 'goal_' + Date.now() + Math.random().toString(36).substr(2, 5),
                     name: 'New Goal',
                     description: '',
+                    targetTime: false,
+                    targetMoney: false,
                     amountType: 'NONE',
-                    targetAmountFlat: 0,
+                    targetAmountFlatValue: null,
+                    targetAmountFlatUnit: 'lakhs',
                     months: 0,
-                    monthlyAmount: 0,
+                    monthlyAmountValue: null,
+                    monthlyAmountUnit: 'thousands',
                     targetDate: '',
                     allocations: []
                 });
+                this.saveGoalsAndTags();
+            },
+            toggleGoalTarget(goal, type) {
+                if (type === 'time') {
+                    goal.targetTime = !goal.targetTime;
+                } else if (type === 'money') {
+                    goal.targetMoney = !goal.targetMoney;
+                    if (goal.targetMoney && (!goal.amountType || goal.amountType === 'NONE')) {
+                        goal.amountType = 'FLAT';
+                    }
+                }
                 this.saveGoalsAndTags();
             },
             deleteGoal(index) {
@@ -1198,9 +1544,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 goal.allocations.splice(index, 1);
                 this.saveGoalsAndTags();
             },
+            getGoalMonthlyAmount(goal) {
+                if (!goal.targetMoney || goal.amountType !== 'MONTHS') return 0;
+                const mult = goal.monthlyAmountUnit === 'crores' ? 10000000 : (goal.monthlyAmountUnit === 'lakhs' ? 100000 : (goal.monthlyAmountUnit === 'thousands' ? 1000 : 1));
+                return (Number(goal.monthlyAmountValue) || 0) * mult;
+            },
             getGoalTargetAmount(goal) {
-                if (goal.amountType === 'FLAT') return Number(goal.targetAmountFlat) || 0;
-                if (goal.amountType === 'MONTHS') return (Number(goal.months) || 0) * (Number(goal.monthlyAmount) || 0);
+                if (!goal.targetMoney) return 0;
+                if (goal.amountType === 'FLAT') {
+                    const mult = goal.targetAmountFlatUnit === 'crores' ? 10000000 : (goal.targetAmountFlatUnit === 'lakhs' ? 100000 : (goal.targetAmountFlatUnit === 'thousands' ? 1000 : 1));
+                    return (Number(goal.targetAmountFlatValue) || 0) * mult;
+                }
+                if (goal.amountType === 'MONTHS') {
+                    const mult = goal.monthlyAmountUnit === 'crores' ? 10000000 : (goal.monthlyAmountUnit === 'lakhs' ? 100000 : (goal.monthlyAmountUnit === 'thousands' ? 1000 : 1));
+                    const monthly = (Number(goal.monthlyAmountValue) || 0) * mult;
+                    return (goal.months && goal.months > 0) ? (goal.months * monthly) : 0;
+                }
                 return 0;
             },
             getAssetClassesForGoal(goalId) {
@@ -1253,20 +1612,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             computeAllocationPercent(goal, allocIndex) {
                 if (!goal || !goal.allocations || !goal.allocations[allocIndex]) return 0;
                 const alloc = goal.allocations[allocIndex];
-                if (alloc.type === 'PERCENT') return Number(alloc.value) || 0;
                 
-                let totalMonths = 0;
-                goal.allocations.forEach(a => { if (a.type === 'MONTHS') totalMonths += Number(a.value) || 0; });
-                
-                if (alloc.type === 'MONTHS') {
-                    if (goal.amountType === 'MONTHS' && goal.months > 0) {
+                if (goal.amountType === 'MONTHS') {
+                    if (goal.months && goal.months > 0) {
                         return ((Number(alloc.value) || 0) / goal.months) * 100;
                     }
-                    if (totalMonths > 0) {
-                        return ((Number(alloc.value) || 0) / totalMonths) * 100;
-                    }
+                    return 0;
                 }
-                return 0;
+                
+                // For FLAT or NONE, the value is inherently a percentage
+                return Number(alloc.value) || 0;
             },
             getTotalAllocationPercent(goal) {
                 if (!goal || !goal.allocations) return 0;
@@ -1341,6 +1696,23 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const cleanVal = val.replace(/[^\d.]/g, '');
                 if (cleanVal === '') return null;
                 return isNegative ? -parseFloat(cleanVal) : parseFloat(cleanVal);
+            },
+            formatCurrency(amount) {
+                const isNegative = amount < 0;
+                const absAmount = Math.abs(amount);
+                let formatted = '';
+                
+                if (absAmount >= 10000000) {
+                    formatted = (absAmount / 10000000).toFixed(2) + ' Cr';
+                } else if (absAmount >= 100000) {
+                    formatted = (absAmount / 100000).toFixed(2) + ' L';
+                } else if (absAmount >= 1000) {
+                    formatted = (absAmount / 1000).toFixed(2) + ' K';
+                } else {
+                    formatted = absAmount.toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+                }
+                
+                return isNegative ? '-' + formatted : formatted;
             },
             formatNumber(value, decimals = 0) {
                 if (value === null || value === undefined || isNaN(value)) return '0';
@@ -2293,6 +2665,34 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     return;
                 }
 
+                // ====================================================================
+                // PHASE 1: DYNAMIC AMC EXTRACTION (Read the Summary Table)
+                // ====================================================================
+                const validFundHouses = new Set();
+                let inSummaryTable = false;
+
+                for (let line of lines) {
+                    let trimmed = line.trim();
+                    
+                    if (trimmed.includes("Cost Value") || trimmed.includes("Market Value")) {
+                        inSummaryTable = true;
+                        continue;
+                    }
+                    
+                    if (inSummaryTable) {
+                        if (trimmed.startsWith("Total") || trimmed.includes("Folio No")) {
+                            inSummaryTable = false;
+                            break;
+                        }
+                        const summaryRowMatch = trimmed.match(/^([A-Za-z\s&]+?)\s+(?:-?\(?[\d,]+\.\d{2}\)?)\s+(?:-?\(?[\d,]+\.\d{2}\)?)$/i);
+                        if (summaryRowMatch) {
+                            validFundHouses.add(summaryRowMatch[1].trim());
+                        } else if (trimmed.length > 3 && !/[\d]/.test(trimmed) && !trimmed.toLowerCase().includes("mutual fund")) {
+                            validFundHouses.add(trimmed);
+                        }
+                    }
+                }
+
                 let currentFundHouse = "Unknown Fund House";
                 let currentFolio = "Unknown Folio";
                 let currentFund = null; // { fundHouse, folioNo, fundName, isin, closingUnits, nav, investedValue, marketValue, rawTxns[] }
@@ -2307,11 +2707,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
+                    if (!line) continue;
 
-                    // Track fund house context
-                    const fhMatch = line.match(/([A-Za-z\s]+Mutual Fund)/i);
-                    if (fhMatch && !/PORTFOLIO SUMMARY/i.test(line) && !/Total/i.test(line)) {
-                        currentFundHouse = fhMatch[1].trim();
+                    // --- NEW: Dynamic Fund House Detection ---
+                    if (validFundHouses.has(line) && !line.includes("PORTFOLIO SUMMARY")) {
+                        currentFundHouse = line;
+                        continue;
+                    }
+                    
+                    const fhFallbackMatch = line.match(/^([A-Za-z\s]+Mutual Fund)$/i);
+                    if (fhFallbackMatch && validFundHouses.size === 0 && !line.includes("PORTFOLIO SUMMARY") && !/Total/i.test(line)) {
+                        currentFundHouse = fhFallbackMatch[1].trim();
                     }
 
                     // Track folio context
@@ -2329,7 +2735,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         let rawFundName = isinMatch[1].trim();
                         if (rawFundName.startsWith('(') || rawFundName.length < 20) {
                             const prevLine = i > 0 ? lines[i - 1].trim() : '';
-                            if (!prevLine.includes('PAN:') && !prevLine.includes('Folio No:') && !prevLine.includes('KYC:')) {
+                            if (!prevLine.includes('PAN:') && !prevLine.includes('Folio No:') && !prevLine.includes('KYC:') && !validFundHouses.has(prevLine)) {
                                 rawFundName = prevLine + ' ' + rawFundName;
                             }
                         }
@@ -2790,6 +3196,92 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 };
 
                 this.chart.setOption(option);
+            },
+            
+            renderCalendarChart() {
+                const chartDom = document.getElementById('portfolioCalendarChart');
+                if (!chartDom) return;
+                
+                if (!window.echarts) {
+                    console.warn("ECharts not loaded");
+                    return;
+                }
+
+                if (!this.calendarChart) {
+                    this.calendarChart = window.echarts.init(chartDom);
+                }
+
+                const categories = [];
+                const data = [];
+                
+                const orderedData = [...this.investmentCalendarData].reverse();
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                
+                orderedData.forEach(yearRow => {
+                    yearRow.months.forEach((val, index) => {
+                        if (!val || val === 0) return;
+                        categories.push(`${yearRow.year} ${monthNames[index]}`);
+                        data.push(Math.round(val));
+                    });
+                });
+
+                const option = {
+                    toolbox: {
+                        right: 15,
+                        feature: {
+                            saveAsImage: { title: 'Save as Image', name: 'Investment_Calendar' }
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function(params) {
+                            return `<strong>${params.name}</strong><br/>${params.marker} Investment: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                        },
+                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
+                        borderColor: '#333',
+                        borderWidth: 1,
+                        textStyle: { color: '#fff' }
+                    },
+                    grid: { left: '3%', right: '4%', bottom: '2%', top: '8%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: categories,
+                        axisLabel: {
+                            rotate: 45,
+                            fontSize: 10,
+                            interval: Math.max(0, Math.floor(categories.length / 24))
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'Amount (₹)',
+                        nameLocation: 'middle',
+                        nameGap: 50,
+                        axisLabel: {
+                            formatter: function(value) {
+                                if (value >= 10000000) return (value / 10000000).toFixed(1) + ' Cr';
+                                else if (value >= 100000) return (value / 100000).toFixed(1) + ' L';
+                                else if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
+                                return value.toLocaleString('en-IN');
+                            },
+                            fontSize: 11
+                        }
+                    },
+                    series: [{
+                        name: 'Investment',
+                        type: 'bar',
+                        data: data,
+                        itemStyle: {
+                            color: new window.echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#f39c12' },
+                                { offset: 1, color: '#f9c74f' }
+                            ])
+                        },
+                        barMaxWidth: 40
+                    }]
+                };
+
+                this.calendarChart.setOption(option, true);
             },
             
             copyPassword() {
