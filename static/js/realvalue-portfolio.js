@@ -376,7 +376,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         :class="{'active': selectedReportArea === cat}"
                                         @click="selectedReportArea = cat; calculateSummary()"
                                         style="white-space: nowrap;">
-                                        📁 {{ cat }}
+                                        <span v-if="getGoalColorByName(cat)" :style="{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '2px', backgroundColor: getGoalColorByName(cat), marginRight: '0.4rem', border: '1px solid rgba(0,0,0,0.15)' }"></span>{{ cat }}
                                     </button>
                                 </div>
                             </div>
@@ -399,7 +399,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 </thead>
                                 <tbody>
                                     <tr v-for="row in summaryData" :key="row.name">
-                                        <td><strong>{{ row.name || 'Unclassified' }}</strong></td>
+                                        <td>
+                                            <strong>
+                                                <span v-if="getExploreColorForName(row.name)" :style="{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '2px', backgroundColor: getExploreColorForName(row.name), marginRight: '0.45rem', border: '1px solid rgba(0,0,0,0.15)' }"></span>{{ row.name || 'Unclassified' }}
+                                            </strong>
+                                        </td>
                                         <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--text-secondary);">{{ row.targetPercent !== null ? formatPercent(row.targetPercent) : '—' }}</td>
                                         <td v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" style="text-align: right;">{{ row.fundCount }}</td>
                                         <td style="text-align: right;">
@@ -414,7 +418,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                             <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: row.xirrInr === null || row.xirrInr === undefined ? 'var(--text-secondary)' : (Number(row.xirrInr) >= 0 ? '#15803d' : '#b91c1c') }">{{ formatXirr(row.xirrInr) }}</div>
                                             <div style="font-size: 0.8em; color: var(--text-secondary);" :style="row.growthValue < 0 ? 'color: #ef4444;' : ''">₹{{ formatNumber(Math.abs(row.growthValue)) }}</div>
                                         </td>
-                                        <td v-if="summaryData.length > 1" style="text-align: right; font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--text-secondary)' : (row.contributionPercent >= 0 ? '#15803d' : '#b91c1c') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</td>
+                                        <td v-if="summaryData.length > 1" style="text-align: right;">
+                                            <div style="font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--text-secondary)' : (row.contributionPercent >= 0 ? '#15803d' : '#b91c1c') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ (row.contributionPercent !== null && row.investedPercent > 0) ? (row.contributionPercent / row.investedPercent).toFixed(2) + 'x' : '—' }}</div>
+                                        </td>
                                         <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;" :style="{ color: row.driftPercent === null ? 'var(--text-secondary)' : (row.driftPercent < 0 ? '#b91c1c' : '#15803d') }">{{ row.driftPercent === null ? '—' : formatPercent(row.driftPercent) }}</td>
                                     </tr>
                                     <tr v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" class="total-row">
@@ -743,13 +750,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <!-- LEFT SIDE: Goal Metadata and Amount Setup -->
                                 <div>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                                        <div style="grid-column: span 2;">
+                                        <div>
                                             <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Name</label>
                                             <input type="text" v-model="goal.name" class="fund-input" placeholder="e.g. Emergency Fund" @change="saveGoalsAndTags">
                                         </div>
-                                        <div style="grid-column: span 2;">
-                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Description</label>
-                                            <input type="text" v-model="goal.description" class="fund-input" placeholder="What is this goal for?" @change="saveGoalsAndTags">
+                                        <div>
+                                            <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Color</label>
+                                            <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                                <input type="color" :value="goal.color || '#2c7be5'" @input="goal.color = $event.target.value; saveGoalsAndTags()" style="width: 2.5rem; height: 2rem; padding: 0.1rem; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">
+                                                <input type="text" :value="goal.color || '#2c7be5'" @input="goal.color = $event.target.value; saveGoalsAndTags()" @change="saveGoalsAndTags()" class="fund-input" style="width: 110px; font-family: monospace;" placeholder="#2c7be5" maxlength="7">
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -817,8 +827,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     </div>
                                 </div>
                                 
-                                <!-- RIGHT SIDE: Target Asset Allocation Table -->
+                                <!-- RIGHT SIDE: Goal Description + Target Asset Allocation Table -->
                                 <div>
+                                    <div style="margin-bottom: 1.25rem;">
+                                        <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Description</label>
+                                        <input type="text" v-model="goal.description" class="fund-input" placeholder="What is this goal for?" @change="saveGoalsAndTags">
+                                    </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                                         <h4 style="margin: 0; font-size: 1em;">Asset Allocation</h4>
                                     </div>
@@ -837,6 +851,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                     <span v-else>Target %</span>
                                                 </th>
                                                 <th v-if="goal.amountType === 'MONTHS'">Computed %</th>
+                                                <th style="width: 80px;">Color</th>
                                                 <th style="width: 30px; text-align: center;"></th>
                                             </tr>
                                         </thead>
@@ -858,12 +873,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                 <td v-if="goal.amountType === 'MONTHS'" style="font-weight: bold; color: var(--primary-color);">
                                                     {{ formatPercent(computeAllocationPercent(goal, aIdx)) }}
                                                 </td>
+                                                <td style="text-align: center; white-space: nowrap;">
+                                                    <input type="color" :value="alloc.color || '#cccccc'" @input="alloc.color = $event.target.value; saveGoalsAndTags()" style="width: 1.8rem; height: 1.6rem; padding: 0.05rem; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; vertical-align: middle;">
+                                                    <input type="text" :value="alloc.color || ''" @input="alloc.color = $event.target.value; saveGoalsAndTags()" @change="saveGoalsAndTags()" style="width: 68px; border: none; background: transparent; padding: 0.25rem 0.1rem; font-size: 0.8em; font-family: monospace; outline: none; vertical-align: middle;" placeholder="#cccccc" maxlength="7">
+                                                </td>
                                                 <td style="text-align: center;">
                                                     <button type="button" class="btn-remove-subtle" @click="removeAllocationRow(goal, aIdx)" title="Remove">✕</button>
                                                 </td>
                                             </tr>
                                             <tr v-if="!goal.allocations || goal.allocations.length === 0">
-                                                <td :colspan="goal.amountType === 'MONTHS' ? 5 : 4" style="text-align: center; color: #999; font-style: italic; padding: 1rem;">No asset class allocations defined</td>
+                                                <td :colspan="goal.amountType === 'MONTHS' ? 6 : 5" style="text-align: center; color: #999; font-style: italic; padding: 1rem;">No asset class allocations defined</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1196,6 +1215,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         
                         if (g.targetTime === undefined) g.targetTime = !!g.targetDate;
                         if (g.targetMoney === undefined) g.targetMoney = (g.amountType === 'FLAT' || g.amountType === 'MONTHS');
+                        if (!Array.isArray(g.allocations)) g.allocations = [];
+                        g.allocations = g.allocations.map(a => ({ ...a, color: (a && a.color) ? a.color : '' }));
+                        g.color = g.color || '#2c7be5';
                         
                         return g;
                     });
@@ -1215,7 +1237,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         if (cat === '') { delete storedTags[key].category; continue; }
                         let goalOpt = storedGoals.find(g => g.name === cat);
                         if (!goalOpt) {
-                            goalOpt = { id: 'goal_' + Date.now() + Math.random().toString(36).substr(2, 5), name: cat, description: '', amountType: 'NONE', targetDate: '', allocations: [] };
+                            goalOpt = { id: 'goal_' + Date.now() + Math.random().toString(36).substr(2, 5), name: cat, description: '', amountType: 'NONE', targetDate: '', color: '#2c7be5', allocations: [] };
                             storedGoals.push(goalOpt);
                             needsMigration = true;
                         }
@@ -1284,11 +1306,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 driftAnalysisChart: null,
                 resizeHandler: null,
                 debounceTimer: null,
+                portfolioRenderRaf1: null,
+                portfolioRenderRaf2: null,
+                portfolioRenderSeq: 0,
                 showPrivacyDetails: false,
                 promptCopied: false,
                 showZeroBalance: false,
                 
-                calendarViewTab: 'table',
+                calendarViewTab: 'chart',
                 calendarInvestor: 'All',
                 calendarInflationMode: 'nominal',
                 calendarGranularity: 'yearly',
@@ -1321,6 +1346,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             if (this.calendarChart) this.calendarChart.dispose();
         },
         computed: {
+            shouldRenderPerformanceChart() {
+                return this.activeTab === 'explore' && this.portfolioViewTab === 'chart' && this.summaryData.length > 0;
+            },
             uniqueInvestorsCalendar() {
                 const investors = new Set();
                 this.funds.forEach(f => {
@@ -1391,6 +1419,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
         },
         watch: {
+            shouldRenderPerformanceChart(newVal) {
+                if (newVal) {
+                    this.schedulePortfolioChartRender();
+                }
+            },
+            summaryData() {
+                if (this.shouldRenderPerformanceChart) {
+                    this.schedulePortfolioChartRender();
+                }
+            },
             investmentCalendarData() {
                 if (this.calendarViewTab === 'chart') {
                     this.$nextTick(() => { this.renderCalendarChart(); });
@@ -1406,23 +1444,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     this.$nextTick(() => { this.renderCalendarChart(); });
                 }
             },
-            portfolioViewTab() {
-                if (this.portfolioViewTab === 'chart' && this.summaryData.length > 0) {
-                    this.$nextTick(() => {
-                        this.updateChart();
-                        requestAnimationFrame(() => {
-                            this.resizePortfolioCharts();
-                        });
-                    });
-                }
-            },
             activeTab(newVal) {
-                if (newVal === 'explore' && this.portfolioViewTab === 'chart') {
+                if (newVal === 'explore' && this.calendarViewTab === 'chart') {
                     this.$nextTick(() => {
-                        if (this.summaryData.length > 0) {
-                            this.updateChart();
+                        if (this.investmentCalendarData.length > 0) {
+                            this.renderCalendarChart();
                             requestAnimationFrame(() => {
-                                this.resizePortfolioCharts();
+                                if (this.calendarChart) this.calendarChart.resize();
                             });
                         }
                     });
@@ -1430,6 +1458,33 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
         },
         methods: {
+            schedulePortfolioChartRender() {
+                this.$nextTick(() => {
+                    if (this.portfolioViewTab !== 'chart' || this.activeTab !== 'explore' || this.summaryData.length === 0) return;
+
+                    // Cancel older queued renders so only the latest view/data state paints.
+                    if (this.portfolioRenderRaf1) {
+                        cancelAnimationFrame(this.portfolioRenderRaf1);
+                        this.portfolioRenderRaf1 = null;
+                    }
+                    if (this.portfolioRenderRaf2) {
+                        cancelAnimationFrame(this.portfolioRenderRaf2);
+                        this.portfolioRenderRaf2 = null;
+                    }
+
+                    const seq = ++this.portfolioRenderSeq;
+                    this.portfolioRenderRaf1 = requestAnimationFrame(() => {
+                        if (seq !== this.portfolioRenderSeq) return;
+                        if (this.portfolioViewTab !== 'chart' || this.activeTab !== 'explore' || this.summaryData.length === 0) return;
+                        this.updateChart();
+                        this.portfolioRenderRaf2 = requestAnimationFrame(() => {
+                            if (seq !== this.portfolioRenderSeq) return;
+                            if (this.portfolioViewTab !== 'chart' || this.activeTab !== 'explore') return;
+                            this.resizePortfolioCharts();
+                        });
+                    });
+                });
+            },
             resizePortfolioCharts() {
                 if (this.chart) {
                     this.chart.resize();
@@ -1524,7 +1579,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         const config = JSON.parse(e.target.result);
                         if (config.goals) {
                             this.goals = config.goals.map(g => {
-                                let res = { ...g, allocations: g.allocations || [] };
+                                let res = { ...g, allocations: (g.allocations || []).map(a => ({ ...a, color: (a && a.color) ? a.color : '' })) };
+                                if (!res.color) res.color = '#2c7be5';
                                 if (res.targetAmountFlat && res.targetAmountFlatValue === undefined) {
                                     if (res.targetAmountFlat >= 10000000 && res.targetAmountFlat % 10000000 === 0) { res.targetAmountFlatValue = res.targetAmountFlat / 10000000; res.targetAmountFlatUnit = 'crores'; }
                                     else if (res.targetAmountFlat >= 100000 && res.targetAmountFlat % 100000 === 0) { res.targetAmountFlatValue = res.targetAmountFlat / 100000; res.targetAmountFlatUnit = 'lakhs'; }
@@ -1691,6 +1747,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     monthlyAmountValue: null,
                     monthlyAmountUnit: 'thousands',
                     targetDate: '',
+                    color: '#2c7be5',
                     allocations: []
                 });
                 this.saveGoalsAndTags();
@@ -1714,7 +1771,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             },
             addAllocationRow(goal) {
                 if (!goal.allocations) goal.allocations = [];
-                goal.allocations.push({ assetClass: '', type: 'PERCENT', value: 0 });
+                goal.allocations.push({ assetClass: '', type: 'PERCENT', value: 0, color: '' });
                 this.saveGoalsAndTags();
             },
             removeAllocationRow(goal, index) {
@@ -1745,6 +1802,40 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (!goal || !goal.allocations || goal.allocations.length === 0) return this.defaultAssetClasses;
                 const classes = goal.allocations.map(a => a.assetClass).filter(ac => ac && ac.trim() !== '');
                 return classes.length > 0 ? classes : this.defaultAssetClasses;
+            },
+            isHexColor(color) {
+                return /^#([0-9a-fA-F]{6})$/.test((color || '').trim());
+            },
+            getGoalColorByName(goalName) {
+                const goal = this.goals.find(g => g.name === goalName);
+                return goal && this.isHexColor(goal.color) ? goal.color.trim() : '';
+            },
+            getAssetClassColor(goalName, assetClass) {
+                const goal = this.goals.find(g => g.name === goalName);
+                if (!goal || !Array.isArray(goal.allocations)) return '';
+                const alloc = goal.allocations.find(a => a.assetClass === assetClass);
+                return alloc && this.isHexColor(alloc.color) ? alloc.color.trim() : '';
+            },
+            getExploreColorForName(name) {
+                if (this.selectedReportArea === 'overview') {
+                    return this.getGoalColorByName(name);
+                }
+                return this.getAssetClassColor(this.selectedReportArea, name);
+            },
+            getSummaryOrderRank(name) {
+                if (this.selectedReportArea === 'overview') {
+                    const goalIdx = this.goals.findIndex(g => g.name === name);
+                    if (goalIdx >= 0) return goalIdx;
+                    if (name === 'Unassigned') return 999998;
+                    return 999999;
+                }
+
+                const goal = this.goals.find(g => g.name === this.selectedReportArea);
+                if (!goal || !Array.isArray(goal.allocations)) return 999999;
+                const allocIdx = goal.allocations.findIndex(a => a.assetClass === name);
+                if (allocIdx >= 0) return allocIdx;
+                if (name === 'Unclassified') return 999998;
+                return 999999;
             },
             getGoalEarliestDate(goal) {
                 // Find earliest transaction date across all funds tagged to this goal
@@ -3205,10 +3296,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     }
                 });
 
-                // Convert to array and sort
-                this.uniqueCategories = Array.from(cats).sort();
+                // Keep goals in Setup order, then append any extras
+                this.uniqueCategories = this.goals
+                    .map(g => g.name)
+                    .filter(name => cats.has(name));
+                const extraCategories = Array.from(cats)
+                    .filter(name => !this.uniqueCategories.includes(name))
+                    .sort();
+                this.uniqueCategories.push(...extraCategories);
                 if (hasUncategorized) {
-                    this.uniqueCategories.push('Uncategorized');
+                    this.uniqueCategories.push('Unassigned');
                 }
                 
                 this.uniqueAssetClasses = Array.from(acs).sort();
@@ -3324,14 +3421,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     }
                 }
 
-                data.sort((a, b) => b.value - a.value);
+                data.sort((a, b) => {
+                    const rankDiff = this.getSummaryOrderRank(a.name) - this.getSummaryOrderRank(b.name);
+                    if (rankDiff !== 0) return rankDiff;
+                    return b.value - a.value;
+                });
                 this.summaryData = data;
-
-                if (this.portfolioViewTab === 'chart') {
-                    this.$nextTick(() => {
-                        this.updateChart();
-                    });
-                }
             },
 
             updateChart() {
@@ -3497,11 +3592,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const growthContribPercentByName = Object.fromEntries(
                     this.summaryData.map(item => [item.name, Number(item.contributionPercent || 0)])
                 );
+                const exploreColorByName = Object.fromEntries(
+                    this.summaryData.map(item => [item.name, this.getExploreColorForName(item.name)])
+                );
 
                 // Market value allocation shown as share percentages
                 const outerData = this.summaryData.map(item => ({
                     name: item.name,
-                    value: Number((item.percent || 0).toFixed(2))
+                    value: Number((item.percent || 0).toFixed(2)),
+                    ...(exploreColorByName[item.name] ? { itemStyle: { color: exploreColorByName[item.name] } } : {})
                 }));
 
                 // Growth share shown as positive growth contribution percentages
@@ -3511,11 +3610,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const innerData = positiveGrowthTotal > 0
                     ? this.summaryData.map(item => ({
                         name: item.name,
-                        value: Number((Math.max(0, Number(item.growthValue) || 0)).toFixed(2))
+                        value: Number((Math.max(0, Number(item.growthValue) || 0)).toFixed(2)),
+                        ...(exploreColorByName[item.name] ? { itemStyle: { color: exploreColorByName[item.name] } } : {})
                     }))
                     : this.summaryData.map(item => ({
                         name: item.name,
-                        value: Number((item.percent || 0).toFixed(2))
+                        value: Number((item.percent || 0).toFixed(2)),
+                        ...(exploreColorByName[item.name] ? { itemStyle: { color: exploreColorByName[item.name] } } : {})
                     }));
 
                 const legendItems = this.summaryData.map(item => item.name);
@@ -3536,16 +3637,39 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 };
 
                 const option = {
-                    title: {
-                        text: this.selectedReportArea === 'overview' ? 'Overall Performance' : `${this.selectedReportArea} Performance`,
-                        left: 'center',
-                        top: 0,
-                        textStyle: {
-                            color: '#2c3e50',
-                            fontSize: 16,
-                            fontWeight: 600
+                    animation: false,
+                    title: [
+                        {
+                            text: this.selectedReportArea === 'overview' ? 'Overall Performance' : `${this.selectedReportArea} Performance`,
+                            left: 'center',
+                            top: 0,
+                            textStyle: {
+                                color: '#2c3e50',
+                                fontSize: 16,
+                                fontWeight: 600
+                            }
+                        },
+                        {
+                            text: 'Market Value',
+                            left: 'center',
+                            top: '37%',
+                            textStyle: {
+                                fontSize: 15,
+                                fontWeight: 600,
+                                color: '#444'
+                            }
+                        },
+                        {
+                            text: 'Growth Share',
+                            left: 'center',
+                            top: '57%',
+                            textStyle: {
+                                fontSize: 15,
+                                fontWeight: 600,
+                                color: '#444'
+                            }
                         }
-                    },
+                    ],
                     toolbox: {
                         right: 15,
                         feature: {
@@ -3589,14 +3713,23 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             center: ['50%', '52%'],
                             startAngle: 180,
                             clockwise: false,
+                            avoidLabelOverlap: false,
                             label: {
+                                show: true,
+                                position: 'outside',
                                 formatter: function(params) {
                                     if (params.name === '__placeholder__') return '';
                                     const pct = growthContribPercentByName[params.name] || 0;
                                     return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            labelLayout: { hideOverlap: true },
+                            labelLine: { show: true, length: 8, length2: 8 },
+                            labelLayout: function(params) {
+                                return {
+                                    hideOverlap: false,
+                                    moveOverlap: 'shiftY'
+                                };
+                            },
                             data: makeSemiData(innerData)
                         },
                         {
@@ -3606,45 +3739,29 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             center: ['50%', '48%'],
                             startAngle: 180,
                             clockwise: true,
+                            avoidLabelOverlap: false,
                             label: {
+                                show: true,
+                                position: 'outside',
                                 formatter: function(params) {
                                     if (params.name === '__placeholder__') return '';
                                     const pct = marketValuePercentByName[params.name] || 0;
                                     return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            labelLayout: { hideOverlap: true },
+                            labelLine: { show: true, length: 8, length2: 8 },
+                            labelLayout: function(params) {
+                                return {
+                                    hideOverlap: false,
+                                    moveOverlap: 'shiftY'
+                                };
+                            },
                             data: makeSemiData(outerData)
                         }
                     ],
-                    graphic: [
-                        {
-                            type: 'text',
-                            left: 'center',
-                            top: '38%',
-                            style: {
-                                text: 'Market Value',
-                                textAlign: 'center',
-                                fontSize: 18,
-                                fontWeight: 600,
-                                fill: '#444'
-                            }
-                        },
-                        {
-                            type: 'text',
-                            left: 'center',
-                            top: '58%',
-                            style: {
-                                text: 'Growth Share',
-                                textAlign: 'center',
-                                fontSize: 18,
-                                fontWeight: 600,
-                                fill: '#444'
-                            }
-                        }
-                    ]
                 };
 
+                this.dualConcentricChart.clear();
                 this.dualConcentricChart.setOption(option, true);
             },
 
@@ -3662,14 +3779,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
 
                 // Prepare data for drift analysis: asset classes with drift
-                // Reverse the order to show from top to bottom
+                // Reverse so that first item in user order appears at the top of the horizontal bar chart
                 const driftData = this.summaryData
                     .filter(item => item.driftPercent !== null)
-                    .sort((a, b) => a.driftPercent - b.driftPercent)
+                    .slice()
                     .reverse();
 
                 const categories = driftData.map(item => item.name);
                 const driftValues = driftData.map(item => item.driftPercent);
+                const driftColors = driftData.map(item => this.getExploreColorForName(item.name) || '#3b82f6');
 
                 const option = {
                     title: {
@@ -3731,7 +3849,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         {
                             name: 'Drift',
                             type: 'bar',
-                            data: driftValues,
+                            data: driftValues.map((value, idx) => ({
+                                value,
+                                itemStyle: { color: driftColors[idx] }
+                            })),
                             itemStyle: {
                                 color: '#3b82f6'
                             },
