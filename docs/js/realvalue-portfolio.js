@@ -368,7 +368,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         :class="{'active': selectedReportArea === 'overview'}"
                                         @click="selectedReportArea = 'overview'; calculateSummary()"
                                         style="white-space: nowrap;">
-                                        🌍 Overview
+                                        🌍 Overall
                                     </button>
                                     <button 
                                         v-for="cat in uniqueCategories" :key="cat"
@@ -442,16 +442,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                         <!-- Chart View -->
                         <div v-show="portfolioViewTab === 'chart'" style="margin-bottom: 2rem;">
-                            <!-- Overview Chart: Single Pie -->
+                            <!-- Overall Chart: Dual Concentric -->
                             <template v-if="selectedReportArea === 'overview'">
-                                <h3 style="text-align: center; margin-bottom: 1rem;">Category Distribution (Overview)</h3>
-                                <div id="portfolio-allocation-chart" class="chart-container"></div>
+                                <div id="portfolio-dual-concentric-chart" class="chart-container" style="height: 520px; min-height: 520px;"></div>
                             </template>
                             
-                            <!-- Single-Asset Goal Chart: Regular Pie -->
+                            <!-- Single-Asset Goal Chart: Semicircle (no drift) -->
                             <template v-else-if="summaryData.length === 1">
-                                <h3 style="text-align: center; margin-bottom: 1rem;">Performance ({{ selectedReportArea }})</h3>
-                                <div id="portfolio-allocation-chart" class="chart-container"></div>
+                                <div id="portfolio-dual-concentric-chart" class="chart-container" style="height: 520px; min-height: 520px;"></div>
                             </template>
                             
                             <!-- Multi-Asset Goal Charts: Dual Concentric + Drift Analysis (Side by Side) -->
@@ -459,14 +457,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                                     <!-- Dual Concentric Chart: Market Value (Outer) + Growth Share (Inner) -->
                                     <div>
-                                        <h3 style="text-align: center; margin-bottom: 1rem;">Performance ({{ selectedReportArea }})</h3>
-                                        <div id="portfolio-dual-concentric-chart" class="chart-container"></div>
+                                        <div id="portfolio-dual-concentric-chart" class="chart-container" style="height: 520px; min-height: 520px;"></div>
                                     </div>
                                     
                                     <!-- Drift Chart -->
                                     <div>
-                                        <h3 style="text-align: center; margin-bottom: 1rem;">Drift ({{ selectedReportArea }})</h3>
-                                        <div id="portfolio-drift-analysis-chart" class="chart-container"></div>
+                                        <div id="portfolio-drift-analysis-chart" class="chart-container" style="height: 520px; min-height: 520px;"></div>
                                     </div>
                                 </div>
                             </template>
@@ -1414,22 +1410,42 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (this.portfolioViewTab === 'chart' && this.summaryData.length > 0) {
                     this.$nextTick(() => {
                         this.updateChart();
+                        requestAnimationFrame(() => {
+                            this.resizePortfolioCharts();
+                        });
                     });
                 }
             },
             activeTab(newVal) {
                 if (newVal === 'explore' && this.portfolioViewTab === 'chart') {
                     this.$nextTick(() => {
-                        if (this.chart) {
-                            this.chart.resize();
-                        } else if (this.summaryData.length > 0) {
+                        if (this.summaryData.length > 0) {
                             this.updateChart();
+                            requestAnimationFrame(() => {
+                                this.resizePortfolioCharts();
+                            });
                         }
                     });
                 }
             }
         },
         methods: {
+            resizePortfolioCharts() {
+                if (this.chart) {
+                    this.chart.resize();
+                }
+                if (this.dualConcentricChart) {
+                    this.dualConcentricChart.resize();
+                }
+                if (this.driftAnalysisChart) {
+                    this.driftAnalysisChart.resize();
+                }
+            },
+
+            getDateStamp() {
+                return new Date().toISOString().slice(0, 10);
+            },
+
             async fetchInflationData() {
                 try {
                     const cachedRaw = localStorage.getItem('realvalue_inflation_cache');
@@ -3319,8 +3335,23 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             },
 
             updateChart() {
-                if (this.selectedReportArea === 'overview' || this.summaryData.length === 1) {
-                    // Dispose multi-asset charts if switching back to overview/single
+                if (this.selectedReportArea === 'overview') {
+                    // Overall: Dual concentric chart only
+                    if (this.chart) {
+                        this.chart.dispose();
+                        this.chart = null;
+                    }
+                    if (this.driftAnalysisChart) {
+                        this.driftAnalysisChart.dispose();
+                        this.driftAnalysisChart = null;
+                    }
+                    this.renderDualConcentricChart();
+                } else if (this.summaryData.length === 1) {
+                    // Single-asset goal: semicircle chart, no drift
+                    if (this.chart) {
+                        this.chart.dispose();
+                        this.chart = null;
+                    }
                     if (this.dualConcentricChart) {
                         this.dualConcentricChart.dispose();
                         this.dualConcentricChart = null;
@@ -3329,8 +3360,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         this.driftAnalysisChart.dispose();
                         this.driftAnalysisChart = null;
                     }
-                    // Overview or single-asset goal: Regular pie chart
-                    this.renderOverviewChart();
+                    this.renderDualConcentricChart();
                 } else {
                     // Dispose overview chart if switching to multi-asset
                     if (this.chart) {
@@ -3365,7 +3395,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 const option = {
                     title: {
-                        text: 'Portfolio Category Overview',
+                        text: 'Overall Performance',
                         left: 'center',
                         top: 0,
                         textStyle: { color: '#2c3e50', fontSize: 16 }
@@ -3375,7 +3405,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         feature: {
                             saveAsImage: {
                                 title: 'Download Snapshot',
-                                name: 'Portfolio_Report_Overview',
+                                name: `Overall_Performance_${this.getDateStamp()}`,
                                 pixelRatio: 2
                             }
                         }
@@ -3437,85 +3467,182 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     return;
                 }
 
+                // Recreate chart if template branch changed and DOM node was replaced
+                if (this.dualConcentricChart && this.dualConcentricChart.getDom() !== chartDom) {
+                    this.dualConcentricChart.dispose();
+                    this.dualConcentricChart = null;
+                }
+
                 if (!this.dualConcentricChart) {
                     this.dualConcentricChart = window.echarts.init(chartDom);
                 }
 
-                // Format currency like SIP Engine does
                 const fmt = v => {
                     const n = Math.round(v);
                     if (n >= 10000000) return '₹' + (n / 10000000).toFixed(2) + ' Cr';
-                    if (n >= 100000)   return '₹' + (n / 100000).toFixed(2) + ' L';
-                    if (n >= 1000)     return '₹' + (n / 1000).toFixed(2) + ' K';
+                    if (n >= 100000) return '₹' + (n / 100000).toFixed(2) + ' L';
+                    if (n >= 1000) return '₹' + (n / 1000).toFixed(2) + ' K';
                     return '₹' + n.toLocaleString('en-IN');
                 };
 
-                // Outer circle: Market Value (total value)
+                const marketValueByName = Object.fromEntries(
+                    this.summaryData.map(item => [item.name, Number(item.value) || 0])
+                );
+                const growthValueByName = Object.fromEntries(
+                    this.summaryData.map(item => [item.name, Math.max(0, Number(item.growthValue) || 0)])
+                );
+                const marketValuePercentByName = Object.fromEntries(
+                    this.summaryData.map(item => [item.name, Number(item.percent || 0)])
+                );
+                const growthContribPercentByName = Object.fromEntries(
+                    this.summaryData.map(item => [item.name, Number(item.contributionPercent || 0)])
+                );
+
+                // Market value allocation shown as share percentages
                 const outerData = this.summaryData.map(item => ({
                     name: item.name,
-                    value: item.value
+                    value: Number((item.percent || 0).toFixed(2))
                 }));
 
-                // Inner circle: Growth Share (growth value only)
-                const innerData = this.summaryData.map(item => ({
-                    name: item.name,
-                    value: item.growthValue >= 0 ? item.growthValue : 0
-                }));
+                // Growth share shown as positive growth contribution percentages
+                const positiveGrowthTotal = this.summaryData.reduce((sum, item) => {
+                    return sum + Math.max(0, Number(item.growthValue) || 0);
+                }, 0);
+                const innerData = positiveGrowthTotal > 0
+                    ? this.summaryData.map(item => ({
+                        name: item.name,
+                        value: Number((Math.max(0, Number(item.growthValue) || 0)).toFixed(2))
+                    }))
+                    : this.summaryData.map(item => ({
+                        name: item.name,
+                        value: Number((item.percent || 0).toFixed(2))
+                    }));
+
+                const legendItems = this.summaryData.map(item => item.name);
+                const makeSemiData = (data) => {
+                    const total = Math.max(data.reduce((sum, d) => sum + (Number(d.value) || 0), 0), 1);
+                    return [
+                        ...data,
+                        {
+                            name: '__placeholder__',
+                            value: total,
+                            itemStyle: { color: 'transparent' },
+                            label: { show: false },
+                            labelLine: { show: false },
+                            tooltip: { show: false },
+                            emphasis: { disabled: true }
+                        }
+                    ];
+                };
 
                 const option = {
-                    toolbox: {
-                        feature: { saveAsImage: { title: 'Save as Image' } }
-                    },
-                    tooltip: {
-                        formatter: function(params) {
-                            const value = params.value;
-                            const seriesName = params.seriesName === 'Market Value' ? 'Market Value' : 'Growth Share';
-                            return params.marker + '<strong>' + seriesName + ' - ' + params.name + '</strong><br>' +
-                                   fmt(value) + ' (' + params.percent.toFixed(2) + '%)';
+                    title: {
+                        text: this.selectedReportArea === 'overview' ? 'Overall Performance' : `${this.selectedReportArea} Performance`,
+                        left: 'center',
+                        top: 0,
+                        textStyle: {
+                            color: '#2c3e50',
+                            fontSize: 16,
+                            fontWeight: 600
                         }
                     },
-                    legend: { top: 10, padding: [0, 0, 40, 0] },
+                    toolbox: {
+                        right: 15,
+                        feature: {
+                            saveAsImage: {
+                                title: 'Save as Image',
+                                name: `${(this.selectedReportArea === 'overview' ? 'Overall' : this.selectedReportArea).replace(/[^a-zA-Z0-9]/g, '_')}_Performance_${this.getDateStamp()}`,
+                                pixelRatio: 2
+                            }
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function(params) {
+                            if (params.name === '__placeholder__') return '';
+                            const seriesLabel = params.seriesName === 'Market Value Allocation' ? 'Market Value' : 'Growth Share';
+                            const amount = params.seriesName === 'Market Value Allocation'
+                                ? (marketValueByName[params.name] || 0)
+                                : (growthValueByName[params.name] || 0);
+                            const pct = params.seriesName === 'Market Value Allocation'
+                                ? (marketValuePercentByName[params.name] || 0)
+                                : (growthContribPercentByName[params.name] || 0);
+                            return '<strong>' + params.name + ' - ' + seriesLabel + '</strong><br>' +
+                                   fmt(amount) + ' (' + pct.toFixed(2) + '%)';
+                        }
+                    },
+                    legend: {
+                        bottom: 0,
+                        left: 'center',
+                        orient: 'horizontal',
+                        data: legendItems
+                    },
                     color: [
                         '#2c3e50', '#0066cc', '#1890ff', '#13c2c2', '#52c41a', 
                         '#eb2f96', '#722ed1', '#fa8c16', '#fadb14', '#a0d911'
                     ],
                     series: [
                         {
-                            name: 'Market Value',
+                            name: 'Growth Contribution',
                             type: 'pie',
-                            radius: ['55%', '80%'],
-                            center: ['50%', '60%'],
-                            label: { 
+                            radius: ['36%', '58%'],
+                            center: ['50%', '52%'],
+                            startAngle: 180,
+                            clockwise: false,
+                            label: {
                                 formatter: function(params) {
-                                    return params.name + '\n' + fmt(params.value) + ' (' + params.percent.toFixed(2) + '%)';
+                                    if (params.name === '__placeholder__') return '';
+                                    const pct = growthContribPercentByName[params.name] || 0;
+                                    return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            data: outerData
+                            labelLayout: { hideOverlap: true },
+                            data: makeSemiData(innerData)
                         },
                         {
-                            name: 'Growth Share',
+                            name: 'Market Value Allocation',
                             type: 'pie',
-                            radius: ['30%', '50%'],
-                            center: ['50%', '60%'],
-                            label: { 
+                            radius: ['36%', '58%'],
+                            center: ['50%', '48%'],
+                            startAngle: 180,
+                            clockwise: true,
+                            label: {
                                 formatter: function(params) {
-                                    return params.name + '\n' + fmt(params.value) + ' (' + params.percent.toFixed(2) + '%)';
+                                    if (params.name === '__placeholder__') return '';
+                                    const pct = marketValuePercentByName[params.name] || 0;
+                                    return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            data: innerData
+                            labelLayout: { hideOverlap: true },
+                            data: makeSemiData(outerData)
                         }
                     ],
-                    graphic: {
-                        type: 'text',
-                        left: 'center',
-                        top: '56%',
-                        style: {
-                            text: 'Market Value\nvs Growth',
-                            textAlign: 'center',
-                            fontSize: 16,
-                            fontWeight: 600
+                    graphic: [
+                        {
+                            type: 'text',
+                            left: 'center',
+                            top: '38%',
+                            style: {
+                                text: 'Market Value',
+                                textAlign: 'center',
+                                fontSize: 18,
+                                fontWeight: 600,
+                                fill: '#444'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 'center',
+                            top: '58%',
+                            style: {
+                                text: 'Growth Share',
+                                textAlign: 'center',
+                                fontSize: 18,
+                                fontWeight: 600,
+                                fill: '#444'
+                            }
                         }
-                    }
+                    ]
                 };
 
                 this.dualConcentricChart.setOption(option, true);
@@ -3545,12 +3672,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const driftValues = driftData.map(item => item.driftPercent);
 
                 const option = {
+                    title: {
+                        text: `${this.selectedReportArea} Drift`,
+                        left: 'center',
+                        top: 0,
+                        textStyle: {
+                            color: '#2c3e50',
+                            fontSize: 16,
+                            fontWeight: 600
+                        }
+                    },
                     toolbox: {
                         right: 15,
                         feature: {
                             saveAsImage: {
                                 title: 'Save as Image',
-                                name: `Drift_Analysis_${this.selectedReportArea.replace(/[^a-zA-Z0-9]/g, '_')}`,
+                                name: `${this.selectedReportArea.replace(/[^a-zA-Z0-9]/g, '_')}_Drift_${this.getDateStamp()}`,
                                 pixelRatio: 2
                             }
                         }
@@ -3569,7 +3706,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         left: '15%',
                         right: '5%',
                         bottom: '15%',
-                        top: '8%',
+                        top: '16%',
                         containLabel: true
                     },
                     xAxis: {
@@ -3658,7 +3795,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     toolbox: {
                         right: 15,
                         feature: {
-                            saveAsImage: { title: 'Save as Image', name: 'Investment_Calendar' }
+                            saveAsImage: {
+                                title: 'Save as Image',
+                                name: `Investment_Calendar_${this.getDateStamp()}`
+                            }
                         }
                     },
                     tooltip: {
