@@ -42,6 +42,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             .portfolio-tracker .asset-table th {
                 text-align: left;
             }
+            .portfolio-tracker .summary-table th,
+            .portfolio-tracker .summary-table td {
+                vertical-align: top;
+            }
             .chart-container {
                 width: 100%;
                 height: 400px;
@@ -341,7 +345,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         <div class="investment-plan" v-if="summaryData.length > 0">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
                             <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-                                <h2 style="margin: 0;">📊 Allocation Report</h2>
+                                <h2 style="margin: 0;">📊 Performance & Drift</h2>
                                 <div class="mode-toggle">
                                     <button 
                                         type="button"
@@ -384,35 +388,53 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 <thead>
                                     <tr>
                                         <th>{{ selectedReportArea === 'overview' ? 'Category' : 'Asset Class' }}</th>
-                                        <th style="text-align: right;"># Funds</th>
-                                        <th style="text-align: right;">Invested Value</th>
-                                        <th style="text-align: right;">Market Value</th>
-                                        <th style="text-align: right;">XIRR %</th>
-                                        <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;">Contrib. %</th>
-                                        <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;">Target %</th>
-                                        <th v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;">Allocation %</th>
+                                        <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: left;">Target</th>
+                                        <th v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" style="text-align: left;"># Funds</th>
+                                        <th style="text-align: left;">Invested Value</th>
+                                        <th style="text-align: left;">Market Value</th>
+                                        <th style="text-align: left;">Growth (XIRR)</th>
+                                        <th v-if="summaryData.length > 1" style="text-align: left;">Growth Share</th>
+                                        <th v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: left;">Drift</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="row in summaryData" :key="row.name">
                                         <td><strong>{{ row.name || 'Unclassified' }}</strong></td>
-                                        <td style="text-align: right;">{{ row.fundCount }}</td>
-                                        <td style="text-align: right;">₹{{ formatNumber(row.investedValue) }}</td>
-                                        <td style="text-align: right;">₹{{ formatNumber(row.value) }}</td>
-                                        <td style="text-align: right; font-weight: 600; color: var(--text-primary);">{{ formatXirr(row.xirrInr) }}</td>
-                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--text-secondary)' : (row.contributionPercent >= 0 ? '#15803d' : '#b91c1c') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</td>
-                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--text-secondary);">{{ getTargetPercent(row.name) !== null ? formatPercent(getTargetPercent(row.name)) : '—' }}</td>
-                                        <td v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;">{{ formatPercent(row.percent) }}</td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--text-secondary);">{{ row.targetPercent !== null ? formatPercent(row.targetPercent) : '—' }}</td>
+                                        <td v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" style="text-align: right;">{{ row.fundCount }}</td>
+                                        <td style="text-align: right;">
+                                            <div>₹{{ formatNumber(row.investedValue) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatPercent(row.investedPercent) }}</div>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <div>₹{{ formatNumber(row.value) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatPercent(row.percent) }}</div>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: row.xirrInr === null || row.xirrInr === undefined ? 'var(--text-secondary)' : (Number(row.xirrInr) >= 0 ? '#15803d' : '#b91c1c') }">{{ formatXirr(row.xirrInr) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);" :style="row.growthValue < 0 ? 'color: #ef4444;' : ''">₹{{ formatNumber(Math.abs(row.growthValue)) }}</div>
+                                        </td>
+                                        <td v-if="summaryData.length > 1" style="text-align: right; font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--text-secondary)' : (row.contributionPercent >= 0 ? '#15803d' : '#b91c1c') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;" :style="{ color: row.driftPercent === null ? 'var(--text-secondary)' : (row.driftPercent < 0 ? '#b91c1c' : '#15803d') }">{{ row.driftPercent === null ? '—' : formatPercent(row.driftPercent) }}</td>
                                     </tr>
-                                    <tr class="total-row">
+                                    <tr v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" class="total-row">
                                         <td><strong>Total Portfolio</strong></td>
-                                        <td style="text-align: right;"><strong>{{ totalPortfolioFundCount }}</strong></td>
-                                        <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></td>
-                                        <td style="text-align: right;"><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></td>
-                                        <td style="text-align: right; font-weight: 600; color: var(--text-primary);"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></td>
-                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong>{{ totalPortfolioValue !== totalPortfolioInvestedValue ? '100.00%' : '—' }}</strong></td>
                                         <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong>100.00%</strong></td>
-                                        <td v-if="selectedReportArea === 'overview' || summaryData.length > 1" style="text-align: right;"><strong>100.00%</strong></td>
+                                        <td v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" style="text-align: right;"><strong>{{ totalPortfolioFundCount }}</strong></td>
+                                        <td style="text-align: right;">
+                                            <div><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);"><strong>100.00%</strong></div>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <div><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);"><strong>100.00%</strong></div>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: totalPortfolioXirrInr === null || totalPortfolioXirrInr === undefined ? 'var(--text-secondary)' : (Number(totalPortfolioXirrInr) >= 0 ? '#15803d' : '#b91c1c') }"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></div>
+                                            <div style="font-size: 0.8em; color: var(--text-secondary);" :style="(totalPortfolioValue - totalPortfolioInvestedValue) < 0 ? 'color: #ef4444;' : ''"><strong>₹{{ formatNumber(Math.abs(totalPortfolioValue - totalPortfolioInvestedValue)) }}</strong></div>
+                                        </td>
+                                        <td v-if="summaryData.length > 1" style="text-align: right;"><strong>{{ totalPortfolioValue !== totalPortfolioInvestedValue ? '100.00%' : '—' }}</strong></td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong><span :style="[getTotalDriftColorStyle(totalPositiveDrift()), { cursor: 'default', opacity: 1, display: 'inline-block' }]">{{ formatPercent(totalPositiveDrift()) }}</span></strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -420,10 +442,34 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                         <!-- Chart View -->
                         <div v-show="portfolioViewTab === 'chart'" style="margin-bottom: 2rem;">
-                            <h3 style="text-align: center; margin-bottom: 1rem;">
-                                {{ selectedReportArea === 'overview' ? 'Category Distribution (Overview)' : 'Asset Class Distribution (' + selectedReportArea + ')' }}
-                            </h3>
-                            <div id="portfolio-allocation-chart" class="chart-container"></div>
+                            <!-- Overview Chart: Single Pie -->
+                            <template v-if="selectedReportArea === 'overview'">
+                                <h3 style="text-align: center; margin-bottom: 1rem;">Category Distribution (Overview)</h3>
+                                <div id="portfolio-allocation-chart" class="chart-container"></div>
+                            </template>
+                            
+                            <!-- Single-Asset Goal Chart: Regular Pie -->
+                            <template v-else-if="summaryData.length === 1">
+                                <h3 style="text-align: center; margin-bottom: 1rem;">Performance ({{ selectedReportArea }})</h3>
+                                <div id="portfolio-allocation-chart" class="chart-container"></div>
+                            </template>
+                            
+                            <!-- Multi-Asset Goal Charts: Dual Concentric + Drift Analysis (Side by Side) -->
+                            <template v-else>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                                    <!-- Dual Concentric Chart: Market Value (Outer) + Growth Share (Inner) -->
+                                    <div>
+                                        <h3 style="text-align: center; margin-bottom: 1rem;">Performance ({{ selectedReportArea }})</h3>
+                                        <div id="portfolio-dual-concentric-chart" class="chart-container"></div>
+                                    </div>
+                                    
+                                    <!-- Drift Chart -->
+                                    <div>
+                                        <h3 style="text-align: center; margin-bottom: 1rem;">Drift ({{ selectedReportArea }})</h3>
+                                        <div id="portfolio-drift-analysis-chart" class="chart-container"></div>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
                         </div>
                     
@@ -481,7 +527,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="uniqueInvestorsCalendar.length > 0" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem;">
+                                <div v-if="uniqueInvestorsCalendar.length > 0" style="display: flex; gap: 0.5rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem;">
                                     <span style="font-size: 0.85em; color: var(--text-secondary);">Select Investors:</span>
                                     <div class="mode-toggle">
                                         <button 
@@ -523,7 +569,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <tr v-for="row in investmentCalendarData" :key="row.year">
                                             <td><strong>{{ row.year }}</strong></td>
                                             <td v-for="(val, idx) in row.months" :key="idx">
-                                                <span v-if="val !== 0" class="help-icon" :data-tooltip="(val < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(val), 0)" style="cursor: default; opacity: 1;" :style="val < 0 ? 'color: #ef4444;' : ''">
+                                                <span v-if="val !== 0" class="help-icon" :data-tooltip="(val < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(val), 0)" @click="jumpToMonthlyMonth(row.year, idx)" style="cursor: pointer; opacity: 1; text-decoration: underline dotted; text-underline-offset: 2px;" :style="val < 0 ? 'color: #ef4444;' : ''">
                                                     {{ formatCurrency(val) }}
                                                 </span>
                                                 <span v-else style="color: #999;">—</span>
@@ -545,7 +591,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <tr>
                                             <th style="white-space: nowrap;">Date</th>
                                             <th style="text-align: left; white-space: nowrap;">Investor</th>
-                                            <th style="text-align: right; white-space: nowrap;">Folio</th>
+                                            <th style="text-align: left; white-space: nowrap;">Folio</th>
                                             <th style="text-align: left;">Fund Name</th>
                                             <th style="text-align: right; white-space: nowrap;">Amount (₹)</th>
                                         </tr>
@@ -553,7 +599,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <tbody>
                                         <template v-for="(row, idx) in investmentCalendarMonthlyDetail" :key="row.date + row.fundName + idx">
                                             <tr v-if="idx === 0 || investmentCalendarMonthlyDetail[idx - 1].monthKey !== row.monthKey">
-                                                <td style="background: #f5f5f5; font-weight: bold; color: var(--primary-color); padding: 0.4rem 0.6rem; white-space: nowrap;">
+                                                <td :id="'calendar-month-' + row.monthKey" style="background: #f5f5f5; font-weight: bold; color: var(--primary-color); padding: 0.4rem 0.6rem; white-space: nowrap;">
                                                     {{ row.monthKey }}
                                                 </td>
                                                 <td colspan="3" style="background: #f5f5f5; padding: 0.4rem 0.6rem;"></td>
@@ -1238,6 +1284,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 portfolioViewTab: 'chart',
                 selectedReportArea: 'overview',
                 chart: null,
+                dualConcentricChart: null,
+                driftAnalysisChart: null,
                 resizeHandler: null,
                 debounceTimer: null,
                 showPrivacyDetails: false,
@@ -1261,6 +1309,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             this.fetchInflationData();
             this.resizeHandler = () => {
                 if (this.chart) this.chart.resize();
+                if (this.dualConcentricChart) this.dualConcentricChart.resize();
+                if (this.driftAnalysisChart) this.driftAnalysisChart.resize();
                 if (this.calendarChart) this.calendarChart.resize();
             };
             window.addEventListener('resize', this.resizeHandler);
@@ -1270,6 +1320,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
             if (this.chart) this.chart.dispose();
+            if (this.dualConcentricChart) this.dualConcentricChart.dispose();
+            if (this.driftAnalysisChart) this.driftAnalysisChart.dispose();
             if (this.calendarChart) this.calendarChart.dispose();
         },
         computed: {
@@ -1740,6 +1792,28 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const total = this.getTotalAllocationPercent(goal);
                 return Math.abs(total - 100) > 0.01;
             },
+            jumpToMonthlyMonth(year, monthIndex) {
+                const month = String(monthIndex + 1).padStart(2, '0');
+                const monthKey = `${year}-${month}`;
+                this.calendarViewTab = 'table';
+                this.calendarGranularity = 'monthly';
+
+                this.$nextTick(() => {
+                    const target = document.getElementById(`calendar-month-${monthKey}`);
+                    if (!target) return;
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    const originalTransition = target.style.transition;
+                    const originalBoxShadow = target.style.boxShadow;
+                    target.style.transition = 'box-shadow 0.25s ease-in-out';
+                    target.style.boxShadow = 'inset 0 0 0 9999px rgba(254, 243, 199, 0.9)';
+                    setTimeout(() => {
+                        target.style.boxShadow = originalBoxShadow || '';
+                        setTimeout(() => {
+                            target.style.transition = originalTransition || '';
+                        }, 250);
+                    }, 1200);
+                });
+            },
             calculateNextMilestone(currentValue, currency) {
                 currentValue = Number(currentValue) || 0;
                 if (currency === 'USD') {
@@ -1839,6 +1913,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const num = Number(value);
                 if (!isFinite(num) || isNaN(num)) return '-';
                 return num.toFixed(2) + '%';
+            },
+            totalPositiveDrift() {
+                return this.summaryData.reduce((sum, row) => sum + Math.max(0, Number(row.driftPercent) || 0), 0);
+            },
+            getTotalDriftColorStyle(pct) {
+                if (!isFinite(pct) || pct <= 0) return { color: 'var(--text-secondary)' };
+                if (pct <= 2.5) return { color: '#155724', background: '#d4edda', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 5.0) return { color: '#1e7e34', background: '#e8f5e9', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 7.5) return { color: '#856404', background: '#fff3cd', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 10.0) return { color: '#d35400', background: '#ffe8d6', padding: '2px 6px', borderRadius: '4px' };
+                return { color: '#721c24', background: '#f8d7da', padding: '2px 6px', borderRadius: '4px' };
             },
             formatNavDate(dateStr) {
                 if (!dateStr) return '-';
@@ -3204,16 +3289,21 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     if (row.value > 0) {
                         const normalizedRowFlows = this.normalizeDatedFlows(row.cashflowsInr || []);
                         const growthValue = row.value - row.investedValue;
+                        const allocationPercent = total > 0 ? (row.value / total) * 100 : 0;
+                        const targetPercent = this.selectedReportArea !== 'overview' ? this.getTargetPercent(name) : null;
                         data.push({
                             name,
                             value: row.value,
                             investedValue: row.investedValue,
+                            investedPercent: totalInvested > 0 ? (row.investedValue / totalInvested) * 100 : 0,
                             fundCount: row.fundCount,
                             growthValue,
-                            contributionPercent: this.selectedReportArea !== 'overview' && totalGrowth !== 0 ? (growthValue / totalGrowth) * 100 : null,
+                            targetPercent,
+                            driftPercent: targetPercent !== null ? allocationPercent - targetPercent : null,
+                            contributionPercent: totalGrowth !== 0 ? (growthValue / totalGrowth) * 100 : null,
                             xirrInr: normalizedRowFlows.length >= 2 ? this.computeXirr(normalizedRowFlows) : null,
                             xirrUsd: null,
-                            percent: total > 0 ? (row.value / total) * 100 : 0
+                            percent: allocationPercent
                         });
                     }
                 }
@@ -3229,6 +3319,31 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             },
 
             updateChart() {
+                if (this.selectedReportArea === 'overview' || this.summaryData.length === 1) {
+                    // Dispose multi-asset charts if switching back to overview/single
+                    if (this.dualConcentricChart) {
+                        this.dualConcentricChart.dispose();
+                        this.dualConcentricChart = null;
+                    }
+                    if (this.driftAnalysisChart) {
+                        this.driftAnalysisChart.dispose();
+                        this.driftAnalysisChart = null;
+                    }
+                    // Overview or single-asset goal: Regular pie chart
+                    this.renderOverviewChart();
+                } else {
+                    // Dispose overview chart if switching to multi-asset
+                    if (this.chart) {
+                        this.chart.dispose();
+                        this.chart = null;
+                    }
+                    // Multi-asset goal: Dual concentric chart + drift analysis
+                    this.renderDualConcentricChart();
+                    this.renderDriftAnalysisChart();
+                }
+            },
+
+            renderOverviewChart() {
                 const chartDom = document.getElementById('portfolio-allocation-chart');
                 if (!chartDom) return;
                 
@@ -3250,7 +3365,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 const option = {
                     title: {
-                        text: this.selectedReportArea === 'overview' ? 'Portfolio Category Overview' : `Asset Allocation: ${this.selectedReportArea}`,
+                        text: 'Portfolio Category Overview',
                         left: 'center',
                         top: 0,
                         textStyle: { color: '#2c3e50', fontSize: 16 }
@@ -3260,7 +3375,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         feature: {
                             saveAsImage: {
                                 title: 'Download Snapshot',
-                                name: `Portfolio_Report_${this.selectedReportArea === 'overview' ? 'Overview' : this.selectedReportArea.replace(/[^a-zA-Z0-9]/g, '_')}`,
+                                name: 'Portfolio_Report_Overview',
                                 pixelRatio: 2
                             }
                         }
@@ -3284,7 +3399,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     ],
                     series: [
                         {
-                            name: this.selectedReportArea === 'overview' ? 'Category' : 'Asset Class',
+                            name: 'Category',
                             type: 'pie',
                             radius: ['35%', '65%'],
                             center: ['50%', '55%'],
@@ -3312,6 +3427,196 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 this.chart.setOption(option);
             },
+
+            renderDualConcentricChart() {
+                const chartDom = document.getElementById('portfolio-dual-concentric-chart');
+                if (!chartDom) return;
+                
+                if (!window.echarts) {
+                    console.warn("ECharts not loaded");
+                    return;
+                }
+
+                if (!this.dualConcentricChart) {
+                    this.dualConcentricChart = window.echarts.init(chartDom);
+                }
+
+                // Format currency like SIP Engine does
+                const fmt = v => {
+                    const n = Math.round(v);
+                    if (n >= 10000000) return '₹' + (n / 10000000).toFixed(2) + ' Cr';
+                    if (n >= 100000)   return '₹' + (n / 100000).toFixed(2) + ' L';
+                    if (n >= 1000)     return '₹' + (n / 1000).toFixed(2) + ' K';
+                    return '₹' + n.toLocaleString('en-IN');
+                };
+
+                // Outer circle: Market Value (total value)
+                const outerData = this.summaryData.map(item => ({
+                    name: item.name,
+                    value: item.value
+                }));
+
+                // Inner circle: Growth Share (growth value only)
+                const innerData = this.summaryData.map(item => ({
+                    name: item.name,
+                    value: item.growthValue >= 0 ? item.growthValue : 0
+                }));
+
+                const option = {
+                    toolbox: {
+                        feature: { saveAsImage: { title: 'Save as Image' } }
+                    },
+                    tooltip: {
+                        formatter: function(params) {
+                            const value = params.value;
+                            const seriesName = params.seriesName === 'Market Value' ? 'Market Value' : 'Growth Share';
+                            return params.marker + '<strong>' + seriesName + ' - ' + params.name + '</strong><br>' +
+                                   fmt(value) + ' (' + params.percent.toFixed(2) + '%)';
+                        }
+                    },
+                    legend: { top: 10, padding: [0, 0, 40, 0] },
+                    color: [
+                        '#2c3e50', '#0066cc', '#1890ff', '#13c2c2', '#52c41a', 
+                        '#eb2f96', '#722ed1', '#fa8c16', '#fadb14', '#a0d911'
+                    ],
+                    series: [
+                        {
+                            name: 'Market Value',
+                            type: 'pie',
+                            radius: ['55%', '80%'],
+                            center: ['50%', '60%'],
+                            label: { 
+                                formatter: function(params) {
+                                    return params.name + '\n' + fmt(params.value) + ' (' + params.percent.toFixed(2) + '%)';
+                                }
+                            },
+                            data: outerData
+                        },
+                        {
+                            name: 'Growth Share',
+                            type: 'pie',
+                            radius: ['30%', '50%'],
+                            center: ['50%', '60%'],
+                            label: { 
+                                formatter: function(params) {
+                                    return params.name + '\n' + fmt(params.value) + ' (' + params.percent.toFixed(2) + '%)';
+                                }
+                            },
+                            data: innerData
+                        }
+                    ],
+                    graphic: {
+                        type: 'text',
+                        left: 'center',
+                        top: '56%',
+                        style: {
+                            text: 'Market Value\nvs Growth',
+                            textAlign: 'center',
+                            fontSize: 16,
+                            fontWeight: 600
+                        }
+                    }
+                };
+
+                this.dualConcentricChart.setOption(option, true);
+            },
+
+            renderDriftAnalysisChart() {
+                const chartDom = document.getElementById('portfolio-drift-analysis-chart');
+                if (!chartDom) return;
+                
+                if (!window.echarts) {
+                    console.warn("ECharts not loaded");
+                    return;
+                }
+
+                if (!this.driftAnalysisChart) {
+                    this.driftAnalysisChart = window.echarts.init(chartDom);
+                }
+
+                // Prepare data for drift analysis: asset classes with drift
+                // Reverse the order to show from top to bottom
+                const driftData = this.summaryData
+                    .filter(item => item.driftPercent !== null)
+                    .sort((a, b) => a.driftPercent - b.driftPercent)
+                    .reverse();
+
+                const categories = driftData.map(item => item.name);
+                const driftValues = driftData.map(item => item.driftPercent);
+
+                const option = {
+                    toolbox: {
+                        right: 15,
+                        feature: {
+                            saveAsImage: {
+                                title: 'Save as Image',
+                                name: `Drift_Analysis_${this.selectedReportArea.replace(/[^a-zA-Z0-9]/g, '_')}`,
+                                pixelRatio: 2
+                            }
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: (params) => {
+                            const value = params.value;
+                            const formattedValue = (value >= 0 ? '+' : '') + parseFloat(value).toFixed(2) + '%';
+                            const status = value > 0 ? '(over-weight)' : '(under-weight)';
+                            return params.marker + ' <strong>' + params.name + '</strong><br/>' +
+                                   'Drift: <strong>' + formattedValue + '</strong> ' + status;
+                        }
+                    },
+                    grid: {
+                        left: '15%',
+                        right: '5%',
+                        bottom: '15%',
+                        top: '8%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        name: 'Drift %',
+                        nameLocation: 'middle',
+                        nameGap: 30,
+                        axisLabel: {
+                            formatter: (value) => {
+                                return (value >= 0 ? '+' : '') + value.toFixed(1) + '%';
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: { type: 'dashed' }
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: categories
+                    },
+                    series: [
+                        {
+                            name: 'Drift',
+                            type: 'bar',
+                            data: driftValues,
+                            itemStyle: {
+                                color: '#3b82f6'
+                            },
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: function(params) {
+                                    return (params.value >= 0 ? '+' : '') + params.value.toFixed(2) + '%';
+                                }
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    color: '#1890ff'
+                                }
+                            }
+                        }
+                    ]
+                };
+
+                this.driftAnalysisChart.setOption(option, true);
+            },
+            
             
             renderCalendarChart() {
                 const chartDom = document.getElementById('portfolioCalendarChart');
