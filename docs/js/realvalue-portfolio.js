@@ -990,6 +990,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     </button>
                                 </div>
                                 <div class="mode-toggle">
+                                    <button type="button" @click="downloadTransactionsCsv" style="white-space: nowrap;">
+                                        ⬇️ Download Transactions
+                                    </button>
+                                </div>
+                                <div class="mode-toggle">
                                     <button type="button" class="btn-clear-all" @click="clearPortfolio" style="white-space: nowrap;">
                                         🗑️ Clear All Data
                                     </button>
