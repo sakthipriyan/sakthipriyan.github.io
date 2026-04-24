@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building Truly Serverless Big Data Pipelines: Scaling with AWS Lambda and Step Functions | Sakthi Priyan H</title>
+    <meta name="description" content="How to build an N-stage Driver/Executor model using AWS Lambda and Step Functions that handles massive batch and micro-batch workloads without a single dedicated server, eliminating cluster maintenance and scaling instantly to zero"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-systems"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-systems/" class="name-link">Building Systems</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-systems/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-systems/">Building Systems</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-systems/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Building Truly Serverless Big Data Pipelines: Scaling with AWS Lambda and Step Functions</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Building Truly Serverless Big Data Pipelines: Scaling with AWS Lambda and Step Functions</h1>
+    <p class="content-summary">How to build an N-stage Driver/Executor model using AWS Lambda and Step Functions that handles massive batch and micro-batch workloads without a single dedicated server, eliminating cluster maintenance and scaling instantly to zero</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-04-23">Apr 23, 2026</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">9 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h2 id="the-problem">The Problem</h2>
+<p>For years, the standard approach to processing hundreds of gigabytes of data involved heavy infrastructure. We relied on running Spark jobs and later Go based distributed system running on Kubernetes clusters. While powerful, this compute-forward deployment model comes with high maintenance overhead, constant sustenance work, and the inherent friction of node and pod bring-up times. Go platform uses storage as shuffle requiring no internode communication.</p>
+<p>What if we could build a truly serverless data processing framework? One that requires zero cluster maintenance, scales instantly and scales right back down to zero?</p>
+<p>By leveraging AWS Lambda and AWS Step Functions, it is possible to build an N-stage Driver/Executor model that can handle massive batch and micro-batch workloads without a single dedicated server. Here is how to architect it and more importantly, how to overcome the strict limitations of serverless environments.</p>
+<h2 id="the-challenges-of-serverless-data-processing">The Challenges of Serverless Data Processing</h2>
+<p>AWS Lambda is an incredible tool, but it was not originally designed for heavy, stateful data processing. When moving away from cluster-based processing, you immediately hit several hard constraints:</p>
+<ul>
+<li><strong>Hard Time Limits</strong>: Lambda has a strict maximum runtime of 15 minutes.</li>
+<li><strong>Compute Ceilings</strong>: Instances max out at 10GB of memory and ~6 vCPUs.</li>
+<li><strong>Network Throttling</strong>: Network throughput is limited and throttled compared to dedicated EC2 instances.</li>
+<li><strong>No Direct Communication</strong>: Unlike Kubernetes pods, Lambda functions cannot directly communicate with each other over the network.</li>
+<li><strong>Statelessness (Mostly)</strong>: While Lambda instances are likely reused—which requires carefully resetting global variables and local files—they fundamentally lack persistent local state.</li>
+</ul>
+<p>To build a data processing engine here, you cannot just lift and shift your code. You have to rethink the orchestration.</p>
+<h2 id="the-solution-a-state-machine-centric-architecture">The Solution: A State Machine-Centric Architecture</h2>
+<p>The secret to bypassing Lambda&rsquo;s execution limits is delegating the orchestration to AWS Step Functions. Instead of a single script trying to do everything before the 15-minute timeout, the Step Function acts as the persistent brain, triggering ephemeral compute nodes.</p>
+<p>We modeled this using an N-stage Driver/Executor architecture.</p>
+<h3 id="1-the-driver-the-planner">1. The Driver (The Planner)</h3>
+<p>The process begins with the Step Function invoking a Driver Lambda. The Driver is responsible for task generation or performing standalone work. Because driver processing is typically sequential, we provision this Lambda with just 2GB of memory.</p>
+<p>Crucially, the Driver does not process the bulk of the data. It calculates what needs to be done, chunks the work into a task group (each task group contains multiple tasks) and returns a state to the Step Function.</p>
+<h3 id="2-the-choice-state-the-router">2. The Choice State (The Router)</h3>
+<p>Once the Driver finishes, the Step Function enters a Choice state. Based on the Driver&rsquo;s output, the state machine decides the next move:</p>
+<ul>
+<li><code>run_executors</code>: Trigger the massive parallel processing phase.</li>
+<li><code>run_driver</code>: Loop back to execute the next driver stage.</li>
+<li><code>sleep</code>: Pause for a configured duration, then loop back to the Driver — useful for polling or micro-batch scenarios. (Used this for pipeline jobs and external orchestrations)</li>
+<li><code>succeed</code> or <code>fail</code>: Terminate the job.</li>
+</ul>
+<h3 id="3-the-executors-the-workers">3. The Executors (The Workers)</h3>
+<p>If tasks need to be processed, the Step Function uses a Map state to fan out the work to multiple Executor Lambdas concurrently.</p>
+<ul>
+<li><strong>Maximized Resources</strong>: Executor Lambdas are provisioned with the maximum 10GB of memory. This isn&rsquo;t necessarily because the code requires 10GB of RAM, but because AWS allocates maximum CPU and network bandwidth proportionally to memory.</li>
+<li><strong>Parallel Execution</strong>: The Step Function handles the concurrency, launching up to 40 executors simultaneously to process the task groups. Within each executor, it can process multiple tasks in parallel assigned to it from the Task Group.</li>
+</ul>
+<p>Once the Executors finish their stage, the Step Function cycles back to the Driver to plan the next stage, effectively creating an infinite loop of compute that never hits the 15-minute timeout.</p>
+<p>The diagram below shows the complete state machine flow:</p>
+<pre><code class="language-dot">digraph StepFunctionsWorkflow {
+    rankdir=TB;
+    bgcolor=transparent;
+    node [shape=box; style=filled;];
+
+    // Lambda Functions Cluster
+    subgraph cluster_Lambdas {
+        label = &quot;AWS Lambda Functions&quot;;
+        style = filled;
+        color = yellow;
+
+        DriverLambda [label=&quot;Lambda Driver (2GB)&quot;; color=lightyellow;];
+        ExecutorLambda [label=&quot;Lambda Executor (10GB)&quot;; color=lightyellow;];
+    }
+
+    // Step Functions Cluster
+    subgraph cluster_AWS_Step_Functions {
+        label = &quot;AWS Step Functions&quot;;
+        style = filled;
+        color = &quot;#D4EDDA&quot;;
+
+        Start [label=&quot;Start&quot;; shape=oval];
+        RunDriver [label=&quot;Invoke Driver (Task)&quot;];
+        Choice [label=&quot;Choice&quot;; shape=diamond; color=lightblue];
+        Wait [label=&quot;Sleep (Wait)&quot;; color=&quot;#FAFAD2&quot;];
+        RunExecutorsMap [label=&quot;Run Executors (Map)\n(MaxConcurrency = N)&quot;];
+        InvokeExecutor [label=&quot;Invoke Executor (Tasks)&quot;];
+        Succeed [label=&quot;Succeed&quot;; color=&quot;#2DC13F&quot;; shape=oval];
+        Fail [label=&quot;Fail&quot;; color=&quot;#FF3131&quot;; shape=oval];
+        End [shape=oval];
+
+        Start -&gt; RunDriver;
+        RunDriver -&gt; Choice [label=&quot; On Complete&quot;];
+
+        Choice -&gt; RunExecutorsMap [label=&quot; run_executors&quot;];
+        Choice -&gt; RunDriver [label=&quot; run_driver&quot;];
+        Choice -&gt; Wait [label=&quot; sleep&quot;];
+        Choice -&gt; Succeed [label=&quot; succeed&quot;];
+        Choice -&gt; Fail [label=&quot; fail&quot;];
+
+        Wait -&gt; RunDriver;
+        RunExecutorsMap -&gt; InvokeExecutor;
+        InvokeExecutor -&gt; RunExecutorsMap;
+        RunExecutorsMap -&gt; RunDriver [label=&quot; On Complete&quot;];
+        Fail -&gt; End;
+        Succeed -&gt; End;
+    }
+
+    // Data flow
+    RunDriver -&gt; DriverLambda;
+    InvokeExecutor -&gt; ExecutorLambda;
+}
+</code></pre>
+<h2 id="overcoming-state-and-networking-limitations">Overcoming State and Networking Limitations</h2>
+<p>Because Executor Lambdas cannot talk to each other, all data sharing must be externalized.</p>
+<ul>
+<li><strong>State Persistence</strong>: Any state must be persisted in a shared work area rather than in memory.</li>
+<li><strong>Data Passing</strong>: The Driver and Executors communicate across stages via AWS S3 buckets (Read/Write/Read-Only) and the AWS SSM Parameter Store used credential secrets.</li>
+</ul>
+<p>When migrating legacy code to this model, the biggest refactoring efforts involve fixing in-memory sharing across stages and removing reliance on global variables. Everything happening outside of a defined stage must be moved inside one.</p>
+<h3 id="lambda-instance-reuse">Lambda Instance Reuse</h3>
+<p>Lambda execution environments are likely reused across invocations. This means credentials, environment variables, local temporary files, and any global variables from a previous invocation may still be present. Your code must explicitly reset all shared state at the start of each invocation — never assume a clean slate. Also, reuse them when context didn&rsquo;t change.</p>
+<h2 id="tuning-for-performance">Tuning for Performance</h2>
+<h3 id="lambda-sizing">Lambda Sizing</h3>
+<ul>
+<li><strong>Driver Lambda (2GB)</strong>: Driver work is typically sequential — planning, task chunking, state checks. 2GB (roughly 1.1 vCPUs) is sufficient. If a driver stage does anything compute-intensive, it should be extracted into an executor stage instead.</li>
+<li><strong>Executor Lambda (10GB)</strong>: Executors are provisioned at the maximum available memory. This is not always because the workload needs 10GB of RAM — AWS scales CPU cores and network bandwidth proportionally to memory allocation, so maxing out memory also maximises throughput.</li>
+</ul>
+<h3 id="executor-concurrency-and-workload-type">Executor Concurrency and Workload Type</h3>
+<p>The right number of concurrent executors and worker threads within each executor depends on whether your workload is CPU-bound, memory-bound, or network-bound and goal is latency vs stability</p>
+<h4 id="workload-type">Workload Type</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Workload type</th>
+          <th>Workers per executor</th>
+          <th>Reasoning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>cpu</code></td>
+          <td>~6</td>
+          <td>Matches available vCPUs</td>
+      </tr>
+      <tr>
+          <td><code>memory</code></td>
+          <td>~3</td>
+          <td>Reduces heap pressure per worker. <br/> But, here we are leaving money on the table!</td>
+      </tr>
+      <tr>
+          <td><code>network</code></td>
+          <td>~24</td>
+          <td>I/O waits allow high concurrency</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="optimization-goal">Optimization Goal</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Optimization Goal</th>
+          <th>Target Executor Count</th>
+          <th>Strategy &amp; Rationale</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Latency</code></td>
+          <td>Up to 40</td>
+          <td>Run more executors in parallel to maximize speed.</td>
+      </tr>
+      <tr>
+          <td><code>Stability</code></td>
+          <td>Up to 10</td>
+          <td>Run fewer executors to minimize resource contention and reduce the risk of retry storms.</td>
+      </tr>
+  </tbody>
+</table>
+<p>The system can auto-scale from 1 to 40 executors; the upper bound (40) is driven by Step Functions parallel maps and parameter store throughput limits.</p>
+<h2 id="performance-trade-offs-vs-cluster-compute">Performance Trade-offs vs Cluster Compute</h2>
+<p>Lambda is not a free lunch. Early benchmarks comparing equivalent workloads show:</p>
+<ul>
+<li><strong>vs EKS Fargate</strong>: Lambda is typically faster but more expensive.</li>
+<li><strong>vs EKS EC2</strong>: Lambda is typically slower and more expensive.</li>
+</ul>
+<p>The value proposition is not raw throughput — it is <strong>operational simplicity</strong>. Zero cluster management, instant scale-to-zero, and no node or pod bring-up overhead make serverless the right default for low-to-moderate volume workloads or teams that cannot justify the maintenance cost of a dedicated cluster.</p>
+<h2 id="the-result">The Result</h2>
+<p>By centralizing the logic in a Step Function and using Lambdas as purely functional, stateless workers, you gain an incredibly resilient architecture.</p>
+<p>For batch jobs, this means instant launch times with no cluster spin-up overhead. For infrastructure teams, it means a compute-forward deployment model with virtually zero sustenance work. It is a paradigm shift in how we process big data—trading the complexity of cluster management for the elegance of state machine orchestration.</p>
+<h2 id="system-level-limits-to-plan-around">System-Level Limits to Plan Around</h2>
+<p>Even with a well-designed state machine, there are hard platform limits that constrain how large a single job can grow and how fast it can run:</p>
+<h3 id="lambda">Lambda</h3>
+<ul>
+<li><strong>Memory/Time Limits</strong>: Max size of 10GB and 15 mins runtime. Any task that cannot be performed within these memory and time limits cannot be supported. Tasks need to be broken down into manageable chunks to overcome these limitations.</li>
+</ul>
+<h3 id="step-functions">Step Functions</h3>
+<ul>
+<li><strong>Execution History</strong>: Each state machine execution is capped at 25,000 events. A job with many stages and large fan-outs can approach this limit surprisingly quickly. If a single pipeline is long-running with many Driver/Executor cycles, consider splitting it into chained executions.</li>
+<li><strong>Max Runtime</strong>: A single execution can run for up to one year — so the overall pipeline lifetime is not the concern. The event cap is.</li>
+<li><strong>Parallel Map Concurrency</strong>: The default Inline Map state is capped at 40 concurrent executions, but you can overcome this and scale up to 10,000 parallel executions by upgrading to the Distributed Map state.</li>
+</ul>
+<h3 id="parameter-store">Parameter Store</h3>
+<ul>
+<li><strong>Throughput Limits</strong>: The Driver and Executors use AWS SSM Parameter Store for loading credentials. Parameter Store has throughput limits on API calls (standard tier: 40 TPS; higher-throughput tier: 10,000 TPS with additional cost). At 40 concurrent executors, each making multiple reads per invocation, this can become a bottleneck. Plan ahead by batching reads and caching parameter values within a Lambda instance.</li>
+</ul>
+<h2 id="looking-ahead-lambda-managed-instances">Looking Ahead: Lambda Managed Instances</h2>
+<p>One of the most promising developments for serverless data processing is <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-managed-instances.html">AWS Lambda Managed Instances</a>. Unlike the default Lambda compute type, Managed Instances run your functions on EC2 instances within your own account — including modern hardware such as Graviton4 and network-optimized instances — while AWS still handles all provisioning, patching, and scaling.</p>
+<p>Key properties that would directly benefit the Driver/Executor model:</p>
+<ul>
+<li><strong>No cold starts</strong>: Managed Instances scale to a configured minimum rather than zero, eliminating executor launch latency entirely.</li>
+<li><strong>Higher network throughput</strong>: Network-optimized and high-bandwidth instance types remove one of the most significant bottlenecks for data-intensive workloads.</li>
+<li><strong>Multi-concurrent invocations</strong>: A single execution environment can handle multiple invocations simultaneously, which increases executor throughput for IO-heavy stages without needing to spin up additional instances. But code need to support parallel invocations.</li>
+<li><strong>EC2 pricing</strong>: Instance-based billing with support for Reserved Instances and Savings Plans makes high-volume, predictable workloads materially cheaper than default per-request pricing.</li>
+</ul>
+<blockquote>
+<p>Essentially, this allows the architecture to function as a highly scalable distributed system running on simple, cost-efficient EC2 instances, completely bypassing the complexity and maintenance of an EKS setup.</p>
+</blockquote>
+<p><strong>Go is not yet supported as of writing this article.</strong> Once Go support is available, this architecture becomes an even stronger candidate for high-throughput data pipelines written in Go.</p>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/aws/" class="tag-link">Aws</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/lambda/" class="tag-link">Lambda</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/serverless/" class="tag-link">Serverless</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/data-engineering/" class="tag-link">Data-Engineering</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/cloud/" class="tag-link">Cloud</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/design/" class="tag-link">Design</a>
+        
+        <a href="https://sakthipriyan.com/building-systems/tags/go/" class="tag-link">Go</a>
+    </div>
+    <div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
+                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                    console.log('[DEBUG] Rendering DOT block');
+
+                    const viz = new Viz();
+                    viz.renderSVGElement(dotCode)
+                        .then(svg => {
+                            
+                            svg.removeAttribute('width');
+                            svg.removeAttribute('height');
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                            
+                            const container = document.createElement('div');
+                            container.className = 'graphviz-diagram';
+                            container.appendChild(svg);
+
+                            
+                            const preEl = codeEl.parentNode;
+                            preEl.parentNode.replaceChild(container, preEl);
+
+                            console.log('[DEBUG] Diagram rendered');
+                        })
+                        .catch(err => {
+                            console.error('[DEBUG] Viz.js error:', err);
+                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                        });
+                });
+            });
+        </script>
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>
