@@ -6,20 +6,55 @@
     <description>Recent content in Systems_tags on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/systems_tags/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aws</title>
+      <link>https://sakthipriyan.com/building-systems/tags/aws/</link>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/aws/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Cloud</title>
       <link>https://sakthipriyan.com/building-systems/tags/cloud/</link>
-      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/cloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data-Engineering</title>
+      <link>https://sakthipriyan.com/building-systems/tags/data-engineering/</link>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/data-engineering/</guid>
       <description></description>
     </item>
     <item>
       <title>Design</title>
       <link>https://sakthipriyan.com/building-systems/tags/design/</link>
-      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>https://sakthipriyan.com/building-systems/tags/go/</link>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lambda</title>
+      <link>https://sakthipriyan.com/building-systems/tags/lambda/</link>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/lambda/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Serverless</title>
+      <link>https://sakthipriyan.com/building-systems/tags/serverless/</link>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-systems/tags/serverless/</guid>
       <description></description>
     </item>
     <item>
@@ -27,13 +62,6 @@
       <link>https://sakthipriyan.com/building-systems/tags/docker/</link>
       <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/docker/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Go</title>
-      <link>https://sakthipriyan.com/building-systems/tags/go/</link>
-      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/tags/go/</guid>
       <description></description>
     </item>
     <item>
@@ -307,13 +335,6 @@
       <link>https://sakthipriyan.com/building-systems/tags/web-server/</link>
       <pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-systems/tags/web-server/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Aws</title>
-      <link>https://sakthipriyan.com/building-systems/tags/aws/</link>
-      <pubDate>Wed, 17 Feb 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/tags/aws/</guid>
       <description></description>
     </item>
     <item>
