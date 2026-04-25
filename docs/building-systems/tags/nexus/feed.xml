@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nexus on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/nexus/</link>
+    <link>http://localhost:1313/building-systems/tags/nexus/</link>
     <description>Recent content in Nexus on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 24 Apr 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/nexus/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/nexus/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
+      <link>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/</guid>
       <description>Fixing unresolved dependency in playframework.</description>
     </item>
   </channel>
