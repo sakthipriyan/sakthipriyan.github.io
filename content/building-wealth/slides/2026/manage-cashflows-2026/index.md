@@ -25,7 +25,7 @@ sakthipriyan.com/building-wealth
 
 <h2 class="title-scramble">Managing Money Flows 2026</h2>
 <br/>
-<h3 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>A Personal Financial OS</h3>
+<h3 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Designing a Personal Finance System</h3>
 <h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 4.5}'>using Bank Accounts, Credit Cards & Mutual Funds</h4>
 <h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 5}'>Apr 25, 2026</h4>
 <br/><br/>
@@ -76,6 +76,110 @@ sakthipriyan.com/building-wealth
 | 🏥 **Medical (Addon)** | Exclusive for Medical Expenses |
 | 🛒 **Back up** | Bank redundancy in case Primary fails |
 
+--
+
+### Overview
+
+```dot
+digraph FinanceArchitecture {
+
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [
+    shape=rectangle,
+    style="rounded,filled",
+    fontname="Inter",
+    fontsize=13,
+    fillcolor="#f7fbff"
+  ];
+
+  edge [
+    arrowsize=0.9,
+    fontname="Inter",
+    fontsize=11,
+    color="#2b7cff"
+  ];
+
+  // --- Income ---
+  Salary [
+    label="💼 Salary / Income",
+    shape=folder,
+    fillcolor="#e8f3ff"
+  ];
+
+  // --- Routing Layer ---
+  subgraph cluster_routing {
+    label="🏦 Routing Layer (Bank Accounts)";
+    style="rounded,dashed";
+    color="#4a90e2";
+
+    IncomeAcc [label="💰 Income Account", shape=folder, fillcolor="#e6f7ff"];
+    InvestmentAcc [label="📈 Investment Accounts", shape=folder, fillcolor="#e6f7ff"];
+    ExpenseAcc [label="🧾 Expense Accounts", shape=folder, fillcolor="#e6f7ff"];
+
+    { rank=same; IncomeAcc; InvestmentAcc; ExpenseAcc; }
+  }
+
+  // --- Outcomes ---
+  Rewards [
+    label="✨ Reward Points",
+    shape=folder,
+    fillcolor="#f9f0ff"
+  ];
+
+  // --- Credit Card Layer ---
+  CreditCard [
+    label="💳 Credit Cards",
+    shape=folder,
+    fillcolor="#fff4e6"
+  ];
+
+  // --- Expenses ---
+  Expenses [
+    label="💳 Expenses",
+    shape=folder,
+    fillcolor="#ffeaea"
+  ];
+
+  Assets [
+    label="🏆 Multiple Goals & \n Global Multi Asset Portfolio",
+    shape=folder,
+    fillcolor="#fffbe6"
+  ];
+
+  // --- Core Flow ---
+  Salary -> IncomeAcc [label=" Salary Credit"];
+
+  IncomeAcc -> InvestmentAcc [label=" Allocate"];
+  IncomeAcc -> ExpenseAcc [label=" Allocate"];
+  InvestmentAcc -> ExpenseAcc [label=" Redeem"];
+
+  // --- Investments ---
+  InvestmentAcc -> Assets [label=" Invest"];
+
+  // --- Spending Paths ---
+  ExpenseAcc -> Expenses [label=" UPI"];
+
+  ExpenseAcc -> CreditCard [label=" Bill Payment", style=dotted];
+  InvestmentAcc -> CreditCard [label=" Bill Payment", style=dotted];
+
+  CreditCard -> Expenses [label=" Spend"];
+
+  // --- Rewards ---
+  CreditCard -> Rewards [label=" Earn", constraint=false];
+  Rewards -> Expenses [label=" Redeem"];
+
+  // --- Asset Creation via Card ---
+  CreditCard -> Assets [label=" Gold Schemes"];
+
+  // --- Layout hints ---
+  { rank=same; Rewards; CreditCard; }
+  { rank=same; Assets; Expenses; }
+}
+```
 
 ---
 <!-- .slide: data-transition="fade" -->
@@ -1274,7 +1378,7 @@ digraph MedicalFlow {
     { rank=same; Salary; Investment; Medical; }
   }
 
-  // --- Medical Mutual Funds Cluster (Moved Below Banks) ---
+  // --- Medical Mutual Funds Cluster ---
   subgraph cluster_medical_funds {
     label="Mutual Funds";
     style="rounded,dashed";
@@ -1292,28 +1396,28 @@ digraph MedicalFlow {
   // --- Credit Cards & Rewards Cluster ---
   subgraph cluster_credit_cards {
     label="💳 Credit Cards & Rewards";
-    style="rounded,dashed";
+    style="rounded,dashed,invis";
     color="#ffa500";
     fontcolor="#cc6600";
     fontsize=13;
     fontname="Inter";
     
-    MedCard [label="💳 Medical Credit Card", shape=folder, fillcolor="#fff4e6"];
-    RewardPoints [label="✨ Reward Points", shape=folder, fillcolor="#f9f0ff"];
+    MedCard [label="💳 Medical Credit Card", shape=folder, fillcolor="#fff4e6", style="invis"];
+    RewardPoints [label="✨ Reward Points", shape=folder, fillcolor="#f9f0ff", style="invis"];
   }
 
   // --- Health Insurance Cluster ---
   subgraph cluster_insurance {
     label="🩺 Health Insurance";
-    style="rounded,dashed";
+    style="rounded,dashed,invis";
     color="#20b2aa";
     fontcolor="#105955";
     fontsize=13;
     fontname="Inter";
 
-    PersonalIns [label="🛡️ Personal Policy", shape=folder, fillcolor="#e6fff0"];
-    SpouseIns [label="🏢 Spouse Employer", shape=folder, fillcolor="#e6fff0"];
-    EmpIns [label="🏢 My Employer", shape=folder, fillcolor="#e6fff0"];
+    PersonalIns [label="🛡️ Personal Policy", shape=folder, fillcolor="#e6fff0", style="invis"];
+    SpouseIns [label="🏢 Spouse Employer", shape=folder, fillcolor="#e6fff0", style="invis"];
+    EmpIns [label="🏢 My Employer", shape=folder, fillcolor="#e6fff0", style="invis"];
     
     { rank=same; EmpIns; SpouseIns; PersonalIns; }
   }
@@ -1328,7 +1432,7 @@ digraph MedicalFlow {
     fontname="Inter";
 
     MedExpenses [label="🧾 Medical Expenses", shape=folder, fillcolor="#f0fff0"];
-    Hospital [label="🏨 Hospitalizations", shape=folder, fillcolor="#fff7e6"];
+    Hospital [label="🏨 Hospitalizations", shape=folder, fillcolor="#fff7e6", style="invis"];
     
     { rank=same; MedExpenses; Hospital; }
   }
@@ -1342,10 +1446,11 @@ digraph MedicalFlow {
   Investment -> Medical [label=" Hospitalizations/Top ups"];
 
   // --- Credit Card Bill Payment Flow ---
-  Medical -> MedCard [label=" Bill Payment (direct)", style="dotted"];
+  Medical -> MedCard [label=" Bill Payment (direct)", style="invis"];
 
   // --- Spending Flows ---
   Medical -> MedExpenses [label=" UPI Scan to Pay"];
+  edge [style="invis"];
   MedCard -> MedExpenses [label=" Card Spend"];
   MedCard -> Hospital [label=" Emergency Spends"];
 
@@ -1356,7 +1461,6 @@ digraph MedicalFlow {
   MedCard -> RewardPoints [label=" Earn"];
 }
 ```
-
 
 --
 <!-- .slide: data-transition="fade" -->
@@ -1389,7 +1493,7 @@ digraph MedicalFlow {
     { rank=same; Salary; Investment; Medical; }
   }
 
-  // --- Medical Mutual Funds Cluster (Moved Below Banks) ---
+  // --- Medical Mutual Funds Cluster ---
   subgraph cluster_medical_funds {
     label="Mutual Funds";
     style="rounded,dashed";
@@ -1420,15 +1524,15 @@ digraph MedicalFlow {
   // --- Health Insurance Cluster ---
   subgraph cluster_insurance {
     label="🩺 Health Insurance";
-    style="rounded,dashed";
+    style="rounded,dashed,invis";
     color="#20b2aa";
     fontcolor="#105955";
     fontsize=13;
     fontname="Inter";
 
-    PersonalIns [label="🛡️ Personal Policy", shape=folder, fillcolor="#e6fff0"];
-    SpouseIns [label="🏢 Spouse Employer", shape=folder, fillcolor="#e6fff0"];
-    EmpIns [label="🏢 My Employer", shape=folder, fillcolor="#e6fff0"];
+    PersonalIns [label="🛡️ Personal Policy", shape=folder, fillcolor="#e6fff0", style="invis"];
+    SpouseIns [label="🏢 Spouse Employer", shape=folder, fillcolor="#e6fff0", style="invis"];
+    EmpIns [label="🏢 My Employer", shape=folder, fillcolor="#e6fff0", style="invis"];
     
     { rank=same; EmpIns; SpouseIns; PersonalIns; }
   }
@@ -1443,7 +1547,7 @@ digraph MedicalFlow {
     fontname="Inter";
 
     MedExpenses [label="🧾 Medical Expenses", shape=folder, fillcolor="#f0fff0"];
-    Hospital [label="🏨 Hospitalizations", shape=folder, fillcolor="#fff7e6"];
+    Hospital [label="🏨 Hospitalizations", shape=folder, fillcolor="#fff7e6", style="invis"];
     
     { rank=same; MedExpenses; Hospital; }
   }
@@ -1462,16 +1566,15 @@ digraph MedicalFlow {
   // --- Spending Flows ---
   Medical -> MedExpenses [label=" UPI Scan to Pay"];
   MedCard -> MedExpenses [label=" Card Spend"];
-  MedCard -> Hospital [label=" Emergency Spends"];
+  MedCard -> Hospital [label=" Emergency Spends", style="invis"];
 
   // --- Insurance Flow ---
-  SpouseIns -> Hospital [label=" Coverage", ltail=cluster_insurance];
+  SpouseIns -> Hospital [label=" Coverage", ltail=cluster_insurance, style="invis"];
 
   // --- Rewards Flow ---
   MedCard -> RewardPoints [label=" Earn"];
 }
 ```
-
 
 --
 <!-- .slide: data-transition="fade" -->
@@ -1588,7 +1691,191 @@ digraph MedicalFlow {
 ```
 
 ---
+<!-- .slide: data-transition="fade" -->
+## 5️⃣ Travel Spends ✈️
+```dot
+digraph TravelFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
 
+  node [shape=rectangle, style="rounded,filled", fontname="Inter", fontsize=12, fillcolor="#f7fbff"];
+  edge [arrowsize=0.9, fontname="Inter", fontsize=10, color="#2b7cff"];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label="🏦 Bank Accounts";
+    style="rounded,dashed";
+    color="#4a90e2";
+    fontcolor="#1a4b99";
+    fontsize=13;
+    fontname="Inter";
+    margin=10;
+    edge [minlen=0.5];
+
+    Salary [label="💼 Salary Account", shape=folder, fillcolor="#e8f3ff"];
+    Investment [label="📈 Investment Account", shape=folder, fillcolor="#e6f7ff"];
+    Travel [label="✈️ Travel Account", shape=folder, fillcolor="#e6f7ff"];
+
+    { rank=same; Salary; Investment; Travel; }
+  }
+
+  // --- Travel Mutual Funds Cluster ---
+  subgraph cluster_travel_funds {
+    label="Mutual Funds";
+    style="rounded,dashed";
+    color="#00e6d9";
+    fontcolor="#009991";
+    fontsize=13;
+    fontname="Inter";
+
+    Arbitrage [label="⚖️ Travel Fund\n(Arbitrage)", shape=folder, fillcolor="#e6fff0"];
+  }
+
+  // --- Credit Cards & Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label="💳 Credit Cards & Rewards";
+    style="rounded,dashed,invis";
+    color="#ffa500";
+    fontcolor="#cc6600";
+    fontsize=13;
+    fontname="Inter";
+
+    TravelCard [label="💳 Primary Credit Card", shape=folder, fillcolor="#fff4e6", style="invis"];
+    RewardPoints [label="✨ Reward Points", shape=folder, fillcolor="#f9f0ff", style="invis"];
+  }
+
+  // --- Expenses & Destinations Cluster ---
+  subgraph cluster_expenses {
+    label="💰 Expenses";
+    style="rounded,dashed,invis";
+    color="#ff6b81";
+    fontcolor="#c0392b";
+    fontsize=13;
+    fontname="Inter";
+
+    TravelExpense [label="🧾 Travel Expenses", shape=folder, fillcolor="#f0fff0", style="invis"];
+    FlightHotel [label="🏨 Flights & Hotels", shape=folder, fillcolor="#fff7e6", style="invis"];
+  }
+
+  // --- Flows (Investments & Transfers) ---
+  Salary -> Investment [label=" Monthly travel\nallocation", weight=10];
+  Investment -> Arbitrage [label=" Invest"];
+  Arbitrage -> Investment [label=" Redeem"];
+  Investment -> Travel [label=" Transfer", weight=10];
+
+  edge [style="invis"];
+  // --- Credit Card Bill Payment Flow ---
+  Travel -> TravelCard [label=" Bharat Connect (Bill Pay)", style="invis"];
+
+  // --- UPI Spending Flows ---
+  Travel -> TravelExpense [label=" UPI Scan to Pay"];
+
+  // --- Spending Flows (Credit Card) ---
+  TravelCard -> FlightHotel [label=" Online Bookings"];
+  TravelCard -> TravelExpense [label=" Card Spend"];
+
+  // --- Rewards Flow (Earn & Redeem) ---
+  TravelCard -> RewardPoints [label=" Earn on Spends"];
+  RewardPoints -> FlightHotel [label=" Redeem for Bookings", color="#9b59b6"];
+}
+```
+
+--
+<!-- .slide: data-transition="fade" -->
+## 5️⃣ Travel Spends ✈️
+```dot
+digraph TravelFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style="rounded,filled", fontname="Inter", fontsize=12, fillcolor="#f7fbff"];
+  edge [arrowsize=0.9, fontname="Inter", fontsize=10, color="#2b7cff"];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label="🏦 Bank Accounts";
+    style="rounded,dashed";
+    color="#4a90e2";
+    fontcolor="#1a4b99";
+    fontsize=13;
+    fontname="Inter";
+    margin=10;
+    edge [minlen=0.5];
+
+    Salary [label="💼 Salary Account", shape=folder, fillcolor="#e8f3ff"];
+    Investment [label="📈 Investment Account", shape=folder, fillcolor="#e6f7ff"];
+    Travel [label="✈️ Travel Account", shape=folder, fillcolor="#e6f7ff"];
+
+    { rank=same; Salary; Investment; Travel; }
+  }
+
+  // --- Travel Mutual Funds Cluster ---
+  subgraph cluster_travel_funds {
+    label="Mutual Funds";
+    style="rounded,dashed";
+    color="#00e6d9";
+    fontcolor="#009991";
+    fontsize=13;
+    fontname="Inter";
+
+    Arbitrage [label="⚖️ Travel Fund\n(Arbitrage)", shape=folder, fillcolor="#e6fff0"];
+  }
+
+  // --- Credit Cards & Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label="💳 Credit Cards & Rewards";
+    style="rounded,dashed,invis";
+    color="#ffa500";
+    fontcolor="#cc6600";
+    fontsize=13;
+    fontname="Inter";
+
+    TravelCard [label="💳 Primary Credit Card", shape=folder, fillcolor="#fff4e6", style="invis"];
+    RewardPoints [label="✨ Reward Points", shape=folder, fillcolor="#f9f0ff", style="invis"];
+  }
+
+  // --- Expenses & Destinations Cluster ---
+  subgraph cluster_expenses {
+    label="💰 Expenses";
+    style="rounded,dashed";
+    color="#ff6b81";
+    fontcolor="#c0392b";
+    fontsize=13;
+    fontname="Inter";
+
+    TravelExpense [label="🧾 Travel Expenses", shape=folder, fillcolor="#f0fff0"];
+    FlightHotel [label="🏨 Flights & Hotels", shape=folder, fillcolor="#fff7e6", style="invis"];
+  }
+
+  // --- Flows (Investments & Transfers) ---
+  Salary -> Investment [label=" Monthly travel\nallocation", weight=10];
+  Investment -> Arbitrage [label=" Invest"];
+  Arbitrage -> Investment [label=" Redeem"];
+  Investment -> Travel [label=" Transfer", weight=10];
+
+  // --- Credit Card Bill Payment Flow ---
+  Travel -> TravelCard [label=" Bharat Connect (Bill Pay)", style="invis"];
+
+  // --- UPI Spending Flows ---
+  Travel -> TravelExpense [label=" UPI Scan to Pay"];
+
+  edge [style="invis"];
+  // --- Spending Flows (Credit Card) ---
+  TravelCard -> FlightHotel [label=" Online Bookings"];
+  TravelCard -> TravelExpense [label=" Card Spend"];
+
+  // --- Rewards Flow (Earn & Redeem) ---
+  TravelCard -> RewardPoints [label=" Earn on Spends"];
+  RewardPoints -> FlightHotel [label=" Redeem for Bookings", color="#9b59b6"];
+}
+```
+
+--
+<!-- .slide: data-transition="fade" -->
 ## 5️⃣ Travel Spends ✈️
 ```dot
 digraph TravelFlow {
