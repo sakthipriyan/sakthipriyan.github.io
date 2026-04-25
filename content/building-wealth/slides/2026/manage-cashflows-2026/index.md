@@ -4,7 +4,7 @@ date: "2026-04-24"
 draft: false
 layout: "slides"
 type: "slides"
-summary: "Manage money flow via Bank Accounts, Credit Cards & Mutual Funds"
+summary: "Manage and automate your money flow via purpose-built Bank Accounts, Credit Cards, and Mutual Funds."
 js_tools:
   - viz
   - gsap
