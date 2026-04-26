@@ -56,7 +56,7 @@ Using **HDFC Remit Now** (or equivalent):
 
 ## Timelines
 
-Transfers typically credit to IBKR within **1–3 business days**. HDFC Remit Now has been reliable for next-business-day credits.
+Transfers typically credit to IBKR within **T / T+1 business days**. Adding a **deposit notification in IBKR** (Funding → Notify of Deposit) with your account ID and name in the transfer message speeds up the matching process.
 
 ## What to Track
 
