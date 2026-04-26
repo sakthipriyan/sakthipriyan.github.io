@@ -5,7 +5,7 @@ type: "books"
 chapter: 12
 date: 2026-04-25
 author: "Sakthi Priyan H"
-draft: true
+draft: false
 ---
 
 ## TODO: Migrating from Existing to New IBKR Account
