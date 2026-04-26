@@ -1,6 +1,6 @@
 ---
 title: "Why Beyond India?"
-subtitle: "The case for global diversification and why limiting yourself to Indian markets increases risk."
+subtitle: "The case for global diversification and why limiting yourself to Indian markets reduces opportunity & increases risk."
 type: "books"
 chapter: 1
 date: 2026-04-25
@@ -10,49 +10,54 @@ draft: false
 
 ## The World Has More Than One Market
 
-If you invest only in India, you are investing in roughly **3% of the world's equity markets**.
+The global equity universe spans dozens of countries, hundreds of industries, and tens of thousands of companies. India, despite its growth story, is a small slice of that universe. This chapter makes the case for why every serious long-term investor should look beyond the NSE/BSE.
 
-That is not a strategy. That is a blind spot.
+> If you invest only in India, you are investing in roughly **3% of the world's equity markets**.  
+> That is not a strategy. That is a blind spot.
 
-The global equity universe spans dozens of countries, hundreds of industries, and tens of thousands of companies. India, despite its growth story, is a small slice of that universe. This chapter makes the case for why every serious long-term investor should look beyond the NSE.
+## The Global Stock Market Landscape
 
----
+There are around 20 countries worldwide with a stock market capitalisation exceeding USD 1 Trillion ($1,000,000,000,000). Together, they represent the bulk of the investable equity universe.
 
-## The Global Stock Exchange Landscape
+| Country | Region | Market Cap ($ Trillion) | Share (%) |
+|---|---|---|---|
+| **United States** | North America | **70.0** | **43.8%** |
+| China | Asia-Pacific | 17.1 | 10.7% |
+| Japan | Asia-Pacific | 8.85 | 5.5% |
+| Hong Kong | Asia-Pacific | 7.35 | 4.6% |
+| **India** | Asia-Pacific | **5.18** | **3.2%** |
+| Canada | North America | 4.70 | 2.9% |
+| Taiwan | Asia-Pacific | 4.33 | 2.7% |
+| United Kingdom | Europe | 4.00 | 2.5% |
+| South Korea | Asia-Pacific | 3.85 | 2.4% |
+| France | Europe | 3.29 | 2.1% |
+| Germany | Europe | 2.88 | 1.8% |
+| Saudi Arabia | Middle East | 2.55 | 1.6% |
+| Switzerland | Europe | 2.20 | 1.4% |
+| Netherlands | Europe | 2.10 | 1.3% |
+| Australia | Asia-Pacific | 1.97 | 1.2% |
+| Spain | Europe | 1.96 | 1.2% |
+| Sweden | Europe | 1.41 | 0.9% |
+| South Africa | Africa | 1.23 | 0.8% |
+| United Arab Emirates | Middle East | 1.14 | 0.7% |
+| **All others (94)** | Multiple Regions  | **~13.9** | **~8.7%** |
+| **Total** | | **~160** | **100%** |
 
-There are over 20 stock exchanges worldwide with a market capitalisation exceeding USD 1 trillion. Together, they represent the investable equity universe.
+**By region:**
 
-*Source: [Wikipedia — List of major stock exchanges](https://en.wikipedia.org/wiki/List_of_major_stock_exchanges), as of March/April 2026.*
+| Region | Market Cap ($ Trillion) | Share (%) |
+|---|---|---|
+| North America (US + Canada) | ~74.7 | ~46.7% |
+| Asia-Pacific (ex-India) | ~43.5 | ~27.2% |
+| Europe | ~17.8 | ~11.1% |
+| **India** | **~5.2** | **~3.2%** |
+| Middle East | ~3.7 | ~2.3% |
+| Other / Emerging | ~15.1 | ~9.4% |
+| **Total** | **~160** | **100%** |
 
-| Stock Exchange | MIC | Region | City | Market Cap (USD T) | Share (%) |
-|---|---|---|---|---|---|
-| New York Stock Exchange | XNYS | North America | New York | 44.7 | 27.0% |
-| Nasdaq | XNAS | North America | New York | 42.2 | 25.5% |
-| Shanghai SE | XSHG | Asia-Pacific | Shanghai | 9.72 | 5.9% |
-| Japan Exchange Group | XJPX | Asia-Pacific | Tokyo | 7.95 | 4.8% |
-| Euronext | XAMS | Europe | Amsterdam | 7.45 | 4.5% |
-| Shenzhen SE | XSHE | Asia-Pacific | Shenzhen | 6.66 | 4.0% |
-| Hong Kong SE | XHKG | Asia-Pacific | Hong Kong | 6.2 | 3.7% |
-| National Stock Exchange | XNSE | Asia-Pacific | Mumbai | 5.32 | 3.2% |
-| Bombay Stock Exchange | XBOM | Asia-Pacific | Mumbai | 5.25 | **3.2%** |
-| Toronto SE | XTSE | North America | Toronto | 4.6 | 2.8% |
-| Taiwan SE | XTAI | Asia-Pacific | Taipei | 4.13 | 2.5% |
-| London SE | XLON | Europe | London | 4.1 | 2.5% |
-| Korea Exchange | XKOS | Asia-Pacific | Seoul | 3.7 | 2.2% |
-| Deutsche Börse | XFRA | Europe | Frankfurt | 3.15 | 1.9% |
-| Saudi Exchange | XSAU | Middle East | Riyadh | 2.55 | 1.5% |
-| SIX Swiss Exchange | XSWX | Europe | Zürich | 1.97 | 1.2% |
-| Australian SE | XASX | Asia-Pacific | Sydney | 1.89 | 1.1% |
-| Nasdaq Nordic | XCSE | Europe | Copenhagen | 1.79 | 1.1% |
-| Johannesburg SE | XJSE | Africa | Johannesburg | 1.15 | 0.7% |
-| B3 | BVMF | South America | São Paulo | 1.01 | 0.6% |
-| **Total** | | | | **~165.5** | **100%** |
+The United States alone accounts for **~44%** of global market capitalisation. Europe adds another ~11%. Asia-Pacific (ex-India) contributes ~27%. India contributes approximately **3.2%**.
 
-> Note: BSE and NSE largely list the same Indian companies. India's effective share of global market cap is approximately **3.2%**.
-
-The United States alone — NYSE + Nasdaq — accounts for **~52.5%** of global market capitalisation. Europe adds another ~11%. Asia-Pacific (ex-India) contributes ~30%.
-
-India contributes just over **3%**.
+Source: Worldbank data taken from [Wikipedia — List of countries by stock market capitalisation](https://en.wikipedia.org/wiki/List_of_countries_by_stock_market_capitalization), as on **Apr 26, 2026**.
 
 ---
 

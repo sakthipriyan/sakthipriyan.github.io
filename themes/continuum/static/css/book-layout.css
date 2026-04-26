@@ -423,7 +423,7 @@ body.book-reader {
     margin: 2rem 0;
 }
 
-.chapter-body blockquote {
+.book-reader .chapter-body blockquote {
     border-left: 4px solid var(--book-link);
     padding: 1rem 1.5rem;
     margin: 2rem 0;
