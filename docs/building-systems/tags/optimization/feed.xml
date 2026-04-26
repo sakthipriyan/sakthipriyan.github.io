@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Optimization on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/optimization/</link>
+    <link>http://localhost:1313/building-systems/tags/optimization/</link>
     <description>Recent content in Optimization on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/optimization/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/optimization/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Uber Binary Pattern in Go: Build Once, Run Everywhere</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</link>
+      <link>http://localhost:1313/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</link>
       <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/the-uber-binary-pattern-in-go-build-once-run-everywhere/</guid>
       <description>How using a single uber binary with symbolic links can reduce container image size, build time &amp;amp; build infrastructure costs and image initialization time for Go applications across server/serverless deployment modes</description>
     </item>
     <item>
       <title>Lines of code inversely proportional to readability</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</link>
+      <link>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</link>
       <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/lines-of-code-inversely-proportional-to-readability/</guid>
       <description>Always code less to make it easily readable.</description>
     </item>
   </channel>
