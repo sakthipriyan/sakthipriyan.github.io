@@ -29,6 +29,7 @@ No jargon, no vague advice—just a clear, step-by-step playbook built from real
 ✅ Those who want to file ITR correctly after global investments  
 ✅ Anyone looking to track global portfolio XIRR alongside domestic holdings  
 
+<!--
 ## What You'll Learn
 
 ### Part 1: The Why and the What
@@ -56,12 +57,16 @@ No jargon, no vague advice—just a clear, step-by-step playbook built from real
 - **Tracking XIRR**: Using RealValue Portfolio to track your global investments
 - **Migrating to a New IBKR Account**: Moving from an existing to a new IBKR account
 - **Mobile / Web App Access**: What's available on mobile and web vs desktop for direct and indirect accounts
+-->
 
 ## About the Author
 
-**Sakthi Priyan H** is a long-term investor and creator of the **Sakthi Priyan H | Building Wealth** YouTube channel, where he simplifies personal finance and long-term investing for Indian audiences. Based in Chennai, he has over 16 years of experience building complex systems and solving real-world problems, which shapes his disciplined, analytical approach to investing.
-
-Sakthi began investing in **2016**, gradually evolving his portfolio over the years: starting with liquid funds, moving to ELSS funds, growing into index funds and eventually into global investments via Nasdaq 100 domestic mutual funds and international ETFs via LRS.
+- Based in Chennai; ~17 years building complex software systems and products
+- Long-term investor since 2016; disciplined, analytical, process-first
+- Portfolio evolved from liquid/ELSS/small-cap to rule-based, global, multi-asset
+- Focussing of asset allocation and tax efficient **Perpetual Rebalancing**
+- International exposure via LRS (ETFs) and domestic funds (Nasdaq 100, etc.)
+- Creator of the [Building Wealth](https://www.youtube.com/@SakthiPriyanH) YouTube channel — personal finance and long-term investing for Indian audiences
 
 ## Start Reading
 

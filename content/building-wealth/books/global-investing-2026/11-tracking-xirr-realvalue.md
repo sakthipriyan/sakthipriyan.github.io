@@ -5,7 +5,7 @@ type: "books"
 chapter: 11
 date: 2026-04-25
 author: "Sakthi Priyan H"
-draft: false
+draft: true
 ---
 
 ## TODO: Tracking XIRR - Using RealValue Portfolio

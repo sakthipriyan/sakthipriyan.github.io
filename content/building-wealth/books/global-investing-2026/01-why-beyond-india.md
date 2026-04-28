@@ -55,7 +55,7 @@ There are around 20 countries worldwide with a stock market capitalisation excee
 | Other / Emerging | ~15.1 | ~9.4% |
 | **Total** | **~160** | **100%** |
 
-The United States alone accounts for **~44%** of global market capitalisation. Europe adds another ~11%. Asia-Pacific (ex-India) contributes ~27%. India contributes approximately **3.2%**.
+The **United States** alone accounts for **~44%** of global market capitalisation. **Europe*** adds another ~11%. **Asia-Pacific (ex-India)** contributes **~27%**. India contributes approximately **3.2%**.
 
 Source: Worldbank data taken from [Wikipedia — List of countries by stock market capitalisation](https://en.wikipedia.org/wiki/List_of_countries_by_stock_market_capitalization), as on **Apr 26, 2026**.
 
