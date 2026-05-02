@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Managing Money Flows 2026 | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds.">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="/css/slides.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
+
+    
+</head>
+
+<body>
+    
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown data-separator="^---$" data-separator-vertical="^--$" data-separator-notes="^Note:" data-charset="utf-8">
+            <textarea data-template>
+&lt;span style=&#34;
+ display:inline-block;
+ background: linear-gradient(90deg, #fbbf24, #f59e0b);
+ color: #fff;
+ padding: 4px 30px;
+ border-radius: 30px;
+&#34;&gt;
+sakthipriyan.com/building-wealth
+&lt;/span&gt;
+
+&lt;h2 class=&#34;title-scramble&#34;&gt;Managing Money Flows 2026&lt;/h2&gt;
+&lt;br/&gt;
+&lt;h3 class=&#34;subtitle-fade&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;y&#34;: 30}, &#34;duration&#34;: 1, &#34;delay&#34;: 2.5}&#39;&gt;Designing a Personal Finance System&lt;/h3&gt;
+&lt;h4 class=&#34;subtitle-fade&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;y&#34;: 30}, &#34;duration&#34;: 1, &#34;delay&#34;: 4.5}&#39;&gt;using Bank Accounts, Credit Cards &amp; Mutual Funds&lt;/h4&gt;
+&lt;h4 class=&#34;subtitle-fade2&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;y&#34;: 30}, &#34;duration&#34;: 1, &#34;delay&#34;: 5}&#39;&gt;Apr 25, 2026&lt;/h4&gt;
+&lt;br/&gt;&lt;br/&gt;
+&lt;br/&gt;
+
+---
+
+### Disclaimer
+&lt;!-- .slide: data-autoslide=&#34;5000&#34; --&gt;
+|  | |
+|---------------|----------------|
+| **Personal Variation** | What works for me may not suit everyone. |
+| **Educational Purpose** | For learning only, not financial advice. |
+| **Investment Risk** | Values can rise or fall; capital may be lost. |
+| **Regulatory Note** | Check local laws and tax rules before investing. |
+| **Personal Responsibility** | Viewers are responsible for their own decisions             |
+
+---
+
+## 1️⃣ The Core Idea  
+
+&gt; Money separated by **purpose**,  
+&gt; **budgeted** yearly &amp; **allocated** monthly.  
+
+*Each bank account serves a specific purpose.*
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+--
+
+### My Bank Accounts  
+| 🏦 **Account Type** | 💡 **Purpose** |
+|----------------------|------------------------|
+| 💰 **Income** | Where salary or income lands |
+| 📈 **Investment** | For long-term wealth building  |
+| 📈 **Investment Intl.** | For international forex routing  |
+| 🧾 **Expense** | For all regular bills and daily expenses |
+| 🏥 **Medical** | For health-related expenses |
+| ✈️ **Travel** | For trips, vacations and experiences |
+--
+
+### My Credit Cards
+| 💳 **Credit Card** | 💡 **Purpose** |
+|--------------------|----------------------|
+| 🧾 **Primary** | All Expenses, Travel and Gold schemes |
+| 🏥 **Medical (Addon)** | Exclusive for Medical Expenses |
+| 🛒 **Back up** | Bank redundancy in case Primary fails |
+
+--
+
+### Overview
+
+```dot
+digraph FinanceArchitecture {
+
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [
+    shape=rectangle,
+    style=&#34;rounded,filled&#34;,
+    fontname=&#34;Inter&#34;,
+    fontsize=13,
+    fillcolor=&#34;#f7fbff&#34;
+  ];
+
+  edge [
+    arrowsize=0.9,
+    fontname=&#34;Inter&#34;,
+    fontsize=11,
+    color=&#34;#2b7cff&#34;
+  ];
+
+  // --- Income ---
+  Salary [
+    label=&#34;💼 Salary / Income&#34;,
+    shape=folder,
+    fillcolor=&#34;#e8f3ff&#34;
+  ];
+
+  // --- Routing Layer ---
+  subgraph cluster_routing {
+    label=&#34;🏦 Routing Layer (Bank Accounts)&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+
+    IncomeAcc [label=&#34;💰 Income Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    InvestmentAcc [label=&#34;📈 Investment Accounts&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    ExpenseAcc [label=&#34;🧾 Expense Accounts&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; IncomeAcc; InvestmentAcc; ExpenseAcc; }
+  }
+
+  // --- Outcomes ---
+  Rewards [
+    label=&#34;✨ Reward Points&#34;,
+    shape=folder,
+    fillcolor=&#34;#f9f0ff&#34;
+  ];
+
+  // --- Credit Card Layer ---
+  CreditCard [
+    label=&#34;💳 Credit Cards&#34;,
+    shape=folder,
+    fillcolor=&#34;#fff4e6&#34;
+  ];
+
+  // --- Expenses ---
+  Expenses [
+    label=&#34;💳 Expenses&#34;,
+    shape=folder,
+    fillcolor=&#34;#ffeaea&#34;
+  ];
+
+  Assets [
+    label=&#34;🏆 Multiple Goals &amp; \n Global Multi Asset Portfolio&#34;,
+    shape=folder,
+    fillcolor=&#34;#fffbe6&#34;
+  ];
+
+  // --- Core Flow ---
+  Salary -&gt; IncomeAcc [label=&#34; Salary Credit&#34;];
+
+  IncomeAcc -&gt; InvestmentAcc [label=&#34; Allocate&#34;];
+  IncomeAcc -&gt; ExpenseAcc [label=&#34; Allocate&#34;];
+  InvestmentAcc -&gt; ExpenseAcc [label=&#34; Redeem&#34;];
+
+  // --- Investments ---
+  InvestmentAcc -&gt; Assets [label=&#34; Invest&#34;];
+
+  // --- Spending Paths ---
+  ExpenseAcc -&gt; Expenses [label=&#34; UPI&#34;];
+
+  ExpenseAcc -&gt; CreditCard [label=&#34; Bill Payment&#34;, style=dotted];
+  InvestmentAcc -&gt; CreditCard [label=&#34; Bill Payment&#34;, style=dotted];
+
+  CreditCard -&gt; Expenses [label=&#34; Spend&#34;];
+
+  // --- Rewards ---
+  CreditCard -&gt; Rewards [label=&#34; Earn&#34;, constraint=false];
+  Rewards -&gt; Expenses [label=&#34; Redeem&#34;];
+
+  // --- Asset Creation via Card ---
+  CreditCard -&gt; Assets [label=&#34; Gold Schemes&#34;];
+
+  // --- Layout hints ---
+  { rank=same; Rewards; CreditCard; }
+  { rank=same; Assets; Expenses; }
+}
+```
+
+---
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 2️⃣ Investments 📈
+```dot
+digraph InvestmentFlow {
+  rankdir=TB; // top-to-bottom
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=12;
+    invis=true;
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    IntlAccount [label=&#34;🏦 Investment Intl. Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+
+    { rank=same; Salary; Investment; IntlAccount; }
+  }
+
+  // --- Mutual Funds and Categories ---
+  MutualFunds [label=&#34;📊 Mutual Funds / ETFs&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+  INEquity [label=&#34;🇮🇳 Indian Equity Index Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+  DebtMF [label=&#34;💰 Debt / Arbitrage Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+
+  // --- International Investments ---
+  IntlBroker [label=&#34;🌍 International Broker Account&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+  USEquity [label=&#34;🇺🇸 US Equity (NASDAQ 100)&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    style=&#34;invis&#34;;
+
+    CreditCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Gold Cluster ---
+  subgraph cluster_gold {
+    label=&#34;🏆 Gold Investments&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffd700&#34;;
+    fontcolor=&#34;#c09000&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    GoldMF [label=&#34;🏅 Gold Mutual Fund / ETFs&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;, style=&#34;invis&#34;];
+    GoldScheme [label=&#34;👑 Gold Jewellery Scheme&#34;, shape=folder, fillcolor=&#34;#fff4cc&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Flows ---
+  
+  Salary -&gt; Investment [label=&#34; Monthly allocation&#34;];
+  edge [style=&#34;invis&#34;];
+  Investment -&gt; IntlAccount [label=&#34; Fund allocation&#34;];
+  Investment -&gt; MutualFunds [label=&#34; Mutual Fund purchases&#34;];
+  MutualFunds -&gt; INEquity [label=&#34;Equity&#34;];
+  MutualFunds -&gt; DebtMF [label=&#34;Debt&#34;];
+  MutualFunds -&gt; GoldMF [label=&#34; Digital Gold&#34;];
+
+  // --- Updated International Flow ---
+  IntlAccount -&gt; IntlBroker [label=&#34; INR to USD&#34;];
+  IntlBroker -&gt; USEquity [label=&#34; Buy ETFs&#34;];
+
+  // --- Credit Card &amp; Rewards Flow ---
+  Investment -&gt; CreditCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;dotted,invis&#34;];
+  CreditCard -&gt; GoldScheme [label=&#34; Physical Gold&#34;];
+  CreditCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 2️⃣ Investments 📈
+```dot
+digraph InvestmentFlow {
+  rankdir=TB; // top-to-bottom
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=12;
+    invis=true;
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    IntlAccount [label=&#34;🏦 Investment Intl. Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+
+    { rank=same; Salary; Investment; IntlAccount; }
+  }
+
+  // --- Mutual Funds and Categories ---
+  MutualFunds [label=&#34;📊 Mutual Funds / ETFs&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+  INEquity [label=&#34;🇮🇳 Indian Equity Index Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  DebtMF [label=&#34;💰 Debt / Arbitrage Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+
+  // --- International Investments ---
+  IntlBroker [label=&#34;🌍 International Broker Account&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+  USEquity [label=&#34;🇺🇸 US Equity (NASDAQ 100)&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    style=&#34;invis&#34;;
+
+    CreditCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Gold Cluster ---
+  subgraph cluster_gold {
+    label=&#34;🏆 Gold Investments&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffd700&#34;;
+    fontcolor=&#34;#c09000&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    GoldMF [label=&#34;🏅 Gold Mutual Fund / ETFs&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;];
+    GoldScheme [label=&#34;👑 Gold Jewellery Scheme&#34;, shape=folder, fillcolor=&#34;#fff4cc&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Flows ---
+  
+  Salary -&gt; Investment [label=&#34; Monthly allocation&#34;];
+  Investment -&gt; IntlAccount [label=&#34; Fund allocation&#34;, style=&#34;invis&#34;];
+  Investment -&gt; MutualFunds [label=&#34; Mutual Fund purchases&#34;];
+  MutualFunds -&gt; INEquity [label=&#34;Equity&#34;];
+  MutualFunds -&gt; DebtMF [label=&#34;Debt&#34;];
+  MutualFunds -&gt; GoldMF [label=&#34; Digital Gold&#34;];
+  edge [style=&#34;invis&#34;];
+  // --- Updated International Flow ---
+  IntlAccount -&gt; IntlBroker [label=&#34; INR to USD&#34;];
+  IntlBroker -&gt; USEquity [label=&#34; Buy ETFs&#34;];
+
+  // --- Credit Card &amp; Rewards Flow ---
+  Investment -&gt; CreditCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;dotted,invis&#34;];
+  CreditCard -&gt; GoldScheme [label=&#34; Physical Gold&#34;];
+  CreditCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 2️⃣ Investments 📈
+```dot
+digraph InvestmentFlow {
+  rankdir=TB; // top-to-bottom
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=12;
+    invis=true;
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    IntlAccount [label=&#34;🏦 Investment Intl. Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+
+    { rank=same; Salary; Investment; IntlAccount; }
+  }
+
+  // --- Mutual Funds and Categories ---
+  MutualFunds [label=&#34;📊 Mutual Funds / ETFs&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+  INEquity [label=&#34;🇮🇳 Indian Equity Index Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  DebtMF [label=&#34;💰 Debt / Arbitrage Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+
+  // --- International Investments ---
+  IntlBroker [label=&#34;🌍 International Broker Account&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+  USEquity [label=&#34;🇺🇸 US Equity (NASDAQ 100)&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    CreditCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Gold Cluster ---
+  subgraph cluster_gold {
+    label=&#34;🏆 Gold Investments&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffd700&#34;;
+    fontcolor=&#34;#c09000&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    GoldMF [label=&#34;🏅 Gold Mutual Fund / ETFs&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;];
+    GoldScheme [label=&#34;👑 Gold Jewellery Scheme&#34;, shape=folder, fillcolor=&#34;#fff4cc&#34;];
+  }
+
+  // --- Flows ---
+  
+  Salary -&gt; Investment [label=&#34; Monthly allocation&#34;];
+  Investment -&gt; IntlAccount [label=&#34; Fund allocation&#34;, style=&#34;invis&#34;];
+  Investment -&gt; MutualFunds [label=&#34; Mutual Fund purchases&#34;];
+  MutualFunds -&gt; INEquity [label=&#34;Equity&#34;];
+  MutualFunds -&gt; DebtMF [label=&#34;Debt&#34;];
+  MutualFunds -&gt; GoldMF [label=&#34; Digital Gold&#34;];
+
+  // --- Updated International Flow ---
+  IntlAccount -&gt; IntlBroker [label=&#34; INR to USD&#34;, style=&#34;invis&#34;];
+  IntlBroker -&gt; USEquity [label=&#34; Buy ETFs&#34;, style=&#34;invis&#34;];
+
+  // --- Credit Card &amp; Rewards Flow ---
+  Investment -&gt; CreditCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;dotted&#34;];
+  CreditCard -&gt; GoldScheme [label=&#34; Physical Gold&#34;];
+  CreditCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 2️⃣ Investments 📈
+
+```dot
+digraph InvestmentFlow {
+  rankdir=TB; // top-to-bottom
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=12;
+    invis=true;
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    IntlAccount [label=&#34;🏦 Investment Intl. Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; Investment; IntlAccount; }
+  }
+
+  // --- Mutual Funds and Categories ---
+  MutualFunds [label=&#34;📊 Mutual Funds / ETFs&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+  INEquity [label=&#34;🇮🇳 Indian Equity Index Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  DebtMF [label=&#34;💰 Debt / Arbitrage Funds&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+
+  // --- International Investments ---
+  IntlBroker [label=&#34;🌍 International Broker Account&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+  USEquity [label=&#34;🇺🇸 US Equity (NASDAQ 100)&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;];
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    CreditCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Gold Cluster ---
+  subgraph cluster_gold {
+    label=&#34;🏆 Gold Investments&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffd700&#34;;
+    fontcolor=&#34;#c09000&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    GoldMF [label=&#34;🏅 Gold Mutual Fund / ETFs&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;];
+    GoldScheme [label=&#34;👑 Gold Jewellery Scheme&#34;, shape=folder, fillcolor=&#34;#fff4cc&#34;];
+  }
+
+  // --- Flows ---
+  Salary -&gt; Investment [label=&#34; Monthly allocation&#34;];
+  Investment -&gt; MutualFunds [label=&#34; Mutual Fund purchases&#34;];
+  MutualFunds -&gt; INEquity [label=&#34;Equity&#34;];
+  MutualFunds -&gt; DebtMF [label=&#34;Debt&#34;];
+  MutualFunds -&gt; GoldMF [label=&#34; Digital Gold&#34;];
+
+  // --- Updated International Flow ---
+  Investment -&gt; IntlAccount [label=&#34; Fund allocation&#34;];
+  IntlAccount -&gt; IntlBroker [label=&#34; INR to USD&#34;];
+  IntlBroker -&gt; USEquity [label=&#34; Buy ETFs&#34;];
+
+  // --- Credit Card &amp; Rewards Flow ---
+  Investment -&gt; CreditCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;dotted&#34;];
+  CreditCard -&gt; GoldScheme [label=&#34; Physical Gold&#34;];
+  CreditCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+---
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 3️⃣ Living Expenses 🧾
+
+```dot
+digraph ExpensesFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    ExpenseAccount [label=&#34;🧾 Expense Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; ExpenseAccount; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PrimaryCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Card Payment Interfaces Cluster ---
+  subgraph cluster_interfaces {
+    label=&#34;📱 Card Interfaces&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#2b7cff&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    SamsungWallet [label=&#34;⌚ Samsung Wallet\n(me/mobile)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    GooglePay [label=&#34;📱 Google Pay\n(spouse)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    PhysicalCard [label=&#34;💳 Physical Card&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    VoucherSystem [label=&#34;🎟️ Voucher System&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;, style=&#34;invis&#34;];
+
+    { rank=same; SamsungWallet; GooglePay; PhysicalCard; VoucherSystem; }
+  }
+
+  // --- UPI Payment Interfaces Cluster ---
+  subgraph cluster_upi_interfaces {
+    label=&#34;🔗 UPI Interfaces&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#00a86b&#34;;
+    fontcolor=&#34;#008050&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    UPISamsung [label=&#34;⌚ Samsung Wallet\n(me)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    UPIGoogle [label=&#34;📱 Google Pay\n(Spouse/UPI Circle)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+
+    { rank=same; UPISamsung; UPIGoogle; }
+  }
+
+  // --- Expenses Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Expenses [label=&#34;💰 Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Allocation Flows ---
+  Salary -&gt; ExpenseAccount [label=&#34; Monthly Allocation&#34;, weight=10];
+  Salary -&gt; ExpenseAccount [label=&#34; Yearly Allocation&#34;, style=dashed];
+
+  edge [style=&#34;invis&#34;];
+  // --- UPI Spending Flows ---
+  ExpenseAccount -&gt; UPISamsung [label=&#34; Linked&#34;];
+  ExpenseAccount -&gt; UPIGoogle [label=&#34; Linked&#34;];
+  UPISamsung -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+  UPIGoogle -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+
+  // --- Credit Card Bill Payment Flows ---
+  ExpenseAccount -&gt; PrimaryCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;invis&#34;];
+
+  // --- Spending Flows (Vouchers) ---
+  PrimaryCard -&gt; VoucherSystem [label=&#34; Buy Vouchers&#34;];
+  VoucherSystem -&gt; Expenses [label=&#34; Redeem Vouchers&#34;];
+
+  // --- Spending Flows (Primary Card Intermediaries) ---
+  PrimaryCard -&gt; SamsungWallet [label=&#34; Linked&#34;];
+  PrimaryCard -&gt; GooglePay [label=&#34; Linked&#34;];
+  PrimaryCard -&gt; PhysicalCard [label=&#34; Linked&#34;];
+
+  PhysicalCard -&gt; Expenses [label=&#34; Tap or Insert&#34;];
+  SamsungWallet -&gt; Expenses [label=&#34; Tap to Pay&#34;];
+  GooglePay -&gt; Expenses [label=&#34; Tap to Pay&#34;];
+
+  // --- Rewards Flows ---
+  PrimaryCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 3️⃣ Living Expenses 🧾
+
+```dot
+digraph ExpensesFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    ExpenseAccount [label=&#34;🧾 Expense Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; ExpenseAccount; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PrimaryCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Card Payment Interfaces Cluster ---
+  subgraph cluster_interfaces {
+    label=&#34;📱 Card Interfaces&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#2b7cff&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    SamsungWallet [label=&#34;⌚ Samsung Wallet\n(me/mobile)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    GooglePay [label=&#34;📱 Google Pay\n(spouse)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    PhysicalCard [label=&#34;💳 Physical Card&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    VoucherSystem [label=&#34;🎟️ Voucher System&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;, style=&#34;invis&#34;];
+
+    { rank=same; SamsungWallet; GooglePay; PhysicalCard; VoucherSystem; }
+  }
+
+  // --- UPI Payment Interfaces Cluster ---
+  subgraph cluster_upi_interfaces {
+    label=&#34;🔗 UPI Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00a86b&#34;;
+    fontcolor=&#34;#008050&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    UPISamsung [label=&#34;⌚ Samsung Wallet\n(me)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    UPIGoogle [label=&#34;📱 Google Pay\n(Spouse/UPI Circle)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+
+    { rank=same; UPISamsung; UPIGoogle; }
+  }
+
+  // --- Expenses Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Expenses [label=&#34;💰 Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  }
+
+  // --- Allocation Flows ---
+  Salary -&gt; ExpenseAccount [label=&#34; Monthly Allocation&#34;, weight=10];
+  Salary -&gt; ExpenseAccount [label=&#34; Yearly Allocation&#34;, style=dashed];
+
+  // --- UPI Spending Flows ---
+  ExpenseAccount -&gt; UPISamsung [label=&#34; Linked&#34;];
+  ExpenseAccount -&gt; UPIGoogle [label=&#34; Linked&#34;];
+  UPISamsung -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+  UPIGoogle -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+
+  edge [style=&#34;invis&#34;];
+  // --- Credit Card Bill Payment Flows ---
+  ExpenseAccount -&gt; PrimaryCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;invis&#34;];
+
+  // --- Spending Flows (Vouchers) ---
+  PrimaryCard -&gt; VoucherSystem [label=&#34; Buy Vouchers&#34;];
+  VoucherSystem -&gt; Expenses [label=&#34; Redeem Vouchers&#34;];
+
+  // --- Spending Flows (Primary Card Intermediaries) ---
+  PrimaryCard -&gt; SamsungWallet [label=&#34; Linked&#34;];
+  PrimaryCard -&gt; GooglePay [label=&#34; Linked&#34;];
+  PrimaryCard -&gt; PhysicalCard [label=&#34; Linked&#34;];
+
+  PhysicalCard -&gt; Expenses [label=&#34; Tap or Insert&#34;];
+  SamsungWallet -&gt; Expenses [label=&#34; Tap to Pay&#34;];
+  GooglePay -&gt; Expenses [label=&#34; Tap to Pay&#34;];
+
+  // --- Rewards Flows ---
+  PrimaryCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 3️⃣ Living Expenses 🧾
+
+```dot
+digraph ExpensesFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    ExpenseAccount [label=&#34;🧾 Expense Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; ExpenseAccount; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PrimaryCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Card Payment Interfaces Cluster ---
+  subgraph cluster_interfaces {
+    label=&#34;📱 Card Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#2b7cff&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    SamsungWallet [label=&#34;⌚ Samsung Wallet\n(me/mobile)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    GooglePay [label=&#34;📱 Google Pay\n(spouse)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    PhysicalCard [label=&#34;💳 Physical Card&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    VoucherSystem [label=&#34;🎟️ Voucher System&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;, style=&#34;invis&#34;];
+
+    { rank=same; SamsungWallet; GooglePay; PhysicalCard; VoucherSystem; }
+  }
+
+  // --- UPI Payment Interfaces Cluster ---
+  subgraph cluster_upi_interfaces {
+    label=&#34;🔗 UPI Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00a86b&#34;;
+    fontcolor=&#34;#008050&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    UPISamsung [label=&#34;⌚ Samsung Wallet\n(me)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    UPIGoogle [label=&#34;📱 Google Pay\n(Spouse/UPI Circle)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+
+    { rank=same; UPISamsung; UPIGoogle; }
+  }
+
+  // --- Expenses Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Expenses [label=&#34;💰 Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  }
+
+  // --- Allocation Flows ---
+  Salary -&gt; ExpenseAccount [label=&#34; Monthly Allocation&#34;, weight=10];
+  Salary -&gt; ExpenseAccount [label=&#34; Yearly Allocation&#34;, style=dashed];
+
+  // --- UPI Spending Flows ---
+  ExpenseAccount -&gt; UPISamsung [label=&#34; Linked&#34;];
+  ExpenseAccount -&gt; UPIGoogle [label=&#34; Linked&#34;];
+  UPISamsung -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+  UPIGoogle -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+
+  // --- Credit Card Bill Payment Flows ---
+  ExpenseAccount -&gt; PrimaryCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;dotted&#34;];
+
+  // --- Spending Flows (Vouchers) ---
+  PrimaryCard -&gt; VoucherSystem [label=&#34; Buy Vouchers&#34;, style=&#34;invis&#34;];
+  VoucherSystem -&gt; Expenses [label=&#34; Redeem Vouchers&#34;, style=&#34;invis&#34;];
+
+  // --- Spending Flows (Primary Card Intermediaries) ---
+  PrimaryCard -&gt; SamsungWallet [label=&#34; Linked&#34;, style=&#34;invis&#34;];
+  PrimaryCard -&gt; GooglePay [label=&#34; Linked&#34;, style=&#34;invis&#34;];
+  PrimaryCard -&gt; PhysicalCard [label=&#34; Linked&#34;];
+
+  PhysicalCard -&gt; Expenses [label=&#34; Tap or Insert&#34;];
+  SamsungWallet -&gt; Expenses [label=&#34; Tap to Pay&#34;, style=&#34;invis&#34;];
+  GooglePay -&gt; Expenses [label=&#34; Tap to Pay&#34;, style=&#34;invis&#34;];
+
+  // --- Rewards Flows ---
+  PrimaryCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 3️⃣ Living Expenses 🧾
+
+```dot
+digraph ExpensesFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    ExpenseAccount [label=&#34;🧾 Expense Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; ExpenseAccount; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PrimaryCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Card Payment Interfaces Cluster ---
+  subgraph cluster_interfaces {
+    label=&#34;📱 Card Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#2b7cff&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    SamsungWallet [label=&#34;⌚ Samsung Wallet\n(me/mobile)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    GooglePay [label=&#34;📱 Google Pay\n(spouse)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    PhysicalCard [label=&#34;💳 Physical Card&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    VoucherSystem [label=&#34;🎟️ Voucher System&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;];
+
+    { rank=same; SamsungWallet; GooglePay; PhysicalCard; VoucherSystem; }
+  }
+
+  // --- UPI Payment Interfaces Cluster ---
+  subgraph cluster_upi_interfaces {
+    label=&#34;🔗 UPI Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00a86b&#34;;
+    fontcolor=&#34;#008050&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    UPISamsung [label=&#34;⌚ Samsung Wallet\n(me)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    UPIGoogle [label=&#34;📱 Google Pay\n(Spouse/UPI Circle)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+
+    { rank=same; UPISamsung; UPIGoogle; }
+  }
+
+  // --- Expenses Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Expenses [label=&#34;💰 Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  }
+
+  // --- Allocation Flows ---
+  Salary -&gt; ExpenseAccount [label=&#34; Monthly Allocation&#34;, weight=10];
+  Salary -&gt; ExpenseAccount [label=&#34; Yearly Allocation&#34;, style=dashed];
+
+  // --- UPI Spending Flows ---
+  ExpenseAccount -&gt; UPISamsung [label=&#34; Linked&#34;];
+  ExpenseAccount -&gt; UPIGoogle [label=&#34; Linked&#34;];
+  UPISamsung -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+  UPIGoogle -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+
+  // --- Credit Card Bill Payment Flows ---
+  ExpenseAccount -&gt; PrimaryCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;dotted&#34;];
+
+  // --- Spending Flows (Vouchers) ---
+  PrimaryCard -&gt; VoucherSystem [label=&#34; Buy Vouchers&#34;];
+  VoucherSystem -&gt; Expenses [label=&#34; Redeem Vouchers&#34;];
+
+  // --- Spending Flows (Primary Card Intermediaries) ---
+  PrimaryCard -&gt; SamsungWallet [label=&#34; Linked&#34;, style=&#34;invis&#34;];
+  PrimaryCard -&gt; GooglePay [label=&#34; Linked&#34;, style=&#34;invis&#34;];
+  PrimaryCard -&gt; PhysicalCard [label=&#34; Linked&#34;];
+
+  PhysicalCard -&gt; Expenses [label=&#34; Tap or Insert&#34;];
+  SamsungWallet -&gt; Expenses [label=&#34; Tap to Pay&#34;, style=&#34;invis&#34;];
+  GooglePay -&gt; Expenses [label=&#34; Tap to Pay&#34;, style=&#34;invis&#34;];
+
+  // --- Rewards Flows ---
+  PrimaryCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 3️⃣ Living Expenses 🧾
+
+```dot
+digraph ExpensesFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    ExpenseAccount [label=&#34;🧾 Expense Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; ExpenseAccount; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PrimaryCard [label=&#34;🧾 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Card Payment Interfaces Cluster ---
+  subgraph cluster_interfaces {
+    label=&#34;📱 Card Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#2b7cff&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    SamsungWallet [label=&#34;⌚ Samsung Wallet\n(me/mobile)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    GooglePay [label=&#34;📱 Google Pay\n(spouse)&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    PhysicalCard [label=&#34;💳 Physical Card&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    VoucherSystem [label=&#34;🎟️ Voucher System&#34;, shape=folder, fillcolor=&#34;#fffbe6&#34;];
+
+    { rank=same; SamsungWallet; GooglePay; PhysicalCard; VoucherSystem; }
+  }
+
+  // --- UPI Payment Interfaces Cluster ---
+  subgraph cluster_upi_interfaces {
+    label=&#34;🔗 UPI Interfaces&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00a86b&#34;;
+    fontcolor=&#34;#008050&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    UPISamsung [label=&#34;⌚ Samsung Wallet\n(me)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    UPIGoogle [label=&#34;📱 Google Pay\n(Spouse/UPI Circle)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+
+    { rank=same; UPISamsung; UPIGoogle; }
+  }
+
+  // --- Expenses Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Expenses [label=&#34;💰 Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+  }
+
+  // --- Allocation Flows ---
+  Salary -&gt; ExpenseAccount [label=&#34; Monthly Allocation&#34;, weight=10];
+  Salary -&gt; ExpenseAccount [label=&#34; Yearly Allocation&#34;, style=dashed];
+
+  // --- UPI Spending Flows ---
+  ExpenseAccount -&gt; UPISamsung [label=&#34; Linked&#34;];
+  ExpenseAccount -&gt; UPIGoogle [label=&#34; Linked&#34;];
+  UPISamsung -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+  UPIGoogle -&gt; Expenses [label=&#34; Scan to Pay&#34;];
+
+  // --- Credit Card Bill Payment Flows ---
+  ExpenseAccount -&gt; PrimaryCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;dotted&#34;];
+
+  // --- Spending Flows (Vouchers) ---
+  PrimaryCard -&gt; VoucherSystem [label=&#34; Buy Vouchers&#34;];
+  VoucherSystem -&gt; Expenses [label=&#34; Redeem Vouchers&#34;];
+
+  // --- Spending Flows (Primary Card Intermediaries) ---
+  PrimaryCard -&gt; SamsungWallet [label=&#34; Linked&#34;];
+  PrimaryCard -&gt; GooglePay [label=&#34; Linked&#34;];
+  PrimaryCard -&gt; PhysicalCard [label=&#34; Linked&#34;];
+
+  PhysicalCard -&gt; Expenses [label=&#34; Tap or Insert&#34;];
+  SamsungWallet -&gt; Expenses [label=&#34; Tap to Pay&#34;];
+  GooglePay -&gt; Expenses [label=&#34; Tap to Pay&#34;];
+
+  // --- Rewards Flows ---
+  PrimaryCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+---
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 4️⃣ Medical Expenses 🏥
+```dot
+digraph MedicalFlow {
+  compound=true; 
+  rankdir=TB; 
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;, style=&#34;invis&#34;];
+    Medical [label=&#34;🏥 Medical Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    
+    { rank=same; Salary; Investment; Medical; }
+  }
+
+  // --- Medical Mutual Funds Cluster ---
+  subgraph cluster_medical_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#66cdaa&#34;;
+    fontcolor=&#34;#2f6655&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedFund [label=&#34;💊 Medical Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+    Emergency [label=&#34;🚨 Emergency Fund\n(Liquid, Hybrids)&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; MedFund; Emergency; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    
+    MedCard [label=&#34;💳 Medical Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Health Insurance Cluster ---
+  subgraph cluster_insurance {
+    label=&#34;🩺 Health Insurance&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#20b2aa&#34;;
+    fontcolor=&#34;#105955&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PersonalIns [label=&#34;🛡️ Personal Policy&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    SpouseIns [label=&#34;🏢 Spouse Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    EmpIns [label=&#34;🏢 My Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; EmpIns; SpouseIns; PersonalIns; }
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedExpenses [label=&#34;🧾 Medical Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+    Hospital [label=&#34;🏨 Hospitalizations&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; MedExpenses; Hospital; }
+  }
+
+  // --- Flows (Investments) ---
+  Salary -&gt; Medical [label=&#34; Monthly allocation&#34;];
+  edge [style=&#34;invis&#34;];
+  Salary -&gt; Investment [label=&#34; Planned allocation&#34;];
+  Investment -&gt; MedFund [label=&#34; Invest&#34;];
+  MedFund -&gt; Investment [label=&#34; Redeem&#34;];
+  Emergency -&gt; Investment [label=&#34; Redeem on unplanned&#34;];
+  Investment -&gt; Medical [label=&#34; Hospitalizations/Top ups&#34;];
+
+  // --- Credit Card Bill Payment Flow ---
+  Medical -&gt; MedCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;invis&#34;];
+
+  // --- Spending Flows ---
+  Medical -&gt; MedExpenses [label=&#34; UPI Scan to Pay&#34;];
+  MedCard -&gt; MedExpenses [label=&#34; Card Spend&#34;];
+  MedCard -&gt; Hospital [label=&#34; Emergency Spends&#34;];
+
+  // --- Insurance Flow ---
+  SpouseIns -&gt; Hospital [label=&#34; Coverage&#34;, ltail=cluster_insurance];
+
+  // --- Rewards Flow ---
+  MedCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 4️⃣ Medical Expenses 🏥
+```dot
+digraph MedicalFlow {
+  compound=true; 
+  rankdir=TB; 
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Medical [label=&#34;🏥 Medical Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    
+    { rank=same; Salary; Investment; Medical; }
+  }
+
+  // --- Medical Mutual Funds Cluster ---
+  subgraph cluster_medical_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#66cdaa&#34;;
+    fontcolor=&#34;#2f6655&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedFund [label=&#34;💊 Medical Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Emergency [label=&#34;🚨 Emergency Fund\n(Liquid, Hybrids)&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    
+    { rank=same; MedFund; Emergency; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    
+    MedCard [label=&#34;💳 Medical Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Health Insurance Cluster ---
+  subgraph cluster_insurance {
+    label=&#34;🩺 Health Insurance&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#20b2aa&#34;;
+    fontcolor=&#34;#105955&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PersonalIns [label=&#34;🛡️ Personal Policy&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    SpouseIns [label=&#34;🏢 Spouse Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    EmpIns [label=&#34;🏢 My Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; EmpIns; SpouseIns; PersonalIns; }
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedExpenses [label=&#34;🧾 Medical Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+    Hospital [label=&#34;🏨 Hospitalizations&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; MedExpenses; Hospital; }
+  }
+
+  // --- Flows (Investments) ---
+  Salary -&gt; Medical [label=&#34; Monthly allocation&#34;];
+  Salary -&gt; Investment [label=&#34; Planned allocation&#34;];
+  Investment -&gt; MedFund [label=&#34; Invest&#34;];
+  MedFund -&gt; Investment [label=&#34; Redeem&#34;];
+  Emergency -&gt; Investment [label=&#34; Redeem on unplanned&#34;];
+  Investment -&gt; Medical [label=&#34; Hospitalizations/Top ups&#34;];
+
+  edge [style=&#34;invis&#34;];
+  // --- Credit Card Bill Payment Flow ---
+  Medical -&gt; MedCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;invis&#34;];
+
+  // --- Spending Flows ---
+  Medical -&gt; MedExpenses [label=&#34; UPI Scan to Pay&#34;];
+  MedCard -&gt; MedExpenses [label=&#34; Card Spend&#34;];
+  MedCard -&gt; Hospital [label=&#34; Emergency Spends&#34;];
+
+  // --- Insurance Flow ---
+  SpouseIns -&gt; Hospital [label=&#34; Coverage&#34;, ltail=cluster_insurance];
+
+  // --- Rewards Flow ---
+  MedCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 4️⃣ Medical Expenses 🏥
+```dot
+digraph MedicalFlow {
+  compound=true; 
+  rankdir=TB; 
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Medical [label=&#34;🏥 Medical Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    
+    { rank=same; Salary; Investment; Medical; }
+  }
+
+  // --- Medical Mutual Funds Cluster ---
+  subgraph cluster_medical_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#66cdaa&#34;;
+    fontcolor=&#34;#2f6655&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedFund [label=&#34;💊 Medical Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Emergency [label=&#34;🚨 Emergency Fund\n(Liquid, Hybrids)&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    
+    { rank=same; MedFund; Emergency; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    
+    MedCard [label=&#34;💳 Medical Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Health Insurance Cluster ---
+  subgraph cluster_insurance {
+    label=&#34;🩺 Health Insurance&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#20b2aa&#34;;
+    fontcolor=&#34;#105955&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PersonalIns [label=&#34;🛡️ Personal Policy&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    SpouseIns [label=&#34;🏢 Spouse Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    EmpIns [label=&#34;🏢 My Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; EmpIns; SpouseIns; PersonalIns; }
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedExpenses [label=&#34;🧾 Medical Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Hospital [label=&#34;🏨 Hospitalizations&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; MedExpenses; Hospital; }
+  }
+
+  // --- Flows (Investments) ---
+  Salary -&gt; Medical [label=&#34; Monthly allocation&#34;];
+  Salary -&gt; Investment [label=&#34; Planned allocation&#34;];
+  Investment -&gt; MedFund [label=&#34; Invest&#34;];
+  MedFund -&gt; Investment [label=&#34; Redeem&#34;];
+  Emergency -&gt; Investment [label=&#34; Redeem on unplanned&#34;];
+  Investment -&gt; Medical [label=&#34; Hospitalizations/Top ups&#34;];
+
+  // --- Credit Card Bill Payment Flow ---
+  Medical -&gt; MedCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;invis&#34;];
+
+  // --- Spending Flows ---
+  Medical -&gt; MedExpenses [label=&#34; UPI Scan to Pay&#34;];
+  edge [style=&#34;invis&#34;];
+  MedCard -&gt; MedExpenses [label=&#34; Card Spend&#34;];
+  MedCard -&gt; Hospital [label=&#34; Emergency Spends&#34;];
+
+  // --- Insurance Flow ---
+  SpouseIns -&gt; Hospital [label=&#34; Coverage&#34;, ltail=cluster_insurance];
+
+  // --- Rewards Flow ---
+  MedCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 4️⃣ Medical Expenses 🏥
+```dot
+digraph MedicalFlow {
+  compound=true; 
+  rankdir=TB; 
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Medical [label=&#34;🏥 Medical Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    
+    { rank=same; Salary; Investment; Medical; }
+  }
+
+  // --- Medical Mutual Funds Cluster ---
+  subgraph cluster_medical_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#66cdaa&#34;;
+    fontcolor=&#34;#2f6655&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedFund [label=&#34;💊 Medical Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Emergency [label=&#34;🚨 Emergency Fund\n(Liquid, Hybrids)&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    
+    { rank=same; MedFund; Emergency; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    
+    MedCard [label=&#34;💳 Medical Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Health Insurance Cluster ---
+  subgraph cluster_insurance {
+    label=&#34;🩺 Health Insurance&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#20b2aa&#34;;
+    fontcolor=&#34;#105955&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PersonalIns [label=&#34;🛡️ Personal Policy&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    SpouseIns [label=&#34;🏢 Spouse Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    EmpIns [label=&#34;🏢 My Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; EmpIns; SpouseIns; PersonalIns; }
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedExpenses [label=&#34;🧾 Medical Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Hospital [label=&#34;🏨 Hospitalizations&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+    
+    { rank=same; MedExpenses; Hospital; }
+  }
+
+  // --- Flows (Investments) ---
+  Salary -&gt; Medical [label=&#34; Monthly allocation&#34;];
+  Salary -&gt; Investment [label=&#34; Planned allocation&#34;];
+  Investment -&gt; MedFund [label=&#34; Invest&#34;];
+  MedFund -&gt; Investment [label=&#34; Redeem&#34;];
+  Emergency -&gt; Investment [label=&#34; Redeem on unplanned&#34;];
+  Investment -&gt; Medical [label=&#34; Hospitalizations/Top ups&#34;];
+
+  // --- Credit Card Bill Payment Flow ---
+  Medical -&gt; MedCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;dotted&#34;];
+
+  // --- Spending Flows ---
+  Medical -&gt; MedExpenses [label=&#34; UPI Scan to Pay&#34;];
+  MedCard -&gt; MedExpenses [label=&#34; Card Spend&#34;];
+  MedCard -&gt; Hospital [label=&#34; Emergency Spends&#34;, style=&#34;invis&#34;];
+
+  // --- Insurance Flow ---
+  SpouseIns -&gt; Hospital [label=&#34; Coverage&#34;, ltail=cluster_insurance, style=&#34;invis&#34;];
+
+  // --- Rewards Flow ---
+  MedCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 4️⃣ Medical Expenses 🏥
+```dot
+digraph MedicalFlow {
+  compound=true; 
+  rankdir=TB; 
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Medical [label=&#34;🏥 Medical Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    
+    { rank=same; Salary; Investment; Medical; }
+  }
+
+  // --- Medical Mutual Funds Cluster (Moved Below Banks) ---
+  subgraph cluster_medical_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#66cdaa&#34;;
+    fontcolor=&#34;#2f6655&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedFund [label=&#34;💊 Medical Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Emergency [label=&#34;🚨 Emergency Fund\n(Liquid, Hybrids)&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    
+    { rank=same; MedFund; Emergency; }
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    
+    MedCard [label=&#34;💳 Medical Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Health Insurance Cluster ---
+  subgraph cluster_insurance {
+    label=&#34;🩺 Health Insurance&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#20b2aa&#34;;
+    fontcolor=&#34;#105955&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    PersonalIns [label=&#34;🛡️ Personal Policy&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    SpouseIns [label=&#34;🏢 Spouse Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    EmpIns [label=&#34;🏢 My Employer&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+    
+    { rank=same; EmpIns; SpouseIns; PersonalIns; }
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    MedExpenses [label=&#34;🧾 Medical Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    Hospital [label=&#34;🏨 Hospitalizations&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;];
+    
+    { rank=same; MedExpenses; Hospital; }
+  }
+
+  // --- Flows (Investments) ---
+  Salary -&gt; Medical [label=&#34; Monthly allocation&#34;];
+  Salary -&gt; Investment [label=&#34; Planned allocation&#34;];
+  Investment -&gt; MedFund [label=&#34; Invest&#34;];
+  MedFund -&gt; Investment [label=&#34; Redeem&#34;];
+  Emergency -&gt; Investment [label=&#34; Redeem on unplanned&#34;];
+  Investment -&gt; Medical [label=&#34; Hospitalizations/Top ups&#34;];
+
+  // --- Credit Card Bill Payment Flow ---
+  Medical -&gt; MedCard [label=&#34; Bill Payment (direct)&#34;, style=&#34;dotted&#34;];
+
+  // --- Spending Flows ---
+  Medical -&gt; MedExpenses [label=&#34; UPI Scan to Pay&#34;];
+  MedCard -&gt; MedExpenses [label=&#34; Card Spend&#34;];
+  MedCard -&gt; Hospital [label=&#34; Emergency Spends&#34;];
+
+  // --- Insurance Flow ---
+  SpouseIns -&gt; Hospital [label=&#34; Coverage&#34;, ltail=cluster_insurance];
+
+  // --- Rewards Flow ---
+  MedCard -&gt; RewardPoints [label=&#34; Earn&#34;];
+}
+```
+
+---
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 5️⃣ Travel Spends ✈️
+```dot
+digraph TravelFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+    edge [minlen=0.5];
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Travel [label=&#34;✈️ Travel Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; Investment; Travel; }
+  }
+
+  // --- Travel Mutual Funds Cluster ---
+  subgraph cluster_travel_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00e6d9&#34;;
+    fontcolor=&#34;#009991&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Arbitrage [label=&#34;⚖️ Travel Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    TravelCard [label=&#34;💳 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    TravelExpense [label=&#34;🧾 Travel Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;, style=&#34;invis&#34;];
+    FlightHotel [label=&#34;🏨 Flights &amp; Hotels&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Flows (Investments &amp; Transfers) ---
+  Salary -&gt; Investment [label=&#34; Monthly travel\nallocation&#34;, weight=10];
+  Investment -&gt; Arbitrage [label=&#34; Invest&#34;];
+  Arbitrage -&gt; Investment [label=&#34; Redeem&#34;];
+  Investment -&gt; Travel [label=&#34; Transfer&#34;, weight=10];
+
+  edge [style=&#34;invis&#34;];
+  // --- Credit Card Bill Payment Flow ---
+  Travel -&gt; TravelCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;invis&#34;];
+
+  // --- UPI Spending Flows ---
+  Travel -&gt; TravelExpense [label=&#34; UPI Scan to Pay&#34;];
+
+  // --- Spending Flows (Credit Card) ---
+  TravelCard -&gt; FlightHotel [label=&#34; Online Bookings&#34;];
+  TravelCard -&gt; TravelExpense [label=&#34; Card Spend&#34;];
+
+  // --- Rewards Flow (Earn &amp; Redeem) ---
+  TravelCard -&gt; RewardPoints [label=&#34; Earn on Spends&#34;];
+  RewardPoints -&gt; FlightHotel [label=&#34; Redeem for Bookings&#34;, color=&#34;#9b59b6&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 5️⃣ Travel Spends ✈️
+```dot
+digraph TravelFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10;
+    edge [minlen=0.5];
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Travel [label=&#34;✈️ Travel Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+
+    { rank=same; Salary; Investment; Travel; }
+  }
+
+  // --- Travel Mutual Funds Cluster ---
+  subgraph cluster_travel_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00e6d9&#34;;
+    fontcolor=&#34;#009991&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Arbitrage [label=&#34;⚖️ Travel Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed,invis&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    TravelCard [label=&#34;💳 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;, style=&#34;invis&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    TravelExpense [label=&#34;🧾 Travel Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    FlightHotel [label=&#34;🏨 Flights &amp; Hotels&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;, style=&#34;invis&#34;];
+  }
+
+  // --- Flows (Investments &amp; Transfers) ---
+  Salary -&gt; Investment [label=&#34; Monthly travel\nallocation&#34;, weight=10];
+  Investment -&gt; Arbitrage [label=&#34; Invest&#34;];
+  Arbitrage -&gt; Investment [label=&#34; Redeem&#34;];
+  Investment -&gt; Travel [label=&#34; Transfer&#34;, weight=10];
+
+  // --- Credit Card Bill Payment Flow ---
+  Travel -&gt; TravelCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;invis&#34;];
+
+  // --- UPI Spending Flows ---
+  Travel -&gt; TravelExpense [label=&#34; UPI Scan to Pay&#34;];
+
+  edge [style=&#34;invis&#34;];
+  // --- Spending Flows (Credit Card) ---
+  TravelCard -&gt; FlightHotel [label=&#34; Online Bookings&#34;];
+  TravelCard -&gt; TravelExpense [label=&#34; Card Spend&#34;];
+
+  // --- Rewards Flow (Earn &amp; Redeem) ---
+  TravelCard -&gt; RewardPoints [label=&#34; Earn on Spends&#34;];
+  RewardPoints -&gt; FlightHotel [label=&#34; Redeem for Bookings&#34;, color=&#34;#9b59b6&#34;];
+}
+```
+
+--
+&lt;!-- .slide: data-transition=&#34;fade&#34; --&gt;
+## 5️⃣ Travel Spends ✈️
+```dot
+digraph TravelFlow {
+  rankdir=TB; // top-to-bottom layout
+  bgcolor=transparent;
+  splines=true;
+  overlap=false;
+
+  node [shape=rectangle, style=&#34;rounded,filled&#34;, fontname=&#34;Inter&#34;, fontsize=12, fillcolor=&#34;#f7fbff&#34;];
+  edge [arrowsize=0.9, fontname=&#34;Inter&#34;, fontsize=10, color=&#34;#2b7cff&#34;];
+
+  // --- Bank Accounts Cluster ---
+  subgraph cluster_banks {
+    label=&#34;🏦 Bank Accounts&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#4a90e2&#34;;
+    fontcolor=&#34;#1a4b99&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+    margin=10; // Tightens the padding inside this cluster only
+    edge [minlen=0.5];
+
+    Salary [label=&#34;💼 Salary Account&#34;, shape=folder, fillcolor=&#34;#e8f3ff&#34;];
+    Investment [label=&#34;📈 Investment Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    Travel [label=&#34;✈️ Travel Account&#34;, shape=folder, fillcolor=&#34;#e6f7ff&#34;];
+    
+    { rank=same; Salary; Investment; Travel; }
+  }
+
+  // --- Travel Mutual Funds Cluster ---
+  subgraph cluster_travel_funds {
+    label=&#34;Mutual Funds&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#00e6d9&#34;;
+    fontcolor=&#34;#009991&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    Arbitrage [label=&#34;⚖️ Travel Fund\n(Arbitrage)&#34;, shape=folder, fillcolor=&#34;#e6fff0&#34;];
+  }
+
+  // --- Credit Cards &amp; Rewards Cluster ---
+  subgraph cluster_credit_cards {
+    label=&#34;💳 Credit Cards &amp; Rewards&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ffa500&#34;;
+    fontcolor=&#34;#cc6600&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    TravelCard [label=&#34;💳 Primary Credit Card&#34;, shape=folder, fillcolor=&#34;#fff4e6&#34;];
+    RewardPoints [label=&#34;✨ Reward Points&#34;, shape=folder, fillcolor=&#34;#f9f0ff&#34;];
+  }
+
+  // --- Expenses &amp; Destinations Cluster ---
+  subgraph cluster_expenses {
+    label=&#34;💰 Expenses&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#ff6b81&#34;;
+    fontcolor=&#34;#c0392b&#34;;
+    fontsize=13;
+    fontname=&#34;Inter&#34;;
+
+    TravelExpense [label=&#34;🧾 Travel Expenses&#34;, shape=folder, fillcolor=&#34;#f0fff0&#34;];
+    FlightHotel [label=&#34;🏨 Flights &amp; Hotels&#34;, shape=folder, fillcolor=&#34;#fff7e6&#34;];
+  }
+
+  // --- Flows (Investments &amp; Transfers) ---
+  // High weight keeps these specific nodes tightly aligned and short
+  Salary -&gt; Investment [label=&#34; Monthly travel\nallocation&#34;, weight=10]; 
+  Investment -&gt; Arbitrage [label=&#34; Invest&#34;];
+  Arbitrage -&gt; Investment [label=&#34; Redeem&#34;];
+  Investment -&gt; Travel [label=&#34; Transfer&#34;, weight=10];
+
+  // --- Credit Card Bill Payment Flow ---
+  Travel -&gt; TravelCard [label=&#34; Bharat Connect (Bill Pay)&#34;, style=&#34;dotted&#34;];
+
+  // --- UPI Spending Flows ---
+  Travel -&gt; TravelExpense [label=&#34; UPI Scan to Pay&#34;];
+
+  // --- Spending Flows (Credit Card) ---
+  TravelCard -&gt; FlightHotel [label=&#34; Online Bookings&#34;];
+  TravelCard -&gt; TravelExpense [label=&#34; Card Spend&#34;];
+  
+  // --- Rewards Flow (Earn &amp; Redeem) ---
+  TravelCard -&gt; RewardPoints [label=&#34; Earn on Spends&#34;];
+  RewardPoints -&gt; FlightHotel [label=&#34; Redeem for Bookings&#34;, color=&#34;#9b59b6&#34;]; 
+}
+```
+---
+
+## 6️⃣ Bill Payment Overhead
+- Earlier I used to have multiple credit cards each assigned to its own purpose
+- Now, consolidated all them into a 1 Primary Credit Card
+- Overhead is in marking each entry for a specific purpose
+- Pay parts of credit card bill from the corresponding bank account
+
+---
+
+## 7️⃣ Summary
+1. **Segment money by purpose** → clarity &amp; reduced financial stress
+2. **Budget yearly, allocate monthly** → spending is always planned
+3. **Automate transfers** → less friction, fewer missed allocations
+4. **Credit cards as tools** → earn rewards on every rupee spent
+5. **Match liquidity to time horizon** → short-term needs backed by liquid assets
+
+---
+
+&lt;span style=&#34;
+ display:inline-block;
+ background: linear-gradient(90deg, #fbbf24, #f59e0b);
+ color: #fff;
+ padding: 4px 30px;
+ border-radius: 30px;
+&#34;&gt;
+sakthipriyan.com/building-wealth
+&lt;/span&gt;
+
+&lt;div style=&#34;margin-top: 30px;&#34;&gt;
+&lt;h3 data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;y&#34;: -50, &#34;scale&#34;: 1.5}, &#34;duration&#34;: 0.8, &#34;delay&#34;: 1.2}&#39;&gt;
+&lt;strong&gt;Found this useful? 🙂&lt;/strong&gt;
+&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div style=&#34;font-size: 1.4em; margin: 35px 0;&#34;&gt;
+&lt;p data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;x&#34;: -100, &#34;rotation&#34;: -45}, &#34;duration&#34;: 0.6, &#34;delay&#34;: 2, &#34;ease&#34;: &#34;elastic.out(1, 0.5)&#34;}&#39;&gt;
+👍 Like
+&lt;/p&gt;
+&lt;p data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;x&#34;: 100, &#34;rotation&#34;: 45}, &#34;duration&#34;: 0.6, &#34;delay&#34;: 2.4, &#34;ease&#34;: &#34;elastic.out(1, 0.5)&#34;}&#39;&gt;
+💬 Comment
+&lt;/p&gt;
+&lt;p data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;scale&#34;: 0}, &#34;duration&#34;: 0.6, &#34;delay&#34;: 2.8, &#34;ease&#34;: &#34;back.out(2)&#34;}&#39;&gt;
+🔄 Share
+&lt;/p&gt;
+&lt;p data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;y&#34;: 100}, &#34;duration&#34;: 0.6, &#34;delay&#34;: 3.2, &#34;ease&#34;: &#34;bounce.out&#34;}&#39;&gt;
+📌 Subscribe
+&lt;/p&gt;
+&lt;p style=&#34;font-size: 0.9em; opacity: 0.8;&#34; data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0}, &#34;duration&#34;: 0.5, &#34;delay&#34;: 3.8}&#39;&gt;
+for more...
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h3 data-gsap=&#39;{&#34;from&#34;: {&#34;opacity&#34;: 0, &#34;scale&#34;: 3, &#34;rotation&#34;: 360}, &#34;duration&#34;: 1.5, &#34;delay&#34;: 4.5, &#34;ease&#34;: &#34;elastic.out(1, 0.3)&#34;}&#39;&gt;
+&lt;strong&gt;✨ Thank You 🙏&lt;/strong&gt;
+&lt;/h3&gt;
+</textarea>
+        </section>
+    </div>
+</div>
+
+
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    
+    
+
+    
+
+    
+<script src="/js/slides.js"></script>
+
+
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+
+</html>
