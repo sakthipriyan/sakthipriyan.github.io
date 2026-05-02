@@ -17,7 +17,7 @@ I am planning to publish,
 1) The state of **the portfolio** every April [[first edition here](/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/)]
 2) The state of the **1 Portfolio** all other months [Current article is the first one]
 
-**1 Portfolio** is the core portfolio apart from the Emergency and Travel Funds
+**1 Portfolio** is the core portfolio apart from the Emergency and Travel Funds.
 
 ## The Portfolio Summary
 The overall portfolio delivered **14.13% XIRR**.
@@ -32,6 +32,7 @@ The overall portfolio delivered **14.13% XIRR**.
 
 Notes: 
 - XIRR computed using latest NAVs available on May 1, 2026 before May month investments
+- XIRR computation excluding all 0 balance funds which I used in past
 - Emergency Fund had significant historical volume in a liquid fund, so pulling down the overall XIRR
 
 > Used **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** to tag categories/asset classes to derive the XIRR.  
@@ -42,7 +43,7 @@ Notes:
 
 ## 1 Portfolio — Asset Class Breakdown
 
-Following is the current state of the 1 Portfolio.
+Following is the current state of the **1 Portfolio**.
 
 | Asset Class | XIRR | Growth Share | Current Allocation <br/> <small>(on May 1, 2026)</small> | Target Allocation <br/><small>(for TY 2026-27)</small> | Drift |
 |:---|---:|---:|---:|---:|---:|
@@ -76,7 +77,7 @@ Following is the current state of the 1 Portfolio.
 ### Key Performance Drivers
 
 - **Concentrated Growth**: The Nasdaq 100 is the undisputed powerhouse of the portfolio. Despite being slightly underweight currently, it accounts for 56.95% of the total growth share. Underweight is mainly due to change in target allocation from 35% to 40%.
-- **Gold Outperformance**: Gold has significantly exceeded expectations with a 41.56% XIRR, leading to the largest positive drift in the portfolio (+2.59%). Gold outperformance was even higher (17% allocation) prior to merging multiple goals/rebalancing.
+- **Gold Outperformance**: Gold has significantly exceeded expectations with a 41.56% XIRR, leading to the largest positive drift in the portfolio (+2.59%). Gold outperformance was even higher (+7%) prior to merging multiple goals/rebalancing.
 - **Domestic Lag**: The Nifty 50 remains the primary laggard with an XIRR of only 4.06%, contributing just 5.58% to the overall growth share despite being the second-largest allocation.
 
 > In a **Gloabl Multi Asset Portfolio**, some assets will always be over performing while others lag.  
@@ -107,6 +108,16 @@ The table below consolidates the current state, May 2026 investment allocation a
 | **Gold** | 12.59% | <span style="color:green">+2.59%</span> | 0.00% | 12.32% | <span style="color:green">+2.32%</span> | 10.00% |
 | **Total** | **100.00%** | **4.09%** | **100.00%** | **100.00%** | **3.67%** | **100.00%** |
 
+### Column Definitions
+- **Asset Class**: Underlying asset class part of the 1 Portfolio
+- **Current**: Actual market value
+- **Pre Drift**: Current deviation from target (sum of positive values = total drift)
+- **New Invest**: Percentage of next monthly investment directed to each asset class
+- **Post Alloc**: Estimated market value after the investment
+- **Post Drift**: Estimated drift after investment
+- **Target**: Target allocation for the asset class
+
+
 <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
   
   <!-- First Image Container -->
@@ -125,26 +136,17 @@ The table below consolidates the current state, May 2026 investment allocation a
 
 </div>
 
-> New Allocation:	**2.25%**, Drift Correction:	**0.42%** and Post Corrected Drift: **3.67%**
-
-- **FY 2025-26 Target**: Target allocation under the outgoing financial year
-- **Current**: Actual allocation as of today
-- **Pre Drift**: Current deviation from FY 2025-26 target (sum of positive values = total drift)
-- **New Invest**: Percentage of next monthly investment directed to each asset
-- **Post Alloc**: Estimated allocation after the investment
-- **Post Drift**: Estimated drift after investment
-- **TY 2026-27 Target**: New target allocation effective this tax year
-
-**Key observations from this month's allocation:**
-
-- **Nasdaq 100 receives 65.00%** of the next investment — the most underweight asset, and therefore the top priority
-- **Gold and Debt receive zero** — both are overweight relative to their TY 2026-27 targets. By not buying them they drift towards the target allocation
-- **Total portfolio drift reduces** from 5.41% to 4.89% after a single investment cycle — gradual, continuous improvement
-- This is based on today's state of the portfolio. Will rerun the tools with latest NAVs and monthly allocation before investing
+> New Allocation:	**2.25%**, Drift Correction:	**0.42%** (from **4.09%** to **3.67%**)
 
 
-> The 1 Portfolio uses the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. No selling occurs during normal market conditions. New money does the rebalancing.
+### Key Observations from this month's allocation
+*   **Nasdaq 100 receives 53.79%** of the next investment — as the most underweight asset relative to its large 40% target, it remains the primary destination for fresh capital.
+*  **Tiered Domestic Allocation** - Fresh funds are being funneled into Nifty 50 (25.76%), mid-tier equities (~9% each for Next 50 and Midcap 150) and smallcaps (2.27%) to ensure the entire equity sleeve moves upward in unison.
+*   **Gold and Debt receive zero** — both assets are currently overweight. By directing no new funds here, their weightage naturally "drifts" down toward the target as the equity base grows.
+*   **Total portfolio drift reduces** from 4.09% to 3.67% — a meaningful **0.42% correction** achieved solely through a single monthly cash flow, avoiding the tax impact of selling winners.
 
+> The 1 Portfolio uses the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. No selling occurs during normal market conditions. New money does the rebalancing.   
+> Includes support for Multiple investor and TCS adjusted allocation for International investments.
 
 ---
 
@@ -183,49 +185,3 @@ Essentially trying to invest **$10/month** extra, as per [this projection](/buil
 3. New-money rebalancing works better than selling (see [this](/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/))
 4. FX costs compound significantly over long horizons (see [this](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/))
 5. Execution mistakes can happen, need to be careful
-
----
-
-## How I Manage This End to End
-
-Three tools work together to cover the full investment workflow — from performance visibility to capital deployment to international funding.
-
-### 1. RealValue Portfolio — Multi-Asset XIRR Reporting
-
-**[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** is the starting point every month. It ingests CAMS + KFinTech CAS PDFs (Indian mutual funds) and IBKR activity statements (international investments) directly in the browser — no data leaves the device.
-
-Funds are tagged to goal buckets (1 Portfolio, Emergency, Travel, Retirement) and asset classes (Nasdaq 100, Nifty 50, Gold, etc.). The tool computes **XIRR per category and asset class**, giving a unified view of a multi-asset, multi-goal portfolio spread across Indian mutual funds and a US brokerage.
-
-This is the report that drives everything in the sections above.
-
-### 2. RealValue Family SIP Allocator — Monthly Drift Correction
-
-**[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** takes the current allocation (from the Portfolio tool) and the target allocation as inputs. It then computes how the next monthly investment should be split across asset classes to minimise drift — directing capital only to underweight assets, proportional to their deficit.
-
-This is the [Perpetual Rebalancing](/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/) framework in practice:
-
-- No selling during normal conditions
-- New money does all the rebalancing
-- Drift shrinks gradually, month by month
-
-The drift correction table in this post is the direct output of this tool run against today's portfolio state.
-
-### 3. RealValue FX Engine — Forex Cost Estimation and Optimization
-
-**[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** computes the true all-in cost of an INR-to-USD transfer — bank rate, FX spread, GST on conversion, processing fee, and TCS — to arrive at the effective exchange rate and transaction cost percentage.
-
-It is used to:
-
-- Compare banks and routes (ICICI direct vs FX Retail + BoB) before executing a transfer
-- Track the effective rate and TCS for each transaction (feeds into Form 12BAA)
-- Quantify the long-run cost of suboptimal forex routing
-
-The FX comparison table in this post was built using this tool.
-
-### How I Did This Before
-
-Before building these tools, the same workflow was significantly more manual and error-prone.
-
-For **portfolio reporting and drift correction** (tools 1 and 2), I maintained a custom Google Sheet — manually entering current asset values, tweaking formulas, and deriving the target allocation split. It worked, but was fragile and time-consuming to update each month.
-
-For **forex cost estimation** (tool 3), I would navigate through the bank's remittance portal all the way to the payment confirmation page — just to see the TCS and total debit amount — then back out, adjust the transfer amount, and repeat. A semi-binary search by hand to find the right INR amount that fully utilises the monthly international investment budget. Tedious and easy to get wrong.
