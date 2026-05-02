@@ -1,23 +1,38 @@
 ---
-title: "State of the 1 Portfolio: Returns and Allocation — May 2026 Edition"
-date: 2026-05-01
+title: State of the 1 Portfolio — Returns, Allocation & Rebalancing (May 2026)
+date: 2026-05-02
 draft: false
 type: "blogs"
 wealth_tags:
-  - "State of the Portfolio"
+  - "State of the 1 Portfolio"
   - "Asset Allocation"
   - "Rebalancing"
-  - "NASDAQ 100"
-  - "Gold"
 
-summary: "Monthly review of 1 Portfolio"
+summary: "Monthly “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and rebalancing strategy"
+---
+I am publishing two portfolio reports:
+* **State of the Portfolio (Annual)** — published every April [[first edition here](/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/)]  
+* **State of the 1 Portfolio (Monthly)** — published every other month [Current one is the first edition]
+
+The **1 Portfolio** represents the core long-term wealth portfolio, excluding the Emergency and Travel funds.
+
 ---
 
-I am planning to publish,  
-1) The state of **the portfolio** every April [[first edition here](/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/)]
-2) The state of the **1 Portfolio** all other months [Current article is the first one]
+## Portfolio Snapshot — May 2026
 
-**1 Portfolio** is the core portfolio apart from the Emergency and Travel Funds.
+| Metric               | Value                           |
+| -------------------- | ------------------------------- |
+| Portfolio Strategy   | **Global Multi-Asset Passive** Investing using<br/> **Indian Mutual Funds** & **Irish ETFs**      |
+| 1 Portfolio XIRR  | **19.13%**                      |
+| Total Portfolio XIRR | **14.13%**                      |
+| Target Equity Allocation    | **85%**                        |
+| Largest Market Value        | **Nasdaq 100 (37.65%)**         |
+| Rebalancing Method   | **Perpetual Rebalancing** |
+| International Broker | **IBKR (Tiered)**               |
+| FX Optimization      | **FX Retail + Bharat Connect** via BHIM  |
+
+
+---
 
 ## The Portfolio Summary
 The overall portfolio delivered **14.13% XIRR**.
@@ -27,19 +42,16 @@ The overall portfolio delivered **14.13% XIRR**.
 | **1 Portfolio** | **The Core Portfolio** for Building Wealth | 19.13% | 93.43% |
 | **Emergency** | To cater to **emergencies** |7.38% | 5.64% |
 | **Travel** | To cover domestic/international **trips** | 7.08% | 0.84% |
-| ~~Retirement~~ | **Transactional Mistake** that have to clean up | 7.12% | 0.09% |
+| ~~Retirement~~ | Legacy transactional error currently waiting for clean up| 7.12% | 0.09% |
 | **Total** | |**14.13%** | **100.00%** |
 
 Notes: 
 - XIRR computed using latest NAVs available on May 1, 2026 before May month investments
-- XIRR computation excluding all 0 balance funds which I used in past
+- XIRR computation excluded all 0 balance funds which were exited earlier
 - Emergency Fund had significant historical volume in a liquid fund, so pulling down the overall XIRR
+- The portfolio is currently in the 8-figure INR range.
 
-> Used **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** to tag categories/asset classes to derive the XIRR.  
-> **Your data stays with you! All processing done in your browser!**
->
-> Currently supports CAMS + KFinTech combined PDF (Indian Mutual Funds) and IBKR (International Investments). 
-> You should check it out if you want to build your report!  
+---
 
 ## 1 Portfolio — Asset Class Breakdown
 
@@ -51,10 +63,19 @@ Following is the current state of the **1 Portfolio**.
 | **Nifty 50** | 4.06% | 5.58% | 18.92% | 20% | <span style="color:red">-1.08%</span> |
 | **Next 50** | 35.26% | 2.89% | 9.67% | 10% | <span style="color:red">-0.33%</span> |
 | **Midcap 150** | 27.94% | 2.40% | 9.69% | 10% | <span style="color:red">-0.31%</span> |
-| **Smallcap 250** | 53.32% | 1.86% | 4.97% | 5% | <span style="color:red">-0.03%</span> |
+| **Smallcap 250** | 53.32% | 1.86% | 4.97%| 5% | <span style="color:red">-0.03%</span> |
 | **Debt** | 7.29% | 3.66% | 6.50% | 5% | <span style="color:green">+1.50%</span> |
 | **Gold** | 41.56% | 26.68% | 12.59% | 10% | <span style="color:green">+2.59%</span> |
 | **Total** | **19.13%** | **100%** | **100%** | **100%** | **4.09%** |
+
+*Growth Share represents the percentage contribution of each asset class to the portfolio’s total gains.*
+
+> Used **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** to tag goals/asset classes to derive the XIRR.  
+> **Your data stays with you! All processing done in your browser!**
+> 
+> Currently supports CAMS + KFinTech combined PDF (Indian Mutual Funds) and IBKR (International Investments). 
+> Check it out if you want to build your own report for domestic investment or international ones or both!  
+
 
 <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
   
@@ -77,19 +98,16 @@ Following is the current state of the **1 Portfolio**.
 ### Key Performance Drivers
 
 - **Concentrated Growth**: The Nasdaq 100 is the undisputed powerhouse of the portfolio. Despite being slightly underweight currently, it accounts for 56.95% of the total growth share. Underweight is mainly due to change in target allocation from 35% to 40%.
-- **Gold Outperformance**: Gold has significantly exceeded expectations with a 41.56% XIRR, leading to the largest positive drift in the portfolio (+2.59%). Gold outperformance was even higher (+7%) prior to merging multiple goals/rebalancing.
+- **Gold Outperformance**: Gold has significantly exceeded expectations with a 41.56% XIRR, leading to the largest positive drift in the portfolio (+2.59%). Gold outperformance peaked at +7% above target before I merged multiple goals and performed hard rebalancing.
 - **Domestic Lag**: The Nifty 50 remains the primary laggard with an XIRR of only 4.06%, contributing just 5.58% to the overall growth share despite being the second-largest allocation.
 
-> In a **Gloabl Multi Asset Portfolio**, some assets will always be over performing while others lag.  
-> Overtime over performer will become under performer and vice versa.  
+> In a globally diversified portfolio, performance leadership rotates continuously.
+> The objective is not to predict the next winner, but to systematically rebalance capital toward undervalued assets.
 
 
-> My Strategy is to use **Perpetual Rebalancing** to do both **Value Buying** (buy assets with negative drift) and **Moment Capturing** (dynamically sell over a period of 6 months to reduce overall drift from say 10% to 4%).
+> My Strategy is to use **Perpetual Rebalancing** to do both **Value Buying** (buy assets with negative drift) and **Momentum Capturing** (dynamically sell over a period of 6 months to reduce overall drift from say 10% to 4%).
 
 
-## Transparency Note
-
-> This portfolio reflects my personal investment strategy and risk tolerance. It is not an investment advice.
 
 ---
 
@@ -108,7 +126,7 @@ The table below consolidates the current state, May 2026 investment allocation a
 | **Gold** | 12.59% | <span style="color:green">+2.59%</span> | 0.00% | 12.32% | <span style="color:green">+2.32%</span> | 10.00% |
 | **Total** | **100.00%** | **4.09%** | **100.00%** | **100.00%** | **3.67%** | **100.00%** |
 
-### Column Definitions
+### Definitions
 - **Asset Class**: Underlying asset class part of the 1 Portfolio
 - **Current**: Actual market value
 - **Pre Drift**: Current deviation from target (sum of positive values = total drift)
@@ -116,7 +134,9 @@ The table below consolidates the current state, May 2026 investment allocation a
 - **Post Alloc**: Estimated market value after the investment
 - **Post Drift**: Estimated drift after investment
 - **Target**: Target allocation for the asset class
+- **Total Drift**: Drift is calculated as the sum of positive deviations from target allocations
 
+> Used the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. Includes support for Multiple investor and TCS adjusted allocation for International investments.
 
 <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
   
@@ -145,43 +165,66 @@ The table below consolidates the current state, May 2026 investment allocation a
 *   **Gold and Debt receive zero** — both assets are currently overweight. By directing no new funds here, their weightage naturally "drifts" down toward the target as the equity base grows.
 *   **Total portfolio drift reduces** from 4.09% to 3.67% — a meaningful **0.42% correction** achieved solely through a single monthly cash flow, avoiding the tax impact of selling winners.
 
-> The 1 Portfolio uses the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** framework — monthly investments are directed exclusively to underweight assets, proportional to their deficit from target. No selling occurs during normal market conditions. New money does the rebalancing.   
-> Includes support for Multiple investor and TCS adjusted allocation for International investments.
 
 ---
 
-## FX Cost Optimization: Funding IBKR
+## Optimizing International Investment
 
-> I use **[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** to find the true transaction cost and compare various rates.  
-> Using to compute/track TCS for 12BAA form and to find the TCS opportunity cost.
+**For International Investment, Forex Cost and Broker Cost will be a huge drag if not optimized.**
 
-For international investments via [Interactive Brokers](https://www.interactivebrokers.co.in/), the foreign exchange transaction cost on INR-to-USD conversion is a recurring drag that compounds over years of regular funding. Optimizing it matters.
+### Direct IBKR Account
+For Broker Cost optimization, I set up a direct account with IBKR with tiered pricing.  
+Earlier used an account created via ICICI Direct Global which was using a fixed pricing model.
 
-Following comparison for three thousand dollars. [ICICI (Current)](/building-wealth/tools/realvalue-fx-engine/#v1udd20260403r93.12b92.67a3000f1000y0g12m3) vs [FX Retail + BoB (Plan)](/building-wealth/tools/realvalue-fx-engine/#v1udd20260403r92.77b92.67a3000f1250y0g12m3)
+#### Main differences are
+1. Direct IBKR access gets full access to the IBKR environment including Desktop app
+2. Tiered pricing minimum is ~$1.7 where as Fixed plan I was using earlier was minimum $4
+3. There was a fixed ₹999/year plan I subscribed with ICICI Direct Global. With direct IBKR it is $0/year
 
-| Parameter | ICICI (Current) | FX Retail + BoB (Plan) |
-|-----------|----------------:|-----------------------:|
-| Interbank Rate | ₹92.67/USD | ₹92.67/USD |
-| Bank Rate | ₹93.12/USD | ₹92.77/USD |
-| FX Spread | ₹0.45/USD | ₹0.10/USD |
-| Processing Fee | ₹1,000 + GST | ₹1,250 + GST |
-| Effective Rate | ₹93.63/USD | ₹93.38/USD |
-| **Transaction Cost** | **1.03%** | **0.76%** |
-| Effective Rate | <img src="icici_forex.png" style="max-width:100%;"> | <img src="bob_forex.png" style="max-width:100%;"> |
+#### Migration In Progress
+* I was able to move the residual Cash from older account to the newer one seamlessly
+* Positions are still in the old account but planning to move them to the new account as well
+* Planning to buy this month allocation in the new account
 
-Switching to [FX Retail](https://fxretail.co.in) with Bank of Baroda reduces the effective transaction cost from **1.03% to 0.76%** — a saving of ~0.27% per transfer. The key driver is BoB's exceptionally low FX spread of just ₹0.10/USD through FX Retail, compared to ₹0.45/USD with ICICI's highly discounted rate on bank card rate.
+### Forex Optimization
+For international investments, the foreign exchange transaction cost on INR-to-USD conversion is a recurring drag that compounds over years of regular funding. Optimizing it matters.
 
-Note that BoB's processing fee is slightly higher (₹1,250 vs ₹1,000), but this is more than offset by the much lower FX spread on larger transfer amounts. As the transaction volume increases, the transaction cost will come down.
+| | Option 1 | Option 2 | Option 3 |
+|:---|---:|---:|---:|
+| Bank | **ICICI Bank** | **Bank of Baroda** | **ICICI Bank** |
+| Channel | Direct Bank | FX Retail Web | FX Retail + Bharat Connect + BHIM
+| Interbank Rate | ₹94.91/USD | ₹94.91/USD | ₹94.91/USD |
+| Bank Rate | ₹96.54/USD | ₹95.01/USD | ₹95.11/USD |
+| FX Spread | ₹1.63/USD | ₹0.10/USD | ₹0.20/USD |
+| Processing Fee | ₹1,000 + GST | ₹1,250 + GST | ₹1,000 + GST |
+| Effective Rate | ₹96.97/USD | ₹95.52/USD | ₹95.54/USD |
+| **Transaction Cost %** | **2.17%** | **0.64%** | **0.66%** |
+| Visual Reference | <img src="fx1.png" style="max-width:100%;"> | <img src="fx2.png" style="max-width:100%;"> | <img src="fx3.png" style="max-width:100%;"> |
 
-**Next step — Direct IBKR**: Currently operating via an indirect route. Moving to a direct IBKR account will reduce brokerage by an additional **$2–3 per transaction**, with no per-transaction intermediary overhead.
+- Computation based on 2 May 2026 mid-market rate from public sources (Google) and ICICI FX rate in Money2World. (FX Retail ones just added 10p/USD or 20p/USD as applicable). Computed using my actual allocation (6 figure INR).
+- The higher the allocation, the lower the effective transaction cost
+- Switching to [FX Retail](https://fxretail.co.in) with Bank of Baroda reduces the effective transaction cost from **2.17% to 0.64%** — a saving of ~1.53% per transfer. The key driver is BoB's exceptionally low FX spread of just ₹0.10/USD through FX Retail. 
+- Interestingly, FX Retail via Bharat Connect (using apps such as BHIM) allows private banks to process forex transfers with only a ₹0.20/USD markup. **So we get the speed of private banks at the cost of public bank.**
 
-Essentially trying to invest **$10/month** extra, as per [this projection](/building-wealth/tools/realvalue-sip-engine/#v1otd22yf202604c0lm0.01kg24h10i6t15p22y) this can lead to real (inflation adjusted) value of **$24,330** higher portfolio in **22 years**. Which is like **₹22 lakhs** extra in today's money. In long run optimizing these costs are very important.
+> Used the **[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** to find the true transaction cost and compare various rates.  
+> Using to compute/track TCS for Form 122 (previously known as 12BAA Form) and to find the TCS opportunity cost.
+
 
 ---
-## Key Lessons From FY 2025–26
+## Key lessons for me
+- Equity recovering improved overall market value of the 1 Portfolio
+- Most importantly, drift came down to 4.09% even prior to new allocation
+- Broker cost optimized for Global Investment
+- Still optimizing the FX Cost with newer channels like FX Retail via Bharat Connect
+- Speed of capital deployment is as important as Markup optimizations for Global Investment
 
-1. Asset allocation matters more than running behind momentum
-2. Index funds reduce behavioural mistakes (see [this](/building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/))
-3. New-money rebalancing works better than selling (see [this](/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/))
-4. FX costs compound significantly over long horizons (see [this](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/))
-5. Execution mistakes can happen, need to be careful
+### Forward Expectations | Guessing the Future Allocation
+- I am anticipating that equity recovery/growth will continue for few months
+- Nasdaq will swing up so fast that I will stop allocating to it this year sometime
+- I will see Gold/Debt fund allocation by the system this year
+- Nifty performance remains muted relative to global equities and may require policy catalysts to regain leadership
+- Still not sure If I will hit 0% drift perfection this year!
+
+## Transparency Note
+
+> This portfolio reflects my personal investment strategy and risk tolerance. It is not investment advice.
