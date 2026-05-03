@@ -17,9 +17,7 @@ No jargon, no vague advice—just a clear, step-by-step playbook built from real
 
 ## Book Status
 
-🚧 **Work In Progress** - Currently refining the further chapters. Targeting to complete by End of June 2026.
-
-
+🚧 **Work In Progress** - Currently writing & refining the further chapters. Targeting to complete by End of June 2026.  
 📚 **Living Document** - Updated as regulations and products evolve  
 🎯 **Practical** - Real workflows, real tools, real examples
 
@@ -68,19 +66,18 @@ He has been a long-term investor since 2016 and approaches investing with a disc
 
 His international investing journey includes exposure through India’s Liberalised Remittance Scheme (LRS) using global ETFs, alongside domestic international funds such as Nasdaq 100 funds.
 
-Sakthi shares his investing framework and practical learnings through the [Building Wealth](/building-wealth/) platform, where he publishes educational content for Indian investors including articles, videos, portfolio analysis, tools and learning resources. Through his [blog](/building-wealth/blogs/), [YouTube channel](https://www.youtube.com/@SakthiPriyanHBuildingWealth), [presentations](/building-wealth/slides/), and community discussions (including [Reddit](https://www.reddit.com/user/Melodic-Telephone967/)), he aims to help Indian investors understand global investing and build long-term wealth with simple, disciplined systems.
+Sakthi shares his investing framework and practical learnings through the [Building Wealth](/building-wealth/) platform, where he publishes educational content for Indian investors including articles, videos, portfolio analysis, tools and learning resources. Through his [blog](/building-wealth/blogs/), [YouTube channel](https://www.youtube.com/@SakthiPriyanHBuildingWealth), [presentations](/building-wealth/slides/), and community discussions (including [Reddit](https://www.reddit.com/user/Melodic-Telephone967/)), he aims to help Indian investors understand global investing and build long-term wealth with simple, disciplined systems. 
+
+This book is an attempt to consolidate the knowledge spread across these places.
+
+## Disclaimer
+
+> The information presented in this book is based on the author’s personal investing journey, research, and experiences. It is intended solely for educational and informational purposes and should not be considered financial, investment, or tax advice.
+> 
+> Readers should consult a SEBI-registered investment adviser (RIA) and a qualified tax professional before making investment decisions or acting on the information provided in this book. The author assumes no responsibility for any financial decisions made by readers based on this content.
 
 ## Start Reading
 
 Begin with [Chapter 1: Why Beyond India?](01-why-beyond-india.md) or jump to any chapter that interests you.
 
-**Remember**: Global diversification is not about chasing returns abroad—it's about reducing concentration risk and owning the world's best businesses.
-
-## WIP
-Work in progress. Currently refining the further chapters. Targeting to complete by End of June 2026.
-
-## Disclaimer
-
-> The information presented in this book is based on the author’s personal investing journey, research, and experiences. It is intended solely for educational and informational purposes and should not be considered financial, investment, or tax advice.
-
-> Readers should consult a SEBI-registered investment adviser (RIA) and a qualified tax professional before making investment decisions or acting on the information provided in this book. The author assumes no responsibility for any financial decisions made by readers based on this content.
+> **Remember**: Global diversification is not about chasing returns abroad—it's about reducing concentration risk and owning the world's best businesses.

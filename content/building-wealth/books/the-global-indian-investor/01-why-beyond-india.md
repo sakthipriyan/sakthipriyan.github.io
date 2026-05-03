@@ -55,9 +55,13 @@ There are around 20 countries worldwide with a stock market capitalisation excee
 | Other / Emerging | ~15.1 | ~9.4% |
 | **Total** | **~160** | **100%** |
 
-The **United States** alone accounts for **~44%** of global market capitalisation. **Europe*** adds another ~11%. **Asia-Pacific (ex-India)** contributes **~27%**. India contributes approximately **3.2%**.
-
 Source: Worldbank data taken from [Wikipedia — List of countries by stock market capitalisation](https://en.wikipedia.org/wiki/List_of_countries_by_stock_market_capitalization), as on **Apr 26, 2026**.
+
+> The **United States** alone accounts for **~44%** of global market capitalisation. **Europe** adds another ~11%. **Asia-Pacific (ex-India)** contributes **~27%**. India contributes approximately **3.2%**.
+
+Among the four markets larger than India in the table above, my conviction varies. Japan’s long-term demographic trajectory—an aging and shrinking population—makes it difficult for me to build strong confidence in sustained growth. China and Hong Kong raise a different concern: structural opacity and policy unpredictability, which make it harder for outside investors to fully understand and price the risks.
+
+The United States, despite periodic turbulence and market cycles, continues to earn my long-term confidence. Its culture of innovation, strong institutions, deep capital markets, and the global influence of its technology companies make it, in my view, the most compelling large market outside India for long-term growth.
 
 ---
 
@@ -75,13 +79,13 @@ Both are major exchanges. But they are not comparable in scale, depth, or the ki
 
 India's IT sector is largely an **IT services** sector — TCS, Infosys, Wipro build software for others. Nasdaq lists the companies that are **building the platforms, chips, and operating systems** those services run on. These are fundamentally different businesses with different margin profiles and growth trajectories.
 
-If you invest only on the NSE, you are buying the support act, not the headline performer.
+> If you invest only on the NSE, you are buying the support act, not the headline performer.
 
 ---
 
 ## The Companies You Are Missing
 
-Some of the most transformative businesses of the last two decades are listed on US exchanges — primarily Nasdaq — and are inaccessible through Indian stock exchanges.
+Some of the most transformative businesses of the last two decades are listed on US exchanges — primarily Nasdaq — and are inaccessible directly through Indian stock exchanges.
 
 | Company | Exchange | What They Do |
 |---|---|---|
@@ -96,7 +100,13 @@ Some of the most transformative businesses of the last two decades are listed on
 | Broadcom | Nasdaq | Networking chips, semiconductors |
 | AMD | Nasdaq | CPUs and GPUs for AI workloads |
 
-None of these companies are listed on the NSE or BSE. You cannot buy Apple or NVIDIA through Zerodha or Groww. The only route is international investing via LRS, which is exactly what this book covers.
+None of these companies are listed on the NSE or BSE. You cannot buy Apple or NVIDIA directly through Indian brokers. 
+There are three primary ways to gain exposure to them:
+1. Indian mutual funds that invest in global equities
+2. Indian ETFs tracking indices like the Nasdaq-100
+3. Direct international investing through the Liberalised Remittance Scheme (LRS), which allows Indians to invest in overseas stocks and ETFs.
+
+> This book focuses primarily on the third route—investing internationally through LRS.
 
 ---
 
@@ -140,6 +150,24 @@ A globally diversified portfolio spreads this risk across:
 No single country dominates in every decade. Japan dominated the 1980s. The US dominated the 2010s. Emerging markets had their moment in the 2000s. Holding a global basket means you capture growth wherever it occurs.
 
 ---
+
+## Global Multi Asset Portfolio and Perpetual Rebalancing
+
+I run a global multi-asset portfolio consisting of Indian equities, U.S. equities, debt, and gold. These assets move through different economic cycles and rarely perform in sync. Equities across countries diverge at times, while debt and gold provide stability during periods of equity volatility and potentially can act as a dry powder when equities fall.
+
+> Adding multiple geographies and asset classes increases the variation in returns, which makes the rebalancing mechanism more effective over time.
+
+This diversification naturally creates rebalancing opportunities. When one asset outperforms and its portfolio weight rises above its target, new capital can be directed toward assets that have lagged.
+
+My strategy uses **Perpetual Rebalancing** to achieve two things simultaneously: **value buying** and **momentum capturing**.
+
+Value buying happens when capital is allocated to assets that have drifted below their target allocation—effectively buying assets that are temporarily out of favor. For example, when U.S. equities correct relative to Indian equities, new investments are directed toward the U.S. allocation.
+
+At the same time, I allow winners to run and **capture momentum**. Instead of selling immediately when an asset becomes overweight, I will gradually reduce the drift over a period of roughly six months—bringing it down, for example, from a 10% overall drift toward a 4% band. This slow normalization avoids cutting momentum too early while still keeping the portfolio aligned with its long-term allocation.
+
+In practice, most rebalancing happens through **monthly cash flows rather than selling existing holdings**, which keeps the process tax-efficient and disciplined.
+
+Over time, this framework creates a simple but powerful behavior: **buy assets with negative drift and gradually harvest gains from assets with positive drift**, while maintaining a globally diversified portfolio.
 
 ## Key Takeaways
 
