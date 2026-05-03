@@ -101,12 +101,12 @@ Some of the most transformative businesses of the last two decades are listed on
 | AMD | Nasdaq | CPUs and GPUs for AI workloads |
 
 None of these companies are listed on the NSE or BSE. You cannot buy Apple or NVIDIA directly through Indian brokers. 
-There are three primary ways to gain exposure to them:
+There are 3 paths to gain exposure to them:
 1. Indian mutual funds that invest in global equities
 2. Indian ETFs tracking indices like the Nasdaq-100
 3. Direct international investing through the Liberalised Remittance Scheme (LRS), which allows Indians to invest in overseas stocks and ETFs.
 
-> This book focuses primarily on the third route—investing internationally through LRS.
+> This book focuses primarily on the 3rd path of direct international investing through LRS.
 
 ---
 
@@ -173,8 +173,8 @@ Over time, this framework creates a simple but powerful behavior: **buy assets w
 
 1. India represents ~3% of global market cap. Investing only in India means ignoring 97% of the opportunity.
 2. Nasdaq alone is **8x larger** than NSE and lists the world's most valuable technology companies.
-3. Apple, NVIDIA, Microsoft, Google, Amazon, Meta — none are accessible through Indian exchanges.
+3. Apple, NVIDIA, Microsoft, Google, Amazon, Meta — none are accessible through Indian exchanges directly.
 4. The INR has depreciated ~90% against the USD over 50 years. USD-denominated assets provide a natural currency hedge.
 5. Geographic diversification reduces dependence on any single country's economic cycle.
 
-The rest of this book explains **how** to access global markets from India — the mechanics of LRS, FX costs, brokers, and tax compliance — so you can act on this case, not just understand it.
+The rest of this book explains **how** to access global markets from India — the mechanics of LRS, FX costs, ETF selection, brokers, and tax compliance — so you can act on this case, not just understand it.

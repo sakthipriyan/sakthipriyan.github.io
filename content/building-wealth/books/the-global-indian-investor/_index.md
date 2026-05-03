@@ -7,6 +7,8 @@ date: 2026-04-25
 author: "Sakthi Priyan H"
 type: books
 draft: false
+wealth_tags:
+  - International Investing
 ---
 
 ## About This Book
@@ -14,6 +16,8 @@ draft: false
 This book demystifies global investing for Indian residents. It walks you through every step: understanding why international diversification matters, how to legally send money abroad under LRS, choosing the right broker, picking the right instruments, handling taxes, and filing returns.
 
 No jargon, no vague advice—just a clear, step-by-step playbook built from real experience investing globally from India.
+
+> This book is about building a reliable global investing engine for Indian investors — one that continues to function even when regulatory limits, fund closures, or market distortions appear.
 
 ## Book Status
 
@@ -62,7 +66,7 @@ No jargon, no vague advice—just a clear, step-by-step playbook built from real
 ## About the Author
 **Sakthi Priyan H** is a technology leader based in Chennai with over 17 years of experience building complex software systems and products. His work has primarily focused on large-scale systems, distributed architectures, and data-intensive platforms.
 
-He has been a long-term investor since 2016 and approaches investing with a disciplined, analytical, and process-driven mindset. Over time, his portfolio evolved from a mix of liquid funds, ELSS, and small-cap investments into a rule-based, globally diversified, multi-asset portfolio focused on asset allocation, tax efficiency, and perpetual rebalancing.
+He has been a long-term investor since 2016 and approaches investing with a disciplined, analytical, and process-driven mindset. Over time, his portfolio evolved from a mix of liquid funds, ELSS, and small-cap investments into a rule-based, passive, globally diversified, multi-asset portfolio focused on asset allocation, tax efficiency, and perpetual rebalancing.
 
 His international investing journey includes exposure through India’s Liberalised Remittance Scheme (LRS) using global ETFs, alongside domestic international funds such as Nasdaq 100 funds.
 
