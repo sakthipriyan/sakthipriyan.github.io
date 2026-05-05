@@ -1,24 +1,67 @@
 ---
-title: "LRS - How to Send Money?"
-subtitle: "Step-by-step guide to remitting money abroad under the Liberalised Remittance Scheme."
+title: "How to Send Money Efficiently?"
+subtitle: "Step-by-step guide to efficiently remitting money abroad under the Liberalised Remittance Scheme."
 type: "books"
 chapter: 3
 date: 2026-04-25
 author: "Sakthi Priyan H"
-draft: true
+draft: false
 ---
+Before we look at selecting the instrument and broker, let us look at how to send money.
+As retail investor what are all the options available to us.
+
 
 ## What is LRS?
 
-The Liberalised Remittance Scheme (LRS) allows Indian residents to remit up to **USD 250,000 per financial year** for permitted purposes — including overseas investment in securities.
+The Liberalised Remittance Scheme (LRS) allows Indian residents to remit up to **USD 250,000 per financial year** for permitted purposes — including overseas investment in equities.
 
 Every rupee you send to your foreign brokerage account goes through LRS. Understanding this process is essential before you invest a single dollar abroad.
 
 ## How the Money Flows
 
-The flow is: your Indian bank → SWIFT → your broker's receiving bank → credited to your brokerage account.
+The flow is: your Indian bank → INR to USD → SWIFT → your broker's receiving bank → credited to your brokerage account.
 
-For IBKR, the receiving bank is typically Citibank US. Your Indian bank will ask you for IBKR's beneficiary bank details when you initiate the transfer.
+
+
+## Various Levels
+
+### Level 0
+Go to bank website and transact using the online platform.
+Zero friction 
+
+
+Using FX Retail + Bharat Connect/ Forex + Icici/Hdfc gives 20p/USD upto 5 lakhs outwards remittance.
+
+Inward remittance for larger volume FX Retail + BoB will be better option but manual process.
+
+HDFC/ICICI i have done online end to end.
+
+Direct bank is the worst option to do online or offline.
+
+This the pecking order worst to best
+
+direct bank card rate (~150p/USD markup)
+
+negotiated direct bank card rate (~50p/USD markup)
+
+FX Retail web + Private Banks (not easy to get markup rate to 20p. I got 50p/USD only)
+
+FX Retail + bharat connect/forex + private banks (default markup 20p/USD. Upto Rs 5 lakhs for buying USD)
+
+FX Retail + Public Banks (can get as low as 10p/USD markup). But process is not online but remote.
+
+I have done remittance via 1,2,3 and 5. 4 failed due to some UPI linking. I will be retring on Monday.
+
+I think 4 is best option for sending money out. Because without any negotiation the default rate is only 20p/USD and Good till monthly remittance is 5 lakhs rupees. (Actual limit comes from UPI's 5 lakhs transaction limit for this transaction type). This i can execute at speed of private bank at the cost of public bank
+
+5 is best for high volume and for inward remittance.
+
+ICICI i have seen money credited in IBKR in couple of hours. Fastest i have seen. I have to wait for market to open up.
+
+HDFC end of day processing, i was still able to buy Nasdaq 100 via Irish ETFs in European markets on the same day.
+
+BoB though money credited on same date, it was beyond 10pm IST when European markets were closed. So i can buy only on next day.
+
 
 ## Setting Up Your Bank for LRS + FX Retail
 
