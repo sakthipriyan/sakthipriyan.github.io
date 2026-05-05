@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates — A Live Transaction Walkthrough | Sakthi Priyan H</title>
+    <meta name="description" content="A step-by-step walkthrough of executing a live INR-to-USD forex transaction using FX Retail via Bharat Connect (BHIM), completing the remittance on ICICI Bank Money2World, and investing in an Irish ETF on IBKR"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/books/">Books</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates — A Live Transaction Walkthrough</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates — A Live Transaction Walkthrough</h1>
+    <p class="content-summary">A step-by-step walkthrough of executing a live INR-to-USD forex transaction using FX Retail via Bharat Connect (BHIM), completing the remittance on ICICI Bank Money2World, and investing in an Irish ETF on IBKR</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-05-05">May 5, 2026</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">9 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <p>When remitting money abroad, Indian investors face a persistent trade-off:</p>
+<ul>
+<li><strong>Public banks</strong> (e.g., Bank of Baroda): Lowest FX spreads on FX Retail, but slower manual execution</li>
+<li><strong>Private banks</strong> (e.g., ICICI Bank): Fast and reliable remittance infrastructure, but higher FX spreads</li>
+</ul>
+<p><strong>FX Retail via Bharat Connect</strong> breaks this trade-off entirely. You lock an FX deal at the public bank&rsquo;s near-interbank rate through the <strong>BHIM app</strong>, and execute the actual wire transfer through <strong>ICICI Bank&rsquo;s Money2World</strong> — combining the best of both channels.</p>
+<blockquote>
+<p>I had earlier <a href="/building-wealth/blogs/inr-to-usd-fx-retail-web-vs-fx-retail-bharat-connect-vs-direct-bank-rates/">compared FX Retail Web vs Bharat Connect rates</a> theoretically. This post documents my <strong>first live transaction</strong> through this hybrid channel.</p>
+</blockquote>
+<blockquote>
+<p>Switching from the default ICICI Bank rate (₹96.54/USD) to this hybrid channel (₹95.105/USD) saves <strong>₹1,435 per $1,000 transferred</strong> — for just 3 extra minutes via BHIM.</p>
+</blockquote>
+<h2 id="the-hybrid-flow">The Hybrid Flow</h2>
+<pre><code class="language-dot">digraph HybridFXFlow {
+  rankdir=TB;
+  bgcolor=transparent;
+  node [shape=box, style=&quot;rounded,filled&quot;, fontname=&quot;Arial&quot;, fontsize=12];
+  edge [fontname=&quot;Arial&quot;, fontsize=11];
+
+  subgraph cluster_rate {
+    label=&quot;① Rate Locking — FX Retail + Bharat Connect + BHIM App&quot;;
+    style=&quot;rounded,bold&quot;;
+    color=&quot;#a0c4ff&quot;;
+    BHIM [label=&quot;BHIM App\nBills &amp; recharges &gt; Forex&quot;, fillcolor=&quot;#dbeafe&quot;];
+    FXRetail [label=&quot;FX Retail (RBI / CCIL)\nBank Spread: ₹0.20/USD&quot;, fillcolor=&quot;#bfdbfe&quot;];
+    Deal [label=&quot;Deal Confirmed @ ₹95.105/USD&quot;, shape=note, fillcolor=&quot;#fffbea&quot;];
+    { rank=same; BHIM; FXRetail; Deal; }
+    BHIM -&gt; FXRetail -&gt; Deal;
+  }
+
+  subgraph cluster_remittance {
+    label=&quot;② Wire Transfer — ICICI Money2World&quot;;
+    style=&quot;rounded,bold&quot;;
+    color=&quot;#f4a261&quot;;
+    M2W [label=&quot;Money2World\nDefault Bank Rate: ₹96.54/USD&quot;, fillcolor=&quot;#fde8d8&quot;];
+    TradeNo [label=&quot;Apply FX-Retail Trade No.\nRate Updated: ₹95.105/USD&quot;, fillcolor=&quot;#fef3c7&quot;];
+    Wire [label=&quot;OTP → Wire Initiated → Completed&quot;, fillcolor=&quot;#fde8d8&quot;];
+    { rank=same; M2W; TradeNo; Wire; }
+    M2W -&gt; TradeNo -&gt; Wire;
+  }
+
+  subgraph cluster_invest {
+    label=&quot;③ Investment — IBKR&quot;;
+    style=&quot;rounded,bold&quot;;
+    color=&quot;#b9fbc0&quot;;
+    IBKR [label=&quot;USD Credited in IBKR&quot;, fillcolor=&quot;#d1fae5&quot;];
+    Order [label=&quot;Buy ANAU (Nasdaq 100 UCITS ETF)&quot;, fillcolor=&quot;#a7f3d0&quot;];
+    { rank=same; IBKR; Order; }
+    IBKR -&gt; Order;
+  }
+
+  Deal -&gt; TradeNo [style=dashed, label=&quot; Trade No. via SMS/Email&quot;];
+  Wire -&gt; IBKR;
+}
+</code></pre>
+<blockquote>
+<p>The key insight: the FX rate is locked on Bharat Connect at the <strong>public bank spread level @ 20p/USD, but the bank executing the actual wire can be a private bank with faster online remittance.</strong></p>
+</blockquote>
+<h3 id="why-this-hybrid-flow-works">Why This Hybrid Flow Works</h3>
+<ol>
+<li>FX rate discovery happens on the <a href="https://www.clearcorp.co.in/web/clearcorp/fx-retail1">CCIL FX Retail platform</a></li>
+<li><a href="https://www.bharat-connect.com/forex/">Bharat Connect</a> exposes the deal booking via <a href="https://www.bhimupi.org.in/">BHIM</a></li>
+<li>The actual remittance is executed by the relationship bank (<a href="https://www.icici.bank.in/">ICICI Bank</a>)</li>
+</ol>
+<hr>
+<h2 id="step-1-booking-the-fx-deal-via-bhim-app">Step 1: Booking the FX Deal via BHIM App</h2>
+<p>The BHIM app includes a <strong>Forex</strong> option under <strong>Bills</strong>, routing through the <strong>Bharat Connect Forex</strong> network. This gives access to FX Retail rates from multiple relationship banks — select your preferred bank, enter the amount, confirm the rate, and book the deal.</p>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; margin: 24px 0;">
+  <div>
+    <img src="BHIM1.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 1/10: Go to Bills & recharges</p>
+  </div>
+  <div>
+    <img src="BHIM2.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 2/10: Expand Finances and select Forex</p>
+  </div>
+  <div>
+    <img src="BHIM3.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 3/10: If FX Retail is already set up, the screen displays the registered mobile number and customer ID. Just Proceed.</p>
+  </div>
+  <div>
+    <img src="BHIM4.jpg" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 4/10: We have to select the Preferred Relationship Bank (RB) to execute this Forex transaction</p>
+  </div>
+  <div>
+    <img src="BHIM5.jpg" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 5/10: I had 3 banks under RB. I picked ICICI since I was using it for all my <a href="/building-wealth/slides/managing-money-flows-2026/#/3/3">investment routing</a></p>
+  </div>
+  <div>
+    <img src="BHIM6.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 6/10: Bank Charge means ₹0.20 per USD over the CCIL FX Retail rate. With zero negotiations we get excellent rate.</p>
+  </div>
+  <div>
+    <img src="BHIM7.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 7/10: $1 = ₹ 94.9625 The quoted rate includes a ₹0.10 protective buffer, used by FX Retail to account for small market movements before settlement. You can enter USD amount you want to transfer here. INR is shown for that excluding bank processing fee + GST + FX GST. Refer <a target="_blank" href="/building-wealth/tools/realvalue-fx-engine/#v1udd20260505r95.0625b94.8625a3000f1000y0g12m3">this</a> for complete breakup</p>
+  </div>
+  <div>
+    <img src="BHIM8.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 8/10: The rate fluctuates in real time, so the booked rate may differ slightly from the preview. You can select Book.</p>
+  </div>
+  <div>
+    <img src="BHIM9.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 9/10: You will be shown the list of bank accounts linked to BHIM. If a bank account was newly linked to BHIM, UPI may enforce a ₹5,000 limit for the first 24 hours.</p>
+  </div>
+  <div>
+    <img src="BHIM10.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;">Step 10/10: The BHIM UI may appear to hang for a few seconds while the transaction is processed. While it was circling, I received Email/SMS from FX Retail and ICICI Bank as well. It didn't show any success/failure at that time for me. I simply closed the app.</p>
+  </div>
+  <div>
+    <img src="BHIM11.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+    <p style="font-size:0.85em; margin-top:6px; color:#555;"><b>Market hours from 9:15AM to 3:30PM.</b> You will see this in non market hours — "Customer Transaction services are closed. Please try again during business hours."</p>
+  </div>
+</div>
+<blockquote>
+<p>The entire transaction took just <strong>3 minutes</strong>, including the time spent calculating the USD amount via the <a href="/building-wealth/tools/realvalue-fx-engine/#v1udd20260505r95.105b94.905a1000f1000y0g12m3">RealValue FX Engine</a> and capturing the screenshots for this article.</p>
+</blockquote>
+<p>The FX deal was confirmed instantly by SMS:</p>
+<blockquote>
+<p><strong>9:32 AM</strong> — <code>Trade No 20260504XXXXXX Buy CASH for USD XXX @ 95.1050 INR. — FX-Retail (Clearcorp)</code></p>
+</blockquote>
+<p>A second SMS from ICICI Bank confirmed the deal was linked and ready to utilise:</p>
+<blockquote>
+<p><strong>9:33 AM</strong> — <code>Forex Deal booked with ICICI Bank FX-Retail Trade No. 20260504XXXXXX is available for utilisation.</code></p>
+</blockquote>
+<hr>
+<h2 id="step-2-completing-the-remittance-via-icici-money2world">Step 2: Completing the Remittance via ICICI Money2World</h2>
+<p>With the FX-Retail Trade Number in hand, the next step is to initiate the wire transfer on <strong>ICICI Bank&rsquo;s Money2World</strong> portal. The portal defaults to ICICI&rsquo;s standard rate — but entering the trade number applies the locked Bharat Connect rate automatically.</p>
+<div style="margin-bottom: 24px;">
+  <img src="m2w_1.png" style="width:100%; border-radius:8px; border:1px solid #ddd; padding:4px;">
+  <p style="font-size:0.9em; margin-top:8px; color:#555;">Step 1/3: Default rate displayed is <strong><a href="/building-wealth/tools/realvalue-fx-engine/#v1udd20260505r96.54b94.905a1000f1000y0g12m3">₹96.54/USD</a></strong>. The "Have an FX-Retail Trade No.?" link at the bottom-left switches the transaction to the pre-booked deal rate.</p>
+</div>
+<div style="margin-bottom: 24px;">
+  <img src="m2w_2.png" style="width:100%; border-radius:8px; border:1px solid #ddd; padding:4px;">
+  <p style="font-size:0.9em; margin-top:8px; color:#555;">Step 2/3: FX-Retail Trade Details modal — entering Trade No. <code>20260504XXXXXX</code> fetches the locked rate of <strong><a href="/building-wealth/tools/realvalue-fx-engine/#v1udd20260505r95.105b94.905a1000f1000y0g12m3">₹95.105/USD</a></strong>, replacing the default ICICI rate and saving <b>₹1.435/USD</b>.</p>
+</div>
+<div style="margin-bottom: 24px;">
+  <img src="m2w_3.png" style="width:100%; border-radius:8px; border:1px solid #ddd; padding:4px;">
+  <p style="font-size:0.9em; margin-top:8px; color:#555;">Step 3/3: Transaction confirmed at <strong>1 USD = ₹95.105</strong> via FX-Retail + Bharat Connect. From here, it is the usual flow.
+</div>
+<h2 id="transaction-timeline">Transaction Timeline</h2>
+<p>The complete flow — from deal booking to funds landing in IBKR — completed in under <strong>2 hours</strong>.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Time</th>
+          <th style="text-align: left">Event</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>9:32 AM</strong></td>
+          <td style="text-align: left">FX-Retail deal booked via BHIM — @ <code>₹95.1050</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>9:32 AM</strong></td>
+          <td style="text-align: left">FX-Retail trade confirmation sms/email received</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>9:33 AM</strong></td>
+          <td style="text-align: left">ICICI Bank SMS: deal available for utilisation</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>9:42 AM</strong></td>
+          <td style="text-align: left">ICICI Bank confirms Money2World transfer initiated</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>10:00 AM (Approx)</strong></td>
+          <td style="text-align: left">Added Deposit notice to IBKR</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>11:11 AM</strong></td>
+          <td style="text-align: left">Money2World transfer completed (Received SWIFT copy)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>11:26 AM</strong></td>
+          <td style="text-align: left">ICICI confirms overseas funds credited to receiver account</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>11:27 AM</strong></td>
+          <td style="text-align: left">IBKR deposit notification: USD wire available in account</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>In <strong>2 hours</strong> money is available in the broker account.<br>
+The speed almost felt like a domestic NEFT transfer.</p>
+</blockquote>
+<p>The Money2World step itself took about 10 minutes, slightly longer only because I was capturing screenshots for this article and reporting a UI issue to ICICI (their exchange dropdown currently does not include SIX Swiss Exchange, where ANAU is listed).</p>
+<p><strong>Both BHIM and Money2World actions can be completed in ~5 mins in total</strong></p>
+<h2 id="potential-savings-from-fx-retail--bharat-connect">Potential Savings from FX Retail + Bharat Connect</h2>
+<blockquote>
+<p>Optimizing FX spreads is one of the few investing improvements that carries zero market risk.</p>
+</blockquote>
+<p>The savings are deployed as extra USD into equity. Assuming <strong>~$50/month saved</strong>, invested for <strong>20 years</strong> at <strong>16% XIRR</strong> with <strong>10% annual step-up</strong> and <strong>15% capital gains tax</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Metric</th>
+          <th style="text-align: right">Value (USD)</th>
+          <th style="text-align: right">Value (INR at ₹95.1)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Total Invested</td>
+          <td style="text-align: right">$34,404</td>
+          <td style="text-align: right">₹32.7 lakh</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Portfolio Value (Pre-Tax)</td>
+          <td style="text-align: right">$138,349</td>
+          <td style="text-align: right">₹1.32 crore</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Portfolio Value (Post-Tax)</td>
+          <td style="text-align: right">$122,757</td>
+          <td style="text-align: right">₹1.17 crore</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p><strong>₹1.17 crore</strong> compounded purely from FX spread savings. Projected using <a href="/building-wealth/tools/realvalue-sip-engine/#v1otd20yf202605c0lm0.05kg16h10i6t15p20y">RealValue SIP Engine</a></p>
+</blockquote>
+<img src="markup-growth.png" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+<p><strong>Note on Inflation</strong>: These are nominal values. At 6% annual inflation over 20 years, the real purchasing power of ₹1.17 crore would be roughly ₹36 lakh in today’s terms. Still meaningful — and still effectively free money from optimizing a recurring cost.</p>
+<h2 id="end-to-end-from-inr-to-invested">End-to-End: From INR to Invested</h2>
+<p>With USD available in IBKR, the month&rsquo;s allocation was deployed the same afternoon.
+The funds arrived so quickly that I actually had to wait for the European markets to open at 1:30 PM IST.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Field</th>
+          <th style="text-align: left">Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Instrument</td>
+          <td style="text-align: left">ANAU (Nasdaq 100 — Irish UCITS ETF)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Action</td>
+          <td style="text-align: left">Buy</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Execution Time</td>
+          <td style="text-align: left">1:52 PM</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">IBKR Tiered Fee</td>
+          <td style="text-align: left">$1.91</td>
+      </tr>
+  </tbody>
+</table>
+<p><em>Another $2.09 savings here by moving from indirect fixed plan with $4 min fee (Earlier opened via ICICI Direct Global) to direct tiered plan ($1.7 min fee).</em></p>
+<h2 id="summary">Summary</h2>
+<blockquote>
+<p>FX Retail via Bharat Connect is the best option for outward remittance up to ₹5 lakh per transaction via BHIM / UPI without any negotiations with the Relationship Bank.</p>
+</blockquote>
+<p>By combining the near-interbank rate locked via BHIM with ICICI&rsquo;s remittance execution speed, this hybrid approach delivers public bank pricing at private bank performance.</p>
+<p>For Indian investors making regular monthly remittances for global investing, optimizing this single step can recover a meaningful amount over the long run — without changing the investment strategy at all.</p>
+<h3 id="downsides">Downsides</h3>
+<ul>
+<li>It is a multi party transaction: FX Retail + Bharat Connect + BHIM + ICICI Bank. If anything goes wrong, it may take a while to fix.</li>
+<li>Available only for outward remittance and limited to ₹5 lakhs via BHIM/UPI (Actual limit coming from UPI&rsquo;s limit of 5 lakhs for this kind of transaction. I have seen $25,000 Remittance limit somewhere but not sure who is supporting that)</li>
+</ul>
+<h3 id="public-banks">Public Banks</h3>
+<p>For public sector banks, even at a ₹5 lakh remittance, a <strong>₹0.10/USD lower markup saves only about $2</strong> compared to the ₹0.20/USD spread used in this flow. However, achieving that marginal improvement typically requires <strong>manual paperwork and a 1–2 day processing cycle</strong>.</p>
+<p>That delay introduces its own costs — <strong>capital remains idle until the transfer completes</strong>, and the process often depends on <strong>branch staff availability and follow-ups</strong>. For regular monthly investments, the convenience and speed of an online channel can outweigh such small incremental FX savings.</p>
+<h3 id="fx-retail-web">FX Retail Web</h3>
+<p>Once ICICI Bank enables the requested <strong>₹0.20/USD spread</strong> on the <strong>FX Retail Web portal</strong>, I will likely switch back to using that channel. Currently the web interface is configured with an <strong>unreasonable 1.75% markup</strong>, which makes it far less competitive than the Bharat Connect route.</p>
+<p>Using FX Retail Web would also simplify the transaction flow considerably. Instead of the current chain — <strong>FX Retail → Bharat Connect → BHIM App → ICICI Bank</strong> — the process would involve just <strong>FX Retail and ICICI Bank</strong>. Fewer intermediaries, fewer steps, and one less app on the phone.</p>
+<p>I installed BHIM purely for this forex use case. For day-to-day payments I am already comfortable with Samsung Wallet and Google Pay (mainly for UPI Circle usage as documented <a href="/building-wealth/slides/managing-money-flows-2026/#/4/1">here</a>), so keeping BHIM around solely for remittances feels unnecessary.</p>
+<p>Another small drawback with the Bharat Connect flow is the <strong>₹0.10 rate buffer</strong> used during rate discovery. It slightly distorts the USD calculation when planning the remittance amount. In this transaction, I ended up <strong>not deploying the entire INR amount originally allocated</strong>.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<h3 id="for-educational-purpose-only">For educational purpose only</h3>
+<blockquote>
+<p>This post reflects my personal experience and is not investment or financial advice. Forex rates, bank spreads and Bharat Connect channel availability may change.</p>
+</blockquote>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/forex/" class="tag-link">Forex</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/remittance/" class="tag-link">Remittance</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/fx-retail/" class="tag-link">FX Retail</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/bharat-connect/" class="tag-link">Bharat Connect</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/bhim/" class="tag-link">BHIM</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/icici-bank/" class="tag-link">ICICI Bank</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/money2world/" class="tag-link">Money2World</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/international-investing/" class="tag-link">International Investing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/ibkr/" class="tag-link">IBKR</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/cost-optimization/" class="tag-link">Cost Optimization</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/lrs/" class="tag-link">LRS</a>
+    </div>
+    <div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                document.querySelectorAll('pre code.language-dot, pre code.dot').forEach(codeEl => {
+                    const dotCode = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                    console.log('[DEBUG] Rendering DOT block');
+
+                    const viz = new Viz();
+                    viz.renderSVGElement(dotCode)
+                        .then(svg => {
+                            
+                            svg.removeAttribute('width');
+                            svg.removeAttribute('height');
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+                            
+                            const container = document.createElement('div');
+                            container.className = 'graphviz-diagram';
+                            container.appendChild(svg);
+
+                            
+                            const preEl = codeEl.parentNode;
+                            preEl.parentNode.replaceChild(container, preEl);
+
+                            console.log('[DEBUG] Diagram rendered');
+                        })
+                        .catch(err => {
+                            console.error('[DEBUG] Viz.js error:', err);
+                            codeEl.parentNode.textContent = "Error rendering diagram: " + err;
+                        });
+                });
+            });
+        </script>
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>

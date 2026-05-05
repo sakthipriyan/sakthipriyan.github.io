@@ -40,7 +40,7 @@ The architecture follows a clean, modular design.
 
 ```dot
 digraph SQLTranslatorClustered {
-  rankdir=LR;
+  rankdir=TB;
   bgcolor=transparent;
   node [shape=box, style="rounded,filled", fillcolor=white, fontname="Arial"];
 
