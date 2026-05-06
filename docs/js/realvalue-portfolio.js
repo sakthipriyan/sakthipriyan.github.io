@@ -2317,6 +2317,25 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 return this.normalizeDatedFlows(Object.entries(merged).map(([date, amount]) => ({ date, amount })));
             },
+            // Merge two arrays of IBKR trade records without double-counting.
+            // Deduplication key: date + quantity + amount (three-part tuple).
+            // This lets a "current FY" re-upload add only new trades while
+            // leaving historical trades from a prior upload intact.
+            mergeIbkrTradeRecords(existingRecords, newRecords) {
+                const seen = new Set();
+                const result = [];
+                const addRecord = (rec) => {
+                    // Round to 6 dp to avoid floating-point key collisions.
+                    const key = `${rec.date}|${Number(rec.quantity).toFixed(6)}|${Number(rec.amount).toFixed(6)}`;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        result.push(rec);
+                    }
+                };
+                (existingRecords || []).forEach(addRecord);
+                (newRecords || []).forEach(addRecord);
+                return result.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+            },
             sumFlowAmounts(flows) {
                 return (flows || []).reduce((sum, flow) => sum + (Number(flow.amount) || 0), 0);
             },
@@ -2483,7 +2502,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     try {
                         localStorage.setItem('realvalue-portfolio-usd-rate', JSON.stringify({ rate: usdInfo.tt_buy, date: usdInfo.date }));
                     } catch(e) { /* ignore */ }
-                    await this.processIbkrCsv(text, usdInfo.tt_buy, targetDate);
+                    await this.processIbkrCsv(text, usdInfo, targetDate);
                 } catch (err) {
                     console.error("IBKR CSV Error:", err);
                     this.ibkrError = `Error processing IBKR report: ${err.message}`;
@@ -2492,7 +2511,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     this.$refs.ibkrInput.value = '';
                 }
             },
-            async processIbkrCsv(text, usdToInr, reportEndDate) {
+            async processIbkrCsv(text, usdRateInfo, reportEndDate) {
+                // Use direction-appropriate SBI card rates:
+                //   TT Buy  — bank buys USD from you (for sell proceeds & current market value)
+                //   TT Sell — bank sells USD to you (for purchase costs & remittance)
+                const usdToInrBuy  = usdRateInfo.tt_buy;
+                const usdToInrSell = usdRateInfo.tt_sell;
                 const lines = text.split(/\r?\n/);
                 const instruments = {}; // symbol -> { description, isin }
                 const symbolToGroup = {}; // symbol -> grouped key across aliases
@@ -2597,14 +2621,25 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         }
                         rateObj = dateRateCache[dateStr];
                     }
-                    return rateObj && rateObj.tt_buy ? rateObj.tt_buy : usdToInr;
+                    // Return both rates; callers choose based on cashflow direction.
+                    return {
+                        tt_buy:  rateObj && rateObj.tt_buy  ? rateObj.tt_buy  : usdToInrBuy,
+                        tt_sell: rateObj && rateObj.tt_sell ? rateObj.tt_sell : usdToInrSell
+                    };
                 };
 
                 for (const pos of positions) {
                     const info = instruments[pos.symbol] || { description: pos.symbol, isin: '' };
-                    const fundId = 'IBKR_' + pos.symbol;
-                    const marketValueInr = Math.round(pos.value * usdToInr);
-                    const investedValueInr = Math.round(pos.costBasis * usdToInr);
+                    // Use accountNo + ISIN as the fundId (mirrors CAMS FolioNo_ISIN pattern).
+                    // Fall back to accountNo + symbol when ISIN is absent.
+                    // This ensures positions from two different IBKR accounts never collide
+                    // even when they hold the same ticker.
+                    const isinSuffix = (info.isin && info.isin.trim()) ? info.isin.trim() : pos.symbol;
+                    const fundId = accountNo + '_' + isinSuffix;
+                    // Current market value: TT Buy (you'd sell USD to repatriate)
+                    // Initial invested-value fallback: TT Sell (you paid to buy USD)
+                    const marketValueInr   = Math.round(pos.value     * usdToInrBuy);
+                    const investedValueInr = Math.round(pos.costBasis * usdToInrSell);
                     const existingIdx = this.funds.findIndex(f => f.id === fundId);
                     const existingFund = existingIdx !== -1 ? this.funds[existingIdx] : null;
                     const fundObj = {
@@ -2614,7 +2649,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         fundName: info.description,
                         isin: info.isin,
                         closingUnits: pos.quantity,
-                        nav: pos.closePrice > 0 ? pos.closePrice * usdToInr : null,
+                        nav: pos.closePrice > 0 ? pos.closePrice * usdToInrBuy : null,
                         navUsd: pos.closePrice > 0 ? pos.closePrice : null,
                         marketValue: marketValueInr,
                         marketValueUsd: pos.value,
@@ -2624,6 +2659,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         transactionCashflowsInr: existingFund && Array.isArray(existingFund.transactionCashflowsInr) ? existingFund.transactionCashflowsInr : [],
                         transactionCashflowsUsd: existingFund && Array.isArray(existingFund.transactionCashflowsUsd) ? existingFund.transactionCashflowsUsd : [],
                         transactionUnitFlows: existingFund && Array.isArray(existingFund.transactionUnitFlows) ? existingFund.transactionUnitFlows : [],
+                        // Persist full individual trade records so FIFO works across partial re-uploads.
+                        transactionTradeRecords: existingFund && Array.isArray(existingFund.transactionTradeRecords) ? existingFund.transactionTradeRecords : [],
                         source: 'IBKR',
                         originalName: ibkrExtractedName ? ibkrExtractedName.trim() : null
                     };
@@ -2673,14 +2710,26 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                     const mergedFlowsInr = [];
                     for (const flow of mergedFlowsUsd) {
-                        const fx = await resolveFxForDate(flow.date);
+                        const rates = await resolveFxForDate(flow.date);
+                        // Buy outflow (negative) → TT Sell; Sell inflow (positive) → TT Buy
+                        const fx = flow.amount < 0 ? rates.tt_sell : rates.tt_buy;
                         mergedFlowsInr.push({ date: flow.date, amount: flow.amount * fx });
                     }
                     targetFund.transactionCashflowsInr = this.normalizeDatedFlows(mergedFlowsInr);
 
+                    // Merge individual trade records (persisted across uploads) using a
+                    // unique-tuple deduplication: same date + quantity + amount = same trade.
+                    // This lets FIFO work correctly when only a partial (current-FY) report
+                    // is uploaded on top of a previously loaded historical report.
+                    const existingTradeRecords = Array.isArray(targetFund.transactionTradeRecords) ? targetFund.transactionTradeRecords : [];
+                    const mergedTradeRecords = this.mergeIbkrTradeRecords(existingTradeRecords, symbolTradeRecords);
+                    targetFund.transactionTradeRecords = mergedTradeRecords;
+
                     // Compute INR invested value using transaction-date FX and FIFO open-lot costing.
-                    if (symbolTradeRecords.length > 0) {
-                        const orderedTrades = [...symbolTradeRecords].sort((a, b) => {
+                    // Use the full merged trade records (not just this file's) so partial
+                    // re-uploads produce correct results.
+                    if (mergedTradeRecords.length > 0) {
+                        const orderedTrades = [...mergedTradeRecords].sort((a, b) => {
                             const d = new Date(a.date) - new Date(b.date);
                             if (d !== 0) return d;
                             return 0;
@@ -2693,8 +2742,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                             if (qty > 0) {
                                 const usdOut = Math.abs(tr.amount || 0);
-                                const fx = await resolveFxForDate(tr.date);
-                                const inrOut = usdOut * fx;
+                                const rates = await resolveFxForDate(tr.date);
+                                // Buying stocks = buying USD = you paid TT Sell rate
+                                const inrOut = usdOut * rates.tt_sell;
                                 const usdPerUnit = usdOut / qty;
                                 const inrPerUnit = inrOut / qty;
                                 if (isFinite(usdPerUnit) && isFinite(inrPerUnit) && usdPerUnit >= 0 && inrPerUnit >= 0) {
