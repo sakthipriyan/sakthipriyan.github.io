@@ -1,117 +1,403 @@
 ---
 title: "How to Send Money Efficiently?"
-subtitle: "Step-by-step guide to efficiently remitting money abroad under the Liberalised Remittance Scheme."
+subtitle: "A practical guide to remitting money abroad efficiently under the Liberalised Remittance Scheme (LRS)."
 type: "books"
 chapter: 3
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
 ---
-Before we look at selecting the instrument and broker, let us look at how to send money.
-As retail investor what are all the options available to us.
 
+Before selecting a broker or investment instrument, it is important to understand how money actually moves from India to an overseas brokerage account.
+
+For Indian retail investors, the remittance process itself can materially impact long-term returns. A seemingly small FX markup of ~₹1.50 per USD compounds significantly over decades of investing.
+
+This chapter focuses on sending money abroad efficiently under the Liberalised Remittance Scheme (LRS).
+
+---
 
 ## What is LRS?
 
-The Liberalised Remittance Scheme (LRS) allows Indian residents to remit up to **USD 250,000 per financial year** for permitted purposes — including overseas investment in equities.
+The **Liberalised Remittance Scheme (LRS)** allows Indian residents to remit up to **$250,000 (~₹2.4 Crores @ 94.55) per financial year** for permitted purposes, including overseas investment in equities and ETFs.
 
-Every rupee you send to your foreign brokerage account goes through LRS. Understanding this process is essential before you invest a single dollar abroad.
+Every rupee sent to a foreign brokerage account passes through the LRS framework. Understanding this process is essential before investing internationally.
+
+### Tax Collected at Source (TCS)
+
+Under current LRS rules, once your total foreign remittances in a financial year cross ₹10 lakhs, banks begin collecting TCS on the remittances.
+
+For overseas investments, this can materially increase the upfront cash outflow during remittance. This was one of the major reasons I initially delayed international investing — I was concerned about the opportunity cost of capital temporarily locked until adjusted during income tax filing.
+
+Later in this chapter, we will look at practical ways to reduce the impact of this cash-flow friction.
+
+---
 
 ## How the Money Flows
 
-The flow is: your Indian bank → INR to USD → SWIFT → your broker's receiving bank → credited to your brokerage account.
+The remittance chain typically looks like this:
+
+```dot
+digraph RemittanceFlow {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+
+    bank [label="Indian Bank Account"];
+    fx [label="INR converted to USD"];
+    swift [label="SWIFT Transfer"];
+    brokerbank [label="Broker's Receiving Bank"];
+    broker [label="Brokerage Account Credit"];
+
+    bank -> fx;
+    fx -> swift;
+    swift -> brokerbank;
+    brokerbank -> broker;
+}
+```
 
 
+In practice, there are 4 major cost components:
 
-## Various Levels
+1. **FX markup** (most important)
+2. SWIFT / remittance charges
+3. GST on charges
+4. FX GST
 
-### Level 0
-Go to bank website and transact using the online platform.
-Zero friction 
+For long-term investors, FX markup dominates all other costs.
 
+---
 
-Using FX Retail + Bharat Connect/ Forex + Icici/Hdfc gives 20p/USD upto 5 lakhs outwards remittance.
+## Understanding the Different Remittance Levels
 
-Inward remittance for larger volume FX Retail + BoB will be better option but manual process.
+There are multiple ways to remit money abroad. The convenience and FX efficiency vary significantly.
 
-HDFC/ICICI i have done online end to end.
+### Level 0 — Standard Bank card rate
 
-Direct bank is the worst option to do online or offline.
+The simplest approach is:
 
-This the pecking order worst to best
+- Log into your bank website (I have used ICICI Bank / HDFC Bank online)
+- Use the standard outward remittance flow
+- Accept the bank-provided exchange rate
 
-direct bank card rate (~150p/USD markup)
+This is the default experience most retail users see.
 
-negotiated direct bank card rate (~50p/USD markup)
+The process is frictionless, but usually expensive.
 
-FX Retail web + Private Banks (not easy to get markup rate to 20p. I got 50p/USD only)
+Typical markup:
+- ~₹1.50/USD above interbank rates (Rate shown in Google)
 
-FX Retail + bharat connect/forex + private banks (default markup 20p/USD. Upto Rs 5 lakhs for buying USD)
+This is effectively the "retail card rate" offered by banks.
 
-FX Retail + Public Banks (can get as low as 10p/USD markup). But process is not online but remote.
+### Level 1 - Promoted Bank card rate
 
-I have done remittance via 1,2,3 and 5. 4 failed due to some UPI linking. I will be retring on Monday.
+Same as Level 0 but with some discounts.
 
-I think 4 is best option for sending money out. Because without any negotiation the default rate is only 20p/USD and Good till monthly remittance is 5 lakhs rupees. (Actual limit comes from UPI's 5 lakhs transaction limit for this transaction type). This i can execute at speed of private bank at the cost of public bank
+When I started, there was promotion code offered by bank specifically for the IBKR remittance (ICICI Direct Global provided the promo code for ICICI Bank). This waived the processing fee of 1,000 + GST and applied a 40p/USD discount on bank card rate.
 
-5 is best for high volume and for inward remittance.
+Also based on the broker, there is a waiver of the processing fee. At lower volume, this plays a significant role. But, as your investment scales the markup cost will become significant.
 
-ICICI i have seen money credited in IBKR in couple of hours. Fastest i have seen. I have to wait for market to open up.
+### Level 2 - Negotiated Bank card rate
 
-HDFC end of day processing, i was still able to buy Nasdaq 100 via Irish ETFs in European markets on the same day.
+Later 
 
-BoB though money credited on same date, it was beyond 10pm IST when European markets were closed. So i can buy only on next day.
+### Level 3 - FX Retail Web + Private Banks
 
+### Level 4 - FX Retail + Bharat Connect / Forex + Private Banks
 
-## Setting Up Your Bank for LRS + FX Retail
+### Level 5 - FX Retail + Public Sector Banks
 
-The remittance itself is straightforward. Getting your bank to give you a competitive FX rate is where effort is needed — this is covered in detail in the next chapter. Here is the setup sequence:
+---
 
-1. **Choose your bank**: HDFC, ICICI, HDFC, BoB are commonly used. Not all branches handle LRS equally — seek out an AD (Authorised Dealer) branch or a branch known for forex business. General branches are often unfamiliar with FX Retail.
-2. **Set up FX Retail with the bank**: This is a one-time setup. Each bank has its own onboarding process. At HDFC, the RM at an established branch can set this up quickly. ICICI requires more persistence — expect multiple touchpoints across customer care, RM, and NRI teams.
-3. **Register your broker's account details**: Add IBKR as a beneficiary in your bank's remittance portal (e.g., HDFC Remit Now).
+# The Remittance Efficiency Ladder
 
-## Doing a Test Run
+From worst to best FX efficiency:
 
-Before sending a large amount, do a **small test transfer** (e.g., USD 50–100). This confirms that:
-- The beneficiary account details are correct
-- The money reaches your broker account
-- The FX charge on a test run will look high (percentage-wise) because the fixed processing fee dominates — this is expected and not representative
+| Method | Typical Markup |
+|---|---|
+| Standard bank card rate | ~₹1.50/USD |
+| Negotiated bank rate | ~₹0.50/USD |
+| FX Retail Web + Private Banks | ~₹0.50/USD |
+| FX Retail + Bharat Connect / Forex + Private Banks | ~₹0.20/USD |
+| FX Retail + Public Sector Banks | ~₹0.10/USD |
 
-Once confirmed, proceed with your intended amount.
+---
 
-## Step-by-Step: Initiating a Transfer
+# My Practical Experience
 
-Using **HDFC Remit Now** (or equivalent):
-1. Log in to your bank's net banking / remittance portal
-2. Select LRS as the purpose and "Investment in securities abroad" as the sub-purpose
-3. Enter the amount in USD
-4. If FX Retail is set up: enter your FX Retail Trade Number (obtained separately on the CCIL FX Retail platform after booking a deal)
-5. Confirm the rate and initiate the transfer
-6. Keep the transfer receipt for your records (needed for tax filing)
+I have personally executed remittances through:
 
-## Documents Required
+- Standard bank remittance
+- Negotiated bank FX rates
+- FX Retail with public sector banks
+
+I also attempted the Bharat Connect flow, though my initial setup failed due to UPI linkage issues. I plan to retry this again.
+
+Based on my experience:
+
+## Best Balance for Most Retail Investors
+
+### FX Retail + Bharat Connect + Private Banks
+
+This currently appears to be the most practical setup for most investors because it combines:
+
+- Private bank convenience
+- Near-public-bank FX pricing
+- Fully online flow
+- Fast execution
+
+Typical characteristics:
+- ~₹0.20/USD markup by default
+- Works well up to ₹5 lakhs per transfer
+- UPI transaction limit becomes the practical ceiling
+
+This effectively provides:
+
+> private-bank speed at near public-bank pricing.
+
+---
+
+## Best for Large Transfers
+
+### FX Retail + Public Sector Banks
+
+Public sector banks can offer:
+- ~₹0.10/USD markup
+- Extremely competitive rates for large remittances
+- Better inward remittance conversion as well
+
+However:
+- The process is usually semi-manual
+- Requires coordination with branch forex teams
+- Not fully online
+- Slower operationally
+
+This setup is best suited for:
+- Large periodic remittances
+- High-volume investors
+- Investors optimizing every basis point
+
+---
+
+# Bank Experience Comparison
+
+## ICICI Bank
+
+ICICI has been the fastest in my experience.
+
+I have seen:
+- Money credited to IBKR within a couple of hours
+- Same-day deployment possible into US markets
+
+Operationally, ICICI feels closest to a modern real-time remittance workflow.
+
+---
+
+## HDFC Bank
+
+HDFC generally processes by end-of-day.
+
+Even then, I was still able to:
+- Remit funds on the same day
+- Buy Nasdaq 100 exposure through Irish ETFs during European market hours
+
+The delay was manageable.
+
+---
+
+## Bank of Baroda (BoB)
+
+BoB provided excellent FX pricing, but the operational flow was slower.
+
+In one case:
+- Funds reached the broker on the same date
+- But after European markets had closed (~10 PM IST)
+
+This delayed deployment until the next trading session.
+
+---
+
+# Setting Up Your Bank for LRS + FX Retail
+
+The remittance itself is straightforward.
+
+Getting competitive FX pricing is the harder part.
+
+The setup process generally looks like this:
+
+## 1. Choose the Right Bank
+
+Commonly used banks include:
+
+- HDFC Bank
+- ICICI Bank
+- Bank of Baroda (BoB)
+
+Not all branches handle LRS and FX Retail efficiently.
+
+Prefer:
+- Authorised Dealer (AD) branches
+- Forex-focused branches
+- Branches already servicing HNI / remittance customers
+
+Many regular branches are unfamiliar with FX Retail workflows.
+
+---
+
+## 2. Enable FX Retail Access
+
+This is usually a one-time setup.
+
+Each bank handles onboarding differently.
+
+### HDFC
+- Relatively smoother
+- Good relationship managers can complete setup quickly
+
+### ICICI
+- Requires persistence
+- Multiple touchpoints may be needed across:
+  - customer care
+  - relationship managers
+  - forex teams
+
+---
+
+## 3. Add Your Broker as Beneficiary
+
+Register your brokerage account details in the remittance portal.
+
+For example:
+- HDFC RemitNow
+- ICICI Money2World
+
+You will need:
+- Beneficiary bank name
+- SWIFT code
+- Broker account number
+- Broker address
+
+---
+
+# Do a Small Test Transfer First
+
+Before sending a large amount, do a small test remittance.
+
+Example:
+- USD 50–100
+
+This validates:
+- Beneficiary details
+- SWIFT routing
+- Broker credit workflow
+
+Do not judge FX efficiency from the test transfer.
+
+Small transfers look expensive because:
+- Fixed processing fees dominate
+- Percentage cost appears artificially high
+
+Once validated, proceed with larger transfers.
+
+---
+
+# Step-by-Step Transfer Flow
+
+Using HDFC RemitNow (or equivalent):
+
+1. Log into net banking
+2. Open outward remittance / LRS section
+3. Select purpose:
+   - "Investment abroad"
+   - "Investment in foreign securities"
+4. Enter USD amount
+5. If using FX Retail:
+   - Book the FX deal separately
+   - Enter the FX Retail trade number
+6. Confirm the exchange rate
+7. Submit the transfer
+8. Save the transfer receipt
+
+---
+
+# Documents Typically Required
+
+Most banks require:
 
 - PAN card
 - Passport
-- A15CB / Form 15CA documentation (usually handled by the bank's system for investment-purpose remittances)
-- IBKR account details: account number, SWIFT code, beneficiary bank name and address
+- LRS declaration
+- Form 15CA / 15CB workflow
+  - Often automated for investment remittances
+- Broker details
+  - Account number
+  - SWIFT code
+  - Receiving bank information
 
-## Timelines
+---
 
-Transfers typically credit to IBKR within **T / T+1 business days**. Adding a **deposit notification in IBKR** (Funding → Notify of Deposit) with your account ID and name in the transfer message speeds up the matching process.
+# Expected Timelines
 
-## What to Track
+Typical settlement timeline:
 
-For each transfer, record:
-- Date of transfer
-- INR debit amount
-- USD amount credited
+- T day
+- T+1 business day
+
+Operational efficiency depends heavily on:
+- Bank cut-off times
+- SWIFT processing
+- Whether deposit notification was added at the broker
+
+For IBKR, adding:
+
+```text
+Funding → Notify Deposit
+```
+
+before remittance significantly improves matching speed.
+
+---
+
+# What You Should Track
+
+Maintain a remittance log containing:
+
+- Transfer date
+- INR debited
+- USD credited
 - FX rate achieved
-- Processing fees paid
+- Charges paid
+- Bank used
 
-This data feeds into your XIRR calculation and your tax filing (cost basis in INR at remittance date).
+This becomes useful for:
+- XIRR calculations
+- Portfolio analytics
+- Tax reporting
+- Auditing remittance efficiency over time
 
-## TODO
-- Add Form 15CA/15CB guidance (auto-generated vs manual)
-- Annual USD 250,000 limit tracking across multiple remittances
+---
+
+# Key Takeaway
+
+For long-term international investors:
+
+- Brokerage fees matter less
+- Expense ratios matter less
+- FX conversion efficiency matters far more than most people realise
+
+Reducing FX markup from:
+- ₹1.50/USD
+to
+- ₹0.20/USD
+
+creates a meaningful long-term compounding advantage.
+
+The difference becomes substantial when investing consistently over decades.
+
+---
+
+# TODO
+
+- Add detailed Form 15CA / 15CB walkthrough
+- Add CCIL FX Retail booking screenshots
+- Add Bharat Connect flow explanation
+- Add inward remittance optimisation
+- Add examples comparing FX markup impact over 20+ years
