@@ -14,94 +14,106 @@ For Indian retail investors, the remittance process itself can materially impact
 
 This chapter focuses on sending money abroad efficiently under the Liberalised Remittance Scheme (LRS).
 
----
-
 ## What is LRS?
 
-The **Liberalised Remittance Scheme (LRS)** allows Indian residents to remit up to **$250,000 (~₹2.4 Crores @ 94.55) per financial year** for permitted purposes, including overseas investment in equities and ETFs.
+The **Liberalised Remittance Scheme (LRS)** allows Indian residents to remit up to **$250,000 (~₹2.4 Crores @ 94.55) per financial year** for permitted purposes, including **Indian investment abroad in equity capital** (Purpose Code: S0001)
 
 Every rupee sent to a foreign brokerage account passes through the LRS framework. Understanding this process is essential before investing internationally.
 
-### Tax Collected at Source (TCS)
+### Tax Collected at Source (TCS) @ 20%
 
-Under current LRS rules, once your total foreign remittances in a financial year cross ₹10 lakhs, banks begin collecting TCS on the remittances.
+Under current LRS rules, once your total foreign remittances for investments in a financial year cross ₹10 lakhs, banks begin collecting TCS (Refundable) on the remittances above ₹10 lakhs @ 20%.
 
-For overseas investments, this can materially increase the upfront cash outflow during remittance. This was one of the major reasons I initially delayed international investing — I was concerned about the opportunity cost of capital temporarily locked until adjusted during income tax filing.
+While this 20% levy is not an additional tax, it acts as a significant upfront cash-flow friction. It temporarily locks up capital that could otherwise be compounding in the market, holding it out of play until it can be adjusted against your overall tax liability during your annual return filing. In fact, concern over this exact opportunity cost was a major reason I initially delayed building my own international portfolio.
 
-Later in this chapter, we will look at practical ways to reduce the impact of this cash-flow friction.
+Next chapter, we will look at practical ways to reduce the impact of this cash-flow friction.
 
----
+### Key Takeaways: The Two Rules of Remittance
+When planning your international asset allocation, your capital movement is governed by two fundamental constraints:
+1. **The Hard Cap**: A maximum outward limit of $250,000 per person, per financial year.
+2. **The Friction Point**: A 20% TCS applied on all outward remittances exceeding ₹10 lakhs in that same financial year.
 
 ## How the Money Flows
 
-The remittance chain typically looks like this:
+The typical overseas remittance flow works as follows:
 
-```dot
-digraph RemittanceFlow {
-    rankdir=TB;
-    node [shape=box, style=rounded];
+1. **Indian Bank Account** – Funds originate from your Indian savings account.
+2. **INR converted to USD** – The bank converts INR to USD using the mid-market rate plus its FX markup, etc.,
+3. **SWIFT Transfer** – The USD is sent internationally through the SWIFT banking network.
+4. **Broker's Receiving Bank** – The broker’s partner bank receives the incoming USD transfer.
+5. **Brokerage Account Credit** – The funds are credited to your brokerage account and become available for investing.
 
-    bank [label="Indian Bank Account"];
-    fx [label="INR converted to USD"];
-    swift [label="SWIFT Transfer"];
-    brokerbank [label="Broker's Receiving Bank"];
-    broker [label="Brokerage Account Credit"];
+## Cost Components in an Overseas Remittance (LRS)
+In practice, following 5 cost components are typically involved in converting INR to USD,
 
-    bank -> fx;
-    fx -> swift;
-    swift -> brokerbank;
-    brokerbank -> broker;
-}
-```
+| # | Component | What It Means | Nature of Cost | Notes |
+|---|------------|---------------|----------------|-------|
+| (1) | Mid-Market Rate | Base INR cost required to purchase USD at the interbank/reference rate | Baseline | This is the “fair” exchange rate before bank margins |
+| (2) | **FX Markup** | Bank’s margin added on top of the mid-market rate | Variable (Most Important) | Directly impacts long-term returns; even small differences compound significantly |
+| (3) | SWIFT / Remittance Charges / Processing Fee | Bank’s fee for executing the outward remittance | Fixed | Some banks or relationship tiers or broker setup waive this |
+| (4) | GST on Remittance Charges | GST applied on (3) @ 18% | Fixed (Tax Component) | Not applicable if (3) is waived |
+| (5) | GST on Forex Conversion | GST applied on the FX conversion amount as per forex slab rules | Variable (Tax Component) | Calculated on the forex transaction amount (mid-rate + markup) |
 
+Usually for long-term investors, **FX markup**(2) dominates all other costs. You can use the [RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/) to do this break down.
 
-In practice, there are 4 major cost components:
-
-1. **FX markup** (most important)
-2. SWIFT / remittance charges
-3. GST on charges
-4. FX GST
-
-For long-term investors, FX markup dominates all other costs.
-
----
 
 ## Understanding the Different Remittance Levels
 
-There are multiple ways to remit money abroad. The convenience and FX efficiency vary significantly.
+There are multiple avenues for remitting capital abroad, but they present a stark trade-off between convenience and FX efficiency. Private banks typically offer seamless, fully digital journeys, but this frictionless experience often comes at the cost of higher exchange rate spreads. Conversely, public sector banks generally rely on manual, branch-led processing—yet navigating this administrative friction is often the key to negotiating the absolute lowest FX markups.
 
-### Level 0 — Standard Bank card rate
+### Level 0 — Standard Bank Retail Card Rate
 
 The simplest approach is:
 
-- Log into your bank website (I have used ICICI Bank / HDFC Bank online)
+- Log into your bank website
 - Use the standard outward remittance flow
 - Accept the bank-provided exchange rate
 
 This is the default experience most retail users see.
-
 The process is frictionless, but usually expensive.
 
 Typical markup:
 - ~₹1.50/USD above interbank rates (Rate shown in Google)
 
-This is effectively the "retail card rate" offered by banks.
+> This is effectively the **"Retail Card Rate"** offered by banks.
 
-### Level 1 - Promoted Bank card rate
+*I have used HDFC's RemitNow facilities for this end to end online for a test transaction of $100.*
 
-Same as Level 0 but with some discounts.
+### Level 1 - Promoted Bank Card Rate
 
-When I started, there was promotion code offered by bank specifically for the IBKR remittance (ICICI Direct Global provided the promo code for ICICI Bank). This waived the processing fee of 1,000 + GST and applied a 40p/USD discount on bank card rate.
+Same as Level 0 but with some discounts due to promotions. Typically when banks have tie up with the broker they offer this. Some banks also waive the (3) & (4) and cover it via (2). At lower volume, this plays a significant role. But, as your investment scales the FX Markup (2) will become a significant component.
 
-Also based on the broker, there is a waiver of the processing fee. At lower volume, this plays a significant role. But, as your investment scales the markup cost will become significant.
+Problem with this approach is that promotions always will have an expiry date. Suddenly one day bank will remove the promotion code.
 
-### Level 2 - Negotiated Bank card rate
+When I started, there was promotion code offered by bank specifically for the IBKR remittance (ICICI Direct Global provided the promo code for ICICI Bank). This waived the processing fee of ₹1,000 + GST and applied a 40paise/USD discount on bank's retail card rate. Essentially (2) reduced and (3)/(4) waived. 
 
-Later 
+*Originally, I used ICICI's Money2World with promo code and I was content with it. Suddenly this was removed, forcing me to explore alternate options to reduce the overall transaction cost.*
+
+### Level 2 - Negotiated Bank Card Rate
+
+As you are scaling your volume over time, reach out to the bank branch or relationship manager to set up preferred rates. They can setup some discount based on overall relationship value and recurring monthly volume. This also will have an expiry date. So, the problem here is to keep asking them again and again!
+
+*While in pursuit of Level 3 option with ICICI Bank, they offered me ~90p/USD discount based on relationship value/transaction volume. Where I used upto 5 figure USD after a hard rebalancing.*
 
 ### Level 3 - FX Retail Web + Private Banks
 
+Let me introduce you to [RBI](https://www.rbi.org.in/) and [CCIL](https://www.clearcorp.co.in/)'s [FX Retail](https://www.clearcorp.co.in/web/clearcorp/fx-retail1) system which is bringing transparency for USD/INR currency conversion with a pre-configured FX Markup (2) for customers. Customer can buy/sell USD at market rate +/- pre configured FX Markup rates.
+
+Once I learned about this system, I started discussing with banks where I had accounts (HDFC Bank & ICICI Bank). ICICI Bank onboarded me with absurd 1.75% default rate (which is even higher than the Level 0) while HDFC Bank did a reasonable good job of onboarding me @ 50 paise/USD. I tried hard to get ICICI Bank to setup the rates in FX Retail system, but they didn't do so far (3 months passed!). But, I found a better way!
+
+In case of HDFC,
+1. Ask the bank to raise the Limit
+2. Book a Trade Deal on FX Retail web site and get a Trade Deal ID
+3. On bank website input the Trade Deal ID while carrying out the transaction
+
+*I used FX Retail + HDFC RemitNow online for transferring a monthly investment in 4 figure USD @ 50p/USD*
+
 ### Level 4 - FX Retail + Bharat Connect / Forex + Private Banks
+
+> This is the best way of sending money abroad at the speed of the private bank but at the cost of a public bank without any negotiations with the bank!
+
+While exploring various option, I found that FX Retail also supported via Bharat Connect Forex option where we can "buy" the USD using the new age apps. Dealing 
+
 
 ### Level 5 - FX Retail + Public Sector Banks
 
