@@ -2,7 +2,7 @@
 title: "12 BAAA - TCS Opportunity Cost"
 subtitle: "Understanding Form 12BAAA, TCS on LRS remittances, and the real opportunity cost of blocked capital."
 type: "books"
-chapter: 4
+chapter: 5
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true

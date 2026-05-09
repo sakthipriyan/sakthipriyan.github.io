@@ -2,7 +2,7 @@
 title: "FX Rate Comparison"
 subtitle: "Comparing FX Retail, FX Retail Bharat Connect, and Bank Rates to minimize remittance costs."
 type: "books"
-chapter: 5
+chapter: 60
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true
