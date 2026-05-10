@@ -30,6 +30,7 @@ No jargon, no vague advice—just a clear, step-by-step playbook built from real
 ✅ Indian investors who want to diversify beyond Indian markets  
 ✅ Anyone curious about LRS and international brokerage accounts  
 ✅ Investors who want to understand Irish ETFs and why they matter  
+✅ Investors having willingness to overcome initial setup friction  
 ✅ Those who want to file ITR correctly after global investments  
 ✅ Anyone looking to track global portfolio XIRR alongside domestic holdings  
 

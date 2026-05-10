@@ -1,7 +1,7 @@
 ---
 author: Sakthi Priyan H
 chapter: 4
-date: 2026-04-25
+date: 2026-05-09
 draft: false
 subtitle: Setting up FX Retail and using it for cost-efficient forex
   remittances.

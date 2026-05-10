@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FX Retail - A Deep Dive | Sakthi Priyan H</title>
+    <meta name="description" content="Systems that Scale. Wealth that Compounds.">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <link rel="stylesheet" href="https://sakthipriyan.com/css/book-layout.css">
+    
+</head>
+
+<body class="book-reader building-wealth" data-template="single.html"><header class="book-header">
+    <div class="book-header-content"><button class="book-toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button><div class="book-title-area"><h1 class="book-header-title">
+                <a href="/building-wealth/books/" class="book-icon-link" title="Back to Books">📖</a>
+                <a href="/building-wealth/books/the-global-indian-investor/">The Global Indian Investor</a>
+            </h1>
+        </div><div class="book-author">
+            by <a href="/" class="author-link">Sakthi Priyan H</a>
+        </div><button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+            <span class="theme-icon theme-icon-light" data-theme="light">☀</span>
+            <span class="theme-icon theme-icon-dark" data-theme="dark">☾</span>
+        </button>
+    </div>
+</header>
+
+    <aside class="book-toc-sidebar">
+    <div class="book-toc-content"><div class="book-toc-header">
+            <h2>Table of Contents</h2>
+            <button class="book-toc-close" aria-label="Close Table of Contents">×</button>
+        </div>
+        <nav class="book-toc-nav">
+            <ol class="book-toc-list">
+                <li class="book-toc-item">
+                    <a href="/building-wealth/books/the-global-indian-investor/01-why-beyond-india/"><span class="chapter-number">1.</span> Why Beyond India?
+                    </a>
+                </li>
+                <li class="book-toc-item">
+                    <a href="/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/"><span class="chapter-number">2.</span> 3 Paths to Global Investing for Indians
+                    </a>
+                </li>
+                <li class="book-toc-item">
+                    <a href="/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/"><span class="chapter-number">3.</span> How to Transfer Money Efficiently?
+                    </a>
+                </li>
+                <li class="book-toc-item active">
+                    <a href="/building-wealth/books/the-global-indian-investor/04-fx-retail-a-deep-dive/"><span class="chapter-number">4.</span> FX Retail - A Deep Dive
+                    </a>
+                </li>
+                <li class="book-toc-item">
+                    <a href="/building-wealth/books/the-global-indian-investor/05-tcs-opportunity-cost/"><span class="chapter-number">5.</span> The Opportunity Cost of TCS
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</aside>
+<main class="book-main-content">
+        <div class="book-content-wrapper">
+            <article class="book-chapter">
+                <header class="chapter-header">
+                    <div class="chapter-number-display">Chapter 4</div>
+                    <h1 class="chapter-title">FX Retail - A Deep Dive</h1>
+                    <p class="chapter-subtitle">Setting up FX Retail and using it for cost-efficient forex remittances.</p>
+                </header>
+
+                <div class="chapter-body">
+                    <h2 id="fx-retail">FX Retail</h2>
+<p><a href="https://www.clearcorp.co.in/web/clearcorp/fx-retail1">FX Retail</a> is a retail foreign exchange trading platform operated by the
+Clearing Corporation of India Limited (CCIL) under RBI guidance.<br>
+It allows individuals to access near-interbank FX rates through their
+relationship bank.</p>
+<p>Instead of relying entirely on the bank&rsquo;s opaque forex pricing, FX
+Retail lets you lock a USD/INR rate transparently on the platform, while
+the bank acts as the settlement partner for the remittance.</p>
+<p>When configured properly, FX Retail can reduce forex costs significantly
+compared to standard bank remittance rates.</p>
+<h2 id="how-fx-retail-works">How FX Retail Works</h2>
+<p>The FX Retail ecosystem has three participants:</p>
+<ol>
+<li><strong>Customer</strong>: the retail user booking forex</li>
+<li><strong>Relationship Bank</strong>: the bank that settles the remittance</li>
+<li><strong>FX Retail Platform</strong>: the marketplace providing price discovery</li>
+</ol>
+<h3 id="sending-usd-to-brokerage-account">Sending USD to Brokerage account</h3>
+<p>Customer → FX Retail Platform → Relationship Bank → International
+Remittance → Broker Bank Account</p>
+<ol>
+<li>You first <strong>book the forex rate on FX Retail</strong> via
+<ol>
+<li><strong><a href="https://fxretail.co.in/">FX Retail Web</a></strong> (Buy or Sell USD) or</li>
+<li>via mobile apps such as BHIM using <strong><a href="https://www.bharat-connect.com/forex/">Bharat Connect / Forex</a></strong> (Buy USD only) option</li>
+</ol>
+</li>
+<li>The bank <strong>executes the outward remittance using that locked rate</strong> to the destination broker account</li>
+</ol>
+<h2 id="step-1-register-on-fx-retail">Step 1: Register on FX Retail</h2>
+<ol>
+<li>Visit <a href="https://fxretail.co.in">https://fxretail.co.in</a></li>
+<li>Start customer registration</li>
+<li>Verify email and mobile via OTP</li>
+<li>Submit PAN and personal details</li>
+<li>Choose a relationship bank</li>
+</ol>
+<p>After submission, FX Retail generates a <strong>customer registration request
+reference number</strong>.</p>
+<p>Example:</p>
+<p>Customer Name: SAKTHI PRIYAN<br>
+Request Ref No: CRR/IN/000000</p>
+<p>Once the relationship bank approves the request, your FX Retail account
+is activated and login credentials are sent.</p>
+<h2 id="step-2-add-relationship-banks">Step 2: Add Relationship Banks</h2>
+<p>FX Retail allows multiple banks to be linked to the same account.</p>
+<p>Typical flow:</p>
+<ol>
+<li>Login to FX Retail</li>
+<li>Add relationship bank</li>
+<li>Submit bank account details</li>
+<li>Bank approves the request</li>
+</ol>
+<p>Example status notification:</p>
+<p>Add Bank Request Ref: CRR/IN/000000-0</p>
+<p>After approval, the bank becomes available for trading.</p>
+<h2 id="step-3-bank-markup-configuration">Step 3: Bank Markup Configuration</h2>
+<p>Every bank configures its own FX markup.</p>
+<p>Example markup notifications:</p>
+<p>ICICI Bank<br>
+Markup Type: Percentage<br>
+Markup Value: 1.75%</p>
+<p>HDFC Bank<br>
+Markup Type: Paise<br>
+Markup Value: 50.00</p>
+<p>Markup is automatically added to the platform trade price to produce the
+<strong>final settlement rate</strong>.</p>
+<p>Example:</p>
+<p>Trade Price: 91.6425<br>
+Bank Fee: 0.50<br>
+Final Price: 92.1425</p>
+<p><strong>With FX Retail Web markup set up requires negotiation with the bank to setup appropriate  rates.</strong> Main challenge here is the lack of knowledge in the typical branches.</p>
+<p>For FX Retail via Bharat Connect markup is capped at 20p/USD. So Level 4 becomes easier than Level 3 or Level 5 explained in the previous Chapter.</p>
+<h2 id="step-4-trading-limits">Step 4: Trading Limits</h2>
+<p>FX Retail require a <strong>trading limit</strong> before you can book forex via FX Retail Web.
+The limit defines the maximum USD amount you can trade.</p>
+<p>Example:</p>
+<p>Bank: HDFC Bank<br>
+Limit Type: Global Gross<br>
+Limit Amount: USD 1,000</p>
+<p>Once the bank approves the limit, FX Retail sends a confirmation
+notification.</p>
+<p>Some banks allow limits to be configured directly in the platform, while
+others require email approval and others we can setup high trading limit on yearly basis as well.</p>
+<p>In case of Bharat Connect Forex options. Upto $10,000 can be sent via the apps. But using UPI this is further limited to ₹5 lakhs per transaction and ₹10 lakhs per day. It didn&rsquo;t require any limit setup with the bank. It just worked out of box when I was used FX Retail via BHIM + ICICI Bank.</p>
+<h2 id="step-5-booking-the-deal">Step 5: Booking the deal</h2>
+<h3 id="using-fx-retail-web">Using FX Retail Web</h3>
+<h4 id="steps">Steps</h4>
+<ol>
+<li>Log into the FX Retail website</li>
+<li>Choose the bank and select BUY/SELL</li>
+<li>Enter the USD to be bought/sold and confirm</li>
+<li>Trade deal is booked and  FX-Retail Trade No. is generated</li>
+<li>Goto bank website for remittance flow, enter the Trade No in appropriate field. (In case of offline operations, Trade deal PDF can be shared with the branch forex staff to process further)</li>
+</ol>
+<p>Trade booking is available once limits are enabled via Step 4.</p>
+<h4 id="example">Example</h4>
+<p>Following is an example FX Retail email I received in the past.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>FX-Retail Customer ID</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Customer Name</td>
+          <td>SAKTHI PRIYAN</td>
+      </tr>
+      <tr>
+          <td>Traded Date Time</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>FX-Retail Trade No.</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Relationship Bank</td>
+          <td>HDFC BANK LIMITED</td>
+      </tr>
+      <tr>
+          <td>Account Number of Customer</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Instrument</td>
+          <td>CASH</td>
+      </tr>
+      <tr>
+          <td>Trade Type</td>
+          <td>Booking</td>
+      </tr>
+      <tr>
+          <td>Original Trade No.</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>BUY/SELL (USD)</td>
+          <td>BUY</td>
+      </tr>
+      <tr>
+          <td>Traded Amount (USD)</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Trade Price (INR per USD)</td>
+          <td>91.6425</td>
+      </tr>
+      <tr>
+          <td>Final Price (INR per USD)</td>
+          <td>92.1425</td>
+      </tr>
+      <tr>
+          <td>Amount (INR)</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Settlement Date</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Login Name</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Source</td>
+          <td>Fx-Retail</td>
+      </tr>
+      <tr>
+          <td>Bharat Connect Transaction ID</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Delivery Mode</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Settlement Branch Name</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Settlement Branch Address</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="using-fx-retail-via-bharat-connect-forex">Using FX Retail via Bharat Connect Forex</h3>
+<h4 id="steps-1">Steps</h4>
+<ol>
+<li>Open BHIM and navigate to Bharat Connect (Bills &amp; recharge) and Forex under Financial.</li>
+<li>Choose the bank, enter the USD and pay via UPI mandate</li>
+<li>FX-Retail Trade No is generated and sent via email/sms. Also available on the FX Retail web</li>
+<li>Goto bank website for remittance flow, enter the Trade No</li>
+</ol>
+<p>I earlier captured this whole flow <a href="/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/">here</a></p>
+<h4 id="example-1">Example</h4>
+<p>Following is an example FX Retail email I received in the past.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>FX-Retail Customer ID</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Customer Name</td>
+          <td>SAKTHI PRIYAN</td>
+      </tr>
+      <tr>
+          <td>Traded Date Time</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>FX-Retail Trade No.</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Relationship Bank</td>
+          <td>ICICI Bank Limited</td>
+      </tr>
+      <tr>
+          <td>Account Number of Customer</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Instrument</td>
+          <td>CASH</td>
+      </tr>
+      <tr>
+          <td>Trade Type</td>
+          <td>Booking</td>
+      </tr>
+      <tr>
+          <td>Original Trade No.</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>BUY/SELL (USD)</td>
+          <td>BUY</td>
+      </tr>
+      <tr>
+          <td>Traded Amount (USD)</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Trade Price (INR per USD)</td>
+          <td>94.9050</td>
+      </tr>
+      <tr>
+          <td>Final Price (INR per USD)</td>
+          <td>95.1050</td>
+      </tr>
+      <tr>
+          <td>Amount (INR)</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Settlement Date</td>
+          <td>04-May-2026</td>
+      </tr>
+      <tr>
+          <td>Login Name</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Source</td>
+          <td>Bharat Connect</td>
+      </tr>
+      <tr>
+          <td>Bharat Connect Transaction ID</td>
+          <td>redacted</td>
+      </tr>
+      <tr>
+          <td>Delivery Mode</td>
+          <td>Remittance</td>
+      </tr>
+      <tr>
+          <td>Settlement Branch Name</td>
+          <td>DIGITAL</td>
+      </tr>
+      <tr>
+          <td>Settlement Branch Address</td>
+          <td>redacted</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>Step 1 to Step 3 are one time setup.<br>
+Step 4 (required for FX Retail Web for private banks but not required for FX Retail via Bharat Connect)<br>
+Step 5 is the actual transaction where Trade No is generated and utilized.</p>
+</blockquote>
+<h2 id="bank-specific-setup-experience">Bank Specific Setup Experience</h2>
+<h3 id="icici-bank">ICICI Bank</h3>
+<ul>
+<li>Step 1: I first registered with ICICI and it went smooth</li>
+<li>Step 2: Not Applicable (As this is the first relationship bank)</li>
+<li>Step 3: Zero progress, still with very high 1.75% markup and branch staff/forex department/customer care not helping to set reasonable markup here. I side stepped this by using the default 20p/USD via Bharat Connect option.</li>
+<li>Step 4: Limits can be set up via service menu such as CCIL Deal Limit. 5% Amount is linened in the bank account based on the set limit</li>
+<li>Step 5: Online end to end. Through the <strong>FX-Retail Trade No.</strong> option is not promptly visible in the UI, it just worked well.</li>
+</ul>
+<h3 id="hdfc-bank">HDFC Bank</h3>
+<ul>
+<li>Step 1: Not Applicable (Already setup with ICICI)</li>
+<li>Step 2: Went smooth</li>
+<li>Step 3: Got a default rate of 1.2% and RM/Branch moved this down to 50p/USD within few days of the request</li>
+<li>Step 4: Need to send email here to a specific id (When you raise limit request via FX Retail web you will see this email). Limit allowed only for 1 day</li>
+<li>Step 5: Online end to end, <strong>FX-Retail Trade No.</strong> is promptly visible and it just worked here as well.</li>
+</ul>
+<h3 id="bank-of-baroda">Bank of Baroda</h3>
+<ul>
+<li>Step 1: Not Applicable (Already setup with ICICI)</li>
+<li>Step 2: Manual process with the branch staff, it took a while to get onboarded.</li>
+<li>Step 3: Got a minimum rate of 10p/USD based on the projected volume</li>
+<li>Step 4: Limit setup can be done for larger amount for longer time period. I filled up the form to set it up for a year. Not required till I hit the limits</li>
+<li>Step 5: Get approval from backend team via branch forex team. Then book the deal on FX Retail web and then forward the Trade Deal PDF to the branch forex team to process the remittance.</li>
+</ul>
+<h2 id="importance-of-choosing-the-right-bank--branch">Importance of Choosing the Right Bank &amp; Branch</h2>
+<p>If your bank account is not with a branch that actively handles <strong>forex transactions</strong>, getting the correct markup rates or onboarding to <strong>FX Retail</strong> can become difficult.</p>
+<h3 id="choosing-the-right-bank">Choosing the Right Bank</h3>
+<p>Based on your comfort and service preference, you can choose between <strong>private banks</strong> or <strong>public sector banks</strong>. Need to pick up a bank which is integrated with FX Retail and preferably with Bharat Connect Forex integration.</p>
+<p>I have used following banks for remittances as seen in this chapter:</p>
+<ul>
+<li>ICICI Bank (Fully online, fastest I have seen but, I couldn&rsquo;t succeed setting up markup rate in FX Retail)</li>
+<li>HDFC Bank (Fully online, fast and good RM/branch support for setting up the markup rates)</li>
+<li>Bank of Baroda (Offline/Slow but very good branch staff support and markup rate setup)</li>
+</ul>
+<h3 id="choosing-the-right-branch">Choosing the Right Branch</h3>
+<p>Not all bank branches handle <strong>LRS remittances</strong> and <strong>FX Retail onboarding</strong> efficiently.</p>
+<p>Prefer branches that are:</p>
+<ul>
+<li><strong>Authorised Dealer (AD) branches</strong></li>
+<li><strong>Forex-focused branches</strong></li>
+<li>Branches that already service <strong>HNI or frequent remittance customers</strong></li>
+</ul>
+<p>Many regular retail branches are unfamiliar with <strong>FX Retail workflows</strong>, which can slow down onboarding and limit your ability to negotiate better FX markup rates.</p>
+
+                </div>
+            </article><nav class="chapter-navigation">
+                <a href="/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/" class="chapter-nav-link chapter-nav-prev">
+                    <span class="nav-direction">← CHAPTER 3</span>
+                    <span class="nav-title">How to Transfer Money Efficiently?</span>
+                </a>
+                <a href="/building-wealth/books/the-global-indian-investor/05-tcs-opportunity-cost/" class="chapter-nav-link chapter-nav-next">
+                    <span class="nav-direction">CHAPTER 5 →</span>
+                    <span class="nav-title">The Opportunity Cost of TCS</span>
+                </a>
+            </nav>
+        </div>
+    </main><div class="book-toc-overlay"></div><script>
+    
+    if (localStorage.getItem('book-theme') === 'auto') {
+        localStorage.removeItem('book-theme');
+        localStorage.removeItem('book-theme-manual');
+    }
+    
+    
+    (function() {
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        const body = document.body;
+        const lightIcon = document.querySelector('.theme-icon-light');
+        const darkIcon = document.querySelector('.theme-icon-dark');
+        
+        if (!themeToggle) return;
+        
+        
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        
+        let currentTheme = localStorage.getItem('book-theme');
+        
+        
+        if (currentTheme === 'auto') {
+            localStorage.removeItem('book-theme');
+            currentTheme = null;
+        }
+        
+        if (!currentTheme) {
+            currentTheme = prefersDark.matches ? 'dark' : 'light';
+        }
+        
+        function applyTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem('book-theme', theme);
+            
+            
+            html.classList.remove('theme-auto', 'theme-light', 'theme-dark');
+            body.classList.remove('theme-auto', 'theme-light', 'theme-dark');
+            
+            
+            html.classList.add('theme-' + theme);
+            body.classList.add('theme-' + theme);
+            
+            console.log('Applied theme:', theme, 'HTML classes:', html.className, 'Body classes:', body.className);
+            
+            
+            if (theme === 'dark') {
+                lightIcon.classList.add('active');
+                darkIcon.classList.remove('active');
+            } else {
+                darkIcon.classList.add('active');
+                lightIcon.classList.remove('active');
+            }
+        }
+        
+        
+        applyTheme(currentTheme);
+        
+        
+        themeToggle.addEventListener('click', function() {
+            
+            localStorage.setItem('book-theme-manual', 'true');
+            
+            
+            const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(nextTheme);
+        });
+        
+        
+        prefersDark.addEventListener('change', function(e) {
+            
+            const wasAuto = !localStorage.getItem('book-theme-manual');
+            if (wasAuto) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    })();
+
+    
+    (function() {
+        const tocToggle = document.querySelector('.book-toc-toggle');
+        const tocSidebar = document.querySelector('.book-toc-sidebar');
+        const tocClose = document.querySelector('.book-toc-close');
+        const tocOverlay = document.querySelector('.book-toc-overlay');
+        const body = document.body;
+        
+        if (!tocToggle || !tocSidebar) return;
+        
+        function openTOC() {
+            tocSidebar.classList.add('active');
+            tocOverlay.classList.add('active');
+            tocToggle.classList.add('active');
+            tocToggle.setAttribute('aria-expanded', 'true');
+            body.style.overflow = 'hidden';
+        }
+        
+        function closeTOC() {
+            tocSidebar.classList.remove('active');
+            tocOverlay.classList.remove('active');
+            tocToggle.classList.remove('active');
+            tocToggle.setAttribute('aria-expanded', 'false');
+            body.style.overflow = '';
+        }
+        
+        tocToggle.addEventListener('click', function() {
+            if (tocSidebar.classList.contains('active')) {
+                closeTOC();
+            } else {
+                openTOC();
+            }
+        });
+        
+        if (tocClose) {
+            tocClose.addEventListener('click', closeTOC);
+        }
+        
+        if (tocOverlay) {
+            tocOverlay.addEventListener('click', closeTOC);
+        }
+        
+        
+        const tocLinks = document.querySelectorAll('.book-toc-list a');
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    closeTOC();
+                }
+            });
+        });
+        
+        
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && tocSidebar.classList.contains('active')) {
+                closeTOC();
+            }
+        });
+    })();
+</script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    </script></body>
+</html>
+
