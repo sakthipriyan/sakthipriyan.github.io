@@ -3,7 +3,7 @@ title: "How to Transfer Money Efficiently?"
 subtitle: "A practical guide to remitting money abroad efficiently under the Liberalised Remittance Scheme (LRS)."
 type: "books"
 chapter: 3
-date: 2026-04-25
+date: 2026-05-09
 author: "Sakthi Priyan H"
 draft: false
 ---

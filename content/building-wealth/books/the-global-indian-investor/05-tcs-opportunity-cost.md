@@ -3,7 +3,7 @@ title: "The Opportunity Cost of TCS"
 subtitle: "How Tax Collected at Source on LRS remittances locks up investment capital — and how Form 122 accelerates recovery."
 type: "books"
 chapter: 5
-date: 2026-04-25
+date: 2026-05-10
 author: "Sakthi Priyan H"
 draft: false
 ---
@@ -266,4 +266,4 @@ In practice, this transforms TCS from a major drag on capital efficiency into a 
 
 ---
 
-> Work In Progress: Writing/Refining further chapters. Stay tuned!
+> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!
