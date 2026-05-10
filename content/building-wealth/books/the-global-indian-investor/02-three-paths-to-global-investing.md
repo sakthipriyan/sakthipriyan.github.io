@@ -162,6 +162,4 @@ When I started Path 3, I set up an Interactive Brokers account via ICICI Direct 
 
 ---
 
-Now that we have examined the three structural paths available to Indian investors, the next chapter explores how to practically set up the infrastructure required for direct international investing.
-
-> Work In Progress: Writing/Refining further chapters. Stay tuned!
+Now that we have examined the three structural paths available to Indian investors, following chapters explore how to practically set up the infrastructure required for direct international investing.
