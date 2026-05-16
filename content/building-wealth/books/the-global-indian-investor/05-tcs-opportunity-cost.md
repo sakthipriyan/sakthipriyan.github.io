@@ -263,7 +263,3 @@ In practice, this transforms TCS from a major drag on capital efficiency into a 
 | **Total Cost** | **₹33,991.77** | **1.58%** | **100.00%** |
 
 > In other words, TCS is not the real problem — delayed recovery is. Use Form 122
-
----
-
-> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!
