@@ -10,23 +10,89 @@ draft: false
 
 > **The Philosophy:** I am a passive, long-term investor who owns the world's most innovative companies via index funds. I am not trying to beat the benchmark; I am trying to **be the benchmark**.
 
-## Why I chose Irish ETFs? 
+## Why I chose Irish ETFs
 
 3 Problems with US ETFs,
-1. Tax Leakage (yearly dividend taxation)
-2. US Estate Tax Risk (above $60,000 assets)
-3. More paperwork for just holding the ETFs (even without any selling)
 
-| Feature | US-Domiciled ETFs ([VOO](https://investor.vanguard.com/investment-products/etfs/profile/voo)/[QQQ](https://invesco.com/qqq-etf/en/home.html)) | Irish UCITS (Acc) ETFs ([CSPX](https://ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund)/[CNDX](https://ishares.com/uk/individual/en/products/253741/ishares-nasdaq-100-ucits-etf)) |
+|  | US-Domiciled ETFs ([VOO](https://investor.vanguard.com/investment-products/etfs/profile/voo)/[QQQ](https://invesco.com/qqq-etf/en/home.html)) | Irish UCITS (Acc) ETFs ([CSPX](https://ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund)/[CNDX](https://ishares.com/uk/individual/en/products/253741/ishares-nasdaq-100-ucits-etf)) |
 | :--- | :--- | :--- |
-| **Withholding Dividend Tax** | 25–30% US Withholding Tax | 15% US Withholding Tax (Treaty) |
-| **Indian Dividend Taxation** <br/> with surcharge + cess | Taxed at your **Slab Rate** annually<br/>Slab rate upto: **35.88%** | **Tax-deferred** until you sell<br/>LTCG after 24m upto: **14.95%** |
-| **Estate Tax Risk** | Up to 40% (on assets >$60k) | **0%** (No US Estate Tax exposure) |
-| **Taxation Paperwork** | To fill [W-8BEN](https://www.irs.gov/forms-pubs/about-form-w-8-ben) (likely once every 3 years) <br> To fill [Form 67](https://www.incometax.gov.in/iec/foportal/help/statutory-forms/popular-form/form67-um) (yearly before ITR) <br/>ITR fill Schedule FA & FSI| ITR fill Schedule FA (FSI only on ETF sale) |
+| 1. **US Estate Tax Risk** | Up to 40% (on assets >$60k) | **0%** (No US Estate Tax exposure) |
+| 2. **Dividend Tax Leakage**| Dividend withholding tax in US and remaining paid in India | Dividends reinvested within the fund - no dividend taxation for the Investor |
+| 3. **Taxation Paperwork** | Irrespective of ETF sale we need to fill, <br>1. [W-8BEN](https://www.irs.gov/forms-pubs/about-form-w-8-ben) (likely once every 3 years) <br/> 2. [Form 67](https://www.incometax.gov.in/iec/foportal/help/statutory-forms/popular-form/form67-um) (yearly before ITR) <br/>3. ITR fill a) Schedule FA & b) Schedule FSI| 1. ITR fill Schedule FA (Schedule FSI only on ETF sale) |
 
-We will look into each of them in detail in this chapter.
+For a long-term Indian investor building global wealth, these three issues—estate tax exposure, dividend tax leakage, and administrative complexity—make US-domiciled ETFs structurally inefficient compared to Irish-domiciled UCITS ETFs.
 
-## Tax Leakage: The Growth vs. IDCW Comparison
+## 1. US Estate Tax Risk
+India currently has **no estate or inheritance tax**, so heirs typically receive the full value of assets held in India.
+
+For residents of India investing in US domiciled assets (US stocks, US ETFs), **U.S. estate tax rules for Non-Resident Aliens (NRAs)** apply. Because there is **no estate-tax treaty between India and the United States**, the exemption is only **$60,000 of US based assets** (US-situs assets).
+
+> In an untimely demise of the Investor, Uncle Sam effectively becomes a primary heir (upto 40% share) to the Investor's US assets (like direct US stocks or US-domiciled ETFs like VOO or VTI).
+
+### India vs US - Estate Tax Comparison
+
+Let's compare Estate Tax across India vs US.
+
+|  | India | United States (NRAs) |
+|---|---|---|
+| Estate / Inheritance tax | None | Yes |
+| Exemption threshold | Unlimited | $60,000 |
+| Tax rates | 0% | 18% → 40% progressive (Table shown below) |
+| Max rate | 0% | 40% |
+| Applies to | All assets | US-situs assets only (both invested and growth) |
+| Treaty relief | Not applicable | None for India |
+| When applied | Never | At death before transfer to heirs |
+
+### Estate Tax Exposure by Portfolio Size
+
+First $13,000 tax is exempted, which effectively offsets the tax on the first $60,000 of asset value.
+
+| Asset Value Range | Tax on Base Amount | Marginal Rate on Excess | Effective Net Tax <br/> (After $13k Exempted) |
+| :--- | :--- | :--- | :--- |
+| **$0 – $60,000** | $0 | 18% – 24% | **$0** (Exemption Threshold) |
+| **$60,001 – $80,000** | $13,000 | 26% | **$5,200** |
+| **$80,001 – $100,000** | $18,200 | 28% | **$10,800** |
+| **$100,001 – $150,000** | $23,800 | 30% | **$25,800** |
+| **$150,001 – $250,000** | $38,800 | 32% | **$57,800** |
+| **$250,001 – $500,000** | $70,800 | 34% | **$142,800** |
+| **$500,001 – $750,000** | $155,800 | 37% | **$235,300** |
+| **$750,001 – $1,000,000**| $248,300 | 39% | **$332,800** |
+| **Over $1,000,000** | $345,800 | 40% | **$332,800 + 40% of excess** |
+
+Sources: 
+- [Estate tax for nonresidents not citizens of the United States
+](https://www.irs.gov/businesses/small-businesses-self-employed/estate-tax-for-nonresidents-not-citizens-of-the-united-states)
+- [Instructions for Form 706 (09/2025) > Part II—Tax Computation > Table A—Unified Rate Schedule](https://www.irs.gov/instructions/i706#f16779e20)
+
+### Portfolio Projection 
+Calculating when the portfolio breaches the $60,000 tax-exempt boundary.
+
+**Parameters**: **12%** Expected Growth (S&P 500 in USD) | **10%** Annual Hike | **30-Year** Horizon
+
+| Initial Monthly Investment | Total Invested | Final Portfolio | Year Crossing $60k | Projection |
+|---:|---:|---:|---|---|
+| $100 | $197,364 | $798,334 | Year 14 | [RealValue SIP Engine](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202601c0lm0.1kg12h10i0t0p30y) |
+| $500 | $986,964 | $3,992,988 | Year 6 | [RealValue SIP Engine](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202601c0lm0.5kg12h10i0t0p30y) |
+| $1,000 | $1,973,916 | $7,985,892 | Year 4 | [RealValue SIP Engine](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202601c0lm1kg12h10i0t0p30y) |
+| $5,000 | $9,869,664 | $39,929,214 | Year 1 | [RealValue SIP Engine](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202601c0lm5kg12h10i0t0p30y) |
+
+Read ₹ as $ in the projection links. You can use **RealValue SIP Engine** to project using your investment parameters to find out when you will cross $60k limit. Usually sooner than you anticipate.
+
+### Asset Liquidity & Processing Timelines
+
+The "time-to-liquidity" for heirs is dictated by the asset's legal domicile and the account's ownership structure. Transitioning assets after an investor's demise involves a significant "liquidity lock" that varies based on whether the IRS is involved in the clearance process.
+
+| Scenario | Estimated Timeline | Primary Bottleneck |
+| :--- | :--- | :--- |
+| **With US Assets** (Situs Assets) | **18 – 24 Months** | **The Federal Block:** The mandatory **IRS "Transfer Certificate" (Form 5173)**. This "hard" bottleneck is subject to the manual review cycle of the IRS International Estate Tax department; brokers are legally barred from releasing assets without this clearance. |
+| **Non-US Assets** (UCITS) | **2 Weeks – 12 Months** | **Account Structure Dependent:** Transition ranges from **2–6 weeks** (Joint/TOD) to **6–12 months** (Individual). Individual accounts face a "soft" bottleneck requiring **Succession Proof** (Legal Heir Certificate or Probate) to satisfy international compliance. |
+
+> Using Irish ETFs removes US Estate Tax and also reduces the transitioning timeline.
+
+*Note: A detailed breakdown of account ownership structures (Joint vs. Individual) and specific succession planning strategies will be explained in the next chapter.*
+
+
+## 2. Tax Leakage: The Growth vs. IDCW Comparison
 
 Choosing between a US-domiciled and an Ireland-domiciled ETF is essentially a choice between an **IDCW (Income Distribution)** and a **Growth** strategy. For Indian residents, the ETF's domicile determines both the tax rate and whether those taxes can be deferred.
 
@@ -41,6 +107,9 @@ The table below illustrates the "tax leakage" that occurs before dividends can b
 
 | Feature | US-Domiciled ETF | Ireland-Domiciled ETF |
 | :--- | :--- | :--- |
+| **Withholding Dividend Tax** | 25–30% US Withholding Tax | 15% US Withholding Tax (Treaty) |
+| **Indian Dividend Taxation** <br/> with surcharge + cess | Taxed at your **Slab Rate** annually<br/>Slab rate upto: **35.88%** | **Tax-deferred** until you sell<br/>LTCG after 24m upto: **14.95%** |
+
 | **Dividend Strategy** | Mandatory Distribution (IDCW) | Accumulating (Growth) available |
 | **Internal Tax Leakage** | **25%** (With W-8BEN) or **30%** | **15%** (US-Ireland Tax Treaty) |
 | **Tax Deferral** | **No.** Taxes paid annually on dividend receipts. | **Yes.** Taxes deferred until sale. |
@@ -301,3 +370,24 @@ Before buying, compare the current market price against the previous day's NAV t
 ## TODO
 - Add S&P 500, World, ACWI ETF detailed comparison tables
 - Add justETF portfolio builder examples
+
+
+---
+
+| **Individual Account**<br/>No Transfer on Death (TOD) | **6 – 12 Months** | **Succession Proof:** The requirement to obtain a **Legal Heir Certificate** or **Probate** in India to satisfy international compliance. This "soft" bottleneck is largely consumed by local administrative and legal procedures in India. |
+| **Joint Account (JTWROS) / No US Assets** | **2 – 6 Weeks** | Standard broker verification of death certificate; bypasses probate and IRS clearance. |
+
+
+
+
+### Asset Liquidity & Processing Timelines
+
+The "time-to-liquidity" for heirs is dictated by the asset's legal domicile and the account's ownership structure. Transitioning assets after a death involves a significant "liquidity lock" that varies based on whether the IRS is involved in the clearance process.
+
+| Scenario | Estimated Timeline | Primary Bottleneck (Including Key Friction Points) |
+| :--- | :--- | :--- |
+| **With US Assets**<br/>(US Situs Assets) | **18 – 24 Months** | **The Federal Block:** The mandatory **IRS "Transfer Certificate" (Form 5173)**. US brokers are legally barred from releasing significant assets without this "hard" bottleneck, which is subject to the manual review cycle of the IRS International Estate Tax department. |
+| **No US Assets** | **few weeks to 12 months** | Timeline depends on account structure viz., Individual Account or Joint Account. But, IRS dependency is gone. |
+
+
+> Using a **Joint Account** (JTWROS - Joint Tenants with Right of Survivorship) with **non-US assets (UCITS)** effectively reduces this transition period to a matter of weeks, as it bypasses both the IRS audit and the legal heir certification process.
