@@ -3009,7 +3009,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             // CAS parsing engine (cas.html stateful line-by-line approach)
             processParsedText(rawText, casExtractedName) {
                 // --- ENHANCED SANITIZER (cas.html): remove Registrar column bleed + stray RTAs ---
-                rawText = rawText.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
+                rawText = rawText.replace(/Registrar\s*:\s*(?:CAMS|KFINTECH|KARVY|LINK\s*INTIME)/gi, '');
                 rawText = rawText.replace(/Registrar\s*:/gi, '');
                 rawText = rawText.replace(/\b(KFINTECH|CAMS)\b/gi, '');
 
