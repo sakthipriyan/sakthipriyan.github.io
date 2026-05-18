@@ -251,7 +251,7 @@
 
 function parseCASData(fullText, leftColumnText) {
             // --- GLOBAL TEXT SANITIZER ---
-            let sanitizedText = fullText.replace(/Registrar\s*:\s*[A-Za-z]+/gi, '');
+            let sanitizedText = fullText.replace(/Registrar\s*:\s*(?:CAMS|KFINTECH|KARVY|LINK\s*INTIME)/gi, '');
             sanitizedText = sanitizedText.replace(/Registrar\s*:/gi, ''); 
             sanitizedText = sanitizedText.replace(/\b(KFINTECH|CAMS)\b/gi, ''); 
             
