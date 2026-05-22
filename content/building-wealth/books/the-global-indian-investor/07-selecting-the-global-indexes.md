@@ -42,6 +42,55 @@ Unlike traditional exchange-traded funds (ETFs), Gold ETCs are legally structure
 
 Most modern gold ETCs are **physically backed**, meaning that gold bullion is held in secure vaults (typically in London) and acts as collateral for the securities issued to investors.
 
+### A Gold Comparison
+
+Let's compare Indian Gold ETFs/Mutual Funds vs Irish Gold ETCs
+
+#### Summary
+
+
+| Instrument | Min Cost (%) | Max Cost (%) |
+| :--- | :---: | :---: |
+| Indian Gold Mutual Funds (FoFs) | 0.70 | 1.50 |
+| Indian Gold ETFs | 0.50 | 0.80 |
+| Irish Gold ETCs | 0.11 | 0.12 |
+
+Min and Max cost based on filtered list of Top 3 AUM and Top 3 TER rankings.
+<!-- Because the gold is held in **large institutional bars (~12.5kg)**, costs and spreads are very low. -->
+
+#### Indian Gold Mutual Funds (FoFs)
+
+| Fund Name | ISIN | AUM | FoF TER | ETF TER | Total TER | Rank |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| SBI Gold Fund | INF200K01UT3 | ~₹15,691 Cr | 0.25% | 0.65% | 0.90% | AUM #1 |
+| HDFC Gold Fund | INF179K01NZ6 | ~₹11,464 Cr | 0.20% | 0.59% | 0.79% | AUM #2 |
+| Nippon India Gold Savings | INF204K01MG3 | ~₹7,178 Cr | 0.05% | 0.81% | 0.86% | AUM #3, TER #1 |
+| Kotak Gold Fund | INF109K01AD6 | ~₹6,693 Cr | 0.16% | 0.52% | 0.68% | TER #2 |
+| Axis Gold Fund | INF846K01EP9 | ~₹2,888 Cr | 0.18% | 0.58% | 0.76% | TER #3 |
+
+#### Top Indian Gold ETFs
+
+| ETF Name | ISIN | AUM (Rs Cr) | TER (%) | Rank (#) |
+| :--- | :--- | :--- | :--- | :--- |
+| Nippon India ETF Gold BeES | INF204KB17I5 | 55,540 | 0.81 | AUM #1 |
+| SBI Gold ETF | INF200KA16D8 | 24,549 | 0.65 | AUM #2 |
+| Kotak Gold ETF | INF174KA1HJ8 | 14,339 | 0.52 | AUM #3, TER #1 |
+| HDFC Gold ETF | INF179KC1981 | 4,200 | 0.59 | TER #3 |
+| Axis Gold ETF | INF846K01W80 | 3,500 | 0.58 | TER #2 |
+
+#### Irish Gold ETCs
+
+Following are [Irish Gold ETCs](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-preciousMetals&index=Gold&dc=IE&quoteCurrency=USD) which can be explored.
+
+| Fund Name | ISIN | AUM ($million) | TER | USD Ticker | Rank # |
+| :--- | :--- | ---: | :--- | :--- | :--- |
+| iShares Physical Gold ETC | IE00B4ND3602 | 37,627 | 0.12% | IGLN | AUM #1, TER #2 |
+| Invesco Physical Gold ETC | IE00B579F325 | 29,100 | 0.12% | SGLD | AUM #2, TER #2 |
+| Amundi Physical Gold ETC (C) | FR0013416716 | 12,229 | 0.12% | GLDD | AUM #3, TER #2 |
+| Xtrackers IE Physical Gold ETC Securities | DE000A2T0VU5 | 6,949 | 0.11% | XGDU | TER #1 |
+
+As seen above TER is very competitive 0.11% to 0.12%.
+
 ### Key Characteristics of Gold ETCs
 
 #### 1. Direct Exposure to Gold Price
@@ -250,30 +299,3 @@ For investors seeking a simple gold allocation without dealing with physical bul
 
 
 
-## Gold ETCs
-
-
-
-https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-preciousMetals&index=Gold&dc=IE&quoteCurrency=USD
-
-
-
-Fund name	Chart 4 w	Fund size
-(in m $)	TER p.a.	52 w low/high	1Y
-in %	3Y
-in %	5Y
-in %	Distribution	Replication	ISIN	 
-
-
-
-
- 	iShares Physical Gold ETC	Chart	37,717	0.12%	Graph	42.36%	130.60%	141.28%	Accumulating	Physically
-backed	IE00B4ND3602	
- 	Invesco Physical Gold ETC	Chart	29,277	0.12%	Graph	42.36%	130.60%	141.32%	Accumulating	Physically
-backed	IE00B579F325	
- 	Amundi Physical Gold ETC (C)	Chart	12,330	0.12%	Graph	42.31%	130.52%	141.48%	Accumulating	Physically
-backed	FR0013416716	
- 	Xtrackers IE Physical Gold ETC Securities	Chart	6,985	0.11%	Graph	42.34%	130.61%	140.97%	Accumulating	Physically
-backed	DE000A2T0VU5	
- 	HANetf The Royal Mint Responsibly Sourced Physical Gold ETC	Chart	1,641	0.22%	Graph	42.11%	129.60%	139.83%	Accumulating	Physically
-backed	XS2115336336
