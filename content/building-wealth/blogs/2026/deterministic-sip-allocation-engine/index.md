@@ -1,6 +1,6 @@
 ---
 title: "Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator"
-date: 2026-05-22
+date: 2026-05-23
 draft: false
 type: "blogs"
 wealth_tags:
@@ -9,287 +9,256 @@ wealth_tags:
   - Rebalancing
   - RealValue Engines
 
-summary: "How I upgraded my *RealValue Family SIP Allocator* from a proportional cash-deficit allocation to a drift-equalization engine and why it reduced structural portfolio variance by 66%."
+summary: "How I upgraded my *RealValue Family SIP Allocator* from a proportional drift allocation model to a even drift optimization model and why it reduced structural portfolio variance by 66%."
 ---
+## From Proportional Drift to Even Drift Optimization: Rethinking Portfolio Rebalancing
 
-The way average retail investors execute their monthly investments is fundamentally "dumb". 
-They set up a static SIP (I was there!) — a fixed amount into each fund — and let it run. 
-The AMCs execute it blindly, completely ignoring the fact that the actual portfolio is drifting from its target risk profile.
-Eventually doing a calendar based or threshold based rebalancing and paying tax and timing risk.
+When I switched from static SIP allocation to cashflow rebalancing 3–4 years ago, it was already a major upgrade.
 
-Earlier published [Perpetual Rebalancing: A Practical Framework for Long-Term Wealth](/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/).   
-I mentioned **"Allocate fresh investments proportionally to underweight assets"** under *1. Drift-Proportional Buying (Monthly, No Selling)* section.
+Instead of blindly investing fixed percentages every month, new capital was dynamically allocated toward underweight assets. Recently, I published that engine publicly as the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)**.
 
+But over the last few months, after adding detailed drift visualizations and studying month-over-month portfolio behavior, I realized something important:
 
+> Simply reducing drift is not enough.
+> The real objective is reducing drift imbalance across the entire portfolio.
 
+That realization led to the evolution from **Proportional Drift Allocation** to **Even Drift Optimization**.
 
-When I built the first version of the **RealValue Family SIP Allocator**, I wanted to fix this. I built a dynamic engine that calculated the exact cash deficit of every asset in my family's portfolio and allocated our monthly capital proportionally to fill those holes.
+Read [Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It)](why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/) if you are new to cashflow rebalancing.
 
-It worked. But as the portfolio scaled, I realized it had a structural flaw. It was leaving "drift debt" on the table, introducing uncompensated variance, and failing to fully capture the mathematical alpha of rebalancing.
+This post specifically details the evolution of the allocator model itself.
 
-So I tore it down and rebuilt it.
+## The Original Model: Proportional Drift Allocation
 
-This post documents that evolution — from a reactive "Cash-Deficit" script to an institutional-grade "Even-Drift Equalization" engine — and why it dropped my portfolio's structural drift variance by over **66%**.
+The original allocator followed a fairly intuitive rule:
 
-## The Setup: A Constrained Family Portfolio
+> Allocate new investments proportional to how far each asset is from its target allocation.
 
-Before diving into the engine, it helps to understand the real-world constraints I was working within.
+So:
 
-My family's portfolio has a fixed target allocation across seven asset classes:
+1. If an asset is underweight by 2%, allocate more.
+2. If another asset is underweight by 1%, allocate less.
+3. If an asset is overweight, stop allocating.
 
-| Asset Class  | Target |
-| ------------ | -----: |
-| Nasdaq 100   |    40% |
-| Nifty 50     |    20% |
-| Next 50      |    10% |
-| Midcap 150   |    10% |
-| Smallcap 250 |     5% |
-| Gold         |    10% |
-| Debt         |     5% |
+Simple. Logical. Efficient.
 
-The monthly SIP is split across two investors: one with international access (Nasdaq 100 eligible) and one without, due to TCS and remittance constraints. This is a hard constraint the engine must respect — it is not just a preference.
+Using current market values (May 23, 2026) and the next monthly investment cycle, the allocator produced the following result.
 
----
+| Asset Class  |      Target |  Pre Actual | Pre Drift | Allocation Share | Post Actual | Post Drift |
+| ------------ | ----------: | ----------: | --------: | ---------------: | ----------: | ---------: |
+| Nasdaq 100   |      40.00% |      39.90% |    -0.10% |           19.50% |      39.39% |     -0.61% |
+| Nifty 50     |      20.00% |      18.00% |    -2.00% |           43.75% |      18.64% |     -1.36% |
+| Next 50      |      10.00% |       9.30% |    -0.70% |           16.75% |       9.48% |     -0.52% |
+| Midcap 150   |      10.00% |       9.51% |    -0.49% |           13.00% |       9.60% |     -0.40% |
+| Smallcap 250 |       5.00% |       4.73% |    -0.27% |            7.00% |       4.79% |     -0.21% |
+| Debt         |       5.00% |       6.10% |    +1.10% |            0.00% |       5.95% |     +0.95% |
+| Gold         |      10.00% |      12.47% |    +2.47% |            0.00% |      12.16% |     +2.16% |
+| **Total**    | **100.00%** | **100.00%** | **3.57%** |      **100.00%** | **100.00%** |  **3.10%** |
 
-## V1: The Cash Deficit Model
+At first glance, this looks good.
 
-The original engine used a simple approach:
+* Every asset moved closer to its target allocation.
+* Total portfolio drift reduced.
+* Underweight assets received most of the capital.
 
-1. Compute the target rupee value for every asset based on the new total portfolio size (current + new SIP).
-2. Calculate the **cash deficit** for each underweight asset.
-3. Allocate the SIP proportionally to those deficits.
-4. Skip overweight assets entirely.
+But there was a deeper structural issue.
 
-This feels intuitive. An asset that is "missing" more money should receive more capital. And it does work — in the short term.
+The portfolio remained uneven after allocation.
 
----
+Some assets became nearly aligned while others remained significantly misaligned.
 
-## The Problem I Observed
+For example:
 
-One month I noticed something strange. Even after deploying the SIP, some assets moved toward their target while others drifted *further away*.
+* Smallcap 250 ended at **-0.21% drift**
+* Midcap 150 ended at **-0.40% drift**
+* But Nifty 50 still remained deeply underweight at **-1.36% drift**
 
-**Pre-allocation state (real data, May 2026):**
+Over time, this created unstable correction behavior:
 
-| Asset Class  | Target | Actual  |    Drift |
-| ------------ | -----: | ------: | -------: |
-| Nasdaq 100   |    40% |  39.79% |  −0.21% |
-| Nifty 50     |    20% |  17.99% |  −2.01% |
-| Next 50      |    10% |   9.29% |  −0.71% |
-| Midcap 150   |    10% |   9.53% |  −0.47% |
-| Smallcap 250 |     5% |   4.75% |  −0.25% |
-| Debt         |     5% |   6.11% |  +1.11% |
-| Gold         |    10% |  12.54% |  +2.54% |
+* some assets repeatedly stayed under-corrected
+* others oscillated near target
+* post-allocation drift patterns changed unpredictably month to month
 
-The V1 engine identified Nifty 50's massive −2.01% drift and gave it the largest allocation (43% of the SIP). But when I looked at the *post-allocation* drift:
+The portfolio kept “improving,” but rarely converged toward a stable equilibrium state.
 
-**V1 Post-allocation drift:**
+The problem was subtle:
 
-| Asset Class  | % of SIP |  Post-Drift |
-| ------------ | -------: | ----------: |
-| Nasdaq 100   |   21.25% |     −0.68% |
-| Nifty 50     |   43.13% |     −1.38% |
-| Next 50      |   16.88% |     −0.52% |
-| Midcap 150   |   12.50% |     −0.40% |
-| Smallcap 250 |    6.25% |     −0.21% |
-| Debt         |    0.00% |     +0.96% |
-| Gold         |    0.00% |     +2.23% |
+> Proportional drift allocation optimizes individual assets locally.
+> It does not optimize the portfolio globally.
 
-Nifty 50 received 43% of the capital and *still* ended up at −1.38%. The allocator was plugging holes, not solving the system.
+## The New Model: Even Drift Optimization
 
-The drift was **scattered** — ranging from −0.21% to −1.38% across the equity universe. Standard deviation across the five equity assets: **0.45%**.
-
-At first this looked like a bug. It wasn't.
-
----
-
-## The Hidden System Dynamic
-
-The issue was structural. The engine was solving local cash deficits but ignoring global portfolio expansion.
-
-When the portfolio grows by the SIP amount, the *target* values for every asset also grow — proportionally to their allocation weight.
-
-```
-For every ₹100 added to the portfolio,
-Nasdaq 100's target value increases by ₹40.
-Nifty 50's target value increases by ₹20.
-```
-
-This means every asset is simultaneously "running uphill." An asset at 40% weight faces four times the target expansion of an asset at 10% weight. The cash-deficit model completely ignores this dynamic. It only looks at the *current* gap, not the gap that will exist *after* the portfolio grows.
-
-This creates what I call **Drift Debt** — unresolved imbalance that silently compounds into future allocation pressure, month after month.
-
----
-
-## The Realization
-
-The portfolio was not a collection of independent assets. It was a **constrained dynamic system**.
+The new model changes the optimization objective entirely.
 
 Instead of asking:
 
-> "Which asset needs the most cash?"
+> “How much should each asset get proportional to its drift?”
 
-the right question is:
+It asks:
 
-> "What is the tightest achievable equilibrium state the entire system can be forced into?"
+> “What allocation creates the most evenly distributed residual drift across the portfolio?”
 
-That leads to a completely different formulation.
+This is a fundamentally different optimization problem.
 
----
+Instead of minimizing drift independently, the optimizer minimizes **drift dispersion**.
 
-## V2: Even-Drift Equalization
+The goal becomes:
 
-The upgraded engine uses **Tracking Error Minimization** — the same principle behind institutional cash-flow rebalancing and direct indexing platforms. The idea: minimize the *variance* of post-allocation drifts across the portfolio.
+> Push the entire portfolio toward the tightest achievable equilibrium state.
 
-### The Core Insight: Drifts Must Sum to Zero
+Using the exact same portfolio and same monthly contribution, the new optimizer produced this allocation:
 
-In a fully-invested portfolio (100% allocated), the sum of all drifts is always exactly zero. Positive drift in overweight assets must be perfectly offset by negative drift in underweight assets.
+| Asset Class  |      Target |  Pre Actual | Pre Drift | Allocation Share | Post Actual | Post Drift |
+| ------------ | ----------: | ----------: | --------: | ---------------: | ----------: | ---------: |
+| Nasdaq 100   |      40.00% |      39.90% |    -0.10% |           16.63% |      39.32% |     -0.68% |
+| Nifty 50     |      20.00% |      18.00% |    -2.00% |           71.00% |      19.32% |     -0.68% |
+| Next 50      |      10.00% |       9.30% |    -0.70% |           10.38% |       9.32% |     -0.68% |
+| Midcap 150   |      10.00% |       9.51% |    -0.49% |            2.00% |       9.32% |     -0.68% |
+| Smallcap 250 |       5.00% |       4.73% |    -0.27% |            0.00% |       4.61% |     -0.39% |
+| Debt         |       5.00% |       6.10% |    +1.10% |            0.00% |       5.95% |     +0.95% |
+| Gold         |      10.00% |      12.47% |    +2.47% |            0.00% |      12.16% |     +2.16% |
+| **Total**    | **100.00%** | **100.00%** | **3.57%** |      **100.00%** | **100.00%** |  **3.10%** |
 
-This is not an approximation — it is a mathematical identity.
+At first, the allocation looks counterintuitive.
 
-**In our portfolio, Gold and Debt are overweight:**
+* Nifty 50 receives dramatically more capital
+* Midcap receives almost nothing
+* Smallcap receives zero
+* Allocation is no longer proportional
 
-| Asset | Post-Drift (locked) |
-| ----- | ------------------: |
-| Gold  |              +2.23% |
-| Debt  |              +0.96% |
-| Total |              +3.19% |
+But the post-allocation structure reveals the real breakthrough.
 
-Since these assets receive zero new allocation (they're already overweight), their post-drift is determined purely by how much the portfolio grows around them. And since total drift must sum to zero, the remaining equity assets must collectively absorb **−3.19%** of drift.
+## The Breakthrough: Drift Band Compression
 
-### The Iterative Algorithm
+The key improvement is not just lower drift.
 
-The engine finds the optimal equilibrium in up to N+2 iterations:
+It is **drift band compression**.
 
-1. **Seed the fixed set.** Mark all individually overweight assets, and all assets in overweight groups (e.g., Debt + Gold exceed their "Defense" group cap), as fixed at 0 allocation.
+### Old Model: Wide Residual Drift Spread
 
-2. **Compute locked drift.** For each fixed asset:
-   `locked drift = currentValue / newPortfolioTotal − targetPercent`
+| Asset Class  | Post Drift |
+| ------------ | ---------: |
+| Nifty 50     |     -1.36% |
+| Nasdaq 100   |     -0.61% |
+| Next 50      |     -0.52% |
+| Midcap 150   |     -0.40% |
+| Smallcap 250 |     -0.21% |
 
-3. **Derive remaining drift budget.**
-   `remaining budget = −(sum of locked drifts)`
+Negative drift range:
 
-4. **Calculate target drift.** Divide the remaining budget equally across all solvable assets:
-   `target drift = remaining budget / N`
+> -1.36% to -0.21%
 
-5. **Constraint check.** For each solvable asset, compute the required allocation:
-   `required = (targetPercent + targetDrift) × newTotal − currentValue`
-   If any required allocation is *negative* (would require selling), move that asset to the fixed set and restart from Step 2.
+Spread:
 
-6. **Converge.** Stop when all solvable assets require positive allocations.
+> 1.15 percentage points
 
-### Iteration 1 (this portfolio):
+The portfolio still carried large imbalance concentration.
 
-- **Fixed:** Debt (+1.11% locked drift), Gold (+2.54% locked drift)
-- **Locked drift sum:** +3.19% (roughly — exact post-SIP values used)
-- **Remaining budget:** −3.19%
-- **N = 5** (Nasdaq, Nifty, Next 50, Midcap, Smallcap)
-- **Target drift:** −3.19% ÷ 5 = **−0.638%**
-- **Constraint check:** Smallcap 250 (at −0.25%) would need a *negative* allocation to reach −0.638%. → Move to fixed set, restart.
+Some assets remained heavily underweight while others became nearly balanced.
 
-### Iteration 2:
+### New Model: Equilibrium Drift Compression
 
-- **Fixed:** Debt, Gold, Smallcap 250 (locked at its natural post-SIP drift of ≈ −0.37%)
-- **New locked drift sum:** +2.82%
-- **Remaining budget:** −2.82%
-- **N = 4** (Nasdaq, Nifty, Next 50, Midcap)
-- **Target drift:** −2.82% ÷ 4 = **−0.705%**
-- **Constraint check:** All four assets require positive allocations. ✓ **Converged.**
+| Asset Class  | Post Drift |
+| ------------ | ---------: |
+| Nasdaq 100   |     -0.68% |
+| Nifty 50     |     -0.68% |
+| Next 50      |     -0.68% |
+| Midcap 150   |     -0.68% |
+| Smallcap 250 |     -0.39% |
 
-The engine then computes the precise allocation for each asset to hit −0.705% post-drift simultaneously.
+Negative drift range:
 
----
+> -0.68% to -0.39%
 
-## The Results
+Spread:
 
-**V2 Post-allocation drift (same ₹8L SIP, same portfolio):**
+> 0.29 percentage points
 
-| Asset Class  | % of SIP |  Post-Drift |
-| ------------ | -------: | ----------: |
-| Nasdaq 100   |   20.00% |     −0.71% |
-| Nifty 50     |   70.00% |     −0.71% |
-| Next 50      |   10.00% |     −0.69% |
-| Midcap 150   |    0.00% |     −0.71% |
-| Smallcap 250 |    0.00% |     −0.37% |
-| Debt         |    0.00% |     +0.96% |
-| Gold         |    0.00% |     +2.23% |
+That is approximately a:
 
-**Drift variance comparison (equity universe):**
+> 75% compression in residual negative drift band
 
-| Metric               | V1 (Cash Deficit) | V2 (Even-Drift) | Improvement |
-| -------------------- | ----------------: | --------------: | ----------: |
-| Std deviation        |            0.448% |          0.150% |       −66% |
-| Spread (max − min)   |            1.167% |          0.343% |       −71% |
-| Convergence set spread |        —        |          0.018% |           — |
+The optimizer intentionally synchronizes residual imbalance across assets.
 
-The four assets in the convergence set (Nasdaq, Nifty, Next 50, Midcap) achieved a post-drift spread of just **0.018%** — essentially simultaneous equilibrium.
+Instead of:
 
-Note what the engine did: it aggressively funneled **70% of the SIP into Nifty 50** — the asset dragging the system's standard deviation the most — while intentionally giving zero to Midcap and Smallcap, because giving them capital would *worsen* the overall system variance. This is counterintuitive if you think in cash terms. It is mathematically obvious if you think in drift terms.
+* some assets being “very wrong”
+* and others being “almost correct”
 
----
+…the portfolio converges toward a common equilibrium state.
 
-## Why This Matters
+## Variance Reduction: The Real Optimization Signal
 
-### Variance Drag Elimination
+Traditional rebalancing systems mostly measure:
 
-Uncompensated tracking error is a silent tax on long-term compound growth. A portfolio that continuously runs at −1.38% in one asset and −0.21% in another is structurally inefficient. That asymmetry means the portfolio is not capturing the rebalancing premium it theoretically should.
+* individual drift reduction
+* distance from target
 
-### The Rebalancing Premium (Shannon's Demon)
+But the more important metric is:
 
-The even-drift engine mechanically guarantees that you are buying the *cheapest relative asset at maximum volume* every single month. This is not market timing — it is **geometrically optimal cash-flow deployment**. Shannon's Demon shows that rebalancing a volatile portfolio generates a return bonus above the weighted average of components. The V2 engine extracts this premium at maximum efficiency.
+> Drift variance across the portfolio.
 
-### Deterministic, Explainable Outcomes
+Because variance measures how unevenly imbalance is distributed.
 
-The V1 engine produced different results depending on which assets happened to be most underweight that month. The V2 engine produces a mathematically predictable outcome. Given the same portfolio state, the same SIP will always produce the same result. This matters for systematic investors who want to understand — and verify — their own system.
+The old proportional model reduced drift magnitude but still left imbalance concentrated in specific assets.
 
-### No Drift Debt
+The new optimizer minimizes imbalance dispersion itself.
 
-The V1 engine carried residual imbalance forward every month. Nifty at −1.38% is not just an aesthetic problem — it is structural vulnerability that compounds. V2 forces the maximum achievable correction in a single pass.
+| Model                         | Residual Drift Characteristics         |
+| ----------------------------- | -------------------------------------- |
+| Proportional Drift Allocation | Uneven residual drift distribution     |
+| Even Drift Optimization       | Harmonized residual drift distribution |
 
----
+| Model                         | Negative Drift Band |
+| ----------------------------- | ------------------: |
+| Proportional Drift Allocation |               1.15% |
+| Even Drift Optimization       |               0.29% |
 
-## What This Is NOT
+This is the key conceptual shift:
 
-This is not:
+| Old Model                | New Model                     |
+| ------------------------ | ----------------------------- |
+| Reduce individual drift  | Reduce drift dispersion       |
+| Local optimization       | Global optimization           |
+| Asset-centric correction | Portfolio equilibrium seeking |
+| Correction magnitude     | Structural balance            |
 
-* market prediction or timing,
-* AI or machine learning,
-* alpha forecasting,
-* tactical or dynamic asset allocation.
+## Why This Changes SIP Allocation Fundamentally
 
-It is **control systems engineering** applied to a financial portfolio. The goal is not predicting returns — it is maintaining portfolio integrity with every rupee deployed.
+Traditional SIP systems were designed primarily for simplicity:
 
-Think of it as the difference between a thermostat that turns the heater on when it feels cold (V1) versus one that continuously adjusts the heat output to minimize temperature deviation from setpoint across all rooms simultaneously (V2).
+* fixed monthly contribution
+* fixed allocation percentages
+* periodic rebalancing
 
----
+But portfolios are dynamic systems.
 
-## Investor Constraints Are First-Class Citizens
+And dynamic systems require adaptive correction mechanisms.
 
-One often-overlooked aspect of real family portfolios: **not all capital is fungible**.
+Even Drift Optimization effectively turns SIP allocation into:
 
-In this portfolio, one investor cannot access international assets due to TCS regulations. The engine handles this as a hard constraint during investor-level capital distribution — after the asset-level drift equalization is complete. The same framework works with slab-rate investors, TCS-applicable accounts, and multi-member SIPs.
+* perpetual rebalancing
+* continuous equilibrium seeking
+* flow-based portfolio stabilization
 
----
+The portfolio becomes self-correcting every month using incoming cashflows alone.
 
-## Try It
+No selling required.
 
-The updated algorithm is live in the [RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/).
+## Final Thought
 
-Import your portfolio, set your monthly SIP amounts, and look at the Post Allocation Drift column in the Allocation Report table. The convergence-set assets will show nearly identical drift values — proof that the engine found the equilibrium point.
+The original proportional drift allocator was already a major improvement over static SIP allocation.
 
----
+But Even Drift Optimization represents the next evolution.
 
-## Final Thoughts
+It reframes portfolio management from:
 
-I originally thought I was building a SIP calculator. What emerged instead was a constrained equilibrium engine for continuous portfolio maintenance.
+> “How do we allocate money?”
 
-The surprising part is that the complexity did not come from overengineering. It emerged naturally from observing real system failures:
+to:
 
-* drift worsening after buying,
-* unstable month-to-month allocation patterns,
-* unresolved structural imbalance compounding silently.
+> “What is the tightest achievable equilibrium state this portfolio can reach with finite monthly cashflows?”
 
-Most retail investing tools think in terms of **cash flow**. Very few think in terms of **portfolio geometry**. That distinction fundamentally changes allocator behavior.
+That is a far deeper optimization problem.
 
-Good engineering often looks like this — local heuristics break, system constraints become visible, equilibrium models emerge.
-
-If you are serious about passive investing, you cannot rely on "dumb" static SIPs. Wealth generation is a systems engineering problem. The tighter your logic, the fewer leaks in your compounding.
+And likely where the next generation of portfolio construction systems will evolve.
