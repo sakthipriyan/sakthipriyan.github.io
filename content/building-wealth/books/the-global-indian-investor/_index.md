@@ -83,6 +83,6 @@ This book is an attempt to consolidate the knowledge spread across these places.
 
 ## Start Reading
 
-Begin with [Chapter 1: Why Beyond India?](01-why-beyond-india.md) or jump to any chapter that interests you.
+Begin with [Chapter 1: Why Beyond India?](01-why-beyond-india) or jump to any chapter that interests you.
 
 > **Remember**: Global diversification is not about chasing returns abroad—it's about reducing concentration risk and owning the world's best businesses.

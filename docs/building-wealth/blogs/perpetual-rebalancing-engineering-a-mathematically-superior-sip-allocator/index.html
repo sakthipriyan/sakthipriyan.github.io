@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator | Sakthi Priyan H</title>
+    <meta name="description" content="How I upgraded my RealValue Family SIP Allocator from a proportional drift allocation model to a even drift optimization model and why it reduced structural portfolio variance by 66%."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/books/">Books</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator</h1>
+    <p class="content-summary">How I upgraded my *RealValue Family SIP Allocator* from a proportional drift allocation model to a even drift optimization model and why it reduced structural portfolio variance by 66%.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-05-23">May 23, 2026</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">5 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h2 id="from-proportional-drift-to-even-drift-optimization-rethinking-portfolio-rebalancing">From Proportional Drift to Even Drift Optimization: Rethinking Portfolio Rebalancing</h2>
+<p>When I switched from static SIP allocation to cashflow rebalancing 3–4 years ago, it was already a major upgrade.</p>
+<p>Instead of blindly investing fixed percentages every month, new capital was dynamically allocated toward underweight assets. Recently, I published that engine publicly as the <strong><a href="/building-wealth/tools/realvalue-family-sip-allocator/">RealValue Family SIP Allocator</a></strong>.</p>
+<p>But over the last few months, after adding detailed drift visualizations and studying month-over-month portfolio behavior, I realized something important:</p>
+<blockquote>
+<p>Simply reducing drift is not enough.
+The real objective is reducing drift imbalance across the entire portfolio.</p>
+</blockquote>
+<p>That realization led to the evolution from <strong>Proportional Drift Allocation</strong> to <strong>Even Drift Optimization</strong>.</p>
+<p>Read <a href="why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/">Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It)</a> if you are new to cashflow rebalancing.</p>
+<p>This post specifically details the evolution of the allocator model itself.</p>
+<h2 id="the-original-model-proportional-drift-allocation">The Original Model: Proportional Drift Allocation</h2>
+<p>The original allocator followed a fairly intuitive rule:</p>
+<blockquote>
+<p>Allocate new investments proportional to how far each asset is from its target allocation.</p>
+</blockquote>
+<p>So:</p>
+<ol>
+<li>If an asset is underweight by 2%, allocate more.</li>
+<li>If another asset is underweight by 1%, allocate less.</li>
+<li>If an asset is overweight, stop allocating.</li>
+</ol>
+<p>Simple. Logical. Efficient.</p>
+<p>Using current market values (May 23, 2026) and the next monthly investment cycle, the allocator produced the following result.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset Class</th>
+          <th style="text-align: right">Target</th>
+          <th style="text-align: right">Pre Actual</th>
+          <th style="text-align: right">Pre Drift</th>
+          <th style="text-align: right">Allocation Share</th>
+          <th style="text-align: right">Post Actual</th>
+          <th style="text-align: right">Post Drift</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Nasdaq 100</td>
+          <td style="text-align: right">40.00%</td>
+          <td style="text-align: right">39.90%</td>
+          <td style="text-align: right">-0.10%</td>
+          <td style="text-align: right">19.50%</td>
+          <td style="text-align: right">39.39%</td>
+          <td style="text-align: right">-0.61%</td>
+      </tr>
+      <tr>
+          <td>Nifty 50</td>
+          <td style="text-align: right">20.00%</td>
+          <td style="text-align: right">18.00%</td>
+          <td style="text-align: right">-2.00%</td>
+          <td style="text-align: right">43.75%</td>
+          <td style="text-align: right">18.64%</td>
+          <td style="text-align: right">-1.36%</td>
+      </tr>
+      <tr>
+          <td>Next 50</td>
+          <td style="text-align: right">10.00%</td>
+          <td style="text-align: right">9.30%</td>
+          <td style="text-align: right">-0.70%</td>
+          <td style="text-align: right">16.75%</td>
+          <td style="text-align: right">9.48%</td>
+          <td style="text-align: right">-0.52%</td>
+      </tr>
+      <tr>
+          <td>Midcap 150</td>
+          <td style="text-align: right">10.00%</td>
+          <td style="text-align: right">9.51%</td>
+          <td style="text-align: right">-0.49%</td>
+          <td style="text-align: right">13.00%</td>
+          <td style="text-align: right">9.60%</td>
+          <td style="text-align: right">-0.40%</td>
+      </tr>
+      <tr>
+          <td>Smallcap 250</td>
+          <td style="text-align: right">5.00%</td>
+          <td style="text-align: right">4.73%</td>
+          <td style="text-align: right">-0.27%</td>
+          <td style="text-align: right">7.00%</td>
+          <td style="text-align: right">4.79%</td>
+          <td style="text-align: right">-0.21%</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td style="text-align: right">5.00%</td>
+          <td style="text-align: right">6.10%</td>
+          <td style="text-align: right">+1.10%</td>
+          <td style="text-align: right">0.00%</td>
+          <td style="text-align: right">5.95%</td>
+          <td style="text-align: right">+0.95%</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td style="text-align: right">10.00%</td>
+          <td style="text-align: right">12.47%</td>
+          <td style="text-align: right">+2.47%</td>
+          <td style="text-align: right">0.00%</td>
+          <td style="text-align: right">12.16%</td>
+          <td style="text-align: right">+2.16%</td>
+      </tr>
+      <tr>
+          <td><strong>Total</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>3.57%</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>3.10%</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>At first glance, this looks good.</p>
+<ul>
+<li>Every asset moved closer to its target allocation.</li>
+<li>Total portfolio drift reduced.</li>
+<li>Underweight assets received most of the capital.</li>
+</ul>
+<p>But there was a deeper structural issue.</p>
+<p>The portfolio remained uneven after allocation.</p>
+<p>Some assets became nearly aligned while others remained significantly misaligned.</p>
+<p>For example:</p>
+<ul>
+<li>Smallcap 250 ended at <strong>-0.21% drift</strong></li>
+<li>Midcap 150 ended at <strong>-0.40% drift</strong></li>
+<li>But Nifty 50 still remained deeply underweight at <strong>-1.36% drift</strong></li>
+</ul>
+<p>Over time, this created unstable correction behavior:</p>
+<ul>
+<li>some assets repeatedly stayed under-corrected</li>
+<li>others oscillated near target</li>
+<li>post-allocation drift patterns changed unpredictably month to month</li>
+</ul>
+<p>The portfolio kept “improving,” but rarely converged toward a stable equilibrium state.</p>
+<p>The problem was subtle:</p>
+<blockquote>
+<p>Proportional drift allocation optimizes individual assets locally.
+It does not optimize the portfolio globally.</p>
+</blockquote>
+<h2 id="the-new-model-even-drift-optimization">The New Model: Even Drift Optimization</h2>
+<p>The new model changes the optimization objective entirely.</p>
+<p>Instead of asking:</p>
+<p><strong>“How much should each asset get proportional to its drift?”</strong></p>
+<p>It asks:</p>
+<p><strong>“What allocation creates the most evenly distributed residual drift across the portfolio?”</strong></p>
+<p>This is a fundamentally different optimization problem.</p>
+<p>Instead of minimizing drift independently, the optimizer minimizes <strong>drift dispersion</strong>.</p>
+<p>The goal becomes:</p>
+<blockquote>
+<p>Push the entire portfolio toward the tightest achievable equilibrium state.</p>
+</blockquote>
+<p>Using the exact same portfolio and same monthly contribution, the new optimizer produced this allocation:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset Class</th>
+          <th style="text-align: right">Target</th>
+          <th style="text-align: right">Pre Actual</th>
+          <th style="text-align: right">Pre Drift</th>
+          <th style="text-align: right">Allocation Share</th>
+          <th style="text-align: right">Post Actual</th>
+          <th style="text-align: right">Post Drift</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Nasdaq 100</td>
+          <td style="text-align: right">40.00%</td>
+          <td style="text-align: right">39.90%</td>
+          <td style="text-align: right">-0.10%</td>
+          <td style="text-align: right">16.63%</td>
+          <td style="text-align: right">39.32%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Nifty 50</td>
+          <td style="text-align: right">20.00%</td>
+          <td style="text-align: right">18.00%</td>
+          <td style="text-align: right">-2.00%</td>
+          <td style="text-align: right">71.00%</td>
+          <td style="text-align: right">19.32%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Next 50</td>
+          <td style="text-align: right">10.00%</td>
+          <td style="text-align: right">9.30%</td>
+          <td style="text-align: right">-0.70%</td>
+          <td style="text-align: right">10.38%</td>
+          <td style="text-align: right">9.32%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Midcap 150</td>
+          <td style="text-align: right">10.00%</td>
+          <td style="text-align: right">9.51%</td>
+          <td style="text-align: right">-0.49%</td>
+          <td style="text-align: right">2.00%</td>
+          <td style="text-align: right">9.32%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Smallcap 250</td>
+          <td style="text-align: right">5.00%</td>
+          <td style="text-align: right">4.73%</td>
+          <td style="text-align: right">-0.27%</td>
+          <td style="text-align: right">0.00%</td>
+          <td style="text-align: right">4.61%</td>
+          <td style="text-align: right">-0.39%</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td style="text-align: right">5.00%</td>
+          <td style="text-align: right">6.10%</td>
+          <td style="text-align: right">+1.10%</td>
+          <td style="text-align: right">0.00%</td>
+          <td style="text-align: right">5.95%</td>
+          <td style="text-align: right">+0.95%</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td style="text-align: right">10.00%</td>
+          <td style="text-align: right">12.47%</td>
+          <td style="text-align: right">+2.47%</td>
+          <td style="text-align: right">0.00%</td>
+          <td style="text-align: right">12.16%</td>
+          <td style="text-align: right">+2.16%</td>
+      </tr>
+      <tr>
+          <td><strong>Total</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>3.57%</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>100.00%</strong></td>
+          <td style="text-align: right"><strong>3.10%</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>At first, the allocation looks counterintuitive.</p>
+<ul>
+<li>Nifty 50 receives dramatically more capital</li>
+<li>Midcap receives almost nothing</li>
+<li>Smallcap receives zero</li>
+<li>Allocation is no longer proportional</li>
+</ul>
+<p>But the post-allocation structure reveals the real breakthrough.</p>
+<h2 id="the-breakthrough-drift-band-compression--variance-reduction">The Breakthrough: Drift Band Compression &amp; Variance Reduction</h2>
+<p>Traditional rebalancing systems mostly measure individual drift reduction and distance from target.</p>
+<p>But the key improvement is not just lower absolute drift.</p>
+<p>It is <strong>drift band compression</strong> and <strong>variance reduction</strong>.</p>
+<p>Because variance measures how unevenly imbalance is distributed, the true optimization signal is to minimize imbalance dispersion itself.</p>
+<h3 id="drift-band-comparison">Drift Band Comparison</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Asset Class</th>
+          <th style="text-align: right">Proportional Allocation</th>
+          <th style="text-align: right">Even Drift Optimization</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Nifty 50</td>
+          <td style="text-align: right">-1.36%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Nasdaq 100</td>
+          <td style="text-align: right">-0.61%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Next 50</td>
+          <td style="text-align: right">-0.52%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Midcap 150</td>
+          <td style="text-align: right">-0.40%</td>
+          <td style="text-align: right">-0.68%</td>
+      </tr>
+      <tr>
+          <td>Smallcap 250</td>
+          <td style="text-align: right">-0.21%</td>
+          <td style="text-align: right">-0.39%</td>
+      </tr>
+      <tr>
+          <td><strong>Drift Visual</strong></td>
+          <td style="text-align: right"><img src="proportional-drift.png" alt="Proportional Allocation Drift" width="100%"></td>
+          <td style="text-align: right"><img src="even-drift.png" alt="Even Drift Optimization" width="100%"></td>
+      </tr>
+  </tbody>
+</table>
+<p>This reveals the key conceptual shift in the optimization model:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Metric</th>
+          <th>Proportional Allocation</th>
+          <th>Even Drift Optimization</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Optimization Focus</strong></td>
+          <td>Reduce individual drift (Local optimization)</td>
+          <td>Reduce drift dispersion (Global optimization)</td>
+      </tr>
+      <tr>
+          <td><strong>Correction Target</strong></td>
+          <td>Correction magnitude (Asset-centric correction)</td>
+          <td>Structural balance (Portfolio equilibrium seeking)</td>
+      </tr>
+      <tr>
+          <td><strong>Negative Drift Range</strong></td>
+          <td>-1.36% to -0.21%</td>
+          <td>-0.68% to -0.39%</td>
+      </tr>
+      <tr>
+          <td><strong>Spread</strong></td>
+          <td>1.15 percentage points</td>
+          <td>0.29 percentage points (~75% compression)</td>
+      </tr>
+      <tr>
+          <td><strong>Imbalance Distribution</strong></td>
+          <td>Uneven residual drift distribution</td>
+          <td>Harmonized residual drift distribution</td>
+      </tr>
+      <tr>
+          <td><strong>Asset State</strong></td>
+          <td>Some assets &ldquo;very wrong&rdquo;, others &ldquo;almost correct&rdquo;</td>
+          <td>Portfolio converges toward a common equilibrium state</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="why-this-changes-sip-allocation-fundamentally">Why This Changes SIP Allocation Fundamentally</h2>
+<p>Traditional SIP systems were designed primarily for simplicity:</p>
+<ul>
+<li>fixed monthly contribution</li>
+<li>fixed allocation percentages</li>
+<li>periodic rebalancing</li>
+</ul>
+<p>But portfolios are dynamic systems.</p>
+<p>And dynamic systems require adaptive correction mechanisms.</p>
+<p>Even Drift Optimization effectively turns SIP allocation into:</p>
+<ul>
+<li>perpetual rebalancing</li>
+<li>continuous equilibrium seeking</li>
+<li>flow-based portfolio stabilization</li>
+</ul>
+<p>The portfolio becomes self-correcting every month using incoming cashflows alone.</p>
+<p>No selling required.</p>
+<h2 id="final-thought">Final Thought</h2>
+<p>The original proportional drift allocator was already a major improvement over static SIP allocation.</p>
+<p>But Even Drift Optimization represents the next evolution.</p>
+<p>It reframes portfolio management from:</p>
+<blockquote>
+<p>“How do we allocate money?”</p>
+</blockquote>
+<p>to:</p>
+<blockquote>
+<p>“What is the tightest achievable equilibrium state this portfolio can reach with finite monthly cashflows?”</p>
+</blockquote>
+<p>That is a far deeper optimization problem.</p>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/sip/" class="tag-link">SIP</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/asset-allocation/" class="tag-link">Asset Allocation</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/rebalancing/" class="tag-link">Rebalancing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/realvalue-engines/" class="tag-link">RealValue Engines</a>
+    </div>
+    <div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>
