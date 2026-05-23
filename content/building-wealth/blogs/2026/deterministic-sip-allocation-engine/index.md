@@ -92,11 +92,11 @@ The new model changes the optimization objective entirely.
 
 Instead of asking:
 
-> “How much should each asset get proportional to its drift?”
+**“How much should each asset get proportional to its drift?”**
 
 It asks:
 
-> “What allocation creates the most evenly distributed residual drift across the portfolio?”
+**“What allocation creates the most evenly distributed residual drift across the portfolio?”**
 
 This is a fundamentally different optimization problem.
 
@@ -128,100 +128,37 @@ At first, the allocation looks counterintuitive.
 
 But the post-allocation structure reveals the real breakthrough.
 
-## The Breakthrough: Drift Band Compression
+## The Breakthrough: Drift Band Compression & Variance Reduction
 
-The key improvement is not just lower drift.
+Traditional rebalancing systems mostly measure individual drift reduction and distance from target.
 
-It is **drift band compression**.
+But the key improvement is not just lower absolute drift.
 
-### Old Model: Wide Residual Drift Spread
+It is **drift band compression** and **variance reduction**.
 
-| Asset Class  | Post Drift |
-| ------------ | ---------: |
-| Nifty 50     |     -1.36% |
-| Nasdaq 100   |     -0.61% |
-| Next 50      |     -0.52% |
-| Midcap 150   |     -0.40% |
-| Smallcap 250 |     -0.21% |
+Because variance measures how unevenly imbalance is distributed, the true optimization signal is to minimize imbalance dispersion itself.
 
-Negative drift range:
+### Drift Band Comparison
 
-> -1.36% to -0.21%
+| Asset Class  | Proportional Allocation | Even Drift Optimization |
+| ------------ | ----------------------: | ----------------------: |
+| Nifty 50     |                  -1.36% |                  -0.68% |
+| Nasdaq 100   |                  -0.61% |                  -0.68% |
+| Next 50      |                  -0.52% |                  -0.68% |
+| Midcap 150   |                  -0.40% |                  -0.68% |
+| Smallcap 250 |                  -0.21% |                  -0.39% |
+| **Drift Visual** | <img src="proportional-drift.png" alt="Proportional Allocation Drift" width="100%"> | <img src="even-drift.png" alt="Even Drift Optimization" width="100%"> |
 
-Spread:
+This reveals the key conceptual shift in the optimization model:
 
-> 1.15 percentage points
-
-The portfolio still carried large imbalance concentration.
-
-Some assets remained heavily underweight while others became nearly balanced.
-
-### New Model: Equilibrium Drift Compression
-
-| Asset Class  | Post Drift |
-| ------------ | ---------: |
-| Nasdaq 100   |     -0.68% |
-| Nifty 50     |     -0.68% |
-| Next 50      |     -0.68% |
-| Midcap 150   |     -0.68% |
-| Smallcap 250 |     -0.39% |
-
-Negative drift range:
-
-> -0.68% to -0.39%
-
-Spread:
-
-> 0.29 percentage points
-
-That is approximately a:
-
-> 75% compression in residual negative drift band
-
-The optimizer intentionally synchronizes residual imbalance across assets.
-
-Instead of:
-
-* some assets being “very wrong”
-* and others being “almost correct”
-
-…the portfolio converges toward a common equilibrium state.
-
-## Variance Reduction: The Real Optimization Signal
-
-Traditional rebalancing systems mostly measure:
-
-* individual drift reduction
-* distance from target
-
-But the more important metric is:
-
-> Drift variance across the portfolio.
-
-Because variance measures how unevenly imbalance is distributed.
-
-The old proportional model reduced drift magnitude but still left imbalance concentrated in specific assets.
-
-The new optimizer minimizes imbalance dispersion itself.
-
-| Model                         | Residual Drift Characteristics         |
-| ----------------------------- | -------------------------------------- |
-| Proportional Drift Allocation | Uneven residual drift distribution     |
-| Even Drift Optimization       | Harmonized residual drift distribution |
-
-| Model                         | Negative Drift Band |
-| ----------------------------- | ------------------: |
-| Proportional Drift Allocation |               1.15% |
-| Even Drift Optimization       |               0.29% |
-
-This is the key conceptual shift:
-
-| Old Model                | New Model                     |
-| ------------------------ | ----------------------------- |
-| Reduce individual drift  | Reduce drift dispersion       |
-| Local optimization       | Global optimization           |
-| Asset-centric correction | Portfolio equilibrium seeking |
-| Correction magnitude     | Structural balance            |
+| Metric                     | Proportional Allocation                                 | Even Drift Optimization                                   |
+| -------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| **Optimization Focus**     | Reduce individual drift (Local optimization)            | Reduce drift dispersion (Global optimization)             |
+| **Correction Target**      | Correction magnitude (Asset-centric correction)         | Structural balance (Portfolio equilibrium seeking)        |
+| **Negative Drift Range**   | -1.36% to -0.21%                                        | -0.68% to -0.39%                                          |
+| **Spread**                 | 1.15 percentage points                                  | 0.29 percentage points (~75% compression)                 |
+| **Imbalance Distribution** | Uneven residual drift distribution                      | Harmonized residual drift distribution                    |
+| **Asset State**            | Some assets "very wrong", others "almost correct"       | Portfolio converges toward a common equilibrium state     |
 
 ## Why This Changes SIP Allocation Fundamentally
 
@@ -260,5 +197,3 @@ to:
 > “What is the tightest achievable equilibrium state this portfolio can reach with finite monthly cashflows?”
 
 That is a far deeper optimization problem.
-
-And likely where the next generation of portfolio construction systems will evolve.
