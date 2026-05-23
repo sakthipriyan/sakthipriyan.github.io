@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It) | Sakthi Priyan H</title>
+    <meta name="description" content="Static SIPs blindly invest fixed amounts regardless of portfolio drift. Cashflow-Based Rebalancing uses new investments to continuously correct allocation drift — enabling tax-efficient perpetual rebalancing during the accumulation phase."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
+    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="https://sakthipriyan.com/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/books/">Books</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="https://sakthipriyan.com/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="https://sakthipriyan.com/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/blogs/">Blogs</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It)</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="blog-post">
+    
+<header class="content-header">
+    <h1 class="content-title">Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It)</h1>
+    <p class="content-summary">Static SIPs blindly invest fixed amounts regardless of portfolio drift. Cashflow-Based Rebalancing uses new investments to continuously correct allocation drift — enabling tax-efficient perpetual rebalancing during the accumulation phase.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime=" 2026-05-23">May 23, 2026</time>
+        </span>
+        
+        <span class="meta-item">
+            <span class="meta-icon">📖</span>
+            <span class="read-time">8 min read</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    <div class="post-content">
+        <h2 id="the-problem-with-the-traditional-static-sip">The Problem with the traditional Static SIP</h2>
+<p>We need to have a candid conversation about the holy grail of personal finance advice: the traditional fixed contribution SIP and yearly rebalancing. Traditional SIP advice solved an emotional problem — getting people to invest consistently. But it never solved the portfolio optimization problem.</p>
+<p>For years, investors have been told to “set it and forget it” — pick a fixed allocation, automate the monthly investment, and never think about it again.</p>
+<p>So every month:</p>
+<ul>
+<li>50% goes to Indian Equity</li>
+<li>20% to Gold</li>
+<li>20% to Debt</li>
+<li>10% to US Equity</li>
+</ul>
+<p>…regardless of what the market did.</p>
+<p><strong>It feels disciplined because it removes emotional decision-making. But mathematically, it is surprisingly inefficient.</strong></p>
+<p>Static SIPs are excellent for building the habit of investing for the beginners. The problem is that they completely ignore the single most important signal available every month:</p>
+<blockquote>
+<p><strong>Your current portfolio&rsquo;s drift from the target asset allocation.</strong></p>
+</blockquote>
+<p>When markets move, your portfolio drifts away from its target allocation. A static SIP keeps investing blindly instead of correcting that imbalance. Over long periods, this leads to weaker capital efficiency, larger allocation distortions, and slower recovery after market dislocations.</p>
+<p>Traditional yearly rebalancing tries to fix this — but usually by selling winners and triggering taxes.</p>
+<p>That is where <strong>cashflow-based rebalancing</strong> changes the game.</p>
+<p>If you are still in the accumulation phase, your monthly cashflow is your biggest advantage. Instead of investing in fixed percentages, new money should primarily flow into whichever assets are underweight relative to the target allocation.</p>
+<p>This creates a powerful outcome:</p>
+<blockquote>
+<p><strong>Tax-free rebalancing using fresh cashflows</strong></p>
+</blockquote>
+<p>No forced selling. No capital gains realization. No unnecessary tax drag.</p>
+<p>And this advantage can last for years — until you eventually reach the portfolio <strong>“flywheel stage”</strong>, where market growth becomes larger than your annual contributions.</p>
+<h2 id="the-problem-with-the-static-sip">The Problem with the Static SIP</h2>
+<p>A static SIP ignores current portfolio state. It is completely blind to what is actually happening inside your portfolio and the broader market.</p>
+<p>Assume a target allocation with a monthly investment of ₹1,00,000. A traditional SIP simply invests new money into these same percentages every month, regardless of market movement:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th>Target</th>
+          <th>Monthly SIP</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Indian Equity</strong></td>
+          <td>50%</td>
+          <td>₹50,000</td>
+      </tr>
+      <tr>
+          <td><strong>Gold</strong></td>
+          <td>20%</td>
+          <td>₹20,000</td>
+      </tr>
+      <tr>
+          <td><strong>Debt</strong></td>
+          <td>20%</td>
+          <td>₹20,000</td>
+      </tr>
+      <tr>
+          <td><strong>US Equity</strong></td>
+          <td>10%</td>
+          <td>₹10,000</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="what-happens-during-market-movements">What Happens During Market Movements?</h2>
+<p>Suppose Indian Equity crashes. The portfolio drifts:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th>Current Allocation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Indian Equity</td>
+          <td>40%</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td>25%</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td>22%</td>
+      </tr>
+      <tr>
+          <td>US Equity</td>
+          <td>13%</td>
+      </tr>
+  </tbody>
+</table>
+<p>Now the portfolio is heavily underweight Indian Equity. But the standard SIP still invests only 50% into Indian Equity — while continuing to add money into already overweight Gold, Debt, and US Equity.</p>
+<p>This is capital inefficient because new cash continues reinforcing already overweight allocations. The portfolio already contains excess exposure in those overweight assets. New capital should primarily repair imbalance. Instead, static SIP continues reinforcing distortion.</p>
+<ul>
+<li><strong>The Bull Market Trap:</strong> Over a year, a rally pushes your portfolio from 50% to 65% Indian Equity. Your static SIP blindly buys more Indian Equity at market highs, pushing risk further away from target.</li>
+<li><strong>The Static Mistake:</strong> It treats every month like day zero, completely ignoring the drift that has accumulated.</li>
+<li><strong>The Consequence:</strong> You end up taking on substantially more risk than planned. When the correction comes, oversized exposure amplifies the drawdown.</li>
+</ul>
+<h2 id="portfolio-drift-is-the-most-important-signal">Portfolio Drift Is the Most Important Signal</h2>
+<p>Every portfolio continuously drifts because assets move at different speeds.</p>
+<ul>
+<li>If Indian Equity rallies → Indian Equity becomes overweight.</li>
+<li>If Gold surges → Gold becomes overweight.</li>
+<li>If Debt underperforms → Debt becomes underweight.</li>
+</ul>
+<p><strong>Drift is not noise. Drift is the portfolio telling you where capital is needed.<br>
+Ignoring drift means ignoring the current state of the portfolio.</strong></p>
+<h2 id="the-smarter-way-cashflow-based-rebalancing">The Smarter Way: Cashflow-Based Rebalancing</h2>
+<p>Cashflow-based rebalancing sounds highly technical, but the core concept is straightforward: <strong>You use your new SIP money to buy whichever asset is currently furthest below its target, forcing your portfolio back to equilibrium.</strong></p>
+<p>Instead of blindly allocating fixed amounts, you calculate the &ldquo;drift&rdquo; (the difference between your target allocation and your actual allocation) and direct fresh cashflow toward the asset classes that have drifted below their targets.</p>
+<h3 id="example-static-sip-vs-drift-based-allocation">Example: Static SIP vs. Drift-Based Allocation</h3>
+<p>Assume target allocation:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th>Target</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Indian Equity</td>
+          <td>50%</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td>20%</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td>20%</td>
+      </tr>
+      <tr>
+          <td>US Equity</td>
+          <td>10%</td>
+      </tr>
+  </tbody>
+</table>
+<p>Current portfolio after market movement:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th>Actual</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Indian Equity</td>
+          <td>40%</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td>25%</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td>22%</td>
+      </tr>
+      <tr>
+          <td>US Equity</td>
+          <td>13%</td>
+      </tr>
+  </tbody>
+</table>
+<p>Gold, Debt, and US Equity are overweight. Indian Equity is heavily underweight. Monthly investment: ₹1,00,000.</p>
+<p><strong>Standard SIP:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th>Investment</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Indian Equity</td>
+          <td>₹50,000</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td>₹20,000</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td>₹20,000</td>
+      </tr>
+      <tr>
+          <td>US Equity</td>
+          <td>₹10,000</td>
+      </tr>
+  </tbody>
+</table>
+<p>This worsens inefficiency by continuing to buy overweight assets like Gold and Debt.</p>
+<p><strong>Drift-Based Allocation:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th>Investment</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Indian Equity</td>
+          <td>₹1,00,000</td>
+      </tr>
+      <tr>
+          <td>Gold</td>
+          <td>₹0</td>
+      </tr>
+      <tr>
+          <td>Debt</td>
+          <td>₹0</td>
+      </tr>
+      <tr>
+          <td>US Equity</td>
+          <td>₹0</td>
+      </tr>
+  </tbody>
+</table>
+<p>This immediately repairs portfolio imbalance. The portfolio converges faster toward target equilibrium.</p>
+<p><em>Note: Given example is way too simplified. In a live scenario, a robust allocator proportions this cashflow dynamically based on the exact mathematical distance each asset is from its target, rather than dumping 100% into just one bucket.</em></p>
+<h2 id="when-static-sip-is-still-perfectly-reasonable">When Static SIP Is Still Perfectly Reasonable</h2>
+<p>Static SIPs are still excellent for:</p>
+<ul>
+<li>complete beginners</li>
+<li>investors with very small portfolios</li>
+<li>people who struggle with behavioral discipline</li>
+<li>investors who want maximum simplicity</li>
+</ul>
+<p>The problem is not that static SIPs are “bad.” The problem is that they stop evolving even after portfolio size, asset complexity, and capital efficiency needs increase.</p>
+<h2 id="why-early-stage-investors-need-this-most">Why Early-Stage Investors Need This Most</h2>
+<p>If you are in the first few years of your investing cycle, cashflow-based rebalancing is highly effective for one mathematical reason: <strong>Your monthly contribution is large relative to your total portfolio size.</strong></p>
+<ul>
+<li><strong>Early Cycle:</strong> If you have a ₹2 Lakh portfolio and invest ₹20,000 a month, your fresh cashflow represents 10% of your total wealth. That is massive steering power — you can correct large portfolio drifts using just one or two months of SIP contributions.</li>
+<li><strong>Late Cycle:</strong> If you have a ₹2 Crore portfolio and invest ₹50,000 a month, your cashflow is a drop in the bucket. It is mathematically impossible to correct a 5% market drift with just new cash. Late-stage investors <em>have</em> to sell assets to rebalance.</li>
+</ul>
+<blockquote>
+<p><strong>As an early investor, your incoming cash is the steering wheel for your portfolio. A static SIP locks that steering wheel in place.</strong></p>
+</blockquote>
+<h2 id="head-to-head-static-vs-cashflow-rebalancing">Head-to-Head: Static vs. Cashflow Rebalancing</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Feature</th>
+          <th>Static SIP</th>
+          <th>Cashflow-Based Even Drift SIP</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Monthly Process</strong></td>
+          <td>Blindly invests fixed amounts</td>
+          <td>Calculates portfolio drift before investing</td>
+      </tr>
+      <tr>
+          <td><strong>Market Awareness</strong></td>
+          <td>Ignores market movements</td>
+          <td>Adapts to market movements</td>
+      </tr>
+      <tr>
+          <td><strong>Risk Control</strong></td>
+          <td>Low (allows massive drift)</td>
+          <td>High (constantly pulls portfolio to target)</td>
+      </tr>
+      <tr>
+          <td><strong>Tax Efficiency</strong></td>
+          <td>Bad (due to yearly rebalancing)</td>
+          <td>Excellent (rebalances without selling)</td>
+      </tr>
+      <tr>
+          <td><strong>Setup Complexity</strong></td>
+          <td>Very Low</td>
+          <td>Moderate (requires a spreadsheet or allocator tool)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="why-drift-based-allocation-is-superior">Why Drift-Based Allocation Is Superior</h2>
+<h3 id="1-maximizes-capital-efficiency">1. Maximizes Capital Efficiency</h3>
+<p>Every new rupee actively repairs imbalance. No capital is wasted reinforcing overweight assets.</p>
+<h3 id="2-reduces-the-need-for-selling">2. Reduces the Need for Selling</h3>
+<p>Traditional rebalancing often requires selling winners. Drift-aware investing uses incoming cashflows to rebalance naturally. This reduces taxation, exit loads, transaction costs, and behavioral friction.</p>
+<h3 id="3-automatically-buys-relative-weakness">3. Automatically Buys Relative Weakness</h3>
+<p>The system naturally directs capital toward underperforming assets — creating disciplined counter-cyclical investing. No prediction required. No market timing required. Only portfolio mathematics.</p>
+<h3 id="4-prevents-portfolio-distortion">4. Prevents Portfolio Distortion</h3>
+<p>Static SIP allows prolonged overweight concentration. Drift-aware allocation continuously constrains distortion, improving long-term risk stability.</p>
+<h3 id="5-adapts-to-market-reality">5. Adapts to Market Reality</h3>
+<p>Markets are dynamic. Static SIP assumes markets are static. That assumption is fundamentally incorrect.</p>
+<h2 id="the-future-is-perpetual-rebalancing">The Future Is Perpetual Rebalancing</h2>
+<p>The future of investing is likely not quarterly rebalancing, annual rebalancing, or fixed SIP percentages. Instead:</p>
+<blockquote>
+<p>Every new cash flow becomes a dynamic portfolio-drift correction event.</p>
+</blockquote>
+<p>This creates a continuously self-correcting portfolio — not through prediction, not through active management, but through deterministic allocation mathematics.</p>
+<p>It takes a little more active management to calculate allocations each month — which is exactly why tools like <a href="/building-wealth/tools/realvalue-family-sip-allocator/">RealValue Family SIP Allocator</a> exist. But by making your fresh capital work intelligently to fix imbalances, you potentially improve long-term capital efficiency while maintaining tighter allocation discipline.</p>
+<h2 id="final-thought">Final Thought</h2>
+<p>Switching from a fixed SIP to a drift-aware allocation system fundamentally shifts your investment approach from <em>&ldquo;What did I want my portfolio to look like in the past?&rdquo;</em> to <em>&ldquo;What does my portfolio need right now?&rdquo;</em></p>
+<p>This shift unlocks three massive, structural benefits:</p>
+<h3 id="1-massive-tax-alpha">1. <strong>Massive Tax Alpha:</strong></h3>
+<p>By fixing drift with fresh cashflow, you avoid the heavy taxation associated with traditional yearly rebalancing. In countries like India with high capital gains taxes, this continuous tax-free correction is an incredible advantage.</p>
+<h3 id="2-mathematically-optimal-purchases">2. <strong>Mathematically Optimal Purchases:</strong></h3>
+<p>The allocator automatically forces you to &ldquo;buy low.&rdquo; By directing new money into the most underperforming assets, you naturally lower your average purchase price across market cycles.</p>
+<h3 id="3-removing-the-emotional-burden">3. <strong>Removing the Emotional Burden:</strong></h3>
+<p>It is psychologically difficult to stop buying highly valued assets and start buying recent low-valuation assets. A deterministic system completely removes that emotional friction, executing the math without hesitation.</p>
+<blockquote>
+<p>Over long horizons, the combined effect of lower tax drag, disciplined counter-cyclical allocation, and reduced behavioral mistakes can become materially significant.</p>
+</blockquote>
+<p>Ready to upgrade your allocation strategy? You can use the <a href="/building-wealth/tools/realvalue-portfolio/">RealValue Portfolio</a> tool to track your current asset drift, and the <a href="/building-wealth/tools/realvalue-family-sip-allocator/">RealValue Family SIP Allocator</a> to instantly calculate exactly where your next month&rsquo;s capital needs to go.</p>
+<blockquote>
+<p><strong>Important</strong>: Drift-aware investing does not guarantee outperformance. Its primary objective is improving allocation discipline, reducing unnecessary tax events, and using fresh capital more efficiently during the accumulation phase.</p>
+</blockquote>
+
+    </div>
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/perpetual-rebalancing/" class="tag-link">Perpetual Rebalancing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/asset-allocation/" class="tag-link">Asset Allocation</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/rebalancing/" class="tag-link">Rebalancing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/sip/" class="tag-link">SIP</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/dynamic-sip/" class="tag-link">Dynamic SIP</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/tax-efficient-investing/" class="tag-link">Tax Efficient Investing</a>
+        
+        <a href="https://sakthipriyan.com/building-wealth/tags/portfolio-management/" class="tag-link">Portfolio Management</a>
+    </div>
+    <div class="content-comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'sakthipriyan';
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer><script>
+            function runHighlightJS() {
+                if (window.hljs) { hljs.highlightAll(); }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+    <script src="https://sakthipriyan.com/js/main.js"></script>
+</body>
+</html>
