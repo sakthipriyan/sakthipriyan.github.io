@@ -14,6 +14,8 @@ wealth_tags:
 summary: "Static SIPs blindly invest fixed amounts regardless of portfolio drift. Cashflow-Based Rebalancing uses new investments to continuously correct allocation drift — enabling tax-efficient perpetual rebalancing during the accumulation phase."
 ---
 
+## The Problem with the traditional Static SIP
+
 We need to have a candid conversation about the holy grail of personal finance advice: the traditional fixed contribution SIP and yearly rebalancing. Traditional SIP advice solved an emotional problem — getting people to invest consistently. But it never solved the portfolio optimization problem. 
 
 For years, investors have been told to “set it and forget it” — pick a fixed allocation, automate the monthly investment, and never think about it again.
