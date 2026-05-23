@@ -154,6 +154,9 @@ Yes. Export as JSON, import next month.
 
 ## Changelog
 
+### 2026-05-23
+- **Algorithm Upgrade**: Evolved from a Proportional Drift Allocation model to an Even Drift Optimization model. This shift intentionally synchronizes residual imbalance across assets, reducing structural portfolio variance and compressing the negative drift band by ~75%. Read the detailed analysis: [Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator](/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/).
+
 ### 2026-03-09
 - **Chart re-render fix**: After importing data and adding a new asset class causing the total target % to become non-100, fixing the percentages did not re-render the allocation and drift charts. Root cause: when validation fails, the chart DOM containers are removed (via `v-if`), but stale ECharts instances were retained. On re-validation, `echarts.init()` was skipped and charts were bound to ghost elements. Fix: dispose and null both chart instances whenever validation fails, so they are cleanly re-initialized when valid data is entered.
 

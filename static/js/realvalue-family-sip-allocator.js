@@ -982,7 +982,11 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 const roundOff = this.getRoundOff();
                 const TCS_MULTIPLIER = 1.2; // 20% TCS on international investments
                 const anyInvestorHasTcs = this.investors.some(inv => inv.tcs && inv.international);
-                const newTotal = currentTotal + totalNewInvestment;
+
+                // When TCS applies, not all of the gross budget enters the portfolio as net assets.
+                // The effective portfolio total used for drift math must reflect net investment only.
+                // We start with gross and refine below after the convergence set is known.
+                let newTotal = currentTotal + totalNewInvestment;
 
                 // Build a working list of all assets enriched with current values
                 const allAssetsEnriched = this.assets.map(asset => ({
@@ -1086,6 +1090,38 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         }
                     }
                     if (!violated) break; // Converged — all solvable assets need positive allocation
+                }
+
+                // TCS correction: if any investor has TCS on international assets, the actual
+                // net portfolio growth is less than the gross budget (by the TCS amount).
+                // Iterate to find the true newTotal so that drift math is calibrated correctly.
+                if (anyInvestorHasTcs && solvableAssets.length > 0) {
+                    const intlSolvable = solvableAssets.filter(a => a.isInternational);
+                    if (intlSolvable.length > 0) {
+                        for (let tcsIter = 0; tcsIter < 10; tcsIter++) {
+                            // Recompute targetDrift with current newTotal estimate
+                            const lockedDriftSumTcs = allAssetsEnriched
+                                .filter(a => fixedSet.has(a.name))
+                                .reduce((sum, a) => sum + (a.currentValue / newTotal - a.targetPercent / 100), 0);
+                            const tdTcs = -lockedDriftSumTcs / solvableAssets.length;
+                            // Estimate international net allocation (sum over intl solvable)
+                            const intlNetAlloc = intlSolvable.reduce((sum, a) => {
+                                return sum + Math.max(0, (a.targetPercent / 100 + tdTcs) * newTotal - a.currentValue);
+                            }, 0);
+                            // Net portfolio growth = gross budget - TCS paid on intl
+                            const newTotalEstimate = currentTotal + totalNewInvestment - (TCS_MULTIPLIER - 1) * intlNetAlloc;
+                            if (Math.abs(newTotalEstimate - newTotal) < 1) {
+                                newTotal = newTotalEstimate;
+                                break;
+                            }
+                            newTotal = newTotalEstimate;
+                        }
+                        // Recompute final targetDrift with corrected newTotal
+                        const lockedFinal = allAssetsEnriched
+                            .filter(a => fixedSet.has(a.name))
+                            .reduce((sum, a) => sum + (a.currentValue / newTotal - a.targetPercent / 100), 0);
+                        targetDrift = -lockedFinal / solvableAssets.length;
+                    }
                 }
 
                 // If all assets ended up fixed, show current state with no allocation

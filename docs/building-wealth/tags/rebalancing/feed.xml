@@ -6,8 +6,22 @@
     <description>Recent content in Rebalancing on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 02 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/building-wealth/tags/rebalancing/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator</title>
+      <link>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/</link>
+      <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/</guid>
+      <description>How I upgraded my &lt;em&gt;RealValue Family SIP Allocator&lt;/em&gt; from a proportional drift allocation model to a even drift optimization model and why it reduced structural portfolio variance by 66%.</description>
+    </item>
+    <item>
+      <title>Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It)</title>
+      <link>https://sakthipriyan.com/building-wealth/blogs/why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/</link>
+      <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/blogs/why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/</guid>
+      <description>Static SIPs blindly invest fixed amounts regardless of portfolio drift. Cashflow-Based Rebalancing uses new investments to continuously correct allocation drift — enabling tax-efficient perpetual rebalancing during the accumulation phase.</description>
+    </item>
     <item>
       <title>State of the 1 Portfolio — Returns, Allocation &amp; Rebalancing (May 2026)</title>
       <link>https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-may-2026/</link>

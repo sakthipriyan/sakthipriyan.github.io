@@ -963,70 +963,71 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
 
                 // Calculate current total portfolio value
                 const currentTotal = this.assets.reduce((sum, asset) => sum + this.getAssetCurrentValue(asset), 0);
-                
+
                 // Calculate total new investment budget (includes TCS for planning)
                 const totalNewInvestment = this.investors.reduce((sum, inv) => sum + this.getInvestorAmount(inv), 0);
-                
-                // Calculate deviations for each asset (use total investment for planning)
-                const planningTotal = currentTotal + totalNewInvestment;
-                const assetDeviations = this.assets.map(asset => {
-                    const targetValue = (asset.targetPercent / 100) * planningTotal;
-                    const currentValue = this.getAssetCurrentValue(asset);
-                    const deviation = targetValue - currentValue;
-                    return {
-                        ...asset,
-                        targetValue,
-                        deviation,
-                        isUnderweight: deviation > 0
-                    };
-                });
-                
-                // Check group constraints
-                const groupCurrentValues = {};
-                this.assetGroups.forEach(group => {
-                    const groupTargetPercent = group.assetNames.reduce((sum, assetName) => {
-                        const asset = this.assets.find(a => a.name === assetName);
-                        return sum + (asset ? asset.targetPercent : 0);
-                    }, 0);
-                    
-                    const groupCurrent = group.assetNames.reduce((sum, assetName) => {
-                        const asset = assetDeviations.find(a => a.name === assetName);
-                        return sum + (asset ? asset.targetValue - asset.deviation : 0); // current value
-                    }, 0);
-                    const groupCurrentPercent = planningTotal > 0 ? (groupCurrent / planningTotal) * 100 : 0;
-                    groupCurrentValues[group.name] = {
-                        currentPercent: groupCurrentPercent,
-                        targetPercent: groupTargetPercent,
-                        isOverweight: groupCurrentPercent >= groupTargetPercent,
-                        assetNames: group.assetNames
-                    };
-                });
-                
-                // Filter assets: exclude those in overweight groups
-                const eligibleAssetDeviations = assetDeviations.filter(asset => {
-                    if (!asset.isUnderweight) return false;
-                    
-                    // Check if asset belongs to any overweight group
-                    for (const groupName in groupCurrentValues) {
-                        const groupInfo = groupCurrentValues[groupName];
-                        if (groupInfo.isOverweight && groupInfo.assetNames.includes(asset.name)) {
-                            return false; // Asset is in overweight group, exclude it
+
+                // ============================================================
+                // EVEN-DRIFT ALLOCATION ENGINE
+                // Iterative algorithm: finds a single target drift shared by all
+                // solvable assets so the portfolio drifts sum to exactly zero.
+                //
+                // Rule: sum of all drifts in a fully-allocated portfolio = 0.
+                // Assets that cannot receive funds (overweight individually or in
+                // an overweight group) are "fixed" at 0 allocation. Their locked
+                // drifts constrain the remaining drift budget that the solvable
+                // assets must absorb equally.
+                // ============================================================
+
+                const roundOff = this.getRoundOff();
+                const TCS_MULTIPLIER = 1.2; // 20% TCS on international investments
+                const anyInvestorHasTcs = this.investors.some(inv => inv.tcs && inv.international);
+
+                // When TCS applies, not all of the gross budget enters the portfolio as net assets.
+                // The effective portfolio total used for drift math must reflect net investment only.
+                // We start with gross and refine below after the convergence set is known.
+                let newTotal = currentTotal + totalNewInvestment;
+
+                // Build a working list of all assets enriched with current values
+                const allAssetsEnriched = this.assets.map(asset => ({
+                    ...asset,
+                    currentValue: this.getAssetCurrentValue(asset)
+                }));
+
+                // Seed the fixed set: assets that are individually overweight or belong
+                // to an overweight group relative to the new total portfolio value.
+                const fixedSet = new Set();
+
+                allAssetsEnriched.forEach(asset => {
+                    // Individually overweight (current allocation >= target in new total)
+                    if (newTotal > 0 && asset.currentValue / newTotal >= asset.targetPercent / 100) {
+                        fixedSet.add(asset.name);
+                        return;
+                    }
+                    // In an overweight group
+                    for (const group of this.assetGroups) {
+                        if (!group.assetNames.includes(asset.name)) continue;
+                        const groupTargetPercent = group.assetNames.reduce((sum, n) => {
+                            const a = this.assets.find(x => x.name === n);
+                            return sum + (a ? a.targetPercent : 0);
+                        }, 0);
+                        const groupCurrentPercent = group.assetNames.reduce((sum, n) => {
+                            const a = allAssetsEnriched.find(x => x.name === n);
+                            return sum + (a && newTotal > 0 ? (a.currentValue / newTotal) * 100 : 0);
+                        }, 0);
+                        if (groupCurrentPercent >= groupTargetPercent) {
+                            fixedSet.add(asset.name);
+                            break;
                         }
                     }
-                    return true;
                 });
-                
-                // Calculate total positive deviation from eligible assets only
-                const totalPositiveDeviation = eligibleAssetDeviations
-                    .reduce((sum, a) => sum + a.deviation, 0);
-                
-                if (totalPositiveDeviation === 0) {
-                    // No assets to allocate
+
+                // If no new investment, short-circuit with empty allocations
+                if (totalNewInvestment === 0 || newTotal === 0) {
                     this.results = {
                         investorAllocations: [],
-                        summary: this.assets.map(asset => {
-                            const currentValue = this.getAssetCurrentValue(asset);
-                            const preActualPercent = currentTotal > 0 ? (currentValue / currentTotal) * 100 : 0;
+                        summary: allAssetsEnriched.map(asset => {
+                            const preActualPercent = currentTotal > 0 ? (asset.currentValue / currentTotal) * 100 : 0;
                             const preTargetValue = Math.round((asset.targetPercent / 100) * currentTotal);
                             const preDrift = preActualPercent - asset.targetPercent;
                             return {
@@ -1034,12 +1035,12 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 targetPercent: asset.targetPercent,
                                 preTargetValue,
                                 targetValue: preTargetValue,
-                                currentValue,
+                                currentValue: asset.currentValue,
                                 preActualPercent,
                                 preDrift,
                                 newAllocation: 0,
                                 newAllocationPercent: 0,
-                                postValue: currentValue,
+                                postValue: asset.currentValue,
                                 postPercent: preActualPercent,
                                 postDrift: preDrift
                             };
@@ -1052,41 +1053,118 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     };
                     return;
                 }
-                
-                // Check if any investor has TCS enabled for international investments
-                const anyInvestorHasTcs = this.investors.some(inv => inv.tcs && inv.international);
-                
-                // Calculate allocation ratios based on deviation, accounting for TCS budget impact
-                // For international assets with TCS, they will consume 1.2x budget, so scale their "need" accordingly
-                const adjustedDeviations = eligibleAssetDeviations.map(asset => ({
-                    ...asset,
-                    budgetNeed: (anyInvestorHasTcs && asset.isInternational) 
-                        ? asset.deviation * 1.2  // International with TCS needs 1.2x budget
-                        : asset.deviation
-                }));
-                
-                const totalBudgetNeed = adjustedDeviations.reduce((sum, a) => sum + a.budgetNeed, 0);
-                
-                // ============================================================
-                // DETERMINISTIC ALLOCATION ENGINE
-                // Asset-centric approach using constrained transportation problem
-                // ============================================================
-                
-                const roundOff = this.getRoundOff();
-                const TCS_MULTIPLIER = 1.2; // 20% TCS on international investments
-                
-                // STEP 1: Calculate exact asset allocations (with rounding adjustment)
+
+                // Iterative even-drift solver
+                let targetDrift = 0;
+                let solvableAssets = [];
+                const MAX_ITERATIONS = allAssetsEnriched.length + 2;
+
+                for (let iter = 0; iter < MAX_ITERATIONS; iter++) {
+                    // Step 2: locked drift for each fixed asset
+                    // Locked drift = currentValue/newTotal - targetPercent/100
+                    const lockedDriftSum = allAssetsEnriched
+                        .filter(a => fixedSet.has(a.name))
+                        .reduce((sum, a) => sum + (a.currentValue / newTotal - a.targetPercent / 100), 0);
+
+                    // Step 3: remaining drift budget (solvable assets must absorb this)
+                    const remainingDriftBudget = -lockedDriftSum;
+
+                    // Step 4: solvable assets & preliminary target drift
+                    solvableAssets = allAssetsEnriched.filter(a => !fixedSet.has(a.name));
+                    const N = solvableAssets.length;
+                    if (N === 0) {
+                        targetDrift = 0;
+                        break;
+                    }
+                    targetDrift = remainingDriftBudget / N;
+
+                    // Step 5: constraint check — find any solvable asset that would require selling
+                    let violated = false;
+                    for (const asset of solvableAssets) {
+                        const required = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                        if (required < 0) {
+                            // Cannot be solved without selling — move to fixed set and restart
+                            fixedSet.add(asset.name);
+                            violated = true;
+                            break;
+                        }
+                    }
+                    if (!violated) break; // Converged — all solvable assets need positive allocation
+                }
+
+                // TCS correction: if any investor has TCS on international assets, the actual
+                // net portfolio growth is less than the gross budget (by the TCS amount).
+                // Iterate to find the true newTotal so that drift math is calibrated correctly.
+                if (anyInvestorHasTcs && solvableAssets.length > 0) {
+                    const intlSolvable = solvableAssets.filter(a => a.isInternational);
+                    if (intlSolvable.length > 0) {
+                        for (let tcsIter = 0; tcsIter < 10; tcsIter++) {
+                            // Recompute targetDrift with current newTotal estimate
+                            const lockedDriftSumTcs = allAssetsEnriched
+                                .filter(a => fixedSet.has(a.name))
+                                .reduce((sum, a) => sum + (a.currentValue / newTotal - a.targetPercent / 100), 0);
+                            const tdTcs = -lockedDriftSumTcs / solvableAssets.length;
+                            // Estimate international net allocation (sum over intl solvable)
+                            const intlNetAlloc = intlSolvable.reduce((sum, a) => {
+                                return sum + Math.max(0, (a.targetPercent / 100 + tdTcs) * newTotal - a.currentValue);
+                            }, 0);
+                            // Net portfolio growth = gross budget - TCS paid on intl
+                            const newTotalEstimate = currentTotal + totalNewInvestment - (TCS_MULTIPLIER - 1) * intlNetAlloc;
+                            if (Math.abs(newTotalEstimate - newTotal) < 1) {
+                                newTotal = newTotalEstimate;
+                                break;
+                            }
+                            newTotal = newTotalEstimate;
+                        }
+                        // Recompute final targetDrift with corrected newTotal
+                        const lockedFinal = allAssetsEnriched
+                            .filter(a => fixedSet.has(a.name))
+                            .reduce((sum, a) => sum + (a.currentValue / newTotal - a.targetPercent / 100), 0);
+                        targetDrift = -lockedFinal / solvableAssets.length;
+                    }
+                }
+
+                // If all assets ended up fixed, show current state with no allocation
+                if (solvableAssets.length === 0) {
+                    this.results = {
+                        investorAllocations: [],
+                        summary: allAssetsEnriched.map(asset => {
+                            const preActualPercent = currentTotal > 0 ? (asset.currentValue / currentTotal) * 100 : 0;
+                            const preTargetValue = Math.round((asset.targetPercent / 100) * currentTotal);
+                            const preDrift = preActualPercent - asset.targetPercent;
+                            return {
+                                assetClass: asset.name,
+                                targetPercent: asset.targetPercent,
+                                preTargetValue,
+                                targetValue: preTargetValue,
+                                currentValue: asset.currentValue,
+                                preActualPercent,
+                                preDrift,
+                                newAllocation: 0,
+                                newAllocationPercent: 0,
+                                postValue: asset.currentValue,
+                                postPercent: preActualPercent,
+                                postDrift: preDrift
+                            };
+                        }),
+                        totalCurrent: currentTotal,
+                        totalNewAllocation: 0,
+                        totalPost: currentTotal,
+                        totalTarget: currentTotal,
+                        totalTargetPercent: this.assets.reduce((sum, a) => sum + a.targetPercent, 0)
+                    };
+                    return;
+                }
+
+                // Build assetAllocations from targetDrift for solvable assets
                 const assetAllocations = [];
-                let totalBudgetConsumed = 0; // gross budget used (investment + TCS cost for intl)
-                
-                adjustedDeviations.forEach(asset => {
-                    const targetBudget = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
-                    // Net investment = budget / TCS_MULTIPLIER for intl with TCS, budget for others
-                    const investmentAmount = (anyInvestorHasTcs && asset.isInternational)
-                        ? targetBudget / TCS_MULTIPLIER
-                        : targetBudget;
-                    const roundedAmount = Math.round(investmentAmount / roundOff) * roundOff;
-                    
+                let totalBudgetConsumed = 0;
+
+                solvableAssets.forEach(asset => {
+                    const rawRequired = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                    const netInvestment = Math.max(0, rawRequired);
+                    const roundedAmount = Math.round(netInvestment / roundOff) * roundOff;
+
                     if (roundedAmount > 0) {
                         assetAllocations.push({
                             name: asset.name,
@@ -1095,13 +1173,13 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             isInternational: asset.isInternational,
                             originalAsset: asset
                         });
-                        // Gross budget cost: investment * TCS_MULTIPLIER for intl, investment for others
+                        // Gross budget cost: investment x TCS_MULTIPLIER for intl with TCS
                         totalBudgetConsumed += (anyInvestorHasTcs && asset.isInternational)
                             ? roundedAmount * TCS_MULTIPLIER
                             : roundedAmount;
                     }
                 });
-                
+
                 // Adjust for rounding: add one roundOff unit at a time to the asset with
                 // the largest rounding remainder (ideal - rounded), until budget is consumed.
                 // remainingBudget is in gross terms (same unit as totalNewInvestment).
@@ -1109,29 +1187,27 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 while (remainingBudget >= roundOff && assetAllocations.length > 0) {
                     let maxDiff = -Infinity;
                     let bestAssetName = null;
-                    
-                    adjustedDeviations.forEach(asset => {
-                        const targetBudget = (asset.budgetNeed / totalBudgetNeed) * totalNewInvestment;
-                        const investmentAmount = (anyInvestorHasTcs && asset.isInternational)
-                            ? targetBudget / TCS_MULTIPLIER
-                            : targetBudget;
-                        const roundedAmount = Math.round(investmentAmount / roundOff) * roundOff;
-                        const diff = investmentAmount - roundedAmount; // positive = was rounded down
-                        
+
+                    solvableAssets.forEach(asset => {
+                        const rawRequired = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                        const netInvestment = Math.max(0, rawRequired);
+                        const roundedAmount = Math.round(netInvestment / roundOff) * roundOff;
+                        const diff = netInvestment - roundedAmount; // positive = was rounded down
+
                         // Budget cost of adding one more roundOff to this asset
                         const additionalBudget = (anyInvestorHasTcs && asset.isInternational)
                             ? roundOff * TCS_MULTIPLIER
                             : roundOff;
-                        
+
                         const allocation = assetAllocations.find(a => a.name === asset.name);
                         if (allocation && diff > maxDiff && additionalBudget <= remainingBudget) {
                             maxDiff = diff;
                             bestAssetName = asset.name;
                         }
                     });
-                    
+
                     if (!bestAssetName) break; // No eligible asset fits in remaining budget
-                    
+
                     const assetToAdjust = assetAllocations.find(a => a.name === bestAssetName);
                     const isIntlWithTcs = anyInvestorHasTcs && assetToAdjust.isInternational;
                     assetToAdjust.amount += roundOff;
