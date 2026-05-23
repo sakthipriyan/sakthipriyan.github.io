@@ -5,7 +5,7 @@ type: "books"
 chapter: 7
 date: 2026-04-25
 author: "Sakthi Priyan H"
-draft: false
+draft: true
 ---
 
 In previous chapter we have seen that, Irish ETFs are more efficient for Indian Investor compared to US ETFs. As part of this Chapter we will look at Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
