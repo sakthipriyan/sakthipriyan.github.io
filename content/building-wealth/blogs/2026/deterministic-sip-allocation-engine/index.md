@@ -9,7 +9,7 @@ wealth_tags:
   - Rebalancing
   - RealValue Engines
 
-summary: "How I upgraded my *RealValue Family SIP Allocator* from a proportional drift allocation model to a even drift optimization model and why it reduced structural portfolio variance by 66%."
+summary: "How I upgraded my *RealValue Family SIP Allocator* from a proportional drift allocation model to an even drift optimization model and why it compressed the negative drift band by 75%."
 ---
 ## From Proportional Drift to Even Drift Optimization: Rethinking Portfolio Rebalancing
 
