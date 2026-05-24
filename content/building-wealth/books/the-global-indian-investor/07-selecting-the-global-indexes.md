@@ -5,7 +5,7 @@ type: "books"
 chapter: 7
 date: 2026-04-25
 author: "Sakthi Priyan H"
-draft: true
+draft: false
 ---
 
 In previous chapter we have seen that, Irish ETFs are more efficient for Indian Investor compared to US ETFs. As part of this Chapter we will look at Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
@@ -41,261 +41,119 @@ Gold ETCs are exchange-traded securities designed to track the price of gold. Th
 Unlike traditional exchange-traded funds (ETFs), Gold ETCs are legally structured as **debt securities issued by financial institutions**, not as investment funds. This structural difference exists because European UCITS fund rules do not allow a fund to hold a single commodity like gold directly.
 
 Most modern gold ETCs are **physically backed**, meaning that gold bullion is held in secure vaults (typically in London) and acts as collateral for the securities issued to investors.
+Here is the refined comparison, enhanced with the exact scale and cost multiples, along with the strategic context regarding the Irish domicile.
 
 ### A Gold Comparison
 
-Let's compare Indian Gold ETFs/Mutual Funds vs Irish Gold ETCs
-
-#### Summary
-
-
-| Instrument | Min Cost (%) | Max Cost (%) |
-| :--- | :---: | :---: |
-| Indian Gold Mutual Funds (FoFs) | 0.70 | 1.50 |
-| Indian Gold ETFs | 0.50 | 0.80 |
-| Irish Gold ETCs | 0.11 | 0.12 |
-
-Min and Max cost based on filtered list of Top 3 AUM and Top 3 TER rankings.
-<!-- Because the gold is held in **large institutional bars (~12.5kg)**, costs and spreads are very low. -->
+Let's compare Indian Gold ETFs/Mutual Funds vs Irish Gold ETCs.
 
 #### Indian Gold Mutual Funds (FoFs)
 
-| Fund Name | ISIN | AUM | FoF TER | ETF TER | Total TER | Rank |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| SBI Gold Fund | INF200K01UT3 | ~₹15,691 Cr | 0.25% | 0.65% | 0.90% | AUM #1 |
-| HDFC Gold Fund | INF179K01NZ6 | ~₹11,464 Cr | 0.20% | 0.59% | 0.79% | AUM #2 |
-| Nippon India Gold Savings | INF204K01MG3 | ~₹7,178 Cr | 0.05% | 0.81% | 0.86% | AUM #3, TER #1 |
-| Kotak Gold Fund | INF109K01AD6 | ~₹6,693 Cr | 0.16% | 0.52% | 0.68% | TER #2 |
-| Axis Gold Fund | INF846K01EP9 | ~₹2,888 Cr | 0.18% | 0.58% | 0.76% | TER #3 |
+Top 3 by AUM and Top 3 by TER are listed here.
 
-#### Top Indian Gold ETFs
+| Fund Name | AUM<br/>(₹ Cr) | AUM<br/>($ million) | Fund&nbsp;TER <br/>(%) | ETF Name | ETF&nbsp;TER <br/>(%) | Total&nbsp;TER <br/>(%) | Rank |
+| --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
+| **SBI Gold Fund** | 15,691 | 1,640 | 0.25 | SBI Gold ETF | 0.65 | 0.90 | AUM #1 |
+| **HDFC Gold Fund** | 11,464 | 1,198 | 0.20 | HDFC Gold ETF | 0.59 | 0.79 | AUM #2 |
+| **Nippon India Gold Savings Fund** | 7,178 | 750 | 0.05 | Nippon India ETF Gold BeES | 0.81 | 0.86 | AUM #3 |
+| **DSP Gold ETF FoF** | 494 | 52 | 0.15 | DSP Gold ETF | 0.38 | 0.53 | TER #3 |
+| **Mirae Asset Gold ETF FoF** | 483 | 50 | 0.12 | Mirae Asset Gold ETF | 0.33 | 0.45 | TER #1 |
+| **Angel One Gold ETF FoF** | 32 | 3 | 0.15 | Angel One Gold ETF | 0.35 | 0.50 | TER #2 |
 
-| ETF Name | ISIN | AUM (Rs Cr) | TER (%) | Rank (#) |
-| :--- | :--- | :--- | :--- | :--- |
-| Nippon India ETF Gold BeES | INF204KB17I5 | 55,540 | 0.81 | AUM #1 |
-| SBI Gold ETF | INF200KA16D8 | 24,549 | 0.65 | AUM #2 |
-| Kotak Gold ETF | INF174KA1HJ8 | 14,339 | 0.52 | AUM #3, TER #1 |
-| HDFC Gold ETF | INF179KC1981 | 4,200 | 0.59 | TER #3 |
-| Axis Gold ETF | INF846K01W80 | 3,500 | 0.58 | TER #2 |
+> Indian Gold FoF Total TER ranges from 0.45% to 0.90% as shown in the table
+
+
+#### Indian Gold ETFs
+
+Top 3 by AUM and Top 3 by TER are listed here.
+
+| ETF Name | ISIN | AUM<br/>(Rs Cr) | AUM<br/>($ million) | TER<br/>(%) | Rank |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Nippon India ETF Gold BeES | INF204KB17I5 | 55,540 | 5,804 | 0.80 | AUM #1 |
+| ICICI Prudential Gold ETF | INF109KC1NT3 | 26,380 | 2,757 | 0.49 | AUM #2 |
+| SBI Gold Exchange Traded Scheme - Growth Option | INF200KA16D8 | 24,549 | 2,565 | 0.65 | AUM #3 |
+| Zerodha Gold ETF | INF0R8F01042 | 2,218 | 232 | 0.35 | TER #2 |
+| The Wealth Company Gold ETF | INF2F0001370 | 23 | 2 | 0.29 | TER #1 |
+| Angel One Gold ETF | INF1J2R01114 | 83 | 9 | 0.35 | TER #3 |
+
+> Indian Gold ETF TER ranges from 0.29% to 0.80% as shown in the table
 
 #### Irish Gold ETCs
 
-Following are [Irish Gold ETCs](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-preciousMetals&index=Gold&dc=IE&quoteCurrency=USD) which can be explored.
+Top 3 by AUM and Top 3 by TER are listed here.
 
-| Fund Name | ISIN | AUM ($million) | TER | USD Ticker | Rank # |
-| :--- | :--- | ---: | :--- | :--- | :--- |
-| iShares Physical Gold ETC | IE00B4ND3602 | 37,627 | 0.12% | IGLN | AUM #1, TER #2 |
-| Invesco Physical Gold ETC | IE00B579F325 | 29,100 | 0.12% | SGLD | AUM #2, TER #2 |
-| Amundi Physical Gold ETC (C) | FR0013416716 | 12,229 | 0.12% | GLDD | AUM #3, TER #2 |
-| Xtrackers IE Physical Gold ETC Securities | DE000A2T0VU5 | 6,949 | 0.11% | XGDU | TER #1 |
+| ETC Name | ISIN | AUM<br/>($ million) | TER<br/>(%) | USD Ticker | Rank |
+| --- | --- | ---: | ---: | --- | --- |
+| iShares Physical Gold ETC | IE00B4ND3602 | 37,627 | 0.12 | IGLN | AUM #1, TER #2 |
+| Invesco Physical Gold ETC | IE00B579F325 | 29,100 | 0.12 | SGLD | AUM #2, TER #2 |
+| Amundi Physical Gold ETC (C) | FR0013416716 | 12,229 | 0.12 | GLDD | AUM #3, TER #2 |
+| Xtrackers IE Physical Gold ETC Securities | DE000A2T0VU5 | 6,949 | 0.11 | XGDU | TER #1 |
 
-As seen above TER is very competitive 0.11% to 0.12%.
+> TER is very competitive globally, ranging from just 0.11% to 0.12%
 
-### Key Characteristics of Gold ETCs
+Source: [justETF](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-preciousMetals&index=Gold&dc=IE&quoteCurrency=USD) as of May 2026 filtered for Ireland Domicile and Gold asset class.
 
-#### 1. Direct Exposure to Gold Price
 
-Gold ETCs aim to track the **spot price of gold** as closely as possible. The price of the ETC moves almost one-for-one with the underlying gold price, minus a small annual management fee.
+#### Comparing the AUM and TER
 
-Typical tracking benchmark:
+| Instrument | Min AUM<br/>($ million) | Max AUM<br/>($ million) | Min TER<br/>(%) | Max TER<br/>(%) |
+| --- | ---: | ---: | ---: | ---: |
+| Indian Gold Mutual Funds (FoFs) | 3 | 1,640 | 0.45 | 0.90 |
+| Indian Gold ETFs | 2 | 5,804 | 0.29 | 0.80 |
+| Irish Gold ETCs | 6,949 | 37,627 | 0.11 | 0.12 |
 
-- LBMA Gold Price PM
-- Gold spot price in USD
+Min and Max cost and AUM are based on the filtered list of Top 3 AUM and Top 3 TER rankings below.
 
-Because of this structure, returns across major Gold ETCs tend to be **almost identical**, differing mainly by fees and tracking efficiency.
+**The Scale & Cost Gap:**
+When looking at the numbers, the structural advantage of global markets becomes obvious:
 
----
+* **Scale:** The largest Indian Gold ETF **~$5.8B** is **~6.5x smaller** than the largest Irish Gold ETC **~$37.6B**, while the largest Indian Gold Mutual Fund is **nearly 23x smaller**.
+* **Cost:** Because the gold in global ETCs is held in massive institutional bars (~12.5kg) with high operational efficiency, their costs are rock bottom. Indian Gold Mutual Funds are anywhere from **3.7x to 7.5x costlier** than their Irish counterparts, with Total TERs dragging at up to 0.90% annually compared to a flat 0.12%.
 
-## 2. Physically Backed Structure
+#### Notes
+- **The Domicile Note:**
+Unlike global equity ETFs (where an Ireland domicile slashes US Dividend Withholding Tax from 30% to 15%), gold does not pay dividends. Therefore, there is **no specific tax treaty advantage** to domiciling gold in Ireland. However, if you are already building a global passive equity portfolio using Ireland-domiciled UCITS ETFs, routing your gold allocation to an Irish ETC is highly recommended for **portfolio consolidation**
+- 1 USD = 95.70 INR used for Indian AUM conversions to USD
+- Data is taken by last week of May 2026
 
-Most large Gold ETCs are **physically backed by gold bars** stored in professional vaults and audited regularly.
+### TER Drag Compounds Hard Over Long Durations
 
-Typical structure:
+At first glance, the difference between a 0.12% TER Global Gold ETC and a 0.90% Indian Gold Fund may appear small. But gold is usually a long-duration holding, and recurring costs compound aggressively over time.
 
-1. Investor buys ETC units on an exchange.
-2. Issuer allocates corresponding gold bullion.
-3. Gold is stored in vaults (often London LBMA vaults).
-4. The ETC price tracks the gold price minus expenses.
+Historically, gross INR gold returns are driven by two compounding components:
 
-The gold acts as collateral to protect investors if the issuer fails.
+* **Gold Growth (USD):** ~7%
+* **USD/INR Depreciation:** ~4%
+* **Combined Gross INR Return:** 11.28% *[(1.07 * 1.04) - 1]*
 
----
+Crucially, the investment structure dictates exactly *where* the Total Expense Ratio (TER) is deducted, which alters the final math.
 
-## 3. Debt Security Structure (Not a Fund)
+For a **Global Gold ETC**, the 0.12% TER is deducted directly from the underlying USD gold return, meaning you still get the full, un-taxed benefit of the currency depreciation on that net USD amount. For an **Indian Gold Fund**, the 0.90% TER is deducted from the *total combined* INR return.
 
-Gold ETCs are technically **secured notes issued by a financial institution**.
+Here is how that structural difference impacts the effective return rate:
 
-This structure exists because:
+### 1. Deriving the Effective Net Rate
 
-- UCITS funds must be diversified.
-- A single commodity fund (100% gold) is not allowed.
+| Structure | Gross USD Growth | TER | Net USD Growth | USD/INR Growth | Effective Net INR CAGR |
+| --- | --- | --- | --- | --- | --- |
+| **Low-cost Gold ETC** | 7.00% | 0.12% | 6.88% | 4.00% | **11.16%**  *[(1.0688 * 1.04) - 1]* |
+| **Indian Gold Fund** | 7.00% | N/A* | 7.00% | 4.00% | **10.38%**  *[11.28% - 0.90%]* |
 
-Therefore ETCs are issued as **collateralized debt instruments whose value is linked to gold prices**.
+*(Note: The Indian Fund's TER is applied to the final INR return, not the USD leg).*
 
----
+While a ~0.78% difference in net CAGR might sound easily ignorable, time amplifies this gap significantly.
 
-## 4. Very Low Costs
+### 2. Comparison of Long-Term Growth
 
-Gold ETCs are among the **cheapest ways to hold gold exposure globally**.
+For a simple ₹1 lakh lump sum held for 30 years, here is how that effective rate divergence plays out:
 
-Typical cost comparison:
+| Structure | Effective Net INR CAGR | Final Value (Nominal) | Additional (₹) | Additional (%) |
+| --- | --- | --- | --- | --- |
+| **Indian Gold Fund** | [10.38%](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202605c1lm0kg10.38h0i6t15p30y) | **₹19.35 lakh** | - | - |
+| **Low-cost Gold ETC** | [11.16%](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202605c1lm0kg11.16h0i6t15p30y) | **₹23.90 lakh** | **₹4.55 lakh** | **23%** |
 
-| Instrument | Cost |
-|---|---|
-| Physical gold coins | 1–3% spread |
-| Indian gold ETFs | ~0.5–1.0% TER |
-| Gold ETCs (Europe) | ~0.11–0.12% TER |
+By switching from an Indian Gold Fund to a low-cost Global Gold ETC, the investor pockets an extra **₹4.53 lakh**—yielding a final portfolio value nearly **23% higher** over 30 years, simply through structural efficiency.
 
-Because the gold is held in **large institutional bars (~12.5kg)**, costs and spreads are very low.
+This is why recurring structural costs matter enormously for long-term passive assets like gold. One-time forex conversion and routing costs to access global markets may hurt initially, but the recurring TER drag of domestic funds compounds against the investor every single year.
 
----
-
-# Major Gold ETCs (USD Denominated)
-
-Below are some of the largest physically backed Gold ETCs available in European markets.
-
-| Fund | AUM | TER | Replication | ISIN |
-|---|---|---|---|---|
-| iShares Physical Gold ETC | $37.7B | 0.12% | Physically backed | IE00B4ND3602 |
-| Invesco Physical Gold ETC | $29.2B | 0.12% | Physically backed | IE00B579F325 |
-| Amundi Physical Gold ETC | $12.3B | 0.12% | Physically backed | FR0013416716 |
-| Xtrackers IE Physical Gold ETC | $7.0B | 0.11% | Physically backed | DE000A2T0VU5 |
-| Royal Mint Physical Gold ETC | $1.6B | 0.22% | Physically backed | XS2115336336 |
-
-### Observations
-
-- All track **the same gold spot price**.
-- Returns across funds are nearly identical.
-- Cost differences are very small (0.11%–0.22%).
-- Large AUM improves liquidity and spreads.
-
----
-
-# Performance Characteristics
-
-Because they track the same underlying commodity, long-term returns are nearly identical across funds.
-
-Typical performance example:
-
-| Period | Return |
-|---|---|
-| 1 Year | ~42% |
-| 3 Years | ~130% |
-| 5 Years | ~140% |
-
-These numbers reflect the strong gold rally in recent years rather than manager skill.
-
----
-
-# Advantages of Gold ETCs
-
-## 1. Extremely Low Cost Gold Exposure
-Annual fees around **0.11%–0.12%**, far cheaper than most gold funds.
-
-## 2. No Storage Hassle
-Investors avoid vault storage, insurance, and security risks.
-
-## 3. High Liquidity
-Large ETCs trade billions of dollars daily on exchanges.
-
-## 4. Accurate Price Tracking
-Tracking error vs gold price is usually extremely small.
-
-## 5. Easy Portfolio Allocation
-Investors can add **2–10% gold allocation** with a single trade.
-
----
-
-# Risks of Gold ETCs
-
-## 1. Issuer Risk
-
-Unlike ETFs, ETCs are **debt securities**.
-
-Although physically backed collateral reduces risk, there is still theoretical issuer exposure.
-
----
-
-## 2. Currency Risk
-
-Most Gold ETCs are priced in **USD**.
-
-For investors using INR or EUR, returns include:
-
-Gold return + USD currency movement
-
-Example:
-
-Gold ↑ 8%  
-USD vs INR ↑ 4%  
-
-Total return ≈ 12%
-
----
-
-## 3. No Income
-
-Gold ETCs do not generate:
-
-- dividends
-- interest
-- cash flows
-
-Returns come **only from price appreciation**.
-
----
-
-# Gold ETC vs Gold ETF
-
-| Feature | Gold ETC | Gold ETF |
-|---|---|---|
-| Structure | Debt security | Investment fund |
-| UCITS compliant | No | Yes |
-| Commodity exposure | Direct | Often via ETC or derivatives |
-| Physical backing | Usually | Usually |
-| Cost | Very low | Slightly higher |
-
-In Europe, Gold ETCs exist because **UCITS rules prohibit single-commodity ETFs**.
-
----
-
-# Role of Gold ETCs in a Portfolio
-
-Gold typically serves three roles:
-
-### 1. Inflation Hedge
-Gold historically preserves purchasing power during inflation.
-
-### 2. Crisis Hedge
-Gold often performs well during financial stress.
-
-### 3. Portfolio Diversifier
-Gold has relatively low correlation with stocks and bonds.
-
-Typical allocations:
-
-| Portfolio Type | Gold Allocation |
-|---|---|
-| Traditional 60/40 | 5% |
-| Risk parity | 10–15% |
-| Permanent portfolio | 25% |
-
----
-
-# Conclusion
-
-Gold ETCs represent one of the **most efficient ways to gain gold exposure globally**.
-
-They combine:
-
-- institutional gold storage
-- extremely low fees
-- stock-exchange liquidity
-- precise tracking of gold prices
-
-Among available options, the **large Irish-domiciled ETCs with TER around 0.11–0.12%** are typically considered the most efficient due to scale, liquidity, and low cost.
-
-For investors seeking a simple gold allocation without dealing with physical bullion, Gold ETCs provide a clean, low-cost solution.
-
-
-
+**Note**: These calculations exclude the initial one-time forex conversion and brokerage costs required to access global markets. However, the recurring TER savings from lower-cost Global Gold ETCs typically offset these upfront costs within the first 2–3 years of holding. In practice, the effective forex cost may be even lower when gold investments are piggybacked on existing international equity allocations, since the same USD balance can be reused across assets without repeated INR–USD conversions. There is no forex cost involved when rebalancing from Global Equity to Gold. 
