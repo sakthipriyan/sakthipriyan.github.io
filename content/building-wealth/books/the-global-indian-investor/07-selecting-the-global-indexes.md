@@ -63,7 +63,7 @@ Index providers build various indexes but ETF issuer only issue ETFs which have 
 Here is how those blueprints translate into actual, investable Irish-domiciled UCITS ETFs. Notice how you are often forced to mix Standard and IMI/All-Cap tiers simply because certain index combinations lack a highly liquid, low-cost ETF.
 
 | Index | ETF | AUM<br/>($&nbsp;million) | TER (%) | RANK |
-| --- | --- | --- | --- | --- |
+| --- | --- | ---: | ---: | --- |
 | **MSCI ACWI** | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259) | 32,763 | 0.20% | AUM #1 |
 |  | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) | 13,691 | 0.12% | TER #1 |
 | **MSCI World** | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983) | 141,198 | 0.20% | AUM #1 |
@@ -81,12 +81,12 @@ Notes:
 - Filtered Funds with AUM > $1 Billion across various indexes.
 - Data taken by end of May 2026
 
-## US Specific Equity ETFs
+## US Equity ETFs
 
 US Equities contribute significantly to Global and Developed Index.
 
 | Global/Developed Index | US Contribution (%) | Example UCITS ETF |
-| --- | --- | --- |
+| --- | ---: | --- |
 | **MSCI ACWI** | ~60% | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
 | **MSCI World** | ~67% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
 
@@ -240,105 +240,3 @@ This is why recurring structural costs matter enormously for long-term passive a
 - Currently, my gold allocation sits in Indian Mutual Funds. While I initially planned to upgrade to Indian ETFs, I am routing all my future gold investments into Irish ETCs to eliminate the heavy domestic cost drag and avoid arbitrary tax distortions entirely.
 
 
-
-----
-
-Merge/dedupe/simlify
-
-
-## Global Equity ETFs
-When expanding outside India, you want to capture either the entire investable world or focus purely on developed markets (since your domestic portfolio already gives you heavy emerging market exposure).
-
-When constructing a global passive equity portfolio, the index provider is the architect and the ETF issuer (Vanguard, BlackRock) is simply the builder executing the blueprint.
-
-FTSE and MSCI are the two dominant architects in the global equity space. While their goal is the same—to capture the performance of global stock markets—they draw their lines differently regarding market capitalization and country classification.
-
-Here is how they break down.
-
-## 1. MSCI (Standard)
-
-MSCI (Morgan Stanley Capital International) is the most widely tracked index provider globally. Their standard indices—such as the **MSCI ACWI** (All Country World Index) or **MSCI World** (Developed Markets only)—focus exclusively on **Large and Mid-cap** stocks.
-
-* **Coverage:** Approximately **85%** of the free float-adjusted market capitalization in each country.
-* **Philosophy:** By capturing the top 85%, you get the vast majority of the market's return with highly liquid stocks, keeping ETF transaction costs and bid-ask spreads low.
-* **Popular UCITS ETFs:** ISAC (iShares MSCI ACWI), SSAC (State Street MSCI ACWI).
-
-## 2. MSCI IMI (Investable Market Index)
-
-"IMI" is MSCI’s expanded blueprint. An IMI index takes the standard Large/Mid-cap index and adds **Small-cap** stocks to it.
-
-* **Coverage:** Approximately **99%** of the global investable market.
-* **Philosophy:** This is the truest representation of a "total market" index. The **MSCI ACWI IMI** captures essentially every investable stock in the world across both Developed and Emerging markets.
-* **Popular UCITS ETFs:** SPYI / IMID (SPDR MSCI ACWI IMI).
-
-## 3. FTSE
-
-FTSE (Financial Times Stock Exchange, now FTSE Russell) is MSCI's primary competitor. Their methodology sits somewhere between MSCI Standard and MSCI IMI. Their flagship global index is the **FTSE All-World**.
-
-* **Coverage:** Approximately **90% to 95%** of the investable market. It captures Large and Mid-caps, but dips slightly further down the market-cap spectrum than standard MSCI, capturing a slice of what MSCI would classify as upper-small-cap.
-* **Philosophy:** Vanguard heavily favors FTSE indices for their international ETFs to keep licensing costs down (which translates to lower TERs for investors) while capturing slightly more market breadth than standard MSCI.
-* **Popular UCITS ETFs:** VWRA / VWCE (Vanguard FTSE All-World).
-
----
-
-## The Structural Comparison
-
-When selecting a single-fund global equity allocation, the choice usually comes down to these three tiers:
-
-| Index Family | Market Cap Focus | Target Market Coverage | Flagship Global Index | Example Irish UCITS |
-| --- | --- | --- | --- | --- |
-| **MSCI Standard** | Large + Mid | ~85% | MSCI ACWI | ISAC |
-| **FTSE** | Large + Mid + (Some Small) | ~90-95% | FTSE All-World | VWRA |
-| **MSCI IMI** | Large + Mid + Small | ~99% | MSCI ACWI IMI | IMID |
-
-## The Classification Trap: Mixing Indices
-
-If you are building a one-fund equity portfolio (e.g., just buying VWRA or ISAC), the difference between FTSE and MSCI is negligible; their long-term performance is virtually identical.
-
-However, if you are splitting your portfolio into separate Developed Markets (DM) and Emerging Markets (EM) ETFs to control your own weightings, **you must never mix index providers**.
-
-The most critical difference between the two is how they classify **South Korea** and **Poland**:
-
-* **FTSE** classifies South Korea and Poland as **Developed Markets**.
-* **MSCI** classifies South Korea and Poland as **Emerging Markets**.
-
-If you pair a FTSE Developed World ETF with an MSCI Emerging Markets ETF, you will hold South Korea twice. If you pair an MSCI World ETF with a FTSE Emerging Markets ETF, you will exclude South Korea entirely.
-
-|Provider | World Markets | Developed Markets | Emerging Markets | 
-|---|---|---|---|
-|MSCI | MSCI ACWI | MSCI World | MSCI Emerging Markets |
-|MSCI IMI | MSCI ACWI IMI | MSCI World | MSCI Emerging Markets |
-|FTSE | All World | FTSE Developed | FTSE Emerging |
-
-This is a clean, simple reference table. However, since index naming conventions are notoriously confusing for beginners, we can optimize this to prevent a very specific trap.
-
-The biggest point of confusion for new investors is seeing the name **"MSCI World"** and assuming it covers the entire globe, when in reality, it *only* covers Developed Markets.
-
-To make this a bulletproof reference guide for your readers—and to tie in your earlier explanation of the "IMI" framework—I recommend renaming the columns slightly for clarity and adding the "Total Market" tier.
-
-Here is the polished version:
-Here is the structurally perfect breakdown showing exactly how both MSCI and FTSE apply their "Total Market" modifiers across all geographies.
-
-By restructuring the table with regions as the columns and the market-cap methodology as the rows, it becomes clear that "IMI" and "All Cap" are not separate regions, but simply a small-cap expansion applied to existing blueprints.
-
-### The Index Blueprint (Standard vs. Total Market)
-
-| Provider Family | Market Cap Focus | Global Markets*(DM + EM)* | Developed Markets*(DM Only)* | Emerging Markets*(EM Only)* |
-| --- | --- | --- | --- | --- |
-| **MSCI (Standard)** | Large + Mid | MSCI ACWI | MSCI World | MSCI Emerging Markets |
-| **MSCI (IMI)** | Large + Mid + Small | MSCI ACWI IMI | MSCI World IMI | MSCI Emerging Markets IMI |
-| **FTSE (Standard)** | Large + Mid* | FTSE All-World | FTSE Developed | FTSE Emerging |
-| **FTSE (All Cap)** | Large + Mid + Small | FTSE Global All Cap | FTSE Developed All Cap | FTSE Emerging All Cap |
-
-> *Note: While the standard FTSE indices officially target Large and Mid-caps, their methodology naturally dips slightly deeper down the market-cap spectrum than standard MSCI.*
-
-### The Implementation Cheat Sheet (Irish UCITS)
-
-To make this instantly actionable, here is the updated ticker map. It reveals exactly where the ETF issuers decided to launch products. Notice how you are forced to mix standard and IMI/All Cap methodologies simply because certain index combinations lack a liquid, low-cost ETF.
-
-| Provider Family | Global Markets | Developed Markets | Emerging Markets |
-| --- | --- | --- | --- |
-| **MSCI (Standard)** | **ISAC** *(iShares)* | **SWRD** *(SPDR)* **IWDA** *(iShares)* | *No highly liquid, low-TER ETF* |
-| **MSCI (IMI)** | **SPYI / IMID** *(SPDR)* | **WIMI** *(Xtrackers)* | **EIMI** *(iShares)* |
-| **FTSE (Standard)** | **VWCE / VWRA** *(Vanguard)* | **VHVE** *(Vanguard)* | **VFEA** *(Vanguard)* |
-| **FTSE (All Cap)** | **FWRA** *(Invesco)* | *No highly liquid Irish UCITS* | *No highly liquid Irish UCITS* |
