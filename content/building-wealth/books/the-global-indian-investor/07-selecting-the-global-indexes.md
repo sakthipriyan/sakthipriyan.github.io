@@ -18,7 +18,7 @@ When expanding outside India, you want to capture either the entire investable w
 
 When constructing a global passive equity portfolio, the index provider (MSCI, FTSE) is the architect and the ETF issuer (Vanguard, BlackRock) is simply the builder executing the blueprint.
 
-FTSE (Financial Times Stock Exchange, now FTSE Russell) and MSCI (Morgan Stanley Capital International) are the two dominant architects in the global equity space. While their goal is the same—to capture the performance of global stock markets—they draw their lines differently regarding market capitalization and country classification.
+MSCI (Morgan Stanley Capital International) and FTSE (Financial Times Stock Exchange, now FTSE Russell) are the two dominant architects in the global equity space. While their goal is the same—to capture the performance of global stock markets—they draw their lines differently regarding market capitalization and country classification.
 
 ### The Methodology
 
@@ -26,7 +26,8 @@ FTSE (Financial Times Stock Exchange, now FTSE Russell) and MSCI (Morgan Stanley
 * **MSCI IMI (Investable Market Index)**: Takes the standard Large/Mid-cap index and adds **Small-cap** stocks to cover ~99% of the investable market. This is the truest representation of a "total market" index.
 * **FTSE**: While their standard indices officially target Large and Mid-caps (~90-95% coverage), their methodology naturally dips slightly deeper down the market-cap spectrum than standard MSCI. Vanguard heavily favors this tier for its flagship global funds to keep licensing costs (and TERs) low.
 * **FTSE All-Cap**:This is FTSE’s equivalent to MSCI’s IMI tier. By adding Small-cap stocks to the standard blueprint, it captures the full 99% of the investable market to provide true total-market exposure.
-### The Classification Trap: Mixing Indices
+
+### The Classification Difference: Mixing Indices
 
 If you are building a one-fund equity portfolio (e.g., just buying a single Global fund), the difference between FTSE and MSCI is negligible; their long-term performance is virtually identical.
 
@@ -39,32 +40,58 @@ The critical difference is how they classify **South Korea** and **Poland**:
 
 If you pair a FTSE Developed World ETF with an MSCI Emerging Markets ETF, you will hold South Korea twice. If you pair an MSCI World ETF with a FTSE Emerging Markets ETF, you will exclude South Korea entirely. Pick one provider's ecosystem and stick to it.
 
-### The Index Blueprint (Standard vs. Total Market)
+### The Index Blueprint
 
 This table shows exactly how both MSCI and FTSE apply their standard and small-cap modifiers across geographies. Note that "IMI" and "All Cap" are not separate regions, but simply a small-cap expansion applied to the base blueprints.
 
 | Provider Family | Market Cap Focus | Market Coverage | Global Markets<br/>*(DM + EM)* | Developed Markets<br/> *(DM Only)* | Emerging Markets<br/> *(EM Only)* |
 | --- | --- | ---: | --- | --- | --- |
-| **MSCI** | Large + Mid | ~85% | [MSCI ACWI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BAll%2BCountry%2BWorld%2B%2528ACWI%2529) | [MSCI World](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BWorld) | [MSCI Emerging Markets](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BEmerging%2BMarkets) |
-| **MSCI IMI** | Large&nbsp;+&nbsp;Mid&nbsp;+&nbsp;Small | ~99% | [MSCI ACWI IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BAll%2BCountry%2BWorld%2BInvestable%2BMarket%2B%2528ACWI%2BIMI%2529) | [MSCI World IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BWorld%2BIMI) | [MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BEmerging%2BMarkets%2BInvestable%2BMarket%2B%28IMI%29) |
-| **FTSE**¹ | Large + Mid | ~90-95% | [FTSE All-World](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BAll-World) | [FTSE Developed](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BDeveloped) | [FTSE Emerging](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BEmerging) |
-| **FTSE&nbsp;All&nbsp;Cap** | Large + Mid + Small | ~99% | [FTSE&nbsp;Global&nbsp;All&nbsp;Cap](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BGlobal%2BAll%2BCap%2BChoice) | FTSE&nbsp;Developed&nbsp;All&nbsp;Cap² | [FTSE Emerging All Cap](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BEmerging%2BAll%2BCap%2BChoice) |
+| **MSCI** | Large + Mid | ~85% | [MSCI ACWI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BAll%2BCountry%2BWorld%2B%2528ACWI%2529&quoteCurrency=USD) | [MSCI World](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BWorld&quoteCurrency=USD) | [MSCI Emerging Markets](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BEmerging%2BMarkets&quoteCurrency=USD) |
+| **MSCI IMI** | Large&nbsp;+&nbsp;Mid&nbsp;+&nbsp;Small | ~99% | [MSCI ACWI IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BAll%2BCountry%2BWorld%2BInvestable%2BMarket%2B%2528ACWI%2BIMI%2529&quoteCurrency=USD) | [MSCI World IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BWorld%2BIMI&quoteCurrency=USD) | [MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BEmerging%2BMarkets%2BInvestable%2BMarket%2B%28IMI%29&quoteCurrency=USD) |
+| **FTSE**¹ | Large + Mid | ~90-95% | [FTSE All-World](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BAll-World&quoteCurrency=USD) | [FTSE Developed](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BDeveloped&quoteCurrency=USD) | [FTSE Emerging](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BEmerging&quoteCurrency=USD) |
+| **FTSE&nbsp;All&nbsp;Cap**² | Large + Mid + Small | ~99% | FTSE&nbsp;Global&nbsp;All&nbsp;Cap | FTSE&nbsp;Developed&nbsp;All&nbsp;Cap | FTSE Emerging All Cap |
 
 **Notes**
 
 1. While the standard FTSE indices officially target Large and Mid-caps, their methodology naturally dips slightly deeper down the market-cap spectrum than standard MSCI, capturing a broader slice of the total market.
-2. No plain-vanilla, standard ETF tracking this exact index exists as of writing this chapter, use FTSE Developed instead.
+2. No plain-vanilla, standard ETF tracking these exact indexes exist as of writing this chapter. Some variants exist for [FTSE Global All Cap Choice](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&index=FTSE%2BGlobal%2BAll%2BCap%2BChoice) and [FTSE Emerging All Cap Choice](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&index=FTSE%2BEmerging%2BAll%2BCap%2BChoice). I would rather use FTSE ones if at all.
+
+Index providers build various indexes but ETF issuer only issue ETFs which have real demand. For example: [MSCI ACWI ex India Index (USD)](https://www.msci.com/documents/10199/a789e2c1-0f2e-4582-a821-fd1f0ac13261) exists but there is no ETF.
 
 ### The Implementation Cheat Sheet (Irish UCITS)
 
 Here is how those blueprints translate into actual, investable Irish-domiciled UCITS ETFs. Notice how you are often forced to mix Standard and IMI/All-Cap tiers simply because certain index combinations lack a highly liquid, low-cost ETF.
 
-| Provider Family | Global Markets | Developed Markets | Emerging Markets |
-| --- | --- | --- | --- |
-| **MSCI** | **ISAC** *(iShares)* | **SWRD** *(SPDR)* **IWDA** *(iShares)* | *No highly liquid Irish UCITS* |
-| **MSCI IMI** | **SPYI / IMID** *(SPDR)* | **WIMI** *(Xtrackers)* | **EIMI** *(iShares)* |
-| **FTSE** | **VWCE / VWRA** *(Vanguard)* **FWRA** *(Invesco)* | **VHVE** *(Vanguard)* | **VFEA** *(Vanguard)* |
-| **FTSE All Cap** | *No highly liquid, non-ESG Irish UCITS* | *No highly liquid Irish UCITS* | *No highly liquid Irish UCITS* |
+| Index | ETF | AUM<br/>($&nbsp;million) | TER (%) | RANK |
+| --- | --- | --- | --- | --- |
+| **MSCI ACWI** | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259) | 32,763 | 0.20% | AUM #1 |
+|  | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) | 13,691 | 0.12% | TER #1 |
+| **MSCI World** | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983) | 141,198 | 0.20% | AUM #1 |
+|  | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394) | 7,815 | 0.05% | TER #1 |
+| **MSCI Emerging Markets** | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35) | 13,348 | 0.18% | AUM #1 |
+|  | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59) | 1,279 | 0.15% | TER #1 |
+| **MSCI ACWI IMI** | [State Street SPDR MSCI ACWI IMI UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) | 6,258 | 0.17% | AUM #1,<br/>TER #1 |
+| **MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66) | 42,430 | 0.18% | AUM #1,<br/>TER #1 |
+| **FTSE All-World** | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80) | 45,672 | 0.19% | AUM #1 |
+|  | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7) | 3,649 | 0.15% | TER #1 |
+| **FTSE Developed** | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03) | 6,830 | 0.12% | AUM #1,<br/>TER #1 |
+| **FTSE Emerging** | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733) | 2,161 | 0.17% | AUM&nbsp;#1,<br/>TER #1 |
+
+Notes:
+- Filtered Funds with AUM > $1 Billion across various indexes.
+- Data taken by end of May 2026
+
+## US Specific Equity ETFs
+
+US Equities contribute significantly to Global and Developed Index.
+
+| Global/Developed Index | US Contribution (%) | Example UCITS ETF |
+| --- | --- | --- |
+| **MSCI ACWI** | ~60% | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
+| **MSCI World** | ~67% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
+
+This section we will focus on US Specific Equity ETFs available.
+
 
 ## Debt ETFs
 > TODO
