@@ -38,17 +38,17 @@ Following is the current state of the **1 Portfolio**.
 
 | Asset Class      |       XIRR | Growth Share | Current Allocation <br/><small>(on June 5, 2026)</small> | Target Allocation <br/><small>(for TY 2026-27)</small> |                                   Drift |
 | :--------------- | ---------: | -----------: | -------------------------------------------------------: | -----------------------------------------------------: | --------------------------------------: |
-| **Nasdaq 100**   |     40.14% |       63.75% |                                                   40.14% |                                                 40.00% | <span style="color:green">+0.14%</span> |
-| **Nifty 50**     |      2.14% |        2.54% |                                                   19.09% |                                                 20.00% |   <span style="color:red">-0.91%</span> |
-| **Next 50**      |     26.20% |        2.56% |                                                    9.17% |                                                 10.00% |   <span style="color:red">-0.83%</span> |
-| **Midcap 150**   |     24.54% |        2.47% |                                                    9.19% |                                                 10.00% |   <span style="color:red">-0.81%</span> |
-| **Smallcap 250** |     43.24% |        1.86% |                                                    4.64% |                                                  5.00% |   <span style="color:red">-0.36%</span> |
-| **Debt**         |      7.12% |        3.10% |                                                    5.91% |                                                  5.00% | <span style="color:green">+0.91%</span> |
-| **Gold**         |     41.81% |       23.72% |                                                   11.86% |                                                 10.00% | <span style="color:green">+1.86%</span> |
-| **Total**        | **21.73%** |  **100.00%** |                                              **100.00%** |                                            **100.00%** |                               **2.91%** |
+| **Nasdaq 100**   |     40.07% |       63.61% |                                                   40.07% |                                                 40.00% | <span style="color:green">+0.07%</span> |
+| **Nifty 50**     |      2.14% |        2.55% |                                                   19.11% |                                                 20.00% |   <span style="color:red">-0.89%</span> |
+| **Next 50**      |     26.20% |        2.57% |                                                    9.18% |                                                 10.00% |   <span style="color:red">-0.82%</span> |
+| **Midcap 150**   |     24.54% |        2.48% |                                                    9.20% |                                                 10.00% |   <span style="color:red">-0.80%</span> |
+| **Smallcap 250** |     43.24% |        1.87% |                                                    4.65% |                                                  5.00% |   <span style="color:red">-0.35%</span> |
+| **Debt**         |      7.12% |        3.11% |                                                    5.92% |                                                  5.00% | <span style="color:green">+0.92%</span> |
+| **Gold**         |     41.81% |       23.81% |                                                   11.87% |                                                 10.00% | <span style="color:green">+1.87%</span> |
+| **Total**        | **21.67%** |  **100.00%** |                                              **100.00%** |                                            **100.00%** |                               **2.86%** |
 
 
-- *Growth Share represents the percentage contribution of each asset class to the portfolio’s total gains*
+- Growth Share represents the percentage contribution of each asset class to the portfolio’s total gains
 - This snapshot is taken post monthly investment
 - The portfolio is currently in the 8-figure INR range
 - Next 50, Midcap 150, Smallcap 250 show higher XIRR because of recent [hard rebalancing](/building-wealth/slides/red-days-productive-days-portfolio-reset/).
@@ -78,9 +78,9 @@ Following is the current state of the **1 Portfolio**.
 
 ### Key Performance Drivers
 
-- **Concentrated Growth**: The Nasdaq 100 is the undisputed powerhouse of the portfolio. Slightly overweight currently, it accounts for 63.75% of the total growth share. Phenomenal growth in past month. Seems [the allocator](/building-wealth/tools/realvalue-family-sip-allocator/) will stop me investing into it sooner.
-- **Gold Outperformance**: Gold has significantly exceeded expectations with a 41.81% XIRR, still with the largest positive drift in the portfolio (+1.89%).
-- **Domestic Lag**: The Nifty 50 remains the primary laggard with an XIRR of only 2.14%, contributing just 2.54% to the overall growth share despite being the second-largest allocation. All 4 Nifty indexes contributed just 9.43% of growth share compared to current market value of 42.09%
+- **Concentrated Growth**: The Nasdaq 100 is the undisputed powerhouse of the portfolio. Nearly at target allocation now (+0.07% drift), it accounts for **63.61%** of the total growth share. Phenomenal growth in the past month. It appears [the allocator](/building-wealth/tools/realvalue-family-sip-allocator/) will stop directing new investments to it very soon.
+- **Gold Outperformance**: Gold has significantly exceeded expectations with a **41.81% XIRR**, and still carries the largest positive drift in the portfolio (**+1.87%**).
+- **Domestic Lag**: The Nifty 50 remains the primary laggard with an XIRR of only **2.14%**, contributing just **2.55%** to the overall growth share despite being the second-largest allocation. All four Indian equity indices (Nifty 50, Next 50, Midcap 150, and Smallcap 250) contributed just **9.47%** of total growth share compared to their current combined allocation of **42.14%**.
 
 > In a globally diversified portfolio, performance leadership rotates continuously.
 > The objective is not to predict the next winner, but to systematically rebalance capital toward undervalued assets.
