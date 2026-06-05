@@ -575,12 +575,18 @@ Step 5 is the actual transaction where Trade No is generated and utilized.</p>
 </script>
 
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-5NGEJ767SK');
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-5NGEJ767SK');
+        }
     </script></body>
 </html>
 
