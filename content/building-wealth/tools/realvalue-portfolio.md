@@ -12,8 +12,8 @@ js_tools:
   - viz
 summary: "Analyze CAS PDFs and IBKR CSVs in one dashboard. Auto-extract holdings, compute transaction-based XIRR (INR/USD), review allocation views, and export cashflows for independent verification."
 wealth_tags:
-  - Portfolio Management
   - Asset Allocation
+  - Portfolio Management
 ---
 
 ## Overview

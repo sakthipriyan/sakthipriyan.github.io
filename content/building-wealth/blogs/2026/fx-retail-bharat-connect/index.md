@@ -4,17 +4,17 @@ date: "2026-05-05"
 draft: false
 type: "blogs"
 wealth_tags:
-  - "Forex"
-  - "Remittance"
-  - "FX Retail"
-  - "Bharat Connect"
-  - "BHIM"
-  - "ICICI Bank"
-  - "Money2World"
-  - "International Investing"
-  - "IBKR"
-  - "Cost Optimization"
-  - "LRS"
+  - BHIM
+  - Bharat Connect
+  - Cost Optimization
+  - FX Retail
+  - Forex
+  - IBKR
+  - ICICI Bank
+  - International Investing
+  - LRS
+  - Money2world
+  - Remittance
 summary: "A step-by-step walkthrough of executing a live INR-to-USD forex transaction using FX Retail via Bharat Connect (BHIM), completing the remittance on ICICI Bank Money2World, and investing in an Irish ETF on IBKR"
 js_tools:
   - viz

@@ -4,10 +4,10 @@ date: 2026-03-24
 draft: false
 type: "blogs"
 wealth_tags:
-  - Rebalancing
   - Asset Allocation
+  - Perpetual Rebalancing
+  - Rebalancing
   - SIP
-
 summary: "A practical, tax-efficient, and behaviorally robust system for portfolio rebalancing tailored for Indian investors."
 ---
 

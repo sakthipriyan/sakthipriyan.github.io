@@ -8,6 +8,7 @@ author: "Sakthi Priyan H"
 type: books
 draft: false
 wealth_tags:
+  - Global Indian Investor
   - International Investing
 ---
 

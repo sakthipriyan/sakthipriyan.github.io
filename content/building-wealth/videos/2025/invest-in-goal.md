@@ -5,8 +5,8 @@ draft: false
 type: "videos"
 wealth_tags:
   - Building Block
-  - Gold
   - ETF
+  - Gold
   - Mutual Fund
 author: "Sakthi Priyan H"
 summary: "Invest in Gold via ETFs, Mutual Funds, SGB & Digital Gold"

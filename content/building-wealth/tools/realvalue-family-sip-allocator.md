@@ -11,8 +11,10 @@ tool_dependencies:
 summary: "A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling."
 wealth_tags:
   - Asset Allocation
-  - Rebalancing
+  - Perpetual Rebalancing
   - Portfolio Management
+  - Rebalancing
+  - SIP
 ---
 
 ## Overview

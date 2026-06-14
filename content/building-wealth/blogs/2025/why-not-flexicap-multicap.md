@@ -5,11 +5,11 @@ date: "2025-12-09"
 draft: false
 summary: "A comparison between a typical multicap/flexicap fund and a globally diversified, rule-based multi-asset allocation strategy."
 wealth_tags:
-  - Investing
-  - Index Funds
   - Asset Allocation
-  - Portfolio Construction
+  - Index Funds
+  - Investing
   - Personal Finance
+  - Portfolio Construction
 ---
 
 Multicap and flexicap funds are popular because they allow a fund manager to freely allocate between large, mid and small caps.  

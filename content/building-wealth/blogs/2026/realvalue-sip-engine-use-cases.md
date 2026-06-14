@@ -3,12 +3,12 @@ title: "RealValue SIP Engine Use Cases"
 date: "2026-01-03"
 draft: false
 type: "blogs"
-wealth_tags: 
-  - "SIP"
-  - "Investment"
-  - "Wealth Creation"
-  - "Financial Planning"
-  - "Retirement"
+wealth_tags:
+  - Financial Planning
+  - Investment
+  - Retirement
+  - SIP
+  - Wealth Creation
 summary: "Discover real-world scenarios showing how to use the RealValue SIP Engine for retirement planning, education goals, house down payments, emergency funds, and more."
 ---
 

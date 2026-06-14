@@ -4,11 +4,11 @@ date: "2026-03-19"
 draft: false
 type: "blogs"
 wealth_tags:
-  - "TCS"
-  - "Form 12BAA"
-  - "LRS"
-  - "Cashflow"
-  - "International Investing"
+  - Cashflow
+  - Form 12baa
+  - International Investing
+  - LRS
+  - TCS
 summary: "How salaried Indians investing internationally via LRS can use Form 12BAA to reduce cashflow drag from TCS, optimize compounding, and avoid capital lock-in."
 ---
 
