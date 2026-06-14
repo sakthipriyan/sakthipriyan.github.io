@@ -8,8 +8,10 @@ summary: "How early financial decisions can create huge long-term opportunity co
 js_tools:
   - echarts
 wealth_tags:
-  - Building Block
   - Asset Allocation
+  - Building Block
+  - Perpetual Rebalancing
+  - SIP
 ---
 
 <span style="

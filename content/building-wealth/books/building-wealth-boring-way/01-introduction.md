@@ -6,6 +6,9 @@ chapter: 1
 date: 2025-11-04
 author: "Sakthi Priyan H"
 draft: false
+wealth_tags:
+  - Building Wealth
+  - Financial Planning
 ---
 
 ## Welcome to Your Wealth-Building Journey

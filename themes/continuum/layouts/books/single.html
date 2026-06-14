@@ -55,6 +55,27 @@
                 <div class="chapter-body">
                     {{ .Content }}
                 </div>
+
+                {{- /* Chapter Tags */ -}}
+                {{ $tags := slice }}
+                {{ $currentSection := .Section }}
+                {{- if eq $currentSection "building-wealth" }}
+                    {{- if .Params.wealth_tags }}{{ $tags = .Params.wealth_tags }}{{ end }}
+                {{- else if eq $currentSection "building-systems" }}
+                    {{- if .Params.systems_tags }}{{ $tags = .Params.systems_tags }}{{ end }}
+                {{- else if .Params.tags }}
+                    {{ $tags = .Params.tags }}
+                {{- end }}
+
+                {{- if $tags }}
+                <div class="card-tags" style="margin-top: 3rem; padding-top: 1rem;">
+                    <span class="tags-icon">🏷️</span>
+                    {{- range $tags }}
+                    {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (. | urlize) }}
+                    <a href="{{ $tagUrl | absURL }}" class="tag-link">{{ . | title }}</a>
+                    {{- end }}
+                </div>
+                {{- end }}
             </article>
 
             {{- /* Chapter Navigation */ -}}

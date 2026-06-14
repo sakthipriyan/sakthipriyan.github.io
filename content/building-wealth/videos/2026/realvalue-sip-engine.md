@@ -4,11 +4,11 @@ date: "2026-01-03"
 draft: "false"
 type: "videos"
 wealth_tags:
-  - SIP
-  - Investment
-  - Wealth Creation
   - Financial Planning
   - Financial Tools
+  - Investment
+  - SIP
+  - Wealth Creation
 summary: "Complete walkthrough of the RealValue SIP Engine — a powerful investment planning tool that shows real (inflation-adjusted) returns, handles multiple goal types, and provides comprehensive financial projections."
 youtube_id: "FLlgRaUAG_o"
 youtube_url: "https://youtu.be/FLlgRaUAG_o"

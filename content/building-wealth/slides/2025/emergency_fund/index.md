@@ -6,8 +6,8 @@ layout: "slides"
 type: "slides"
 summary: "Setup emergency fund using liquid/hybrid Mutual funds"
 wealth_tags:
-  - Emergency Fund 
   - Building Block
+  - Emergency Fund
 ---
 
 <section data-autoslide="2500">

@@ -4,12 +4,12 @@ date: "2026-03-14"
 draft: false
 type: "blogs"
 wealth_tags:
-  - "NASDAQ 100"
-  - "International Investing"
-  - "IBKR"
-  - "LRS"
-  - "ETF"
-  - "Advanced Investor"
+  - Advanced Investor
+  - ETF
+  - IBKR
+  - International Investing
+  - LRS
+  - NASDAQ 100
 summary: "Options to invest in the NASDAQ 100 index from India — covering mutual funds, Indian ETFs, and the LRS route via Interactive Brokers — along with a comparison of Indian apps vs IBKR with UCITS ETFs, buying cost, and taxation."
 ---
 

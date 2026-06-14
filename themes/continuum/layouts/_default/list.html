@@ -48,7 +48,12 @@
   {{- end -}}
 
   {{- $articlesWithTag := slice -}}
-  {{- range .Site.RegularPages -}}
+  {{- range .Site.Pages -}}
+  {{- $parentIsDraft := false -}}
+  {{- if .CurrentSection -}}{{ if .CurrentSection.Draft }}{{ $parentIsDraft = true }}{{ end }}{{ end -}}
+  {{- if .Parent -}}{{ if .Parent.Draft }}{{ $parentIsDraft = true }}{{ end }}{{ end -}}
+
+  {{- if not $parentIsDraft -}}
   {{- $pageSection := .Section -}}
   {{- $page := . -}}
 
@@ -58,6 +63,7 @@
   {{- range $tags -}}
   {{- if eq (. | urlize) ($currentTag | urlize) -}}
   {{- $articlesWithTag = $articlesWithTag | append $page -}}
+  {{- end -}}
   {{- end -}}
   {{- end -}}
   {{- end -}}

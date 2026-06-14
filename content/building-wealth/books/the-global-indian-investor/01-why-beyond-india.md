@@ -6,6 +6,9 @@ chapter: 1
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
+wealth_tags:
+  - International Investing
+  - Portfolio Construction
 ---
 
 ## The World Has More Than One Market

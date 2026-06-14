@@ -9,8 +9,8 @@ js_tools:
   - viz
 wealth_tags:
   - Building Wealth
-  - Gold
   - ETF
+  - Gold
   - Mutual Fund
 ---
 

@@ -4,14 +4,13 @@ date: "2026-03-10"
 draft: false
 type: "blogs"
 wealth_tags:
-  - "Interactive Brokers"
-  - "IBKR"
-  - "Forex"
-  - "Remittance"
-  - "LRS"
-  - "FX Retail"
-  - "International Investing"
-  - "Cost Optimization"
+  - Cost Optimization
+  - FX Retail
+  - Forex
+  - IBKR
+  - International Investing
+  - LRS
+  - Remittance
 summary: "How Indian investors can reduce the hidden forex markup cost when funding Interactive Brokers accounts by using FX Retail instead of the bank's default remittance rate."
 ---
 

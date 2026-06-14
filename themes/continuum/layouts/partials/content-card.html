@@ -36,12 +36,36 @@ Renders a content card with image, title, summary, meta, and tags
                 {{ else if in .RelPermalink "/books/" }}{{ $contentIcon = "📚" }}
                 {{ end }}
                 <span class="content-icon">{{ $contentIcon }}</span>
-                <h2 class="card-title">{{ .Title }}</h2>
+                <h2 class="card-title">
+                    {{ if and (eq .Type "books") .Params.chapter }}
+                        {{ .CurrentSection.Title }}
+                    {{ else }}
+                        {{ .Title }}
+                    {{ end }}
+                </h2>
             </div>
 
+            {{ if and (eq .Type "books") .Params.chapter }}
+            <div style="margin-bottom: 8px;">
+                <div style="font-size: 0.85rem; font-weight: bold; color: var(--book-link, #3498db); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+                    CHAPTER {{ .Params.chapter }}
+                </div>
+                <div style="font-size: 1.2rem; font-weight: 600; color: var(--text-color, #2c3e50); line-height: 1.3;">
+                    {{ .Title }}
+                </div>
+            </div>
+            {{ end }}
+
             <!-- Summary -->
-            {{ if or .Summary .Description .Params.summary }}
-            <p class="card-summary">{{ or .Summary .Description .Params.summary }}</p>
+            {{ $cardSummary := "" }}
+            {{ if eq .Type "books" }}
+                {{ $cardSummary = or .Params.subtitle .Params.summary .Description .Summary }}
+            {{ else }}
+                {{ $cardSummary = or .Params.summary .Description .Summary }}
+            {{ end }}
+
+            {{ if $cardSummary }}
+            <p class="card-summary" {{ if and (eq .Type "books") .Params.chapter }}style="font-style: italic; opacity: 0.85;"{{ end }}>{{ $cardSummary }}</p>
             {{ end }}
 
             <!-- Meta information -->

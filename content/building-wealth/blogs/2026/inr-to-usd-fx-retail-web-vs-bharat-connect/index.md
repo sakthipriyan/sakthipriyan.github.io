@@ -4,12 +4,14 @@ date: "2026-04-08"
 draft: false
 type: "blogs"
 wealth_tags:
-  - "Forex"
-  - "Remittance"
-  - "FX Retail"
-  - "Bharat Connect"
-  - "Cost Optimization"
-  - "International Investing"
+  - Bharat Connect
+  - Cost Optimization
+  - FX Retail
+  - Forex
+  - IBKR
+  - International Investing
+  - LRS
+  - Remittance
 summary: "A comparison of foreign exchange rates for converting INR to USD across different channels like direct banking, FX Retail Web, and the newly discovered FX Retail via Bharat Connect."
 ---
 

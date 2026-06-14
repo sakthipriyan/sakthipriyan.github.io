@@ -6,6 +6,8 @@ chapter: 2
 date: 2025-11-04
 author: "Sakthi Priyan H"
 draft: false
+wealth_tags:
+  - Compound Interest
 ---
 
 ## Understanding Compound Interest

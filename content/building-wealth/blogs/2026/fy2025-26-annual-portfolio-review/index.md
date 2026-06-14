@@ -4,15 +4,14 @@ date: 2026-04-02
 draft: false
 type: "blogs"
 wealth_tags:
-  - "State of the Portfolio"
-  - "Asset Allocation"
-  - "Rebalancing"
-  - "NASDAQ 100"
-  - "Gold"
-  - "IBKR"
-  - "FX Retail"
-  - "LRS"
-
+  - Asset Allocation
+  - FX Retail
+  - Gold
+  - IBKR
+  - LRS
+  - NASDAQ 100
+  - Rebalancing
+  - State Of The Portfolio
 summary: "Annual portfolio review for FY 2025–26: Three goal-based portfolios, allocation strategy, drift correction and forex cost optimization."
 ---
 
