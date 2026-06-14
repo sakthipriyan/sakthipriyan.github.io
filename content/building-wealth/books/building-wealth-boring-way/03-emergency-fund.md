@@ -6,6 +6,8 @@ chapter: 3
 date: 2025-11-04
 author: "Sakthi Priyan H"
 draft: false
+wealth_tags:
+  - Emergency Fund
 ---
 
 ## Why You Need an Emergency Fund
