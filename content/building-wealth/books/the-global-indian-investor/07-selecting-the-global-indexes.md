@@ -61,24 +61,28 @@ This table shows exactly how both MSCI and FTSE apply their standard and small-c
 
 Index providers build various indexes but ETF issuer only issue ETFs which have real demand. For example: [MSCI ACWI ex India Index (USD)](https://www.msci.com/documents/10199/a789e2c1-0f2e-4582-a821-fd1f0ac13261) exists but there is no ETF.
 
-### The Implementation Cheat Sheet (Irish UCITS)
+### The Implementation Cheat Sheet for Global Indexes (Irish UCITS)
 
 Here is how those blueprints translate into actual, investable Irish-domiciled UCITS ETFs. Notice how you are often forced to mix Standard and IMI/All-Cap tiers simply because certain index combinations lack a highly liquid, low-cost ETF.
 
-| Index | ETF | AUM<br/>($&nbsp;million) | TER (%) | RANK |
-| --- | --- | ---: | ---: | --- |
-| **MSCI ACWI** | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259) | 32,763 | 0.20% | AUM #1 |
-|  | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) | 13,691 | 0.12% | TER #1 |
-| **MSCI World** | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983) | 141,198 | 0.20% | AUM #1 |
-|  | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394) | 7,815 | 0.05% | TER #1 |
-| **MSCI Emerging Markets** | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35) | 13,348 | 0.18% | AUM #1 |
-|  | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59) | 1,279 | 0.15% | TER #1 |
-| **MSCI ACWI IMI** | [State Street SPDR MSCI ACWI IMI UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) | 6,258 | 0.17% | AUM #1,<br/>TER #1 |
-| **MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66) | 42,430 | 0.18% | AUM #1,<br/>TER #1 |
-| **FTSE All-World** | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80) | 45,672 | 0.19% | AUM #1 |
-|  | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7) | 3,649 | 0.15% | TER #1 |
-| **FTSE Developed** | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03) | 6,830 | 0.12% | AUM #1,<br/>TER #1 |
-| **FTSE Emerging** | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733) | 2,161 | 0.17% | AUM&nbsp;#1,<br/>TER #1 |
+| Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **MSCI ACWI**                 | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                 |              32,763 |        1 |   0.20% |        2 |
+|                               | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) |              13,691 |        2 |   0.12% |        1 |
+| **MSCI World**                | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)                           |             141,198 |        1 |   0.20% |        2 |
+|                               | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                                      |               7,815 |        2 |   0.05% |        1 |
+| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                          |              13,348 |        1 |   0.18% |        2 |
+|                               | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)                        |               1,279 |        2 |   0.15% |        1 |
+| **MSCI ACWI IMI**             | [State Street SPDR MSCI ACWI IMI UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66)          |               6,258 |        1 |   0.17% |        1 |
+| **MSCI Emerging Markets IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)                |              42,430 |        1 |   0.18% |        1 |
+| **FTSE All-World**            | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                  |              45,672 |        1 |   0.19% |        2 |
+|                               | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                  |               3,649 |        2 |   0.15% |        1 |
+| **FTSE Developed**            | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)                           |               6,830 |        1 |   0.12% |        1 |
+| **FTSE Emerging**             | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733)           |               2,161 |        1 |   0.17% |        1 |
+
+<iframe width="100%" height="750" src="https://curvo.eu/backtest/en/compare-indexes/msci-acwi-vs-msci-acwi-imi-vs-msci-emerging-markets-vs-msci-emerging-markets-imi-vs-msci-world/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
+
+
 
 Notes:
 - Filtered Funds with AUM > $1 Billion across various indexes.
@@ -86,36 +90,91 @@ Notes:
 
 ## US Equity ETFs
 
-> WIP
+US equities dominate both Developed Market (DM) and Global (DM + EM) equity indexes, accounting for ~67% of developed-market capitalization and ~60% of global market capitalization.
 
-US Equities contribute significantly to Global and Developed Indexes.
+| Index | Market | US Contribution (%) | Example UCITS ETF |
+| --- | --- | ---: | --- |
+| **MSCI World** | DM only | ~67% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
+| **MSCI ACWI** | DM + EM | ~60% | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
 
-| Global/Developed Index | US Contribution (%) | Example UCITS ETF |
-| --- | ---: | --- |
-| **MSCI ACWI** | ~60% | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
-| **MSCI World** | ~67% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
+For many investors, a broad global ETF already provides substantial exposure to the United States. However, some investors prefer to control their US allocation separately.
 
-While a broad World ETF provides market-cap-weighted US exposure, many investors deliberately choose to overweight US markets—particularly the technology sector—as the primary growth engine of their portfolio. For example, targeting a 40% allocation specifically to the Nasdaq 100 requires decoupling the US allocation from the broader global index.
+Common reasons for separating US exposure include:
+- Overweighting or underweighting the US market relative to global market-cap weights.
+- Increasing exposure to growth-oriented sectors such as technology.
+- Combining a World [ex USA](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&quoteCurrency=USD&replicationType=replicationType-full&distributionPolicy=distributionPolicy-accumulating&sortOrder=desc&sortField=fundSize&index=MSCI%2BWorld%2Bex%2BUSA&ls=any&fsg=more500&resetPage=true) portfolio with a dedicated US allocation.
+- Implementing a custom asset allocation based on personal risk tolerance and return expectations.
 
-When isolating US exposure, you are generally choosing between two paths: the broad market (S&P 500) or the tech-heavy innovation engine (Nasdaq 100).
+When isolating US exposure, investors using Irish UCITS ETFs will primarily encounter three index families:
 
-### 1. Core US Large Cap (S&P 500)
-The S&P 500 represents the 500 largest US companies across all sectors. It is the default proxy for the US economy.
+| Index Family   | Constituents | Market Cap Focus | Market Coverage | Typical Use              |
+| -------------- | -----------: | ---------------- | --------------: | ------------------------ |
+| **[MSCI USA](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&quoteCurrency=USD&replicationType=replicationType-full&distributionPolicy=distributionPolicy-accumulating&sortOrder=desc&sortField=fundSize&ls=any&fsg=more500&dc=IE&currencyHedged=none&index=MSCI%2BUSA)**   |         ~600 | Large + Mid Cap  |            ~85% | Broad US Exposure        |
+| **[S&P 500](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&country=US&index=S%2526P%2B500%25C2%25AE&quoteCurrency=USD&replicationType=replicationType-full&distributionPolicy=distributionPolicy-accumulating&ls=any&sortOrder=desc&sortField=fundSize&fsg=more500)**    |         ~500 | Large Cap        |            ~80% | Core US Exposure         |
+| **[Nasdaq 100](https://www.justetf.com/en/search.html?assetClass=class-equity&search=ETFS&index=Nasdaq%2B100%25C2%25AE&quoteCurrency=USD&distributionPolicy=distributionPolicy-accumulating&dc=IE&replicationType=replicationType-full&ls=any)** |         ~100 | Large-Cap Growth |            ~50% | Growth / Technology Tilt |
 
-| Index | ETF | AUM<br/>($ million) | TER (%) | RANK |
-| --- | --- | ---: | ---: | --- |
-| **S&P 500** | [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | > 130,000 | 0.07% | AUM #1 |
-| | [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | > 30,000 | 0.07% | AUM #2 |
+Other index families such as Russell (Russell 1000, Russell 2000, Russell 3000), FTSE USA, Solactive GBS USA, and the Dow Jones Industrial Average (DJIA) exist but have relatively limited representation within the Irish-domiciled UCITS ETF universe. Most investors building portfolios with Irish ETFs will primarily encounter MSCI USA, S&P 500 and Nasdaq 100 products.
 
-### 2. The Growth Engine (Nasdaq 100)
-The Nasdaq 100 tracks the 100 largest non-financial companies listed on the Nasdaq exchange. It is heavily concentrated in technology and communication services (~65%+ combined), making it substantially more volatile than the S&P 500, but historically offering a higher premium for that volatility. If your strategy relies on concentrated tech growth to accelerate wealth accumulation, this is the instrument.
+Unlike MSCI USA and S&P 500, the Nasdaq 100 is not intended to represent the broad US equity market. Rather, it is a growth-tilted index that has historically delivered higher returns than the broader market, albeit with greater volatility.
 
-| Index | ETF | AUM<br/>($ million) | TER (%) | RANK |
-| --- | --- | ---: | ---: | --- |
-| **Nasdaq 100** | [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | > 22,000 | 0.30% | AUM #1 |
-| | [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | > 3,600 | 0.30% | TER #1 |
+<iframe width="100%" height="720" src="https://curvo.eu/backtest/en/compare-indexes/msci-usa-vs-sp-500-vs-nasdaq-100/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
 
-*(Note: Invesco EQQQ also offers a distributing variant which is much larger, but for Indian residents, the Accumulating variant listed above is strictly preferred to avoid dividend leakage.)*
+### The Implementation Cheat Sheet for US Indexes (Irish UCITS)
+
+| Index | ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| --- | --- | ---: | ---: | ---: | ---: |
+| **MSCI USA** | [Xtrackers MSCI USA UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDR00) | 12,332 | 1 | 0.03% | 1 |
+|  | [iShares MSCI USA UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B52SFT06) | 4,644 | 2 | 0.03% | 1 |
+|  | [Amundi Core MSCI USA UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000FSN19U2) | 4,007 | 3 | 0.03% | 1 |
+|  | [UBS Core MSCI USA UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXS21) | 2,961 |  | 0.03% | 1 |
+| **S&P 500** | [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | 144,695 | 1 | 0.07% | 2 |
+|  | [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | 32,613 | 2 | 0.07% | 2 |
+|  | [State Street SPDR S&P 500 UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000XZSV718) | 16,962 | 3 | 0.03% | 1 |
+|  | [UBS Core S&P 500 UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXW66) | 1,716 |  | 0.03% | 1 |
+|  | [Xtrackers S&P 500 UCITS ETF 4C](https://www.justetf.com/en/etf-profile.html?isin=IE000Z9SJA06) | 1,483 |  | 0.03% | 1 |
+| **Nasdaq 100** | [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | 25,956 | 1 | 0.30% | 3 |
+|  | [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | 4,254 | 2 | 0.30% | 3 |
+|  | [BNP Paribas Easy II NASDAQ 100 UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000QDFFK00) | 2,776 | 3 | 0.14% | 1 |
+|  | [Xtrackers Nasdaq 100 UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BMFKG444) | 2,198 |  | 0.20% | 2 |
+
+For most long-term investors, the practical difference between MSCI USA and S&P 500 is relatively small. The more consequential decision is whether to own the broad US market (MSCI USA/S&P 500) or to make a deliberate growth bet through the Nasdaq 100.
+
+#### Observations
+
+- S&P 500 remains more popular than MSCI USA despite covering fewer companies.
+- Several MSCI USA and S&P 500 ETFs with assets exceeding $10 billion are available at just 0.03% TER.
+- Nasdaq 100 ETFs remain considerably (~5x) more expensive, with the lowest-cost fund charging 0.14% TER.
+- Investors pay a meaningful premium for concentrated growth exposure.
+
+| Objective                                | MSCI USA | S&P 500 | Nasdaq 100 |
+| ---------------------------------------- | :------: | :-----: | :--------: |
+| Broad US exposure                        |  **Yes** |  Maybe  |     No     |
+| Standard US allocation                   |   Maybe  | **Yes** |     No     |
+| Lowest-cost implementation               |  **Yes** | **Yes** |     No     |
+| Technology and growth tilt               |    No    |  Maybe  |   **Yes**  |
+| Maximum diversification                  |  **Yes** |  Maybe  |     No     |
+| Highest concentration in mega-cap growth |    No    |  Maybe  |   **Yes**  |
+| Closest to a global market-cap portfolio |  **Yes** |  Maybe  |     No     |
+
+#### Notes
+
+- Tables include accumulating Irish-domiciled UCITS ETFs with assets exceeding $1 billion.
+- Fund size, TER and rankings are based on data available in mid-June 2026.
+
+## The Equity Comparison
+
+<iframe width="100%" height="720" src="https://curvo.eu/backtest/en/compare-indexes/msci-acwi-vs-msci-india-vs-msci-usa/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
+
+
+### Observations
+
+* **MSCI ACWI** provides broad diversification across both developed and emerging markets, reducing dependence on any single country.
+* **MSCI USA** has been the strongest performer over the past decade, driven largely by the growth of mega-cap technology companies.
+* **MSCI India** has experienced periods of significant outperformance, but with greater volatility and larger valuation swings.
+* **Market leadership changes over time.** The best-performing country in one decade is rarely guaranteed to lead in the next.
+* A global index allows investors to participate in future winners without needing to predict which country will outperform.
+
+> **Key Takeaway:** Investing in a global index such as MSCI ACWI is not about maximizing returns from a single market. It is about reducing concentration risk while participating in global economic growth.
 
 
 ## Debt ETFs
