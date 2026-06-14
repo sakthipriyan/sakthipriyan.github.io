@@ -8,11 +8,11 @@ summary: "What a ₹1 Crore home loan at 8% truly costs — the gap between nomi
 js_tools:
  - gsap
 wealth_tags:
- - Debt
- - Loans
- - Home Loan
- - Inflation
- - Financial Planning
+  - Debt Management
+  - Financial Planning
+  - Home Loan
+  - Inflation
+  - Loans
 ---
 
 <span style="

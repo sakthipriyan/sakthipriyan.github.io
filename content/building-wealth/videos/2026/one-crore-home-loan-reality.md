@@ -4,11 +4,11 @@ date: 2026-03-05
 draft: false
 type: "videos"
 wealth_tags:
-  - Debt
-  - Loans
+  - Debt Management
+  - Financial Planning
   - Home Loan
   - Inflation
-  - Financial Planning
+  - Loans
 summary: "What a ₹1 Crore home loan at 8% truly costs in nominal vs real terms across 10, 15, and 20 year tenures."
 youtube_id: "nawWm1VOKMI"
 youtube_url: "https://www.youtube.com/watch?v=nawWm1VOKMI"

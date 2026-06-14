@@ -5,10 +5,10 @@ draft: "false"
 type: "videos"
 wealth_tags:
   - Debt Management
-  - Loans
-  - Financial Planning
-  - Personal Finance
   - Financial Literacy
+  - Financial Planning
+  - Loans
+  - Personal Finance
 summary: "Understanding the difference between smart loans and bad loans. Learn when debt can be a powerful tool for wealth creation and when it becomes a burden."
 youtube_id: "CC79fl-zFKY"
 youtube_url: "https://youtu.be/CC79fl-zFKY"
