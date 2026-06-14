@@ -8,7 +8,7 @@ author: "Sakthi Priyan H"
 draft: false
 ---
 
-In previous chapter we have seen that, Irish ETFs are more efficient for Indian Investor compared to US ETFs. As part of this Chapter we will look at Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
+In the previous chapter, we saw that Irish ETFs are more efficient for Indian investors compared to US ETFs. As part of this chapter, we will look at the Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
 
 **Important**: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.
 
@@ -25,7 +25,7 @@ MSCI (Morgan Stanley Capital International) and FTSE (Financial Times Stock Exch
 * **MSCI**: Focuses exclusively on **Large and Mid-cap** stocks. Capturing ~85% of the market keeps transaction costs and bid-ask spreads low by sticking to highly liquid equities.
 * **MSCI IMI (Investable Market Index)**: Takes the standard Large/Mid-cap index and adds **Small-cap** stocks to cover ~99% of the investable market. This is the truest representation of a "total market" index.
 * **FTSE**: While their standard indices officially target Large and Mid-caps (~90-95% coverage), their methodology naturally dips slightly deeper down the market-cap spectrum than standard MSCI. Vanguard heavily favors this tier for its flagship global funds to keep licensing costs (and TERs) low.
-* **FTSE All-Cap**:This is FTSE’s equivalent to MSCI’s IMI tier. By adding Small-cap stocks to the standard blueprint, it captures the full 99% of the investable market to provide true total-market exposure.
+* **FTSE All-Cap**: This is FTSE's equivalent to MSCI's IMI tier. By adding Small-cap stocks to the standard blueprint, it captures the full 99% of the investable market to provide true total-market exposure.
 
 ### The Classification Difference: Mixing Indices
 
@@ -83,18 +83,62 @@ Notes:
 
 ## US Equity ETFs
 
-US Equities contribute significantly to Global and Developed Index.
+> WIP
+
+US Equities contribute significantly to Global and Developed Indexes.
 
 | Global/Developed Index | US Contribution (%) | Example UCITS ETF |
 | --- | ---: | --- |
 | **MSCI ACWI** | ~60% | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
 | **MSCI World** | ~67% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
 
-This section we will focus on US Specific Equity ETFs available.
+While a broad World ETF provides market-cap-weighted US exposure, many investors deliberately choose to overweight US markets—particularly the technology sector—as the primary growth engine of their portfolio. For example, targeting a 40% allocation specifically to the Nasdaq 100 requires decoupling the US allocation from the broader global index.
+
+When isolating US exposure, you are generally choosing between two paths: the broad market (S&P 500) or the tech-heavy innovation engine (Nasdaq 100).
+
+### 1. Core US Large Cap (S&P 500)
+The S&P 500 represents the 500 largest US companies across all sectors. It is the default proxy for the US economy.
+
+| Index | ETF | AUM<br/>($ million) | TER (%) | RANK |
+| --- | --- | ---: | ---: | --- |
+| **S&P 500** | [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | > 130,000 | 0.07% | AUM #1 |
+| | [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | > 30,000 | 0.07% | AUM #2 |
+
+### 2. The Growth Engine (Nasdaq 100)
+The Nasdaq 100 tracks the 100 largest non-financial companies listed on the Nasdaq exchange. It is heavily concentrated in technology and communication services (~65%+ combined), making it substantially more volatile than the S&P 500, but historically offering a higher premium for that volatility. If your strategy relies on concentrated tech growth to accelerate wealth accumulation, this is the instrument.
+
+| Index | ETF | AUM<br/>($ million) | TER (%) | RANK |
+| --- | --- | ---: | ---: | --- |
+| **Nasdaq 100** | [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | > 22,000 | 0.30% | AUM #1 |
+| | [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | > 3,600 | 0.30% | TER #1 |
+
+*(Note: Invesco EQQQ also offers a distributing variant which is much larger, but for Indian residents, the Accumulating variant listed above is strictly preferred to avoid dividend leakage.)*
 
 
 ## Debt ETFs
-> TODO
+
+> WIP
+
+When investing internationally, debt is rarely used for high yield. Instead, it serves as a unified, highly liquid asset structure that acts as a non-correlated buffer to your equity holdings. Rather than managing multiple complex domestic debt buckets (liquid funds, arbitrage funds, corporate bonds), an allocation to high-quality international debt provides a stable anchor for emergency funds and dry powder for rebalancing during market crashes.
+
+There are two primary ways to approach the global debt allocation:
+
+### 1. Cash Equivalents (Short-Term US Treasuries)
+If your primary goal is absolute safety and capital preservation in USD terms, short-term US government bonds (0-1 year maturity) are effectively equivalent to holding USD cash, but with a yield. They have virtually zero interest rate risk.
+
+| Index | ETF | AUM<br/>($ million) | TER (%) |
+| --- | --- | ---: | ---: |
+| **US Treasury 0-1yr** | [iShares USD Treasury Bond 0-1yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BGSF1X88) | > 16,000 | 0.07% |
+
+### 2. Core Global Debt (Global Aggregate Bonds)
+If you want a diversified portfolio of investment-grade government and corporate bonds from around the world, a Global Aggregate Bond ETF is the standard choice. 
+
+*Crucial Step: Always buy the USD-Hedged version.* Because this fund holds debt in Euros, Yen, and Pounds, currency fluctuations against the USD can wipe out the bond yields. Buying the USD-Hedged accumulating variant neutralizes that cross-currency risk.
+
+| Index | ETF | AUM<br/>($ million) | TER (%) |
+| --- | --- | ---: | ---: |
+| **Global Aggregate (USD Hedged)** | [iShares Core Global Aggregate Bond UCITS ETF USD Hedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BZ043R46) | > 3,400 | 0.10% |
+| | [Vanguard Global Aggregate Bond UCITS ETF USD Hedged Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BG47KB92) | > 580 | 0.08% |
 
 ## Gold ETCs (Exchange Traded Commodities)
 
@@ -117,7 +161,6 @@ Gold ETCs are exchange-traded securities designed to track the price of gold. Th
 Unlike traditional exchange-traded funds (ETFs), Gold ETCs are legally structured as **debt securities issued by financial institutions**, not as investment funds. This structural difference exists because European UCITS fund rules do not allow a fund to hold a single commodity like gold directly.
 
 Most modern gold ETCs are **physically backed**, meaning that gold bullion is held in secure vaults (typically in London) and acts as collateral for the securities issued to investors.
-Here is the refined comparison, enhanced with the exact scale and cost multiples, along with the strategic context regarding the Irish domicile.
 
 ### A Gold Comparison
 
@@ -209,7 +252,7 @@ For a **Global Gold ETC**, the 0.12% TER is deducted directly from the underlyin
 
 Here is how that structural difference impacts the effective return rate:
 
-### 1. Deriving the Effective Net Rate
+#### 1. Deriving the Effective Net Rate
 
 | Structure | Gross USD Growth | TER | Net USD Growth | USD/INR Growth | Effective Net INR CAGR |
 | --- | --- | --- | --- | --- | --- |
@@ -220,7 +263,7 @@ Here is how that structural difference impacts the effective return rate:
 
 While a ~0.78% difference in net CAGR might sound easily ignorable, time amplifies this gap significantly.
 
-### 2. Comparison of Long-Term Growth
+#### 2. Comparison of Long-Term Growth
 
 For a simple ₹1 lakh lump sum held for 30 years, here is how that effective rate divergence plays out:
 
