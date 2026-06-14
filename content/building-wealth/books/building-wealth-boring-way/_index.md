@@ -7,6 +7,9 @@ date: 2025-11-04
 author: "Sakthi Priyan H"
 type: books
 draft: true
+wealth_tags:
+  - Building Wealth
+  - Personal Finance
 ---
 
 ## About This Book
