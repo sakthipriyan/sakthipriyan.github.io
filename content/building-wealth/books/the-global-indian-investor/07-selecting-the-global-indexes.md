@@ -6,6 +6,9 @@ chapter: 7
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true
+wealth_tags:
+  - Index Funds
+  - Portfolio Construction
 ---
 
 In previous chapter we have seen that, Irish ETFs are more efficient for Indian Investor compared to US ETFs. As part of this Chapter we will look at Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
