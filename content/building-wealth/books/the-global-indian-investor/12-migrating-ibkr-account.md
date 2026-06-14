@@ -6,6 +6,8 @@ chapter: 12
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true
+wealth_tags:
+  - IBKR
 ---
 
 ## TODO: Migrating from Existing to New IBKR Account
