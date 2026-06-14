@@ -3,13 +3,13 @@ title: "RealValue EMI Engine Use Cases"
 date: "2026-01-23"
 draft: false
 type: "blogs"
-wealth_tags: 
-  - "EMI"
-  - "Loan"
-  - "Debt Management"
-  - "Financial Planning"
-  - "Home Loan"
-  - "Car Loan"
+wealth_tags:
+  - Car Loan
+  - Debt Management
+  - EMI
+  - Financial Planning
+  - Home Loan
+  - Loans
 summary: "Discover real-world scenarios showing how to use the RealValue EMI Engine for home loans, car loans, personal loans, and understanding the true cost of debt with inflation-adjusted calculations."
 ---
 

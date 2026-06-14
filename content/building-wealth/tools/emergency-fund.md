@@ -8,7 +8,7 @@ tool_type: "emergencyFund"
 tool_script: "js/emergency-fund.js"
 summary: "Plan your emergency fund and calculate the timeline to reach your savings goal."
 wealth_tags:
-  - Emergency Fund
   - Building Block
+  - Emergency Fund
 ---
 

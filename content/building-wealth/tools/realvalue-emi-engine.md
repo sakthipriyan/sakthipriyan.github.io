@@ -10,9 +10,9 @@ tool_dependencies:
   - echarts
 summary: "Understand your loan's true cost with real (inflation-adjusted) value projections and EMI burden visualizations."
 wealth_tags:
-  - EMI
-  - Loan
   - Debt Management
+  - EMI
+  - Loans
 ---
 
 ## About RealValue EMI Engine  

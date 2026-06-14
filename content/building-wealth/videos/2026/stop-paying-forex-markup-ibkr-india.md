@@ -4,10 +4,12 @@ date: 2026-03-19
 draft: false
 type: "videos"
 wealth_tags:
-  - International Investing
-  - Forex
-  - Currency Conversion
   - Cost Optimization
+  - FX Retail
+  - Forex
+  - IBKR
+  - International Investing
+  - LRS
 summary: "How to avoid high forex markups (₹1.5/USD) when funding your Interactive Brokers (IBKR) account from India. Step-by-step guide to save on currency conversion costs."
 youtube_id: "fdQ1o7F9eMc"
 youtube_url: "https://youtu.be/fdQ1o7F9eMc"

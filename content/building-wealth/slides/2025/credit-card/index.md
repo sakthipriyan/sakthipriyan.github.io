@@ -9,7 +9,7 @@ js_tools:
  - echarts
  - gsap
 wealth_tags:
- - Credit Card
+  - Credit Card
 ---
 
 <span style="

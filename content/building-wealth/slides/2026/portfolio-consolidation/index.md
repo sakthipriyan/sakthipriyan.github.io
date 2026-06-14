@@ -9,11 +9,11 @@ js_tools:
  - echarts
  - gsap
 wealth_tags:
- - Portfolio
- - Mutual Funds
- - Goal Based Investing
- - Index Funds
- - Consolidation
+  - Consolidation
+  - Goal Based Investing
+  - Index Funds
+  - Mutual Funds
+  - Portfolio
  
 ---
 

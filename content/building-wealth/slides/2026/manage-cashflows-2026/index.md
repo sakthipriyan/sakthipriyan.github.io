@@ -9,8 +9,8 @@ js_tools:
   - viz
   - gsap
 wealth_tags:
-  - Money Flow 
   - Building Block
+  - Money Flow
 ---
 
 <span style="

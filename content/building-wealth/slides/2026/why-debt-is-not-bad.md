@@ -8,9 +8,9 @@ summary: "Understanding when and how to use debt strategically for building weal
 js_tools:
  - gsap
 wealth_tags:
- - Debt
- - Loans
- - Financial Planning
+  - Debt Management
+  - Financial Planning
+  - Loans
 ---
 
 <span style="

@@ -4,8 +4,8 @@ date: "2026-04-26"
 draft: false
 type: "videos"
 wealth_tags:
-  - Money Flow
   - Building Block
+  - Money Flow
 summary: "Manage and automate your money flow via purpose-built Bank Accounts, Credit Cards, and Mutual Funds."
 youtube_id: "Hx7yVz48klI"
 youtube_url: "https://youtu.be/Hx7yVz48klI"

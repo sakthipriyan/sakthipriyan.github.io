@@ -8,8 +8,8 @@ summary: "Manage money flow via Bank Accounts, Credit Cards & Mutual Funds"
 js_tools:
   - viz
 wealth_tags:
-  - Money Flow 
   - Building Block
+  - Money Flow
 ---
 
 

@@ -4,13 +4,13 @@ date: 2026-05-23
 draft: false
 type: "blogs"
 wealth_tags:
-  - Perpetual Rebalancing
   - Asset Allocation
+  - Dynamic Sip
+  - Perpetual Rebalancing
+  - Portfolio Management
   - Rebalancing
   - SIP
-  - Dynamic SIP
   - Tax Efficient Investing
-  - Portfolio Management
 summary: "Static SIPs blindly invest fixed amounts regardless of portfolio drift. Cashflow-Based Rebalancing uses new investments to continuously correct allocation drift — enabling tax-efficient perpetual rebalancing during the accumulation phase."
 ---
 

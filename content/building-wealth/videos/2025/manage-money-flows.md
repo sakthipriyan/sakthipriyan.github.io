@@ -4,8 +4,8 @@ date: "2025-10-19"
 draft: "false"
 type: "videos"
 wealth_tags:
-  - Money Flow 
   - Building Block
+  - Money Flow
 author: "Sakthi Priyan H"
 summary: "Complete breakdown of how to manage your money flows effectively using bank accounts, credit cards, and mutual funds."
 youtube_id: "KQ-E1mWvMMs"
