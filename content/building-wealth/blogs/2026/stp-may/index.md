@@ -4,10 +4,9 @@ date: 2026-05-02
 draft: false
 type: "blogs"
 wealth_tags:
-  - "State of the 1 Portfolio"
-  - "Asset Allocation"
-  - "Rebalancing"
-
+  - Asset Allocation
+  - Rebalancing
+  - State Of The 1 Portfolio
 summary: "Monthly “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and rebalancing strategy"
 ---
 I am publishing two portfolio reports:

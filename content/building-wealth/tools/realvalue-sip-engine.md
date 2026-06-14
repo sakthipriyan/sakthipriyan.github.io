@@ -10,8 +10,8 @@ tool_dependencies:
   - echarts
 summary: "Plan your systematic investment with real (inflation-adjusted) value projections and comprehensive growth visualizations."
 wealth_tags:
-  - SIP
   - Investment
+  - SIP
   - Wealth Creation
 ---
 

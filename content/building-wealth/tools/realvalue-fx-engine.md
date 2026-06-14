@@ -10,12 +10,16 @@ tool_dependencies:
   - echarts
 summary: "Calculate your true effective FX rate including hidden spreads and taxes, compare quotes across banks to minimize costs, track your ₹10L LRS limit via a browser-only transaction log, and compute your TCS refund opportunity cost."
 wealth_tags:
-  - International Investing
-  - Forex
-  - USD
-  - GST
-  - TCS
+  - Cost Optimization
   - Currency Exchange
+  - FX Retail
+  - Forex
+  - GST
+  - IBKR
+  - International Investing
+  - LRS
+  - TCS
+  - USD
 ---
 
 ## About RealValue FX Engine

@@ -6,8 +6,8 @@ layout: "slides"
 type: "slides"
 summary: "How early financial decisions can create huge long-term opportunity costs."
 wealth_tags:
-  - Personal Journey
   - Long Term Growth
+  - Personal Journey
 ---
 
 <span style="

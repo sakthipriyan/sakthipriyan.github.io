@@ -4,11 +4,11 @@ date: 2026-04-05
 draft: false
 type: "videos"
 wealth_tags:
-  - Portfolio
-  - Mutual Funds
+  - Consolidation
   - Goal Based Investing
   - Index Funds
-  - Consolidation
+  - Mutual Funds
+  - Portfolio
 summary: "How I tagged every fund to a goal, identified the noise, and consolidated 30 funds across 5 goals into a cleaner, simpler setup — using a market dip as the trigger."
 youtube_id: "-_B5k_F2FpE"
 youtube_url: "https://youtu.be/-_B5k_F2FpE"

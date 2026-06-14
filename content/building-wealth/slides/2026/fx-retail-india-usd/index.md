@@ -8,14 +8,13 @@ summary: "Indian investors lose 2-3% to hidden bank forex markup on every INR to
 js_tools:
  - gsap
 wealth_tags:
- - Forex
- - FX Retail
- - Interactive Brokers
- - IBKR
- - LRS
- - Remittance
- - Cost Optimization
- - International Investing
+  - Cost Optimization
+  - FX Retail
+  - Forex
+  - IBKR
+  - International Investing
+  - LRS
+  - Remittance
 ---
 
 <span style="

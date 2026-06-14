@@ -3,11 +3,11 @@ title: "Gold in Your Investment Portfolio"
 date: "2024-10-17"
 draft: true
 type: "blogs"
-wealth_tags: 
-  - "gold"
-  - "portfolio"
-  - "diversification"
-  - "asset-allocation"
+wealth_tags:
+  - Asset Allocation
+  - Diversification
+  - Gold
+  - Portfolio
 summary: "Understanding the role of gold in a diversified investment portfolio and optimal allocation strategies."
 ---
 
