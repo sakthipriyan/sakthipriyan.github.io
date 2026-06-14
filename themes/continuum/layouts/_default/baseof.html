@@ -13,9 +13,7 @@
     {{- if eq .Type "tools" }}
     <link rel="stylesheet" href="{{ "css/tools.css" | absURL }}">
     {{- end }}
-    {{- if .Site.Params.googleAnalyticsId }}
-    <script>window.googleAnalyticsId = "{{ .Site.Params.googleAnalyticsId }}";</script>
-    {{- end }}
+
     {{- if or (eq .Section "slides") (eq .Type "slides") }}
     {{- /* Reveal.js CSS */ -}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
@@ -121,6 +119,7 @@
         {{ end }}
     {{- /* Tool scripts are now loaded per-tool in tools/single.html */ -}}
     {{- block "scripts" . }}{{- end }}
+    {{ partial "ga-tracking.html" . }}
     {{- /* Hamburger Menu JavaScript */ -}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -199,6 +198,6 @@
             }
         });
     </script>
-    <script src="{{ "js/main.js" | absURL }}"></script>
+
 </body>
 </html>

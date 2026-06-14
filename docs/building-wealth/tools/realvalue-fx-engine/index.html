@@ -6,7 +6,6 @@
     <title>RealValue FX Engine | Sakthi Priyan H</title>
     <meta name="description" content="Calculate your true effective FX rate including hidden spreads and taxes, compare quotes across banks to minimize costs, track your ₹10L LRS limit via a browser-only transaction log, and compute your TCS refund opportunity cost."><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css">
     <link rel="stylesheet" href="https://sakthipriyan.com/css/tools.css">
-    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
 </head>
 <body class="building-wealth"><header class="site-header">
     <nav class="main-nav">
@@ -479,7 +478,20 @@
     });
 </script>
 
-<script>
+
+    <script>
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    }
+</script><script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
@@ -556,6 +568,6 @@
             }
         });
     </script>
-    <script src="https://sakthipriyan.com/js/main.js"></script>
+
 </body>
 </html>
