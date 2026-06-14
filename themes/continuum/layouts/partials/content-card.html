@@ -36,7 +36,13 @@ Renders a content card with image, title, summary, meta, and tags
                 {{ else if in .RelPermalink "/books/" }}{{ $contentIcon = "📚" }}
                 {{ end }}
                 <span class="content-icon">{{ $contentIcon }}</span>
-                <h2 class="card-title">{{ .Title }}</h2>
+                <h2 class="card-title">
+                    {{ if and (eq .Type "books") .Params.chapter }}
+                        {{ .CurrentSection.Title }} - Chapter {{ .Params.chapter }}: {{ .Title }}
+                    {{ else }}
+                        {{ .Title }}
+                    {{ end }}
+                </h2>
             </div>
 
             <!-- Summary -->
