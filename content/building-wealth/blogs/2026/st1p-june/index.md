@@ -4,10 +4,9 @@ date: 2026-06-05
 draft: false
 type: "blogs"
 wealth_tags:
-  - "State of the 1 Portfolio"
-  - "Asset Allocation"
-  - "Rebalancing"
-
+  - Asset Allocation
+  - Rebalancing
+  - State Of The 1 Portfolio
 summary: "June 2026 edition of “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and system optimizations"
 ---
 Portfolio XIRR improved to 21.67%, drift remains contained at 2.86%, and this month's main change was moving from Proportional Drift Correction to Even Drift Optimization.

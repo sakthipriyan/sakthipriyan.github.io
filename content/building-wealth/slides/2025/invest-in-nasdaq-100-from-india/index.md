@@ -6,9 +6,9 @@ layout: "slides"
 type: "slides"
 summary: "Options to invest in NASDAQ 100, process, cost and taxation"
 wealth_tags:
-  - NASDAQ 100
-  - International Investing
   - Advanced Investor
+  - International Investing
+  - NASDAQ 100
 ---
 
 <section data-autoslide="2500">

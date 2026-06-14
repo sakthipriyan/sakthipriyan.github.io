@@ -6,8 +6,15 @@
     <description>Recent content in FX Retail on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sakthipriyan.com/building-wealth/tags/fx-retail/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FX Retail - A Deep Dive</title>
+      <link>https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/04-fx-retail-a-deep-dive/</link>
+      <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/04-fx-retail-a-deep-dive/</guid>
+      <description>&lt;h2 id=&#34;fx-retail&#34;&gt;FX Retail&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.clearcorp.co.in/web/clearcorp/fx-retail1&#34;&gt;FX Retail&lt;/a&gt; is a retail foreign exchange trading platform operated by the&#xA;Clearing Corporation of India Limited (CCIL) under RBI guidance.&lt;br&gt;&#xA;It allows individuals to access near-interbank FX rates through their&#xA;relationship bank.&lt;/p&gt;&#xA;&lt;p&gt;Instead of relying entirely on the bank&amp;rsquo;s opaque forex pricing, FX&#xA;Retail lets you lock a USD/INR rate transparently on the platform, while&#xA;the bank acts as the settlement partner for the remittance.&lt;/p&gt;&#xA;&lt;p&gt;When configured properly, FX Retail can reduce forex costs significantly&#xA;compared to standard bank remittance rates.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates — A Live Transaction Walkthrough</title>
       <link>https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</link>
@@ -28,6 +35,20 @@
       <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
       <guid>https://sakthipriyan.com/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/</guid>
       <description>Annual portfolio review for FY 2025–26: Three goal-based portfolios, allocation strategy, drift correction and forex cost optimization.</description>
+    </item>
+    <item>
+      <title>Stop Paying ₹1.5/USD! Cut Forex Markup When Funding IBKR (India Guide)</title>
+      <link>https://sakthipriyan.com/building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/</link>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/</guid>
+      <description>How to avoid high forex markups (₹1.5/USD) when funding your Interactive Brokers (IBKR) account from India. Step-by-step guide to save on currency conversion costs.</description>
+    </item>
+    <item>
+      <title>RealValue FX Engine</title>
+      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-fx-engine/</link>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-fx-engine/</guid>
+      <description>Calculate your true effective FX rate including hidden spreads and taxes, compare quotes across banks to minimize costs, track your ₹10L LRS limit via a browser-only transaction log, and compute your TCS refund opportunity cost.</description>
     </item>
     <item>
       <title>Cut Bank Forex Markup on INR to USD Using FX Retail | IBKR Funding, Forex Card, LRS</title>

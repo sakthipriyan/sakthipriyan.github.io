@@ -6,6 +6,9 @@ chapter: 6
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
+wealth_tags:
+  - ETF
+  - Tax Optimization
 ---
 
 > **The Philosophy:** I am not trying to beat the benchmark; I am trying to **be the benchmark**. Therefore, I invest only in index funds and ETFs, not in individual stocks or actively managed funds.

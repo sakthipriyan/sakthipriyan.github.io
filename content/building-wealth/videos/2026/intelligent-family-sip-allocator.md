@@ -5,11 +5,12 @@ draft: false
 type: "videos"
 wealth_tags:
   - Asset Allocation
-  - Rebalancing
+  - Perpetual Rebalancing
   - Portfolio Management
+  - Rebalancing
   - SIP
-  - Tax Optimization
   - TCS
+  - Tax Optimization
 summary: "Discover how to intelligently allocate monthly SIPs across multiple family members, optimize for tax slabs, handle international assets with TCS, and rebalance portfolios using cashflow—all without selling existing holdings."
 youtube_id: "XGzQRKJPcYM"
 youtube_url: "https://youtu.be/XGzQRKJPcYM"

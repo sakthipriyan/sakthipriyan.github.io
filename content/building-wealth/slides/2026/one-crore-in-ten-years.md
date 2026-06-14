@@ -8,10 +8,10 @@ summary: "Why your ₹1 Crore target might need ₹1.79 Crores — inflation, ta
 js_tools:
  - gsap
 wealth_tags:
- - Financial Planning
- - Inflation
- - SIP
- - Wealth Building
+  - Financial Planning
+  - Inflation
+  - SIP
+  - Wealth Building
 ---
 
 <span style="

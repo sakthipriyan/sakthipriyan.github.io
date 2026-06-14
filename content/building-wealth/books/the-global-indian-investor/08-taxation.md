@@ -6,6 +6,9 @@ chapter: 8
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true
+wealth_tags:
+  - TCS
+  - Taxation
 ---
 
 ## Why Irish UCITS ETFs Are Tax-Efficient for Indian Investors

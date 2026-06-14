@@ -4,9 +4,9 @@ date: "2025-11-09"
 draft: "false"
 type: "videos"
 wealth_tags:
+  - Building Block
   - Equity
   - Index Fund
-  - Building Block
 summary: "Understand how to build long-term wealth through Equity & Index Funds — simple, smart, and powerful investing without predictions."
 youtube_id: "xk6nQDPgRjw"
 youtube_url: "https://youtu.be/xk6nQDPgRjw"
