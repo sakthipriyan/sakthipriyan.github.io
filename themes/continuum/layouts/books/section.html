@@ -34,6 +34,7 @@
         </section>
     </main>
     {{ partial "footer.html" . }}
+    {{ partial "ga-tracking.html" . }}
     {{- else -}}
     {{- /* This is a specific book - use book reader layout */ -}}
     {{- /* Check if this book is in draft mode */ -}}
@@ -48,6 +49,7 @@
         </section>
     </main>
     {{ partial "footer.html" . }}
+    {{ partial "ga-tracking.html" . }}
     {{- else -}}
     {{- /* Book is published - show book reader layout */ -}}
     
@@ -98,20 +100,7 @@
 
     {{- /* Scripts */ -}}
     {{ partial "book-scripts.html" . }}
-
-    <script>
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
-            document.head.appendChild(script);
-
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-5NGEJ767SK');
-        }
-    </script>
+    {{ partial "ga-tracking.html" . }}
     {{- end -}}
     {{- end -}}
 </body>

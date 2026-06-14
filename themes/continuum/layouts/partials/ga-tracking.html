@@ -1,0 +1,16 @@
+{{- /* Google Analytics tracking - reads ID from config.yaml params.googleAnalyticsId */ -}}
+{{- with .Site.Params.googleAnalyticsId -}}
+<script>
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id={{ . }}";
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '{{ . }}');
+    }
+</script>
+{{- end -}}

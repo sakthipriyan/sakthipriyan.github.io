@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="/css/slides.css">
-    <script>window.googleAnalyticsId = "G-5NGEJ767SK";</script>
+
 
     
 </head>
@@ -2071,7 +2071,19 @@ for more...
 <script src="/js/slides.js"></script>
 
 
-    <script src="https://sakthipriyan.com/js/main.js"></script>
+    <script>
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    }
+</script>
 </body>
 
 </html>
