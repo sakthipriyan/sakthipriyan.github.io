@@ -12,9 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/sky.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="{{ "css/slides.css" | relURL }}">
-    {{- if .Site.Params.googleAnalyticsId }}
-    <script>window.googleAnalyticsId = "{{ .Site.Params.googleAnalyticsId }}";</script>
-    {{- end }}
+
 
     {{ block "head" . }}{{ end }}
 </head>
@@ -61,7 +59,7 @@
 
     {{ block "scripts" . }}{{ end }}
 
-    <script src="{{ "js/main.js" | absURL }}"></script>
+    {{ partial "ga-tracking.html" . }}
 </body>
 
 </html>

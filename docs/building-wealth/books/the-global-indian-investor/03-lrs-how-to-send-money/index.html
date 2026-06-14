@@ -758,19 +758,18 @@ But, process is dependent on forex team availablity which can add delays.</p>
     })();
 </script>
 
-
     <script>
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
-            document.head.appendChild(script);
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
+        document.head.appendChild(gaScript);
 
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-5NGEJ767SK');
-        }
-    </script></body>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    }
+</script></body>
 </html>
 
