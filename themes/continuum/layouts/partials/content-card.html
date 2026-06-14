@@ -40,8 +40,15 @@ Renders a content card with image, title, summary, meta, and tags
             </div>
 
             <!-- Summary -->
-            {{ if or .Summary .Description .Params.summary }}
-            <p class="card-summary">{{ or .Summary .Description .Params.summary }}</p>
+            {{ $cardSummary := "" }}
+            {{ if eq .Type "books" }}
+                {{ $cardSummary = or .Params.subtitle .Params.summary .Description .Summary }}
+            {{ else }}
+                {{ $cardSummary = or .Params.summary .Description .Summary }}
+            {{ end }}
+
+            {{ if $cardSummary }}
+            <p class="card-summary">{{ $cardSummary }}</p>
             {{ end }}
 
             <!-- Meta information -->
