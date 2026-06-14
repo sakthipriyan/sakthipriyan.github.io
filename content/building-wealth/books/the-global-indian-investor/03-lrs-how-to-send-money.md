@@ -6,6 +6,9 @@ chapter: 3
 date: 2026-05-09
 author: "Sakthi Priyan H"
 draft: false
+wealth_tags:
+  - LRS
+  - Remittance
 ---
 
 Before selecting a broker or investment instrument, it is important to understand how money actually moves from India to an overseas brokerage account.
