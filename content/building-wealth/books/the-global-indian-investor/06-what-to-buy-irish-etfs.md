@@ -268,7 +268,3 @@ These paired funds track the **exact same underlying indices**, but differ entir
 
 ## Notes
 - **UCITS** (Undertakings for Collective Investment in Transferable Securities) is a **European Union regulatory framework** that establishes strict safety, diversification, and transparency standards for mutual funds and ETFs, allowing them to be securely distributed to retail investors worldwide.
-
----
-
-> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!
