@@ -1,6 +1,6 @@
 ---
 title: "Selecting the Global Indexes"
-subtitle: "Mapping the Irish ETF Universe Across Equities, Sovereign Debt and Physical Gold"
+subtitle: "Mapping the Irish ETF Universe Across Equities, Sovereign Debt and Gold"
 type: "books"
 chapter: 7
 date: 2026-04-25
@@ -43,7 +43,7 @@ The critical difference is how they classify **South Korea** and **Poland**:
 
 If you pair a FTSE Developed World ETF with an MSCI Emerging Markets ETF, you will hold South Korea twice. If you pair an MSCI World ETF with a FTSE Emerging Markets ETF, you will exclude South Korea entirely. Pick one provider's ecosystem and stick to it.
 
-### The Index Blueprint
+### The Global Index Blueprint
 
 This table shows exactly how both MSCI and FTSE apply their standard and small-cap modifiers across geographies. Note that "IMI" and "All Cap" are not separate regions, but simply a small-cap expansion applied to the base blueprints.
 
@@ -61,30 +61,45 @@ This table shows exactly how both MSCI and FTSE apply their standard and small-c
 
 Index providers build various indexes but ETF issuer only issue ETFs which have real demand. For example: [MSCI ACWI ex India Index (USD)](https://www.msci.com/documents/10199/a789e2c1-0f2e-4582-a821-fd1f0ac13261) exists but there is no ETF.
 
+#### MSCI Comparison
+<iframe width="100%" height="750" src="https://curvo.eu/backtest/en/compare-indexes/msci-acwi-vs-msci-acwi-imi-vs-msci-emerging-markets-vs-msci-emerging-markets-imi-vs-msci-world/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
+
 ### The Implementation Cheat Sheet for Global Indexes (Irish UCITS)
 
 Here is how those blueprints translate into actual, investable Irish-domiciled UCITS ETFs. Notice how you are often forced to mix Standard and IMI/All-Cap tiers simply because certain index combinations lack a highly liquid, low-cost ETF.
 
+#### Global Markets (All World/ACWI) = Developed Markets (DM) + Emerging Markets (EM)
+
 | Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **MSCI ACWI**                 | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                 |              32,763 |        1 |   0.20% |        2 |
-|                               | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) |              13,691 |        2 |   0.12% |        1 |
-| **MSCI World**                | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)                           |             141,198 |        1 |   0.20% |        2 |
-|                               | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                                      |               7,815 |        2 |   0.05% |        1 |
-| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                          |              13,348 |        1 |   0.18% |        2 |
-|                               | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)                        |               1,279 |        2 |   0.15% |        1 |
-| **MSCI ACWI IMI**             | [State Street SPDR MSCI ACWI IMI UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66)          |               6,258 |        1 |   0.17% |        1 |
-| **MSCI Emerging Markets IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)                |              42,430 |        1 |   0.18% |        1 |
-| **FTSE All-World**            | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                  |              45,672 |        1 |   0.19% |        2 |
-|                               | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                  |               3,649 |        2 |   0.15% |        1 |
-| **FTSE Developed**            | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)                           |               6,830 |        1 |   0.12% |        1 |
-| **FTSE Emerging**             | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733)           |               2,161 |        1 |   0.17% |        1 |
+| **FTSE&nbsp;All&#8209;World**            | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                  |              45,672 |        1 |   0.19% |        3 |
+| **MSCI ACWI**                 | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                 |              32,763 |        2 |   0.20% |         |
+| **MSCI ACWI**                 | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) |              13,691 |        3 |   0.12% |        1 |
+| **MSCI&nbsp;ACWI&nbsp;IMI**             | [State Street SPDR MSCI ACWI IMI UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66)          |               6,258 |         |   0.17% |        2 |
 
-<iframe width="100%" height="750" src="https://curvo.eu/backtest/en/compare-indexes/msci-acwi-vs-msci-acwi-imi-vs-msci-emerging-markets-vs-msci-emerging-markets-imi-vs-msci-world/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
+If you want to pick one index fund for your equity portfolio, pick one of these based on your preference (Index/AUM/TER). Since there is no ETF tracking MSCI ACWI ex India Index (USD), picking this will have slight overlap your Indian Equity holding. But this is the simplest way to get exposure to Global Equity investing.
 
+#### Developed Markets (DM) only
+| Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **MSCI World**                | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)                           |             141,198 |        1 |   0.20% |        3 |
+| **MSCI World**                | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                                      |               7,815 |        2 |   0.05% |        1 |
+| **FTSE Developed**            | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)                           |               6,830 |        3 |   0.12% |        2 |
 
+Since these are Developed Market indexes it won't have any overlap with Indian Equity portfolio. If you want to pick one DM index fund and use Indian Equity portfolio to proxy EM, then pick one of these based on your preference (Index/AUM/TER). 
 
-Notes:
+#### Emerging Markets (EM) only
+| Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)                |              42,430 |        1 |   0.18% |        3 |
+| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                          |              13,348 |        2 |   0.18% |        3 |
+| **MSCI Emerging Markets IMI** | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                  |               3,649 |        3 |   0.15% |        1 |
+| **FTSE Emerging**             | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733)           |               2,161 |         |   0.17% |        2 |
+| **MSCI Emerging Markets**     | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)                        |               1,279 |        |   0.15% |        1 |
+
+If you want more Emerging Markets exposure beyond India you can pick one of these. See the holdings of [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66#holdings) to know which countries it covers. It has ~11% of India and Taiwan/China/South Korea with higher allocation. 
+
+#### Notes
 - Filtered Funds with AUM > $1 Billion across various indexes.
 - Data taken by end of May 2026
 
@@ -105,6 +120,8 @@ Common reasons for separating US exposure include:
 - Combining a World [ex USA](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&quoteCurrency=USD&replicationType=replicationType-full&distributionPolicy=distributionPolicy-accumulating&sortOrder=desc&sortField=fundSize&index=MSCI%2BWorld%2Bex%2BUSA&ls=any&fsg=more500&resetPage=true) portfolio with a dedicated US allocation.
 - Implementing a custom asset allocation based on personal risk tolerance and return expectations.
 
+### The US Index Blueprint
+
 When isolating US exposure, investors using Irish UCITS ETFs will primarily encounter three index families:
 
 | Index Family   | Constituents | Market Cap Focus | Market Coverage | Typical Use              |
@@ -117,34 +134,9 @@ Other index families such as Russell (Russell 1000, Russell 2000, Russell 3000),
 
 Unlike MSCI USA and S&P 500, the Nasdaq 100 is not intended to represent the broad US equity market. Rather, it is a growth-tilted index that has historically delivered higher returns than the broader market, albeit with greater volatility.
 
+#### US Indexes Comparison
 <iframe width="100%" height="720" src="https://curvo.eu/backtest/en/compare-indexes/msci-usa-vs-sp-500-vs-nasdaq-100/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
 
-### The Implementation Cheat Sheet for US Indexes (Irish UCITS)
-
-| Index | ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
-| --- | --- | ---: | ---: | ---: | ---: |
-| **MSCI USA** | [Xtrackers MSCI USA UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDR00) | 12,332 | 1 | 0.03% | 1 |
-|  | [iShares MSCI USA UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B52SFT06) | 4,644 | 2 | 0.03% | 1 |
-|  | [Amundi Core MSCI USA UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000FSN19U2) | 4,007 | 3 | 0.03% | 1 |
-|  | [UBS Core MSCI USA UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXS21) | 2,961 |  | 0.03% | 1 |
-| **S&P 500** | [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | 144,695 | 1 | 0.07% | 2 |
-|  | [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | 32,613 | 2 | 0.07% | 2 |
-|  | [State Street SPDR S&P 500 UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000XZSV718) | 16,962 | 3 | 0.03% | 1 |
-|  | [UBS Core S&P 500 UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXW66) | 1,716 |  | 0.03% | 1 |
-|  | [Xtrackers S&P 500 UCITS ETF 4C](https://www.justetf.com/en/etf-profile.html?isin=IE000Z9SJA06) | 1,483 |  | 0.03% | 1 |
-| **Nasdaq 100** | [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | 25,956 | 1 | 0.30% | 3 |
-|  | [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | 4,254 | 2 | 0.30% | 3 |
-|  | [BNP Paribas Easy II NASDAQ 100 UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000QDFFK00) | 2,776 | 3 | 0.14% | 1 |
-|  | [Xtrackers Nasdaq 100 UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BMFKG444) | 2,198 |  | 0.20% | 2 |
-
-For most long-term investors, the practical difference between MSCI USA and S&P 500 is relatively small. The more consequential decision is whether to own the broad US market (MSCI USA/S&P 500) or to make a deliberate growth bet through the Nasdaq 100.
-
-#### Observations
-
-- S&P 500 remains more popular than MSCI USA despite covering fewer companies.
-- Several MSCI USA and S&P 500 ETFs with assets exceeding $10 billion are available at just 0.03% TER.
-- Nasdaq 100 ETFs remain considerably (~5x) more expensive, with the lowest-cost fund charging 0.14% TER.
-- Investors pay a meaningful premium for concentrated growth exposure.
 
 | Objective                                | MSCI USA | S&P 500 | Nasdaq 100 |
 | ---------------------------------------- | :------: | :-----: | :--------: |
@@ -156,12 +148,52 @@ For most long-term investors, the practical difference between MSCI USA and S&P 
 | Highest concentration in mega-cap growth |    No    |  Maybe  |   **Yes**  |
 | Closest to a global market-cap portfolio |  **Yes** |  Maybe  |     No     |
 
+
+
+### The Implementation Cheat Sheet for US Indexes (Irish UCITS)
+
+### MSCI USA
+
+| ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| --- | ---: | ---: | ---: | ---: |
+| [Xtrackers MSCI USA UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDR00) | 12,332 | 1 | 0.03% | 1 |
+| [iShares MSCI USA UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B52SFT06) | 4,644 | 2 | 0.03% | 1 |
+| [Amundi Core MSCI USA UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000FSN19U2) | 4,007 | 3 | 0.03% | 1 |
+| [UBS Core MSCI USA UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXS21) | 2,961 |  | 0.03% | 1 |
+
+
+### S&P 500
+| ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| --- | ---: | ---: | ---: | ---: |
+| [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | 144,695 | 1 | 0.07% | 2 |
+| [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | 32,613 | 2 | 0.07% | 2 |
+| [State Street SPDR S&P 500 UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000XZSV718) | 16,962 | 3 | 0.03% | 1 |
+| [UBS Core S&P 500 UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXW66) | 1,716 |  | 0.03% | 1 |
+| [Xtrackers S&P 500 UCITS ETF 4C](https://www.justetf.com/en/etf-profile.html?isin=IE000Z9SJA06) | 1,483 |  | 0.03% | 1 |
+
+### Nasdaq 100
+| ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| --- | ---: | ---: | ---: | ---: |
+| [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | 25,956 | 1 | 0.30% | 3 |
+| [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | 4,254 | 2 | 0.30% | 3 |
+| [BNP Paribas Easy II NASDAQ 100 UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000QDFFK00) | 2,776 | 3 | 0.14% | 1 |
+| [Xtrackers Nasdaq 100 UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BMFKG444) | 2,198 |  | 0.20% | 2 |
+
+For most long-term investors, the practical difference between MSCI USA and S&P 500 is relatively small. The more consequential decision is whether to own the broad US market (MSCI USA/S&P 500) or to make a deliberate growth bet through the Nasdaq 100.
+
+#### Observations
+
+- S&P 500 remains more popular than MSCI USA despite covering fewer companies.
+- Several MSCI USA and S&P 500 ETFs with assets exceeding $10 billion are available at just 0.03% TER.
+- Nasdaq 100 ETFs remain considerably (~5x) more expensive, with the lowest-cost fund charging 0.14% TER.
+- Investors pay a meaningful premium for concentrated growth exposure.
+
 #### Notes
 
 - Tables include accumulating Irish-domiciled UCITS ETFs with assets exceeding $1 billion.
 - Fund size, TER and rankings are based on data available in mid-June 2026.
 
-## The Equity Comparison
+## MSCI Comparison of India, USA and ACWI
 
 <iframe width="100%" height="720" src="https://curvo.eu/backtest/en/compare-indexes/msci-acwi-vs-msci-india-vs-msci-usa/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
 
@@ -177,30 +209,30 @@ For most long-term investors, the practical difference between MSCI USA and S&P 
 > **Key Takeaway:** Investing in a global index such as MSCI ACWI is not about maximizing returns from a single market. It is about reducing concentration risk while participating in global economic growth.
 
 
-## Debt ETFs
+## Sovereign Debt ETFs
 
-> WIP
+Debt ETFs primarily serve as the defensive allocation within a portfolio. During accumulation, they provide liquidity, stability, and dry powder for rebalancing. During capital preservation and decumulation, they can also serve as a retirement spending bucket and a source of portfolio income.
 
-When investing internationally, debt is rarely used for high yield. Instead, it serves as a unified, highly liquid asset structure that acts as a non-correlated buffer to your equity holdings. Rather than managing multiple complex domestic debt buckets (liquid funds, arbitrage funds, corporate bonds), an allocation to high-quality international debt provides a stable anchor for emergency funds and dry powder for rebalancing during market crashes.
+The purpose of the debt allocation is not to maximize returns but to provide stability, liquidity, and dry powder for rebalancing. Short-term U.S. Treasuries achieve this objective without the additional credit, duration, currency-hedging, and geopolitical risks introduced by corporate bonds, aggregate bond funds, or emerging-market debt.
 
-There are two primary ways to approach the global debt allocation:
+Depending on your overall portfolio construction/goals, you may also choose to keep the entire defensive allocation in INR-denominated debt instruments and use global equities and global gold (discussed below) as the primary rebalancing assets. In such a setup, a dedicated international debt allocation may not be necessary.
 
-### 1. Cash Equivalents (Short-Term US Treasuries)
-If your primary goal is absolute safety and capital preservation in USD terms, short-term US government bonds (0-1 year maturity) are effectively equivalent to holding USD cash, but with a yield. They have virtually zero interest rate risk.
+Filtering on [USD-denominated, US government bond ETFs, accumulating share class, unhedged, Ireland-domiciled, and assets under management greater than $1 billion](https://www.justetf.com/en/search.html?search=ETFS&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&assetClass=class-bonds&fsg=more500&sortOrder=desc&sortField=fundSize&bondType=Government&currency=USD&currencyHedged=none&country=US) yielded 7 funds as follows
 
-| Index | ETF | AUM<br/>($ million) | TER (%) |
-| --- | --- | ---: | ---: |
-| **US Treasury 0-1yr** | [iShares USD Treasury Bond 0-1yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BGSF1X88) | > 16,000 | 0.07% |
+### U.S. Treasury Bond ETFs
 
-### 2. Core Global Debt (Global Aggregate Bonds)
-If you want a diversified portfolio of investment-grade government and corporate bonds from around the world, a Global Aggregate Bond ETF is the standard choice. 
+| ETF                                                                                                                                       | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **[iShares USD Treasury Bond 0-1yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BGSF1X88)**                   |              19,050 |        1 |   0.07% |        2 |
+| [iShares USD Treasury Bond 3-7yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3VWN393)                   |               8,142 |        2 |   0.07% |        2 |
+| [iShares USD Treasury Bond 1-3yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BYXPSP02)                   |               7,321 |        3 |   0.07% |        2 |
+| [iShares USD Treasury Bond 7-10yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3VWN518)                  |               5,095 |         |   0.07% |        2 |
+| [iShares USD Treasury Bond 20+yr UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BFM6TC58)               |               2,659 |         |   0.07% |        2 |
+| **[Vanguard U.S. Treasury 0-1 Year Bond UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BLRPPV00)** |               2,434 |         |   0.05% |        1 |
+| [Vanguard USD Treasury Bond UCITS ETF Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BGYWFS63)                 |               1,497 |         |   0.05% |        1 |
 
-*Crucial Step: Always buy the USD-Hedged version.* Because this fund holds debt in Euros, Yen, and Pounds, currency fluctuations against the USD can wipe out the bond yields. Buying the USD-Hedged accumulating variant neutralizes that cross-currency risk.
+Based on your preference for TER/AUM you can pick the iShares or Vanguard for 0-1 year Treasury bond ETFs.
 
-| Index | ETF | AUM<br/>($ million) | TER (%) |
-| --- | --- | ---: | ---: |
-| **Global Aggregate (USD Hedged)** | [iShares Core Global Aggregate Bond UCITS ETF USD Hedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BZ043R46) | > 3,400 | 0.10% |
-| | [Vanguard Global Aggregate Bond UCITS ETF USD Hedged Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BG47KB92) | > 580 | 0.08% |
 
 ## Gold ETCs (Exchange Traded Commodities)
 
@@ -345,3 +377,7 @@ This is why recurring structural costs matter enormously for long-term passive a
 - Currently, my gold allocation sits in Indian Mutual Funds. While I initially planned to upgrade to Indian ETFs, I am routing all my future gold investments into Irish ETCs to eliminate the heavy domestic cost drag and avoid arbitrary tax distortions entirely.
 
 
+
+---
+
+> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!
