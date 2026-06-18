@@ -373,7 +373,7 @@ This is why recurring structural costs matter enormously for long-term passive a
 **Note**: These calculations exclude the initial one-time forex conversion and brokerage costs required to access global markets. However, the recurring TER savings from lower-cost Global Gold ETCs typically offset these upfront costs within the first 2–3 years of holding. In practice, the effective forex cost may be even lower when gold investments are piggybacked on existing international equity allocations, since the same USD balance can be reused across assets without repeated INR–USD conversions. There is no forex cost involved when rebalancing from Global Equity to Gold. 
 
 ### Notes
-- Unlike global ETCs that track the pure international market, Indian gold assets track a domestic price heavily distorted by local import duties and GST, exposing your portfolio to sudden, policy-driven wealth destruction whenever the government arbitrarily slashes trade tariffs.
+- Indian gold prices include the impact of import duties, GST, and other local market factors. Changes to these policies can affect domestic gold prices independently of global gold prices, introducing an additional source of tracking variation for Indian investors.
 - Currently, my gold allocation sits in Indian Mutual Funds. While I initially planned to upgrade to Indian ETFs, I am routing all my future gold investments into Irish ETCs to eliminate the heavy domestic cost drag and avoid arbitrary tax distortions entirely.
 
 
