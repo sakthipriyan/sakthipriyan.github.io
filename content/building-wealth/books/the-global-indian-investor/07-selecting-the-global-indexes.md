@@ -70,38 +70,46 @@ Here is how those blueprints translate into actual, investable Irish-domiciled U
 
 #### Global Markets (All World/ACWI) = Developed Markets (DM) + Emerging Markets (EM)
 
-| Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **FTSE&nbsp;All&#8209;World**            | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                  |              45,672 |        1 |   0.19% |        3 |
-| **MSCI ACWI**                 | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                 |              32,763 |        2 |   0.20% |         |
-| **MSCI ACWI**                 | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48) |              13,691 |        3 |   0.12% |        1 |
-| **MSCI&nbsp;ACWI&nbsp;IMI**             | [State Street SPDR MSCI ACWI IMI UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66)          |               6,258 |         |   0.17% |        2 |
+| Index              |ETF                                                                                                                                                      | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **FTSE&nbsp;All&#8209;World** | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                                    |              48,526 |        1 |   0.19% |          |
+| **MSCI ACWI**      | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                                   |              33,730 |        2 |   0.20% |          |
+| **MSCI ACWI**      | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48)                   |              15,800 |        3 |   0.12% |        1 |
+| **MSCI ACWI IMI**  | [State Street SPDR MSCI All Country World Investable Market UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) |               6,804 |          |   0.17% |        3 |
+| **FTSE&nbsp;All&#8209;World** | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                                    |               3,893 |          |   0.15% |        2 |
 
-If you want to pick one index fund for your equity portfolio, pick one of these based on your preference (Index/AUM/TER). Since there is no ETF tracking MSCI ACWI ex India Index (USD), picking this will have slight overlap your Indian Equity holding. But this is the simplest way to get exposure to Global Equity investing.
+
+
+If you want to pick one index fund for your equity portfolio, pick one of these based on your preference (Index/AUM/TER). Since there is no ETF tracking MSCI ACWI ex India Index (USD), picking this will have slight overlap with your Indian Equity holding. But this is the simplest way to get exposure to Global Equity investing.
 
 #### Developed Markets (DM) only
-| Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **MSCI World**                | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)                           |             141,198 |        1 |   0.20% |        3 |
-| **MSCI World**                | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                                      |               7,815 |        2 |   0.05% |        1 |
-| **FTSE Developed**            | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)                           |               6,830 |        3 |   0.12% |        2 |
+| Index                    | ETF                                                                                                                  | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **MSCI World**           | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)         |             141,574 |        1 |   0.20% |          |
+| **MSCI World**           | [Xtrackers MSCI World UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDQ92)                   |              22,388 |        2 |   0.12% |          |
+| **MSCI World**           | [State Street SPDR MSCI World UCITS ETF USD Unhedged](https://www.justetf.com/en/etf-profile.html?isin=IE00BFY0GT14) |              19,233 |        3 |   0.12% |          |
+| **MSCI World**           | [UBS Core MSCI World UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXV59)               |              10,677 |          |   0.06% |        2 |
+| **MSCI World**           | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                    |               8,263 |          |   0.05% |        1 |
+| **FTSE Developed World** | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)         |               6,400 |          |   0.12% |        3 |
 
-Since these are Developed Market indexes it won't have any overlap with Indian Equity portfolio. If you want to pick one DM index fund and use Indian Equity portfolio to proxy EM, then pick one of these based on your preference (Index/AUM/TER). 
+Since these are Developed Market indexes they won't have any overlap with Indian Equity portfolio. If you want to pick one DM index fund and use Indian Equity portfolio to proxy EM, then pick one of these based on your preference (Index/AUM/TER). 
 
 #### Emerging Markets (EM) only
-| Index                         | ETF                                                                                                                                    | AUM<br/>($&nbsp;million) | AUM Rank | TER (%) | TER Rank |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)                |              42,430 |        1 |   0.18% |        3 |
-| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                          |              13,348 |        2 |   0.18% |        3 |
-| **MSCI Emerging Markets IMI** | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                  |               3,649 |        3 |   0.15% |        1 |
-| **FTSE Emerging**             | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733)           |               2,161 |         |   0.17% |        2 |
-| **MSCI Emerging Markets**     | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)                        |               1,279 |        |   0.15% |        1 |
+| Index                         | ETF                                                                                                                          | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
+| **MSCI Emerging Markets IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)      |              43,825 |        1 |   0.18% |          |
+| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                |              13,825 |        2 |   0.18% |          |
+| **MSCI Emerging Markets**     | [iShares MSCI EM UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5YC18)                             |              10,037 |        3 |   0.18% |          |
+| **FTSE Emerging Markets**     | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733) |               2,174 |          |   0.17% |        2 |
+| **MSCI Emerging Markets**     | [State Street SPDR MSCI Emerging Markets UCITS ETF USD](https://www.justetf.com/en/etf-profile.html?isin=IE00B469F816)       |               2,167 |          |   0.18% |        3 |
+| **MSCI Emerging Markets**     | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)              |               1,389 |          |   0.15% |        1 |
 
 If you want more Emerging Markets exposure beyond India you can pick one of these. See the holdings of [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66#holdings) to know which countries it covers. It has ~11% of India and Taiwan/China/South Korea with higher allocation. 
 
 #### Notes
-- Filtered Funds with AUM > $1 Billion across various indexes.
-- Data taken by end of May 2026
+- Filtered Funds with AUM > $1 Billion across various indexes
+- Top 3 by AUM and top 3 by TER listed in above tables
+- Data taken by 3rd week of June 2026
 
 ## US Equity ETFs
 
@@ -215,11 +223,9 @@ Debt ETFs primarily serve as the defensive allocation within a portfolio. During
 
 The purpose of the debt allocation is not to maximize returns but to provide stability, liquidity, and dry powder for rebalancing. Short-term U.S. Treasuries achieve this objective without the additional credit, duration, currency-hedging, and geopolitical risks introduced by corporate bonds, aggregate bond funds, or emerging-market debt.
 
-Depending on your overall portfolio construction/goals, you may also choose to keep the entire defensive allocation in INR-denominated debt instruments and use global equities and global gold (discussed below) as the primary rebalancing assets. In such a setup, a dedicated international debt allocation may not be necessary.
-
 Filtering on [USD-denominated, US government bond ETFs, accumulating share class, unhedged, Ireland-domiciled, and assets under management greater than $1 billion](https://www.justetf.com/en/search.html?search=ETFS&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&assetClass=class-bonds&fsg=more500&sortOrder=desc&sortField=fundSize&bondType=Government&currency=USD&currencyHedged=none&country=US) yielded 7 funds as follows
 
-### U.S. Treasury Bond ETFs
+### US Treasury Bond ETFs
 
 | ETF                                                                                                                                       | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
@@ -232,6 +238,9 @@ Filtering on [USD-denominated, US government bond ETFs, accumulating share class
 | [Vanguard USD Treasury Bond UCITS ETF Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BGYWFS63)                 |               1,497 |         |   0.05% |        1 |
 
 Based on your preference for TER/AUM you can pick the iShares or Vanguard for 0-1 year Treasury bond ETFs.
+Picking up long term debt ETFs such as 7-10yr or 20+yr will expose you more to interest rate risks. So stick to short term (0-1 or 1-3yr) bond ETFs if you are investing in debt.
+
+Depending on your overall portfolio construction/goals, you may also choose to keep the entire defensive allocation in INR-denominated debt instruments and use global equities and global gold (discussed below) as the primary rebalancing assets. In such a setup, a dedicated international debt allocation may not be necessary.
 
 
 ## Gold ETCs (Exchange Traded Commodities)
@@ -264,14 +273,15 @@ Let's compare Indian Gold ETFs/Mutual Funds vs Irish Gold ETCs.
 
 Top 3 by AUM and Top 3 by TER are listed here.
 
-| Fund Name | AUM<br/>(₹ Cr) | AUM<br/>($ million) | Fund&nbsp;TER <br/>(%) | ETF Name | ETF&nbsp;TER <br/>(%) | Total&nbsp;TER <br/>(%) | Rank |
-| --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
-| **SBI Gold Fund** | 15,691 | 1,640 | 0.25 | SBI Gold ETF | 0.65 | 0.90 | AUM #1 |
-| **HDFC Gold Fund** | 11,464 | 1,198 | 0.20 | HDFC Gold ETF | 0.59 | 0.79 | AUM #2 |
-| **Nippon India Gold Savings Fund** | 7,178 | 750 | 0.05 | Nippon India ETF Gold BeES | 0.81 | 0.86 | AUM #3 |
-| **DSP Gold ETF FoF** | 494 | 52 | 0.15 | DSP Gold ETF | 0.38 | 0.53 | TER #3 |
-| **Mirae Asset Gold ETF FoF** | 483 | 50 | 0.12 | Mirae Asset Gold ETF | 0.33 | 0.45 | TER #1 |
-| **Angel One Gold ETF FoF** | 32 | 3 | 0.15 | Angel One Gold ETF | 0.35 | 0.50 | TER #2 |
+| Fund Name                          | AUM<br/>(₹ Cr) | AUM<br/>($ million) | AUM Rank | Fund TER <br/>(%) | ETF Name                   | ETF TER <br/>(%) | Total TER <br/>(%) | TER Rank |
+| ---------------------------------- | -------------: | ------------------: | -------: | ----------------: | -------------------------- | ---------------: | -----------------: | -------: |
+| **SBI Gold Fund**                  |         15,691 |               1,640 |        1 |              0.25 | SBI Gold ETF               |             0.65 |               0.90 |          |
+| **HDFC Gold Fund**                 |         11,464 |               1,198 |        2 |              0.20 | HDFC Gold ETF              |             0.59 |               0.79 |          |
+| **Nippon India Gold Savings Fund** |          7,178 |                 750 |        3 |              0.05 | Nippon India ETF Gold BeES |             0.81 |               0.86 |          |
+| **DSP Gold ETF FoF**               |            494 |                  52 |          |              0.15 | DSP Gold ETF               |             0.38 |               0.53 |        3 |
+| **Mirae Asset Gold ETF FoF**       |            483 |                  50 |          |              0.12 | Mirae Asset Gold ETF       |             0.33 |               0.45 |        1 |
+| **Angel One Gold ETF FoF**         |             32 |                   3 |          |              0.15 | Angel One Gold ETF         |             0.35 |               0.50 |        2 |
+
 
 > Indian Gold FoF Total TER ranges from 0.45% to 0.90% as shown in the table
 
@@ -280,14 +290,15 @@ Top 3 by AUM and Top 3 by TER are listed here.
 
 Top 3 by AUM and Top 3 by TER are listed here.
 
-| ETF Name | ISIN | AUM<br/>(Rs Cr) | AUM<br/>($ million) | TER<br/>(%) | Rank |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Nippon India ETF Gold BeES | INF204KB17I5 | 55,540 | 5,804 | 0.80 | AUM #1 |
-| ICICI Prudential Gold ETF | INF109KC1NT3 | 26,380 | 2,757 | 0.49 | AUM #2 |
-| SBI Gold Exchange Traded Scheme - Growth Option | INF200KA16D8 | 24,549 | 2,565 | 0.65 | AUM #3 |
-| Zerodha Gold ETF | INF0R8F01042 | 2,218 | 232 | 0.35 | TER #2 |
-| The Wealth Company Gold ETF | INF2F0001370 | 23 | 2 | 0.29 | TER #1 |
-| Angel One Gold ETF | INF1J2R01114 | 83 | 9 | 0.35 | TER #3 |
+| ETF Name                                        | ISIN         | AUM<br/>(₹ Cr) | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
+| ----------------------------------------------- | ------------ | -------------: | ------------------: | -------: | ----------: | -------: |
+| Nippon India ETF Gold BeES                      | INF204KB17I5 |         55,540 |               5,804 |        1 |        0.80 |          |
+| ICICI Prudential Gold ETF                       | INF109KC1NT3 |         26,380 |               2,757 |        2 |        0.49 |          |
+| SBI Gold Exchange Traded Scheme - Growth Option | INF200KA16D8 |         24,549 |               2,565 |        3 |        0.65 |          |
+| Zerodha Gold ETF                                | INF0R8F01042 |          2,218 |                 232 |          |        0.35 |        2 |
+| The Wealth Company Gold ETF                     | INF2F0001370 |             23 |                   2 |          |        0.29 |        1 |
+| Angel One Gold ETF                              | INF1J2R01114 |             83 |                   9 |          |        0.35 |        3 |
+
 
 > Indian Gold ETF TER ranges from 0.29% to 0.80% as shown in the table
 
@@ -295,12 +306,12 @@ Top 3 by AUM and Top 3 by TER are listed here.
 
 Top 3 by AUM and Top 3 by TER are listed here.
 
-| ETC Name | ISIN | AUM<br/>($ million) | TER<br/>(%) | USD Ticker | Rank |
-| --- | --- | ---: | ---: | --- | --- |
-| iShares Physical Gold ETC | IE00B4ND3602 | 37,627 | 0.12 | IGLN | AUM #1, TER #2 |
-| Invesco Physical Gold ETC | IE00B579F325 | 29,100 | 0.12 | SGLD | AUM #2, TER #2 |
-| Amundi Physical Gold ETC (C) | FR0013416716 | 12,229 | 0.12 | GLDD | AUM #3, TER #2 |
-| Xtrackers IE Physical Gold ETC Securities | DE000A2T0VU5 | 6,949 | 0.11 | XGDU | TER #1 |
+| ETC Name                                                                                                   | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
+| ---------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ----------: | -------: |
+| [iShares Physical Gold ETC](https://www.justetf.com/en/etf-profile.html?isin=IE00B4ND3602)                 |              37,627 |        1 |        0.12 |        2 |
+| [Invesco Physical Gold ETC](https://www.justetf.com/en/etf-profile.html?isin=IE00B579F325)                 |              29,100 |        2 |        0.12 |        2 |
+| [Amundi Physical Gold ETC (C)](https://www.justetf.com/en/etf-profile.html?isin=FR0013416716)              |              12,229 |        3 |        0.12 |        2 |
+| [Xtrackers IE Physical Gold ETC Securities](https://www.justetf.com/en/etf-profile.html?isin=DE000A2T0VU5) |               6,949 |          |        0.11 |        1 |
 
 > TER is very competitive globally, ranging from just 0.11% to 0.12%
 
@@ -376,7 +387,79 @@ This is why recurring structural costs matter enormously for long-term passive a
 - Indian gold prices include the impact of import duties, GST, and other local market factors. Changes to these policies can affect domestic gold prices independently of global gold prices, introducing an additional source of tracking variation for Indian investors.
 - Currently, my gold allocation sits in Indian Mutual Funds. While I initially planned to upgrade to Indian ETFs, I am routing all my future gold investments into Irish ETCs to eliminate the heavy domestic cost drag and avoid arbitrary tax distortions entirely.
 
+## Portfolio Construction
 
+The indexes and ETFs discussed throughout this chapter can be combined in several ways depending on how much diversification, concentration, and control an investor desires.
+
+At one end of the spectrum sits the fully diversified global market portfolio. At the other end sits a concentrated, high-conviction portfolio built around India and US technology. As diversification decreases, concentration in a smaller set of countries, sectors, and companies naturally increases. This may lead to higher returns, but it also increases volatility and the risk of underperforming the broader global market.
+
+| Portfolio | DM Allocation | EM Allocation | Description |
+| :--- | :--- | :--- | :--- |
+| **GM** | Included | Included | One-fund global portfolio (FTSE All-World / MSCI ACWI). |
+| **DM + EM** | MSCI World / FTSE Developed | MSCI EM / FTSE Emerging | Full control over Developed and Emerging Market weights. |
+| **DM + India** | MSCI World / FTSE Developed | India | India replaces dedicated EM allocation. |
+| **USA + India** | MSCI USA / S&P 500 | India | Simple two-region portfolio. |
+| **Nasdaq 100 + India** | Nasdaq 100 | India | Concentrated growth portfolio focused on India and US technology. |
+
+### The Concentration Ladder
+
+As we move down the ladder—from **GM → DM → MSCI USA → S&P 500 → Nasdaq 100**—the portfolio gradually becomes more concentrated. 
+
+The number of countries and individual companies decreases, reducing overall diversification. Conversely, the weight of the top 10 companies, technology exposure, and volatility all increase. This magnifies both the potential for massive outperformance and the risk of severe underperformance.
+
+### The Role of Gold and Debt
+
+Growth assets are only one side of portfolio construction. Gold and Debt serve an entirely different purpose:
+
+| Asset | Primary Role |
+| :--- | :--- |
+| **Equity** | Long-term growth |
+| **Gold** | Crisis hedge and rebalancing asset |
+| **Debt** | Stability, liquidity, and dry powder |
+
+Rather than maximizing returns, Gold and Debt create opportunities for systematic rebalancing. For example:
+
+* During equity bear markets, Gold or Debt can be sold to purchase equities at lower valuations.
+* During strong equity rallies, excess profits can be redirected into Gold or Debt.
+* During retirement, Debt can provide spending liquidity while allowing equities to recover from temporary drawdowns.
+
+A later chapter on **The Perpetual Rebalancing Framework** will cover the exact mechanics I follow to maintain my desired asset allocation, detailing both the Accumulation and Decumulation phases end-to-end.
+
+### My current asset allocation (Tax Year 2026-27)
+
+My current asset allocation is based on the **Concentrated Diversification** approach. 
+US is highly concentrated via Nasdaq 100, while India is highly diversified in the Nifty 500 companies using custom weights. Concentrated on just 2 countries but diversified over 600 companies.
+
+Instead of owning the entire world, I focus on two primary growth engines:
+
+1. **India** through broad market indexes (Nifty 50, Nifty Next 50, Nifty Midcap 150, & Nifty Smallcap 250).
+2. **US Technology and Innovation** through the Nasdaq 100.
+
+This results in exposure to approximately 600 companies (Nifty 500 via custom weights + Nasdaq 100). While significantly more concentrated than a global index, it still provides meaningful diversification across sectors, industries, and market capitalizations.
+
+My current asset allocation looks like this:
+
+| Asset | Allocation |
+| --- | --- |
+| **India** | 45% |
+| **Nasdaq 100** | 40% |
+| **Gold** | 10% |
+| **Debt** | 5% |
+
+This gives me 50% INR (India + Debt) and 50% USD (Nasdaq 100 + Gold) based assets. 85% in Equity and 15% in defensive assets.
+
+> This allocation reflects my own goals, risk tolerance, and conviction. It should be viewed as an example implementation rather than a recommendation.
+
+### Key Takeaway
+
+The decision is not simply a binary choice between diversification and concentration. It is a choice between:
+
+* **Maximum Diversification** through Global Market portfolios, which aim to capture global economic growth with minimal concentration risk. This is truly moving to a global index and not worry about which country/sector will perform better.
+* **Concentrated Diversification** through portfolios such as India + Nasdaq 100, which focus on a smaller set of high-conviction growth engines while relying on Gold and Debt to provide stability and rebalancing opportunities. This is for investors who have conviction in their country and top global growth engine. This is the approach I currently follow.
+
+Neither approach is inherently superior. The appropriate choice depends entirely on an investor's goals, conviction, risk tolerance, and willingness to weather periods of underperformance relative to the global market.
+
+> The important part is selecting an allocation that you can consistently maintain through both bull and bear markets. A good portfolio is not the one with the highest historical return, but the one you can hold for decades without abandoning the plan.
 
 ---
 
