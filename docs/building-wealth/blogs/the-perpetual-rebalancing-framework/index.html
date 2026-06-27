@@ -182,7 +182,7 @@
         
         <span class="meta-item">
             <span class="meta-icon">📖</span>
-            <span class="read-time">13 min read</span>
+            <span class="read-time">15 min read</span>
         </span>
     </div>
 
@@ -543,11 +543,19 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
 </ul>
 <h3 id="4-buy-engine">4. Buy Engine</h3>
 <p><strong>The Buy Engine is responsible for deploying available capital into the Core Portfolio.</strong></p>
-<p>Traditional approaches often rely on <strong>calendar-based rebalancing</strong> or <strong>threshold-based rebalancing</strong> , both of which typically require selling winners and can increase portfolio turnover and tax realization. <strong>The Perpetual Rebalancing Framework</strong> instead uses <strong>cash-flow-based rebalancing</strong> as its <strong>primary mechanism</strong>.</p>
-<p>By directing fresh capital to underweight assets, the framework continuously reduces portfolio drift while minimizing unnecessary sales, portfolio turnover, and taxes. Active selling is reserved only for situations where overall portfolio drift exceeds predefined thresholds which is taken care by the <strong>Sell Engine</strong>.</p>
-<p>It implements the <strong>Forward Water-Filling</strong> algorithm, which allocates capital only to underweight asset classes. I will explain this using following Example Portfolio data and visuals.</p>
-<h3 id="example-portfolio-buy-engine-deployment-summary">Example Portfolio: Buy Engine Deployment Summary</h3>
-<p>The following table summarizes the impact of the Buy Engine deployment for the above  Example Portfolio. Here, we are investing <strong>2.11%</strong> of current portfolio value as part of monthly investment cycle. It has reduced the Portfolio Drift from <strong>2.13%</strong> to <strong>1.58%</strong> and correcting <strong>0.55%</strong> of the total drift. Essentially 25% improvement of the Portfolio Drift.</p>
+<p>Traditional approaches often rely on <strong>calendar-based rebalancing</strong> or <strong>threshold-based rebalancing</strong> , both of which typically require selling winners and can increase portfolio turnover and tax realization.</p>
+<p><strong>The Perpetual Rebalancing Framework</strong> instead uses cash-flow-based rebalancing as its primary mechanism. Rather than selling winners, fresh capital is directed toward underweight assets using the Forward Water-Filling algorithm.</p>
+<p>The Buy Engine has four objectives:</p>
+<ul>
+<li>Reduce portfolio drift using fresh capital</li>
+<li>Minimize portfolio turnover</li>
+<li>Avoid unnecessary selling</li>
+<li>Preserve tax efficiency by making cash inflows the primary rebalancing mechanism</li>
+</ul>
+<p>The <strong>Buy Engine</strong> operates only after all liquidity obligations have been satisfied. Active selling is reserved for the <strong>Sell Engine</strong>, which activates only when the aggregate portfolio drift exceeds predefined thresholds.</p>
+<h4 id="example-portfolio">Example Portfolio</h4>
+<p>The following example illustrates how the Buy Engine deploys fresh capital into an existing portfolio.</p>
+<p>During this monthly investment cycle, <strong>2.11%</strong> of the portfolio value is added as fresh capital. The <strong>Buy Engine</strong> allocates this capital using <strong>Forward Water-Filling</strong>.</p>
 <table>
   <thead>
       <tr>
@@ -635,12 +643,12 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
       </tr>
   </tbody>
 </table>
-<p>Same data represented as Stacked Bar Chart.</p>
+<p>The Buy Engine reduces the aggregate portfolio drift from <strong>2.13%</strong> to <strong>1.58%</strong>, correcting <strong>0.55%</strong> of total drift. In other words, a monthly contribution equal to <strong>2.11%</strong> of the portfolio improves the overall drift by approximately <strong>25%</strong>, without selling a single asset.</p>
 <div id="water-filling-chart" class="echarts-container" style="height: 700px;" data-chart='{
     "title": { "text": "Drift Correction Impact", "left": "center" },
     "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
     "legend": { 
-        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening"],
+        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening", "New Water Level"],
         "bottom": 0 
     },
     "grid": { "left": "3%", "right": "4%", "bottom": "15%", "containLabel": true },
@@ -662,6 +670,22 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
         { "name": "Improvement", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e" } },
         { "name": "Improvement (Evaporated)", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
         { "name": "Worsening", "type": "bar", "data": [], "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+        {
+            "name": "New Water Level",
+            "type": "line",
+            "data": [],
+            "itemStyle": { "color": "#1e40af" },
+            "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
+            "markLine": {
+                "symbol": "none",
+                "silent": true,
+                "label": { "show": false },
+                "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
+                "data": [
+                    { "yAxis": -0.39 }
+                ]
+            }
+        },
         {
             "name": "Empty",
             "type": "bar",
@@ -762,142 +786,313 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
         }
     ]
 }'></div>
+<h4 id="observations">Observations</h4>
 <ul>
-<li><strong>Capital Deployment:</strong> In this round, The Buy Engine focused exclusively on underweight assets (Nasdaq 100, Next 50, and Midcap 150) to minimize drift while avoiding additional exposure to already overweight positions.</li>
-<li><strong>Passive Normalization:</strong> Overweight assets—specifically <strong>Nifty 50, Debt, and Gold</strong>—were not allocated new capital. Their post-allocation percentages decreased slightly due to the increased total portfolio base, illustrating the natural normalization process inherent in the framework.</li>
-<li><strong>System State:</strong> The portfolio remains in a &ldquo;drift-aware&rdquo; state, with Nasdaq 100 showing the most significant improvement, closing the gap from <strong>-1.25%</strong> to <strong>-0.39%</strong>.</li>
+<li><strong>Largest deficits receive the highest allocation.</strong> Nasdaq 100 receives most of the fresh capital because it has the largest negative drift.</li>
+<li><strong>Only underweight assets receive capital.</strong> Next 50 and Midcap 150 also receive allocations, while overweight assets receive none.</li>
+<li><strong>Overweights naturally normalize.</strong> Nifty 50, Debt, and Gold become slightly closer to their target allocations simply because the total portfolio value increases.</li>
+<li><strong>No selling is required.</strong> Since the aggregate positive drift (<strong>2.13%</strong>) is well below the Sell Engine threshold (<strong>10%</strong> by default), no assets are sold.</li>
+<li><strong>Allocation decisions ignore recent performance.</strong> Although Gold has generated substantially higher returns than Debt, neither receives additional capital because both are already overweight. The framework responds only to portfolio drift, not recent performance.</li>
 </ul>
-<p>This example demonstrates an important property of the framework:</p>
 <blockquote>
-<p><strong>Even though Gold has returned significantly more than Debt (≈91% vs ≈19% cumulative gain), it receives no special treatment. Decisions are driven solely by portfolio drift relative to the strategic allocation—not by recent returns or performance.</strong></p>
+<p><strong>The Buy Engine is allocation-driven, not performance-driven.</strong> Its sole objective is to move the portfolio closer to its strategic allocation using fresh capital while avoiding unnecessary turnover and taxes.</p>
 </blockquote>
-<p>I think this last observation is one of the strongest teaching moments in your framework. It reinforces that the operating system is <strong>allocation-driven</strong>, not <strong>performance-chasing</strong>, which is a key distinction.</p>
-<p>Since the aggregate positive drift is <strong>well below</strong> the Sell Engine activation threshold (10% by default), <strong>no assets are sold</strong>.</p>
-<p>Instead, the <strong>Buy Engine</strong> deploys future contributions using Forward Water-Filling:</p>
-<ol>
-<li>Nasdaq 100</li>
-<li>Midcap 150</li>
-<li>Next 50</li>
-<li>Smallcap 250</li>
-</ol>
-<p>Debt, Gold, and Nifty 50 receive no additional allocation until their positive drift has been offset by future investments.</p>
-<p>Its objectives are to:</p>
+<h4 id="contrarian-by-construction">Contrarian by Construction</h4>
+<p>The Buy Engine naturally follows a <strong>value-oriented, contrarian investment philosophy</strong>.</p>
+<p>As asset prices diverge over time, the portfolio drifts away from its strategic allocation. Assets that have <strong>underperformed</strong> become underweight, while assets that have <strong>outperformed</strong> become overweight.</p>
+<p>Rather than chasing recent winners, the Buy Engine systematically directs fresh capital toward the underweight assets. This results in:</p>
 <ul>
-<li>passively reduce portfolio drift,</li>
-<li>minimize portfolio turnover,</li>
-<li>avoid unnecessary selling, and</li>
-<li>preserve tax efficiency by using fresh inflows as the primary rebalancing mechanism.</li>
+<li><strong>Buying relatively cheaper assets</strong> that have fallen below their target allocation.</li>
+<li><strong>Avoiding additional purchases</strong> of assets that have recently outperformed.</li>
+<li><strong>Selling nothing</strong> unless overall portfolio drift becomes excessive.</li>
 </ul>
-<p>The Buy Engine operates only after all liquidity obligations have been satisfied.</p>
-<h3 id="5-sell-engine">5. Sell Engine</h3>
-<p>The Sell Engine actively controls portfolio drift when passive rebalancing is no longer sufficient.</p>
-<p>It implements the <strong>Reverse Water-Filling</strong> algorithm, which gradually harvests gains from overweight asset classes whenever aggregate portfolio drift exceeds the configured threshold.</p>
-<p>The Sell Engine follows three constraints:</p>
+<p>In effect, the framework follows the classic investment principle of:</p>
+<blockquote>
+<p><strong>Buy relatively low, avoid buying relatively high.</strong></p>
+</blockquote>
+<p>Unlike traditional value investing, this approach does <strong>not</strong> rely on estimating intrinsic value, valuation multiples, or future returns. The investor&rsquo;s chosen <strong>strategic asset allocation</strong> acts as the reference point, and portfolio drift serves as the signal for where new capital should be deployed.</p>
+<p>This makes the framework <strong>systematically contrarian</strong>—it continuously buys relative underperformers and naturally resists performance chasing, all without requiring market forecasts or subjective judgment.</p>
+<h4 id="target-weighted-capital-allocation">Target-Weighted Capital Allocation</h4>
+<p>Forward Water-Filling optimizes for <strong>portfolio-level drift reduction</strong>, not equal treatment across asset classes.</p>
+<p>As a result, larger strategic allocations naturally receive more capital than smaller satellite allocations because they contribute more to the portfolio&rsquo;s overall tracking error.</p>
+<p>For example, in the illustrative portfolio:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Asset</th>
+          <th style="text-align: right">Target Allocation</th>
+          <th style="text-align: right">Pre-Drift</th>
+          <th style="text-align: right">Post-Drift</th>
+          <th style="text-align: right">Relative Tracking Error</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Nasdaq 100</strong></td>
+          <td style="text-align: right">40%</td>
+          <td style="text-align: right">-1.25%</td>
+          <td style="text-align: right"><strong>-0.39%</strong></td>
+          <td style="text-align: right"><strong>0.39 / 40 = 0.98%</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Next 50</strong></td>
+          <td style="text-align: right">10%</td>
+          <td style="text-align: right">-0.36%</td>
+          <td style="text-align: right"><strong>-0.39%</strong></td>
+          <td style="text-align: right"><strong>0.39 / 10 = 3.90%</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>Although both assets end up with a similar <strong>absolute drift</strong> of <strong>-0.39%</strong>, the impact is very different:</p>
 <ul>
-<li>sell only LTCG-eligible lots,</li>
-<li>reserve taxes before redeploying proceeds, and</li>
-<li>distribute sales across overweight assets to restore the portfolio toward its strategic allocation.</li>
+<li>For <strong>Nasdaq 100</strong>, a <strong>0.39%</strong> drift represents only <strong>0.98%</strong> of its target allocation.</li>
+<li>For <strong>Next 50</strong>, the same <strong>0.39%</strong> drift represents <strong>3.90%</strong> of its target allocation.</li>
 </ul>
-<p>Unlike the Buy Engine, the Sell Engine is event-driven and activates only when the portfolio requires active drift correction.</p>
+<p>Consequently, the Buy Engine allocates significantly more capital to <strong>Nasdaq 100</strong> than to <strong>Next 50</strong>. The objective is not to make every asset equally close to its target, but to produce the <strong>largest reduction in overall portfolio drift for each unit of fresh capital invested</strong>.</p>
+<p>This produces two desirable properties:</p>
+<ul>
+<li><strong>Core allocations remain tightly aligned</strong> with their strategic targets, resulting in lower tracking error for the largest portfolio positions.</li>
+<li><strong>Satellite allocations are allowed to drift more naturally</strong>, avoiding the need to continuously inject small amounts of capital into relatively minor positions.</li>
+</ul>
+<blockquote>
+<p><strong>Forward Water-Filling minimizes portfolio-level tracking error, not per-asset drift.</strong></p>
+</blockquote>
+<h4 id="policy-configurations-3">Policy Configurations</h4>
+<p>Zero Policy Configurations for the Buy Engine. Just Execute the mathematical logic.</p>
 <hr>
-<h2 id="3-system-components-1">3. System Components</h2>
-<h3 id="1-income-1">1. Income</h3>
-<h3 id="2-liquidity-buckets">2. Liquidity Buckets</h3>
-<h3 id="3-core-portfolio-1">3. Core Portfolio</h3>
-<h3 id="4-buy-engine-1">4. Buy Engine</h3>
-<h3 id="5-sell-engine-1">5. Sell Engine</h3>
-<h2 id="3-core-design-principles">3. Core Design Principles</h2>
+<h3 id="5-sell-engine">5. Sell Engine</h3>
+<p>The <strong>Sell Engine</strong> actively controls portfolio drift when cash-flow-based rebalancing through the Buy Engine is no longer sufficient.</p>
+<p>Traditional rebalancing approaches, such as <strong>calendar-based</strong> or <strong>threshold-based</strong> rebalancing, typically sell overweight assets and immediately buy underweight assets in a single rebalance. While simple, this approach interrupts long-term winners, increases portfolio turnover, and often realizes unnecessary taxable gains.</p>
+<p>The Perpetual Rebalancing Framework takes a different approach.</p>
+<p>Instead of treating <strong>portfolio drift as a problem to eliminate</strong>, it treats drift as evidence of <strong>positive price momentum</strong>. The objective is therefore <strong>not to eliminate drift</strong>, but to keep it within an acceptable operating range.</p>
+<p>To achieve this, the Sell Engine uses the <strong>Reverse Water-Filling</strong> algorithm to gradually harvest gains from overweight assets while allowing long-term winners to continue compounding.</p>
+<p>Unlike the Buy Engine, the Sell Engine is <strong>event-driven</strong> and activates only when aggregate portfolio drift exceeds a configurable threshold.</p>
+<p>The Buy Engine and Sell Engine have complementary objectives:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Engine</th>
+          <th>Objective</th>
+          <th>Typical Operation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Buy Engine</strong></td>
+          <td>Continuously steer portfolio drift toward <strong>0%</strong> using fresh capital.</td>
+          <td>Executes every review cycle whenever deployable capital is available.</td>
+      </tr>
+      <tr>
+          <td><strong>Sell Engine</strong></td>
+          <td>Gradually steer aggregate positive drift from <strong>N%</strong> toward <strong>N/2%</strong>.</td>
+          <td>Executes only when aggregate drift exceeds the configured threshold.</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="design-principles">Design Principles</h4>
+<p>The Sell Engine follows four principles:</p>
 <ol>
-<li><strong>Fresh inflows do most of the rebalancing:</strong> Directing new money to underweights reduces turnover and taxes.</li>
-<li><strong>Winners are not constantly cut:</strong> Assets drift within a tolerance band; sales only trigger at portfolio-level extremes.</li>
-<li><strong>Liquidity is protected first:</strong> Emergency and Retirement buckets must be funded before any drift optimization occurs.</li>
-<li><strong>Sells are portfolio-level:</strong> Reverse water-filling distributes the sell burden mathematically across all overweight assets.</li>
-<li><strong>Retirement bucket is a liquidity sink:</strong> It absorbs harvested gains and funds withdrawals, fully decoupled from drift logic.</li>
-</ol>
-<h2 id="4-system-states--portfolio-structure">4. System States &amp; Portfolio Structure</h2>
-<h3 id="states">States</h3>
+<li>
+<p><strong>Activate only when necessary.</strong></p>
 <ul>
-<li><strong>Accumulation Mode:</strong> Wealth-building phase. Fresh inflows continue; Emergency Bucket prioritised.</li>
-<li><strong>Retirement Mode:</strong> Withdrawal phase. Portfolio funds living expenses; Retirement Bucket prioritised.</li>
-</ul>
-<h3 id="structure">Structure</h3>
-<ul>
-<li><strong>Core Portfolio (Strategic Assets):</strong> Participates in drift measurement, buy-side water-filling, and sell-side reverse water-filling. (e.g., Equities, Debt, Gold).</li>
-<li><strong>Liquidity Buckets (Emergency / Retirement):</strong> Special-purpose cash reserves. Excluded from ordinary drift optimization.</li>
-</ul>
-<h2 id="5-liquidity-bucket-design">5. Liquidity Bucket Design</h2>
-<h3 id="emergency-bucket-accumulation">Emergency Bucket (Accumulation)</h3>
-<ul>
-<li><strong>Purpose:</strong> Short-term resilience against income loss or shocks.</li>
-<li><strong>Refill Rule:</strong> If below target, it claims all fresh inflows and harvested sell proceeds before the core portfolio.</li>
-</ul>
-<h3 id="retirement-bucket-retirement">Retirement Bucket (Retirement)</h3>
-<ul>
-<li><strong>Target Size:</strong> 3 years of expenses (E₁ + E₂ + E₃).</li>
-<li><strong>Assets:</strong> Indian Arbitrage Funds (immediate local liquidity) and USD Treasuries (0–3 year defensive reserve).</li>
-<li><strong>Refill Rule:</strong> If below target, it claims all eligible capital first.</li>
-</ul>
-<h2 id="6-mathematical-definitions">6. Mathematical Definitions</h2>
-<p>For $n$ core assets:</p>
-<ul>
-<li>$w_i$ = target weight</li>
-<li>$p_i$ = current weight</li>
-<li>$d_i = p_i - w_i$ (Drift)</li>
-<li>$d_i^+ = \max(d_i, 0)$ (Positive drift)</li>
-<li>$D^+ = \sum d_i^+$ (Total System-Wide Positive Drift)</li>
-</ul>
-<h2 id="7-buy-engine-forward-water-filling">7. Buy Engine: Forward Water-Filling</h2>
-<p>Allocates deployable capital ($C$) to underweight assets ($d_i &lt; 0$) to minimize post-allocation drift imbalance:</p>
-<ul>
-<li><strong>Objective:</strong> $\min \sum (d_i^{post})^2$</li>
-<li><strong>Rule:</strong> Deepest deficits receive capital first. Stops when an asset reaches target. Overweights never receive capital.</li>
-</ul>
-<h2 id="8-sell-engine-reverse-water-filling">8. Sell Engine: Reverse Water-Filling</h2>
-<p>Activated when aggregate positive drift becomes excessive.</p>
-<ul>
-<li><strong>Sell Trigger:</strong> $D^+ &gt; 10%$</li>
-<li><strong>Trailing Ceiling Progression:</strong> Steps down over successive reviews: 10% → 9% → 8% → 7% → 6% → 5%.</li>
-<li><strong>Eligibility:</strong> Only assets with LTCG-eligible lots are sold.</li>
-<li><strong>Objective:</strong> At active ceiling $c$, minimizes squared excess drifts: $\min \sum (\max(d_i^{post} - c, 0))^2$.</li>
-<li><strong>Execution:</strong> Sells the most overweight assets down to the active ceiling.</li>
-</ul>
-<h2 id="9-tax-rules--capital-priority">9. Tax Rules &amp; Capital Priority</h2>
-<ul>
-<li><strong>Net Capital:</strong> Taxes are computed and reserved immediately on sold lots. Only post-tax net proceeds are redeployed.</li>
-<li><strong>Capital Routing Cascade:</strong>
-<ul>
-<li><strong>Accumulation:</strong> Emergency Bucket → Core Underweights</li>
-<li><strong>Retirement:</strong> Retirement Bucket → Core Underweights</li>
+<li>Ignore normal portfolio drift.</li>
+<li>Begin active selling only when aggregate positive drift exceeds <strong>N%</strong>.</li>
 </ul>
 </li>
-</ul>
-<h2 id="10-monthly-execution-engine">10. Monthly Execution Engine</h2>
-<ol>
-<li><strong>Update State:</strong> Refresh asset values and determine active state (Accumulation vs Retirement).</li>
-<li><strong>Determine Liquidity Obligation:</strong> Calculate active bucket deficit.</li>
-<li><strong>Collect Inflows:</strong> Aggregate SIP, dividends, and idle cash.</li>
-<li><strong>Route Inflows:</strong> Fill active bucket deficit first.</li>
-<li><strong>Forward Water-Filling:</strong> Allocate any residual inflows to core underweights.</li>
-<li><strong>Compute Drift:</strong> Calculate total positive drift ($D^+$).</li>
-<li><strong>Evaluate Sell Trigger:</strong> If $D^+ &gt; 10%$, activate sell program.</li>
-<li><strong>Reverse Water-Filling:</strong> Trim LTCG overweights down to the active ceiling.</li>
-<li><strong>Reserve Taxes:</strong> Deduct tax liability to find net harvested capital.</li>
-<li><strong>Route Harvested Capital:</strong> Fill active bucket deficit first, then allocate remainder via forward water-filling.</li>
-<li><strong>Update State Machine:</strong> Step down sell ceiling for the next review cycle.</li>
-</ol>
-<h2 id="11-canonical-rule-set">11. Canonical Rule Set</h2>
+<li>
+<p><strong>Reduce drift gradually.</strong></p>
 <ul>
-<li><strong>State:</strong> Accumulation Mode or Retirement Mode.</li>
-<li><strong>Liquidity Bucket:</strong> Emergency (Accumulation) / Retirement (Retirement).</li>
-<li><strong>Liquidity Priority:</strong> Active bucket is always filled first.</li>
-<li><strong>Retirement Specs:</strong> 3 years of expenses in INR Arbitrage + short USD Treasuries.</li>
-<li><strong>Buy Rule:</strong> Forward water-filling into underweights only.</li>
-<li><strong>Sell Trigger:</strong> Total positive drift across core assets &gt; 10%.</li>
-<li><strong>Sell Execution:</strong> Reverse water-filling across LTCG-eligible lots with trailing ceilings (10→5).</li>
-<li><strong>Tax Handling:</strong> Reserve taxes before capital reuse.</li>
+<li>Spread selling over <strong>M review periods</strong> rather than performing a single rebalance.</li>
 </ul>
-<h2 id="12-final-interpretation">12. Final Interpretation</h2>
-<p>Perpetual Rebalancing is a portfolio operating system consisting of four layers: a strategic multi-asset portfolio, a drift-aware buy engine, a drift-aware sell engine, and a lifecycle liquidity layer. It unifies rebalancing, tax-aware selling, emergency liquidity, and retirement withdrawals into a single coherent system.</p>
+</li>
+<li>
+<p><strong>Maintain a drift band.</strong></p>
+<ul>
+<li>Reduce portfolio drift from <strong>N%</strong> to <strong>N/2%</strong>.</li>
+<li>Do not force the portfolio back to its target allocation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Preserve momentum.</strong></p>
+<ul>
+<li>Allow winning assets to remain overweight as long as overall portfolio risk stays within the configured drift band.</li>
+</ul>
+</li>
+</ol>
+<h4 id="policy-configuration">Policy Configuration</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Configuration</th>
+          <th style="text-align: center">Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Maximum Portfolio Drift (N)</strong></td>
+          <td style="text-align: center"><strong>10%</strong></td>
+          <td>Aggregate positive drift that activates the Sell Engine.</td>
+      </tr>
+      <tr>
+          <td><strong>Minimum Portfolio Drift (N/2)</strong></td>
+          <td style="text-align: center"><strong>5%</strong></td>
+          <td>Aggregate positive drift at which active selling stops.</td>
+      </tr>
+      <tr>
+          <td><strong>Sell Duration (M)</strong></td>
+          <td style="text-align: center"><strong>6 Months</strong></td>
+          <td>Number of review periods over which drift is gradually reduced.</td>
+      </tr>
+      <tr>
+          <td><strong>Sell LTCG Lots Only</strong></td>
+          <td style="text-align: center"><strong>Enabled</strong></td>
+          <td>Restrict selling to Long-Term Capital Gain (LTCG) eligible lots to maximize tax efficiency.</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="example">Example</h4>
+<p>Example configuration:</p>
+<ul>
+<li><strong>Maximum Drift:</strong> 10%</li>
+<li><strong>Minimum Drift:</strong> 5%</li>
+<li><strong>Sell Duration:</strong> 6 monthly reviews</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Review</th>
+          <th style="text-align: right">Active Drift Ceiling</th>
+          <th>Action</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Before Trigger</td>
+          <td style="text-align: right">≤10%</td>
+          <td>No selling</td>
+      </tr>
+      <tr>
+          <td>Trigger</td>
+          <td style="text-align: right">&gt;10%</td>
+          <td>Sell program begins</td>
+      </tr>
+      <tr>
+          <td>Month 1</td>
+          <td style="text-align: right">10%</td>
+          <td>Sell only if drift exceeds ceiling</td>
+      </tr>
+      <tr>
+          <td>Month 2</td>
+          <td style="text-align: right">9%</td>
+          <td>Continue if required</td>
+      </tr>
+      <tr>
+          <td>Month 3</td>
+          <td style="text-align: right">8%</td>
+          <td>Continue if required</td>
+      </tr>
+      <tr>
+          <td>Month 4</td>
+          <td style="text-align: right">7%</td>
+          <td>Continue if required</td>
+      </tr>
+      <tr>
+          <td>Month 5</td>
+          <td style="text-align: right">6%</td>
+          <td>Continue if required</td>
+      </tr>
+      <tr>
+          <td>Month 6</td>
+          <td style="text-align: right">5%</td>
+          <td>Stop selling</td>
+      </tr>
+  </tbody>
+</table>
+<p>At each monthly review, selling occurs only if the current portfolio drift exceeds the active ceiling. If market movements or the Buy Engine have already reduced drift below the ceiling, no selling occurs during that review.</p>
+<h4 id="execution-model">Execution Model</h4>
+<p>The Buy Engine always executes before the Sell Engine.</p>
+<ol>
+<li>Collect all available capital.</li>
+<li>Apply priority routing (Taxes → Liquidity Reserve → Buy Engine).</li>
+<li>Execute the Buy Engine.</li>
+<li>Compute the updated portfolio drift.</li>
+<li>Execute the Sell Engine only if the active drift ceiling is exceeded.</li>
+</ol>
+<p>This ordering ensures that fresh capital performs as much rebalancing as possible before any assets are sold.</p>
+<p>When selling:</p>
+<ul>
+<li>Only <strong>LTCG-eligible lots</strong> are considered (based on policy configuration).</li>
+<li>Taxes are estimated and reserved immediately.</li>
+<li>Only <strong>net sale proceeds</strong> are available for reinvestment.</li>
+</ul>
+<p>The Buy Engine then combines:</p>
+<ul>
+<li>Monthly inflows,</li>
+<li>Net sale proceeds, and</li>
+<li>Existing deployable cash,</li>
+</ul>
+<p>into a <strong>single Forward Water-Filling allocation</strong>.</p>
+<p>This minimizes unnecessary buy-sell cycles, reduces transaction costs, and keeps portfolio turnover low.</p>
+<h4 id="traditional-vs-perpetual-rebalancing">Traditional vs Perpetual Rebalancing</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Traditional Rebalancing</th>
+          <th>Perpetual Rebalancing</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Reacts to every rebalance event</td>
+          <td>Activates only when drift becomes excessive</td>
+      </tr>
+      <tr>
+          <td>Resets portfolio back to target</td>
+          <td>Maintains an acceptable drift band</td>
+      </tr>
+      <tr>
+          <td>Frequently interrupts winners</td>
+          <td>Preserves long-term momentum</td>
+      </tr>
+      <tr>
+          <td>Large taxable rebalances</td>
+          <td>Small, gradual tax-aware realizations</td>
+      </tr>
+      <tr>
+          <td>Independent buy and sell transactions</td>
+          <td>Integrated Buy and Sell Engine</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p><strong>The Sell Engine manages drift rather than eliminating it. By allowing winners to remain overweight and reducing drift only when necessary, the framework captures long-term momentum while keeping portfolio risk within a configurable operating band.</strong></p>
+</blockquote>
+<h2 id="4-summary">4. Summary</h2>
+<p><strong>Perpetual Rebalancing is a portfolio operating system consisting of four layers: a strategic global multi-asset portfolio, a drift-aware buy engine, a drift-aware sell engine, and a lifecycle liquidity layer. It unifies rebalancing, tax-aware selling, emergency liquidity, and retirement withdrawals into a single coherent system.</strong></p>
+<h2 id="5-future-work">5. Future Work</h2>
+<p>The Perpetual Rebalancing Framework introduces several configurable policy parameters, including:</p>
+<ul>
+<li>Strategic asset allocation</li>
+<li>Maximum portfolio drift (N)</li>
+<li>Minimum portfolio drift (N/2)</li>
+<li>Sell duration (M)</li>
+<li>Liquidity reserve targets</li>
+<li>Tax policies</li>
+</ul>
+<p>The interaction between these parameters influences portfolio turnover, realized taxes, tracking error, and long-term returns.</p>
+<p>A comprehensive historical backtest is therefore required to evaluate:</p>
+<ul>
+<li>Long-term CAGR</li>
+<li>Portfolio volatility</li>
+<li>Maximum drawdown</li>
+<li>Portfolio turnover</li>
+<li>Realized tax liability</li>
+<li>Tracking error</li>
+<li>Liquidity utilization</li>
+<li>Sequence-of-returns resilience during retirement</li>
+</ul>
+<p>The objective of the backtest is <strong>not to optimize for the highest returns</strong>, but to understand the trade-offs between tax efficiency, risk control, turnover, and portfolio stability under different market conditions.</p>
 
     </div>
 
@@ -972,6 +1167,83 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
         
         
         
+        <script type="module">
+            import { D2 } from 'https://esm.sh/@terrastruct/d2';
+            
+            document.addEventListener('DOMContentLoaded', async function() {
+                const d2Elements = document.querySelectorAll('pre code.language-d2, pre code.d2');
+                if (d2Elements.length === 0) return;
+                
+                console.log('[DEBUG] Initializing D2');
+                try {
+                    const d2 = new D2();
+                    
+                    
+                    const diagramTasks = Array.from(d2Elements).map(codeEl => {
+                        const preEl = codeEl.parentNode;
+                        let d2Code = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                        
+                        
+                        const container = document.createElement('div');
+                        container.className = 'd2-diagram d2-loading';
+                        container.style.padding = '2rem';
+                        container.style.textAlign = 'center';
+                        container.style.fontFamily = 'monospace';
+                        container.style.color = '#888';
+                        container.style.background = '#f9f9f9';
+                        container.style.border = '1px dashed #ccc';
+                        container.style.borderRadius = '4px';
+                        container.innerHTML = '<span class="spinner">⚙️</span> Rendering diagram...';
+                        
+                        
+                        preEl.parentNode.replaceChild(container, preEl);
+                        
+                        
+                        if (!d2Code.includes('d2-config')) {
+                            const configBlock = `vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 105
+  }
+}\n`;
+                            d2Code = configBlock + d2Code;
+                        }
+                        
+                        return { d2Code, container };
+                    });
+
+                    
+                    for (const task of diagramTasks) {
+                        try {
+                            console.log('[DEBUG] Rendering D2 block');
+                            const result = await d2.compile(task.d2Code);
+                            const svg = await d2.render(result.diagram, result.renderOptions || {});
+                            
+                            
+                            task.container.className = 'd2-diagram';
+                            task.container.removeAttribute('style'); 
+                            task.container.innerHTML = svg;
+                            
+                            const svgEl = task.container.querySelector('svg');
+                            if (svgEl) {
+                                svgEl.removeAttribute('width');
+                                svgEl.removeAttribute('height');
+                                svgEl.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                                svgEl.style.width = '100%';
+                                svgEl.style.height = 'auto';
+                            }
+                            
+                            console.log('[DEBUG] D2 Diagram rendered');
+                        } catch (err) {
+                            console.error('[DEBUG] D2 compile/render error:', err);
+                            task.container.innerHTML = `<div style="color:red; padding:1rem;">Error rendering D2 diagram: ${err.message || err}</div>`;
+                        }
+                    }
+                } catch (initErr) {
+                    console.error('[DEBUG] D2 initialization error:', initErr);
+                }
+            });
+        </script>
         
     <script>
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {

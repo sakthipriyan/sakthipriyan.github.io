@@ -11,7 +11,7 @@ wealth_tags:
 summary: "A unified framework that handles buying, selling, liquidity management, and withdrawals under one coherent rule set for both Accumulation and Retirement Phases."
 js_tools:
   - echarts
-  # - d2
+  - d2
 ---
 
 ## 1. Introduction
@@ -231,15 +231,23 @@ Both approaches are essentially optimizing the Portfolio Drift after SELL/BUY ac
 
 **The Buy Engine is responsible for deploying available capital into the Core Portfolio.**
 
-Traditional approaches often rely on **calendar-based rebalancing** or **threshold-based rebalancing** , both of which typically require selling winners and can increase portfolio turnover and tax realization. **The Perpetual Rebalancing Framework** instead uses **cash-flow-based rebalancing** as its **primary mechanism**. 
+Traditional approaches often rely on **calendar-based rebalancing** or **threshold-based rebalancing** , both of which typically require selling winners and can increase portfolio turnover and tax realization. 
 
-By directing fresh capital to underweight assets, the framework continuously reduces portfolio drift while minimizing unnecessary sales, portfolio turnover, and taxes. Active selling is reserved only for situations where overall portfolio drift exceeds predefined thresholds which is taken care by the **Sell Engine**.
+**The Perpetual Rebalancing Framework** instead uses cash-flow-based rebalancing as its primary mechanism. Rather than selling winners, fresh capital is directed toward underweight assets using the Forward Water-Filling algorithm.
 
-It implements the **Forward Water-Filling** algorithm, which allocates capital only to underweight asset classes. I will explain this using following Example Portfolio data and visuals.
+The Buy Engine has four objectives:
+- Reduce portfolio drift using fresh capital
+- Minimize portfolio turnover
+- Avoid unnecessary selling
+- Preserve tax efficiency by making cash inflows the primary rebalancing mechanism
 
-### Example Portfolio: Buy Engine Deployment Summary
+The **Buy Engine** operates only after all liquidity obligations have been satisfied. Active selling is reserved for the **Sell Engine**, which activates only when the aggregate portfolio drift exceeds predefined thresholds.
 
-The following table summarizes the impact of the Buy Engine deployment for the above  Example Portfolio. Here, we are investing **2.11%** of current portfolio value as part of monthly investment cycle. It has reduced the Portfolio Drift from **2.13%** to **1.58%** and correcting **0.55%** of the total drift. Essentially 25% improvement of the Portfolio Drift.
+#### Example Portfolio
+
+The following example illustrates how the Buy Engine deploys fresh capital into an existing portfolio.
+
+During this monthly investment cycle, **2.11%** of the portfolio value is added as fresh capital. The **Buy Engine** allocates this capital using **Forward Water-Filling**.
 
 | Asset Class | Target | Pre-Allocation (%) | Pre-Drift | Allocation | Post-Allocation (%) | Post-Drift |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -252,13 +260,13 @@ The following table summarizes the impact of the Buy Engine deployment for the a
 | **Gold** | 10.00% | 10.78% | +0.78% | 0.00% | 10.55% | +0.55% |
 | **Total** | **100%** | **100%** | **2.13%** | **100%** | **100%** | **1.58%** |
 
-Same data represented as Stacked Bar Chart.
+The Buy Engine reduces the aggregate portfolio drift from **2.13%** to **1.58%**, correcting **0.55%** of total drift. In other words, a monthly contribution equal to **2.11%** of the portfolio improves the overall drift by approximately **25%**, without selling a single asset.
 
 <div id="water-filling-chart" class="echarts-container" style="height: 700px;" data-chart='{
     "title": { "text": "Drift Correction Impact", "left": "center" },
     "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
     "legend": { 
-        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening"],
+        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening", "New Water Level"],
         "bottom": 0 
     },
     "grid": { "left": "3%", "right": "4%", "bottom": "15%", "containLabel": true },
@@ -280,6 +288,22 @@ Same data represented as Stacked Bar Chart.
         { "name": "Improvement", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e" } },
         { "name": "Improvement (Evaporated)", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
         { "name": "Worsening", "type": "bar", "data": [], "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+        {
+            "name": "New Water Level",
+            "type": "line",
+            "data": [],
+            "itemStyle": { "color": "#1e40af" },
+            "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
+            "markLine": {
+                "symbol": "none",
+                "silent": true,
+                "label": { "show": false },
+                "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
+                "data": [
+                    { "yAxis": -0.39 }
+                ]
+            }
+        },
         {
             "name": "Empty",
             "type": "bar",
@@ -381,148 +405,204 @@ Same data represented as Stacked Bar Chart.
     ]
 }'></div>
 
+#### Observations
 
-* **Capital Deployment:** In this round, The Buy Engine focused exclusively on underweight assets (Nasdaq 100, Next 50, and Midcap 150) to minimize drift while avoiding additional exposure to already overweight positions.
-* **Passive Normalization:** Overweight assets—specifically **Nifty 50, Debt, and Gold**—were not allocated new capital. Their post-allocation percentages decreased slightly due to the increased total portfolio base, illustrating the natural normalization process inherent in the framework.
-* **System State:** The portfolio remains in a "drift-aware" state, with Nasdaq 100 showing the most significant improvement, closing the gap from **-1.25%** to **-0.39%**.
+* **Largest deficits receive the highest allocation.** Nasdaq 100 receives most of the fresh capital because it has the largest negative drift.
+* **Only underweight assets receive capital.** Next 50 and Midcap 150 also receive allocations, while overweight assets receive none.
+* **Overweights naturally normalize.** Nifty 50, Debt, and Gold become slightly closer to their target allocations simply because the total portfolio value increases.
+* **No selling is required.** Since the aggregate positive drift (**2.13%**) is well below the Sell Engine threshold (**10%** by default), no assets are sold.
+* **Allocation decisions ignore recent performance.** Although Gold has generated substantially higher returns than Debt, neither receives additional capital because both are already overweight. The framework responds only to portfolio drift, not recent performance.
 
-This example demonstrates an important property of the framework:
+> **The Buy Engine is allocation-driven, not performance-driven.** Its sole objective is to move the portfolio closer to its strategic allocation using fresh capital while avoiding unnecessary turnover and taxes.
 
-> **Even though Gold has returned significantly more than Debt (≈91% vs ≈19% cumulative gain), it receives no special treatment. Decisions are driven solely by portfolio drift relative to the strategic allocation—not by recent returns or performance.**
+#### Contrarian by Construction
 
-I think this last observation is one of the strongest teaching moments in your framework. It reinforces that the operating system is **allocation-driven**, not **performance-chasing**, which is a key distinction.
+The Buy Engine naturally follows a **value-oriented, contrarian investment philosophy**.
+
+As asset prices diverge over time, the portfolio drifts away from its strategic allocation. Assets that have **underperformed** become underweight, while assets that have **outperformed** become overweight.
+
+Rather than chasing recent winners, the Buy Engine systematically directs fresh capital toward the underweight assets. This results in:
+
+* **Buying relatively cheaper assets** that have fallen below their target allocation.
+* **Avoiding additional purchases** of assets that have recently outperformed.
+* **Selling nothing** unless overall portfolio drift becomes excessive.
+
+In effect, the framework follows the classic investment principle of:
+
+> **Buy relatively low, avoid buying relatively high.**
+
+Unlike traditional value investing, this approach does **not** rely on estimating intrinsic value, valuation multiples, or future returns. The investor's chosen **strategic asset allocation** acts as the reference point, and portfolio drift serves as the signal for where new capital should be deployed.
+
+This makes the framework **systematically contrarian**—it continuously buys relative underperformers and naturally resists performance chasing, all without requiring market forecasts or subjective judgment.
+
+#### Target-Weighted Capital Allocation
+
+Forward Water-Filling optimizes for **portfolio-level drift reduction**, not equal treatment across asset classes.
+
+As a result, larger strategic allocations naturally receive more capital than smaller satellite allocations because they contribute more to the portfolio's overall tracking error.
+
+For example, in the illustrative portfolio:
+
+| Asset          | Target Allocation | Pre-Drift | Post-Drift | Relative Tracking Error |
+| -------------- | ----------------: | --------: | ---------: | ----------------------: |
+| **Nasdaq 100** |               40% |    -1.25% | **-0.39%** |   **0.39 / 40 = 0.98%** |
+| **Next 50**    |               10% |    -0.36% | **-0.39%** |   **0.39 / 10 = 3.90%** |
+
+Although both assets end up with a similar **absolute drift** of **-0.39%**, the impact is very different:
+
+* For **Nasdaq 100**, a **0.39%** drift represents only **0.98%** of its target allocation.
+* For **Next 50**, the same **0.39%** drift represents **3.90%** of its target allocation.
+
+Consequently, the Buy Engine allocates significantly more capital to **Nasdaq 100** than to **Next 50**. The objective is not to make every asset equally close to its target, but to produce the **largest reduction in overall portfolio drift for each unit of fresh capital invested**.
+
+This produces two desirable properties:
+
+* **Core allocations remain tightly aligned** with their strategic targets, resulting in lower tracking error for the largest portfolio positions.
+* **Satellite allocations are allowed to drift more naturally**, avoiding the need to continuously inject small amounts of capital into relatively minor positions.
+
+> **Forward Water-Filling minimizes portfolio-level tracking error, not per-asset drift.**
+
+#### Policy Configurations
+Zero Policy Configurations for the Buy Engine. Just Execute the mathematical logic.
 
 
-Since the aggregate positive drift is **well below** the Sell Engine activation threshold (10% by default), **no assets are sold**.
 
-Instead, the **Buy Engine** deploys future contributions using Forward Water-Filling:
-
-1. Nasdaq 100
-2. Midcap 150
-3. Next 50
-4. Smallcap 250
-
-Debt, Gold, and Nifty 50 receive no additional allocation until their positive drift has been offset by future investments.
-
-
-
-Its objectives are to:
-
-* passively reduce portfolio drift,
-* minimize portfolio turnover,
-* avoid unnecessary selling, and
-* preserve tax efficiency by using fresh inflows as the primary rebalancing mechanism.
-
-The Buy Engine operates only after all liquidity obligations have been satisfied.
-
-### 5. Sell Engine
-
-The Sell Engine actively controls portfolio drift when passive rebalancing is no longer sufficient.
-
-It implements the **Reverse Water-Filling** algorithm, which gradually harvests gains from overweight asset classes whenever aggregate portfolio drift exceeds the configured threshold.
-
-The Sell Engine follows three constraints:
-
-* sell only LTCG-eligible lots,
-* reserve taxes before redeploying proceeds, and
-* distribute sales across overweight assets to restore the portfolio toward its strategic allocation.
-
-Unlike the Buy Engine, the Sell Engine is event-driven and activates only when the portfolio requires active drift correction.
 
 ---
 
-
-## 3. System Components
-### 1. Income
-
-### 2. Liquidity Buckets
-
-### 3. Core Portfolio
-
-### 4. Buy Engine
-
 ### 5. Sell Engine
 
+The **Sell Engine** actively controls portfolio drift when cash-flow-based rebalancing through the Buy Engine is no longer sufficient.
 
+Traditional rebalancing approaches, such as **calendar-based** or **threshold-based** rebalancing, typically sell overweight assets and immediately buy underweight assets in a single rebalance. While simple, this approach interrupts long-term winners, increases portfolio turnover, and often realizes unnecessary taxable gains.
 
-## 3. Core Design Principles
-1. **Fresh inflows do most of the rebalancing:** Directing new money to underweights reduces turnover and taxes.
-2. **Winners are not constantly cut:** Assets drift within a tolerance band; sales only trigger at portfolio-level extremes.
-3. **Liquidity is protected first:** Emergency and Retirement buckets must be funded before any drift optimization occurs.
-4. **Sells are portfolio-level:** Reverse water-filling distributes the sell burden mathematically across all overweight assets.
-5. **Retirement bucket is a liquidity sink:** It absorbs harvested gains and funds withdrawals, fully decoupled from drift logic.
+The Perpetual Rebalancing Framework takes a different approach.
 
-## 4. System States & Portfolio Structure
+Instead of treating **portfolio drift as a problem to eliminate**, it treats drift as evidence of **positive price momentum**. The objective is therefore **not to eliminate drift**, but to keep it within an acceptable operating range.
 
-### States
-* **Accumulation Mode:** Wealth-building phase. Fresh inflows continue; Emergency Bucket prioritised.
-* **Retirement Mode:** Withdrawal phase. Portfolio funds living expenses; Retirement Bucket prioritised.
+To achieve this, the Sell Engine uses the **Reverse Water-Filling** algorithm to gradually harvest gains from overweight assets while allowing long-term winners to continue compounding.
 
-### Structure
-* **Core Portfolio (Strategic Assets):** Participates in drift measurement, buy-side water-filling, and sell-side reverse water-filling. (e.g., Equities, Debt, Gold).
-* **Liquidity Buckets (Emergency / Retirement):** Special-purpose cash reserves. Excluded from ordinary drift optimization.
+Unlike the Buy Engine, the Sell Engine is **event-driven** and activates only when aggregate portfolio drift exceeds a configurable threshold.
 
-## 5. Liquidity Bucket Design
+The Buy Engine and Sell Engine have complementary objectives:
 
-### Emergency Bucket (Accumulation)
-* **Purpose:** Short-term resilience against income loss or shocks.
-* **Refill Rule:** If below target, it claims all fresh inflows and harvested sell proceeds before the core portfolio.
+| Engine | Objective | Typical Operation |
+|--------|-----------|-------------------|
+| **Buy Engine** | Continuously steer portfolio drift toward **0%** using fresh capital. | Executes every review cycle whenever deployable capital is available. |
+| **Sell Engine** | Gradually steer aggregate positive drift from **N%** toward **N/2%**. | Executes only when aggregate drift exceeds the configured threshold. |
 
-### Retirement Bucket (Retirement)
-* **Target Size:** 3 years of expenses (E₁ + E₂ + E₃).
-* **Assets:** Indian Arbitrage Funds (immediate local liquidity) and USD Treasuries (0–3 year defensive reserve).
-* **Refill Rule:** If below target, it claims all eligible capital first.
+#### Design Principles
 
-## 6. Mathematical Definitions
-For $n$ core assets:
-* $w_i$ = target weight
-* $p_i$ = current weight
-* $d_i = p_i - w_i$ (Drift)
-* $d_i^+ = \max(d_i, 0)$ (Positive drift)
-* $D^+ = \sum d_i^+$ (Total System-Wide Positive Drift)
+The Sell Engine follows four principles:
 
-## 7. Buy Engine: Forward Water-Filling
-Allocates deployable capital ($C$) to underweight assets ($d_i < 0$) to minimize post-allocation drift imbalance:
-* **Objective:** $\min \sum (d_i^{post})^2$
-* **Rule:** Deepest deficits receive capital first. Stops when an asset reaches target. Overweights never receive capital.
+1. **Activate only when necessary.**
+   - Ignore normal portfolio drift.
+   - Begin active selling only when aggregate positive drift exceeds **N%**.
 
-## 8. Sell Engine: Reverse Water-Filling
-Activated when aggregate positive drift becomes excessive.
+2. **Reduce drift gradually.**
+   - Spread selling over **M review periods** rather than performing a single rebalance.
 
-* **Sell Trigger:** $D^+ > 10\%$
-* **Trailing Ceiling Progression:** Steps down over successive reviews: 10% → 9% → 8% → 7% → 6% → 5%.
-* **Eligibility:** Only assets with LTCG-eligible lots are sold.
-* **Objective:** At active ceiling $c$, minimizes squared excess drifts: $\min \sum (\max(d_i^{post} - c, 0))^2$.
-* **Execution:** Sells the most overweight assets down to the active ceiling.
+3. **Maintain a drift band.**
+   - Reduce portfolio drift from **N%** to **N/2%**.
+   - Do not force the portfolio back to its target allocation.
 
-## 9. Tax Rules & Capital Priority
-* **Net Capital:** Taxes are computed and reserved immediately on sold lots. Only post-tax net proceeds are redeployed.
-* **Capital Routing Cascade:**
-  * **Accumulation:** Emergency Bucket → Core Underweights
-  * **Retirement:** Retirement Bucket → Core Underweights
+4. **Preserve momentum.**
+   - Allow winning assets to remain overweight as long as overall portfolio risk stays within the configured drift band.
 
-## 10. Monthly Execution Engine
-1. **Update State:** Refresh asset values and determine active state (Accumulation vs Retirement).
-2. **Determine Liquidity Obligation:** Calculate active bucket deficit.
-3. **Collect Inflows:** Aggregate SIP, dividends, and idle cash.
-4. **Route Inflows:** Fill active bucket deficit first.
-5. **Forward Water-Filling:** Allocate any residual inflows to core underweights.
-6. **Compute Drift:** Calculate total positive drift ($D^+$).
-7. **Evaluate Sell Trigger:** If $D^+ > 10\%$, activate sell program.
-8. **Reverse Water-Filling:** Trim LTCG overweights down to the active ceiling.
-9. **Reserve Taxes:** Deduct tax liability to find net harvested capital.
-10. **Route Harvested Capital:** Fill active bucket deficit first, then allocate remainder via forward water-filling.
-11. **Update State Machine:** Step down sell ceiling for the next review cycle.
+#### Policy Configuration
+| Configuration | Default | Description |
+|--------------|:-------:|-------------|
+| **Maximum Portfolio Drift (N)** | **10%** | Aggregate positive drift that activates the Sell Engine. |
+| **Minimum Portfolio Drift (N/2)** | **5%** | Aggregate positive drift at which active selling stops. |
+| **Sell Duration (M)** | **6 Months** | Number of review periods over which drift is gradually reduced. |
+| **Sell LTCG Lots Only** | **Enabled** | Restrict selling to Long-Term Capital Gain (LTCG) eligible lots to maximize tax efficiency. |
 
-## 11. Canonical Rule Set
-* **State:** Accumulation Mode or Retirement Mode.
-* **Liquidity Bucket:** Emergency (Accumulation) / Retirement (Retirement).
-* **Liquidity Priority:** Active bucket is always filled first.
-* **Retirement Specs:** 3 years of expenses in INR Arbitrage + short USD Treasuries.
-* **Buy Rule:** Forward water-filling into underweights only.
-* **Sell Trigger:** Total positive drift across core assets > 10%.
-* **Sell Execution:** Reverse water-filling across LTCG-eligible lots with trailing ceilings (10→5).
-* **Tax Handling:** Reserve taxes before capital reuse.
+#### Example
 
-## 12. Final Interpretation
-Perpetual Rebalancing is a portfolio operating system consisting of four layers: a strategic multi-asset portfolio, a drift-aware buy engine, a drift-aware sell engine, and a lifecycle liquidity layer. It unifies rebalancing, tax-aware selling, emergency liquidity, and retirement withdrawals into a single coherent system.
+Example configuration:
+
+- **Maximum Drift:** 10%
+- **Minimum Drift:** 5%
+- **Sell Duration:** 6 monthly reviews
+
+| Review | Active Drift Ceiling | Action |
+|---------|---------------------:|--------|
+| Before Trigger | ≤10% | No selling |
+| Trigger | >10% | Sell program begins |
+| Month 1 | 10% | Sell only if drift exceeds ceiling |
+| Month 2 | 9% | Continue if required |
+| Month 3 | 8% | Continue if required |
+| Month 4 | 7% | Continue if required |
+| Month 5 | 6% | Continue if required |
+| Month 6 | 5% | Stop selling |
+
+At each monthly review, selling occurs only if the current portfolio drift exceeds the active ceiling. If market movements or the Buy Engine have already reduced drift below the ceiling, no selling occurs during that review.
+
+#### Execution Model
+
+The Buy Engine always executes before the Sell Engine.
+
+1. Collect all available capital.
+2. Apply priority routing (Taxes → Liquidity Reserve → Buy Engine).
+3. Execute the Buy Engine.
+4. Compute the updated portfolio drift.
+5. Execute the Sell Engine only if the active drift ceiling is exceeded.
+
+This ordering ensures that fresh capital performs as much rebalancing as possible before any assets are sold.
+
+When selling:
+
+- Only **LTCG-eligible lots** are considered (based on policy configuration).
+- Taxes are estimated and reserved immediately.
+- Only **net sale proceeds** are available for reinvestment.
+
+The Buy Engine then combines:
+
+- Monthly inflows,
+- Net sale proceeds, and
+- Existing deployable cash,
+
+into a **single Forward Water-Filling allocation**.
+
+This minimizes unnecessary buy-sell cycles, reduces transaction costs, and keeps portfolio turnover low.
+
+#### Traditional vs Perpetual Rebalancing
+
+| Traditional Rebalancing | Perpetual Rebalancing |
+|-------------------------|-----------------------|
+| Reacts to every rebalance event | Activates only when drift becomes excessive |
+| Resets portfolio back to target | Maintains an acceptable drift band |
+| Frequently interrupts winners | Preserves long-term momentum |
+| Large taxable rebalances | Small, gradual tax-aware realizations |
+| Independent buy and sell transactions | Integrated Buy and Sell Engine |
+
+> **The Sell Engine manages drift rather than eliminating it. By allowing winners to remain overweight and reducing drift only when necessary, the framework captures long-term momentum while keeping portfolio risk within a configurable operating band.**
+
+## 4. Summary
+**Perpetual Rebalancing is a portfolio operating system consisting of four layers: a strategic global multi-asset portfolio, a drift-aware buy engine, a drift-aware sell engine, and a lifecycle liquidity layer. It unifies rebalancing, tax-aware selling, emergency liquidity, and retirement withdrawals into a single coherent system.**
+
+## 5. Future Work
+
+The Perpetual Rebalancing Framework introduces several configurable policy parameters, including:
+
+- Strategic asset allocation
+- Maximum portfolio drift (N)
+- Minimum portfolio drift (N/2)
+- Sell duration (M)
+- Liquidity reserve targets
+- Tax policies
+
+The interaction between these parameters influences portfolio turnover, realized taxes, tracking error, and long-term returns.
+
+A comprehensive historical backtest is therefore required to evaluate:
+
+- Long-term CAGR
+- Portfolio volatility
+- Maximum drawdown
+- Portfolio turnover
+- Realized tax liability
+- Tracking error
+- Liquidity utilization
+- Sequence-of-returns resilience during retirement
+
+The objective of the backtest is **not to optimize for the highest returns**, but to understand the trade-offs between tax efficiency, risk control, turnover, and portfolio stability under different market conditions.
