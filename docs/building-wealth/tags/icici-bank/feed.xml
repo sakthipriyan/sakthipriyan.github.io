@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ICICI Bank on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/icici-bank/</link>
+    <link>http://localhost:1313/building-wealth/tags/icici-bank/</link>
     <description>Recent content in ICICI Bank on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/icici-bank/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-wealth/tags/icici-bank/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates — A Live Transaction Walkthrough</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</link>
+      <link>http://localhost:1313/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</link>
       <pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</guid>
       <description>A step-by-step walkthrough of executing a live INR-to-USD forex transaction using FX Retail via Bharat Connect (BHIM), completing the remittance on ICICI Bank Money2World, and investing in an Irish ETF on IBKR</description>
     </item>
   </channel>

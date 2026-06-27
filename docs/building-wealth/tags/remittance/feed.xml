@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Remittance on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/remittance/</link>
+    <link>http://localhost:1313/building-wealth/tags/remittance/</link>
     <description>Recent content in Remittance on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 09 May 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/remittance/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-wealth/tags/remittance/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Transfer Money Efficiently?</title>
-      <link>https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/</link>
+      <link>http://localhost:1313/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/</link>
       <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/</guid>
+      <guid>http://localhost:1313/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/</guid>
       <description>&lt;p&gt;Before selecting a broker or investment instrument, it is important to understand how money actually moves from India to an overseas brokerage account.&lt;/p&gt;&#xA;&lt;p&gt;For Indian retail investors, the remittance process itself can materially impact long-term returns. A seemingly small FX markup of ~₹1.50 per USD compounds significantly over decades of investing.&lt;/p&gt;&#xA;&lt;p&gt;This chapter focuses on sending money abroad efficiently under the Liberalised Remittance Scheme (LRS).&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-lrs&#34;&gt;What is LRS?&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Liberalised Remittance Scheme (LRS)&lt;/strong&gt; allows Indian residents to remit up to &lt;strong&gt;$250,000 (~₹2.4 Crores @ 94.55) per financial year&lt;/strong&gt; for permitted purposes, including &lt;strong&gt;Indian investment abroad in equity capital&lt;/strong&gt; (Purpose Code: S0001)&lt;/p&gt;</description>
     </item>
     <item>
       <title>FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates — A Live Transaction Walkthrough</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</link>
+      <link>http://localhost:1313/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</link>
       <pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/</guid>
       <description>A step-by-step walkthrough of executing a live INR-to-USD forex transaction using FX Retail via Bharat Connect (BHIM), completing the remittance on ICICI Bank Money2World, and investing in an Irish ETF on IBKR</description>
     </item>
     <item>
       <title>INR to USD: FX Retail Web vs FX Retail Bharat Connect vs Direct Bank Rates</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/inr-to-usd-fx-retail-web-vs-fx-retail-bharat-connect-vs-direct-bank-rates/</link>
+      <link>http://localhost:1313/building-wealth/blogs/inr-to-usd-fx-retail-web-vs-fx-retail-bharat-connect-vs-direct-bank-rates/</link>
       <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/inr-to-usd-fx-retail-web-vs-fx-retail-bharat-connect-vs-direct-bank-rates/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/inr-to-usd-fx-retail-web-vs-fx-retail-bharat-connect-vs-direct-bank-rates/</guid>
       <description>A comparison of foreign exchange rates for converting INR to USD across different channels like direct banking, FX Retail Web, and the newly discovered FX Retail via Bharat Connect.</description>
     </item>
     <item>
       <title>Cut Bank Forex Markup on INR to USD Using FX Retail | IBKR Funding, Forex Card, LRS</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/cut-bank-forex-markup-on-inr-to-usd-using-fx-retail-ibkr-funding-forex-card-lrs/</link>
+      <link>http://localhost:1313/building-wealth/slides/cut-bank-forex-markup-on-inr-to-usd-using-fx-retail-ibkr-funding-forex-card-lrs/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/cut-bank-forex-markup-on-inr-to-usd-using-fx-retail-ibkr-funding-forex-card-lrs/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/cut-bank-forex-markup-on-inr-to-usd-using-fx-retail-ibkr-funding-forex-card-lrs/</guid>
       <description>Indian investors lose 2-3% to hidden bank forex markup on every INR to USD transfer. Learn how to use FX Retail to negotiate lower rates for IBKR funding, forex card loading, and LRS remittances.</description>
     </item>
     <item>
       <title>Funding Interactive Brokers from India Using FX Retail</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/</link>
+      <link>http://localhost:1313/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/</link>
       <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/</guid>
       <description>How Indian investors can reduce the hidden forex markup cost when funding Interactive Brokers accounts by using FX Retail instead of the bank&amp;rsquo;s default remittance rate.</description>
     </item>
   </channel>
