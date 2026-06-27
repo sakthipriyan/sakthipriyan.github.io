@@ -10,6 +10,7 @@ wealth_tags:
   - Retirement
 summary: "A unified framework that handles buying, selling, liquidity management, and withdrawals under one coherent rule set for both Accumulation and Retirement Phases."
 js_tools:
+  - echarts
   # - d2
 ---
 
@@ -234,11 +235,11 @@ Traditional approaches often rely on **calendar-based rebalancing** or **thresho
 
 By directing fresh capital to underweight assets, the framework continuously reduces portfolio drift while minimizing unnecessary sales, portfolio turnover, and taxes. Active selling is reserved only for situations where overall portfolio drift exceeds predefined thresholds which is taken care by the **Sell Engine**.
 
-It implements the **Forward Water-Filling** algorithm, which allocates capital only to underweight asset classes.
+It implements the **Forward Water-Filling** algorithm, which allocates capital only to underweight asset classes. I will explain this using following Example Portfolio data and visuals.
 
 ### Example Portfolio: Buy Engine Deployment Summary
 
-The following table summarizes the impact of the Buy Engine deployment for the above  Example Portfolio. Here we are investing **2.11%** as part of monthly investment cycle. It has reduced the Portfolio Drift from **2.13%** to **1.58%** and correcting **0.55%** of the total drift. Essentially 25% improvement of the Portfolio Drift.
+The following table summarizes the impact of the Buy Engine deployment for the above  Example Portfolio. Here, we are investing **2.11%** of current portfolio value as part of monthly investment cycle. It has reduced the Portfolio Drift from **2.13%** to **1.58%** and correcting **0.55%** of the total drift. Essentially 25% improvement of the Portfolio Drift.
 
 | Asset Class | Target | Pre-Allocation (%) | Pre-Drift | Allocation | Post-Allocation (%) | Post-Drift |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -251,8 +252,137 @@ The following table summarizes the impact of the Buy Engine deployment for the a
 | **Gold** | 10.00% | 10.78% | +0.78% | 0.00% | 10.55% | +0.55% |
 | **Total** | **100%** | **100%** | **2.13%** | **100%** | **100%** | **1.58%** |
 
+Same data represented as Stacked Bar Chart.
 
-* **Capital Deployment:** The Buy Engine focused exclusively on underweight assets (Nasdaq 100, Next 50, and Midcap 150) to minimize drift while avoiding additional exposure to already overweight positions.
+<div id="water-filling-chart" class="echarts-container" style="height: 700px;" data-chart='{
+    "title": { "text": "Drift Correction Impact", "left": "center" },
+    "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
+    "legend": { 
+        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening"],
+        "bottom": 0 
+    },
+    "grid": { "left": "3%", "right": "4%", "bottom": "15%", "containLabel": true },
+    "xAxis": {
+        "type": "category",
+        "data": ["Nasdaq 100", "Nifty 50", "Next 50", "Midcap 150", "Smallcap 250", "Debt", "Gold"],
+        "axisLabel": { "interval": 0, "rotate": 30 }
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Drift (%)",
+        "min": -1.5,
+        "max": 1.25,
+        "axisLabel": { "formatter": "{value}%" }
+    },
+    "series": [
+        { "name": "Pre Drift", "type": "bar", "data": [], "itemStyle": { "color": "#3b82f6" } },
+        { "name": "Post Drift", "type": "bar", "data": [], "itemStyle": { "color": "#1e40af" } },
+        { "name": "Improvement", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e" } },
+        { "name": "Improvement (Evaporated)", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+        { "name": "Worsening", "type": "bar", "data": [], "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+        {
+            "name": "Empty",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [-0.39, 0, -0.36, -0.39, -0.08, 0, 0],
+            "itemStyle": { "color": "transparent" },
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Neg Delta",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                { "value": -0.86, "itemStyle": { "color": "#22c55e" } },
+                { "value": -0.22, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                { "value": -0.03, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                { "value": -0.05, "itemStyle": { "color": "#22c55e" } },
+                { "value": -0.11, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                0, 0
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Neg Base",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                { "value": -0.25, "itemStyle": { "color": "#3b82f6" } },
+                { "value": -1.28, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.11, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.06, "itemStyle": { "color": "#3b82f6" } },
+                { "value": -1.31, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.50, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.50, "itemStyle": { "color": "#1e40af" } }
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Pos Base",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                0, 0, 0, 0, 0, 
+                { "value": 1.02, "itemStyle": { "color": "#1e40af" } },
+                { "value": 0.55, "itemStyle": { "color": "#1e40af" } }
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Pos Delta",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                0,
+                { "value": 0.20, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                0, 0, 0,
+                { "value": 0.13, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                { "value": 0.23, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } }
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Pre Drift",
+            "type": "line",
+            "data": [-1.25, 0.20, -0.36, -0.44, -0.08, 1.15, 0.78],
+            "itemStyle": { "color": "#3b82f6" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        },
+        {
+            "name": "Post Drift",
+            "type": "line",
+            "data": [-0.39, -0.22, -0.39, -0.39, -0.19, 1.02, 0.55],
+            "itemStyle": { "color": "#1e40af" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        },
+        {
+            "name": "Improvement",
+            "type": "line",
+            "data": [0.86, "-", "-", 0.05, "-", 0.13, 0.23],
+            "itemStyle": { "color": "#22c55e" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        },
+        {
+            "name": "Worsening",
+            "type": "line",
+            "data": ["-", -0.42, -0.03, "-", -0.11, "-", "-"],
+            "itemStyle": { "color": "#ef4444" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        }
+    ]
+}'></div>
+
+
+* **Capital Deployment:** In this round, The Buy Engine focused exclusively on underweight assets (Nasdaq 100, Next 50, and Midcap 150) to minimize drift while avoiding additional exposure to already overweight positions.
 * **Passive Normalization:** Overweight assets—specifically **Nifty 50, Debt, and Gold**—were not allocated new capital. Their post-allocation percentages decreased slightly due to the increased total portfolio base, illustrating the natural normalization process inherent in the framework.
 * **System State:** The portfolio remains in a "drift-aware" state, with Nasdaq 100 showing the most significant improvement, closing the gap from **-1.25%** to **-0.39%**.
 
