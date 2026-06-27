@@ -545,9 +545,9 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
 <p><strong>The Buy Engine is responsible for deploying available capital into the Core Portfolio.</strong></p>
 <p>Traditional approaches often rely on <strong>calendar-based rebalancing</strong> or <strong>threshold-based rebalancing</strong> , both of which typically require selling winners and can increase portfolio turnover and tax realization. <strong>The Perpetual Rebalancing Framework</strong> instead uses <strong>cash-flow-based rebalancing</strong> as its <strong>primary mechanism</strong>.</p>
 <p>By directing fresh capital to underweight assets, the framework continuously reduces portfolio drift while minimizing unnecessary sales, portfolio turnover, and taxes. Active selling is reserved only for situations where overall portfolio drift exceeds predefined thresholds which is taken care by the <strong>Sell Engine</strong>.</p>
-<p>It implements the <strong>Forward Water-Filling</strong> algorithm, which allocates capital only to underweight asset classes.</p>
+<p>It implements the <strong>Forward Water-Filling</strong> algorithm, which allocates capital only to underweight asset classes. I will explain this using following Example Portfolio data and visuals.</p>
 <h3 id="example-portfolio-buy-engine-deployment-summary">Example Portfolio: Buy Engine Deployment Summary</h3>
-<p>The following table summarizes the impact of the Buy Engine deployment for the above  Example Portfolio. Here we are investing <strong>2.11%</strong> as part of monthly investment cycle. It has reduced the Portfolio Drift from <strong>2.13%</strong> to <strong>1.58%</strong> and correcting <strong>0.55%</strong> of the total drift. Essentially 25% improvement of the Portfolio Drift.</p>
+<p>The following table summarizes the impact of the Buy Engine deployment for the above  Example Portfolio. Here, we are investing <strong>2.11%</strong> of current portfolio value as part of monthly investment cycle. It has reduced the Portfolio Drift from <strong>2.13%</strong> to <strong>1.58%</strong> and correcting <strong>0.55%</strong> of the total drift. Essentially 25% improvement of the Portfolio Drift.</p>
 <table>
   <thead>
       <tr>
@@ -635,8 +635,135 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
       </tr>
   </tbody>
 </table>
+<p>Same data represented as Stacked Bar Chart.</p>
+<div id="water-filling-chart" class="echarts-container" style="height: 700px;" data-chart='{
+    "title": { "text": "Drift Correction Impact", "left": "center" },
+    "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
+    "legend": { 
+        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening"],
+        "bottom": 0 
+    },
+    "grid": { "left": "3%", "right": "4%", "bottom": "15%", "containLabel": true },
+    "xAxis": {
+        "type": "category",
+        "data": ["Nasdaq 100", "Nifty 50", "Next 50", "Midcap 150", "Smallcap 250", "Debt", "Gold"],
+        "axisLabel": { "interval": 0, "rotate": 30 }
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Drift (%)",
+        "min": -1.5,
+        "max": 1.25,
+        "axisLabel": { "formatter": "{value}%" }
+    },
+    "series": [
+        { "name": "Pre Drift", "type": "bar", "data": [], "itemStyle": { "color": "#3b82f6" } },
+        { "name": "Post Drift", "type": "bar", "data": [], "itemStyle": { "color": "#1e40af" } },
+        { "name": "Improvement", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e" } },
+        { "name": "Improvement (Evaporated)", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+        { "name": "Worsening", "type": "bar", "data": [], "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+        {
+            "name": "Empty",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [-0.39, 0, -0.36, -0.39, -0.08, 0, 0],
+            "itemStyle": { "color": "transparent" },
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Neg Delta",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                { "value": -0.86, "itemStyle": { "color": "#22c55e" } },
+                { "value": -0.22, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                { "value": -0.03, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                { "value": -0.05, "itemStyle": { "color": "#22c55e" } },
+                { "value": -0.11, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                0, 0
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Neg Base",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                { "value": -0.25, "itemStyle": { "color": "#3b82f6" } },
+                { "value": -1.28, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.11, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.06, "itemStyle": { "color": "#3b82f6" } },
+                { "value": -1.31, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.50, "itemStyle": { "color": "#1e40af" } },
+                { "value": -1.50, "itemStyle": { "color": "#1e40af" } }
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Pos Base",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                0, 0, 0, 0, 0, 
+                { "value": 1.02, "itemStyle": { "color": "#1e40af" } },
+                { "value": 0.55, "itemStyle": { "color": "#1e40af" } }
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Pos Delta",
+            "type": "bar",
+            "barWidth": "70%",
+            "stack": "main",
+            "data": [
+                0,
+                { "value": 0.20, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                0, 0, 0,
+                { "value": 0.13, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
+                { "value": 0.23, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } }
+            ],
+            "tooltip": { "show": false }
+        },
+        {
+            "name": "Pre Drift",
+            "type": "line",
+            "data": [-1.25, 0.20, -0.36, -0.44, -0.08, 1.15, 0.78],
+            "itemStyle": { "color": "#3b82f6" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        },
+        {
+            "name": "Post Drift",
+            "type": "line",
+            "data": [-0.39, -0.22, -0.39, -0.39, -0.19, 1.02, 0.55],
+            "itemStyle": { "color": "#1e40af" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        },
+        {
+            "name": "Improvement",
+            "type": "line",
+            "data": [0.86, "-", "-", 0.05, "-", 0.13, 0.23],
+            "itemStyle": { "color": "#22c55e" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        },
+        {
+            "name": "Worsening",
+            "type": "line",
+            "data": ["-", -0.42, -0.03, "-", -0.11, "-", "-"],
+            "itemStyle": { "color": "#ef4444" },
+            "lineStyle": { "opacity": 0 },
+            "symbol": "none"
+        }
+    ]
+}'></div>
 <ul>
-<li><strong>Capital Deployment:</strong> The Buy Engine focused exclusively on underweight assets (Nasdaq 100, Next 50, and Midcap 150) to minimize drift while avoiding additional exposure to already overweight positions.</li>
+<li><strong>Capital Deployment:</strong> In this round, The Buy Engine focused exclusively on underweight assets (Nasdaq 100, Next 50, and Midcap 150) to minimize drift while avoiding additional exposure to already overweight positions.</li>
 <li><strong>Passive Normalization:</strong> Overweight assets—specifically <strong>Nifty 50, Debt, and Gold</strong>—were not allocated new capital. Their post-allocation percentages decreased slightly due to the increased total portfolio base, illustrating the natural normalization process inherent in the framework.</li>
 <li><strong>System State:</strong> The portfolio remains in a &ldquo;drift-aware&rdquo; state, with Nasdaq 100 showing the most significant improvement, closing the gap from <strong>-1.25%</strong> to <strong>-0.39%</strong>.</li>
 </ul>
@@ -824,6 +951,23 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
         
         
         
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof echarts !== 'undefined') {
+                    document.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                        try {
+                            const config = JSON.parse(container.dataset.chart);
+                            const chart = echarts.init(container);
+                            chart.setOption(config);
+                            window.addEventListener('resize', () => chart.resize());
+                        } catch (e) { console.error('[DEBUG] ECharts config error:', e); }
+                    });
+                }
+            });
+        </script>
         
         
         

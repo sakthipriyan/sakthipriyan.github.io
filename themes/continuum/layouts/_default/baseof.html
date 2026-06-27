@@ -109,6 +109,20 @@
         {{ if or (in $jsTools "echarts") (in $jsTools "all") }}
         <!-- ECharts for data visualization -->
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof echarts !== 'undefined') {
+                    document.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                        try {
+                            const config = JSON.parse(container.dataset.chart);
+                            const chart = echarts.init(container);
+                            chart.setOption(config);
+                            window.addEventListener('resize', () => chart.resize());
+                        } catch (e) { console.error('[DEBUG] ECharts config error:', e); }
+                    });
+                }
+            });
+        </script>
         {{ end }}
         
         {{ if or (in $jsTools "gsap") (in $jsTools "all") }}
