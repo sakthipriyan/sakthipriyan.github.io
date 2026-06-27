@@ -2,101 +2,108 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Asset Allocation on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-wealth/tags/asset-allocation/</link>
+    <link>http://localhost:1313/building-wealth/tags/asset-allocation/</link>
     <description>Recent content in Asset Allocation on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 05 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-wealth/tags/asset-allocation/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/building-wealth/tags/asset-allocation/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Perpetual Rebalancing Framework</title>
+      <link>http://localhost:1313/building-wealth/blogs/the-perpetual-rebalancing-framework/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/building-wealth/blogs/the-perpetual-rebalancing-framework/</guid>
+      <description>A unified framework that handles buying, selling, liquidity management, and withdrawals under one coherent rule set for both accumulation and retirement phases.</description>
+    </item>
     <item>
       <title>State of the 1 Portfolio — Returns, Allocation &amp; Rebalancing (June 2026)</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/</link>
+      <link>http://localhost:1313/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/</link>
       <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/</guid>
       <description>June 2026 edition of “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and system optimizations</description>
     </item>
     <item>
       <title>Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/</link>
+      <link>http://localhost:1313/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/</link>
       <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/</guid>
       <description>How I upgraded my &lt;em&gt;RealValue Family SIP Allocator&lt;/em&gt; from a proportional drift allocation model to an even drift optimization model and why it compressed the negative drift band by 75%.</description>
     </item>
     <item>
       <title>Why Static SIP Allocation Is Inefficient (And How Cashflow Rebalancing Fixes It)</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/</link>
+      <link>http://localhost:1313/building-wealth/blogs/why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/</link>
       <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/why-static-sip-allocation-is-inefficient-and-how-cashflow-rebalancing-fixes-it/</guid>
       <description>Static SIPs blindly invest fixed amounts regardless of portfolio drift. Cashflow-Based Rebalancing uses new investments to continuously correct allocation drift — enabling tax-efficient perpetual rebalancing during the accumulation phase.</description>
     </item>
     <item>
       <title>State of the 1 Portfolio — Returns, Allocation &amp; Rebalancing (May 2026)</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-may-2026/</link>
+      <link>http://localhost:1313/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-may-2026/</link>
       <pubDate>Sat, 02 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-may-2026/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-may-2026/</guid>
       <description>Monthly “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and rebalancing strategy</description>
     </item>
     <item>
       <title>3 Paths to Global Investing for Indians</title>
-      <link>https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/</link>
+      <link>http://localhost:1313/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/</link>
       <pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/</guid>
+      <guid>http://localhost:1313/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/</guid>
       <description>&lt;p&gt;For an Indian investor seeking global diversification, the key decision is not only &lt;strong&gt;what&lt;/strong&gt; to invest in, but &lt;strong&gt;how&lt;/strong&gt; to access international markets.&lt;/p&gt;&#xA;&lt;p&gt;In practice, there are &lt;strong&gt;3 primary paths&lt;/strong&gt;,&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Path 1: Domestic Mutual Funds&lt;/li&gt;&#xA;&lt;li&gt;Path 2: Indian ETFs with International Exposure&lt;/li&gt;&#xA;&lt;li&gt;Path 3: Direct International Investing via LRS&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Each path offers different trade-offs in cost, flexibility, and accessibility.&lt;/p&gt;&#xA;&lt;h2 id=&#34;a-quick-comparison&#34;&gt;A Quick Comparison&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Path&lt;/th&gt;&#xA;          &lt;th&gt;Setup&lt;/th&gt;&#xA;          &lt;th&gt;Usage&lt;/th&gt;&#xA;          &lt;th&gt;Cost&lt;/th&gt;&#xA;          &lt;th&gt;Flexibility&lt;/th&gt;&#xA;          &lt;th&gt;Taxation&lt;/th&gt;&#xA;          &lt;th&gt;Market Access&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;1. Mutual Funds&lt;/td&gt;&#xA;          &lt;td&gt;Very Easy&lt;/td&gt;&#xA;          &lt;td&gt;Very Easy&lt;/td&gt;&#xA;          &lt;td&gt;Medium&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;2. Indian ETFs&lt;/td&gt;&#xA;          &lt;td&gt;Easy&lt;/td&gt;&#xA;          &lt;td&gt;Easy&lt;/td&gt;&#xA;          &lt;td&gt;Medium&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;3. Direct LRS&lt;/td&gt;&#xA;          &lt;td&gt;Moderate&lt;/td&gt;&#xA;          &lt;td&gt;Moderate&lt;/td&gt;&#xA;          &lt;td&gt;Low&lt;/td&gt;&#xA;          &lt;td&gt;Very High&lt;/td&gt;&#xA;          &lt;td&gt;Medium&lt;/td&gt;&#xA;          &lt;td&gt;Very High&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;path-1-domestic-mutual-funds&#34;&gt;Path 1: Domestic Mutual Funds&lt;/h2&gt;&#xA;&lt;p&gt;I have gained exposure to the Nasdaq 100 through two distinct Indian mutual funds. These instruments allow for international diversification using Indian Rupees (INR) without the complexities of direct foreign investing.&lt;/p&gt;</description>
     </item>
     <item>
       <title>RealValue Portfolio</title>
-      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/</link>
+      <link>http://localhost:1313/building-wealth/tools/realvalue-portfolio/</link>
       <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/</guid>
+      <guid>http://localhost:1313/building-wealth/tools/realvalue-portfolio/</guid>
       <description>Analyze CAS PDFs and IBKR CSVs in one dashboard. Auto-extract holdings, compute transaction-based XIRR (INR/USD), review allocation views, and export cashflows for independent verification.</description>
     </item>
     <item>
       <title>State of the Portfolio: Returns, Allocation and Strategy — Edition 1</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/</link>
+      <link>http://localhost:1313/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/</link>
       <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/</guid>
       <description>Annual portfolio review for FY 2025–26: Three goal-based portfolios, allocation strategy, drift correction and forex cost optimization.</description>
     </item>
     <item>
       <title>Perpetual Rebalancing: A Practical Framework for Long-Term Wealth</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/</link>
+      <link>http://localhost:1313/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/</link>
       <pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/perpetual-rebalancing-a-practical-framework-for-long-term-wealth/</guid>
       <description>A practical, tax-efficient, and behaviorally robust system for portfolio rebalancing tailored for Indian investors.</description>
     </item>
     <item>
       <title>Intelligent Family SIP Allocator: Cashflow Rebalancing with Tax &amp; TCS Optimization</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/intelligent-family-sip-allocator-cashflow-rebalancing-with-tax-tcs-optimization/</link>
+      <link>http://localhost:1313/building-wealth/videos/intelligent-family-sip-allocator-cashflow-rebalancing-with-tax-tcs-optimization/</link>
       <pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/intelligent-family-sip-allocator-cashflow-rebalancing-with-tax-tcs-optimization/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/intelligent-family-sip-allocator-cashflow-rebalancing-with-tax-tcs-optimization/</guid>
       <description>Discover how to intelligently allocate monthly SIPs across multiple family members, optimize for tax slabs, handle international assets with TCS, and rebalance portfolios using cashflow—all without selling existing holdings.</description>
     </item>
     <item>
       <title>RealValue Family SIP Allocator</title>
-      <link>https://sakthipriyan.com/building-wealth/tools/realvalue-family-sip-allocator/</link>
+      <link>http://localhost:1313/building-wealth/tools/realvalue-family-sip-allocator/</link>
       <pubDate>Sun, 15 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/tools/realvalue-family-sip-allocator/</guid>
+      <guid>http://localhost:1313/building-wealth/tools/realvalue-family-sip-allocator/</guid>
       <description>A smart cashflow rebalancing engine that minimizes allocation drift across investors, with built-in tax-slab optimization and automated international TCS handling.</description>
     </item>
     <item>
       <title>Why Rule-Based Global &amp; Multi-Asset Portfolio Beats a Single Multicap or Flexicap Fund</title>
-      <link>https://sakthipriyan.com/building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/</link>
+      <link>http://localhost:1313/building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/</link>
       <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/</guid>
+      <guid>http://localhost:1313/building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/</guid>
       <description>A comparison between a typical multicap/flexicap fund and a globally diversified, rule-based multi-asset allocation strategy.</description>
     </item>
     <item>
       <title>My Asset Allocation &amp; Rebalancing Explained</title>
-      <link>https://sakthipriyan.com/building-wealth/videos/my-asset-allocation-rebalancing-explained/</link>
+      <link>http://localhost:1313/building-wealth/videos/my-asset-allocation-rebalancing-explained/</link>
       <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/videos/my-asset-allocation-rebalancing-explained/</guid>
+      <guid>http://localhost:1313/building-wealth/videos/my-asset-allocation-rebalancing-explained/</guid>
       <description>A practical breakdown of how I allocate my portfolio across India, US, Debt, and Gold — and my simple, tax-efficient rebalancing method using monthly cash flow.</description>
     </item>
     <item>
       <title>My Asset Allocation &amp; Rebalancing</title>
-      <link>https://sakthipriyan.com/building-wealth/slides/my-asset-allocation-rebalancing/</link>
+      <link>http://localhost:1313/building-wealth/slides/my-asset-allocation-rebalancing/</link>
       <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-wealth/slides/my-asset-allocation-rebalancing/</guid>
+      <guid>http://localhost:1313/building-wealth/slides/my-asset-allocation-rebalancing/</guid>
       <description>How early financial decisions can create huge long-term opportunity costs.</description>
     </item>
   </channel>

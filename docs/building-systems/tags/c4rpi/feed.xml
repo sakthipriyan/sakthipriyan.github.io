@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C4rpi on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/c4rpi/</link>
+    <link>http://localhost:1313/building-systems/tags/c4rpi/</link>
     <description>Recent content in C4rpi on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Mon, 18 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/c4rpi/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/c4rpi/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up a 4 node Raspberry Pi 2 Cluster</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
+      <link>http://localhost:1313/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</link>
       <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/setting-up-a-4-node-raspberry-pi-2-cluster/</guid>
       <description>Setting up the right hardware.</description>
     </item>
     <item>
       <title>Raspberry Pi 2 setup</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-2-setup/</link>
+      <link>http://localhost:1313/building-systems/blogs/raspberry-pi-2-setup/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/raspberry-pi-2-setup/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/raspberry-pi-2-setup/</guid>
       <description>from micro SD card to JDK installation.</description>
     </item>
   </channel>

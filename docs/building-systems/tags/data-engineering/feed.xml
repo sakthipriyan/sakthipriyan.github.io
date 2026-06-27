@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data-Engineering on Sakthi Priyan H</title>
-    <link>https://sakthipriyan.com/building-systems/tags/data-engineering/</link>
+    <link>http://localhost:1313/building-systems/tags/data-engineering/</link>
     <description>Recent content in Data-Engineering on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://sakthipriyan.com/building-systems/tags/data-engineering/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/building-systems/tags/data-engineering/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building Truly Serverless Big Data Pipelines: Scaling with AWS Lambda and Step Functions</title>
-      <link>https://sakthipriyan.com/building-systems/blogs/building-truly-serverless-big-data-pipelines-scaling-with-aws-lambda-and-step-functions/</link>
+      <link>http://localhost:1313/building-systems/blogs/building-truly-serverless-big-data-pipelines-scaling-with-aws-lambda-and-step-functions/</link>
       <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://sakthipriyan.com/building-systems/blogs/building-truly-serverless-big-data-pipelines-scaling-with-aws-lambda-and-step-functions/</guid>
+      <guid>http://localhost:1313/building-systems/blogs/building-truly-serverless-big-data-pipelines-scaling-with-aws-lambda-and-step-functions/</guid>
       <description>How to build an N-stage Driver/Executor model using AWS Lambda and Step Functions that handles massive batch and micro-batch workloads without a single dedicated server, eliminating cluster maintenance and scaling instantly to zero</description>
     </item>
   </channel>
