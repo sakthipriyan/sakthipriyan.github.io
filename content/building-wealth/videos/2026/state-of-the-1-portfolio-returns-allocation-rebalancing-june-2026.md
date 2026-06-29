@@ -6,8 +6,8 @@ type: "videos"
 wealth_tags:
   - State Of The 1 Portfolio
 summary: "A detailed review of the '1 Portfolio' as of June 2026, covering returns, asset allocation, and rebalancing, along with a preview of my upcoming book."
-youtube_id: "" 
-youtube_url: ""
+youtube_id: "T36egt-O1k4"
+youtube_url: "https://youtu.be/T36egt-O1k4"
 duration: "25:42"
 platform: "YouTube"
 ---
