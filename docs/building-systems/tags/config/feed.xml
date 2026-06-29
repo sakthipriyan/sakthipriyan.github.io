@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Config on Sakthi Priyan H</title>
-    <link>http://localhost:1313/building-systems/tags/config/</link>
+    <link>https://sakthipriyan.com/building-systems/tags/config/</link>
     <description>Recent content in Config on Sakthi Priyan H</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 01 Apr 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/building-systems/tags/config/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sakthipriyan.com/building-systems/tags/config/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git Configuration</title>
-      <link>http://localhost:1313/building-systems/blogs/git-configuration/</link>
+      <link>https://sakthipriyan.com/building-systems/blogs/git-configuration/</link>
       <pubDate>Wed, 01 Apr 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/building-systems/blogs/git-configuration/</guid>
+      <guid>https://sakthipriyan.com/building-systems/blogs/git-configuration/</guid>
       <description>Alias for generally used Git commands</description>
     </item>
   </channel>
