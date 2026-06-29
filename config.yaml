@@ -11,7 +11,7 @@ params:
   author: "Sakthi Priyan H"
   googleAnalyticsId: "G-5NGEJ767SK"
   # Default JavaScript tools site-wide (can be overridden per-page)
-  # Options: echarts, gsap, viz, all
+  # Options: echarts, gsap, viz, d2, all
   # Set to [] to disable by default (recommended for performance)
   default_js_tools: []  
   # Example to enable all: default_js_tools: ["all"]

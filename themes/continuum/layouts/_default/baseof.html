@@ -109,6 +109,94 @@
         {{ if or (in $jsTools "echarts") (in $jsTools "all") }}
         <!-- ECharts for data visualization -->
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof echarts !== 'undefined') {
+                    // 1. Process markdown code blocks (e.g., ```echarts)
+                    const echartsCodeBlocks = document.querySelectorAll('pre code.language-echarts, pre code.echarts');
+                    echartsCodeBlocks.forEach(codeEl => {
+                        try {
+                            const preEl = codeEl.parentNode;
+                            const config = JSON.parse(codeEl.textContent);
+                            
+                            // Extract custom height if provided, then remove from config
+                            const customHeight = config.height || '500px';
+                            delete config.height;
+                            
+                            // Create container
+                            const container = document.createElement('div');
+                            container.className = 'echarts-container echarts-loading';
+                            container.style.height = customHeight;
+                            container.style.marginTop = '2rem';
+                            container.style.marginBottom = '2rem';
+                            
+                            // Setup placeholder styling similar to d2
+                            container.style.padding = '2rem';
+                            container.style.textAlign = 'center';
+                            container.style.fontFamily = 'monospace';
+                            container.style.color = '#888';
+                            container.style.background = '#f9f9f9';
+                            container.style.border = '1px dashed #ccc';
+                            container.style.borderRadius = '4px';
+                            // Center vertically if height is large
+                            container.style.display = 'flex';
+                            container.style.flexDirection = 'column';
+                            container.style.justifyContent = 'center';
+
+                            container.innerHTML = '<div><span class="spinner" style="display: inline-block; animation: spin 2s linear infinite;">⚙️</span> Rendering chart...</div>';
+                            
+                            // Add spin animation keyframes if not exists
+                            if (!document.getElementById('spinner-style')) {
+                                const style = document.createElement('style');
+                                style.id = 'spinner-style';
+                                style.textContent = '@keyframes spin { 100% { transform: rotate(360deg); } }';
+                                document.head.appendChild(style);
+                            }
+
+                            // Replace <pre> with container
+                            preEl.parentNode.replaceChild(container, preEl);
+                            
+                            // Initialize ECharts asynchronously to allow UI to paint
+                            setTimeout(() => {
+                                // Reset styling
+                                container.className = 'echarts-container';
+                                container.style.padding = '';
+                                container.style.textAlign = '';
+                                container.style.fontFamily = '';
+                                container.style.color = '';
+                                container.style.background = '';
+                                container.style.border = '';
+                                container.style.borderRadius = '';
+                                container.style.display = 'block';
+                                container.style.flexDirection = '';
+                                container.style.justifyContent = '';
+                                container.innerHTML = '';
+                                
+                                const chart = echarts.init(container);
+                                chart.setOption(config);
+                                window.addEventListener('resize', () => chart.resize());
+                            }, 400);
+                        } catch (e) { 
+                            console.error('[DEBUG] ECharts code block error:', e);
+                            const errorDiv = document.createElement('div');
+                            errorDiv.style.color = 'red';
+                            errorDiv.textContent = 'Error rendering ECharts diagram: ' + e.message;
+                            codeEl.parentNode.parentNode.insertBefore(errorDiv, codeEl.parentNode);
+                        }
+                    });
+
+                    // 2. Backwards compatibility for data-chart divs
+                    document.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
+                        try {
+                            const config = JSON.parse(container.dataset.chart);
+                            const chart = echarts.init(container);
+                            chart.setOption(config);
+                            window.addEventListener('resize', () => chart.resize());
+                        } catch (e) { console.error('[DEBUG] ECharts config error:', e); }
+                    });
+                }
+            });
+        </script>
         {{ end }}
         
         {{ if or (in $jsTools "gsap") (in $jsTools "all") }}
@@ -116,6 +204,87 @@
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+        {{ end }}
+        
+        {{ if or (in $jsTools "d2") (in $jsTools "all") }}
+        {{- /* D2 for declarative diagramming */ -}}
+        <script type="module">
+            import { D2 } from 'https://esm.sh/@terrastruct/d2';
+            
+            document.addEventListener('DOMContentLoaded', async function() {
+                const d2Elements = document.querySelectorAll('pre code.language-d2, pre code.d2');
+                if (d2Elements.length === 0) return;
+                
+                console.log('[DEBUG] Initializing D2');
+                try {
+                    const d2 = new D2();
+                    
+                    // Create placeholders first
+                    const diagramTasks = Array.from(d2Elements).map(codeEl => {
+                        const preEl = codeEl.parentNode;
+                        let d2Code = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                        
+                        // Create placeholder container
+                        const container = document.createElement('div');
+                        container.className = 'd2-diagram d2-loading';
+                        container.style.padding = '2rem';
+                        container.style.textAlign = 'center';
+                        container.style.fontFamily = 'monospace';
+                        container.style.color = '#888';
+                        container.style.background = '#f9f9f9';
+                        container.style.border = '1px dashed #ccc';
+                        container.style.borderRadius = '4px';
+                        container.innerHTML = '<span class="spinner">⚙️</span> Rendering diagram...';
+                        
+                        // Replace <pre> with placeholder immediately
+                        preEl.parentNode.replaceChild(container, preEl);
+                        
+                        // Inject default config if not already present
+                        if (!d2Code.includes('d2-config')) {
+                            const configBlock = `vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 105
+  }
+}\n`;
+                            d2Code = configBlock + d2Code;
+                        }
+                        
+                        return { d2Code, container };
+                    });
+
+                    // Render diagrams asynchronously
+                    for (const task of diagramTasks) {
+                        try {
+                            console.log('[DEBUG] Rendering D2 block');
+                            const result = await d2.compile(task.d2Code);
+                            const svg = await d2.render(result.diagram, result.renderOptions || {});
+                            
+                            // Clear loading state and inject SVG
+                            task.container.className = 'd2-diagram';
+                            task.container.removeAttribute('style'); // remove loading styles
+                            task.container.innerHTML = svg;
+                            
+                            const svgEl = task.container.querySelector('svg');
+                            if (svgEl) {
+                                svgEl.removeAttribute('width');
+                                svgEl.removeAttribute('height');
+                                svgEl.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                                svgEl.style.width = '100%';
+                                svgEl.style.height = 'auto';
+                            }
+                            
+                            console.log('[DEBUG] D2 Diagram rendered');
+                        } catch (err) {
+                            console.error('[DEBUG] D2 compile/render error:', err);
+                            task.container.innerHTML = `<div style="color:red; padding:1rem;">Error rendering D2 diagram: ${err.message || err}</div>`;
+                        }
+                    }
+                } catch (initErr) {
+                    console.error('[DEBUG] D2 initialization error:', initErr);
+                }
+            });
+        </script>
         {{ end }}
     {{- /* Tool scripts are now loaded per-tool in tools/single.html */ -}}
     {{- block "scripts" . }}{{- end }}
