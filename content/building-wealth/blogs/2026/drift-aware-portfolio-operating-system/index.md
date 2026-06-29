@@ -539,7 +539,7 @@ The following chart illustrates a hypothetical scenario. It shows the portfolio 
     "xAxis": {
         "type": "category",
         "boundaryGap": false,
-        "data": ["M-3", "M-2", "M-1", "M1 (Trigger)", "M2", "M3", "M4", "M5", "M6", "M7", "M8"]
+        "data": ["M-3", "M-2", "M-1", "M1 (Trigger)", "M2", "M3", "M4", "M5", "M6 (Stop)", "M7", "M8"]
     },
     "yAxis": {
         "type": "value",
@@ -586,12 +586,12 @@ The following chart illustrates a hypothetical scenario. It shows the portfolio 
                     "distance": 10
                 },
                 "data": [
-                    { "name": "Triggered!", "xAxis": "M1 (Trigger)", "yAxis": 10.8 },
+                    { "name": "Sell", "xAxis": "M1 (Trigger)", "yAxis": 10.8 },
                     { "name": "Sell", "xAxis": "M2", "yAxis": 9.5 },
                     { "name": "Sell", "xAxis": "M3", "yAxis": 8.5 },
                     { "name": "No Sell", "xAxis": "M4", "yAxis": 6.5 },
                     { "name": "Sell", "xAxis": "M5", "yAxis": 6.2 },
-                    { "name": "Done", "xAxis": "M6", "yAxis": 4.8 }
+                    { "name": "No Sell", "xAxis": "M6 (Stop)", "yAxis": 4.8 }
                 ]
             }
         }

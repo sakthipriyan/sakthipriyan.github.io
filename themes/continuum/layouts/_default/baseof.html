@@ -125,18 +125,57 @@
                             
                             // Create container
                             const container = document.createElement('div');
-                            container.className = 'echarts-container';
+                            container.className = 'echarts-container echarts-loading';
                             container.style.height = customHeight;
                             container.style.marginTop = '2rem';
                             container.style.marginBottom = '2rem';
                             
+                            // Setup placeholder styling similar to d2
+                            container.style.padding = '2rem';
+                            container.style.textAlign = 'center';
+                            container.style.fontFamily = 'monospace';
+                            container.style.color = '#888';
+                            container.style.background = '#f9f9f9';
+                            container.style.border = '1px dashed #ccc';
+                            container.style.borderRadius = '4px';
+                            // Center vertically if height is large
+                            container.style.display = 'flex';
+                            container.style.flexDirection = 'column';
+                            container.style.justifyContent = 'center';
+
+                            container.innerHTML = '<div><span class="spinner" style="display: inline-block; animation: spin 2s linear infinite;">⚙️</span> Rendering chart...</div>';
+                            
+                            // Add spin animation keyframes if not exists
+                            if (!document.getElementById('spinner-style')) {
+                                const style = document.createElement('style');
+                                style.id = 'spinner-style';
+                                style.textContent = '@keyframes spin { 100% { transform: rotate(360deg); } }';
+                                document.head.appendChild(style);
+                            }
+
                             // Replace <pre> with container
                             preEl.parentNode.replaceChild(container, preEl);
                             
-                            // Initialize ECharts
-                            const chart = echarts.init(container);
-                            chart.setOption(config);
-                            window.addEventListener('resize', () => chart.resize());
+                            // Initialize ECharts asynchronously to allow UI to paint
+                            setTimeout(() => {
+                                // Reset styling
+                                container.className = 'echarts-container';
+                                container.style.padding = '';
+                                container.style.textAlign = '';
+                                container.style.fontFamily = '';
+                                container.style.color = '';
+                                container.style.background = '';
+                                container.style.border = '';
+                                container.style.borderRadius = '';
+                                container.style.display = 'block';
+                                container.style.flexDirection = '';
+                                container.style.justifyContent = '';
+                                container.innerHTML = '';
+                                
+                                const chart = echarts.init(container);
+                                chart.setOption(config);
+                                window.addEventListener('resize', () => chart.resize());
+                            }, 400);
                         } catch (e) { 
                             console.error('[DEBUG] ECharts code block error:', e);
                             const errorDiv = document.createElement('div');
