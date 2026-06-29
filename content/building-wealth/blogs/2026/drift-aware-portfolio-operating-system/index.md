@@ -597,31 +597,32 @@ At each monthly review, selling occurs only if the current portfolio drift excee
 
 #### Execution Model
 
-The Buy Engine always estimates the new drift before the Sell Engine.
+The system operates in a highly specific sequence to ensure that fresh capital performs as much rebalancing as possible before any assets are sold.
 
-1. Collect all available capital.
-2. Apply priority routing (Taxes → Liquidity Reserve → Buy Engine).
-3. Calculate the new drift using only cashflows.
-4. Compute the updated portfolio drift.
-5. Execute the Sell Engine only if the active drift ceiling is exceeded.
+**Normal Operation (Sell Program Inactive):**
 
-This ordering ensures that fresh capital performs as much rebalancing as possible before any assets are sold.
+1. **Buy Engine (Compute):** Calculates the projected portfolio drift assuming all fresh cash flows are deployed via Forward Water-Filling.
+2. **Evaluation:** If the projected drift remains below the Maximum Drift Threshold, the Sell Engine stays dormant. The system skips to step 4.
+3. **Sell Engine (Compute + Execute):** If the projected drift exceeds the threshold, the Sell Engine activates. It computes exactly what needs to be sold using Reverse Water-Filling (factoring in tax reserves) so that the *post-repurchase* drift will hit the active threshold. It then executes the sell orders.
+4. **Buy Engine (Execute):** The Buy Engine combines fresh inflows with any net sale proceeds and executes the final Forward Water-Filling purchases.
 
-When selling:
+This creates the standard operational sequence:
+> **Buy Engine (Compute) → Sell Engine (Compute & Execute) → Buy Engine (Execute)**
 
-- Only **LTCG-eligible lots** are considered (based on policy configuration).
-- Taxes are estimated and reserved immediately.
-- Only **net sale proceeds** are available for reinvestment.
+**Active Sell Program:**
 
-The Buy Engine then combines:
+When the portfolio is already in an active sell program (stepping down the ceiling over $M$ months), the sequence is slightly modified:
+> **Sell Engine (Compute & Optionally Execute) → Buy Engine (Execute)**
 
-- Monthly inflows,
-- Net sale proceeds, and
-- Existing deployable cash,
+During this phase, the Sell Engine evaluates the active ceiling directly. If the portfolio requires selling to stay below the stepped-down ceiling, it computes and executes the necessary sales before passing the net proceeds to the Buy Engine for deployment.
 
-into a **single Forward Water-Filling allocation**.
+**Execution Constraints:**
 
-This minimizes unnecessary buy-sell cycles, reduces transaction costs, and keeps portfolio turnover low.
+- Only **LTCG-eligible lots** are considered for selling.
+- Taxes are estimated and reserved immediately upon sale.
+- Only **net sale proceeds** (along with fresh cash) are pushed to the Buy Engine for reinvestment in a **single Forward Water-Filling allocation**.
+
+This tight integration between the engines minimizes unnecessary buy-sell cycles, reduces transaction costs, and ensures maximum tax efficiency.
 
 #### Traditional vs Perpetual Rebalancing
 
