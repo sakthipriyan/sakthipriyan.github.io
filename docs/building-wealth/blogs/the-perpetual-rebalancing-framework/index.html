@@ -544,14 +544,7 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
 <h3 id="4-buy-engine">4. Buy Engine</h3>
 <p><strong>The Buy Engine is responsible for deploying available capital into the Core Portfolio.</strong></p>
 <p>Traditional approaches often rely on <strong>calendar-based rebalancing</strong> or <strong>threshold-based rebalancing</strong> , both of which typically require selling winners and can increase portfolio turnover and tax realization.</p>
-<p><strong>The Perpetual Rebalancing Framework</strong> instead uses cash-flow-based rebalancing as its primary mechanism. Rather than selling winners, fresh capital is directed toward underweight assets using the Forward Water-Filling algorithm.</p>
-<p>The Buy Engine has four objectives:</p>
-<ul>
-<li>Reduce portfolio drift using fresh capital</li>
-<li>Minimize portfolio turnover</li>
-<li>Avoid unnecessary selling</li>
-<li>Preserve tax efficiency by making cash inflows the primary rebalancing mechanism</li>
-</ul>
+<p><strong>The Perpetual Rebalancing Framework</strong> instead uses <strong>cash-flow-based rebalancing</strong> as its primary mechanism. Rather than selling winners, fresh capital is directed toward underweight assets using the Forward Water-Filling algorithm.</p>
 <p>The <strong>Buy Engine</strong> operates only after all liquidity obligations have been satisfied. Active selling is reserved for the <strong>Sell Engine</strong>, which activates only when the aggregate portfolio drift exceeds predefined thresholds.</p>
 <h4 id="example-portfolio">Example Portfolio</h4>
 <p>The following example illustrates how the Buy Engine deploys fresh capital into an existing portfolio.</p>
@@ -790,7 +783,7 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
 <ul>
 <li><strong>Largest deficits receive the highest allocation.</strong> Nasdaq 100 receives most of the fresh capital because it has the largest negative drift.</li>
 <li><strong>Only underweight assets receive capital.</strong> Next 50 and Midcap 150 also receive allocations, while overweight assets receive none.</li>
-<li><strong>Overweights naturally normalize.</strong> Nifty 50, Debt, and Gold become slightly closer to their target allocations simply because the total portfolio value increases.</li>
+<li><strong>Overweights naturally normalize.</strong> Debt and Gold become slightly closer to their target allocations simply because the total portfolio value increases.</li>
 <li><strong>No selling is required.</strong> Since the aggregate positive drift (<strong>2.13%</strong>) is well below the Sell Engine threshold (<strong>10%</strong> by default), no assets are sold.</li>
 <li><strong>Allocation decisions ignore recent performance.</strong> Although Gold has generated substantially higher returns than Debt, neither receives additional capital because both are already overweight. The framework responds only to portfolio drift, not recent performance.</li>
 </ul>
@@ -859,7 +852,6 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
 </blockquote>
 <h4 id="policy-configurations-3">Policy Configurations</h4>
 <p>Zero Policy Configurations for the Buy Engine. Just Execute the mathematical logic.</p>
-<hr>
 <h3 id="5-sell-engine">5. Sell Engine</h3>
 <p>The <strong>Sell Engine</strong> actively controls portfolio drift when cash-flow-based rebalancing through the Buy Engine is no longer sufficient.</p>
 <p>Traditional rebalancing approaches, such as <strong>calendar-based</strong> or <strong>threshold-based</strong> rebalancing, typically sell overweight assets and immediately buy underweight assets in a single rebalance. While simple, this approach interrupts long-term winners, increases portfolio turnover, and often realizes unnecessary taxable gains.</p>
@@ -973,14 +965,9 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
           <td>No selling</td>
       </tr>
       <tr>
-          <td>Trigger</td>
-          <td style="text-align: right">&gt;10%</td>
-          <td>Sell program begins</td>
-      </tr>
-      <tr>
-          <td>Month 1</td>
+          <td>Month 1 (Trigger)</td>
           <td style="text-align: right">10%</td>
-          <td>Sell only if drift exceeds ceiling</td>
+          <td>Sell program begins</td>
       </tr>
       <tr>
           <td>Month 2</td>
@@ -1009,13 +996,80 @@ If Portfolio Drift is unmanaged, the risk profile will change considerably over 
       </tr>
   </tbody>
 </table>
+<p>The following chart illustrates a hypothetical scenario. It shows the portfolio drift over time, triggering the sell program, and how the <strong>Active Drift Ceiling</strong> steps down. Notice how selling only occurs when the portfolio drift is <em>above</em> the active ceiling.</p>
+<div class="echarts-container" style="height: 500px; margin-top: 2rem; margin-bottom: 2rem;" data-chart='{
+    "title": { "text": "Sell Engine: Active Drift Ceiling and Execution", "left": "center" },
+    "tooltip": { "trigger": "axis" },
+    "legend": { "data": ["Portfolio Drift", "Active Ceiling"], "bottom": 0 },
+    "grid": { "left": "5%", "right": "5%", "bottom": "15%", "containLabel": true },
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": false,
+        "data": ["M-3", "M-2", "M-1", "M1 (Trigger)", "M2", "M3", "M4", "M5", "M6", "M7", "M8"]
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Aggregate Positive Drift (%)",
+        "min": 4,
+        "max": 12,
+        "axisLabel": { "formatter": "{value}%" }
+    },
+    "series": [
+        {
+            "name": "Active Ceiling",
+            "type": "line",
+            "step": "end",
+            "data": [10, 10, 10, 10, 9, 8, 7, 6, 5, 10, 10],
+            "itemStyle": { "color": "#ef4444" },
+            "lineStyle": { "width": 2, "type": "dashed" },
+            "markArea": {
+                "itemStyle": { "color": "rgba(239, 68, 68, 0.05)" },
+                "data": [
+                    [
+                        { "name": "Sell Program Active", "xAxis": "M1 (Trigger)" },
+                        { "xAxis": "M6" }
+                    ]
+                ]
+            }
+        },
+        {
+            "name": "Portfolio Drift",
+            "type": "line",
+            "data": [6.0, 8.0, 9.5, 10.8, 9.5, 8.5, 6.5, 6.2, 4.8, 5.5, 6.0],
+            "itemStyle": { "color": "#3b82f6" },
+            "lineStyle": { "width": 3 },
+            "symbol": "circle",
+            "symbolSize": 8,
+            "markPoint": {
+                "symbol": "circle",
+                "symbolSize": 1,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "color": "#1e40af",
+                    "fontWeight": "bold",
+                    "formatter": "{b}",
+                    "distance": 10
+                },
+                "data": [
+                    { "name": "Triggered!", "xAxis": "M1 (Trigger)", "yAxis": 10.8 },
+                    { "name": "Sell", "xAxis": "M2", "yAxis": 9.5 },
+                    { "name": "Sell", "xAxis": "M3", "yAxis": 8.5 },
+                    { "name": "No Sell", "xAxis": "M4", "yAxis": 6.5 },
+                    { "name": "Sell", "xAxis": "M5", "yAxis": 6.2 },
+                    { "name": "Done", "xAxis": "M6", "yAxis": 4.8 }
+                ]
+            }
+        }
+    ]
+}'></div>
 <p>At each monthly review, selling occurs only if the current portfolio drift exceeds the active ceiling. If market movements or the Buy Engine have already reduced drift below the ceiling, no selling occurs during that review.</p>
 <h4 id="execution-model">Execution Model</h4>
-<p>The Buy Engine always executes before the Sell Engine.</p>
+<p>The Buy Engine always estimates the new drift before the Sell Engine.</p>
 <ol>
 <li>Collect all available capital.</li>
 <li>Apply priority routing (Taxes → Liquidity Reserve → Buy Engine).</li>
-<li>Execute the Buy Engine.</li>
+<li>Calculate the new drift using only cashflows.</li>
 <li>Compute the updated portfolio drift.</li>
 <li>Execute the Sell Engine only if the active drift ceiling is exceeded.</li>
 </ol>
