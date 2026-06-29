@@ -233,13 +233,7 @@ Both approaches are essentially optimizing the Portfolio Drift after SELL/BUY ac
 
 Traditional approaches often rely on **calendar-based rebalancing** or **threshold-based rebalancing** , both of which typically require selling winners and can increase portfolio turnover and tax realization. 
 
-**The Perpetual Rebalancing Framework** instead uses cash-flow-based rebalancing as its primary mechanism. Rather than selling winners, fresh capital is directed toward underweight assets using the Forward Water-Filling algorithm.
-
-The Buy Engine has four objectives:
-- Reduce portfolio drift using fresh capital
-- Minimize portfolio turnover
-- Avoid unnecessary selling
-- Preserve tax efficiency by making cash inflows the primary rebalancing mechanism
+**The Perpetual Rebalancing Framework** instead uses **cash-flow-based rebalancing** as its primary mechanism. Rather than selling winners, fresh capital is directed toward underweight assets using the Forward Water-Filling algorithm.
 
 The **Buy Engine** operates only after all liquidity obligations have been satisfied. Active selling is reserved for the **Sell Engine**, which activates only when the aggregate portfolio drift exceeds predefined thresholds.
 
@@ -409,7 +403,7 @@ The Buy Engine reduces the aggregate portfolio drift from **2.13%** to **1.58%**
 
 * **Largest deficits receive the highest allocation.** Nasdaq 100 receives most of the fresh capital because it has the largest negative drift.
 * **Only underweight assets receive capital.** Next 50 and Midcap 150 also receive allocations, while overweight assets receive none.
-* **Overweights naturally normalize.** Nifty 50, Debt, and Gold become slightly closer to their target allocations simply because the total portfolio value increases.
+* **Overweights naturally normalize.** Debt and Gold become slightly closer to their target allocations simply because the total portfolio value increases.
 * **No selling is required.** Since the aggregate positive drift (**2.13%**) is well below the Sell Engine threshold (**10%** by default), no assets are sold.
 * **Allocation decisions ignore recent performance.** Although Gold has generated substantially higher returns than Debt, neither receives additional capital because both are already overweight. The framework responds only to portfolio drift, not recent performance.
 
@@ -464,11 +458,6 @@ This produces two desirable properties:
 
 #### Policy Configurations
 Zero Policy Configurations for the Buy Engine. Just Execute the mathematical logic.
-
-
-
-
----
 
 ### 5. Sell Engine
 
@@ -528,23 +517,91 @@ Example configuration:
 | Review | Active Drift Ceiling | Action |
 |---------|---------------------:|--------|
 | Before Trigger | ≤10% | No selling |
-| Trigger | >10% | Sell program begins |
-| Month 1 | 10% | Sell only if drift exceeds ceiling |
+| Month 1 (Trigger) | 10% | Sell program begins |
 | Month 2 | 9% | Continue if required |
 | Month 3 | 8% | Continue if required |
 | Month 4 | 7% | Continue if required |
 | Month 5 | 6% | Continue if required |
 | Month 6 | 5% | Stop selling |
 
+The following chart illustrates a hypothetical scenario. It shows the portfolio drift over time, triggering the sell program, and how the **Active Drift Ceiling** steps down. Notice how selling only occurs when the portfolio drift is *above* the active ceiling.
+
+<div class="echarts-container" style="height: 500px; margin-top: 2rem; margin-bottom: 2rem;" data-chart='{
+    "title": { "text": "Sell Engine: Active Drift Ceiling and Execution", "left": "center" },
+    "tooltip": { "trigger": "axis" },
+    "legend": { "data": ["Portfolio Drift", "Active Ceiling"], "bottom": 0 },
+    "grid": { "left": "5%", "right": "5%", "bottom": "15%", "containLabel": true },
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": false,
+        "data": ["M-3", "M-2", "M-1", "M1 (Trigger)", "M2", "M3", "M4", "M5", "M6", "M7", "M8"]
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Aggregate Positive Drift (%)",
+        "min": 4,
+        "max": 12,
+        "axisLabel": { "formatter": "{value}%" }
+    },
+    "series": [
+        {
+            "name": "Active Ceiling",
+            "type": "line",
+            "step": "end",
+            "data": [10, 10, 10, 10, 9, 8, 7, 6, 5, 10, 10],
+            "itemStyle": { "color": "#ef4444" },
+            "lineStyle": { "width": 2, "type": "dashed" },
+            "markArea": {
+                "itemStyle": { "color": "rgba(239, 68, 68, 0.05)" },
+                "data": [
+                    [
+                        { "name": "Sell Program Active", "xAxis": "M1 (Trigger)" },
+                        { "xAxis": "M6" }
+                    ]
+                ]
+            }
+        },
+        {
+            "name": "Portfolio Drift",
+            "type": "line",
+            "data": [6.0, 8.0, 9.5, 10.8, 9.5, 8.5, 6.5, 6.2, 4.8, 5.5, 6.0],
+            "itemStyle": { "color": "#3b82f6" },
+            "lineStyle": { "width": 3 },
+            "symbol": "circle",
+            "symbolSize": 8,
+            "markPoint": {
+                "symbol": "circle",
+                "symbolSize": 1,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "color": "#1e40af",
+                    "fontWeight": "bold",
+                    "formatter": "{b}",
+                    "distance": 10
+                },
+                "data": [
+                    { "name": "Triggered!", "xAxis": "M1 (Trigger)", "yAxis": 10.8 },
+                    { "name": "Sell", "xAxis": "M2", "yAxis": 9.5 },
+                    { "name": "Sell", "xAxis": "M3", "yAxis": 8.5 },
+                    { "name": "No Sell", "xAxis": "M4", "yAxis": 6.5 },
+                    { "name": "Sell", "xAxis": "M5", "yAxis": 6.2 },
+                    { "name": "Done", "xAxis": "M6", "yAxis": 4.8 }
+                ]
+            }
+        }
+    ]
+}'></div>
+
 At each monthly review, selling occurs only if the current portfolio drift exceeds the active ceiling. If market movements or the Buy Engine have already reduced drift below the ceiling, no selling occurs during that review.
 
 #### Execution Model
 
-The Buy Engine always executes before the Sell Engine.
+The Buy Engine always estimates the new drift before the Sell Engine.
 
 1. Collect all available capital.
 2. Apply priority routing (Taxes → Liquidity Reserve → Buy Engine).
-3. Execute the Buy Engine.
+3. Calculate the new drift using only cashflows.
 4. Compute the updated portfolio drift.
 5. Execute the Sell Engine only if the active drift ceiling is exceeded.
 
