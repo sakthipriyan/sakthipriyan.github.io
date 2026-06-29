@@ -112,6 +112,41 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 if (typeof echarts !== 'undefined') {
+                    // 1. Process markdown code blocks (e.g., ```echarts)
+                    const echartsCodeBlocks = document.querySelectorAll('pre code.language-echarts, pre code.echarts');
+                    echartsCodeBlocks.forEach(codeEl => {
+                        try {
+                            const preEl = codeEl.parentNode;
+                            const config = JSON.parse(codeEl.textContent);
+                            
+                            // Extract custom height if provided, then remove from config
+                            const customHeight = config.height || '500px';
+                            delete config.height;
+                            
+                            // Create container
+                            const container = document.createElement('div');
+                            container.className = 'echarts-container';
+                            container.style.height = customHeight;
+                            container.style.marginTop = '2rem';
+                            container.style.marginBottom = '2rem';
+                            
+                            // Replace <pre> with container
+                            preEl.parentNode.replaceChild(container, preEl);
+                            
+                            // Initialize ECharts
+                            const chart = echarts.init(container);
+                            chart.setOption(config);
+                            window.addEventListener('resize', () => chart.resize());
+                        } catch (e) { 
+                            console.error('[DEBUG] ECharts code block error:', e);
+                            const errorDiv = document.createElement('div');
+                            errorDiv.style.color = 'red';
+                            errorDiv.textContent = 'Error rendering ECharts diagram: ' + e.message;
+                            codeEl.parentNode.parentNode.insertBefore(errorDiv, codeEl.parentNode);
+                        }
+                    });
+
+                    // 2. Backwards compatibility for data-chart divs
                     document.querySelectorAll('.echarts-container[data-chart]').forEach(container => {
                         try {
                             const config = JSON.parse(container.dataset.chart);
