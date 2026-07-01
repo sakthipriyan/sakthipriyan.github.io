@@ -14,6 +14,12 @@ wealth_tags:
 summary: "How Indian investors can reduce the hidden forex markup cost when funding Interactive Brokers accounts by using FX Retail instead of the bank's default remittance rate."
 ---
 
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 When Indian investors fund Interactive Brokers (IBKR) accounts, the biggest hidden cost is often the foreign exchange markup charged by banks. Most investors use the default outward remittance flow provided by their bank without realising how much the FX spread is costing them.
 
 ## Typical Bank Flow
