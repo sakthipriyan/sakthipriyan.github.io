@@ -6,6 +6,8 @@ theme: "continuum"
 build:
   writeStats: true
 
+enableGitInfo: true
+
 params:
   description: "Systems that Scale. Wealth that Compounds."
   author: "Sakthi Priyan H"

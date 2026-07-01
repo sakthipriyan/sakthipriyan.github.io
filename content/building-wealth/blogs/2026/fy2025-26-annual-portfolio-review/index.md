@@ -15,6 +15,12 @@ wealth_tags:
 summary: "Annual portfolio review for FY 2025–26: Three goal-based portfolios, allocation strategy, drift correction and forex cost optimization."
 ---
 
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 > Used **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** to tag categories/asset classes to derive the XIRR.  
 > **Your data stays with you! All processing done in your browser!**
 >

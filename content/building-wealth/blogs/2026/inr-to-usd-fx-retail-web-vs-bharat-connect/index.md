@@ -15,6 +15,12 @@ wealth_tags:
 summary: "A comparison of foreign exchange rates for converting INR to USD across different channels like direct banking, FX Retail Web, and the newly discovered FX Retail via Bharat Connect."
 ---
 
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 Foreign exchange rates shown on Google or financial websites rarely reflect the **actual rate you get from banks**. Banks apply spreads, margins, and additional fees depending on the channel used to execute the transaction.
 
 > I rely on the **[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** (a tool I built) to calculate the true transaction cost and compare various forex rates.
