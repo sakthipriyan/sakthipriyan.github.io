@@ -13,6 +13,12 @@ wealth_tags:
 summary: "Options to invest in the NASDAQ 100 index from India — covering mutual funds, Indian ETFs, and the LRS route via Interactive Brokers — along with a comparison of Indian apps vs IBKR with UCITS ETFs, buying cost, and taxation."
 ---
 
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 The NASDAQ 100 has delivered around 23% CAGR in INR terms over the past decade, compared to 11–12% for Nifty 50 / Nifty Next 50. For Indian investors looking to diversify internationally and gain exposure to the world's leading tech companies, it is a compelling option.
 
 This post covers what the NASDAQ 100 is, the available routes to invest from India, a comparison of Indian apps vs direct international brokers, my personal choice, the full process, cost overhead, and tax implications.

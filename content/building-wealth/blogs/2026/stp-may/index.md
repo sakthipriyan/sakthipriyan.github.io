@@ -9,6 +9,13 @@ wealth_tags:
   - State Of The 1 Portfolio
 summary: "Monthly “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and rebalancing strategy"
 ---
+
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 I am publishing two portfolio reports:
 * **State of the Portfolio (Annual)** — published every April [[first edition here](/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/)]  
 * **State of the 1 Portfolio (Monthly)** — published every other month [Current one is the first edition]

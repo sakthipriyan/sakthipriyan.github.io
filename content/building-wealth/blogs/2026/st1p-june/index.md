@@ -9,6 +9,13 @@ wealth_tags:
   - State Of The 1 Portfolio
 summary: "June 2026 edition of “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and system optimizations"
 ---
+
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 Portfolio XIRR improved to 21.67%, drift remains contained at 2.86%, and this month's main change was moving from Proportional Drift Correction to Even Drift Optimization.
 
 I am publishing two portfolio reports:
