@@ -20,6 +20,12 @@ js_tools:
   - viz
 ---
 
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 When remitting money abroad, Indian investors face a persistent trade-off:
 
 - **Public banks** (e.g., Bank of Baroda): Lowest FX spreads on FX Retail, but slower manual execution

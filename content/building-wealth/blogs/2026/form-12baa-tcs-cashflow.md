@@ -12,6 +12,12 @@ wealth_tags:
 summary: "How salaried Indians investing internationally via LRS can use Form 12BAA to reduce cashflow drag from TCS, optimize compounding, and avoid capital lock-in."
 ---
 
+> **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
+>
+> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+
+---
+
 ## Who is this for?
 
 This applies to:
