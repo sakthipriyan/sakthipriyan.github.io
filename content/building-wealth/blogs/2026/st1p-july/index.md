@@ -18,7 +18,9 @@ summary: "July 2026 edition of “State of the 1 Portfolio” report covering po
 
 ---
 
-Portfolio XIRR stands at **20.34%**, total drift reduced to **1.97%**, and this month the portfolio continues its systematic drift correction.
+June 2026 was a month of leadership rotation. US equities and Gold cooled off while Indian equities recovered. Despite these market movements, this **monthly portfolio update** shows the **portfolio drift**  
+- reduced from **2.86%** to **1.97%** due to market movements and 
+- further reduced to **1.60%** using only fresh monthly investments—without selling any holdings.
 
 I am publishing two portfolio reports:
 
@@ -29,34 +31,52 @@ I am publishing two portfolio reports:
 
 The **1 Portfolio** represents the core long-term wealth portfolio, excluding the Emergency and Travel funds.
 
-## Portfolio Snapshot — July 2026
 
-| Metric               | Value                           |
-| -------------------- | ------------------------------- |
-| Portfolio Strategy   | **Global Multi-Asset Passive** Investing using<br/> **Indian Mutual Funds** & **Irish ETFs**      |
-| 1 Portfolio XIRR  | **20.34%** <span style="color:red">▼</span><br/><small>21.67%</small> |
-| Target Equity Allocation    | **85.00%** <small>(unchanged)</small> |
-| Current Equity Allocation    | **83.03%** <span style="color:green">▲</span><br/><small>81.43%</small> |
-| Equity Allocation           | **India: 43.81%** <span style="color:green">▲</span><br/><small>42.14%</small><br/>**US: 39.22%** <span style="color:red">▼</span><br/><small>40.07%</small>|
-| Rebalancing Method   | **[Perpetual Rebalancing](/building-wealth/tags/perpetual-rebalancing/)** |
-| Portfolio Drift      | **1.97%** <span style="color:green">▼</span><br/><small>2.86%</small> |
-| New Monthly Investment | **2.22%** <span style="color:red">▼</span><br/><small>2.60%</small> |
+## 1 Portfolio — Snapshot
+
+<table>
+  <tbody>
+    <tr>
+      <td>Portfolio Strategy</td>
+      <td colspan="4"><strong>Global Multi-Asset Passive</strong> Investing using<br/> <strong>Indian Mutual Funds</strong> &amp; <strong>Irish ETFs</strong></td>
+    </tr>
+    <tr>
+      <td>Equity Allocation</td>
+      <td>Target <small>(2026-27)</small><br/><strong>85.00%</strong><br/><small>(unchanged)</small></td>
+      <td>Current<br/><strong>83.03%</strong> <span style="color:green">▲</span><br/><small>81.43%</small></td>
+      <td>India<br/><strong>43.81%</strong> <span style="color:green">▲</span><br/><small>42.14%</small></td>
+      <td>US<br/><strong>39.22%</strong> <span style="color:red">▼</span><br/><small>40.07%</small></td>
+    </tr>
+    <tr>
+      <td>1 Portfolio</td>
+      <td>XIRR<br/><strong>20.34%</strong> <span style="color:red">▼</span><br/><small>21.67%</small></td>
+      <td>Drift<br/><strong>1.97%</strong> <span style="color:green">▼</span><br/><small>2.86%</small></td>
+      <td colspan="2">New Investment<br/><strong>2.22%</strong> <span style="color:red">▼</span><br/><small>2.60%</small></td>
+    </tr>
+    <tr>
+      <td>Rebalancing Method</td>
+      <td colspan="4"><strong><a href="/building-wealth/tags/perpetual-rebalancing/">Perpetual Rebalancing</a></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+> Although portfolio XIRR declined from 21.67% to 20.34%, the reduction was primarily driven by the cooling of previous outperformers (US equities and Gold) aided by currency appreciation. The portfolio itself became better diversified and closer to its target allocation.
 
 ## 1 Portfolio — Performance & Drift
 
 Following is the current state of the **1 Portfolio** as on July 1, 2026 before monthly investment.  
-Data compared to previous [State of the 1 Portfolio (June 2026)](/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/) report.
+Data is compared to the previous [State of the 1 Portfolio (June 2026)](/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/) report.
 
-| Asset Class | Age | XIRR | Growth Share | Current Allocation <br/><small>(on July 3, 2026)</small> | Target Allocation <br/><small>(for TY 2026-27)</small> | Drift |
+| Asset Class | Age | XIRR | Growth Share | Current Allocation <br/><small>(on July 1, 2026)</small> | Target Allocation <br/><small>(for TY 2026-27)</small> | Drift |
 | :--------------- | :---: | ---------: | -----------: | -------------------------------------------------------: | -----------------------------------------------------: | --------------------------------------: |
-| **Nasdaq 100**   | <abbr title="01 Jul 2022">4y</abbr> | 37.49% <span style="color:red">▼</span><br/><small>40.07%</small> | 61.39% <span style="color:red">▼</span><br/><small>63.61%</small> | 39.22% <span style="color:red">▼</span><br/><small>40.07%</small> | 40.00% | <span style="color:red">-0.78%</span> <span style="color:red">▼</span><br/><small>+0.07%</small> |
-| **Nifty 50**   | <abbr title="05 Jul 2022">4y</abbr> | 3.72% <span style="color:green">▲</span><br/><small>2.14%</small> | 4.88% <span style="color:green">▲</span><br/><small>2.55%</small> | 19.91% <span style="color:green">▲</span><br/><small>19.11%</small> | 20.00% | <span style="color:red">-0.09%</span> <span style="color:green">▲</span><br/><small>-0.89%</small> |
-| **Next 50**   | <abbr title="04 Jul 2025">1y</abbr> | 28.21% <span style="color:green">▲</span><br/><small>26.20%</small> | 3.53% <span style="color:green">▲</span><br/><small>2.57%</small> | 9.50% <span style="color:green">▲</span><br/><small>9.18%</small> | 10.00% | <span style="color:red">-0.50%</span> <span style="color:green">▲</span><br/><small>-0.82%</small> |
-| **Midcap 150**   | <abbr title="04 Jul 2025">1y</abbr> | 26.05% <span style="color:green">▲</span><br/><small>24.54%</small> | 3.35% <span style="color:green">▲</span><br/><small>2.48%</small> | 9.51% <span style="color:green">▲</span><br/><small>9.20%</small> | 10.00% | <span style="color:red">-0.49%</span> <span style="color:green">▲</span><br/><small>-0.80%</small> |
-| **Smallcap 250**   | <abbr title="04 Jul 2025">1y</abbr> | 48.03% <span style="color:green">▲</span><br/><small>43.24%</small> | 2.68% <span style="color:green">▲</span><br/><small>1.87%</small> | 4.89% <span style="color:green">▲</span><br/><small>4.65%</small> | 5.00% | <span style="color:red">-0.11%</span> <span style="color:green">▲</span><br/><small>-0.35%</small> |
-| **Debt**   | <abbr title="01 Jul 2022">4y</abbr> | 8.00% <span style="color:green">▲</span><br/><small>7.12%</small> | 3.81% <span style="color:green">▲</span><br/><small>3.11%</small> | 6.13% <span style="color:green">▲</span><br/><small>5.92%</small> | 5.00% | <span style="color:green">+1.13%</span> <span style="color:red">▲</span><br/><small>+0.92%</small> |
-| **Gold**   | <abbr title="01 Jul 2022">4y</abbr> | 34.40% <span style="color:red">▼</span><br/><small>41.81%</small> | 20.35% <span style="color:red">▼</span><br/><small>23.81%</small> | 10.84% <span style="color:red">▼</span><br/><small>11.87%</small> | 10.00% | <span style="color:green">+0.84%</span> <span style="color:green">▼</span><br/><small>+1.87%</small> |
-| **Total**        | | **20.34%** <span style="color:red">▼</span><br/><small>21.67%</small> | **100.00%** | **100.00%** | **100.00%** | **<span style="color:green">+1.97%</span>** <span style="color:green">▼</span><br/><small>+2.86%</small> |
+| **Nasdaq 100**   | <abbr title="01 Jul 2022">4y</abbr> | 37.49% <span style="color:red">▼</span><br/><small>40.07%</small> | 61.39% <span style="color:red">▼</span><br/><small>63.61%</small> | 39.22% <span style="color:red">▼</span><br/><small>40.07%</small> | 40.00% | -0.78% <span style="color:red">▼</span><br/><small>+0.07%</small> |
+| **Nifty 50**   | <abbr title="05 Jul 2022">4y</abbr> | 3.72% <span style="color:green">▲</span><br/><small>2.14%</small> | 4.88% <span style="color:green">▲</span><br/><small>2.55%</small> | 19.91% <span style="color:green">▲</span><br/><small>19.11%</small> | 20.00% | -0.09% <span style="color:green">▲</span><br/><small>-0.89%</small> |
+| **Next 50**   | <abbr title="04 Jul 2025">1y</abbr> | 28.21% <span style="color:green">▲</span><br/><small>26.20%</small> | 3.53% <span style="color:green">▲</span><br/><small>2.57%</small> | 9.50% <span style="color:green">▲</span><br/><small>9.18%</small> | 10.00% | -0.50% <span style="color:green">▲</span><br/><small>-0.82%</small> |
+| **Midcap 150**   | <abbr title="04 Jul 2025">1y</abbr> | 26.05% <span style="color:green">▲</span><br/><small>24.54%</small> | 3.35% <span style="color:green">▲</span><br/><small>2.48%</small> | 9.51% <span style="color:green">▲</span><br/><small>9.20%</small> | 10.00% | -0.49% <span style="color:green">▲</span><br/><small>-0.80%</small> |
+| **Smallcap 250**   | <abbr title="04 Jul 2025">1y</abbr> | 48.03% <span style="color:green">▲</span><br/><small>43.24%</small> | 2.68% <span style="color:green">▲</span><br/><small>1.87%</small> | 4.89% <span style="color:green">▲</span><br/><small>4.65%</small> | 5.00% | -0.11% <span style="color:green">▲</span><br/><small>-0.35%</small> |
+| **Debt**   | <abbr title="01 Jul 2022">4y</abbr> | 8.00% <span style="color:green">▲</span><br/><small>7.12%</small> | 3.81% <span style="color:green">▲</span><br/><small>3.11%</small> | 6.13% <span style="color:green">▲</span><br/><small>5.92%</small> | 5.00% | +1.13% <span style="color:red">▲</span><br/><small>+0.92%</small> |
+| **Gold**   | <abbr title="01 Jul 2022">4y</abbr> | 34.40% <span style="color:red">▼</span><br/><small>41.81%</small> | 20.35% <span style="color:red">▼</span><br/><small>23.81%</small> | 10.84% <span style="color:red">▼</span><br/><small>11.87%</small> | 10.00% | +0.84% <span style="color:green">▼</span><br/><small>+1.87%</small> |
+| **Total**        | | **20.34%** <span style="color:red">▼</span><br/><small>21.67%</small> | **100.00%** | **100.00%** | **100.00%** | **+1.97%** <span style="color:green">▼</span><br/><small>+2.86%</small> |
 
 ### Definitions
 
@@ -68,8 +88,7 @@ Data compared to previous [State of the 1 Portfolio (June 2026)](/building-wealt
 * **Drift**: Difference between current allocation and target allocation (positive = overweight, negative = underweight).
 * **Total Drift**: Calculated as the sum of positive deviations from target allocations. A higher drift indicates the portfolio is further away from its target allocation. Conceptually, it represents the percentage of the portfolio that would need to be sold and reallocated to reach the target allocation precisely (ignoring taxes, transaction costs, and other practical constraints).
 
-> Used **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** to tag goals/asset classes to derive the XIRR.  
-> **Your data stays with you! All processing done in your browser!**
+
 
 
 <div style="display: flex; gap: 20px;  align-items: flex-start; flex-wrap: wrap;">
@@ -182,9 +201,8 @@ Data compared to previous [State of the 1 Portfolio (June 2026)](/building-wealt
 
 </div>
 
-### Key Performance Drivers
+### Performance & Drift Observations
 
-> US Equity and Gold cooled off this month (aided in part by INR currency appreciation against the USD), while Indian Equities and Debt performed better.
 
 - **Concentrated Growth**: The **Nasdaq 100** remains the undisputed powerhouse, accounting for **61.39%** of the total growth share (though slightly down from 63.61% in June). Its XIRR cooled down to **37.49%** (from 40.07%). In terms of drift, it shifted from a slight overweight (+0.07%) to an underweight position (**-0.78%**).
 - **Domestic Lag & Improvement**: 
@@ -194,15 +212,12 @@ Data compared to previous [State of the 1 Portfolio (June 2026)](/building-wealt
 - **Gold Cooling Down**: Gold's performance cooled, with XIRR dropping to **34.40%** <small>(<span style="color:red">▼</span> 7.41% from 41.81% in June)</small>. However, its drift favorably decreased from a heavy +1.87% down to **+0.84%**—a positive outcome for an overweight asset returning towards its target.
 - **Debt Drift Rising**: **Debt** now carries the largest positive drift in the portfolio at **+1.13%**, an increase from +0.92% last month. Since Debt is already overweight, this drift increase is unfavorable for maintaining the target allocation and flags it as a priority for future correction.
 
-> In a globally diversified portfolio, performance leadership rotates continuously.
+> In a global multi asset portfolio, performance leadership rotates continuously.
 > The objective is not to predict the next winner, but to systematically rebalance capital toward undervalued assets.
-
-
-My strategy uses the **[Perpetual Rebalancing Framework](/building-wealth/blogs/drift-aware-portfolio-operating-system/)** to execute both **Value Buying** (allocating fresh capital to assets with negative drift using Forward Water-Filling) and **Momentum Capturing** (dynamically selling over 6 months to reduce overall drift from 10% to 5% using Reverse Water-Filling).
 
 ## Drift Correction aka Monthly Investment
 
-The table below consolidates the current state, monthly investment allocation and the target allocation in one view:
+The table below consolidates the current state, monthly investment allocation, post investment state and shows how drift is managed:
 
 | Asset Class | Current | Pre Drift | New Invest | Post Invest | Post Drift | Target |
 | :--------------- | ----------: | --------------------------------------: | ----------: | ----------: | --------------------------------------: | ----------: |
@@ -215,6 +230,7 @@ The table below consolidates the current state, monthly investment allocation an
 | **Gold**         |      10.84% | <span style="color:green">+0.84%</span> |       0.00% |      10.60% | <span style="color:green">+0.60%</span> |      10.00% |
 | **Total**   | **100.00%** | **1.97%** | **100.00%** | **100.00%** |  **1.60%** | **100.00%** |
 
+> A new allocation of **2.22%** resulted in a drift correction of **0.37%** (from **1.97%** to **1.60%**).
 
 ### Definitions
 - **Asset Class**: Underlying asset class part of the 1 Portfolio
@@ -226,13 +242,10 @@ The table below consolidates the current state, monthly investment allocation an
 - **Target**: Target allocation for the asset class
 - **Total Drift**: Drift is calculated as the sum of positive deviations from target allocations
 
-> Used the **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** for monthly allocation. \
-> Allocations are directed exclusively to underweight assets using the [Forward Water-Filling](/building-wealth/blogs/drift-aware-portfolio-operating-system/) algorithm to minimize overall portfolio drift.
-
 ```echarts
 {
     "height": "700px",
-    "title": { "text": "Drift Correction Impact", "left": "center" },
+    "title": { "text": "Drift Correction aka Monthly Investment", "left": "center" },
     "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
     "legend": { 
         "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening", "New Water Level"],
@@ -382,19 +395,19 @@ The table below consolidates the current state, monthly investment allocation an
 }
 ```
 
+**The new water level is computed using the Forward Water-Filling approach. Capital is distributed across underweight assets to raise their drift up to this new line.**
 
-
-
-> A new allocation of **2.22%** resulted in a drift correction of **0.37%** (from **1.97%** to **1.60%**).
-
+- Moving towards 0 is improvement and moving away from 0 is worsening.
+- **Pre Drift = Post Drift + Improvement** for Nasdaq 100, Next 50 and Midcap 150
+- **Pre Drift = Post Drift + Improvement(Evaporated)** for Debt and Gold
+- **Pre Drift = Post Drift - Worsening** for Nifty 50 and Smallcap 250
 
 ### Key Observations from this month's allocation
 * **Nasdaq 100 receives 59.01%** of the next investment. With a **-0.78% drift**, it is currently the most underweight asset class and therefore becomes the primary destination for fresh capital.
-* **Selective Equity Allocation** — The remaining investment is directed to **Next 50 (16.34%)**, **Midcap 150 (16.34%)**, and **Nifty 50 (8.31%)**. **Smallcap 250 receives no allocation**, as correcting larger drifts elsewhere provides a more efficient path toward the target portfolio.
+* **Selective Equity Allocation** — The remaining investment is directed to **Next 50 (16.34%)**, **Midcap 150 (16.34%)**, and **Nifty 50 (8.31%)**. **Smallcap 250 receives no allocation**, as it way above the new water level line. We need to let it cool down.
 * **Gold and Debt receive zero** — both assets remain overweight. By directing no new funds to these asset classes, their allocation gradually declines toward the target as the equity portion of the portfolio grows.
-* **Total portfolio drift reduces** from **1.97% to 1.60%** — a meaningful **0.37% correction** achieved solely through a single monthly cash flow, without requiring any sales or triggering potential tax consequences.
 
-## Tools Used
+## Investment Stack
 
 | Tool | Region | Type | Purpose |
 | :--- | :--- | :--- | :--- |
@@ -402,79 +415,99 @@ The table below consolidates the current state, monthly investment allocation an
 | **[CAMS Online](https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement)** | India | Reporting | Generating the combined reporting (CAS) which is imported into RealValue Portfolio. |
 | **[Interactive Brokers (IBKR)](https://www.interactivebrokers.co.in/en/home.php)** | International | Execution & Reporting | Execution and data source for Irish ETF tracking.<br/><small>Read **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)** [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/)</small> |
 | **[BHIM](https://www.bhimupi.org.in/) + [ICICI Bank](https://www.icicibank.com/)** | International | Execution | Sending money from Indian bank account to US broker account (INR to USD) in an efficient way using **[FX Retail](https://www.fxretail.co.in/)** and **[Bharat Connect Forex](https://www.bharat-connect.com/forex/)**. <br/><small>Read [FX Retail via Bharat Connect - Private Bank Speed at Public Bank Rates (A Live Transaction Walkthrough)](/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/)</small> |
-| **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** | All | Tracking | Browser-only tool built for tracking goals and asset classes, and computing the portfolio's XIRR. Supports importing data from Indian Mutual Funds & IBKR. |
-| **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** | All | Planning | Dynamic monthly investment planning tool for drift correction. <br/> <small>Implements  **[BUY Engine](/building-wealth/blogs/the-perpetual-rebalancing-framework/#34-buy-engine)** of [The Perpetual Rebalancing Framework](/building-wealth/blogs/the-perpetual-rebalancing-framework/).</small> |
+| **[RealValue FX Engine](/building-wealth/tools/realvalue-fx-engine/)** | International | Planning & Tracking | Computing the USD that we can send based on the allocated INR. |
+| **[RealValue Portfolio](/building-wealth/tools/realvalue-portfolio/)** | All | Tracking | Browser-only tool built for tracking goals and asset classes, and computing the portfolio's XIRR. Your data stays with you! Supports importing data from Indian Mutual Funds & IBKR. |
+| **[RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/)** | All | Planning | Used for dynamic monthly investment planning and drift correction allocation. <br/> <small>Implements  **[BUY Engine](/building-wealth/blogs/the-perpetual-rebalancing-framework/#34-buy-engine)** of [The Perpetual Rebalancing Framework](/building-wealth/blogs/the-perpetual-rebalancing-framework/).</small> |
 
 ## System Optimizations
 
-### Now: Salary Day = Investment Day
+### IBKR Desktop App
+I switched to use the IBKR desktop app instead of the web interface for placing orders and I found it much better than the web interface. I will continue using the desktop app for future transactions. It has options to select the exchanges directly, which I couldn't find on the web. Though I didn't change from SMART routing, I would like to try using it for future.
 
-Earlier, I transferred **fixed money** from my Salary Account to my Investment Account on the **1st of every month automatically**. Depending on weekends and holidays, deployment could be delayed by 3–5 days after salary credit.
+### The Perpetual Rebalancing Framework
+**Finally** I published [The Perpetual Rebalancing Framework](/building-wealth/blogs/the-perpetual-rebalancing-framework/) in detail. Following is the introduction from the article.
 
-#### Dynamic allocation
-This year, I moved from a fixed allocation model to a more dynamic one that considers the cash already available across supporting accounts such as Expense and Medical accounts. See [Managing Money Flows 2026](/building-wealth/slides/managing-money-flows-2026/) for more details on my bank account setup.
+---
 
-For example, if my Medical Account has a target balance of ₹10,000 and it already contains ₹5,000, I only need to top it up by ₹5,000 instead of transferring the usual ₹10,000. The remaining ₹5,000 can be redirected to investments immediately.
+The **Perpetual Rebalancing Framework** is a liquidity-aware, drift-aware, tax-aware and stateful portfolio **operating system** designed to support both phases of an investor's journey:
 
-#### Immediate deployment
-As a result, I can now manually move funds and invest on the same day the salary is credited rather than waiting until the start of the next month. Same-day deployment is feasible whenever there is adequate time between salary credit and the applicable transaction cut-off times and I am available to execute the transfers and investments:
+1. **Accumulation:** Building wealth through regular contributions.
+2. **Retirement:** Funding expenses while preserving long-term portfolio stability.
 
-* **Mutual Funds:** Before the applicable fund cut-off time (typically around **3:00 PM**) for the day's NAV.
-* **RBI FX-Retail (Bharat Connect):** Within the FX-Retail transaction window, which is typically **9:15 AM to 3:30 PM** on forex working days.
+The framework is built on **3 core principles**:
 
-A small optimization, but one that reduces idle cash, improves savings rate and capital efficiency, and allows investments to start compounding a few days earlier every month.
+1. **Liquidity First**: Maintain sufficient liquidity for emergencies during accumulation and for regular expenditures during retirement.
 
-### Even Drift Optimization
+2. **Risk Management**:
+   - **Passive Drift Control:** Use portfolio cash flows to continuously reduce **portfolio drift** month on month.
+   - **Active Drift Control:** Perform tax-aware **slow rebalancing** only when overall portfolio drift exceeds predefined thresholds.
 
-Earlier, I allocated new investments proportional to negative drift. **The larger the drift, the larger the allocation.**
+3. **Tax Efficiency**: Minimize taxes by preferentially realizing Long-Term Capital Gains (LTCG) while keeping portfolio turnover low.
 
-This month, I moved to an **even drift optimization** model. **Instead of simply reducing drift, the allocator attempts to leave all underweight asset classes with a similar post-investment drift.** The goal is to make the portfolio converge toward target allocation more uniformly over time. [Drift Correction aka Monthly Investment](#drift-correction-aka-monthly-investment) table shows that most of the post drift of the assets are at **-0.60%**.
-
-A side effect is that priority shifts toward larger asset classes. Under the earlier approach, asset classes with smaller target allocations often converged to their targets faster. With **Even Drift Optimization**, asset classes with larger target allocations are typically prioritized because they have a greater impact on the portfolio's overall drift profile, resulting in a more balanced convergence across the entire portfolio.
-
-See [Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator](/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/) for more details.
+---
 
 
 ## Execution Friction
-### Forex transaction cost
-The main challenge is that as the Nasdaq continues to rally, it becomes increasingly overweight relative to its target allocation. As a result, the allocator directs less and less new capital toward it.
+### Salary Day != Investment Day
+Last month i moved to **Salary Day = Investment Day**. I am investing on the same day I receive my salary.
 
-When the allocator is sending larger amounts to Nasdaq, transaction costs are less of a concern because the fixed forex remittance charges get spread across a larger investment amount. However, when the allocator only recommends a small allocation, the fixed components of the remittance cost become significant and can materially increase the effective transaction cost.
+Though the June salary landed on the last working day, I couldn't execute the plan as it was after the cut off time for Indian Mutual Funds and Forex remittance. I had to wait a day and then planned the investments using the 30th June EoD data (instead of 29th June).
 
-I am generally comfortable with transaction costs of up to around **1.5%**, as the potential opportunity cost of waiting until the next month could be higher if Nasdaq continues to perform well. The problem arises when the recommended investment amount falls into the low four-digit or even three-digit USD range, where fixed remittance fees become disproportionately expensive.
+### ICICI Money2World Website Outage
+On 1st July I started executing the indian mutual funds 3 of 4 funds invested across me/spouse folios. I kept the 4th fund along with the forex remittance as a buffer. Essentially I want to do the forex remittance to the IBKR before buying the last mutual fund.
 
-This is pushing me to explore alternatives such as **IDFC First Bank** and **AU Small Finance Bank**, both of which reportedly waive or reduce forex processing fees. For smaller transactions, eliminating the fixed processing fee can significantly reduce the overall cost and make frequent, low-volume deployments economically viable.
+**July 1**
+- Using BHIM I was able to create the Trade deal on FX Retail as required and money debited instantly via UPI
+- ICICI Money2World website was down till 5:30pm on July 1st, so couldn't do the forex remittance.
+- Once the website was functioning, I executed the trade deal on the website.
 
-### Transaction Mistakes
-I am still getting familiar with the IBKR web interface. While placing an order, I intended to reduce the quantity by **1 share**, but the **– button was adjusting the quantity by 10 shares** and I didn't notice before the order was executed.
+**July 2**
+- I kept getting multiple sms/emails/calls from the ICICI team asking me to utilize the deal, I told them that I did once the website was up and shared the reference id.
+- **12:48** ICICI usually reverses the BHIM UPI debit, debits the full amount again, and finally I receive these SMSs.
+- **13:24** Then I went and placed the buy order for the last Indian mutual fund.
+- **15:45** I reached out to the ICICI Phone Banking number to raise this issue of pending execution. He said it will likely get executed next day. I specifically told him I am concerned on the recent outage blocking my execution. He said he will reach out to the concerned team.
+- **16:36** I received the email on the transfer request completed. (...with the wrong SWIFT Copy PDF. It contained a manual LRS application form with another customer's government ID and sensitive data.). I suspect someone manually triggered this after my call and attached wrong file.
+- **17:11** Order completed in IBKR. Finally!
 
-As a result, I had to place additional corrective trades, which unnecessarily increased my brokerage costs. In previous transactions, my commissions were typically around **$1.90**, whereas this month I ended up paying roughly **$4.35 per order** across multiple orders.
+Unlike [this](/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/#transaction-timeline) documented transfer (which took ~90 minutes), this time it took almost 2 days. 
+This was a large transfer so Bank of Baroda setup I could have got few dollars extra. Contemplating to use it if this issue is recurring.
 
-The monetary impact is small, but it was entirely avoidable and serves as a reminder that execution details matter just as much as allocation decisions.
+**Learning**: Next time I have to check if the Money2World is up before creating the deal on FX Retail via BHIM. Otherwise I could use BoB setup.
 
-I suspect the IBKR Desktop application provides better visibility and control than the web interface. I'll likely explore it before the next transaction and pay closer attention to order quantities and estimated commissions before submitting trades.
+### Outcome
+I want to complete all my investments on June 30. But, it was dragged on till July 2. Let's see how the execution goes for the July 31 investment plan in the next report.
+
+## New Discovery
+
+### FX Retail/Bharat Connect Forex
+I have been using **BHIM** to create FX Retail Trade deals and execute them via ICICI Money2World as documented [here](/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/).
+
+- I explored **CRED** for FX Retail/Bharat Connect Forex option
+  - It has features to create the FX Retail Trade deal (Better interface compared to BHIM)
+  - I didn't create trade deal with it due to higher forex allocation for this month
+  - They had Net Banking option which can overcome the UPI limits of ₹5 lakhs. We can do upto $10k with it
+  - If this works well, I am unblocked upto $10k outwards remittance
+  - Probably, will test/publish the article for lower volume in future
+- Explored **Mobikwik** as well 
+  - This Forex option comes in search 
+  - But it is disabled for usage (When I touch the Forex icon on search result, nothing happens)
+
+### SIX Swiss Exchange vs. London Stock Exchange
+
+The **SIX Swiss Exchange (EBS)** is currently more expensive than the **London Stock Exchange (LSE)** for my transactions. However, several **low-TER Nasdaq 100 ETFs** are available only in **USD on SIX**, while the LSE alternatives generally have higher expense ratios. For a long-term portfolio, the lower TER can offset the higher trading costs within a few years.
+
+I will keep monitoring whether these ETFs are eventually listed on LSE in USD. While I could buy the EUR- or GBP-denominated listings on LSE/Xetra, that would add FX conversion costs, more tax-reporting overhead, and unnecessary EUR/GBP exposure.
+
+For now, I prefer paying the higher one-time trading cost on **SIX Swiss Exchange** to hold **lower-cost USD-denominated ETFs**.
 
 ## Reflections
-
-### What I learned
-- The recovery in equities improved the overall market value of the 1 Portfolio
-- Most importantly, **drift came down to 2.76% after new allocation but went up to 2.86% as of this writing**
-- Moved my investment day from first working day of month to last working day of previous month to improve capital deployment speed
-- Drift correction using Even Drift Optimization looks cleaner than proportional approach
-
 ### What I need to improve
-- Need to consistently hit the sub $2 for broker cost with single transaction
-- Fixed forex processing fees remain the biggest friction point for low-volume international allocations
-
-### New Discovery
-- As part of research for [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/) I discovered that [Gold ETCs](https://www.justetf.com/en/search.html?search=ETFS&index=Gold&dc=IE&quoteCurrency=USD&resetPage=true) (0.12% TER) are much cheaper than Indian Gold ETFs/Mutual Funds (0.29% to 0.90% TER) more details available in the upcoming chapter
+- Need to see if I can get lower brokerage cost by selecting the exchange option available in IBKR desktop
 
 ### Expected Allocation Trends
-- I expect US equity strength to continue for the next few months
-- Nasdaq will swing up so fast that I will stop allocating to it this year sometime
-- Nifty performance remains muted relative to global equities and may require policy catalysts to regain leadership
-- I will see Gold/Debt fund allocation by the allocator this year
-- At the current rate of drift reduction, a Zero Drift Portfolio appears increasingly achievable.
+- I will start allocating to gold much sooner than I anticipated
+- Debt fund allocation will happen later than gold
+- Zero Drift Portfolio appears increasingly achievable
 
 ## Transparency Note
 
