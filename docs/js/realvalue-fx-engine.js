@@ -333,7 +333,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                         <tr>
                                             <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem;">
                                                 <span>TCS @ 20% (refundable)</span>
-                                                <span class="help-icon help-icon-wide help-icon-above" data-tooltip="Tax Collected at Source under LRS. Levied at 20% on the gross INR amount exceeding ₹10,00,000 (Bank Rate × USD bought). You can claim this as tax credit in your ITR, and also submit Form 12BAA to your employer to adjust salary TDS where applicable.">ℹ️</span>
+                                                <span class="help-icon help-icon-wide help-icon-above" data-tooltip="Tax Collected at Source under LRS. Levied at 20% on the gross INR amount exceeding ₹10,00,000 (Bank Rate × USD bought). You can claim this as tax credit in your ITR, and also submit Form 122 to your employer to adjust salary TDS where applicable.">ℹ️</span>
                                             </td>
                                             <td style="padding: 0.4rem 0.75rem; text-align: right;" v-html="'₹' + formatINRHtml(preview.tcs)"></td>
                                         </tr>
@@ -598,8 +598,8 @@ window.initializeTool.fxTracker = function (container, config) {
                         </div>
                         <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total FX Charges</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #ef4444;" v-html="'₹' + formatINRHtml(summary.totalCharges)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #ef4444; margin-top: 0.2rem;">{{ (summary.totalCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: #ef4444;" v-html="'₹' + formatINRHtml(summary.totalBankCharges)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #ef4444; margin-top: 0.2rem;">{{ (summary.totalBankCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
                         <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total GST Paid</div>
@@ -609,6 +609,26 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Detail Table -->
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+                        <div class="mode-toggle">
+                            <button
+                                type="button"
+                                :class="{'active': txnViewMode === 'transaction'}"
+                                @click="txnViewMode = 'transaction'"
+                                style="white-space: nowrap;"
+                                title="Show what you paid: Exchange Amount, Processing Fee, GST">
+                                🧾 Transaction
+                            </button>
+                            <button
+                                type="button"
+                                :class="{'active': txnViewMode === 'analysis'}"
+                                @click="txnViewMode = 'analysis'"
+                                style="white-space: nowrap;"
+                                title="Show competitiveness: FX Interbank, FX Charges, GST">
+                                📈 Analysis
+                            </button>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="summary-table">
                             <thead>
@@ -619,8 +639,10 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <th style="text-align: center;">USD Bought</th>
                                     <th style="text-align: center;">INR Spent</th>
                                     <th style="text-align: center;">TCS</th>
-                                    <th style="text-align: center;">FX Interbank</th>
-                                    <th style="text-align: center;">FX Charges</th>
+                                    <th v-if="txnViewMode === 'transaction'" style="text-align: center;">Exchange Amount</th>
+                                    <th v-if="txnViewMode === 'analysis'"   style="text-align: center;">FX Interbank</th>
+                                    <th v-if="txnViewMode === 'transaction'" style="text-align: center;">Processing Fee</th>
+                                    <th v-if="txnViewMode === 'analysis'"   style="text-align: center;">FX Charges</th>
                                     <th style="text-align: center;">GST</th>
                                     <th style="min-width: 30px;"></th>
                                 </tr>
@@ -633,8 +655,12 @@ window.initializeTool.fxTracker = function (container, config) {
                                     <td style="text-align: right;" v-html="'$' + formatUSDHtml(txn.usdReceived)"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.inrSpent)"></td>
                                     <td style="text-align: right;" v-html="txn.tcs != null ? '₹' + formatINRHtml(txn.tcs) : '–'"></td>
-                                    <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.ibCost)"></td>
-                                    <td style="text-align: right;" v-html="'₹' + formatINRHtml((txn.fxSpread || 0) + (txn.processingFee || 0))"></td>
+                                    <!-- Col 7: Exchange Amount (Transaction) or FX Interbank (Analysis) -->
+                                    <td v-if="txnViewMode === 'transaction'" style="text-align: right;" v-html="'₹' + formatINRHtml(txn.grossINR)"></td>
+                                    <td v-if="txnViewMode === 'analysis'"   style="text-align: right;" v-html="'₹' + formatINRHtml(txn.ibCost)"></td>
+                                    <!-- Col 8: Processing Fee (Transaction) or FX Charges (Analysis) -->
+                                    <td v-if="txnViewMode === 'transaction'" style="text-align: right;" v-html="'₹' + formatINRHtml(txn.processingFee || 0)"></td>
+                                    <td v-if="txnViewMode === 'analysis'"   style="text-align: right;" v-html="'₹' + formatINRHtml((txn.fxSpread || 0) + (txn.processingFee || 0))"></td>
                                     <td style="text-align: right;" v-html="'₹' + formatINRHtml(txn.gst)"></td>
                                     <td style="text-align: center;">
                                         <button
@@ -680,14 +706,14 @@ window.initializeTool.fxTracker = function (container, config) {
                         <div class="input-group" style="margin: 0; min-width: 200px;">
                             <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                                 <span>TCS Adjustment Method</span>
-                                <span class="help-icon help-icon-wide" data-tooltip="When predicting the refund schedule, assume either Form 12BAA (monthly payroll adjustment) or standard ITR Filing.">ℹ️</span>
+                                <span class="help-icon help-icon-wide" data-tooltip="When predicting the refund schedule, assume either Form 122 (monthly payroll adjustment) or standard ITR Filing.">ℹ️</span>
                             </label>
                             <div class="unit-buttons">
                                 <button 
                                     type="button"
                                     :class="{'active': form.use12BAA}"
                                     @click="form.use12BAA = true; debouncedCalculate()">
-                                    Form 12BAA (Monthly)
+                                    Form 122 (Monthly)
                                 </button>
                                 <button 
                                     type="button"
@@ -823,6 +849,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 transactions: [],
                 comparisonItems: [],
                 selectedFY: null,
+                txnViewMode: 'transaction',
                 showComparisonTable: false,
                 debounceTimer: null,
                 suppressAutoInterbankSync: false,
@@ -912,6 +939,9 @@ window.initializeTool.fxTracker = function (container, config) {
                     totalTCS += t.tcs || 0;
                     totalIBCost += t.ibCost || 0;
                 });
+                const totalBankCharges = this.filteredTransactions.reduce(
+                    (sum, t) => sum + (t.fxSpread || 0) + (t.processingFee || 0), 0
+                );
 
                 // Calculate Opportunity Cost directly from the schedule column
                 let totalOppCost = 0;
@@ -919,7 +949,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     totalOppCost += row.oppCost || 0;
                 }
 
-                return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalTCS, totalIBCost, totalOppCost };
+                return { totalINRSpent, totalUSDBought, totalGST, totalCharges, totalBankCharges, totalTCS, totalIBCost, totalOppCost };
             },
             exportJSON() {
                 if (!this.preview.valid) return '';
@@ -1021,7 +1051,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 return enriched.reverse(); // newest-first for display
             },
             tcsDragSchedule() {
-                const txns = this.computedTransactions.filter(t => t.tcs > 0);
+                const txns = this.filteredTransactions.filter(t => t.tcs > 0);
                 if (txns.length === 0) return [];
 
                 // Group by FY

@@ -1,218 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Building machine learning models | Sakthi Priyan H</title>
-    <meta name="description" content="using scala spark"><link rel="stylesheet" href="https://sakthipriyan.com/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css">
-</head>
-<body class="building-systems"><header class="site-header">
-    <nav class="main-nav">
-        
-            
-            
-            
-            
-            
-            <div class="logo">
-                <a href="https://sakthipriyan.com/" class="name-link">Sakthi Priyan H</a>
-                <span class="separator"> | </span>
-                
-                <a href="/building-systems/" class="name-link">Building Systems</a>
-            </div>
-            
-            
-            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            
-            <ul class="nav-links">
-                
-                
-                
-                
-                
-                    
-                    
-                    
-                        
-                            
-                            <li><a href="https://sakthipriyan.com/building-systems/about/">About</a></li>
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
-                            
-                                <li><a href="https://sakthipriyan.com/building-systems/blogs/">Blogs</a></li>
-                            
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
-                            
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
-                            
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
-                            
-                            
-                                
-                                    
-                                
-                            
-                            
-                                <li><a href="https://sakthipriyan.com/building-systems/tags/">Tags</a></li>
-                            
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
-                            
-                        
-                    
-                
-                    
-                    
-                    
-                        
-                            
-                            
-                        
-                    
-                
-            </ul>
-        
-    </nav>
-</header>
-<nav class="breadcrumb" aria-label="breadcrumb">
-    <ol class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a href="https://sakthipriyan.com/">Home</a>
-        </li>
-            
-            
-                
-                
-                
-                
-                
-                
-                
-                
-                <li class="breadcrumb-item">
-                    
-                        <a href="/building-systems/">Building Systems</a>
-                    
-                </li>
-                
-                
-                
-                
-                
-                    
-                    
-                        
-                        
-                        <li class="breadcrumb-item">
-                            
-                                <a href="/building-systems/blogs/">Blogs</a>
-                            
-                        </li>
-                        
-                    
-                
-            
-            
-            
-            
-            <li class="breadcrumb-item active" aria-current="page">
-                <span>Building machine learning models</span>
-            </li>
-            
-        </ol>
-</nav>
-
-    <main>
-<article class="blog-post">
-    
-<header class="content-header">
-    <h1 class="content-title">Building machine learning models</h1>
-    <p class="content-summary">using scala spark</p>
-
-    <div class="content-meta">
-        <span class="meta-item">
-            <span class="meta-icon">📅</span>
-            <time datetime="2018-12-25">Dec 25, 2018</time>
-        </span>
-        <span class="meta-item" title="Last Updated">
-            <span class="meta-icon">🔄</span>
-            <time datetime="2025-11-20">Nov 20, 2025</time>
-        </span>
-        <span class="meta-item" title="View Source on GitHub">
-            <span class="meta-icon">💻</span>
-            <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2018/building-machine-learning-models-using-scala-spark.md" target="_blank" rel="noopener noreferrer">Source</a>
-        </span>
-        
-        <span class="meta-item">
-            <span class="meta-icon">📖</span>
-            <span class="read-time">13 min read</span>
-        </span>
-    </div>
-
-    <hr class="content-divider">
-</header>
-
-    <div class="post-content">
-        <h3 id="intro">Intro</h3>
-<p>This is continuation with the previous posts,</p>
-<ul>
-<li><a href="../../../2018/11/24/learning-scala-spark-basics.html">Learning Scala Spark basics</a></li>
-<li><a href="../../../2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html">Feature engineering for machine learning models</a></li>
-</ul>
-<blockquote>
-<p>You need to complete <a href="../../../2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html">Feature engineering for machine learning models</a> before proceeding.</p>
-</blockquote>
-<h3 id="handson2scala">HandsOn2.scala</h3>
-<p>This is the file used in previous post, where, at the end we had single feature engineered DataFrame.</p>
-<p>At the end we will add storeDF method</p>
-<pre><code>def storeDF(dataFrame: DataFrame, path: String) = {
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Building machine learning models | Sakthi Priyan H</title><meta name=description content="using scala spark"><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
+<span class=hamburger-line></span>
+<span class=hamburger-line></span>
+<span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Building machine learning models</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Building machine learning models</h1><p class=content-summary>using scala spark</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
+<time datetime=2018-12-25>Dec 25, 2018</time>
+</span><span class=meta-item title="Last Updated"><span class=meta-icon>🔄</span>
+<time datetime=2025-11-20>Nov 20, 2025</time>
+</span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
+<a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2018/building-machine-learning-models-using-scala-spark.md target=_blank rel="noopener noreferrer">Source</a>
+</span><span class=meta-item><span class=meta-icon>📖</span>
+<span class=read-time>13 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=intro>Intro</h3><p>This is continuation with the previous posts,</p><ul><li><a href=../../../2018/11/24/learning-scala-spark-basics.html>Learning Scala Spark basics</a></li><li><a href=../../../2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html>Feature engineering for machine learning models</a></li></ul><blockquote><p>You need to complete <a href=../../../2018/12/06/feature-engineering-for-machine-learning-models-using-scala-spark.html>Feature engineering for machine learning models</a> before proceeding.</p></blockquote><h3 id=handson2scala>HandsOn2.scala</h3><p>This is the file used in previous post, where, at the end we had single feature engineered DataFrame.</p><p>At the end we will add storeDF method</p><pre><code>def storeDF(dataFrame: DataFrame, path: String) = {
   dataFrame.write.option(&quot;header&quot;, &quot;true&quot;).csv(path)
 }
-</code></pre>
-<p>In the main method, we will store the moviesFeaturedDF at the end.</p>
-<pre><code>val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
+</code></pre><p>In the main method, we will store the moviesFeaturedDF at the end.</p><pre><code>val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
 storeDF(moviesFeaturedDF.repartition(1), moviesFeaturedFile)
-</code></pre>
-<p>We are repartitioning it so that it is stored as a single file. We shouldn&rsquo;t do this in most of the cases.</p>
-<h3 id="lets-inspect-the-output">Let&rsquo;s inspect the output</h3>
-<pre><code>$ ls -lh ../../../Downloads/ml-latest-small/movies-featured.csv
+</code></pre><p>We are repartitioning it so that it is stored as a single file. We shouldn&rsquo;t do this in most of the cases.</p><h3 id=lets-inspect-the-output>Let&rsquo;s inspect the output</h3><pre><code>$ ls -lh ../../../Downloads/ml-latest-small/movies-featured.csv
 total 600
 -rw-r--r--  1 sakthipriyan  staff     0B Dec 25 12:19 _SUCCESS
 -rw-r--r--  1 sakthipriyan  staff   298K Dec 25 12:19 part-00000-538b57a1-58c0-4801-9258-fbd806151d80-c000.csv
@@ -228,14 +30,7 @@ movieId,title,label,gCount,tCount,Drama,Comedy,Romance,Thriller,Action,Adventure
 14,Nixon (1995),0.0,1,2,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 16,Casino (1995),0.0,2,1,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 17,Sense and Sensibility (1995),0.0,2,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-</code></pre>
-<p>As you can see, the <code>moviesFeaturedFile</code> is written as CSV file in the output.<br>
-Without repartition, it might have been multiple files as output.</p>
-<h3 id="handson3scala">HandsOn3.scala</h3>
-<p>Let&rsquo;s move on to the building the machine learning models now.</p>
-<p>Following is the scala source code for <code>HandsOn3.scala</code>.<br>
-We will be writing all the new steps into the <code>def main(args: Array[String])</code></p>
-<pre><code>import org.apache.spark.sql.{DataFrame, SparkSession}
+</code></pre><p>As you can see, the <code>moviesFeaturedFile</code> is written as CSV file in the output.<br>Without repartition, it might have been multiple files as output.</p><h3 id=handson3scala>HandsOn3.scala</h3><p>Let&rsquo;s move on to the building the machine learning models now.</p><p>Following is the scala source code for <code>HandsOn3.scala</code>.<br>We will be writing all the new steps into the <code>def main(args: Array[String])</code></p><pre><code>import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
 object HandsOn3 {
@@ -266,12 +61,7 @@ object HandsOn3 {
     // More code goes here.
   }
 }
-</code></pre>
-<h3 id="train-and-test-dataframes">Train and Test DataFrames</h3>
-<h4 id="moviesfeatureddf">moviesFeaturedDF</h4>
-<p>Which will be used for training and testing the model.</p>
-<p><strong>Schema</strong></p>
-<pre><code>moviesFeaturedDF.printSchema()
+</code></pre><h3 id=train-and-test-dataframes>Train and Test DataFrames</h3><h4 id=moviesfeatureddf>moviesFeaturedDF</h4><p>Which will be used for training and testing the model.</p><p><strong>Schema</strong></p><pre><code>moviesFeaturedDF.printSchema()
 root
 |-- movieId: integer (nullable = true)
 |-- title: string (nullable = true)
@@ -317,9 +107,7 @@ root
 |-- dark: double (nullable = true)
 |-- mental illness: double (nullable = true)
 |-- tComedy: double (nullable = true)
-</code></pre>
-<p><strong>Sample Data</strong></p>
-<pre><code>moviesFeaturedDF.show(5)
+</code></pre><p><strong>Sample Data</strong></p><pre><code>moviesFeaturedDF.show(5)
 +-------+--------------------+-----+------+------+-----+------+-------+--------+------+---------+-----+------+-------+-------+--------+------+---------+-------+---+-----------+---------+----+-------+----------------+-----------+---------+------+--------+-----+------+-------+----------+-----------------+------+--------+--------+------------------+-------+-----------+------------+----+--------------+-------+
 |movieId|               title|label|gCount|tCount|Drama|Comedy|Romance|Thriller|Action|Adventure|Crime|Sci-Fi|Mystery|Fantasy|Children|Horror|Animation|Musical|War|Documentary|Film-Noir|IMAX|Western|In Netflix queue|atmospheric|superhero|Disney|religion|funny|quirky|surreal|psychology|thought-provoking|tCrime|suspense|politics|visually appealing|tSci-fi|dark comedy|twist ending|dark|mental illness|tComedy|
 +-------+--------------------+-----+------+------+-----+------+-------+--------+------+---------+-----+------+-------+-------+--------+------+---------+-------+---+-----------+---------+----+-------+----------------+-----------+---------+------+--------+-----+------+-------+----------+-----------------+------+--------+--------+------------------+-------+-----------+------------+----+--------------+-------+
@@ -330,9 +118,7 @@ root
 |      7|      Sabrina (1995)|  1.0|     2|     1|  0.0|   1.0|    1.0|     0.0|   0.0|      0.0|  0.0|   0.0|    0.0|    0.0|     0.0|   0.0|      0.0|    0.0|0.0|        0.0|      0.0| 0.0|    0.0|             0.0|        0.0|      0.0|   0.0|     0.0|  0.0|   0.0|    0.0|       0.0|              0.0|   0.0|     0.0|     0.0|               0.0|    0.0|        0.0|         0.0| 0.0|           0.0|    0.0|
 +-------+--------------------+-----+------+------+-----+------+-------+--------+------+---------+-----+------+-------+-------+--------+------+---------+-------+---+-----------+---------+----+-------+----------------+-----------+---------+------+--------+-----+------+-------+----------+-----------------+------+--------+--------+------------------+-------+-----------+------------+----+--------------+-------+
 only showing top 5 rows
-</code></pre>
-<h4 id="lets-create-train-and-test">Let&rsquo;s create train and test</h4>
-<pre><code>def trainAndTest(df:DataFrame, features: Array[String]): (DataFrame,DataFrame) = {
+</code></pre><h4 id=lets-create-train-and-test>Let&rsquo;s create train and test</h4><pre><code>def trainAndTest(df:DataFrame, features: Array[String]): (DataFrame,DataFrame) = {
 
   // Data Transformation
   val assembler = new VectorAssembler().setInputCols(features).setOutputCol(&quot;features&quot;)
@@ -348,25 +134,9 @@ only showing top 5 rows
   // Return train and test as Tuple
   (train,test)
 }
-</code></pre>
-<ul>
-<li>We will use <a href="https://spark.apache.org/docs/2.2.0/ml-features.html#vectorassembler">VectorAssembler</a> to transform the input as required by most Machine Learning models in Spark.</li>
-<li>We will use <code>data.randomSplit</code> to split input dataFrame into train and test.</li>
-</ul>
-<h4 id="in-main-method">In main method</h4>
-<pre><code>val features = Array(&quot;gCount&quot;,&quot;tCount&quot;, &quot;Drama&quot;)
+</code></pre><ul><li>We will use <a href=https://spark.apache.org/docs/2.2.0/ml-features.html#vectorassembler>VectorAssembler</a> to transform the input as required by most Machine Learning models in Spark.</li><li>We will use <code>data.randomSplit</code> to split input dataFrame into train and test.</li></ul><h4 id=in-main-method>In main method</h4><pre><code>val features = Array(&quot;gCount&quot;,&quot;tCount&quot;, &quot;Drama&quot;)
 val (train,test) = trainAndTest(moviesFeaturedDF, features)
-</code></pre>
-<ul>
-<li>List of features used for training the model.</li>
-<li>In this case, I had picked <code>gCount</code>, <code>tCount</code> and <code>Drama</code></li>
-</ul>
-<h3 id="machine-learning-model">Machine Learning Model</h3>
-<p>We will go through <a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#multilayer-perceptron-classifier">Multilayer perceptron classifier</a> machine learning models as part of this post.</p>
-<h4 id="multilayer-perceptron-classifier-mlpc">Multilayer perceptron classifier (MLPC)</h4>
-<p>Multilayer perceptron classifier (MLPC) is a classifier based on the <a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feedforward artificial neural network</a>.</p>
-<h4 id="train-mlpc-model-using-given-features-and-train-dataframe">Train MLPC model using given features and train DataFrame</h4>
-<pre><code>def trainMLPC(train:DataFrame, features: Array[String]) : MultilayerPerceptronClassificationModel = {
+</code></pre><ul><li>List of features used for training the model.</li><li>In this case, I had picked <code>gCount</code>, <code>tCount</code> and <code>Drama</code></li></ul><h3 id=machine-learning-model>Machine Learning Model</h3><p>We will go through <a href=https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#multilayer-perceptron-classifier>Multilayer perceptron classifier</a> machine learning models as part of this post.</p><h4 id=multilayer-perceptron-classifier-mlpc>Multilayer perceptron classifier (MLPC)</h4><p>Multilayer perceptron classifier (MLPC) is a classifier based on the <a href=https://en.wikipedia.org/wiki/Feedforward_neural_network>feedforward artificial neural network</a>.</p><h4 id=train-mlpc-model-using-given-features-and-train-dataframe>Train MLPC model using given features and train DataFrame</h4><pre><code>def trainMLPC(train:DataFrame, features: Array[String]) : MultilayerPerceptronClassificationModel = {
 
   // Setting up Hyper Parameters. Specify layers for the neural network:
   // Input layer of size (features.length), 
@@ -386,33 +156,20 @@ val (train,test) = trainAndTest(moviesFeaturedDF, features)
   // This would train the MultilayerPerceptronClassifier for the given data and hyper parameters.
   trainer.fit(train)
 }
-</code></pre>
-<ul>
-<li>In the <code>layers</code> we can change the intermediate hidden layers</li>
-<li>Next we have to invoke this one in main.</li>
-</ul>
-<h4 id="train-mlpc-using-train-dataset-and-selected-features">Train MLPC using train dataset and selected features</h4>
-<p>In the main, add following.</p>
-<pre><code>val mlpcModel =  trainMLPC(train,features)
-</code></pre>
-<h4 id="lets-test-the-model-for-accuracy">Let&rsquo;s test the model for accuracy.</h4>
-<pre><code>// Here, we apply the MLPC model built using train data on the test dataset.
+</code></pre><ul><li>In the <code>layers</code> we can change the intermediate hidden layers</li><li>Next we have to invoke this one in main.</li></ul><h4 id=train-mlpc-using-train-dataset-and-selected-features>Train MLPC using train dataset and selected features</h4><p>In the main, add following.</p><pre><code>val mlpcModel =  trainMLPC(train,features)
+</code></pre><h4 id=lets-test-the-model-for-accuracy>Let&rsquo;s test the model for accuracy.</h4><pre><code>// Here, we apply the MLPC model built using train data on the test dataset.
 val resultMLPC = mlpcModel.transform(test)
 
 // This method detailed below will print the accuracy of the model on the test data.
 printAccuracy(resultMLPC)
-</code></pre>
-<p>Following is the <code>printAccuracy</code> that will print the accuracy of the model by comparing the actual vs predicted class.</p>
-<pre><code>def printAccuracy(dataFrame: DataFrame, features: Array[String]): Unit = {
+</code></pre><p>Following is the <code>printAccuracy</code> that will print the accuracy of the model by comparing the actual vs predicted class.</p><pre><code>def printAccuracy(dataFrame: DataFrame, features: Array[String]): Unit = {
   val predictionAndLabels = dataFrame.select(&quot;prediction&quot;, &quot;label&quot;)
   val evaluator = new MulticlassClassificationEvaluator().setMetricName(&quot;accuracy&quot;)
   println(&quot;Accuracy = &quot; +
     s&quot;${(100 * evaluator.evaluate(predictionAndLabels)).formatted(&quot;%.2f&quot;)}%&quot; +
     s&quot; Features: ${features.mkString(&quot;, &quot;)}. &quot;)
 }
-</code></pre>
-<h4 id="full-main-method">Full main method</h4>
-<pre><code>def main(args: Array[String]): Unit = {
+</code></pre><h4 id=full-main-method>Full main method</h4><pre><code>def main(args: Array[String]): Unit = {
   
   // Init spark and load dataframe
   val spark = getSpark()
@@ -432,15 +189,10 @@ printAccuracy(resultMLPC)
   // Print the accuracy of the model.
   printAccuracy(resultMLPC, features)
 }
-</code></pre>
-<h4 id="automated-run-using-various-combinations-of-the-features">Automated run using various combinations of the features</h4>
-<p>In this function, all subset of the given features are derived and empty set is filtered out.</p>
-<pre><code>def getFeatures(features: Array[String]): List[Array[String]] = {
+</code></pre><h4 id=automated-run-using-various-combinations-of-the-features>Automated run using various combinations of the features</h4><p>In this function, all subset of the given features are derived and empty set is filtered out.</p><pre><code>def getFeatures(features: Array[String]): List[Array[String]] = {
   features.toSet.subsets().toList.filter(set =&gt; set.size &gt; 0).map(set =&gt; set.toArray)
 }
-</code></pre>
-<p>Updated main method with iterations.</p>
-<pre><code>def main(args: Array[String]): Unit = {
+</code></pre><p>Updated main method with iterations.</p><pre><code>def main(args: Array[String]): Unit = {
   // Init spark and load dataFrame
   val spark = getSpark()
   val moviesFeaturedFile = &quot;../../../Downloads/ml-latest-small/movies-featured.csv&quot;
@@ -463,10 +215,7 @@ printAccuracy(resultMLPC)
     printAccuracy(resultMLPC, features)
   }
 }
-</code></pre>
-<h4 id="iterations">Iterations</h4>
-<p>Output of the above program with given set of features.</p>
-<pre><code>Accuracy = 38.46% Features: Thriller. 
+</code></pre><h4 id=iterations>Iterations</h4><p>Output of the above program with given set of features.</p><pre><code>Accuracy = 38.46% Features: Thriller. 
 Accuracy = 45.79% Features: tCount. 
 Accuracy = 40.29% Features: Comedy. 
 Accuracy = 47.25% Features: Romance. 
@@ -593,173 +342,12 @@ Accuracy = 53.85% Features: Thriller, tCount, Romance, Drama, gCount, Action.
 Accuracy = 52.75% Features: Thriller, Comedy, Romance, Drama, gCount, Action. 
 Accuracy = 54.58% Features: tCount, Comedy, Romance, Drama, gCount, Action. 
 Accuracy = 57.88% Features: Thriller, tCount, Comedy, Romance, Drama, gCount, Action. 
-</code></pre>
-<p><strong>Accuracy = 58.24% Features: tCount, gCount, Action.</strong>
-As you can see, this one has given most accuracy so for.</p>
-<h3 id="next">Next</h3>
-<p>In next post, we can simplify this problem to binary classification instead of multi class classification. We will be using both <a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#random-forest-classifier">Random forest classifier</a> and <a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#multilayer-perceptron-classifier">Multilayer perceptron classifier</a> machine learning models to compare against each other.</p>
-<h3 id="code-download">Code Download</h3>
-<ul>
-<li><a href="https://github.com/sakthipriyan/learning-spark">https://github.com/sakthipriyan/learning-spark</a> has full source code.</li>
-</ul>
-<h3 id="references">References</h3>
-<ol>
-<li><a href="https://spark.apache.org/docs/2.2.0/sql-programming-guide.html">https://spark.apache.org/docs/2.2.0/sql-programming-guide.html</a></li>
-<li><a href="https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset">https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset</a></li>
-<li><a href="https://spark.apache.org/docs/2.2.0/ml-classification-regression.html">https://spark.apache.org/docs/2.2.0/ml-classification-regression.html</a></li>
-<li><a href="https://spark.apache.org/docs/2.2.0/ml-features.html">https://spark.apache.org/docs/2.2.0/ml-features.html</a></li>
-</ol>
-
-    </div>
-
-    
-<footer class="content-footer">
-    <hr class="content-divider">
-    
-    
-    <div class="card-tags">
-        <span class="tags-icon">🏷️</span>
-        
-        <a href="https://sakthipriyan.com/building-systems/tags/spark/" class="tag-link">Spark</a>
-        
-        <a href="https://sakthipriyan.com/building-systems/tags/scala/" class="tag-link">Scala</a>
-        
-        <a href="https://sakthipriyan.com/building-systems/tags/sbt/" class="tag-link">Sbt</a>
-        
-        <a href="https://sakthipriyan.com/building-systems/tags/bigdata/" class="tag-link">Bigdata</a>
-        
-        <a href="https://sakthipriyan.com/building-systems/tags/code/" class="tag-link">Code</a>
-        
-        <a href="https://sakthipriyan.com/building-systems/tags/machine-learning/" class="tag-link">Machine-Learning</a>
-    </div>
-    <div class="content-comments">
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = 'sakthipriyan';
-            (function () {
-                var dsq = document.createElement('script');
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-                Disqus.</a></noscript>
-    </div>
-</footer>
-</article>
-
-    </main><footer class="site-footer">
-    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
-</footer><script>
-            function runHighlightJS() {
-                if (window.hljs) { hljs.highlightAll(); }
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js" onload="runHighlightJS()"></script>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    <script>
-    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        var gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
-        document.head.appendChild(gaScript);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-5NGEJ767SK');
-    }
-</script><script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            
-            console.log('Hamburger menu initialized', { hamburger, navLinks });
-            
-            if (hamburger && navLinks) {
-                
-                const overlay = document.createElement('div');
-                overlay.className = 'nav-overlay';
-                document.body.appendChild(overlay);
-                
-                console.log('Overlay created and added to body');
-                
-                
-                hamburger.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    
-                    
-                    const isExpanded = hamburger.classList.contains('active');
-                    hamburger.setAttribute('aria-expanded', isExpanded);
-                    
-                    
-                    document.body.style.overflow = isExpanded ? 'hidden' : '';
-                    
-                    console.log('Menu toggled', { isExpanded });
-                });
-                
-                
-                overlay.addEventListener('click', function() {
-                    console.log('Overlay clicked - closing menu');
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    overlay.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                });
-                
-                
-                const navLinksElements = navLinks.querySelectorAll('a');
-                console.log('Found nav links:', navLinksElements.length);
-                
-                navLinksElements.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        console.log('Link clicked:', link.href);
-                        
-                        
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        overlay.classList.remove('active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    });
-                });
-                
-                
-                window.addEventListener('resize', function() {
-                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
-                        console.log('Window resized - closing menu');
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        overlay.classList.remove('active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    }
-                });
-            } else {
-                console.warn('Hamburger menu elements not found');
-            }
-        });
-    </script>
-
-</body>
-</html>
+</code></pre><p><strong>Accuracy = 58.24% Features: tCount, gCount, Action.</strong>
+As you can see, this one has given most accuracy so for.</p><h3 id=next>Next</h3><p>In next post, we can simplify this problem to binary classification instead of multi class classification. We will be using both <a href=https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#random-forest-classifier>Random forest classifier</a> and <a href=https://spark.apache.org/docs/2.2.0/ml-classification-regression.html#multilayer-perceptron-classifier>Multilayer perceptron classifier</a> machine learning models to compare against each other.</p><h3 id=code-download>Code Download</h3><ul><li><a href=https://github.com/sakthipriyan/learning-spark>https://github.com/sakthipriyan/learning-spark</a> has full source code.</li></ul><h3 id=references>References</h3><ol><li><a href=https://spark.apache.org/docs/2.2.0/sql-programming-guide.html>https://spark.apache.org/docs/2.2.0/sql-programming-guide.html</a></li><li><a href=https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset>https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset</a></li><li><a href=https://spark.apache.org/docs/2.2.0/ml-classification-regression.html>https://spark.apache.org/docs/2.2.0/ml-classification-regression.html</a></li><li><a href=https://spark.apache.org/docs/2.2.0/ml-features.html>https://spark.apache.org/docs/2.2.0/ml-features.html</a></li></ol></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<a href=https://sakthipriyan.com/building-systems/tags/spark/ class=tag-link>Spark</a>
+<a href=https://sakthipriyan.com/building-systems/tags/scala/ class=tag-link>Scala</a>
+<a href=https://sakthipriyan.com/building-systems/tags/sbt/ class=tag-link>Sbt</a>
+<a href=https://sakthipriyan.com/building-systems/tags/bigdata/ class=tag-link>Bigdata</a>
+<a href=https://sakthipriyan.com/building-systems/tags/code/ class=tag-link>Code</a>
+<a href=https://sakthipriyan.com/building-systems/tags/machine-learning/ class=tag-link>Machine-Learning</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>

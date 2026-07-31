@@ -103,7 +103,7 @@ Every transaction you add is stored in your browser and displayed in a sortable 
 
 Because Tax Collected at Source (TCS) is deducted immediately but only recovered later, that capital is temporarily locked away. This delay creates an **opportunity cost** (cashflow drag). RealValue FX Engine now tracks and quantifies this loss dynamically:
 
-- **Adjustment Methods**: You can configure how you plan to recover the TCS. Choose **Form 12BAA (Monthly)** if you've submitted the TCS certificate to your employer to reduce your monthly TDS. Choose **ITR Filing** if you plan to claim it as a refund, along with your **Expected Refund By** date (e.g., Oct 31, Jan 31).
+- **Adjustment Methods**: You can configure how you plan to recover the TCS. Choose **Form 122 (Monthly)** if you've submitted the TCS certificate to your employer to reduce your monthly TDS. Choose **ITR Filing** if you plan to claim it as a refund, along with your **Expected Refund By** date (e.g., Oct 31, Jan 31).
 - **Your XIRR (%)**: Enter your expected annual compound growth rate. The engine applies this rate daily to the pending TCS balance to compute exactly how much money you effectively lose while waiting for the tax credit.
 - **TCS Opportunity Cost Table**: A dedicated chronological schedule below the history table maps out every TCS payment and adjustment event, keeping a running tally of your pending TCS and calculating the accrued opportunity cost at every step.
 
@@ -153,8 +153,14 @@ All data is stored exclusively in your **browser's localStorage**. Nothing is se
 
 ## Changelog
 
+### 2026-07-31
+- **FY Dropdown Filter**: Added a Financial Year selector to the Transaction History section. Defaults to the latest FY with transactions. Filters both the transaction table, all five summary tiles, and the TCS Opportunity Cost schedule to the selected FY.
+- **Transaction / Analysis View Toggle**: Added a two-mode toggle above the transaction table. Transaction view shows Exchange Amount + Processing Fee (how your payment was split). Analysis view shows FX Interbank + FX Charges (how competitive the rate was). GST and all other columns remain the same across both views.
+- **Total FX Charges Card**: Scoped to bank-specific charges only (FX Markup + Processing Fee). GST, which is a government levy, is already captured separately in the Total GST Paid card.
+- **Form 12BAA renamed to Form 122**: Updated all references in the tool.
+
 ### 2026-03-21
 - **Compare Rates Feature**: Added a comprehensive side-by-side comparison engine. Evaluate multiple bank rates via horizontal summary cards and an exploded granular table displaying exact components like FX Spread, GST breakdowns, and Transaction Cost percentages. Highlights the best rate based on the lowest Transaction Cost. Improved UI and neutralized financial terminology across the tool.
 
 ### 2026-03-20
-- **TCS Opportunity Cost Module**: Added an interactive chronological schedule that dynamically tracks and visualizes the exact monetary opportunity cost (XIRR) of having your capital temporarily locked up by the government in TCS. The module explicitly contrasts the capital drag of the traditional **ITR Refund** timeline against using **Form 12BAA** for immediate employer salary TDS adjustment!
+- **TCS Opportunity Cost Module**: Added an interactive chronological schedule that dynamically tracks and visualizes the exact monetary opportunity cost (XIRR) of having your capital temporarily locked up by the government in TCS. The module explicitly contrasts the capital drag of the traditional **ITR Refund** timeline against using **Form 122** for immediate employer salary TDS adjustment!
