@@ -1,7 +1,7 @@
 ---
 title: "Filing Income Tax for FY 2025-26: A Schedule-by-Schedule Breakdown of ITR-2"
 date: "2026-07-29"
-draft: false
+draft: true
 type: "blogs"
 wealth_tags:
   - Income Tax
