@@ -1123,6 +1123,80 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         targetDrift = -lockedFinal / solvableAssets.length;
                     }
                 }
+                
+                // Check if International assets are starved due to investor constraints
+                let splitMode = false;
+                let intlRawReqs = {};
+                let domRawReqs = {};
+                
+                if (solvableAssets.length > 0) {
+                    let globalIntlGrossReq = 0;
+                    solvableAssets.forEach(asset => {
+                        if (asset.isInternational) {
+                            const rawRequired = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                            const netInvestment = Math.max(0, rawRequired);
+                            globalIntlGrossReq += (anyInvestorHasTcs) ? netInvestment * TCS_MULTIPLIER : netInvestment;
+                        }
+                    });
+                    
+                    const intlCapacity = this.investors
+                        .filter(inv => inv.international)
+                        .reduce((sum, inv) => sum + this.getInvestorAmount(inv), 0);
+                        
+                    if (globalIntlGrossReq > intlCapacity) {
+                        splitMode = true;
+                        
+                        // Recompute precise newTotal for split mode
+                        let intlNetAlloc = 0;
+                        this.investors.filter(inv => inv.international).forEach(inv => {
+                            const cap = this.getInvestorAmount(inv);
+                            intlNetAlloc += (inv.tcs) ? cap / TCS_MULTIPLIER : cap;
+                        });
+                        
+                        const domCapacity = totalNewInvestment - intlCapacity;
+                        let domNetAlloc = domCapacity; // No TCS on domestic
+                        
+                        newTotal = currentTotal + intlNetAlloc + domNetAlloc;
+                        
+                        const solveExactSubset = (subset, netBudget) => {
+                            let fixed = new Set();
+                            let d = 0;
+                            let solvable = [];
+                            for (let iter = 0; iter < subset.length + 2; iter++) {
+                                solvable = subset.filter(a => !fixed.has(a.name));
+                                if (solvable.length === 0) { d = 0; break; }
+                                
+                                let sumV = 0, sumW = 0;
+                                solvable.forEach(a => { sumV += a.currentValue; sumW += a.targetPercent/100; });
+                                
+                                d = ((netBudget + sumV) / newTotal - sumW) / solvable.length;
+                                
+                                let violated = false;
+                                for (const a of solvable) {
+                                    if ((a.targetPercent/100 + d)*newTotal - a.currentValue < 0) {
+                                        fixed.add(a.name);
+                                        violated = true;
+                                        break;
+                                    }
+                                }
+                                if (!violated) break;
+                            }
+                            
+                            const reqs = {};
+                            subset.forEach(a => {
+                                if (fixed.has(a.name)) reqs[a.name] = 0;
+                                else reqs[a.name] = (a.targetPercent/100 + d)*newTotal - a.currentValue;
+                            });
+                            return reqs;
+                        };
+                        
+                        const intlAssets = allAssetsEnriched.filter(a => a.isInternational);
+                        intlRawReqs = solveExactSubset(intlAssets, intlNetAlloc);
+                        
+                        const domAssets = allAssetsEnriched.filter(a => !a.isInternational);
+                        domRawReqs = solveExactSubset(domAssets, domNetAlloc);
+                    }
+                }
 
                 // If all assets ended up fixed, show current state with no allocation
                 if (solvableAssets.length === 0) {
@@ -1159,9 +1233,18 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 // Build assetAllocations from targetDrift for solvable assets
                 const assetAllocations = [];
                 let totalBudgetConsumed = 0;
+                
+                let finalRawReqs = {};
+                if (splitMode) {
+                    finalRawReqs = { ...intlRawReqs, ...domRawReqs };
+                } else {
+                    solvableAssets.forEach(asset => {
+                        finalRawReqs[asset.name] = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                    });
+                }
 
-                solvableAssets.forEach(asset => {
-                    const rawRequired = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                allAssetsEnriched.forEach(asset => {
+                    const rawRequired = finalRawReqs[asset.name] || 0;
                     const netInvestment = Math.max(0, rawRequired);
                     const roundedAmount = Math.round(netInvestment / roundOff) * roundOff;
 
@@ -1188,19 +1271,20 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     let maxDiff = -Infinity;
                     let bestAssetName = null;
 
-                    solvableAssets.forEach(asset => {
-                        const rawRequired = (asset.targetPercent / 100 + targetDrift) * newTotal - asset.currentValue;
+                    allAssetsEnriched.forEach(asset => {
+                        const allocation = assetAllocations.find(a => a.name === asset.name);
+                        if (!allocation) return;
+                        
+                        const rawRequired = finalRawReqs[asset.name] || 0;
                         const netInvestment = Math.max(0, rawRequired);
-                        const roundedAmount = Math.round(netInvestment / roundOff) * roundOff;
-                        const diff = netInvestment - roundedAmount; // positive = was rounded down
+                        const diff = netInvestment - allocation.amount; // positive = was rounded down
 
                         // Budget cost of adding one more roundOff to this asset
                         const additionalBudget = (anyInvestorHasTcs && asset.isInternational)
                             ? roundOff * TCS_MULTIPLIER
                             : roundOff;
 
-                        const allocation = assetAllocations.find(a => a.name === asset.name);
-                        if (allocation && diff > maxDiff && additionalBudget <= remainingBudget) {
+                        if (diff > maxDiff && additionalBudget <= remainingBudget) {
                             maxDiff = diff;
                             bestAssetName = asset.name;
                         }
@@ -1291,11 +1375,17 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     }
                     
                     // Apply allocation
-                    invData.allocations.push({
-                        asset: asset.name,
-                        amount: investment,
-                        tcs: tcs
-                    });
+                    const existingAlloc = invData.allocations.find(a => a.asset === asset.name);
+                    if (existingAlloc) {
+                        existingAlloc.amount += investment;
+                        existingAlloc.tcs += tcs;
+                    } else {
+                        invData.allocations.push({
+                            asset: asset.name,
+                            amount: investment,
+                            tcs: tcs
+                        });
+                    }
                     invData.remaining -= total;
                     asset.amount -= investment;
                 };
@@ -1359,6 +1449,54 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         }
                         
                         if (!allocated) break;
+                    }
+                }
+                
+                // PHASE 3: Fallback allocation for restricted unallocated cash
+                // If any investor still has cash because they were restricted from investing
+                // in globally under-allocated assets, greedily allocate their remaining
+                // cash to their allowable non-slab assets, one roundOff at a time.
+                for (const invData of investorData) {
+                    while (invData.remaining >= roundOff) {
+                        let bestRawAsset = null;
+                        let lowestScore = Infinity;
+                        
+                        for (const rawAsset of allAssetsEnriched) {
+                            if (rawAsset.hasSlabRate) continue; // Only non-slab assets
+                            if (rawAsset.isInternational && !invData.internationalEnabled) continue;
+                            
+                            let totalAllocated = 0;
+                            investorData.forEach(inv => {
+                                const alloc = inv.allocations.find(al => al.asset === rawAsset.name);
+                                if (alloc) totalAllocated += alloc.amount;
+                            });
+                            
+                            const postValue = rawAsset.currentValue + totalAllocated;
+                            const score = postValue / rawAsset.targetPercent;
+                            
+                            if (score < lowestScore) {
+                                lowestScore = score;
+                                bestRawAsset = rawAsset;
+                            }
+                        }
+                        
+                        if (bestRawAsset) {
+                            let assetObj = nonSlabAssets.find(a => a.name === bestRawAsset.name);
+                            if (!assetObj) {
+                                assetObj = {
+                                    name: bestRawAsset.name,
+                                    amount: 0,
+                                    isSlabAsset: bestRawAsset.hasSlabRate,
+                                    isInternational: bestRawAsset.isInternational,
+                                    originalAsset: bestRawAsset
+                                };
+                                nonSlabAssets.push(assetObj);
+                            }
+                            assetObj.amount += roundOff;
+                            allocate(invData, assetObj, roundOff);
+                        } else {
+                            break;
+                        }
                     }
                 }
                 
