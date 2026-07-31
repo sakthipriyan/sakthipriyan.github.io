@@ -207,84 +207,84 @@
 <h2 id="typical-bank-flow">Typical Bank Flow</h2>
 <p>Banks offer straightforward remittance portals for sending money abroad:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Bank</th>
-          <th>Flow</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ICICI Bank</td>
-          <td>Savings Account → Money2World → IBKR</td>
-      </tr>
-      <tr>
-          <td>HDFC Bank</td>
-          <td>Savings Account → RemitNow → IBKR</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Bank</th>
+					<th>Flow</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ICICI Bank</td>
+					<td>Savings Account → Money2World → IBKR</td>
+			</tr>
+			<tr>
+					<td>HDFC Bank</td>
+					<td>Savings Account → RemitNow → IBKR</td>
+			</tr>
+	</tbody>
 </table>
 <p>This works smoothly, but the FX conversion rate often includes a significant hidden spread.</p>
 <h2 id="typical-bank-fx-markup">Typical Bank FX Markup</h2>
 <p>In many cases banks charge around ₹1.75 per USD markup over the interbank rate.</p>
 <p>For example, if you send $1000 (assuming 1 USD = ₹91.85 interbank rate, bank rate = ₹93.60):</p>
 <table>
-  <thead>
-      <tr>
-          <th>Component</th>
-          <th>Calculation</th>
-          <th style="text-align: right">Cost</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Bank FX spread</td>
-          <td>1000 × ₹1.75</td>
-          <td style="text-align: right">₹1,750</td>
-      </tr>
-      <tr>
-          <td>FX conversion GST</td>
-          <td>18% × (1% × ₹93,600)</td>
-          <td style="text-align: right">₹168</td>
-      </tr>
-      <tr>
-          <td>Processing fee</td>
-          <td>Flat</td>
-          <td style="text-align: right">₹1,000</td>
-      </tr>
-      <tr>
-          <td>GST on processing fee</td>
-          <td>18% × ₹1,000</td>
-          <td style="text-align: right">₹180</td>
-      </tr>
-      <tr>
-          <td><strong>Total extra cost</strong></td>
-          <td></td>
-          <td style="text-align: right"><strong>₹3,098</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Component</th>
+					<th>Calculation</th>
+					<th style="text-align: right">Cost</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Bank FX spread</td>
+					<td>1000 × ₹1.75</td>
+					<td style="text-align: right">₹1,750</td>
+			</tr>
+			<tr>
+					<td>FX conversion GST</td>
+					<td>18% × (1% × ₹93,600)</td>
+					<td style="text-align: right">₹168</td>
+			</tr>
+			<tr>
+					<td>Processing fee</td>
+					<td>Flat</td>
+					<td style="text-align: right">₹1,000</td>
+			</tr>
+			<tr>
+					<td>GST on processing fee</td>
+					<td>18% × ₹1,000</td>
+					<td style="text-align: right">₹180</td>
+			</tr>
+			<tr>
+					<td><strong>Total extra cost</strong></td>
+					<td></td>
+					<td style="text-align: right"><strong>₹3,098</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>The FX spread alone can cost more than the processing fee. For investors funding their global brokerage regularly, this adds up quickly.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Rate</th>
-          <th style="text-align: right">Value (per USD)</th>
-          <th style="text-align: right">% Over Interbank</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Market rate (interbank)</td>
-          <td style="text-align: right">₹91.85</td>
-          <td style="text-align: right">—</td>
-      </tr>
-      <tr>
-          <td>Effective rate (total cost ÷ $1000)</td>
-          <td style="text-align: right">₹94.95</td>
-          <td style="text-align: right">3.38%</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Rate</th>
+					<th style="text-align: right">Value (per USD)</th>
+					<th style="text-align: right">% Over Interbank</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Market rate (interbank)</td>
+					<td style="text-align: right">₹91.85</td>
+					<td style="text-align: right">—</td>
+			</tr>
+			<tr>
+					<td>Effective rate (total cost ÷ $1000)</td>
+					<td style="text-align: right">₹94.95</td>
+					<td style="text-align: right">3.38%</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="discovering-fx-retail">Discovering FX Retail</h2>
 <p>To reduce this cost I started using <strong><a href="https://www.fxretail.co.in/">FX Retail</a></strong>, a forex dealing platform launched in August 2019 by the <a href="https://www.ccilindia.com/">Clearing Corporation of India (CCIL)</a> under a directive from the <a href="https://www.rbi.org.in/">Reserve Bank of India (RBI)</a>.</p>
@@ -312,30 +312,30 @@
 </ul>
 <p>Here is what I observed:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Bank</th>
-          <th>Default</th>
-          <th>Negotiated</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ICICI</td>
-          <td>1.75%</td>
-          <td>No response yet</td>
-      </tr>
-      <tr>
-          <td>HDFC</td>
-          <td>1.2%</td>
-          <td>₹0.50 per USD</td>
-      </tr>
-      <tr>
-          <td>Bank of Baroda</td>
-          <td>—</td>
-          <td>₹0.10 per USD (offered)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Bank</th>
+					<th>Default</th>
+					<th>Negotiated</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ICICI</td>
+					<td>1.75%</td>
+					<td>No response yet</td>
+			</tr>
+			<tr>
+					<td>HDFC</td>
+					<td>1.2%</td>
+					<td>₹0.50 per USD</td>
+			</tr>
+			<tr>
+					<td>Bank of Baroda</td>
+					<td>—</td>
+					<td>₹0.10 per USD (offered)</td>
+			</tr>
+	</tbody>
 </table>
 <p>HDFC responded quickly and reduced the spread to <strong>50 paise per USD</strong> based on various factors.</p>
 <p>ICICI has not responded so far. (Tried reaching out via multiple channels since 3 Feb 2026)</p>
@@ -371,25 +371,25 @@
 <h3 id="step-2-complete-bank-remittance">Step 2: Complete Bank Remittance</h3>
 <p>Login to the bank&rsquo;s remittance portal and enter the Trade ID:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Bank</th>
-          <th>Portal</th>
-          <th>Action</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>HDFC</td>
-          <td>RemitNow</td>
-          <td>Enter Trade ID → Execute transfer</td>
-      </tr>
-      <tr>
-          <td>ICICI</td>
-          <td>Money2World</td>
-          <td>Enter Trade ID → Execute transfer</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Bank</th>
+					<th>Portal</th>
+					<th>Action</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>HDFC</td>
+					<td>RemitNow</td>
+					<td>Enter Trade ID → Execute transfer</td>
+			</tr>
+			<tr>
+					<td>ICICI</td>
+					<td>Money2World</td>
+					<td>Enter Trade ID → Execute transfer</td>
+			</tr>
+	</tbody>
 </table>
 <p>The bank then settles the transaction using the FX rate locked in FX Retail.</p>
 <h2 id="documentation-differences">Documentation Differences</h2>
@@ -416,102 +416,102 @@ I used bank statement as reference for 12BAA form.</p>
 <h2 id="cost-comparison">Cost Comparison</h2>
 <p>For a $1000 transfer (interbank rate = ₹91.85/USD):</p>
 <table>
-  <thead>
-      <tr>
-          <th>Component</th>
-          <th style="text-align: right">Direct Bank</th>
-          <th style="text-align: right">FX Retail @ 50p</th>
-          <th style="text-align: right">FX Retail @ 10p</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>FX spread</td>
-          <td style="text-align: right">₹1,750</td>
-          <td style="text-align: right">₹500</td>
-          <td style="text-align: right">₹100</td>
-      </tr>
-      <tr>
-          <td>FX rate used</td>
-          <td style="text-align: right">₹93.60/USD</td>
-          <td style="text-align: right">₹92.35/USD</td>
-          <td style="text-align: right">₹91.95/USD</td>
-      </tr>
-      <tr>
-          <td>FX amount (1000 × rate)</td>
-          <td style="text-align: right">₹93,600</td>
-          <td style="text-align: right">₹92,350</td>
-          <td style="text-align: right">₹91,950</td>
-      </tr>
-      <tr>
-          <td>FX conversion GST (18% × 1% × FX amount)</td>
-          <td style="text-align: right">₹168</td>
-          <td style="text-align: right">₹166</td>
-          <td style="text-align: right">₹166</td>
-      </tr>
-      <tr>
-          <td>Processing fee</td>
-          <td style="text-align: right">₹1,000</td>
-          <td style="text-align: right">₹1,000</td>
-          <td style="text-align: right">₹1,000</td>
-      </tr>
-      <tr>
-          <td>GST on processing fee (18% × ₹1,000)</td>
-          <td style="text-align: right">₹180</td>
-          <td style="text-align: right">₹180</td>
-          <td style="text-align: right">₹180</td>
-      </tr>
-      <tr>
-          <td><strong>Total paid</strong></td>
-          <td style="text-align: right"><strong>₹94,948</strong></td>
-          <td style="text-align: right"><strong>₹93,696</strong></td>
-          <td style="text-align: right"><strong>₹93,296</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Effective rate</strong> (total ÷ $1000)</td>
-          <td style="text-align: right"><strong>₹94.95/USD</strong></td>
-          <td style="text-align: right"><strong>₹93.70/USD</strong></td>
-          <td style="text-align: right"><strong>₹93.30/USD</strong></td>
-      </tr>
-      <tr>
-          <td><strong>% over interbank</strong></td>
-          <td style="text-align: right"><strong>3.38%</strong></td>
-          <td style="text-align: right"><strong>2.01%</strong></td>
-          <td style="text-align: right"><strong>1.58%</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Component</th>
+					<th style="text-align: right">Direct Bank</th>
+					<th style="text-align: right">FX Retail @ 50p</th>
+					<th style="text-align: right">FX Retail @ 10p</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>FX spread</td>
+					<td style="text-align: right">₹1,750</td>
+					<td style="text-align: right">₹500</td>
+					<td style="text-align: right">₹100</td>
+			</tr>
+			<tr>
+					<td>FX rate used</td>
+					<td style="text-align: right">₹93.60/USD</td>
+					<td style="text-align: right">₹92.35/USD</td>
+					<td style="text-align: right">₹91.95/USD</td>
+			</tr>
+			<tr>
+					<td>FX amount (1000 × rate)</td>
+					<td style="text-align: right">₹93,600</td>
+					<td style="text-align: right">₹92,350</td>
+					<td style="text-align: right">₹91,950</td>
+			</tr>
+			<tr>
+					<td>FX conversion GST (18% × 1% × FX amount)</td>
+					<td style="text-align: right">₹168</td>
+					<td style="text-align: right">₹166</td>
+					<td style="text-align: right">₹166</td>
+			</tr>
+			<tr>
+					<td>Processing fee</td>
+					<td style="text-align: right">₹1,000</td>
+					<td style="text-align: right">₹1,000</td>
+					<td style="text-align: right">₹1,000</td>
+			</tr>
+			<tr>
+					<td>GST on processing fee (18% × ₹1,000)</td>
+					<td style="text-align: right">₹180</td>
+					<td style="text-align: right">₹180</td>
+					<td style="text-align: right">₹180</td>
+			</tr>
+			<tr>
+					<td><strong>Total paid</strong></td>
+					<td style="text-align: right"><strong>₹94,948</strong></td>
+					<td style="text-align: right"><strong>₹93,696</strong></td>
+					<td style="text-align: right"><strong>₹93,296</strong></td>
+			</tr>
+			<tr>
+					<td><strong>Effective rate</strong> (total ÷ $1000)</td>
+					<td style="text-align: right"><strong>₹94.95/USD</strong></td>
+					<td style="text-align: right"><strong>₹93.70/USD</strong></td>
+					<td style="text-align: right"><strong>₹93.30/USD</strong></td>
+			</tr>
+			<tr>
+					<td><strong>% over interbank</strong></td>
+					<td style="text-align: right"><strong>3.38%</strong></td>
+					<td style="text-align: right"><strong>2.01%</strong></td>
+					<td style="text-align: right"><strong>1.58%</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>For investors funding regularly, the savings compound significantly over time.</p>
 <p>The table below shows how the effective rate and markup percentage change across transfer amounts. As the amount increases, fixed fees (processing + GST) get diluted, so the effective rate improves slightly:</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">Amount</th>
-          <th style="text-align: right">Direct Bank</th>
-          <th style="text-align: right">FX Retail @ 50p</th>
-          <th style="text-align: right">FX Retail @ 10p</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">$1,000</td>
-          <td style="text-align: right">₹94.95 / +3.38%</td>
-          <td style="text-align: right">₹93.70 / +2.01%</td>
-          <td style="text-align: right">₹93.30 / +1.58%</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">$5,000</td>
-          <td style="text-align: right">₹93.94 / +2.27%</td>
-          <td style="text-align: right">₹92.69 / +0.91%</td>
-          <td style="text-align: right">₹92.29 / +0.48%</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">$10,000</td>
-          <td style="text-align: right">₹93.81 / +2.13%</td>
-          <td style="text-align: right">₹92.56 / +0.77%</td>
-          <td style="text-align: right">₹92.16 / +0.34%</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">Amount</th>
+					<th style="text-align: right">Direct Bank</th>
+					<th style="text-align: right">FX Retail @ 50p</th>
+					<th style="text-align: right">FX Retail @ 10p</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">$1,000</td>
+					<td style="text-align: right">₹94.95 / +3.38%</td>
+					<td style="text-align: right">₹93.70 / +2.01%</td>
+					<td style="text-align: right">₹93.30 / +1.58%</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">$5,000</td>
+					<td style="text-align: right">₹93.94 / +2.27%</td>
+					<td style="text-align: right">₹92.69 / +0.91%</td>
+					<td style="text-align: right">₹92.29 / +0.48%</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">$10,000</td>
+					<td style="text-align: right">₹93.81 / +2.13%</td>
+					<td style="text-align: right">₹92.56 / +0.77%</td>
+					<td style="text-align: right">₹92.16 / +0.34%</td>
+			</tr>
+	</tbody>
 </table>
 <p><em>Each cell shows effective rate per USD and % over interbank (₹91.85). FX conversion GST = 18% on the forex service charge, computed per Rule 32(2) of CGST Rules: ≤₹1 lakh → 1% of gross INR amount (min ₹45); ₹1–10 lakh → ₹1,000 + 0.5% on amount over ₹1 lakh; &gt;₹10 lakh → ₹5,500 + 0.1% on amount over ₹10 lakh (max ₹60,000).</em></p>
 <h2 id="important-risk">Important Risk</h2>

@@ -237,146 +237,146 @@
 <h3 id="how-the-four-costs-are-calculated">How the Four Costs Are Calculated</h3>
 <p>For a $1,000 transaction (interbank rate ₹91.85, bank rate ₹93.60, processing fee ₹1,000):</p>
 <table>
-  <thead>
-      <tr>
-          <th>Component</th>
-          <th>Calculation</th>
-          <th>Cost</th>
-          <th>Per $1</th>
-          <th>% vs Interbank</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Bank FX Spread</td>
-          <td>1,000 × (₹93.60 − ₹91.85)</td>
-          <td>₹1,750</td>
-          <td>₹1.75</td>
-          <td>1.90%</td>
-      </tr>
-      <tr>
-          <td>FX Conversion GST</td>
-          <td>18% × Rule-32 taxable value</td>
-          <td>₹168</td>
-          <td>₹0.17</td>
-          <td>0.18%</td>
-      </tr>
-      <tr>
-          <td>Processing Fee</td>
-          <td>Flat</td>
-          <td>₹1,000</td>
-          <td>₹1.00</td>
-          <td>1.09%</td>
-      </tr>
-      <tr>
-          <td>GST on Processing Fee</td>
-          <td>18% × ₹1,000</td>
-          <td>₹180</td>
-          <td>₹0.18</td>
-          <td>0.20%</td>
-      </tr>
-      <tr>
-          <td><strong>Total Extra Cost</strong></td>
-          <td></td>
-          <td><strong>₹3,098</strong></td>
-          <td><strong>₹3.10</strong></td>
-          <td><strong>3.37%</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Component</th>
+					<th>Calculation</th>
+					<th>Cost</th>
+					<th>Per $1</th>
+					<th>% vs Interbank</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Bank FX Spread</td>
+					<td>1,000 × (₹93.60 − ₹91.85)</td>
+					<td>₹1,750</td>
+					<td>₹1.75</td>
+					<td>1.90%</td>
+			</tr>
+			<tr>
+					<td>FX Conversion GST</td>
+					<td>18% × Rule-32 taxable value</td>
+					<td>₹168</td>
+					<td>₹0.17</td>
+					<td>0.18%</td>
+			</tr>
+			<tr>
+					<td>Processing Fee</td>
+					<td>Flat</td>
+					<td>₹1,000</td>
+					<td>₹1.00</td>
+					<td>1.09%</td>
+			</tr>
+			<tr>
+					<td>GST on Processing Fee</td>
+					<td>18% × ₹1,000</td>
+					<td>₹180</td>
+					<td>₹0.18</td>
+					<td>0.20%</td>
+			</tr>
+			<tr>
+					<td><strong>Total Extra Cost</strong></td>
+					<td></td>
+					<td><strong>₹3,098</strong></td>
+					<td><strong>₹3.10</strong></td>
+					<td><strong>3.37%</strong></td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="rule-322b-cgst--fx-taxable-value">Rule 32(2)(b) CGST — FX Taxable Value</h4>
 <p>India&rsquo;s GST Act prescribes a deemed-value slab for the FX conversion service:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Transaction Amount (Gross INR)</th>
-          <th>Rule 32(2) Taxable Value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Up to ₹1,00,000</td>
-          <td>1% of amount (minimum ₹45)</td>
-      </tr>
-      <tr>
-          <td>₹1,00,001 – ₹10,00,000</td>
-          <td>₹1,000 + 0.5% of amount above ₹1,00,000</td>
-      </tr>
-      <tr>
-          <td>Above ₹10,00,000</td>
-          <td>₹5,500 + 0.1% of amount above ₹10,00,000 (max ₹60,000)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Transaction Amount (Gross INR)</th>
+					<th>Rule 32(2) Taxable Value</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Up to ₹1,00,000</td>
+					<td>1% of amount (minimum ₹45)</td>
+			</tr>
+			<tr>
+					<td>₹1,00,001 – ₹10,00,000</td>
+					<td>₹1,000 + 0.5% of amount above ₹1,00,000</td>
+			</tr>
+			<tr>
+					<td>Above ₹10,00,000</td>
+					<td>₹5,500 + 0.1% of amount above ₹10,00,000 (max ₹60,000)</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>18% GST</strong> is then levied on the taxable value above. This is separate from the flat processing fee which also attracts 18% GST.</p>
 <h4 id="tcs--tax-collected-at-source">TCS — Tax Collected at Source</h4>
 <p>Under Section 206C(1G) of the Income Tax Act, banks collect TCS on LRS remittances. The threshold and rate reset every financial year (April 1 – March 31):</p>
 <table>
-  <thead>
-      <tr>
-          <th>Cumulative Gross INR in FY</th>
-          <th>TCS Rate</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Up to ₹10,00,000</td>
-          <td>0%</td>
-      </tr>
-      <tr>
-          <td>Above ₹10,00,000</td>
-          <td>20% on the excess</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Cumulative Gross INR in FY</th>
+					<th>TCS Rate</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Up to ₹10,00,000</td>
+					<td>0%</td>
+			</tr>
+			<tr>
+					<td>Above ₹10,00,000</td>
+					<td>20% on the excess</td>
+			</tr>
+	</tbody>
 </table>
 <p>RealValue FX Engine accumulates gross INR <strong>in chronological date order</strong> across all your logged Buy USD transactions for the current FY to determine the correct TCS for each deal. TCS is a refundable advance tax — it does not represent a permanent cost.</p>
 <h3 id="transaction-log--history">Transaction Log &amp; History</h3>
 <p>Every transaction you add is stored in your browser and displayed in a sortable history table with these columns:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Column</th>
-          <th>What it shows</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Date</strong></td>
-          <td>Trade settlement date</td>
-      </tr>
-      <tr>
-          <td><strong>Bank</strong></td>
-          <td>Bank or broker name</td>
-      </tr>
-      <tr>
-          <td><strong>Trans ID</strong></td>
-          <td>Your deal / transaction reference</td>
-      </tr>
-      <tr>
-          <td><strong>USD Bought</strong></td>
-          <td>Actual USD received for this transaction</td>
-      </tr>
-      <tr>
-          <td><strong>Gross INR Spent</strong></td>
-          <td>Total INR debited including TCS</td>
-      </tr>
-      <tr>
-          <td><strong>Net INR Spent</strong></td>
-          <td>INR spent excluding refundable TCS</td>
-      </tr>
-      <tr>
-          <td><strong>Charges</strong></td>
-          <td>FX spread + processing fee (permanent costs)</td>
-      </tr>
-      <tr>
-          <td><strong>GST</strong></td>
-          <td>Total GST (FX conversion + processing fee)</td>
-      </tr>
-      <tr>
-          <td><strong>TCS</strong></td>
-          <td>TCS collected (refundable in ITR)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Column</th>
+					<th>What it shows</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Date</strong></td>
+					<td>Trade settlement date</td>
+			</tr>
+			<tr>
+					<td><strong>Bank</strong></td>
+					<td>Bank or broker name</td>
+			</tr>
+			<tr>
+					<td><strong>Trans ID</strong></td>
+					<td>Your deal / transaction reference</td>
+			</tr>
+			<tr>
+					<td><strong>USD Bought</strong></td>
+					<td>Actual USD received for this transaction</td>
+			</tr>
+			<tr>
+					<td><strong>Gross INR Spent</strong></td>
+					<td>Total INR debited including TCS</td>
+			</tr>
+			<tr>
+					<td><strong>Net INR Spent</strong></td>
+					<td>INR spent excluding refundable TCS</td>
+			</tr>
+			<tr>
+					<td><strong>Charges</strong></td>
+					<td>FX spread + processing fee (permanent costs)</td>
+			</tr>
+			<tr>
+					<td><strong>GST</strong></td>
+					<td>Total GST (FX conversion + processing fee)</td>
+			</tr>
+			<tr>
+					<td><strong>TCS</strong></td>
+					<td>TCS collected (refundable in ITR)</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="tcs-opportunity-cost-cashflow-drag">TCS Opportunity Cost (Cashflow Drag)</h3>
 <p>Because Tax Collected at Source (TCS) is deducted immediately but only recovered later, that capital is temporarily locked away. This delay creates an <strong>opportunity cost</strong> (cashflow drag). RealValue FX Engine now tracks and quantifies this loss dynamically:</p>
