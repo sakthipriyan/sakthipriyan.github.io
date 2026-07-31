@@ -156,6 +156,9 @@ Yes. Export as JSON, import next month.
 
 ## Changelog
 
+### 2026-07-31
+- **Constraint-Aware Drift Solver**: Upgraded the Even Drift Phase 1 solver to natively understand individual investor constraints. When assets (like International equities) demand more cash than eligible investors can provide, the problem is mathematically split. The algorithm caps the constrained asset to the exact capacity of eligible investors, and solves an independent, perfectly even post-drift distribution for the remaining domestic assets using the remaining domestic-only cash.
+
 ### 2026-05-23
 - **Algorithm Upgrade**: Evolved from a Proportional Drift Allocation model to an Even Drift Optimization model. This shift intentionally synchronizes residual imbalance across assets, reducing structural portfolio variance and compressing the negative drift band by ~75%. Read the detailed analysis: [Perpetual Rebalancing: Engineering a Mathematically Superior SIP Allocator](/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/).
 
