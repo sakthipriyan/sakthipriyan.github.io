@@ -16,4 +16,4 @@ tools/get-data/*.out
 
 # test
 docs/test/
-static/test/
+static/test/bin/
