@@ -296,30 +296,30 @@ SellEngine -&gt; Income
 <h4 id="prioritized-routing">Prioritized Routing</h4>
 <p>All income is routed according to the framework&rsquo;s capital priority rules.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Priority</th>
-          <th>Destination</th>
-          <th>Purpose</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>0</strong> (Highest)</td>
-          <td><strong>Tax Payment</strong></td>
-          <td>Reserve funds to meet tax liabilities before any capital is redeployed. Typically after sale of any assets.</td>
-      </tr>
-      <tr>
-          <td><strong>1</strong> (Medium)</td>
-          <td><strong>Liquidity Reserve</strong></td>
-          <td>Fund the active liquidity reserve (Emergency during accumulation or Retirement during retirement) until its target is reached.</td>
-      </tr>
-      <tr>
-          <td><strong>2</strong> (Lowest)</td>
-          <td><strong>Core Portfolio</strong></td>
-          <td>Deploy any remaining capital into underweight assets through Buy Engine.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Priority</th>
+					<th>Destination</th>
+					<th>Purpose</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>0</strong> (Highest)</td>
+					<td><strong>Tax Payment</strong></td>
+					<td>Reserve funds to meet tax liabilities before any capital is redeployed. Typically after sale of any assets.</td>
+			</tr>
+			<tr>
+					<td><strong>1</strong> (Medium)</td>
+					<td><strong>Liquidity Reserve</strong></td>
+					<td>Fund the active liquidity reserve (Emergency during accumulation or Retirement during retirement) until its target is reached.</td>
+			</tr>
+			<tr>
+					<td><strong>2</strong> (Lowest)</td>
+					<td><strong>Core Portfolio</strong></td>
+					<td>Deploy any remaining capital into underweight assets through Buy Engine.</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="policy-configurations">Policy Configurations</h4>
 <ul>
@@ -344,28 +344,28 @@ SellEngine -&gt; Income
 <h4 id="policy-configurations-1">Policy Configurations</h4>
 <p>The framework exposes a small set of policy parameters that determine the size of each reserve.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Phase</th>
-          <th>Reserve</th>
-          <th>Default Target</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Accumulation</strong></td>
-          <td><strong>Emergency Reserve</strong></td>
-          <td><strong>12 months of essential expenses</strong></td>
-          <td>Maintains a reserve for income disruptions and emergencies. The framework prioritizes building and replenishing this reserve before investing in the Core Portfolio.</td>
-      </tr>
-      <tr>
-          <td><strong>Retirement</strong></td>
-          <td><strong>Retirement Reserve</strong></td>
-          <td><strong>3 years of annual expenses</strong></td>
-          <td>Maintains a reserve for planned withdrawals, reducing the need to sell Core Portfolio assets during adverse market conditions and mitigating sequence of returns risk.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Phase</th>
+					<th>Reserve</th>
+					<th>Default Target</th>
+					<th>Description</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Accumulation</strong></td>
+					<td><strong>Emergency Reserve</strong></td>
+					<td><strong>12 months of essential expenses</strong></td>
+					<td>Maintains a reserve for income disruptions and emergencies. The framework prioritizes building and replenishing this reserve before investing in the Core Portfolio.</td>
+			</tr>
+			<tr>
+					<td><strong>Retirement</strong></td>
+					<td><strong>Retirement Reserve</strong></td>
+					<td><strong>3 years of annual expenses</strong></td>
+					<td>Maintains a reserve for planned withdrawals, reducing the need to sell Core Portfolio assets during adverse market conditions and mitigating sequence of returns risk.</td>
+			</tr>
+	</tbody>
 </table>
 <ul>
 <li>Reserve targets are configurable and should reflect an investor&rsquo;s risk tolerance and financial circumstances.</li>
@@ -373,63 +373,63 @@ SellEngine -&gt; Income
 </ul>
 <h4 id="illustrative-reserve-assets">Illustrative Reserve Assets</h4>
 <table>
-  <thead>
-      <tr>
-          <th>Asset Class</th>
-          <th>Currency</th>
-          <th>Primary Purpose</th>
-          <th>Minimum LTCG Holding Period</th>
-          <th>LTCG</th>
-          <th>STCG</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Indian Arbitrage Funds</strong></td>
-          <td>INR</td>
-          <td>Provide highly liquid, low-volatility reserves for short-term liquidity needs.</td>
-          <td><strong>1 year</strong></td>
-          <td>12.5%</td>
-          <td>20%</td>
-      </tr>
-      <tr>
-          <td><strong>Irish ETFs holding short-duration U.S. Treasury Bills</strong></td>
-          <td>USD</td>
-          <td>Provide defensive USD reserves while preserving capital and maintaining liquidity.</td>
-          <td><strong>2 years</strong></td>
-          <td>12.5%</td>
-          <td>Slab rate</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Asset Class</th>
+					<th>Currency</th>
+					<th>Primary Purpose</th>
+					<th>Minimum LTCG Holding Period</th>
+					<th>LTCG</th>
+					<th>STCG</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Indian Arbitrage Funds</strong></td>
+					<td>INR</td>
+					<td>Provide highly liquid, low-volatility reserves for short-term liquidity needs.</td>
+					<td><strong>1 year</strong></td>
+					<td>12.5%</td>
+					<td>20%</td>
+			</tr>
+			<tr>
+					<td><strong>Irish ETFs holding short-duration U.S. Treasury Bills</strong></td>
+					<td>USD</td>
+					<td>Provide defensive USD reserves while preserving capital and maintaining liquidity.</td>
+					<td><strong>2 years</strong></td>
+					<td>12.5%</td>
+					<td>Slab rate</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>Note:</strong> The LTCG holding periods above are based on prevailing Indian tax law. Investors should always verify current tax regulations and consult with tax advisors regarding their specific circumstances.</p>
 <h3 id="33-core-portfolio">3.3. Core Portfolio</h3>
 <p>The Core Portfolio contains the strategic long-term asset allocation, for example:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Asset Class</th>
-          <th>Indian</th>
-          <th>International¹</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Equities</strong></td>
-          <td>Equities (Stocks, ETFs, Mutual Funds)</td>
-          <td>MSCI ACWI / MSCI USA / S&amp;P 500 / Nasdaq 100 / Apple</td>
-      </tr>
-      <tr>
-          <td><strong>Debt</strong></td>
-          <td>Debt Funds / Bonds</td>
-          <td>Irish ETFs holding short term US Treasuries</td>
-      </tr>
-      <tr>
-          <td><strong>Gold</strong></td>
-          <td>Gold Funds / ETFs</td>
-          <td>International Gold ETFs such as Sprott Physical Gold Trust (PHYS)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Asset Class</th>
+					<th>Indian</th>
+					<th>International¹</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Equities</strong></td>
+					<td>Equities (Stocks, ETFs, Mutual Funds)</td>
+					<td>MSCI ACWI / MSCI USA / S&amp;P 500 / Nasdaq 100 / Apple</td>
+			</tr>
+			<tr>
+					<td><strong>Debt</strong></td>
+					<td>Debt Funds / Bonds</td>
+					<td>Irish ETFs holding short term US Treasuries</td>
+			</tr>
+			<tr>
+					<td><strong>Gold</strong></td>
+					<td>Gold Funds / ETFs</td>
+					<td>International Gold ETFs such as Sprott Physical Gold Trust (PHYS)</td>
+			</tr>
+	</tbody>
 </table>
 <ol>
 <li>See <strong>The Global Indian Investor</strong> book: <strong><a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/">Chapter 7: Selecting the Global Indexes</a></strong> for more on selecting the Global Indexes.</li>
@@ -437,73 +437,73 @@ SellEngine -&gt; Income
 <h3 id="example-portfolio-current-state">Example Portfolio: Current State</h3>
 <p>The following example illustrates a real global multi-asset portfolio. Each asset has a <strong>target allocation</strong> and a <strong>current market value</strong>. As markets move, the portfolio naturally drifts away from its target allocation over time.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Asset</th>
-          <th style="text-align: right">Target</th>
-          <th style="text-align: right">Current</th>
-          <th style="text-align: right">Drift</th>
-          <th>State</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Nasdaq 100</strong></td>
-          <td style="text-align: right">40.00%</td>
-          <td style="text-align: right">38.75%</td>
-          <td style="text-align: right"><strong>−1.25%</strong></td>
-          <td>Underweight</td>
-      </tr>
-      <tr>
-          <td><strong>Nifty 50</strong></td>
-          <td style="text-align: right">20.00%</td>
-          <td style="text-align: right">20.20%</td>
-          <td style="text-align: right"><strong>+0.20%</strong></td>
-          <td>Slightly Overweight</td>
-      </tr>
-      <tr>
-          <td><strong>Next 50</strong></td>
-          <td style="text-align: right">10.00%</td>
-          <td style="text-align: right">9.64%</td>
-          <td style="text-align: right"><strong>−0.36%</strong></td>
-          <td>Underweight</td>
-      </tr>
-      <tr>
-          <td><strong>Midcap 150</strong></td>
-          <td style="text-align: right">10.00%</td>
-          <td style="text-align: right">9.56%</td>
-          <td style="text-align: right"><strong>−0.44%</strong></td>
-          <td>Underweight</td>
-      </tr>
-      <tr>
-          <td><strong>Smallcap 250</strong></td>
-          <td style="text-align: right">5.00%</td>
-          <td style="text-align: right">4.92%</td>
-          <td style="text-align: right"><strong>−0.08%</strong></td>
-          <td>Slightly Underweight</td>
-      </tr>
-      <tr>
-          <td><strong>Debt</strong></td>
-          <td style="text-align: right">5.00%</td>
-          <td style="text-align: right">6.15%</td>
-          <td style="text-align: right"><strong>+1.15%</strong></td>
-          <td>Overweight</td>
-      </tr>
-      <tr>
-          <td><strong>Gold</strong></td>
-          <td style="text-align: right">10.00%</td>
-          <td style="text-align: right">10.78%</td>
-          <td style="text-align: right"><strong>+0.78%</strong></td>
-          <td>Overweight</td>
-      </tr>
-      <tr>
-          <td><strong>Total</strong></td>
-          <td style="text-align: right"><strong>100.00%</strong></td>
-          <td style="text-align: right"><strong>100.00%</strong></td>
-          <td style="text-align: right"><strong>+2.13%</strong></td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Asset</th>
+					<th style="text-align: right">Target</th>
+					<th style="text-align: right">Current</th>
+					<th style="text-align: right">Drift</th>
+					<th>State</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Nasdaq 100</strong></td>
+					<td style="text-align: right">40.00%</td>
+					<td style="text-align: right">38.75%</td>
+					<td style="text-align: right"><strong>−1.25%</strong></td>
+					<td>Underweight</td>
+			</tr>
+			<tr>
+					<td><strong>Nifty 50</strong></td>
+					<td style="text-align: right">20.00%</td>
+					<td style="text-align: right">20.20%</td>
+					<td style="text-align: right"><strong>+0.20%</strong></td>
+					<td>Slightly Overweight</td>
+			</tr>
+			<tr>
+					<td><strong>Next 50</strong></td>
+					<td style="text-align: right">10.00%</td>
+					<td style="text-align: right">9.64%</td>
+					<td style="text-align: right"><strong>−0.36%</strong></td>
+					<td>Underweight</td>
+			</tr>
+			<tr>
+					<td><strong>Midcap 150</strong></td>
+					<td style="text-align: right">10.00%</td>
+					<td style="text-align: right">9.56%</td>
+					<td style="text-align: right"><strong>−0.44%</strong></td>
+					<td>Underweight</td>
+			</tr>
+			<tr>
+					<td><strong>Smallcap 250</strong></td>
+					<td style="text-align: right">5.00%</td>
+					<td style="text-align: right">4.92%</td>
+					<td style="text-align: right"><strong>−0.08%</strong></td>
+					<td>Slightly Underweight</td>
+			</tr>
+			<tr>
+					<td><strong>Debt</strong></td>
+					<td style="text-align: right">5.00%</td>
+					<td style="text-align: right">6.15%</td>
+					<td style="text-align: right"><strong>+1.15%</strong></td>
+					<td>Overweight</td>
+			</tr>
+			<tr>
+					<td><strong>Gold</strong></td>
+					<td style="text-align: right">10.00%</td>
+					<td style="text-align: right">10.78%</td>
+					<td style="text-align: right"><strong>+0.78%</strong></td>
+					<td>Overweight</td>
+			</tr>
+			<tr>
+					<td><strong>Total</strong></td>
+					<td style="text-align: right"><strong>100.00%</strong></td>
+					<td style="text-align: right"><strong>100.00%</strong></td>
+					<td style="text-align: right"><strong>+2.13%</strong></td>
+					<td></td>
+			</tr>
+	</tbody>
 </table>
 <p>See: <a href="/building-wealth/tags/state-of-the-1-portfolio/">State of the 1 Portfolio</a> or <a href="/building-wealth/tags/state-of-the-portfolio/">State of the Portfolio</a> for more such data points.</p>
 <p>This Example Portfolio has Total Positive Drift: <strong>2.13%</strong> and hence Total Negative Drift: <strong>−2.13%</strong>.</p>
@@ -566,91 +566,91 @@ SellEngine -&gt; Income
 <p>The following example illustrates how the Buy Engine deploys fresh capital into an existing portfolio.</p>
 <p>During this monthly investment cycle, <strong>2.11%</strong> of the portfolio value is added as fresh capital. The <strong>Buy Engine</strong> allocates this capital using <strong>Forward Water-Filling</strong>.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Asset Class</th>
-          <th style="text-align: right">Target</th>
-          <th style="text-align: right">Pre-Allocation (%)</th>
-          <th style="text-align: right">Pre-Drift</th>
-          <th style="text-align: right">Allocation</th>
-          <th style="text-align: right">Post-Allocation (%)</th>
-          <th style="text-align: right">Post-Drift</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Nasdaq 100</strong></td>
-          <td style="text-align: right">40.00%</td>
-          <td style="text-align: right">38.75%</td>
-          <td style="text-align: right">-1.25%</td>
-          <td style="text-align: right">80.30%</td>
-          <td style="text-align: right">39.61%</td>
-          <td style="text-align: right"><strong>-0.39%</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Nifty 50</strong></td>
-          <td style="text-align: right">20.00%</td>
-          <td style="text-align: right">20.20%</td>
-          <td style="text-align: right">+0.20%</td>
-          <td style="text-align: right">0.00%</td>
-          <td style="text-align: right">19.78%</td>
-          <td style="text-align: right">-0.22%</td>
-      </tr>
-      <tr>
-          <td><strong>Next 50</strong></td>
-          <td style="text-align: right">10.00%</td>
-          <td style="text-align: right">9.64%</td>
-          <td style="text-align: right">-0.36%</td>
-          <td style="text-align: right">7.91%</td>
-          <td style="text-align: right">9.61%</td>
-          <td style="text-align: right"><strong>-0.39%</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Midcap 150</strong></td>
-          <td style="text-align: right">10.00%</td>
-          <td style="text-align: right">9.56%</td>
-          <td style="text-align: right">-0.44%</td>
-          <td style="text-align: right">11.79%</td>
-          <td style="text-align: right">9.61%</td>
-          <td style="text-align: right"><strong>-0.39%</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Smallcap 250</strong></td>
-          <td style="text-align: right">5.00%</td>
-          <td style="text-align: right">4.92%</td>
-          <td style="text-align: right">-0.08%</td>
-          <td style="text-align: right">0.00%</td>
-          <td style="text-align: right">4.81%</td>
-          <td style="text-align: right">-0.19%</td>
-      </tr>
-      <tr>
-          <td><strong>Debt</strong></td>
-          <td style="text-align: right">5.00%</td>
-          <td style="text-align: right">6.15%</td>
-          <td style="text-align: right">+1.15%</td>
-          <td style="text-align: right">0.00%</td>
-          <td style="text-align: right">6.02%</td>
-          <td style="text-align: right">+1.02%</td>
-      </tr>
-      <tr>
-          <td><strong>Gold</strong></td>
-          <td style="text-align: right">10.00%</td>
-          <td style="text-align: right">10.78%</td>
-          <td style="text-align: right">+0.78%</td>
-          <td style="text-align: right">0.00%</td>
-          <td style="text-align: right">10.55%</td>
-          <td style="text-align: right">+0.55%</td>
-      </tr>
-      <tr>
-          <td><strong>Total</strong></td>
-          <td style="text-align: right"><strong>100%</strong></td>
-          <td style="text-align: right"><strong>100%</strong></td>
-          <td style="text-align: right"><strong>2.13%</strong></td>
-          <td style="text-align: right"><strong>100%</strong></td>
-          <td style="text-align: right"><strong>100%</strong></td>
-          <td style="text-align: right"><strong>1.58%</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Asset Class</th>
+					<th style="text-align: right">Target</th>
+					<th style="text-align: right">Pre-Allocation (%)</th>
+					<th style="text-align: right">Pre-Drift</th>
+					<th style="text-align: right">Allocation</th>
+					<th style="text-align: right">Post-Allocation (%)</th>
+					<th style="text-align: right">Post-Drift</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Nasdaq 100</strong></td>
+					<td style="text-align: right">40.00%</td>
+					<td style="text-align: right">38.75%</td>
+					<td style="text-align: right">-1.25%</td>
+					<td style="text-align: right">80.30%</td>
+					<td style="text-align: right">39.61%</td>
+					<td style="text-align: right"><strong>-0.39%</strong></td>
+			</tr>
+			<tr>
+					<td><strong>Nifty 50</strong></td>
+					<td style="text-align: right">20.00%</td>
+					<td style="text-align: right">20.20%</td>
+					<td style="text-align: right">+0.20%</td>
+					<td style="text-align: right">0.00%</td>
+					<td style="text-align: right">19.78%</td>
+					<td style="text-align: right">-0.22%</td>
+			</tr>
+			<tr>
+					<td><strong>Next 50</strong></td>
+					<td style="text-align: right">10.00%</td>
+					<td style="text-align: right">9.64%</td>
+					<td style="text-align: right">-0.36%</td>
+					<td style="text-align: right">7.91%</td>
+					<td style="text-align: right">9.61%</td>
+					<td style="text-align: right"><strong>-0.39%</strong></td>
+			</tr>
+			<tr>
+					<td><strong>Midcap 150</strong></td>
+					<td style="text-align: right">10.00%</td>
+					<td style="text-align: right">9.56%</td>
+					<td style="text-align: right">-0.44%</td>
+					<td style="text-align: right">11.79%</td>
+					<td style="text-align: right">9.61%</td>
+					<td style="text-align: right"><strong>-0.39%</strong></td>
+			</tr>
+			<tr>
+					<td><strong>Smallcap 250</strong></td>
+					<td style="text-align: right">5.00%</td>
+					<td style="text-align: right">4.92%</td>
+					<td style="text-align: right">-0.08%</td>
+					<td style="text-align: right">0.00%</td>
+					<td style="text-align: right">4.81%</td>
+					<td style="text-align: right">-0.19%</td>
+			</tr>
+			<tr>
+					<td><strong>Debt</strong></td>
+					<td style="text-align: right">5.00%</td>
+					<td style="text-align: right">6.15%</td>
+					<td style="text-align: right">+1.15%</td>
+					<td style="text-align: right">0.00%</td>
+					<td style="text-align: right">6.02%</td>
+					<td style="text-align: right">+1.02%</td>
+			</tr>
+			<tr>
+					<td><strong>Gold</strong></td>
+					<td style="text-align: right">10.00%</td>
+					<td style="text-align: right">10.78%</td>
+					<td style="text-align: right">+0.78%</td>
+					<td style="text-align: right">0.00%</td>
+					<td style="text-align: right">10.55%</td>
+					<td style="text-align: right">+0.55%</td>
+			</tr>
+			<tr>
+					<td><strong>Total</strong></td>
+					<td style="text-align: right"><strong>100%</strong></td>
+					<td style="text-align: right"><strong>100%</strong></td>
+					<td style="text-align: right"><strong>2.13%</strong></td>
+					<td style="text-align: right"><strong>100%</strong></td>
+					<td style="text-align: right"><strong>100%</strong></td>
+					<td style="text-align: right"><strong>1.58%</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>The Buy Engine reduces aggregate portfolio drift from <strong>2.13%</strong> to <strong>1.58%</strong>, correcting <strong>0.55%</strong> of total drift. In other words, a monthly contribution equal to <strong>2.11%</strong> of the portfolio improves the overall drift by approximately <strong>25%</strong>, without selling a single asset.</p>
 <pre><code class="language-echarts">{
@@ -829,31 +829,31 @@ SellEngine -&gt; Income
 <p>As a result, larger strategic allocations naturally receive more capital than smaller satellite allocations because they contribute more to the portfolio&rsquo;s overall tracking error.</p>
 <p>For example, in the illustrative portfolio:</p>
 <table>
-  <thead>
-      <tr>
-          <th>Asset</th>
-          <th style="text-align: right">Target Allocation</th>
-          <th style="text-align: right">Pre-Drift</th>
-          <th style="text-align: right">Post-Drift</th>
-          <th style="text-align: right">Relative Tracking Error</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Nasdaq 100</strong></td>
-          <td style="text-align: right">40%</td>
-          <td style="text-align: right">-1.25%</td>
-          <td style="text-align: right"><strong>-0.39%</strong></td>
-          <td style="text-align: right"><strong>0.39 / 40 = 0.98%</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Next 50</strong></td>
-          <td style="text-align: right">10%</td>
-          <td style="text-align: right">-0.36%</td>
-          <td style="text-align: right"><strong>-0.39%</strong></td>
-          <td style="text-align: right"><strong>0.39 / 10 = 3.90%</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Asset</th>
+					<th style="text-align: right">Target Allocation</th>
+					<th style="text-align: right">Pre-Drift</th>
+					<th style="text-align: right">Post-Drift</th>
+					<th style="text-align: right">Relative Tracking Error</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Nasdaq 100</strong></td>
+					<td style="text-align: right">40%</td>
+					<td style="text-align: right">-1.25%</td>
+					<td style="text-align: right"><strong>-0.39%</strong></td>
+					<td style="text-align: right"><strong>0.39 / 40 = 0.98%</strong></td>
+			</tr>
+			<tr>
+					<td><strong>Next 50</strong></td>
+					<td style="text-align: right">10%</td>
+					<td style="text-align: right">-0.36%</td>
+					<td style="text-align: right"><strong>-0.39%</strong></td>
+					<td style="text-align: right"><strong>0.39 / 10 = 3.90%</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>Although both assets end up with a similar <strong>absolute drift</strong> of <strong>-0.39%</strong>, the impact is very different:</p>
 <ul>
@@ -893,35 +893,35 @@ SellEngine -&gt; Income
 </ul>
 <h4 id="policy-configurations-4">Policy Configurations</h4>
 <table>
-  <thead>
-      <tr>
-          <th>Configuration</th>
-          <th style="text-align: center">Default</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Maximum Portfolio Drift (N)</strong></td>
-          <td style="text-align: center"><strong>10%</strong></td>
-          <td>Aggregate positive drift that activates the Sell Engine.</td>
-      </tr>
-      <tr>
-          <td><strong>Minimum Portfolio Drift (N/2)</strong></td>
-          <td style="text-align: center"><strong>5%</strong></td>
-          <td>Aggregate positive drift at which active selling stops.</td>
-      </tr>
-      <tr>
-          <td><strong>Sell Duration (M)</strong></td>
-          <td style="text-align: center"><strong>6 months</strong></td>
-          <td>Number of review periods over which drift is gradually reduced.</td>
-      </tr>
-      <tr>
-          <td><strong>Sell LTCG Lots Only</strong></td>
-          <td style="text-align: center"><strong>Enabled</strong></td>
-          <td>Restrict selling to Long-Term Capital Gain (LTCG) eligible lots to maximize tax efficiency.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Configuration</th>
+					<th style="text-align: center">Default</th>
+					<th>Description</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Maximum Portfolio Drift (N)</strong></td>
+					<td style="text-align: center"><strong>10%</strong></td>
+					<td>Aggregate positive drift that activates the Sell Engine.</td>
+			</tr>
+			<tr>
+					<td><strong>Minimum Portfolio Drift (N/2)</strong></td>
+					<td style="text-align: center"><strong>5%</strong></td>
+					<td>Aggregate positive drift at which active selling stops.</td>
+			</tr>
+			<tr>
+					<td><strong>Sell Duration (M)</strong></td>
+					<td style="text-align: center"><strong>6 months</strong></td>
+					<td>Number of review periods over which drift is gradually reduced.</td>
+			</tr>
+			<tr>
+					<td><strong>Sell LTCG Lots Only</strong></td>
+					<td style="text-align: center"><strong>Enabled</strong></td>
+					<td>Restrict selling to Long-Term Capital Gain (LTCG) eligible lots to maximize tax efficiency.</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="example">Example</h4>
 <p>Example configuration:</p>
@@ -931,50 +931,50 @@ SellEngine -&gt; Income
 <li><strong>Sell Duration:</strong> 6 monthly reviews</li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th>Review</th>
-          <th style="text-align: right">Active Drift Ceiling</th>
-          <th>Action</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Before Trigger</td>
-          <td style="text-align: right">≤10%</td>
-          <td>No selling</td>
-      </tr>
-      <tr>
-          <td>Month 1 (Trigger)</td>
-          <td style="text-align: right">10%</td>
-          <td>Sell program begins</td>
-      </tr>
-      <tr>
-          <td>Month 2</td>
-          <td style="text-align: right">9%</td>
-          <td>Continue if required</td>
-      </tr>
-      <tr>
-          <td>Month 3</td>
-          <td style="text-align: right">8%</td>
-          <td>Continue if required</td>
-      </tr>
-      <tr>
-          <td>Month 4</td>
-          <td style="text-align: right">7%</td>
-          <td>Continue if required</td>
-      </tr>
-      <tr>
-          <td>Month 5</td>
-          <td style="text-align: right">6%</td>
-          <td>Continue if required</td>
-      </tr>
-      <tr>
-          <td>Month 6</td>
-          <td style="text-align: right">5%</td>
-          <td>Stop selling</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Review</th>
+					<th style="text-align: right">Active Drift Ceiling</th>
+					<th>Action</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Before Trigger</td>
+					<td style="text-align: right">≤10%</td>
+					<td>No selling</td>
+			</tr>
+			<tr>
+					<td>Month 1 (Trigger)</td>
+					<td style="text-align: right">10%</td>
+					<td>Sell program begins</td>
+			</tr>
+			<tr>
+					<td>Month 2</td>
+					<td style="text-align: right">9%</td>
+					<td>Continue if required</td>
+			</tr>
+			<tr>
+					<td>Month 3</td>
+					<td style="text-align: right">8%</td>
+					<td>Continue if required</td>
+			</tr>
+			<tr>
+					<td>Month 4</td>
+					<td style="text-align: right">7%</td>
+					<td>Continue if required</td>
+			</tr>
+			<tr>
+					<td>Month 5</td>
+					<td style="text-align: right">6%</td>
+					<td>Continue if required</td>
+			</tr>
+			<tr>
+					<td>Month 6</td>
+					<td style="text-align: right">5%</td>
+					<td>Stop selling</td>
+			</tr>
+	</tbody>
 </table>
 <p>The following chart illustrates a hypothetical scenario. It shows the portfolio drift over time, triggering the sell program, and how the <strong>Active Drift Ceiling</strong> steps down. Selling occurs only when the portfolio drift exceeds the active ceiling.</p>
 <pre><code class="language-echarts">{
@@ -1080,85 +1080,85 @@ SellEngine -&gt; Income
 </blockquote>
 <h3 id="41-traditional-vs-perpetual-rebalancing">4.1 Traditional vs Perpetual Rebalancing</h3>
 <table>
-  <thead>
-      <tr>
-          <th>Traditional Rebalancing</th>
-          <th>Perpetual Rebalancing</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Static SIP month on month</td>
-          <td>Dynamic SIP based on market conditions</td>
-      </tr>
-      <tr>
-          <td>Reacts to every rebalance event</td>
-          <td>Activates selling only when drift becomes excessive</td>
-      </tr>
-      <tr>
-          <td>Resets portfolio back to target</td>
-          <td>Maintains an acceptable drift band</td>
-      </tr>
-      <tr>
-          <td>Frequently interrupts winners</td>
-          <td>Preserves long-term momentum</td>
-      </tr>
-      <tr>
-          <td>Large taxable rebalances</td>
-          <td>Small, gradual tax-aware realizations</td>
-      </tr>
-      <tr>
-          <td>Independent buy and sell transactions</td>
-          <td>Integrated Buy and Sell Engine</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Traditional Rebalancing</th>
+					<th>Perpetual Rebalancing</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Static SIP month on month</td>
+					<td>Dynamic SIP based on market conditions</td>
+			</tr>
+			<tr>
+					<td>Reacts to every rebalance event</td>
+					<td>Activates selling only when drift becomes excessive</td>
+			</tr>
+			<tr>
+					<td>Resets portfolio back to target</td>
+					<td>Maintains an acceptable drift band</td>
+			</tr>
+			<tr>
+					<td>Frequently interrupts winners</td>
+					<td>Preserves long-term momentum</td>
+			</tr>
+			<tr>
+					<td>Large taxable rebalances</td>
+					<td>Small, gradual tax-aware realizations</td>
+			</tr>
+			<tr>
+					<td>Independent buy and sell transactions</td>
+					<td>Integrated Buy and Sell Engine</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="42-the-buy-engine-and-sell-engine-have-complementary-objectives">4.2 The Buy Engine and Sell Engine have complementary objectives:</h3>
 <table>
-  <thead>
-      <tr>
-          <th>Attribute</th>
-          <th><strong>Buy Engine</strong></th>
-          <th><strong>Sell Engine</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Primary Objective</strong></td>
-          <td>Continuously steer portfolio drift toward <strong>0%</strong> using fresh capital.</td>
-          <td>Gradually steer aggregate positive drift from <strong>N%</strong> toward <strong>N/2%</strong>.</td>
-      </tr>
-      <tr>
-          <td><strong>Trigger</strong></td>
-          <td>Deployable capital is available after satisfying all liquidity requirements.</td>
-          <td>Aggregate positive drift exceeds the configured threshold.</td>
-      </tr>
-      <tr>
-          <td><strong>Typical Operation</strong></td>
-          <td>Executes every review cycle whenever fresh capital is available.</td>
-          <td>Executes only when required to control excessive portfolio drift.</td>
-      </tr>
-      <tr>
-          <td><strong>Allocation Strategy</strong></td>
-          <td><strong>Forward Water-Filling</strong> allocates capital to underweight assets.</td>
-          <td><strong>Reverse Water-Filling</strong> trims overweight assets.</td>
-      </tr>
-      <tr>
-          <td><strong>Investment Analogy</strong></td>
-          <td>Systematic <strong>value investing</strong>—buy relative weakness.</td>
-          <td>Systematic <strong>momentum capture</strong>—harvest sustained strength.</td>
-      </tr>
-      <tr>
-          <td><strong>Trading Bias</strong></td>
-          <td>Buy-only.</td>
-          <td>Sell-only.</td>
-      </tr>
-      <tr>
-          <td><strong>Tax Impact</strong></td>
-          <td>No capital gains realization.</td>
-          <td>Realizes capital gains only when the configured drift threshold is exceeded.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Attribute</th>
+					<th><strong>Buy Engine</strong></th>
+					<th><strong>Sell Engine</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Primary Objective</strong></td>
+					<td>Continuously steer portfolio drift toward <strong>0%</strong> using fresh capital.</td>
+					<td>Gradually steer aggregate positive drift from <strong>N%</strong> toward <strong>N/2%</strong>.</td>
+			</tr>
+			<tr>
+					<td><strong>Trigger</strong></td>
+					<td>Deployable capital is available after satisfying all liquidity requirements.</td>
+					<td>Aggregate positive drift exceeds the configured threshold.</td>
+			</tr>
+			<tr>
+					<td><strong>Typical Operation</strong></td>
+					<td>Executes every review cycle whenever fresh capital is available.</td>
+					<td>Executes only when required to control excessive portfolio drift.</td>
+			</tr>
+			<tr>
+					<td><strong>Allocation Strategy</strong></td>
+					<td><strong>Forward Water-Filling</strong> allocates capital to underweight assets.</td>
+					<td><strong>Reverse Water-Filling</strong> trims overweight assets.</td>
+			</tr>
+			<tr>
+					<td><strong>Investment Analogy</strong></td>
+					<td>Systematic <strong>value investing</strong>—buy relative weakness.</td>
+					<td>Systematic <strong>momentum capture</strong>—harvest sustained strength.</td>
+			</tr>
+			<tr>
+					<td><strong>Trading Bias</strong></td>
+					<td>Buy-only.</td>
+					<td>Sell-only.</td>
+			</tr>
+			<tr>
+					<td><strong>Tax Impact</strong></td>
+					<td>No capital gains realization.</td>
+					<td>Realizes capital gains only when the configured drift threshold is exceeded.</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="43-why-i-built-this-framework">4.3 Why I Built This Framework</h3>
 <p><strong>The Perpetual Rebalancing Framework was originally built to solve my own long-term portfolio management problem.</strong> Along the way, I discovered that almost every individual building block already existed. Strategic asset allocation, lifecycle investing, liquidity reserves, cash-flow-based rebalancing, tax-aware selling, and systematic withdrawals are all well-established concepts with decades of history.</p>

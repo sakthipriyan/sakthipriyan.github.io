@@ -211,97 +211,97 @@
 <p>Gain clarity on your mutual fund investments by parsing your combined CAS directly in your browser. Tag each holding with custom Categories, Asset Classes, and Statuses, which are automatically saved to your browser&rsquo;s local storage for future reference.</p>
 <h3 id="key-features">Key Features</h3>
 <table>
-  <thead>
-      <tr>
-          <th>Feature</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>100% Private</strong></td>
-          <td>PDF parsing happens entirely in your browser; your financial data never leaves your device.</td>
-      </tr>
-      <tr>
-          <td><strong>Auto-Extraction</strong></td>
-          <td>Automatically pulls out your holdings, folios, ISINs, and current market values.</td>
-      </tr>
-      <tr>
-          <td><strong>Custom Tagging</strong></td>
-          <td>Create and assign custom Categories and Asset Classes to group related funds together.</td>
-      </tr>
-      <tr>
-          <td><strong>Status Tracking</strong></td>
-          <td>Mark funds to &ldquo;Buy&rdquo;, &ldquo;Hold&rdquo;, or &ldquo;Sell&rdquo; to keep your portfolio strategy clear.</td>
-      </tr>
-      <tr>
-          <td><strong>Visual Summary</strong></td>
-          <td>Get instant aggregated views and charts of your entire portfolio broken down by Asset Class and Category.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Feature</th>
+					<th>Description</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>100% Private</strong></td>
+					<td>PDF parsing happens entirely in your browser; your financial data never leaves your device.</td>
+			</tr>
+			<tr>
+					<td><strong>Auto-Extraction</strong></td>
+					<td>Automatically pulls out your holdings, folios, ISINs, and current market values.</td>
+			</tr>
+			<tr>
+					<td><strong>Custom Tagging</strong></td>
+					<td>Create and assign custom Categories and Asset Classes to group related funds together.</td>
+			</tr>
+			<tr>
+					<td><strong>Status Tracking</strong></td>
+					<td>Mark funds to &ldquo;Buy&rdquo;, &ldquo;Hold&rdquo;, or &ldquo;Sell&rdquo; to keep your portfolio strategy clear.</td>
+			</tr>
+			<tr>
+					<td><strong>Visual Summary</strong></td>
+					<td>Get instant aggregated views and charts of your entire portfolio broken down by Asset Class and Category.</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="full-capability-matrix">Full Capability Matrix</h3>
 <table>
-  <thead>
-      <tr>
-          <th>Capability</th>
-          <th>What It Does</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>CAS PDF Parsing (CAMS/KFinTech)</strong></td>
-          <td>Parses consolidated CAS PDFs (including password-protected files) directly in the browser and extracts folio-wise holdings, units, NAV, market value, and cost value.</td>
-      </tr>
-      <tr>
-          <td><strong>IBKR CSV Parsing</strong></td>
-          <td>Parses Interactive Brokers activity/open position CSV data for stock holdings, cost basis, market value, trades, and account mapping.</td>
-      </tr>
-      <tr>
-          <td><strong>Unified Portfolio View</strong></td>
-          <td>Combines CAS and IBKR holdings into one table with consistent tagging, valuation display, and status workflow.</td>
-      </tr>
-      <tr>
-          <td><strong>Transaction-Based XIRR (Not Manual Input)</strong></td>
-          <td>Computes XIRR from actual transaction cashflows plus terminal value; supports fund-level and aggregated report-level computation.</td>
-      </tr>
-      <tr>
-          <td><strong>INR + USD Analytics for IBKR</strong></td>
-          <td>Computes and displays both INR and USD values/XIRR for IBKR holdings where transaction history is available.</td>
-      </tr>
-      <tr>
-          <td><strong>Historical FX Conversion</strong></td>
-          <td>Converts IBKR transaction cashflows to INR using SBI historical TT Buy rates on transaction date (or previous available date).</td>
-      </tr>
-      <tr>
-          <td><strong>Invested Value Integrity for IBKR</strong></td>
-          <td>Uses open-lot FIFO-based invested value estimation (transaction-date FX adjusted) so invested vs market vs XIRR are more internally consistent.</td>
-      </tr>
-      <tr>
-          <td><strong>NAV + Date Display</strong></td>
-          <td>Shows NAV per unit and valuation date with market value context; IBKR supports INR and USD NAV display.</td>
-      </tr>
-      <tr>
-          <td><strong>Quantity Reconciliation Guardrails</strong></td>
-          <td>Skips/flags XIRR when parsed transaction quantity does not reconcile with reported holdings quantity.</td>
-      </tr>
-      <tr>
-          <td><strong>Category / Asset Class / Status Tagging</strong></td>
-          <td>Lets you tag each holding with your custom Category, Asset Class, and Buy/Hold/Sell status.</td>
-      </tr>
-      <tr>
-          <td><strong>Allocation Report Modes</strong></td>
-          <td>Provides overview and category-scoped asset-class breakdowns with table + chart visualization.</td>
-      </tr>
-      <tr>
-          <td><strong>Persistent Local State</strong></td>
-          <td>Saves funds, tags, and settings in browser local storage for continuity across sessions/uploads.</td>
-      </tr>
-      <tr>
-          <td><strong>Download Transactions CSV</strong></td>
-          <td>Exports normalized cashflow rows (<code>TRANSACTION</code> + <code>TERMINAL</code>) in INR/USD for offline XIRR verification in Excel/Sheets/Python.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Capability</th>
+					<th>What It Does</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>CAS PDF Parsing (CAMS/KFinTech)</strong></td>
+					<td>Parses consolidated CAS PDFs (including password-protected files) directly in the browser and extracts folio-wise holdings, units, NAV, market value, and cost value.</td>
+			</tr>
+			<tr>
+					<td><strong>IBKR CSV Parsing</strong></td>
+					<td>Parses Interactive Brokers activity/open position CSV data for stock holdings, cost basis, market value, trades, and account mapping.</td>
+			</tr>
+			<tr>
+					<td><strong>Unified Portfolio View</strong></td>
+					<td>Combines CAS and IBKR holdings into one table with consistent tagging, valuation display, and status workflow.</td>
+			</tr>
+			<tr>
+					<td><strong>Transaction-Based XIRR (Not Manual Input)</strong></td>
+					<td>Computes XIRR from actual transaction cashflows plus terminal value; supports fund-level and aggregated report-level computation.</td>
+			</tr>
+			<tr>
+					<td><strong>INR + USD Analytics for IBKR</strong></td>
+					<td>Computes and displays both INR and USD values/XIRR for IBKR holdings where transaction history is available.</td>
+			</tr>
+			<tr>
+					<td><strong>Historical FX Conversion</strong></td>
+					<td>Converts IBKR transaction cashflows to INR using SBI historical TT Buy rates on transaction date (or previous available date).</td>
+			</tr>
+			<tr>
+					<td><strong>Invested Value Integrity for IBKR</strong></td>
+					<td>Uses open-lot FIFO-based invested value estimation (transaction-date FX adjusted) so invested vs market vs XIRR are more internally consistent.</td>
+			</tr>
+			<tr>
+					<td><strong>NAV + Date Display</strong></td>
+					<td>Shows NAV per unit and valuation date with market value context; IBKR supports INR and USD NAV display.</td>
+			</tr>
+			<tr>
+					<td><strong>Quantity Reconciliation Guardrails</strong></td>
+					<td>Skips/flags XIRR when parsed transaction quantity does not reconcile with reported holdings quantity.</td>
+			</tr>
+			<tr>
+					<td><strong>Category / Asset Class / Status Tagging</strong></td>
+					<td>Lets you tag each holding with your custom Category, Asset Class, and Buy/Hold/Sell status.</td>
+			</tr>
+			<tr>
+					<td><strong>Allocation Report Modes</strong></td>
+					<td>Provides overview and category-scoped asset-class breakdowns with table + chart visualization.</td>
+			</tr>
+			<tr>
+					<td><strong>Persistent Local State</strong></td>
+					<td>Saves funds, tags, and settings in browser local storage for continuity across sessions/uploads.</td>
+			</tr>
+			<tr>
+					<td><strong>Download Transactions CSV</strong></td>
+					<td>Exports normalized cashflow rows (<code>TRANSACTION</code> + <code>TERMINAL</code>) in INR/USD for offline XIRR verification in Excel/Sheets/Python.</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="cas-parser-limitation">CAS Parser Limitation</h3>
 <blockquote>
@@ -376,30 +376,30 @@
 <h2 id="privacy--trust">Privacy &amp; Trust</h2>
 <p>Your financial data never leaves your device.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Aspect</th>
-          <th>Detail</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>CAS PDF parsing</strong></td>
-          <td>Runs entirely in your browser using <a href="https://mozilla.github.io/pdf.js/">PDF.js</a> — no file is ever uploaded</td>
-      </tr>
-      <tr>
-          <td><strong>IBKR CSV parsing</strong></td>
-          <td>Processed locally in your browser</td>
-      </tr>
-      <tr>
-          <td><strong>Tags &amp; settings</strong></td>
-          <td>Saved only in your browser&rsquo;s local storage</td>
-      </tr>
-      <tr>
-          <td><strong>IBKR FX conversion</strong></td>
-          <td>SBI historical TT Buy rates pre-fetched and cached locally on page load from <a href="https://data.sakthipriyan.com/">data.sakthipriyan.com</a>; no network needed after initial load</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Aspect</th>
+					<th>Detail</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>CAS PDF parsing</strong></td>
+					<td>Runs entirely in your browser using <a href="https://mozilla.github.io/pdf.js/">PDF.js</a> — no file is ever uploaded</td>
+			</tr>
+			<tr>
+					<td><strong>IBKR CSV parsing</strong></td>
+					<td>Processed locally in your browser</td>
+			</tr>
+			<tr>
+					<td><strong>Tags &amp; settings</strong></td>
+					<td>Saved only in your browser&rsquo;s local storage</td>
+			</tr>
+			<tr>
+					<td><strong>IBKR FX conversion</strong></td>
+					<td>SBI historical TT Buy rates pre-fetched and cached locally on page load from <a href="https://data.sakthipriyan.com/">data.sakthipriyan.com</a>; no network needed after initial load</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="how-it-works">How It Works</h3>
 <pre><code class="language-dot">digraph RealValueComplete {
