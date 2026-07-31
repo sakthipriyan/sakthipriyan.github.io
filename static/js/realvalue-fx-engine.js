@@ -538,7 +538,17 @@ window.initializeTool.fxTracker = function (container, config) {
                 <div id="transaction-history-section" style="scroll-margin-top: 80px;">
                     <div class="investment-plan" v-if="transactions.length > 0" style="margin-bottom: 2rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                        <h2 style="margin: 0;">📋 Transaction History</h2>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <h2 style="margin: 0;">📋 Transaction History</h2>
+                            <div v-if="availableFYs.length > 0" style="display: flex; align-items: center; gap: 0.4rem;">
+                                <select
+                                    v-model="selectedFY"
+                                    style="padding: 0.3rem 0.6rem; border: 1px solid #c3d9f5; border-radius: 6px; font-size: 0.9em; background: #f0f7ff; color: #2980b9; font-weight: 600; cursor: pointer;"
+                                >
+                                    <option :value="fy" v-for="fy in availableFYs" :key="fy">FY {{ fy }}-{{ String(fy + 1).slice(-2) }}</option>
+                                </select>
+                            </div>
+                        </div>
                         <div style="display: flex; gap: 0.5rem;">
                             <input
                                 type="file"
@@ -616,7 +626,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(txn, i) in computedTransactions" :key="txn.id">
+                                <tr v-for="(txn, i) in filteredTransactions" :key="txn.id">
                                     <td style="white-space: nowrap;">{{ txn.date }}</td>
                                     <td>{{ txn.bank || '–' }}</td>
                                     <td style="font-family: monospace; font-size: 0.85em;">{{ txn.txnId || '–' }}</td>
@@ -812,6 +822,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 },
                 transactions: [],
                 comparisonItems: [],
+                selectedFY: null,
                 showComparisonTable: false,
                 debounceTimer: null,
                 suppressAutoInterbankSync: false,
@@ -864,6 +875,28 @@ window.initializeTool.fxTracker = function (container, config) {
                 if (this.form.amountUnit === 'inr') return '$' + this.formatUSDHtml(this.preview.result);
                 return '₹' + this.formatINRHtml(this.preview.result);
             },
+            availableFYs() {
+                const fySet = new Set();
+                this.computedTransactions.forEach(t => {
+                    const d = new Date(t.date);
+                    const fy = d.getMonth() < 3 ? d.getFullYear() - 1 : d.getFullYear();
+                    fySet.add(fy);
+                });
+                return [...fySet].sort((a, b) => b - a); // newest first
+            },
+            fyLabel() {
+                const fy = this.selectedFY;
+                if (fy == null) return 'All Years';
+                return `FY ${fy}-${String(fy + 1).slice(-2)}`;
+            },
+            filteredTransactions() {
+                if (this.selectedFY == null) return this.computedTransactions;
+                return this.computedTransactions.filter(t => {
+                    const d = new Date(t.date);
+                    const fy = d.getMonth() < 3 ? d.getFullYear() - 1 : d.getFullYear();
+                    return fy === this.selectedFY;
+                });
+            },
             summary() {
                 let totalINRSpent = 0;
                 let totalUSDBought = 0;
@@ -871,7 +904,7 @@ window.initializeTool.fxTracker = function (container, config) {
                 let totalCharges = 0;
                 let totalTCS = 0;
                 let totalIBCost = 0;
-                this.computedTransactions.forEach(t => {
+                this.filteredTransactions.forEach(t => {
                     totalGST += t.gst || 0;
                     totalINRSpent += t.inrSpent || 0;
                     totalUSDBought += t.usdReceived || 0;
@@ -1073,6 +1106,14 @@ window.initializeTool.fxTracker = function (container, config) {
         },
 
         watch: {
+            availableFYs(newFYs) {
+                // When a new FY appears (transaction added/removed), auto-select the latest
+                if (newFYs.length === 0) {
+                    this.selectedFY = null;
+                } else if (this.selectedFY == null || !newFYs.includes(this.selectedFY)) {
+                    this.selectedFY = newFYs[0];
+                }
+            },
             transactions: {
                 deep: true,
                 handler() {
@@ -1109,6 +1150,12 @@ window.initializeTool.fxTracker = function (container, config) {
             this.loadFromStorage(hasSharedState);
             this.loadFromUrl();
             this.calculate();
+            // Default selectedFY to the latest available FY after data is loaded
+            this.$nextTick(() => {
+                if (this.availableFYs.length > 0) {
+                    this.selectedFY = this.availableFYs[0];
+                }
+            });
         },
 
         beforeUnmount() {
