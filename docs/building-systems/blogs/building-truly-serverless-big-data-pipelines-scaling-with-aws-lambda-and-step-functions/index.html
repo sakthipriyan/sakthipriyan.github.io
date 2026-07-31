@@ -298,52 +298,52 @@
 <p>The right number of concurrent executors and worker threads within each executor depends on whether your workload is CPU-bound, memory-bound, or network-bound and goal is latency vs stability</p>
 <h4 id="workload-type">Workload Type</h4>
 <table>
-  <thead>
-      <tr>
-          <th>Workload type</th>
-          <th>Workers per executor</th>
-          <th>Reasoning</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>cpu</code></td>
-          <td>~6</td>
-          <td>Matches available vCPUs</td>
-      </tr>
-      <tr>
-          <td><code>memory</code></td>
-          <td>~3</td>
-          <td>Reduces heap pressure per worker. <br/> But, here we are leaving money on the table!</td>
-      </tr>
-      <tr>
-          <td><code>network</code></td>
-          <td>~24</td>
-          <td>I/O waits allow high concurrency</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Workload type</th>
+					<th>Workers per executor</th>
+					<th>Reasoning</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>cpu</code></td>
+					<td>~6</td>
+					<td>Matches available vCPUs</td>
+			</tr>
+			<tr>
+					<td><code>memory</code></td>
+					<td>~3</td>
+					<td>Reduces heap pressure per worker. <br/> But, here we are leaving money on the table!</td>
+			</tr>
+			<tr>
+					<td><code>network</code></td>
+					<td>~24</td>
+					<td>I/O waits allow high concurrency</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="optimization-goal">Optimization Goal</h4>
 <table>
-  <thead>
-      <tr>
-          <th>Optimization Goal</th>
-          <th>Target Executor Count</th>
-          <th>Strategy &amp; Rationale</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>Latency</code></td>
-          <td>Up to 40</td>
-          <td>Run more executors in parallel to maximize speed.</td>
-      </tr>
-      <tr>
-          <td><code>Stability</code></td>
-          <td>Up to 10</td>
-          <td>Run fewer executors to minimize resource contention and reduce the risk of retry storms.</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Optimization Goal</th>
+					<th>Target Executor Count</th>
+					<th>Strategy &amp; Rationale</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Latency</code></td>
+					<td>Up to 40</td>
+					<td>Run more executors in parallel to maximize speed.</td>
+			</tr>
+			<tr>
+					<td><code>Stability</code></td>
+					<td>Up to 10</td>
+					<td>Run fewer executors to minimize resource contention and reduce the risk of retry storms.</td>
+			</tr>
+	</tbody>
 </table>
 <p>The system can auto-scale from 1 to 40 executors; the upper bound (40) is driven by Step Functions parallel maps and parameter store throughput limits.</p>
 <h2 id="performance-trade-offs-vs-cluster-compute">Performance Trade-offs vs Cluster Compute</h2>
