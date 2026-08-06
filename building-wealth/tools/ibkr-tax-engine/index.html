@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IBKR Tax Engine | Sakthi Priyan H</title>
+    <meta name="description" content="Compute Schedule AL and Schedule FA inputs from IBKR Flex Query CSV export."><link rel="stylesheet" href="http://localhost:1313/css/style.css">
+    <link rel="stylesheet" href="http://localhost:1313/css/tools.css">
+</head>
+<body class="building-wealth"><header class="site-header">
+    <nav class="main-nav">
+        
+            
+            
+            
+            
+            
+            <div class="logo">
+                <a href="http://localhost:1313/" class="name-link">Sakthi Priyan H</a>
+                <span class="separator"> | </span>
+                
+                <a href="/building-wealth/" class="name-link">Building Wealth</a>
+            </div>
+            
+            
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-links">
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                        
+                            
+                            <li><a href="http://localhost:1313/building-wealth/about/">About</a></li>
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/blogs/">Blogs</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/books/">Books</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/slides/">Slides</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/tags/">Tags</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/tools/">Tools</a></li>
+                            
+                        
+                    
+                
+                    
+                    
+                    
+                        
+                            
+                            
+                                <li><a href="http://localhost:1313/building-wealth/videos/">Videos</a></li>
+                            
+                        
+                    
+                
+            </ul>
+        
+    </nav>
+</header>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="http://localhost:1313/">Home</a>
+        </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="breadcrumb-item">
+                    
+                        <a href="/building-wealth/">Building Wealth</a>
+                    
+                </li>
+                
+                
+                
+                
+                
+                    
+                    
+                        
+                        
+                        <li class="breadcrumb-item">
+                            
+                                <a href="/building-wealth/tools/">Tools</a>
+                            
+                        </li>
+                        
+                    
+                
+            
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">
+                <span>IBKR Tax Engine</span>
+            </li>
+            
+        </ol>
+</nav>
+
+    <main>
+<article class="tool">
+    
+<header class="content-header">
+    <h1 class="content-title">IBKR Tax Engine</h1>
+    <p class="content-summary">Compute Schedule AL and Schedule FA inputs from IBKR Flex Query CSV export.</p>
+
+    <div class="content-meta">
+        <span class="meta-item">
+            <span class="meta-icon">📅</span>
+            <time datetime="2026-08-01">Aug 1, 2026</time>
+        </span>
+        <span class="meta-item" title="View Source on GitHub">
+            <span class="meta-icon">💻</span>
+            <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-wealth/tools/ibkr-tax-engine.md" target="_blank" rel="noopener noreferrer">Source</a>
+        </span><span class="meta-item">
+            <span class="meta-icon">🔧</span>
+            <span class="use-time">Interactive Tool</span>
+        </span>
+    </div>
+
+    <hr class="content-divider">
+</header>
+
+    
+    
+    
+    <div class="tool-interface">
+        <div id="tool-ibkrTaxEngine" class="tool-widget">
+            
+        </div>
+    </div>
+    
+
+    <div class="tool-content">
+        <h2 id="about-ibkr-tax-engine">About IBKR Tax Engine</h2>
+<blockquote>
+<p><strong>IBKR Tax Engine</strong> helps you easily compute Schedule FA and Schedule AL metrics for your Indian Income Tax Returns from an Interactive Brokers (IBKR) Flex Query export.</p>
+</blockquote>
+<p>Traditional tax preparation involves manually parsing hundreds of rows of IBKR transaction history to identify peak balances, closing balances, and initial values for Schedule FA (Calendar Year) and Schedule AL (Financial Year).</p>
+<p><strong>IBKR Tax Engine</strong> solves this by:</p>
+<ul>
+<li>Processing your IBKR Flex Query CSV directly in your browser.</li>
+<li>Automatically identifying the correct SBI TT Buying rates for USD to INR conversion.</li>
+<li>Computing Schedule FA outputs (Calendar Year basis) including Peak Balance and Closing Balance.</li>
+<li>Computing Schedule AL outputs (Financial Year basis) for &ldquo;Shares &amp; Securities&rdquo;.</li>
+</ul>
+<h3 id="built-for-real-life">Built for Real Life</h3>
+<ul>
+<li>100% Private: All calculations happen locally in your browser. Your financial data is never sent to any server.</li>
+<li>Supports Calendar Year (Jan - Dec) for Schedule FA.</li>
+<li>Supports Financial Year (Apr - Mar) for Schedule AL.</li>
+<li>Fully transparent and easy to use.</li>
+</ul>
+<h3 id="frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</h3>
+<h3 id="what-data-does-the-tool-need">What data does the tool need?</h3>
+<p>You need an IBKR Flex Query CSV export that contains &ldquo;Trades&rdquo; and &ldquo;Dividends&rdquo;. The tool reconstructs your daily balances across the selected year to identify your peak and closing balances.</p>
+<h3 id="how-is-the-exchange-rate-applied">How is the exchange rate applied?</h3>
+<p>The tool automatically fetches historical SBI TT Buying rates (via an API endpoint used across our portfolio tools) for the exact dates required.</p>
+<h3 id="is-my-data-safe">Is my data safe?</h3>
+<p>Yes. The CSV file is parsed using JavaScript running strictly on your device. The only network requests made are to fetch historical SBI exchange rates. No personal or financial data is transmitted.</p>
+
+    </div>
+
+    
+
+    
+<footer class="content-footer">
+    <hr class="content-divider">
+    
+    
+    <div class="card-tags">
+        <span class="tags-icon">🏷️</span>
+        
+        <a href="http://localhost:1313/building-wealth/tags/tax/" class="tag-link">Tax</a>
+        
+        <a href="http://localhost:1313/building-wealth/tags/ibkr/" class="tag-link">IBKR</a>
+    </div>
+</footer>
+</article>
+
+    </main><footer class="site-footer">
+    <p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p>
+</footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="http://localhost:1313/js/ibkr-tax-engine.js"></script>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const toolType = 'ibkrTaxEngine';
+        const toolContainer = document.getElementById('tool-' + toolType);
+
+        if (window.initializeTool && typeof window.initializeTool[toolType] === 'function') {
+            window.initializeTool[toolType](toolContainer, "null");
+        }
+    });
+</script>
+
+
+    <script>
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK";
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5NGEJ767SK');
+    }
+</script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Hamburger menu initialized', { hamburger, navLinks });
+            
+            if (hamburger && navLinks) {
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                document.body.appendChild(overlay);
+                
+                console.log('Overlay created and added to body');
+                
+                
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    
+                    const isExpanded = hamburger.classList.contains('active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                    
+                    
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                    
+                    console.log('Menu toggled', { isExpanded });
+                });
+                
+                
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay clicked - closing menu');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+                
+                
+                const navLinksElements = navLinks.querySelectorAll('a');
+                console.log('Found nav links:', navLinksElements.length);
+                
+                navLinksElements.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        console.log('Link clicked:', link.href);
+                        
+                        
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+                        console.log('Window resized - closing menu');
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                console.warn('Hamburger menu elements not found');
+            }
+        });
+    </script>
+
+</body>
+</html>

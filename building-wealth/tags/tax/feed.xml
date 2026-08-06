@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Tax on Sakthi Priyan H</title>
+		<link>http://localhost:1313/building-wealth/tags/tax/</link>
+		<description>Recent content in Tax on Sakthi Priyan H</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/building-wealth/tags/tax/feed.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>IBKR Tax Engine</title>
+				<link>http://localhost:1313/building-wealth/tools/ibkr-tax-engine/</link>
+				<pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/building-wealth/tools/ibkr-tax-engine/</guid>
+				<description>Compute Schedule AL and Schedule FA inputs from IBKR Flex Query CSV export.</description>
+			</item>
+	</channel>
+</rss>
