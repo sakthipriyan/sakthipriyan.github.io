@@ -11,20 +11,22 @@ This repository contains the Hugo-based static site source, including:
 - **Tools**: In-browser utilities like the *RealValue Portfolio Tracker* and *FX Engine* that run locally for complete privacy.
 
 ## Tech Stack
-- **Site Generator:** [Hugo](https://gohugo.io/)
+- **Site Generator:** [Hugo](https://gohugo.io/) v0.164.0 Extended
 - **Theme:** Custom `continuum` theme (located in `/themes/continuum`)
-- **Hosting:** GitHub Pages (served from the `/docs` directory)
+- **Hosting:** GitHub Pages (served from the `gh-pages` branch)
+- **CI/CD:** GitHub Actions (auto-deploys on every push to `main`)
 
 ## Local Development
 
-1. Ensure [Hugo (Extended version)](https://gohugo.io/installation/) is installed.
+1. Install Hugo via Homebrew:
+   ```bash
+   brew install hugo
+   ```
 2. Clone this repository.
 3. Start the local development server:
    ```bash
    hugo server -D
    ```
 4. View the site at `http://localhost:1313/`
-5. To build for production (generates output in the `/docs` folder for GitHub Pages):
-   ```bash
-   hugo
-   ```
+
+> **Note:** You don't need to build manually anymore. Pushing to `main` (via a PR) triggers the CI pipeline which builds and deploys automatically.

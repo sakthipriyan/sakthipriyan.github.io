@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:    # allows manual trigger from GitHub UI / gh CLI
 
 jobs:
   deploy:
@@ -27,7 +28,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy to gh-pages
-        uses: peaceiris/gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
