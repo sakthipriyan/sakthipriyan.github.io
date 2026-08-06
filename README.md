@@ -30,3 +30,4 @@ This repository contains the Hugo-based static site source, including:
 4. View the site at `http://localhost:1313/`
 
 > **Note:** You don't need to build manually anymore. Pushing to `main` (via a PR) triggers the CI pipeline which builds and deploys automatically.
+
