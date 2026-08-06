@@ -2,6 +2,12 @@
 .DS_Store
 hugo_stats.json
 
+# Hugo build output (built by CI, not committed to source)
+docs/
+
+# Local tooling binaries
+bin/
+
 # Local temp files and tokens
 .tmp/
 
