@@ -51,18 +51,15 @@ As of v0.2.1:
 | <span style="white-space:nowrap">📈 Mutual Funds</span> | KFinTech | PDF (password protected) | ⏳ | Combined Account Statement (CAS) |
 | <span style="white-space:nowrap">🌍 Intl Brokers</span> | Interactive Brokers (IBKR) | CSV | ✅ | Activity statements |
 
-*Note: Bank Account parsers have not been tested with Joint Accounts. Not all credit cards tested with add on cards*
+*Note: Bank account parsers have not yet been tested with joint accounts. Add-on card support varies by credit-card parser.*
 
 ### Output Schema
-#### JSON
-One important decision was to build on the [ReBIT Account Aggregator schema](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an xfina extension rather than forcing those fields into an incompatible model or discarding them.
 
-#### CSV
-CSV support to be added soon as part github issue [#42](https://github.com/sakthipriyan/xfina/issues/42).
+One important decision was to build on the [ReBIT Account Aggregator schema](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an `xfina` extension rather than forcing those fields into an incompatible model or discarding them. (CSV export support will be added soon as part of GitHub issue [#42](https://github.com/sakthipriyan/xfina/issues/42)).
 
-## Why Rust, and How It Unlocked Five Interfaces for Free
+## Why Rust: One Core, Five Interfaces
 
-The choice of Rust was primarily about correctness and performance, but it turned out to be the most important architectural decision for a completely different reason: **Rust compiles to WebAssembly**, which made it trivially easy to ship the same parsing logic to five different runtime targets without rewriting a single line of core code.
+Rust compiles to WebAssembly, which made it possible to reuse the same parsing logic across five runtime targets without rewriting the core.
 
 ```d2
 core: Xfina Core {
@@ -107,7 +104,9 @@ Each target required only a thin binding layer — typically a macro that wires 
 
 ### AI and the Learning Curve
 
-I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude models. In an AI code-generated world, the notoriously steep learning curve of Rust is no longer an impediment. As long as you have a tight feedback loop and strong test suites covering various use cases, you can iterate incredibly fast in a strictly typed, compiled language.
+I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude models. AI doesn't eliminate Rust's learning curve, but it dramatically shortens the feedback loop. With the compiler and a strong test suite continuously checking the generated code, I could iterate on a language I was still learning without sacrificing the safety benefits that attracted me to Rust in the first place.
+
+Performance was therefore a two-sided requirement: **the system needed to run fast, and I needed to build it fast.** Rust addressed the first; AI-assisted development, strong typing, and aggressive testing helped address the second.
 
 That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the git worktree.
 
@@ -227,13 +226,13 @@ Parsing financial data without verifying it is dangerous — a missed row or dec
 
 **Level 2 — Summary validation:** The engine compares declared vs. computed totals (total credits, total debits, closing balance). Checks are classified as either **`Declared`** (the institution printed this number) or **`Derived`** (inferred from arithmetic). 
 
-This drives the overall `ValidationStatus`: all passed → green ✅, only derived failures → yellow ⚠, any declared failure → red ✗. 
+This drives the overall `ValidationStatus`: all passed → green ✅, only derived failures → yellow ⚠, any declared failure → red ✗. The validation engine is only as strong as the source data allows.
 
 ## The Deployment Pipeline
 
 Automation is handled by three distinct GitHub Actions workflows:
 
-1. **`test.yml` (PR Checks)** — Runs on every pull request to `main`. It features a smart diff-checker that identifies if any core logic (`src/`, `python/`, `wasm/`, `tests/`) was modified. If core files changed, it strictly enforces that `CHANGELOG.md` is updated in the same PR, failing the build if it's missing. It then runs formatting, linting (`clippy`), `cargo test`, and verifies the WASM target compiles.
+1. **`test.yml` (PR Checks)** — Runs on every pull request to `main`. It features a smart diff-checker that identifies if any core logic was modified, then runs formatting, linting (`clippy`), `cargo test`, and verifies the WASM target compiles.
 2. **`deploy-unreleased.yml` (Continuous Preview)** — Every push to `main` triggers a build of the latest WASM module and Vue site. It leverages GitHub concurrency groups to cancel outdated in-progress runs, then delegates the heavy lifting to our custom `cargo run -p xtask -- deploy-site --unreleased` tool to push to the `/unreleased/` path on GitHub Pages.
 3. **`publish.yml` (Release)** — Triggered by a git tag (e.g., `v0.2.1`), this workflow first verifies that the tag was created on the `main` branch to prevent accidental rogue releases. Once verified, it orchestrates four parallel jobs: publishing the Rust library to Crates.io, building and publishing the NPM package (with `--provenance`), building Python wheels via `maturin` for PyPI, and deploying the versioned frontend via the `xtask` deployer.
 
@@ -249,11 +248,29 @@ Snapshot testing is the primary strategy. Each parser has an integration test th
 
 Because financial statements contain highly sensitive PII, **testing is strictly limited to real (but private) files checked into a private sibling repository**, and tests are run locally. I plan to include these tests in the CI pipeline eventually, but I need to be extremely careful to ensure no data is ever leaked in the GitHub Actions logs.
 
-## Performance Benchmark Python
+## Beyond Parsing: The Data Quality Problem
 
-Just to show case the performance of Rust binded Python libraries vs native ones I compared the popular [casparser](https://github.com/codereverser/casparser) vs the new [xfina](https://github.com/sakthipriyan/xfina)
+One of the biggest challenges in building Xfina is that financial statements are not designed for machine consumption. The same institution can provide different levels of information across PDF, Excel, and CSV formats, and some reports contain little or no summary information that can be used to validate the parsed transactions.
 
-Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
+For example, an ICICI Bank credit card statement does not include the card number anywhere in the PDF or XLS report. An Axis Bank PDF contains significantly more information than its Excel equivalent. Credit card statements generally don't provide a running balance, so validation is limited to summary-level checks. Where running balances are available, Xfina can validate every transaction sequentially.
+
+CAMS is a particularly good example of what becomes possible when the source contains richer information. A CAS can be validated at multiple levels: individual transactions and running balances for each mutual fund, at the AMC level, and again against the overall consolidated totals.
+
+In general, I have found the formats roughly ordered from **easiest to hardest to parse as CSV/Excel → PDF**, while the richness of the data tends to go in the opposite direction: **PDF → Excel/CSV**. PDFs often contain information that is missing from their structured counterparts, but they are also arguably the worst format for exchanging data between systems.
+
+The bigger problem is therefore not just parsing. **Financial institutions should provide a standard machine-readable export, ideally using an established schema such as ReBIT AA, in a consistent format across banks, cards, brokers, and mutual funds.** Today, anyone managing multiple bank accounts, credit cards, mutual funds, and brokerage accounts has to deal with a fragmented collection of formats and data quality.
+
+This matters especially for privacy-first applications. If institutions provided a standard export directly to the user, financial software could process that data locally without requiring users to upload sensitive financial information to an upstream server.
+
+That is where Xfina fits today: **bridging the gap between the messy formats institutions provide and the structured data applications need.** Over time, I want to expand Xfina's support for richer PDF statements across institutions, allowing more precise validation of the underlying transactions and summary data.
+
+Ultimately, the best solution isn't another parser. It is for financial institutions to make **standardized, machine-readable exports a first-class feature**. Until then, Xfina is my attempt to make that fragmented data usable, locally, reliably, and without compromising privacy.
+
+## Performance: Rust vs Python
+
+To demonstrate the benefit of doing the parsing in compiled Rust while exposing a Python API, I compared the popular [casparser](https://github.com/codereverser/casparser) project with Xfina's Python bindings. 
+
+Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is an order of magnitude faster and operates with a microscopic memory profile.
 
 To put numbers to this, I ran a local benchmark using 13 real CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
 
@@ -281,39 +298,7 @@ xfina_time = time.time() - start
 > **`casparser`**: 6.08 seconds \
 > **`xfina`**: 0.47 seconds
 
-
-
-**Xfina is roughly 13x faster** on the exact same workload. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural. But, if this is used individually, it doesn't matter much.
-
-
-
-## Beyond Parsing: The Data Quality Problem
-One of the biggest challenges in building Xfina is that financial statements are not designed for machine consumption. The same institution can provide different levels of information across PDF, Excel, and CSV formats, and some reports contain little or no summary information that can be used to validate the parsed transactions.
-
-For example, an ICICI Bank credit card statement does not include the card number anywhere in the PDF or XLS report. An Axis Bank PDF contains significantly more information than its Excel equivalent. Credit card statements generally don't provide a running balance, so validation is limited to summary-level checks. Where running balances are available, Xfina can validate every transaction sequentially.
-
-CAMS is a particularly good example of what becomes possible when the source contains richer information. A CAS can be validated at multiple levels: individual transactions and running balances for each mutual fund, at the AMC level, and again against the overall consolidated totals.
-
-In general, I have found the formats roughly ordered from **easiest to hardest to parse as CSV/Excel → PDF**, while the richness of the data tends to go in the opposite direction: **PDF → Excel/CSV**. PDFs often contain information that is missing from their structured counterparts, but they are also arguably the worst format for exchanging data between systems.
-
-The bigger problem is therefore not just parsing. **Financial institutions should provide a standard machine-readable export, ideally using an established schema such as ReBIT AA, in a consistent format across banks, cards, brokers, and mutual funds.** Today, anyone managing multiple bank accounts, credit cards, mutual funds, and brokerage accounts has to deal with a fragmented collection of formats and data quality.
-
-This matters especially for privacy-first applications. If institutions provided a standard export directly to the user, financial software could process that data locally without requiring users to upload sensitive financial information to an upstream server.
-
-That is where Xfina fits today: **bridging the gap between the messy formats institutions provide and the structured data applications need.** Over time, I want to expand Xfina's support for richer PDF statements across institutions, allowing more precise validation of the underlying transactions and summary data.
-
-Ultimately, the best solution isn't another parser. It is for financial institutions to make **standardized, machine-readable exports a first-class feature**. Until then, Xfina is my attempt to make that fragmented data usable, locally, reliably, and without compromising privacy.
-
-
-## What I Learned
-
-**Rust for WASM unlocks a write-once, ship-everywhere model.** One codebase, five delivery targets with only thin binding layers separating them. The WASM payoff is real.
-
-**The `xtask` pattern keeps build tooling maintainable.** All deployment logic is type-checked Rust in the same repo — no bash scripts, no drift between CI YAML and local commands.
-
-**Snapshot tests are non-negotiable for parsers.** Any field mapping change is immediately visible as a diff. Without them, regressions are discovered by users.
-
-**`modified_timestamp` as a date inference hint.** When institutions don't embed the statement date in a machine-readable field, the file's last-modified time turns out to be a surprisingly reliable fallback.
+On this workload, Xfina was roughly 13× faster. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural. But, if this is used individually, it doesn't matter much.
 
 ## Links
 
