@@ -117,7 +117,7 @@ This project marked a major personal milestone: it was the first time I ever pub
 
 ### 1. The Rust Library
 
-**Install** ![Crates.io](https://img.shields.io/crates/v/xfina)
+**Install** [![Crates.io](https://img.shields.io/crates/v/xfina.svg?color=orange)](https://crates.io/crates/xfina)
 Add the dependency to your `Cargo.toml`:
 ```toml
 [dependencies]
@@ -136,7 +136,7 @@ println!("Validation status: {:?}", result.validation.overall);
 
 ### 2. The CLI Tool
 
-**Install** ![Crates.io](https://img.shields.io/crates/v/xfina)
+**Install** [![Crates.io](https://img.shields.io/crates/v/xfina.svg?color=orange)](https://crates.io/crates/xfina)
 ```bash
 cargo install xfina --features cli
 ```
@@ -149,7 +149,7 @@ xfina mutual-fund cams portfolio.pdf --password "XXXXXXXXXX"
 
 ### 3. The Python Bindings (PyPI)
 
-**Install** ![PyPI](https://img.shields.io/pypi/v/xfina)
+**Install** [![PyPI](https://img.shields.io/pypi/v/xfina.svg?color=blue)](https://pypi.org/project/xfina/)
 ```bash
 pip install xfina
 ```
@@ -168,7 +168,7 @@ NPM’s automated name-similarity and anti-typosquatting protections prevented m
 
 So, rather than introducing a different name, I simply reused the `xfina-wasm` package name for the WebAssembly bindings.
 
-**Install** ![NPM](https://img.shields.io/npm/v/xfina-wasm)
+**Install** [![npm](https://img.shields.io/npm/v/xfina-wasm.svg?color=yellow)](https://www.npmjs.com/package/xfina-wasm)
 ```bash
 npm install xfina-wasm
 ```
