@@ -28,8 +28,6 @@ I wanted something different and far more powerful: **a fast, local, open-source
 
 That project is [Xfina](https://github.com/sakthipriyan/xfina). Ultimately, this parser serves as a foundational building block for a stealth project I am working on to consolidate multiple standalone financial tools I have built over the years.
 
----
-
 ## What Xfina Does
 
 Xfina parses financial statements directly from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON conforming to the [ReBIT Account Aggregator (AA) schema](https://api.rebit.org.in/), with optional extensions for richer data.
@@ -51,8 +49,6 @@ As of v0.2.1:
 | <span style="white-space:nowrap">🌍 Intl Brokers</span> | Interactive Brokers (IBKR) | CSV | ✅ | Activity statements |
 
 *Note: Bank Account parsers have not been tested with Joint Accounts.*
-
----
 
 ## Why Rust, and How It Unlocked Five Interfaces for Free
 
@@ -107,8 +103,6 @@ I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude 
 
 That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the workspace.
 
----
-
 ## Five Interfaces, One Core: The Demos
 
 This project marked a major personal milestone: it was the first time I ever published code to public package repositories, hitting Crates.io, NPM, and PyPI all in one go. Here is how you consume the exact same parser across all five interfaces:
@@ -158,8 +152,6 @@ const result = JSON.parse(jsonString);
 ### 5. The Web App
 A Vue 3 application that imports the NPM package and parses files locally on drop. Try it live at [xfina.sakthipriyan.com](https://xfina.sakthipriyan.com/).
 
----
-
 ## Architecture
 
 The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and `xtask` (the build tool) — plus the `web/` Vue app:
@@ -175,8 +167,6 @@ xfina/
 
 The key design principle: **write the parser once, expose it everywhere.** All three binding layers share the same `ParseRequest` builder struct and the same `ParseResult<T>` return type.
 
----
-
 ## The Data Models
 
 The output schema is built directly on the [Sahamati Account Aggregator specifications](https://sahamati.org.in/):
@@ -190,8 +180,6 @@ Every parser supports two output flavors via a `format` parameter:
 - **`xfina` (default)** — Dates as Unix timestamps, includes the `xfina` extension object with institution-specific metadata. 
 - **`rebit`** — Strict ReBIT AA schema compliance. The `xfina` extension is stripped, date-only fields stay as `YYYY-MM-DD` strings.
 
----
-
 ## The Parsers & Validation Engine
 
 Parsing financial data without verifying it is dangerous — a missed row or decimal rounding error could silently produce wrong output. Every `ParseResult<T>` carries a `ValidationReport` with two levels of checks:
@@ -201,8 +189,6 @@ Parsing financial data without verifying it is dangerous — a missed row or dec
 **Level 2 — Summary validation:** The engine compares declared vs. computed totals (total credits, total debits, closing balance). Checks are classified as either **`Declared`** (the institution printed this number) or **`Derived`** (inferred from arithmetic). 
 
 This drives the overall `ValidationStatus`: all passed → green ✅, only derived failures → yellow ⚠, any declared failure → red ✗. 
-
----
 
 ## The Deployment Pipeline
 
@@ -218,8 +204,6 @@ We maintain a multi-versioned website to ensure stability. The **Unversioned** s
 
 Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via `cargo xtask deploy-site` — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like `/0.2/`), updates a `versions.json` registry, and force-pushes to `gh-pages`. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.
 
----
-
 ## Testing Strategy
 
 Snapshot testing is the primary strategy. Each parser has an integration test that reads a real statement, parses it, and compares JSON output against a committed snapshot. 
@@ -227,8 +211,6 @@ Snapshot testing is the primary strategy. Each parser has an integration test th
 Because financial statements contain highly sensitive PII, **testing is strictly limited to real (but private) files checked into a private sibling repository**, and tests are run locally. I plan to include these tests in the CI pipeline eventually, but I need to be extremely careful to ensure no data is ever leaked in the GitHub Actions logs.
 
 *(One important technical fix: the IBKR parser originally used `HashMap`/`HashSet` for grouping trades. Hash iteration order is non-deterministic, which made snapshots flaky. Switching to `BTreeMap`/`BTreeSet` — which always iterate in sorted order — fixed it entirely.)*
-
----
 
 ## What I Learned
 
@@ -239,8 +221,6 @@ Because financial statements contain highly sensitive PII, **testing is strictly
 **Snapshot tests are non-negotiable for parsers.** Any field mapping change is immediately visible as a diff. Without them, regressions are discovered by users.
 
 **`modified_timestamp` as a date inference hint.** When institutions don't embed the statement date in a machine-readable field, the file's last-modified time turns out to be a surprisingly reliable fallback.
-
----
 
 ## Links
 
