@@ -38,17 +38,17 @@ As of v0.2.1, it supports:
 
 | Category | Institution / Provider | Format | Status | Notes |
 |---|---|---|---|---|
-| 🏦 Bank Account | Axis Bank | XLS | **Production Ready** | Full support |
-| 🏦 Bank Account | Bank of Baroda | XLS | **Production Ready** | Full support |
-| 🏦 Bank Account | HDFC Bank | XLS | **Production Ready** | Full support |
-| 🏦 Bank Account | ICICI Bank | XLS | **Production Ready** | Full support |
-| 🏦 Bank Account | State Bank of India | PDF (password protected) | **Production Ready** | Full support |
-| 💳 Credit Card | Axis Bank | - | **TODO** | Waiting for the statement to be generated |
-| 💳 Credit Card | HDFC Bank | CSV | **Production Ready** | Full support incl. add-on cardholders, reward points |
-| 💳 Credit Card | ICICI Bank | XLS | **Production Ready** | Tested card without any add-on cards |
-| 📈 Mutual Funds | CAMS | PDF (password protected) | **Production Ready** | Combined Account Statement (CAS) |
-| 📈 Mutual Funds | KFinTech | PDF (password protected) | **TODO** | Combined Account Statement (CAS) |
-| 🌍 Intl Brokers | Interactive Brokers (IBKR) | CSV | **Production Ready** | Activity statements |
+| 🏦 Bank Account | Axis Bank | XLS | ✅ | Full support |
+| 🏦 Bank Account | Bank of Baroda | XLS | ✅ | Full support |
+| 🏦 Bank Account | HDFC Bank | XLS | ✅ | Full support |
+| 🏦 Bank Account | ICICI Bank | XLS | ✅ | Full support |
+| 🏦 Bank Account | State Bank of India | PDF (password protected) | ✅ | Full support |
+| 💳 Credit Card | Axis Bank | - | ⏳ | Waiting for the statement to be generated |
+| 💳 Credit Card | HDFC Bank | CSV | ✅ | Full support incl. add-on cardholders, reward points |
+| 💳 Credit Card | ICICI Bank | XLS | ✅ | Tested card without any add-on cards |
+| 📈 Mutual Funds | CAMS | PDF (password protected) | ✅ | Combined Account Statement (CAS) |
+| 📈 Mutual Funds | KFinTech | PDF (password protected) | ⏳ | Combined Account Statement (CAS) |
+| 🌍 Intl Brokers | Interactive Brokers (IBKR) | CSV | ✅ | Activity statements |
 
 *Note: Bank Account parsers have not been tested with Joint Accounts.*
 
