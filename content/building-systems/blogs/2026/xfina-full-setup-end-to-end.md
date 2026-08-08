@@ -22,7 +22,7 @@ Every time I wanted a consolidated view of my finances — bank statements, cred
 
 The existing options were either Account Aggregators (useful, but require consent frameworks and institutional agreements), manual spreadsheets (brittle, no validation), or paid upload-based services (a non-starter for privacy-conscious users).
 
-A few years ago, I made an initial attempt at solving this for my [RealValue Portfolio](https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/) project. I used `pdf.js` to build a browser-only parsing engine. While it preserved privacy, development iteration was severely limited to browser-based testing, and the parser was locked into being a web-only tool that only supported CAMS mutual funds and IBKR. The WASM upgrade is a significant leap, expanding support to a wide variety of bank accounts and credit cards.
+Sometime back, I made an initial attempt at solving this for my [RealValue Portfolio](https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/) project. I used `pdf.js` to build a browser-only parsing engine. While it preserved privacy, development iteration was severely limited to browser-based testing, and the parser was locked into being a web-only tool that only supported CAMS mutual funds and IBKR. The WASM upgrade is a significant leap, expanding support to a wide variety of bank accounts and credit cards.
 
 I wanted something different and far more powerful: **a fast, local, open-source parser** that understands the proprietary formats used by Indian banks and brokerages, and outputs clean, structured JSON.
 
