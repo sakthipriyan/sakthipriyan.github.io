@@ -237,7 +237,7 @@ Automation is handled by three distinct GitHub Actions workflows:
 |---|---|---|
 | **`test.yml`** <br/> *(PR Checks)* | Pull request to `main` | Features a smart diff-checker to identify if core logic was modified. Runs formatting, linting (`clippy`), `cargo test` (unit and logic tests; fixture-backed snapshot tests are run locally), and verifies WASM compilation. |
 | **`deploy-unreleased.yml`** <br/> *(Continuous Preview)* | Merge to `main` | Leverages concurrency groups to cancel outdated runs. Delegates the build of the WASM module and Vue site to `cargo xtask deploy-site --unreleased` to push to the `/unreleased/` path on GitHub Pages. |
-| **`publish.yml`** <br/> *(Release)* | Git tag (e.g., `v0.2.1`) | Verifies the tag is on the `main` branch to prevent rogue releases. Orchestrates four parallel jobs to publish to Crates.io, NPM (with `--provenance`), PyPI (via `maturin`), and deploy the versioned frontend using `cargo xtask`. |
+| **`publish.yml`** <br/> *(Release)* | Git tag on `main` (e.g., `v0.2.1`) | Verifies the tag is on the `main` branch to prevent rogue releases. Orchestrates four parallel jobs to publish to Crates.io, NPM (with `--provenance`), PyPI (via `maturin`), and deploy the versioned frontend using `cargo xtask`. |
 
 ### Multi-Versioned Website
 
