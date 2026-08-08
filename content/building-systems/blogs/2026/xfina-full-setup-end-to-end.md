@@ -55,7 +55,7 @@ As of v0.2.1:
 
 ### Output Schema
 
-One important decision was to build on the [ReBIT Account Aggregator schema](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an `xfina` extension rather than forcing those fields into an incompatible model or discarding them. (CSV export support will be added soon as part of GitHub issue [#42](https://github.com/sakthipriyan/xfina/issues/42)).
+One important decision was to build on top of the [Sahamati Account Aggregator (AA) and ReBIT standards](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an `xfina` extension rather than forcing those fields into an incompatible model or discarding them. (CSV export support will be added soon as part of GitHub issue [#42](https://github.com/sakthipriyan/xfina/issues/42)).
 
 ## Why Rust: One Core, Five Interfaces
 
@@ -99,12 +99,13 @@ core -> wasm: wasm-bindgen
 core -> pylib: PyO3 + Maturin
 wasm -> webapp: xfina-wasm npm pkg
 ```
+*(Note: The CLI and Rust Library are the exact same crate, compiled with different feature flags).*
 
 Each target required only a thin binding layer — typically a macro that wires a parser function to a different calling convention. The same core logic that validates a running balance or maps an XLS row to a `DepositAccount` struct runs identically in a Rust binary, inside a Python process, and in a browser tab with no servers involved. **That's the WASM payoff.**
 
 ### AI and the Learning Curve
 
-I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude models. AI doesn't eliminate Rust's learning curve, but it dramatically shortens the feedback loop. With the compiler and a strong test suite continuously checking the generated code, I could iterate on a language I was still learning without sacrificing the safety benefits that attracted me to Rust in the first place.
+I built Xfina using **Antigravity**, alternating between Gemini Pro and Claude models. AI doesn't eliminate Rust's learning curve, but it dramatically shortens the feedback loop. With the compiler and a strong test suite continuously checking the generated code, I could iterate on a language I was still learning without sacrificing the safety benefits that attracted me to Rust in the first place.
 
 Performance was therefore a two-sided requirement: **the system needed to run fast, and I needed to build it fast.** Rust addressed the first; AI-assisted development, strong typing, and aggressive testing helped address the second.
 
@@ -116,7 +117,7 @@ This project marked a major personal milestone: it was the first time I ever pub
 
 ### 1. The Rust Library
 
-**Install**
+**Install** ![Crates.io](https://img.shields.io/crates/v/xfina)
 Add the dependency to your `Cargo.toml`:
 ```toml
 [dependencies]
@@ -135,7 +136,7 @@ println!("Validation status: {:?}", result.validation.overall);
 
 ### 2. The CLI Tool
 
-**Install**
+**Install** ![Crates.io](https://img.shields.io/crates/v/xfina)
 ```bash
 cargo install xfina --features cli
 ```
@@ -148,7 +149,7 @@ xfina mutual-fund cams portfolio.pdf --password "XXXXXXXXXX"
 
 ### 3. The Python Bindings (PyPI)
 
-**Install**
+**Install** ![PyPI](https://img.shields.io/pypi/v/xfina)
 ```bash
 pip install xfina
 ```
@@ -167,7 +168,7 @@ NPM’s automated name-similarity and anti-typosquatting protections prevented m
 
 So, rather than introducing a different name, I simply reused the `xfina-wasm` package name for the WebAssembly bindings.
 
-**Install**
+**Install** ![NPM](https://img.shields.io/npm/v/xfina-wasm)
 ```bash
 npm install xfina-wasm
 ```
@@ -178,7 +179,7 @@ import init, { parse_hdfc_ba } from 'xfina-wasm';
 
 await init(); // Initialize WASM
 const bytes = new Uint8Array(await file.arrayBuffer());
-const jsonString = parse_hdfc_ba(bytes, null, file.name, null, "xfina");
+const jsonString = parse_hdfc_ba(bytes, null /* password */, file.name, null /* account_id */, "xfina");
 const result = JSON.parse(jsonString);
 ```
 
@@ -203,11 +204,11 @@ xfina/
 └── web/               # Vue 3 + Vite frontend
 ```
 
-The key design principle: **write the parser once, expose it everywhere.** All three binding layers share the same `ParseRequest` builder struct and the same `ParseResult<T>` return type.
+The key design principle: **write the parser once, expose it everywhere.** All three binding layers share the same `ParseRequest` builder struct and the same `ParseResult<T>` return type. By passing raw bytes to the core rather than file paths, the parsing logic remains completely side-effect-free — which is exactly why the same core functions can run inside a Rust binary, a Python process, and a browser tab without filesystem access.
 
 ## The Data Models
 
-The output schema is built directly on the [Sahamati Account Aggregator specifications](https://sahamati.org.in/):
+The output schema is built directly on the Sahamati AA and ReBIT standards:
 
 - **`DepositAccount`** — savings/current accounts
 - **`CreditCardAccount`** — credit card statements
@@ -232,7 +233,7 @@ This drives the overall `ValidationStatus`: all passed → green ✅, only deriv
 
 Automation is handled by three distinct GitHub Actions workflows:
 
-1. **`test.yml` (PR Checks)** — Runs on every pull request to `main`. It features a smart diff-checker that identifies if any core logic was modified, then runs formatting, linting (`clippy`), `cargo test`, and verifies the WASM target compiles.
+1. **`test.yml` (PR Checks)** — Runs on every pull request to `main`. It features a smart diff-checker that identifies if any core logic was modified, then runs formatting, linting (`clippy`), `cargo test` (runs unit and logic tests; fixture-backed snapshot tests are still run locally), and verifies the WASM target compiles.
 2. **`deploy-unreleased.yml` (Continuous Preview)** — Every push to `main` triggers a build of the latest WASM module and Vue site. It leverages GitHub concurrency groups to cancel outdated in-progress runs, then delegates the heavy lifting to our custom `cargo run -p xtask -- deploy-site --unreleased` tool to push to the `/unreleased/` path on GitHub Pages.
 3. **`publish.yml` (Release)** — Triggered by a git tag (e.g., `v0.2.1`), this workflow first verifies that the tag was created on the `main` branch to prevent accidental rogue releases. Once verified, it orchestrates four parallel jobs: publishing the Rust library to Crates.io, building and publishing the NPM package (with `--provenance`), building Python wheels via `maturin` for PyPI, and deploying the versioned frontend via the `xtask` deployer.
 
@@ -240,7 +241,7 @@ Automation is handled by three distinct GitHub Actions workflows:
 
 We maintain a multi-versioned website to ensure stability. The **Unversioned** site is continuously published from `main` HEAD. I use this to verify the WASM and UI integration in the real world *before* cutting a tag. 
 
-Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via `cargo xtask deploy-site` — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like `/0.2/`), updates a `versions.json` registry, and force-pushes to `gh-pages`. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.
+Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via `cargo run -p xtask -- deploy-site` — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like `/0.2/`), updates a `versions.json` registry, and force-pushes to `gh-pages`. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.
 
 ## Testing Strategy
 
@@ -293,7 +294,7 @@ for pdf in pdfs:
     xfina.parse_cams(pdf_bytes, password="XXXXXXXXXX")
 xfina_time = time.time() - start
 ```
-*Benchmark ran on MBP 2026*
+*Benchmark ran on MBP 2026 (M5 Pro / 24GB)*
 
 > **`casparser`**: 6.08 seconds \
 > **`xfina`**: 0.47 seconds
