@@ -1,9 +1,9 @@
 ---
 type: blogs
-title: "Xfina: Building a Multi-Ecosystem Financial Statement Parser from Scratch"
+title: "Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser"
 date: "2026-08-08"
 draft: true
-summary: "A complete end-to-end walkthrough of building Xfina — a privacy-first, Rust-powered parser for Indian financial statements (bank accounts, credit cards, mutual funds, international brokers) — published simultaneously to Crates.io, NPM, and PyPI, with a WASM-powered web app deployed to GitHub Pages."
+summary: "Parsing Indian financial statements locally with Rust, WebAssembly, and a single shared core across Rust, Python, JavaScript, CLI, and the web."
 systems_tags:
   - rust
   - wasm
