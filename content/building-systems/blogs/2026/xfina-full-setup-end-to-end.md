@@ -116,6 +116,15 @@ That said, compiled languages demand resources. While I could comfortably do Jav
 This project marked a major personal milestone: it was the first time I ever published code to public package repositories, hitting Crates.io, NPM, and PyPI all in one go. Here is how you consume the exact same parser across all five interfaces:
 
 ### 1. The Rust Library
+
+**Install**
+Add the dependency to your `Cargo.toml`:
+```toml
+[dependencies]
+xfina = "0.2.1"
+```
+
+**Usage**
 ```rust
 use xfina::bank_accounts::hdfc::parse_hdfc_bank_statement;
 use xfina::models::request::ParseRequest;
@@ -126,17 +135,26 @@ println!("Validation status: {:?}", result.validation.overall);
 ```
 
 ### 2. The CLI Tool
+
+**Install**
 ```bash
 cargo install xfina --features cli
+```
 
+**Usage**
+```bash
 xfina bank-account hdfc statement.xls
-xfina mutual-fund cams portfolio.pdf --password "XXXXXXXXXX" --format rebit
+xfina mutual-fund cams portfolio.pdf --password "XXXXXXXXXX"
 ```
 
 ### 3. The Python Bindings (PyPI)
+
+**Install**
 ```bash
 pip install xfina
 ```
+
+**Usage**
 ```python
 import xfina
 with open("hdfc_statement.xls", "rb") as f:
@@ -150,10 +168,12 @@ NPM’s automated name-similarity and anti-typosquatting protections prevented m
 
 So, rather than introducing a different name, I simply reused the `xfina-wasm` package name for the WebAssembly bindings.
 
+**Install**
 ```bash
 npm install xfina-wasm
 ```
 
+**Usage**
 ```javascript
 import init, { parse_hdfc_ba } from 'xfina-wasm';
 
@@ -164,6 +184,11 @@ const result = JSON.parse(jsonString);
 ```
 
 ### 5. The Web App
+
+**Install**
+You just need a browser!
+
+**Usage**
 A Vue 3 application that imports the NPM package and parses files locally on drop. Try it live at [xfina.sakthipriyan.com](https://xfina.sakthipriyan.com/).
 
 ## Architecture
@@ -194,7 +219,7 @@ Every parser supports two output flavors via a `format` parameter:
 - **`xfina` (default)** — Dates as Unix timestamps, includes the `xfina` extension object with institution-specific metadata. 
 - **`rebit`** — Strict ReBIT AA schema compliance. The `xfina` extension is stripped, date-only fields stay as `YYYY-MM-DD` strings.
 
-## The Parsers & Validation Engine
+## Robust Validation
 
 Parsing financial data without verifying it is dangerous — a missed row or decimal rounding error could silently produce wrong output. Every `ParseResult<T>` carries a `ValidationReport` with two levels of checks:
 
@@ -224,13 +249,13 @@ Snapshot testing is the primary strategy. Each parser has an integration test th
 
 Because financial statements contain highly sensitive PII, **testing is strictly limited to real (but private) files checked into a private sibling repository**, and tests are run locally. I plan to include these tests in the CI pipeline eventually, but I need to be extremely careful to ensure no data is ever leaked in the GitHub Actions logs.
 
-*(One important technical fix: the IBKR parser originally used `HashMap`/`HashSet` for grouping trades. Hash iteration order is non-deterministic, which made snapshots flaky. Switching to `BTreeMap`/`BTreeSet` — which always iterate in sorted order — fixed it entirely.)*
+## Performance Benchmark Python
 
-## Performance: `casparser` vs Xfina
+Just to show case the performance of Rust binded Python libraries vs native ones I compared the popular [casparser](https://github.com/codereverser/casparser) vs the new [xfina](https://github.com/sakthipriyan/xfina)
 
-The efficiency of the underlying language is immediately evident when comparing the popular Python project `casparser` against the new `xfina` Python library. Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
+Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
 
-To put numbers to this, I ran a local benchmark using 13 real (but anonymized) CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
+To put numbers to this, I ran a local benchmark using 13 real CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
 
 ```python
 import time
@@ -240,7 +265,7 @@ import xfina
 # 1. Benchmark casparser
 start = time.time()
 for pdf in pdfs:
-    casparser.read_cas_pdf(pdf, passwords[pdf])
+    casparser.read_cas_pdf(pdf, "XXXXXXXXXX")
 cas_time = time.time() - start
 
 # 2. Benchmark xfina
@@ -248,14 +273,37 @@ start = time.time()
 for pdf in pdfs:
     with open(pdf, "rb") as f:
         pdf_bytes = f.read()
-    xfina.parse_cams(pdf_bytes, password=passwords[pdf])
+    xfina.parse_cams(pdf_bytes, password="XXXXXXXXXX")
 xfina_time = time.time() - start
 ```
+*Benchmark ran on MBP 2026*
 
-- **`casparser`**: ~6.08 seconds
-- **`xfina`**: ~0.47 seconds
+> **`casparser`**: 6.08 seconds \
+> **`xfina`**: 0.47 seconds
 
-**Xfina is roughly 13x faster** on the exact same workload. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural.
+
+
+**Xfina is roughly 13x faster** on the exact same workload. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural. But, if this is used individually, it doesn't matter much.
+
+
+
+## Beyond Parsing: The Data Quality Problem
+One of the biggest challenges in building Xfina is that financial statements are not designed for machine consumption. The same institution can provide different levels of information across PDF, Excel, and CSV formats, and some reports contain little or no summary information that can be used to validate the parsed transactions.
+
+For example, an ICICI Bank credit card statement does not include the card number anywhere in the PDF or XLS report. An Axis Bank PDF contains significantly more information than its Excel equivalent. Credit card statements generally don't provide a running balance, so validation is limited to summary-level checks. Where running balances are available, Xfina can validate every transaction sequentially.
+
+CAMS is a particularly good example of what becomes possible when the source contains richer information. A CAS can be validated at multiple levels: individual transactions and running balances for each mutual fund, at the AMC level, and again against the overall consolidated totals.
+
+In general, I have found the formats roughly ordered from **easiest to hardest to parse as CSV/Excel → PDF**, while the richness of the data tends to go in the opposite direction: **PDF → Excel/CSV**. PDFs often contain information that is missing from their structured counterparts, but they are also arguably the worst format for exchanging data between systems.
+
+The bigger problem is therefore not just parsing. **Financial institutions should provide a standard machine-readable export, ideally using an established schema such as ReBIT AA, in a consistent format across banks, cards, brokers, and mutual funds.** Today, anyone managing multiple bank accounts, credit cards, mutual funds, and brokerage accounts has to deal with a fragmented collection of formats and data quality.
+
+This matters especially for privacy-first applications. If institutions provided a standard export directly to the user, financial software could process that data locally without requiring users to upload sensitive financial information to an upstream server.
+
+That is where Xfina fits today: **bridging the gap between the messy formats institutions provide and the structured data applications need.** Over time, I want to expand Xfina's support for richer PDF statements across institutions, allowing more precise validation of the underlying transactions and summary data.
+
+Ultimately, the best solution isn't another parser. It is for financial institutions to make **standardized, machine-readable exports a first-class feature**. Until then, Xfina is my attempt to make that fragmented data usable, locally, reliably, and without compromising privacy.
+
 
 ## What I Learned
 
