@@ -193,7 +193,7 @@ A Vue 3 application that imports the NPM package and parses files locally on dro
 
 ## Architecture
 
-The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and `xtask` (the [cargo-xtask](https://github.com/matklad/cargo-xtask) build tool) — plus the `web/` Vue app:
+The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and [`xtask`](https://github.com/sakthipriyan/xfina/tree/main/xtask) (the build tool) — plus the `web/` Vue app:
 
 ```
 xfina/
