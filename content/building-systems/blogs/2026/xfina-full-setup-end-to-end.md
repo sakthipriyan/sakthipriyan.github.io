@@ -16,25 +16,24 @@ js_tools:
   - d2
 ---
 
-## The Introduction
 
-Years ago, in the pre-AI era, I manually gathered all my bank statements and created a consolidated report. Through this exercise, I discovered a few financial leakages and addressed them. However, because it was all done manually, it took an enormous amount of time and effort. While I wanted to repeat the exercise, the friction was simply too high, and I eventually stopped doing it.
+## Why I Built Xfina
 
-Currently, I manually tag my credit card entries every month and ensure the bills are paid from the corresponding bank accounts. There is a lot of manual tagging and planning involved in allocating cash flow across accounts and setting aside monthly investments. Once the monthly investment is allocated, I have various systems in place to automate the execution planning — but the upfront data extraction is a major bottleneck. I want to build a complete system where I can simply dump all my statements, define my policies, and have the system tell me exactly what to do based on those policies.
+Years ago, before AI, I manually consolidated my bank statements to understand where my money was going, identify financial leakages, and measure my savings rate. It worked, but the effort made it too painful to repeat.
 
-Every time I wanted this consolidated view of my finances — bank statements, credit card bills, mutual fund portfolios, international brokerage activity — I had to manually open each institution's portal, download their proprietary PDF or Excel file, and reconcile everything by hand.
+The underlying problem was bigger: **financial data is fragmented across institutions and trapped in proprietary formats.** Before it can be analyzed or automated, it needs to be extracted, normalized, and validated.
 
-The existing automated options were either Account Aggregators (useful, but require consent frameworks and institutional agreements), manual spreadsheets (brittle, no validation), or paid upload-based services (a non-starter for privacy-conscious users).
+I wanted a **fast, privacy-first, local, open-source parser** that could turn these statements into structured financial data. I also wanted to **build it fast**—supporting many formats without sacrificing correctness or maintainability.
 
-Sometime back, I made an initial attempt at solving this for my [RealValue Portfolio](https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/) project. I used `pdf.js` to build a browser-only parsing engine. While it preserved privacy, development iteration was severely limited to browser-based testing, and the parser was locked into being a web-only tool that only supported CAMS mutual funds and IBKR. The WASM upgrade is a significant leap, expanding support to a wide variety of bank accounts and credit cards.
+My first attempt was for my [RealValue Portfolio](https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/) project, where I built a browser-only parser using `pdf.js`. It kept financial data entirely on the user's machine, but was difficult to develop and limited to CAMS mutual funds and IBKR.
 
-I wanted something different and far more powerful: **a fast, local, open-source parser** that understands the proprietary formats used by Indian banks and brokerages, and outputs clean, structured JSON.
+That led to **[Xfina](https://github.com/sakthipriyan/xfina)**: a Rust-based parsing engine with a single core exposed through Rust, CLI, Python, JavaScript/WASM, and a browser-based web app. Rust provides the performance and strong typing; WASM lets the same core run locally in the browser; comprehensive tests keep rapid development safe.
 
-That project is [Xfina](https://github.com/sakthipriyan/xfina). Ultimately, this parser serves as the foundational data-extraction layer for that larger stealth project I am working on to completely automate my financial policy execution.
+Xfina is now the data-extraction foundation for a larger **stealth project** I’m building to automate financial workflows. The goal was simple: **fast to run, fast to build, and fast to evolve—without compromising privacy.**
 
 ## What Xfina Does
 
-Xfina parses financial statements directly from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON conforming to the [ReBIT Account Aggregator (AA) schema](https://api.rebit.org.in/), with optional extensions for richer data.
+Xfina parses financial statements from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON data.
 
 As of v0.2.1:
 
@@ -52,7 +51,14 @@ As of v0.2.1:
 | <span style="white-space:nowrap">📈 Mutual Funds</span> | KFinTech | PDF (password protected) | ⏳ | Combined Account Statement (CAS) |
 | <span style="white-space:nowrap">🌍 Intl Brokers</span> | Interactive Brokers (IBKR) | CSV | ✅ | Activity statements |
 
-*Note: Bank Account parsers have not been tested with Joint Accounts.*
+*Note: Bank Account parsers have not been tested with Joint Accounts. Not all credit cards tested with add on cards*
+
+### Output Schema
+#### JSON
+One important decision was to build on the [ReBIT Account Aggregator schema](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an xfina extension rather than forcing those fields into an incompatible model or discarding them.
+
+#### CSV
+CSV support to be added soon as part github issue [#42](https://github.com/sakthipriyan/xfina/issues/42).
 
 ## Why Rust, and How It Unlocked Five Interfaces for Free
 
@@ -103,9 +109,7 @@ Each target required only a thin binding layer — typically a macro that wires 
 
 I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude models. In an AI code-generated world, the notoriously steep learning curve of Rust is no longer an impediment. As long as you have a tight feedback loop and strong test suites covering various use cases, you can iterate incredibly fast in a strictly typed, compiled language.
 
-That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the workspace.
-
-
+That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the git worktree.
 
 ## Five Interfaces, One Core: The Demos
 
@@ -126,7 +130,7 @@ println!("Validation status: {:?}", result.validation.overall);
 cargo install xfina --features cli
 
 xfina bank-account hdfc statement.xls
-xfina mutual-fund cams portfolio.pdf --password "PAN_DOB" --format rebit
+xfina mutual-fund cams portfolio.pdf --password "XXXXXXXXXX" --format rebit
 ```
 
 ### 3. The Python Bindings (PyPI)
@@ -141,9 +145,15 @@ print(result["validation"]["overall"])
 ```
 
 ### 4. The JS/WASM Module (NPM)
+
+NPM’s automated name-similarity and anti-typosquatting protections prevented me from publishing `xfina`, with the error: **“Package name too similar to existing package find.”**
+
+So, rather than introducing a different name, I simply reused the `xfina-wasm` package name for the WebAssembly bindings.
+
 ```bash
 npm install xfina-wasm
 ```
+
 ```javascript
 import init, { parse_hdfc_ba } from 'xfina-wasm';
 
@@ -198,9 +208,9 @@ This drives the overall `ValidationStatus`: all passed → green ✅, only deriv
 
 Automation is handled by three distinct GitHub Actions workflows:
 
-1. **`test.yml` (PR Checks)** — Runs `cargo test` and verifies the WASM target compiles on every pull request.
-2. **`deploy-unreleased.yml` (Continuous Preview)** — Every push to `main` triggers a build of the latest WASM + Vue site and deploys it to the `/unreleased/` path on GitHub Pages.
-3. **`publish.yml` (Release)** — Triggered by a git tag (`v*.*.*`), this orchestrates five parallel jobs to publish to Crates.io, NPM, PyPI, and deploy the versioned docs.
+1. **`test.yml` (PR Checks)** — Runs on every pull request to `main`. It features a smart diff-checker that identifies if any core logic (`src/`, `python/`, `wasm/`, `tests/`) was modified. If core files changed, it strictly enforces that `CHANGELOG.md` is updated in the same PR, failing the build if it's missing. It then runs formatting, linting (`clippy`), `cargo test`, and verifies the WASM target compiles.
+2. **`deploy-unreleased.yml` (Continuous Preview)** — Every push to `main` triggers a build of the latest WASM module and Vue site. It leverages GitHub concurrency groups to cancel outdated in-progress runs, then delegates the heavy lifting to our custom `cargo run -p xtask -- deploy-site --unreleased` tool to push to the `/unreleased/` path on GitHub Pages.
+3. **`publish.yml` (Release)** — Triggered by a git tag (e.g., `v0.2.1`), this workflow first verifies that the tag was created on the `main` branch to prevent accidental rogue releases. Once verified, it orchestrates four parallel jobs: publishing the Rust library to Crates.io, building and publishing the NPM package (with `--provenance`), building Python wheels via `maturin` for PyPI, and deploying the versioned frontend via the `xtask` deployer.
 
 ### Multi-Versioned Website
 
