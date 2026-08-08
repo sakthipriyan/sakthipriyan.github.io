@@ -189,7 +189,7 @@ const result = JSON.parse(jsonString);
 You just need a browser!
 
 **Usage**
-A Vue 3 application that imports the NPM package and parses files locally on drop. Try it live at [xfina.sakthipriyan.com](https://xfina.sakthipriyan.com/).
+A Vue 3 application that imports the NPM package and parses files locally on drop. Try it live at [xfina.dev](https://xfina.dev/).
 
 ## Architecture
 
@@ -311,7 +311,7 @@ On this workload, Xfina was roughly 13× faster. When you are processing hundred
 ## Links
 
 - **GitHub**: [github.com/sakthipriyan/xfina](https://github.com/sakthipriyan/xfina)
-- **Web App**: [xfina.sakthipriyan.com](https://xfina.sakthipriyan.com/)
+- **Web App**: [xfina.dev](https://xfina.dev/)
 - **Crates.io**: [crates.io/crates/xfina](https://crates.io/crates/xfina)
 - **NPM**: [xfina-wasm](https://www.npmjs.com/package/xfina-wasm)
 - **PyPI**: [pypi.org/project/xfina](https://pypi.org/project/xfina/)
