@@ -34,19 +34,23 @@ That project is [Xfina](https://github.com/sakthipriyan/xfina).
 
 Xfina is a **Rust library** (and CLI tool) that parses financial statements from Indian institutions directly from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON conforming to the [ReBIT Account Aggregator (AA) schema](https://api.rebit.org.in/), with optional extensions for richer data.
 
-As of v0.2, it supports:
+As of v0.2.1, it supports:
 
-| Category | Institution | Format | Status |
-|---|---|---|---|
-| 🏦 Bank Account | HDFC Bank | `.xls`/`.xlsx` | ✅ Production |
-| 🏦 Bank Account | ICICI Bank | `.xls`/`.xlsx` | ✅ Production |
-| 🏦 Bank Account | State Bank of India | PDF (password) | ✅ Production |
-| 🏦 Bank Account | Bank of Baroda | `.xls`/`.xlsx` | ✅ Production |
-| 🏦 Bank Account | Axis Bank | `.xls`/`.xlsx` | ✅ Production |
-| 💳 Credit Card | HDFC Bank | CSV | ✅ Production |
-| 💳 Credit Card | ICICI Bank | `.xls`/`.xlsx` | ✅ Production |
-| 📈 Mutual Funds | CAMS | PDF (password) | ✅ Production |
-| 🌍 Intl Brokers | Interactive Brokers | CSV | ✅ Production |
+| Category | Institution / Provider | Format | Status | Notes |
+|---|---|---|---|---|
+| 🏦 Bank Account | Axis Bank | XLS | **Production Ready** | Full support |
+| 🏦 Bank Account | Bank of Baroda | XLS | **Production Ready** | Full support |
+| 🏦 Bank Account | HDFC Bank | XLS | **Production Ready** | Full support |
+| 🏦 Bank Account | ICICI Bank | XLS | **Production Ready** | Full support |
+| 🏦 Bank Account | State Bank of India | PDF (password protected) | **Production Ready** | Full support |
+| 💳 Credit Card | Axis Bank | - | **TODO** | Waiting for the statement to be generated |
+| 💳 Credit Card | HDFC Bank | CSV | **Production Ready** | Full support incl. add-on cardholders, reward points |
+| 💳 Credit Card | ICICI Bank | XLS | **Production Ready** | Tested card without any add-on cards |
+| 📈 Mutual Funds | CAMS | PDF (password protected) | **Production Ready** | Combined Account Statement (CAS) |
+| 📈 Mutual Funds | KFinTech | PDF (password protected) | **TODO** | Combined Account Statement (CAS) |
+| 🌍 Intl Brokers | Interactive Brokers (IBKR) | CSV | **Production Ready** | Activity statements |
+
+*Note: Bank Account parsers have not been tested with Joint Accounts.*
 
 Beyond parsing, Xfina also ships a **two-level validation engine** that catches parsing discrepancies, a **WASM build** for in-browser use, **Python bindings** via PyO3/Maturin, and a **Vue 3 web app** — all publishing simultaneously to Crates.io, NPM, and PyPI on every tagged release via GitHub Actions.
 
