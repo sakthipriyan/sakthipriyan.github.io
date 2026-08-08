@@ -18,15 +18,19 @@ js_tools:
 
 ## The Introduction
 
-Every time I wanted a consolidated view of my finances — bank statements, credit card bills, mutual fund portfolios, international brokerage activity — I had to manually open each institution's portal, download their proprietary PDF or Excel file, and reconcile everything by hand.
+Years ago, in the pre-AI era, I manually gathered all my bank statements and created a consolidated report. Through this exercise, I discovered a few financial leakages and addressed them. However, because it was all done manually, it took an enormous amount of time and effort. While I wanted to repeat the exercise, the friction was simply too high, and I eventually stopped doing it.
 
-The existing options were either Account Aggregators (useful, but require consent frameworks and institutional agreements), manual spreadsheets (brittle, no validation), or paid upload-based services (a non-starter for privacy-conscious users).
+Currently, I manually tag my credit card entries every month and ensure the bills are paid from the corresponding bank accounts. There is a lot of manual tagging and planning involved in allocating cash flow across accounts and setting aside monthly investments. Once the monthly investment is allocated, I have various systems in place to automate the execution planning — but the upfront data extraction is a major bottleneck. I want to build a complete system where I can simply dump all my statements, define my policies, and have the system tell me exactly what to do based on those policies.
+
+Every time I wanted this consolidated view of my finances — bank statements, credit card bills, mutual fund portfolios, international brokerage activity — I had to manually open each institution's portal, download their proprietary PDF or Excel file, and reconcile everything by hand.
+
+The existing automated options were either Account Aggregators (useful, but require consent frameworks and institutional agreements), manual spreadsheets (brittle, no validation), or paid upload-based services (a non-starter for privacy-conscious users).
 
 Sometime back, I made an initial attempt at solving this for my [RealValue Portfolio](https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/) project. I used `pdf.js` to build a browser-only parsing engine. While it preserved privacy, development iteration was severely limited to browser-based testing, and the parser was locked into being a web-only tool that only supported CAMS mutual funds and IBKR. The WASM upgrade is a significant leap, expanding support to a wide variety of bank accounts and credit cards.
 
 I wanted something different and far more powerful: **a fast, local, open-source parser** that understands the proprietary formats used by Indian banks and brokerages, and outputs clean, structured JSON.
 
-That project is [Xfina](https://github.com/sakthipriyan/xfina). Ultimately, this parser serves as a foundational building block for a stealth project I am working on to consolidate multiple standalone financial tools I have built over the years.
+That project is [Xfina](https://github.com/sakthipriyan/xfina). Ultimately, this parser serves as the foundational data-extraction layer for that larger stealth project I am working on to completely automate my financial policy execution.
 
 ## What Xfina Does
 
