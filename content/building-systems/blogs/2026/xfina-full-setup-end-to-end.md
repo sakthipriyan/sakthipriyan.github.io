@@ -16,7 +16,7 @@ js_tools:
   - d2
 ---
 
-## The Problem
+## The Introduction
 
 Every time I wanted a consolidated view of my finances — bank statements, credit card bills, mutual fund portfolios, international brokerage activity — I had to manually open each institution's portal, download their proprietary PDF or Excel file, and reconcile everything by hand.
 
@@ -101,9 +101,16 @@ I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude 
 
 That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the workspace.
 
-## Performance: `camsparser` vs Xfina
+## Performance: `casparser` vs Xfina
 
-The efficiency of the underlying language is immediately evident when comparing the popular Python project `camsparser` against the new `xfina` Python library. Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
+The efficiency of the underlying language is immediately evident when comparing the popular Python project `casparser` against the new `xfina` Python library. Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
+
+To put numbers to this, I ran a local benchmark using 13 real (but anonymized) CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
+
+- **`casparser`**: ~6.08 seconds
+- **`xfina`**: ~0.47 seconds
+
+**Xfina is roughly 13x faster** on the exact same workload. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural.
 
 ## Five Interfaces, One Core: The Demos
 
