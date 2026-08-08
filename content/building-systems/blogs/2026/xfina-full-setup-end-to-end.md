@@ -105,36 +105,7 @@ I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude 
 
 That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the workspace.
 
-## Performance: `casparser` vs Xfina
 
-The efficiency of the underlying language is immediately evident when comparing the popular Python project `casparser` against the new `xfina` Python library. Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
-
-To put numbers to this, I ran a local benchmark using 13 real (but anonymized) CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
-
-```python
-import time
-import casparser
-import xfina
-
-# 1. Benchmark casparser
-start = time.time()
-for pdf in pdfs:
-    casparser.read_cas_pdf(pdf, passwords[pdf])
-cas_time = time.time() - start
-
-# 2. Benchmark xfina
-start = time.time()
-for pdf in pdfs:
-    with open(pdf, "rb") as f:
-        pdf_bytes = f.read()
-    xfina.parse_cams(pdf_bytes, password=passwords[pdf])
-xfina_time = time.time() - start
-```
-
-- **`casparser`**: ~6.08 seconds
-- **`xfina`**: ~0.47 seconds
-
-**Xfina is roughly 13x faster** on the exact same workload. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural.
 
 ## Five Interfaces, One Core: The Demos
 
@@ -244,6 +215,37 @@ Snapshot testing is the primary strategy. Each parser has an integration test th
 Because financial statements contain highly sensitive PII, **testing is strictly limited to real (but private) files checked into a private sibling repository**, and tests are run locally. I plan to include these tests in the CI pipeline eventually, but I need to be extremely careful to ensure no data is ever leaked in the GitHub Actions logs.
 
 *(One important technical fix: the IBKR parser originally used `HashMap`/`HashSet` for grouping trades. Hash iteration order is non-deterministic, which made snapshots flaky. Switching to `BTreeMap`/`BTreeSet` — which always iterate in sorted order — fixed it entirely.)*
+
+## Performance: `casparser` vs Xfina
+
+The efficiency of the underlying language is immediately evident when comparing the popular Python project `casparser` against the new `xfina` Python library. Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
+
+To put numbers to this, I ran a local benchmark using 13 real (but anonymized) CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
+
+```python
+import time
+import casparser
+import xfina
+
+# 1. Benchmark casparser
+start = time.time()
+for pdf in pdfs:
+    casparser.read_cas_pdf(pdf, passwords[pdf])
+cas_time = time.time() - start
+
+# 2. Benchmark xfina
+start = time.time()
+for pdf in pdfs:
+    with open(pdf, "rb") as f:
+        pdf_bytes = f.read()
+    xfina.parse_cams(pdf_bytes, password=passwords[pdf])
+xfina_time = time.time() - start
+```
+
+- **`casparser`**: ~6.08 seconds
+- **`xfina`**: ~0.47 seconds
+
+**Xfina is roughly 13x faster** on the exact same workload. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural.
 
 ## What I Learned
 
