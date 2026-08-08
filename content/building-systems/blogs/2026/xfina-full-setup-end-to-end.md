@@ -22,9 +22,11 @@ Every time I wanted a consolidated view of my finances — bank statements, cred
 
 The existing options were either Account Aggregators (useful, but require consent frameworks and institutional agreements), manual spreadsheets (brittle, no validation), or paid upload-based services (a non-starter for privacy-conscious users).
 
-I wanted something different: **a fast, local, open-source parser** that understands the proprietary formats used by Indian banks and brokerages, and outputs clean, structured JSON.
+A few years ago, I made an initial attempt at solving this for my RealValue Portfolio project. I used `pdf.js` to parse statements directly in the browser. While it preserved privacy, development iteration was severely limited to browser-based testing, and the parser was locked into being a web-only tool. 
 
-That project is [Xfina](https://github.com/sakthipriyan/xfina).
+I wanted something different and far more powerful: **a fast, local, open-source parser** that understands the proprietary formats used by Indian banks and brokerages, and outputs clean, structured JSON.
+
+That project is [Xfina](https://github.com/sakthipriyan/xfina). Ultimately, this parser serves as a foundational building block for a stealth project I am working on to consolidate multiple standalone financial tools I have built over the years.
 
 ---
 
@@ -54,7 +56,9 @@ As of v0.2.1:
 
 ## Why Rust, and How It Unlocked Five Interfaces for Free
 
-The choice of Rust was primarily about correctness and performance for parsing financial data — but it turned out to be the most important architectural decision for a completely different reason: **Rust compiles to WebAssembly**, which made it trivially easy to ship the same parsing logic to five different runtime targets without rewriting a single line of core code.
+The choice of Rust was primarily about correctness and performance. The efficiency of the underlying language is immediately evident: comparing my older `camsparser` script to the new `xfina` CAMS parser, the Rust version is orders of magnitude faster with a microscopic memory profile.
+
+But Rust turned out to be the most important architectural decision for a completely different reason: **Rust compiles to WebAssembly**, which made it trivially easy to ship the same parsing logic to five different runtime targets without rewriting a single line of core code.
 
 ```d2
 core: Xfina Core {
@@ -95,17 +99,64 @@ core -> pylib: PyO3 + Maturin
 wasm -> webapp: xfina-wasm npm pkg
 ```
 
-Each target required only a thin binding layer — typically a macro that wires a parser function to a different calling convention:
+Each target required only a thin binding layer — typically a macro that wires a parser function to a different calling convention. The same core logic that validates a running balance or maps an XLS row to a `DepositAccount` struct runs identically in a Rust binary, inside a Python process, and in a browser tab with no servers involved. **That's the WASM payoff.**
 
-- **Rust library** — zero overhead, just the public crate API
-- **CLI** — Clap argument parsing on top, a handful of match arms
-- **Python** — a `create_py_binding!` macro per parser, PyO3 handles the ABI
-- **JS / NPM** — a `create_wasm_binding!` macro per parser, wasm-bindgen generates the glue
-- **Web app** — Vue 3 imports the NPM package, calls the WASM functions directly in the browser
+### AI and the Learning Curve
 
-The same core logic that validates a running balance or maps an XLS row to a `DepositAccount` struct runs identically in a Rust binary, inside a Python process, and in a browser tab with no servers involved. **That's the WASM payoff.**
+I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude models. In an AI code-generated world, the notoriously steep learning curve of Rust is no longer an impediment. As long as you have a tight feedback loop and strong test suites covering various use cases, you can iterate incredibly fast in a strictly typed, compiled language.
 
-If this had been built in Python or Node first, adding a Rust CLI or browser support would have required a rewrite. Choosing Rust as the single source of truth made every other target a consequence of that choice, not a separate project.
+That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the workspace.
+
+---
+
+## Five Interfaces, One Core: The Demos
+
+This project marked a major personal milestone: it was the first time I ever published code to public package repositories, hitting Crates.io, NPM, and PyPI all in one go. Here is how you consume the exact same parser across all five interfaces:
+
+### 1. The Rust Library
+```rust
+use xfina::bank_accounts::hdfc::parse_hdfc_bank_statement;
+use xfina::models::request::ParseRequest;
+
+let req = ParseRequest::new(&file_bytes).with_filename("statement.xls");
+let result = parse_hdfc_bank_statement(req).unwrap();
+println!("Validation status: {:?}", result.validation.overall);
+```
+
+### 2. The CLI Tool
+```bash
+cargo install xfina --features cli
+
+xfina bank-account hdfc statement.xls
+xfina mutual-fund cams portfolio.pdf --password "PAN_DOB" --format rebit
+```
+
+### 3. The Python Bindings (PyPI)
+```bash
+pip install xfina
+```
+```python
+import xfina
+with open("hdfc_statement.xls", "rb") as f:
+    result = xfina.parse_hdfc_ba(f.read())
+print(result["validation"]["overall"])
+```
+
+### 4. The JS/WASM Module (NPM)
+```bash
+npm install xfina-wasm
+```
+```javascript
+import init, { parse_hdfc_ba } from 'xfina-wasm';
+
+await init(); // Initialize WASM
+const bytes = new Uint8Array(await file.arrayBuffer());
+const jsonString = parse_hdfc_ba(bytes, null, file.name, null, "xfina");
+const result = JSON.parse(jsonString);
+```
+
+### 5. The Web App
+A Vue 3 application that imports the NPM package and parses files locally on drop. Try it live at [xfina.sakthipriyan.com](https://xfina.sakthipriyan.com/).
 
 ---
 
@@ -130,120 +181,52 @@ The key design principle: **write the parser once, expose it everywhere.** All t
 
 The output schema is built directly on the [Sahamati Account Aggregator specifications](https://sahamati.org.in/):
 
-- **`DepositAccount`** — savings/current accounts (opening balance, closing balance, transaction list)
-- **`CreditCardAccount`** — credit card statements (billing period, due amounts, reward points)
-- **`MutualFundsAccount`** — Combined Account Statement (AMC schemes, NAV, transactions)
-- **`EquityAccount`** — international broker accounts (trades, corporate actions, positions)
-
-### Dual Output Format
+- **`DepositAccount`** — savings/current accounts
+- **`CreditCardAccount`** — credit card statements
+- **`MutualFundsAccount`** — Combined Account Statement (CAS)
+- **`EquityAccount`** — international broker accounts
 
 Every parser supports two output flavors via a `format` parameter:
-
-- **`xfina` (default)** — Dates as Unix timestamps, includes the `xfina` extension object with institution-specific metadata. Optimized for programmatic consumption.
-- **`rebit`** — Strict ReBIT AA schema compliance. The `xfina` extension is stripped, date-only fields stay as `YYYY-MM-DD` strings. Use this for AA API submission.
-
-The transformation is a post-serialization pass that walks the JSON tree and converts or strips fields accordingly.
-
-### The `ParseRequest` Builder
-
-All parsers accept a uniform `ParseRequest` struct — file bytes, an optional password, an optional filename hint, and an optional `modified_timestamp`. The last field is subtler than it looks: several bank PDFs don't include a machine-readable statement date, so the file's last-modified timestamp is used as a fallback hint to improve date inference.
+- **`xfina` (default)** — Dates as Unix timestamps, includes the `xfina` extension object with institution-specific metadata. 
+- **`rebit`** — Strict ReBIT AA schema compliance. The `xfina` extension is stripped, date-only fields stay as `YYYY-MM-DD` strings.
 
 ---
 
-## The Parsers
+## The Parsers & Validation Engine
 
-Every parser follows the same four steps:
+Parsing financial data without verifying it is dangerous — a missed row or decimal rounding error could silently produce wrong output. Every `ParseResult<T>` carries a `ValidationReport` with two levels of checks:
 
-1. **Open the raw bytes** via `calamine` (Excel), `pdf-extract` (PDF), or `csv`.
-2. **Walk the file's structure** using regex and string matching to locate headers, transaction rows, and summary sections.
-3. **Map extracted values** into the shared model structs.
-4. **Run the validation engine** and return a `ParseResult<T>`.
+**Level 1 — Row validation:** For each consecutive transaction pair in a bank statement, the engine checks that `balance[n] = balance[n−1] ± amount[n]`. When a row fails, the engine resyncs to the printed balance before continuing, ensuring a single bad row doesn't cascade into compounding failures.
 
-Each parser is gated behind a Cargo feature flag — `ba-hdfc`, `cc-hdfc`, `mf-cams`, etc. — so downstream users compile only what they need. XLS parsers pull in `calamine`, PDF parsers pull in `pdf-extract`, and CSV parsers pull in `csv`. None of these bleed into each other.
+**Level 2 — Summary validation:** The engine compares declared vs. computed totals (total credits, total debits, closing balance). Checks are classified as either **`Declared`** (the institution printed this number) or **`Derived`** (inferred from arithmetic). 
 
----
-
-## The Validation Engine
-
-Parsing financial data without verifying it is dangerous — a missed row or decimal rounding error could silently produce wrong output. Every `ParseResult<T>` carries a `ValidationReport` with two levels of checks.
-
-**Level 1 — Row validation:** For each consecutive transaction pair in a bank statement, the engine checks that `balance[n] = balance[n−1] ± amount[n]`. When a row fails, the engine resyncs to the printed balance before continuing — this is intentional, so a single bad row doesn't cascade into compounding failures on every subsequent row.
-
-**Level 2 — Summary validation:** After all rows are parsed, the engine compares declared vs. computed totals (total credits, total debits, closing balance). Checks are classified by source:
-
-- **`Declared`** — the institution printed this number. A failure is a strong signal of a parsing bug.
-- **`Derived`** — inferred from arithmetic (e.g. `opening + credits − debits = closing`). A failure might be rounding drift.
-
-This drives the overall `ValidationStatus`: all passed → green ✅, only derived failures → yellow ⚠, any declared failure → red ✗. The web app renders these as visual badges on every parsed statement.
-
----
-
-## Error Handling
-
-Early versions used stringly-typed `Result<T, String>` errors. This was replaced in v0.2 with a typed `XfinaError` enum via `thiserror` — variants include `PasswordRequired`, `IncorrectPassword`, `InvalidFormat`, and `ParseError`. The reason this matters: WASM and Python bindings can now programmatically distinguish a password prompt situation from a parse failure and show different UI feedback accordingly.
-
----
-
-## The CLI
-
-```bash
-cargo install xfina --features cli
-
-xfina bank-account hdfc statement.xls
-xfina bank-account sbi passbook.pdf --password "dob1990"
-xfina mutual-fund cams portfolio.pdf --password "PAN_DOB" --format rebit
-xfina intl-stocks ibkr activity.csv --output ./exports/ibkr.json
-```
-
-There's also a `dump` subcommand that extracts raw text from any PDF or XLS — the primary tool for reverse-engineering a new statement format before writing a parser.
-
----
-
-## The Web App
-
-The `web/` directory is a **Vue 3 + Vite + Tailwind CSS** application. It imports the `xfina-wasm` NPM package and calls the WASM parse functions directly on file drop — files never leave the browser.
-
-Key details:
-- Statement header, account summary, and transaction table are rendered per statement type
-- Validation badges (✅ / ⚠ / ✗) are shown for each parsed result
-- A version selector reads `versions.json` to let users browse any published minor release at `/0.1/`, `/0.2/`, etc.
-- Dark mode support via `@vueuse/core`
+This drives the overall `ValidationStatus`: all passed → green ✅, only derived failures → yellow ⚠, any declared failure → red ✗. 
 
 ---
 
 ## The Deployment Pipeline
 
-A tagged release (`v*.*.*`) triggers five parallel GitHub Actions jobs:
+Automation is handled by three distinct GitHub Actions workflows:
 
-1. **`check_branch`** — ensures the tag is on `main`, blocking accidental releases from feature branches
-2. **`crates_io`** — `cargo publish`
-3. **`npm`** — `wasm-pack build --target web` → `npm publish --provenance`
-4. **`pypi`** — `maturin build --release` → `pypa/gh-action-pypi-publish`
-5. **`deploy_docs_tag`** — builds the versioned site and deploys to GitHub Pages
+1. **`test.yml` (PR Checks)** — Runs `cargo test` and verifies the WASM target compiles on every pull request.
+2. **`deploy-unreleased.yml` (Continuous Preview)** — Every push to `main` triggers a build of the latest WASM + Vue site and deploys it to the `/unreleased/` path on GitHub Pages.
+3. **`publish.yml` (Release)** — Triggered by a git tag (`v*.*.*`), this orchestrates five parallel jobs to publish to Crates.io, NPM, PyPI, and deploy the versioned docs.
 
-Every push to `main` also triggers a separate `deploy-unreleased.yml` workflow that deploys the latest build to `/unreleased/` so the bleeding-edge state is always previewable.
+### Multi-Versioned Website
 
-### The `xtask` Deploy System
+We maintain a multi-versioned website to ensure stability. The **Unversioned** site is continuously published from `main` HEAD. I use this to verify the WASM and UI integration in the real world *before* cutting a tag. 
 
-Website deployment runs via `cargo xtask deploy-site` — a [Cargo xtask](https://github.com/matklad/cargo-xtask) that keeps all build automation as a first-class Rust program in the same workspace. It uses `git worktree` to check out `gh-pages` into a temp directory, builds the WASM and Vue bundles, writes assets to the right versioned path, updates `versions.json`, and force-pushes. The versioning scheme uses minor versions as stable URL prefixes (`/0.2/` always points to the latest patch in that series).
+Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via `cargo xtask deploy-site` — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like `/0.2/`), updates a `versions.json` registry, and force-pushes to `gh-pages`. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.
 
 ---
 
 ## Testing Strategy
 
-Snapshot testing is the primary strategy. Each parser has an integration test that reads a real (anonymized) statement from a sibling `../xfina-test-data/` directory (not committed — it contains PII), parses it, and compares JSON output against a committed snapshot. Snapshots are updated locally with `UPDATE_EXPECTED=1 cargo test` and skipped in CI (where test data isn't available) via an `GITHUB_ACTIONS` env check.
+Snapshot testing is the primary strategy. Each parser has an integration test that reads a real statement, parses it, and compares JSON output against a committed snapshot. 
 
-One important fix: the IBKR parser originally used `HashMap`/`HashSet` for grouping trades. Hash iteration order is non-deterministic, which made snapshots flaky. Switching to `BTreeMap`/`BTreeSet` — which always iterate in sorted order — fixed it entirely.
+Because financial statements contain highly sensitive PII, **testing is strictly limited to real (but private) files checked into a private sibling repository**, and tests are run locally. I plan to include these tests in the CI pipeline eventually, but I need to be extremely careful to ensure no data is ever leaked in the GitHub Actions logs.
 
----
-
-## Adding a New Parser
-
-1. Create the module in `src/bank_accounts/`, `src/credit_cards/`, etc.
-2. Return `Result<ParseResult<T>, XfinaError>` — use `?` for propagation
-3. Add a feature flag in `Cargo.toml` and include it in `all`
-4. Export in `src/lib.rs`, add to the CLI match arms, add a `create_wasm_binding!` call, add a `create_py_binding!` call, and add UI support in `web/src/App.vue`
-5. Write an integration test in `tests/` using the snapshot pattern
+*(One important technical fix: the IBKR parser originally used `HashMap`/`HashSet` for grouping trades. Hash iteration order is non-deterministic, which made snapshots flaky. Switching to `BTreeMap`/`BTreeSet` — which always iterate in sorted order — fixed it entirely.)*
 
 ---
 
@@ -254,8 +237,6 @@ One important fix: the IBKR parser originally used `HashMap`/`HashSet` for group
 **The `xtask` pattern keeps build tooling maintainable.** All deployment logic is type-checked Rust in the same repo — no bash scripts, no drift between CI YAML and local commands.
 
 **Snapshot tests are non-negotiable for parsers.** Any field mapping change is immediately visible as a diff. Without them, regressions are discovered by users.
-
-**`BTreeMap` over `HashMap` whenever you serialize to JSON in tests.** Non-deterministic iteration order is a silent test flakiness source.
 
 **`modified_timestamp` as a date inference hint.** When institutions don't embed the statement date in a machine-readable field, the file's last-modified time turns out to be a surprisingly reliable fallback.
 
