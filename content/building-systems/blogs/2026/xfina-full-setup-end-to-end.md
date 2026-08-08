@@ -193,7 +193,7 @@ A Vue 3 application that imports the NPM package and parses files locally on dro
 
 ## Architecture
 
-The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and `xtask` (the build tool) — plus the `web/` Vue app:
+The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and `xtask` (the [cargo-xtask](https://github.com/matklad/cargo-xtask) build tool) — plus the `web/` Vue app:
 
 ```
 xfina/
@@ -236,14 +236,14 @@ Automation is handled by three distinct GitHub Actions workflows:
 | Workflow | Trigger | Action & Details |
 |---|---|---|
 | **`test.yml`** <br/> *(PR Checks)* | Pull request to `main` | Features a smart diff-checker to identify if core logic was modified. Runs formatting, linting (`clippy`), `cargo test` (unit and logic tests; fixture-backed snapshot tests are run locally), and verifies WASM compilation. |
-| **`deploy-unreleased.yml`** <br/> *(Continuous Preview)* | Merge to `main` | Leverages concurrency groups to cancel outdated runs. Delegates the build of the WASM module and Vue site to `cargo run -p xtask -- deploy-site --unreleased` to push to the `/unreleased/` path on GitHub Pages. |
-| **`publish.yml`** <br/> *(Release)* | Git tag (e.g., `v0.2.1`) | Verifies the tag is on the `main` branch to prevent rogue releases. Orchestrates four parallel jobs to publish to Crates.io, NPM (with `--provenance`), PyPI (via `maturin`), and deploy the versioned frontend using `xtask`. |
+| **`deploy-unreleased.yml`** <br/> *(Continuous Preview)* | Merge to `main` | Leverages concurrency groups to cancel outdated runs. Delegates the build of the WASM module and Vue site to `cargo xtask deploy-site --unreleased` to push to the `/unreleased/` path on GitHub Pages. |
+| **`publish.yml`** <br/> *(Release)* | Git tag (e.g., `v0.2.1`) | Verifies the tag is on the `main` branch to prevent rogue releases. Orchestrates four parallel jobs to publish to Crates.io, NPM (with `--provenance`), PyPI (via `maturin`), and deploy the versioned frontend using `cargo xtask`. |
 
 ### Multi-Versioned Website
 
 We maintain a multi-versioned website to ensure stability. The **Unversioned** site is continuously published from `main` HEAD. I use this to verify the WASM and UI integration in the real world *before* cutting a tag. 
 
-Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via `cargo run -p xtask -- deploy-site` — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like `/0.2/`), updates a `versions.json` registry, and force-pushes to `gh-pages`. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.
+Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via `cargo xtask deploy-site` — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like `/0.2/`), updates a `versions.json` registry, and force-pushes to `gh-pages`. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.
 
 ## Testing Strategy
 
