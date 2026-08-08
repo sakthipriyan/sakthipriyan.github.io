@@ -58,33 +58,33 @@ But Rust turned out to be the most important architectural decision for a comple
 
 ```d2
 core: Xfina Core {
-  style.fill: "#1e293b"
+  style.fill: "#2c3e50"
   style.font-color: white
   label: "Xfina Core (Rust)\nParsers · Models · Validation"
 }
 
 cli: CLI\n(cargo install xfina) {
-  style.fill: "#0f172a"
+  style.fill: "#2c3e50"
   style.font-color: white
 }
 
 rustlib: Rust Library\n(crates.io) {
-  style.fill: "#0f172a"
+  style.fill: "#2c3e50"
   style.font-color: white
 }
 
 wasm: WASM Module\n(npm) {
-  style.fill: "#0f172a"
+  style.fill: "#2c3e50"
   style.font-color: white
 }
 
 pylib: Python Library\n(PyPI) {
-  style.fill: "#0f172a"
+  style.fill: "#2c3e50"
   style.font-color: white
 }
 
 webapp: Web App\n(GitHub Pages) {
-  style.fill: "#0f172a"
+  style.fill: "#2c3e50"
   style.font-color: white
 }
 
