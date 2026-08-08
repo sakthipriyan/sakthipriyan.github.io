@@ -1,9 +1,9 @@
 ---
 type: blogs
-title: "xFina: Building a Multi-Ecosystem Financial Statement Parser from Scratch"
+title: "Xfina: Building a Multi-Ecosystem Financial Statement Parser from Scratch"
 date: "2026-08-08"
 draft: true
-summary: "A complete end-to-end walkthrough of building xFina — a privacy-first, Rust-powered parser for Indian financial statements (bank accounts, credit cards, mutual funds, international brokers) — published simultaneously to Crates.io, NPM, and PyPI, with a WASM-powered web app deployed to GitHub Pages."
+summary: "A complete end-to-end walkthrough of building Xfina — a privacy-first, Rust-powered parser for Indian financial statements (bank accounts, credit cards, mutual funds, international brokers) — published simultaneously to Crates.io, NPM, and PyPI, with a WASM-powered web app deployed to GitHub Pages."
 systems_tags:
   - rust
   - wasm
@@ -26,13 +26,13 @@ The existing options were either:
 
 I wanted something different: **a fast, local, open-source parser** that could understand the proprietary formats used by Indian banks and brokerages, and output clean, structured JSON.
 
-That project is [xFina](https://github.com/sakthipriyan/xfina).
+That project is [Xfina](https://github.com/sakthipriyan/xfina).
 
 ---
 
-## What xFina Does
+## What Xfina Does
 
-xFina is a **Rust library** (and CLI tool) that parses financial statements from Indian institutions directly from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON conforming to the [ReBIT Account Aggregator (AA) schema](https://api.rebit.org.in/), with optional extensions for richer data.
+Xfina is a **Rust library** (and CLI tool) that parses financial statements from Indian institutions directly from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON conforming to the [ReBIT Account Aggregator (AA) schema](https://api.rebit.org.in/), with optional extensions for richer data.
 
 As of v0.2, it supports:
 
@@ -48,7 +48,7 @@ As of v0.2, it supports:
 | 📈 Mutual Funds | CAMS | PDF (password) | ✅ Production |
 | 🌍 Intl Brokers | Interactive Brokers | CSV | ✅ Production |
 
-Beyond parsing, xFina also ships a **two-level validation engine** that catches parsing discrepancies, a **WASM build** for in-browser use, **Python bindings** via PyO3/Maturin, and a **Vue 3 web app** — all publishing simultaneously to Crates.io, NPM, and PyPI on every tagged release via GitHub Actions.
+Beyond parsing, Xfina also ships a **two-level validation engine** that catches parsing discrepancies, a **WASM build** for in-browser use, **Python bindings** via PyO3/Maturin, and a **Vue 3 web app** — all publishing simultaneously to Crates.io, NPM, and PyPI on every tagged release via GitHub Actions.
 
 ---
 
@@ -215,7 +215,7 @@ This keeps compile times fast and the binary small when only one parser is neede
 
 ## The Validation Engine
 
-This is one of the most important parts of xFina. Parsing financial data without verifying it is dangerous — a missed row or off-by-one in decimal handling could silently produce wrong output.
+This is one of the most important parts of Xfina. Parsing financial data without verifying it is dangerous — a missed row or off-by-one in decimal handling could silently produce wrong output.
 
 Every `ParseResult<T>` contains a `ValidationReport`:
 
@@ -306,7 +306,7 @@ This matters because WASM and Python bindings can now programmatically distingui
 
 ## The CLI
 
-Installing and running xFina from the terminal:
+Installing and running Xfina from the terminal:
 
 ```bash
 cargo install xfina --features cli
@@ -448,7 +448,7 @@ npm run dev
 
 ## The Deployment Pipeline
 
-This is where things get interesting. xFina publishes to **four targets simultaneously** on a tagged release, all via GitHub Actions.
+This is where things get interesting. Xfina publishes to **four targets simultaneously** on a tagged release, all via GitHub Actions.
 
 ### CI: PR Checks (`test.yml`)
 
