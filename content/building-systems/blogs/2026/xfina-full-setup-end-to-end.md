@@ -111,6 +111,26 @@ The efficiency of the underlying language is immediately evident when comparing 
 
 To put numbers to this, I ran a local benchmark using 13 real (but anonymized) CAMS CAS PDF statements from the `xfina-test-data` repository. Both libraries parsed the exact same 13 files:
 
+```python
+import time
+import casparser
+import xfina
+
+# 1. Benchmark casparser
+start = time.time()
+for pdf in pdfs:
+    casparser.read_cas_pdf(pdf, passwords[pdf])
+cas_time = time.time() - start
+
+# 2. Benchmark xfina
+start = time.time()
+for pdf in pdfs:
+    with open(pdf, "rb") as f:
+        pdf_bytes = f.read()
+    xfina.parse_cams(pdf_bytes, password=passwords[pdf])
+xfina_time = time.time() - start
+```
+
 - **`casparser`**: ~6.08 seconds
 - **`xfina`**: ~0.47 seconds
 
