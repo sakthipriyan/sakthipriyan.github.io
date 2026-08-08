@@ -1,0 +1,179 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser | Sakthi Priyan H</title><meta name=description content="Parsing Indian financial statements locally with Rust, WebAssembly, and a single shared core across Rust, Python, JavaScript, CLI, and the web."><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
+<span class=hamburger-line></span>
+<span class=hamburger-line></span>
+<span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser</h1><p class=content-summary>Parsing Indian financial statements locally with Rust, WebAssembly, and a single shared core across Rust, Python, JavaScript, CLI, and the web.</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
+<time datetime=2026-08-08>Aug 8, 2026</time>
+</span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
+<a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2026/xfina-full-setup-end-to-end.md target=_blank rel="noopener noreferrer">Source</a>
+</span><span class=meta-item><span class=meta-icon>📖</span>
+<span class=read-time>13 min read</span></span></div><hr class=content-divider></header><div class=post-content><h2 id=why-i-built-xfina>Why I Built Xfina</h2><p>Years ago, before AI, I manually consolidated my bank statements to understand where my money was going, identify financial leakages, and measure my savings rate. It worked, but the effort made it too painful to repeat.</p><p>The underlying problem was bigger: <strong>financial data is fragmented across institutions and trapped in proprietary formats.</strong> Before it can be analyzed or automated, it needs to be extracted, normalized, and validated.</p><p>I wanted a <strong>fast, privacy-first, local, open-source parser</strong> that could turn these statements into structured financial data. I also wanted to <strong>build it fast</strong>—supporting many formats without sacrificing correctness or maintainability.</p><p>My first attempt was for my <a href=https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/>RealValue Portfolio</a> project, where I built a browser-only parser using <code>pdf.js</code>. It kept financial data entirely on the user&rsquo;s machine, but was difficult to develop and limited to CAMS mutual funds and IBKR.</p><p>That led to <strong><a href=https://github.com/sakthipriyan/xfina>Xfina</a></strong>: a Rust-based parsing engine with a single core exposed through Rust, CLI, Python, JavaScript/WASM, and a browser-based web app. Rust provides the performance and strong typing; WASM lets the same core run locally in the browser; comprehensive tests keep rapid development safe.</p><p>Xfina is now the data-extraction foundation for a larger <strong>stealth project</strong> I’m building to automate financial workflows. The goal was simple: <strong>fast to run, fast to build, and fast to evolve—without compromising privacy.</strong></p><h2 id=what-xfina-does>What Xfina Does</h2><p>Xfina parses financial statements from raw file bytes — PDFs, Excel sheets, CSVs — and outputs structured JSON data.</p><p>As of v0.2.1:</p><table><thead><tr><th><span style=white-space:nowrap>Category</span></th><th>Institution / Provider</th><th>Format</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td><span style=white-space:nowrap>🏦 Bank Account</span></td><td>Axis Bank</td><td>XLS</td><td>✅</td><td>Full support</td></tr><tr><td><span style=white-space:nowrap>🏦 Bank Account</span></td><td>Bank of Baroda</td><td>XLS</td><td>✅</td><td>Full support</td></tr><tr><td><span style=white-space:nowrap>🏦 Bank Account</span></td><td>HDFC Bank</td><td>XLS</td><td>✅</td><td>Full support</td></tr><tr><td><span style=white-space:nowrap>🏦 Bank Account</span></td><td>ICICI Bank</td><td>XLS</td><td>✅</td><td>Full support</td></tr><tr><td><span style=white-space:nowrap>🏦 Bank Account</span></td><td>State Bank of India</td><td>PDF (password protected)</td><td>✅</td><td>Full support</td></tr><tr><td><span style=white-space:nowrap>💳 Credit Card</span></td><td>Axis Bank</td><td>-</td><td>⏳</td><td>Waiting for the statement to be generated</td></tr><tr><td><span style=white-space:nowrap>💳 Credit Card</span></td><td>HDFC Bank</td><td>CSV</td><td>✅</td><td>Full support incl. add-on cardholders, reward points</td></tr><tr><td><span style=white-space:nowrap>💳 Credit Card</span></td><td>ICICI Bank</td><td>XLS</td><td>✅</td><td>Tested card without any add-on cards</td></tr><tr><td><span style=white-space:nowrap>📈 Mutual Funds</span></td><td>CAMS</td><td>PDF (password protected)</td><td>✅</td><td>Combined Account Statement (CAS)</td></tr><tr><td><span style=white-space:nowrap>📈 Mutual Funds</span></td><td>KFinTech</td><td>PDF (password protected)</td><td>⏳</td><td>Combined Account Statement (CAS)</td></tr><tr><td><span style=white-space:nowrap>🌍 Intl Brokers</span></td><td>Interactive Brokers (IBKR)</td><td>CSV</td><td>✅</td><td>Activity statements</td></tr></tbody></table><p><em>Note: Bank account parsers have not yet been tested with joint accounts. Add-on card support varies by credit-card parser.</em></p><h3 id=output-schema>Output Schema</h3><p>One important decision was to build on top of the <a href=https://api.rebit.org.in/>Sahamati Account Aggregator (AA) and ReBIT standards</a> rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an <code>xfina</code> extension rather than forcing those fields into an incompatible model or discarding them. (CSV export support will be added soon as part of GitHub issue <a href=https://github.com/sakthipriyan/xfina/issues/42>#42</a>).</p><h2 id=why-rust-one-core-five-interfaces>Why Rust: One Core, Five Interfaces</h2><p>Rust compiles to WebAssembly, which made it possible to reuse the same parsing logic across five runtime targets without rewriting the core.</p><pre><code class=language-d2>core: Xfina Core {
+  style.fill: &quot;#764ba2&quot;
+  style.font-color: white
+  label: &quot;Xfina Core (Rust)\nParsers · Models · Validation&quot;
+}
+
+cli: CLI\n(cargo install xfina) {
+  style.fill: &quot;#764ba2&quot;
+  style.font-color: white
+}
+
+rustlib: Rust Library\n(crates.io) {
+  style.fill: &quot;#764ba2&quot;
+  style.font-color: white
+}
+
+wasm: WASM Module\n(npm) {
+  style.fill: &quot;#764ba2&quot;
+  style.font-color: white
+}
+
+pylib: Python Library\n(PyPI) {
+  style.fill: &quot;#764ba2&quot;
+  style.font-color: white
+}
+
+webapp: Web App\n(GitHub Pages) {
+  style.fill: &quot;#764ba2&quot;
+  style.font-color: white
+}
+
+core -&gt; cli: Clap
+core -&gt; rustlib: crate API
+core -&gt; wasm: wasm-bindgen
+core -&gt; pylib: PyO3 + Maturin
+wasm -&gt; webapp: xfina-wasm npm pkg
+</code></pre><p><em>(Note: The CLI and Rust Library are the exact same crate, compiled with different feature flags).</em></p><p>Each target required only a thin binding layer — typically a macro that wires a parser function to a different calling convention. The same core logic that validates a running balance or maps an XLS row to a <code>DepositAccount</code> struct runs identically in a Rust binary, inside a Python process, and in a browser tab with no servers involved. <strong>That&rsquo;s the WASM payoff.</strong></p><h3 id=ai-and-the-learning-curve>AI and the Learning Curve</h3><p>I built Xfina using <strong>Antigravity</strong>, alternating between Gemini Pro and Claude models. AI doesn&rsquo;t eliminate Rust&rsquo;s learning curve, but it dramatically shortens the feedback loop. With the compiler and a strong test suite continuously checking the generated code, I could iterate on a language I was still learning without sacrificing the safety benefits that attracted me to Rust in the first place.</p><p>Performance was therefore a two-sided requirement: <strong>the system needed to run fast, and I needed to build it fast.</strong> Rust addressed the first; AI-assisted development, strong typing, and aggressive testing helped address the second.</p><p>That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the git worktree.</p><h2 id=five-interfaces-one-core-the-demos>Five Interfaces, One Core: The Demos</h2><p>This project marked a major personal milestone: it was the first time I ever published code to public package repositories, hitting Crates.io, NPM, and PyPI all in one go. Here is how you consume the exact same parser across all five interfaces:</p><h3 id=1-the-rust-library>1. The Rust Library</h3><p><strong>Install</strong> <a href=https://crates.io/crates/xfina><img src="https://img.shields.io/crates/v/xfina.svg?color=orange" alt=Crates.io></a>
+Add the dependency to your <code>Cargo.toml</code>:</p><pre><code class=language-toml>[dependencies]
+xfina = &quot;0.2.1&quot;
+</code></pre><p><strong>Usage</strong></p><pre><code class=language-rust>use xfina::bank_accounts::hdfc::parse_hdfc_bank_statement;
+use xfina::models::request::ParseRequest;
+
+let req = ParseRequest::new(&amp;file_bytes).with_filename(&quot;statement.xls&quot;);
+let result = parse_hdfc_bank_statement(req).unwrap();
+println!(&quot;Validation status: {:?}&quot;, result.validation.overall);
+</code></pre><h3 id=2-the-cli-tool>2. The CLI Tool</h3><p><strong>Install</strong> <a href=https://crates.io/crates/xfina><img src="https://img.shields.io/crates/v/xfina.svg?color=orange" alt=Crates.io></a></p><pre><code class=language-bash>cargo install xfina --features cli
+</code></pre><p><strong>Usage</strong></p><pre><code class=language-bash>xfina bank-account hdfc statement.xls
+xfina mutual-fund cams portfolio.pdf --password &quot;XXXXXXXXXX&quot;
+</code></pre><h3 id=3-the-python-bindings-pypi>3. The Python Bindings (PyPI)</h3><p><strong>Install</strong> <a href=https://pypi.org/project/xfina/><img src="https://img.shields.io/pypi/v/xfina.svg?color=blue" alt=PyPI></a></p><pre><code class=language-bash>pip install xfina
+</code></pre><p><strong>Usage</strong></p><pre><code class=language-python>import xfina
+with open(&quot;hdfc_statement.xls&quot;, &quot;rb&quot;) as f:
+    result = xfina.parse_hdfc_ba(f.read())
+print(result[&quot;validation&quot;][&quot;overall&quot;])
+</code></pre><h3 id=4-the-jswasm-module-npm>4. The JS/WASM Module (NPM)</h3><p>NPM’s automated name-similarity and anti-typosquatting protections prevented me from publishing <code>xfina</code>, with the error: <strong>“Package name too similar to existing package find.”</strong></p><p>So, rather than introducing a different name, I simply reused the <code>xfina-wasm</code> package name for the WebAssembly bindings.</p><p><strong>Install</strong> <a href=https://www.npmjs.com/package/xfina-wasm><img src="https://img.shields.io/npm/v/xfina-wasm.svg?color=yellow" alt=npm></a></p><pre><code class=language-bash>npm install xfina-wasm
+</code></pre><p><strong>Usage</strong></p><pre><code class=language-javascript>import init, { parse_hdfc_ba } from 'xfina-wasm';
+
+await init(); // Initialize WASM
+const bytes = new Uint8Array(await file.arrayBuffer());
+const jsonString = parse_hdfc_ba(bytes, null /* password */, file.name, null /* account_id */, &quot;xfina&quot;);
+const result = JSON.parse(jsonString);
+</code></pre><h3 id=5-the-web-app>5. The Web App</h3><p><strong>Install</strong>
+You just need a browser!</p><p><strong>Usage</strong>
+A Vue 3 application that imports the NPM package and parses files locally on drop. Try it live at <a href=https://xfina.sakthipriyan.com/>xfina.sakthipriyan.com</a>.</p><h2 id=architecture>Architecture</h2><p>The project is a <strong>Cargo workspace</strong> with four crates — <code>xfina</code> (the core library), <code>xfina-wasm</code>, <code>xfina-py</code>, and <a href=https://github.com/sakthipriyan/xfina/tree/main/xtask><code>xtask</code></a> (the build tool) — plus the <code>web/</code> Vue app:</p><pre><code>xfina/
+├── src/               # Core library: parsers, models, validation, CLI
+├── wasm/              # WASM bindings (wasm-bindgen)
+├── python/            # Python bindings (pyo3 + maturin)
+├── xtask/             # Custom build &amp; deployment scripts
+└── web/               # Vue 3 + Vite frontend
+</code></pre><p>The key design principle: <strong>write the parser once, expose it everywhere.</strong> All three binding layers share the same <code>ParseRequest</code> builder struct and the same <code>ParseResult&lt;T></code> return type. By passing raw bytes to the core rather than file paths, the parsing logic remains completely side-effect-free — which is exactly why the same core functions can run inside a Rust binary, a Python process, and a browser tab without filesystem access.</p><h2 id=the-data-models>The Data Models</h2><p>The output schema is built directly on the Sahamati AA and ReBIT standards:</p><ul><li><strong><code>DepositAccount</code></strong> — savings/current accounts</li><li><strong><code>CreditCardAccount</code></strong> — credit card statements</li><li><strong><code>MutualFundsAccount</code></strong> — Combined Account Statement (CAS)</li><li><strong><code>EquityAccount</code></strong> — international broker accounts</li></ul><p>Every parser supports two output flavors via a <code>format</code> parameter:</p><ul><li><strong><code>xfina</code> (default)</strong> — Dates as Unix timestamps, includes the <code>xfina</code> extension object with institution-specific metadata.</li><li><strong><code>rebit</code></strong> — Strict ReBIT AA schema compliance. The <code>xfina</code> extension is stripped, date-only fields stay as <code>YYYY-MM-DD</code> strings.</li></ul><h2 id=robust-validation>Robust Validation</h2><p>Parsing financial data without verifying it is dangerous — a missed row or decimal rounding error could silently produce wrong output. Every <code>ParseResult&lt;T></code> carries a <code>ValidationReport</code> with two levels of checks:</p><p><strong>Level 1 — Row validation:</strong> For each consecutive transaction pair in a bank statement, the engine checks that <code>balance[n] = balance[n−1] ± amount[n]</code>. When a row fails, the engine resyncs to the printed balance before continuing, ensuring a single bad row doesn&rsquo;t cascade into compounding failures.</p><p><strong>Level 2 — Summary validation:</strong> The engine compares declared vs. computed totals (total credits, total debits, closing balance). Checks are classified as either <strong><code>Declared</code></strong> (the institution printed this number) or <strong><code>Derived</code></strong> (inferred from arithmetic).</p><p>This drives the overall <code>ValidationStatus</code>: all passed → green ✅, only derived failures → yellow ⚠, any declared failure → red ✗. The validation engine is only as strong as the source data allows.</p><h2 id=the-deployment-pipeline>The Deployment Pipeline</h2><p>Automation is handled by four distinct GitHub Actions workflows (three explicit, one implicit):</p><table><thead><tr><th>Workflow</th><th>Trigger</th><th>Action & Details</th></tr></thead><tbody><tr><td><strong><code>test.yml</code></strong><br><em>(PR Checks)</em></td><td>Pull request to <code>main</code></td><td>Features a smart diff-checker to identify if core logic was modified. Runs formatting, linting (<code>clippy</code>), <code>cargo test</code> (unit and logic tests; fixture-backed snapshot tests are run locally), and verifies WASM compilation.</td></tr><tr><td><strong><code>deploy-unreleased.yml</code></strong><br><em>(Continuous Preview)</em></td><td>Merge to <code>main</code></td><td>Leverages concurrency groups to cancel outdated runs. Delegates the build of the WASM module and Vue site to <code>cargo xtask deploy-site --unreleased</code>, which force-pushes the assets to the <code>gh-pages</code> branch.</td></tr><tr><td><strong><code>publish.yml</code></strong><br><em>(Release)</em></td><td>Git tag on <code>main</code> (e.g., <code>v0.2.1</code>)</td><td>Verifies the tag is on the <code>main</code> branch to prevent rogue releases. Orchestrates four parallel jobs to publish to Crates.io, NPM (with <code>--provenance</code>), PyPI (via <code>maturin</code>), and deploy the versioned frontend to <code>gh-pages</code> using <code>cargo xtask</code>.</td></tr><tr><td><strong><code>pages-build-deployment</code></strong><br><em>(Implicit)</em></td><td>Push to <code>gh-pages</code> branch</td><td>GitHub&rsquo;s internal, implicit workflow that detects pushes to the <code>gh-pages</code> branch (triggered by the two workflows above) and serves those assets directly to GitHub Pages.</td></tr></tbody></table><h3 id=key-principle-passwordless-deployments-oidc>Key Principle: Passwordless Deployments (OIDC)</h3><p>A core tenet of this pipeline is accessing resources without static keys wherever possible. Both the NPM and PyPI deployments use <strong>OIDC (OpenID Connect)</strong> for authentication, allowing GitHub Actions to securely publish packages without storing long-lived API tokens in repository secrets. Crates.io does not yet support OIDC, so it remains the only target still requiring a traditional static token.</p><h3 id=multi-versioned-website>Multi-Versioned Website</h3><p>We maintain a multi-versioned website to ensure stability. The <strong>Unversioned</strong> site is continuously published from <code>main</code> HEAD. I use this to verify the WASM and UI integration in the real world <em>before</em> cutting a tag.</p><p>Once verified, cutting a tag triggers the release workflow, which publishes the modules to the package management systems. Website deployment runs via <code>cargo xtask deploy-site</code> — a custom Rust build tool in the workspace. It builds the bundles, writes assets to a versioned path (like <code>/0.2/</code>), updates a <code>versions.json</code> registry, and force-pushes to <code>gh-pages</code>. The versioning scheme uses minor versions as stable URL prefixes, while the root URL always mirrors the overall latest release.</p><h2 id=testing-strategy>Testing Strategy</h2><p>Snapshot testing is the primary strategy. Each parser has an integration test that reads a real statement, parses it, and compares JSON output against a committed snapshot.</p><p>Because financial statements contain highly sensitive PII, <strong>testing is strictly limited to real (but private) files checked into a private sibling repository</strong>, and tests are run locally. I plan to include these tests in the CI pipeline eventually, but I need to be extremely careful to ensure no data is ever leaked in the GitHub Actions logs.</p><h2 id=beyond-parsing-the-data-quality-problem>Beyond Parsing: The Data Quality Problem</h2><p>One of the biggest challenges in building Xfina is that financial statements are not designed for machine consumption. The same institution can provide different levels of information across PDF, Excel, and CSV formats, and some reports contain little or no summary information that can be used to validate the parsed transactions.</p><p>For example, an ICICI Bank credit card statement does not include the card number anywhere in the PDF or XLS report. An Axis Bank PDF contains significantly more information than its Excel equivalent. Credit card statements generally don&rsquo;t provide a running balance, so validation is limited to summary-level checks. Where running balances are available, Xfina can validate every transaction sequentially.</p><p>CAMS is a particularly good example of what becomes possible when the source contains richer information. A CAS can be validated at multiple levels: individual transactions and running balances for each mutual fund, at the AMC level, and again against the overall consolidated totals.</p><p>In general, I have found the formats roughly ordered from <strong>easiest to hardest to parse as CSV/Excel → PDF</strong>, while the richness of the data tends to go in the opposite direction: <strong>PDF → Excel/CSV</strong>. PDFs often contain information that is missing from their structured counterparts, but they are also arguably the worst format for exchanging data between systems.</p><p>The bigger problem is therefore not just parsing. <strong>Financial institutions should provide a standard machine-readable export, ideally using an established schema such as ReBIT AA, in a consistent format across banks, cards, brokers, and mutual funds.</strong> Today, anyone managing multiple bank accounts, credit cards, mutual funds, and brokerage accounts has to deal with a fragmented collection of formats and data quality.</p><p>This matters especially for privacy-first applications. If institutions provided a standard export directly to the user, financial software could process that data locally without requiring users to upload sensitive financial information to an upstream server.</p><p>That is where Xfina fits today: <strong>bridging the gap between the messy formats institutions provide and the structured data applications need.</strong> Over time, I want to expand Xfina&rsquo;s support for richer PDF statements across institutions, allowing more precise validation of the underlying transactions and summary data.</p><p>Ultimately, the best solution isn&rsquo;t another parser. It is for financial institutions to make <strong>standardized, machine-readable exports a first-class feature</strong>. Until then, Xfina is my attempt to make that fragmented data usable, locally, reliably, and without compromising privacy.</p><h2 id=performance-rust-vs-python>Performance: Rust vs Python</h2><p>To demonstrate the benefit of doing the parsing in compiled Rust while exposing a Python API, I compared the popular <a href=https://github.com/codereverser/casparser>casparser</a> project with Xfina&rsquo;s Python bindings.</p><p>Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is an order of magnitude faster and operates with a microscopic memory profile.</p><p>To put numbers to this, I ran a local benchmark using 13 real CAMS CAS PDF statements from the <code>xfina-test-data</code> repository. Both libraries parsed the exact same 13 files:</p><pre><code class=language-python>import time
+import casparser
+import xfina
+
+# 1. Benchmark casparser
+start = time.time()
+for pdf in pdfs:
+    casparser.read_cas_pdf(pdf, &quot;XXXXXXXXXX&quot;)
+cas_time = time.time() - start
+
+# 2. Benchmark xfina
+start = time.time()
+for pdf in pdfs:
+    with open(pdf, &quot;rb&quot;) as f:
+        pdf_bytes = f.read()
+    xfina.parse_cams(pdf_bytes, password=&quot;XXXXXXXXXX&quot;)
+xfina_time = time.time() - start
+</code></pre><p><em>Benchmark ran on MBP 2026 (M5 Pro / 24GB)</em></p><blockquote><p><strong><code>casparser</code></strong>: 6.08 seconds<br><strong><code>xfina</code></strong>: 0.47 seconds</p></blockquote><p>On this workload, Xfina was roughly 13× faster. When you are processing hundreds of statements in a batch pipeline or a web backend, that difference is architectural. But, if this is used individually, it doesn&rsquo;t matter much.</p><h2 id=links>Links</h2><ul><li><strong>GitHub</strong>: <a href=https://github.com/sakthipriyan/xfina>github.com/sakthipriyan/xfina</a></li><li><strong>Web App</strong>: <a href=https://xfina.sakthipriyan.com/>xfina.sakthipriyan.com</a></li><li><strong>Crates.io</strong>: <a href=https://crates.io/crates/xfina>crates.io/crates/xfina</a></li><li><strong>NPM</strong>: <a href=https://www.npmjs.com/package/xfina-wasm>xfina-wasm</a></li><li><strong>PyPI</strong>: <a href=https://pypi.org/project/xfina/>pypi.org/project/xfina</a></li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<a href=https://sakthipriyan.com/building-systems/tags/rust/ class=tag-link>Rust</a>
+<a href=https://sakthipriyan.com/building-systems/tags/wasm/ class=tag-link>Wasm</a>
+<a href=https://sakthipriyan.com/building-systems/tags/python/ class=tag-link>Python</a>
+<a href=https://sakthipriyan.com/building-systems/tags/architecture/ class=tag-link>Architecture</a>
+<a href=https://sakthipriyan.com/building-systems/tags/cloud/ class=tag-link>Cloud</a>
+<a href=https://sakthipriyan.com/building-systems/tags/devops/ class=tag-link>Devops</a>
+<a href=https://sakthipriyan.com/building-systems/tags/design/ class=tag-link>Design</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script type=module>
+            import { D2 } from 'https://esm.sh/@terrastruct/d2';
+            
+            document.addEventListener('DOMContentLoaded', async function() {
+                const d2Elements = document.querySelectorAll('pre code.language-d2, pre code.d2');
+                if (d2Elements.length === 0) return;
+                
+                console.log('[DEBUG] Initializing D2');
+                try {
+                    const d2 = new D2();
+                    
+                    
+                    const diagramTasks = Array.from(d2Elements).map(codeEl => {
+                        const preEl = codeEl.parentNode;
+                        let d2Code = codeEl.textContent.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                        
+                        
+                        const container = document.createElement('div');
+                        container.className = 'd2-diagram d2-loading';
+                        container.style.padding = '2rem';
+                        container.style.textAlign = 'center';
+                        container.style.fontFamily = 'monospace';
+                        container.style.color = '#888';
+                        container.style.background = '#f9f9f9';
+                        container.style.border = '1px dashed #ccc';
+                        container.style.borderRadius = '4px';
+                        container.innerHTML = '<span class="spinner">⚙️</span> Rendering diagram...';
+                        
+                        
+                        preEl.parentNode.replaceChild(container, preEl);
+                        
+                        
+                        if (!d2Code.includes('d2-config')) {
+                            const configBlock = `vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 105
+  }
+}\n`;
+                            d2Code = configBlock + d2Code;
+                        }
+                        
+                        return { d2Code, container };
+                    });
+
+                    
+                    for (const task of diagramTasks) {
+                        try {
+                            console.log('[DEBUG] Rendering D2 block');
+                            const result = await d2.compile(task.d2Code);
+                            const svg = await d2.render(result.diagram, result.renderOptions || {});
+                            
+                            
+                            task.container.className = 'd2-diagram';
+                            task.container.removeAttribute('style'); 
+                            task.container.innerHTML = svg;
+                            
+                            const svgEl = task.container.querySelector('svg');
+                            if (svgEl) {
+                                svgEl.removeAttribute('width');
+                                svgEl.removeAttribute('height');
+                                svgEl.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                                svgEl.style.width = '100%';
+                                svgEl.style.height = 'auto';
+                            }
+                            
+                            console.log('[DEBUG] D2 Diagram rendered');
+                        } catch (err) {
+                            console.error('[DEBUG] D2 compile/render error:', err);
+                            task.container.innerHTML = `<div style="color:red; padding:1rem;">Error rendering D2 diagram: ${err.message || err}</div>`;
+                        }
+                    }
+                } catch (initErr) {
+                    console.error('[DEBUG] D2 initialization error:', initErr);
+                }
+            });
+        </script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
