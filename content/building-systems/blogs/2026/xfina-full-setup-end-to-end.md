@@ -66,33 +66,33 @@ The choice of Rust was primarily about correctness and performance, but it turne
 
 ```d2
 core: Xfina Core {
-  style.fill: "#2c3e50"
+  style.fill: "#764ba2"
   style.font-color: white
   label: "Xfina Core (Rust)\nParsers · Models · Validation"
 }
 
 cli: CLI\n(cargo install xfina) {
-  style.fill: "#2c3e50"
+  style.fill: "#764ba2"
   style.font-color: white
 }
 
 rustlib: Rust Library\n(crates.io) {
-  style.fill: "#2c3e50"
+  style.fill: "#764ba2"
   style.font-color: white
 }
 
 wasm: WASM Module\n(npm) {
-  style.fill: "#2c3e50"
+  style.fill: "#764ba2"
   style.font-color: white
 }
 
 pylib: Python Library\n(PyPI) {
-  style.fill: "#2c3e50"
+  style.fill: "#764ba2"
   style.font-color: white
 }
 
 webapp: Web App\n(GitHub Pages) {
-  style.fill: "#2c3e50"
+  style.fill: "#764ba2"
   style.font-color: white
 }
 
