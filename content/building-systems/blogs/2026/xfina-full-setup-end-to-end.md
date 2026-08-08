@@ -52,9 +52,7 @@ As of v0.2.1:
 
 ## Why Rust, and How It Unlocked Five Interfaces for Free
 
-The choice of Rust was primarily about correctness and performance. The efficiency of the underlying language is immediately evident: comparing my older `camsparser` script to the new `xfina` CAMS parser, the Rust version is orders of magnitude faster with a microscopic memory profile.
-
-But Rust turned out to be the most important architectural decision for a completely different reason: **Rust compiles to WebAssembly**, which made it trivially easy to ship the same parsing logic to five different runtime targets without rewriting a single line of core code.
+The choice of Rust was primarily about correctness and performance, but it turned out to be the most important architectural decision for a completely different reason: **Rust compiles to WebAssembly**, which made it trivially easy to ship the same parsing logic to five different runtime targets without rewriting a single line of core code.
 
 ```d2
 core: Xfina Core {
@@ -102,6 +100,10 @@ Each target required only a thin binding layer — typically a macro that wires 
 I built Xfina using **Anti Gravity**, alternating between Gemini Pro and Claude models. In an AI code-generated world, the notoriously steep learning curve of Rust is no longer an impediment. As long as you have a tight feedback loop and strong test suites covering various use cases, you can iterate incredibly fast in a strictly typed, compiled language.
 
 That said, compiled languages demand resources. While I could comfortably do JavaScript development on my old 2017 MacBook Pro, I had to upgrade my machine for this Rust project to maximize my limited time and maintain parallel progress across the workspace.
+
+## Performance: `camsparser` vs Xfina
+
+The efficiency of the underlying language is immediately evident when comparing the popular Python project `camsparser` against the new `xfina` Python library. Because Xfina does the heavy lifting in compiled Rust and only hands the final dictionary back to Python, it is orders of magnitude faster and operates with a microscopic memory profile.
 
 ## Five Interfaces, One Core: The Demos
 
