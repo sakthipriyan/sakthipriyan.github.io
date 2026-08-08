@@ -2,7 +2,7 @@
 type: blogs
 title: "Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser"
 date: "2026-08-08"
-draft: true
+draft: false
 summary: "Parsing Indian financial statements locally with Rust, WebAssembly, and a single shared core across Rust, Python, JavaScript, CLI, and the web."
 systems_tags:
   - rust
