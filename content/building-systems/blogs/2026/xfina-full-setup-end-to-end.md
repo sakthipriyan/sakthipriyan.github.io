@@ -233,9 +233,11 @@ This drives the overall `ValidationStatus`: all passed → green ✅, only deriv
 
 Automation is handled by three distinct GitHub Actions workflows:
 
-1. **`test.yml` (PR Checks)** — Runs on every pull request to `main`. It features a smart diff-checker that identifies if any core logic was modified, then runs formatting, linting (`clippy`), `cargo test` (runs unit and logic tests; fixture-backed snapshot tests are still run locally), and verifies the WASM target compiles.
-2. **`deploy-unreleased.yml` (Continuous Preview)** — Every push to `main` triggers a build of the latest WASM module and Vue site. It leverages GitHub concurrency groups to cancel outdated in-progress runs, then delegates the heavy lifting to our custom `cargo run -p xtask -- deploy-site --unreleased` tool to push to the `/unreleased/` path on GitHub Pages.
-3. **`publish.yml` (Release)** — Triggered by a git tag (e.g., `v0.2.1`), this workflow first verifies that the tag was created on the `main` branch to prevent accidental rogue releases. Once verified, it orchestrates four parallel jobs: publishing the Rust library to Crates.io, building and publishing the NPM package (with `--provenance`), building Python wheels via `maturin` for PyPI, and deploying the versioned frontend via the `xtask` deployer.
+| Workflow | Trigger | Action & Details |
+|---|---|---|
+| **`test.yml`** <br/> *(PR Checks)* | Pull request to `main` | Features a smart diff-checker to identify if core logic was modified. Runs formatting, linting (`clippy`), `cargo test` (unit and logic tests; fixture-backed snapshot tests are run locally), and verifies WASM compilation. |
+| **`deploy-unreleased.yml`** <br/> *(Continuous Preview)* | Push to `main` | Leverages concurrency groups to cancel outdated runs. Delegates the build of the WASM module and Vue site to `cargo run -p xtask -- deploy-site --unreleased` to push to the `/unreleased/` path on GitHub Pages. |
+| **`publish.yml`** <br/> *(Release)* | Git tag (e.g., `v0.2.1`) | Verifies the tag is on the `main` branch to prevent rogue releases. Orchestrates four parallel jobs to publish to Crates.io, NPM (with `--provenance`), PyPI (via `maturin`), and deploy the versioned frontend using `xtask`. |
 
 ### Multi-Versioned Website
 
