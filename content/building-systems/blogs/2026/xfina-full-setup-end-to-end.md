@@ -242,7 +242,7 @@ Automation is handled by four distinct GitHub Actions workflows (three explicit,
 
 ### Key Principle: Passwordless Deployments (OIDC)
 
-A core tenet of this pipeline is accessing resources without static keys wherever possible. Both the NPM and PyPI deployments use **OIDC (OpenID Connect)** for authentication, allowing GitHub Actions to securely publish packages without storing long-lived API tokens in repository secrets. Crates.io does not yet support OIDC, so it remains the only target still requiring a traditional static token.
+A core tenet of this pipeline is accessing resources without static keys wherever possible. The NPM, PyPI, and Crates.io deployments all use **OIDC (OpenID Connect)** for authentication, allowing GitHub Actions to securely publish packages without storing long-lived API tokens in repository secrets.
 
 ### Multi-Versioned Website
 
