@@ -313,5 +313,5 @@ On this workload, Xfina was roughly 13× faster. When you are processing hundred
 - **GitHub**: [github.com/sakthipriyan/xfina](https://github.com/sakthipriyan/xfina)
 - **Web App**: [xfina.dev](https://xfina.dev/)
 - **Crates.io**: [crates.io/crates/xfina](https://crates.io/crates/xfina)
-- **NPM**: [xfina-wasm](https://www.npmjs.com/package/xfina-wasm)
+- **NPM**: [npmjs.com/package/xfina-wasm](https://www.npmjs.com/package/xfina-wasm)
 - **PyPI**: [pypi.org/project/xfina](https://pypi.org/project/xfina/)
