@@ -1,5 +1,5 @@
 ---
-title: "Filing Income Tax for FY 2025-26: A Schedule-by-Schedule Breakdown of ITR-2"
+title: "Demystifying ITR-2: My FY 2025-26 Tax Filing Journey"
 date: "2026-07-29"
 draft: false
 type: "blogs"
