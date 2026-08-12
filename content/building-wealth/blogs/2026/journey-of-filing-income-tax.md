@@ -32,7 +32,7 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 ## 📅 Filing Timeline & Process
 
-- **Date of Filing**: July 25, 2026
+- **Date of Filing**: July 25, 2026 (Typically I file once I receive the Form 16 unlike this year)
 - **Date of Processing & Refund**: August 6, 2026
 - **Software Used**: The official Income Tax website was used directly for filling out the forms.
 - **Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
@@ -61,7 +61,7 @@ digraph IncomeTree {
   
   Dividends [label="Dividends", fillcolor="#e8f5e9"];
   DomesticShares [label="Domestic Shares"];
-  ICICIDirect [label="ICICI Direct"];
+  ICICIDirect [label="INFY, GOLDBEES, etc."];
   
   Interest [label="Interest Income", fillcolor="#fff8e1"];
   SavingsAccount [label="Savings Account"];
@@ -186,7 +186,7 @@ Here is the exact folder structure and documents I downloaded to prepare for thi
   - Interest Certificates (for Schedule OS)
 - **📁 Mutual Funds & NSDL**:
   - Consolidated Account Statements (CAS) from CAMS/KFintech for Mutual Funds
-  - NSDL CAS for Demat holdings (ICICI Direct)
+  - NSDL CAS for Demat holdings (INFY, GOLDBEES, etc.)
 - **📁 IBKR (Foreign Investments)**:
   - Annual Activity Statement (Calendar Year: Jan 1 – Dec 31) — *Required for Schedule FA*
   - Annual Activity Statement (Financial Year: Apr 1 – Mar 31) — *Required for Schedule AL*
