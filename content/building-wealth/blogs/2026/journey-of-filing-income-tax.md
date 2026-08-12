@@ -29,6 +29,14 @@ Filing Income Tax Returns (ITR-2) for **Financial Year 2025–26 (Assessment Yea
 
 Rather than high-level generalizations, this post **backtracks each section of the filed ITR-2 return line-by-line**, demonstrating how every income head is computed, how special tax rates apply, how foreign assets are disclosed across **Schedule FA** (Calendar Year) and **Schedule AL** (Financial Year), and how Tax Collected at Source (TCS) offsets tax liability.
 
+
+## 📅 Filing Timeline & Process
+
+- **Date of Filing**: July 25, 2026
+- **Date of Processing & Refund**: August 6, 2026
+- **Software Used**: The official Income Tax website was used directly for filling out the forms.
+- **Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
+
 ## 🌳 System Overview
 
 Here is the exact data flow from raw income streams into ITR-2 schedules, leading to total tax computation and final tax credit reconciliation.
@@ -195,22 +203,20 @@ Alongside the source documents, I created a master reconciliation spreadsheet (`
 In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
 #### Key Breakdown
-- **Gross Salary**: **₹X,XX,XX,XXX** (Employer).
+- **Gross Salary**: **XXX** (Employer).
   - Includes basic salary, allowances, special perquisites, and minor ancillary payments like Hack Day Prizes.
-- **Standard Deduction (Sec 16ia)**: **₹XX,XXX** (upgraded standard deduction limit).
-- **Total Income under Head Salaries**: **₹X,XX,XX,XXX**.
+- **Standard Deduction (Sec 16ia)**: **XXX** (upgraded standard deduction limit).
+- **Total Income under Head Salaries**: **XXX**.
 
 ### 2. Schedule Income from Other Sources (Schedule OS)
 
 All non-salary regular income is declared here:
 
-- **Interest from Savings Bank Accounts**: **₹X,XXX**
-  - Reconciled across multiple savings accounts.
-- **Dividend Income**: **₹X,XXX**
-  - Domestic dividends received.
-- **Total Income under Schedule OS**: **₹X,XXX**.
+- **Interest from Savings Bank Accounts & Dividends**: **~₹6,000**
+  - Reconciled across multiple savings accounts and domestic dividends received.
+- **Total Income under Schedule OS**: **~₹6,000**.
 
-*(Note: PPF interest of ₹XX,XXX earned during the year is tax-exempt under Section 10(11) and noted separately).*
+*(Note: PPF interest of XXX earned during the year is tax-exempt under Section 10(11) and noted separately).*
 
 ### 3. Schedule Capital Gains (Schedule CG & Schedule 112A)
 
@@ -218,41 +224,41 @@ The capital gains schedule reconciles realized redemptions across equity mutual 
 
 #### A. Short-Term Capital Loss (STCL) Setoff
 - **Equity MF Redemptions**: Consideration against acquisition cost.
-- **Realized STCL**: **`-₹XX,XXX`**.
+- **Realized STCL**: **`-XXX`**.
 
 #### B. Long-Term Capital Gains (LTCG under Section 112A)
-- Total equity mutual fund sales proceeds: **₹XX,XX,XXX**.
-- Total cost of acquisition: **₹XX,XX,XXX**.
-- Gross LTCG: **₹XX,XX,XXX**.
-- **Setoff of STCL**: After setting off STCL (`-₹XX,XXX`) against LTCG, **Net Taxable LTCG = ₹XX,XX,XXX**.
-- **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **₹X,XX,XXX**.
+- Total equity mutual fund sales proceeds: **XXX**.
+- Total cost of acquisition: **XXX**.
+- Gross LTCG: **XXX**.
+- **Setoff of STCL**: After setting off STCL (`-XXX`) against LTCG, **Net Taxable LTCG = XXX**.
+- **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **XXX**.
 
 ## Tax Schedules
 
 ### 4. Schedule TDS1 & Schedule TCS (Taxes Paid)
 
 These schedules aggregate all the taxes that have already been paid on your behalf:
-- **Employer Salary TDS (Schedule TDS1)**: **₹XX,XX,XXX** deducted and deposited by employer.
-- **LRS Remittance TCS (Schedule TCS)**: **₹X,XX,XXX** collected and remitted by banks on foreign transfers.
+- **Employer Salary TDS (Schedule TDS1)**: **XXX** deducted and deposited by employer.
+- **LRS Remittance TCS (Schedule TCS)**: **XXX** collected and remitted by banks on foreign transfers.
 
 ### 5. Part B-TI, Part B-TTI & Tax Refund Settlement
 
 #### A. Total Income Computation (Part B-TI)
-- **Salary Income**: ₹X,XX,XX,XXX
-- **Income from Other Sources**: ₹X,XXX
-- **Capital Gains (Special Rate 12.5%)**: ₹XX,XX,XXX
-- **Gross Total Income (GTI) / Total Income**: **₹X,XX,XX,XXX** (₹X.XX Crore)
+- **Salary Income**: XXX
+- **Income from Other Sources**: XXX
+- **Capital Gains (Special Rate 12.5%)**: XXX
+- **Gross Total Income (GTI) / Total Income**: **XXX** (₹X.XX Crore)
 
 #### B. Tax Liability & Surcharge Breakdown (Part B-TTI)
-- **Tax at Normal Slab Rates**: ₹XX,XX,XXX
-- **Tax at Special Rates (12.5% on LTCG)**: ₹X,XX,XXX
-- **Surcharge**: **₹X,XX,XXX**
-- **Health & Education Cess (4%)**: **₹X,XX,XXX**
-- **Gross Tax Liability**: **₹XX,XX,XXX** (₹XX.XX Lakh)
+- **Tax at Normal Slab Rates**: XXX
+- **Tax at Special Rates (12.5% on LTCG)**: XXX
+- **Surcharge**: **XXX**
+- **Health & Education Cess (4%)**: **XXX**
+- **Gross Tax Liability**: **XXX** (XXX.XX Lakh)
 
 #### C. Taxes Paid & Final Refund Calculation
-- **Total Taxes Paid (from Schedule TDS1 & TCS)**: **₹XX,XX,XXX**
-- **Net Refund Due**: **`₹XXX`**
+- **Total Taxes Paid (from Schedule TDS1 & TCS)**: **XXX**
+- **Net Refund Due**: **`₹440`**
 
 ## Disclosure Schedules
 
@@ -264,8 +270,8 @@ Schedule FA is a mandatory disclosure under the Black Money Act for any foreign 
 
 1. **Interactive Brokers LLC** (Country: United States)
    - **Account Open Date**: May 6, 2025
-   - **Peak Balance during Period**: **₹XX,XX,XXX** (`$XX,XXX.XX` converted at SBI TT Buying Rate of `XX.XX`)
-   - **Closing Balance as of Dec 31, 2025**: **₹XX,XX,XXX** (`$XX,XXX.XX` converted at SBI TT Buying Rate of `XX.XX`)
+   - **Peak Balance during Period**: **XXX** (`$XX,XXX.XX` converted at SBI TT Buying Rate of `XX.XX`)
+   - **Closing Balance as of Dec 31, 2025**: **XXX** (`$XX,XXX.XX` converted at SBI TT Buying Rate of `XX.XX`)
 
 2. **DriveWealth LLC** (Country: United States)
    - **Account Open Date**: Dec 7, 2024
@@ -276,9 +282,9 @@ Schedule FA is a mandatory disclosure under the Black Money Act for any foreign 
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
 - **Interest Acquiring Date**: May 7, 2025
-- **Initial Value of Investment**: **₹XX,XX,XXX**
-- **Peak Balance**: **₹XX,XX,XXX**
-- **Closing Balance (Dec 31, 2025)**: **₹XX,XX,XXX**
+- **Initial Value of Investment**: **XXX**
+- **Peak Balance**: **XXX**
+- **Closing Balance (Dec 31, 2025)**: **XXX**
 
 > **🌍 Interested in international investing?**  
 > For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated upcoming chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
@@ -304,22 +310,29 @@ A critical nuance is that the reporting basis is a mix depending on the asset cl
 #### Notes on Asset Reporting
 
 1. **Gold & Jewellery**: Although the schedule technically requires reporting at *acquisition cost*, I reported the **market value**. This is because a significant portion of the gold was received as gifts over time, meaning I do not have the original purchase bills to determine the historic cost.
-2. **NPS / EPF**: There is a lack of clarity and no explicit, appropriate field to report NPS or EPF balances in Schedule AL. Although I collected these numbers to understand my true net worth standing, they are omitted from the formal tax schedule.
+2. **PPF, NPS & EPF**: PPF goes under bank savings. However, there is no clarity or dedicated fields to report NPS or EPF balances in Schedule AL. Although I collected these numbers to understand my true net worth standing, they are omitted from the formal tax schedule.
 
-> **Key Takeaway**: Notice how foreign ETF holdings are disclosed in **Schedule FA for Calendar Year 2025** (peak `₹XX.XXL`), but in **Schedule AL for Financial Year end March 31, 2026**, they are reported at full year-end acquisition cost (**`₹XX.XXL`**) under Shares & Securities!
+> **Key Takeaway**: Notice how foreign ETF holdings are disclosed in **Schedule FA for Calendar Year 2025** (peak `XXX.XXL`), but in **Schedule AL for Financial Year end March 31, 2026**, they are reported at full year-end acquisition cost (**`XXX.XXL`**) under Shares & Securities!
+
+
+## 🎯 Tax Planning & Rebalancing
+
+A significant part of this year's filing success was the precise tax planning I did. By March end, I was doing a "hard rebalancing"—exiting actively managed funds and moving into passive ones, as well as buying Irish-domiciled NASDAQ 100 ETFs. 
+
+During this process, I intentionally utilized the Tax Collected at Source (TCS) on international remittances. I planned the routing such that the tax I had to pay as advance tax was fully covered by the TCS with some buffer. As a result of this exact calculation, my final computed tax refund was a precise **₹440**.
 
 ## 💡 Summary of Key Learnings
 
-1. **Exact Setoff Mechanics**: Short-Term Capital Loss (`-₹XX,XXX`) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
-2. **LRS TCS Offsets High Tax Liability**: Remittance TCS of `₹X,XX,XXX` collected by banks was fully absorbed against total tax liability (including surcharge), resulting in a clean refund of `₹XXX` instead of a large self-assessment tax payout.
-3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `₹XX.XXL`) aligns perfectly with Schedule AL year-end asset cost (`₹XX.XXL` in IBKR ETFs), maintaining 100% compliance across both schedules.
+1. **Exact Setoff Mechanics**: Short-Term Capital Loss (`-XXX`) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
+2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
+3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `XXX.XXL`) aligns perfectly with Schedule AL year-end asset cost (`XXX.XXL` in IBKR ETFs), maintaining 100% compliance across both schedules.
 
 ## 🧹 System Simplification for Next Year
 
 Documenting this entire process made me realize I want to drastically simplify my tax operating system for the next financial year. Here is the action plan:
 1. **Close NPS and PPF**: Reduce the number of accounts to track.
 2. **Consolidate Banks**: Close any not-in-use bank accounts.
-3. **Sell Direct Equities**: By selling direct equities, I completely remove the domestic dividend component, simplifying Schedule OS and reducing the number of entries in Schedule AL.
+3. **Exit Direct Equities**: I want to exit direct equity completely (except for some shares I got as an employee of Infosys back in 2013). This will remove the domestic dividend component, drastically simplifying Schedule OS and reducing the number of entries in Schedule AL.
 
 ## 🔗 Related Reading
 - [Using Form 12BAA to Reduce Cashflow Drag on International Investments](/building-wealth/blogs/2026/form-12baa-tcs-cashflow/)
