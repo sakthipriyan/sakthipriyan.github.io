@@ -41,6 +41,8 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 **Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
 
+> Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
+
 ## 🌳 System Overview
 
 Here is the exact data flow from raw income streams into ITR-2 schedules, leading to total tax computation and final tax credit reconciliation.
@@ -57,7 +59,7 @@ digraph IncomeTree {
   node [shape=box, style=filled, fillcolor="#ffffff", fontname="sans-serif", color="#333333", margin="0.2,0.1"];
   edge [color="#666666", penwidth=1.5];
   
-  Income [label="Income Streams (FY 2025-26)", shape=folder, fillcolor="#eef2f5"];
+  Income [label="Income Sources (FY 2025-26)", shape=folder, fillcolor="#eef2f5"];
   
   Salary [label="Salary Income", fillcolor="#e3f2fd"];
   Employer [label="Employer"];
@@ -95,7 +97,7 @@ digraph IncomeTree {
 
 </div>
 
-Beyond these one I have tax exempt interest income from provident funds such as EPF and PPF.
+Beyond these, I also have tax-exempt interest and growth from provident funds such as EPF, PPF, and NPS.
 
 ### Tax Credits
 
@@ -109,7 +111,7 @@ digraph TaxPayment {
   node [shape=box, style=filled, fillcolor="#ffffff", fontname="sans-serif", color="#333333", margin="0.2,0.1"];
   edge [color="#666666", penwidth=1.5];
   
-  IncomeTax [label="Income Tax", shape=folder, fillcolor="#eef2f5"];
+  IncomeTax [label="Tax Credits", shape=folder, fillcolor="#eef2f5"];
   
   SalaryTDS [label="Salary TDS", fillcolor="#e3f2fd"];
   Employer [label="Employer"];
