@@ -197,15 +197,15 @@ digraph AssetDisclosures {
 Need to download following documents for various sections required.
 I am organizing them into Google Drive and a Google Sheet for all computations. 
 
-| Source | Documents | Required For | How to Get Them |
-| :--- | :--- | :--- | :--- |
-| **IT Department** | • Form 26AS<br>• Annual Information Statement (AIS)<br>• Taxpayer Information Summary (TIS) | • Cross-verifying TDS, TCS, and overall income data | Login to Income Tax portal > e-File > Income Tax Returns > View Form 26AS. For AIS/TIS, go to Services > Annual Information Statement (AIS). |
-| **Employer** (Aqfer) | • Form 16 (Part A and Part B) | • **Schedule S** (Salary)<br>• **Schedule TDS1** (Employer TDS) | Download from employer's payroll portal or HR system. |
-| **Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | • **Schedule AL** (Bank balances)<br>• **Schedule OS** (Interest Income) | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
-| **Mutual Funds** (MFCentral) | • Capital Gains Statement | • **Schedule CG** (Realized gains/losses)<br>• **Schedule 112A** (LTCG) | Request capital gains statement from MFCentral. |
-| **Shares** (ICICI Direct) | • Holding Statement / Cost Basis (INFY, GOLDBEES, etc.) | • **Schedule AL** (Year-end acquisition cost) | Download from the broker website. *(Since there was no selling, only the cost basis till Mar 31 is required for Schedule AL).* |
-| **Foreign Investments** (IBKR) | • Flex Report (Breakdown by cash and stocks on every day)<br>• Activity Statement | • **Schedule FA** (Peak/Closing balances & Initial Investment)<br>• **Schedule AL** (Cost basis) | Login to IBKR Portal > Performance & Reports. Run **Flex Queries** from mid-2025 to Mar 31, 2026 for daily balances. Generate the **Activity Statement** to get lot-wise cost basis for Schedule AL and Schedule FA Initial Investment value. |
-| **EPF & NPS** | • Statements downloaded strictly for net-worth tracking | • **Not required**. (Personal net-worth tracking) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
+| Source / Entity | Documents | Required For |
+| :--- | :--- | :--- |
+| **IT Department** | Form 26AS, AIS, TIS | Cross-verifying all data |
+| **Employer** | Form 16 (Part A & B) | Schedule S, Schedule TDS1 |
+| **Banks** | Account Statements, Interest Certificates | Schedule AL, Schedule OS |
+| **Mutual Funds** | Capital Gains Statement (via MFCentral) | Schedule CG, Schedule 112A |
+| **Shares** (ICICI Direct) | Holding Statement / Cost Basis | Schedule AL |
+| **Foreign Investments** (IBKR) | Flex Report, Activity Statement | Schedule FA, Schedule AL |
+| **EPF & NPS** | Account Statements | N/A (Personal Net-Worth only) |
 
 ## Income Schedules
 
