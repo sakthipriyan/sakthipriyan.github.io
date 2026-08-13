@@ -23,7 +23,7 @@ js_tools:
 > 
 > Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.
 > 
-> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `<redacted>`.)*
+> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
 
 The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
 
@@ -216,10 +216,10 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 This is the most straightforward schedule. The numbers are pulled directly from Form 16, making it the simplest one to fill up. In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
 #### Key Breakdown
-- **Gross Salary**: **<redacted>** (Employer).
+- **Gross Salary**: **&lt;redacted&gt;** (Employer).
   - Includes basic salary, allowances, special perquisites, and minor ancillary payments like Hack Day Prizes.
 - **Standard Deduction (Sec 16ia)**: **75,000** (upgraded standard deduction limit).
-- **Total Income under Head Salaries**: **<redacted>**.
+- **Total Income under Head Salaries**: **&lt;redacted&gt;**.
 
 ### 2. Schedule OS <small>(Income from Other Sources)</small>
 
@@ -243,14 +243,14 @@ Another challenge was entering lot-level details for Section 112A. I used AI to 
 
 #### A. Short-Term Capital Loss (STCL) Setoff
 - **Equity MF Redemptions**: Consideration against acquisition cost.
-- **Realized STCL**: **<redacted>**.
+- **Realized STCL**: **&lt;redacted&gt;**.
 
 #### B. Long-Term Capital Gains (LTCG under Section 112A)
-- Total equity mutual fund sales proceeds: **<redacted>**.
-- Total cost of acquisition: **<redacted>**.
-- Gross LTCG: **<redacted>**.
-- **Setoff of STCL**: After setting off STCL (<redacted>) against LTCG, **Net Taxable LTCG = <redacted>**.
-- **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **<redacted>**.
+- Total equity mutual fund sales proceeds: **&lt;redacted&gt;**.
+- Total cost of acquisition: **&lt;redacted&gt;**.
+- Gross LTCG: **&lt;redacted&gt;**.
+- **Setoff of STCL**: After setting off STCL (&lt;redacted&gt;) against LTCG, **Net Taxable LTCG = &lt;redacted&gt;**.
+- **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **&lt;redacted&gt;**.
 
 ## Tax Schedules
 
@@ -259,26 +259,26 @@ The tax schedules were pretty much entirely auto-filled from the portal data. I 
 ### 1. Schedule TDS1 & TCS <small>(Taxes Paid)</small>
 
 These schedules aggregate all the taxes that have already been paid on your behalf:
-- **Employer Salary TDS (Schedule TDS1)**: **<redacted>** deducted and deposited by employer.
-- **LRS Remittance TCS (Schedule TCS)**: **<redacted>** collected and remitted by banks on foreign transfers.
+- **Employer Salary TDS (Schedule TDS1)**: **&lt;redacted&gt;** deducted and deposited by employer.
+- **LRS Remittance TCS (Schedule TCS)**: **&lt;redacted&gt;** collected and remitted by banks on foreign transfers.
 
 ### 2. Part B-TI & Part B-TTI <small>(Tax Refund Settlement)</small>
 
 #### A. Total Income Computation (Part B-TI)
-- **Salary Income**: <redacted>
-- **Income from Other Sources**: <redacted>
-- **Capital Gains (Special Rate 12.5%)**: <redacted>
-- **Gross Total Income (GTI) / Total Income**: **<redacted>**
+- **Salary Income**: &lt;redacted&gt;
+- **Income from Other Sources**: &lt;redacted&gt;
+- **Capital Gains (Special Rate 12.5%)**: &lt;redacted&gt;
+- **Gross Total Income (GTI) / Total Income**: **&lt;redacted&gt;**
 
 #### B. Tax Liability & Surcharge Breakdown (Part B-TTI)
-- **Tax at Normal Slab Rates**: <redacted>
-- **Tax at Special Rates (12.5% on LTCG)**: <redacted>
-- **Surcharge**: **<redacted>**
-- **Health & Education Cess (4%)**: **<redacted>**
-- **Gross Tax Liability**: **<redacted>**
+- **Tax at Normal Slab Rates**: &lt;redacted&gt;
+- **Tax at Special Rates (12.5% on LTCG)**: &lt;redacted&gt;
+- **Surcharge**: **&lt;redacted&gt;**
+- **Health & Education Cess (4%)**: **&lt;redacted&gt;**
+- **Gross Tax Liability**: **&lt;redacted&gt;**
 
 #### C. Taxes Paid & Final Refund Calculation
-- **Total Taxes Paid (from Schedule TDS1 & TCS)**: **<redacted>**
+- **Total Taxes Paid (from Schedule TDS1 & TCS)**: **&lt;redacted&gt;**
 - **Net Refund Due**: **<span style="color: green;">₹440</span>**
 
 ## Disclosure Schedules
@@ -295,8 +295,8 @@ I had to make two key decision points here:
 
 1. **Interactive Brokers LLC** (Country: United States)
    - **Account Open Date**: Mid 2025
-   - **Peak Balance during Period**: **<redacted>** ($<redacted> converted at SBI TT Buying Rate of <redacted>)
-   - **Closing Balance as of Dec 31, 2025**: **<redacted>** ($<redacted> converted at SBI TT Buying Rate of <redacted>)
+   - **Peak Balance during Period**: **&lt;redacted&gt;** ($&lt;redacted&gt; converted at SBI TT Buying Rate of &lt;redacted&gt;)
+   - **Closing Balance as of Dec 31, 2025**: **&lt;redacted&gt;** ($&lt;redacted&gt; converted at SBI TT Buying Rate of &lt;redacted&gt;)
 
 2. **DriveWealth LLC** (Country: United States)
    - **Account Open Date**: End 2024
@@ -325,9 +325,9 @@ This was much simpler since I only had 1 asset in the broker account (the ETF).
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
 - **Interest Acquiring Date**: Mid 2025
-- **Initial Value of Investment**: **<redacted>** *(Sum of lot-wise cost basis converted via SBI TT BUY rates)*
-- **Peak Balance**: **<redacted>** *(From Flex Query)*
-- **Closing Balance (Dec 31, 2025)**: **<redacted>** *(From Flex Query)*
+- **Initial Value of Investment**: **&lt;redacted&gt;** *(Sum of lot-wise cost basis converted via SBI TT BUY rates)*
+- **Peak Balance**: **&lt;redacted&gt;** *(From Flex Query)*
+- **Closing Balance (Dec 31, 2025)**: **&lt;redacted&gt;** *(From Flex Query)*
 
 
 
@@ -364,9 +364,9 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 
 ## 💡 Summary of Key Learnings
 
-1. **Exact Setoff Mechanics**: Short-Term Capital Loss (<redacted>) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
+1. **Exact Setoff Mechanics**: Short-Term Capital Loss (&lt;redacted&gt;) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
-3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak <redacted>) aligns perfectly with Schedule AL year-end asset cost (<redacted> in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
+3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak &lt;redacted&gt;) aligns perfectly with Schedule AL year-end asset cost (&lt;redacted&gt; in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
 
 ## 🧹 The Long-Term Simplification Goal
 
