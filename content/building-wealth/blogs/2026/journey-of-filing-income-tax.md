@@ -22,6 +22,8 @@ js_tools:
 > ⚖️ **Disclaimer: Not a Chartered Accountant (CA)**
 > 
 > Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.
+> 
+> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `<redacted>`.)*
 
 The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
 
@@ -227,13 +229,7 @@ All non-salary regular income is declared here. This schedule requires adding up
   - Reconciled across multiple savings accounts and domestic dividends received.
 - **Total Income under Schedule OS**: **~₹6,000**.
 
-#### Looking Ahead
 
-##### Reduce Dividend Tracking
-I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
-
-##### Minimize Bank Interest & Cash Drag
-I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time. To combat this, I am consciously moving spending to credit cards wherever possible, keeping the actual cash required to run the month very minimal. This is also a lesson learned from the past, where holding too much cash generated significant interest, leading to unexpected taxes and penalties for missing self-assessment advance tax payments.
 
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
@@ -247,13 +243,13 @@ Another challenge was entering lot-level details for Section 112A. I used AI to 
 
 #### A. Short-Term Capital Loss (STCL) Setoff
 - **Equity MF Redemptions**: Consideration against acquisition cost.
-- **Realized STCL**: **`<redacted>`**.
+- **Realized STCL**: **<redacted>**.
 
 #### B. Long-Term Capital Gains (LTCG under Section 112A)
 - Total equity mutual fund sales proceeds: **<redacted>**.
 - Total cost of acquisition: **<redacted>**.
 - Gross LTCG: **<redacted>**.
-- **Setoff of STCL**: After setting off STCL (`<redacted>`) against LTCG, **Net Taxable LTCG = <redacted>**.
+- **Setoff of STCL**: After setting off STCL (<redacted>) against LTCG, **Net Taxable LTCG = <redacted>**.
 - **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **<redacted>**.
 
 ## Tax Schedules
@@ -299,8 +295,8 @@ I had to make two key decision points here:
 
 1. **Interactive Brokers LLC** (Country: United States)
    - **Account Open Date**: Mid 2025
-   - **Peak Balance during Period**: **<redacted>** (`$<redacted>` converted at SBI TT Buying Rate of `<redacted>`)
-   - **Closing Balance as of Dec 31, 2025**: **<redacted>** (`$<redacted>` converted at SBI TT Buying Rate of `<redacted>`)
+   - **Peak Balance during Period**: **<redacted>** ($<redacted> converted at SBI TT Buying Rate of <redacted>)
+   - **Closing Balance as of Dec 31, 2025**: **<redacted>** ($<redacted> converted at SBI TT Buying Rate of <redacted>)
 
 2. **DriveWealth LLC** (Country: United States)
    - **Account Open Date**: End 2024
@@ -311,7 +307,10 @@ I had to make two key decision points here:
 
 I genuinely missed reporting this zero-balance account in the previous year's ITR, simply because I was not aware that a completely unused, zero-balance account still had to be disclosed. 
 
-Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign movable assets does not exceed ₹20 lakhs (effective **October 1, 2024**, via the Finance (No. 2) Act, 2024). Since my balance was exactly ₹0, I was protected from the draconian penalty, though the IT department still actively expects and encourages proper disclosure. 
+Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign movable assets does not exceed ₹20 lakhs (effective **October 1, 2024**, via the [Finance (No. 2) Act, 2024](https://incometaxindia.gov.in/communications/circular/circular-9-2024.pdf)). Since my balance was exactly ₹0, I was protected from the draconian penalty, though the IT department still actively expects and encourages proper disclosure. 
+
+> **🌍 Interested in international investing?**  
+> For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
 
 I initially thought of correcting the past omission by filing an Updated Return (ITR-U). However, based on my understanding of the ITR-U rules, you **cannot** file an ITR-U merely to update a disclosure in Schedule FA. An ITR-U is only permitted if it results in additional income and additional tax liability. I would have had to declare "fake" earnings and pay unnecessary tax just to fix a zero-balance disclosure! Consequently, I decided to simply report it correctly this year.
 
@@ -330,8 +329,7 @@ This was much simpler since I only had 1 asset in the broker account (the ETF).
 - **Peak Balance**: **<redacted>** *(From Flex Query)*
 - **Closing Balance (Dec 31, 2025)**: **<redacted>** *(From Flex Query)*
 
-> **🌍 Interested in international investing?**  
-> For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
+
 
 ### 2. Schedule AL <small>(Assets & Liabilities at Financial Year End — March 31, 2026)</small>
 
@@ -355,9 +353,7 @@ This schedule required a lot more work to get every entry precisely right. A cri
 #### Notes on Asset Reporting
 
 1. **Gold & Jewellery**: Although the schedule technically requires reporting at *acquisition cost*, I reported the **market value**. This is because a significant portion of the gold was received as gifts over time, meaning I do not have the original purchase bills to determine the historic cost. *(Note: What I did here is a pragmatic workaround; the strict technical rule expects reporting at the original acquisition cost of the previous owner).*
-2. **PPF, NPS & EPF**: PPF goes under bank savings. However, there is no clarity or dedicated fields to report NPS or EPF balances in Schedule AL. Although I collected these numbers to understand my true net worth standing, they are omitted from the formal tax schedule.
-
-> **Key Takeaway**: Notice how foreign ETF holdings are disclosed in **Schedule FA for Calendar Year 2025** (peak `<redacted>`), but in **Schedule AL for Financial Year end March 31, 2026**, they are reported at full year-end acquisition cost (**`<redacted>`**) under Shares & Securities!
+2. **PPF, NPS & EPF**: PPF goes under bank savings. However, there is no clarity or dedicated fields to report NPS balances in Schedule AL. Although I collected these numbers to understand my true net worth standing, they are omitted from the formal tax schedule.
 
 
 ## 🎯 Tax Planning & Rebalancing
@@ -368,16 +364,17 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 
 ## 💡 Summary of Key Learnings
 
-1. **Exact Setoff Mechanics**: Short-Term Capital Loss (`<redacted>`) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
+1. **Exact Setoff Mechanics**: Short-Term Capital Loss (<redacted>) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
-3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `<redacted>`) aligns perfectly with Schedule AL year-end asset cost (`<redacted>` in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
+3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak <redacted>) aligns perfectly with Schedule AL year-end asset cost (<redacted> in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
 
 ## 🧹 The Long-Term Simplification Goal
 
 Documenting this complex filing process has reinforced my desire to drastically simplify my tax and investment operating system. While it may take a while to fully execute due to lock-ins, I eventually want to exit three specific asset classes to reduce reporting overhead:
 1. **NPS**: Waiting to hit the minimum 5-year limit to exit.
 2. **PPF**: Waiting out the 15-year lock-in period.
-3. **Direct Shares**: I plan to exit all direct shares, except perhaps Gold (which remains cheaper to hold directly than via mutual funds).
+3. **Direct Shares (Dividend Tracking)**: I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
+4. **Bank Accounts (Interest & Cash Drag)**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag. I am consciously moving spending to credit cards to keep the actual cash required minimal.
 
 Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
 
