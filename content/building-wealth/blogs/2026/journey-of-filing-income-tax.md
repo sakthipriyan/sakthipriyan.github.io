@@ -32,16 +32,20 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 ## 📅 Filing Timeline & Process
 
-- **Date of Filing**: July 25, 2026 (Typically I file once I receive the Form 16 unlike this year)
-- **Date of Processing & Refund**: August 6, 2026
-- **Software Used**: The official Income Tax website was used directly for filling out the forms.
-- **Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
+| Date | Time | Event |
+| :--- | :--- | :--- |
+| **July 25, 2026** | - | Successfully filed ITR-2 on the official Income Tax portal. *(Typically I file once I receive the Form 16 unlike this year)* |
+| **August 6, 2026** | 6:47 AM | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund. |
+| **August 6, 2026** | 4:33 PM | Received SMS from SBI confirming ₹440 refund credited to the account. |
+| **August 10, 2026** | 7:42 PM | Received final "Your Refund has been credited" email. |
+
+**Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
 
 ## 🌳 System Overview
 
 Here is the exact data flow from raw income streams into ITR-2 schedules, leading to total tax computation and final tax credit reconciliation.
 
-### Income Tree
+### Income Sources
 
 This diagram breaks down the various income sources that make up your total income for the year.
 
@@ -90,6 +94,8 @@ digraph IncomeTree {
 ```
 
 </div>
+
+Beyond these one I have tax exempt interest income from provident funds such as EPF and PPF.
 
 ### Tax Credits
 
