@@ -339,9 +339,6 @@ Since total income exceeds a certain threshold (which changes over time), **Sche
 
 This schedule required a lot more work to get every entry precisely right. A critical nuance is that the reporting basis is a mix depending on the asset class: **Shares, Securities, and Real Estate** are reported at their historic **Acquisition Cost**, whereas liquid assets like **Bank Deposits and Cash** are reported at their **Exact Balance** on March 31.
 
-Getting acquisition costs for things like Gold is particularly challenging, as most of them are gifts and the exact historic cost is unknown.
-
-Finally, IBKR holdings also need to be included here, but crucially, using a **Financial Year end basis (March 31, 2026)** unlike the Calendar Year basis used in Schedule FA.
 
 | Asset Category | Reporting Basis | Breakdown / Notes |
 | :--- | :--- | :--- |
