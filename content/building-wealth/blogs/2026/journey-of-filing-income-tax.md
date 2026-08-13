@@ -41,12 +41,12 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 > Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
 
-### 🔍 Preparation, Filing & Review Workflow
+### 🔍 Preparation & Review Workflow
 
 - **Collect various documents** from multiple sources.
 - **Focus on individual sections** and fill them up one by one.
 - To fill up aggregated numbers, **compute them in Google Sheets** (Dual purpose: current year tracking and next year reference).
-- **Verify each section** with the help of AI Tools.
+- **Verify each section** manually and also with the help of AI Tools.
 - **Verify the overall JSON against previous year** (which reveals actual income growth, what we added new, what was removed, and how assets have grown compared to previous year).
 
 ## 🌳 System Overview
@@ -192,31 +192,19 @@ digraph AssetDisclosures {
 
 </div>
 
-## 📂 Documents Required & Downloaded
+## 📂 Documents Downloaded
 
-Before touching the ITR utility, you need a pristine set of source documents to cross-reconcile your numbers. I highly recommend creating a dedicated `FY 2025-26` folder to keep everything organized. 
+Need to download following documents for various sections required.
+I am organizing them into Google Drive and a Google Sheet for all computations. 
 
-Here is the exact folder structure and documents I downloaded to prepare for this filing:
-
-- **📁 IT Department**:
-  - Form 26AS
-  - Annual Information Statement (AIS) & Taxpayer Information Summary (TIS)
-- **📁 Aqfer** (Employer):
-  - Form 16 (Part A and Part B)
-- **📁 Banks (HDFC, ICICI, BoB)**:
-  - Bank Account Statements (for exact closing balances)
-  - Interest Certificates (for Schedule OS)
-- **📁 Mutual Funds & NSDL**:
-  - Consolidated Account Statements (CAS) from CAMS/KFintech for Mutual Funds
-  - NSDL CAS for Demat holdings (INFY, GOLDBEES, etc.)
-- **📁 IBKR (Foreign Investments)**:
-  - Annual Activity Statement (Calendar Year: Jan 1 – Dec 31) — *Required for Schedule FA*
-  - Annual Activity Statement (Financial Year: Apr 1 – Mar 31) — *Required for Schedule AL*
-- **📁 EPF & NPS**:
-  - Statements downloaded strictly for net-worth tracking (Schedule AL notes)
-
-**Working Excel Sheet**:  
-Alongside the source documents, I created a master reconciliation spreadsheet (`ITR2 - FY2025-26.xlsx`) to aggregate and double-check all the numbers before entering them into the official utility.
+| Source / Folder | Documents | How to Get Them |
+| :--- | :--- | :--- |
+| **📁 IT Department** | • Form 26AS<br>• Annual Information Statement (AIS) & Taxpayer Information Summary (TIS) | Login to Income Tax portal > e-File > Income Tax Returns > View Form 26AS. For AIS/TIS, go to Services > Annual Information Statement (AIS). |
+| **📁 Aqfer** (Employer) | • Form 16 (Part A and Part B) | Download from employer's payroll portal or HR system. |
+| **📁 Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
+| **📁 Mutual Funds & NSDL** | • Consolidated Account Statements (CAS) from CAMS/KFintech<br>• NSDL CAS for Demat holdings (INFY, GOLDBEES, etc.) | Request mutual fund CAS via camsonline.com or kfintech.com. For Demat, download the e-CAS from nsdlcas.nsdl.com. |
+| **📁 IBKR** (Foreign Investments) | • Annual Activity Statement (Calendar Year: Jan 1 – Dec 31) *(For Schedule FA)*<br>• Annual Activity Statement (Financial Year: Apr 1 – Mar 31) *(For Schedule AL)* | Login to IBKR Portal > Performance & Reports > Statements > Activity. Run two custom date ranges (Jan-Dec and Apr-Mar). |
+| **📁 EPF & NPS** | • Statements downloaded strictly for net-worth tracking (Schedule AL notes) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
 
 ## Income Schedules
 
