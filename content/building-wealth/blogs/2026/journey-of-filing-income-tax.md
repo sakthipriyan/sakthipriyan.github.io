@@ -197,15 +197,15 @@ digraph AssetDisclosures {
 Need to download following documents for various sections required.
 I am organizing them into Google Drive and a Google Sheet for all computations. 
 
-| Source | Documents | How to Get Them |
-| :--- | :--- | :--- |
-| **IT Department** | • Form 26AS<br>• Annual Information Statement (AIS) & Taxpayer Information Summary (TIS) | Login to Income Tax portal > e-File > Income Tax Returns > View Form 26AS. For AIS/TIS, go to Services > Annual Information Statement (AIS). |
-| **Employer** (Aqfer) | • Form 16 (Part A and Part B) | Download from employer's payroll portal or HR system. |
-| **Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
-| **Mutual Funds** | • Capital Gains Statement | Request capital gains statement from MFCentral. |
-| **Shares** | • Holding Statement / Cost Basis (INFY, GOLDBEES, etc.) | Download from the broker website. *(Since there was no selling, only the cost basis till Mar 31 is required for Schedule AL).* |
-| **Foreign Investments** (IBKR) | • Flex Report (Breakdown by cash and stocks on every day) | Login to IBKR Portal > Performance & Reports > Flex Queries. Since the account was opened in mid-2025, run it from mid-2025 to Mar 31, 2026. This single report handles both Schedule AL and Schedule FA computations. (Since I had only 1 ETF for this period) |
-| **EPF & NPS** | • Statements downloaded strictly for net-worth tracking (Schedule AL notes) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
+| Source | Documents | Required For | How to Get Them |
+| :--- | :--- | :--- | :--- |
+| **IT Department** | • Form 26AS<br>• Annual Information Statement (AIS)<br>• Taxpayer Information Summary (TIS) | Cross-verifying TDS, TCS, and overall income data. | Login to Income Tax portal > e-File > Income Tax Returns > View Form 26AS. For AIS/TIS, go to Services > Annual Information Statement (AIS). |
+| **Employer** (Aqfer) | • Form 16 (Part A and Part B) | **Schedule S** (Salary) and **Schedule TDS1** (Employer TDS). | Download from employer's payroll portal or HR system. |
+| **Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | **Schedule AL** (Bank balances) and **Schedule OS** (Interest Income). | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
+| **Mutual Funds** | • Capital Gains Statement | **Schedule CG** and **Schedule 112A** (Realized gains/losses). | Request capital gains statement from MFCentral. |
+| **Shares** | • Holding Statement / Cost Basis (INFY, GOLDBEES, etc.) | **Schedule AL** (Year-end holding acquisition cost). | Download from the broker website. *(Since there was no selling, only the cost basis till Mar 31 is required for Schedule AL).* |
+| **Foreign Investments** (IBKR) | • Flex Report (Breakdown by cash and stocks on every day) | **Schedule FA** (Peak/Closing balances) and **Schedule AL** (Cost basis). | Login to IBKR Portal > Performance & Reports > Flex Queries. Since the account was opened in mid-2025, run it from mid-2025 to Mar 31, 2026. This single report handles both Schedule AL and Schedule FA computations. (Since I had only 1 ETF for this period) |
+| **EPF & NPS** | • Statements downloaded strictly for net-worth tracking (Schedule AL notes) | Personal net-worth tracking (Omitted from formal schedules). | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
 
 ## Income Schedules
 
