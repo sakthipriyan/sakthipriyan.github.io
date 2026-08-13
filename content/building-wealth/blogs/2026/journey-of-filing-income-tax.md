@@ -197,13 +197,13 @@ digraph AssetDisclosures {
 Need to download following documents for various sections required.
 I am organizing them into Google Drive and a Google Sheet for all computations. 
 
-| Source / Folder | Documents | How to Get Them |
+| Source | Documents | How to Get Them |
 | :--- | :--- | :--- |
 | **📁 IT Department** | • Form 26AS<br>• Annual Information Statement (AIS) & Taxpayer Information Summary (TIS) | Login to Income Tax portal > e-File > Income Tax Returns > View Form 26AS. For AIS/TIS, go to Services > Annual Information Statement (AIS). |
 | **📁 Aqfer** (Employer) | • Form 16 (Part A and Part B) | Download from employer's payroll portal or HR system. |
 | **📁 Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
 | **📁 Mutual Funds & NSDL** | • Consolidated Account Statements (CAS) from CAMS/KFintech<br>• NSDL CAS for Demat holdings (INFY, GOLDBEES, etc.) | Request mutual fund CAS via camsonline.com or kfintech.com. For Demat, download the e-CAS from nsdlcas.nsdl.com. |
-| **📁 IBKR** (Foreign Investments) | • Annual Activity Statement (Calendar Year: Jan 1 – Dec 31) *(For Schedule FA)*<br>• Annual Activity Statement (Financial Year: Apr 1 – Mar 31) *(For Schedule AL)* | Login to IBKR Portal > Performance & Reports > Statements > Activity. Run two custom date ranges (Jan-Dec and Apr-Mar). |
+| **📁 IBKR** (Foreign Investments) | • Flex Report (Breakdown by cash and stocks on every day) | Login to IBKR Portal > Performance & Reports > Flex Queries. Since the account was opened in mid-2025, run it from mid-2025 to Mar 31, 2026. This single report handles both Schedule AL and Schedule FA computations. |
 | **📁 EPF & NPS** | • Statements downloaded strictly for net-worth tracking (Schedule AL notes) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
 
 ## Income Schedules
