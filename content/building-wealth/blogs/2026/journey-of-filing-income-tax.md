@@ -321,6 +321,8 @@ This was much simpler since I only had 1 asset in the broker account (the ETF).
 - To get the **Peak Balance** and **Closing Balance**, I just reused the exact same Flex Query report mentioned above. 
 - However, to compute the **Initial Value of Investment**, I had to generate a separate Activity Statement which gives the cost basis for every single lot, and then apply the respective SBI TT BUY rate to sum it all up into INR.
 
+**Reported Asset Details:**
+
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
 - **Interest Acquiring Date**: May 7, 2025
