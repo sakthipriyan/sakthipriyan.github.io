@@ -211,7 +211,7 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 
 ### 1. Schedule S <small>(Schedule Salary)</small>
 
-In the New Tax Regime (Section 115BAC), salary computation is streamlined:
+This is the most straightforward schedule. The numbers are pulled directly from Form 16, making it the simplest one to fill up. In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
 #### Key Breakdown
 - **Gross Salary**: **XXX** (Employer).
@@ -221,7 +221,7 @@ In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
 ### 2. Schedule OS <small>(Income from Other Sources)</small>
 
-All non-salary regular income is declared here:
+All non-salary regular income is declared here. This schedule requires adding up the individual details and comparing them against the AIS/TIS to ensure no mismatches.
 
 - **Interest from Savings Bank Accounts & Dividends**: **~₹6,000**
   - Reconciled across multiple savings accounts and domestic dividends received.
@@ -229,9 +229,17 @@ All non-salary regular income is declared here:
 
 *(Note: PPF interest of XXX earned during the year is tax-exempt under Section 10(11) and noted separately).*
 
+> **Looking Ahead**: I actually want to remove this dividend part altogether by exiting individual domestic stocks entirely. I also plan to minimize the number of bank accounts I hold to drastically reduce the reconciliation overhead here.
+
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
-The capital gains schedule reconciles realized redemptions across equity mutual funds and stocks:
+This schedule reconciles realized redemptions across equity mutual funds and stocks. This was my first time doing an STCL (Short-Term Capital Loss) setoff, and I had to take help from AI to figure out how it has to be broken down by various time periods. 
+
+An interesting discovery that took a while to figure out: if you have an STCL, you don't report it at an individual breakup level. I initially tried entering positive/negative numbers for STCG and the portal wasn't allowing negative values. It turns out, STCL is just automatically adjusted against LTCG.
+
+Another challenge was entering lot-level details for Section 112A. I used AI to create a working CSV file that could be successfully uploaded to the portal. 
+
+*Quirk*: The portal validation didn't allow decimal values (paise) and forced rounding up. There was a ₹4 total difference. Interestingly, when the ITR intimation came in, they showed the total correctly including this difference! So internally, they sum up with paise but don't allow us to enter them. Either way, it didn't impact the final outcome.
 
 #### A. Short-Term Capital Loss (STCL) Setoff
 - **Equity MF Redemptions**: Consideration against acquisition cost.
@@ -245,6 +253,8 @@ The capital gains schedule reconciles realized redemptions across equity mutual 
 - **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **XXX**.
 
 ## Tax Schedules
+
+The tax schedules were pretty much entirely auto-filled from the portal data. I just reviewed them to ensure everything matched my computations.
 
 ### 1. Schedule TDS1 & TCS <small>(Taxes Paid)</small>
 
@@ -275,7 +285,11 @@ These schedules aggregate all the taxes that have already been paid on your beha
 
 ### 1. Schedule FA <small>(Foreign Assets — Calendar Year 2025)</small>
 
-Schedule FA is a mandatory disclosure under the Black Money Act for any foreign account held during the **Calendar Year (Jan 1, 2025 – Dec 31, 2025)**.
+This is my first time doing Schedule FA, so it took me more time to understand all the intricate details. Schedule FA is a mandatory disclosure under the Black Money Act for any foreign account held during the **Calendar Year (Jan 1, 2025 – Dec 31, 2025)**.
+
+I had to make two key decision points here:
+1. **Reporting Level**: For Table A2, I chose to report the full broker account-level details. (Some sources/tools suggest reporting only the cash balance, but I decided to be comprehensive).
+2. **Peak Balance Computation**: To compute the peak balance, I found the peak USD balance and then converted that into INR using the SBI TT BUY rate. (I actually cloned a tool earlier to parse SBI rate PDFs and generate a yearly JSON for this exact purpose). Some suggest just doing a direct peak balance in INR based on daily spot rates, which I think is incorrect.
 
 #### Table A2: Details of Foreign Custodial Accounts
 
@@ -290,6 +304,8 @@ Schedule FA is a mandatory disclosure under the Black Money Act for any foreign 
 
 #### Table A3: Details of Foreign Equity and Debt Interest
 
+This was much simpler since I only had 1 asset in the broker account (the ETF). I reused the exact same activity statement.
+
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
 - **Interest Acquiring Date**: May 7, 2025
@@ -298,13 +314,17 @@ Schedule FA is a mandatory disclosure under the Black Money Act for any foreign 
 - **Closing Balance (Dec 31, 2025)**: **XXX**
 
 > **🌍 Interested in international investing?**  
-> For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated upcoming chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
+> For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
 
 ### 2. Schedule AL <small>(Assets & Liabilities at Financial Year End — March 31, 2026)</small>
 
 Since total income exceeds a certain threshold (which changes over time), **Schedule AL** requires reporting all domestic and foreign assets held as of **March 31, 2026**. 
 
-A critical nuance is that the reporting basis is a mix depending on the asset class: **Shares, Securities, and Real Estate** are reported at their historic **Acquisition Cost**, whereas liquid assets like **Bank Deposits and Cash** are reported at their **Exact Balance** on March 31.
+This schedule required a lot more work to get every entry precisely right. A critical nuance is that the reporting basis is a mix depending on the asset class: **Shares, Securities, and Real Estate** are reported at their historic **Acquisition Cost**, whereas liquid assets like **Bank Deposits and Cash** are reported at their **Exact Balance** on March 31.
+
+Getting acquisition costs for things like Gold is particularly challenging, as most of them are gifts and the exact historic cost is unknown.
+
+Finally, IBKR holdings also need to be included here, but crucially, using a **Financial Year end basis (March 31, 2026)** unlike the Calendar Year basis used in Schedule FA.
 
 | Asset Category | Reporting Basis | Breakdown / Notes |
 | :--- | :--- | :--- |
