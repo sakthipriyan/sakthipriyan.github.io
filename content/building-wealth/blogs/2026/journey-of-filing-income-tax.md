@@ -227,9 +227,9 @@ All non-salary regular income is declared here. This schedule requires adding up
   - Reconciled across multiple savings accounts and domestic dividends received.
 - **Total Income under Schedule OS**: **~₹6,000**.
 
-> **Looking Ahead**: 
-> - **Eliminate Dividend Tracking**: I plan to remove this dividend part altogether by exiting individual domestic stocks entirely.
-> - **Minimize Bank Interest & Cash Drag**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time.
+**Looking Ahead**: 
+- **Reduce Dividend Tracking**: I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
+- **Minimize Bank Interest & Cash Drag**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time.
 
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
