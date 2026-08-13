@@ -375,12 +375,6 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
 3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `XXX`) aligns perfectly with Schedule AL year-end asset cost (`XXX` in IBKR ETFs), maintaining 100% compliance across both schedules.
 
-## 🧹 System Simplification for Next Year
-
-Documenting this entire process made me realize I want to drastically simplify my tax operating system for the next financial year. Here is the action plan:
-1. **Close NPS and PPF**: Reduce the number of accounts to track.
-2. **Consolidate Banks**: Close any not-in-use bank accounts.
-3. **Exit Direct Equities**: I want to exit direct equity completely (except for some shares I got as an employee of Infosys back in 2013). This will remove the domestic dividend component, drastically simplifying Schedule OS and reducing the number of entries in Schedule AL.
 
 ## 🔗 Related Reading
 - [Using Form 12BAA to Reduce Cashflow Drag on International Investments](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/)
