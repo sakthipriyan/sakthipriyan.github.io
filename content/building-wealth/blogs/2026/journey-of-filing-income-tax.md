@@ -34,14 +34,14 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 | Date/Time | Event |
 | :--- | :--- |
-| **Jul 25, 2026 21:48** | Successfully filed and received "Confirmation on e-Verification of Income Tax Return".<br>*(Typically I file once I receive the Form 16 unlike this year)* |
-| **Aug 6, 2026 06:47** | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund. |
+| **Jul 25, 2026 21:48** | Successfully filed and received "Confirmation on e-Verification of Income Tax Return".<br/>*(Typically I file once I receive the Form 16 unlike this year)* |
+| **Aug 6, 2026 06:47** | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund.<br/>*(Exact refund amount as filed)* |
 | **Aug 6, 2026 16:33** | Received SMS from SBI confirming ₹440 refund credited to the account. |
 | **Aug 10, 2026 19:42** | Received final "Your Refund has been credited" email. |
 
-**Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
-
 > Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
+
+**Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
 
 ## 🌳 System Overview
 
@@ -65,33 +65,37 @@ digraph IncomeTree {
   Employer [label="Employer"];
   Aqfer [label="Aqfer"];
   
-  Dividends [label="Dividends", fillcolor="#e8f5e9"];
-  DomesticShares [label="Domestic Shares"];
-  ICICIDirect [label="INFY, GOLDBEES, etc."];
+  CapitalGains [label="Capital Gains\n(STCL/LTCG u/s 112A)", fillcolor="#ffebee"];
+  MutualFunds [label="Mutual Funds"];
+  AMCs [label="Axis, HDFC, ICICI Prudential,\nKotak, Nippon, Quant"];
   
   Interest [label="Interest Income", fillcolor="#fff8e1"];
   SavingsAccount [label="Savings Account"];
   Banks [label="HDFC, ICICI, Axis"];
   
-  CapitalGains [label="Capital Gains\n(STCL/LTCG u/s 112A)", fillcolor="#ffebee"];
-  MutualFunds [label="Mutual Funds"];
-  AMCs [label="Axis, HDFC, ICICI Prudential,\nKotak, Nippon, Quant"];
+  Dividends [label="Dividends", fillcolor="#e8f5e9"];
+  DomesticShares [label="Domestic Shares"];
+  ICICIDirect [label="INFY, GOLDBEES, etc."];
   
   Salary -> Income;
   Employer -> Salary;
   Aqfer -> Employer;
   
-  Dividends -> Income;
-  DomesticShares -> Dividends;
-  ICICIDirect -> DomesticShares;
+  CapitalGains -> Income;
+  MutualFunds -> CapitalGains;
+  AMCs -> MutualFunds;
   
   Interest -> Income;
   SavingsAccount -> Interest;
   Banks -> SavingsAccount;
   
-  CapitalGains -> Income;
-  MutualFunds -> CapitalGains;
-  AMCs -> MutualFunds;
+  Dividends -> Income;
+  DomesticShares -> Dividends;
+  ICICIDirect -> DomesticShares;
+  
+  // Force vertical ordering
+  { rank=same; Salary; CapitalGains; Interest; Dividends; }
+  Salary -> CapitalGains -> Interest -> Dividends [style=invis];
 }
 ```
 
