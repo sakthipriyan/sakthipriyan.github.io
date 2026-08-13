@@ -41,7 +41,13 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 > Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
 
-**Review Process**: I took help from various AI tools to review the prepared returns. I also downloaded the JSON and compared it with the previous year's JSON to verify if I was missing anything.
+### 🔍 Review Process
+
+- **Collect various documents** from multiple sources.
+- **Focus on individual sections** and fill them up one by one.
+- To fill up aggregated numbers, **compute them in Google Sheets** (Dual purpose: current year tracking and next year reference).
+- **Verify each section** with the help of AI Tools.
+- **Verify the overall JSON against previous year** (which reveals actual income growth, what we added new, what was removed, and how assets have grown compared to previous year).
 
 ## 🌳 System Overview
 
@@ -59,7 +65,7 @@ digraph IncomeTree {
   node [shape=box, style=filled, fillcolor="#ffffff", fontname="sans-serif", color="#333333", margin="0.2,0.1"];
   edge [color="#666666", penwidth=1.5];
   
-  Income [label="Income Sources (FY 2025-26)", shape=folder, fillcolor="#eef2f5"];
+  Income [label="Income Sources", shape=folder, fillcolor="#eef2f5"];
   
   Salary [label="Salary Income", fillcolor="#e3f2fd"];
   Employer [label="Employer"];
