@@ -203,8 +203,8 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 | **Employer** | Form 16 (Part A & B) | Schedule S, Schedule TDS1 |
 | **Banks** | Account Statements, Interest Certificates | Schedule AL, Schedule OS |
 | **Mutual Funds** | Capital Gains Statement (via MFCentral) | Schedule CG, Schedule 112A |
-| **Shares** (ICICI Direct) | Holding Statement / Cost Basis | Schedule AL |
-| **Foreign Investments** (IBKR) | Flex Report, Activity Statement | Schedule FA, Schedule AL |
+| **Shares** | Holding Statement / Cost Basis (ICICI Direct) | Schedule AL |
+| **Foreign Investments** | Flex Report, Activity Statement (IBKR) | Schedule FA, Schedule AL |
 | **EPF & NPS** | Account Statements | N/A (Personal Net-Worth only) |
 
 ## Income Schedules
