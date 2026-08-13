@@ -13,7 +13,7 @@ wealth_tags:
   - Capital Gains
   - Foreign Assets
   - Financial Systems
-summary: "A line-by-line breakdown of filing ITR-2 for FY 2025-26 — backtracking every schedule from Salary (Sched S) to Other Sources (Sched OS), Capital Gains (Sched CG & 112A), Foreign Assets (Sched FA), Assets & Liabilities (Sched AL), and TCS tax credit setoff."
+summary: "A schedule-by-schedule reconstruction of my actual ITR-2 filing for FY 2025-26 — backtracking every schedule from Salary (Sched S) to Other Sources (Sched OS), Capital Gains (Sched CG & 112A), Foreign Assets (Sched FA), Assets & Liabilities (Sched AL), and TCS tax credit setoff."
 js_tools:
   - d2
   - viz
@@ -27,7 +27,7 @@ The goal of this post is to document exactly what I have done to simplify my own
 
 Filing Income Tax Returns (ITR-2) for **Financial Year 2025–26 (Assessment Year 2026–27)** requires an exact, schedule-by-schedule reconciliation when you manage salary, domestic mutual funds, real estate, bank deposits, LRS remittances, and foreign assets like Irish-domiciled UCITS ETFs via Interactive Brokers (IBKR).
 
-Rather than high-level generalizations, this post **backtracks each section of the filed ITR-2 return line-by-line**, demonstrating how every income head is computed, how special tax rates apply, how foreign assets are disclosed across **Schedule FA** (Calendar Year) and **Schedule AL** (Financial Year), and how Tax Collected at Source (TCS) offsets tax liability.
+Rather than high-level generalizations, this post **backtracks each section of the filed ITR-2 return schedule-by-schedule**, demonstrating how every income head is computed, how special tax rates apply, how foreign assets are disclosed across **Schedule FA** (Calendar Year) and **Schedule AL** (Financial Year), and how Tax Collected at Source (TCS) offsets tax liability.
 
 
 ## 📅 Filing Timeline & Process
@@ -214,10 +214,10 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 This is the most straightforward schedule. The numbers are pulled directly from Form 16, making it the simplest one to fill up. In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
 #### Key Breakdown
-- **Gross Salary**: **XXX** (Employer).
+- **Gross Salary**: **<redacted>** (Employer).
   - Includes basic salary, allowances, special perquisites, and minor ancillary payments like Hack Day Prizes.
 - **Standard Deduction (Sec 16ia)**: **75,000** (upgraded standard deduction limit).
-- **Total Income under Head Salaries**: **XXX**.
+- **Total Income under Head Salaries**: **<redacted>**.
 
 ### 2. Schedule OS <small>(Income from Other Sources)</small>
 
@@ -239,7 +239,7 @@ I aim to reduce bank interest income further. Keeping excess cash in the bank no
 
 This schedule reconciles realized redemptions across equity mutual funds and stocks. This was my first time doing an STCL (Short-Term Capital Loss) setoff, and I had to take help from AI to figure out how it has to be broken down by various time periods. 
 
-An interesting discovery that took a while to figure out: if you have an STCL, you don't report it at an individual breakup level. I initially tried entering positive/negative numbers for STCG and the portal wasn't allowing negative values. It turns out, STCL is just automatically adjusted against LTCG.
+An interesting discovery that took a while to figure out: if you have an STCL, you don't report it at an individual breakup level. I initially tried entering positive/negative numbers for STCG and the portal wasn't allowing negative values. In my experience on the portal, STCL was automatically adjusted against LTCG.
 
 Another challenge was entering lot-level details for Section 112A. I used AI to create a working CSV file that could be successfully uploaded to the portal. 
 
@@ -247,14 +247,14 @@ Another challenge was entering lot-level details for Section 112A. I used AI to 
 
 #### A. Short-Term Capital Loss (STCL) Setoff
 - **Equity MF Redemptions**: Consideration against acquisition cost.
-- **Realized STCL**: **`-XXX`**.
+- **Realized STCL**: **`<redacted>`**.
 
 #### B. Long-Term Capital Gains (LTCG under Section 112A)
-- Total equity mutual fund sales proceeds: **XXX**.
-- Total cost of acquisition: **XXX**.
-- Gross LTCG: **XXX**.
-- **Setoff of STCL**: After setting off STCL (`-XXX`) against LTCG, **Net Taxable LTCG = XXX**.
-- **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **XXX**.
+- Total equity mutual fund sales proceeds: **<redacted>**.
+- Total cost of acquisition: **<redacted>**.
+- Gross LTCG: **<redacted>**.
+- **Setoff of STCL**: After setting off STCL (`<redacted>`) against LTCG, **Net Taxable LTCG = <redacted>**.
+- **Special Tax Rate (Schedule SI)**: Taxed at the special rate of **12.5%** = **<redacted>**.
 
 ## Tax Schedules
 
@@ -263,26 +263,26 @@ The tax schedules were pretty much entirely auto-filled from the portal data. I 
 ### 1. Schedule TDS1 & TCS <small>(Taxes Paid)</small>
 
 These schedules aggregate all the taxes that have already been paid on your behalf:
-- **Employer Salary TDS (Schedule TDS1)**: **XXX** deducted and deposited by employer.
-- **LRS Remittance TCS (Schedule TCS)**: **XXX** collected and remitted by banks on foreign transfers.
+- **Employer Salary TDS (Schedule TDS1)**: **<redacted>** deducted and deposited by employer.
+- **LRS Remittance TCS (Schedule TCS)**: **<redacted>** collected and remitted by banks on foreign transfers.
 
 ### 2. Part B-TI & Part B-TTI <small>(Tax Refund Settlement)</small>
 
 #### A. Total Income Computation (Part B-TI)
-- **Salary Income**: XXX
-- **Income from Other Sources**: XXX
-- **Capital Gains (Special Rate 12.5%)**: XXX
-- **Gross Total Income (GTI) / Total Income**: **XXX** (₹X.XX Crore)
+- **Salary Income**: <redacted>
+- **Income from Other Sources**: <redacted>
+- **Capital Gains (Special Rate 12.5%)**: <redacted>
+- **Gross Total Income (GTI) / Total Income**: **<redacted>**
 
 #### B. Tax Liability & Surcharge Breakdown (Part B-TTI)
-- **Tax at Normal Slab Rates**: XXX
-- **Tax at Special Rates (12.5% on LTCG)**: XXX
-- **Surcharge**: **XXX**
-- **Health & Education Cess (4%)**: **XXX**
-- **Gross Tax Liability**: **XXX** (XXX.XX Lakh)
+- **Tax at Normal Slab Rates**: <redacted>
+- **Tax at Special Rates (12.5% on LTCG)**: <redacted>
+- **Surcharge**: **<redacted>**
+- **Health & Education Cess (4%)**: **<redacted>**
+- **Gross Tax Liability**: **<redacted>**
 
 #### C. Taxes Paid & Final Refund Calculation
-- **Total Taxes Paid (from Schedule TDS1 & TCS)**: **XXX**
+- **Total Taxes Paid (from Schedule TDS1 & TCS)**: **<redacted>**
 - **Net Refund Due**: **<span style="color: green;">₹440</span>**
 
 ## Disclosure Schedules
@@ -299,8 +299,8 @@ I had to make two key decision points here:
 
 1. **Interactive Brokers LLC** (Country: United States)
    - **Account Open Date**: Mid 2025
-   - **Peak Balance during Period**: **XXX** (`$XXX` converted at SBI TT Buying Rate of `XX.XX`)
-   - **Closing Balance as of Dec 31, 2025**: **XXX** (`$XXX` converted at SBI TT Buying Rate of `XX.XX`)
+   - **Peak Balance during Period**: **<redacted>** (`$<redacted>` converted at SBI TT Buying Rate of `<redacted>`)
+   - **Closing Balance as of Dec 31, 2025**: **<redacted>** (`$<redacted>` converted at SBI TT Buying Rate of `<redacted>`)
 
 2. **DriveWealth LLC** (Country: United States)
    - **Account Open Date**: End 2024
@@ -311,9 +311,9 @@ I had to make two key decision points here:
 
 I genuinely missed reporting this zero-balance account in the previous year's ITR, simply because I was not aware that a completely unused, zero-balance account still had to be disclosed. 
 
-Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign bank accounts does not exceed ₹5 lakhs (this exemption limit was increased to ₹20 lakhs for all movable assets effective **October 1, 2024**, via the Finance (No. 2) Act, 2024). Since my balance was exactly ₹0, I was safely exempt from the draconian penalty. 
+Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign movable assets does not exceed ₹20 lakhs (effective **October 1, 2024**, via the Finance (No. 2) Act, 2024). Since my balance was exactly ₹0, I was protected from the draconian penalty, though the IT department still actively expects and encourages proper disclosure. 
 
-I initially thought of correcting the past omission by filing an Updated Return (ITR-U). However, under income tax rules, you **cannot** file an ITR-U merely to update a disclosure in Schedule FA. An ITR-U is only permitted if it results in additional income and additional tax liability. I would have had to declare "fake" earnings and pay unnecessary tax just to fix a zero-balance disclosure! Consequently, I decided to simply report it correctly this year.
+I initially thought of correcting the past omission by filing an Updated Return (ITR-U). However, based on my understanding of the ITR-U rules, you **cannot** file an ITR-U merely to update a disclosure in Schedule FA. An ITR-U is only permitted if it results in additional income and additional tax liability. I would have had to declare "fake" earnings and pay unnecessary tax just to fix a zero-balance disclosure! Consequently, I decided to simply report it correctly this year.
 
 #### Table A3: Details of Foreign Equity and Debt Interest
 
@@ -326,9 +326,9 @@ This was much simpler since I only had 1 asset in the broker account (the ETF).
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
 - **Interest Acquiring Date**: Mid 2025
-- **Initial Value of Investment**: **XXX** *(Sum of lot-wise cost basis converted via SBI TT BUY rates)*
-- **Peak Balance**: **XXX** *(From Flex Query)*
-- **Closing Balance (Dec 31, 2025)**: **XXX** *(From Flex Query)*
+- **Initial Value of Investment**: **<redacted>** *(Sum of lot-wise cost basis converted via SBI TT BUY rates)*
+- **Peak Balance**: **<redacted>** *(From Flex Query)*
+- **Closing Balance (Dec 31, 2025)**: **<redacted>** *(From Flex Query)*
 
 > **🌍 Interested in international investing?**  
 > For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
@@ -354,10 +354,10 @@ This schedule required a lot more work to get every entry precisely right. A cri
 
 #### Notes on Asset Reporting
 
-1. **Gold & Jewellery**: Although the schedule technically requires reporting at *acquisition cost*, I reported the **market value**. This is because a significant portion of the gold was received as gifts over time, meaning I do not have the original purchase bills to determine the historic cost.
+1. **Gold & Jewellery**: Although the schedule technically requires reporting at *acquisition cost*, I reported the **market value**. This is because a significant portion of the gold was received as gifts over time, meaning I do not have the original purchase bills to determine the historic cost. *(Note: What I did here is a pragmatic workaround; the strict technical rule expects reporting at the original acquisition cost of the previous owner).*
 2. **PPF, NPS & EPF**: PPF goes under bank savings. However, there is no clarity or dedicated fields to report NPS or EPF balances in Schedule AL. Although I collected these numbers to understand my true net worth standing, they are omitted from the formal tax schedule.
 
-> **Key Takeaway**: Notice how foreign ETF holdings are disclosed in **Schedule FA for Calendar Year 2025** (peak `XXX.XX`), but in **Schedule AL for Financial Year end March 31, 2026**, they are reported at full year-end acquisition cost (**`XXX.XX`**) under Shares & Securities!
+> **Key Takeaway**: Notice how foreign ETF holdings are disclosed in **Schedule FA for Calendar Year 2025** (peak `<redacted>`), but in **Schedule AL for Financial Year end March 31, 2026**, they are reported at full year-end acquisition cost (**`<redacted>`**) under Shares & Securities!
 
 
 ## 🎯 Tax Planning & Rebalancing
@@ -368,9 +368,9 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 
 ## 💡 Summary of Key Learnings
 
-1. **Exact Setoff Mechanics**: Short-Term Capital Loss (`-XXX`) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
+1. **Exact Setoff Mechanics**: Short-Term Capital Loss (`<redacted>`) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
-3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `XXX`) aligns perfectly with Schedule AL year-end asset cost (`XXX` in IBKR ETFs), maintaining 100% compliance across both schedules.
+3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `<redacted>`) aligns perfectly with Schedule AL year-end asset cost (`<redacted>` in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
 
 ## 🧹 The Long-Term Simplification Goal
 
