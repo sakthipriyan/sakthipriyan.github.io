@@ -229,7 +229,7 @@ All non-salary regular income is declared here. This schedule requires adding up
 
 **Looking Ahead**: 
 - **Reduce Dividend Tracking**: I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
-- **Minimize Bank Interest & Cash Drag**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time.
+- **Minimize Bank Interest & Cash Drag**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time. To combat this, I am consciously moving spending to credit cards wherever possible, keeping the actual cash required to run the month very minimal. This is also a lesson learned from the past, where holding too much cash generated significant interest, leading to unexpected taxes and penalties for missing self-assessment advance tax payments.
 
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
