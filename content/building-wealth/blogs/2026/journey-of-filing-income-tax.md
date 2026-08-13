@@ -372,6 +372,15 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
 3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `XXX`) aligns perfectly with Schedule AL year-end asset cost (`XXX` in IBKR ETFs), maintaining 100% compliance across both schedules.
 
+## 🧹 The Long-Term Simplification Goal
+
+Documenting this complex filing process has reinforced my desire to drastically simplify my tax and investment operating system. While it may take a while to fully execute due to lock-ins, I eventually want to exit three specific asset classes to reduce reporting overhead:
+1. **NPS**: Waiting to hit the minimum 5-year limit to exit.
+2. **PPF**: Waiting out the 15-year lock-in period.
+3. **Direct Shares**: I plan to exit all direct shares, except perhaps Gold (which remains cheaper to hold directly than via mutual funds).
+
+Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
+
 
 ## 🔗 Related Reading
 - [Using Form 12BAA to Reduce Cashflow Drag on International Investments](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/)
