@@ -34,7 +34,7 @@ Rather than high-level generalizations, this post **backtracks each section of t
 
 | Date/Time | Event |
 | :--- | :--- |
-| **Jul 25, 2026 21:48** | Successfully filed and received "Confirmation on e-Verification of Income Tax Return". *(Typically I file once I receive the Form 16 unlike this year)* |
+| **Jul 25, 2026 21:48** | Successfully filed and received "Confirmation on e-Verification of Income Tax Return".<br>*(Typically I file once I receive the Form 16 unlike this year)* |
 | **Aug 6, 2026 06:47** | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund. |
 | **Aug 6, 2026 16:33** | Received SMS from SBI confirming ₹440 refund credited to the account. |
 | **Aug 10, 2026 19:42** | Received final "Your Refund has been credited" email. |
