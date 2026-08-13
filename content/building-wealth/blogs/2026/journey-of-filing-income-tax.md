@@ -365,7 +365,7 @@ Finally, IBKR holdings also need to be included here, but crucially, using a **F
 
 A significant part of this year's filing success was the precise tax planning I did. By March end, I was doing a "[hard rebalancing](/building-wealth/slides/red-days-productive-days-portfolio-reset/)" ([watch video](/building-wealth/videos/red-days-productive-days-portfolio-reset/))—exiting actively managed funds and moving into passive ones, as well as buying Irish-domiciled NASDAQ 100 ETFs. 
 
-During this process, I intentionally utilized the Tax Collected at Source (TCS) on international remittances. I planned the routing such that the tax I had to pay as advance tax was fully covered by the TCS with some buffer. As a result of this exact calculation, my final computed tax refund was a precise **₹440**.
+During this process, I intentionally utilized the Tax Collected at Source (TCS) on international remittances. I planned the routing such that the tax I had to pay as advance tax was fully covered by the TCS, intentionally including some extra buffer to safely account for any unforeseen dividends and bank interests. My goal was to land a low 4-digit tax refund (to avoid falling short and paying penalties). Ultimately, managing to get it all the way down to a 3-digit refund of precisely **₹440** proved that this was a very successful and highly accurate calculation!
 
 ## 💡 Summary of Key Learnings
 
