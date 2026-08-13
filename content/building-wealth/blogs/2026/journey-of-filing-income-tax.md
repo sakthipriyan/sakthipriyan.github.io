@@ -49,7 +49,7 @@ Here is the exact data flow from raw income streams into ITR-2 schedules, leadin
 
 ### Income Sources
 
-This diagram breaks down the various income sources that make up your total income for the year.
+This diagram breaks down the various income sources that make up my total income for the year.
 
 <div style="margin: 0 auto; text-align: center;">
 
@@ -97,11 +97,11 @@ digraph IncomeTree {
 
 </div>
 
-Beyond these, I also have tax-exempt interest and growth from provident funds such as EPF, PPF, and NPS.
+Beyond these, I also have tax-exempt interest and growth from retirement products such as EPF, PPF, and NPS.
 
 ### Tax Credits
 
-This diagram illustrates how your total tax liability is offset by your tax credits like TDS and TCS.
+This diagram illustrates how your total tax liability is offset by my tax credits like TDS and TCS.
 
 <div style="max-width: 70%; margin: 0 auto; text-align: center;">
 
@@ -173,6 +173,10 @@ digraph AssetDisclosures {
   MovableAssets -> ScheduleAL;
   FinancialMovable -> MovableAssets;
   PhysicalMovable -> MovableAssets;
+  
+  // Force FA to be rendered above AL
+  { rank=same; ScheduleFA; ScheduleAL; }
+  ScheduleFA -> ScheduleAL [style=invis];
 }
 ```
 
