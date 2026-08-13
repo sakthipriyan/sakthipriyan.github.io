@@ -325,7 +325,7 @@ This was much simpler since I only had 1 asset in the broker account (the ETF).
 
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
-- **Interest Acquiring Date**: May 7, 2025
+- **Interest Acquiring Date**: Mid 2025
 - **Initial Value of Investment**: **XXX** *(Sum of lot-wise cost basis converted via SBI TT BUY rates)*
 - **Peak Balance**: **XXX** *(From Flex Query)*
 - **Closing Balance (Dec 31, 2025)**: **XXX** *(From Flex Query)*
