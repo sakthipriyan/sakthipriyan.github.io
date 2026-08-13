@@ -313,7 +313,7 @@ I genuinely missed reporting this zero-balance account in the previous year's IT
 
 Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign bank accounts does not exceed ₹5 lakhs (this exemption limit was increased to ₹20 lakhs for all movable assets effective **October 1, 2024**, via the Finance (No. 2) Act, 2024). Since my balance was exactly ₹0, I was safely exempt from the draconian penalty. 
 
-I initially thought of correcting the past omission by filing an Updated Return (ITR-U). However, under income tax rules, you **cannot** file an ITR-U merely to update a disclosure in Schedule FA. An ITR-U is only permitted if it results in additional income and additional tax liability. I would have had to declare "fake" earnings and pay unnecessary tax just to fix a zero-balance disclosure! Consequently, I decided to simply report it correctly from this year onward.
+I initially thought of correcting the past omission by filing an Updated Return (ITR-U). However, under income tax rules, you **cannot** file an ITR-U merely to update a disclosure in Schedule FA. An ITR-U is only permitted if it results in additional income and additional tax liability. I would have had to declare "fake" earnings and pay unnecessary tax just to fix a zero-balance disclosure! Consequently, I decided to simply report it correctly this year.
 
 #### Table A3: Details of Foreign Equity and Debt Interest
 
@@ -383,6 +383,7 @@ Documenting this entire process made me realize I want to drastically simplify m
 3. **Exit Direct Equities**: I want to exit direct equity completely (except for some shares I got as an employee of Infosys back in 2013). This will remove the domestic dividend component, drastically simplifying Schedule OS and reducing the number of entries in Schedule AL.
 
 ## 🔗 Related Reading
-- [Using Form 12BAA to Reduce Cashflow Drag on International Investments](/building-wealth/blogs/2026/form-12baa-tcs-cashflow/)
+- [Using Form 12BAA to Reduce Cashflow Drag on International Investments](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/)
 - [Funding Interactive Brokers from India Using FX Retail](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/)
-- [How to Invest in NASDAQ 100 from India](/building-wealth/blogs/invest-in-nasdaq-100-from-india/)
+- [How to Invest in NASDAQ 100 from India (Mutual Funds, ETFs, and IBKR Guide)](/building-wealth/blogs/how-to-invest-in-nasdaq-100-from-india-mutual-funds-etfs-and-ibkr-guide/)
+- [State of the Portfolio: Returns, Allocation and Strategy — Edition 1](/building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/)
