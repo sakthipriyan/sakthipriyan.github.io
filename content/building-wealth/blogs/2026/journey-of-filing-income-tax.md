@@ -202,24 +202,24 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 | **IT Department** | • Form 26AS<br>• Annual Information Statement (AIS)<br>• Taxpayer Information Summary (TIS) | • Cross-verifying TDS, TCS, and overall income data | Login to Income Tax portal > e-File > Income Tax Returns > View Form 26AS. For AIS/TIS, go to Services > Annual Information Statement (AIS). |
 | **Employer** (Aqfer) | • Form 16 (Part A and Part B) | • **Schedule S** (Salary)<br>• **Schedule TDS1** (Employer TDS) | Download from employer's payroll portal or HR system. |
 | **Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | • **Schedule AL** (Bank balances)<br>• **Schedule OS** (Interest Income) | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
-| **Mutual Funds** | • Capital Gains Statement | • **Schedule CG** (Realized gains/losses)<br>• **Schedule 112A** (LTCG) | Request capital gains statement from MFCentral. |
-| **Shares** | • Holding Statement / Cost Basis (INFY, GOLDBEES, etc.) | • **Schedule AL** (Year-end acquisition cost) | Download from the broker website. *(Since there was no selling, only the cost basis till Mar 31 is required for Schedule AL).* |
+| **Mutual Funds** (MFCentral) | • Capital Gains Statement | • **Schedule CG** (Realized gains/losses)<br>• **Schedule 112A** (LTCG) | Request capital gains statement from MFCentral. |
+| **Shares** (ICICI Direct) | • Holding Statement / Cost Basis (INFY, GOLDBEES, etc.) | • **Schedule AL** (Year-end acquisition cost) | Download from the broker website. *(Since there was no selling, only the cost basis till Mar 31 is required for Schedule AL).* |
 | **Foreign Investments** (IBKR) | • Flex Report (Breakdown by cash and stocks on every day) | • **Schedule FA** (Peak/Closing balances)<br>• **Schedule AL** (Cost basis) | Login to IBKR Portal > Performance & Reports > Flex Queries. Since the account was opened in mid-2025, run it from mid-2025 to Mar 31, 2026. This single report handles both Schedule AL and Schedule FA computations. (Since I had only 1 ETF for this period) |
-| **EPF & NPS** | • Statements downloaded strictly for net-worth tracking (Schedule AL notes) | • Personal net-worth tracking (Omitted from formal schedules) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
+| **EPF & NPS** | • Statements downloaded strictly for net-worth tracking | • **Not required**. (Personal net-worth tracking) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
 
 ## Income Schedules
 
-### 1. Schedule Salary (Schedule S)
+### 1. Schedule S <small>(Schedule Salary)</small>
 
 In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
 #### Key Breakdown
 - **Gross Salary**: **XXX** (Employer).
   - Includes basic salary, allowances, special perquisites, and minor ancillary payments like Hack Day Prizes.
-- **Standard Deduction (Sec 16ia)**: **XXX** (upgraded standard deduction limit).
+- **Standard Deduction (Sec 16ia)**: **75,000** (upgraded standard deduction limit).
 - **Total Income under Head Salaries**: **XXX**.
 
-### 2. Schedule Income from Other Sources (Schedule OS)
+### 2. Schedule OS <small>(Income from Other Sources)</small>
 
 All non-salary regular income is declared here:
 
@@ -229,7 +229,7 @@ All non-salary regular income is declared here:
 
 *(Note: PPF interest of XXX earned during the year is tax-exempt under Section 10(11) and noted separately).*
 
-### 3. Schedule Capital Gains (Schedule CG & Schedule 112A)
+### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
 The capital gains schedule reconciles realized redemptions across equity mutual funds and stocks:
 
@@ -246,13 +246,13 @@ The capital gains schedule reconciles realized redemptions across equity mutual 
 
 ## Tax Schedules
 
-### 4. Schedule TDS1 & Schedule TCS (Taxes Paid)
+### 4. Schedule TDS1 & TCS <small>(Taxes Paid)</small>
 
 These schedules aggregate all the taxes that have already been paid on your behalf:
 - **Employer Salary TDS (Schedule TDS1)**: **XXX** deducted and deposited by employer.
 - **LRS Remittance TCS (Schedule TCS)**: **XXX** collected and remitted by banks on foreign transfers.
 
-### 5. Part B-TI, Part B-TTI & Tax Refund Settlement
+### 5. Part B-TI & Part B-TTI <small>(Tax Refund Settlement)</small>
 
 #### A. Total Income Computation (Part B-TI)
 - **Salary Income**: XXX
@@ -273,7 +273,7 @@ These schedules aggregate all the taxes that have already been paid on your beha
 
 ## Disclosure Schedules
 
-### 6. Schedule FA (Foreign Assets) — Calendar Year 2025
+### 6. Schedule FA <small>(Foreign Assets — Calendar Year 2025)</small>
 
 Schedule FA is a mandatory disclosure under the Black Money Act for any foreign account held during the **Calendar Year (Jan 1, 2025 – Dec 31, 2025)**.
 
@@ -300,7 +300,7 @@ Schedule FA is a mandatory disclosure under the Black Money Act for any foreign 
 > **🌍 Interested in international investing?**  
 > For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated upcoming chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
 
-### 7. Schedule AL (Assets & Liabilities at Financial Year End — March 31, 2026)
+### 7. Schedule AL <small>(Assets & Liabilities at Financial Year End — March 31, 2026)</small>
 
 Since total income exceeds a certain threshold (which changes over time), **Schedule AL** requires reporting all domestic and foreign assets held as of **March 31, 2026**. 
 
