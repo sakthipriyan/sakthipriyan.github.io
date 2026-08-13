@@ -204,7 +204,7 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 | **Banks** (HDFC, ICICI, BoB) | • Bank Account Statements (for exact closing balances)<br>• Interest Certificates (for Schedule OS) | • **Schedule AL** (Bank balances)<br>• **Schedule OS** (Interest Income) | Login to respective net banking portals > Statements/Certificates > Download for the Financial Year. |
 | **Mutual Funds** (MFCentral) | • Capital Gains Statement | • **Schedule CG** (Realized gains/losses)<br>• **Schedule 112A** (LTCG) | Request capital gains statement from MFCentral. |
 | **Shares** (ICICI Direct) | • Holding Statement / Cost Basis (INFY, GOLDBEES, etc.) | • **Schedule AL** (Year-end acquisition cost) | Download from the broker website. *(Since there was no selling, only the cost basis till Mar 31 is required for Schedule AL).* |
-| **Foreign Investments** (IBKR) | • Flex Report (Breakdown by cash and stocks on every day) | • **Schedule FA** (Peak/Closing balances)<br>• **Schedule AL** (Cost basis) | Login to IBKR Portal > Performance & Reports > Flex Queries. Since the account was opened in mid-2025, run it from mid-2025 to Mar 31, 2026. This single report handles both Schedule AL and Schedule FA computations. (Since I had only 1 ETF for this period) |
+| **Foreign Investments** (IBKR) | • Flex Report (Breakdown by cash and stocks on every day)<br>• Activity Statement | • **Schedule FA** (Peak/Closing balances & Initial Investment)<br>• **Schedule AL** (Cost basis) | Login to IBKR Portal > Performance & Reports. Run **Flex Queries** from mid-2025 to Mar 31, 2026 for daily balances. Generate the **Activity Statement** to get lot-wise cost basis for Schedule AL and Schedule FA Initial Investment value. |
 | **EPF & NPS** | • Statements downloaded strictly for net-worth tracking | • **Not required**. (Personal net-worth tracking) | **EPF**: Member e-Sewa portal or UMANG app.<br>**NPS**: CRA login (e.g. NSDL e-Gov) > Views > Statement of Account. |
 
 ## Income Schedules
@@ -227,9 +227,13 @@ All non-salary regular income is declared here. This schedule requires adding up
   - Reconciled across multiple savings accounts and domestic dividends received.
 - **Total Income under Schedule OS**: **~₹6,000**.
 
-**Looking Ahead**: 
-- **Reduce Dividend Tracking**: I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
-- **Minimize Bank Interest & Cash Drag**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time. To combat this, I am consciously moving spending to credit cards wherever possible, keeping the actual cash required to run the month very minimal. This is also a lesson learned from the past, where holding too much cash generated significant interest, leading to unexpected taxes and penalties for missing self-assessment advance tax payments.
+#### Looking Ahead
+
+##### Reduce Dividend Tracking
+I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
+
+##### Minimize Bank Interest & Cash Drag
+I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time. To combat this, I am consciously moving spending to credit cards wherever possible, keeping the actual cash required to run the month very minimal. This is also a lesson learned from the past, where holding too much cash generated significant interest, leading to unexpected taxes and penalties for missing self-assessment advance tax payments.
 
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
@@ -279,7 +283,7 @@ These schedules aggregate all the taxes that have already been paid on your beha
 
 #### C. Taxes Paid & Final Refund Calculation
 - **Total Taxes Paid (from Schedule TDS1 & TCS)**: **XXX**
-- **Net Refund Due**: **`₹440`**
+- **Net Refund Due**: **<span style="color: green;">₹440</span>**
 
 ## Disclosure Schedules
 
@@ -289,29 +293,40 @@ This is my first time doing Schedule FA, so it took me more time to understand a
 
 I had to make two key decision points here:
 1. **Reporting Level**: For Table A2, I chose to report the full broker account-level details. (Some sources/tools suggest reporting only the cash balance, but I decided to be comprehensive).
-2. **Peak Balance Computation**: To compute the peak balance, I found the peak USD balance and then converted that into INR using the SBI TT BUY rate. (I actually cloned a tool earlier to parse SBI rate PDFs and generate a yearly JSON for this exact purpose). Some suggest just doing a direct peak balance in INR based on daily spot rates, which I think is incorrect.
+2. **Peak Balance Computation**: To compute the peak balance, I found the peak USD balance and then converted that specific peak into INR using the SBI TT BUY rate. (I actually cloned a tool earlier to parse SBI rate PDFs and generate a yearly JSON for this exact purpose, available at [data.sakthipriyan.com](https://data.sakthipriyan.com)). Some sources suggest applying the SBI TT BUY rate to the balance every single day to find the absolute INR peak, which I think is an incorrect interpretation.
 
 #### Table A2: Details of Foreign Custodial Accounts
 
 1. **Interactive Brokers LLC** (Country: United States)
-   - **Account Open Date**: May 6, 2025
-   - **Peak Balance during Period**: **XXX** (`$XX,XXX.XX` converted at SBI TT Buying Rate of `XX.XX`)
-   - **Closing Balance as of Dec 31, 2025**: **XXX** (`$XX,XXX.XX` converted at SBI TT Buying Rate of `XX.XX`)
+   - **Account Open Date**: Mid 2025
+   - **Peak Balance during Period**: **XXX** (`$XXX` converted at SBI TT Buying Rate of `XX.XX`)
+   - **Closing Balance as of Dec 31, 2025**: **XXX** (`$XXX` converted at SBI TT Buying Rate of `XX.XX`)
 
 2. **DriveWealth LLC** (Country: United States)
-   - **Account Open Date**: Dec 7, 2024
-   - **Peak Balance & Closing Balance**: **₹0** (Account inactive/empty)
+   - **Account Open Date**: End 2024
+   - **Peak Balance & Closing Balance**: **₹0**  
+     Account inactive/empty. Opened via INDmoney but never used due to reasons detailed in [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/). I have since fully closed this account, which means one less entry to worry about for next year's ITR!
+
+#### A Note on Past Omissions & The Black Money Act
+
+I genuinely missed reporting this zero-balance account in the previous year's ITR, simply because I was not aware that a completely unused, zero-balance account still had to be disclosed. 
+
+Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign bank accounts does not exceed ₹5 lakhs (this exemption limit was increased to ₹20 lakhs for all movable assets effective **October 1, 2024**, via the Finance (No. 2) Act, 2024). Since my balance was exactly ₹0, I was safely exempt from the draconian penalty. 
+
+I initially thought of correcting the past omission by filing an Updated Return (ITR-U). However, under income tax rules, you **cannot** file an ITR-U merely to update a disclosure in Schedule FA. An ITR-U is only permitted if it results in additional income and additional tax liability. I would have had to declare "fake" earnings and pay unnecessary tax just to fix a zero-balance disclosure! Consequently, I decided to simply report it correctly from this year onward.
 
 #### Table A3: Details of Foreign Equity and Debt Interest
 
-This was much simpler since I only had 1 asset in the broker account (the ETF). I reused the exact same activity statement.
+This was much simpler since I only had 1 asset in the broker account (the ETF). 
+- To get the **Peak Balance** and **Closing Balance**, I just reused the exact same Flex Query report mentioned above. 
+- However, to compute the **Initial Value of Investment**, I had to generate a separate Activity Statement which gives the cost basis for every single lot, and then apply the respective SBI TT BUY rate to sum it all up into INR.
 
 - **Entity**: *Xtrackers (IE) plc - Xtrackers NASDAQ 100 UCITS ETF 1C* (Country: Ireland)
 - **Nature of Entity**: Exchange Traded Fund (ETF)
 - **Interest Acquiring Date**: May 7, 2025
-- **Initial Value of Investment**: **XXX**
-- **Peak Balance**: **XXX**
-- **Closing Balance (Dec 31, 2025)**: **XXX**
+- **Initial Value of Investment**: **XXX** *(Sum of lot-wise cost basis converted via SBI TT BUY rates)*
+- **Peak Balance**: **XXX** *(From Flex Query)*
+- **Closing Balance (Dec 31, 2025)**: **XXX** *(From Flex Query)*
 
 > **🌍 Interested in international investing?**  
 > For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
@@ -348,7 +363,7 @@ Finally, IBKR holdings also need to be included here, but crucially, using a **F
 
 ## 🎯 Tax Planning & Rebalancing
 
-A significant part of this year's filing success was the precise tax planning I did. By March end, I was doing a "hard rebalancing"—exiting actively managed funds and moving into passive ones, as well as buying Irish-domiciled NASDAQ 100 ETFs. 
+A significant part of this year's filing success was the precise tax planning I did. By March end, I was doing a "[hard rebalancing](/building-wealth/slides/red-days-productive-days-portfolio-reset/)" ([watch video](/building-wealth/videos/red-days-productive-days-portfolio-reset/))—exiting actively managed funds and moving into passive ones, as well as buying Irish-domiciled NASDAQ 100 ETFs. 
 
 During this process, I intentionally utilized the Tax Collected at Source (TCS) on international remittances. I planned the routing such that the tax I had to pay as advance tax was fully covered by the TCS with some buffer. As a result of this exact calculation, my final computed tax refund was a precise **₹440**.
 
@@ -356,7 +371,7 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 
 1. **Exact Setoff Mechanics**: Short-Term Capital Loss (`-XXX`) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just `₹440` instead of a large self-assessment tax payout.
-3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `XXX.XXL`) aligns perfectly with Schedule AL year-end asset cost (`XXX.XXL` in IBKR ETFs), maintaining 100% compliance across both schedules.
+3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak `XXX`) aligns perfectly with Schedule AL year-end asset cost (`XXX` in IBKR ETFs), maintaining 100% compliance across both schedules.
 
 ## 🧹 System Simplification for Next Year
 
