@@ -246,13 +246,13 @@ The capital gains schedule reconciles realized redemptions across equity mutual 
 
 ## Tax Schedules
 
-### 4. Schedule TDS1 & TCS <small>(Taxes Paid)</small>
+### 1. Schedule TDS1 & TCS <small>(Taxes Paid)</small>
 
 These schedules aggregate all the taxes that have already been paid on your behalf:
 - **Employer Salary TDS (Schedule TDS1)**: **XXX** deducted and deposited by employer.
 - **LRS Remittance TCS (Schedule TCS)**: **XXX** collected and remitted by banks on foreign transfers.
 
-### 5. Part B-TI & Part B-TTI <small>(Tax Refund Settlement)</small>
+### 2. Part B-TI & Part B-TTI <small>(Tax Refund Settlement)</small>
 
 #### A. Total Income Computation (Part B-TI)
 - **Salary Income**: XXX
@@ -273,7 +273,7 @@ These schedules aggregate all the taxes that have already been paid on your beha
 
 ## Disclosure Schedules
 
-### 6. Schedule FA <small>(Foreign Assets — Calendar Year 2025)</small>
+### 1. Schedule FA <small>(Foreign Assets — Calendar Year 2025)</small>
 
 Schedule FA is a mandatory disclosure under the Black Money Act for any foreign account held during the **Calendar Year (Jan 1, 2025 – Dec 31, 2025)**.
 
@@ -300,7 +300,7 @@ Schedule FA is a mandatory disclosure under the Black Money Act for any foreign 
 > **🌍 Interested in international investing?**  
 > For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated upcoming chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
 
-### 7. Schedule AL <small>(Assets & Liabilities at Financial Year End — March 31, 2026)</small>
+### 2. Schedule AL <small>(Assets & Liabilities at Financial Year End — March 31, 2026)</small>
 
 Since total income exceeds a certain threshold (which changes over time), **Schedule AL** requires reporting all domestic and foreign assets held as of **March 31, 2026**. 
 
