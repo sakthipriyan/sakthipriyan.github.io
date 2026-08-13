@@ -227,9 +227,9 @@ All non-salary regular income is declared here. This schedule requires adding up
   - Reconciled across multiple savings accounts and domestic dividends received.
 - **Total Income under Schedule OS**: **~₹6,000**.
 
-*(Note: PPF interest of XXX earned during the year is tax-exempt under Section 10(11) and noted separately).*
-
-> **Looking Ahead**: I actually want to remove this dividend part altogether by exiting individual domestic stocks entirely. I also plan to minimize the number of bank accounts I hold to drastically reduce the reconciliation overhead here.
+> **Looking Ahead**: 
+> - **Eliminate Dividend Tracking**: I plan to remove this dividend part altogether by exiting individual domestic stocks entirely.
+> - **Minimize Bank Interest & Cash Drag**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag, losing real value over time.
 
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
