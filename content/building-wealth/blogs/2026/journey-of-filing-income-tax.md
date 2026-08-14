@@ -110,7 +110,7 @@ Beyond these, I also have tax-exempt interest and growth from retirement product
 
 ### Tax Credits
 
-This diagram illustrates how your total tax liability is offset by my tax credits like TDS and TCS. By [using Form 12BAA to report TCS to my employer](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/), the Salary TDS was already adjusted against the LRS TCS. *(Note: For the current financial year, this declaration is now done using the newly introduced [Form 122](https://incometaxindia.gov.in/pages/downloads/income-tax-forms.aspx)).*
+This diagram illustrates how your total tax liability is offset by my tax credits like TDS and TCS. By [using Form 12BAA to report TCS to my employer](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/), the Salary TDS was already adjusted against the LRS TCS. *(Note: For the current financial year, this declaration is now done using the newly introduced [Form 122](https://www.incometaxindia.gov.in/w/form-no.-122)).*
 
 <div style="max-width: 70%; margin: 0 auto; text-align: center;">
 
