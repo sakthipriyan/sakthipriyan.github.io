@@ -295,8 +295,8 @@ I had to make two key decision points here:
 
 1. **Interactive Brokers LLC** (Country: United States)
    - **Account Open Date**: Mid 2025
-   - **Peak Balance during Period**: **&lt;redacted&gt;** ($&lt;redacted&gt; converted at SBI TT Buying Rate of &lt;redacted&gt;)
-   - **Closing Balance as of Dec 31, 2025**: **&lt;redacted&gt;** ($&lt;redacted&gt; converted at SBI TT Buying Rate of &lt;redacted&gt;)
+   - **Peak Balance during Period**: **₹&lt;redacted&gt;** ($&lt;redacted&gt; converted at SBI TT Buying Rate of ₹&lt;redacted&gt;)
+   - **Closing Balance as of Dec 31, 2025**: **₹&lt;redacted&gt;** ($&lt;redacted&gt; converted at SBI TT Buying Rate of ₹&lt;redacted&gt;)
 
 2. **DriveWealth LLC** (Country: United States)
    - **Account Open Date**: End 2024
