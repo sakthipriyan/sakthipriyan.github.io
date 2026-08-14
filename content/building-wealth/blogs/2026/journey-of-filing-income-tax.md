@@ -337,7 +337,7 @@ This was much simpler since I only had 1 asset in the broker account (the ETF).
 
 ### 2. Schedule AL <small>(Assets & Liabilities at Financial Year End — March 31, 2026)</small>
 
-Since total income exceeds a certain threshold (which changes over time), **Schedule AL** requires reporting all domestic and foreign assets held as of **March 31, 2026**. 
+Since total income exceeds a certain threshold (which changes over time), **Schedule AL** requires reporting the specified movable and immovable assets and related liabilities held as of **March 31, 2026**. 
 
 This schedule required a lot more work to get every entry precisely right. A critical nuance is that the reporting basis is a mix depending on the asset class: **Shares, Securities, and Real Estate** are reported at their historic **Acquisition Cost**, whereas liquid assets like **Bank Deposits and Cash** are reported at their **Exact Balance** on March 31.
 
@@ -371,7 +371,7 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 1. **Exact Setoff Mechanics**: Short-Term Capital Loss (&lt;redacted&gt;) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just **<span style="color: green;">₹440</span>** instead of a large self-assessment tax payout.
 3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak &lt;redacted&gt;) aligns perfectly with Schedule AL year-end asset cost (&lt;redacted&gt; in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
-4. **Avoiding Schedule FSI, TR & Form 67**: By [intentionally choosing Irish-domiciled accumulating ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#3-taxation-paperwork-administrative-complexity) and making no sales during the year, I generated zero foreign income (no dividends, no capital gains). This completely bypassed the complex headache of reporting Foreign Source Income (Schedule FSI), claiming Foreign Tax Credits (Schedule TR), and filing Form 67.
+4. **Avoiding Schedule FSI, TR & Form 67**: By [intentionally choosing Irish-domiciled accumulating ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#3-taxation-paperwork-administrative-complexity) and making no sales during the year, I received no foreign dividends and realized no foreign capital gains during the year. This completely bypassed the complex headache of reporting Foreign Source Income (Schedule FSI), claiming Foreign Tax Credits (Schedule TR), and filing Form 67.
 
 ## 🧹 The Long-Term Simplification Goal
 
