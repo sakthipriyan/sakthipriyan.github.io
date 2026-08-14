@@ -367,7 +367,7 @@ During this process, I intentionally utilized the Tax Collected at Source (TCS) 
 1. **Exact Setoff Mechanics**: Short-Term Capital Loss (&lt;redacted&gt;) is seamlessly set off against Long-Term Capital Gains before applying the 12.5% special tax rate under Section 112A.
 2. **LRS TCS Offsets High Tax Liability**: Remittance TCS collected by banks was fully absorbed against total tax liability (including surcharge). Thanks to precise planning during my March rebalancing, this resulted in a clean refund of just **<span style="color: green;">₹440</span>** instead of a large self-assessment tax payout.
 3. **Calendar Year vs Financial Year Integrity**: Schedule FA accurate reporting (CY 2025 peak &lt;redacted&gt;) aligns perfectly with Schedule AL year-end asset cost (&lt;redacted&gt; in IBKR ETFs), giving me confidence that my disclosures were internally consistent across both schedules.
-4. **Avoiding Schedule TR & Form 67**: By intentionally choosing Irish-domiciled accumulating ETFs (which automatically reinvest dividends instead of distributing them), I completely avoided foreign dividend withholding tax. This means zero foreign income to report, and no need to deal with the complex headache of claiming Foreign Tax Credits via Schedule TR or filing Form 67.
+4. **Avoiding Schedule TR & Form 67**: By [intentionally choosing Irish-domiciled accumulating ETFs](/building-wealth/books/the-global-indian-investor/) (which automatically reinvest dividends instead of distributing them), I completely avoided foreign dividend withholding tax. This means zero foreign income to report, and no need to deal with the complex headache of claiming Foreign Tax Credits via Schedule TR or filing Form 67.
 
 ## 🧹 The Long-Term Simplification Goal
 
