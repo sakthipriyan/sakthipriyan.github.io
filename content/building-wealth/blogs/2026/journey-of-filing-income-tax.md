@@ -1,7 +1,6 @@
 ---
 title: "Demystifying ITR-2: My FY 2025-26 Tax Filing Journey"
 date: "2026-08-14"
-lastmod: "2026-08-14"
 draft: false
 type: "blogs"
 wealth_tags:
@@ -16,14 +15,14 @@ wealth_tags:
   - Financial Systems
 summary: "A schedule-by-schedule reconstruction of my actual ITR-2 filing for FY 2025-26 — backtracking every schedule from Salary (Sched S) to Other Sources (Sched OS), Capital Gains (Sched CG & 112A), Foreign Assets (Sched FA), Assets & Liabilities (Sched AL), and TCS tax credit setoff."
 js_tools:
-  - d2
   - viz
 ---
 
 > ⚖️ **Disclaimer: Not a Chartered Accountant (CA)**
 > 
-> Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.
-The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
+> Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.  
+>  
+> The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
 
 Filing Income Tax Returns (ITR-2) for **Financial Year 2025–26 (Assessment Year 2026–27)** requires an exact, schedule-by-schedule reconciliation when you manage salary, domestic mutual funds, real estate, bank deposits, LRS remittances, and foreign assets like Irish-domiciled UCITS ETFs via Interactive Brokers (IBKR).
 
@@ -38,7 +37,7 @@ Rather than high-level generalizations, this post **backtracks each section of t
 | **Aug 6, 2026 06:47** | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund.<br/>*(Exact refund amount as filed)* |
 | **Aug 6, 2026 16:33** | Received SMS from SBI confirming ₹440 refund credited to the account. |
 | **Aug 10, 2026 19:42** | Received final "Your Refund has been credited" email. |
-| **Aug 14, 2026** | Published this comprehensive retrospective blog post. |
+| **Aug 14, 2026 07:30** | Published this comprehensive retrospective blog post. |
 
 > Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
 
@@ -217,13 +216,14 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 
 This is the most straightforward schedule. The numbers are pulled directly from Form 16, making it the simplest one to fill up. In the New Tax Regime (Section 115BAC), salary computation is streamlined:
 
-> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
-
 #### Key Breakdown
 - **Gross Salary**: **&lt;redacted&gt;** (Employer).
   - Includes basic salary, allowances, special perquisites, and minor ancillary payments like Hack Day Prizes.
 - **Standard Deduction (Sec 16ia)**: **75,000** (upgraded standard deduction limit).
 - **Total Income under Head Salaries**: **&lt;redacted&gt;**.
+
+> *Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `<redacted>`.*
+
 
 ### 2. Schedule OS <small>(Income from Other Sources)</small>
 
@@ -364,7 +364,7 @@ This schedule required a lot more work to get every entry precisely right. A cri
 
 A significant part of this year's filing success was the precise tax planning I did. By March end, I was doing a "[hard rebalancing](/building-wealth/slides/red-days-productive-days-portfolio-reset/)" ([watch video](/building-wealth/videos/red-days-productive-days-portfolio-reset/))—exiting actively managed funds and moving into passive ones, as well as buying Irish-domiciled NASDAQ 100 ETFs. 
 
-During this process, I intentionally utilized the Tax Collected at Source (TCS) on international remittances. I planned the routing such that the tax I had to pay as advance tax was fully covered by the TCS, intentionally including some extra buffer to safely account for any unforeseen dividends and bank interests. My goal was to land a low 4-digit tax refund (to avoid falling short and paying penalties). Ultimately, managing to get it all the way down to a 3-digit refund of precisely **₹440** proved that this was a very successful and highly accurate calculation!
+During this process, I intentionally utilized the Tax Collected at Source (TCS) on international remittances (a strategy I discussed in detail on [this Reddit thread](https://www.reddit.com/r/personalfinanceindia/comments/1s696gg/tax_harvesting_for_lrs_tcs/)). I planned the routing such that the tax I had to pay as advance tax was fully covered by the TCS, intentionally including some extra buffer to safely account for any unforeseen dividends and bank interests. My goal was to land a low 4-digit tax refund (to avoid falling short and paying penalties). Ultimately, managing to get it all the way down to a 3-digit refund of precisely **₹440** proved that this was a very successful and highly accurate calculation!
 
 ## 💡 Summary of Key Learnings
 
