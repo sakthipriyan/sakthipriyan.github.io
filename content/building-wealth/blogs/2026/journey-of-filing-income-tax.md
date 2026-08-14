@@ -375,7 +375,7 @@ Documenting this complex filing process has reinforced my desire to drastically 
 1. **NPS**: Waiting to hit the minimum 5-year limit to exit.
 2. **PPF**: Waiting out the 15-year lock-in period.
 3. **Direct Shares (Dividend Tracking)**: I plan to exit most individual domestic stocks entirely, though I am waiting for a market rebound to sell some of them. Ultimately, I will probably just keep GOLDBEES and the INFY shares I received as an employee back in 2013.
-4. **Bank Accounts (Interest & Cash Drag)**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag. I am consciously moving spending to credit cards to keep the actual cash required minimal.
+4. **Bank Accounts (Interest & Cash Drag)**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag. Worse, it creates a vicious cycle: generating more interest income increases the total tax liability, which often leads to falling short on advance tax, and ultimately paying Section 234 penalties (a trap I have fallen into in the past). I am consciously moving spending to credit cards to keep the actual cash required minimal.
 
 Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
 
