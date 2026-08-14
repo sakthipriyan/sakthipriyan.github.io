@@ -22,6 +22,8 @@ js_tools:
 > ⚖️ **Disclaimer: Not a Chartered Accountant (CA)**
 > 
 > Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.
+> 
+> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
 The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
 
 Filing Income Tax Returns (ITR-2) for **Financial Year 2025–26 (Assessment Year 2026–27)** requires an exact, schedule-by-schedule reconciliation when you manage salary, domestic mutual funds, real estate, bank deposits, LRS remittances, and foreign assets like Irish-domiciled UCITS ETFs via Interactive Brokers (IBKR).
@@ -307,7 +309,7 @@ I had to make two key decision points here:
 
 I genuinely missed reporting this zero-balance account in the previous year's ITR, simply because I was not aware that a completely unused, zero-balance account still had to be disclosed. 
 
-Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign movable assets does not exceed ₹20 lakhs (effective **October 1, 2024**, via the Finance (No. 2) Act, 2024). Since my balance was exactly ₹0, I was protected from the draconian penalty, though the IT department still actively expects and encourages proper disclosure. 
+Under Section 43 of the **Black Money Act**, non-disclosure of a foreign asset carries a terrifying flat penalty of **₹10 lakhs**—even for zero-balance accounts! Fortunately, there is a statutory relaxation: the penalty does not apply if the aggregate value of foreign movable assets does not exceed ₹20 lakhs (effective **October 1, 2024**, via the Finance (No. 2) Act, 2024, as confirmed by [Business Standard](https://www.business-standard.com/finance/personal-finance/no-penalty-if-undisclosed-foreign-assets-less-than-rs-20-lakh-cbdt-124082200508_1.html)). Since my balance was exactly ₹0, I was protected from the draconian penalty, though the IT department still actively expects and encourages proper disclosure. 
 
 > **🌍 Interested in international investing?**  
 > For a comprehensive guide on building a globally diversified portfolio from India, check out my book: **[The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**. A dedicated chapter will exclusively cover deep-dives into Schedule FA and Schedule AL reporting for Interactive Brokers (IBKR) accounts.
@@ -378,9 +380,6 @@ Documenting this complex filing process has reinforced my desire to drastically 
 4. **Bank Accounts (Interest & Cash Drag)**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag. Worse, it creates a vicious cycle: generating more interest income increases the total tax liability, which often leads to falling short on advance tax, and ultimately paying Section 234 penalties (a trap I have fallen into in the past). I am consciously moving spending to credit cards to keep the actual cash required minimal.
 
 Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
-
-> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `<redacted>`.)*
-
 
 ## 🔗 Related Reading
 - [Funding Interactive Brokers from India Using FX Retail](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/)
