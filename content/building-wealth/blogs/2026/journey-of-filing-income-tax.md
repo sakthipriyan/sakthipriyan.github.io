@@ -383,7 +383,7 @@ Documenting this complex filing process has reinforced my desire to drastically 
 
 Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
 
-Probably I should do this year on year.
+> Probably, I should publish my ITR filing year on year.
 
 ## 🔗 Related Reading
 - [Funding Interactive Brokers from India Using FX Retail](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/)
