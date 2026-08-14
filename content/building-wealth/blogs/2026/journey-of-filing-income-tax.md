@@ -22,9 +22,6 @@ js_tools:
 > ⚖️ **Disclaimer: Not a Chartered Accountant (CA)**
 > 
 > Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.
-> 
-> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
-
 The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
 
 Filing Income Tax Returns (ITR-2) for **Financial Year 2025–26 (Assessment Year 2026–27)** requires an exact, schedule-by-schedule reconciliation when you manage salary, domestic mutual funds, real estate, bank deposits, LRS remittances, and foreign assets like Irish-domiciled UCITS ETFs via Interactive Brokers (IBKR).
@@ -378,6 +375,8 @@ Documenting this complex filing process has reinforced my desire to drastically 
 4. **Bank Accounts (Interest & Cash Drag)**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag. I am consciously moving spending to credit cards to keep the actual cash required minimal.
 
 Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
+
+> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
 
 
 ## 🔗 Related Reading
