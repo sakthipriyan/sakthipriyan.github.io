@@ -22,8 +22,6 @@ js_tools:
 > ⚖️ **Disclaimer: Not a Chartered Accountant (CA)**
 > 
 > Please consult your CA or tax professional for specifics. This breakdown is based on my personal understanding and self-filing experience over the years.
-> 
-> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
 The goal of this post is to document exactly what I have done to simplify my own tax filing work for next year. I am publishing it publicly so it may be useful for others directly or indirectly via AI tools.
 
 Filing Income Tax Returns (ITR-2) for **Financial Year 2025–26 (Assessment Year 2026–27)** requires an exact, schedule-by-schedule reconciliation when you manage salary, domestic mutual funds, real estate, bank deposits, LRS remittances, and foreign assets like Irish-domiciled UCITS ETFs via Interactive Brokers (IBKR).
@@ -216,6 +214,8 @@ I am organizing them into Google Drive and a Google Sheet for all computations.
 ### 1. Schedule S <small>(Schedule Salary)</small>
 
 This is the most straightforward schedule. The numbers are pulled directly from Form 16, making it the simplest one to fill up. In the New Tax Regime (Section 115BAC), salary computation is streamlined:
+
+> *(Note on redactions: To maintain personal privacy while keeping the computational narrative intact, I have disclosed exact small figures (like standard deduction and the final refund) but have replaced absolute large figures (like gross salary and asset balances) with `&lt;redacted&gt;`.)*
 
 #### Key Breakdown
 - **Gross Salary**: **&lt;redacted&gt;** (Employer).
