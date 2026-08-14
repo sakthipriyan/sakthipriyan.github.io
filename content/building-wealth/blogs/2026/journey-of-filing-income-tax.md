@@ -233,7 +233,7 @@ All non-salary regular income is declared here. This schedule requires adding up
 
 ### 3. Schedule CG & 112A <small>(Capital Gains)</small>
 
-This schedule reconciles realized redemptions across equity mutual funds and stocks. This was my first time doing an STCL (Short-Term Capital Loss) setoff, and I had to take help from AI to figure out how it has to be broken down by various time periods. 
+This schedule reconciles realized [redemptions](/building-wealth/slides/red-days-productive-days-portfolio-reset/) ([watch video](/building-wealth/videos/red-days-productive-days-portfolio-reset/)) across equity mutual funds. This was my first time doing an STCL (Short-Term Capital Loss) setoff, and I had to take help from AI to figure out how it has to be broken down by various time periods. 
 
 An interesting discovery that took a while to figure out: if you have an STCL, you don't report it at an individual breakup level. I initially tried entering positive/negative numbers for STCG and the portal wasn't allowing negative values. In my experience on the portal, STCL was automatically adjusted against LTCG.
 
