@@ -23,3 +23,4 @@ tools/get-data/*.out
 # test
 docs/test/
 static/test/bin/
+*.py
