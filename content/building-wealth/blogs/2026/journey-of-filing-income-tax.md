@@ -106,11 +106,11 @@ digraph IncomeTree {
 
 </div>
 
-Beyond these, I also have tax-exempt interest and growth from retirement products such as EPF, PPF, and NPS.
+Beyond these, I also have tax-exempt interest and growth from retirement products such as [EPF, PPF, and NPS](/building-wealth/slides/financial-tools/#/4/3).
 
 ### Tax Credits
 
-This diagram illustrates how your total tax liability is offset by my tax credits like TDS and TCS. By [using Form 12BAA to report TCS to my employer](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/), the Salary TDS was already adjusted against the LRS TCS. *(Note: For the current financial year, this declaration is now done using the newly introduced [Form 122](https://www.incometaxindia.gov.in/w/form-no.-122)).*
+This diagram illustrates how your total tax liability is offset by my tax credits like TDS and TCS. 
 
 <div style="max-width: 70%; margin: 0 auto; text-align: center;">
 
@@ -141,6 +141,9 @@ digraph TaxPayment {
 ```
 
 </div>
+
+By [using Form 12BAA to report TCS to my employer](/building-wealth/blogs/using-form-12baa-to-reduce-cashflow-drag-on-international-investments/), the Salary TDS was already adjusted against the LRS TCS.  
+*Note: For the current financial year, this declaration is now done using the newly introduced [Form 122](https://www.incometaxindia.gov.in/w/form-no.-122).*
 
 ### Asset Disclosures
 
