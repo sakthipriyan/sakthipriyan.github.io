@@ -1,6 +1,6 @@
 ---
 title: "Demystifying ITR-2: My FY 2025-26 Tax Filing Journey"
-date: "2026-07-29"
+date: "2026-08-14"
 draft: false
 type: "blogs"
 wealth_tags:
@@ -37,6 +37,7 @@ Rather than high-level generalizations, this post **backtracks each section of t
 | **Aug 6, 2026 06:47** | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund.<br/>*(Exact refund amount as filed)* |
 | **Aug 6, 2026 16:33** | Received SMS from SBI confirming ₹440 refund credited to the account. |
 | **Aug 10, 2026 19:42** | Received final "Your Refund has been credited" email. |
+| **Aug 14, 2026** | Published this comprehensive retrospective blog post. |
 
 > Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
 
