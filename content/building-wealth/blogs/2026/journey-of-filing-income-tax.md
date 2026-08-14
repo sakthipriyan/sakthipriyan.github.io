@@ -37,7 +37,7 @@ Rather than high-level generalizations, this post **backtracks each section of t
 | **Aug 6, 2026 06:47** | Received "INTIMATION u/s 143(1) OF THE INCOME TAX ACT, 1961" email confirming the refund.<br/>*(Exact refund amount as filed)* |
 | **Aug 6, 2026 16:33** | Received SMS from SBI confirming ₹440 refund credited to the account. |
 | **Aug 10, 2026 19:42** | Received final "Your Refund has been credited" email. |
-| **Aug 14, 2026 07:30** | Published this comprehensive retrospective blog post. |
+| **Aug 14, 2026 07:41** | Published this comprehensive retrospective blog post. |
 
 > Phenomenal processing by the IT department; at least I didn't expect that to happen this fast. All happened in such quick succession that I actually remembered the exact refund amount!
 
@@ -382,6 +382,8 @@ Documenting this complex filing process has reinforced my desire to drastically 
 4. **Bank Accounts (Interest & Cash Drag)**: I aim to reduce bank interest income further. Keeping excess cash in the bank not only adds to the reporting overhead but also suffers from cash drag. Worse, it creates a vicious cycle: generating more interest income increases the total tax liability, which often leads to falling short on advance tax, and ultimately paying Section 234 penalties (a trap I have fallen into in the past). I am consciously moving spending to credit cards to keep the actual cash required minimal.
 
 Once this consolidation is complete, my income reporting will be reduced to just Salary and Bank Interest. Capital Gains will only be triggered when there is actual selling (e.g., for LTCG tax harvesting). Nothing else will complicate the return!
+
+Probably I should do this year on year.
 
 ## 🔗 Related Reading
 - [Funding Interactive Brokers from India Using FX Retail](/building-wealth/blogs/funding-interactive-brokers-from-india-using-fx-retail/)
