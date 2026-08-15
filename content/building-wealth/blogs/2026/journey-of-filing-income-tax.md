@@ -5,7 +5,6 @@ draft: false
 type: "blogs"
 wealth_tags:
   - Capital Gains
-  - Financial Systems
   - Foreign Assets
   - Income Tax
   - ITR Filing

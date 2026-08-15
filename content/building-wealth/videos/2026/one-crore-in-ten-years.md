@@ -4,11 +4,11 @@ date: 2026-02-25
 draft: false
 type: "videos"
 wealth_tags:
+  - Building Wealth
   - Financial Planning
   - Inflation
   - SIP
   - Tax Optimization
-  - Wealth Building
 summary: "Most SIP calculators lie to you. Here's the real math behind ₹1 Crore in 10 years — accounting for inflation, exit tax, and a growing SIP."
 youtube_id: "h6Kbexp2whc"
 youtube_url: "https://youtu.be/h6Kbexp2whc"

@@ -8,7 +8,7 @@ wealth_tags:
   - Financial Tools
   - Inflation
   - Loans
-  - Real Value
+  - RealValue Engines
 summary: "Understand the real (inflation-adjusted) cost of loans in India using the RealValue EMI Engine — see what you truly pay over time, post-tax and post-inflation."
 youtube_id: "54pc2SyETg0"
 youtube_url: "https://youtu.be/54pc2SyETg0"

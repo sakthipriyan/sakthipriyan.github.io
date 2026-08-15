@@ -14,10 +14,10 @@
 
 wealth_tags:
   - Advanced Investor  # 3
-  - Asset Allocation  # 17
+  - Asset Allocation  # 16
   - Bharat Connect  # 2
   - Building Block  # 15
-  - Building Wealth  # 5
+  - Building Wealth  # 10
   - Capital Gains  # 1
   - Car Loan  # 1
   - Cashflow  # 1
@@ -25,7 +25,6 @@ wealth_tags:
   - Consolidation  # 2
   - Cost Optimization  # 6
   - Credit Card  # 2
-  - Currency Exchange  # 1
   - Debt  # 2
   - Debt Management  # 6
   - Demo  # 1
@@ -37,7 +36,6 @@ wealth_tags:
   - ETF  # 4
   - Financial Literacy  # 1
   - Financial Planning  # 10
-  - Financial Systems  # 1
   - Financial Tools  # 4
   - Foreign Assets  # 1
   - Forex  # 7
@@ -48,13 +46,12 @@ wealth_tags:
   - Gold  # 4
   - GST  # 1
   - Home Loan  # 3
-  - IBKR  # 12
+  - IBKR  # 11
   - Income Tax  # 1
   - Index Funds  # 6
   - Inflation  # 5
   - International Investing  # 13
-  - Investing  # 1
-  - Investment  # 3
+  - Investment  # 4
   - ITR Filing  # 1
   - Loans  # 7
   - Long Term Growth  # 3
@@ -68,9 +65,8 @@ wealth_tags:
   - Portfolio  # 3
   - Portfolio Construction  # 3
   - Portfolio Management  # 5
-  - Real Value  # 1
-  - RealValue Engines  # 2
-  - Rebalancing  # 11
+  - RealValue Engines  # 3
+  - Rebalancing  # 10
   - Remittance  # 5
   - Retirement  # 2
   - Schedule AL  # 1
@@ -78,16 +74,13 @@ wealth_tags:
   - Schedule FA  # 1
   - Schedule OS  # 1
   - SIP  # 12
-  - State Of The 1 Portfolio  # 5
+  - State Of The 1 Portfolio  # 4
   - State Of The Portfolio  # 1
-  - Tax  # 1
   - Tax Efficient Investing  # 1
   - Tax Optimization  # 3
   - Taxation  # 3
   - TCS  # 6
   - USD  # 1
-  - Wealth Building  # 2
-  - Wealth Creation  # 3
 
 systems_tags:
   - AI Engineering  # 3
