@@ -11,7 +11,7 @@ wealth_tags:
   - Building Wealth
   - ETF
   - Gold
-  - Mutual Fund
+  - Mutual Funds
 ---
 
 <span style="

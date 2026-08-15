@@ -5,8 +5,8 @@ draft: false
 type: "blogs"
 wealth_tags:
   - Cost Optimization
-  - FX Retail
   - Forex
+  - FX Retail
   - IBKR
   - International Investing
   - LRS

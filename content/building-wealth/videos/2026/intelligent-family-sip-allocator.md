@@ -9,8 +9,8 @@ wealth_tags:
   - Portfolio Management
   - Rebalancing
   - SIP
-  - TCS
   - Tax Optimization
+  - TCS
 summary: "Discover how to intelligently allocate monthly SIPs across multiple family members, optimize for tax slabs, handle international assets with TCS, and rebalance portfolios using cashflow—all without selling existing holdings."
 youtube_id: "XGzQRKJPcYM"
 youtube_url: "https://youtu.be/XGzQRKJPcYM"

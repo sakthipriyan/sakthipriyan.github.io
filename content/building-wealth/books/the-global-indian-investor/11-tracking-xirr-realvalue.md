@@ -7,8 +7,8 @@ date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true
 wealth_tags:
-  - RealValue Engines
   - Portfolio Management
+  - RealValue Engines
 ---
 
 ## TODO: Tracking XIRR - Using RealValue Portfolio

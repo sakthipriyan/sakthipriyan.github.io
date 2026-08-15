@@ -1,0 +1,114 @@
+# Canonical site-wide tag list.
+#
+# This is the source of truth for wealth_tags (building-wealth section) and
+# systems_tags (building-systems section). Before adding a new tag to any
+# article's front matter, check here first and reuse an existing tag if the
+# topic is already covered -- new tags fragment the taxonomy and dilute tag
+# pages. Only add a genuinely new tag when none of the existing ones fit.
+#
+# Style: Title Case, alphabetical order. Acronyms keep their natural casing
+# (AWS, IBKR, SIP, WASM).
+#
+# Count = number of content files currently using the tag (informational only,
+# not enforced by Hugo -- update this file by hand when tags change).
+
+wealth_tags:
+  - Advanced Investor  # 3
+  - Asset Allocation  # 17
+  - Bharat Connect  # 2
+  - Building Block  # 15
+  - Building Wealth  # 5
+  - Capital Gains  # 1
+  - Car Loan  # 1
+  - Cashflow  # 1
+  - Compound Interest  # 1
+  - Consolidation  # 2
+  - Cost Optimization  # 6
+  - Credit Card  # 2
+  - Currency Exchange  # 1
+  - Debt  # 2
+  - Debt Management  # 6
+  - Demo  # 1
+  - Diversification  # 1
+  - Dynamic Sip  # 1
+  - Emergency Fund  # 4
+  - EMI  # 3
+  - Equity  # 2
+  - ETF  # 4
+  - Financial Literacy  # 1
+  - Financial Planning  # 10
+  - Financial Systems  # 1
+  - Financial Tools  # 4
+  - Foreign Assets  # 1
+  - Forex  # 7
+  - Form 12baa  # 1
+  - FX Retail  # 8
+  - Global Indian Investor  # 1
+  - Goal Based Investing  # 2
+  - Gold  # 4
+  - GST  # 1
+  - Home Loan  # 3
+  - IBKR  # 12
+  - Income Tax  # 1
+  - Index Funds  # 6
+  - Inflation  # 5
+  - International Investing  # 13
+  - Investing  # 1
+  - Investment  # 3
+  - ITR Filing  # 1
+  - Loans  # 7
+  - Long Term Growth  # 3
+  - LRS  # 10
+  - Money Flow  # 4
+  - Mutual Funds  # 6
+  - NASDAQ 100  # 4
+  - Perpetual Rebalancing  # 8
+  - Personal Finance  # 3
+  - Personal Journey  # 2
+  - Portfolio  # 3
+  - Portfolio Construction  # 3
+  - Portfolio Management  # 5
+  - Real Value  # 1
+  - RealValue Engines  # 2
+  - Rebalancing  # 11
+  - Remittance  # 5
+  - Retirement  # 2
+  - Schedule AL  # 1
+  - Schedule CG  # 1
+  - Schedule FA  # 1
+  - Schedule OS  # 1
+  - SIP  # 12
+  - State Of The 1 Portfolio  # 5
+  - State Of The Portfolio  # 1
+  - Tax  # 1
+  - Tax Efficient Investing  # 1
+  - Tax Optimization  # 3
+  - Taxation  # 3
+  - TCS  # 6
+  - USD  # 1
+  - Wealth Building  # 2
+  - Wealth Creation  # 3
+
+systems_tags:
+  - AI Engineering  # 3
+  - ANTLR  # 3
+  - Architecture  # 1
+  - Athena  # 2
+  - AWS  # 1
+  - BigQuery  # 2
+  - Cloud  # 3
+  - DAG  # 1
+  - Data Engineering  # 1
+  - Design  # 3
+  - DevOps  # 1
+  - Docker  # 1
+  - Go  # 2
+  - IR  # 3
+  - Lambda  # 1
+  - Optimization  # 1
+  - Python  # 1
+  - Rust  # 1
+  - Serverless  # 1
+  - SQL  # 1
+  - SQL Translation  # 2
+  - WASM  # 1

@@ -12,8 +12,8 @@ summary: "Calculate your true effective FX rate including hidden spreads and tax
 wealth_tags:
   - Cost Optimization
   - Currency Exchange
-  - FX Retail
   - Forex
+  - FX Retail
   - GST
   - IBKR
   - International Investing
