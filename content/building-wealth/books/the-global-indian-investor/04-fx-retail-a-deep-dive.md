@@ -8,8 +8,8 @@ subtitle: Setting up FX Retail and using it for cost-efficient forex
 title: FX Retail - A Deep Dive
 type: books
 wealth_tags:
-  - FX Retail
   - Forex
+  - FX Retail
 ---
 
 ## FX Retail

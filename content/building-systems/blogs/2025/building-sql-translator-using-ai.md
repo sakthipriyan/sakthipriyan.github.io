@@ -5,12 +5,12 @@ date: "2025-11-21"
 draft: false
 summary: "A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing."
 systems_tags:
-  - SQL Translation
-  - ANTLR
   - AI Engineering
-  - IR
-  - BigQuery
+  - ANTLR
   - Athena
+  - BigQuery
+  - IR
+  - SQL Translation
 js_tools:
   - viz
 ---

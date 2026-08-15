@@ -4,15 +4,15 @@ date: "2026-08-14"
 draft: false
 type: "blogs"
 wealth_tags:
+  - Capital Gains
+  - Financial Systems
+  - Foreign Assets
   - Income Tax
   - ITR Filing
-  - Schedule FA
   - Schedule AL
   - Schedule CG
+  - Schedule FA
   - Schedule OS
-  - Capital Gains
-  - Foreign Assets
-  - Financial Systems
 summary: "A schedule-by-schedule reconstruction of my actual ITR-2 filing for FY 2025-26 — backtracking every schedule from Salary (Sched S) to Other Sources (Sched OS), Capital Gains (Sched CG & 112A), Foreign Assets (Sched FA), Assets & Liabilities (Sched AL), and TCS tax credit setoff."
 js_tools:
   - viz

@@ -5,11 +5,11 @@ date: "2026-01-10"
 draft: false
 summary: "How using a single uber binary with symbolic links can reduce container image size, build time & build infrastructure costs and image initialization time for Go applications across server/serverless deployment modes"
 systems_tags:
-  - go
-  - optimization
-  - docker
-  - cloud
-  - design
+  - Cloud
+  - Design
+  - Docker
+  - Go
+  - Optimization
 js_tools:
   - viz
 ---
