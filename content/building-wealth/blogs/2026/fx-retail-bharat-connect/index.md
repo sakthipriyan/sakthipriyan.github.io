@@ -249,8 +249,10 @@ For Indian investors making regular monthly remittances for global investing, op
 
 ### Downsides
 
-- It is a multi party transaction: FX Retail + Bharat Connect + BHIM + ICICI Bank. If anything goes wrong, it may take a while to fix.
 - Available only for outward remittance and limited to ₹5 lakhs via BHIM/UPI (Actual limit coming from UPI's limit of 5 lakhs for this kind of transaction. I have seen $25,000 Remittance limit somewhere but not sure who is supporting that)
+- It is a multi party transaction: FX Retail + Bharat Connect + BHIM + ICICI Bank. If anything goes wrong, it may take a while to fix.
+
+> This one isn't hypothetical any more. A later attempt through this exact flow failed mid-way and took **11 days and 43 follow-ups** to unwind — [the full account](/building-wealth/blogs/failed-fx-retail-bhim-bharat-connect-transaction/).
 
 ### Public Banks
 
