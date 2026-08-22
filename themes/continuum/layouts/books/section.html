@@ -6,6 +6,7 @@
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ .Description | default .Site.Params.description }}">
     {{- partial "css.html" (slice "style" "book-layout") }}
+    {{- partial "section-accents.html" . }}
 </head>
 
 <body class="book-reader {{ .Section }}">
