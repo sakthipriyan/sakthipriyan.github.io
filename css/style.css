@@ -1199,6 +1199,16 @@ main {
     color: white;
 }
 
+.social-link.reddit {
+    color: #FF5700;
+}
+
+.social-link.reddit:hover {
+    background: #FF5700;
+    border-color: #FF5700;
+    color: white;
+}
+
 /* Responsive design for hero */
 @media (min-width: 768px) {
     .hero-content {
