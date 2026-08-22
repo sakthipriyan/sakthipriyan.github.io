@@ -24,3 +24,8 @@ tools/get-data/*.out
 docs/test/
 static/test/bin/
 *.py
+
+# Personal data exports and local working files (never commit)
+twitter-*.zip
+nav-price-evolution-*.csv
+.claude/
