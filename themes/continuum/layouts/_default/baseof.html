@@ -19,15 +19,13 @@
         {{- $styles = $styles | append "syntax" }}
     {{- end }}
     {{- partial "css.html" $styles }}
+    {{- partial "section-accents.html" . }}
     {{- block "head" . }}{{- end }}
 </head>
+{{- /* Body class names the owning section so its accent tokens apply; taxonomy
+       and term pages resolve back to the section that declares them. */ -}}
 {{- $bodyClass := .Section }}
-{{- /* Map taxonomy sections to actual sections for CSS */ -}}
-{{- if eq .Section "systems_tags" }}
-    {{- $bodyClass = "building-systems" }}
-{{- else if eq .Section "wealth_tags" }}
-    {{- $bodyClass = "building-wealth" }}
-{{- end }}
+{{- with partial "func/owning-section.html" . }}{{ $bodyClass = .Section }}{{ end }}
 {{- /* Use book reader layout for books */ -}}
 {{- if eq .Type "books" }}
 <body class="book-reader {{ $bodyClass }}">

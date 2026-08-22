@@ -11,6 +11,14 @@
     --border-radius: 8px;
     --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+
+    /* Section accent tokens. Overridden per section by the generated
+       section-accents.css, which is built from each section's own front matter. */
+    --accent-from: var(--secondary-color);
+    --accent-to: var(--secondary-color);
+    --accent-ink: var(--secondary-color);
+    --on-accent: #fff;
+    --header-bg: var(--primary-color);
 }
 
 * {
@@ -34,8 +42,8 @@ body.book-layout {
 
 /* Header */
 .site-header {
-    background: var(--primary-color);
-    color: white;
+    background: var(--header-bg);
+    color: var(--on-accent);
     padding: 1rem 0;
     position: sticky;
     top: 0;
@@ -53,7 +61,7 @@ body.book-layout {
 
 .logo {
     font-size: 1.3rem;
-    color: white;
+    color: var(--on-accent);
     text-decoration: none;
     white-space: nowrap;
     overflow: hidden;
@@ -67,7 +75,7 @@ body.book-layout {
 }
 
 .nav-links a {
-    color: white;
+    color: var(--on-accent);
     text-decoration: none;
     transition: var(--transition);
     padding: 0.5rem 1rem;
@@ -94,7 +102,7 @@ body.book-layout {
 .hamburger-line {
     width: 25px;
     height: 3px;
-    background-color: white;
+    background-color: var(--on-accent);
     transition: all 0.3s ease;
     border-radius: 2px;
 }
@@ -206,25 +214,15 @@ body.book-layout {
 }
 
 /* Section-specific navigation link backgrounds for homepage */
-.nav-links .building-systems-link {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+/* Home-page pills: each carries its own accent tokens inline (see header.html). */
+.nav-links .section-link-pill {
+    background: linear-gradient(135deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    color: var(--on-accent);
 }
 
-.nav-links .building-systems-link:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-    color: white;
-    transform: translateY(-1px);
-}
-
-.nav-links .building-wealth-link {
-    background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
-    color: white;
-}
-
-.nav-links .building-wealth-link:hover {
-    background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
-    color: white;
+.nav-links .section-link-pill:hover {
+    background: linear-gradient(135deg, var(--accent-to) 0%, var(--accent-from) 100%);
+    color: var(--on-accent);
     transform: translateY(-1px);
 }
 
@@ -335,20 +333,14 @@ main {
 }
 
 /* Section-specific view-all button colors */
-.building-systems .view-all-link {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.view-all-link {
+    background: linear-gradient(135deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    color: var(--on-accent);
 }
 
-.building-systems .view-all-link:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-.building-wealth .view-all-link {
-    background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
-}
-
-.building-wealth .view-all-link:hover {
-    background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+.view-all-link:hover {
+    background: linear-gradient(135deg, var(--accent-to) 0%, var(--accent-from) 100%);
+    color: var(--on-accent);
 }
 
 /* Cards */
@@ -1158,54 +1150,15 @@ main {
     height: 20px;
 }
 
-.social-link.linkedin {
-    color: #0077b5;
+/* Brand colour comes from each link's --social-color (set in config.yaml). */
+.social-link[style*="--social-color"] {
+    color: var(--social-color);
 }
 
-.social-link.linkedin:hover {
-    background: #0077b5;
-    border-color: #0077b5;
-    color: white;
-}
-
-.social-link.twitter {
-    color: #1da1f2;
-}
-
-.social-link.twitter:hover {
-    background: #1da1f2;
-    border-color: #1da1f2;
-    color: white;
-}
-
-.social-link.github {
-    color: #333;
-}
-
-.social-link.github:hover {
-    background: #333;
-    border-color: #333;
-    color: white;
-}
-
-.social-link.youtube {
-    color: #FF0000;
-}
-
-.social-link.youtube:hover {
-    background: #FF0000;
-    border-color: #FF0000;
-    color: white;
-}
-
-.social-link.reddit {
-    color: #FF5700;
-}
-
-.social-link.reddit:hover {
-    background: #FF5700;
-    border-color: #FF5700;
-    color: white;
+.social-link[style*="--social-color"]:hover {
+    background: var(--social-color);
+    border-color: var(--social-color);
+    color: #fff;
 }
 
 /* Responsive design for hero */
@@ -1242,7 +1195,7 @@ main {
     box-shadow: var(--box-shadow);
     padding: 2rem;
     transition: var(--transition);
-    border-left: 4px solid var(--secondary-color);
+    border-left: 4px solid var(--accent-from);
 }
 
 .section-card:hover {
@@ -1319,44 +1272,24 @@ main {
 }
 
 /* Section-specific button colors */
-.section-card:nth-child(1) .stat-link {
+.section-card .stat-link {
     background: white;
-    color: #667eea;
-    border-color: #667eea;
+    color: var(--accent-ink);
+    border-color: var(--accent-ink);
 }
 
-.section-card:nth-child(1) .stat-link:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.section-card .stat-link:hover {
+    background: linear-gradient(135deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    color: var(--on-accent);
     border-color: transparent;
 }
 
-.section-card:nth-child(1) .section-link {
-    color: #667eea;
+.section-card .section-link {
+    color: var(--accent-ink);
 }
 
-.section-card:nth-child(1) .section-link:hover {
-    color: #764ba2;
-}
-
-.section-card:nth-child(2) .stat-link {
-    background: white;
-    color: #f7b733;
-    border-color: #f7b733;
-}
-
-.section-card:nth-child(2) .stat-link:hover {
-    background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
-    color: white;
-    border-color: transparent;
-}
-
-.section-card:nth-child(2) .section-link {
-    color: #f7b733;
-}
-
-.section-card:nth-child(2) .section-link:hover {
-    color: #fc4a1a;
+.section-card .section-link:hover {
+    color: var(--accent-to);
 }
 
 /* Slides-specific styling */
@@ -1391,27 +1324,11 @@ main {
     transform: translateX(2px);
 }
 
-/* Building Systems section branding */
-.building-systems .site-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.building-systems .logo {
-    font-size: 1.3rem;
-}
-
-/* Building Wealth section branding */
-.building-wealth .site-header {
-    background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
-}
-
-.building-wealth .logo {
-    font-size: 1.3rem;
-}
+/* Section branding comes from --header-bg / --on-accent (see section-accents.css). */
 
 /* Logo structure for section pages */
 .logo .name-link {
-    color: white;
+    color: var(--on-accent);
     text-decoration: none;
     transition: var(--transition);
     white-space: nowrap;
@@ -1744,15 +1661,9 @@ main article blockquote {
     color: #555;
 }
 
-/* Section-specific blockquote colors */
-.building-systems .post-content blockquote,
-.building-systems main article blockquote {
-    border-left-color: #667eea;
-}
-
-.building-wealth .post-content blockquote,
-.building-wealth main article blockquote {
-    border-left-color: #f7b733;
+.post-content blockquote,
+main article blockquote {
+    border-left-color: var(--accent-from);
 }
 
 .post-content code,
@@ -1776,15 +1687,9 @@ main article pre {
     line-height: 1.6;
 }
 
-/* Section-specific pre code border colors */
-.building-systems .post-content pre,
-.building-systems main article pre {
-    border-color: #667eea;
-}
-
-.building-wealth .post-content pre,
-.building-wealth main article pre {
-    border-color: #f7b733;
+.post-content pre,
+main article pre {
+    border-color: var(--accent-from);
 }
 
 .post-content pre code,
@@ -1869,58 +1774,25 @@ main article table th {
     border-left: 4px solid var(--secondary-color);
 }
 
-/* Section-specific card border colors */
-.building-systems .category-card {
-    border-left: 4px solid #667eea;
+/* Accent edge on every card type. */
+.category-card,
+.post-card,
+.slide-card,
+.book-card,
+.video-card,
+.tool-card,
+.tag-card,
+.content-card {
+    border-left: 4px solid var(--accent-from);
 }
 
-.building-wealth .category-card {
-    border-left: 4px solid #f7b733;
-}
-
-/* Section-specific colors for other card types */
-.building-systems .post-card,
-.building-systems .slide-card,
-.building-systems .book-card,
-.building-systems .video-card,
-.building-systems .tool-card {
-    border-left: 4px solid #667eea;
-}
-
-.building-wealth .post-card,
-.building-wealth .slide-card,
-.building-wealth .book-card,
-.building-wealth .video-card,
-.building-wealth .tool-card,
-.building-wealth .tag-card,
-.building-wealth .content-card {
-    border-left: 4px solid #f7b733;
-}
-
-.building-systems .tag-card,
-.building-systems .content-card {
-    border-left: 4px solid #667eea;
-}
-
-/* Section-specific tag colors */
-.building-systems .card-tags .tag-link:hover {
-    background: #667eea;
-}
-
-.building-wealth .card-tags .tag-link:hover {
-    background: #f7b733;
+.card-tags .tag-link:hover {
+    background: var(--accent-from);
+    color: var(--on-accent);
 }
 
 /* Homepage section cards - specific colors */
-.section-card:first-of-type {
-    border-left: 4px solid #667eea;
-    /* Building Systems blue */
-}
 
-.section-card:last-of-type {
-    border-left: 4px solid #f7b733;
-    /* Building Wealth gold */
-}
 
 .category-card:hover {
     transform: translateY(-2px);
@@ -2156,15 +2028,7 @@ main article table th {
 }
 
 /* Homepage section cards - specific colors */
-.section-card:first-of-type {
-    border-left: 4px solid #667eea;
-    /* Building Systems blue */
-}
 
-.section-card:last-of-type {
-    border-left: 4px solid #f7b733;
-    /* Building Wealth gold */
-}
 
 /* Tag Cards Styles */
 .tags-grid {
@@ -2254,13 +2118,9 @@ main article table th {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Section-specific tag badge colors */
-.building-systems .tag-count-badge {
-    background: #667eea;
-}
-
-.building-wealth .tag-count-badge {
-    background: #f7b733;
+.tag-count-badge {
+    background: var(--accent-from);
+    color: var(--on-accent);
 }
 
 .tag-card:hover .tag-count-badge {

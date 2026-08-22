@@ -24,10 +24,10 @@ Displays title, summary, date, and reading/watching/use time
         </span>
         {{- end }}
 
-        {{- if .File }}
-        <span class="meta-item" title="View Source on GitHub">
+        {{- if and .File .Site.Params.sourceRepo }}
+        <span class="meta-item" title="View source">
             <span class="meta-icon">💻</span>
-            <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/{{ .File.Path }}" target="_blank" rel="noopener noreferrer">Source</a>
+            <a href="{{ printf "%s/blob/%s/content/%s" (strings.TrimSuffix "/" .Site.Params.sourceRepo) (.Site.Params.sourceBranch | default "main") .File.Path }}" target="_blank" rel="noopener noreferrer">Source</a>
         </span>
         {{- end }}
 

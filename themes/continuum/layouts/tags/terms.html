@@ -14,23 +14,15 @@
     {{ end }}
 {{ end }}
 
-<!-- Set taxonomy based on section -->
-{{ if eq $currentSection "building-systems" }}
-    {{ $taxonomyName = "systems_tags" }}
-    {{ if isset .Site.Taxonomies "systems_tags" }}
-        {{ $taxonomyData = .Site.Taxonomies.systems_tags.ByCount }}
-    {{ end }}
-{{ else if eq $currentSection "building-wealth" }}
-    {{ $taxonomyName = "wealth_tags" }}
-    {{ if isset .Site.Taxonomies "wealth_tags" }}
-        {{ $taxonomyData = .Site.Taxonomies.wealth_tags.ByCount }}
-    {{ end }}
-{{ else }}
-    <!-- Global fallback -->
-    {{ $taxonomyName = "systems_tags" }}
-    {{ if isset .Site.Taxonomies "systems_tags" }}
-        {{ $taxonomyData = .Site.Taxonomies.systems_tags.ByCount }}
-    {{ end }}
+{{- /* Taxonomy comes from the owning section's own front matter. */ -}}
+{{ $sectionPage := partial "func/owning-section.html" . }}
+{{ if $sectionPage }}
+    {{ $currentSection = $sectionPage.Section }}
+    {{ $sectionName = $sectionPage.Title }}
+    {{ $taxonomyName = $sectionPage.Params.taxonomy | default "" }}
+{{ end }}
+{{ if and $taxonomyName (isset .Site.Taxonomies $taxonomyName) }}
+    {{ $taxonomyData = (index .Site.Taxonomies $taxonomyName).ByCount }}
 {{ end }}
 
 <div class="container section-container">
@@ -45,14 +37,7 @@
         {{ if $taxonomyData }}
         <div class="tags-grid">
             {{ range $taxonomyData }}
-                {{ $tagUrl := "" }}
-                {{ if eq $currentSection "building-systems" }}
-                    {{ $tagUrl = printf "/building-systems/tags/%s/" (.Name | urlize) }}
-                {{ else if eq $currentSection "building-wealth" }}
-                    {{ $tagUrl = printf "/building-wealth/tags/%s/" (.Name | urlize) }}
-                {{ else }}
-                    {{ $tagUrl = printf "/building-systems/tags/%s/" (.Name | urlize) }}
-                {{ end }}
+                {{ $tagUrl := printf "/%s/tags/%s/" $currentSection (.Name | urlize) }}
                 
                 <div class="tag-card">
                     <a href="{{ $tagUrl | absURL }}">

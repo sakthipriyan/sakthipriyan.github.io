@@ -18,10 +18,8 @@
             {{- end -}}
             {{- /* Determine books section URL based on current section */ -}}
             {{- $booksUrl := "" -}}
-            {{- if in .RelPermalink "/building-systems/" -}}
-                {{- $booksUrl = "/building-systems/books/" -}}
-            {{- else if in .RelPermalink "/building-wealth/" -}}
-                {{- $booksUrl = "/building-wealth/books/" -}}
+            {{- with partial "func/owning-section.html" . -}}
+                {{- $booksUrl = printf "%sbooks/" .RelPermalink -}}
             {{- end -}}
             <h1 class="book-header-title">
                 <a href="{{ $booksUrl }}" class="book-icon-link" title="Back to Books">📖</a>
@@ -31,7 +29,7 @@
 
         {{- /* Author */ -}}
         <div class="book-author">
-            by <a href="/" class="author-link">{{ .Params.author | default "Sakthi Priyan H" }}</a>
+            by <a href="/" class="author-link">{{ .Params.author | default .Site.Params.author | default .Site.Title }}</a>
         </div>
 
         {{- /* Theme Toggle */ -}}

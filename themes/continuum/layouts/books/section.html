@@ -10,7 +10,8 @@
 
 <body class="book-reader {{ .Section }}">
     {{- /* Check if this is the books list page or a specific book page */ -}}
-    {{- $isBooksListPage := or (eq .RelPermalink "/building-systems/books/") (eq .RelPermalink "/building-wealth/books/") -}}
+    {{- /* True for a section's /books/ index, false for an individual book. */ -}}
+    {{- $isBooksListPage := eq (len (split (strings.TrimSuffix "/" (strings.TrimPrefix "/" .RelPermalink)) "/")) 2 -}}
 
     {{- if $isBooksListPage -}}
     {{- /* This is the books list page - use default layout */ -}}

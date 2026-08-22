@@ -8,17 +8,11 @@
             {{ if .Section }}
                 {{ $actualSection := .Section }}
                 {{ $sectionTitle := .Section | title | replaceRE "-" " " }}
-                
-                <!-- Map taxonomy sections to actual sections -->
-                {{ if eq .Section "systems_tags" }}
-                    {{ $actualSection = "building-systems" }}
-                    {{ $sectionTitle = "Building Systems" }}
-                {{ else if eq .Section "wealth_tags" }}
-                    {{ $actualSection = "building-wealth" }}
-                    {{ $sectionTitle = "Building Wealth" }}
+                {{ $sectionPage := partial "func/owning-section.html" . }}
+                {{ if $sectionPage }}
+                    {{ $actualSection = $sectionPage.Section }}
+                    {{ $sectionTitle = $sectionPage.Title }}
                 {{ end }}
-                
-                {{ $sectionPage := .Site.GetPage $actualSection }}
                 {{ if $sectionPage }}
                 <li class="breadcrumb-item{{ if eq .RelPermalink $sectionPage.RelPermalink }} active{{ end }}"{{ if eq .RelPermalink $sectionPage.RelPermalink }} aria-current="page"{{ end }}>
                     {{ if eq .RelPermalink $sectionPage.RelPermalink }}
