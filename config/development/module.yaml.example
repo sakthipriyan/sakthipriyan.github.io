@@ -1,0 +1,11 @@
+# Optional, local only. Copy to config/development/module.yaml (gitignored) to
+# develop the theme against this site: `hugo server` runs in the development
+# environment, so this applies there and never to a production build (`hugo`),
+# which always resolves the published module.
+#
+# The path must be absolute -- Hugo resolves a relative replacement against the
+# project root, not the parent directory.
+module:
+  imports:
+    - path: github.com/sakthipriyan/hugo-continuum
+  replacements: "github.com/sakthipriyan/hugo-continuum -> /absolute/path/to/hugo-continuum"

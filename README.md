@@ -12,21 +12,42 @@ This repository contains the Hugo-based static site source, including:
 
 ## Tech Stack
 - **Site Generator:** [Hugo](https://gohugo.io/) v0.164.0 Extended
-- **Theme:** Custom `continuum` theme (located in `/themes/continuum`)
+- **Theme:** [`continuum`](https://github.com/sakthipriyan/hugo-continuum), consumed as a Hugo Module
 - **Hosting:** GitHub Pages (served from the `gh-pages` branch)
 - **CI/CD:** GitHub Actions (auto-deploys on every push to `main`)
 
 ## Local Development
 
-1. Install Hugo via Homebrew:
+1. Install Hugo and Go (Hugo Modules need Go to resolve the theme):
    ```bash
-   brew install hugo
+   brew install hugo go
    ```
 2. Clone this repository.
 3. Start the local development server:
    ```bash
    hugo server -D
    ```
+   The theme is downloaded automatically on first run.
 4. View the site at `http://localhost:1313/`
+
+### Working on the theme at the same time
+
+To edit the theme and see changes here immediately, check out
+[hugo-continuum](https://github.com/sakthipriyan/hugo-continuum) and point this
+site at it:
+
+```bash
+cp config/development/module.yaml.example config/development/module.yaml
+# then set the absolute path to your hugo-continuum checkout
+```
+
+That file is gitignored and only applies to `hugo server`; production builds
+always use the published module.
+
+To pull in a new published version of the theme:
+
+```bash
+hugo mod get -u github.com/sakthipriyan/hugo-continuum
+```
 
 > **Note:** You don't need to build manually anymore. Pushing to `main` (via a PR) triggers the CI pipeline which builds and deploys automatically.
