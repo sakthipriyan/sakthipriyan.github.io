@@ -1,15 +1,14 @@
----
-title: Listing S3 Top level folders
+---title: Listing S3 Top level folders
 date: '2015-12-09'
 draft: false
 type: blogs
 systems_tags:
-- aws
+- AWS
 - s3
 - export
 - code
 - boto
-- python
+- Python
 author: Sakthi Priyan H
 summary: using simple Python code.
 aliases:

@@ -1,14 +1,13 @@
----
-title: Responsive exponential backoff in Go
+---title: Responsive exponential backoff in Go
 date: '2022-11-13'
 draft: false
 type: blogs
 systems_tags:
-- go
+- Go
 - exponential-backoff
 - sleep
 - code
-- cloud
+- Cloud
 - dynamodb
 summary: using exponentially scaling up and down the sleep time
 aliases:

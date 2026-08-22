@@ -28,7 +28,7 @@ params:
 markup:
   highlight:
     noClasses: false
-    codeFences: false
+    codeFences: true
   goldmark:
     renderer:
       unsafe: true

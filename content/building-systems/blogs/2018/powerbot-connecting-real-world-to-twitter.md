@@ -1,12 +1,11 @@
----
-title: Powerbot connecting real world to twitter
+---title: Powerbot connecting real world to twitter
 date: '2018-05-06'
 draft: false
 type: blogs
 systems_tags:
 - hardware
 - iot
-- python
+- Python
 - code
 - circuit
 - raspberry-pi

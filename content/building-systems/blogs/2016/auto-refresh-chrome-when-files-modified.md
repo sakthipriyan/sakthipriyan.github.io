@@ -1,11 +1,10 @@
----
-title: Auto refresh Chrome when files modified
+---title: Auto refresh Chrome when files modified
 date: '2016-02-15'
 draft: false
 type: blogs
 systems_tags:
 - chrome
-- python
+- Python
 - webgen
 - code
 author: Sakthi Priyan H

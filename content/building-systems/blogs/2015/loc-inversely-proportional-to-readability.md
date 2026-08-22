@@ -1,12 +1,11 @@
----
-title: Lines of code inversely proportional to readability
+---title: Lines of code inversely proportional to readability
 date: '2015-07-07'
 draft: false
 type: blogs
 systems_tags:
 - code
 - java
-- optimization
+- Optimization
 - code-less
 author: Sakthi Priyan H
 summary: Always code less to make it easily readable.

@@ -1,5 +1,4 @@
----
-title: Creating REST API Specification
+---title: Creating REST API Specification
 date: '2016-03-30'
 draft: false
 type: blogs
@@ -7,7 +6,7 @@ systems_tags:
 - api
 - swagger
 - documentation
-- design
+- Design
 - cricscore-api
 author: Sakthi Priyan H
 summary: using Swagger Specification

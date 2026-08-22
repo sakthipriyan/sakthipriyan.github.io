@@ -2915,3 +2915,53 @@ main article table th {
 .green  { color: #4CAF50; }
 .yellow { color: #f39c12; }
 .red    { color: #dc3545; }
+
+/* Diagram & chart containers (styles formerly applied inline by the loader scripts) */
+.echarts-container {
+    display: block;
+    margin: 2rem 0;
+}
+
+.echarts-container.echarts-loading,
+.d2-diagram.d2-loading {
+    padding: 2rem;
+    text-align: center;
+    font-family: monospace;
+    color: #888;
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}
+
+.echarts-container.echarts-loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.d2-diagram svg {
+    width: 100%;
+    height: auto;
+}
+
+.chart-error {
+    color: #c0392b;
+    padding: 1rem;
+}
+
+.spinner {
+    display: inline-block;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+    }
+}

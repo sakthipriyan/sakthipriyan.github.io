@@ -1,5 +1,4 @@
----
-title: Documenting Play Framework using Swagger
+---title: Documenting Play Framework using Swagger
 date: '2016-07-20'
 draft: false
 type: blogs
@@ -8,7 +7,7 @@ systems_tags:
 - swagger
 - play-framework
 - documentation
-- design
+- Design
 author: Sakthi Priyan H
 summary: Setting up live documentation for API
 aliases:

@@ -1,5 +1,4 @@
----
-title: Building a scalable recommendation engine
+---title: Building a scalable recommendation engine
 date: '2015-05-30'
 draft: false
 type: blogs
@@ -7,7 +6,7 @@ systems_tags:
 - playframework
 - couchbase
 - elasticsearch
-- design
+- Design
 - big-data
 - recommendation
 author: Sakthi Priyan H

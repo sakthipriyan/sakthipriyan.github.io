@@ -1,13 +1,12 @@
----
-title: How to create a modern blog?
+---title: How to create a modern blog?
 date: '2015-04-08'
 draft: false
 type: blogs
 systems_tags:
 - blog-software
 - webgen
-- design
-- python
+- Design
+- Python
 - markdown
 author: Sakthi Priyan H
 summary: using markdown and python

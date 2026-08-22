@@ -1,10 +1,9 @@
----
-title: Setup Elasticsearch cluster on AWS
+---title: Setup Elasticsearch cluster on AWS
 date: '2015-07-15'
 draft: false
 type: blogs
 systems_tags:
-- aws
+- AWS
 - elasticsearch
 - setup
 author: Sakthi Priyan H

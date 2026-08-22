@@ -91,22 +91,6 @@
                     {{ end }}
                     {{ end }}
 
-                    <!-- Add Tags link -->
-                    {{ $tagsPath := printf "%stags/" $sectionPath }}
-                    {{ $tagsSection := $.Site.GetPage $tagsPath }}
-                    {{ if $tagsSection }}
-                    {{ $tagCount := 0 }}
-                    {{ range $.Site.Pages }}
-                    {{ if and .Params.tags (eq .Section .Section) }}
-                    {{ $tagCount = add $tagCount 1 }}
-                    {{ end }}
-                    {{ end }}
-                    {{ if gt $tagCount 0 }}
-                    <a href="{{ $tagsSection.Permalink }}" class="stat-link">
-                        🏷️ {{ $tagCount }} {{ if eq $tagCount 1 }}tagged item{{ else }}tagged items{{ end }}
-                    </a>
-                    {{ end }}
-                    {{ end }}
                 </div>
             </div>
 

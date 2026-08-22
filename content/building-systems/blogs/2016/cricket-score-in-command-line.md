@@ -1,5 +1,4 @@
----
-title: Cricket score in command line
+---title: Cricket score in command line
 date: '2016-01-28'
 draft: false
 type: blogs
@@ -7,7 +6,7 @@ systems_tags:
 - cricket
 - code
 - cricscore-api
-- python
+- Python
 author: Sakthi Priyan H
 summary: using python and open cricscore api
 aliases:

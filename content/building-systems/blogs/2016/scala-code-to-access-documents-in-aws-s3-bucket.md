@@ -1,11 +1,10 @@
----
-title: Scala code to access documents in AWS S3 bucket
+---title: Scala code to access documents in AWS S3 bucket
 date: '2016-02-17'
 draft: false
 type: blogs
 systems_tags:
 - scala
-- aws
+- AWS
 - s3
 - http
 - code

@@ -1,5 +1,4 @@
----
-title: Crawlpod - open source scalable web crawler
+---title: Crawlpod - open source scalable web crawler
 date: '2015-12-12'
 draft: false
 type: blogs
@@ -9,7 +8,7 @@ systems_tags:
 - scala
 - akka
 - mongodb
-- design
+- Design
 - open-source
 author: Sakthi Priyan H
 summary: built on top of Scala and Akka framework.

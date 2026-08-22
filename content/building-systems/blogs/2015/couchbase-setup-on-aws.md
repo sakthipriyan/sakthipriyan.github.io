@@ -1,12 +1,11 @@
----
-title: Couchbase setup on AWS
+---title: Couchbase setup on AWS
 date: '2015-07-24'
 draft: false
 type: blogs
 systems_tags:
 - couchbase
 - setup
-- aws
+- AWS
 author: Sakthi Priyan H
 summary: EC2 instances
 aliases:

@@ -1,5 +1,4 @@
----
-title: Experiment with Raspberry Pi
+---title: Experiment with Raspberry Pi
 date: '2016-01-05'
 draft: false
 type: blogs
@@ -11,7 +10,7 @@ systems_tags:
 - downloader
 - youtube
 - torrent
-- python
+- Python
 author: Sakthi Priyan H
 summary: How I turned it to a electricity monitor, tweetbot and downloader.
 aliases:

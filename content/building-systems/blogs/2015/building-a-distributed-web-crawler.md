@@ -1,5 +1,4 @@
----
-title: Building a scalable distributed web crawler
+---title: Building a scalable distributed web crawler
 date: '2015-04-18'
 draft: false
 type: blogs
@@ -11,7 +10,7 @@ systems_tags:
 - couchbase
 - jsoup
 - big-data
-- design
+- Design
 - distributed
 - proxy
 author: Sakthi Priyan H
