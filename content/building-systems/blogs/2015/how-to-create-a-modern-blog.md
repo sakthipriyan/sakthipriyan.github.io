@@ -1,4 +1,5 @@
----title: How to create a modern blog?
+---
+title: How to create a modern blog?
 date: '2015-04-08'
 draft: false
 type: blogs

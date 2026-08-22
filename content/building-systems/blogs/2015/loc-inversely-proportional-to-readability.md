@@ -1,4 +1,5 @@
----title: Lines of code inversely proportional to readability
+---
+title: Lines of code inversely proportional to readability
 date: '2015-07-07'
 draft: false
 type: blogs

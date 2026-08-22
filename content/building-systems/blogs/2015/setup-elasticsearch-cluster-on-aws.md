@@ -1,4 +1,5 @@
----title: Setup Elasticsearch cluster on AWS
+---
+title: Setup Elasticsearch cluster on AWS
 date: '2015-07-15'
 draft: false
 type: blogs

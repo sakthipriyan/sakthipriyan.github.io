@@ -1,4 +1,5 @@
----title: Building a scalable recommendation engine
+---
+title: Building a scalable recommendation engine
 date: '2015-05-30'
 draft: false
 type: blogs

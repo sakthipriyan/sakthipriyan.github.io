@@ -1,4 +1,5 @@
----title: Responsive exponential backoff in Go
+---
+title: Responsive exponential backoff in Go
 date: '2022-11-13'
 draft: false
 type: blogs

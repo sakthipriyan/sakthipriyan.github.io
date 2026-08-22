@@ -1,4 +1,5 @@
----title: Documenting Play Framework using Swagger
+---
+title: Documenting Play Framework using Swagger
 date: '2016-07-20'
 draft: false
 type: blogs

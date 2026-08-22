@@ -1,4 +1,5 @@
----title: Couchbase setup on AWS
+---
+title: Couchbase setup on AWS
 date: '2015-07-24'
 draft: false
 type: blogs

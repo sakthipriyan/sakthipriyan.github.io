@@ -1,4 +1,5 @@
----title: Cricket score in command line
+---
+title: Cricket score in command line
 date: '2016-01-28'
 draft: false
 type: blogs
