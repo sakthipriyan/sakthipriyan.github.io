@@ -83,8 +83,11 @@ body.book-layout {
 }
 
 .nav-links a:hover {
-    color: var(--secondary-color);
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--on-accent);
+    /* Tint derived from the text colour, so it darkens light headers and
+       lightens dark ones. Older browsers keep the flat fallback. */
+    background: rgba(255, 255, 255, 0.15);
+    background: color-mix(in srgb, var(--on-accent) 15%, transparent);
 }
 
 /* Hamburger Menu */
@@ -1335,12 +1338,12 @@ main {
 }
 
 .logo .name-link:hover {
-    color: var(--secondary-color);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    color: var(--on-accent);
+    text-decoration: underline;
 }
 
 .logo .separator {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--on-accent);
     margin: 0 0.75rem;
     font-weight: normal;
     flex-shrink: 0;
