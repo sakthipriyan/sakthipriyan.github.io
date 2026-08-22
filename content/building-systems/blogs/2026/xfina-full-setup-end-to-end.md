@@ -5,13 +5,13 @@ date: "2026-08-08"
 draft: false
 summary: "Parsing Indian financial statements locally with Rust, WebAssembly, and a single shared core across Rust, Python, JavaScript, CLI, and the web."
 systems_tags:
-  - rust
-  - wasm
-  - python
-  - architecture
-  - cloud
-  - devops
-  - design
+  - Architecture
+  - Cloud
+  - Design
+  - DevOps
+  - Python
+  - Rust
+  - WASM
 js_tools:
   - d2
 ---

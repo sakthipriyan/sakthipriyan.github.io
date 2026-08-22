@@ -7,7 +7,7 @@ summary: "How to Invest in Debt in India 2025 for Building Wealth using Arbitrag
 wealth_tags:
   - Building Block
   - Debt
-  - Mutual Fund
+  - Mutual Funds
 youtube_id: "aopoC1my4M4" # Add YouTube Video ID here
 youtube_url: "https://youtu.be/aopoC1my4M4"
 duration: "08:59"

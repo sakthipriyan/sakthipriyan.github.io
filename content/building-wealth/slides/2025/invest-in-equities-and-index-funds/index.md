@@ -8,7 +8,7 @@ summary: "Simple. Smart. Boring. Powerful. Grow Wealth through Equity & Index Fu
 wealth_tags:
   - Building Wealth
   - Equity
-  - Index Fund
+  - Index Funds
 ---
 
 <span style="

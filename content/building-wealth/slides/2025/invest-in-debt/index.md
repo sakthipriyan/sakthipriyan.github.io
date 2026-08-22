@@ -10,7 +10,7 @@ js_tools:
 wealth_tags:
   - Building Block
   - Debt
-  - Mutual Fund
+  - Mutual Funds
 ---
 
 <span style="

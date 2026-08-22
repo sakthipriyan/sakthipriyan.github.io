@@ -6,8 +6,8 @@ type: "blogs"
 wealth_tags:
   - Bharat Connect
   - Cost Optimization
-  - FX Retail
   - Forex
+  - FX Retail
   - IBKR
   - International Investing
   - LRS

@@ -5,13 +5,13 @@ date: "2026-04-23"
 draft: false
 summary: "How to build an N-stage Driver/Executor model using AWS Lambda and Step Functions that handles massive batch and micro-batch workloads without a single dedicated server, eliminating cluster maintenance and scaling instantly to zero"
 systems_tags:
-  - aws
-  - lambda
-  - serverless
-  - data-engineering
-  - cloud
-  - design
+  - AWS
+  - Cloud
+  - Data Engineering
+  - Design
   - Go
+  - Lambda
+  - Serverless
 js_tools:
   - viz
 ---

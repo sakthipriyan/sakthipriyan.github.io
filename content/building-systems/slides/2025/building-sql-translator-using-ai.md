@@ -8,12 +8,12 @@ summary: "A walkthrough of building a SQL translator using agentic AI, determini
 js_tools:
   - viz
 systems_tags:
-  - SQL Translation
-  - ANTLR
   - AI Engineering
-  - IR
-  - BigQuery
+  - ANTLR
   - Athena
+  - BigQuery
+  - IR
+  - SQL Translation
 ---
 
 ## Building SQL Translator 

@@ -8,11 +8,11 @@ summary: "Prototype system that converts natural language into SQL and IR to dri
 js_tools:
   - viz
 systems_tags:
-  - SQL
   - AI Engineering
-  - IR
-  - DAG
   - ANTLR
+  - DAG
+  - IR
+  - SQL
 ---
 <small>sakthipriyan.com/building-systems</small>
 

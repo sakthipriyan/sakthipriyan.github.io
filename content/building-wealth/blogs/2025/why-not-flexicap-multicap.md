@@ -7,7 +7,7 @@ summary: "A comparison between a typical multicap/flexicap fund and a globally d
 wealth_tags:
   - Asset Allocation
   - Index Funds
-  - Investing
+  - Investment
   - Personal Finance
   - Portfolio Construction
 ---

@@ -7,8 +7,8 @@ date: 2026-05-10
 author: "Sakthi Priyan H"
 draft: false
 wealth_tags:
-  - TCS
   - Taxation
+  - TCS
 ---
 
 When I first learned about TCS on LRS remittances, my instinct was to stay below the ₹10 lakh threshold. Paying 20% TCS sounded like locking away a large portion of capital for more than a year.

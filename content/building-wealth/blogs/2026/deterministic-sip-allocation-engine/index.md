@@ -6,7 +6,7 @@ type: "blogs"
 wealth_tags:
   - Asset Allocation
   - Perpetual Rebalancing
-  - Realvalue Engines
+  - RealValue Engines
   - Rebalancing
   - SIP
 summary: "How I upgraded my *RealValue Family SIP Allocator* from a proportional drift allocation model to an even drift optimization model and why it compressed the negative drift band by 75%."

@@ -7,8 +7,8 @@ date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
 wealth_tags:
-  - International Investing
   - Asset Allocation
+  - International Investing
 ---
 
 For an Indian investor seeking global diversification, the key decision is not only **what** to invest in, but **how** to access international markets.
