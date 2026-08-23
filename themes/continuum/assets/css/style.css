@@ -126,10 +126,13 @@ body.book-layout {
         padding: 0 1rem;
     }
     
+    /* The logo keeps its 1.3rem base size at every width: it is nowrap with
+       ellipsis, so a long section name truncates rather than shrinking the
+       header text. Three rules used to fight over this (0.9 / 1.1 / 0.85rem,
+       the last one winning). */
     .logo {
         order: 1;
         flex: 1;
-        font-size: 0.9rem;
         min-width: 0;
     }
     
@@ -1003,10 +1006,6 @@ main {
         padding: 0 1rem;
     }
 
-    .logo {
-        font-size: 1.1rem;
-    }
-
     main {
         padding: 1rem;
     }
@@ -1438,10 +1437,6 @@ main {
 
 /* Responsive navigation for section headers */
 @media (max-width: 768px) {
-    .logo {
-        font-size: 0.85rem;
-    }
-    
     .logo .separator {
         margin: 0 0.25rem;
     }
@@ -2915,3 +2910,53 @@ main article table th {
 .green  { color: #4CAF50; }
 .yellow { color: #f39c12; }
 .red    { color: #dc3545; }
+
+/* Diagram & chart containers (styles formerly applied inline by the loader scripts) */
+.echarts-container {
+    display: block;
+    margin: 2rem 0;
+}
+
+.echarts-container.echarts-loading,
+.d2-diagram.d2-loading {
+    padding: 2rem;
+    text-align: center;
+    font-family: monospace;
+    color: #888;
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}
+
+.echarts-container.echarts-loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.d2-diagram svg {
+    width: 100%;
+    height: auto;
+}
+
+.chart-error {
+    color: #c0392b;
+    padding: 1rem;
+}
+
+.spinner {
+    display: inline-block;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+    }
+}

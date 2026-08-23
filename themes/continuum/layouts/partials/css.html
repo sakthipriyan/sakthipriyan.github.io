@@ -1,0 +1,13 @@
+{{- /*
+  Emits minified, fingerprinted <link> tags for theme stylesheets.
+  Usage: {{ partial "css.html" (slice "style" "tools") }}
+  Names are resolved against assets/css/<name>.css.
+*/ -}}
+{{- range . -}}
+  {{- with resources.Get (printf "css/%s.css" .) -}}
+    {{- $css := . | minify | fingerprint -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- else -}}
+    {{- errorf "partial css.html: assets/css/%s.css not found" . -}}
+  {{- end -}}
+{{- end -}}

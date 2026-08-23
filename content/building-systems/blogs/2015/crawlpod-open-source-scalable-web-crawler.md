@@ -9,7 +9,7 @@ systems_tags:
 - scala
 - akka
 - mongodb
-- design
+- Design
 - open-source
 author: Sakthi Priyan H
 summary: built on top of Scala and Akka framework.
@@ -77,25 +77,29 @@ Important two classes are explained here.
 
 1. **CrawlRequest** - Contains all data required to send HTTP request.
 
-        case class CrawlRequest (
-            url: String, // URL of request, with query params.
-            extractor: String, // package.classname.methodname of extractor.
-            method: String = "GET", // Http method.
-            headers: Option[Map[String, String]] = None, // Optional Header.
-            // Optional data that can be passed around.
-            passData: Option[Map[String, String]] = None,
-            requestBody: Option[String] = None, //Post request body
-            cache: Boolean = true )
+    ```scala
+    case class CrawlRequest (
+        url: String, // URL of request, with query params.
+        extractor: String, // package.classname.methodname of extractor.
+        method: String = "GET", // Http method.
+        headers: Option[Map[String, String]] = None, // Optional Header.
+        // Optional data that can be passed around.
+        passData: Option[Map[String, String]] = None,
+        requestBody: Option[String] = None, //Post request body
+        cache: Boolean = true )
+    ```
 
 2. **CrawlResponse** - represents the http response with additional data.
 
-        case class CrawlResponse(
-            request: CrawlRequest, // Original crawl request object
-            status: Int, // http status. Say 200, 404, etc.,
-            headers: Map[String, List[String]], // Response headers
-            body: String, // response body
-            created: Long = System.currentTimeMillis,
-            timeTaken: Int = -1) // Time taken to get this response.
+    ```scala
+    case class CrawlResponse(
+        request: CrawlRequest, // Original crawl request object
+        status: Int, // http status. Say 200, 404, etc.,
+        headers: Map[String, List[String]], // Response headers
+        body: String, // response body
+        created: Long = System.currentTimeMillis,
+        timeTaken: Int = -1) // Time taken to get this response.
+    ```
 
 
 ### Now lets Crawl.
@@ -104,32 +108,36 @@ Assumed that mongodb is running somewhere and configured `mongodb.url` in `appli
 #### Steps 1, 2, 3.
 1. Create a extractor code which returns `Extract` object.
 
-        package net.crawlpod.extract
+    ```scala
+    package net.crawlpod.extract
 
-        class Example {
-          def init(response: CrawlResponse): Extract = {
-            val dom = response.toDom
-            // Heavy lifting next two lines,
-            // Custom implementation for various pages of interest.
-            val docs = extractDocsFromDom(dom) // Extract json docs.
-            val requests = extractRequestsFromDom(dom) // Extract next set of urls.
-            new Extract(docs,requests)
-          }
-        }
+    class Example {
+      def init(response: CrawlResponse): Extract = {
+        val dom = response.toDom
+        // Heavy lifting next two lines,
+        // Custom implementation for various pages of interest.
+        val docs = extractDocsFromDom(dom) // Extract json docs.
+        val requests = extractRequestsFromDom(dom) // Extract next set of urls.
+        new Extract(docs,requests)
+      }
+    }
+    ```
 
 2. Add an entry to the queue. Since Mongodb is used, we have to add an Json object into `queue` collection.
 
-        {
-            "url" : "http://example.com",
-            "extractor" : "net.crawlpod.extract.Example.init",
-            "method" : "GET",
-            "passData" : {
-                "date1" : "01-Apr-2014",
-                "date2" : "31-Mar-2015"
-            },
-            "cache" : true,
-            "used" : false
-        }
+    ```json
+    {
+        "url" : "http://example.com",
+        "extractor" : "net.crawlpod.extract.Example.init",
+        "method" : "GET",
+        "passData" : {
+            "date1" : "01-Apr-2014",
+            "date2" : "31-Mar-2015"
+        },
+        "cache" : true,
+        "used" : false
+    }
+    ```
 
 3. Now run the application by launching `net.crawlpod.core.CrawlPod`
 

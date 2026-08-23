@@ -65,27 +65,31 @@ First step is to login and get the access token.
 
 **Request**
 
-    POST /services/oauth2/token HTTP/1.1
-    Host: login.salesforce.com
-    X-PrettyPrint: 1
-    Content-Type: application/x-www-form-urlencoded
+```http
+POST /services/oauth2/token HTTP/1.1
+Host: login.salesforce.com
+X-PrettyPrint: 1
+Content-Type: application/x-www-form-urlencoded
 
-    grant_type=password&
-    client_id=consumerkey&
-    client_secret=consumersecret&
-    username=user%40domain.com&
-    password=passwordsecuritytoken
+grant_type=password&
+client_id=consumerkey&
+client_secret=consumersecret&
+username=user%40domain.com&
+password=passwordsecuritytoken
+```
 
 **Response**
 
-    {
-      "access_token" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-      "instance_url" : "https://ap2.salesforce.com",
-      "id" : "https://login.salesforce.com/id/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXX",
-      "token_type" : "Bearer",
-      "issued_at" : "1454735969118",
-      "signature" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX="
-    }
+```json
+{
+  "access_token" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "instance_url" : "https://ap2.salesforce.com",
+  "id" : "https://login.salesforce.com/id/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXX",
+  "token_type" : "Bearer",
+  "issued_at" : "1454735969118",
+  "signature" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX="
+}
+```
 
 
 * We have to use `access_token` in `Authorization` Header as `Authorization: Bearer access_token`
@@ -98,56 +102,60 @@ Here, I am retrieving a custom object, Mutual Fund.
 
 **Request**
 
-    GET /services/data/v35.0/sobjects/Mutual_Fund__c HTTP/1.1
-    Host: ap2.salesforce.com
-    Authorization: Bearer access_token
-    X-PrettyPrint: 1
+```http
+GET /services/data/v35.0/sobjects/Mutual_Fund__c HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+```
 
 **Response**
 
-    {
-      "objectDescribe": {
-        "activateable": false,
-        "createable": true,
-        "custom": true,
-        "customSetting": false,
-        "deletable": true,
-        "deprecatedAndHidden": false,
-        "feedEnabled": true,
-        "keyPrefix": "a00",
-        "label": "Mutual Fund",
-        "labelPlural": "Mutual Funds",
-        "layoutable": true,
-        "mergeable": false,
-        "name": "Mutual_Fund__c",
-        "queryable": true,
-        "replicateable": true,
-        "retrieveable": true,
-        "searchable": true,
-        "triggerable": true,
-        "undeletable": true,
-        "updateable": true,
-        "urls": {
-          "compactLayouts": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe/compactLayouts",
-          "rowTemplate": "/services/data/v35.0/sobjects/Mutual_Fund__c/{ID}",
-          "approvalLayouts": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe/approvalLayouts",
-          "describe": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe",
-          "quickActions": "/services/data/v35.0/sobjects/Mutual_Fund__c/quickActions",
-          "layouts": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe/layouts",
-          "sobject": "/services/data/v35.0/sobjects/Mutual_Fund__c"
-        }
-      },
-      "recentItems": [
-        {
-          "attributes": {
-            "type": "Mutual_Fund__c",
-            "url": "/services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF"
-          },
-          "Id": "a002800000P9WeyAAF",
-          "Name": "Motilal Focused Midcap 30 - DP G"
-        }
-      ]
+```json
+{
+  "objectDescribe": {
+    "activateable": false,
+    "createable": true,
+    "custom": true,
+    "customSetting": false,
+    "deletable": true,
+    "deprecatedAndHidden": false,
+    "feedEnabled": true,
+    "keyPrefix": "a00",
+    "label": "Mutual Fund",
+    "labelPlural": "Mutual Funds",
+    "layoutable": true,
+    "mergeable": false,
+    "name": "Mutual_Fund__c",
+    "queryable": true,
+    "replicateable": true,
+    "retrieveable": true,
+    "searchable": true,
+    "triggerable": true,
+    "undeletable": true,
+    "updateable": true,
+    "urls": {
+      "compactLayouts": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe/compactLayouts",
+      "rowTemplate": "/services/data/v35.0/sobjects/Mutual_Fund__c/{ID}",
+      "approvalLayouts": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe/approvalLayouts",
+      "describe": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe",
+      "quickActions": "/services/data/v35.0/sobjects/Mutual_Fund__c/quickActions",
+      "layouts": "/services/data/v35.0/sobjects/Mutual_Fund__c/describe/layouts",
+      "sobject": "/services/data/v35.0/sobjects/Mutual_Fund__c"
     }
+  },
+  "recentItems": [
+    {
+      "attributes": {
+        "type": "Mutual_Fund__c",
+        "url": "/services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF"
+      },
+      "Id": "a002800000P9WeyAAF",
+      "Name": "Motilal Focused Midcap 30 - DP G"
+    }
+  ]
+}
+```
 
 
 ### Get a record
@@ -155,32 +163,36 @@ Here, I am getting a specific record from the Mutual Funds object.
 
 **Request**
 
-    GET /services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF HTTP/1.1
-    Host: ap2.salesforce.com
-    Authorization: Bearer access_token
-    X-PrettyPrint: 1
+```http
+GET /services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+```
 
 **Response**
 
-    {
-      "attributes": {
-        "type": "Mutual_Fund__c",
-        "url": "/services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF"
-      },
-      "Id": "a002800000P9WeyAAF",
-      "OwnerId": "00528000002A6JaAAK",
-      "IsDeleted": false,
-      "Name": "Motilal Focused Midcap 30 - DP G",
-      "CreatedDate": "2016-02-05T09:50:59.000+0000",
-      "CreatedById": "00528000002A6JaAAK",
-      "LastModifiedDate": "2016-02-05T10:46:48.000+0000",
-      "LastModifiedById": "00528000002A6JaAAK",
-      "SystemModstamp": "2016-02-05T10:46:48.000+0000",
-      "LastViewedDate": "2016-02-05T10:32:24.000+0000",
-      "LastReferencedDate": "2016-02-05T10:32:24.000+0000",
-      "checked__c": false,
-      "External_ID__c": 104
-    }
+```json
+{
+  "attributes": {
+    "type": "Mutual_Fund__c",
+    "url": "/services/data/v35.0/sobjects/Mutual_Fund__c/a002800000P9WeyAAF"
+  },
+  "Id": "a002800000P9WeyAAF",
+  "OwnerId": "00528000002A6JaAAK",
+  "IsDeleted": false,
+  "Name": "Motilal Focused Midcap 30 - DP G",
+  "CreatedDate": "2016-02-05T09:50:59.000+0000",
+  "CreatedById": "00528000002A6JaAAK",
+  "LastModifiedDate": "2016-02-05T10:46:48.000+0000",
+  "LastModifiedById": "00528000002A6JaAAK",
+  "SystemModstamp": "2016-02-05T10:46:48.000+0000",
+  "LastViewedDate": "2016-02-05T10:32:24.000+0000",
+  "LastReferencedDate": "2016-02-05T10:32:24.000+0000",
+  "checked__c": false,
+  "External_ID__c": 104
+}
+```
 
 ### Upsert a record
 
@@ -196,19 +208,23 @@ Example: /services/data/v35.0/sobjects/Mutual_Fund__c/`External_ID__c`/`104`
 
 **Request**
 
-    PATCH /services/data/v35.0/sobjects/Mutual_Fund__c/External_ID__c/104 HTTP/1.1
-    Host: ap2.salesforce.com
-    Authorization: Bearer access_token
-    X-PrettyPrint: 1
-    Content-Type: application/json
+```http
+PATCH /services/data/v35.0/sobjects/Mutual_Fund__c/External_ID__c/104 HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+Content-Type: application/json
 
-    {
-        "Name": "Motilal Focused Midcap 30 - DP (G)"
-    }
+{
+    "Name": "Motilal Focused Midcap 30 - DP (G)"
+}
+```
 
 **Response**
 
-    204 No Content
+```http
+204 No Content
+```
 
 Response code `204` is returned in case of update operation.
 
@@ -216,25 +232,29 @@ Response code `204` is returned in case of update operation.
 
 **Request**
 
-    PATCH /services/data/v35.0/sobjects/Mutual_Fund__c/External_ID__c/111 HTTP/1.1
-    Host: ap2.salesforce.com
-    Authorization: Bearer access_token
-    X-PrettyPrint: 1
-    Content-Type: application/json
+```http
+PATCH /services/data/v35.0/sobjects/Mutual_Fund__c/External_ID__c/111 HTTP/1.1
+Host: ap2.salesforce.com
+Authorization: Bearer access_token
+X-PrettyPrint: 1
+Content-Type: application/json
 
-    {
-        "Name": "SBI Blue Chip Fund - Direct (G)"
-    }
+{
+    "Name": "SBI Blue Chip Fund - Direct (G)"
+}
+```
 
 **Response**
 
-    201 Created
+```http
+201 Created
 
-    {
-        "id": "a002800000PA0AzAAL",
-        "success": true,
-        "errors": []
-    }
+{
+    "id": "a002800000PA0AzAAL",
+    "success": true,
+    "errors": []
+}
+```
 
 Response code `201` is returned in case of insert operation.
 

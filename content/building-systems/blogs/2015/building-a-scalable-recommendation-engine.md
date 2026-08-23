@@ -7,7 +7,7 @@ systems_tags:
 - playframework
 - couchbase
 - elasticsearch
-- design
+- Design
 - big-data
 - recommendation
 author: Sakthi Priyan H

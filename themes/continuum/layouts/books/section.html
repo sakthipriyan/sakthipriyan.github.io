@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en" }}">
+<html lang="{{ .Site.Language.Locale | default "en" }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ .Description | default .Site.Params.description }}">
-    <link rel="stylesheet" href="{{ "/css/style.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "/css/book-layout.css" | absURL }}">
+    {{- partial "css.html" (slice "style" "book-layout") }}
 </head>
 
 <body class="book-reader {{ .Section }}">

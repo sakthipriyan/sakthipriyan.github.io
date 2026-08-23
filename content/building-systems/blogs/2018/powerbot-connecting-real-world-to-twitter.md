@@ -6,7 +6,7 @@ type: blogs
 systems_tags:
 - hardware
 - iot
-- python
+- Python
 - code
 - circuit
 - raspberry-pi
@@ -57,14 +57,16 @@ LDR - Light Dependent Resistor.
 
 Following code is used to set up and detect the status.
 
-	import RPi.GPIO as GPIO
-	
-	def init_sensor():
-	    GPIO.setmode(GPIO.BCM)
-	    GPIO.setup(4, GPIO.IN)
-	
-	def get_status():
-	    return not GPIO.input(4)
+```python
+import RPi.GPIO as GPIO
+
+def init_sensor():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(4, GPIO.IN)
+
+def get_status():
+    return not GPIO.input(4)
+```
 
 
 ### Twitter

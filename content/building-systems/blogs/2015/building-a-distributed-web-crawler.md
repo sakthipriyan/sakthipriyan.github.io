@@ -11,7 +11,7 @@ systems_tags:
 - couchbase
 - jsoup
 - big-data
-- design
+- Design
 - distributed
 - proxy
 author: Sakthi Priyan H

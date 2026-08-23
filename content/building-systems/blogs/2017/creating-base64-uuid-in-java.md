@@ -28,57 +28,61 @@ In the era of APIs, each resource is identified by unique id. [UUID](https://en.
 ### Code
 Following Java code written as spring component. It should be straight forward to use it in other places as well. `java.util.Base64` requires `Java 8`.
 
-	package com.sakthipriyan.example;
+```java
+package com.sakthipriyan.example;
 
-	import java.nio.ByteBuffer;
-	import java.util.Base64;
-	import java.util.Base64.Encoder;
-	import java.util.UUID;
+import java.nio.ByteBuffer;
+import java.util.Base64;
+import java.util.Base64.Encoder;
+import java.util.UUID;
 
-	import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
 
-	@Component
-	public class Uuid {
+@Component
+public class Uuid {
 
-	    private final Encoder encoder;
+    private final Encoder encoder;
 
-	    public Uuid() {
-	        this.encoder = Base64.getUrlEncoder();
-	    }
+    public Uuid() {
+        this.encoder = Base64.getUrlEncoder();
+    }
 
-	    public String randomId() {
+    public String randomId() {
 
-	        // Create random UUID
-	        UUID uuid = UUID.randomUUID();
+        // Create random UUID
+        UUID uuid = UUID.randomUUID();
 
-	        // Create byte[] for base64 from uuid
-	        byte[] src = ByteBuffer.wrap(new byte[16])
-	        		.putLong(uuid.getMostSignificantBits())
-	                .putLong(uuid.getLeastSignificantBits())
-	                .array();
+        // Create byte[] for base64 from uuid
+        byte[] src = ByteBuffer.wrap(new byte[16])
+        		.putLong(uuid.getMostSignificantBits())
+                .putLong(uuid.getLeastSignificantBits())
+                .array();
 
-	        // Encode to Base64 and remove trailing ==
-	        return encoder.encodeToString(src).substring(0, 22);
-	    }
+        // Encode to Base64 and remove trailing ==
+        return encoder.encodeToString(src).substring(0, 22);
+    }
 
-	}
+}
+```
 
 
 ### Usage
 
-	package com.sakthipriyan.example;
+```java
+package com.sakthipriyan.example;
 
-	@Service
-	public class ExampleService {
+@Service
+public class ExampleService {
 
-		@Autowired
-		private Uuid uuid;
+	@Autowired
+	private Uuid uuid;
 
-		public void doSomething(){
-			String uniqueId = uuid.randomId();
-			// Do whatever you want to do.
-		}
+	public void doSomething(){
+		String uniqueId = uuid.randomId();
+		// Do whatever you want to do.
 	}
+}
+```
 
 
 ### Generated IDs

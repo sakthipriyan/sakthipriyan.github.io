@@ -8,7 +8,7 @@ systems_tags:
 - swagger
 - play-framework
 - documentation
-- design
+- Design
 author: Sakthi Priyan H
 summary: Setting up live documentation for API
 aliases:
@@ -30,14 +30,18 @@ Now, let us start integrating the swagger module. Following is tested for Play F
 
 1. Add plugin as dependency in build file `build.sbt`
 
-		libraryDependencies += "io.swagger" %% "swagger-play2" % "1.5.2"
+```scala
+	libraryDependencies += "io.swagger" %% "swagger-play2" % "1.5.2"
+```
 
 
 2. Enable the Swagger Module in `conf/application.conf`
 
-		play.modules.enabled += "play.modules.swagger.SwaggerModule"
+```text
+	play.modules.enabled += "play.modules.swagger.SwaggerModule"
 
-		api.version = "v1" // Specify the api version.
+	api.version = "v1" // Specify the api version.
+```
  [More config](https://github.com/swagger-api/swagger-play/tree/master/play-2.4/swagger-play2#applicationconf---config-options) can be added to `conf/application.conf` to auto generate additional fields in Swagger Spec.
 
 ### Document API
@@ -47,36 +51,46 @@ Now, let us start integrating the swagger module. Following is tested for Play F
 Sample code can be found below.
 Add following code to the controller class.
 
-	@Api(value = "Example Controller", produces = "application/json")
+```java
+@Api(value = "Example Controller", produces = "application/json")
+```
 
 For each method we need to add documentation, we have to specify the following annotation.  
 Standard response class is provided. Here, we have `Response.class`
 
-	@ApiOperation(value = "Get API", notes = "Get list of id & values.", response = Response.class)
+```java
+@ApiOperation(value = "Get API", notes = "Get list of id & values.", response = Response.class)
+```
 
 
 For each additional response, that API may return can be added using the following annotation.
 
-	@ApiResponses({
-		@ApiResponse(code = 403, message = "Invalid Authorization", response = ErrorStatus.class),
-		@ApiResponse(code = 500, message = "Internal Server Error", response = ErrorStatus.class) })
+```java
+@ApiResponses({
+	@ApiResponse(code = 403, message = "Invalid Authorization", response = ErrorStatus.class),
+	@ApiResponse(code = 500, message = "Internal Server Error", response = ErrorStatus.class) })
+```
 
 
 Arguments in controller methods can be added using,
 
-	@ApiOperation(value = "Get User", response = User.class)
-	public Promise<Result> getUser(
-		@ApiParam(value = "User Id", name = "userId") String userId){
-			User user = getUser(userId);
-			return ok(user);
-		}
+```java
+@ApiOperation(value = "Get User", response = User.class)
+public Promise<Result> getUser(
+	@ApiParam(value = "User Id", name = "userId") String userId){
+		User user = getUser(userId);
+		return ok(user);
+	}
+```
 
 
 
 ### Routes
 We can access the auto generated Swagger spec by adding a route to it in `conf/routes`
 
-	GET		/docs/swagger.json				controllers.ApiHelpController.getResources
+```text
+GET		/docs/swagger.json				controllers.ApiHelpController.getResources
+```
 
 Now. we can access Swagger Spec from `/docs/swagger.json`
 
@@ -86,29 +100,35 @@ Alternatively, we can serve Swagger UI in play framework as well.
 This also, solves any CORS issues that might arise when API and Swagger UI on different domains.  
 Copy [dist](https://github.com/swagger-api/swagger-ui/tree/master/dist) of Swagger UI to `/public/swagger-ui` in Play Project.
 
-	GET		/docs/				controllers.Assets.at(path="/public/swagger-ui",file="index.html")
-	GET		/docs/swagger.json	controllers.ApiHelpController.getResources
-	GET		/docs/*file			controllers.Assets.at(path="/public/swagger-ui",file)
+```text
+GET		/docs/				controllers.Assets.at(path="/public/swagger-ui",file="index.html")
+GET		/docs/swagger.json	controllers.ApiHelpController.getResources
+GET		/docs/*file			controllers.Assets.at(path="/public/swagger-ui",file)
+```
 
 Edit `index.html` to change the Swagger Spec url.
 
 **From**
 
-	var url = window.location.search.match(/url=([^&]+)/);
-	if (url && url.length > 1) {
-		url = decodeURIComponent(url[1]);
-	} else {
-		url = "http://petstore.swagger.io/v2/swagger.json";
-	}
+```javascript
+var url = window.location.search.match(/url=([^&]+)/);
+if (url && url.length > 1) {
+	url = decodeURIComponent(url[1]);
+} else {
+	url = "http://petstore.swagger.io/v2/swagger.json";
+}
+```
 
 **To**
 
-	var url = window.location.search.match(/url=([^&]+)/);
-	if (url && url.length > 1) {
-		url = decodeURIComponent(url[1]);
-	} else {
-		url = "swagger.json";
-	}
+```javascript
+var url = window.location.search.match(/url=([^&]+)/);
+if (url && url.length > 1) {
+	url = decodeURIComponent(url[1]);
+} else {
+	url = "swagger.json";
+}
+```
 
 ### Explore APIs
 Once, sbt compiles and run the playframework, go to `http://localhost:9000/docs/` to see the live working Swagger UI.
