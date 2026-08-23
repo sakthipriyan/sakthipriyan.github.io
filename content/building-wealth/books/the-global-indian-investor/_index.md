@@ -22,7 +22,7 @@ No jargon, no vague advice—just a clear, step-by-step playbook built from real
 
 ## Book Status
 
-🚧 **Work In Progress** - Currently writing & refining the further chapters. Targeting to complete by End of June 2026.  
+🚧 **Work In Progress** - Currently writing & refining the further chapters. Targeting to complete by End of ~~June~~ 2026.  
 📚 **Living Document** - Updated as regulations and products evolve  
 🎯 **Practical** - Real workflows, real tools, real examples
 
