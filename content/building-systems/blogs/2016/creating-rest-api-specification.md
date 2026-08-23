@@ -55,53 +55,67 @@ In short, Swagger specification contains 3 sections,
 First Let us specify which version of the swagger we are using.
 Required field. Currently Value is '2.0'
 
-	swagger: '2.0'
+```yaml
+swagger: '2.0'
+```
 
 #### API info
 `info` is required root of the spec. Within `info`, `title` and `version` are required properties.  
 Other properties such as `termsOfService`, `contact`, `license` are optional, but I would suggest we add them as well.
 
-	info:
-	  title: Cricscore API
-	  version: '1.0'
-	  description: Simple REST API to get cricket scores.
-	  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
-	  contact:
-	    name: Sakthi Priyan H
-	    url: 'http://sakthipriyan.com'
-	    email: email@example.com
-	  license:
-	    name: Attribution 4.0 International (CC BY 4.0)
-	    url: 'http://creativecommons.org/licenses/by/4.0/'
+```yaml
+info:
+  title: Cricscore API
+  version: '1.0'
+  description: Simple REST API to get cricket scores.
+  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
+  contact:
+    name: Sakthi Priyan H
+    url: 'http://sakthipriyan.com'
+    email: email@example.com
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: 'http://creativecommons.org/licenses/by/4.0/'
+```
 
 Refer the [info](http://swagger.io/specification/#infoObject) section in the spec for more details.
 
 #### Host name
 The host (name or ip) serving the API.
 
-	host: cricscore-api.appspot.com
+```yaml
+host: cricscore-api.appspot.com
+```
 
 #### Base path
 Base path of the API. For, Cricscore API, currently there is no base path. So, using the `/`.
 
-	basePath: /
+```yaml
+basePath: /
+```
 
 In case, if you are using say `https://example.com/api/v1/` as basePath, then it should be
 
-	basePath: /api/v1/
+```yaml
+basePath: /api/v1/
+```
 
 #### Schemes
 Schemes supported in the API.
 
-	schemes:
-		- http
-		- https
+```yaml
+schemes:
+	- http
+	- https
+```
 
 #### Produces
 List of content types produced by the API. Currently Cricscore API produce only JSON.
 
-	produces:
-		- application/json
+```yaml
+produces:
+	- application/json
+```
 
 Similarly, there is a `consumes` property as well in the Swagger spec.
 
@@ -111,47 +125,55 @@ We have two different JSON objects that are returned from the Cricscore API.
 
 **Match**
 
-	{"id":631136,"t2":"Kenya","t1":"Scotland"}
+```json
+{"id":631136,"t2":"Kenya","t1":"Scotland"}
+```
 
 In Swagger Spec, it becomes.
 
-	definitions:
-		Match:
-			type: object
-			properties:
-			id:
-				type: integer
-				description: Match Id.
-			t1:
-				type: string
-				description: Name of the Team One
-			t2:
-				type: string
-				description: Name of the Team Two
+```yaml
+definitions:
+	Match:
+		type: object
+		properties:
+		id:
+			type: integer
+			description: Match Id.
+		t1:
+			type: string
+			description: Name of the Team One
+		t2:
+			type: string
+			description: Name of the Team Two
+```
 
 **Score**
 
-	{
-		"id":597924,
-		"si":"West Indies 25/1 * v India 229/7",
-		"de":"WI 25/2 (3.1 ov, J Charles 12*, UT Yadav 2/7)"
-	}
+```json
+{
+	"id":597924,
+	"si":"West Indies 25/1 * v India 229/7",
+	"de":"WI 25/2 (3.1 ov, J Charles 12*, UT Yadav 2/7)"
+}
+```
 
 In Swagger Spec, it becomes.
 
-	definitions:
-		Score:
-			type: object
-			properties:
-			id:
-				type: integer
-				description: Match Id.
-			de:
-				type: string
-				description: detailed description of the match.
-			si:
-				type: string
-				description: simple description of the match.
+```yaml
+definitions:
+	Score:
+		type: object
+		properties:
+		id:
+			type: integer
+			description: Match Id.
+		de:
+			type: string
+			description: detailed description of the match.
+		si:
+			type: string
+			description: simple description of the match.
+```
 
 With this we have defined over json format that is returned from the service.
 
@@ -168,124 +190,128 @@ Swagger Spec operation object contains following fields.
 Following spec should be fairly self explanatory.  
 Refer the original [documentation](http://cricscore-api.appspot.com/) of the Cricscore API done earlier using HTTP request/response.
 
-	/csa:
-		get:
-			summary: Get currently playing matches or get scores of specific matches.
-			parameters:
-			- name: id
-				in: query
-				required: false
-				description: Match Ids separated by + sign.
-				type: string
-			- name: If-Modified-Since
-				in: header
-				required: false
-				description: Timestamp of the last response.
-				type: string
-			responses:
-				default:
-					description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
-					schema:
+```yaml
+/csa:
+	get:
+		summary: Get currently playing matches or get scores of specific matches.
+		parameters:
+		- name: id
+			in: query
+			required: false
+			description: Match Ids separated by + sign.
+			type: string
+		- name: If-Modified-Since
+			in: header
+			required: false
+			description: Timestamp of the last response.
+			type: string
+		responses:
+			default:
+				description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
+				schema:
+				type: array
+				items:
+					$ref: '#/definitions/Match'
+			200:
+				description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
+				headers:
+				Last-Modified:
+					type: string
+					description: Should be used for subsequent requests as If-Modified-Since request header.
+				schema:
 					type: array
 					items:
-						$ref: '#/definitions/Match'
-				200:
-					description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
-					headers:
-					Last-Modified:
-						type: string
-						description: Should be used for subsequent requests as If-Modified-Since request header.
-					schema:
-						type: array
-						items:
-							$ref: '#/definitions/Score'
-				500:
-					description: Unexpected server error.
+						$ref: '#/definitions/Score'
+			500:
+				description: Unexpected server error.
+```
 
 
 #### Full Swagger Spec for Cricscore API
 
-	swagger: '2.0'
-	info:
-	  title: Cricscore API
-	  version: '1.0'
-	  description: Simple REST API to get cricket scores.
-	  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
-	  contact:
-	    name: Sakthi Priyan H
-	    url: 'http://sakthipriyan.com'
-	    email: email@example.com
-	  license:
-	    name: Attribution 4.0 International (CC BY 4.0)
-	    url: 'http://creativecommons.org/licenses/by/4.0/'
-	host: cricscore-api.appspot.com
-	basePath: /
-	schemes:
-	  - http
-	  - https
-	produces:
-	  - application/json
+```yaml
+swagger: '2.0'
+info:
+  title: Cricscore API
+  version: '1.0'
+  description: Simple REST API to get cricket scores.
+  termsOfService: YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE AND THE CONTENT IS AT YOUR SOLE RISK AND THAT THE SERVICE AND THE CONTENT ARE PROVIDED 'AS IS' AND 'AS AVAILABLE'.
+  contact:
+    name: Sakthi Priyan H
+    url: 'http://sakthipriyan.com'
+    email: email@example.com
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: 'http://creativecommons.org/licenses/by/4.0/'
+host: cricscore-api.appspot.com
+basePath: /
+schemes:
+  - http
+  - https
+produces:
+  - application/json
 
-	paths:
-	  /csa:
-	    get:
-	      summary: Get currently playing matches.
-	      parameters:
-	        - name: id
-	          in: query
-	          required: false
-	          description: Match Ids separated by + sign.
-	          type: string
-	        - name: If-Modified-Since
-	          in: header
-	          required: false
-	          description: Timestamp of the last response.
-	          type: string
-	      responses:
-	        default:
-	          description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
-	          schema:
-	            type: array
-	            items:
-	              $ref: '#/definitions/Match'
-	        200:
-	          description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
-	          headers:
-	            Last-Modified:
-	              type: string
-	              description: Should be used for subsequent requests as If-Modified-Since request header.
-	          schema:
-	            type: array
-	            items:
-	              $ref: '#/definitions/Score'
-	        500:
-	          description: Unexpected server error.
+paths:
+  /csa:
+    get:
+      summary: Get currently playing matches.
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: Match Ids separated by + sign.
+          type: string
+        - name: If-Modified-Since
+          in: header
+          required: false
+          description: Timestamp of the last response.
+          type: string
+      responses:
+        default:
+          description: 200 Ok response which contains list of currently playing matches when query parameter `id` is absent.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Match'
+        200:
+          description: Array of Score for requested Match Ids for which score has changed based on the If-Modified-Since header.
+          headers:
+            Last-Modified:
+              type: string
+              description: Should be used for subsequent requests as If-Modified-Since request header.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Score'
+        500:
+          description: Unexpected server error.
 
-	definitions:
-	  Match:
-	    type: object
-	    properties:
-	      id:
-	        type: integer
-	        description: Match Id.
-	      t1:
-	        type: string
-	        description: Name of the Team One
-	      t2:
-	        type: string
-	        description: Name of the Team Two
-	  Score:
-	    type: object
-	    properties:
-	      id:
-	        type: integer
-	        description: Match Id.
-	      de:
-	        type: string
-	        description: detailed description of the match.
-	      si:
-	        type: string
-	        description: simple description of the match.
+definitions:
+  Match:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Match Id.
+      t1:
+        type: string
+        description: Name of the Team One
+      t2:
+        type: string
+        description: Name of the Team Two
+  Score:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Match Id.
+      de:
+        type: string
+        description: detailed description of the match.
+      si:
+        type: string
+        description: simple description of the match.
+```
 
 ### Let's try it out online.
 There is fantastic online swagger editor is available at [http://editor.swagger.io/](http://editor.swagger.io/).  

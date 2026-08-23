@@ -70,8 +70,10 @@ Following set files are generated, when webgen is run.
 ### Deployment
 Generate the website using the following command.
 
-	#python webgen.py [location of the config file]
-	python webgen.py ../sakthipriyan.com/conf/local.json
+```bash
+#python webgen.py [location of the config file]
+python webgen.py ../sakthipriyan.com/conf/local.json
+```
 
 Once the blog is generated it can be easily deployed over any static webserver like [nginx](http://nginx.org/) or [apache webserver](http://httpd.apache.org/). I prefer nginx for being thread less web server.
 

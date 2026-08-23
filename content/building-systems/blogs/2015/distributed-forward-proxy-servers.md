@@ -40,19 +40,21 @@ Setting up a distributed forward proxy servers can be done as follows.
 #### Configure
     nano /etc/squid3/squid.conf
 
-    ### Add squid config shown below ###
+```text
+### Add squid config shown below ###
 
-    http_port 8001
+http_port 8001
 
-    # visible_hostname should be the aws instance hostname.
-    visible_hostname ip-10-XXX-XXX-149
+# visible_hostname should be the aws instance hostname.
+visible_hostname ip-10-XXX-XXX-149
 
-    # IP address of the haproxy should be used.
-    # Also, 127.0.0.1 can be removed if we don't need access from localhost.
-    acl haproxy src 10.XXX.XXX.172 127.0.0.1
+# IP address of the haproxy should be used.
+# Also, 127.0.0.1 can be removed if we don't need access from localhost.
+acl haproxy src 10.XXX.XXX.172 127.0.0.1
 
-    http_access allow haproxy
-    cache deny all
+http_access allow haproxy
+cache deny all
+```
 
 #### Reload with new config
     # reload the new config
@@ -83,29 +85,31 @@ Repeat the same steps across instances where squid has to be set up.
 
 #### Configure
 
-    nano /etc/haproxy/haproxy.cfg
-    ### Add haproxy config as shown below. ###
+```bash
+nano /etc/haproxy/haproxy.cfg
+### Add haproxy config as shown below. ###
 
-    /etc/haproxy/haproxy.cfg
-    global
-     daemon
-     maxconn 256
-    defaults
-     mode http
-     timeout connect 5000ms
-     timeout client 50000ms
-     timeout server 50000ms
-    frontend squid_frontend
-     bind *:8000
-     default_backend squid_backend
-     option http_proxy
-    backend squid_backend
-     option http_proxy
-     server squid0 10.XXX.XXX.172:8001
-     server squid1 10.XXX.XXX.248:8001
-     server squid2 10.XXX.XXX.149:8001
-     # Add more IPs here as required
-     balance roundrobin
+/etc/haproxy/haproxy.cfg
+global
+ daemon
+ maxconn 256
+defaults
+ mode http
+ timeout connect 5000ms
+ timeout client 50000ms
+ timeout server 50000ms
+frontend squid_frontend
+ bind *:8000
+ default_backend squid_backend
+ option http_proxy
+backend squid_backend
+ option http_proxy
+ server squid0 10.XXX.XXX.172:8001
+ server squid1 10.XXX.XXX.248:8001
+ server squid2 10.XXX.XXX.149:8001
+ # Add more IPs here as required
+ balance roundrobin
+```
 
 #### Reload with new config
     # Reload the new config
@@ -123,30 +127,36 @@ How to test the distributed proxy cluster?
 
 Console output
 
-    <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <TITLE>302 Moved</TITLE></HEAD><BODY>
-    <H1>302 Moved</H1>
-    The document has moved
-    <A HREF="http://www.google.com">here</A>.
-    </BODY>
-    </HTML>
+```html
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>302 Moved</TITLE></HEAD><BODY>
+<H1>302 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com">here</A>.
+</BODY>
+</HTML>
+```
 
 #### Haproxy
 In haproxy server execute the following command,
 
-    for i in {1..6}; do  curl -x localhost:8000  https://check.torproject.org 2>/dev/null | grep IP; done
+```bash
+for i in {1..6}; do  curl -x localhost:8000  https://check.torproject.org 2>/dev/null | grep IP; done
+```
 
 If IPs are changed in round robin then, the distributed proxy is working fine as expected.  
 Following output is shown in the console with IPs in roundrobin.  
 Set upper bound in for loop to twice the number of squid servers to test.
 
 
-    <p>Your IP address appears to be:  <strong>XXX.XXX.XXX.125</strong></p>
-    <p>Your IP address appears to be:  <strong>XXX.XXX.XXX.132</strong></p>
-    <p>Your IP address appears to be:  <strong>XXX.XXX.XXX.162</strong></p>
-    <p>Your IP address appears to be:  <strong>XXX.XXX.XXX.125</strong></p>
-    <p>Your IP address appears to be:  <strong>XXX.XXX.XXX.132</strong></p>
-    <p>Your IP address appears to be:  <strong>XXX.XXX.XXX.162</strong></p>
+```html
+<p>Your IP address appears to be:  <strong>XXX.XXX.XXX.125</strong></p>
+<p>Your IP address appears to be:  <strong>XXX.XXX.XXX.132</strong></p>
+<p>Your IP address appears to be:  <strong>XXX.XXX.XXX.162</strong></p>
+<p>Your IP address appears to be:  <strong>XXX.XXX.XXX.125</strong></p>
+<p>Your IP address appears to be:  <strong>XXX.XXX.XXX.132</strong></p>
+<p>Your IP address appears to be:  <strong>XXX.XXX.XXX.162</strong></p>
+```
 
 
 #### Notes

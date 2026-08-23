@@ -19,24 +19,26 @@ aliases:
 Few years back, I came across following method in a legacy application.  
 Method consists of 18 lines of code to determine, if boolean is enabled or not for the given object.
 
-	public boolean isEnabled(Object obj) {
-		boolean disable = false;
-		try {
-			String someValue = getSomeValue(obj);
-			if(someValue != null) {
-				if(someValue.equalsIgnoreCase("T")){
-					disable = true;
-				} else {
-					disable = false;
-				}
+```java
+public boolean isEnabled(Object obj) {
+	boolean disable = false;
+	try {
+		String someValue = getSomeValue(obj);
+		if(someValue != null) {
+			if(someValue.equalsIgnoreCase("T")){
+				disable = true;
 			} else {
 				disable = false;
 			}
-		} catch(SomeException e){
+		} else {
 			disable = false;
 		}
-		return disable;
+	} catch(SomeException e){
+		disable = false;
 	}
+	return disable;
+}
+```
 
 
 
@@ -44,14 +46,16 @@ Method consists of 18 lines of code to determine, if boolean is enabled or not f
 
 After simplication of the logic, it can be rewritten as follows,
 
-	public boolean isEnabled(Object obj) {
-		try {
-			if("T".equalsIgnoreCase(getSomeValue(obj))){
-				return true;
-			}
-		} catch(SomeException e) {}
-		return false;
-	}
+```java
+public boolean isEnabled(Object obj) {
+	try {
+		if("T".equalsIgnoreCase(getSomeValue(obj))){
+			return true;
+		}
+	} catch(SomeException e) {}
+	return false;
+}
+```
 
 Now, it is just 8 lines, doing exactly the same thing. Say, **55%** code is unwanted.
 This code is more readable and as well, it is more efficient. 

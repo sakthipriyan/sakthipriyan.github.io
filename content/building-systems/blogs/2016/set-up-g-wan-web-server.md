@@ -17,10 +17,12 @@ aliases:
 
 From G-WAN [website](http://gwan.ch/),
 
-    G-WAN runs C, C# or Java with less CPU and
-    less RAM while handling more requests than other
-    servers. Other languages (Go, PHP, Python, Ruby, JS...)
-    benefit from G-WAN's multicore architecture.
+```text
+G-WAN runs C, C# or Java with less CPU and
+less RAM while handling more requests than other
+servers. Other languages (Go, PHP, Python, Ruby, JS...)
+benefit from G-WAN's multicore architecture.
+```
 
 G-WAN can be used for serving both static and dynamic contents.
 
@@ -44,47 +46,51 @@ This post explains how to set up static website.
 ### Set up
 Just download and unpack the server.
 
-    wget "http://gwan.com/archives/gwan_linux64-bit.tar.bz2"
-    tar -xjf gwan_linux64-bit.tar.bz2
-    cd gwan_linux64-bit
-    ./gwan -h
+```bash
+wget "http://gwan.com/archives/gwan_linux64-bit.tar.bz2"
+tar -xjf gwan_linux64-bit.tar.bz2
+cd gwan_linux64-bit
+./gwan -h
+```
 
 Following output is shown,
 
-      _________________________________________________________________
-      |                                                               |
-      | G-WAN Web App. Server v7.12.6   64-bit (Feb  8 2016 16:33:28) |
-      |_______________________________________________________________|
-      |                                                               |
-      | Usage: gwan [-b -d -g -t -w | -k | -r | -v] [argument]        |
-      |        (grouped options like '-bd' are ignored, use '-b -d')  |
-      |_______________________________________________________________|
-      |                                                               |
-      |   -b | use the TCP_DEFER_ACCEPT TCP option                    |
-      |      | (not for frontends: it disables the DoS shield)        |
-      |                                                               |
-      |   -d | daemon mode (default is '-d:www-data:www-data',        |
-      |      | use -d:group:user or just -d:account if user=group)    |
-      |                                                               |
-      |   -g | do not limit worker threads to physical CPU Cores      |
-      |      | (may be needed to bypass a faulty CPU detection but    |
-      |      | don't set more workers than you have physical Cores)   |
-      |                                                               |
-      |   -k | (gracefully) kill local gwan processes using the       |
-      |      | *.pid files found in the ./gwan directory              |
-      |                                                               |
-      |   -r | run the specified C script and exit (-r hello.c)       |
-      |      | (general-purpose source code here, not servlets)       |
-      |                                                               |
-      |   -t | store client requests in the 'gwan/trace' file         |
-      |                                                               |
-      |   -v | show the version number and build date, and exit       |
-      |                                                               |
-      |   -w | define the number of worker threads (ie: -g -w 1)      |
-      |_______________________________________________________________|
+```text
+  _________________________________________________________________
+  |                                                               |
+  | G-WAN Web App. Server v7.12.6   64-bit (Feb  8 2016 16:33:28) |
+  |_______________________________________________________________|
+  |                                                               |
+  | Usage: gwan [-b -d -g -t -w | -k | -r | -v] [argument]        |
+  |        (grouped options like '-bd' are ignored, use '-b -d')  |
+  |_______________________________________________________________|
+  |                                                               |
+  |   -b | use the TCP_DEFER_ACCEPT TCP option                    |
+  |      | (not for frontends: it disables the DoS shield)        |
+  |                                                               |
+  |   -d | daemon mode (default is '-d:www-data:www-data',        |
+  |      | use -d:group:user or just -d:account if user=group)    |
+  |                                                               |
+  |   -g | do not limit worker threads to physical CPU Cores      |
+  |      | (may be needed to bypass a faulty CPU detection but    |
+  |      | don't set more workers than you have physical Cores)   |
+  |                                                               |
+  |   -k | (gracefully) kill local gwan processes using the       |
+  |      | *.pid files found in the ./gwan directory              |
+  |                                                               |
+  |   -r | run the specified C script and exit (-r hello.c)       |
+  |      | (general-purpose source code here, not servlets)       |
+  |                                                               |
+  |   -t | store client requests in the 'gwan/trace' file         |
+  |                                                               |
+  |   -v | show the version number and build date, and exit       |
+  |                                                               |
+  |   -w | define the number of worker threads (ie: -g -w 1)      |
+  |_______________________________________________________________|
 
-    G-WAN can listen on 3 local IP addresses:
-     127.0.0.1 192.168.42.101 172.17.42.1
+G-WAN can listen on 3 local IP addresses:
+ 127.0.0.1 192.168.42.101 172.17.42.1
+```
 
 List of IPs which can be listened by G-WAN is shown above.
 
@@ -92,8 +98,10 @@ List of IPs which can be listened by G-WAN is shown above.
     # Start the server in the background
     $ ./gwan &
 
-    # Stop the server
-    $ ./gwan -k
+```console
+# Stop the server
+$ ./gwan -k
+```
 
 ### Directory Layout for static website
 

@@ -27,28 +27,32 @@ This post explains how to encrypt the hexadecimal string and to decrypt the enco
     import java.io.UnsupportedEncodingException;
     import java.util.Base64;
 
-    import javax.crypto.Cipher;
-    import javax.crypto.SecretKey;
-    import javax.crypto.spec.SecretKeySpec;
+```java
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
-    import javax.xml.bind.DatatypeConverter;
+import javax.xml.bind.DatatypeConverter;
 
-    import org.slf4j.Logger;
-    import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+```
 
 ### Initilization
 
-    // Objects required for encryption/decryption
-    private final SecretKey secretKey;
-    private final Logger logger;
-    private final Base64.Encoder encoder;
-    private final Base64.Decoder decoder;
+```java
+// Objects required for encryption/decryption
+private final SecretKey secretKey;
+private final Logger logger;
+private final Base64.Encoder encoder;
+private final Base64.Decoder decoder;
 
-    // In constructor
-    this.secretKey = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
-    this.logger = LoggerFactory.getLogger(getClass());
-    this.encoder = Base64.getUrlEncoder();
-    this.decoder = Base64.getUrlDecoder();
+// In constructor
+this.secretKey = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+this.logger = LoggerFactory.getLogger(getClass());
+this.encoder = Base64.getUrlEncoder();
+this.decoder = Base64.getUrlDecoder();
+```
 
 
 * Here, `key` is argument to the constructor.
@@ -57,27 +61,29 @@ This post explains how to encrypt the hexadecimal string and to decrypt the enco
 
 ### Encryption
 
-    public String encrypt(String plainText) {
-        try {
+```java
+public String encrypt(String plainText) {
+    try {
 
-            // Get byte array which has to be encrypted.
-            byte[] plainTextByte = toByteArray(plainText);
+        // Get byte array which has to be encrypted.
+        byte[] plainTextByte = toByteArray(plainText);
 
-            // Encrypt the bytes using the secret key
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            byte[] encryptedByte = cipher.doFinal(plainTextByte);
+        // Encrypt the bytes using the secret key
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] encryptedByte = cipher.doFinal(plainTextByte);
 
-            // Use Base64 encoder to encode the byte array
-            // into Base 64 representation. Requires Java 8.
-            return encoder.encodeToString(encryptedByte);
+        // Use Base64 encoder to encode the byte array
+        // into Base 64 representation. Requires Java 8.
+        return encoder.encodeToString(encryptedByte);
 
-        } catch (Exception e) {
-            logger.error("Failed to encrypt", e);
-        }
-
-        return null;
+    } catch (Exception e) {
+        logger.error("Failed to encrypt", e);
     }
+
+    return null;
+}
+```
 
 This is how encryption works.
 
@@ -89,25 +95,27 @@ This is how encryption works.
 
 ### Decryption
 
-        public String decrypt(String encrypted) {
-            try {
-                // Decode Base 64 String into bytes array.
-                byte[] encryptedByte = decoder.decode(encrypted);
+```java
+    public String decrypt(String encrypted) {
+        try {
+            // Decode Base 64 String into bytes array.
+            byte[] encryptedByte = decoder.decode(encrypted);
 
-                //Do the decryption
-                Cipher cipher = Cipher.getInstance("AES");
-                cipher.init(Cipher.DECRYPT_MODE, secretKey);
-                byte[] decryptedByte = cipher.doFinal(encryptedByte);
+            //Do the decryption
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            byte[] decryptedByte = cipher.doFinal(encryptedByte);
 
-                // Get hexadecimal string from the byte array.
-                return toHexString(decryptedByte);
+            // Get hexadecimal string from the byte array.
+            return toHexString(decryptedByte);
 
-            } catch (Exception e) {
-                logger.error("Failed to decrypt {}", encrypted, e);
-            }
-            return null;
+        } catch (Exception e) {
+            logger.error("Failed to decrypt {}", encrypted, e);
         }
+        return null;
     }
+}
+```
 
 This is how decryption works.
 
@@ -119,13 +127,15 @@ This is how decryption works.
 
 ### Hexadecimal String to equivalent Binary and vice versa.
 
-    private byte[] toByteArray(String s) {
-        return DatatypeConverter.parseHexBinary(s);
-    }
+```java
+private byte[] toByteArray(String s) {
+    return DatatypeConverter.parseHexBinary(s);
+}
 
-    private String toHexString(byte[] array) {
-        return DatatypeConverter.printHexBinary(array).toLowerCase();
-    }
+private String toHexString(byte[] array) {
+    return DatatypeConverter.printHexBinary(array).toLowerCase();
+}
+```
 
 ### Notes
 * Key length can be 128, 192 or 256 bits.

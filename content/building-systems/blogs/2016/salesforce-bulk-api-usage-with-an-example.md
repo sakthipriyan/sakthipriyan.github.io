@@ -41,40 +41,44 @@ First we need to sign in using soap request to obtain the `sessionId`.
 
 **Request**
 
-    POST /services/Soap/u/35.0 HTTP/1.1
-    Host: login.salesforce.com
-    Content-Type: text/xml
-    SOAPAction: login
+```http
+POST /services/Soap/u/35.0 HTTP/1.1
+Host: login.salesforce.com
+Content-Type: text/xml
+SOAPAction: login
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
-      <env:Body>
-        <n1:login xmlns:n1="urn:partner.soap.sforce.com">
-          <n1:username>user@domain.com</n1:username>
-          <n1:password>passwordsecrettoken</n1:password>
-        </n1:login>
-      </env:Body>
-    </env:Envelope>
+<?xml version="1.0" encoding="utf-8" ?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+  <env:Body>
+    <n1:login xmlns:n1="urn:partner.soap.sforce.com">
+      <n1:username>user@domain.com</n1:username>
+      <n1:password>passwordsecrettoken</n1:password>
+    </n1:login>
+  </env:Body>
+</env:Envelope>
+```
 
 **Response**
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns="urn:partner.soap.sforce.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-        <soapenv:Body>
-            <loginResponse>
-                <result>
-                    <metadataServerUrl>https://ap2.salesforce.com/services/Soap/m/35.0/XXXXXXXXXXXXXXX</metadataServerUrl>
-                    <passwordExpired>false</passwordExpired>
-                    <sandbox>false</sandbox>
-                    <serverUrl>https://ap2.salesforce.com/services/Soap/u/35.0/XXXXXXXXXXXXXX</serverUrl>
-                    <sessionId>sessionId</sessionId>
-                    <userId>userId</userId>
-                </result>
-            </loginResponse>
-        </soapenv:Body>
-    </soapenv:Envelope>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns="urn:partner.soap.sforce.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Body>
+        <loginResponse>
+            <result>
+                <metadataServerUrl>https://ap2.salesforce.com/services/Soap/m/35.0/XXXXXXXXXXXXXXX</metadataServerUrl>
+                <passwordExpired>false</passwordExpired>
+                <sandbox>false</sandbox>
+                <serverUrl>https://ap2.salesforce.com/services/Soap/u/35.0/XXXXXXXXXXXXXX</serverUrl>
+                <sessionId>sessionId</sessionId>
+                <userId>userId</userId>
+            </result>
+        </loginResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+```
 
 * `<userInfo>` tag isn't shown in the response above.
 * We have to parse this XML and read `<sessionId>`
@@ -87,46 +91,50 @@ It will accept only `CSV` file.
 
 **Request**
 
-    POST /services/async/35.0/job HTTP/1.1
-    Host: ap2.salesforce.com
-    Content-Type: application/xml
-    X-SFDC-Session: sessionId
+```http
+POST /services/async/35.0/job HTTP/1.1
+Host: ap2.salesforce.com
+Content-Type: application/xml
+X-SFDC-Session: sessionId
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-        <operation>upsert</operation>
-        <object>Mutual_Fund__c</object>
-        <externalIdFieldName>External_ID__c</externalIdFieldName>
-        <contentType>CSV</contentType>
-    </jobInfo>
+<?xml version="1.0" encoding="UTF-8"?>
+<jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+    <operation>upsert</operation>
+    <object>Mutual_Fund__c</object>
+    <externalIdFieldName>External_ID__c</externalIdFieldName>
+    <contentType>CSV</contentType>
+</jobInfo>
+```
 
 **Response**
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-        <id>750280000018ch2AAA</id>
-        <operation>upsert</operation>
-        <object>Mutual_Fund__c</object>
-        <createdById>XXXXXXXXXXXXXXXXXX</createdById>
-        <createdDate>2016-02-07T08:58:10.000Z</createdDate>
-        <systemModstamp>2016-02-07T08:58:10.000Z</systemModstamp>
-        <state>Open</state>
-        <externalIdFieldName>External_ID__c</externalIdFieldName>
-        <concurrencyMode>Parallel</concurrencyMode>
-        <contentType>CSV</contentType>
-        <numberBatchesQueued>0</numberBatchesQueued>
-        <numberBatchesInProgress>0</numberBatchesInProgress>
-        <numberBatchesCompleted>0</numberBatchesCompleted>
-        <numberBatchesFailed>0</numberBatchesFailed>
-        <numberBatchesTotal>0</numberBatchesTotal>
-        <numberRecordsProcessed>0</numberRecordsProcessed>
-        <numberRetries>0</numberRetries>
-        <apiVersion>35.0</apiVersion>
-        <numberRecordsFailed>0</numberRecordsFailed>
-        <totalProcessingTime>0</totalProcessingTime>
-        <apiActiveProcessingTime>0</apiActiveProcessingTime>
-        <apexProcessingTime>0</apexProcessingTime>
-    </jobInfo>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+    <id>750280000018ch2AAA</id>
+    <operation>upsert</operation>
+    <object>Mutual_Fund__c</object>
+    <createdById>XXXXXXXXXXXXXXXXXX</createdById>
+    <createdDate>2016-02-07T08:58:10.000Z</createdDate>
+    <systemModstamp>2016-02-07T08:58:10.000Z</systemModstamp>
+    <state>Open</state>
+    <externalIdFieldName>External_ID__c</externalIdFieldName>
+    <concurrencyMode>Parallel</concurrencyMode>
+    <contentType>CSV</contentType>
+    <numberBatchesQueued>0</numberBatchesQueued>
+    <numberBatchesInProgress>0</numberBatchesInProgress>
+    <numberBatchesCompleted>0</numberBatchesCompleted>
+    <numberBatchesFailed>0</numberBatchesFailed>
+    <numberBatchesTotal>0</numberBatchesTotal>
+    <numberRecordsProcessed>0</numberRecordsProcessed>
+    <numberRetries>0</numberRetries>
+    <apiVersion>35.0</apiVersion>
+    <numberRecordsFailed>0</numberRecordsFailed>
+    <totalProcessingTime>0</totalProcessingTime>
+    <apiActiveProcessingTime>0</apiActiveProcessingTime>
+    <apexProcessingTime>0</apexProcessingTime>
+</jobInfo>
+```
 
 * We have to use the `id` as `job id` for subsequent calls.
 
@@ -136,39 +144,43 @@ It will accept only `CSV` file.
 Here, `job id` is used as part of the URL.  
 Content of the CSV file is sent via POST request.  
 
-    POST /services/async/35.0/job/750280000018ch2AAA/batch HTTP/1.1
-    Host: ap2.salesforce.com
-    Content-Type: text/csv; charset=UTF-8
-    X-SFDC-Session: sessionId
+```http
+POST /services/async/35.0/job/750280000018ch2AAA/batch HTTP/1.1
+Host: ap2.salesforce.com
+Content-Type: text/csv; charset=UTF-8
+X-SFDC-Session: sessionId
 
-    "Name","External_ID__c"
-    "SBI Small & Midcap Fund -Direct (G)",100
-    "SBI Midcap Fund - Direct (G)",101
-    "Sundaram Select Micro Cap-Sr 5-DP-G",102
-    "DSP-BR Micro Cap Fund - Direct (G)",103
-    "Motilal Focused Midcap 30 - DP (G)",104
-    "SBI Magnum Midcap Fund (G)",105
-    "SBI Small & Midcap Fund (G)",106
-    "DSP-BR Micro Cap Fund - RP (G)",107
-    "Motilal Focused Midcap 30 - RP (G)",108
-    "Sundaram Select Micro Cap-Sr 5-RP-G",109
+"Name","External_ID__c"
+"SBI Small & Midcap Fund -Direct (G)",100
+"SBI Midcap Fund - Direct (G)",101
+"Sundaram Select Micro Cap-Sr 5-DP-G",102
+"DSP-BR Micro Cap Fund - Direct (G)",103
+"Motilal Focused Midcap 30 - DP (G)",104
+"SBI Magnum Midcap Fund (G)",105
+"SBI Small & Midcap Fund (G)",106
+"DSP-BR Micro Cap Fund - RP (G)",107
+"Motilal Focused Midcap 30 - RP (G)",108
+"Sundaram Select Micro Cap-Sr 5-RP-G",109
+```
 
 **Response**  
 In response, `id` corresponds to the `batch id`.
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <batchInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-        <id>75128000001RukcAAC</id>
-        <jobId>750280000018ch2AAA</jobId>
-        <state>Queued</state>
-        <createdDate>2016-02-07T09:02:14.000Z</createdDate>
-        <systemModstamp>2016-02-07T09:02:14.000Z</systemModstamp>
-        <numberRecordsProcessed>0</numberRecordsProcessed>
-        <numberRecordsFailed>0</numberRecordsFailed>
-        <totalProcessingTime>0</totalProcessingTime>
-        <apiActiveProcessingTime>0</apiActiveProcessingTime>
-        <apexProcessingTime>0</apexProcessingTime>
-    </batchInfo>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<batchInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+    <id>75128000001RukcAAC</id>
+    <jobId>750280000018ch2AAA</jobId>
+    <state>Queued</state>
+    <createdDate>2016-02-07T09:02:14.000Z</createdDate>
+    <systemModstamp>2016-02-07T09:02:14.000Z</systemModstamp>
+    <numberRecordsProcessed>0</numberRecordsProcessed>
+    <numberRecordsFailed>0</numberRecordsFailed>
+    <totalProcessingTime>0</totalProcessingTime>
+    <apiActiveProcessingTime>0</apiActiveProcessingTime>
+    <apexProcessingTime>0</apexProcessingTime>
+</batchInfo>
+```
 
 
 ### Close Job
@@ -176,92 +188,104 @@ In response, `id` corresponds to the `batch id`.
 **Request**  
 Here, `job id` is used in the URL.
 
-    POST /services/async/35.0/job/750280000018ch2AAA HTTP/1.1
-    Host: ap2.salesforce.com
-    Content-Type: application/xml
-    X-SFDC-Session: sessionId
+```http
+POST /services/async/35.0/job/750280000018ch2AAA HTTP/1.1
+Host: ap2.salesforce.com
+Content-Type: application/xml
+X-SFDC-Session: sessionId
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-      <state>Closed</state>
-    </jobInfo>
+<?xml version="1.0" encoding="UTF-8"?>
+<jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+  <state>Closed</state>
+</jobInfo>
+```
 
 **Response**
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-        <id>750280000018ch2AAA</id>
-        <operation>upsert</operation>
-        <object>Mutual_Fund__c</object>
-        <createdById>XXXXXXXXXXXXXXXXXX</createdById>
-        <createdDate>2016-02-07T08:58:10.000Z</createdDate>
-        <systemModstamp>2016-02-07T08:58:10.000Z</systemModstamp>
-        <state>Closed</state>
-        <externalIdFieldName>External_ID__c</externalIdFieldName>
-        <concurrencyMode>Parallel</concurrencyMode>
-        <contentType>CSV</contentType>
-        <numberBatchesQueued>0</numberBatchesQueued>
-        <numberBatchesInProgress>0</numberBatchesInProgress>
-        <numberBatchesCompleted>1</numberBatchesCompleted>
-        <numberBatchesFailed>0</numberBatchesFailed>
-        <numberBatchesTotal>1</numberBatchesTotal>
-        <numberRecordsProcessed>10</numberRecordsProcessed>
-        <numberRetries>0</numberRetries>
-        <apiVersion>35.0</apiVersion>
-        <numberRecordsFailed>0</numberRecordsFailed>
-        <totalProcessingTime>137</totalProcessingTime>
-        <apiActiveProcessingTime>65</apiActiveProcessingTime>
-        <apexProcessingTime>0</apexProcessingTime>
-    </jobInfo>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+    <id>750280000018ch2AAA</id>
+    <operation>upsert</operation>
+    <object>Mutual_Fund__c</object>
+    <createdById>XXXXXXXXXXXXXXXXXX</createdById>
+    <createdDate>2016-02-07T08:58:10.000Z</createdDate>
+    <systemModstamp>2016-02-07T08:58:10.000Z</systemModstamp>
+    <state>Closed</state>
+    <externalIdFieldName>External_ID__c</externalIdFieldName>
+    <concurrencyMode>Parallel</concurrencyMode>
+    <contentType>CSV</contentType>
+    <numberBatchesQueued>0</numberBatchesQueued>
+    <numberBatchesInProgress>0</numberBatchesInProgress>
+    <numberBatchesCompleted>1</numberBatchesCompleted>
+    <numberBatchesFailed>0</numberBatchesFailed>
+    <numberBatchesTotal>1</numberBatchesTotal>
+    <numberRecordsProcessed>10</numberRecordsProcessed>
+    <numberRetries>0</numberRetries>
+    <apiVersion>35.0</apiVersion>
+    <numberRecordsFailed>0</numberRecordsFailed>
+    <totalProcessingTime>137</totalProcessingTime>
+    <apiActiveProcessingTime>65</apiActiveProcessingTime>
+    <apexProcessingTime>0</apexProcessingTime>
+</jobInfo>
+```
 
 ### Batch Status
 
 **Request**  
 Here, `job id` and `batch id` is used in the URL.
 
-    GET /services/async/35.0/job/750280000018ch2AAA/batch/75128000001RukcAAC HTTP/1.1
-    Host: ap2.salesforce.com
-    X-SFDC-Session: sessionId
+```http
+GET /services/async/35.0/job/750280000018ch2AAA/batch/75128000001RukcAAC HTTP/1.1
+Host: ap2.salesforce.com
+X-SFDC-Session: sessionId
+```
 
 **Response**
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <batchInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-        <id>75128000001RukcAAC</id>
-        <jobId>750280000018ch2AAA</jobId>
-        <state>Completed</state>
-        <createdDate>2016-02-07T09:02:14.000Z</createdDate>
-        <systemModstamp>2016-02-07T09:02:17.000Z</systemModstamp>
-        <numberRecordsProcessed>10</numberRecordsProcessed>
-        <numberRecordsFailed>0</numberRecordsFailed>
-        <totalProcessingTime>137</totalProcessingTime>
-        <apiActiveProcessingTime>65</apiActiveProcessingTime>
-        <apexProcessingTime>0</apexProcessingTime>
-    </batchInfo>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<batchInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+    <id>75128000001RukcAAC</id>
+    <jobId>750280000018ch2AAA</jobId>
+    <state>Completed</state>
+    <createdDate>2016-02-07T09:02:14.000Z</createdDate>
+    <systemModstamp>2016-02-07T09:02:17.000Z</systemModstamp>
+    <numberRecordsProcessed>10</numberRecordsProcessed>
+    <numberRecordsFailed>0</numberRecordsFailed>
+    <totalProcessingTime>137</totalProcessingTime>
+    <apiActiveProcessingTime>65</apiActiveProcessingTime>
+    <apexProcessingTime>0</apexProcessingTime>
+</batchInfo>
+```
 
 ### Batch Result
 
 **Request**  
 Here, `job id` and `batch id` is used in the URL.
 
-    GET /services/async/35.0/job/750280000018ch2AAA/batch/75128000001RukcAAC/result HTTP/1.1
-    Host: ap2.salesforce.com
-    X-SFDC-Session: sessionId
+```http
+GET /services/async/35.0/job/750280000018ch2AAA/batch/75128000001RukcAAC/result HTTP/1.1
+Host: ap2.salesforce.com
+X-SFDC-Session: sessionId
+```
 
 **Response**  
 We get the status of each record submitted as part of the batch in CSV format.
 
-    "Id","Success","Created","Error"
-    "a002800000P9WeuAAF","true","false",""
-    "a002800000P9WevAAF","true","false",""
-    "a002800000P9WewAAF","true","false",""
-    "a002800000P9WexAAF","true","false",""
-    "a002800000P9WeyAAF","true","false",""
-    "a002800000P9WezAAF","true","false",""
-    "a002800000P9Wf0AAF","true","false",""
-    "a002800000P9Wf1AAF","true","false",""
-    "a002800000P9Wf2AAF","true","false",""
-    "a002800000P9Wf3AAF","true","false",""
+```text
+"Id","Success","Created","Error"
+"a002800000P9WeuAAF","true","false",""
+"a002800000P9WevAAF","true","false",""
+"a002800000P9WewAAF","true","false",""
+"a002800000P9WexAAF","true","false",""
+"a002800000P9WeyAAF","true","false",""
+"a002800000P9WezAAF","true","false",""
+"a002800000P9Wf0AAF","true","false",""
+"a002800000P9Wf1AAF","true","false",""
+"a002800000P9Wf2AAF","true","false",""
+"a002800000P9Wf3AAF","true","false",""
+```
 
 ### Are we done?
 1. If the batch is completed successfully and `numberRecordsFailed` is `0`, then we are done.

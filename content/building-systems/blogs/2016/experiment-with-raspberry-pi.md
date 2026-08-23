@@ -77,8 +77,10 @@ For me it is at `http://192.168.0.2:9091/transmission/web/`
 #### Youtube downloader
 [youtube-dl](https://rg3.github.io/youtube-dl/) is a command line utility to download videos from variety of video platforms like Youtube.
 
-    # download the video as mp4
-    youtube-dl 'https://www.youtube.com/watch?v=Zc54gFhdpLA'
+```bash
+# download the video as mp4
+youtube-dl 'https://www.youtube.com/watch?v=Zc54gFhdpLA'
+```
 
 Above command will store the video in the given link to `Zc54gFhdpLA.mp4` file.  
 Really helpful, if you are planning to have offline access to specific videos.  
@@ -87,8 +89,10 @@ Before downloading any video content, please verify the terms and conditions of 
 #### Wget downloader
 [wget](https://www.gnu.org/software/wget/) is a simple utility to download specific URLs.
 
-    # download the page and store it
-    wget 'http://sakthipriyan.com' -qO index.html
+```bash
+# download the page and store it
+wget 'http://sakthipriyan.com' -qO index.html
+```
 
 Above command will download the given URL and store it in a `index.html` file.  
 Useful, if you are downloading a large file with slower download speed.

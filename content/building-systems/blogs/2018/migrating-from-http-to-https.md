@@ -52,25 +52,27 @@ From price point it is very competitive compared more prominant cloud providers.
 
 Contents of the initial `/etc/nginx/conf.d/sakthipriyan.com.conf`
 
-	#
-	# HTTPS server configuration
-	#
+```nginx
+#
+# HTTPS server configuration
+#
 
-	server {
-		listen       80;
-		server_name  sakthipriyan.com;
+server {
+	listen       80;
+	server_name  sakthipriyan.com;
 
-		location / {
-			root   /var/www/sakthipriyan.com/;
-			index  index.html index.htm;
-		}
+	location / {
+		root   /var/www/sakthipriyan.com/;
+		index  index.html index.htm;
 	}
+}
 
-	server {
-		listen         80;
-		server_name    www.sakthipriyan.com;
-		return         301 http://sakthipriyan.com$request_uri;
-	}
+server {
+	listen         80;
+	server_name    www.sakthipriyan.com;
+	return         301 http://sakthipriyan.com$request_uri;
+}
+```
 
 I had set up two server_names. 
 
@@ -80,10 +82,12 @@ I had set up two server_names.
 #### Installing PIP, Jinja2 and Markdown
 Required for webgen to generate the website from markdown src files.
 
-	yum -y install python-pip
-	pip install --upgrade pip
-	pip install jinja2
-	pip install markdown
+```bash
+yum -y install python-pip
+pip install --upgrade pip
+pip install jinja2
+pip install markdown
+```
 
 #### Cloning webgen and sakthipriyan.com
 	yum -y install git 
@@ -110,54 +114,56 @@ If I remember correctly, I had used default options and directly I had updated t
 #### Updated Nginx Config 
 Nginx config after using `certbot --nginx`
 
-	cat /etc/nginx/conf.d/sakthipriyan.com.conf
-	#
-	# HTTPS server configuration
-	#
+```bash
+cat /etc/nginx/conf.d/sakthipriyan.com.conf
+#
+# HTTPS server configuration
+#
 
-	server {
-		server_name  sakthipriyan.com;
+server {
+	server_name  sakthipriyan.com;
 
-		location / {
-			root   /var/www/sakthipriyan.com/;
-			index  index.html index.htm;
-		}
-
-		listen 443 ssl;
-		ssl_certificate /etc/letsencrypt/live/sakthipriyan.com/fullchain.pem;
-		ssl_certificate_key /etc/letsencrypt/live/sakthipriyan.com/privkey.pem;
-		include /etc/letsencrypt/options-ssl-nginx.conf;
-		ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+	location / {
+		root   /var/www/sakthipriyan.com/;
+		index  index.html index.htm;
 	}
 
-	server {
-		server_name    www.sakthipriyan.com;
-		return         301 https://sakthipriyan.com$request_uri;
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/sakthipriyan.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/sakthipriyan.com/privkey.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
 
-		listen 443 ssl;
-		ssl_certificate /etc/letsencrypt/live/sakthipriyan.com/fullchain.pem;
-		ssl_certificate_key /etc/letsencrypt/live/sakthipriyan.com/privkey.pem;
-		include /etc/letsencrypt/options-ssl-nginx.conf;
-		ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-	}
-	
-	server {
-		if ($host = sakthipriyan.com) {
-			return 301 https://$host$request_uri;
-		}
-		listen       80;
-		server_name  sakthipriyan.com;
-		return 404;
-	}
+server {
+	server_name    www.sakthipriyan.com;
+	return         301 https://sakthipriyan.com$request_uri;
 
-	server {
-		if ($host = www.sakthipriyan.com) {
-			return 301 https://$host$request_uri;
-		}
-		listen         80;
-		server_name    www.sakthipriyan.com;
-		return 404;
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/sakthipriyan.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/sakthipriyan.com/privkey.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+	if ($host = sakthipriyan.com) {
+		return 301 https://$host$request_uri;
 	}
+	listen       80;
+	server_name  sakthipriyan.com;
+	return 404;
+}
+
+server {
+	if ($host = www.sakthipriyan.com) {
+		return 301 https://$host$request_uri;
+	}
+	listen         80;
+	server_name    www.sakthipriyan.com;
+	return 404;
+}
+```
 
 I had removed `# managed by Certbot` in the above config for simplicity.
 
@@ -177,9 +183,11 @@ Two crontab items installed.
 
 `crontab -l` will list the installed crontabs. You have to use `crontab -e` to edit.
 
-	crontab -l
-	0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew 
-	0,30 * * * * /root/sakthipriyan.com/update.sh
+```bash
+crontab -l
+0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew 
+0,30 * * * * /root/sakthipriyan.com/update.sh
+```
 
 If you wonder, why we have random sleep here because this would prevent peak load to certbot services.
 

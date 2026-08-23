@@ -25,50 +25,54 @@ It easy to do a unit testing of simple Java application where object life cycle 
 ### Maven Dependencies
 To start with, we need following dependencies added to the `pom.xml` file. Or add these dependencies into `build.gradle` or `build.sbt`, if you are using `gradle` or `sbt` respectively.
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>4.0.3.RELEASE</version>
-      <scope>test</scope>
-    </dependency>
+```xml
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.11</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-test</artifactId>
+  <version>4.0.3.RELEASE</version>
+  <scope>test</scope>
+</dependency>
+```
 
 ### Example Code
 Following example code shows how to easily do JUnit testing of Spring application.
 
-    package com.sakthipriyan.example.junit;
+```java
+package com.sakthipriyan.example.junit;
 
-    import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-    import org.junit.Test;
-    import org.junit.runner.RunWith;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.test.context.ContextConfiguration;
-    import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-    // Specify how to run this test class.
-    @RunWith(SpringJUnit4ClassRunner.class)
-    // Provide the spring configuration file in the classpath.
-    @ContextConfiguration("classpath:spring.xml")
-    public class ExampleServiceImplTest {
+// Specify how to run this test class.
+@RunWith(SpringJUnit4ClassRunner.class)
+// Provide the spring configuration file in the classpath.
+@ContextConfiguration("classpath:spring.xml")
+public class ExampleServiceImplTest {
 
-        // Autowire the Class that has to be tested.
-        @Autowired
-        private ExampleService exampleService;
+    // Autowire the Class that has to be tested.
+    @Autowired
+    private ExampleService exampleService;
 
-        // Here test a sum method in the ExampleService.
-        @Test
-        public void testSum() {
-            int sum = exampleService.sum(12,13);
-            assertEquals(25, sum);
-        }
-
+    // Here test a sum method in the ExampleService.
+    @Test
+    public void testSum() {
+        int sum = exampleService.sum(12,13);
+        assertEquals(25, sum);
     }
+
+}
+```
 
 ### Explanation
 * Using `@RunWith(SpringJUnit4ClassRunner.class)` annotation modifies how the test class is run.
