@@ -23,6 +23,7 @@ This file contains instructions and context for any AI agent operating within th
 ## 5. Agent Workflow & Lifecycle
 - **Branching & PRs:** All work must be done via a separate Pull Request. Direct commits to `main` are restricted.
 - **Local Development:** Locally, Hugo runs in continuous mode (`hugo server -D`) and files are typically edited manually via Zed. Keep this in mind when discussing previewing changes.
+- **Theme Lives Elsewhere:** The `continuum` theme is a separate repository ([hugo-continuum](https://github.com/sakthipriyan/hugo-continuum)) consumed as a Hugo Module -- there is no `themes/` directory here. Layout, partial and CSS changes belong in that repo, not this one. To work on both at once, copy `config/development/module.yaml.example` to `config/development/module.yaml` and point it at a local checkout.
 - **Merging:** PRs are approved via GitHub checks. When the user explicitly requests to merge, always use a **Squash Merge** to keep the `main` history clean.
 - **Deployment:** Upon merging, GitHub Actions will automatically build the Hugo site and publish it via GitHub Pages.
 - **Content Syndication:** Post-merging, generate promotional social media content to distribute the new article link. Create posts tailored for **Twitter**, **YouTube** (if a video applies), and **Reddit**. If the article falls under the `building-systems` category, additionally draft a short **LinkedIn** article/post.

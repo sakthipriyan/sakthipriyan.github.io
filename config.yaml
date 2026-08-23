@@ -1,6 +1,11 @@
 baseURL: "https://sakthipriyan.com/"
 title: "Sakthi Priyan H"
-theme: "continuum"
+# The theme lives in its own repository and is consumed as a Hugo Module.
+# For local theme development, config/development/module.yaml points this at a
+# sibling checkout so edits show up without a publish/bump cycle.
+module:
+  imports:
+    - path: github.com/sakthipriyan/hugo-continuum
 
 # Single Hugo site with sections
 build:

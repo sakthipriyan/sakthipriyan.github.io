@@ -29,3 +29,7 @@ static/test/bin/
 twitter-*.zip
 nav-price-evolution-*.csv
 .claude/
+
+# Local-only Hugo module replacement for theme development.
+# Copy config/development/module.yaml.example and set your own absolute path.
+config/development/module.yaml
