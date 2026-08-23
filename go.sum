@@ -1,10 +1,2 @@
-github.com/sakthipriyan/hugo-continuum v0.0.0-20251025140516-9b5839ef8265 h1:vCLT0RRj7yj027XkhyONKTV12+R3zGXRaMmGEMHLtF8=
-github.com/sakthipriyan/hugo-continuum v0.0.0-20251025140516-9b5839ef8265/go.mod h1:29Sy0SGPIEOG+ogi16eeCTOmJTyaoTx1krOfuQIlPhA=
-github.com/sakthipriyan/hugo-continuum v0.0.0-20260822173042-ee433db3664f h1:pOrQoOpGAzenqAhl3/L6KEUC9jUllNsdQmmKGJKeTiQ=
-github.com/sakthipriyan/hugo-continuum v0.0.0-20260822173042-ee433db3664f/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
-github.com/sakthipriyan/hugo-continuum v0.1.0 h1:HhiRErKLWaNDYK0gfCbkwvtdjMpKBEPhg4GD8IGZerY=
-github.com/sakthipriyan/hugo-continuum v0.1.0/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
-github.com/sakthipriyan/hugo-continuum v0.1.1 h1:5HC4XassXYEzT/ZvbN1vzx/pGGFvNJr92WIwtkLmFwI=
-github.com/sakthipriyan/hugo-continuum v0.1.1/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
-github.com/sakthipriyan/hugo-continuum v0.1.2 h1:l+sb4x2QBYCN4Tm0fdfQJMNYmA+Xl1dXOjN8Y8yop7E=
-github.com/sakthipriyan/hugo-continuum v0.1.2/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
+github.com/sakthipriyan/hugo-continuum v0.2.0 h1:couEe6tY3dIrfLqh+B0A/7zGZ+jpcusmhVZ6d+P8L3I=
+github.com/sakthipriyan/hugo-continuum v0.2.0/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
