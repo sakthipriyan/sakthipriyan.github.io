@@ -126,10 +126,13 @@ body.book-layout {
         padding: 0 1rem;
     }
     
+    /* The logo keeps its 1.3rem base size at every width: it is nowrap with
+       ellipsis, so a long section name truncates rather than shrinking the
+       header text. Three rules used to fight over this (0.9 / 1.1 / 0.85rem,
+       the last one winning). */
     .logo {
         order: 1;
         flex: 1;
-        font-size: 0.9rem;
         min-width: 0;
     }
     
@@ -1003,10 +1006,6 @@ main {
         padding: 0 1rem;
     }
 
-    .logo {
-        font-size: 1.1rem;
-    }
-
     main {
         padding: 1rem;
     }
@@ -1438,10 +1437,6 @@ main {
 
 /* Responsive navigation for section headers */
 @media (max-width: 768px) {
-    .logo {
-        font-size: 0.85rem;
-    }
-    
     .logo .separator {
         margin: 0 0.25rem;
     }
