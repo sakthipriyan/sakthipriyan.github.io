@@ -1,24 +1,18 @@
 ---
 title: "Sakthi Priyan"
 description: "Exploring Building Systems and Building Wealth through blogs, videos, slides, tools and books"
+# Curated entry points shown under "Start here". `note` is optional and falls
+# back to the target page's own summary, so nothing is described twice.
+startHere:
+  - page: /building-wealth/books/the-global-indian-investor/
+  - page: /building-wealth/tools/realvalue-portfolio/
+  - page: /building-systems/blogs/xfina-one-rust-core-five-interfaces-building-a-privacy-first-financial-statement-parser/
+latestCount: 6
 ---
 
-Welcome to my digital space where I share insights on **Building Systems** and **Building Wealth**.
+I write about two things: **building systems** that scale, and **building wealth**
+that compounds. Mostly by documenting what I actually did — the setup, the
+numbers, and the parts that went wrong.
 
-Explore comprehensive content covering development practices, architectural patterns, investment strategies, and financial planning to help you grow both professionally and financially.
-
-## What You'll Find Here
-
-### 🚀 Building Systems
-Technical insights, development tools, engineering best practices, and industry knowledge to help you excel in building scalable systems.
-
-[Explore Building Systems →](/building-systems/)
-
-### 💰 Building Wealth  
-Investment strategies, financial planning tips, and wealth building techniques to secure your financial future.
-
-[Explore Building Wealth →](/building-wealth/)
-
----
-
-*Navigate to the specific sections above to dive deep into each area, or browse the recent activity below to see the latest content.*
+The tools here run entirely in your browser. Nothing you paste into them leaves
+your machine.
