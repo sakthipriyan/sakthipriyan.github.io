@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Building SQL Translator using AI Coding Agents | Sakthi Priyan H</title><meta name=description content="A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing."><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Building SQL Translator using AI Coding Agents | Sakthi Priyan H</title><meta name=description content="A comprehensive walkthrough of building an extensible SQL translator framework using AI coding agents, ANTLR grammars, unified IR and YAML-driven testing."><link rel=stylesheet href=/css/style.min.3b4dde4b82683cce7fac5abeaa4623e79c1482280fcbce9c8c4a01c862888a4f.css integrity="sha256-O03eS4JoPM5/rFq+qkYj55wUgigPy86cjEoByGKIik8="><link rel=stylesheet href=/css/syntax.min.7e672808766d1ee879199f31b96578d6c2c4022d4e880505051a38ff65c41339.css integrity="sha256-fmcoCHZtHuh5GZ8xuWV41sLEAi1OiAUFBRo4/2XEEzk="></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
 <span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span>
@@ -12,32 +12,32 @@
 <span class=read-time>12 min read</span></span></div><hr class=content-divider></header><div class=post-content><p>Originally presented as part of <a href=https://aqfer.com/>Aqfer</a>&rsquo;s internal tech talk.</p><h2 id=introduction>Introduction</h2><p>Building a SQL translator might sound daunting, but with the right architecture and AI coding agents, it becomes a manageable and even enjoyable engineering challenge. In this post, I&rsquo;ll walk you through my journey of building an extensible, grammar-based SQL translator framework that currently supports Athena ↔ BigQuery translation, with plans to expand to Snowflake, SparkSQL and etc.,</p><p>This is an on-going project, where we are expanding Grammar for more coverage. Probably, I can come back in future and write more on what happened further. Excited by good progress made so far, I ended up creating this article.</p><h2 id=the-goal>The Goal</h2><p>The project had two key requirements:</p><ol><li>Leverage AI Coding Agents for development</li><li>Create an <strong>extensible</strong>, <strong>grammar-based parsing</strong>, <strong>SQL translator</strong> that works across multiple dialects</li></ol><p><strong>Current Status:</strong></p><ul><li>✅ Athena → BigQuery</li><li>✅ BigQuery → Athena</li><li>🔜 SparkSQL, Snowflake, etc.,</li></ul><h2 id=architecture-overview>Architecture Overview</h2><p>The architecture follows a clean, modular design.</p><pre><code class=language-dot>digraph SQLTranslatorClustered {
   rankdir=TB;
   bgcolor=transparent;
-  node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=white, fontname=&quot;Arial&quot;];
+  node [shape=box, style=&#34;rounded,filled&#34;, fillcolor=white, fontname=&#34;Arial&#34;];
 
   // ======================================================
-  // === TEST CASES (Inputs + Outputs) =====================
+  // === TEST CASES (Inputs &#43; Outputs) =====================
   // ======================================================
   subgraph cluster_testcases {
-    label=&quot;Test Cases (Developer)&quot;;
-    style=&quot;rounded,bold&quot;;
-    color=&quot;#a0c4ff&quot;;
+    label=&#34;Test Cases (Developer)&#34;;
+    style=&#34;rounded,bold&#34;;
+    color=&#34;#a0c4ff&#34;;
 
     // SQL Inputs
     subgraph cluster_inputs {
-      label=&quot;SQL Inputs&quot;;
-      style=&quot;rounded,dashed&quot;;
-      color=&quot;#a0c4ff&quot;;
-      AthenaIn [label=&quot;Athena SQL&quot;];
-      BigQueryIn [label=&quot;BigQuery SQL&quot;];
+      label=&#34;SQL Inputs&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#a0c4ff&#34;;
+      AthenaIn [label=&#34;Athena SQL&#34;];
+      BigQueryIn [label=&#34;BigQuery SQL&#34;];
     }
 
     // SQL Outputs
     subgraph cluster_outputs {
-      label=&quot;Generated Outputs&quot;;
-      style=&quot;rounded,dashed&quot;;
-      color=&quot;#ffc6ff&quot;;
-      OutAthena [label=&quot;Athena SQL&quot;];
-      OutBigQuery [label=&quot;BigQuery SQL&quot;];
+      label=&#34;Generated Outputs&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#ffc6ff&#34;;
+      OutAthena [label=&#34;Athena SQL&#34;];
+      OutBigQuery [label=&#34;BigQuery SQL&#34;];
     }
   }
 
@@ -45,55 +45,55 @@
   // === CORE SYSTEM (GRAMMAR → PARSER → IR → GENERATOR) ===
   // ======================================================
   subgraph cluster_core {
-    label=&quot;SQL Translator Core (AI Agent)&quot;;
-    style=&quot;rounded,bold&quot;;
-    color=&quot;#90caf9&quot;;
+    label=&#34;SQL Translator Core (AI Agent)&#34;;
+    style=&#34;rounded,bold&#34;;
+    color=&#34;#90caf9&#34;;
 
     // === GRAMMARS ===
     subgraph cluster_grammars {
-      label=&quot;ANTLR Grammars&quot;;
-      style=&quot;rounded,dashed&quot;;
-      color=&quot;#f4a261&quot;;
-      AthenaGrammar [label=&quot;Athena.g4\n(Grammar)&quot;];
-      BigQueryGrammar [label=&quot;BigQuery.g4\n(Grammar)&quot;];
+      label=&#34;ANTLR Grammars&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#f4a261&#34;;
+      AthenaGrammar [label=&#34;Athena.g4\n(Grammar)&#34;];
+      BigQueryGrammar [label=&#34;BigQuery.g4\n(Grammar)&#34;];
     }
 
     // === PARSERS ===
     subgraph cluster_parsers {
-      label=&quot;Parsers (ANTLR Generated)&quot;;
-      style=&quot;rounded,dashed&quot;;
-      color=&quot;#ffd6a5&quot;;
-      AthenaParser [label=&quot;Athena Parser&quot;];
-      BigQueryParser [label=&quot;BigQuery Parser&quot;];
+      label=&#34;Parsers (ANTLR Generated)&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#ffd6a5&#34;;
+      AthenaParser [label=&#34;Athena Parser&#34;];
+      BigQueryParser [label=&#34;BigQuery Parser&#34;];
     }
 
     // === CONVERTERS ===
     subgraph cluster_converters {
-      label=&quot;Converters (AST → IR)&quot;;
-      style=&quot;rounded,dashed&quot;;
-      color=&quot;#b9fbc0&quot;;
-      AthenaConverter [label=&quot;Athena Converter&quot;];
-      BigQueryConverter [label=&quot;BigQuery Converter&quot;];
+      label=&#34;Converters (AST → IR)&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#b9fbc0&#34;;
+      AthenaConverter [label=&#34;Athena Converter&#34;];
+      BigQueryConverter [label=&#34;BigQuery Converter&#34;];
     }
 
     // === IR CORE ===
     subgraph cluster_ir {
-      label=&quot;Unified Intermediate Representation (IR)&quot;;
-      style=&quot;rounded,bold&quot;;
-      color=&quot;#fff3b0&quot;;
-      IR [label=&quot;Unified IR\n(Go structs / Substrait)&quot;,
+      label=&#34;Unified Intermediate Representation (IR)&#34;;
+      style=&#34;rounded,bold&#34;;
+      color=&#34;#fff3b0&#34;;
+      IR [label=&#34;Unified IR\n(Go structs / Substrait)&#34;,
           shape=box,
-          style=&quot;rounded,filled,bold&quot;,
-          fillcolor=&quot;#fffbea&quot;];
+          style=&#34;rounded,filled,bold&#34;,
+          fillcolor=&#34;#fffbea&#34;];
     }
 
     // === GENERATORS ===
     subgraph cluster_generators {
-      label=&quot;SQL Generators&quot;;
-      style=&quot;rounded,dashed&quot;;
-      color=&quot;#dab6fc&quot;;
-      AthenaGen [label=&quot;Athena Generator&quot;];
-      BigQueryGen [label=&quot;BigQuery Generator&quot;];
+      label=&#34;SQL Generators&#34;;
+      style=&#34;rounded,dashed&#34;;
+      color=&#34;#dab6fc&#34;;
+      AthenaGen [label=&#34;Athena Generator&#34;];
+      BigQueryGen [label=&#34;BigQuery Generator&#34;];
     }
   }
 
@@ -108,93 +108,91 @@
   // === IR → OUTPUTS PATHS ===
   IR -&gt; AthenaGen -&gt; OutAthena;
   IR -&gt; BigQueryGen -&gt; OutBigQuery;
-}
-</code></pre><h3 id=core-system-layer-ai-agent-built>Core System Layer (AI Agent Built)</h3><p><strong>ANTLR Grammars:</strong><br>By using a mature grammar framework like <a href=https://www.antlr.org/>ANTLR</a>, we avoided having to build a custom lexer and parser through AI agents.</p><ul><li><code>Athena.g4</code> - Grammar definition for Athena SQL</li><li><code>BigQuery.g4</code> - Grammar definition for BigQuery SQL</li><li>Grammar generated via two approaches,<ul><li>Pointing to source documentation and asking AI tools to generate them</li><li>By using various test cases, AI Agents discover grammar required on the fly</li></ul></li></ul><p><strong>Parsers (Auto-generated):</strong></p><ul><li>At Aqfer <a href=https://go.dev/>Go</a> is the predominant language and ANTLR supported Go as well</li><li>ANTLR generates parsers from grammars</li><li>These parsers are fully deterministic (~86% of total codebase)</li><li>Athena/BigQuery parsers generates AST from the input SQL dialect</li></ul><p><strong>Converters (AST → IR):</strong></p><ul><li>Transform parsed Abstract Syntax Trees into Intermediate Representation (IR)</li><li>Athena Converter takes Athena AST and converts that into IR</li><li>BigQuery Converter takes BigQuery AST and converts that into IR</li></ul><p><strong>Unified Intermediate Representation (IR):</strong></p><ul><li>Core abstraction layer using Go structs (considering Substrait)</li><li>Enables multi-dialect translation</li><li>Single source of truth for SQL semantics</li><li>This will be superset of the SQL semantics that need to be supported</li></ul><p><strong>SQL Generators:</strong></p><ul><li>Generate target SQL from IR</li><li>Athena Generator converts IR to Athena dialect</li><li>BigQuery Generator converts IR to BigQuery dialect</li></ul><h3 id=test-cases-layer-developer-input>Test Cases Layer (Developer Input)</h3><p>This layer contains SQL inputs and expected outputs in YAML format:</p><ul><li>Contains SQL dialects for different representation</li><li>For a given test case, it has pair of Athena SQL and BigQuery SQL</li><li>For same test case, test can be performed on both directions</li></ul><h2 id=why-this-approach>Why This Approach?</h2><p>This architecture offers several compelling advantages:</p><ol><li><strong>Unified IR enables multi-dialect translation</strong> - Add a new dialect by implementing just a parser/converter and generator</li><li><strong>Easy addition of new dialects</strong> - The IR abstracts away dialect-specific quirks</li><li><strong>Consistent testing via YAML</strong> - All test cases are version-controlled and reusable</li><li><strong>Deterministic grammar via ANTLR</strong> - Auto-generated parsers eliminate manual parsing bugs</li><li><strong>Separation of concerns</strong> - Each component has a single, well-defined responsibility</li></ol><h2 id=cli-based-development--testing>CLI-Based Development & Testing</h2><p>A robust CLI was crucial for the development workflow. Here&rsquo;s how it works:</p><h3 id=yaml-test-format>YAML Test Format</h3><pre><code class=language-yaml>test_cases:
-  - name: simple_select
-    bigquery: SELECT id, name, age FROM `dataset.users` WHERE age &gt; 18
-    athena: SELECT id, name, age FROM &quot;dataset&quot;.&quot;users&quot; WHERE age &gt; 18
-</code></pre><h3 id=running-tests-with-slice-notation>Running Tests with Slice Notation</h3><p>The CLI supports flexible test execution:</p><pre><code class=language-sh># Run test case 3 only
-sqltranslate --yaml examples/ --yaml-run 3
-
-# Run first 3 test cases, i.e., 0, 1, 2
-sqltranslate --yaml examples/ --yaml-run :3
-
-# Run test cases 2 to 4, i.e., 2, 3, 4
-sqltranslate --yaml examples/ --yaml-run 2:5
-</code></pre><h3 id=test-case-reusability>Test Case Reusability</h3><p>One of the beautiful aspects of this design is that the same test case validates <strong>both directions</strong>:</p><ul><li>BigQuery → Athena</li><li>Athena → BigQuery</li><li>Potentially same dialect → same dialect (for validation)</li><li>If N dialects are supported, a given Test Case need to be run N<sup>2</sup> times.</li></ul><p>Adding new dialects to the YAML is straightforward - just add the SQL for that dialect.</p><h3 id=cli-output-example>CLI Output Example</h3><p>The CLI provides detailed YAML output showing exactly what passed and failed:</p><pre><code class=language-yaml>summary:
-  total_test_cases: 101
-  athena_to_bigquery_succeeded: 96
-  bigquery_to_athena_succeeded: 96
-details:
-  - name: negative_numbers
-    index: 83 # Enabled AI tools to find the failing test case pretty fast
-    athena_to_bigquery:
-      input: SELECT * FROM accounts WHERE balance &lt; -100
-      expected: SELECT * FROM accounts WHERE balance &lt; -100
-      output: 'Parse error: line 1:39 token recognition error at: ''-'''
-      status: failed_to_parse
-    bigquery_to_athena:
-      input: SELECT * FROM accounts WHERE balance &lt; -100
-      expected: SELECT * FROM accounts WHERE balance &lt; -100
-      output: SELECT * FROM accounts WHERE balance &lt; - 100
-      status: failed_mismatch
-</code></pre><h3 id=the-importance-of-a-strong-cli>The Importance of a Strong CLI</h3><p>A well-designed CLI was essential:</p><ul><li><strong>Deterministic testing environment</strong> - Same inputs always produce same outputs</li><li><strong>Re-runnable test cases</strong> - Critical for iterative development</li><li><strong>YAML output for tracking</strong> - Exact failure details fed back to AI agents</li><li><strong>Automation-friendly</strong> - Easy to integrate into CI/CD pipelines</li></ul><h2 id=development-workflow-with-ai-agents>Development Workflow with AI Agents</h2><p>The development process followed an iterative pattern:</p><pre><code class=language-dot>digraph SQLTranslatorWorkflow {
+}</code></pre><h3 id=core-system-layer-ai-agent-built>Core System Layer (AI Agent Built)</h3><p><strong>ANTLR Grammars:</strong><br>By using a mature grammar framework like <a href=https://www.antlr.org/>ANTLR</a>, we avoided having to build a custom lexer and parser through AI agents.</p><ul><li><code>Athena.g4</code> - Grammar definition for Athena SQL</li><li><code>BigQuery.g4</code> - Grammar definition for BigQuery SQL</li><li>Grammar generated via two approaches,<ul><li>Pointing to source documentation and asking AI tools to generate them</li><li>By using various test cases, AI Agents discover grammar required on the fly</li></ul></li></ul><p><strong>Parsers (Auto-generated):</strong></p><ul><li>At Aqfer <a href=https://go.dev/>Go</a> is the predominant language and ANTLR supported Go as well</li><li>ANTLR generates parsers from grammars</li><li>These parsers are fully deterministic (~86% of total codebase)</li><li>Athena/BigQuery parsers generates AST from the input SQL dialect</li></ul><p><strong>Converters (AST → IR):</strong></p><ul><li>Transform parsed Abstract Syntax Trees into Intermediate Representation (IR)</li><li>Athena Converter takes Athena AST and converts that into IR</li><li>BigQuery Converter takes BigQuery AST and converts that into IR</li></ul><p><strong>Unified Intermediate Representation (IR):</strong></p><ul><li>Core abstraction layer using Go structs (considering Substrait)</li><li>Enables multi-dialect translation</li><li>Single source of truth for SQL semantics</li><li>This will be superset of the SQL semantics that need to be supported</li></ul><p><strong>SQL Generators:</strong></p><ul><li>Generate target SQL from IR</li><li>Athena Generator converts IR to Athena dialect</li><li>BigQuery Generator converts IR to BigQuery dialect</li></ul><h3 id=test-cases-layer-developer-input>Test Cases Layer (Developer Input)</h3><p>This layer contains SQL inputs and expected outputs in YAML format:</p><ul><li>Contains SQL dialects for different representation</li><li>For a given test case, it has pair of Athena SQL and BigQuery SQL</li><li>For same test case, test can be performed on both directions</li></ul><h2 id=why-this-approach>Why This Approach?</h2><p>This architecture offers several compelling advantages:</p><ol><li><strong>Unified IR enables multi-dialect translation</strong> - Add a new dialect by implementing just a parser/converter and generator</li><li><strong>Easy addition of new dialects</strong> - The IR abstracts away dialect-specific quirks</li><li><strong>Consistent testing via YAML</strong> - All test cases are version-controlled and reusable</li><li><strong>Deterministic grammar via ANTLR</strong> - Auto-generated parsers eliminate manual parsing bugs</li><li><strong>Separation of concerns</strong> - Each component has a single, well-defined responsibility</li></ol><h2 id=cli-based-development--testing>CLI-Based Development & Testing</h2><p>A robust CLI was crucial for the development workflow. Here&rsquo;s how it works:</p><h3 id=yaml-test-format>YAML Test Format</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>test_cases</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>simple_select</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>bigquery</span><span class=p>:</span><span class=w> </span><span class=l>SELECT id, name, age FROM `dataset.users` WHERE age &gt; 18</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>athena</span><span class=p>:</span><span class=w> </span><span class=l>SELECT id, name, age FROM &#34;dataset&#34;.&#34;users&#34; WHERE age &gt; 18</span><span class=w>
+</span></span></span></code></pre></div><h3 id=running-tests-with-slice-notation>Running Tests with Slice Notation</h3><p>The CLI supports flexible test execution:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># Run test case 3 only</span>
+</span></span><span class=line><span class=cl>sqltranslate --yaml examples/ --yaml-run <span class=m>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Run first 3 test cases, i.e., 0, 1, 2</span>
+</span></span><span class=line><span class=cl>sqltranslate --yaml examples/ --yaml-run :3
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Run test cases 2 to 4, i.e., 2, 3, 4</span>
+</span></span><span class=line><span class=cl>sqltranslate --yaml examples/ --yaml-run 2:5
+</span></span></code></pre></div><h3 id=test-case-reusability>Test Case Reusability</h3><p>One of the beautiful aspects of this design is that the same test case validates <strong>both directions</strong>:</p><ul><li>BigQuery → Athena</li><li>Athena → BigQuery</li><li>Potentially same dialect → same dialect (for validation)</li><li>If N dialects are supported, a given Test Case need to be run N<sup>2</sup> times.</li></ul><p>Adding new dialects to the YAML is straightforward - just add the SQL for that dialect.</p><h3 id=cli-output-example>CLI Output Example</h3><p>The CLI provides detailed YAML output showing exactly what passed and failed:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>summary</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>total_test_cases</span><span class=p>:</span><span class=w> </span><span class=m>101</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>athena_to_bigquery_succeeded</span><span class=p>:</span><span class=w> </span><span class=m>96</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bigquery_to_athena_succeeded</span><span class=p>:</span><span class=w> </span><span class=m>96</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>details</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>negative_numbers</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>index</span><span class=p>:</span><span class=w> </span><span class=m>83</span><span class=w> </span><span class=c># Enabled AI tools to find the failing test case pretty fast</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>athena_to_bigquery</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>input</span><span class=p>:</span><span class=w> </span><span class=l>SELECT * FROM accounts WHERE balance &lt; -100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>expected</span><span class=p>:</span><span class=w> </span><span class=l>SELECT * FROM accounts WHERE balance &lt; -100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>output</span><span class=p>:</span><span class=w> </span><span class=nt>&#39;Parse error</span><span class=p>:</span><span class=w> </span><span class=nt>line 1:39 token recognition error at</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span>-<span class=s1>&#39;&#39;</span><span class=l>&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>status</span><span class=p>:</span><span class=w> </span><span class=l>failed_to_parse</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>bigquery_to_athena</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>input</span><span class=p>:</span><span class=w> </span><span class=l>SELECT * FROM accounts WHERE balance &lt; -100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>expected</span><span class=p>:</span><span class=w> </span><span class=l>SELECT * FROM accounts WHERE balance &lt; -100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>output</span><span class=p>:</span><span class=w> </span><span class=l>SELECT * FROM accounts WHERE balance &lt; - 100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>status</span><span class=p>:</span><span class=w> </span><span class=l>failed_mismatch</span><span class=w>
+</span></span></span></code></pre></div><h3 id=the-importance-of-a-strong-cli>The Importance of a Strong CLI</h3><p>A well-designed CLI was essential:</p><ul><li><strong>Deterministic testing environment</strong> - Same inputs always produce same outputs</li><li><strong>Re-runnable test cases</strong> - Critical for iterative development</li><li><strong>YAML output for tracking</strong> - Exact failure details fed back to AI agents</li><li><strong>Automation-friendly</strong> - Easy to integrate into CI/CD pipelines</li></ul><h2 id=development-workflow-with-ai-agents>Development Workflow with AI Agents</h2><p>The development process followed an iterative pattern:</p><pre><code class=language-dot>digraph SQLTranslatorWorkflow {
   bgcolor=transparent;
   rankdir=TB;
   nodesep=0.3;
   ranksep=0.3;
-  node [shape=box, style=&quot;rounded,filled&quot;, fontname=&quot;Arial&quot;];
+  node [shape=box, style=&#34;rounded,filled&#34;, fontname=&#34;Arial&#34;];
 
-  // Developer + Test Suite
-  Dev [label=&quot;👤 Developer&quot;, fillcolor=&quot;#e3f2fd&quot;];
-  TestSuite [label=&quot;🧪 Test Suite&quot;, shape=folder, fillcolor=&quot;#fff3cd&quot;];
+  // Developer &#43; Test Suite
+  Dev [label=&#34;👤 Developer&#34;, fillcolor=&#34;#e3f2fd&#34;];
+  TestSuite [label=&#34;🧪 Test Suite&#34;, shape=folder, fillcolor=&#34;#fff3cd&#34;];
 
   // === Coding Agent Subgraph ===
   subgraph cluster_agent {
-    label=&quot;🤖 Coding Agent&quot;;
-    style=&quot;rounded,dashed&quot;;
-    color=&quot;#888888&quot;;
-    fontname=&quot;Arial Bold&quot;;
+    label=&#34;🤖 Coding Agent&#34;;
+    style=&#34;rounded,dashed&#34;;
+    color=&#34;#888888&#34;;
+    fontname=&#34;Arial Bold&#34;;
 
-    Start [label=&quot;🏁 Start\n(initial N)&quot;, shape=oval, fillcolor=&quot;#c8e6c9&quot;];
+    Start [label=&#34;🏁 Start\n(initial N)&#34;, shape=oval, fillcolor=&#34;#c8e6c9&#34;];
 
-    RunN [label=&quot;▶️ Run Test Case N&quot;, fillcolor=&quot;#e8f5e9&quot;];
+    RunN [label=&#34;▶️ Run Test Case N&#34;, fillcolor=&#34;#e8f5e9&#34;];
 
-    Regression [label=&quot;🔁 Regression Check :N&quot;, fillcolor=&quot;#f3e5f5&quot;];
+    Regression [label=&#34;🔁 Regression Check :N&#34;, fillcolor=&#34;#f3e5f5&#34;];
 
-    Fix [label=&quot;🛠️ Fix Issues&quot;, fillcolor=&quot;#ffebee&quot;];
+    Fix [label=&#34;🛠️ Fix Issues&#34;, fillcolor=&#34;#ffebee&#34;];
 
-    Inc [label=&quot;➕ Increment N&quot;, fillcolor=&quot;#f1f8e9&quot;];
+    Inc [label=&#34;➕ Increment N&#34;, fillcolor=&#34;#f1f8e9&#34;];
 
-    Stop [label=&quot;🛑 Stop\n(final N)&quot;, shape=oval, fillcolor=&quot;#ffcdd2&quot;];
+    Stop [label=&#34;🛑 Stop\n(final N)&#34;, shape=oval, fillcolor=&#34;#ffcdd2&#34;];
   }
 
   // Developer workflow
-  Dev -&gt; TestSuite [label=&quot;Add/Update Tests/Prompt/Generated&quot;];
-  Dev -&gt; Start [label=&quot;Prompt&quot;];
+  Dev -&gt; TestSuite [label=&#34;Add/Update Tests/Prompt/Generated&#34;];
+  Dev -&gt; Start [label=&#34;Prompt&#34;];
 
   // Core flow (compact)
   Start -&gt; RunN;
 
-  RunN -&gt; Fix [label=&quot; Failed&quot;];
-  RunN -&gt; Regression [label=&quot; Passed&quot;];
+  RunN -&gt; Fix [label=&#34; Failed&#34;];
+  RunN -&gt; Regression [label=&#34; Passed&#34;];
 
-  Regression -&gt; Fix [label=&quot; Failed&quot;];
-  Regression -&gt; Inc [label=&quot; Passed&quot;];
+  Regression -&gt; Fix [label=&#34; Failed&#34;];
+  Regression -&gt; Inc [label=&#34; Passed&#34;];
 
-  Inc -&gt; RunN [label=&quot;More tests&quot;];
-  Inc -&gt; Stop [label=&quot;Done&quot;];
+  Inc -&gt; RunN [label=&#34;More tests&#34;];
+  Inc -&gt; Stop [label=&#34;Done&#34;];
 
   Fix -&gt; RunN;
 
   // Dotted: Test Suite influence
-  edge [style=dotted, color=&quot;gray40&quot;];
+  edge [style=dotted, color=&#34;gray40&#34;];
   TestSuite -&gt; RunN;
   TestSuite -&gt; Regression;
 
   edge [style=solid, color=black];
-}
-</code></pre><ol><li><strong>Developer</strong> creates/updates test cases and provides prompts</li><li><strong>AI Agent starts</strong> with initial test case N</li><li><strong>Run test case N</strong> to validate</li><li>If <strong>passed</strong>, run <strong>regression check</strong> on all tests up to N</li><li>If <strong>failed</strong> (either new test or regression), <strong>fix issues</strong></li><li>Once all tests pass, <strong>increment N</strong> and repeat</li><li><strong>Stop</strong> when all test cases pass</li></ol><p>The workflow was highly iterative, with the AI agent fixing issues and re-running regressions after each change. The CLI&rsquo;s slice notation made it easy to run specific subsets of tests quickly.</p><h2 id=the-test-suite-challenge>The Test Suite Challenge</h2><p>One important lesson: <strong>AI-generated tests were NOT reliable</strong>.</p><p>Initially, I had the AI generate test cases, but they:</p><ul><li>Contained subtle errors</li><li>Missed edge cases</li><li>Had incorrect expected outputs</li></ul><p>This required significant manual correction. Eventually, we curated a high-quality test suite through:</p><ul><li>Manual review and correction</li><li>Validating against actual database behavior</li></ul><p>The curated test suite became invaluable for guiding the AI agent and ensuring correctness.</p><h2 id=documentation-readmemd-as-the-north-star>Documentation: README.md as the North Star</h2><p>Without a comprehensive README, the AI model kept rediscovering basics:</p><ul><li><em>&ldquo;How do I run ANTLR?&rdquo;</em></li><li><em>&ldquo;Where is the go:generate command?&rdquo;</em></li><li><em>&ldquo;How do I build the project?&rdquo;</em></li></ul><p>This led to unnecessary <strong>credit burn</strong> as the model wasted time on setup rather than solving problems.</p><p><strong>Solution:</strong> Once the README had detailed step-by-step instructions, the AI executed tasks much faster with minimal discovery overhead.</p><p>Key sections in the README:</p><ul><li>Setup instructions</li><li>Build commands</li><li>Test execution</li><li>Architecture overview</li><li>Development guidelines</li></ul><p>Interestingly, large part of README was also auto generated.<br>Customization done at Development workflow to match the development model explained earlier.</p><h2 id=agent-aided-iteration>Agent-Aided Iteration</h2><p>The iterative process with AI agents had some challenges:</p><ul><li>Agents sometimes claimed work was &ldquo;fixed&rdquo; when it wasn&rsquo;t</li><li>CLI validation caught these false positives</li><li>Modified CLI to output YAML with test indices</li><li>Fed failing case details back to agent</li><li>Agent could then re-run exact failing cases</li></ul><h3 id=sample-prompts-to-agent>Sample Prompts to Agent</h3><p>The prompts evolved from verbose to terse as the project progressed:</p><ul><li>&ldquo;Use Development step in guidelines.md in aqfer-ir. Start developing from test case 0&rdquo;</li><li>&ldquo;Continue testing use case 3 and so on&rdquo;</li><li>&ldquo;Fix 10&rdquo;</li><li>&ldquo;Proceed building 11, 12 and so on&mldr; till 15&rdquo;</li><li>&ldquo;14, 15 as well&rdquo;</li><li>Simply pasting CLI output showing failures</li><li>&ldquo;continue&rdquo;</li><li>&ldquo;Run array_agg_order&rdquo;</li><li>&ldquo;Run with :20 and fix issues&rdquo;</li><li>&ldquo;Let&rsquo;s do 20:25&rdquo;</li><li>&ldquo;Run :35&rdquo;</li><li>&ldquo;Run :36, :37,&mldr;. :40&rdquo;</li><li>&ldquo;Let&rsquo;s fix 40 and run :40 as well after fix&rdquo;</li><li>&ldquo;40 is failing?&rdquo;</li><li>&ldquo;run till :80&rdquo;</li></ul><p>Eventually AI Agent (Junie/Goland) printed the following:</p><blockquote><p><em>&ldquo;All 101 test cases for both Athena to BigQuery and BigQuery to Athena conversions passed successfully, confirming the fixes work as intended.&rdquo;</em></p></blockquote><h3 id=feeding-cli-output-to-ai>Feeding CLI Output to AI</h3><p>A particularly effective technique was feeding the CLI output directly to the AI especially when it stopped or claimed successful completion.</p><pre><code>summary:
+}</code></pre><ol><li><strong>Developer</strong> creates/updates test cases and provides prompts</li><li><strong>AI Agent starts</strong> with initial test case N</li><li><strong>Run test case N</strong> to validate</li><li>If <strong>passed</strong>, run <strong>regression check</strong> on all tests up to N</li><li>If <strong>failed</strong> (either new test or regression), <strong>fix issues</strong></li><li>Once all tests pass, <strong>increment N</strong> and repeat</li><li><strong>Stop</strong> when all test cases pass</li></ol><p>The workflow was highly iterative, with the AI agent fixing issues and re-running regressions after each change. The CLI&rsquo;s slice notation made it easy to run specific subsets of tests quickly.</p><h2 id=the-test-suite-challenge>The Test Suite Challenge</h2><p>One important lesson: <strong>AI-generated tests were NOT reliable</strong>.</p><p>Initially, I had the AI generate test cases, but they:</p><ul><li>Contained subtle errors</li><li>Missed edge cases</li><li>Had incorrect expected outputs</li></ul><p>This required significant manual correction. Eventually, we curated a high-quality test suite through:</p><ul><li>Manual review and correction</li><li>Validating against actual database behavior</li></ul><p>The curated test suite became invaluable for guiding the AI agent and ensuring correctness.</p><h2 id=documentation-readmemd-as-the-north-star>Documentation: README.md as the North Star</h2><p>Without a comprehensive README, the AI model kept rediscovering basics:</p><ul><li><em>&ldquo;How do I run ANTLR?&rdquo;</em></li><li><em>&ldquo;Where is the go:generate command?&rdquo;</em></li><li><em>&ldquo;How do I build the project?&rdquo;</em></li></ul><p>This led to unnecessary <strong>credit burn</strong> as the model wasted time on setup rather than solving problems.</p><p><strong>Solution:</strong> Once the README had detailed step-by-step instructions, the AI executed tasks much faster with minimal discovery overhead.</p><p>Key sections in the README:</p><ul><li>Setup instructions</li><li>Build commands</li><li>Test execution</li><li>Architecture overview</li><li>Development guidelines</li></ul><p>Interestingly, large part of README was also auto generated.<br>Customization done at Development workflow to match the development model explained earlier.</p><h2 id=agent-aided-iteration>Agent-Aided Iteration</h2><p>The iterative process with AI agents had some challenges:</p><ul><li>Agents sometimes claimed work was &ldquo;fixed&rdquo; when it wasn&rsquo;t</li><li>CLI validation caught these false positives</li><li>Modified CLI to output YAML with test indices</li><li>Fed failing case details back to agent</li><li>Agent could then re-run exact failing cases</li></ul><h3 id=sample-prompts-to-agent>Sample Prompts to Agent</h3><p>The prompts evolved from verbose to terse as the project progressed:</p><ul><li>&ldquo;Use Development step in guidelines.md in aqfer-ir. Start developing from test case 0&rdquo;</li><li>&ldquo;Continue testing use case 3 and so on&rdquo;</li><li>&ldquo;Fix 10&rdquo;</li><li>&ldquo;Proceed building 11, 12 and so on&mldr; till 15&rdquo;</li><li>&ldquo;14, 15 as well&rdquo;</li><li>Simply pasting CLI output showing failures</li><li>&ldquo;continue&rdquo;</li><li>&ldquo;Run array_agg_order&rdquo;</li><li>&ldquo;Run with :20 and fix issues&rdquo;</li><li>&ldquo;Let&rsquo;s do 20:25&rdquo;</li><li>&ldquo;Run :35&rdquo;</li><li>&ldquo;Run :36, :37,&mldr;. :40&rdquo;</li><li>&ldquo;Let&rsquo;s fix 40 and run :40 as well after fix&rdquo;</li><li>&ldquo;40 is failing?&rdquo;</li><li>&ldquo;run till :80&rdquo;</li></ul><p>Eventually AI Agent (Junie/Goland) printed the following:</p><blockquote><p><em>&ldquo;All 101 test cases for both Athena to BigQuery and BigQuery to Athena conversions passed successfully, confirming the fixes work as intended.&rdquo;</em></p></blockquote><h3 id=feeding-cli-output-to-ai>Feeding CLI Output to AI</h3><p>A particularly effective technique was feeding the CLI output directly to the AI especially when it stopped or claimed successful completion.</p><pre tabindex=0><code>summary:
   total_test_cases: 15
   athena_to_bigquery_succeeded: 12
   bigquery_to_athena_succeeded: 13
@@ -212,4 +210,4 @@ details:
 <a href=https://sakthipriyan.com/building-systems/tags/bigquery/ class=tag-link>BigQuery</a>
 <a href=https://sakthipriyan.com/building-systems/tags/ir/ class=tag-link>IR</a>
 <a href=https://sakthipriyan.com/building-systems/tags/sql-translation/ class=tag-link>SQL Translation</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script src=https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js></script><script src=https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js></script><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code.language-dot, pre code.dot").forEach(e=>{const t=e.textContent.replace(/&gt;/g,">").replace(/&lt;/g,"<");console.log("[DEBUG] Rendering DOT block");const n=new Viz;n.renderSVGElement(t).then(t=>{t.removeAttribute("width"),t.removeAttribute("height"),t.setAttribute("preserveAspectRatio","xMidYMid meet");const n=document.createElement("div");n.className="graphviz-diagram",n.appendChild(t);const s=e.parentNode;s.parentNode.replaceChild(n,s),console.log("[DEBUG] Diagram rendered")}).catch(t=>{console.error("[DEBUG] Viz.js error:",t),e.parentNode.textContent="Error rendering diagram: "+t})})})</script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script src=https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js></script><script src=https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js></script><script defer src=/js/viz-init.min.1c912e731c1b96e9f2413ccc01669a1dac792d266149794527f064d5874375c7.js integrity="sha256-HJEucxwblunyQTzMAWaaHax5LSZhSXlFJ/Bk1YdDdcc="></script><script defer src=/js/nav.min.20173668f4f7bb18cfdc22fb6952964666099d78e7a6fcc333adb3431fe5db3b.js integrity="sha256-IBc2aPT3uxjP3CL7aVKWRmYJnXjnpvzDM62zQx/l2zs="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>

@@ -1,59 +1,59 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Couchbase setup on AWS | Sakthi Priyan H</title><meta name=description content="EC2 instances"><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Couchbase setup on AWS | Sakthi Priyan H</title><meta name=description content="EC2 instances"><link rel=stylesheet href=/css/style.min.3b4dde4b82683cce7fac5abeaa4623e79c1482280fcbce9c8c4a01c862888a4f.css integrity="sha256-O03eS4JoPM5/rFq+qkYj55wUgigPy86cjEoByGKIik8="><link rel=stylesheet href=/css/syntax.min.7e672808766d1ee879199f31b96578d6c2c4022d4e880505051a38ff65c41339.css integrity="sha256-fmcoCHZtHuh5GZ8xuWV41sLEAi1OiAUFBRo4/2XEEzk="></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
 <span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Couchbase setup on AWS</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Couchbase setup on AWS</h1><p class=content-summary>EC2 instances</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
 <time datetime=2015-07-24>Jul 24, 2015</time>
 </span><span class=meta-item title="Last Updated"><span class=meta-icon>🔄</span>
-<time datetime=2025-11-20>Nov 20, 2025</time>
+<time datetime=2026-08-23>Aug 23, 2026</time>
 </span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
 <a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2015/couchbase-setup-on-aws.md target=_blank rel="noopener noreferrer">Source</a>
 </span><span class=meta-item><span class=meta-icon>📖</span>
-<span class=read-time>2 min read</span></span></div><hr class=content-divider></header><div class=post-content><p><a href=http://couchbase.com>Couchbase</a> cluster can be set up on AWS EC2 instance as shown below.</p><h3 id=setup>Setup</h3><p>The following configuration details are for Ubuntu distro.</p><ol><li><p>Setup EBS (EBS is recommended for better performance).</p><pre><code> # Mounting EBS to /mnt
- sudo mkfs.ext4 /dev/xvdf
- sudo mkdir /mnt
- sudo mount /dev/xvdf /mnt
-
- # Configure fstab
- # Add following line in /etc/fstab document
- # /dev/xvdf       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2
- echo &quot;/dev/xvdf       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2&quot; | sudo tee -a /etc/fstab
-</code></pre></li><li><p>Download Couchbase</p><pre><code> # Download the deb file from couchbase website
- wget http://packages.couchbase.com/releases/3.0.1/couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb
-
- # Copy the downloaded file into all nodes. Replace the IP XXX.XXX.XXX.XXX with actual IP.
- scp  couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb ubuntu@XXX.XXX.XXX.XXX:couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb
-</code></pre></li><li><p>Install and configure Couchbase on each node.</p><pre><code> # Install Couchbase &amp; setup folder
- sudo dpkg -i couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb
- sudo mkdir /mnt/cb
- sudo chown couchbase:couchbase /mnt/cb
-
- # Configure all the Couchbase installations.
- /opt/couchbase/bin/couchbase-cli node-init -c 127.0.0.1:8091 \
-         -u admin -p PASSWORD \
-         --node-init-data-path=/mnt/cb/data \
-         --node-init-index-path=/mnt/cb/index
-  # PASSWORD replace with actual password (use a lengthy random string).
-</code></pre></li><li><p>Initialize the cluster in one of the nodes.
-Here, RAM is set as 15GB per node. Can be changed as required.</p><pre><code> /opt/couchbase/bin/couchbase-cli cluster-init -c 127.0.0.1:8091 \
-         -u admin -p PASSWORD \
-         --cluster-init-ramsize=15360
-</code></pre></li><li><p>Add all other nodes.
-Change the server-add IP address for all remaining nodes and execute.</p><pre><code> /opt/couchbase/bin/couchbase-cli rebalance -c 127.0.0.1:8091 -u admin -p PASSWORD \
-         --server-add=XXX.XXX.XXX.XXX:8091 \
-         --server-add-username=admin \
-         --server-add-password=PASSWORD
-</code></pre></li><li><p>Now, create a Bucket. Finally..</p><pre><code> # Create a bucket `bucket-one` with quota 10GB per node.
- /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 -u admin -p PASSWORD \
-         --bucket=bucket-one \
-         --bucket-type=couchbase \
-         --bucket-password=BPASSWORD \
-         --bucket-ramsize=10240 \
-         --bucket-replica=1 \
-         --wait
- # Replace BPASSWORD with password for the bucket.
-</code></pre></li></ol><p>Now, we can start using the bucket and so the Couchbase cluster.</p></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<span class=read-time>2 min read</span></span></div><hr class=content-divider></header><div class=post-content><p><a href=http://couchbase.com>Couchbase</a> cluster can be set up on AWS EC2 instance as shown below.</p><h3 id=setup>Setup</h3><p>The following configuration details are for Ubuntu distro.</p><ol><li><p>Setup EBS (EBS is recommended for better performance).</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Mounting EBS to /mnt</span>
+</span></span><span class=line><span class=cl>sudo mkfs.ext4 /dev/xvdf
+</span></span><span class=line><span class=cl>sudo mkdir /mnt
+</span></span><span class=line><span class=cl>sudo mount /dev/xvdf /mnt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Configure fstab</span>
+</span></span><span class=line><span class=cl><span class=c1># Add following line in /etc/fstab document</span>
+</span></span><span class=line><span class=cl><span class=c1># /dev/xvdf       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;/dev/xvdf       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2&#34;</span> <span class=p>|</span> sudo tee -a /etc/fstab
+</span></span></code></pre></div></li><li><p>Download Couchbase</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Download the deb file from couchbase website</span>
+</span></span><span class=line><span class=cl>wget http://packages.couchbase.com/releases/3.0.1/couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Copy the downloaded file into all nodes. Replace the IP XXX.XXX.XXX.XXX with actual IP.</span>
+</span></span><span class=line><span class=cl>scp  couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb ubuntu@XXX.XXX.XXX.XXX:couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb
+</span></span></code></pre></div></li><li><p>Install and configure Couchbase on each node.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Install Couchbase &amp; setup folder</span>
+</span></span><span class=line><span class=cl>sudo dpkg -i couchbase-server-enterprise_3.0.1-ubuntu12.04_amd64.deb
+</span></span><span class=line><span class=cl>sudo mkdir /mnt/cb
+</span></span><span class=line><span class=cl>sudo chown couchbase:couchbase /mnt/cb
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Configure all the Couchbase installations.</span>
+</span></span><span class=line><span class=cl>/opt/couchbase/bin/couchbase-cli node-init -c 127.0.0.1:8091 <span class=se>\
+</span></span></span><span class=line><span class=cl>        -u admin -p PASSWORD <span class=se>\
+</span></span></span><span class=line><span class=cl>        --node-init-data-path<span class=o>=</span>/mnt/cb/data <span class=se>\
+</span></span></span><span class=line><span class=cl>        --node-init-index-path<span class=o>=</span>/mnt/cb/index
+</span></span><span class=line><span class=cl> <span class=c1># PASSWORD replace with actual password (use a lengthy random string).</span>
+</span></span></code></pre></div></li><li><p>Initialize the cluster in one of the nodes.
+Here, RAM is set as 15GB per node. Can be changed as required.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/opt/couchbase/bin/couchbase-cli cluster-init -c 127.0.0.1:8091 <span class=se>\
+</span></span></span><span class=line><span class=cl>        -u admin -p PASSWORD <span class=se>\
+</span></span></span><span class=line><span class=cl>        --cluster-init-ramsize<span class=o>=</span><span class=m>15360</span>
+</span></span></code></pre></div></li><li><p>Add all other nodes.
+Change the server-add IP address for all remaining nodes and execute.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/opt/couchbase/bin/couchbase-cli rebalance -c 127.0.0.1:8091 -u admin -p PASSWORD <span class=se>\
+</span></span></span><span class=line><span class=cl>        --server-add<span class=o>=</span>XXX.XXX.XXX.XXX:8091 <span class=se>\
+</span></span></span><span class=line><span class=cl>        --server-add-username<span class=o>=</span>admin <span class=se>\
+</span></span></span><span class=line><span class=cl>        --server-add-password<span class=o>=</span>PASSWORD
+</span></span></code></pre></div></li><li><p>Now, create a Bucket. Finally..</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Create a bucket `bucket-one` with quota 10GB per node.</span>
+</span></span><span class=line><span class=cl>/opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 -u admin -p PASSWORD <span class=se>\
+</span></span></span><span class=line><span class=cl>        --bucket<span class=o>=</span>bucket-one <span class=se>\
+</span></span></span><span class=line><span class=cl>        --bucket-type<span class=o>=</span>couchbase <span class=se>\
+</span></span></span><span class=line><span class=cl>        --bucket-password<span class=o>=</span>BPASSWORD <span class=se>\
+</span></span></span><span class=line><span class=cl>        --bucket-ramsize<span class=o>=</span><span class=m>10240</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>        --bucket-replica<span class=o>=</span><span class=m>1</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>        --wait
+</span></span><span class=line><span class=cl><span class=c1># Replace BPASSWORD with password for the bucket.</span>
+</span></span></code></pre></div></li></ol><p>Now, we can start using the bucket and so the Couchbase cluster.</p></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
 <a href=https://sakthipriyan.com/building-systems/tags/couchbase/ class=tag-link>Couchbase</a>
 <a href=https://sakthipriyan.com/building-systems/tags/setup/ class=tag-link>Setup</a>
-<a href=https://sakthipriyan.com/building-systems/tags/aws/ class=tag-link>Aws</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
+<a href=https://sakthipriyan.com/building-systems/tags/aws/ class=tag-link>AWS</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script defer src=/js/nav.min.20173668f4f7bb18cfdc22fb6952964666099d78e7a6fcc333adb3431fe5db3b.js integrity="sha256-IBc2aPT3uxjP3CL7aVKWRmYJnXjnpvzDM62zQx/l2zs="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>

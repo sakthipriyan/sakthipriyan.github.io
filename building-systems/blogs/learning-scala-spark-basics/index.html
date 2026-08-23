@@ -1,139 +1,139 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Learning Scala Spark basics | Sakthi Priyan H</title><meta name=description content="using spark shell in local"><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Learning Scala Spark basics | Sakthi Priyan H</title><meta name=description content="using spark shell in local"><link rel=stylesheet href=/css/style.min.3b4dde4b82683cce7fac5abeaa4623e79c1482280fcbce9c8c4a01c862888a4f.css integrity="sha256-O03eS4JoPM5/rFq+qkYj55wUgigPy86cjEoByGKIik8="><link rel=stylesheet href=/css/syntax.min.7e672808766d1ee879199f31b96578d6c2c4022d4e880505051a38ff65c41339.css integrity="sha256-fmcoCHZtHuh5GZ8xuWV41sLEAi1OiAUFBRo4/2XEEzk="></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
 <span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Learning Scala Spark basics</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Learning Scala Spark basics</h1><p class=content-summary>using spark shell in local</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
 <time datetime=2018-11-24>Nov 24, 2018</time>
 </span><span class=meta-item title="Last Updated"><span class=meta-icon>🔄</span>
-<time datetime=2025-11-20>Nov 20, 2025</time>
+<time datetime=2026-08-23>Aug 23, 2026</time>
 </span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
 <a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2018/learning-scala-spark-basics.md target=_blank rel="noopener noreferrer">Source</a>
 </span><span class=meta-item><span class=meta-icon>📖</span>
-<span class=read-time>5 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=apache-spark>Apache Spark</h3><p><a href=https://spark.apache.org/>Apache Spark™</a> is a unified analytics engine for large-scale data processing. It can be used for variety of things like, big data processing, machine learning, stream processing and etc.,</p><h3 id=environment>Environment</h3><p>I had tested it in Mac OS and Ubuntu. May or may not work on Windows.</p><h4 id=prerequisites>Prerequisites</h4><p>Java 8 installed and available as <code>java</code> in command line.</p><h3 id=set-up>Set up</h3><h4 id=download>Download</h4><ol><li><a href=https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz>Download</a> the Spark package from Apache Spark <a href=https://spark.apache.org/downloads.html>Website</a>. Download links points to Spark 2.2.0 which i had used. You can choose latest from the website.</li><li><a href=http://files.grouplens.org/datasets/movielens/ml-latest-small.zip>Download</a> movies data set from <a href=https://grouplens.org/datasets/movielens/>GroupLens</a>. Download links point to small dataset. You can choose larger one if you have infra.</li></ol><h4 id=unpack>Unpack</h4><p>Move both files to same directory.</p><pre><code>unzip ml-lastest-small.zip  
-tar -xvzf spark-2.2.0-bin-hadoop2.7.tgz
-</code></pre><h4 id=spark-shell>Spark Shell</h4><p>Move into the spark extracted directory.</p><pre><code>cd spark-2.2.0-bin-hadoop2.7
-./bin/spark-shell
-</code></pre><p>It will take some seconds to boot up, be patient.
-Once it is up, you will be able to see,</p><pre><code>Spark context Web UI available at http://172.16.3.139:4040
-Spark context available as 'sc' (master = local[*], app id = local-1543057723300).
-Spark session available as 'spark'.
-Welcome to	
-  ____              __	
- / __/__  ___ _____/ /__
- _\ \/ _ \/ _ `/ __/  '_/
-/___/ .__/\_,_/_/ /_/\_\   version 2.2.0
-   /_/
-  
-Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_161)
-Type in expressions to have them evaluated.
-Type :help for more information.
-scala&gt; 
-</code></pre><p>You can see the <code>scala></code> prompt. We will be entering commands in this prompt.</p><h3 id=define-data-loading-function>Define data loading function</h3><pre><code>def loadDF(filepath:String) : org.apache.spark.sql.DataFrame 
-= spark.read.format(&quot;com.databricks.spark.csv&quot;).option(&quot;header&quot;, &quot;true&quot;).option(&quot;inferSchema&quot;, &quot;true&quot;).load(filepath)
-</code></pre><p>You will see following console output</p><pre><code>loadDF: (filepath: String)org.apache.spark.sql.DataFrame
-</code></pre><h3 id=load-data-into-dataframe>Load Data into Dataframe</h3><p>Dataframe is similar to table in SQL world.</p><pre><code>val moviesFile = &quot;../ml-latest-small/movies.csv&quot;
-val ratingsFile = &quot;../ml-latest-small/ratings.csv&quot;
-val tagsFile = &quot;../ml-latest-small/tags.csv&quot;
-
-val moviesDF = loadDF(moviesFile)
-
-// You can load other files into dataframe as well.
-</code></pre><h3 id=lets-start-the-journey>Let&rsquo;s start the journey</h3><p>Now we have <code>moviesDF</code> which loaded the data from <code>movies.csv</code> which we had downloaded earlier.</p><p>Refer <a href=https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset>this</a> documentation for various functions available in the dataframe.</p><h4 id=number-of-records>Number of records</h4><p>So simple, just call method <code>count</code>. As with Scala, single parentheses is optional for methods.</p><pre><code>moviesDF.count
-</code></pre><p>It will show the number of records as follows</p><pre><code>res1: Long = 9742
-</code></pre><h4 id=schema-of-the-dataframe>Schema of the Dataframe</h4><pre><code>moviesDF.printSchema
-</code></pre><p>Output will show field names and data types.</p><pre><code>root
-|-- movieId: integer (nullable = true)
-|-- title: string (nullable = true)
-|-- genres: string (nullable = true)
-</code></pre><p>Dataframes can support complex data types such as map, array and struct. So, it can be nested as well.</p><h4 id=show-records-from-the-data-frame>Show records from the data frame</h4><pre><code>moviesDF.show
-</code></pre><p>By default, it shows top 20 records in the dataframe.</p><pre><code>+-------+--------------------+--------------------+
-|movieId|               title|              genres|
-+-------+--------------------+--------------------+
-|      1|    Toy Story (1995)|Adventure|Animati...|
-|      2|      Jumanji (1995)|Adventure|Childre...|
-|      3|Grumpier Old Men ...|      Comedy|Romance|
-|      4|Waiting to Exhale...|Comedy|Drama|Romance|
-|      5|Father of the Bri...|              Comedy|
-|      6|         Heat (1995)|Action|Crime|Thri...|
-|      7|      Sabrina (1995)|      Comedy|Romance|
-|      8| Tom and Huck (1995)|  Adventure|Children|
-|      9| Sudden Death (1995)|              Action|
-|     10|    GoldenEye (1995)|Action|Adventure|...|
-|     11|American Presiden...|Comedy|Drama|Romance|
-|     12|Dracula: Dead and...|       Comedy|Horror|
-|     13|        Balto (1995)|Adventure|Animati...|
-|     14|        Nixon (1995)|               Drama|
-|     15|Cutthroat Island ...|Action|Adventure|...|
-|     16|       Casino (1995)|         Crime|Drama|
-|     17|Sense and Sensibi...|       Drama|Romance|
-|     18|   Four Rooms (1995)|              Comedy|
-|     19|Ace Ventura: When...|              Comedy|
-|     20|  Money Train (1995)|Action|Comedy|Cri...|
-+-------+--------------------+--------------------+
-only showing top 20 rows
-</code></pre><p>Also, we can specify number of records as well.</p><pre><code>moviesDF.show(4)
-</code></pre><h4 id=creating-new-dataframes>Creating new dataframes</h4><p>Operations such as <code>select</code> we do on dataframe creates another dataframe.</p><pre><code>val movieTitlesDF = moviesDF.select($&quot;title&quot;)
-</code></pre><p>$&ldquo;title&rdquo; means <code>column</code> title. <code>select</code> also supports <code>"title"</code> as well. But, it cannot be mix of <code>column</code> and <code>string</code>.</p><p>Console output,</p><pre><code>movieTitlesDF: org.apache.spark.sql.DataFrame = [title: string]
-</code></pre><p>Now we have created a new dataframe called <code>movieTitlesDF</code> from the <code>moviesDF</code></p><pre><code>movieTitlesDF.show(3)
-+--------------------+
-|               title|
-+--------------------+
-|    Toy Story (1995)|
-|      Jumanji (1995)|
-|Grumpier Old Men ...|
-+--------------------+
-only showing top 3 rows
-</code></pre><h4 id=creating-new-fields>Creating new fields.</h4><p>In machine learning applications, for feature engineering, we would be deriving new fields.</p><p>Creating new new Dataframe with length of movie title.</p><pre><code>val titleDF = movieTitlesDF.select($&quot;title&quot;, length($&quot;title&quot;).alias(&quot;length&quot;))
-
-titleDF.show(2)
-+----------------+------+
-|           title|length|
-+----------------+------+
-|Toy Story (1995)|    16|
-|  Jumanji (1995)|    14|
-+----------------+------+
-only showing top 2 rows
-</code></pre><h4 id=let-us-find-the-movie-name-with-the-longest-name>Let us find the movie name with the longest name,</h4><pre><code>titleDF.sort($&quot;length&quot;.desc).head
-
-res2: org.apache.spark.sql.Row = [Dragon Ball Z the Movie: The World's Strongest (a.k.a. Dragon Ball Z: The Strongest Guy in The World) (Doragon bôru Z: Kono yo de ichiban tsuyoi yatsu) (1990),158]
-</code></pre><p>So the movie name is <code>Dragon Ball Z the Movie: The World's Strongest (a.k.a. Dragon Ball Z: The Strongest Guy in The World) (Doragon bôru Z: Kono yo de ichiban tsuyoi yatsu) (1990)</code> which has <code>158</code> characters.</p><p>We have used <code>sort</code> and sorted the rows in dataframe using <code>length</code> in <code>desc</code> order.</p><h4 id=lets-do-pattern-matching>Let&rsquo;s do pattern matching.</h4><p>Find movies which has <code>(year)</code> in the name.</p><pre><code>titleDF.where($&quot;title&quot;.rlike(&quot;[0-9]{4}&quot;)).count
-res3: Long = 9730
-</code></pre><p>So, in total we have 12 movies without year in it.</p><h4 id=lets-work-with-array>Let&rsquo;s work with Array</h4><p>If you have seen the <code>moviesDF.show</code> closely, <code>genres</code> is <code>|</code> separated multiple values.</p><p>First we will split the <code>genres</code> column by <code>|</code> and make it as <code>array&lt;string></code></p><pre><code>val genresDF = moviesDF.select(split($&quot;genres&quot;,&quot;\\|&quot;).alias(&quot;genres&quot;))
-genresDF: org.apache.spark.sql.DataFrame = [genres: array&lt;string&gt;]
-
-genresDF.show(2)
-+--------------------+
-|              genres|
-+--------------------+
-|[Adventure, Anima...|
-|[Adventure, Child...|
-+--------------------+
-only showing top 2 rows
-</code></pre><p>As you can see, genres is an array now.</p><h4 id=find-out-top-3-genres-in-our-records>Find out top 3 genres in our records</h4><p>Next, we will explode the array and find the count of each genre.</p><pre><code>genresDF.select(explode($&quot;genres&quot;).alias(&quot;genre&quot;)).groupBy($&quot;genre&quot;).count().show(3)
-
-+--------+-----+
-|   genre|count|
-+--------+-----+
-|   Crime| 1199|
-| Romance| 1596|
-|Thriller| 1894|
-+--------+-----+
-only showing top 3 rows
-</code></pre><h4 id=lets-find-top-3-movies-with-most-tags>Let&rsquo;s find top 3 movies with most tags</h4><pre><code>val tagsDF = loadDF(tagsFile)
-tagsDF.groupBy($&quot;movieId&quot;).count.sort($&quot;count&quot;.desc).limit(3).
-join(moviesDF, &quot;movieId&quot;).select(&quot;title&quot;,&quot;count&quot;).show()
-+--------------------+-----+
-|               title|count|
-+--------------------+-----+
-| Pulp Fiction (1994)|  181|
-|   Fight Club (1999)|   54|
-|2001: A Space Ody...|   41|
-+--------------------+-----+
-</code></pre><h4 id=that-is-not-all>That is not all</h4><p>We have gone through some basic functions available in dataframes.</p><ul><li>count</li><li>printSchema</li><li>show</li><li>select</li><li>length</li><li>alias</li><li>desc</li><li>sort, desc</li><li>split</li><li>rlike</li><li>where</li><li>head</li><li>groupBy</li></ul><p>Spark dataframe supports more number of operations and functions.</p><h3 id=enjoy-learning-spark>Enjoy learning Spark</h3><p>Expore more and play with the dataframe. You can use <code>ratings.csv</code> as well.</p><h3 id=references>References</h3><ol><li><a href=https://spark.apache.org/docs/2.2.0/sql-programming-guide.html>https://spark.apache.org/docs/2.2.0/sql-programming-guide.html</a></li><li><a href=https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset>https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset</a></li></ol></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<span class=read-time>5 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=apache-spark>Apache Spark</h3><p><a href=https://spark.apache.org/>Apache Spark™</a> is a unified analytics engine for large-scale data processing. It can be used for variety of things like, big data processing, machine learning, stream processing and etc.,</p><h3 id=environment>Environment</h3><p>I had tested it in Mac OS and Ubuntu. May or may not work on Windows.</p><h4 id=prerequisites>Prerequisites</h4><p>Java 8 installed and available as <code>java</code> in command line.</p><h3 id=set-up>Set up</h3><h4 id=download>Download</h4><ol><li><a href=https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz>Download</a> the Spark package from Apache Spark <a href=https://spark.apache.org/downloads.html>Website</a>. Download links points to Spark 2.2.0 which i had used. You can choose latest from the website.</li><li><a href=http://files.grouplens.org/datasets/movielens/ml-latest-small.zip>Download</a> movies data set from <a href=https://grouplens.org/datasets/movielens/>GroupLens</a>. Download links point to small dataset. You can choose larger one if you have infra.</li></ol><h4 id=unpack>Unpack</h4><p>Move both files to same directory.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>unzip ml-lastest-small.zip  
+</span></span><span class=line><span class=cl>tar -xvzf spark-2.2.0-bin-hadoop2.7.tgz
+</span></span></code></pre></div><h4 id=spark-shell>Spark Shell</h4><p>Move into the spark extracted directory.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> spark-2.2.0-bin-hadoop2.7
+</span></span><span class=line><span class=cl>./bin/spark-shell
+</span></span></code></pre></div><p>It will take some seconds to boot up, be patient.
+Once it is up, you will be able to see,</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Spark context Web UI available at http://172.16.3.139:4040
+</span></span><span class=line><span class=cl>Spark context available as &#39;sc&#39; (master = local[*], app id = local-1543057723300).
+</span></span><span class=line><span class=cl>Spark session available as &#39;spark&#39;.
+</span></span><span class=line><span class=cl>Welcome to	
+</span></span><span class=line><span class=cl>  ____              __	
+</span></span><span class=line><span class=cl> / __/__  ___ _____/ /__
+</span></span><span class=line><span class=cl> _\ \/ _ \/ _ `/ __/  &#39;_/
+</span></span><span class=line><span class=cl>/___/ .__/\_,_/_/ /_/\_\   version 2.2.0
+</span></span><span class=line><span class=cl>   /_/
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_161)
+</span></span><span class=line><span class=cl>Type in expressions to have them evaluated.
+</span></span><span class=line><span class=cl>Type :help for more information.
+</span></span><span class=line><span class=cl>scala&gt; 
+</span></span></code></pre></div><p>You can see the <code>scala></code> prompt. We will be entering commands in this prompt.</p><h3 id=define-data-loading-function>Define data loading function</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>def</span> <span class=n>loadDF</span><span class=o>(</span><span class=n>filepath</span><span class=k>:</span><span class=kt>String</span><span class=o>)</span> <span class=k>:</span> <span class=kt>org.apache.spark.sql.DataFrame</span> 
+</span></span><span class=line><span class=cl><span class=k>=</span> <span class=n>spark</span><span class=o>.</span><span class=n>read</span><span class=o>.</span><span class=n>format</span><span class=o>(</span><span class=s>&#34;com.databricks.spark.csv&#34;</span><span class=o>).</span><span class=n>option</span><span class=o>(</span><span class=s>&#34;header&#34;</span><span class=o>,</span> <span class=s>&#34;true&#34;</span><span class=o>).</span><span class=n>option</span><span class=o>(</span><span class=s>&#34;inferSchema&#34;</span><span class=o>,</span> <span class=s>&#34;true&#34;</span><span class=o>).</span><span class=n>load</span><span class=o>(</span><span class=n>filepath</span><span class=o>)</span>
+</span></span></code></pre></div><p>You will see following console output</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>loadDF: (filepath: String)org.apache.spark.sql.DataFrame
+</span></span></code></pre></div><h3 id=load-data-into-dataframe>Load Data into Dataframe</h3><p>Dataframe is similar to table in SQL world.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>val</span> <span class=n>moviesFile</span> <span class=k>=</span> <span class=s>&#34;../ml-latest-small/movies.csv&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>ratingsFile</span> <span class=k>=</span> <span class=s>&#34;../ml-latest-small/ratings.csv&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>tagsFile</span> <span class=k>=</span> <span class=s>&#34;../ml-latest-small/tags.csv&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>moviesDF</span> <span class=k>=</span> <span class=n>loadDF</span><span class=o>(</span><span class=n>moviesFile</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// You can load other files into dataframe as well.
+</span></span></span></code></pre></div><h3 id=lets-start-the-journey>Let&rsquo;s start the journey</h3><p>Now we have <code>moviesDF</code> which loaded the data from <code>movies.csv</code> which we had downloaded earlier.</p><p>Refer <a href=https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset>this</a> documentation for various functions available in the dataframe.</p><h4 id=number-of-records>Number of records</h4><p>So simple, just call method <code>count</code>. As with Scala, single parentheses is optional for methods.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=n>moviesDF</span><span class=o>.</span><span class=n>count</span>
+</span></span></code></pre></div><p>It will show the number of records as follows</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>res1: Long = 9742
+</span></span></code></pre></div><h4 id=schema-of-the-dataframe>Schema of the Dataframe</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=n>moviesDF</span><span class=o>.</span><span class=n>printSchema</span>
+</span></span></code></pre></div><p>Output will show field names and data types.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>root
+</span></span><span class=line><span class=cl>|-- movieId: integer (nullable = true)
+</span></span><span class=line><span class=cl>|-- title: string (nullable = true)
+</span></span><span class=line><span class=cl>|-- genres: string (nullable = true)
+</span></span></code></pre></div><p>Dataframes can support complex data types such as map, array and struct. So, it can be nested as well.</p><h4 id=show-records-from-the-data-frame>Show records from the data frame</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=n>moviesDF</span><span class=o>.</span><span class=n>show</span>
+</span></span></code></pre></div><p>By default, it shows top 20 records in the dataframe.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>+-------+--------------------+--------------------+
+</span></span><span class=line><span class=cl>|movieId|               title|              genres|
+</span></span><span class=line><span class=cl>+-------+--------------------+--------------------+
+</span></span><span class=line><span class=cl>|      1|    Toy Story (1995)|Adventure|Animati...|
+</span></span><span class=line><span class=cl>|      2|      Jumanji (1995)|Adventure|Childre...|
+</span></span><span class=line><span class=cl>|      3|Grumpier Old Men ...|      Comedy|Romance|
+</span></span><span class=line><span class=cl>|      4|Waiting to Exhale...|Comedy|Drama|Romance|
+</span></span><span class=line><span class=cl>|      5|Father of the Bri...|              Comedy|
+</span></span><span class=line><span class=cl>|      6|         Heat (1995)|Action|Crime|Thri...|
+</span></span><span class=line><span class=cl>|      7|      Sabrina (1995)|      Comedy|Romance|
+</span></span><span class=line><span class=cl>|      8| Tom and Huck (1995)|  Adventure|Children|
+</span></span><span class=line><span class=cl>|      9| Sudden Death (1995)|              Action|
+</span></span><span class=line><span class=cl>|     10|    GoldenEye (1995)|Action|Adventure|...|
+</span></span><span class=line><span class=cl>|     11|American Presiden...|Comedy|Drama|Romance|
+</span></span><span class=line><span class=cl>|     12|Dracula: Dead and...|       Comedy|Horror|
+</span></span><span class=line><span class=cl>|     13|        Balto (1995)|Adventure|Animati...|
+</span></span><span class=line><span class=cl>|     14|        Nixon (1995)|               Drama|
+</span></span><span class=line><span class=cl>|     15|Cutthroat Island ...|Action|Adventure|...|
+</span></span><span class=line><span class=cl>|     16|       Casino (1995)|         Crime|Drama|
+</span></span><span class=line><span class=cl>|     17|Sense and Sensibi...|       Drama|Romance|
+</span></span><span class=line><span class=cl>|     18|   Four Rooms (1995)|              Comedy|
+</span></span><span class=line><span class=cl>|     19|Ace Ventura: When...|              Comedy|
+</span></span><span class=line><span class=cl>|     20|  Money Train (1995)|Action|Comedy|Cri...|
+</span></span><span class=line><span class=cl>+-------+--------------------+--------------------+
+</span></span><span class=line><span class=cl>only showing top 20 rows
+</span></span></code></pre></div><p>Also, we can specify number of records as well.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=n>moviesDF</span><span class=o>.</span><span class=n>show</span><span class=o>(</span><span class=mi>4</span><span class=o>)</span>
+</span></span></code></pre></div><h4 id=creating-new-dataframes>Creating new dataframes</h4><p>Operations such as <code>select</code> we do on dataframe creates another dataframe.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>val</span> <span class=n>movieTitlesDF</span> <span class=k>=</span> <span class=n>moviesDF</span><span class=o>.</span><span class=n>select</span><span class=o>(</span><span class=n>$</span><span class=s>&#34;title&#34;</span><span class=o>)</span>
+</span></span></code></pre></div><p>$&ldquo;title&rdquo; means <code>column</code> title. <code>select</code> also supports <code>"title"</code> as well. But, it cannot be mix of <code>column</code> and <code>string</code>.</p><p>Console output,</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>movieTitlesDF: org.apache.spark.sql.DataFrame = [title: string]
+</span></span></code></pre></div><p>Now we have created a new dataframe called <code>movieTitlesDF</code> from the <code>moviesDF</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>movieTitlesDF.show(3)
+</span></span><span class=line><span class=cl>+--------------------+
+</span></span><span class=line><span class=cl>|               title|
+</span></span><span class=line><span class=cl>+--------------------+
+</span></span><span class=line><span class=cl>|    Toy Story (1995)|
+</span></span><span class=line><span class=cl>|      Jumanji (1995)|
+</span></span><span class=line><span class=cl>|Grumpier Old Men ...|
+</span></span><span class=line><span class=cl>+--------------------+
+</span></span><span class=line><span class=cl>only showing top 3 rows
+</span></span></code></pre></div><h4 id=creating-new-fields>Creating new fields.</h4><p>In machine learning applications, for feature engineering, we would be deriving new fields.</p><p>Creating new new Dataframe with length of movie title.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>val</span> <span class=n>titleDF</span> <span class=k>=</span> <span class=n>movieTitlesDF</span><span class=o>.</span><span class=n>select</span><span class=o>(</span><span class=n>$</span><span class=s>&#34;title&#34;</span><span class=o>,</span> <span class=n>length</span><span class=o>(</span><span class=n>$</span><span class=s>&#34;title&#34;</span><span class=o>).</span><span class=n>alias</span><span class=o>(</span><span class=s>&#34;length&#34;</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>titleDF</span><span class=o>.</span><span class=n>show</span><span class=o>(</span><span class=mi>2</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>+----------------+------+</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>           <span class=n>title</span><span class=o>|</span><span class=n>length</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>+----------------+------+</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=nc>Toy</span> <span class=nc>Story</span> <span class=o>(</span><span class=mi>1995</span><span class=o>)|</span>    <span class=mi>16</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>  <span class=nc>Jumanji</span> <span class=o>(</span><span class=mi>1995</span><span class=o>)|</span>    <span class=mi>14</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>+----------------+------+</span>
+</span></span><span class=line><span class=cl><span class=n>only</span> <span class=n>showing</span> <span class=n>top</span> <span class=mi>2</span> <span class=n>rows</span>
+</span></span></code></pre></div><h4 id=let-us-find-the-movie-name-with-the-longest-name>Let us find the movie name with the longest name,</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>titleDF.sort($&#34;length&#34;.desc).head
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>res2: org.apache.spark.sql.Row = [Dragon Ball Z the Movie: The World&#39;s Strongest (a.k.a. Dragon Ball Z: The Strongest Guy in The World) (Doragon bôru Z: Kono yo de ichiban tsuyoi yatsu) (1990),158]
+</span></span></code></pre></div><p>So the movie name is <code>Dragon Ball Z the Movie: The World's Strongest (a.k.a. Dragon Ball Z: The Strongest Guy in The World) (Doragon bôru Z: Kono yo de ichiban tsuyoi yatsu) (1990)</code> which has <code>158</code> characters.</p><p>We have used <code>sort</code> and sorted the rows in dataframe using <code>length</code> in <code>desc</code> order.</p><h4 id=lets-do-pattern-matching>Let&rsquo;s do pattern matching.</h4><p>Find movies which has <code>(year)</code> in the name.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>titleDF.where($&#34;title&#34;.rlike(&#34;[0-9]{4}&#34;)).count
+</span></span><span class=line><span class=cl>res3: Long = 9730
+</span></span></code></pre></div><p>So, in total we have 12 movies without year in it.</p><h4 id=lets-work-with-array>Let&rsquo;s work with Array</h4><p>If you have seen the <code>moviesDF.show</code> closely, <code>genres</code> is <code>|</code> separated multiple values.</p><p>First we will split the <code>genres</code> column by <code>|</code> and make it as <code>array&lt;string></code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>val</span> <span class=n>genresDF</span> <span class=k>=</span> <span class=n>moviesDF</span><span class=o>.</span><span class=n>select</span><span class=o>(</span><span class=n>split</span><span class=o>(</span><span class=n>$</span><span class=s>&#34;genres&#34;</span><span class=o>,</span><span class=s>&#34;\\|&#34;</span><span class=o>).</span><span class=n>alias</span><span class=o>(</span><span class=s>&#34;genres&#34;</span><span class=o>))</span>
+</span></span><span class=line><span class=cl><span class=n>genresDF</span><span class=k>:</span> <span class=kt>org.apache.spark.sql.DataFrame</span> <span class=o>=</span> <span class=o>[</span><span class=kt>genres:</span> <span class=kt>array&lt;string&gt;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>genresDF</span><span class=o>.</span><span class=n>show</span><span class=o>(</span><span class=mi>2</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>+--------------------+</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>              <span class=n>genres</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>+--------------------+</span>
+</span></span><span class=line><span class=cl><span class=o>|[</span><span class=kt>Adventure</span>, <span class=kt>Anima...|</span>
+</span></span><span class=line><span class=cl><span class=kt>|</span><span class=o>[</span><span class=kt>Adventure</span>, <span class=kt>Child...|</span>
+</span></span><span class=line><span class=cl><span class=kt>+--------------------+</span>
+</span></span><span class=line><span class=cl><span class=kt>only</span> <span class=kt>showing</span> <span class=kt>top</span> <span class=err>2</span> <span class=kt>rows</span>
+</span></span></code></pre></div><p>As you can see, genres is an array now.</p><h4 id=find-out-top-3-genres-in-our-records>Find out top 3 genres in our records</h4><p>Next, we will explode the array and find the count of each genre.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>genresDF.select(explode($&#34;genres&#34;).alias(&#34;genre&#34;)).groupBy($&#34;genre&#34;).count().show(3)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>+--------+-----+
+</span></span><span class=line><span class=cl>|   genre|count|
+</span></span><span class=line><span class=cl>+--------+-----+
+</span></span><span class=line><span class=cl>|   Crime| 1199|
+</span></span><span class=line><span class=cl>| Romance| 1596|
+</span></span><span class=line><span class=cl>|Thriller| 1894|
+</span></span><span class=line><span class=cl>+--------+-----+
+</span></span><span class=line><span class=cl>only showing top 3 rows
+</span></span></code></pre></div><h4 id=lets-find-top-3-movies-with-most-tags>Let&rsquo;s find top 3 movies with most tags</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>val</span> <span class=n>tagsDF</span> <span class=k>=</span> <span class=n>loadDF</span><span class=o>(</span><span class=n>tagsFile</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=n>tagsDF</span><span class=o>.</span><span class=n>groupBy</span><span class=o>(</span><span class=n>$</span><span class=s>&#34;movieId&#34;</span><span class=o>).</span><span class=n>count</span><span class=o>.</span><span class=n>sort</span><span class=o>(</span><span class=n>$</span><span class=s>&#34;count&#34;</span><span class=o>.</span><span class=n>desc</span><span class=o>).</span><span class=n>limit</span><span class=o>(</span><span class=mi>3</span><span class=o>).</span>
+</span></span><span class=line><span class=cl><span class=n>join</span><span class=o>(</span><span class=n>moviesDF</span><span class=o>,</span> <span class=s>&#34;movieId&#34;</span><span class=o>).</span><span class=n>select</span><span class=o>(</span><span class=s>&#34;title&#34;</span><span class=o>,</span><span class=s>&#34;count&#34;</span><span class=o>).</span><span class=n>show</span><span class=o>()</span>
+</span></span><span class=line><span class=cl><span class=o>+--------------------+-----+</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>               <span class=n>title</span><span class=o>|</span><span class=n>count</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>+--------------------+-----+</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=nc>Pulp</span> <span class=nc>Fiction</span> <span class=o>(</span><span class=mi>1994</span><span class=o>)|</span>  <span class=mi>181</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>   <span class=nc>Fight</span> <span class=nc>Club</span> <span class=o>(</span><span class=mi>1999</span><span class=o>)|</span>   <span class=mi>54</span><span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=mi>2001</span><span class=k>:</span> <span class=kt>A</span> <span class=kt>Space</span> <span class=kt>Ody...|</span>   <span class=err>41</span><span class=kt>|</span>
+</span></span><span class=line><span class=cl><span class=o>+--------------------+-----+</span>
+</span></span></code></pre></div><h4 id=that-is-not-all>That is not all</h4><p>We have gone through some basic functions available in dataframes.</p><ul><li>count</li><li>printSchema</li><li>show</li><li>select</li><li>length</li><li>alias</li><li>desc</li><li>sort, desc</li><li>split</li><li>rlike</li><li>where</li><li>head</li><li>groupBy</li></ul><p>Spark dataframe supports more number of operations and functions.</p><h3 id=enjoy-learning-spark>Enjoy learning Spark</h3><p>Expore more and play with the dataframe. You can use <code>ratings.csv</code> as well.</p><h3 id=references>References</h3><ol><li><a href=https://spark.apache.org/docs/2.2.0/sql-programming-guide.html>https://spark.apache.org/docs/2.2.0/sql-programming-guide.html</a></li><li><a href=https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset>https://spark.apache.org/docs/2.2.0/api/scala/index.html#org.apache.spark.sql.Dataset</a></li></ol></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
 <a href=https://sakthipriyan.com/building-systems/tags/spark/ class=tag-link>Spark</a>
 <a href=https://sakthipriyan.com/building-systems/tags/scala/ class=tag-link>Scala</a>
 <a href=https://sakthipriyan.com/building-systems/tags/shell/ class=tag-link>Shell</a>
 <a href=https://sakthipriyan.com/building-systems/tags/learning/ class=tag-link>Learning</a>
 <a href=https://sakthipriyan.com/building-systems/tags/bigdata/ class=tag-link>Bigdata</a>
 <a href=https://sakthipriyan.com/building-systems/tags/code/ class=tag-link>Code</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script defer src=/js/nav.min.20173668f4f7bb18cfdc22fb6952964666099d78e7a6fcc333adb3431fe5db3b.js integrity="sha256-IBc2aPT3uxjP3CL7aVKWRmYJnXjnpvzDM62zQx/l2zs="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>

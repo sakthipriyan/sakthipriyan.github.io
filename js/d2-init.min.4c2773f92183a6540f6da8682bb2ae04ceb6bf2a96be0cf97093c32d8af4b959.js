@@ -1,0 +1,7 @@
+import{D2}from"https://esm.sh/@terrastruct/d2";function diagramBlockRoot(e){return e.closest("div.highlight")||e.parentNode}document.addEventListener("DOMContentLoaded",async function(){const e=document.querySelectorAll("pre code.language-d2, pre code.d2");if(e.length===0)return;try{const t=new D2,n=Array.from(e).map(e=>{const s=diagramBlockRoot(e);let t=e.textContent.replace(/&gt;/g,">").replace(/&lt;/g,"<");const n=document.createElement("div");return n.className="d2-diagram d2-loading",n.innerHTML='<span class="spinner">⚙️</span> Rendering diagram...',s.parentNode.replaceChild(n,s),t.includes("d2-config")||(t=`vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 105
+  }
+}
+`+t),{d2Code:t,container:n}});for(const e of n)try{const s=await t.compile(e.d2Code),o=await t.render(s.diagram,s.renderOptions||{});e.container.className="d2-diagram",e.container.innerHTML=o;const n=e.container.querySelector("svg");n&&(n.removeAttribute("width"),n.removeAttribute("height"),n.setAttribute("preserveAspectRatio","xMidYMid meet"))}catch(t){console.error("D2 compile/render error:",t),e.container.className="d2-diagram",e.container.innerHTML='<div class="chart-error">Error rendering D2 diagram: '+(t.message||t)+"</div>"}}catch(e){console.error("D2 initialization error:",e)}})

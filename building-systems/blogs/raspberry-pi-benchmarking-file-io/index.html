@@ -1,155 +1,155 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Raspberry Pi Benchmarking File IO | Sakthi Priyan H</title><meta name=description content="using sysbench, sd card and attached external hard disk"><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Raspberry Pi Benchmarking File IO | Sakthi Priyan H</title><meta name=description content="using sysbench, sd card and attached external hard disk"><link rel=stylesheet href=/css/style.min.3b4dde4b82683cce7fac5abeaa4623e79c1482280fcbce9c8c4a01c862888a4f.css integrity="sha256-O03eS4JoPM5/rFq+qkYj55wUgigPy86cjEoByGKIik8="><link rel=stylesheet href=/css/syntax.min.7e672808766d1ee879199f31b96578d6c2c4022d4e880505051a38ff65c41339.css integrity="sha256-fmcoCHZtHuh5GZ8xuWV41sLEAi1OiAUFBRo4/2XEEzk="></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
 <span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Raspberry Pi Benchmarking File IO</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Raspberry Pi Benchmarking File IO</h1><p class=content-summary>using sysbench, sd card and attached external hard disk</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
 <time datetime=2016-01-31>Jan 31, 2016</time>
 </span><span class=meta-item title="Last Updated"><span class=meta-icon>🔄</span>
-<time datetime=2025-11-20>Nov 20, 2025</time>
+<time datetime=2026-08-23>Aug 23, 2026</time>
 </span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
 <a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2016/raspberry-pi-benchmarking-file-io.md target=_blank rel="noopener noreferrer">Source</a>
 </span><span class=meta-item><span class=meta-icon>📖</span>
-<span class=read-time>4 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=set-up-sysbench>Set up sysbench</h3><ul><li><p>Earlier I used it to benchmark the <code>cpu</code> <a href=../11/raspberry-pi-2-benchmarking.html>here</a>.</p></li><li><p>So, I used <code>sysbench</code> to benchmark the file system.</p></li><li><p><code>sysbench</code> can be installed using <code>apt-get</code></p><pre><code>  sudo apt-get update
-  sudo apt-get install sysbench
-</code></pre></li></ul><h3 id=benchmarking-cases>Benchmarking cases</h3><ol><li>HDD - FAT32 mounted at <code>/mnt/storage/</code></li><li>HDD - NTFS mounted at <code>/mnt/transfers/</code></li><li>SD CARD - EXT4 mounted at <code>/</code></li></ol><h3 id=benchmarking-preparation>Benchmarking Preparation</h3><ol><li><p>Create directory <code>benchmark</code> in all three locations</p><pre><code> mkdir /mnt/storage/benchmark
- mkdir /mnt/transfers/benchmark
- mkdir ~/benchmark
-</code></pre></li><li><p>Create required test files</p><pre><code> $ cd /mnt/storage/benchmark
- $ sysbench --test=fileio --file-total-size=5G prepare
- sysbench 0.4.12:  multi-threaded system evaluation benchmark
-
- 128 files, 40960Kb each, 5120Mb total
- Creating files for the test...
-</code></pre></li><li><p>Copy the files to other 2 locations</p><pre><code> cp * /mnt/transfers/benchmark/
- cp * ~/benchmark/
-</code></pre></li></ol><h3 id=benchmark>Benchmark</h3><ul><li>Change to required directory.</li><li>Run the benchmark.</li><li>Do this for all 3 cases.</li></ul><h4 id=output-for-all-cases-shown-below>Output for all cases shown below.</h4><ol><li><p>HDD - FAT32</p><pre><code> $ cd /mnt/storage/benchmark
- $ sysbench --test=fileio --file-total-size=5G \
- --file-test-mode=rndrw --init-rng=on \
- --max-time=300 --max-requests=0 run
-
- sysbench 0.4.12:  multi-threaded system evaluation benchmark
-
- Running the test with following options:
- Number of threads: 1
- Initializing random number generator from timer.
-
-
- Extra file open flags: 0
- 128 files, 40Mb each
- 5Gb total file size
- Block size 16Kb
- Number of random requests for random IO: 0
- Read/Write ratio for combined random IO test: 1.50
- Periodic FSYNC enabled, calling fsync() each 100 requests.
- Calling fsync() at the end of test, Enabled.
- Using synchronous I/O mode
- Doing random r/w test
- Threads started!
- Time limit exceeded, exiting...
- Done.
-
- Operations performed:  27810 Read, 18540 Write, 59264 Other = 105614 Total
- Read 434.53Mb  Written 289.69Mb  Total transferred 724.22Mb  (2.414Mb/sec)
-   154.49 Requests/sec executed
-
- Test execution summary:
-     total time:                          300.0140s
-     total number of events:              46350
-     total time taken by event execution: 226.9894
-     per-request statistics:
-          min:                                  0.08ms
-          avg:                                  4.90ms
-          max:                                 28.78ms
-          approx.  95 percentile:              11.81ms
-
- Threads fairness:
-     events (avg/stddev):           46350.0000/0.00
-     execution time (avg/stddev):   226.9894/0.00
-</code></pre></li><li><p>HDD - NTFS</p><pre><code> $ cd /mnt/transfers/benchmark
- $ sysbench --test=fileio --file-total-size=5G \
-          --file-test-mode=rndrw --init-rng=on \
-          --max-time=300 --max-requests=0 run
- sysbench 0.4.12:  multi-threaded system evaluation benchmark
-
- Running the test with following options:
- Number of threads: 1
- Initializing random number generator from timer.
-
-
- Extra file open flags: 0
- 128 files, 40Mb each
- 5Gb total file size
- Block size 16Kb
- Number of random requests for random IO: 0
- Read/Write ratio for combined random IO test: 1.50
- Periodic FSYNC enabled, calling fsync() each 100 requests.
- Calling fsync() at the end of test, Enabled.
- Using synchronous I/O mode
- Doing random r/w test
- Threads started!
- Time limit exceeded, exiting...
- Done.
-
- Operations performed:  20629 Read, 13752 Write, 43904 Other = 78285 Total
- Read 322.33Mb  Written 214.88Mb  Total transferred 537.2Mb  (1.7906Mb/sec)
-   114.60 Requests/sec executed
-
- Test execution summary:
-     total time:                          300.0108s
-     total number of events:              34381
-     total time taken by event execution: 241.7225
-     per-request statistics:
-          min:                                  0.09ms
-          avg:                                  7.03ms
-          max:                                 70.43ms
-          approx.  95 percentile:              12.80ms
-
- Threads fairness:
-     events (avg/stddev):           34381.0000/0.00
-     execution time (avg/stddev):   241.7225/0.00
-</code></pre></li><li><p>SD CARD - EXT4</p><pre><code> $ cd ~/benchmark
- $ sysbench --test=fileio --file-total-size=5G \
- --file-test-mode=rndrw --init-rng=on \
- --max-time=300 --max-requests=0 run
- sysbench 0.4.12:  multi-threaded system evaluation benchmark
-
- Running the test with following options:
- Number of threads: 1
- Initializing random number generator from timer.
-
-
- Extra file open flags: 0
- 128 files, 40Mb each
- 5Gb total file size
- Block size 16Kb
- Number of random requests for random IO: 0
- Read/Write ratio for combined random IO test: 1.50
- Periodic FSYNC enabled, calling fsync() each 100 requests.
- Calling fsync() at the end of test, Enabled.
- Using synchronous I/O mode
- Doing random r/w test
- Threads started!
- Time limit exceeded, exiting...
- Done.
-
- Operations performed:  1020 Read, 680 Write, 2122 Other = 3822 Total
- Read 15.938Mb  Written 10.625Mb  Total transferred 26.562Mb  (90.526Kb/sec)
- 5.66 Requests/sec executed
-
- Test execution summary:
- total time:                          300.4667s
- total number of events:              1700
- total time taken by event execution: 8.3414
- per-request statistics:
-      min:                                  0.10ms
-      avg:                                  4.91ms
-      max:                                821.14ms
-      approx.  95 percentile:               2.32ms
-
- Threads fairness:
- events (avg/stddev):           1700.0000/0.00
- execution time (avg/stddev):   8.3414/0.00
-</code></pre></li></ol><h4 id=observation-and-notes>Observation and notes</h4><ul><li>HDD - FAT32(2.414Mb/sec) > HDD - NTFS(1.7906Mb/sec) &#187;&#187;> SD CARD - EXT4(90.526Kb/sec).</li><li>So, in speed comparison,<ul><li>HDD - FAT32 = 1.35 x HDD - NTFS</li><li>HDD - FAT32 = 26.67 x SD CARD - EXT4</li><li>HDD - NTFS = 19.77 x SD CARD - EXT4</li></ul></li><li>In short, HDD is like 20x faster than SD card.</li><li>As in any benchmark, take this with a pinch of salt.</li><li>I repeated each case couple of times and didn&rsquo;t see much deviation in the overall speed.</li></ul><h3 id=clean-up>Clean up</h3><ul><li>Remove the <code>benchmark</code> folders.</li><li>Or may be if you want empty <code>benchmark</code> folders, then run <code>sysbench --test=fileio cleanup</code> in each folder.</li></ul><h3 id=hardware-and-os>Hardware and OS</h3><ul><li>I was using <a href=https://www.raspberrypi.org/products/model-b/>Raspberry Pi 1 Model B</a> for this setup.</li><li>It is running <a href=https://www.raspbian.org/>Raspbian</a> GNU/Linux 8 (jessie)</li><li>Internal HDD - Seagate Barracuda 7200.12, 1TB - connected via USB enclosure.</li><li>SD Card - Transcend 16 GB SDHC Class 10</li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<span class=read-time>4 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=set-up-sysbench>Set up sysbench</h3><ul><li><p>Earlier I used it to benchmark the <code>cpu</code> <a href=../11/raspberry-pi-2-benchmarking.html>here</a>.</p></li><li><p>So, I used <code>sysbench</code> to benchmark the file system.</p></li><li><p><code>sysbench</code> can be installed using <code>apt-get</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install sysbench
+</span></span></code></pre></div></li></ul><h3 id=benchmarking-cases>Benchmarking cases</h3><ol><li>HDD - FAT32 mounted at <code>/mnt/storage/</code></li><li>HDD - NTFS mounted at <code>/mnt/transfers/</code></li><li>SD CARD - EXT4 mounted at <code>/</code></li></ol><h3 id=benchmarking-preparation>Benchmarking Preparation</h3><ol><li><p>Create directory <code>benchmark</code> in all three locations</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir /mnt/storage/benchmark
+</span></span><span class=line><span class=cl>mkdir /mnt/transfers/benchmark
+</span></span><span class=line><span class=cl>mkdir ~/benchmark
+</span></span></code></pre></div></li><li><p>Create required test files</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=line><span class=cl><span class=gp>$</span> <span class=nb>cd</span> /mnt/storage/benchmark
+</span></span><span class=line><span class=cl><span class=gp>$</span> sysbench --test<span class=o>=</span>fileio --file-total-size<span class=o>=</span>5G prepare
+</span></span><span class=line><span class=cl><span class=go>sysbench 0.4.12:  multi-threaded system evaluation benchmark
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>128 files, 40960Kb each, 5120Mb total
+</span></span></span><span class=line><span class=cl><span class=go>Creating files for the test...
+</span></span></span></code></pre></div></li><li><p>Copy the files to other 2 locations</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cp * /mnt/transfers/benchmark/
+</span></span><span class=line><span class=cl>cp * ~/benchmark/
+</span></span></code></pre></div></li></ol><h3 id=benchmark>Benchmark</h3><ul><li>Change to required directory.</li><li>Run the benchmark.</li><li>Do this for all 3 cases.</li></ul><h4 id=output-for-all-cases-shown-below>Output for all cases shown below.</h4><ol><li><p>HDD - FAT32</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=line><span class=cl><span class=gp>$</span> <span class=nb>cd</span> /mnt/storage/benchmark
+</span></span><span class=line><span class=cl><span class=gp>$</span> sysbench --test<span class=o>=</span>fileio --file-total-size<span class=o>=</span>5G <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=go>--file-test-mode=rndrw --init-rng=on \
+</span></span></span><span class=line><span class=cl><span class=go>--max-time=300 --max-requests=0 run
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>sysbench 0.4.12:  multi-threaded system evaluation benchmark
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Running the test with following options:
+</span></span></span><span class=line><span class=cl><span class=go>Number of threads: 1
+</span></span></span><span class=line><span class=cl><span class=go>Initializing random number generator from timer.
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Extra file open flags: 0
+</span></span></span><span class=line><span class=cl><span class=go>128 files, 40Mb each
+</span></span></span><span class=line><span class=cl><span class=go>5Gb total file size
+</span></span></span><span class=line><span class=cl><span class=go>Block size 16Kb
+</span></span></span><span class=line><span class=cl><span class=go>Number of random requests for random IO: 0
+</span></span></span><span class=line><span class=cl><span class=go>Read/Write ratio for combined random IO test: 1.50
+</span></span></span><span class=line><span class=cl><span class=go>Periodic FSYNC enabled, calling fsync() each 100 requests.
+</span></span></span><span class=line><span class=cl><span class=go>Calling fsync() at the end of test, Enabled.
+</span></span></span><span class=line><span class=cl><span class=go>Using synchronous I/O mode
+</span></span></span><span class=line><span class=cl><span class=go>Doing random r/w test
+</span></span></span><span class=line><span class=cl><span class=go>Threads started!
+</span></span></span><span class=line><span class=cl><span class=go>Time limit exceeded, exiting...
+</span></span></span><span class=line><span class=cl><span class=go>Done.
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Operations performed:  27810 Read, 18540 Write, 59264 Other = 105614 Total
+</span></span></span><span class=line><span class=cl><span class=go>Read 434.53Mb  Written 289.69Mb  Total transferred 724.22Mb  (2.414Mb/sec)
+</span></span></span><span class=line><span class=cl><span class=go>  154.49 Requests/sec executed
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Test execution summary:
+</span></span></span><span class=line><span class=cl><span class=go>    total time:                          300.0140s
+</span></span></span><span class=line><span class=cl><span class=go>    total number of events:              46350
+</span></span></span><span class=line><span class=cl><span class=go>    total time taken by event execution: 226.9894
+</span></span></span><span class=line><span class=cl><span class=go>    per-request statistics:
+</span></span></span><span class=line><span class=cl><span class=go>         min:                                  0.08ms
+</span></span></span><span class=line><span class=cl><span class=go>         avg:                                  4.90ms
+</span></span></span><span class=line><span class=cl><span class=go>         max:                                 28.78ms
+</span></span></span><span class=line><span class=cl><span class=go>         approx.  95 percentile:              11.81ms
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Threads fairness:
+</span></span></span><span class=line><span class=cl><span class=go>    events (avg/stddev):           46350.0000/0.00
+</span></span></span><span class=line><span class=cl><span class=go>    execution time (avg/stddev):   226.9894/0.00
+</span></span></span></code></pre></div></li><li><p>HDD - NTFS</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=line><span class=cl><span class=gp>$</span> <span class=nb>cd</span> /mnt/transfers/benchmark
+</span></span><span class=line><span class=cl><span class=gp>$</span> sysbench --test<span class=o>=</span>fileio --file-total-size<span class=o>=</span>5G <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=go>         --file-test-mode=rndrw --init-rng=on \
+</span></span></span><span class=line><span class=cl><span class=go>         --max-time=300 --max-requests=0 run
+</span></span></span><span class=line><span class=cl><span class=go>sysbench 0.4.12:  multi-threaded system evaluation benchmark
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Running the test with following options:
+</span></span></span><span class=line><span class=cl><span class=go>Number of threads: 1
+</span></span></span><span class=line><span class=cl><span class=go>Initializing random number generator from timer.
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Extra file open flags: 0
+</span></span></span><span class=line><span class=cl><span class=go>128 files, 40Mb each
+</span></span></span><span class=line><span class=cl><span class=go>5Gb total file size
+</span></span></span><span class=line><span class=cl><span class=go>Block size 16Kb
+</span></span></span><span class=line><span class=cl><span class=go>Number of random requests for random IO: 0
+</span></span></span><span class=line><span class=cl><span class=go>Read/Write ratio for combined random IO test: 1.50
+</span></span></span><span class=line><span class=cl><span class=go>Periodic FSYNC enabled, calling fsync() each 100 requests.
+</span></span></span><span class=line><span class=cl><span class=go>Calling fsync() at the end of test, Enabled.
+</span></span></span><span class=line><span class=cl><span class=go>Using synchronous I/O mode
+</span></span></span><span class=line><span class=cl><span class=go>Doing random r/w test
+</span></span></span><span class=line><span class=cl><span class=go>Threads started!
+</span></span></span><span class=line><span class=cl><span class=go>Time limit exceeded, exiting...
+</span></span></span><span class=line><span class=cl><span class=go>Done.
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Operations performed:  20629 Read, 13752 Write, 43904 Other = 78285 Total
+</span></span></span><span class=line><span class=cl><span class=go>Read 322.33Mb  Written 214.88Mb  Total transferred 537.2Mb  (1.7906Mb/sec)
+</span></span></span><span class=line><span class=cl><span class=go>  114.60 Requests/sec executed
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Test execution summary:
+</span></span></span><span class=line><span class=cl><span class=go>    total time:                          300.0108s
+</span></span></span><span class=line><span class=cl><span class=go>    total number of events:              34381
+</span></span></span><span class=line><span class=cl><span class=go>    total time taken by event execution: 241.7225
+</span></span></span><span class=line><span class=cl><span class=go>    per-request statistics:
+</span></span></span><span class=line><span class=cl><span class=go>         min:                                  0.09ms
+</span></span></span><span class=line><span class=cl><span class=go>         avg:                                  7.03ms
+</span></span></span><span class=line><span class=cl><span class=go>         max:                                 70.43ms
+</span></span></span><span class=line><span class=cl><span class=go>         approx.  95 percentile:              12.80ms
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Threads fairness:
+</span></span></span><span class=line><span class=cl><span class=go>    events (avg/stddev):           34381.0000/0.00
+</span></span></span><span class=line><span class=cl><span class=go>    execution time (avg/stddev):   241.7225/0.00
+</span></span></span></code></pre></div></li><li><p>SD CARD - EXT4</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-console data-lang=console><span class=line><span class=cl><span class=gp>$</span> <span class=nb>cd</span> ~/benchmark
+</span></span><span class=line><span class=cl><span class=gp>$</span> sysbench --test<span class=o>=</span>fileio --file-total-size<span class=o>=</span>5G <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=go>--file-test-mode=rndrw --init-rng=on \
+</span></span></span><span class=line><span class=cl><span class=go>--max-time=300 --max-requests=0 run
+</span></span></span><span class=line><span class=cl><span class=go>sysbench 0.4.12:  multi-threaded system evaluation benchmark
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Running the test with following options:
+</span></span></span><span class=line><span class=cl><span class=go>Number of threads: 1
+</span></span></span><span class=line><span class=cl><span class=go>Initializing random number generator from timer.
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Extra file open flags: 0
+</span></span></span><span class=line><span class=cl><span class=go>128 files, 40Mb each
+</span></span></span><span class=line><span class=cl><span class=go>5Gb total file size
+</span></span></span><span class=line><span class=cl><span class=go>Block size 16Kb
+</span></span></span><span class=line><span class=cl><span class=go>Number of random requests for random IO: 0
+</span></span></span><span class=line><span class=cl><span class=go>Read/Write ratio for combined random IO test: 1.50
+</span></span></span><span class=line><span class=cl><span class=go>Periodic FSYNC enabled, calling fsync() each 100 requests.
+</span></span></span><span class=line><span class=cl><span class=go>Calling fsync() at the end of test, Enabled.
+</span></span></span><span class=line><span class=cl><span class=go>Using synchronous I/O mode
+</span></span></span><span class=line><span class=cl><span class=go>Doing random r/w test
+</span></span></span><span class=line><span class=cl><span class=go>Threads started!
+</span></span></span><span class=line><span class=cl><span class=go>Time limit exceeded, exiting...
+</span></span></span><span class=line><span class=cl><span class=go>Done.
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Operations performed:  1020 Read, 680 Write, 2122 Other = 3822 Total
+</span></span></span><span class=line><span class=cl><span class=go>Read 15.938Mb  Written 10.625Mb  Total transferred 26.562Mb  (90.526Kb/sec)
+</span></span></span><span class=line><span class=cl><span class=go>5.66 Requests/sec executed
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Test execution summary:
+</span></span></span><span class=line><span class=cl><span class=go>total time:                          300.4667s
+</span></span></span><span class=line><span class=cl><span class=go>total number of events:              1700
+</span></span></span><span class=line><span class=cl><span class=go>total time taken by event execution: 8.3414
+</span></span></span><span class=line><span class=cl><span class=go>per-request statistics:
+</span></span></span><span class=line><span class=cl><span class=go>     min:                                  0.10ms
+</span></span></span><span class=line><span class=cl><span class=go>     avg:                                  4.91ms
+</span></span></span><span class=line><span class=cl><span class=go>     max:                                821.14ms
+</span></span></span><span class=line><span class=cl><span class=go>     approx.  95 percentile:               2.32ms
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=go>Threads fairness:
+</span></span></span><span class=line><span class=cl><span class=go>events (avg/stddev):           1700.0000/0.00
+</span></span></span><span class=line><span class=cl><span class=go>execution time (avg/stddev):   8.3414/0.00
+</span></span></span></code></pre></div></li></ol><h4 id=observation-and-notes>Observation and notes</h4><ul><li>HDD - FAT32(2.414Mb/sec) > HDD - NTFS(1.7906Mb/sec) &#187;&#187;> SD CARD - EXT4(90.526Kb/sec).</li><li>So, in speed comparison,<ul><li>HDD - FAT32 = 1.35 x HDD - NTFS</li><li>HDD - FAT32 = 26.67 x SD CARD - EXT4</li><li>HDD - NTFS = 19.77 x SD CARD - EXT4</li></ul></li><li>In short, HDD is like 20x faster than SD card.</li><li>As in any benchmark, take this with a pinch of salt.</li><li>I repeated each case couple of times and didn&rsquo;t see much deviation in the overall speed.</li></ul><h3 id=clean-up>Clean up</h3><ul><li>Remove the <code>benchmark</code> folders.</li><li>Or may be if you want empty <code>benchmark</code> folders, then run <code>sysbench --test=fileio cleanup</code> in each folder.</li></ul><h3 id=hardware-and-os>Hardware and OS</h3><ul><li>I was using <a href=https://www.raspberrypi.org/products/model-b/>Raspberry Pi 1 Model B</a> for this setup.</li><li>It is running <a href=https://www.raspbian.org/>Raspbian</a> GNU/Linux 8 (jessie)</li><li>Internal HDD - Seagate Barracuda 7200.12, 1TB - connected via USB enclosure.</li><li>SD Card - Transcend 16 GB SDHC Class 10</li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
 <a href=https://sakthipriyan.com/building-systems/tags/raspberry-pi/ class=tag-link>Raspberry-Pi</a>
 <a href=https://sakthipriyan.com/building-systems/tags/ntfs/ class=tag-link>Ntfs</a>
 <a href=https://sakthipriyan.com/building-systems/tags/fat/ class=tag-link>Fat</a>
@@ -157,4 +157,4 @@
 <a href=https://sakthipriyan.com/building-systems/tags/hard-disk/ class=tag-link>Hard-Disk</a>
 <a href=https://sakthipriyan.com/building-systems/tags/sd-card/ class=tag-link>Sd-Card</a>
 <a href=https://sakthipriyan.com/building-systems/tags/benchmark/ class=tag-link>Benchmark</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script defer src=/js/nav.min.20173668f4f7bb18cfdc22fb6952964666099d78e7a6fcc333adb3431fe5db3b.js integrity="sha256-IBc2aPT3uxjP3CL7aVKWRmYJnXjnpvzDM62zQx/l2zs="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>

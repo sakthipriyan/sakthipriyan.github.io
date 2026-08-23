@@ -1,132 +1,132 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Efficiently using Enum in entity class | Sakthi Priyan H</title><meta name=description content="to improve code maintainability and database performance."><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Efficiently using Enum in entity class | Sakthi Priyan H</title><meta name=description content="to improve code maintainability and database performance."><link rel=stylesheet href=/css/style.min.3b4dde4b82683cce7fac5abeaa4623e79c1482280fcbce9c8c4a01c862888a4f.css integrity="sha256-O03eS4JoPM5/rFq+qkYj55wUgigPy86cjEoByGKIik8="><link rel=stylesheet href=/css/syntax.min.7e672808766d1ee879199f31b96578d6c2c4022d4e880505051a38ff65c41339.css integrity="sha256-fmcoCHZtHuh5GZ8xuWV41sLEAi1OiAUFBRo4/2XEEzk="></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
 <span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Efficiently using Enum in entity class</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Efficiently using Enum in entity class</h1><p class=content-summary>to improve code maintainability and database performance.</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
 <time datetime=2015-08-24>Aug 24, 2015</time>
 </span><span class=meta-item title="Last Updated"><span class=meta-icon>🔄</span>
-<time datetime=2025-11-20>Nov 20, 2025</time>
+<time datetime=2026-08-23>Aug 23, 2026</time>
 </span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
 <a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2015/efficiently-using-enum-in-entity-class.md target=_blank rel="noopener noreferrer">Source</a>
 </span><span class=meta-item><span class=meta-icon>📖</span>
-<span class=read-time>3 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=problems-in-using-enum-in-jpa>Problems in using Enum in JPA</h3><ul><li>JPA implementations stores the ordinal number of the enum.</li><li>It is problematic in many ways,<ul><li>We cannot rearrange the enum values.</li><li>We cannot remove unused enum value.</li><li>We can add new enum values only at the end.</li></ul></li><li>Alternatively, we can use the string representation of the enum.<ul><li>It is too verbose, takes more space.</li><li>Comparing <code>varchar</code> in database is costly compared to <code>int</code>. Moreover, this field will be used to filter results often.</li></ul></li></ul><h3 id=how-to-do-it-right>How to do it right?</h3><p>In this post we will see how to efficiently use Enum using a <code>int value</code> for each enum value.</p><ul><li>Create an enum with an int value.</li><li>Create a class that implements AttributeConverter.</li><li>Now, simply use the enum wherever required in entity class.</li></ul><h3 id=enum-status>Enum Status</h3><p><code>Status</code> has enum values such <code>ACTIVE</code>,<code>INACTIVE</code>, etc.,</p><pre><code>package com.sakthipriyan.example;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public enum Status {
-
-    // Add any enum values anywhere.
-    // Make sure not to repeat same int value.
-    // Changing values here, would require update in database as well.
-    // Now values stored in database is made explicit in code.
-    ACTIVE(1),
-    INACTIVE(2),
-    CREATED(3),
-    SUBMITTED(4),
-    ACCPETED(6),
-    REJECTED(7);
-
-    private final int value;
-
-    private Status(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return this.value;
-    }
-
-    // This is look up map to get Enum value from int value.
-    private final static Map&lt;Integer, Status&gt; map = new HashMap&lt;&gt;();
-
-    // In Enum, static block will be executed after creating all Enum values.
-    static {
-        for (Status status : Status.values()) {
-            map.put(status.getValue(), status);
-        }
-    }
-
-    public final static Status getStatus(int value) {
-        return map.get(value);
-    }
-
-}
-</code></pre><h3 id=statusconverter-implements-attributeconverter>StatusConverter implements AttributeConverter</h3><p>AttributeConverter can be implemented to override the default behavior. This implementation say that, <code>Status</code> should be stored as <code>Integer</code> and also provides method to get the <code>Status</code> object from <code>Integer</code> value of the database.</p><pre><code>package com.sakthipriyan.example;
-
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
-
-@Converter(autoApply = true)
-public class StatusConverter implements AttributeConverter&lt;Status, Integer&gt; {
-
-    @Override
-    public Integer convertToDatabaseColumn(Status status) {
-        return status.getValue();
-    }
-
-    @Override
-    public Status convertToEntityAttribute(Integer value) {
-        return Status.getStatus(value);
-    }
-}
-</code></pre><h3 id=enitity-langauge>Enitity Langauge</h3><p>Now, we can start using the enum <code>Status</code>.
-Here, Langauge entity has a Status field in it.</p><pre><code>package com.sakthipriyan.example;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Language {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private short id;
-
-    @Column(nullable = false)
-    private String language;
-
-    @Column(nullable = false)
-    private Status status;
-
-    public Language(String language) {
-        super();
-        this.language = language;
-        this.status = Status.ACTIVE;
-    }
-
-    public Language() {
-        super();
-    }
-
-    public short getId() {
-        return id;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void deactivate() {
-        this.status = Status.INACTIVE;
-    }
-
-    public void activate() {
-        this.status = Status.ACTIVE;
-    }
-}
-</code></pre><h3 id=result>Result</h3><p>Now, whenever the Language object is stored in the database. It will persist the Integer equivalent of the Status object rather than using Ordinal number or String representation of the Enum value.</p><h3 id=further-tuning>Further tuning</h3><ul><li>Based on the usage, you can even use <code>Short</code> in place of <code>Integer</code> in <code>Status</code> and <code>StatusConverter</code>.</li><li>Also, you can specify the column size in <code>@Column</code> definition.</li><li>Alternatively, with minor variations we should be able to easily stores enum values as <code>char(n)</code> say <code>n=2</code> or <code>n=3</code>.</li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<span class=read-time>3 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=problems-in-using-enum-in-jpa>Problems in using Enum in JPA</h3><ul><li>JPA implementations stores the ordinal number of the enum.</li><li>It is problematic in many ways,<ul><li>We cannot rearrange the enum values.</li><li>We cannot remove unused enum value.</li><li>We can add new enum values only at the end.</li></ul></li><li>Alternatively, we can use the string representation of the enum.<ul><li>It is too verbose, takes more space.</li><li>Comparing <code>varchar</code> in database is costly compared to <code>int</code>. Moreover, this field will be used to filter results often.</li></ul></li></ul><h3 id=how-to-do-it-right>How to do it right?</h3><p>In this post we will see how to efficiently use Enum using a <code>int value</code> for each enum value.</p><ul><li>Create an enum with an int value.</li><li>Create a class that implements AttributeConverter.</li><li>Now, simply use the enum wherever required in entity class.</li></ul><h3 id=enum-status>Enum Status</h3><p><code>Status</code> has enum values such <code>ACTIVE</code>,<code>INACTIVE</code>, etc.,</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span><span class=w> </span><span class=nn>com.sakthipriyan.example</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>java.util.HashMap</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>java.util.Map</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>enum</span><span class=w> </span><span class=n>Status</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// Add any enum values anywhere.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// Make sure not to repeat same int value.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// Changing values here, would require update in database as well.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// Now values stored in database is made explicit in code.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>ACTIVE</span><span class=p>(</span><span class=n>1</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>INACTIVE</span><span class=p>(</span><span class=n>2</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>CREATED</span><span class=p>(</span><span class=n>3</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>SUBMITTED</span><span class=p>(</span><span class=n>4</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>ACCPETED</span><span class=p>(</span><span class=n>6</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>REJECTED</span><span class=p>(</span><span class=n>7</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>value</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=nf>Status</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>value</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>value</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>value</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=nf>getValue</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=k>this</span><span class=p>.</span><span class=na>value</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// This is look up map to get Enum value from int value.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=n>Map</span><span class=o>&lt;</span><span class=n>Integer</span><span class=p>,</span><span class=w> </span><span class=n>Status</span><span class=o>&gt;</span><span class=w> </span><span class=n>map</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>HashMap</span><span class=o>&lt;&gt;</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// In Enum, static block will be executed after creating all Enum values.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>static</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>for</span><span class=w> </span><span class=p>(</span><span class=n>Status</span><span class=w> </span><span class=n>status</span><span class=w> </span><span class=p>:</span><span class=w> </span><span class=n>Status</span><span class=p>.</span><span class=na>values</span><span class=p>())</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>map</span><span class=p>.</span><span class=na>put</span><span class=p>(</span><span class=n>status</span><span class=p>.</span><span class=na>getValue</span><span class=p>(),</span><span class=w> </span><span class=n>status</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=n>Status</span><span class=w> </span><span class=nf>getStatus</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>value</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>map</span><span class=p>.</span><span class=na>get</span><span class=p>(</span><span class=n>value</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><h3 id=statusconverter-implements-attributeconverter>StatusConverter implements AttributeConverter</h3><p>AttributeConverter can be implemented to override the default behavior. This implementation say that, <code>Status</code> should be stored as <code>Integer</code> and also provides method to get the <code>Status</code> object from <code>Integer</code> value of the database.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span><span class=w> </span><span class=nn>com.sakthipriyan.example</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.AttributeConverter</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.Converter</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nd>@Converter</span><span class=p>(</span><span class=n>autoApply</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>true</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>StatusConverter</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>AttributeConverter</span><span class=o>&lt;</span><span class=n>Status</span><span class=p>,</span><span class=w> </span><span class=n>Integer</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Integer</span><span class=w> </span><span class=nf>convertToDatabaseColumn</span><span class=p>(</span><span class=n>Status</span><span class=w> </span><span class=n>status</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>status</span><span class=p>.</span><span class=na>getValue</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Status</span><span class=w> </span><span class=nf>convertToEntityAttribute</span><span class=p>(</span><span class=n>Integer</span><span class=w> </span><span class=n>value</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>Status</span><span class=p>.</span><span class=na>getStatus</span><span class=p>(</span><span class=n>value</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><h3 id=enitity-langauge>Enitity Langauge</h3><p>Now, we can start using the enum <code>Status</code>.
+Here, Langauge entity has a Status field in it.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span><span class=w> </span><span class=nn>com.sakthipriyan.example</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.Column</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.Entity</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.GeneratedValue</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.GenerationType</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>javax.persistence.Id</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nd>@Entity</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Language</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Id</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@GeneratedValue</span><span class=p>(</span><span class=n>strategy</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>GenerationType</span><span class=p>.</span><span class=na>AUTO</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kt>short</span><span class=w> </span><span class=n>id</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Column</span><span class=p>(</span><span class=n>nullable</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>false</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>language</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Column</span><span class=p>(</span><span class=n>nullable</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>false</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>Status</span><span class=w> </span><span class=n>status</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=nf>Language</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>language</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>super</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>language</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>language</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>status</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Status</span><span class=p>.</span><span class=na>ACTIVE</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=nf>Language</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>super</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>short</span><span class=w> </span><span class=nf>getId</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>id</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=nf>getLanguage</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>language</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Status</span><span class=w> </span><span class=nf>getStatus</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>status</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>deactivate</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>status</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Status</span><span class=p>.</span><span class=na>INACTIVE</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>activate</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>status</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Status</span><span class=p>.</span><span class=na>ACTIVE</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><h3 id=result>Result</h3><p>Now, whenever the Language object is stored in the database. It will persist the Integer equivalent of the Status object rather than using Ordinal number or String representation of the Enum value.</p><h3 id=further-tuning>Further tuning</h3><ul><li>Based on the usage, you can even use <code>Short</code> in place of <code>Integer</code> in <code>Status</code> and <code>StatusConverter</code>.</li><li>Also, you can specify the column size in <code>@Column</code> definition.</li><li>Alternatively, with minor variations we should be able to easily stores enum values as <code>char(n)</code> say <code>n=2</code> or <code>n=3</code>.</li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
 <a href=https://sakthipriyan.com/building-systems/tags/java/ class=tag-link>Java</a>
 <a href=https://sakthipriyan.com/building-systems/tags/code/ class=tag-link>Code</a>
 <a href=https://sakthipriyan.com/building-systems/tags/jpa/ class=tag-link>Jpa</a>
 <a href=https://sakthipriyan.com/building-systems/tags/database/ class=tag-link>Database</a>
 <a href=https://sakthipriyan.com/building-systems/tags/enum/ class=tag-link>Enum</a>
 <a href=https://sakthipriyan.com/building-systems/tags/hibernate/ class=tag-link>Hibernate</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script defer src=/js/nav.min.20173668f4f7bb18cfdc22fb6952964666099d78e7a6fcc333adb3431fe5db3b.js integrity="sha256-IBc2aPT3uxjP3CL7aVKWRmYJnXjnpvzDM62zQx/l2zs="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>

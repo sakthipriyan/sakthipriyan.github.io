@@ -1,125 +1,125 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Scala code to access documents in AWS S3 bucket | Sakthi Priyan H</title><meta name=description content="via http get and put requests"><link rel=stylesheet href=https://sakthipriyan.com/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/default.min.css></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Scala code to access documents in AWS S3 bucket | Sakthi Priyan H</title><meta name=description content="via http get and put requests"><link rel=stylesheet href=/css/style.min.3b4dde4b82683cce7fac5abeaa4623e79c1482280fcbce9c8c4a01c862888a4f.css integrity="sha256-O03eS4JoPM5/rFq+qkYj55wUgigPy86cjEoByGKIik8="><link rel=stylesheet href=/css/syntax.min.7e672808766d1ee879199f31b96578d6c2c4022d4e880505051a38ff65c41339.css integrity="sha256-fmcoCHZtHuh5GZ8xuWV41sLEAi1OiAUFBRo4/2XEEzk="></head><body class=building-systems><header class=site-header><nav class=main-nav><div class=logo><a href=https://sakthipriyan.com/ class=name-link>Sakthi Priyan H</a>
 <span class=separator>| </span><a href=/building-systems/ class=name-link>Building Systems</a></div><button class=hamburger aria-label="Toggle navigation" aria-expanded=false>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span>
 <span class=hamburger-line></span></button><ul class=nav-links><li><a href=https://sakthipriyan.com/building-systems/about/>About</a></li><li><a href=https://sakthipriyan.com/building-systems/blogs/>Blogs</a></li><li><a href=https://sakthipriyan.com/building-systems/tags/>Tags</a></li></ul></nav></header><nav class=breadcrumb aria-label=breadcrumb><ol class=breadcrumb-list><li class=breadcrumb-item><a href=https://sakthipriyan.com/>Home</a></li><li class=breadcrumb-item><a href=/building-systems/>Building Systems</a></li><li class=breadcrumb-item><a href=/building-systems/blogs/>Blogs</a></li><li class="breadcrumb-item active" aria-current=page><span>Scala code to access documents in AWS S3 bucket</span></li></ol></nav><main><article class=blog-post><header class=content-header><h1 class=content-title>Scala code to access documents in AWS S3 bucket</h1><p class=content-summary>via http get and put requests</p><div class=content-meta><span class=meta-item><span class=meta-icon>📅</span>
 <time datetime=2016-02-17>Feb 17, 2016</time>
 </span><span class=meta-item title="Last Updated"><span class=meta-icon>🔄</span>
-<time datetime=2025-11-20>Nov 20, 2025</time>
+<time datetime=2026-08-23>Aug 23, 2026</time>
 </span><span class=meta-item title="View Source on GitHub"><span class=meta-icon>💻</span>
 <a href=https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/content/building-systems/blogs/2016/scala-code-to-access-documents-in-aws-s3-bucket.md target=_blank rel="noopener noreferrer">Source</a>
 </span><span class=meta-item><span class=meta-icon>📖</span>
-<span class=read-time>4 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=intro>Intro</h3><p>AWS S3 documents in a specific bucket can be via Rest APIs.<br><code>http</code> GET to retrieve documents and <code>http</code> PUT to store documents.</p><h3 id=why-rest-api>Why Rest API?</h3><ul><li>Rest is simple and straight forward.</li><li>We can use any preferred http client library.</li><li>No need to include additional Java dependencies into the project by adding AWS SDK.</li><li>We can use http client library that is already present in the project dependencies.</li></ul><h3 id=lets-go-async>Let&rsquo;s go Async</h3><ul><li>Though we can use any java/scala http client, Let&rsquo;s use an async http client.</li><li>I had used Scala Dispatch library to send requests.</li></ul><h3 id=scala-code>Scala Code</h3><p>In line comments for more explanations.</p><pre><code>package com.sakthipriyan.aws
-
-import java.text.SimpleDateFormat
-import java.util.{ TimeZone, Date }
-import com.typesafe.config.ConfigFactory
-import javax.crypto.spec.SecretKeySpec
-
-// case class to represent the AWS S3 http request
-case class AwsS3Request(
-    url:String, // Request url
-    headers:Map[String,String], // Request Headers
-    requestBody:Option[String]) // Optional request body
-
-object AwsS3 {
-
-  // AWS configuration
-  private val awsConfig = ConfigFactory.load(&quot;aws.conf&quot;)
-  private val s3Uri = awsConfig.getString(&quot;s3.uri&quot;)
-  private val s3bucket = awsConfig.getString(&quot;s3.bucket&quot;)
-  private val s3Key = awsConfig.getString(&quot;s3.key&quot;)
-  private val s3Secret = awsConfig.getString(&quot;s3.secret&quot;)
-
-  // Config used for signing the request
-  private val utf8 = &quot;UTF-8&quot;
-  private val hmacsha1 = &quot;HMACSHA1&quot;
-  private val sdf = new SimpleDateFormat(&quot;EEE, dd MMM yyyy HH:mm:ss z&quot;)
-  sdf.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;))
-
-  // Create signingKey from s3Secret
-  private val signingKey = new SecretKeySpec(s3Secret.getBytes(utf8), hmacsha1)
-
-  // Creates required authorization header for http requests.
-  // Sign the input string using s3secret key.
-  private def auth(str2sign: String) = {
-    import javax.crypto.Mac
-    import org.apache.commons.codec.binary.Base64
-
-    val mac = Mac.getInstance(hmacsha1)
-    mac.init(signingKey)
-    val dataBytes = str2sign.getBytes(utf8)
-    val signature = mac.doFinal(dataBytes)
-    val sign = Base64.encodeBase64String(signature)
-
-    // Following string is used in the Authorization header.
-    s&quot;AWS $s3Key:$sign&quot;
-  }
-
-  // Creates AwsS3Request for retrieving document for the given path.
-  def get(path:String) = {
-    val date = sdf.format(new Date())
-    val authorization = auth(s&quot;GET\n\n\n$date\n/$s3bucket/$path&quot;)
-    AwsS3Request(
-        s&quot;$s3Uri/$path&quot;,
-        Map(&quot;Date&quot; -&gt; date, &quot;Authorization&quot; -&gt; authorization),
-        None)
-  }
-
-  // Creates AwsS3Request for storing given path and content
-  def put(path:String. content: String) = {
-    val date = sdf.format(new Date())
-    val authorization = auth(s&quot;PUT\n\ntext/html\n$date\n/$s3bucket/$path&quot;)
-    AwsS3Request(
-        s&quot;$s3Uri/$path&quot;,
-        Map(&quot;Date&quot; -&gt; date,
-          &quot;Authorization&quot; -&gt; authorization,
-          &quot;Content-Type&quot; -&gt; &quot;text/html&quot;,
-          &quot;Content-Length&quot; -&gt; content.length.toString),
-        Some(content))
-  }
-
-}
-</code></pre><h3 id=sample-aws-configuration>Sample AWS configuration</h3><p>Typesafe config is used for configuring the application.<br>Contents of the AWS config file <code>aws.conf</code> is shown below.</p><pre><code>s3 {
-  key : &quot;9X8M6YC85BRUOXGJI1HE&quot;
-  secret : &quot;dGhlIHNlY3JldCB0aGF0IHlvdSBkb25gdCBrbm93IA==&quot;
-  bucket : &quot;bucket-name-here&quot;
-  uri : &quot;https://s3-ap-southeast-1.amazonaws.com/&quot;${s3.bucket}
-}
-</code></pre><p>Make sure aws key and secret has only access to specified bucket.<br>It is a good practice to give only required permissions for aws access keys.</p><h3 id=async-http-client>Async Http client</h3><p>Following code snippets generates Dispatch Request for AwsS3Request object.
-package com.sakthipriyan.aws</p><pre><code>import dispatch._, Defaults._
-class AsyncHttpClient {
-  def getDispatchReq(request:AwsS3Request) = {
-    request.requestBody match {
-      case Some(content) =&gt; {
-          val req = url(request.url) &lt;:&lt; request.headers &lt;&lt; content
-          req.PUT
-      }
-      case None =&gt; {
-        val req = url(request.url) &lt;:&lt; request.headers
-        req.GET
-      }
-    }
-  }
-}
-</code></pre><p>Refer <a href=http://dispatch.databinder.net/Dispatch.html>Dispatch Documentation</a> to know more
-about processing http request/response in Dispatch.<br>It should be fairly easy to use <code>AwsS3Request</code> object and send http request using any http library.</p><h3 id=example-usage>Example Usage</h3><p>Usage example shown below.<br>Processing the http request/response is not shown.</p><pre><code>import com.sakthipriyan.aws.{AwsS3, AsyncHttpClient}
-
-val path = &quot;path/to/store/the/content&quot;
-val content = &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello HTML World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;
-
-//Store an document into the given path.
-val putRequest = AsyncHttpClient.getDispatchReq(AwsS3.put(path, content))
-// TODO - send the http put request and process the response using Dispatch.
-
-//Retrieve the document for the specified path.
-val getRequest = AsyncHttpClient.getDispatchReq(AwsS3.get(path))
-// TODO - send the http get request and process the response using Dispatch.
-</code></pre><h3 id=notes>Notes</h3><ul><li>While processing http response, please make sure to handle non <code>200 OK</code> response.</li><li>It will be wiser to use AWS SDK if you are using it already.</li><li>Based on usage, you can use synchronous or asynchronous http client libraries.</li><li>Still, It would be better to use async http client library to store or retrieve documents from s3 bucket.</li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
+<span class=read-time>4 min read</span></span></div><hr class=content-divider></header><div class=post-content><h3 id=intro>Intro</h3><p>AWS S3 documents in a specific bucket can be via Rest APIs.<br><code>http</code> GET to retrieve documents and <code>http</code> PUT to store documents.</p><h3 id=why-rest-api>Why Rest API?</h3><ul><li>Rest is simple and straight forward.</li><li>We can use any preferred http client library.</li><li>No need to include additional Java dependencies into the project by adding AWS SDK.</li><li>We can use http client library that is already present in the project dependencies.</li></ul><h3 id=lets-go-async>Let&rsquo;s go Async</h3><ul><li>Though we can use any java/scala http client, Let&rsquo;s use an async http client.</li><li>I had used Scala Dispatch library to send requests.</li></ul><h3 id=scala-code>Scala Code</h3><p>In line comments for more explanations.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>package</span> <span class=nn>com.sakthipriyan.aws</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=nn>java.text.SimpleDateFormat</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=nn>java.util.</span><span class=o>{</span> <span class=nc>TimeZone</span><span class=o>,</span> <span class=nc>Date</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=nn>com.typesafe.config.ConfigFactory</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=nn>javax.crypto.spec.SecretKeySpec</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// case class to represent the AWS S3 http request
+</span></span></span><span class=line><span class=cl><span class=k>case</span> <span class=k>class</span> <span class=nc>AwsS3Request</span><span class=o>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>url</span><span class=k>:</span><span class=kt>String</span><span class=o>,</span> <span class=c1>// Request url
+</span></span></span><span class=line><span class=cl>    <span class=n>headers</span><span class=k>:</span><span class=kt>Map</span><span class=o>[</span><span class=kt>String</span>,<span class=kt>String</span><span class=o>],</span> <span class=c1>// Request Headers
+</span></span></span><span class=line><span class=cl>    <span class=n>requestBody</span><span class=k>:</span><span class=kt>Option</span><span class=o>[</span><span class=kt>String</span><span class=o>])</span> <span class=c1>// Optional request body
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>object</span> <span class=nc>AwsS3</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// AWS configuration
+</span></span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>awsConfig</span> <span class=k>=</span> <span class=nc>ConfigFactory</span><span class=o>.</span><span class=n>load</span><span class=o>(</span><span class=s>&#34;aws.conf&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>s3Uri</span> <span class=k>=</span> <span class=n>awsConfig</span><span class=o>.</span><span class=n>getString</span><span class=o>(</span><span class=s>&#34;s3.uri&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>s3bucket</span> <span class=k>=</span> <span class=n>awsConfig</span><span class=o>.</span><span class=n>getString</span><span class=o>(</span><span class=s>&#34;s3.bucket&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>s3Key</span> <span class=k>=</span> <span class=n>awsConfig</span><span class=o>.</span><span class=n>getString</span><span class=o>(</span><span class=s>&#34;s3.key&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>s3Secret</span> <span class=k>=</span> <span class=n>awsConfig</span><span class=o>.</span><span class=n>getString</span><span class=o>(</span><span class=s>&#34;s3.secret&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Config used for signing the request
+</span></span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>utf8</span> <span class=k>=</span> <span class=s>&#34;UTF-8&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>hmacsha1</span> <span class=k>=</span> <span class=s>&#34;HMACSHA1&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>sdf</span> <span class=k>=</span> <span class=k>new</span> <span class=nc>SimpleDateFormat</span><span class=o>(</span><span class=s>&#34;EEE, dd MMM yyyy HH:mm:ss z&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>sdf</span><span class=o>.</span><span class=n>setTimeZone</span><span class=o>(</span><span class=nc>TimeZone</span><span class=o>.</span><span class=n>getTimeZone</span><span class=o>(</span><span class=s>&#34;UTC&#34;</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Create signingKey from s3Secret
+</span></span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>val</span> <span class=n>signingKey</span> <span class=k>=</span> <span class=k>new</span> <span class=nc>SecretKeySpec</span><span class=o>(</span><span class=n>s3Secret</span><span class=o>.</span><span class=n>getBytes</span><span class=o>(</span><span class=n>utf8</span><span class=o>),</span> <span class=n>hmacsha1</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Creates required authorization header for http requests.
+</span></span></span><span class=line><span class=cl>  <span class=c1>// Sign the input string using s3secret key.
+</span></span></span><span class=line><span class=cl>  <span class=k>private</span> <span class=k>def</span> <span class=n>auth</span><span class=o>(</span><span class=n>str2sign</span><span class=k>:</span> <span class=kt>String</span><span class=o>)</span> <span class=k>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>import</span> <span class=nn>javax.crypto.Mac</span>
+</span></span><span class=line><span class=cl>    <span class=k>import</span> <span class=nn>org.apache.commons.codec.binary.Base64</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>mac</span> <span class=k>=</span> <span class=nc>Mac</span><span class=o>.</span><span class=n>getInstance</span><span class=o>(</span><span class=n>hmacsha1</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>mac</span><span class=o>.</span><span class=n>init</span><span class=o>(</span><span class=n>signingKey</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>dataBytes</span> <span class=k>=</span> <span class=n>str2sign</span><span class=o>.</span><span class=n>getBytes</span><span class=o>(</span><span class=n>utf8</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>signature</span> <span class=k>=</span> <span class=n>mac</span><span class=o>.</span><span class=n>doFinal</span><span class=o>(</span><span class=n>dataBytes</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>sign</span> <span class=k>=</span> <span class=nc>Base64</span><span class=o>.</span><span class=n>encodeBase64String</span><span class=o>(</span><span class=n>signature</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Following string is used in the Authorization header.
+</span></span></span><span class=line><span class=cl>    <span class=s>s&#34;AWS </span><span class=si>$s3Key</span><span class=s>:</span><span class=si>$sign</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Creates AwsS3Request for retrieving document for the given path.
+</span></span></span><span class=line><span class=cl>  <span class=k>def</span> <span class=n>get</span><span class=o>(</span><span class=n>path</span><span class=k>:</span><span class=kt>String</span><span class=o>)</span> <span class=k>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>date</span> <span class=k>=</span> <span class=n>sdf</span><span class=o>.</span><span class=n>format</span><span class=o>(</span><span class=k>new</span> <span class=nc>Date</span><span class=o>())</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>authorization</span> <span class=k>=</span> <span class=n>auth</span><span class=o>(</span><span class=s>s&#34;GET\n\n\n</span><span class=si>$date\n</span><span class=s>/</span><span class=si>$s3bucket</span><span class=s>/</span><span class=si>$path</span><span class=s>&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=nc>AwsS3Request</span><span class=o>(</span>
+</span></span><span class=line><span class=cl>        <span class=s>s&#34;</span><span class=si>$s3Uri</span><span class=s>/</span><span class=si>$path</span><span class=s>&#34;</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>        <span class=nc>Map</span><span class=o>(</span><span class=s>&#34;Date&#34;</span> <span class=o>-&gt;</span> <span class=n>date</span><span class=o>,</span> <span class=s>&#34;Authorization&#34;</span> <span class=o>-&gt;</span> <span class=n>authorization</span><span class=o>),</span>
+</span></span><span class=line><span class=cl>        <span class=nc>None</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Creates AwsS3Request for storing given path and content
+</span></span></span><span class=line><span class=cl>  <span class=k>def</span> <span class=n>put</span><span class=o>(</span><span class=n>path</span><span class=k>:</span><span class=kt>String.</span> <span class=kt>content:</span> <span class=kt>String</span><span class=o>)</span> <span class=k>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>date</span> <span class=k>=</span> <span class=n>sdf</span><span class=o>.</span><span class=n>format</span><span class=o>(</span><span class=k>new</span> <span class=nc>Date</span><span class=o>())</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=n>authorization</span> <span class=k>=</span> <span class=n>auth</span><span class=o>(</span><span class=s>s&#34;PUT\n\ntext/html\n</span><span class=si>$date\n</span><span class=s>/</span><span class=si>$s3bucket</span><span class=s>/</span><span class=si>$path</span><span class=s>&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=nc>AwsS3Request</span><span class=o>(</span>
+</span></span><span class=line><span class=cl>        <span class=s>s&#34;</span><span class=si>$s3Uri</span><span class=s>/</span><span class=si>$path</span><span class=s>&#34;</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>        <span class=nc>Map</span><span class=o>(</span><span class=s>&#34;Date&#34;</span> <span class=o>-&gt;</span> <span class=n>date</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>          <span class=s>&#34;Authorization&#34;</span> <span class=o>-&gt;</span> <span class=n>authorization</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>          <span class=s>&#34;Content-Type&#34;</span> <span class=o>-&gt;</span> <span class=s>&#34;text/html&#34;</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>          <span class=s>&#34;Content-Length&#34;</span> <span class=o>-&gt;</span> <span class=n>content</span><span class=o>.</span><span class=n>length</span><span class=o>.</span><span class=n>toString</span><span class=o>),</span>
+</span></span><span class=line><span class=cl>        <span class=nc>Some</span><span class=o>(</span><span class=n>content</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></div><h3 id=sample-aws-configuration>Sample AWS configuration</h3><p>Typesafe config is used for configuring the application.<br>Contents of the AWS config file <code>aws.conf</code> is shown below.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>s3 {
+</span></span><span class=line><span class=cl>  key : &#34;9X8M6YC85BRUOXGJI1HE&#34;
+</span></span><span class=line><span class=cl>  secret : &#34;dGhlIHNlY3JldCB0aGF0IHlvdSBkb25gdCBrbm93IA==&#34;
+</span></span><span class=line><span class=cl>  bucket : &#34;bucket-name-here&#34;
+</span></span><span class=line><span class=cl>  uri : &#34;https://s3-ap-southeast-1.amazonaws.com/&#34;${s3.bucket}
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></div><p>Make sure aws key and secret has only access to specified bucket.<br>It is a good practice to give only required permissions for aws access keys.</p><h3 id=async-http-client>Async Http client</h3><p>Following code snippets generates Dispatch Request for AwsS3Request object.
+package com.sakthipriyan.aws</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>import</span> <span class=nn>dispatch._</span><span class=o>,</span> <span class=nc>Defaults</span><span class=o>.</span><span class=k>_</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>AsyncHttpClient</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>def</span> <span class=n>getDispatchReq</span><span class=o>(</span><span class=n>request</span><span class=k>:</span><span class=kt>AwsS3Request</span><span class=o>)</span> <span class=k>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>request</span><span class=o>.</span><span class=n>requestBody</span> <span class=k>match</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nc>Some</span><span class=o>(</span><span class=n>content</span><span class=o>)</span> <span class=k>=&gt;</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>          <span class=k>val</span> <span class=n>req</span> <span class=k>=</span> <span class=n>url</span><span class=o>(</span><span class=n>request</span><span class=o>.</span><span class=n>url</span><span class=o>)</span> <span class=o>&lt;:&lt;</span> <span class=n>request</span><span class=o>.</span><span class=n>headers</span> <span class=o>&lt;&lt;</span> <span class=n>content</span>
+</span></span><span class=line><span class=cl>          <span class=n>req</span><span class=o>.</span><span class=nc>PUT</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nc>None</span> <span class=k>=&gt;</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>val</span> <span class=n>req</span> <span class=k>=</span> <span class=n>url</span><span class=o>(</span><span class=n>request</span><span class=o>.</span><span class=n>url</span><span class=o>)</span> <span class=o>&lt;:&lt;</span> <span class=n>request</span><span class=o>.</span><span class=n>headers</span>
+</span></span><span class=line><span class=cl>        <span class=n>req</span><span class=o>.</span><span class=nc>GET</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></div><p>Refer <a href=http://dispatch.databinder.net/Dispatch.html>Dispatch Documentation</a> to know more
+about processing http request/response in Dispatch.<br>It should be fairly easy to use <code>AwsS3Request</code> object and send http request using any http library.</p><h3 id=example-usage>Example Usage</h3><p>Usage example shown below.<br>Processing the http request/response is not shown.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>import</span> <span class=nn>com.sakthipriyan.aws.</span><span class=o>{</span><span class=nc>AwsS3</span><span class=o>,</span> <span class=nc>AsyncHttpClient</span><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>path</span> <span class=k>=</span> <span class=s>&#34;path/to/store/the/content&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>content</span> <span class=k>=</span> <span class=s>&#34;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello HTML World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//Store an document into the given path.
+</span></span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>putRequest</span> <span class=k>=</span> <span class=nc>AsyncHttpClient</span><span class=o>.</span><span class=n>getDispatchReq</span><span class=o>(</span><span class=nc>AwsS3</span><span class=o>.</span><span class=n>put</span><span class=o>(</span><span class=n>path</span><span class=o>,</span> <span class=n>content</span><span class=o>))</span>
+</span></span><span class=line><span class=cl><span class=c1>// TODO - send the http put request and process the response using Dispatch.
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//Retrieve the document for the specified path.
+</span></span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>getRequest</span> <span class=k>=</span> <span class=nc>AsyncHttpClient</span><span class=o>.</span><span class=n>getDispatchReq</span><span class=o>(</span><span class=nc>AwsS3</span><span class=o>.</span><span class=n>get</span><span class=o>(</span><span class=n>path</span><span class=o>))</span>
+</span></span><span class=line><span class=cl><span class=c1>// TODO - send the http get request and process the response using Dispatch.
+</span></span></span></code></pre></div><h3 id=notes>Notes</h3><ul><li>While processing http response, please make sure to handle non <code>200 OK</code> response.</li><li>It will be wiser to use AWS SDK if you are using it already.</li><li>Based on usage, you can use synchronous or asynchronous http client libraries.</li><li>Still, It would be better to use async http client library to store or retrieve documents from s3 bucket.</li></ul></div><footer class=content-footer><hr class=content-divider><div class=card-tags><span class=tags-icon>🏷️</span>
 <a href=https://sakthipriyan.com/building-systems/tags/scala/ class=tag-link>Scala</a>
-<a href=https://sakthipriyan.com/building-systems/tags/aws/ class=tag-link>Aws</a>
+<a href=https://sakthipriyan.com/building-systems/tags/aws/ class=tag-link>AWS</a>
 <a href=https://sakthipriyan.com/building-systems/tags/s3/ class=tag-link>S3</a>
 <a href=https://sakthipriyan.com/building-systems/tags/http/ class=tag-link>Http</a>
 <a href=https://sakthipriyan.com/building-systems/tags/code/ class=tag-link>Code</a>
 <a href=https://sakthipriyan.com/building-systems/tags/dispatch/ class=tag-link>Dispatch</a></div><div class=content-comments><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="sakthipriyan";(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script>function runHighlightJS(){window.hljs&&hljs.highlightAll()}</script><script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js onload=runHighlightJS()></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(console.log("Hamburger menu initialized",{hamburger:e,navLinks:t}),e&&t){const n=document.createElement("div");n.className="nav-overlay",document.body.appendChild(n),console.log("Overlay created and added to body"),e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation(),e.classList.toggle("active"),t.classList.toggle("active"),n.classList.toggle("active");const o=e.classList.contains("active");e.setAttribute("aria-expanded",o),document.body.style.overflow=o?"hidden":"",console.log("Menu toggled",{isExpanded:o})}),n.addEventListener("click",function(){console.log("Overlay clicked - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""});const s=t.querySelectorAll("a");console.log("Found nav links:",s.length),s.forEach(s=>{s.addEventListener("click",function(){console.log("Link clicked:",s.href),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow=""})}),window.addEventListener("resize",function(){window.innerWidth>768&&e.classList.contains("active")&&(console.log("Window resized - closing menu"),e.classList.remove("active"),t.classList.remove("active"),n.classList.remove("active"),e.setAttribute("aria-expanded","false"),document.body.style.overflow="")})}else console.warn("Hamburger menu elements not found")})</script></body></html>
+Disqus.</a></noscript></div></footer></article></main><footer class=site-footer><p>&copy; 2026 Sakthi Priyan H. Built with Hugo and Continuum theme.</p></footer><script defer src=/js/nav.min.20173668f4f7bb18cfdc22fb6952964666099d78e7a6fcc333adb3431fe5db3b.js integrity="sha256-IBc2aPT3uxjP3CL7aVKWRmYJnXjnpvzDM62zQx/l2zs="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>
