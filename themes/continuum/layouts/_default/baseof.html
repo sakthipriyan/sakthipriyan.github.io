@@ -19,10 +19,6 @@
         {{- $styles = $styles | append "syntax" }}
     {{- end }}
     {{- partial "css.html" $styles }}
-    {{- if or (eq .Section "slides") (eq .Type "slides") }}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
-    {{- end }}
     {{- block "head" . }}{{- end }}
 </head>
 {{- $bodyClass := .Section }}
@@ -45,14 +41,6 @@
     </main>
     {{- partial "footer.html" . }}
 {{- end }}
-
-    {{- /* Slides: reveal.js is initialised by the slides layout itself. */ -}}
-    {{- if or (eq .Section "slides") (eq .Type "slides") }}
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
-    {{- end }}
 
     {{- /* Optional per-page JS tools, opted into via front matter `js_tools`. */ -}}
     {{- $jsTools := .Params.js_tools | default (.Site.Params.default_js_tools | default slice) }}
