@@ -1,0 +1,24 @@
+{{- /*
+  Emits the per-section accent tokens as a generated stylesheet.
+  Every value comes from the section's own _index.md front matter, so the theme
+  carries no knowledge of which sections a site has or what colours they use.
+  Sections declaring no accentFrom simply inherit the :root defaults.
+*/ -}}
+{{- $rules := slice -}}
+{{- range .Site.Sections -}}
+  {{- $s := . -}}
+  {{- if $s.Params.accentFrom -}}
+    {{- $rules = $rules | append (printf "body.%s{--accent-from:%s;--accent-to:%s;--accent-ink:%s;--on-accent:%s;--header-bg:linear-gradient(135deg,%s 0%%,%s 100%%);}"
+        $s.Section
+        $s.Params.accentFrom
+        ($s.Params.accentTo   | default $s.Params.accentFrom)
+        ($s.Params.accentInk  | default $s.Params.accentFrom)
+        ($s.Params.onAccent   | default "#fff")
+        $s.Params.accentFrom
+        ($s.Params.accentTo   | default $s.Params.accentFrom)) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $rules -}}
+  {{- $r := resources.FromString "css/section-accents.css" (delimit . "\n") | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $r.RelPermalink }}" integrity="{{ $r.Data.Integrity }}">
+{{- end -}}

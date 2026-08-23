@@ -7,6 +7,7 @@
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ .Description | default .Site.Params.description }}">
     {{- partial "css.html" (slice "style" "book-layout") }}
+    {{- partial "section-accents.html" . }}
     <!-- Book Reader Layout Active -->
 </head>
 
@@ -58,10 +59,10 @@
                 {{- /* Chapter Tags */ -}}
                 {{ $tags := slice }}
                 {{ $currentSection := .Section }}
-                {{- if eq $currentSection "building-wealth" }}
-                    {{- if .Params.wealth_tags }}{{ $tags = .Params.wealth_tags }}{{ end }}
-                {{- else if eq $currentSection "building-systems" }}
-                    {{- if .Params.systems_tags }}{{ $tags = .Params.systems_tags }}{{ end }}
+                {{- $taxonomy := "" }}
+                {{- with partial "func/owning-section.html" . }}{{ $taxonomy = .Params.taxonomy | default "" }}{{ end }}
+                {{- if $taxonomy }}
+                    {{- with (index .Params $taxonomy) }}{{ $tags = . }}{{ end }}
                 {{- else if .Params.tags }}
                     {{ $tags = .Params.tags }}
                 {{- end }}

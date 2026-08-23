@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="container section-container">
-  {{- /* Top-level section landing pages (/building-wealth/, /building-systems/).
-         Leaf sections have their own templates: layouts/<type>/list.html. */ -}}
+  {{- /* Top-level section landing pages. Leaf sections have their own
+         templates: layouts/<type>/list.html. */ -}}
   <div class="content-list">
     <h1>{{ .Title }}</h1>
     {{- with .Content }}

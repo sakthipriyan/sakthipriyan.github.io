@@ -6,20 +6,18 @@ Displays tags and Disqus comments
 <footer class="content-footer">
     <hr class="content-divider">
 
-    {{- /* Determine taxonomy based on section */ -}}
+    {{- /* Tags come from the taxonomy the owning section declares. */ -}}
     {{ $tags := slice }}
     {{ $currentSection := .Section }}
-
-    {{- if eq $currentSection "building-wealth" }}
-    {{- if .Params.wealth_tags }}
-    {{ $tags = .Params.wealth_tags }}
+    {{ $taxonomy := "" }}
+    {{- with partial "func/owning-section.html" . }}
+    {{- $currentSection = .Section }}
+    {{- $taxonomy = .Params.taxonomy | default "" }}
     {{- end }}
-    {{- else if eq $currentSection "building-systems" }}
-    {{- if .Params.systems_tags }}
-    {{ $tags = .Params.systems_tags }}
-    {{- end }}
-    {{- else if .Params.tags }}
-    {{ $tags = .Params.tags }}
+    {{- if $taxonomy }}
+    {{- with (index .Params $taxonomy) }}{{ $tags = . }}{{ end }}
+    {{- else }}
+    {{- with .Params.tags }}{{ $tags = . }}{{ end }}
     {{- end }}
 
     {{- if $tags }}
@@ -37,7 +35,7 @@ Displays tags and Disqus comments
     <div class="content-comments">
         <div id="disqus_thread"></div>
         <script type="text/javascript">
-            var disqus_shortname = 'sakthipriyan';
+            var disqus_shortname = '{{ .Site.Config.Services.Disqus.Shortname }}';
             (function () {
                 var dsq = document.createElement('script');
                 dsq.type = 'text/javascript';

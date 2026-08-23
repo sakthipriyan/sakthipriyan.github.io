@@ -127,10 +127,9 @@ Renders a content card with image, title, summary, meta, and tags
     <!-- Tags outside the main link to avoid nested anchors -->
     {{ $currentSection := .Section }}
     {{ $taxonomyName := "" }}
-    {{ if eq $currentSection "building-systems" }}
-    {{ $taxonomyName = "systems_tags" }}
-    {{ else if eq $currentSection "building-wealth" }}
-    {{ $taxonomyName = "wealth_tags" }}
+    {{ with partial "func/owning-section.html" . }}
+    {{ $currentSection = .Section }}
+    {{ $taxonomyName = .Params.taxonomy | default "" }}
     {{ end }}
 
     {{ if $taxonomyName }}

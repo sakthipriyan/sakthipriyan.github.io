@@ -1,14 +1,12 @@
 {{ define "main" }}
 <div class="container section-container">
-  {{- /* Term pages are permalinked under their owning section, e.g.
-         /building-wealth/tags/<term>/. Recover that section from the path so the
-         listing can be scoped to it. */ -}}
+  {{- /* Terms belong to whichever section declares this taxonomy; scope the
+         listing to that section. */ -}}
   {{- $currentSection := "" -}}
   {{- $sectionName := "" -}}
-  {{- $pathParts := split .RelPermalink "/" -}}
-  {{- if ge (len $pathParts) 4 -}}
-    {{- $currentSection = index $pathParts 1 -}}
-    {{- $sectionName = $currentSection | title | replaceRE "-" " " -}}
+  {{- with partial "func/owning-section.html" . -}}
+    {{- $currentSection = .Section -}}
+    {{- $sectionName = .Title -}}
   {{- end -}}
 
   {{- $pages := where .Pages "Section" $currentSection -}}
