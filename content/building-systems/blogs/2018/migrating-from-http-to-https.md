@@ -33,22 +33,28 @@ I had created a new CentOS 7 instance in [Vultr](https://www.vultr.com/?ref=6819
 From price point it is very competitive compared more prominant cloud providers.
 
 #### Install Nginx, Start Nginx and Set up auto Start
-	yum update
-	yum -y install epel-release 
-	yum -y install nginx
-	service nginx start
-	service nginx status
-	systemctl enable nginx
+```bash
+yum update
+yum -y install epel-release 
+yum -y install nginx
+service nginx start
+service nginx status
+systemctl enable nginx
+```
 
 #### Open up firewall
-	firewall-cmd --zone=public --add-port=80/tcp --permanent
-	firewall-cmd --zone=public --add-port=443/tcp --permanent
-	firewall-cmd --reload
+```bash
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --reload
+```
 
 #### Setting up website on the Nginx
-	mkdir -p /var/www/sakthipriyan.com
-	nano /etc/nginx/conf.d/sakthipriyan.com.conf
-	service nginx reload
+```bash
+mkdir -p /var/www/sakthipriyan.com
+nano /etc/nginx/conf.d/sakthipriyan.com.conf
+service nginx reload
+```
 
 Contents of the initial `/etc/nginx/conf.d/sakthipriyan.com.conf`
 
@@ -90,24 +96,30 @@ pip install markdown
 ```
 
 #### Cloning webgen and sakthipriyan.com
-	yum -y install git 
-	git clone https://github.com/sakthipriyan/sakthipriyan.com.git
-	git clone https://github.com/sakthipriyan/webgen.git
+```bash
+yum -y install git 
+git clone https://github.com/sakthipriyan/sakthipriyan.com.git
+git clone https://github.com/sakthipriyan/webgen.git
+```
 
 #### Generate website and serve via Nginx
-	cd webgen
-	python webgen.py ../sakthipriyan.com/conf/prod.json
-	cp -fr ../sakthipriyan.com/dist/* /var/www/sakthipriyan.com/
+```bash
+cd webgen
+python webgen.py ../sakthipriyan.com/conf/prod.json
+cp -fr ../sakthipriyan.com/dist/* /var/www/sakthipriyan.com/
+```
 
 #### Changing DNS records
 I had to edit DNS `A Record`s to point to new instance's IP address for both `sakthipriyan.com` and `www.sakthipriyan.com`
 
 #### Installing certbot and installing certificates in Nginx
-	yum -y install yum-utils
-	yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
-	yum install certbot
-	yum install python2-certbot-nginx
-	certbot --nginx
+```bash
+yum -y install yum-utils
+yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+yum install certbot
+yum install python2-certbot-nginx
+certbot --nginx
+```
 
 If I remember correctly, I had used default options and directly I had updated the Website Nginx Config using the above certbot command.
 

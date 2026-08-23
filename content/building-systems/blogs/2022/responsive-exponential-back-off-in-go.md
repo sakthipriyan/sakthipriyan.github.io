@@ -29,14 +29,16 @@ aliases:
 - So, it will go like this `1s, 2s, 3s, 4s, 5s, ...` and stops growing once request is successful
 
 #### Code
-    // for each failure we add interval to current delay
-    func sleepTime(currentDelay, interval, maxInterval int64) int64 {
-        currentDelay += interval
-        if currentDelay > maxInterval {
-            currentDelay = maxInterval
-        }
-        return currentDelay
+```go
+// for each failure we add interval to current delay
+func sleepTime(currentDelay, interval, maxInterval int64) int64 {
+    currentDelay += interval
+    if currentDelay > maxInterval {
+        currentDelay = maxInterval
     }
+    return currentDelay
+}
+```
 
 
 ### Exponential back off
@@ -46,17 +48,19 @@ aliases:
 - This will be the better than linear back off as it can get successful delay with less iterations
 
 #### Code
-    // for each failure we multiple the current delay by a multiplication factor
-    func sleepTime(currentDelay, initialDelay, maxInterval int64, multiplier float64) int64 {
-        if currentDelay == 0 {
-           return initialDelay
-        }
-        currentDelay = int64(float64(currentDelay) * multiplier)
-        if currentDelay > maxInterval {
-            return maxInterval
-        }
-        return currentDelay
+```go
+// for each failure we multiple the current delay by a multiplication factor
+func sleepTime(currentDelay, initialDelay, maxInterval int64, multiplier float64) int64 {
+    if currentDelay == 0 {
+       return initialDelay
     }
+    currentDelay = int64(float64(currentDelay) * multiplier)
+    if currentDelay > maxInterval {
+        return maxInterval
+    }
+    return currentDelay
+}
+```
 
 ### Rate Limiting in DynamoDB
 - [DynamoDB](https://aws.amazon.com/dynamodb/) is a Fast, flexible NoSQL database service from [AWS](https://aws.amazon.com/)

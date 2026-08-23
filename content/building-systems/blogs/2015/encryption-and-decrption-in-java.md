@@ -24,8 +24,10 @@ There are plenty of available encryption mechanism in Java.
 This post explains how to encrypt the hexadecimal string and to decrypt the encoded string.  
 
 ### Imports
-    import java.io.UnsupportedEncodingException;
-    import java.util.Base64;
+```java
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+```
 
 ```java
 import javax.crypto.Cipher;

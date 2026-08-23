@@ -171,12 +171,14 @@ only showing top 5 rows
 ### Processing Tags Dataframe
 
 #### As is after loading into dataframe
-	tagsDF.printSchema()
-	root
-	|-- userId: integer (nullable = true)
-	|-- movieId: integer (nullable = true)
-	|-- tag: string (nullable = true)
-	|-- timestamp: integer (nullable = true)
+```text
+tagsDF.printSchema()
+root
+|-- userId: integer (nullable = true)
+|-- movieId: integer (nullable = true)
+|-- tag: string (nullable = true)
+|-- timestamp: integer (nullable = true)
+```
 
 ```text
 tagsDF.show(5)
@@ -226,12 +228,14 @@ only showing top 5 rows
 ### Processing Ratings Dataframe
 
 #### As is after loading into dataframe
-	ratingsDF.printSchema()
-	root
-	|-- userId: integer (nullable = true)
-	|-- movieId: integer (nullable = true)
-	|-- rating: double (nullable = true)
-	|-- timestamp: integer (nullable = true)
+```text
+ratingsDF.printSchema()
+root
+|-- userId: integer (nullable = true)
+|-- movieId: integer (nullable = true)
+|-- rating: double (nullable = true)
+|-- timestamp: integer (nullable = true)
+```
 
 ```text
 ratingsDF.show(5)
@@ -352,17 +356,19 @@ root
 |-- label: double (nullable = false)
 ```
 
- 	moviesConsolidatedDF.show(5)
-	+-------+--------------------+--------------------+-----------+--------------------+--------+-----+
-	|movieId|               title|              genres|genresCount|                tags|tagCount|label|
-	+-------+--------------------+--------------------+-----------+--------------------+--------+-----+
-	|      1|    Toy Story (1995)|[Adventure, Anima...|          5|        [pixar, fun]|       2|  0.0|
-	|      2|      Jumanji (1995)|[Adventure, Child...|          3|[fantasy, game, m...|       4|  0.0|
-	|      3|Grumpier Old Men ...|   [Comedy, Romance]|          2|        [old, moldy]|       2|  1.0|
-	|      5|Father of the Bri...|            [Comedy]|          1| [pregnancy, remake]|       2|  1.0|
-	|      7|      Sabrina (1995)|   [Comedy, Romance]|          2|            [remake]|       1|  1.0|
-	+-------+--------------------+--------------------+-----------+--------------------+--------+-----+
-	only showing top 5 rows
+```text
+moviesConsolidatedDF.show(5)
++-------+--------------------+--------------------+-----------+--------------------+--------+-----+
+|movieId|               title|              genres|genresCount|                tags|tagCount|label|
++-------+--------------------+--------------------+-----------+--------------------+--------+-----+
+|      1|    Toy Story (1995)|[Adventure, Anima...|          5|        [pixar, fun]|       2|  0.0|
+|      2|      Jumanji (1995)|[Adventure, Child...|          3|[fantasy, game, m...|       4|  0.0|
+|      3|Grumpier Old Men ...|   [Comedy, Romance]|          2|        [old, moldy]|       2|  1.0|
+|      5|Father of the Bri...|            [Comedy]|          1| [pregnancy, remake]|       2|  1.0|
+|      7|      Sabrina (1995)|   [Comedy, Romance]|          2|            [remake]|       1|  1.0|
++-------+--------------------+--------------------+-----------+--------------------+--------+-----+
+only showing top 5 rows
+```
 
 ### Let's remove the array and make the table flat.
 

@@ -95,8 +95,10 @@ G-WAN can listen on 3 local IP addresses:
 List of IPs which can be listened by G-WAN is shown above.
 
 ### Starting and stopping the server
-    # Start the server in the background
-    $ ./gwan &
+```console
+# Start the server in the background
+$ ./gwan &
+```
 
 ```console
 # Stop the server

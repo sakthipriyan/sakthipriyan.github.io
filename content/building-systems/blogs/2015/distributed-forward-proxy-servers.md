@@ -25,20 +25,26 @@ Setting up a distributed forward proxy servers can be done as follows.
 ### Squid
 
 #### Install
-    # change to root user
-    sudo su
-    apt-get update
-    # install squid
-    apt-get install squid -y
+```bash
+# change to root user
+sudo su
+apt-get update
+# install squid
+apt-get install squid -y
+```
 
 #### Back up default config for reference
-    # backup current config
-    mv /etc/squid3/squid.conf /etc/squid3/squid.conf.original
-    # make backup copy as readonly
-    chmod a-w /etc/squid3/squid.conf.original
+```bash
+# backup current config
+mv /etc/squid3/squid.conf /etc/squid3/squid.conf.original
+# make backup copy as readonly
+chmod a-w /etc/squid3/squid.conf.original
+```
 
 #### Configure
-    nano /etc/squid3/squid.conf
+```bash
+nano /etc/squid3/squid.conf
+```
 
 ```text
 ### Add squid config shown below ###
@@ -57,31 +63,39 @@ cache deny all
 ```
 
 #### Reload with new config
-    # reload the new config
-    service squid3 reload
-    # To check if squid runs at port 8001
-    netstat -tlnp | grep 8001
+```bash
+# reload the new config
+service squid3 reload
+# To check if squid runs at port 8001
+netstat -tlnp | grep 8001
+```
 
 Repeat the same steps across instances where squid has to be set up.
 
 ### HAProxy
 
 #### Install
-    # change to root user
-    sudo su
-    apt-get update
-    # install haproxy
-    apt-get install haproxy -y
+```bash
+# change to root user
+sudo su
+apt-get update
+# install haproxy
+apt-get install haproxy -y
+```
 
 #### Back up default config for reference
-    # backup current config
-    mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original  
-    # make backup copy as readonly
-    chmod a-w /etc/haproxy/haproxy.cfg.original
+```bash
+# backup current config
+mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original  
+# make backup copy as readonly
+chmod a-w /etc/haproxy/haproxy.cfg.original
+```
 
 #### Enable HAProxy
-    nano /etc/default/haproxy #Enable the haproxy
-    ENABLED=1
+```bash
+nano /etc/default/haproxy #Enable the haproxy
+ENABLED=1
+```
 
 #### Configure
 
@@ -112,18 +126,22 @@ backend squid_backend
 ```
 
 #### Reload with new config
-    # Reload the new config
-    service haproxy reload
-    # To check if haproxy runs at port 8000
-    netstat -tlnp | grep 8000
+```bash
+# Reload the new config
+service haproxy reload
+# To check if haproxy runs at port 8000
+netstat -tlnp | grep 8000
+```
 
 
 ### Test
 How to test the distributed proxy cluster?
 
 ####  Squid
-    curl -x localhost:8001 http://google.com
-    # If you get the html as below, then it is working fine.
+```bash
+curl -x localhost:8001 http://google.com
+# If you get the html as below, then it is working fine.
+```
 
 Console output
 
