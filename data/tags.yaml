@@ -9,13 +9,13 @@
 # Style: Title Case, alphabetical order. Acronyms keep their natural casing
 # (AWS, IBKR, SIP, WASM).
 #
-# Count = number of content files currently using the tag (informational only,
-# not enforced by Hugo -- update this file by hand when tags change).
+# Count = number of content files currently using the tag, drafts included
+# (informational only, not enforced by Hugo -- update by hand when tags change).
 
 wealth_tags:
   - Advanced Investor  # 3
-  - Asset Allocation  # 16
-  - Bharat Connect  # 2
+  - Asset Allocation  # 18
+  - Bharat Connect  # 3
   - Building Block  # 15
   - Building Wealth  # 10
   - Capital Gains  # 1
@@ -23,39 +23,39 @@ wealth_tags:
   - Cashflow  # 1
   - Compound Interest  # 1
   - Consolidation  # 2
-  - Cost Optimization  # 6
-  - Credit Card  # 2
+  - Cost Optimization  # 8
+  - Credit Card  # 3
   - Debt  # 2
-  - Debt Management  # 6
+  - Debt Management  # 7
   - Demo  # 1
-  - Diversification  # 1
+  - Diversification  # 2
   - Dynamic Sip  # 1
   - Emergency Fund  # 4
-  - EMI  # 3
+  - EMI  # 4
   - Equity  # 2
   - ETF  # 4
   - Financial Literacy  # 1
   - Financial Planning  # 10
   - Financial Tools  # 4
   - Foreign Assets  # 1
-  - Forex  # 7
+  - Forex  # 10
   - Form 12baa  # 1
-  - FX Retail  # 8
-  - Global Indian Investor  # 1
+  - FX Retail  # 10
+  - Global Indian Investor  # 2
   - Goal Based Investing  # 2
   - Gold  # 4
   - GST  # 1
   - Home Loan  # 3
-  - IBKR  # 11
+  - IBKR  # 12
   - Income Tax  # 1
   - Index Funds  # 6
   - Inflation  # 5
-  - International Investing  # 13
+  - International Investing  # 16
   - Investment  # 4
   - ITR Filing  # 1
   - Loans  # 7
   - Long Term Growth  # 3
-  - LRS  # 10
+  - LRS  # 13
   - Money Flow  # 4
   - Mutual Funds  # 6
   - NASDAQ 100  # 4
@@ -66,15 +66,15 @@ wealth_tags:
   - Portfolio Construction  # 3
   - Portfolio Management  # 5
   - RealValue Engines  # 3
-  - Rebalancing  # 10
-  - Remittance  # 5
+  - Rebalancing  # 11
+  - Remittance  # 7
   - Retirement  # 2
   - Schedule AL  # 1
   - Schedule CG  # 1
   - Schedule FA  # 1
   - Schedule OS  # 1
   - SIP  # 12
-  - State Of The 1 Portfolio  # 4
+  - State Of The 1 Portfolio  # 5
   - State Of The Portfolio  # 1
   - Tax Efficient Investing  # 1
   - Tax Optimization  # 3
