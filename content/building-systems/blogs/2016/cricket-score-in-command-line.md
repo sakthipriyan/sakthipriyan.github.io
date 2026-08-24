@@ -4,9 +4,9 @@ date: '2016-01-28'
 draft: false
 type: blogs
 systems_tags:
-- cricket
-- code
-- cricscore-api
+- Cricket
+- Code
+- Cricscore API
 - Python
 author: Sakthi Priyan H
 summary: using python and open cricscore api

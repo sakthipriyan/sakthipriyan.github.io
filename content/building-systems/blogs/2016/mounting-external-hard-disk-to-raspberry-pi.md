@@ -4,11 +4,11 @@ date: '2016-01-31'
 draft: false
 type: blogs
 systems_tags:
-- raspberry-pi
-- ntfs
-- fat
-- setup
-- hard-disk
+- Raspberry Pi
+- NTFS
+- FAT
+- Setup
+- Hard Disk
 author: Sakthi Priyan H
 summary: which contains NTFS and FAT file systems.
 aliases:

@@ -4,10 +4,10 @@ date: '2016-07-20'
 draft: false
 type: blogs
 systems_tags:
-- api
-- swagger
-- play-framework
-- documentation
+- API
+- Swagger
+- Play Framework
+- Documentation
 - Design
 author: Sakthi Priyan H
 summary: Setting up live documentation for API

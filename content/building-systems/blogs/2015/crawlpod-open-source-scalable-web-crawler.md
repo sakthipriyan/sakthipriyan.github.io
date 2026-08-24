@@ -4,13 +4,13 @@ date: '2015-12-12'
 draft: false
 type: blogs
 systems_tags:
-- crawlpod
-- web-crawler
-- scala
-- akka
-- mongodb
+- Crawlpod
+- Web Crawler
+- Scala
+- Akka
+- MongoDB
 - Design
-- open-source
+- Open Source
 author: Sakthi Priyan H
 summary: built on top of Scala and Akka framework.
 aliases:

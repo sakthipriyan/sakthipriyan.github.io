@@ -4,12 +4,12 @@ date: '2018-12-25'
 draft: false
 type: blogs
 systems_tags:
-- spark
-- scala
+- Spark
+- Scala
 - sbt
-- bigdata
-- code
-- machine-learning
+- Big Data
+- Code
+- Machine Learning
 author: Sakthi Priyan H
 summary: using scala spark
 aliases:

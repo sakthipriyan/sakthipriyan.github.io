@@ -15,7 +15,9 @@
 wealth_tags:
   - Advanced Investor  # 3
   - Asset Allocation  # 18
+  - Bank of Baroda  # 2
   - Bharat Connect  # 3
+  - BHIM  # 1
   - Building Block  # 15
   - Building Wealth  # 10
   - Capital Gains  # 1
@@ -46,12 +48,14 @@ wealth_tags:
   - Gold  # 4
   - GST  # 1
   - Home Loan  # 3
-  - IBKR  # 12
+  - IBKR  # 13
+  - ICICI Bank  # 1
   - Income Tax  # 1
   - Index Funds  # 6
   - Inflation  # 5
   - International Investing  # 16
   - Investment  # 4
+  - ISO 20022  # 1
   - ITR Filing  # 1
   - Loans  # 7
   - Long Term Growth  # 3
@@ -59,6 +63,7 @@ wealth_tags:
   - Money Flow  # 4
   - Mutual Funds  # 6
   - NASDAQ 100  # 4
+  - NPCI  # 1
   - Perpetual Rebalancing  # 8
   - Personal Finance  # 3
   - Personal Journey  # 2
@@ -69,6 +74,7 @@ wealth_tags:
   - Rebalancing  # 11
   - Remittance  # 7
   - Retirement  # 2
+  - Risk Management  # 1
   - Schedule AL  # 1
   - Schedule CG  # 1
   - Schedule FA  # 1
@@ -81,27 +87,117 @@ wealth_tags:
   - Taxation  # 3
   - TCS  # 6
   - USD  # 1
+  - Wire Transfer  # 1
 
 systems_tags:
+  - .gitconfig  # 1
+  - AES  # 1
   - AI Engineering  # 3
+  - Akka  # 2
   - ANTLR  # 3
+  - API  # 2
   - Architecture  # 1
   - Athena  # 2
-  - AWS  # 1
+  - AWS  # 5
+  - Base64  # 1
+  - Benchmark  # 2
+  - Big Data  # 5
   - BigQuery  # 2
-  - Cloud  # 3
+  - Blog Software  # 1
+  - Boto  # 1
+  - C4RPi  # 2
+  - Certbot  # 1
+  - Chrome  # 1
+  - Circuit  # 1
+  - Cloud  # 4
+  - Code  # 18
+  - Code Less  # 1
+  - Config  # 1
+  - Couchbase  # 3
+  - Crawlpod  # 1
+  - Cricket  # 1
+  - Cricscore API  # 2
   - DAG  # 1
   - Data Engineering  # 1
-  - Design  # 3
+  - Database  # 1
+  - Debug  # 1
+  - Decryption  # 1
+  - Design  # 9
   - DevOps  # 1
+  - Dispatch  # 1
+  - Distributed  # 2
   - Docker  # 1
-  - Go  # 2
+  - Documentation  # 2
+  - Downloader  # 1
+  - DynamoDB  # 1
+  - Elasticsearch  # 2
+  - Encryption  # 1
+  - Enum  # 1
+  - Exponential Backoff  # 1
+  - Export  # 1
+  - ext  # 1
+  - FAT  # 2
+  - Fibonacci  # 1
+  - G-WAN  # 1
+  - Git  # 1
+  - Go  # 3
+  - HAProxy  # 1
+  - Hard Disk  # 2
+  - Hardware  # 2
+  - Hibernate  # 1
+  - HTTP  # 2
+  - HTTPS  # 1
+  - Integration  # 2
+  - IoT  # 1
   - IR  # 3
+  - Java  # 7
+  - JPA  # 1
+  - jsoup  # 1
+  - JUnit  # 1
+  - Kafka  # 1
+  - Kuralbot  # 1
   - Lambda  # 1
-  - Optimization  # 1
-  - Python  # 1
+  - Learning  # 1
+  - Let's Encrypt  # 1
+  - Machine Learning  # 2
+  - Markdown  # 1
+  - MongoDB  # 1
+  - Nexus  # 1
+  - nginx  # 1
+  - NTFS  # 2
+  - Open Source  # 1
+  - Optimization  # 2
+  - Play Framework  # 3
+  - Powerbot  # 1
+  - Proxy  # 2
+  - Python  # 7
+  - Raspberry Pi  # 7
+  - Recommendation  # 1
   - Rust  # 1
+  - S3  # 2
+  - Salesforce  # 2
+  - sbt  # 3
+  - Scala  # 6
+  - SD Card  # 1
   - Serverless  # 1
+  - Setup  # 8
+  - Shell  # 1
+  - Sleep  # 1
+  - Spark  # 3
+  - Spring  # 1
   - SQL  # 1
   - SQL Translation  # 2
+  - Squid  # 1
+  - Swagger  # 2
+  - sysbench  # 1
+  - Testing  # 1
+  - Torrent  # 1
+  - Tweetbot  # 1
+  - Twitter  # 1
+  - UUID  # 1
+  - Version Control  # 1
   - WASM  # 1
+  - Web Crawler  # 2
+  - Web Server  # 1
+  - Webgen  # 2
+  - YouTube  # 1

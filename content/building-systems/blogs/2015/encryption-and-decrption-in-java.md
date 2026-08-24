@@ -4,11 +4,11 @@ date: '2015-07-21'
 draft: false
 type: blogs
 systems_tags:
-- java
-- encryption
-- decryption
-- code
-- aes
+- Java
+- Encryption
+- Decryption
+- Code
+- AES
 author: Sakthi Priyan H
 summary: using a private key and AES algorithm.
 aliases:

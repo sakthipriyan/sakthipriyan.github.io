@@ -4,8 +4,8 @@ date: '2015-07-24'
 draft: false
 type: blogs
 systems_tags:
-- couchbase
-- setup
+- Couchbase
+- Setup
 - AWS
 author: Sakthi Priyan H
 summary: EC2 instances

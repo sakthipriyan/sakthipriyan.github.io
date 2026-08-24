@@ -4,11 +4,11 @@ date: '2015-04-08'
 draft: false
 type: blogs
 systems_tags:
-- blog-software
-- webgen
+- Blog Software
+- Webgen
 - Design
 - Python
-- markdown
+- Markdown
 author: Sakthi Priyan H
 summary: using markdown and python
 aliases:

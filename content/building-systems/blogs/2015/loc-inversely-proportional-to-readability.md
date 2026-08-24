@@ -4,10 +4,10 @@ date: '2015-07-07'
 draft: false
 type: blogs
 systems_tags:
-- code
-- java
+- Code
+- Java
 - Optimization
-- code-less
+- Code Less
 author: Sakthi Priyan H
 summary: Always code less to make it easily readable.
 aliases:

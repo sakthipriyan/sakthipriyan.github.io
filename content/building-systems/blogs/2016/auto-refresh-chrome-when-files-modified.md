@@ -4,10 +4,10 @@ date: '2016-02-15'
 draft: false
 type: blogs
 systems_tags:
-- chrome
+- Chrome
 - Python
-- webgen
-- code
+- Webgen
+- Code
 author: Sakthi Priyan H
 summary: Using python pyinotify and chrome debugging
 aliases:
