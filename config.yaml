@@ -20,6 +20,19 @@ params:
   author: "Sakthi Priyan H"
   initials: "SP"
   profileImage: "/images/profile.jpg"
+  # Social cards and browser icons. These files already existed in static/img
+  # but nothing in <head> ever pointed at them.
+  ogImage: "/images/profile.jpg"
+  twitterHandle: "@sakthipriyan"
+  icons:
+    - href: "/img/sp.svg"
+      type: "image/svg+xml"
+    - href: "/img/sp_32.png"
+      type: "image/png"
+      sizes: "32x32"
+    - href: "/img/favicon.png"
+      type: "image/png"
+      sizes: "16x16"
   sourceRepo: "https://github.com/sakthipriyan/sakthipriyan.github.io"
   sourceBranch: "main"
   social:

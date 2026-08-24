@@ -1,5 +1,5 @@
 ---
-title: Sbt-run-support-210sbt-run-support-210_2.10;0.1-SNAPSHOT
+title: sbt-run-support-210 not found
 date: '2015-04-24'
 draft: false
 type: blogs
@@ -12,6 +12,9 @@ author: Sakthi Priyan H
 summary: Fixing unresolved dependency in playframework.
 aliases:
 - /2015/04/24/sbt-run-support-210-not-found.html
+# The title used to be the Ivy coordinate with its '#' lost in migration, and the
+# URL was generated from it. Keep that URL working.
+- /building-systems/blogs/sbt-run-support-210sbt-run-support-210_2.100.1-snapshot/
 ---
 
 ### Unresolved dependency
