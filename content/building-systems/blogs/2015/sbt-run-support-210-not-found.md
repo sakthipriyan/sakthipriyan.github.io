@@ -4,10 +4,10 @@ date: '2015-04-24'
 draft: false
 type: blogs
 systems_tags:
-- playframework
+- Play Framework
 - sbt
-- debug
-- nexus
+- Debug
+- Nexus
 author: Sakthi Priyan H
 summary: Fixing unresolved dependency in playframework.
 aliases:

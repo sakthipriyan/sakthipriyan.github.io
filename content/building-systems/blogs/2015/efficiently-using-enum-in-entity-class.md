@@ -4,12 +4,12 @@ date: '2015-08-24'
 draft: false
 type: blogs
 systems_tags:
-- java
-- code
-- jpa
-- database
-- enum
-- hibernate
+- Java
+- Code
+- JPA
+- Database
+- Enum
+- Hibernate
 author: Sakthi Priyan H
 summary: to improve code maintainability and database performance.
 aliases:

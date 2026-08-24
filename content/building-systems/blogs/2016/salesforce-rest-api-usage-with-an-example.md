@@ -4,9 +4,9 @@ date: '2016-02-07'
 draft: false
 type: blogs
 systems_tags:
-- salesforce
-- integration
-- code
+- Salesforce
+- Integration
+- Code
 author: Sakthi Priyan H
 summary: to show how to upsert records
 aliases:

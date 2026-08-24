@@ -4,12 +4,12 @@ date: '2016-01-11'
 draft: false
 type: blogs
 systems_tags:
-- raspberry-pi
-- benchmark
-- java
+- Raspberry Pi
+- Benchmark
+- Java
 - sysbench
-- code
-- fibonacci
+- Code
+- Fibonacci
 author: Sakthi Priyan H
 summary: using sysbench and Java
 aliases:

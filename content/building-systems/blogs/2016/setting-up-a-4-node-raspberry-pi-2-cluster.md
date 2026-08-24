@@ -4,10 +4,10 @@ date: '2016-01-18'
 draft: false
 type: blogs
 systems_tags:
-- raspberry-pi
-- c4rpi
-- hardware
-- setup
+- Raspberry Pi
+- C4RPi
+- Hardware
+- Setup
 author: Sakthi Priyan H
 summary: Setting up the right hardware.
 aliases:

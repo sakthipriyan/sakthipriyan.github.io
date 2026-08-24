@@ -4,13 +4,13 @@ date: '2016-01-05'
 draft: false
 type: blogs
 systems_tags:
-- raspberry-pi
-- tweetbot
-- kuralbot
-- powerbot
-- downloader
-- youtube
-- torrent
+- Raspberry Pi
+- Tweetbot
+- Kuralbot
+- Powerbot
+- Downloader
+- YouTube
+- Torrent
 - Python
 author: Sakthi Priyan H
 summary: How I turned it to a electricity monitor, tweetbot and downloader.

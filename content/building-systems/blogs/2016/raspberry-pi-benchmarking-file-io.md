@@ -4,13 +4,13 @@ date: '2016-01-31'
 draft: false
 type: blogs
 systems_tags:
-- raspberry-pi
-- ntfs
-- fat
+- Raspberry Pi
+- NTFS
+- FAT
 - ext
-- hard-disk
-- sd-card
-- benchmark
+- Hard Disk
+- SD Card
+- Benchmark
 author: Sakthi Priyan H
 summary: using sysbench, sd card and attached external hard disk
 aliases:

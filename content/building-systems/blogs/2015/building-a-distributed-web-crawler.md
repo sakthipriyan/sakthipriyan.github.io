@@ -4,16 +4,16 @@ date: '2015-04-18'
 draft: false
 type: blogs
 systems_tags:
-- web-crawler
-- scala
-- akka
-- kafka
-- couchbase
+- Web Crawler
+- Scala
+- Akka
+- Kafka
+- Couchbase
 - jsoup
-- big-data
+- Big Data
 - Design
-- distributed
-- proxy
+- Distributed
+- Proxy
 author: Sakthi Priyan H
 summary: which can perform both crawling and data extraction
 aliases:

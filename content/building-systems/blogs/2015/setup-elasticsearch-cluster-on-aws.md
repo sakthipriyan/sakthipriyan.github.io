@@ -5,8 +5,8 @@ draft: false
 type: blogs
 systems_tags:
 - AWS
-- elasticsearch
-- setup
+- Elasticsearch
+- Setup
 author: Sakthi Priyan H
 summary: EC2 instances.
 aliases:

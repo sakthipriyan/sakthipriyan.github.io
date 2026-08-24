@@ -4,11 +4,11 @@ date: '2016-03-30'
 draft: false
 type: blogs
 systems_tags:
-- api
-- swagger
-- documentation
+- API
+- Swagger
+- Documentation
 - Design
-- cricscore-api
+- Cricscore API
 author: Sakthi Priyan H
 summary: using Swagger Specification
 aliases:

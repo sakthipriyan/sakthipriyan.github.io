@@ -4,10 +4,10 @@ date: '2017-04-02'
 draft: false
 type: blogs
 systems_tags:
-- uuid
-- java
-- code
-- base64
+- UUID
+- Java
+- Code
+- Base64
 author: Sakthi Priyan H
 summary: Alphanumeric unique id using base64 charset
 aliases:

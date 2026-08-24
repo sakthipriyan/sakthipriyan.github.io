@@ -4,12 +4,12 @@ date: '2016-02-17'
 draft: false
 type: blogs
 systems_tags:
-- scala
+- Scala
 - AWS
-- s3
-- http
-- code
-- dispatch
+- S3
+- HTTP
+- Code
+- Dispatch
 author: Sakthi Priyan H
 summary: via http get and put requests
 aliases:

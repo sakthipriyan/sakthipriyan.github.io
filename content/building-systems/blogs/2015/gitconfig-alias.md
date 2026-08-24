@@ -4,11 +4,11 @@ date: '2015-04-01'
 draft: false
 type: blogs
 systems_tags:
-- git
-- config
-- version-control
+- Git
+- Config
+- Version Control
 - .gitconfig
-- setup
+- Setup
 author: Sakthi Priyan H
 summary: Alias for generally used Git commands
 aliases:

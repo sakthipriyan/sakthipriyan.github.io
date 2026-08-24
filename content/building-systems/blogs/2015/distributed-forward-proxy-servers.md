@@ -4,12 +4,12 @@ date: '2015-07-20'
 draft: false
 type: blogs
 systems_tags:
-- squid
-- haproxy
-- proxy
-- http
-- setup
-- distributed
+- Squid
+- HAProxy
+- Proxy
+- HTTP
+- Setup
+- Distributed
 author: Sakthi Priyan H
 summary: to crawl Internet via multiple cloud instances.
 aliases:

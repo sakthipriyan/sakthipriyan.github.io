@@ -4,12 +4,12 @@ date: '2015-05-30'
 draft: false
 type: blogs
 systems_tags:
-- playframework
-- couchbase
-- elasticsearch
+- Play Framework
+- Couchbase
+- Elasticsearch
 - Design
-- big-data
-- recommendation
+- Big Data
+- Recommendation
 author: Sakthi Priyan H
 summary: using play framework, couchbase and elasticsearch
 aliases:

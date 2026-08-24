@@ -4,11 +4,11 @@ date: '2018-11-17'
 draft: false
 type: blogs
 systems_tags:
-- https
-- code
+- HTTPS
+- Code
 - nginx
-- cerbot
-- letsencrypt
+- Certbot
+- Let's Encrypt
 author: Sakthi Priyan H
 summary: using lets encrypt, certbot and configuring Nginx
 aliases:

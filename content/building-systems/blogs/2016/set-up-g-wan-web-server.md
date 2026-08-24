@@ -4,9 +4,9 @@ date: '2016-02-23'
 draft: false
 type: blogs
 systems_tags:
-- web-server
-- g-wan
-- setup
+- Web Server
+- G-WAN
+- Setup
 author: Sakthi Priyan H
 summary: to serve static website
 aliases:

@@ -4,11 +4,11 @@ date: '2015-06-03'
 draft: false
 type: blogs
 systems_tags:
-- junit
-- java
-- spring
-- testing
-- code
+- JUnit
+- Java
+- Spring
+- Testing
+- Code
 author: Sakthi Priyan H
 summary: How to test a Spring Application using JUnit? Explained with example test
   class.

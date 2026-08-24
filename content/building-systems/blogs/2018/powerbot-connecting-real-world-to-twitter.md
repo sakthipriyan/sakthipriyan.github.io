@@ -4,13 +4,13 @@ date: '2018-05-06'
 draft: false
 type: blogs
 systems_tags:
-- hardware
-- iot
+- Hardware
+- IoT
 - Python
-- code
-- circuit
-- raspberry-pi
-- twitter
+- Code
+- Circuit
+- Raspberry Pi
+- Twitter
 author: Sakthi Priyan H
 summary: via Raspberry Pi using GPIO pins
 aliases:

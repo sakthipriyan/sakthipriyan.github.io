@@ -5,10 +5,10 @@ draft: false
 type: blogs
 systems_tags:
 - AWS
-- s3
-- export
-- code
-- boto
+- S3
+- Export
+- Code
+- Boto
 - Python
 author: Sakthi Priyan H
 summary: using simple Python code.

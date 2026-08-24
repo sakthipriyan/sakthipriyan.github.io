@@ -4,10 +4,10 @@ date: '2016-01-11'
 draft: false
 type: blogs
 systems_tags:
-- raspberry-pi
-- setup
-- java
-- c4rpi
+- Raspberry Pi
+- Setup
+- Java
+- C4RPi
 author: Sakthi Priyan H
 summary: from micro SD card to JDK installation.
 aliases:

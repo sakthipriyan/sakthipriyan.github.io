@@ -4,12 +4,12 @@ date: '2018-11-24'
 draft: false
 type: blogs
 systems_tags:
-- spark
-- scala
-- shell
-- learning
-- bigdata
-- code
+- Spark
+- Scala
+- Shell
+- Learning
+- Big Data
+- Code
 author: Sakthi Priyan H
 summary: using spark shell in local
 aliases:
