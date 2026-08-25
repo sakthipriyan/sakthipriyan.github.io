@@ -6,9 +6,9 @@ description: "Technical insights, development tools, and engineering best practi
 # Section identity, read by the theme. Keeping this with the section (rather than
 # in the theme) is what lets the theme stay site-agnostic.
 taxonomy: "systems_tags"
-accentFrom: "#4f46e5"
-accentTo: "#4c1d95"
-accentInk: "#4f46e5"
+accentFrom: "#1e40af"
+accentTo: "#1e3a8a"
+accentInk: "#1e40af"
 onAccent: "#ffffff"
 ---
 
