@@ -15,6 +15,7 @@ youtube_id: "nK9tdBe5e-Q"
 youtube_url: "https://youtu.be/nK9tdBe5e-Q"
 duration: "14:27"
 platform: "YouTube"
+covers: why-beyond-india
 ---
 
 ## About This Video

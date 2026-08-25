@@ -14,14 +14,18 @@ onAccent: "#1a1408"
 # Curated landing. Presence of this key is what switches the section from the
 # grouped listing to the front-page layout; every field below is optional.
 landing:
+  # The doorway: one wide card above the featured six.
+  lead:
+    page: /building-wealth/start-here/
   # One curated list, most important first. Cards show each page's own
   # summary, so there is nothing to write twice.
   featured:
     - page: /building-wealth/books/the-global-indian-investor/
     - page: /building-wealth/tools/realvalue-portfolio/
     - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
-    - page: /building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-august-2026/
-    - page: /building-wealth/blogs/my-credit-card-stack-consolidating-to-3-banks-and-3-networks/
+    # Whichever edition is newest, so this does not go stale each month.
+    - topic: State Of The 1 Portfolio
+    - page: /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
     - page: /building-wealth/tools/realvalue-fx-engine/
   # Each format block leads with these, then fills with the newest.
   tools:

@@ -11,4 +11,5 @@ youtube_id: "9wyBw3ZaSws"
 youtube_url: "https://youtu.be/9wyBw3ZaSws"
 duration: "10:48"
 platform: "YouTube"
+covers: financial-tools
 ---

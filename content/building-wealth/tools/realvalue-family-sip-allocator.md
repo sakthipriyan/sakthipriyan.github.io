@@ -15,6 +15,7 @@ wealth_tags:
   - Portfolio Management
   - Rebalancing
   - SIP
+covers: family-sip-allocator
 ---
 
 ## Overview

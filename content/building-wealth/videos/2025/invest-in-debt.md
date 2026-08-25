@@ -12,4 +12,5 @@ youtube_id: "aopoC1my4M4" # Add YouTube Video ID here
 youtube_url: "https://youtu.be/aopoC1my4M4"
 duration: "08:59"
 platform: "YouTube"
+covers: invest-in-debt
 ---

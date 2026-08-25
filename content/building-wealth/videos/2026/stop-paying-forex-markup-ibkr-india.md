@@ -15,6 +15,7 @@ youtube_id: "fdQ1o7F9eMc"
 youtube_url: "https://youtu.be/fdQ1o7F9eMc"
 duration: "11:56"
 platform: "YouTube"
+covers: cut-forex-markup
 ---
 
 ## About This Video

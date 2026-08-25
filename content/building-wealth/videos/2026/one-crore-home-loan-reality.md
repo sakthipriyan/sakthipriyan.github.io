@@ -14,6 +14,7 @@ youtube_id: "nawWm1VOKMI"
 youtube_url: "https://www.youtube.com/watch?v=nawWm1VOKMI"
 duration: "07:54"
 platform: "YouTube"
+covers: 1-crore-home-loan
 ---
 
 ## About This Video

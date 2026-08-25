@@ -14,6 +14,7 @@ youtube_id: "FLlgRaUAG_o"
 youtube_url: "https://youtu.be/FLlgRaUAG_o"
 duration: "18:40"
 platform: "YouTube"
+covers: realvalue-sip-engine
 ---
 
 ## About This Video

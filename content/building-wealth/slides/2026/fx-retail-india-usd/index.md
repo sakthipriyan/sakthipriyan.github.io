@@ -15,6 +15,7 @@ wealth_tags:
   - International Investing
   - LRS
   - Remittance
+covers: cut-forex-markup
 ---
 
 <span style="

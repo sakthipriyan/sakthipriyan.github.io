@@ -11,4 +11,5 @@ youtube_id: "rcWgfcKUjIo"
 youtube_url: "https://youtu.be/rcWgfcKUjIo"
 duration: "14:36"
 platform: "YouTube"
+covers: emergency-fund
 ---

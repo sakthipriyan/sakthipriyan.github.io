@@ -12,6 +12,7 @@ wealth_tags:
   - Financial Planning
   - Inflation
   - SIP
+covers: 1-crore-in-10-years
 ---
 
 <span style="

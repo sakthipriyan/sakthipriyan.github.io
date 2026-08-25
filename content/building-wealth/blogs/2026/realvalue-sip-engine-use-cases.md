@@ -10,6 +10,7 @@ wealth_tags:
   - Retirement
   - SIP
 summary: "Discover real-world scenarios showing how to use the RealValue SIP Engine for retirement planning, education goals, house down payments, emergency funds, and more."
+covers: realvalue-sip-engine
 ---
 
 The [RealValue SIP Engine](/building-wealth/tools/realvalue-sip-engine/) is a powerful tool for investment planning. Here are practical use cases demonstrating how to leverage it for different financial goals.

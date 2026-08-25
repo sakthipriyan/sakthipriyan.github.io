@@ -12,4 +12,5 @@ youtube_id: "KQ-E1mWvMMs"
 youtube_url: "https://youtu.be/KQ-E1mWvMMs"
 duration: "12:53"
 platform: "YouTube"
+covers: manage-money-flows-2025
 ---

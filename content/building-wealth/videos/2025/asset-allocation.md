@@ -14,4 +14,5 @@ youtube_id: "mIHc2yV7nU0"
 youtube_url: "https://youtu.be/mIHc2yV7nU0"
 duration: "15:29"
 platform: "YouTube"
+covers: asset-allocation-rebalancing
 ---

@@ -14,4 +14,5 @@ youtube_id: "r_7t5RNQgtQ"
 youtube_url: "https://youtu.be/r_7t5RNQgtQ"
 duration: "09:32"
 platform: "YouTube"
+covers: invest-in-gold
 ---

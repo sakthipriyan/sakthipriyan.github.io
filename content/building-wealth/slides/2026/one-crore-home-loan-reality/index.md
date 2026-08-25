@@ -13,6 +13,7 @@ wealth_tags:
   - Home Loan
   - Inflation
   - Loans
+covers: 1-crore-home-loan
 ---
 
 <span style="

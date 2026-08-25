@@ -12,4 +12,5 @@ youtube_id: "xk6nQDPgRjw"
 youtube_url: "https://youtu.be/xk6nQDPgRjw"
 duration: "11:50"
 platform: "YouTube"
+covers: equity-index-funds
 ---
