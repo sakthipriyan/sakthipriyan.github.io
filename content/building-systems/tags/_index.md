@@ -1,5 +1,5 @@
 ---
-title: Tags
+title: Topics
 type: tags
 layout: terms
 ---
