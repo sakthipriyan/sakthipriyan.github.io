@@ -57,8 +57,6 @@ book; the posts below are the parts that changed after I wrote it.
 /building-wealth/books/the-global-indian-investor/
 {{< /subjects >}}
 
-{{< chapters "/building-wealth/books/the-global-indian-investor/" >}}
-
 {{< subjects >}}
 /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
 invest-in-nasdaq-100

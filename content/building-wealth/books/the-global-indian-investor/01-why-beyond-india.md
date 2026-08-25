@@ -9,6 +9,7 @@ draft: false
 wealth_tags:
   - International Investing
   - Portfolio Construction
+covers: why-beyond-india
 ---
 
 ## The World Has More Than One Market
