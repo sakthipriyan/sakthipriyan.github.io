@@ -10,6 +10,7 @@ youtube_id: "T36egt-O1k4"
 youtube_url: "https://youtu.be/T36egt-O1k4"
 duration: "25:42"
 platform: "YouTube"
+covers: st1p-2026-06
 ---
 
 ## About This Video

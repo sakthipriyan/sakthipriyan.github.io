@@ -8,6 +8,7 @@ summary: "Setup emergency fund using liquid/hybrid Mutual funds"
 wealth_tags:
   - Building Block
   - Emergency Fund
+covers: emergency-fund
 ---
 
 <section data-autoslide="2500">

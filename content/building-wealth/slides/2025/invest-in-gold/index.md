@@ -12,6 +12,7 @@ wealth_tags:
   - ETF
   - Gold
   - Mutual Funds
+covers: invest-in-gold
 ---
 
 <span style="

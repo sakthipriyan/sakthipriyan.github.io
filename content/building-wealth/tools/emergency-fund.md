@@ -10,5 +10,6 @@ summary: "Plan your emergency fund and calculate the timeline to reach your savi
 wealth_tags:
   - Building Block
   - Emergency Fund
+covers: emergency-fund
 ---
 

@@ -16,6 +16,7 @@ youtube_id: "XGzQRKJPcYM"
 youtube_url: "https://youtu.be/XGzQRKJPcYM"
 duration: "20:47"
 platform: "YouTube"
+covers: family-sip-allocator
 ---
 
 ## About This Video

@@ -9,6 +9,7 @@ wealth_tags:
   - Building Wealth
   - Equity
   - Index Funds
+covers: equity-index-funds
 ---
 
 <span style="

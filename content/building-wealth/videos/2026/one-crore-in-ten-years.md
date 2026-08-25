@@ -14,6 +14,7 @@ youtube_id: "h6Kbexp2whc"
 youtube_url: "https://youtu.be/h6Kbexp2whc"
 duration: "7:56"
 platform: "YouTube"
+covers: 1-crore-in-10-years
 ---
 
 ## About This Video

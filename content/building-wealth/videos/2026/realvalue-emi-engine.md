@@ -14,6 +14,7 @@ youtube_id: "54pc2SyETg0"
 youtube_url: "https://youtu.be/54pc2SyETg0"
 duration: "9:17"
 platform: "YouTube"
+covers: realvalue-emi-engine
 ---
 
 ## About This Video

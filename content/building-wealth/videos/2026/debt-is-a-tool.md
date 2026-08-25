@@ -14,6 +14,7 @@ youtube_id: "CC79fl-zFKY"
 youtube_url: "https://youtu.be/CC79fl-zFKY"
 duration: "15:13"
 platform: "YouTube"
+covers: debt-is-a-tool
 ---
 
 ## About This Video

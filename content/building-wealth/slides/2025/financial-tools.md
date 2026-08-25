@@ -10,6 +10,7 @@ js_tools:
 wealth_tags:
   - Building Wealth
   - Financial Tools
+covers: financial-tools
 ---
 <small style="
   display:inline-block;

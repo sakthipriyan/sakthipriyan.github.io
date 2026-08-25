@@ -11,6 +11,7 @@ wealth_tags:
   - Home Loan
   - Loans
 summary: "Discover real-world scenarios showing how to use the RealValue EMI Engine for home loans, car loans, personal loans, and understanding the true cost of debt with inflation-adjusted calculations."
+covers: realvalue-emi-engine
 ---
 
 The [RealValue EMI Engine](/building-wealth/tools/realvalue-emi-engine/) is designed to help you understand the real cost of debt by factoring in inflation. Here are practical use cases demonstrating how to use its three calculation modes for different loan scenarios.

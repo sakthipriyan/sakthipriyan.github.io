@@ -10,6 +10,7 @@ js_tools:
 wealth_tags:
   - Building Block
   - Money Flow
+covers: manage-money-flows-2025
 ---
 
 

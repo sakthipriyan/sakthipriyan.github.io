@@ -12,6 +12,7 @@ wealth_tags:
   - Building Block
   - Perpetual Rebalancing
   - SIP
+covers: asset-allocation-rebalancing
 ---
 
 <span style="

@@ -11,6 +11,7 @@ wealth_tags:
   - Building Block
   - Debt
   - Mutual Funds
+covers: invest-in-debt
 ---
 
 <span style="

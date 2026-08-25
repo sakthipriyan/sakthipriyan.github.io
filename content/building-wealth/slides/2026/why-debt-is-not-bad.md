@@ -11,6 +11,7 @@ wealth_tags:
   - Debt Management
   - Financial Planning
   - Loans
+covers: debt-is-a-tool
 ---
 
 <span style="

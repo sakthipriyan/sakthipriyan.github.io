@@ -13,6 +13,7 @@ wealth_tags:
   - Debt Management
   - EMI
   - Loans
+covers: realvalue-emi-engine
 ---
 
 ## About RealValue EMI Engine  
