@@ -8,3 +8,5 @@ build:
 sitemap:
   priority: 0.1
 ---
+
+Search every blog, book, slide, tool, and video in Building Wealth.

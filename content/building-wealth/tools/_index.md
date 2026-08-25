@@ -3,4 +3,4 @@ title: "Tools"
 type: tools
 ---
 
-Financial calculators and investment planning tools to help you build wealth systematically.
+Calculators for planning contributions, loans, and rebalancing.

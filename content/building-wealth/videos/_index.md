@@ -6,4 +6,4 @@ cascade:
 type: videos
 ---
 
-Watch video content covering various aspects of building wealth, from managing money flows to investment strategies and financial planning.
+Recorded explainers and walkthroughs on building wealth.

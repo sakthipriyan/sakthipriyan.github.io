@@ -6,4 +6,4 @@ cascade:
 type: blogs
 ---
 
-Investment insights, market analysis, and wealth building strategies.
+Long-form writing on investing, taxes, and portfolio construction.

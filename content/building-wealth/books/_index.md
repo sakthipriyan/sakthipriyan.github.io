@@ -1,7 +1,7 @@
 ---
 title: "Books"
-description: "Books on Building Wealth and Financial Planning"
+description: "Book-length guides on wealth building, published a chapter at a time."
 type: books
 ---
 
-Collection of books on wealth building, investing, and financial planning.
+Book-length guides on wealth building, published a chapter at a time.

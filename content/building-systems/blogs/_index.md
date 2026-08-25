@@ -6,4 +6,4 @@ cascade:
 type: blogs
 ---
 
-Building systems insights, tutorials, and best practices.
+Long-form writing on distributed systems, infrastructure, and engineering practice.
