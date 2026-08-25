@@ -1,7 +1,7 @@
 ---
 title: "Books"
-description: "Books on Building Systems"
+description: "Book-length guides on building systems, published a chapter at a time."
 type: books
 ---
 
-Collection of books on building systems topics.
+Book-length guides on building systems, published a chapter at a time.

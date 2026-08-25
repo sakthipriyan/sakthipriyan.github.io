@@ -2,8 +2,10 @@
 title: "About"
 date: 2025-12-25
 draft: false
-summary: "About the author and what this content covers."
+summary: "Who writes this, and the principles behind it."
 ---
+
+Who writes this, and the principles behind it.
 
 ## Author
 
