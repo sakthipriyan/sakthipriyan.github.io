@@ -1,11 +1,13 @@
 ---
 title: "Start here"
+# One word in the nav, beside eight other one-word entries.
+linkTitle: "Start"
 summary: "A reading order through everything here — where to begin, what to read next, and which tool to reach for."
 date: 2026-08-25
 ---
 
 There is no order to a blog. Posts arrive newest-first, which is the order I
-wrote them in, not the order they make sense in. This page is the second one.
+wrote them in, not the order they make sense in. This page is that second order.
 
 Each line below is a subject rather than a page. Where I have covered something
 as a post, a talk and a deck, all three are on the line — take whichever suits
