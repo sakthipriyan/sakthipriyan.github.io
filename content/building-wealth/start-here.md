@@ -6,12 +6,9 @@ summary: "Everything here, in the order it makes sense — from why compounding 
 date: 2026-08-25
 ---
 
-There is no order to a blog. Posts arrive newest-first, which is the order I
-wrote them in, not the order they make sense in. This page is that second order.
-
-Every published piece is below, once. Where I have covered something as a post,
-a talk and a deck, all three are on the same line — take whichever suits the
-twenty minutes you have.
+Newest-first is the order I wrote things in, not the order they make sense in.
+This is that second order — every published piece, once, with each format it
+exists in on the same line.
 
 ## Start with why
 
