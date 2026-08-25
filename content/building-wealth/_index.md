@@ -14,6 +14,9 @@ onAccent: "#1a1408"
 # Curated landing. Presence of this key is what switches the section from the
 # grouped listing to the front-page layout; every field below is optional.
 landing:
+  # The doorway: one wide card above the featured six.
+  lead:
+    page: /building-wealth/start-here/
   # One curated list, most important first. Cards show each page's own
   # summary, so there is nothing to write twice.
   featured:
