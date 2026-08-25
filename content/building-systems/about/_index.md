@@ -2,10 +2,10 @@
 title: "About"
 date: 2025-12-25
 draft: false
-summary: "Who writes this, and the principles behind it."
+summary: "Engineer in Chennai, 16 years building and running large systems. These are the notes — sharing what I learn, building in the open, and taking the wider community along for the journey."
 ---
 
-Who writes this, and the principles behind it.
+Engineer in Chennai, 16 years building and running large systems. These are the notes — sharing what I learn, building in the open, and taking the wider community along for the journey.
 
 ## Author
 

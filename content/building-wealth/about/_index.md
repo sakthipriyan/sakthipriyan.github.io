@@ -2,10 +2,10 @@
 title: "About"
 date: 2025-12-25
 draft: false
-summary: "Who writes this, and the principles behind it."
+summary: "Engineer in Chennai, 16 years building software. Investing since 2016, and writing down the reasoning — sharing what I learn, building open-source fintech tools, and taking the wider community along for the journey."
 ---
 
-Who writes this, and the principles behind it.
+Engineer in Chennai, 16 years building software. Investing since 2016, and writing down the reasoning — sharing what I learn, building open-source fintech tools, and taking the wider community along for the journey.
 
 ## Author
 
