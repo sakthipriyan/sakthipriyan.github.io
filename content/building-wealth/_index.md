@@ -14,14 +14,12 @@ onAccent: "#1a1408"
 # Curated landing. Presence of this key is what switches the section from the
 # grouped listing to the front-page layout; every field below is optional.
 landing:
-  # Evergreen: where a newcomer should begin.
-  startHere:
+  # One curated list, most important first. Cards show each page's own
+  # summary, so there is nothing to write twice.
+  featured:
     - page: /building-wealth/books/the-global-indian-investor/
-      note: "A practical guide to investing beyond India — LRS, brokers, Irish ETFs, and the tax that comes with them."
     - page: /building-wealth/tools/realvalue-portfolio/
     - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
-  # Current: what is worth attention now, changed as often as you like.
-  featured:
     - page: /building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-august-2026/
     - page: /building-wealth/blogs/my-credit-card-stack-consolidating-to-3-banks-and-3-networks/
     - page: /building-wealth/tools/realvalue-fx-engine/
