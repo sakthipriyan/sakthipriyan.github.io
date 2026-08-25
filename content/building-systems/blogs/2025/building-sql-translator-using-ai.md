@@ -13,6 +13,7 @@ systems_tags:
   - SQL Translation
 js_tools:
   - viz
+covers: sql-translator-ai-agents
 ---
 
 Originally presented as part of [Aqfer](https://aqfer.com/)'s internal tech talk.

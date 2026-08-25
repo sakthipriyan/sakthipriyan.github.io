@@ -8,6 +8,7 @@ summary: "How early financial decisions can create huge long-term opportunity co
 wealth_tags:
   - Long Term Growth
   - Personal Journey
+covers: how-i-missed-a-crore
 ---
 
 <span style="

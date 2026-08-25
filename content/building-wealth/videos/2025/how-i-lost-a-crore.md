@@ -11,4 +11,5 @@ youtube_id: "5k05KbCnU74"
 youtube_url: "https://youtu.be/5k05KbCnU74"
 duration: "14:48"
 platform: "YouTube"
+covers: how-i-missed-a-crore
 ---

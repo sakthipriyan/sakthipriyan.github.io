@@ -14,6 +14,11 @@ build:
 enableGitInfo: true
 
 params:
+  # When one subject exists in several formats, the earliest of these speaks
+  # for the group: a deck accompanies a talk rather than explaining it, and
+  # usually predates its recording by a day with a terser summary, so
+  # publication order picks the wrong one.
+  formatPrecedence: [blogs, videos, books, tools, slides]
   description: "Systems that Scale. Wealth that Compounds."
   # Identity used by the theme's hero and footer. The theme itself carries no
   # personal data -- everything here belongs to this site.

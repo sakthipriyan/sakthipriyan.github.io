@@ -13,4 +13,5 @@ youtube_id: "O555X0CSIzs"
 youtube_url: "https://youtu.be/O555X0CSIzs"
 duration: "41:39"
 platform: "YouTube"
+covers: invest-in-nasdaq-100
 ---

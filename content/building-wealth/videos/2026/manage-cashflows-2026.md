@@ -11,6 +11,7 @@ youtube_id: "Hx7yVz48klI"
 youtube_url: "https://youtu.be/Hx7yVz48klI"
 duration: "17:42"
 platform: "YouTube"
+covers: managing-money-flows-2026
 ---
 
 ## About This Video

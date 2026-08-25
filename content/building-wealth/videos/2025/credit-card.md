@@ -11,4 +11,5 @@ youtube_id: IxTZGgGLHAk
 youtube_url: https://youtu.be/IxTZGgGLHAk
 duration: 13:05
 platform: YouTube
+covers: credit-cards-usage-risks
 ---
