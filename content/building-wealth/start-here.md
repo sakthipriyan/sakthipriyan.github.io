@@ -55,6 +55,11 @@ book; the posts below are the parts that changed after I wrote it.
 
 {{< subjects >}}
 /building-wealth/books/the-global-indian-investor/
+{{< /subjects >}}
+
+{{< chapters "/building-wealth/books/the-global-indian-investor/" >}}
+
+{{< subjects >}}
 /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
 invest-in-nasdaq-100
 /building-wealth/blogs/why-rule-based-global-multi-asset-portfolio-beats-a-single-multicap-or-flexicap-fund/
