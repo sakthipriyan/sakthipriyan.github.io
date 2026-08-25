@@ -2,14 +2,14 @@
 title: "About"
 date: 2025-12-25
 draft: false
-summary: "Who writes this, and the principles behind it."
+summary: "Engineer in Chennai, 17 years building software. Investing since 2016, and writing down the reasoning — sharing what I learn, building open-source fintech tools, and taking the wider community along for the journey."
 ---
 
-Who writes this, and the principles behind it.
+Engineer in Chennai, 17 years building software. Investing since 2016, and writing down the reasoning — sharing what I learn, building open-source fintech tools, and taking the wider community along for the journey.
 
 ## Author
 
-- Based in Chennai; 16+ years building complex software systems and products
+- Based in Chennai; 17+ years building complex software systems and products
 - Long-term investor since 2016; disciplined, analytical, process-first
 - Portfolio evolved from liquid/ELSS/small-cap to rule-based, global, multi-asset
 - International exposure via LRS (ETFs) and domestic funds (Nasdaq 100, etc.)

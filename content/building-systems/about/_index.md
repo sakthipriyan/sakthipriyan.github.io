@@ -2,14 +2,14 @@
 title: "About"
 date: 2025-12-25
 draft: false
-summary: "Who writes this, and the principles behind it."
+summary: "Engineer in Chennai, 17 years building and running large systems. These are the notes — sharing what I learn, building in the open, and taking the wider community along for the journey."
 ---
 
-Who writes this, and the principles behind it.
+Engineer in Chennai, 17 years building and running large systems. These are the notes — sharing what I learn, building in the open, and taking the wider community along for the journey.
 
 ## Author
 
-- Based in Chennai; 16+ years building complex software systems and products
+- Based in Chennai; 17+ years building complex software systems and products
 - Lifelong passion for building systems that solve real-world problems
 - Programming journey began at age 11; deep curiosity and love for technology
 - Experience across Big Data Systems, Distributed Systems, API Services, Web/Mobile apps
