@@ -11,6 +11,7 @@ js_tools:
 wealth_tags:
   - Building Block
   - Money Flow
+covers: managing-money-flows-2026
 ---
 
 <span style="

@@ -15,6 +15,7 @@ wealth_tags:
   - Mutual Funds
   - Portfolio
  
+covers: red-days-productive-days
 ---
 
 <span style="

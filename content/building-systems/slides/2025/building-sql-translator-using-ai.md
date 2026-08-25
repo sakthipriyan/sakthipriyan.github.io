@@ -14,6 +14,7 @@ systems_tags:
   - BigQuery
   - IR
   - SQL Translation
+covers: sql-translator-ai-agents
 ---
 
 ## Building SQL Translator 

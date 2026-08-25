@@ -14,6 +14,7 @@ youtube_id: "-_B5k_F2FpE"
 youtube_url: "https://youtu.be/-_B5k_F2FpE"
 duration: "16:50"
 platform: "YouTube"
+covers: red-days-productive-days
 ---
 
 ## About This Video

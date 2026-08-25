@@ -11,6 +11,7 @@ wealth_tags:
   - LRS
   - NASDAQ 100
 summary: "Options to invest in the NASDAQ 100 index from India — covering mutual funds, Indian ETFs, and the LRS route via Interactive Brokers — along with a comparison of Indian apps vs IBKR with UCITS ETFs, buying cost, and taxation."
+covers: invest-in-nasdaq-100
 ---
 
 > **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**

@@ -10,6 +10,7 @@ js_tools:
  - gsap
 wealth_tags:
   - Credit Card
+covers: credit-cards-usage-risks
 ---
 
 <span style="

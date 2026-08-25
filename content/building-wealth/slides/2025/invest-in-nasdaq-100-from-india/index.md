@@ -9,6 +9,7 @@ wealth_tags:
   - Advanced Investor
   - International Investing
   - NASDAQ 100
+covers: invest-in-nasdaq-100
 ---
 
 <section data-autoslide="2500">
