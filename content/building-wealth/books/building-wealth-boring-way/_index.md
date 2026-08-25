@@ -7,6 +7,15 @@ date: 2025-11-04
 author: "Sakthi Priyan H"
 type: books
 draft: true
+# Draft applies to this page only -- Hugo resolves it before cascade, so a
+# cascaded `draft` would not reach the chapters. These build options do
+# cascade, and keep every chapter out of the output, the sitemap and the
+# search index until the book is ready. Delete this block together with the
+# `draft` above when publishing.
+cascade:
+  build:
+    render: never
+    list: never
 wealth_tags:
   - Building Wealth
   - Personal Finance
