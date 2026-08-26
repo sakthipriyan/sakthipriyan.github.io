@@ -20,20 +20,28 @@ landing:
   # One curated list, most important first. Cards show each page's own
   # summary, so there is nothing to write twice.
   featured:
-    - page: /building-wealth/books/the-global-indian-investor/
-    - page: /building-wealth/tools/realvalue-portfolio/
-    - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
     # Whichever edition is newest, so this does not go stale each month.
     - topic: State Of The 1 Portfolio
-    - page: /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
-    - page: /building-wealth/tools/realvalue-fx-engine/
-  # Each format block leads with these, then fills with the newest.
+    - page: /building-wealth/books/the-global-indian-investor/
+    - page: /building-wealth/tools/realvalue-portfolio/
+    - page: /building-wealth/tools/xfina/
+    - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
+    - page: /building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/
+  # Each format block leads with these, then fills with the newest. Anything
+  # already shown further up the page is skipped, so a pick that also appears
+  # in Featured quietly gives way to the next candidate.
   tools:
     featured:
+      - page: /building-wealth/tools/realvalue-family-sip-allocator/
+      - page: /building-wealth/tools/realvalue-fx-engine/
       - page: /building-wealth/tools/realvalue-sip-engine/
   videos:
     featured:
-      - page: /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
+      # Recency buries this one, and it is the reason for everything else.
+      - page: /building-wealth/videos/how-i-missed-a-crore/
+  slides:
+    featured:
+      - page: /building-wealth/slides/credit-cards-usage-risks-smart-practices/
   latestCount: 6
   topicsCount: 9
 ---
