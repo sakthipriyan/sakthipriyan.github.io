@@ -9,6 +9,14 @@ taxonomy: "wealth_tags"
 accentFrom: "#f5c542"
 accentTo: "#d4af37"
 accentInk: "#7a5c12"
+
+# Dark. The derivation in the theme lands on these anyway; naming them makes
+# them this section's decision rather than a formula's, and editable without
+# reasoning about oklch. Ink is the brightest, then the line, then the fill --
+# a fill has to stay dark enough for light text to sit on it.
+accentInkDark: "#e0b024"      # kind labels, hover titles, kickers
+accentLineDark: "#966f04"     # card left borders, rules, the footer line
+accentSurfaceDark: "#865f04"  # badges, buttons, pills
 onAccent: "#1a1408"
 
 # Curated landing. Presence of this key is what switches the section from the
