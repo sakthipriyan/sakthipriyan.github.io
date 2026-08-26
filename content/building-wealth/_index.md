@@ -20,11 +20,11 @@ landing:
   # One curated list, most important first. Cards show each page's own
   # summary, so there is nothing to write twice.
   featured:
+    # Whichever edition is newest, so this does not go stale each month.
+    - topic: State Of The 1 Portfolio
     - page: /building-wealth/books/the-global-indian-investor/
     - page: /building-wealth/tools/realvalue-portfolio/
     - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
-    # Whichever edition is newest, so this does not go stale each month.
-    - topic: State Of The 1 Portfolio
     - page: /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
     - page: /building-wealth/tools/realvalue-fx-engine/
   # Each format block leads with these, then fills with the newest.
