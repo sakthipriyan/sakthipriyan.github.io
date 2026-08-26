@@ -1,5 +1,5 @@
 ---
-title: "Start here"
+title: "Start Here"
 # One word in the nav, beside eight other one-word entries.
 linkTitle: "Start"
 summary: "Everything here, in the order it makes sense — from why compounding matters to filing the tax on it."
