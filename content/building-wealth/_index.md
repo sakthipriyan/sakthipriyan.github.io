@@ -27,13 +27,21 @@ landing:
     - page: /building-wealth/tools/xfina/
     - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
     - page: /building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/
-  # Each format block leads with these, then fills with the newest.
+  # Each format block leads with these, then fills with the newest. Anything
+  # already shown further up the page is skipped, so a pick that also appears
+  # in Featured quietly gives way to the next candidate.
   tools:
     featured:
+      - page: /building-wealth/tools/realvalue-family-sip-allocator/
+      - page: /building-wealth/tools/realvalue-fx-engine/
       - page: /building-wealth/tools/realvalue-sip-engine/
   videos:
     featured:
-      - page: /building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/
+      # Recency buries this one, and it is the reason for everything else.
+      - page: /building-wealth/videos/how-i-missed-a-crore/
+  slides:
+    featured:
+      - page: /building-wealth/slides/credit-cards-usage-risks-smart-practices/
   latestCount: 6
   topicsCount: 9
 ---
