@@ -20,10 +20,46 @@ This file contains instructions and context for any AI agent operating within th
 - **Citation Stability:** Indian government and tax portals often have fragile links that expire or change. When citing rules, thresholds, or statutory relaxations, prefer linking to stable, high-quality sources like ClearTax or established financial newspapers (e.g., Business Standard, Economic Times, TaxGuru).
 - **External Links:** Ensure external links actually resolve (verify no 404s) before committing them to a post.
 
-## 5. Agent Workflow & Lifecycle
+## 5. Isolation: One Worktree Per Task
+
+Several agents work these repositories at once -- Claude Code sessions and
+Antigravity, sometimes within minutes of each other. An agent that edits the main
+checkout directly collides with whatever else is in flight, and the loser is
+whoever commits second. Isolation is not optional.
+
+- **Start every task in a fresh worktree.** Before editing a single file, create
+  one: `git worktree add .claude/worktrees/<short-name> -b <branch> origin/main`.
+  Branch from `origin/main`, never from whatever the main checkout happens to have
+  checked out -- that is somebody else's work in progress.
+- **Never edit the main checkout.** The repository root is a shared reading room,
+  not a desk. Treat a dirty main checkout as another agent's uncommitted work:
+  leave it alone, do not stash it, do not commit it, do not switch its branch.
+- **Look before you start.** `git worktree list` in *both* repositories shows what
+  is already in flight. If a live branch touches the same file you are about to
+  touch -- `assets/css/style.css` is the usual flashpoint -- say so up front
+  rather than discovering it as a conflict later.
+- **`.claude/` is gitignored here,** so worktrees never show in `git status` and
+  cannot be committed by accident. hugo-continuum does not ignore it; add
+  `.claude/` to that repo's `.git/info/exclude` (local, never committed) instead.
+- **Theme work needs a second worktree.** Layout, partial and CSS changes live in
+  hugo-continuum, so create a matching worktree there and point this site's
+  `config/development/module.yaml` at *that worktree's* absolute path -- not at
+  the sibling checkout, which another agent is likely using.
+- **Clean up when the PR merges:** `git worktree remove .claude/worktrees/<name>`
+  and delete the branch. A worktree left lying around reads as work in progress.
+
+### Dev servers
+- **Never assume port 1313.** Another session is usually already there. Pick an
+  unused port (`hugo server -D --port 13NN`) and say which one you used.
+- **Stop the server when the task ends.** A forgotten `hugo server` blocks the
+  port for every later session, and a forgotten `npm run dev` can sit for weeks.
+- **Never kill a server you did not start** without asking -- it is probably
+  serving another agent's preview.
+
+## 6. Agent Workflow & Lifecycle
 - **Branching & PRs:** All work must be done via a separate Pull Request. Direct commits to `main` are restricted.
 - **Local Development:** Locally, Hugo runs in continuous mode (`hugo server -D`) and files are typically edited manually via Zed. Keep this in mind when discussing previewing changes.
-- **Theme Lives Elsewhere:** The `continuum` theme is a separate repository ([hugo-continuum](https://github.com/sakthipriyan/hugo-continuum)) consumed as a Hugo Module -- there is no `themes/` directory here. Layout, partial and CSS changes belong in that repo, not this one. To work on both at once, copy `config/development/module.yaml.example` to `config/development/module.yaml` and point it at a local checkout.
+- **Theme Lives Elsewhere:** The `continuum` theme is a separate repository ([hugo-continuum](https://github.com/sakthipriyan/hugo-continuum)) consumed as a Hugo Module -- there is no `themes/` directory here. Layout, partial and CSS changes belong in that repo, not this one. To work on both at once, copy `config/development/module.yaml.example` to `config/development/module.yaml` and point it at your theme worktree (see section 5).
 - **Merging:** PRs are approved via GitHub checks. When the user explicitly requests to merge, always use a **Squash Merge** to keep the `main` history clean.
 - **Deployment:** Upon merging, GitHub Actions will automatically build the Hugo site and publish it via GitHub Pages.
 - **Content Syndication:** Post-merging, generate promotional social media content to distribute the new article link. Create posts tailored for **Twitter**, **YouTube** (if a video applies), and **Reddit**. If the article falls under the `building-systems` category, additionally draft a short **LinkedIn** article/post.
