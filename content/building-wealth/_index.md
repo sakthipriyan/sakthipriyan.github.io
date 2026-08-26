@@ -26,14 +26,14 @@ landing:
     - page: /building-wealth/tools/realvalue-portfolio/
     - page: /building-wealth/tools/xfina/
     - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
-    - page: /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
+    - page: /building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/
   # Each format block leads with these, then fills with the newest.
   tools:
     featured:
       - page: /building-wealth/tools/realvalue-sip-engine/
   videos:
     featured:
-      - page: /building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
+      - page: /building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/
   latestCount: 6
   topicsCount: 9
 ---
