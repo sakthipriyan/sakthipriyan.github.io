@@ -14,3 +14,5 @@ github.com/sakthipriyan/hugo-continuum v0.11.0 h1:cVeYLQMWlRf4Re9N2LjiRPLWJVEUum
 github.com/sakthipriyan/hugo-continuum v0.11.0/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
 github.com/sakthipriyan/hugo-continuum v0.12.0 h1:5VBueA3O2LFrPo1NDa6m+AgOUZXdKeMD7Yse6yxtXRY=
 github.com/sakthipriyan/hugo-continuum v0.12.0/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
+github.com/sakthipriyan/hugo-continuum v0.13.0 h1:r71qx8rxGA6u9SrZikQjAyh6oyslV/gXFNaSJkW396w=
+github.com/sakthipriyan/hugo-continuum v0.13.0/go.mod h1:Sk5iJmICMNsMi5EPo8/e0MU6KrcT+pRIY50FoydyulM=
