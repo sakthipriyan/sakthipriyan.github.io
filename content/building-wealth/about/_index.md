@@ -2,10 +2,10 @@
 title: "About"
 date: 2025-12-25
 draft: false
-summary: "Engineer in Chennai, 17 years building software. Investing since 2016, and writing down the reasoning — sharing what I learn, building open-source fintech tools, and taking the wider community along for the journey."
+summary: "Engineer in Chennai with 17 years of experience building distributed software systems. I've been investing since 2016 and use this site to document my reasoning, share what I learn, and build open-source tools around personal finance along the way."
 ---
 
-Engineer in Chennai, 17 years building software. Investing since 2016, and writing down the reasoning — sharing what I learn, building open-source fintech tools, and taking the wider community along for the journey.
+Engineer in Chennai with 17 years of experience building distributed software systems. I've been investing since 2016 and use this site to document my reasoning, share what I learn, and build open-source tools around personal finance along the way.
 
 ## Author
 
