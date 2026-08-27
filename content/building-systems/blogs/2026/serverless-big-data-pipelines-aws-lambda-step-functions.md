@@ -13,7 +13,7 @@ systems_tags:
   - Lambda
   - Serverless
 js_tools:
-  - viz
+  - d2
 ---
 
 ## The Problem
@@ -68,59 +68,48 @@ Once the Executors finish their stage, the Step Function cycles back to the Driv
 
 The diagram below shows the complete state machine flow:
 
-```dot
-digraph StepFunctionsWorkflow {
-    rankdir=TB;
-    bgcolor=transparent;
-    node [shape=box; style=filled;];
-
-    // Lambda Functions Cluster
-    subgraph cluster_Lambdas {
-        label = "AWS Lambda Functions";
-        style = filled;
-        color = yellow;
-
-        DriverLambda [label="Lambda Driver (2GB)"; color=lightyellow;];
-        ExecutorLambda [label="Lambda Executor (10GB)"; color=lightyellow;];
-    }
-
-    // Step Functions Cluster
-    subgraph cluster_AWS_Step_Functions {
-        label = "AWS Step Functions";
-        style = filled;
-        color = "#D4EDDA";
-
-        Start [label="Start"; shape=oval];
-        RunDriver [label="Invoke Driver (Task)"];
-        Choice [label="Choice"; shape=diamond; color=lightblue];
-        Wait [label="Sleep (Wait)"; color="#FAFAD2"];
-        RunExecutorsMap [label="Run Executors (Map)\n(MaxConcurrency = N)"];
-        InvokeExecutor [label="Invoke Executor (Tasks)"];
-        Succeed [label="Succeed"; color="#2DC13F"; shape=oval];
-        Fail [label="Fail"; color="#FF3131"; shape=oval];
-        End [shape=oval];
-
-        Start -> RunDriver;
-        RunDriver -> Choice [label=" On Complete"];
-
-        Choice -> RunExecutorsMap [label=" run_executors"];
-        Choice -> RunDriver [label=" run_driver"];
-        Choice -> Wait [label=" sleep"];
-        Choice -> Succeed [label=" succeed"];
-        Choice -> Fail [label=" fail"];
-
-        Wait -> RunDriver;
-        RunExecutorsMap -> InvokeExecutor;
-        InvokeExecutor -> RunExecutorsMap;
-        RunExecutorsMap -> RunDriver [label=" On Complete"];
-        Fail -> End;
-        Succeed -> End;
-    }
-
-    // Data flow
-    RunDriver -> DriverLambda;
-    InvokeExecutor -> ExecutorLambda;
+```d2
+vars: {
+  d2-config: {
+    layout-engine: dagre
+  }
 }
+
+direction: down
+
+lambdas: AWS Lambda Functions {
+  driver: "Lambda Driver (2GB)"
+  executor: "Lambda Executor (10GB)"
+}
+
+sfn: AWS Step Functions {
+  start: Start { shape: oval }
+  run_driver: "Invoke Driver (Task)"
+  choice: Choice { shape: diamond }
+  wait: "Sleep (Wait)"
+  map: "Run Executors (Map)\n(MaxConcurrency = N)"
+  invoke: "Invoke Executor (Tasks)"
+  succeed: Succeed { shape: oval }
+  fail: Fail { shape: oval }
+  end: End { shape: oval }
+
+  start -> run_driver
+  run_driver -> choice: On Complete
+  choice -> map: run_executors
+  choice -> run_driver: run_driver
+  choice -> wait: sleep
+  choice -> succeed: succeed
+  choice -> fail: fail
+  wait -> run_driver
+  map -> invoke
+  invoke -> map
+  map -> run_driver: On Complete
+  fail -> end
+  succeed -> end
+}
+
+sfn.run_driver -> lambdas.driver
+sfn.invoke -> lambdas.executor
 ```
 
 ## Overcoming State and Networking Limitations
