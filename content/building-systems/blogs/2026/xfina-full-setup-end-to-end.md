@@ -63,35 +63,14 @@ Rust compiles to WebAssembly, which made it possible to reuse the same parsing l
 
 ```d2
 core: Xfina Core {
-  style.fill: "#764ba2"
-  style.font-color: white
   label: "Xfina Core (Rust)\nParsers · Models · Validation"
 }
 
-cli: CLI\n(cargo install xfina) {
-  style.fill: "#764ba2"
-  style.font-color: white
-}
-
-rustlib: Rust Library\n(crates.io) {
-  style.fill: "#764ba2"
-  style.font-color: white
-}
-
-wasm: WASM Module\n(npm) {
-  style.fill: "#764ba2"
-  style.font-color: white
-}
-
-pylib: Python Library\n(PyPI) {
-  style.fill: "#764ba2"
-  style.font-color: white
-}
-
-webapp: Web App\n(GitHub Pages) {
-  style.fill: "#764ba2"
-  style.font-color: white
-}
+cli: CLI\n(cargo install xfina)
+rustlib: Rust Library\n(crates.io)
+wasm: WASM Module\n(npm)
+pylib: Python Library\n(PyPI)
+webapp: Web App\n(GitHub Pages)
 
 core -> cli: Clap
 core -> rustlib: crate API
