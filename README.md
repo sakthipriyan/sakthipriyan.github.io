@@ -48,6 +48,17 @@ To pull in a new published version of the theme:
 
 ```bash
 hugo mod get -u github.com/sakthipriyan/hugo-continuum
+hugo mod tidy
 ```
+
+`hugo mod get` only ever adds hashes to `go.sum`; it never removes the ones it
+supersedes. Without the second line every bump leaves its predecessor behind —
+this is how ten versions accumulated between v0.5.1 and v0.15.0.
+
+Not `go mod tidy`. Go finds dependencies by reading `import` statements in Go
+source and this site has none, the theme being imported through
+`module.imports` in `config.yaml`. It reads the require as unused and deletes
+it, leaving a site with no theme. The `// indirect` marker on that require is
+correct for the same reason.
 
 > **Note:** You don't need to build manually anymore. Pushing to `main` (via a PR) triggers the CI pipeline which builds and deploys automatically.
