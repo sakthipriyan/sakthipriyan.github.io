@@ -14,7 +14,7 @@ wealth_tags:
   - Remittance
 summary: "A step-by-step walkthrough of executing a live INR-to-USD forex transaction using FX Retail via Bharat Connect (BHIM), completing the remittance on ICICI Bank Money2World, and investing in an Irish ETF on IBKR"
 js_tools:
-  - viz
+  - d2
 ---
 
 > **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
@@ -37,48 +37,67 @@ When remitting money abroad, Indian investors face a persistent trade-off:
 
 ## The Hybrid Flow
 
-```dot
-digraph HybridFXFlow {
-  rankdir=TB;
-  bgcolor=transparent;
-  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=12];
-  edge [fontname="Arial", fontsize=11];
-
-  subgraph cluster_rate {
-    label="① Rate Locking — FX Retail + Bharat Connect + BHIM App";
-    style="rounded,bold";
-    color="#a0c4ff";
-    BHIM [label="BHIM App\nBills & recharges > Forex", fillcolor="#dbeafe"];
-    FXRetail [label="FX Retail (RBI / CCIL)\nBank Spread: ₹0.20/USD", fillcolor="#bfdbfe"];
-    Deal [label="Deal Confirmed @ ₹95.105/USD", shape=note, fillcolor="#fffbea"];
-    { rank=same; BHIM; FXRetail; Deal; }
-    BHIM -> FXRetail -> Deal;
+```d2
+vars: {
+  d2-config: {
+    pad: 20
   }
-
-  subgraph cluster_remittance {
-    label="② Wire Transfer — ICICI Money2World";
-    style="rounded,bold";
-    color="#f4a261";
-    M2W [label="Money2World\nDefault Bank Rate: ₹96.54/USD", fillcolor="#fde8d8"];
-    TradeNo [label="Apply FX-Retail Trade No.\nRate Updated: ₹95.105/USD", fillcolor="#fef3c7"];
-    Wire [label="OTP → Wire Initiated → Completed", fillcolor="#fde8d8"];
-    { rank=same; M2W; TradeNo; Wire; }
-    M2W -> TradeNo -> Wire;
-  }
-
-  subgraph cluster_invest {
-    label="③ Investment — IBKR";
-    style="rounded,bold";
-    color="#b9fbc0";
-    IBKR [label="USD Credited in IBKR", fillcolor="#d1fae5"];
-    Order [label="Buy ANAU (Nasdaq 100 UCITS ETF)", fillcolor="#a7f3d0"];
-    { rank=same; IBKR; Order; }
-    IBKR -> Order;
-  }
-
-  Deal -> TradeNo [style=dashed, label=" Trade No. via SMS/Email"];
-  Wire -> IBKR;
 }
+
+grid-columns: 1
+
+classes: {
+  n: {
+    style: {
+      border-radius: 6
+      stroke-width: 1
+      font-size: 15
+    }
+  }
+  group: {
+    grid-gap: 40
+    style: {
+      border-radius: 8
+      stroke-width: 2
+      font-size: 16
+    }
+  }
+}
+
+RateLocking: "① Rate Locking — FX Retail + Bharat Connect + BHIM App" {
+  class: group
+  grid-columns: 3
+
+  BHIM: "BHIM App\nBills & recharges > Forex" { class: n }
+  FXRetail: "FX Retail (RBI / CCIL)\nBank Spread: ₹0.20/USD" { class: n }
+  Deal: "Deal Confirmed @ ₹95.105/USD" { class: n }
+
+  BHIM -> FXRetail -> Deal
+}
+
+WireTransfer: "② Wire Transfer — ICICI Money2World" {
+  class: group
+  grid-columns: 3
+
+  M2W: "Money2World\nDefault Bank Rate: ₹96.54/USD" { class: n }
+  TradeNo: "Apply FX-Retail Trade No.\nRate Updated: ₹95.105/USD" { class: n }
+  Wire: "OTP → Wire Initiated → Completed" { class: n }
+
+  M2W -> TradeNo -> Wire
+}
+
+InvestmentBlock: "③ Investment — IBKR" {
+  class: group
+  grid-columns: 2
+
+  IBKR: "USD Credited in IBKR" { class: n }
+  Order: "Buy ANAU (Nasdaq 100 UCITS ETF)" { class: n }
+
+  IBKR -> Order
+}
+
+RateLocking.Deal -> WireTransfer.TradeNo: "Trade No. via SMS/Email" { style.stroke-dash: 5 }
+WireTransfer.Wire -> InvestmentBlock.IBKR
 ```
 
 > The key insight: the FX rate is locked on Bharat Connect at the **public bank spread level @ 20p/USD, but the bank executing the actual wire can be a private bank with faster online remittance.**
