@@ -2,7 +2,7 @@
 title: "Tracking XIRR - Using RealValue Portfolio"
 subtitle: "How to track the real returns of your global investments alongside your domestic portfolio."
 type: "books"
-chapter: 11
+chapter: 12
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true

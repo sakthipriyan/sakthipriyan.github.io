@@ -2,7 +2,7 @@
 title: "Taxation"
 subtitle: "Capital gains, dividends, and tax treaty benefits for Indian investors holding Irish ETFs."
 type: "books"
-chapter: 8
+chapter: 9
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true

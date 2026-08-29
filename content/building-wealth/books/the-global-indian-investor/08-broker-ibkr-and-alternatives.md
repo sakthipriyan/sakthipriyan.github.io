@@ -2,10 +2,10 @@
 title: "Broker - IBKR and Alternatives"
 subtitle: "Why Interactive Brokers is the go-to choice for Indian investors and what alternatives exist."
 type: "books"
-chapter: 6
+chapter: 8
 date: 2026-04-25
 author: "Sakthi Priyan H"
-draft: true
+draft: false
 wealth_tags:
   - IBKR
 ---
@@ -71,6 +71,13 @@ These platforms primarily offer US-listed securities (not European exchange-list
 
 **INDmoney / Vested**: For investors wanting US direct stocks or US-listed ETFs with minimal setup. Not suitable for Irish ETF investing.
 
-## TODO
-- Add IBKR account opening step-by-step
-- Verify Irish ETF access on ICICI Direct Global and Paasa
+## Opening an IBKR Direct Account
+
+Getting started with IBKR Direct is relatively straightforward for Indian residents:
+1. **Sign Up**: Visit `ibkr.com/ind` to begin the application.
+2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a "Cash" account initially. You can upgrade to a Margin account later if needed.
+3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
+4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
+5. **Funding**: Once approved, use the LRS methods discussed in earlier chapters to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
+
+*Note: Both ICICI Direct Global and Paasa operate on IBKR infrastructure. While ICICI Direct Global offers access to European exchanges, always verify specific ETF availability and commission structures on intermediary platforms before funding.*

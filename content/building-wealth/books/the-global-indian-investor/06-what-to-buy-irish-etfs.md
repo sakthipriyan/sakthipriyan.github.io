@@ -257,7 +257,8 @@ These paired funds track the **exact same underlying indices**, but differ entir
 | **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
 | **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
 | **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
-| **FTSE All-World** | Vanguard Total World Stock ETF (**VT**) | Vanguard FTSE All-World UCITS ETF (USD) Accumulating (**VWRA**) |
+| **Global All Cap** | Vanguard Total World Stock ETF (**VT**) | SPDR MSCI ACWI IMI UCITS ETF (**SPYI** / **IMID**) |
+| **FTSE All-World** | - | Vanguard FTSE All-World UCITS ETF (**VWRA**) |
 
 ## Key Takeaways
 
