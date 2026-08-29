@@ -92,11 +92,12 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 
 For investors seeking the absolute lowest long-term cost and full market control, opening an account directly with an international prime broker is the ultimate destination. The setup overhead is more or less the same as Level 1, but taxation filing and LRS must be taken care of by the investor themselves.
 
-| International Prime Broker | European ETF Access (Non-US Persons) |
-| :--- | :--- |
-| **[Interactive Brokers](https://www.interactivebrokers.co.in/)** | ✅ Yes |
-| **[Saxo Bank](https://www.home.saxo/)** | ✅ Yes |
-| **[Swissquote](https://en.swissquote.com/)** | ✅ Yes |
+| International Prime Broker | Domicile | European ETF Access |
+| :--- | :--- | :--- |
+| **[Charles Schwab](https://international.schwab.com/)** | United States | ❌ No |
+| **[Interactive Brokers](https://www.interactivebrokers.co.in/)** | United States | ✅ Yes |
+| **[Saxo Bank](https://www.home.saxo/)** | Denmark | ✅ Yes |
+| **[Swissquote](https://en.swissquote.com/)** | Switzerland | ✅ Yes |
 
 
 ### Interactive Brokers (IBKR Direct)
