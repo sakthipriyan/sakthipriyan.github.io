@@ -26,13 +26,13 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 **The critical limitation**: Because their backend API infrastructure is fundamentally designed around US clearinghouses, these platforms are traditionally confined entirely to offering US-listed securities. **You cannot purchase a true Irish-domiciled UCITS ETF listed on the LSE through these platforms.** 
 
 
-| Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) | GIFT City Entity |
-| :--- | :--- | :--- | :--- | :--- |
-| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No | ❌ No |
-| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No | ❌ No |
-| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No | ❌ No | ❌ No |
-| **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No | ❌ No |
-| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No | ❌ No |
+| Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) |
+| :--- | :--- | :--- | :--- |
+| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No |
+| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No |
+| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No | ❌ No |
+| **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No |
+| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No |
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
@@ -47,15 +47,13 @@ A specialized subset of platforms uses Interactive Brokers (IBKR) as their under
 
 Examples of these domestic intermediaries include:
 
-| Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) | GIFT City Entity |
-| :--- | :--- | :--- | :--- | :--- |
-| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
-| **[India INX GA](https://www.indiainxga.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ✅ Yes |
-| **[Kotak Securities (Neo)](https://www.kotakneo.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
-| **[MoneyIsle (TradeCross)](https://moneyisle.in/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
-| **[OmniScience Capital](https://www.omnisciencecapital.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
-| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
-| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ✅ Yes |
+| Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) |
+| :--- | :--- | :--- | :--- |
+| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[Kotak Securities (Neo)](https://www.kotakneo.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[OmniScience Capital](https://www.omnisciencecapital.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 
 *\*Note: While IBKR's architecture allows US persons to purchase European UCITS ETFs, doing so subjects the US taxpayer to highly punitive PFIC (Passive Foreign Investment Company) taxation. For Non-US persons (Indian residents), however, it is highly tax-efficient.*
 
@@ -77,9 +75,15 @@ Gujarat International Finance Tec-City (GIFT City) has emerged as a strategic sa
 
 For Indian residents looking to buy European UCITS ETFs, this route offers a highly regulated, LRS-compliant pathway. The prominent entities providing this access include:
 
-*   **India INX Global Access**: Currently the most robust option within the IFSC. It acts as a centralized digital platform providing a gateway to over 135 exchanges across 33 countries. Crucially, this explicitly includes access to **European exchanges**. They achieve this by partnering with international prime brokers (primarily Interactive Brokers) on the backend.
-*   **NSE IX (NSE International Exchange)**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as a springboard into the European Union, with plans to finalize broad European exchange connectivity by FY27.
-*   **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
+| GIFT City Platform | Backend Execution Partner | European ETF Access |
+| :--- | :--- | :--- |
+| **[India INX GA](https://www.indiainxga.com/)** | Interactive Brokers | ✅ Yes |
+| **[NSE IX GAP](https://www.nseix.com/)** | Multiple / Cyprus SE | ⏳ Planned (FY27) |
+| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | Interactive Brokers | ✅ Yes |
+
+- **India INX Global Access**: Currently the most robust option within the IFSC. It acts as a centralized digital platform providing a gateway to over 135 exchanges across 33 countries, explicitly including **European exchanges**. They achieve this by partnering with international prime brokers on the backend.
+- **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as a springboard into the European Union, with plans to finalize broad European exchange connectivity by FY27.
+- **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
 
 **The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker places you squarely in the **Level 1** category. You are using an Introducing Broker (India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations of Level 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
@@ -117,7 +121,7 @@ While highly popular for US residents, Schwab restricts Non-Resident Aliens from
 
 ## Summary Matrix
 
-| Factor | Level 2 (IBKR Direct) | Level 1 (Paasa / ICICI Direct / INX) | Level 0 (INDmoney / Vested / Stockal) |
+| Factor | Level 2 (IBKR Direct) | Level 1 (Paasa / ICICI Direct / Kotak) | Level 0 (INDmoney / Vested / Stockal) |
 |---|---|---|---|
 | **Primary Market** | Global (LSE, EU, US) | Global (via IBKR) | US Only |
 | **Irish UCITS ETFs** | ✅ Yes | ✅ Yes (Platform dependent) | ❌ No |
