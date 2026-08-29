@@ -27,7 +27,9 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
-While legacy domestic apps (like HDFC Securities or Axis Securities, powered by Stockal on the backend) are attempting to bridge connections to European/UK markets, the availability of UCITS ETFs remains highly fractured, restricted, or entirely non-existent. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
+While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
+
+*(Note: Major public sector bank brokerages, such as SBI Securities or BoB Capital Markets, currently lack dedicated retail global investing tie-ups entirely, leaving investors to seek direct platforms.)*
 
 ## Level 1: Indian Establishments with IBKR Backend
 
@@ -36,6 +38,7 @@ A specialized subset of platforms uses Interactive Brokers (IBKR) as their under
 Examples of these domestic intermediaries include:
 - **Paasa**: A SEBI-registered platform specifically focused on Irish stocks and UCITS ETFs that uses IBKR as its underlying global custodian.
 - **ICICI Direct Global**: Their global investment services platform is powered by Interactive Brokers LLC.
+- **Kotak Securities (Kotak Neo)**: Partners with Interactive Brokers to facilitate its global investing accounts.
 - **India INX Global Access (GA)**: Located in GIFT City, this entity acts as an introducing broker that partners with IBKR.
 - **MoneyIsle (TradeCross)**: Opens global investing accounts where IBKR serves as the licensed brokerage and custodian.
 - **OmniScience Capital**: Utilizes IBKR as the service provider and custodian for its global investment advisory platform.
