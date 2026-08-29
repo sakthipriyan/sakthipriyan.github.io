@@ -21,19 +21,18 @@ Consequently, access must be routed through either heavily regulated internation
 
 ## Level 0: The US-Only Trap (Indian FinTechs)
 
-The first generation of Indian cross-border fintech platforms — such as **INDmoney, Vested, Stockal, and ET Money** — revolutionized retail access by partnering with US clearing brokers (like DriveWealth) to offer fractional trading of US shares.
+The first generation of Indian cross-border fintech platforms — such as **INDmoney, Vested, and Stockal** — revolutionized retail access by partnering with US clearing brokers (like DriveWealth) to offer fractional trading of US shares.
 
 **The critical limitation**: Because their backend API infrastructure is fundamentally designed around US clearinghouses, these platforms are traditionally confined entirely to offering US-listed securities. **You cannot purchase a true Irish-domiciled UCITS ETF listed on the LSE through these platforms.** 
 
 
-| Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) |
-| :--- | :--- | :--- | :--- |
-| **[Axis Securities](https://simplehai.axisdirect.in/global-investing)** | DriveWealth (via Vested) | ❌ No | ❌ No |
-| **[ET Money](https://www.etmoney.com/)** | DriveWealth / Alpaca | ❌ No | ❌ No |
-| **[HDFC Securities](https://www.hdfcsec.com/)** | DriveWealth (via Vested) | ❌ No | ❌ No |
-| **[INDmoney](https://www.indmoney.com/)** | DriveWealth / Alpaca | ❌ No | ❌ No |
-| **[Stockal](https://www.stockal.com/)** | DriveWealth | ❌ No | ❌ No |
-| **[Vested](https://vestedfinance.com/)** | DriveWealth | ❌ No | ❌ No |
+| Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) | GIFT City Entity |
+| :--- | :--- | :--- | :--- | :--- |
+| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No | ❌ No |
+| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No | ❌ No |
+| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No | ❌ No | ❌ No |
+| **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No | ❌ No |
+| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No | ❌ No |
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
@@ -48,15 +47,15 @@ A specialized subset of platforms uses Interactive Brokers (IBKR) as their under
 
 Examples of these domestic intermediaries include:
 
-| Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) |
-| :--- | :--- | :--- | :--- |
-| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **[India INX GA](https://www.indiainxga.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **[Kotak Securities (Neo)](https://www.kotakneo.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **[MoneyIsle (TradeCross)](https://moneyisle.in/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **[OmniScience Capital](https://www.omnisciencecapital.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **[Paasa](https://paasa.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) | GIFT City Entity |
+| :--- | :--- | :--- | :--- | :--- |
+| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
+| **[India INX GA](https://www.indiainxga.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ✅ Yes |
+| **[Kotak Securities (Neo)](https://www.kotakneo.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
+| **[OmniScience Capital](https://www.omnisciencecapital.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
+| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ❌ No |
+| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes | ✅ Yes |
 
 *\*Note: While IBKR's architecture allows US persons to purchase European UCITS ETFs, doing so subjects the US taxpayer to highly punitive PFIC (Passive Foreign Investment Company) taxation. For Non-US persons (Indian residents), however, it is highly tax-efficient.*
 
@@ -105,7 +104,7 @@ While highly popular for US residents, Schwab restricts Non-Resident Aliens from
 
 ## Summary Matrix
 
-| Factor | Level 2 (IBKR Direct) | Level 1 (Paasa / ICICI Direct / INX) | Level 0 (INDmoney / Vested / ET Money) |
+| Factor | Level 2 (IBKR Direct) | Level 1 (Paasa / ICICI Direct / INX) | Level 0 (INDmoney / Vested / Stockal) |
 |---|---|---|---|
 | **Primary Market** | Global (LSE, EU, US) | Global (via IBKR) | US Only |
 | **Irish UCITS ETFs** | ✅ Yes | ✅ Yes (Platform dependent) | ❌ No |
