@@ -104,7 +104,7 @@ Final Price: 92.1425
 
 **With FX Retail Web markup set up requires negotiation with the bank to setup appropriate  rates.** Main challenge here is the lack of knowledge in the typical branches.
 
-For FX Retail via Bharat Connect, the markup varies by bank. For example, 20p/USD is observed for HDFC and ICICI. Bank of Baroda (BoB) can offer an exceptionally low negotiated rate (e.g., 10p/USD), but it comes with a structural catch: when remitting to IBKR, BoB routes the transfer through its own US correspondent ([BoB USA](https://www.bankofbaroda-usa.com/rates-and-charges/service-charges)), which incurs an additional Foreign Bank Charge (FBC). In contrast, ICICI and HDFC route directly to Chase without this intermediary hop. IDFC First Bank charges 100p/USD (₹1), but they do not charge processing fees and GST, meaning there is a break-even point depending on your transfer size. So Level 4 becomes easier than Level 3 or Level 5 explained in the previous Chapter.
+For FX Retail via Bharat Connect, the markup varies by bank. For example, 20p/USD is observed for HDFC and ICICI. Bank of Baroda (BoB) can offer an exceptionally low negotiated rate (e.g., 10p/USD), but it comes with a structural catch when remitting to IBKR involving an additional Foreign Bank Charge (FBC)—[read the full breakdown of this FBC routing here](/building-wealth/blogs/bank-of-baroda-fx-retail-for-ibkr-from-a-0.10-per-usd-markup-to-an-additional-foreign-bank-charge/). IDFC First Bank charges 100p/USD (₹1), but they do not charge processing fees and GST, meaning there is a break-even point depending on your transfer size. So Level 4 becomes easier than Level 3 or Level 5 explained in the previous Chapter.
 
 ## Step 4: Trading Limits
 
