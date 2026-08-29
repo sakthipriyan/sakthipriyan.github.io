@@ -93,3 +93,28 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
 5. **Funding**: Once approved, use the LRS methods discussed in earlier chapters to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
+
+## Account Types and Succession Planning
+
+A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. Unlike Indian demat accounts where you can easily assign a nominee to take over the assets, an international Individual account requires standard estate processing upon the account holder's death.
+
+### The Problem with Individual Accounts
+If you open an "Individual" account and pass away, your heirs must go through a lengthy estate settlement process with the broker. While holding Irish UCITS ETFs completely shields your heirs from the dreaded US IRS estate tax clearance (and the 40% tax itself), the broker will still require proper legal documentation (like a probated Will or Succession Certificate) to transfer the assets. Having a clearly drafted Will can significantly fast-track this process, but a delay is inevitable.
+
+### The Joint Account Solution (With Right of Survivorship)
+The most effective workaround for succession planning is to open a **Joint Account** (specifically, Joint Tenants with Right of Survivorship) with your spouse. 
+- **The Benefit**: In the event of one holder's death, the surviving spouse automatically retains full access and ownership of the account in a very short span of time, bypassing the lengthy probate and estate processing entirely. 
+- **The Catch (Tax Filing)**: The Indian Income Tax Department requires all foreign assets to be disclosed. If you have a Joint Account, the secondary holder (e.g., your spouse) is considered a beneficial owner. Consequently, **the spouse must also declare the IBKR account in the Schedule FA (Foreign Assets) section of their own Income Tax Return**, even if they did not fund it. 
+
+### The Estate Planning Matrix: Worst to Best
+
+When you combine asset domicile (US vs. Irish) with the account type (Individual vs. Joint), the outcomes for your heirs change drastically. 
+
+| Scenario | Asset Type | Account Type | Succession Outcome |
+| :--- | :--- | :--- | :--- |
+| **Worst** | US ETFs (e.g., VOO) | Individual | **High Risk & Delay**: Subject to 40% US Estate Tax. Requires IRS tax clearance (Form 5173), massive legal fees, and lengthy broker probate. |
+| **Bad** | US ETFs (e.g., VOO) | Joint Account | **Tax Risk**: Survivor gets immediate access, but the portfolio remains structurally exposed to US Estate Tax upon the survivor's passing (or requires complex US tax filings). |
+| **Good** | Irish ETFs (e.g., CSPX) | Individual | **Delayed but Safe**: No US Estate Tax and no IRS clearance needed. However, transferring the account requires Indian probate/Will execution which takes time. |
+| **Best** | Irish ETFs (e.g., CSPX) | Joint Account | **Immediate & Safe**: No US Estate Tax. The surviving spouse retains instant access and ownership of the account via Right of Survivorship, entirely bypassing probate. |
+
+> **Key Takeaway**: A Joint Account holding Irish UCITS ETFs provides the smoothest, most tax-efficient generational wealth transfer for an Indian investor, provided both spouses are prepared to file Schedule FA annually.
