@@ -51,8 +51,7 @@ Examples of these domestic intermediaries include:
 | :--- | :--- | :--- | :--- |
 | **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 | **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[MoneyIsle (TradeCross)](https://moneyisle.in/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[OmniScience Capital](https://www.omnisciencecapital.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 | **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 
 *\*Note: While IBKR's architecture allows US persons to purchase European UCITS ETFs, doing so subjects the US taxpayer to highly punitive PFIC (Passive Foreign Investment Company) taxation. For Non-US persons (Indian residents), however, it is highly tax-efficient.*
@@ -84,6 +83,8 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 - **India INX Global Access**: Currently the most robust option within the IFSC. It acts as a centralized digital platform providing a gateway to over 135 exchanges across 33 countries, explicitly including **European exchanges**. They achieve this by partnering with international prime brokers on the backend.
 - **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as a springboard into the European Union, with plans to finalize broad European exchange connectivity by FY27.
 - **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
+
+*(Note: Major Indian Mutual Fund houses are also aggressively setting up entities in GIFT City. By launching Alternative Investment Funds (AIFs) in this jurisdiction, these AMCs can pool LRS capital directly from Indian high-net-worth investors, completely bypassing the restrictive $7 Billion RBI industry limit that froze domestic global mutual funds.)*
 
 **The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker places you squarely in the **Level 1** category. You are using an Introducing Broker (India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations of Level 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
