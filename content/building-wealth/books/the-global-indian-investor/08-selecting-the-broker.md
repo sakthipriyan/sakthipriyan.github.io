@@ -34,9 +34,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
-*(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
-
-*(Note on FinTech GIFT City Routing: Platforms like INDmoney are increasingly routing clients through their own GIFT City entities. While this attempts to reduce steep SWIFT/intermediary bank charges by remitting to a domestic IFSC bank branch instead of a US bank, the strict LRS rules, 20% TCS, and FX markups still fully apply. More importantly, it does not change the underlying asset class. They are still exclusively offering US-listed equities. This means you remain fully exposed to the 30% US dividend withholding tax and 40% estate tax, and you still cannot purchase Irish UCITS ETFs through this route.)*
+*(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 25% US dividend withholding tax and 40% estate tax.)*
 
 While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
 
@@ -85,6 +83,8 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 - **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
 
 *(Note: Major Indian Mutual Fund houses are also aggressively setting up entities in GIFT City. By launching Alternative Investment Funds (AIFs) in this jurisdiction, these AMCs can pool LRS capital directly from Indian high-net-worth investors, completely bypassing the restrictive $7 Billion RBI industry limit that froze domestic global mutual funds.)*
+
+*(Note on FinTech GIFT City Routing: Platforms like INDmoney are increasingly routing clients through their own GIFT City entities. While this attempts to reduce steep SWIFT/intermediary bank charges by remitting to a domestic IFSC bank branch instead of a US bank, the strict LRS rules, 20% TCS, and FX markups still fully apply. More importantly, it does not change the underlying asset class. They are still exclusively offering US-listed equities. This means you remain fully exposed to the 25% US dividend withholding tax and 40% estate tax, and you still cannot purchase Irish UCITS ETFs through this route.)*
 
 **The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker places you squarely in the **Level 1** category. You are using an Introducing Broker (India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations of Level 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
