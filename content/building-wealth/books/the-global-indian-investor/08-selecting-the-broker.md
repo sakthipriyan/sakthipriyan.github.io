@@ -28,12 +28,12 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 | Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) |
 | :--- | :--- | :--- | :--- |
-| **INDmoney** | DriveWealth / Alpaca | ❌ No | ❌ No |
-| **Vested** | DriveWealth | ❌ No | ❌ No |
-| **Stockal** | DriveWealth | ❌ No | ❌ No |
-| **ET Money** | DriveWealth / Alpaca | ❌ No | ❌ No |
-| **HDFC Securities** | DriveWealth (via Vested) | ❌ No | ❌ No |
-| **Axis Securities** | DriveWealth (via Vested) | ❌ No | ❌ No |
+| **[Axis Securities](https://simplehai.axisdirect.in/global-investing)** | DriveWealth (via Vested) | ❌ No | ❌ No |
+| **[ET Money](https://www.etmoney.com/)** | DriveWealth / Alpaca | ❌ No | ❌ No |
+| **[HDFC Securities](https://www.hdfcsec.com/global-investing)** | DriveWealth (via Vested) | ❌ No | ❌ No |
+| **[INDmoney](https://www.indmoney.com/)** | DriveWealth / Alpaca | ❌ No | ❌ No |
+| **[Stockal](https://www.stockal.com/)** | DriveWealth | ❌ No | ❌ No |
+| **[Vested](https://vestedfinance.com/)** | DriveWealth | ❌ No | ❌ No |
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
@@ -50,13 +50,13 @@ Examples of these domestic intermediaries include:
 
 | Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) |
 | :--- | :--- | :--- | :--- |
-| **Paasa** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **ICICI Direct Global** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **Kotak Securities (Neo)** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **India INX GA** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **MoneyIsle (TradeCross)**| Interactive Brokers | ✅ Yes | ✅ Yes |
-| **OmniScience Capital** | Interactive Brokers | ✅ Yes | ✅ Yes |
-| **SMC Global IFSC** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[India INX GA](https://www.indiainxga.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[Kotak Securities (Neo)](https://www.kotakneo.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[OmniScience Capital](https://www.omnisciencecapital.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[Paasa](https://paasa.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
 
 *\*Note: While IBKR's architecture allows US persons to purchase European UCITS ETFs, doing so subjects the US taxpayer to highly punitive PFIC (Passive Foreign Investment Company) taxation. For Non-US persons (Indian residents), however, it is highly tax-efficient.*
 
@@ -74,6 +74,13 @@ Examples of these domestic intermediaries include:
 ## Level 2: Direct International Prime Brokers
 
 For investors seeking the absolute lowest long-term cost and full market control, opening an account directly with an international prime broker is the ultimate destination. The setup overhead is more or less the same as Level 1, but taxation filing and LRS must be taken care of by the investor themselves.
+
+| International Prime Broker | European ETF Access (Non-US Persons) |
+| :--- | :--- |
+| **[Interactive Brokers](https://www.interactivebrokers.co.in/)** | ✅ Yes |
+| **[Saxo Bank](https://www.home.saxo/)** | ✅ Yes |
+| **[Swissquote](https://en.swissquote.com/)** | ✅ Yes |
+
 
 ### Interactive Brokers (IBKR Direct)
 IBKR stands as the undisputed primary conduit for global capital flows originating from India. 
