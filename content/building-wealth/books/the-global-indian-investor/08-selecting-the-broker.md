@@ -166,7 +166,7 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 
 > **Key Takeaway**: A Joint Account holding Irish UCITS ETFs provides the smoothest, most tax-efficient generational wealth transfer for an Indian investor, provided both spouses are prepared to file Schedule FA annually.
 
-## Author's Personal Journey
+## My Personal Journey
 
 My foray into direct global investing started when the RBI imposed industry-wide limits on international mutual funds, effectively blocking that convenient route for a long time. 
 
