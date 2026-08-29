@@ -25,6 +25,16 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 **The critical limitation**: Because their backend API infrastructure is fundamentally designed around US clearinghouses, these platforms are traditionally confined entirely to offering US-listed securities. **You cannot purchase a true Irish-domiciled UCITS ETF listed on the LSE through these platforms.** 
 
+
+| Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) |
+| :--- | :--- | :--- | :--- |
+| **INDmoney** | DriveWealth / Alpaca | ❌ No | ❌ No |
+| **Vested** | DriveWealth | ❌ No | ❌ No |
+| **Stockal** | DriveWealth | ❌ No | ❌ No |
+| **ET Money** | DriveWealth / Alpaca | ❌ No | ❌ No |
+| **HDFC Securities** | DriveWealth (via Vested) | ❌ No | ❌ No |
+| **Axis Securities** | DriveWealth (via Vested) | ❌ No | ❌ No |
+
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
 While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
@@ -35,14 +45,20 @@ While top private bank brokerages — such as **HDFC Securities** and **Axis Sec
 
 A specialized subset of platforms uses Interactive Brokers (IBKR) as their underlying clearing or custodial partner. This allows them to offer access to global markets (including Ireland/Europe) while abstracting some of the complexity for the investor.
 
+
 Examples of these domestic intermediaries include:
-- **Paasa**: A SEBI-registered platform specifically focused on Irish stocks and UCITS ETFs that uses IBKR as its underlying global custodian.
-- **ICICI Direct Global**: Their global investment services platform is powered by Interactive Brokers LLC.
-- **Kotak Securities (Kotak Neo)**: Partners with Interactive Brokers to facilitate its global investing accounts.
-- **India INX Global Access (GA)**: Located in GIFT City, this entity acts as an introducing broker that partners with IBKR.
-- **MoneyIsle (TradeCross)**: Opens global investing accounts where IBKR serves as the licensed brokerage and custodian.
-- **OmniScience Capital**: Utilizes IBKR as the service provider and custodian for its global investment advisory platform.
-- **SMC Global IFSC**: Acts as a referral partner that introduces clients directly to the IBKR platform.
+
+| Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) |
+| :--- | :--- | :--- | :--- |
+| **Paasa** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **ICICI Direct Global** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **Kotak Securities (Neo)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **India INX GA** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **MoneyIsle (TradeCross)**| Interactive Brokers | ✅ Yes | ✅ Yes |
+| **OmniScience Capital** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **SMC Global IFSC** | Interactive Brokers | ✅ Yes | ✅ Yes |
+
+*\*Note: While IBKR's architecture allows US persons to purchase European UCITS ETFs, doing so subjects the US taxpayer to highly punitive PFIC (Passive Foreign Investment Company) taxation. For Non-US persons (Indian residents), however, it is highly tax-efficient.*
 
 **Pros of Level 1**:
 - Easy to start with a familiar Indian interface.
