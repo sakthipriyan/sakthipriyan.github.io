@@ -75,7 +75,7 @@ Here is how those blueprints translate into actual, investable Irish-domiciled U
 | **FTSE&nbsp;All&#8209;World** | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                                    |              48,526 |        1 |   0.19% |          |
 | **MSCI ACWI**      | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                                   |              33,730 |        2 |   0.20% |          |
 | **MSCI ACWI**      | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48)                   |              15,800 |        3 |   0.12% |        1 |
-| **FTSE&nbsp;All&nbsp;Cap** | [Vanguard ESG Global All Cap UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BNG8L278) | N/A | | 0.07% | |
+| **FTSE&nbsp;All&nbsp;Cap** | [Vanguard ESG Global All Cap UCITS ETF (VALL)](https://www.justetf.com/en/etf-profile.html?isin=IE00BNG8L278) | 600 | - | 0.07% | 1 |
 | **MSCI ACWI IMI**  | [State Street SPDR MSCI All Country World Investable Market UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) |               6,804 |          |   0.17% |        3 |
 | **FTSE&nbsp;All&#8209;World** | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                                    |               3,893 |          |   0.15% |        2 |
 

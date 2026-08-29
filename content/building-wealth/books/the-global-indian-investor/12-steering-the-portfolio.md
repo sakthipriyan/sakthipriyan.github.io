@@ -1,5 +1,5 @@
 ---
-title: "Tracking XIRR - Using RealValue Portfolio"
+title: "Steering the Portfolio"
 subtitle: "How to track the real returns of your global investments alongside your domestic portfolio."
 type: "books"
 chapter: 12

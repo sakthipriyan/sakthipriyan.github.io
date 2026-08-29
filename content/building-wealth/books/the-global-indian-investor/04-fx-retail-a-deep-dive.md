@@ -104,7 +104,7 @@ Final Price: 92.1425
 
 **With FX Retail Web markup set up requires negotiation with the bank to setup appropriate  rates.** Main challenge here is the lack of knowledge in the typical branches.
 
-For FX Retail via Bharat Connect, the markup is usually capped at 20p/USD for most major banks (though there are exceptions, e.g., IDFC Bank has been observed to apply a markup of ₹1/USD). So Level 4 becomes easier than Level 3 or Level 5 explained in the previous Chapter.
+For FX Retail via Bharat Connect, the markup varies by bank. For example, 20p/USD is observed for HDFC and ICICI, and 10p/USD for Bank of Baroda. IDFC First Bank charges 100p/USD (₹1), but they do not charge processing fees and GST, so there is a break-even point to consider between the two structures. So Level 4 becomes easier than Level 3 or Level 5 explained in the previous Chapter.
 
 ## Step 4: Trading Limits
 

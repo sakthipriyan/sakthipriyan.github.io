@@ -28,7 +28,6 @@ For Indian investors, US-domiciled ETFs introduce three structural issues:
 The following table summarizes the key differences between US-domiciled ETFs and Irish-domiciled UCITS ETFs before we examine each in detail.
 
 |  | US-Domiciled ETFs ([VOO](https://investor.vanguard.com/investment-products/etfs/profile/voo)/[QQQ](https://invesco.com/qqq-etf/en/home.html)) | Irish UCITS (Acc) ETFs ([CSPX](https://ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund)/[CNDX](https://ishares.com/uk/individual/en/products/253741/ishares-nasdaq-100-ucits-etf)) |
-| :--- | :--- | :--- |
 | 1. **US Estate Tax Risk** | Up to 40% (on assets >$60k) | **0%** (No US Estate Tax exposure) |
 | 2. **Dividend Tax Leakage**| 25% withholding under the US-India DTAA in US and Foreign Tax Credit adjustment through Indian ITR | 15% withholding at the fund level (US-Ireland treaty); dividends reinvested inside the accumulating ETF |
 | 3. **Taxation Paperwork** | Irrespective of ETF sale we need to fill, <br>1. [W-8BEN](https://www.irs.gov/forms-pubs/about-form-w-8-ben) (renewed every 3 years) <br/> 2. [Form 67](https://www.incometax.gov.in/iec/foportal/help/statutory-forms/popular-form/form67-um) (foreign tax credit) <br/>3. ITR: Schedule FA, FSI, TR | 1. ITR: Schedule FA (FSI only on ETF sale) |
@@ -62,7 +61,6 @@ Let's compare Estate Tax across India and US.
 The following table illustrates the impact of U.S. estate tax rates on various portfolio sizes. For Non-Resident Aliens (NRAs), the marginal tax rate applied to the excess value progressively increases from 26% to 40%. 
 
 | Portfolio Range | Tax on Base Amount | Marginal Rate on Excess | Estimated Max Tax Liability <br/> (after $13k unified credit) |
-| :--- | :--- | :--- | :--- |
 | **$0 – $60,000** | $0 | 18% – 24% | **$0** (Exemption Threshold) |
 | **$60,001 – $80,000** | $13,000 | 26% | **$5,200** |
 | **$80,001 – $100,000** | $18,200 | 28% | **$10,800** |
@@ -102,7 +100,6 @@ The time required for heirs to access the portfolio depends primarily on two fac
 2. The ownership structure of the account
 
 | Scenario | Estimated Timeline | Primary Bottleneck |
-| :--- | :--- | :--- |
 | **With US Assets** (Situs Assets) | **12 – 24 Months** | **The Federal Block:** The mandatory **IRS "Transfer Certificate" (Form 5173)**. This "hard" bottleneck is subject to the manual review cycle of the IRS International Estate Tax department; brokers typically freeze accounts until an IRS Transfer Certificate is issued. |
 | **Non-US Assets** (UCITS) | **2 Weeks – 12 Months** | **Account Structure Dependent:** Transition ranges from **2–6 weeks** (Joint/TOD) to **6–12 months** (Individual). Individual accounts face a "soft" bottleneck requiring **Succession Proof** (Legal Heir Certificate or Probate) to satisfy international compliance. |
 
@@ -136,7 +133,6 @@ Indian mutual fund investors will be familiar with *Growth* and *IDCW* plans for
 The table below illustrates the "tax leakage" that occurs before dividends can be reinvested.
 
 | Feature | US ETF | Irish ETF |
-| :--- | :--- | :--- |
 | **US Dividend Withholding Tax** | 30% (default), 25% (US–India treaty rate) | 15% (US-Ireland Treaty) |
 | **Foreign Tax Credit** | Available | Not Available, as it is done within the ETF |
 | **Dividend Strategy** | Mandatory Distribution (IDCW) | Accumulating (Growth) available |
@@ -153,7 +149,6 @@ When investing in the S&P 500, the **"Tax Drag"** on a 2% dividend yield signifi
 This table shows how much of your **2% dividend yield** is lost to taxes before it can be reinvested.
 
 | Feature | US ETF | Irish ETF |
-| :--- | :--- | :--- |
 | **Withholding Tax (Level 1)** | **25.00%** (US Tax) | **15.00%** (US-Ireland Treaty) |
 | **Indian Income Tax (Level 2)*** | **10.88%** (Remaining Slab) | **0.00%** (Not Applicable/Deferred) |
 | **Total Effective Tax** | **35.88%** | **15.00%** |
@@ -254,11 +249,11 @@ These paired funds track the **exact same underlying indices**, but differ entir
 
 | Target Index | Equivalent US ETF | Equivalent Irish UCITS ETF (USD, Acc) |
 | :--- | :--- | :--- |
-| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
-| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
-| **Global All Cap** | Vanguard Total World Stock ETF (**VT**) | SPDR MSCI ACWI IMI UCITS ETF (**SPYI** / **IMID**) |
-| **FTSE All-World** | - | Vanguard FTSE All-World UCITS ETF (**VWRA**) |
+| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | SPDR S&P 500 UCITS ETF (**SPYL**) / Vanguard (**VUAA**) |
+| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | AXA IM Nasdaq-100 UCITS ETF (**ANAU**) / Invesco (**EQAC**) |
+| **MSCI World** | iShares MSCI World ETF (**URTH**) | SPDR MSCI World UCITS ETF (**SPPW**) / iShares (**IWDA**) |
+| **Global All Cap** | Vanguard Total World Stock ETF (**VT**) | Vanguard ESG Global All Cap (**VALL**) / SPDR MSCI ACWI IMI (**SPYI**) |
+| **FTSE All-World** | - | Invesco FTSE All-World (**FWRA**) / Vanguard (**VWRA**) |
 
 ## Key Takeaways
 
