@@ -140,3 +140,15 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 | **Best** | Irish ETFs (e.g., CSPX) | Joint Account | **Immediate & Safe**: No US Estate Tax. The surviving spouse retains instant access and ownership of the account via Right of Survivorship, entirely bypassing probate. |
 
 > **Key Takeaway**: A Joint Account holding Irish UCITS ETFs provides the smoothest, most tax-efficient generational wealth transfer for an Indian investor, provided both spouses are prepared to file Schedule FA annually.
+
+## Author's Personal Journey
+
+My foray into direct global investing started when the RBI imposed industry-wide limits on international mutual funds, effectively blocking that convenient route for a long time. 
+
+Looking for alternatives, I discovered the **ICICI Direct Global** approach (Level 1) and opened my first account there. It served as an excellent stepping stone, abstracting away some of the complexities while I learned the mechanics of cross-border investing. 
+
+After using it for a while and extensively researching the brokerage landscape (which eventually formed the basis of this chapter), I realized the limitations of using an intermediary. Once I became comfortable navigating LRS remittances directly with my bank, I eventually opened a **Direct IBKR account** (Level 2).
+
+Currently, I have moved my residual cash from the ICICI Direct Global account to my direct IBKR account. I am yet to transfer the actual ETF positions, but fortunately, the old ICICI account is not incurring any ongoing maintenance costs since I downgraded it to their free pricing tier.
+
+**On the estate planning front:** I am currently utilizing the "Good" approach (Individual Account holding Irish ETFs) rather than the "Best" approach (Joint Account). The primary reason is administrative: opening a Joint Account would classify my spouse as a beneficial owner, forcing her to upgrade to the far more complex **ITR-2** tax filing just to declare the account in Schedule FA. For now, relying on an Individual Account supported by a clearly drafted Will avoids that annual tax-filing friction.
