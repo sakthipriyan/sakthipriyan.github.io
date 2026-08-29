@@ -1,6 +1,6 @@
 ---
 title: "Selecting the Broker"
-subtitle: "Evaluating international prime brokers and domestic intermediaries for accessing Irish UCITS ETFs."
+subtitle: "Evaluating international prime brokers, domestic intermediaries, and the GIFT City route for accessing Irish UCITS ETFs."
 type: "books"
 chapter: 8
 date: 2026-08-29
