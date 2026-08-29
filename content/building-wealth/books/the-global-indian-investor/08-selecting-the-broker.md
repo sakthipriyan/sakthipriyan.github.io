@@ -26,13 +26,13 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 **The critical limitation**: Because their backend API infrastructure is fundamentally designed around US clearinghouses, these platforms are traditionally confined entirely to offering US-listed securities. **You cannot purchase a true Irish-domiciled UCITS ETF listed on the LSE through these platforms.** 
 
 
-| Indian Platform | Backend US Broker | European ETF Access (US Persons) | European ETF Access (Non-US Persons) |
-| :--- | :--- | :--- | :--- |
-| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No |
-| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No | ❌ No |
-| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No | ❌ No |
-| **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No |
-| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No | ❌ No |
+| Indian Platform | Backend US Broker | European ETF Access |
+| :--- | :--- | :--- |
+| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
+| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
+| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No |
+| **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
+| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
@@ -49,14 +49,12 @@ A specialized subset of platforms uses Interactive Brokers (IBKR) as their under
 
 Examples of these domestic intermediaries include:
 
-| Indian Platform | Backend US Broker | European ETF Access (US Persons)* | European ETF Access (Non-US Persons) |
-| :--- | :--- | :--- | :--- |
-| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-
-*\*Note: While IBKR's architecture allows US persons to purchase European UCITS ETFs, doing so subjects the US taxpayer to highly punitive PFIC (Passive Foreign Investment Company) taxation. For Non-US persons (Indian residents), however, it is highly tax-efficient.*
+| Indian Platform | Backend US Broker | European ETF Access |
+| :--- | :--- | :--- |
+| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
+| **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
+| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
 
 **Pros of Level 1**:
 - Easy to start with a familiar Indian interface.
