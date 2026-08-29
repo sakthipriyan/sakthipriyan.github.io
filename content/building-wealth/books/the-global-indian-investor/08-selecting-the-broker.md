@@ -36,6 +36,8 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 30% US dividend withholding tax and 40% estate tax.)*
 
+*(Note on FinTech GIFT City Routing: Platforms like INDmoney are increasingly routing clients through their own GIFT City entities to reduce international wire transfer (LRS) fees. While this drastically improves the remittance experience and lowers banking costs, it does not change the underlying asset class. They are still exclusively offering US-listed equities. This means you remain fully exposed to the 30% US dividend withholding tax and 40% estate tax, and you still cannot purchase Irish UCITS ETFs through this route.)*
+
 While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
 
 *(Note: Major public sector bank brokerages, such as SBI Securities or BoB Capital Markets, currently lack dedicated retail global investing tie-ups entirely, leaving investors to seek direct platforms.)*
