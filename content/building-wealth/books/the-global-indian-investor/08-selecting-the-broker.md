@@ -30,7 +30,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | :--- | :--- | :--- | :--- |
 | **[Axis Securities](https://simplehai.axisdirect.in/global-investing)** | DriveWealth (via Vested) | ❌ No | ❌ No |
 | **[ET Money](https://www.etmoney.com/)** | DriveWealth / Alpaca | ❌ No | ❌ No |
-| **[HDFC Securities](https://www.hdfcsec.com/global-investing)** | DriveWealth (via Vested) | ❌ No | ❌ No |
+| **[HDFC Securities](https://www.hdfcsec.com/)** | DriveWealth (via Vested) | ❌ No | ❌ No |
 | **[INDmoney](https://www.indmoney.com/)** | DriveWealth / Alpaca | ❌ No | ❌ No |
 | **[Stockal](https://www.stockal.com/)** | DriveWealth | ❌ No | ❌ No |
 | **[Vested](https://vestedfinance.com/)** | DriveWealth | ❌ No | ❌ No |
