@@ -145,7 +145,7 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 
 ### [Saxo Bank](https://www.home.saxo/)
 Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR.
-- **Costs**: They apply a 0.25% currency conversion fee (substantially higher than IBKR). Standard custody fees historically run around 0.12% to 0.15% annually depending on your region.
+- **Costs**: Standard custody fees historically run around 0.12% to 0.15% annually depending on your region, which creates an ongoing drag on portfolio growth compared to IBKR.
 - **Optimization**: Astute investors can often waive this custody fee entirely by opting into Saxo's securities lending program, making it better suited for larger portfolios prioritizing European banking-grade security. 
 
 ### [Swissquote](https://www.swissquote.com/)
