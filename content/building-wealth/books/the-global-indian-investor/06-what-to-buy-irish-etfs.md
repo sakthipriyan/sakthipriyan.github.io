@@ -258,7 +258,7 @@ These paired funds track the **exact same underlying indices**, but differ entir
 | **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | 0.20% | Invesco EQQQ Nasdaq-100 UCITS ETF (**EQAC**) | 0.30% |
 | **MSCI World** | iShares MSCI World ETF (**URTH**) | 0.24% | iShares Core MSCI World UCITS ETF (**IWDA**) | 0.20% |
 
-For a detailed comparison of these indices, their market coverage, and a wider selection of available funds, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.
+For a detailed comparison of these indices, their market coverage, and a wider selection of available funds along with costs and AUM, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.
 
 ## Key Takeaways
 
