@@ -37,13 +37,12 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
-*(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 25% US dividend withholding tax and 40% estate tax.)*
+### Notes on Level 0 Platforms
 
-*(Note: Vested Finance recently began marketing access to "UCITS". However, it is critical to understand that they are offering actively managed UCITS mutual funds, not passive exchange-traded UCITS ETFs (like CSPX or VWRA). While these mutual funds technically bypass the US estate tax, they carry much higher expense ratios than passive index ETFs and do not provide access to the cheap, broad-market European indexes discussed in this book.)*
-
-While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
-
-*(Note: Major public sector bank brokerages, such as SBI Securities or BoB Capital Markets, currently lack dedicated retail global investing tie-ups entirely, leaving investors to seek direct platforms.)*
+*   **The "Irish" ETF Illusion:** A platform like INDmoney might allow the purchase of `EIRL` (the iShares MSCI Ireland ETF). Be aware that this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 25% US dividend withholding tax and 40% estate tax.
+*   **Vested’s "UCITS" Marketing:** Vested Finance recently began marketing access to "UCITS". However, it is critical to understand that they are offering *actively managed UCITS mutual funds*, not passive exchange-traded UCITS ETFs (like CSPX or VWRA). While these mutual funds technically bypass the US estate tax, they carry much higher expense ratios than passive index ETFs and do not provide access to the cheap, broad-market European indexes discussed in this book.
+*   **Private Bank Wrappers:** While top private bank brokerages—such as **HDFC Securities** and **Axis Securities**—heavily market their "global investing" platforms, they typically partner with fintechs like Vested (powered by DriveWealth). Consequently, despite the massive domestic brand name, their offering remains structurally restricted to the US-only ecosystem. (For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/)).
+*   **Public Sector Banks:** Major public sector bank brokerages, such as **SBI Securities** or **BoB Capital Markets**, currently lack dedicated retail global investing tie-ups entirely, leaving investors to seek direct platforms.
 
 ### The Hidden Risk: Platform Fragility
 
