@@ -129,7 +129,7 @@ Charles Schwab is not included in my shortlist because its offering for internat
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
 - **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), which fully supports LRS remittances directly from Indian banks.
 - **SIPC Protection**: Because your account is legally held with IBKR LLC (the US entity), your assets fall under the Securities Investor Protection Corporation (SIPC). SIPC is protection against certain losses if the broker fails (up to $500,000, including a $250,000 limit for cash), not protection against investment losses.
-- **Costs**: Western European ETFs typically incur commissions of around £1 to £3 per trade, depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
+- **Costs**: Western European ETFs typically incur commissions of $2 to $4 per trade minimum (which grows with volume), depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
 
@@ -159,7 +159,7 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 |---|---|---|---|
 | **Primary Market** | US Only | Global (via IBKR) | Global (LSE, EU, US) |
 | **Irish UCITS ETFs** | ❌ No | ✅ Yes (Platform dependent) | ✅ Yes |
-| **Brokerage** | Zero or low | IBKR + intermediary fee | ~£1 to £3 / order |
+| **Brokerage** | Zero or low | IBKR + intermediary fee | ~$2 to $4 minimum / order |
 | **FX Conversion** | Platform Markup (INR ➞ USD) | Bank Rates (INR ➞ USD) | Bank Rates (INR ➞ USD)<br>See [Chapter 3: Cost Components in an Overseas Remittance](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#cost-components-in-an-overseas-remittance-lrs) |
 | **Desktop TWS Access** | ❌ No | ❌ No | ✅ Yes |
 | **LRS Handling** | Integrated | Bundled / Assisted | Self-managed |
