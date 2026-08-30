@@ -110,7 +110,7 @@ The time required for heirs to access the portfolio depends primarily on two fac
 
 > Using Irish ETFs 1) Removes US Estate Tax and 2) Reduces the transitioning timeline.
 
-*Note: A detailed breakdown of account ownership structures (Joint vs. Individual) and specific succession planning strategies will be explained in the following chapter.*
+*Note: A detailed breakdown of account ownership structures (Joint vs. Individual) and specific succession planning strategies is explained in [Chapter 8 > Account Types and Succession Planning](/building-wealth/books/the-global-indian-investor/08-selecting-the-broker/#account-types-and-succession-planning).*
 
 
 ## 2. Dividend Tax Leakage: The Growth vs IDCW Comparison
@@ -252,12 +252,13 @@ Many of the world's largest asset managers—including **BlackRock (iShares), Va
 
 These paired funds track the **exact same underlying indices**, but differ entirely in their legal domicile, tax treatment, and investor base:
 
-| Target Index | Equivalent US ETF | Equivalent Irish UCITS ETF (USD, Acc) |
-| :--- | :--- | :--- |
-| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
-| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
-| **FTSE All-World** | Vanguard Total World Stock ETF (**VT**) | Vanguard FTSE All-World UCITS ETF (USD) Accumulating (**VWRA**) |
+| Target Index | Equivalent US ETF (USD, Dist) | TER | Equivalent Irish UCITS ETF (USD, Acc) | TER |
+| :--- | :--- | :--- | :--- | :--- |
+| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | 0.03% | Vanguard S&P 500 UCITS ETF (**VUAA**) | 0.07% |
+| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | 0.20% | Invesco EQQQ Nasdaq-100 UCITS ETF (**EQAC**) | 0.30% |
+| **MSCI World** | iShares MSCI World ETF (**URTH**) | 0.24% | iShares Core MSCI World UCITS ETF (**IWDA**) | 0.20% |
+
+For a detailed comparison of these indices, their market coverage, and a wider selection of available funds along with costs and AUM, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.
 
 ## Key Takeaways
 
