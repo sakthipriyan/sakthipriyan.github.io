@@ -261,20 +261,7 @@ These paired funds track the **exact same underlying indices**, but differ entir
 
 *\*Note: VT technically tracks the FTSE Global All Cap Index (which includes small-caps), whereas VWRA tracks the FTSE All-World Index (which drops small-caps). However, VWRA is Vanguard's flagship global fund in Ireland.*
 
-### Optimizing for Lowest Cost
-
-While the table above illustrates how providers map their flagship funds across the Atlantic, cost-conscious investors do not have to stick to the same provider. By mixing ETF issuers to find the absolute lowest Total Expense Ratio (TER) for each index, you can build a more cost-efficient portfolio. 
-
 *(For a detailed comparison of these indices, their market coverage, and a wider selection of available funds, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.)*
-
-| Target Index | Lowest-Cost US ETF | Lowest-Cost Irish UCITS ETF (USD, Acc) |
-| :--- | :--- | :--- |
-| **S&P 500** | SPDR Portfolio S&P 500 ETF (**SPLG**) | SPDR S&P 500 UCITS ETF (**SPYL**) |
-| **Nasdaq-100** | Invesco NASDAQ 100 ETF (**QQQM**) | BNP Paribas Easy II Nasdaq-100 UCITS ETF (**ANAU**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | SPDR MSCI World UCITS ETF (**SPPW**) |
-| **Global All-Cap** | Vanguard Total World Stock ETF (**VT**)** | SPDR MSCI ACWI IMI UCITS ETF (**SPYI**) |
-
-*\*\*Note: VT technically tracks the FTSE Global All Cap index, but SPYI (MSCI ACWI IMI) is its functional Irish equivalent as both provide total world exposure including small-caps.*
 
 ## Key Takeaways
 
