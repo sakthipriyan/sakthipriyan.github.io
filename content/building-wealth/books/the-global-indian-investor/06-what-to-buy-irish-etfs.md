@@ -252,7 +252,7 @@ Many of the world's largest asset managers—including **BlackRock (iShares), Va
 
 These paired funds track the **exact same underlying indices**, but differ entirely in their legal domicile, tax treatment, and investor base:
 
-| Target Index | Equivalent US ETF | Equivalent Irish UCITS ETF (USD, Acc) |
+| Target Index | Equivalent US ETF (USD, Distributing) | Equivalent Irish UCITS ETF (USD, Acc) |
 | :--- | :--- | :--- |
 | **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
 | **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
