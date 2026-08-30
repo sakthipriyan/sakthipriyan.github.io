@@ -46,7 +46,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 ### The Hidden Risk: Platform Fragility
 
-Because these platforms act as thin technology wrappers sitting between you, Indian banking regulations (LRS/TCS), and a foreign clearinghouse API, their business models are incredibly fragile. When regulatory friction increases—such as the recent hikes in Tax Collected at Source (TCS) on LRS remittances—the unit economics for these fintechs often collapse. 
+Because these platforms act as thin technology wrappers sitting between you, Indian banking regulations (LRS/TCS), and a foreign clearinghouse API, their business models are incredibly fragile. 
 
 When a fintech wrapper decides to sunset its global investing feature, the investor suffers massively. We have seen this repeatedly:
 *   **Groww** abruptly halted its US stocks offering in early 2024.
