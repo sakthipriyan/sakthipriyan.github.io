@@ -205,7 +205,7 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 
 ## My Personal Journey
 
-My foray into direct global investing started when the RBI imposed [industry-wide limits](/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/#fragility-in-indian-mutual-funds-investing-globally) on international mutual funds, effectively blocking that convenient route for a long time. 
+My foray into direct global investing started when the RBI imposed [industry-wide limits](/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/#cons) on international mutual funds, effectively blocking that convenient route for a long time. 
 
 Initially, I opened an account with **INDmoney** (Tier 0), but I didn't actually use it, as I was still actively researching the global investing landscape. 
 
