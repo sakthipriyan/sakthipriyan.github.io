@@ -106,7 +106,7 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 
 **The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker places you squarely in the **Level 1** category. You are using an Introducing Broker (India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations of Level 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
-> **An Evolving Landscape**: The GIFT City framework is still in its early days and is rapidly evolving. For example, recent regulatory proposals aim to permit the **secondary listing of global ETFs** directly on the NSE IX. Theoretically, this could allow Indian investors to purchase highly sought-after Irish UCITS ETFs straight from GIFT City. However, we must "wait and watch" to see if massive global asset managers (like BlackRock or Vanguard) find the Indian retail market deep enough to justify the compliance and regulatory overhead of initiating a secondary listing here.
+> **An Evolving Landscape**: GIFT City is still in its early days. Recent proposals aim to permit the [**secondary listing of global ETFs on the NSE IX**](https://www.moneycontrol.com/news/business/markets/gift-city-opens-its-door-wider-through-proposal-for-secondary-listing-of-global-etfs-14017534.html). While this could eventually allow direct access to Irish UCITS ETFs, we must "wait and watch" if global issuers like BlackRock or Vanguard are actually willing to undertake the regulatory overhead to list there.
 
 
 ## Level 2: Direct International Prime Brokers
