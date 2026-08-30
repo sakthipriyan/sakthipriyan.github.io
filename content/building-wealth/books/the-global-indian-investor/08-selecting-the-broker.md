@@ -194,12 +194,12 @@ The most effective workaround for succession planning is to open a **Joint Accou
 
 When you combine asset domicile (US vs. Irish) with the account type (Individual vs. Joint), the outcomes for your heirs change drastically. 
 
-| Scenario | Asset Type | Ticker (e.g.) | Exchange | Account Type | Main Consideration |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **1** | US ETFs | SPLG | NYSE Arca | Individual | U.S.-situs estate-tax exposure + estate administration |
-| **2** | US ETFs | SPLG | NYSE Arca | Joint Account | May simplify succession, but U.S.-situs estate-tax exposure remains |
-| **3** | Irish ETFs | SPYL | LSE / SIX | Individual | Generally avoids direct U.S.-situs exposure; estate administration still required |
-| **4** | Irish ETFs | SPYL | LSE / SIX | Joint Account | May simplify succession while generally avoiding direct U.S.-situs exposure |
+| Scenario | Asset Type | Ticker / Exchange | Account Type | Main Consideration |
+| :--- | :--- | :--- | :--- | :--- |
+| **Worst** | US ETFs | SPLG (NYSE) | Individual | U.S.-situs estate-tax exposure + estate administration |
+| **Bad** | US ETFs | SPLG (NYSE) | Joint Account | May simplify succession, but U.S.-situs estate-tax exposure remains |
+| **Good** | Irish ETFs | SPYL (LSE / SIX) | Individual | Generally avoids direct U.S.-situs exposure; estate administration still required |
+| **Best** | Irish ETFs | SPYL (LSE / SIX) | Joint Account | May simplify succession while generally avoiding direct U.S.-situs exposure |
 
 > **Key Takeaway**: For an Indian investor using this structure, a properly configured joint account holding Irish UCITS ETFs may simplify succession while generally avoiding direct U.S.-situs exposure. The trade-off is additional reporting and tax-filing considerations for the joint holder.
 
