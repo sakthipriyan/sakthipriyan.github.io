@@ -132,7 +132,7 @@ IBKR is one of the most established international brokers available to Indian re
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
 
-**Opening an IBKR account directly** (at [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php)) gives the full account with no intermediary layer and remains the **highly recommended** path.
+> **Opening an IBKR account directly** (at [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php)) gives the full account with no intermediary layer and remains the **highly recommended** path.
 
 #### Opening an Account
 
