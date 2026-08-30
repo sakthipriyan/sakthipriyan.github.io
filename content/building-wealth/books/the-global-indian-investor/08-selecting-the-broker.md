@@ -53,7 +53,7 @@ When a fintech wrapper decides to sunset its global investing feature, the inves
 *   **Fi Money** completely sunsetted its US stocks feature in April 2026.
 *   **Winvesta** and **Kuvera** faced similar closures or migrations.
 
-When a fintech exits the market, investors become dependent on the provider's transition process. Depending on the arrangement, this can involve transferring positions to another broker via ACATS, opening a replacement account, or being forced into liquidating positions.
+When a fintech exits the market, investors become dependent on the provider's transition process. Depending on the arrangement, this can involve transferring positions to another broker via the Automated Customer Account Transfer Service (ACATS), opening a replacement account, or being forced into liquidating positions.
 
 This structural fragility is another reason serious, long-term investors naturally gravitate toward direct international brokers (Tier 2).
 
