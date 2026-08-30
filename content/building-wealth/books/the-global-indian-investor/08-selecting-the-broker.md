@@ -127,7 +127,7 @@ Charles Schwab is not included in my shortlist because its offering for internat
 
 ### Interactive Brokers (IBKR Direct)
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
-- **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), providing SIPC insurance while fully supporting LRS remittances directly from Indian banks.
+- **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), which fully supports LRS remittances directly from Indian banks.
 - **Costs**: Western European ETFs typically incur commissions of around £1 to £3 per trade, depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
@@ -138,7 +138,7 @@ IBKR is one of the most established international brokers available to Indian re
 
 Getting started with IBKR Direct is relatively straightforward for Indian residents:
 1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
-2. **Account Type**: Select "Individual" or "Joint" (review the *Account Types and Succession Planning* section below before making this choice) and ensure you choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
+2. **Account Type**: Select "Individual" or "Joint" (review the [Account Types and Succession Planning](#account-types-and-succession-planning) section below before making this choice) and ensure you choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
 5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
