@@ -16,7 +16,7 @@ summary: "How Indian investors can reduce the hidden forex markup cost when fund
 
 > **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
 >
-> Learn how to build a globally diversified portfolio from India. **7 of 12 chapters are live**, covering LRS, FX, global indexes, and Irish ETFs.
+> Learn how to build a globally diversified portfolio from India. **8 of 12 chapters are live**, covering LRS, FX, global indexes, Irish ETFs, and selecting a broker.
 
 ---
 
