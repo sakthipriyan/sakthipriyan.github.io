@@ -230,6 +230,8 @@ Depending on your overall portfolio construction/goals, you may also choose to k
 
 ## Gold ETCs (Exchange Traded Commodities)
 
+> **Taxation Note:** Irish Gold ETCs can be taxed as debt instruments in India. When I need to buy international gold, I may look at Canadian alternatives which are structured as trusts/debt. I discuss this ongoing allocation strategy in my **[State of the 1 Portfolio](/building-wealth/tags/state-of-the-1-portfolio/)** series.
+
 ### Why do we need international gold?
 
 As part of a global asset allocation strategy, holding a portion of gold through international instruments can make portfolio rebalancing more efficient. If both global equities and gold are held in USD, investors can rebalance between them **without incurring additional foreign exchange costs** (usually the major cost for international investment even after optimizations of [Chapter 3: How to Transfer Money Efficiently?](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/)).
