@@ -105,7 +105,7 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 | **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
 
 - **India INX Global Access**: One of the more established options within the IFSC. It acts as a centralized digital platform providing a gateway to over 135 exchanges across 33 countries (according to [India INX's documentation](https://www.indiainx.com/)), explicitly including **European exchanges**. They achieve this by partnering with international brokers on the backend.
-- **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as a springboard into the European Union, with plans to finalize broad European exchange connectivity by FY27.
+- **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as an entry point into the European Union, with plans to finalize broad European exchange connectivity by FY27.
 - **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
 
 #### Other Emerging Use Cases in GIFT City
