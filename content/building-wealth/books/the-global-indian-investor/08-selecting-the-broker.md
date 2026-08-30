@@ -80,8 +80,7 @@ Examples of these domestic intermediaries include:
 
 **Cons of Tier 1**:
 - Needless addition of complexity and an intermediary fee layer on top of IBKR's base execution costs.
-- Restrictive or trimmed-down web apps compared to the full broker platform.
-- **Platform Access**: Intermediary accounts often provide a more limited platform experience than a direct IBKR account; the availability of advanced tools like TWS or IBKR Desktop depends entirely on the intermediary's arrangement.
+- **Platform Access**: Intermediary accounts typically provide a restrictive, trimmed-down web experience compared to a direct IBKR account. The availability of advanced tools like TWS or IBKR Desktop depends entirely on the specific intermediary's arrangement.
 - Dependency on the intermediary's support team to get credentials or resolve direct account issues.
 
 
