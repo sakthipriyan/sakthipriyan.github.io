@@ -128,6 +128,7 @@ Charles Schwab is not included in my shortlist because its offering for internat
 ### Interactive Brokers (IBKR Direct)
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
 - **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), which fully supports LRS remittances directly from Indian banks.
+- **SIPC Protection**: Because your account is legally held with IBKR LLC (the US entity), your assets fall under the Securities Investor Protection Corporation (SIPC). SIPC is protection against certain losses if the broker fails (up to $500,000, including a $250,000 limit for cash), not protection against investment losses.
 - **Costs**: Western European ETFs typically incur commissions of around £1 to £3 per trade, depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
@@ -142,7 +143,6 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
 5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
-6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets fall under the Securities Investor Protection Corporation (SIPC). SIPC is protection against certain losses if the broker fails (up to $500,000, including a $250,000 limit for cash), not protection against investment losses.
 
 ### Saxo Bank
 Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR.
