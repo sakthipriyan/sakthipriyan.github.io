@@ -230,7 +230,7 @@ Depending on your overall portfolio construction/goals, you may also choose to k
 
 ## Gold ETCs (Exchange Traded Commodities)
 
-> **Taxation Note:** Irish Gold ETCs can be taxed as debt instruments in India. When I need to buy international gold, I may look at Canadian alternatives which are structured as trusts/debt. I discuss this ongoing allocation strategy in my **[State of the 1 Portfolio](/building-wealth/tags/state-of-the-1-portfolio/)** series.
+> **Taxation Note:** Irish Gold ETCs can be taxed as debt instruments in India. When I need to buy international gold, I may look at Canadian trust alternatives like the **Sprott Physical Gold Trust (PHYS)**.
 
 ### Why do we need international gold?
 
