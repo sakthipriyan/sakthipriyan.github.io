@@ -15,7 +15,7 @@ wealth_tags:
 
 To invest directly in international ETFs — specifically, the highly tax-efficient Irish UCITS ETFs listed on European exchanges like the London Stock Exchange (LSE) — you require a foreign brokerage account. This account acts as your gateway for deploying Liberalised Remittance Scheme (LRS) capital. 
 
-Indian residents face a unique logistical hurdle here. Traditional retail banking institutions physically located in Europe (e.g., Davy Select) or popular pan-European fintech platforms (e.g., Trading 212, DEGIRO, Lightyear) generally **refuse to onboard non-European Economic Area residents**. This exclusion is driven by strict Anti-Money Laundering (AML) protocols and the PRIIPs regulation. 
+Indian residents face a roadblock here: popular European brokers (like Trading 212 or DEGIRO) generally refuse to open accounts for non-European residents due to strict local regulations. 
 
 Consequently, access must be routed through either heavily regulated international prime brokerages with a global footprint or domestic Indian fintech overlays acting as introducing brokers. To evaluate these options, we can categorize them into three structural levels.
 
