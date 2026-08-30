@@ -165,7 +165,9 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 
 ## SIPC Protection
 
-When your account is legally held with a US entity (such as DriveWealth for Tier 0 or IBKR LLC for Tier 1 and 2), your assets fall under the protection of the Securities Investor Protection Corporation (SIPC). This SIPC protection guards against broker failure (up to $500,000, including a $250,000 limit for cash) and applies universally to **all** platforms discussed in this chapter that custody assets with a US broker-dealer. As a reminder, SIPC does *not* protect against investment losses.
+When your account is legally held with a US entity (such as DriveWealth for Tier 0 or IBKR LLC for Tier 1 and 2), your assets fall under the protection of the Securities Investor Protection Corporation (SIPC). This applies universally to **all** platforms discussed in this chapter that custody assets with a US broker-dealer.
+
+> This SIPC protection guards against broker failure (up to $500,000, including a $250,000 limit for cash). As a reminder, SIPC does *not* protect against investment losses.
 
 ## Account Types and Succession Planning
 
