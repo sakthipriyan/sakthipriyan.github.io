@@ -212,6 +212,6 @@ Given my priority for cost efficiency, using IBKR exclusively minimizes intermed
 
 ---
 
-*Next up: Chapter 9 on Taxation and Tax Filing.*
-
 > Work In Progress: Writing further chapters and refining published chapters. Stay tuned!
+
+*Next up: Chapter 9 on Taxation and Tax Filing.*
