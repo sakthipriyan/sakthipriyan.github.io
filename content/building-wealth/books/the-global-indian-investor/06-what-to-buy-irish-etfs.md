@@ -254,10 +254,10 @@ These paired funds track the **exact same underlying indices**, but differ entir
 
 | Target Index | Equivalent US ETF | Equivalent Irish UCITS ETF (USD, Acc) |
 | :--- | :--- | :--- |
-| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | SPDR S&P 500 UCITS ETF (**SPYL**) / Vanguard (**VUAA**) |
-| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | AXA IM Nasdaq-100 UCITS ETF (**ANAU**) / Invesco (**EQAC**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | SPDR MSCI World UCITS ETF (**SPPW**) / iShares (**IWDA**) |
-| **FTSE All-World** | - | Invesco FTSE All-World (**FWRA**) / Vanguard (**VWRA**) |
+| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
+| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
+| **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
+| **FTSE All-World** | Vanguard Total World Stock ETF (**VT**) | Vanguard FTSE All-World UCITS ETF (USD) Accumulating (**VWRA**) |
 
 ## Key Takeaways
 
