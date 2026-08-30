@@ -71,8 +71,8 @@ Examples of these domestic intermediaries include:
 | Indian Platform | Broker / execution partner | US ETFs | Irish ETFs |
 | :--- | :--- | :--- | :--- |
 | **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
-| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ❌ No |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ❌ No |
 | **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 
 **Pros of Tier 1**:
