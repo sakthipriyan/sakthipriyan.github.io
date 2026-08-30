@@ -182,8 +182,9 @@ For platforms utilizing a US entity (such as DriveWealth for Tier 0 or IBKR LLC 
 
 A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. While US residents can easily assign a **"Transfer on Death" (TOD)** beneficiary to automatically bypass probate, this legal mechanism is not available to foreign residents. Thus, unlike Indian demat accounts where a nominee simply takes over, an international Individual account requires standard estate processing upon the account holder's untimely demise.
 
-### The Problem with Individual Accounts
-If you open an "Individual" account and pass away, your heirs must go through a lengthy estate settlement process with the broker. While holding Irish UCITS ETFs generally shields your heirs from direct U.S. estate-tax exposure (recall the $60,000 Form 706-NA filing threshold detailed in [Chapter 6 > US Estate Tax Rates](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#us-estate-tax-rates)), the broker will still require proper legal documentation (like a probated Will or Succession Certificate) to transfer the assets. Having a clearly drafted Will can significantly fast-track this process, but a delay is inevitable.
+### If the investor opens an individual account and passes away
+
+The heirs must go through a lengthy estate settlement process with the broker. While holding Irish UCITS ETFs generally shields them from direct U.S. estate-tax exposure (recall the $60,000 Form 706-NA filing threshold detailed in [Chapter 6 > US Estate Tax Rates](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#us-estate-tax-rates)), the broker will still require proper legal documentation (like a probated Will or Succession Certificate) to transfer the assets. Having a clearly drafted Will can significantly fast-track this process, but a delay is inevitable.
 
 ### The Joint Account Solution (With Right of Survivorship)
 The most effective workaround for succession planning is to open a **Joint Account** (specifically, Joint Tenants with Right of Survivorship) with your spouse. 
