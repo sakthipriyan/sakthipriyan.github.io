@@ -26,7 +26,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 **The critical limitation**: Because their backend API infrastructure is fundamentally designed around US clearinghouses, these platforms are traditionally confined entirely to offering US-listed securities. **As currently offered, these platforms do not provide access to Irish-domiciled UCITS ETFs listed on European exchanges such as the LSE.** 
 
 
-| Indian Platform | Broker / execution partner | US Stocks / ETF Access | European ETF Access |
+| Indian Platform | Broker / execution partner | US ETFs | Irish ETFs |
 | :--- | :--- | :--- | :--- |
 | **[Angel One](https://www.angelone.in/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ✅ Yes | ❌ No |
 | **[Appreciate](https://appreciatewealth.com/us-stocks/)** | [DriveWealth](https://drivewealth.com/) | ✅ Yes | ❌ No |
@@ -68,7 +68,7 @@ A specialized subset of platforms uses Interactive Brokers (IBKR) as their under
 
 Examples of these domestic intermediaries include:
 
-| Indian Platform | Broker / execution partner | US Stocks / ETF Access | European ETF Access |
+| Indian Platform | Broker / execution partner | US ETFs | Irish ETFs |
 | :--- | :--- | :--- | :--- |
 | **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 | **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
@@ -94,7 +94,7 @@ Gujarat International Finance Tec-City (GIFT City) has emerged as a strategic sa
 
 For Indian residents looking to buy European UCITS ETFs, this route offers a highly regulated, LRS-compliant pathway. The prominent entities providing this access include:
 
-| GIFT City Platform | Backend Execution Partner | US Stocks / ETF Access | European ETF Access |
+| GIFT City Platform | Backend Execution Partner | US ETFs | Irish ETFs |
 | :--- | :--- | :--- | :--- |
 | **[India INX GA](https://www.indiainxga.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
 | **[NSE IX GAP](https://www.nseix.com/)** | Multiple / Cyprus SE | ✅ Yes | ⏳ Planned (FY27) |
@@ -118,7 +118,7 @@ The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, servi
 
 For investors prioritizing long-term cost, control, and independence from domestic intermediaries, opening an account directly with an international broker is the preferred route. The setup overhead is more or less the same as Tier 1, but taxation filing and LRS must be taken care of by the investor themselves.
 
-| International Broker | Domicile | US Stocks / ETF Access | European ETF Access |
+| International Broker | Domicile | US ETFs | Irish ETFs |
 | :--- | :--- | :--- | :--- |
 | **[Charles Schwab](https://international.schwab.com/)** | United States | ✅ Yes | ❌ No |
 | **[Interactive Brokers](https://www.interactivebrokers.co.in/en/home.php)** | United States | ✅ Yes | ✅ Yes |
