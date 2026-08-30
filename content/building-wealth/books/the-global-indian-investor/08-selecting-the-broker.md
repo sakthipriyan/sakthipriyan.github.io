@@ -123,6 +123,9 @@ For investors seeking the absolute lowest long-term cost and full market control
 | **[Swissquote](https://en.swissquote.com/)** | Switzerland | ✅ Yes |
 
 
+### Charles Schwab
+While highly popular for US residents, Schwab restricts Non-Resident Aliens from purchasing EU-listed UCITS ETFs, making it unsuitable for the Irish ETF strategy.
+
 ### Interactive Brokers (IBKR Direct)
 IBKR stands as the undisputed primary conduit for global capital flows originating from India. 
 - **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), providing SIPC insurance while fully supporting LRS remittances directly from Indian banks.
@@ -140,9 +143,6 @@ Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade altern
 ### Swissquote
 A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy, but its pricing architecture is deliberately prohibitive for small-scale retail investors.
 - **Costs**: Strict $1,000 minimum deposit, high trading fees ($25–$30+ per trade), and mandatory quarterly custody fees (CHF 20–50). Mathematically optimal only for very large, static portfolios.
-
-### Charles Schwab
-While highly popular for US residents, Schwab restricts Non-Resident Aliens from purchasing EU-listed UCITS ETFs, making it unsuitable for the Irish ETF strategy.
 
 ## Summary Matrix
 
