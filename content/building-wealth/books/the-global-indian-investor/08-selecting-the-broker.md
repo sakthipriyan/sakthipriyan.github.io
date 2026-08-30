@@ -79,12 +79,12 @@ Examples of these domestic intermediaries include:
 | **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ❌ No |
 | **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 
+*Note: Product capabilities and routing partnerships change over time. Always verify with the platform whether their current offering actively permits direct execution of Irish-domiciled UCITS ETFs on European exchanges.*
+
 **Pros of Tier 1**:
 - Easy to start with a familiar Indian interface.
 - Some platforms provide tax reports or documentation that can simplify Indian tax filing.
 - Access to bundled LRS promotions (as discussed in [Chapter 3 > How to Send Money](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/)).
-
-*Note: Product capabilities and routing partnerships change over time. Always verify with the platform whether their current offering actively permits direct execution of Irish-domiciled UCITS ETFs on European exchanges.*
 
 **Cons of Tier 1**:
 - Additional complexity and an intermediary fee layer on top of the underlying broker's costs.
