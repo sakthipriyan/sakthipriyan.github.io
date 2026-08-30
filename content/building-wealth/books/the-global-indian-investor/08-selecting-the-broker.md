@@ -168,7 +168,7 @@ A fully licensed Swiss bank offering ultimate banking-grade custody and privacy,
 | **Primary Market** | US Only | Global (via IBKR) | Global (LSE, EU, US) |
 | **Irish UCITS ETFs** | ❌ No | ✅ Yes (Platform dependent) | ✅ Yes |
 | **Brokerage** | Zero or low | IBKR + intermediary fee | ~$2 to $4 minimum / order |
-| **FX Conversion** | Platform Markup (INR ➞ USD) | Platform/bank dependent | Bank Rates (INR ➞ USD)<br>See [Chapter 3 > Cost Components in an Overseas Remittance](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#cost-components-in-an-overseas-remittance-lrs) |
+| **FX Conversion (INR -> USD)** | Platform Markup | Platform/bank dependent | Bank Rates<br>See [Chapter 3 > Cost Components in an Overseas Remittance](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#cost-components-in-an-overseas-remittance-lrs) |
 | **Desktop TWS Access** | ❌ No | Platform dependent | ✅ Yes |
 | **LRS Handling** | Integrated | Bundled / Assisted | Self-managed |
 
