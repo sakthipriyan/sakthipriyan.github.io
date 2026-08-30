@@ -28,16 +28,18 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 | Indian Platform | Backend US Broker | European ETF Access |
 | :--- | :--- | :--- |
-| **[Appreciate](https://appreciatewealth.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
+| **[Appreciate](https://appreciatewealth.com/us-stocks/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
-| **[Dhan](https://dhan.co/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
+| **[Dhan](https://dhan.co/us-stocks/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
 | **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No |
-| **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
-| **[Tickertape](https://www.tickertape.in/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
+| **[Stockal (Borderless)](https://www.borderless.world/stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
+| **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
 *(Note: A platform like INDmoney might allow the purchase of `EIRL` — the iShares MSCI Ireland ETF — but this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 25% US dividend withholding tax and 40% estate tax.)*
+
+*(Note: Vested Finance recently began marketing access to "UCITS". However, it is critical to understand that they are offering actively managed UCITS mutual funds, not passive exchange-traded UCITS ETFs (like CSPX or VWRA). While these mutual funds technically bypass the US estate tax, they carry much higher expense ratios than passive index ETFs and do not provide access to the cheap, broad-market European indexes discussed in this book.)*
 
 While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
 
