@@ -252,11 +252,11 @@ Many of the world's largest asset managers—including **BlackRock (iShares), Va
 
 These paired funds track the **exact same underlying indices**, but differ entirely in their legal domicile, tax treatment, and investor base:
 
-| Target Index | Equivalent US ETF (USD, Distributing) | Equivalent Irish UCITS ETF (USD, Acc) |
-| :--- | :--- | :--- |
-| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
-| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
+| Target Index | Equivalent US ETF (USD, Dist) | TER | Equivalent Irish UCITS ETF (USD, Acc) | TER |
+| :--- | :--- | :--- | :--- | :--- |
+| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | 0.03% | Vanguard S&P 500 UCITS ETF (**VUAA**) | 0.07% |
+| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | 0.20% | Invesco EQQQ Nasdaq-100 UCITS ETF (**EQAC**) | 0.30% |
+| **MSCI World** | iShares MSCI World ETF (**URTH**) | 0.24% | iShares Core MSCI World UCITS ETF (**IWDA**) | 0.20% |
 
 For a detailed comparison of these indices, their market coverage, and a wider selection of available funds, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.
 
