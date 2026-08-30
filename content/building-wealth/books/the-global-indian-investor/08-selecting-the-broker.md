@@ -146,14 +146,14 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 
 ## Summary Matrix
 
-| Factor | Level 2 (IBKR Direct) | Level 1 (Paasa / ICICI Direct / Kotak) | Level 0 (INDmoney / Vested / Stockal) |
+| Factor | Level 0 (INDmoney / Vested / Stockal) | Level 1 (Paasa / ICICI Direct / Kotak) | Level 2 (IBKR Direct) |
 |---|---|---|---|
-| **Primary Market** | Global (LSE, EU, US) | Global (via IBKR) | US Only |
-| **Irish UCITS ETFs** | ✅ Yes | ✅ Yes (Platform dependent) | ❌ No |
-| **Brokerage** | ~$1 to £1.70 / order | IBKR + intermediary fee | Zero or low |
-| **FX Conversion** | Bank Rates (INR ➞ USD)<br>[See Ch 3](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/) | Bank Rates (INR ➞ USD) | Platform Markup (INR ➞ USD) |
-| **Desktop TWS Access** | ✅ Yes | ❌ No | ❌ No |
-| **LRS Handling** | Self-managed | Bundled / Assisted | Integrated |
+| **Primary Market** | US Only | Global (via IBKR) | Global (LSE, EU, US) |
+| **Irish UCITS ETFs** | ❌ No | ✅ Yes (Platform dependent) | ✅ Yes |
+| **Brokerage** | Zero or low | IBKR + intermediary fee | ~$1 to £1.70 / order |
+| **FX Conversion** | Platform Markup (INR ➞ USD) | Bank Rates (INR ➞ USD) | Bank Rates (INR ➞ USD)<br>[See Ch 3](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/) |
+| **Desktop TWS Access** | ❌ No | ❌ No | ✅ Yes |
+| **LRS Handling** | Integrated | Bundled / Assisted | Self-managed |
 
 ## Opening an IBKR Direct Account
 
