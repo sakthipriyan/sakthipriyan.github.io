@@ -1,5 +1,5 @@
 ---
-title: "What to Buy - Irish ETFs vs US ETFs"
+title: "What to Buy - US ETFs | Irish ETFs"
 subtitle: "Why Irish-domiciled UCITS ETFs are the 'Growth' option for the Indian investor."
 type: "books"
 chapter: 99
