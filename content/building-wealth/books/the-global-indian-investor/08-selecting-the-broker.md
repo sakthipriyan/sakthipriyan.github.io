@@ -194,7 +194,9 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 
 My foray into direct global investing started when the RBI imposed industry-wide limits on international mutual funds, effectively blocking that convenient route for a long time. 
 
-Looking for alternatives, I discovered the **ICICI Direct Global** approach (Tier 1) and opened my first account there. It served as an excellent stepping stone, abstracting away some of the complexities while I learned the mechanics of cross-border investing. 
+Initially, I opened an account with **INDmoney** (Tier 0), but I didn't actually use it, as I was still actively researching the global investing landscape. 
+
+Through that research, I discovered the **ICICI Direct Global** approach (Tier 1) and opened my first funded account there. It served as an excellent stepping stone, abstracting away some of the complexities while I learned the mechanics of cross-border investing. 
 
 After using it for a while and extensively researching the brokerage landscape (which eventually formed the basis of this chapter), I realized the limitations of using an intermediary. Once I became comfortable navigating LRS remittances directly with my bank, I eventually opened a **Direct IBKR account** (Tier 2).
 
