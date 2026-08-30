@@ -26,19 +26,19 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 **The critical limitation**: Because their backend API infrastructure is fundamentally designed around US clearinghouses, these platforms are traditionally confined entirely to offering US-listed securities. **As currently offered, these platforms do not provide access to Irish-domiciled UCITS ETFs listed on European exchanges such as the LSE.** 
 
 
-| Indian Platform | Broker / execution partner | European ETF Access |
-| :--- | :--- | :--- |
-| **[Angel One](https://www.angelone.in/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
-| **[Appreciate](https://appreciatewealth.com/us-stocks/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
-| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
-| **[Dhan](https://dhan.co/us-stocks/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
-| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
-| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No |
-| **[Kuvera](https://kuvera.in/explore/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
-| **[Stockal (Borderless)](https://www.borderless.world/stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
-| **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
-| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
-| **[Winvesta](https://www.winvesta.in/invest-in-us-stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
+| Indian Platform | Broker / execution partner | US Stocks / ETF Access | European ETF Access |
+| :--- | :--- | :--- | :--- |
+| **[Angel One](https://www.angelone.in/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ✅ Yes | ❌ No |
+| **[Appreciate](https://appreciatewealth.com/us-stocks/)** | [DriveWealth](https://drivewealth.com/) | ✅ Yes | ❌ No |
+| **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ✅ Yes | ❌ No |
+| **[Dhan](https://dhan.co/us-stocks/)** | [ViewTrade](https://viewtrade.com/) | ✅ Yes | ❌ No |
+| **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ✅ Yes | ❌ No |
+| **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ✅ Yes | ❌ No |
+| **[Kuvera](https://kuvera.in/explore/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ✅ Yes | ❌ No |
+| **[Stockal (Borderless)](https://www.borderless.world/stocks)** | [DriveWealth](https://drivewealth.com/) | ✅ Yes | ❌ No |
+| **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ✅ Yes | ❌ No |
+| **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ✅ Yes | ❌ No |
+| **[Winvesta](https://www.winvesta.in/invest-in-us-stocks)** | [Alpaca](https://alpaca.markets/) | ✅ Yes | ❌ No |
 
 *(Note: This is not an exhaustive list of all available platforms.)*
 
@@ -68,12 +68,12 @@ A specialized subset of platforms uses Interactive Brokers (IBKR) as their under
 
 Examples of these domestic intermediaries include:
 
-| Indian Platform | Broker / execution partner | European ETF Access |
-| :--- | :--- | :--- |
-| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
-| **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
-| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
-| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
+| Indian Platform | Broker / execution partner | US Stocks / ETF Access | European ETF Access |
+| :--- | :--- | :--- | :--- |
+| **[ICICI Direct Global](https://www.icicidirect.com/global-investment-services)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[Kotak Securities (Neo)](https://www.kotakneo.com/global-investment/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
+| **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes | ✅ Yes |
 
 **Pros of Tier 1**:
 - Easy to start with a familiar Indian interface.
@@ -94,11 +94,11 @@ Gujarat International Finance Tec-City (GIFT City) has emerged as a strategic sa
 
 For Indian residents looking to buy European UCITS ETFs, this route offers a highly regulated, LRS-compliant pathway. The prominent entities providing this access include:
 
-| GIFT City Platform | Backend Execution Partner | European ETF Access |
-| :--- | :--- | :--- |
-| **[India INX GA](https://www.indiainxga.com/)** | Interactive Brokers | ✅ Yes |
-| **[NSE IX GAP](https://www.nseix.com/)** | Multiple / Cyprus SE | ⏳ Planned (FY27) |
-| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | Interactive Brokers | ✅ Yes |
+| GIFT City Platform | Backend Execution Partner | US Stocks / ETF Access | European ETF Access |
+| :--- | :--- | :--- | :--- |
+| **[India INX GA](https://www.indiainxga.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
+| **[NSE IX GAP](https://www.nseix.com/)** | Multiple / Cyprus SE | ✅ Yes | ⏳ Planned (FY27) |
+| **[SMC Global IFSC](https://www.smcglobalifsc.com/)** | Interactive Brokers | ✅ Yes | ✅ Yes |
 
 - **India INX Global Access**: One of the more established options within the IFSC. It acts as a centralized digital platform providing a gateway to over 135 exchanges across 33 countries (according to [India INX's documentation](https://www.indiainx.com/)), explicitly including **European exchanges**. They achieve this by partnering with international brokers on the backend.
 - **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as a springboard into the European Union, with plans to finalize broad European exchange connectivity by FY27.
@@ -118,12 +118,12 @@ The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, servi
 
 For investors prioritizing long-term cost, control, and independence from domestic intermediaries, opening an account directly with an international broker is the preferred route. The setup overhead is more or less the same as Tier 1, but taxation filing and LRS must be taken care of by the investor themselves.
 
-| International Broker | Domicile | European ETF Access |
-| :--- | :--- | :--- |
-| **[Charles Schwab](https://international.schwab.com/)** | United States | ❌ No |
-| **[Interactive Brokers](https://www.interactivebrokers.co.in/en/home.php)** | United States | ✅ Yes |
-| **[Saxo Bank](https://www.home.saxo/)** | Denmark | ✅ Yes |
-| **[Swissquote](https://en.swissquote.com/)** | Switzerland | ✅ Yes |
+| International Broker | Domicile | US Stocks / ETF Access | European ETF Access |
+| :--- | :--- | :--- | :--- |
+| **[Charles Schwab](https://international.schwab.com/)** | United States | ✅ Yes | ❌ No |
+| **[Interactive Brokers](https://www.interactivebrokers.co.in/en/home.php)** | United States | ✅ Yes | ✅ Yes |
+| **[Saxo Bank](https://www.home.saxo/)** | Denmark | ✅ Yes | ✅ Yes |
+| **[Swissquote](https://en.swissquote.com/)** | Switzerland | ✅ Yes | ✅ Yes |
 
 
 ### Charles Schwab
