@@ -128,7 +128,7 @@ Charles Schwab is not included in my shortlist because its offering for internat
 ### Interactive Brokers (IBKR Direct)
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
 - **Regulation**: Your global investing account is held with their US entity (IBKR LLC, regulated by the US SEC/FINRA). Notably, Interactive Brokers also has a direct presence in the Indian stock markets and is locally registered with SEBI, adding a strong layer of institutional trust. They fully support LRS remittances directly from Indian banks.
-- **Costs**: Western European ETFs typically incur commissions of $2 to $4 per trade minimum (which grows with volume), depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
+- **Costs**: Western European ETFs typically incur commissions of ~$2 to $4 per trade minimum (which grows with volume), depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
 
