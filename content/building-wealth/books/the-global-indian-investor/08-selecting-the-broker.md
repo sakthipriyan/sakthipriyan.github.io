@@ -125,14 +125,14 @@ For investors prioritizing long-term cost, control, and independence from domest
 
 | International Broker | Domicile | US ETFs | Irish ETFs |
 | :--- | :--- | :--- | :--- |
-| **[Charles Schwab](https://international.schwab.com/)** | United States | ✅ Yes | ❌ No |
+| **[Charles Schwab](https://international.schwab.com/)** | United States | ✅ Yes | ⚠️ Yes (Phone only)* |
 | **[Interactive Brokers](https://www.interactivebrokers.co.in/en/home.php)** | United States | ✅ Yes | ✅ Yes |
 | **[Saxo Bank](https://www.home.saxo/)** | Denmark | ✅ Yes | ✅ Yes |
 | **[Swissquote](https://en.swissquote.com/)** | Switzerland | ✅ Yes | ✅ Yes |
 
 
 ### Charles Schwab
-I did not shortlist Schwab because its current European UCITS trading workflow for Indian residents is significantly less convenient and more expensive than IBKR's.
+While Charles Schwab is a globally recognized broker, I did not shortlist it for this specific strategy. While Irish UCITS ETFs are technically available to purchase, non-US residents cannot buy foreign-listed securities online. You are forced to execute these trades via a broker-assisted phone call, which incurs steep additional fees (often $50+ per trade), destroying the cost-efficiency required for a long-term SIP strategy.
 
 ### Interactive Brokers (IBKR Direct)
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
