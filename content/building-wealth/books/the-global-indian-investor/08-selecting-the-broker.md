@@ -17,7 +17,11 @@ To invest directly in international ETFs — specifically, the highly tax-effici
 
 Indian residents face a roadblock here: popular European brokers (like Trading 212 or DEGIRO) generally refuse to open accounts for non-European residents due to strict local regulations. 
 
-Consequently, access must be routed through either heavily regulated international brokers with a global footprint or domestic Indian fintech overlays acting as introducing brokers. To evaluate these options, we can categorize them into three structural tiers.
+Consequently, access must be routed through either heavily regulated international brokers with a global footprint or domestic Indian fintech overlays acting as introducing brokers. To evaluate these options, we can categorize them into three structural tiers:
+
+*   **Tier 0**: Indian platform + US-only broker.
+*   **Tier 1**: Indian platform + International broker (access to more markets).
+*   **Tier 2**: Direct International broker (skipping the Indian platform in Tier 1).
 
 ## Tier 0: US-Only Platforms
 
