@@ -147,7 +147,7 @@ IBKR is one of the most established international brokers available to Indian re
 
 Getting started with IBKR Direct is relatively straightforward for Indian residents:
 1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
-2. **Account Type**: Select "Individual" or "Joint" (see [Succession Planning](#account-types-and-succession-planning) below). You must choose a **"Cash"** account to strictly comply with RBI LRS rules against leveraged trading in foreign markets.
+2. **Account Type**: Select "Individual" or "Joint" (see [Succession Planning](#account-types-and-succession-planning) below). You must choose a **"Cash"** account to strictly comply with RBI LRS rules against leveraged trading in foreign markets (Margin accounts are typically restricted by default for Indian residents during onboarding).
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card and Aadhaar for address proof.
 5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3 > Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
