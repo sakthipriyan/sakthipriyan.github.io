@@ -134,7 +134,7 @@ For investors prioritizing long-term cost, control, and independence from domest
 ### Charles Schwab
 While Charles Schwab is a globally recognized broker, I did not shortlist it for this specific strategy. While Irish UCITS ETFs are technically available to purchase, non-US residents cannot buy foreign-listed securities online. You are forced to execute these trades via a broker-assisted phone call, which incurs steep additional fees (often $50+ per trade), destroying the cost-efficiency required for a long-term SIP strategy.
 
-### Interactive Brokers (IBKR Direct)
+### Interactive Brokers
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
 - **Regulation**: Your global investing account is held with their US entity (IBKR LLC, regulated by the US SEC/FINRA). Notably, Interactive Brokers also has a direct presence in the Indian stock markets and is locally registered with SEBI, adding a strong layer of institutional trust. They fully support LRS remittances directly from Indian banks.
 - **Costs**: Western European ETFs typically incur commissions of ~$2 to $4 per trade minimum (which grows with volume), depending on whether you opt for IBKR's [Fixed or Tiered pricing structure](https://www.interactivebrokers.co.in/en/pricing/commissions-stocks-europe.php) and the specific exchange.
