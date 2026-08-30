@@ -159,7 +159,7 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 
 Getting started with IBKR Direct is relatively straightforward for Indian residents:
 1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
-2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a "Cash" account initially. You can upgrade to a Margin account later if needed.
+2. **Account Type**: Select "Individual" (or Joint if preferred) and strictly choose a **"Cash"** account. Margin accounts (leveraged trading) are explicitly prohibited for Indian residents under the RBI's LRS rules.
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
 5. **Funding**: Once approved, use the LRS methods discussed in earlier chapters to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
