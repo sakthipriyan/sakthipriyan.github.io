@@ -36,7 +36,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Stockal (Borderless)](https://www.borderless.world/stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
-| **[Winvesta](https://winvesta.in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
+| **[Winvesta](https://www.winvesta.in/invest-in-us-stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
 ### Notes on Tier 0 Platforms
 
