@@ -63,7 +63,7 @@ When a fintech wrapper decides to sunset its global investing feature, the inves
 
 When a fintech exits the market, investors become dependent on the provider's transition process. Depending on the arrangement, this can involve transferring positions to another broker via ACATS (Automated Customer Account Transfer Service), opening a replacement account, or being forced into liquidating positions.
 
-This structural fragility is another reason serious, long-term investors naturally gravitate toward direct international brokers (Tier 2).
+> **Key Takeaway:** This structural fragility—coupled with the complete unavailability of Irish UCITS ETFs—is why serious, long-term investors naturally gravitate toward direct international brokers (Tier 2).
 
 ## Tier 1: Indian Establishments with IBKR Backend
 
