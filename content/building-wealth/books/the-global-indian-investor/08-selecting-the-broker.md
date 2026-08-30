@@ -196,10 +196,10 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 
 | Scenario | Asset Type | Account Type | Main Consideration |
 | :--- | :--- | :--- | :--- |
-| **1** | US ETFs (e.g., VOO) | Individual | U.S.-situs estate-tax exposure + estate administration |
-| **2** | US ETFs (e.g., VOO) | Joint Account | May simplify succession, but U.S.-situs estate-tax exposure remains |
-| **3** | Irish ETFs (e.g., CSPX) | Individual | Generally avoids direct U.S.-situs exposure; estate administration still required |
-| **4** | Irish ETFs (e.g., CSPX) | Joint Account | May simplify succession while generally avoiding direct U.S.-situs exposure |
+| **1** | US ETFs (e.g., SPLG) | Individual | U.S.-situs estate-tax exposure + estate administration |
+| **2** | US ETFs (e.g., SPLG) | Joint Account | May simplify succession, but U.S.-situs estate-tax exposure remains |
+| **3** | Irish ETFs (e.g., SPYL) | Individual | Generally avoids direct U.S.-situs exposure; estate administration still required |
+| **4** | Irish ETFs (e.g., SPYL) | Joint Account | May simplify succession while generally avoiding direct U.S.-situs exposure |
 
 > **Key Takeaway**: For an Indian investor using this structure, a properly configured joint account holding Irish UCITS ETFs may simplify succession while generally avoiding direct U.S.-situs exposure. The trade-off is additional reporting and tax-filing considerations for the joint holder.
 
