@@ -133,7 +133,7 @@ IBKR stands as the undisputed primary conduit for global capital flows originati
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
 
-**Opening an IBKR account directly** (at ibkr.com/ind) gives the full account with no intermediary layer and remains the **highly recommended** path.
+**Opening an IBKR account directly** (at [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php)) gives the full account with no intermediary layer and remains the **highly recommended** path.
 
 ### Saxo Bank
 Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR.
@@ -158,11 +158,12 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 ## Opening an IBKR Direct Account
 
 Getting started with IBKR Direct is relatively straightforward for Indian residents:
-1. **Sign Up**: Visit `ibkr.com/ind` to begin the application.
+1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
 2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a "Cash" account initially. You can upgrade to a Margin account later if needed.
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
 5. **Funding**: Once approved, use the LRS methods discussed in earlier chapters to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
+6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets are protected by the Securities Investor Protection Corporation (SIPC) for up to $500,000 (including a $250,000 limit for cash) in the rare event of broker insolvency.
 
 ## Account Types and Succession Planning
 
@@ -198,5 +199,7 @@ Looking for alternatives, I discovered the **ICICI Direct Global** approach (Lev
 After using it for a while and extensively researching the brokerage landscape (which eventually formed the basis of this chapter), I realized the limitations of using an intermediary. Once I became comfortable navigating LRS remittances directly with my bank, I eventually opened a **Direct IBKR account** (Level 2).
 
 Currently, I have moved my residual cash from the ICICI Direct Global account to my direct IBKR account. I am yet to transfer the actual ETF positions, but fortunately, the old ICICI account is not incurring any ongoing maintenance costs since I downgraded it to their free pricing tier.
+
+Given my priority for minimizing costs, using IBKR exclusively currently creates a single point of failure (SPOF) in my international investment setup. I am keeping a close eye on the brokerage landscape for any suitable, cost-effective alternatives to diversify my broker risk once my portfolio size approaches the $500,000 SIPC insurance limit.
 
 **On the estate planning front:** I am currently utilizing the "Good" approach (Individual Account holding Irish ETFs) rather than the "Best" approach (Joint Account). The primary reason is administrative: opening a Joint Account would classify my spouse as a beneficial owner, forcing her to upgrade to the far more complex **ITR-2** tax filing just to declare the account in Schedule FA. For now, relying on an Individual Account supported by a clearly drafted Will avoids that annual tax-filing friction.
