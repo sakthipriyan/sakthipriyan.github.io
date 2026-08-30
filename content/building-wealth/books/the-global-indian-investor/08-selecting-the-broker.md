@@ -179,7 +179,7 @@ If you open an "Individual" account and pass away, your heirs must go through a 
 ### The Joint Account Solution (With Right of Survivorship)
 The most effective workaround for succession planning is to open a **Joint Account** (specifically, Joint Tenants with Right of Survivorship) with your spouse. 
 - **The Benefit**: In the event of one holder's untimely demise, the surviving spouse may be able to take control of the account without the same lengthy estate-administration process that applies to an individual account. 
-- **The Catch (Tax Filing)**: The Indian Income Tax Department requires all foreign assets to be disclosed. If you have a Joint Account, the secondary holder (e.g., your spouse) is considered a beneficial owner. Consequently, **the spouse must also declare the IBKR account in the Schedule FA (Foreign Assets) section of their own Income Tax Return (detailed in [Chapter 9: Annual Compliance: Schedule FA](/building-wealth/books/the-global-indian-investor/09-taxation-and-tax-filing/#annual-compliance-schedule-fa))**, even if they did not fund it. 
+- **The Catch (Tax Filing)**: The Indian Income Tax Department requires all foreign assets to be disclosed. If you have a Joint Account, the secondary holder (e.g., your spouse) is considered a beneficial owner. Consequently, **the spouse must also declare the IBKR account in the Schedule FA (Foreign Assets) section of their own Income Tax Return**, even if they did not fund it. 
 
 ### The Estate Planning Matrix: Worst to Best
 
