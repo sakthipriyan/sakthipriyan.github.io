@@ -38,6 +38,8 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Winvesta](https://www.winvesta.in/invest-in-us-stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
+*(Note: This is not an exhaustive list of all available platforms.)*
+
 ### Notes on Tier 0 Platforms
 
 *   **The "Irish" ETF Illusion:** A platform like INDmoney might allow the purchase of `EIRL` (the iShares MSCI Ireland ETF). Be aware that this is merely a US-listed ETF tracking Irish domestic companies. `EIRL` is a US-listed, US-domiciled ETF that happens to track Irish companies. This is entirely different from a European-listed, Irish-domiciled UCITS ETF like `CSPX` or `VWRA`. Because `EIRL` is US-domiciled, it remains fully exposed to the US tax traps detailed in [Chapter 6 > US Estate Tax Risk](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#1-us-estate-tax-risk).
