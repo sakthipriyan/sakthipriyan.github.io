@@ -230,9 +230,7 @@ Depending on your overall portfolio construction/goals, you may also choose to k
 
 ## Gold ETCs (Exchange Traded Commodities)
 
-> **Taxation Note:** Irish Gold ETCs can be taxed as debt instruments in India. When I need to buy international gold, I may look at Canadian trust alternatives like the **Sprott Physical Gold Trust (PHYS)**.
-> 
-> **Aug 30, 2026 Update:** Because Irish Gold ETCs are legally structured as zero-coupon bonds, they risk being taxed under Section 50AA at your income tax slab rates regardless of the holding period. Canadian trust structures like `PHYS` avoid this debt classification, allowing them to qualify for the unified 12.5% LTCG rate after 24 months.
+> **Aug 30, 2026 Update:** Irish Gold ETCs are legally structured as zero-coupon bonds, meaning they risk being taxed as debt instruments under Section 50AA at your income tax slab rates regardless of the holding period. When buying international gold, I look at Canadian alternatives like the **Sprott Physical Gold Trust (PHYS)**. Because `PHYS` is structured as a trust rather than debt, it avoids this classification and qualifies for the unified 12.5% LTCG rate after 24 months.
 
 ### Why do we need international gold?
 
