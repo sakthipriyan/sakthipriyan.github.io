@@ -36,6 +36,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Stockal (Borderless)](https://www.borderless.world/stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
+| **[Winvesta](https://winvesta.in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
 ### Notes on Tier 0 Platforms
 
@@ -51,7 +52,6 @@ Because these platforms act as thin technology wrappers sitting between you, Ind
 When a fintech wrapper decides to sunset its global investing feature, the investor suffers massively. We have seen this repeatedly:
 *   **Groww** abruptly halted its US stocks offering in early 2024.
 *   **Fi Money** completely sunsetted its US stocks feature in April 2026.
-*   **Winvesta** and **Kuvera** faced similar closures or migrations.
 
 When a fintech exits the market, investors become dependent on the provider's transition process. Depending on the arrangement, this can involve transferring positions to another broker via ACATS (Automated Customer Account Transfer Service), opening a replacement account, or being forced into liquidating positions.
 
