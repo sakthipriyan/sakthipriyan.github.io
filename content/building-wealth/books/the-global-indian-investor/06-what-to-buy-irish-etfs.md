@@ -257,11 +257,8 @@ These paired funds track the **exact same underlying indices**, but differ entir
 | **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
 | **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
 | **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
-| **FTSE All-World** | Vanguard Total World Stock ETF (**VT**)* | Vanguard FTSE All-World UCITS ETF (USD) Accumulating (**VWRA**) |
 
-*\*Note: VT technically tracks the FTSE Global All Cap Index (which includes small-caps), whereas VWRA tracks the FTSE All-World Index (which drops small-caps). However, VWRA is Vanguard's flagship global fund in Ireland.*
-
-*(For a detailed comparison of these indices, their market coverage, and a wider selection of available funds, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.)*
+For a detailed comparison of these indices, their market coverage, and a wider selection of available funds, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.
 
 ## Key Takeaways
 
