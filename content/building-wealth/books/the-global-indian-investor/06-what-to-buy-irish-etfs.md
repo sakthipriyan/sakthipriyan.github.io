@@ -252,12 +252,17 @@ Many of the world's largest asset managers—including **BlackRock (iShares), Va
 
 These paired funds track the **exact same underlying indices**, but differ entirely in their legal domicile, tax treatment, and investor base:
 
-| Target Index | Equivalent US ETF | Equivalent Irish UCITS ETF (USD, Acc) |
+*(For a detailed comparison of these indices, their market coverage, and a wider selection of available funds, see **[Chapter 7 > Selecting the global indexes](/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/)**.)*
+
+| Target Index | Equivalent US ETF | Lowest-Cost Irish UCITS ETF (USD, Acc) |
 | :--- | :--- | :--- |
-| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | Vanguard S&P 500 UCITS ETF (USD) Accumulating (**VUAA**) |
-| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | Invesco EQQQ Nasdaq-100 UCITS ETF Acc (**EQAC**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | iShares Core MSCI World UCITS ETF USD (Acc) (**IWDA**) |
-| **FTSE All-World** | Vanguard Total World Stock ETF (**VT**) | Vanguard FTSE All-World UCITS ETF (USD) Accumulating (**VWRA**) |
+| **S&P 500** | SPDR Portfolio S&P 500 ETF (**SPLG**) | SPDR S&P 500 UCITS ETF (**SPYL**) |
+| **Nasdaq-100** | Invesco NASDAQ 100 ETF (**QQQM**) | BNP Paribas Easy II Nasdaq-100 UCITS ETF (**ANAU**) |
+| **MSCI World** | iShares MSCI World ETF (**URTH**) | SPDR MSCI World UCITS ETF (**SPPW**) |
+| **MSCI ACWI IMI** *(All-Cap)* | Vanguard Total World Stock ETF (**VT**)* | SPDR MSCI ACWI IMI UCITS ETF (**SPYI**) |
+| **FTSE All-World** | - | Invesco FTSE All-World UCITS ETF (**FWRA**) |
+
+*\*VT technically tracks the FTSE Global All Cap index, but SPYI (MSCI ACWI IMI) is its functional Irish equivalent as both provide total world exposure including small-caps.*
 
 ## Key Takeaways
 
