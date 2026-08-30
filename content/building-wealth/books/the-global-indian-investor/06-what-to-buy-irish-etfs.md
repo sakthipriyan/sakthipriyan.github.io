@@ -136,6 +136,7 @@ Indian mutual fund investors will be familiar with *Growth* and *IDCW* plans for
 The table below illustrates the "tax leakage" that occurs before dividends can be reinvested.
 
 | Feature | US ETF | Irish ETF |
+| :--- | :--- | :--- |
 | **US Dividend Withholding Tax** | 30% (default), 25% (US–India treaty rate) | 15% (US-Ireland Treaty) |
 | **Foreign Tax Credit** | Available | Not Available, as it is done within the ETF |
 | **Dividend Strategy** | Mandatory Distribution (IDCW) | Accumulating (Growth) available |
@@ -251,13 +252,13 @@ Many of the world's largest asset managers—including **BlackRock (iShares), Va
 
 These paired funds track the **exact same underlying indices**, but differ entirely in their legal domicile, tax treatment, and investor base:
 
-| Target Index | Equivalent US ETF | Equivalent Irish UCITS ETF (USD, Acc) |
+| Target Index | Equivalent US ETF | Lowest-Cost Irish UCITS ETF (USD, Acc) |
 | :--- | :--- | :--- |
-| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | SPDR S&P 500 UCITS ETF (**SPYL**) / Vanguard (**VUAA**) |
-| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | AXA IM Nasdaq-100 UCITS ETF (**ANAU**) / Invesco (**EQAC**) |
-| **MSCI World** | iShares MSCI World ETF (**URTH**) | SPDR MSCI World UCITS ETF (**SPPW**) / iShares (**IWDA**) |
-| **Global All Cap** | Vanguard Total World Stock ETF (**VT**) | Vanguard ESG Global All Cap (**VALL**) / SPDR MSCI ACWI IMI (**SPYI**) |
-| **FTSE All-World** | - | Invesco FTSE All-World (**FWRA**) / Vanguard (**VWRA**) |
+| **S&P 500** | Vanguard S&P 500 ETF (**VOO**) | SPDR S&P 500 UCITS ETF (**SPYL**) |
+| **Nasdaq-100** | Invesco QQQ Trust (**QQQ**) | BNP Paribas Easy II Nasdaq-100 UCITS ETF (**ANAU**) |
+| **MSCI World** | iShares MSCI World ETF (**URTH**) | SPDR MSCI World UCITS ETF (**SPPW**) |
+| **Global All Cap** | Vanguard Total World Stock ETF (**VT**) | SPDR MSCI ACWI IMI UCITS ETF (**SPYI**) |
+| **FTSE All-World** | - | Invesco FTSE All-World UCITS ETF (**FWRA**) |
 
 ## Key Takeaways
 
