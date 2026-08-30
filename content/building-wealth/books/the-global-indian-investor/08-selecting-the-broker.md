@@ -167,7 +167,7 @@ A fully licensed Swiss bank offering ultimate banking-grade custody and privacy,
 
 For platforms utilizing a US entity (such as DriveWealth for Tier 0 or IBKR LLC for Tier 1 and 2), where the assets are held with a SIPC-member US broker-dealer, SIPC protection may apply.
 
-> SIPC protects against the failure of the broker, subject to its rules and limits; it does not protect against market losses.
+> SIPC protects against the failure of the broker, subject to its rules and limits (up to $500,000, including a $250,000 limit for cash); it does not protect against market losses.
 
 ## Account Types and Succession Planning
 
