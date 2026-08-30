@@ -13,7 +13,11 @@ wealth_tags:
 
 In the previous chapter, we saw that Irish ETFs are more efficient for Indian investors compared to US ETFs. As part of this chapter, we will look at the Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
 
-**Important**: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.
+> **ETF Selection & Data Criteria**
+> * **Currency**: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.
+> * **Liquidity & Safety**: To ensure robust liquidity and minimize fund closure risk, the ETFs shortlisted exclusively feature accumulating Irish-domiciled UCITS ETFs with an **AUM exceeding $1 Billion**.
+> * **Ranking**: Across the various indexes, the tables list the Top 3 funds by AUM and the Top 3 by lowest TER.
+> * **Data Vintage**: Fund size, TER, and rankings are based on data taken in the **3rd week of June 2026**.
 
 ## Global Equity ETFs
 
@@ -78,8 +82,6 @@ Here is how those blueprints translate into actual, investable Irish-domiciled U
 | **MSCI ACWI IMI**  | [State Street SPDR MSCI All Country World Investable Market UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) |               6,804 |          |   0.17% |        3 |
 | **FTSE&nbsp;All&#8209;World** | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                                    |               3,893 |          |   0.15% |        2 |
 
-
-
 If you want to pick one index fund for your equity portfolio, pick one of these based on your preference (Index/AUM/TER). Since there is no ETF tracking MSCI ACWI ex India Index (USD), picking this will have slight overlap with your Indian Equity holding. But this is the simplest way to get exposure to Global Equity investing.
 
 #### Developed Markets (DM) only
@@ -105,11 +107,6 @@ Since these are Developed Market indexes they won't have any overlap with Indian
 | **MSCI Emerging Markets**     | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)              |               1,389 |          |   0.15% |        1 |
 
 If you want more Emerging Markets exposure beyond India you can pick one of these. See the holdings of [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66#holdings) to know which countries it covers. It has ~11% of India and Taiwan/China/South Korea with higher allocation. 
-
-#### Notes
-- Filtered Funds with AUM > $1 Billion across various indexes
-- Top 3 by AUM and top 3 by TER listed in above tables
-- Data taken by 3rd week of June 2026
 
 ## US Equity ETFs
 
@@ -145,7 +142,6 @@ Unlike MSCI USA and S&P 500, the Nasdaq 100 is not intended to represent the bro
 #### US Indexes Comparison
 <iframe width="100%" height="720" src="https://curvo.eu/backtest/en/compare-indexes/msci-usa-vs-sp-500-vs-nasdaq-100/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
 
-
 | Objective                                | MSCI USA | S&P 500 | Nasdaq 100 |
 | ---------------------------------------- | :------: | :-----: | :--------: |
 | Broad US exposure                        |  **Yes** |  Maybe  |     No     |
@@ -155,8 +151,6 @@ Unlike MSCI USA and S&P 500, the Nasdaq 100 is not intended to represent the bro
 | Maximum diversification                  |  **Yes** |  Maybe  |     No     |
 | Highest concentration in mega-cap growth |    No    |  Maybe  |   **Yes**  |
 | Closest to a global market-cap portfolio |  **Yes** |  Maybe  |     No     |
-
-
 
 ### The Implementation Cheat Sheet for US Indexes (Irish UCITS)
 
@@ -168,7 +162,6 @@ Unlike MSCI USA and S&P 500, the Nasdaq 100 is not intended to represent the bro
 | [iShares MSCI USA UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B52SFT06) | 4,644 | 2 | 0.03% | 1 |
 | [Amundi Core MSCI USA UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000FSN19U2) | 4,007 | 3 | 0.03% | 1 |
 | [UBS Core MSCI USA UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXS21) | 2,961 |  | 0.03% | 1 |
-
 
 ### S&P 500
 | ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
@@ -196,15 +189,9 @@ For most long-term investors, the practical difference between MSCI USA and S&P 
 - Nasdaq 100 ETFs remain considerably (~5x) more expensive, with the lowest-cost fund charging 0.14% TER.
 - Investors pay a meaningful premium for concentrated growth exposure.
 
-#### Notes
-
-- Tables include accumulating Irish-domiciled UCITS ETFs with assets exceeding $1 billion.
-- Fund size, TER and rankings are based on data available in mid-June 2026.
-
 ## MSCI Comparison of India, USA and ACWI
 
 <iframe width="100%" height="720" src="https://curvo.eu/backtest/en/compare-indexes/msci-acwi-vs-msci-india-vs-msci-usa/evolution/embed?currency=usd" frameborder="0" scrolling="no" loading="lazy"></iframe>
-
 
 ### Observations
 
@@ -215,7 +202,6 @@ For most long-term investors, the practical difference between MSCI USA and S&P 
 * A global index allows investors to participate in future winners without needing to predict which country will outperform.
 
 > **Key Takeaway:** Investing in a global index such as MSCI ACWI is not about maximizing returns from a single market. It is about reducing concentration risk while participating in global economic growth.
-
 
 ## Sovereign Debt ETFs
 
@@ -242,8 +228,13 @@ Picking up long term debt ETFs such as 7-10yr or 20+yr will expose you more to i
 
 Depending on your overall portfolio construction/goals, you may also choose to keep the entire defensive allocation in INR-denominated debt instruments and use global equities and global gold (discussed below) as the primary rebalancing assets. In such a setup, a dedicated international debt allocation may not be necessary.
 
-
 ## Gold ETCs (Exchange Traded Commodities)
+
+### Aug 30, 2026 Update
+
+Irish Gold ETCs are legally structured as zero-coupon bonds, meaning they risk being taxed as debt instruments under Section 50AA at your **income tax slab rates regardless of the holding period**. When buying international gold, I look at Canadian alternatives like the **Sprott Physical Gold Trust (PHYS)**. Because `PHYS` is structured as a trust rather than debt, it avoids this classification and qualifies for the unified 12.5% LTCG rate after 24 months. Note that while `PHYS` comes with a higher TER (**0.41%**) than Irish ETCs—making its cost comparable to lower-TER Indian Gold ETFs—it offers the liquidity and structural safety of a massive **~$7.5 Billion AUM**.
+
+*(Note: I will come back and rewrite this section to fully detail these Canadian vs Irish structuring nuances.)*
 
 ### Why do we need international gold?
 
@@ -282,9 +273,7 @@ Top 3 by AUM and Top 3 by TER are listed here.
 | **Mirae Asset Gold ETF FoF**       |            483 |                  50 |          |              0.12 | Mirae Asset Gold ETF       |             0.33 |               0.45 |        1 |
 | **Angel One Gold ETF FoF**         |             32 |                   3 |          |              0.15 | Angel One Gold ETF         |             0.35 |               0.50 |        2 |
 
-
 > Indian Gold FoF Total TER ranges from 0.45% to 0.90% as shown in the table
-
 
 #### Indian Gold ETFs
 
@@ -298,7 +287,6 @@ Top 3 by AUM and Top 3 by TER are listed here.
 | Zerodha Gold ETF                                | INF0R8F01042 |          2,218 |                 232 |          |        0.35 |        2 |
 | The Wealth Company Gold ETF                     | INF2F0001370 |             23 |                   2 |          |        0.29 |        1 |
 | Angel One Gold ETF                              | INF1J2R01114 |             83 |                   9 |          |        0.35 |        3 |
-
 
 > Indian Gold ETF TER ranges from 0.29% to 0.80% as shown in the table
 
@@ -326,8 +314,6 @@ Min and Max cost and AUM are based on the filtered list of Top 3 AUM and Top 3 T
 | Indian Gold Mutual Funds (FoFs) | 3 | 1,640 | 0.45 | 0.90 |
 | Indian Gold ETFs | 2 | 5,804 | 0.29 | 0.80 |
 | Irish Gold ETCs | 6,949 | 37,627 | 0.11 | 0.12 |
-
-
 
 **The Scale & Cost Gap:**
 When looking at the numbers, the structural advantage of global markets becomes obvious:
@@ -460,7 +446,3 @@ The decision is not simply a binary choice between diversification and concentra
 Neither approach is inherently superior. The appropriate choice depends entirely on an investor's goals, conviction, risk tolerance, and willingness to weather periods of underperformance relative to the global market.
 
 > The important part is selecting an allocation that you can consistently maintain through both bull and bear markets. A good portfolio is not the one with the highest historical return, but the one you can hold for decades without abandoning the plan.
-
----
-
-> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!

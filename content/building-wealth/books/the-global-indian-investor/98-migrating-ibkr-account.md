@@ -2,7 +2,7 @@
 title: "Migrating from Existing to New IBKR Account"
 subtitle: "How to migrate your holdings from an existing IBKR account to a newly opened one."
 type: "books"
-chapter: 12
+chapter: 98
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: true
