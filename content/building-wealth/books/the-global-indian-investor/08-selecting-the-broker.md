@@ -143,12 +143,12 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 4. **KYC**: You will need your PAN card and Aadhaar for address proof.
 5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
 
-### [Saxo Bank](https://www.home.saxo/)
-Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR.
+### Saxo Bank
+Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR. *(Note: As of mid-2024, Saxo Bank stopped accepting new account applications from Indian residents. It is included here for completeness for existing account holders).*
 - **Costs**: Standard custody fees historically run around 0.12% to 0.15% annually depending on your region, which creates an ongoing drag on portfolio growth compared to IBKR.
 - **Optimization**: Astute investors can often waive this custody fee entirely by opting into Saxo's securities lending program, making it better suited for larger portfolios prioritizing European banking-grade security. 
 
-### [Swissquote](https://www.swissquote.com/)
+### Swissquote
 A fully licensed Swiss bank offering ultimate banking-grade custody and privacy, but its pricing architecture is deliberately prohibitive for small-scale retail investors.
 - **Costs**: Imposes high trading commissions (typically $25–$30+ per trade on international exchanges) and mandatory quarterly custody fees (minimum CHF 20 per quarter). It is mathematically optimal only for very large, static portfolios.
 
