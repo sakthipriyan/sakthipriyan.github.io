@@ -230,7 +230,9 @@ Depending on your overall portfolio construction/goals, you may also choose to k
 
 ## Gold ETCs (Exchange Traded Commodities)
 
-> **Aug 30, 2026 Update:** Irish Gold ETCs are legally structured as zero-coupon bonds, meaning they risk being taxed as debt instruments under Section 50AA at your income tax slab rates regardless of the holding period. When buying international gold, I look at Canadian alternatives like the **Sprott Physical Gold Trust (PHYS)**. Because `PHYS` is structured as a trust rather than debt, it avoids this classification and qualifies for the unified 12.5% LTCG rate after 24 months. Note that while `PHYS` comes with a higher TER (**0.41%**) than Irish ETCs—making its cost comparable to lower-TER Indian Gold ETFs—it offers the liquidity and structural safety of a massive **~$7.5 Billion AUM**.
+### Aug 30, 2026 Update
+
+Irish Gold ETCs are legally structured as zero-coupon bonds, meaning they risk being taxed as debt instruments under Section 50AA at your income tax slab rates regardless of the holding period. When buying international gold, I look at Canadian alternatives like the **Sprott Physical Gold Trust (PHYS)**. Because `PHYS` is structured as a trust rather than debt, it avoids this classification and qualifies for the unified 12.5% LTCG rate after 24 months. Note that while `PHYS` comes with a higher TER (**0.41%**) than Irish ETCs—making its cost comparable to lower-TER Indian Gold ETFs—it offers the liquidity and structural safety of a massive **~$7.5 Billion AUM**.
 
 *(Note: I will come back and rewrite this section to fully detail these Canadian vs Irish structuring nuances.)*
 
