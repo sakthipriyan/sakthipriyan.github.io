@@ -461,7 +461,3 @@ The decision is not simply a binary choice between diversification and concentra
 Neither approach is inherently superior. The appropriate choice depends entirely on an investor's goals, conviction, risk tolerance, and willingness to weather periods of underperformance relative to the global market.
 
 > The important part is selecting an allocation that you can consistently maintain through both bull and bear markets. A good portfolio is not the one with the highest historical return, but the one you can hold for decades without abandoning the plan.
-
----
-
-> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!

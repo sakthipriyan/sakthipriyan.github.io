@@ -209,3 +209,9 @@ Currently, I have moved my residual cash from the ICICI Direct Global account to
 Given my priority for cost efficiency, using IBKR exclusively minimizes intermediary risk, but concentrating the portfolio with a single broker creates broker concentration risk. These are different risks. As my portfolio grows, I will reassess whether broker diversification is worthwhile despite the additional complexity.
 
 **On the estate planning front:** I am currently utilizing the "Good" approach (Individual Account holding Irish ETFs) rather than the "Best" approach (Joint Account). The primary reason is administrative: I concluded that opening a Joint Account would create an additional Schedule FA reporting obligation for my spouse and would require her to file the more complex **ITR-2** tax form. For now, relying on an Individual Account—with plans to create a clearly drafted Will to support it—avoids that annual tax-filing friction.
+
+---
+
+*Next up: Chapter 9 on Taxation and Tax Filing.*
+
+> Work In Progress: Writing further chapters and refining published chapters. Stay tuned!
