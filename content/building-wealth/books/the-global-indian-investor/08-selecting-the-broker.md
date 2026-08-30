@@ -103,8 +103,8 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 
 #### Other Emerging Use Cases in GIFT City
 The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, serving two other major functions for global investing:
-1. **The Mutual Fund Workaround**: Major Indian Asset Management Companies (AMCs) are aggressively setting up Alternative Investment Funds (AIFs) in GIFT City. By doing so, they can pool LRS capital directly from Indian high-net-worth investors, cleanly bypassing the restrictive $7 Billion RBI industry limit that froze domestic global mutual funds.
-2. **The FinTech Cost Optimization**: Retail platforms (like INDmoney) are increasingly routing clients through their own GIFT City entities. While this attempts to reduce steep SWIFT/intermediary bank charges by remitting to a domestic IFSC bank branch instead of a US bank, the strict LRS rules, 20% TCS, and FX markups still fully apply. *More importantly, it does not change the underlying asset class.* They are still exclusively offering US-listed equities. You still cannot purchase Irish UCITS ETFs through this route.
+1. **The Mutual Fund Workaround**: Major Indian Asset Management Companies (AMCs) are aggressively setting up Alternative Investment Funds (AIFs) in GIFT City. By doing so, they can pool LRS capital directly from Indian high-net-worth investors, cleanly bypassing the restrictive $7 Billion RBI industry limit that froze domestic global mutual funds (as covered in [Chapter 2](/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/)).
+2. **The FinTech Cost Optimization**: Retail platforms (like INDmoney) are increasingly routing clients through their own GIFT City entities. While this attempts to reduce steep SWIFT/intermediary bank charges by remitting to a domestic IFSC bank branch instead of a US bank, the strict LRS rules, [20% TCS](/building-wealth/books/the-global-indian-investor/05-tcs-opportunity-cost/), and FX markups still fully apply. *More importantly, it does not change the underlying asset class.* They are still exclusively offering US-listed equities. You still cannot purchase Irish UCITS ETFs through this route.
 
 **The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker for Irish ETFs places you squarely in the **Level 1** category. You are using an Introducing Broker (like India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations as Level 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
@@ -151,7 +151,7 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 | **Primary Market** | Global (LSE, EU, US) | Global (via IBKR) | US Only |
 | **Irish UCITS ETFs** | ✅ Yes | ✅ Yes (Platform dependent) | ❌ No |
 | **Brokerage** | ~$1 to £1.70 / order | IBKR + intermediary fee | Zero or low |
-| **FX Conversion** | IBKR IdealFX (~0.002%) | Platform/Bank rates | Platform rate |
+| **FX Conversion** | Bank Rates (INR ➞ USD) [See Ch 3](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/) | Bank Rates (INR ➞ USD) | Platform Markup (INR ➞ USD) |
 | **Desktop TWS Access** | ✅ Yes | ❌ No | ❌ No |
 | **LRS Handling** | Self-managed | Bundled / Assisted | Integrated |
 
@@ -162,7 +162,7 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
-5. **Funding**: Once approved, use the LRS methods discussed in earlier chapters to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
+5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: How to Send Money](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
 6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets are protected by the Securities Investor Protection Corporation (SIPC) for up to $500,000 (including a $250,000 limit for cash) in the rare event of broker insolvency.
 
 ## Account Types and Succession Planning
@@ -175,7 +175,7 @@ If you open an "Individual" account and pass away, your heirs must go through a 
 ### The Joint Account Solution (With Right of Survivorship)
 The most effective workaround for succession planning is to open a **Joint Account** (specifically, Joint Tenants with Right of Survivorship) with your spouse. 
 - **The Benefit**: In the event of one holder's death, the surviving spouse automatically retains full access and ownership of the account in a very short span of time, bypassing the lengthy probate and estate processing entirely. 
-- **The Catch (Tax Filing)**: The Indian Income Tax Department requires all foreign assets to be disclosed. If you have a Joint Account, the secondary holder (e.g., your spouse) is considered a beneficial owner. Consequently, **the spouse must also declare the IBKR account in the Schedule FA (Foreign Assets) section of their own Income Tax Return**, even if they did not fund it. 
+- **The Catch (Tax Filing)**: The Indian Income Tax Department requires all foreign assets to be disclosed. If you have a Joint Account, the secondary holder (e.g., your spouse) is considered a beneficial owner. Consequently, **the spouse must also declare the IBKR account in the Schedule FA (Foreign Assets) section of their own Income Tax Return (detailed in [Chapter 9](/building-wealth/books/the-global-indian-investor/09-taxation-and-tax-filing/))**, even if they did not fund it. 
 
 ### The Estate Planning Matrix: Worst to Best
 
