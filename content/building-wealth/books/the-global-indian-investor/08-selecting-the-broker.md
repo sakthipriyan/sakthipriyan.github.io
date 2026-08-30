@@ -17,9 +17,9 @@ To invest directly in international ETFs — specifically, the highly tax-effici
 
 Indian residents face a roadblock here: popular European brokers (like Trading 212 or DEGIRO) generally refuse to open accounts for non-European residents due to strict local regulations. 
 
-Consequently, access must be routed through either heavily regulated international prime brokerages with a global footprint or domestic Indian fintech overlays acting as introducing brokers. To evaluate these options, we can categorize them into three structural levels.
+Consequently, access must be routed through either heavily regulated international prime brokerages with a global footprint or domestic Indian fintech overlays acting as introducing brokers. To evaluate these options, we can categorize them into three structural tiers.
 
-## Level 0: The US-Only Trap (Indian FinTechs)
+## Tier 0: The US-Only Trap (Indian FinTechs)
 
 The first generation of Indian cross-border fintech platforms — such as **INDmoney, Vested, and Stockal** — revolutionized retail access by partnering with US clearing brokers (like DriveWealth) to offer fractional trading of US shares.
 
@@ -37,7 +37,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 
-### Notes on Level 0 Platforms
+### Notes on Tier 0 Platforms
 
 *   **The "Irish" ETF Illusion:** A platform like INDmoney might allow the purchase of `EIRL` (the iShares MSCI Ireland ETF). Be aware that this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to all the US tax traps detailed in Chapter 6.
 *   **Private Bank Wrappers:** While top private bank brokerages—such as **HDFC Securities** and **Axis Securities**—heavily market their "global investing" platforms, they typically partner with fintechs like Vested (powered by DriveWealth). Consequently, despite the massive domestic brand name, their offering remains structurally restricted to the US-only ecosystem. (For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/)).
@@ -57,9 +57,9 @@ When this happens, you are typically forced into one of two terrible outcomes:
 1.  **Forced Liquidation**: You must sell your entire portfolio, triggering immediate Capital Gains Tax events (losing years of deferred tax compounding).
 2.  **ACATS Migration**: You must initiate an Automated Customer Account Transfer Service (ACATS) to another supported US broker, which often involves painful manual paperwork, high transfer fees ($50-$100+), and weeks of being locked out of your portfolio.
 
-This structural fragility is another reason serious, long-term investors naturally gravitate toward direct international prime brokers (Level 2).
+This structural fragility is another reason serious, long-term investors naturally gravitate toward direct international prime brokers (Tier 2).
 
-## Level 1: Indian Establishments with IBKR Backend
+## Tier 1: Indian Establishments with IBKR Backend
 
 A specialized subset of platforms uses Interactive Brokers (IBKR) as their underlying clearing or custodial partner. This allows them to offer access to global markets (including Ireland/Europe) while abstracting some of the complexity for the investor.
 
@@ -73,12 +73,12 @@ Examples of these domestic intermediaries include:
 | **[MoneyIsle (TradeCross)](https://moneyisle.in/tradecross/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
 | **[Paasa](https://paasa.com/)** | [Interactive Brokers](https://www.interactivebrokers.com/) | ✅ Yes |
 
-**Pros of Level 1**:
+**Pros of Tier 1**:
 - Easy to start with a familiar Indian interface.
 - Additional features like automated Indian tax reports (Schedule FA, Form 67).
 - Access to bundled LRS promotions (as discussed in the *How to Send Money* chapter).
 
-**Cons of Level 1**:
+**Cons of Tier 1**:
 - Needless addition of complexity and an intermediary fee layer on top of IBKR's base execution costs.
 - Restrictive or trimmed-down web apps compared to the full broker platform.
 - **No Desktop App Access**: You are locked out of IBKR's advanced Trader Workstation (TWS).
@@ -106,14 +106,14 @@ The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, servi
 1. **The Mutual Fund Workaround**: Major Indian Asset Management Companies (AMCs) are aggressively setting up Alternative Investment Funds (AIFs) in GIFT City. By doing so, they can pool LRS capital directly from Indian high-net-worth investors, cleanly bypassing the restrictive $7 Billion RBI industry limit that froze domestic global mutual funds (as covered in [Chapter 2](/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/)).
 2. **The FinTech Cost Optimization**: Retail platforms (like INDmoney) are increasingly routing clients through their own GIFT City entities. While this attempts to reduce steep SWIFT/intermediary bank charges by remitting to a domestic IFSC bank branch instead of a US bank, the strict LRS rules, [20% TCS](/building-wealth/books/the-global-indian-investor/05-tcs-opportunity-cost/), and FX markups still fully apply. *More importantly, it does not change the underlying asset class.* They are still exclusively offering US-listed equities. You still cannot purchase Irish UCITS ETFs through this route.
 
-**The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker for Irish ETFs places you squarely in the **Level 1** category. You are using an Introducing Broker (like India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations as Level 1 (intermediary dependence, potential lack of advanced desktop platforms).
+**The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker for Irish ETFs places you squarely in the **Tier 1** category. You are using an Introducing Broker (like India INX GA) that ultimately routes your orders to an International Prime Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations as Tier 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
 > **An Evolving Landscape**: GIFT City is still in its early days. Recent proposals aim to permit the [**secondary listing of global ETFs on the NSE IX**](https://www.moneycontrol.com/news/business/markets/gift-city-opens-its-door-wider-through-proposal-for-secondary-listing-of-global-etfs-14017534.html). While this could eventually allow direct access to Irish UCITS ETFs without needing a foreign broker account, we must "wait and watch" if global issuers like BlackRock or Vanguard are actually willing to undertake the regulatory overhead to list there.
 
 
-## Level 2: Direct International Prime Brokers
+## Tier 2: Direct International Prime Brokers
 
-For investors seeking the absolute lowest long-term cost and full market control, opening an account directly with an international prime broker is the ultimate destination. The setup overhead is more or less the same as Level 1, but taxation filing and LRS must be taken care of by the investor themselves.
+For investors seeking the absolute lowest long-term cost and full market control, opening an account directly with an international prime broker is the ultimate destination. The setup overhead is more or less the same as Tier 1, but taxation filing and LRS must be taken care of by the investor themselves.
 
 | International Prime Broker | Domicile | European ETF Access |
 | :--- | :--- | :--- |
@@ -146,7 +146,7 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 
 ## Summary Matrix
 
-| Factor | Level 0 (INDmoney / Vested / Stockal) | Level 1 (Paasa / ICICI Direct / Kotak) | Level 2 (IBKR Direct) |
+| Factor | Tier 0 (INDmoney / Vested / Stockal) | Tier 1 (Paasa / ICICI Direct / Kotak) | Tier 2 (IBKR Direct) |
 |---|---|---|---|
 | **Primary Market** | US Only | Global (via IBKR) | Global (LSE, EU, US) |
 | **Irish UCITS ETFs** | ❌ No | ✅ Yes (Platform dependent) | ✅ Yes |
@@ -194,9 +194,9 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 
 My foray into direct global investing started when the RBI imposed industry-wide limits on international mutual funds, effectively blocking that convenient route for a long time. 
 
-Looking for alternatives, I discovered the **ICICI Direct Global** approach (Level 1) and opened my first account there. It served as an excellent stepping stone, abstracting away some of the complexities while I learned the mechanics of cross-border investing. 
+Looking for alternatives, I discovered the **ICICI Direct Global** approach (Tier 1) and opened my first account there. It served as an excellent stepping stone, abstracting away some of the complexities while I learned the mechanics of cross-border investing. 
 
-After using it for a while and extensively researching the brokerage landscape (which eventually formed the basis of this chapter), I realized the limitations of using an intermediary. Once I became comfortable navigating LRS remittances directly with my bank, I eventually opened a **Direct IBKR account** (Level 2).
+After using it for a while and extensively researching the brokerage landscape (which eventually formed the basis of this chapter), I realized the limitations of using an intermediary. Once I became comfortable navigating LRS remittances directly with my bank, I eventually opened a **Direct IBKR account** (Tier 2).
 
 Currently, I have moved my residual cash from the ICICI Direct Global account to my direct IBKR account. I am yet to transfer the actual ETF positions, but fortunately, the old ICICI account is not incurring any ongoing maintenance costs since I downgraded it to their free pricing tier.
 
