@@ -30,6 +30,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | :--- | :--- | :--- |
 | **[Appreciate](https://appreciatewealth.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
+| **[Dhan](https://dhan.co/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
 | **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No |
 | **[Stockal](https://www.stockal.com/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
@@ -41,6 +42,21 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 While top private bank brokerages — such as **HDFC Securities** and **Axis Securities** — heavily market their "global investing" platforms, they typically partner with fintechs like Vested Finance (powered by DriveWealth). Consequently, despite the massive domestic brand name, their international offering remains structurally restricted to the US-only ecosystem. For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/).
 
 *(Note: Major public sector bank brokerages, such as SBI Securities or BoB Capital Markets, currently lack dedicated retail global investing tie-ups entirely, leaving investors to seek direct platforms.)*
+
+### The Hidden Risk: Platform Fragility
+
+Because these platforms act as thin technology wrappers sitting between you, Indian banking regulations (LRS/TCS), and a foreign clearinghouse API, their business models are incredibly fragile. When regulatory friction increases—such as the recent hikes in Tax Collected at Source (TCS) on LRS remittances—the unit economics for these fintechs often collapse. 
+
+When a fintech wrapper decides to sunset its global investing feature, the investor suffers massively. We have seen this repeatedly:
+*   **Groww** abruptly halted its US stocks offering in early 2024.
+*   **Fi Money** completely sunsetted its US stocks feature in April 2026.
+*   **Winvesta** and **Kuvera** faced similar closures or migrations.
+
+When this happens, you are typically forced into one of two terrible outcomes:
+1.  **Forced Liquidation**: You must sell your entire portfolio, triggering immediate Capital Gains Tax events (losing years of deferred tax compounding).
+2.  **ACATS Migration**: You must initiate an Automated Customer Account Transfer Service (ACATS) to another supported US broker, which often involves painful manual paperwork, high transfer fees ($50-$100+), and weeks of being locked out of your portfolio.
+
+This structural fragility is another reason serious, long-term investors naturally gravitate toward direct international prime brokers (Level 2).
 
 ## Level 1: Indian Establishments with IBKR Backend
 
