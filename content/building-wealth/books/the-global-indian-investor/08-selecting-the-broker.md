@@ -155,16 +155,6 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 | **Desktop TWS Access** | ❌ No | ❌ No | ✅ Yes |
 | **LRS Handling** | Integrated | Bundled / Assisted | Self-managed |
 
-## Opening an IBKR Direct Account
-
-Getting started with IBKR Direct is relatively straightforward for Indian residents:
-1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
-2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
-3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
-4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
-5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: How to Send Money](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
-6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets are protected by the Securities Investor Protection Corporation (SIPC) for up to $500,000 (including a $250,000 limit for cash) in the rare event of broker insolvency.
-
 ## Account Types and Succession Planning
 
 A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. Unlike Indian demat accounts where you can easily assign a nominee to take over the assets, an international Individual account requires standard estate processing upon the account holder's untimely demise.
@@ -189,6 +179,16 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 | **Best** | Irish ETFs (e.g., CSPX) | Joint Account | **Immediate & Safe**: No US Estate Tax. The surviving spouse retains instant access and ownership of the account via Right of Survivorship, entirely bypassing probate. |
 
 > **Key Takeaway**: A Joint Account holding Irish UCITS ETFs provides the smoothest, most tax-efficient generational wealth transfer for an Indian investor, provided both spouses are prepared to file Schedule FA annually.
+
+## Opening an IBKR Direct Account
+
+Getting started with IBKR Direct is relatively straightforward for Indian residents:
+1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
+2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
+3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
+4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
+5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: How to Send Money](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
+6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets are protected by the Securities Investor Protection Corporation (SIPC) for up to $500,000 (including a $250,000 limit for cash) in the rare event of broker insolvency.
 
 ## My Personal Journey
 
