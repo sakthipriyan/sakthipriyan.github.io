@@ -39,7 +39,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 ### Notes on Level 0 Platforms
 
-*   **The "Irish" ETF Illusion:** A platform like INDmoney might allow the purchase of `EIRL` (the iShares MSCI Ireland ETF). Be aware that this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to the punitive 25% US dividend withholding tax and 40% estate tax.
+*   **The "Irish" ETF Illusion:** A platform like INDmoney might allow the purchase of `EIRL` (the iShares MSCI Ireland ETF). Be aware that this is merely a US-listed ETF tracking Irish domestic companies. It is completely distinct from a UCITS ETF and remains subject to all the US tax traps detailed in Chapter 6.
 *   **Private Bank Wrappers:** While top private bank brokerages—such as **HDFC Securities** and **Axis Securities**—heavily market their "global investing" platforms, they typically partner with fintechs like Vested (powered by DriveWealth). Consequently, despite the massive domestic brand name, their offering remains structurally restricted to the US-only ecosystem. (For a detailed breakdown of why US-listed ETFs destroy compounding compared to Irish ETFs, review [Chapter 6: What to Buy - Irish ETFs vs US ETFs](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/)).
 *   **Public Sector Banks:** Major public sector bank brokerages, such as **SBI Securities** or **BoB Capital Markets**, currently lack dedicated retail global investing tie-ups entirely, leaving investors to seek direct platforms.
 *   **Vested’s "UCITS" Marketing:** Vested Finance recently began marketing access to "UCITS". However, it is critical to understand that **only actively managed UCITS mutual funds are accessible through this route, not UCITS ETFs** (like CSPX or VWRA). Because their backend (DriveWealth) lacks direct market access to European stock exchanges, they cannot execute trades for exchange-listed ETFs. Instead, they facilitate off-exchange purchases of expensive, actively managed mutual funds directly from asset managers. While these mutual funds technically bypass the US estate tax, they carry much higher expense ratios and entirely fail to provide access to the cheap, broad-market European indexes discussed in this book.
@@ -129,7 +129,7 @@ While highly popular for US residents, Schwab restricts Non-Resident Aliens from
 ### Interactive Brokers (IBKR Direct)
 IBKR stands as the undisputed primary conduit for global capital flows originating from India. 
 - **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), providing SIPC insurance while fully supporting LRS remittances directly from Indian banks.
-- **Costs**: Highly competitive. Trades on the LSE incur a minimal commission of ~£1.70 (or 0.05%). More crucially, their FX desk applies a negligible markup (~0.002%), preserving your principal when converting USD to GBP/EUR.
+- **Costs**: Highly competitive. Trades on the LSE incur a minimal commission (typically around $1.70 to $2.00 or 0.05% per trade).
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
 - **Platforms**: Full access to mobile, web, and the advanced Trader Workstation (TWS) desktop platform.
 
