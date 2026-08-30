@@ -134,6 +134,16 @@ IBKR is one of the most established international brokers available to Indian re
 
 **Opening an IBKR account directly** (at [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php)) gives the full account with no intermediary layer and remains the **highly recommended** path.
 
+#### Opening an Account
+
+Getting started with IBKR Direct is relatively straightforward for Indian residents:
+1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
+2. **Account Type**: Select "Individual" or "Joint" (review the *Account Types and Succession Planning* section below before making this choice) and ensure you choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
+3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
+4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
+5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
+6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets fall under the Securities Investor Protection Corporation (SIPC). SIPC is protection against certain losses if the broker fails (up to $500,000, including a $250,000 limit for cash), not protection against investment losses.
+
 ### Saxo Bank
 Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR.
 - **Costs**: While they have eliminated minimum deposits for their "Classic" tier, they apply a 0.25% currency conversion fee (higher than IBKR) and an annual custody fee of 0.15%.
@@ -178,16 +188,6 @@ When you combine asset domicile (US vs. Irish) with the account type (Individual
 | **4** | Irish ETFs (e.g., CSPX) | Joint Account | May simplify succession while generally avoiding direct U.S.-situs exposure |
 
 > **Key Takeaway**: A Joint Account holding Irish UCITS ETFs provides the smoothest, most tax-efficient generational wealth transfer for an Indian investor, provided both spouses are prepared to file Schedule FA annually.
-
-## Opening an IBKR Direct Account
-
-Getting started with IBKR Direct is relatively straightforward for Indian residents:
-1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
-2. **Account Type**: Select "Individual" (or Joint if preferred) and choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
-3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
-4. **KYC**: You will need your PAN card, Aadhaar for address proof, and a bank statement for funding proof.
-5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
-6. **SIPC Protection**: Note that because your account is legally held with IBKR LLC (the US entity), your assets fall under the Securities Investor Protection Corporation (SIPC). SIPC is protection against certain losses if the broker fails (up to $500,000, including a $250,000 limit for cash), not protection against investment losses.
 
 ## My Personal Journey
 
