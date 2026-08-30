@@ -157,7 +157,7 @@ A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy
 
 ## Account Types and Succession Planning
 
-A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. Unlike Indian demat accounts where you can easily assign a nominee to take over the assets, an international Individual account requires standard estate processing upon the account holder's untimely demise.
+A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. While US residents can easily assign a **"Transfer on Death" (TOD)** beneficiary to automatically bypass probate, this legal mechanism is not available to foreign residents. Thus, unlike Indian demat accounts where a nominee simply takes over, an international Individual account requires standard estate processing upon the account holder's untimely demise.
 
 ### The Problem with Individual Accounts
 If you open an "Individual" account and pass away, your heirs must go through a lengthy estate settlement process with the broker. While holding Irish UCITS ETFs completely shields your heirs from the dreaded US IRS estate tax clearance (and the 40% tax itself), the broker will still require proper legal documentation (like a probated Will or Succession Certificate) to transfer the assets. Having a clearly drafted Will can significantly fast-track this process, but a delay is inevitable.
