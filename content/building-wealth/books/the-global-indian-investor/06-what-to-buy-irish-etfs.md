@@ -110,7 +110,7 @@ The time required for heirs to access the portfolio depends primarily on two fac
 
 > Using Irish ETFs 1) Removes US Estate Tax and 2) Reduces the transitioning timeline.
 
-*Note: A detailed breakdown of account ownership structures (Joint vs. Individual) and specific succession planning strategies will be explained in the following chapter.*
+*Note: A detailed breakdown of account ownership structures (Joint vs. Individual) and specific succession planning strategies is explained in [Chapter 8 > Account Types and Succession Planning](/building-wealth/books/the-global-indian-investor/08-selecting-the-broker/#account-types-and-succession-planning).*
 
 
 ## 2. Dividend Tax Leakage: The Growth vs IDCW Comparison
