@@ -138,19 +138,19 @@ IBKR is one of the most established international brokers available to Indian re
 
 Getting started with IBKR Direct is relatively straightforward for Indian residents:
 1. **Sign Up**: Visit [interactivebrokers.co.in](https://www.interactivebrokers.co.in/en/home.php) to begin the application.
-2. **Account Type**: Select "Individual" or "Joint" (review the [Account Types and Succession Planning](#account-types-and-succession-planning) section below before making this choice) and ensure you choose a **"Cash"** account. In compliance with the RBI's LRS rules (which prohibit leveraged trading), IBKR enforces this directly and does not even make Margin accounts available as an option for Indian residents.
+2. **Account Type**: Select "Individual" or "Joint" (see [Succession Planning](#account-types-and-succession-planning) below). You must choose a **"Cash"** account to comply with RBI LRS rules against leveraged trading (IBKR natively hides Margin accounts for Indian residents).
 3. **Base Currency**: Select USD as your base currency to avoid unnecessary conversion displays for your US/Irish ETFs.
 4. **KYC**: You will need your PAN card and Aadhaar for address proof.
 5. **Funding**: Once approved, use the LRS methods discussed in [Chapter 3: Execution Flow](/building-wealth/books/the-global-indian-investor/03-lrs-how-to-send-money/#execution-flow) to wire funds. Always create a "Deposit Notification" in the IBKR portal before wiring from your Indian bank.
 
-### Saxo Bank
+### [Saxo Bank](https://www.home.saxo/)
 Headquartered in Copenhagen, Saxo Bank serves as a premium, banking-grade alternative to IBKR.
-- **Costs**: While they have eliminated minimum deposits for their "Classic" tier, they apply a 0.25% currency conversion fee (higher than IBKR) and an annual custody fee of 0.15%.
-- **Optimization**: Astute investors can waive the custody fee by opting into Saxo's securities lending program. 
+- **Costs**: They apply a 0.25% currency conversion fee (substantially higher than IBKR). Standard custody fees historically run around 0.12% to 0.15% annually depending on your region.
+- **Optimization**: Astute investors can often waive this custody fee entirely by opting into Saxo's securities lending program, making it better suited for larger portfolios prioritizing European banking-grade security. 
 
-### Swissquote
-A fully licensed Swiss bank, offering ultimate banking-grade custody and privacy, but its pricing architecture is deliberately prohibitive for small-scale retail investors.
-- **Costs**: Strict $1,000 minimum deposit, high trading fees ($25–$30+ per trade), and mandatory quarterly custody fees (CHF 20–50). Mathematically optimal only for very large, static portfolios.
+### [Swissquote](https://www.swissquote.com/)
+A fully licensed Swiss bank offering ultimate banking-grade custody and privacy, but its pricing architecture is deliberately prohibitive for small-scale retail investors.
+- **Costs**: Imposes high trading commissions (typically $25–$30+ per trade on international exchanges) and mandatory quarterly custody fees (minimum CHF 20 per quarter). It is mathematically optimal only for very large, static portfolios.
 
 ## Summary Matrix
 
