@@ -28,6 +28,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 
 | Indian Platform | Broker / execution partner | European ETF Access |
 | :--- | :--- | :--- |
+| **[Angel One](https://www.angelone.in/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
 | **[Appreciate](https://appreciatewealth.com/us-stocks/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Axis Securities](https://simplehai.axisdirect.in/dynamicWeb/global-investing/index.html)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
 | **[Dhan](https://dhan.co/us-stocks/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
