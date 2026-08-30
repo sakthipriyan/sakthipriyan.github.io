@@ -108,6 +108,8 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 - **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as an entry point into the European Union, with plans to finalize broad European exchange connectivity by FY27.
 - **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
 
+> **An Evolving Landscape**: GIFT City is still in its early days. Recent proposals aim to permit the [**secondary listing of global ETFs on the NSE IX**](https://www.moneycontrol.com/news/business/markets/gift-city-opens-its-door-wider-through-proposal-for-secondary-listing-of-global-etfs-14017534.html). While this could eventually allow direct access to Irish UCITS ETFs without needing a foreign broker account, we must "wait and watch" if global issuers like BlackRock or Vanguard are actually willing to undertake the regulatory overhead to list there.
+
 #### Other Emerging Use Cases in GIFT City
 The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, serving two other major functions for global investing:
 1. **The Mutual Fund Workaround**: Major Indian Asset Management Companies (AMCs) are aggressively setting up Alternative Investment Funds (AIFs) in GIFT City. By doing so, they can pool LRS capital directly from Indian high-net-worth investors, providing an alternative route for pooling LRS capital under the applicable IFSC framework that froze domestic global mutual funds (as covered in [Chapter 2 > Fragility in Indian Mutual Funds](/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/#fragility-in-indian-mutual-funds-investing-globally)).
@@ -115,7 +117,6 @@ The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, servi
 
 **The Verdict on GIFT City**: While politically and regulatorily favorable, mechanically, utilizing a GIFT City broker for Irish ETFs places you squarely in the **Tier 1** category. You are using an Introducing Broker (like India INX GA) that ultimately routes your orders to an International Broker (like IBKR) to execute on the London Stock Exchange. It is an excellent, compliant setup, but it carries the same limitations as Tier 1 (intermediary dependence, potential lack of advanced desktop platforms).
 
-> **An Evolving Landscape**: GIFT City is still in its early days. Recent proposals aim to permit the [**secondary listing of global ETFs on the NSE IX**](https://www.moneycontrol.com/news/business/markets/gift-city-opens-its-door-wider-through-proposal-for-secondary-listing-of-global-etfs-14017534.html). While this could eventually allow direct access to Irish UCITS ETFs without needing a foreign broker account, we must "wait and watch" if global issuers like BlackRock or Vanguard are actually willing to undertake the regulatory overhead to list there.
 
 
 ## Tier 2: Direct International Brokers
