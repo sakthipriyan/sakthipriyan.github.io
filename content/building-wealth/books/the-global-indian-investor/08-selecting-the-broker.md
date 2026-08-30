@@ -131,7 +131,7 @@ IBKR stands as the undisputed primary conduit for global capital flows originati
 - **Regulation**: Indian residents typically onboard with IBKR LLC (regulated by the US SEC/FINRA), providing SIPC insurance while fully supporting LRS remittances directly from Indian banks.
 - **Costs**: Highly competitive. Trades on the LSE incur a minimal commission (typically around $1.70 to $2.00 or 0.05% per trade).
 - **Accessibility**: No account minimums and no inactivity fees, making it capital-efficient for both systematic monthly investments (SIPs) and lump-sum deployments.
-- **Platforms**: Full access to mobile, web, and the advanced Trader Workstation (TWS) desktop platform.
+- **Platforms**: Full access to mobile, web, the modern **IBKR Desktop** app, and the highly advanced Trader Workstation (TWS).
 
 **Opening an IBKR account directly** (at ibkr.com/ind) gives the full account with no intermediary layer and remains the **highly recommended** path.
 
