@@ -123,7 +123,7 @@ For investors prioritizing long-term cost, control, and absolute independence fr
 
 
 ### Charles Schwab
-Charles Schwab is not included in my shortlist because its offering for international retail investors generally restricts self-directed trading to US-listed securities, meaning it does not currently provide the European UCITS access required for this strategy.
+Charles Schwab is not included in my shortlist because its offering for international retail investors restricts self-directed online trading strictly to US-listed securities. While Schwab technically allows non-US residents to purchase European UCITS ETFs, they force you to execute these as offline, **broker-assisted phone trades** that carry a prohibitive **$50 transaction fee per trade**. This makes Schwab entirely incompatible with a systematic, low-cost Irish ETF strategy.
 
 ### Interactive Brokers (IBKR Direct)
 IBKR is one of the most established international brokers available to Indian residents seeking direct access to global markets. 
