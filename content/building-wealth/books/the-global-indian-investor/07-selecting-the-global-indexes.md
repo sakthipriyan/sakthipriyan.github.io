@@ -13,7 +13,9 @@ wealth_tags:
 
 In the previous chapter, we saw that Irish ETFs are more efficient for Indian investors compared to US ETFs. As part of this chapter, we will look at the Irish ETF universe and shortlist various ETFs available for Equities, Debt and Gold.
 
-**Important**: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.
+> **Important Criteria**
+> * **Currency**: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.
+> * **Liquidity & Safety**: To ensure robust liquidity and minimize fund closure risk, the ETFs shortlisted in this chapter strictly apply a **$1 Billion minimum AUM** filter.
 
 ## Global Equity ETFs
 
