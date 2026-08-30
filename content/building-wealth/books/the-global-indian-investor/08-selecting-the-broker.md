@@ -118,7 +118,7 @@ For investors seeking the absolute lowest long-term cost and full market control
 | International Prime Broker | Domicile | European ETF Access |
 | :--- | :--- | :--- |
 | **[Charles Schwab](https://international.schwab.com/)** | United States | ❌ No |
-| **[Interactive Brokers](https://www.interactivebrokers.co.in/)** | United States | ✅ Yes |
+| **[Interactive Brokers](https://www.interactivebrokers.co.in/en/home.php)** | United States | ✅ Yes |
 | **[Saxo Bank](https://www.home.saxo/)** | Denmark | ✅ Yes |
 | **[Swissquote](https://en.swissquote.com/)** | Switzerland | ✅ Yes |
 
