@@ -34,6 +34,7 @@ The first generation of Indian cross-border fintech platforms — such as **INDm
 | **[Dhan](https://dhan.co/us-stocks/)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[HDFC Securities](https://www.hdfcsec.com/globalinvesting)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
 | **[INDmoney](https://www.indmoney.com/us-stocks)** | [DriveWealth](https://drivewealth.com/) / [Alpaca](https://alpaca.markets/) | ❌ No |
+| **[Kuvera](https://kuvera.in/explore/us-stocks)** | [DriveWealth](https://drivewealth.com/) (via Vested) | ❌ No |
 | **[Stockal (Borderless)](https://www.borderless.world/stocks)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
 | **[Tickertape](https://www.tickertape.in/us-stocks)** | [ViewTrade](https://viewtrade.com/) | ❌ No |
 | **[Vested](https://vestedfinance.com/in/)** | [DriveWealth](https://drivewealth.com/) | ❌ No |
