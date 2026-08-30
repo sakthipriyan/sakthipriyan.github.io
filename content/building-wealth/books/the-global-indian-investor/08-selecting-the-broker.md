@@ -167,14 +167,14 @@ Getting started with IBKR Direct is relatively straightforward for Indian reside
 
 ## Account Types and Succession Planning
 
-A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. Unlike Indian demat accounts where you can easily assign a nominee to take over the assets, an international Individual account requires standard estate processing upon the account holder's death.
+A critical limitation of international brokerages like IBKR is the **lack of a standard nomination facility** for non-US residents. Unlike Indian demat accounts where you can easily assign a nominee to take over the assets, an international Individual account requires standard estate processing upon the account holder's untimely demise.
 
 ### The Problem with Individual Accounts
 If you open an "Individual" account and pass away, your heirs must go through a lengthy estate settlement process with the broker. While holding Irish UCITS ETFs completely shields your heirs from the dreaded US IRS estate tax clearance (and the 40% tax itself), the broker will still require proper legal documentation (like a probated Will or Succession Certificate) to transfer the assets. Having a clearly drafted Will can significantly fast-track this process, but a delay is inevitable.
 
 ### The Joint Account Solution (With Right of Survivorship)
 The most effective workaround for succession planning is to open a **Joint Account** (specifically, Joint Tenants with Right of Survivorship) with your spouse. 
-- **The Benefit**: In the event of one holder's death, the surviving spouse automatically retains full access and ownership of the account in a very short span of time, bypassing the lengthy probate and estate processing entirely. 
+- **The Benefit**: In the event of one holder's untimely demise, the surviving spouse automatically retains full access and ownership of the account in a very short span of time, bypassing the lengthy probate and estate processing entirely. 
 - **The Catch (Tax Filing)**: The Indian Income Tax Department requires all foreign assets to be disclosed. If you have a Joint Account, the secondary holder (e.g., your spouse) is considered a beneficial owner. Consequently, **the spouse must also declare the IBKR account in the Schedule FA (Foreign Assets) section of their own Income Tax Return (detailed in [Chapter 9](/building-wealth/books/the-global-indian-investor/09-taxation-and-tax-filing/))**, even if they did not fund it. 
 
 ### The Estate Planning Matrix: Worst to Best
