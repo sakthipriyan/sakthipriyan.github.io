@@ -106,9 +106,9 @@ For Indian residents looking to buy European UCITS ETFs, this route offers a hig
 
 - **India INX Global Access**: One of the more established options within the IFSC. It acts as a centralized digital platform providing a gateway to over 135 exchanges across 33 countries (according to [India INX's documentation](https://www.indiainx.com/)), explicitly including **European exchanges**. They achieve this by partnering with international brokers on the backend.
 - **NSE IX**: Operates its own "Global Access Platform" (GAP). While initially focused entirely on US equities, NSE IX recently signed a strategic MoU with the Cyprus Stock Exchange to act as an entry point into the European Union, with plans to finalize broad European exchange connectivity by FY27.
+  
+  > **An Evolving Landscape**: GIFT City is still in its early days. Recent proposals aim to permit the [**secondary listing of global ETFs on the NSE IX**](https://www.moneycontrol.com/news/business/markets/gift-city-opens-its-door-wider-through-proposal-for-secondary-listing-of-global-etfs-14017534.html). While this could eventually allow direct access to Irish UCITS ETFs without needing a foreign broker account, we must "wait and watch" if global issuers like BlackRock or Vanguard are actually willing to undertake the regulatory overhead to list there.
 - **SMC Global IFSC**: Operates as a specialized introducing broker under the IFSC framework to route clients to global execution platforms.
-
-> **An Evolving Landscape**: GIFT City is still in its early days. Recent proposals aim to permit the [**secondary listing of global ETFs on the NSE IX**](https://www.moneycontrol.com/news/business/markets/gift-city-opens-its-door-wider-through-proposal-for-secondary-listing-of-global-etfs-14017534.html). While this could eventually allow direct access to Irish UCITS ETFs without needing a foreign broker account, we must "wait and watch" if global issuers like BlackRock or Vanguard are actually willing to undertake the regulatory overhead to list there.
 
 #### Other Emerging Use Cases in GIFT City
 The IFSC ecosystem is rapidly expanding beyond simple introducing brokers, serving two other major functions for global investing:
