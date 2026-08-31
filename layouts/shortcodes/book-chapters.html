@@ -1,0 +1,17 @@
+{{- $path := .Get 0 -}}
+{{- $book := .Site.GetPage $path -}}
+{{- if $book -}}
+<div class="book-chapters-listing" style="margin-bottom: 2rem;">
+  <h3 id="{{ $book.Title | urlize }}" class="book-title" style="margin-bottom: 0.5rem;"><a class="anchor-link" href="#{{ $book.Title | urlize }}" aria-hidden="true" tabindex="-1"></a><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h3>
+  {{- with $book.Params.subtitle -}}
+  <p class="book-subtitle" style="font-style: italic; opacity: 0.8; margin-top: 0; margin-bottom: 1rem;">{{ . }}</p>
+  {{- end -}}
+  <ul class="latest-list subject-list">
+    {{- range $book.Pages.ByParam "chapter" -}}
+      {{- partial "subject-row.html" (dict "page" . "lead" . "is_subjects_list" true) -}}
+    {{- end -}}
+  </ul>
+</div>
+{{- else -}}
+  {{- errorf "book-chapters shortcode: could not find page %q" $path -}}
+{{- end -}}

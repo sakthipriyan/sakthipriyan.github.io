@@ -1,0 +1,40 @@
+{{- /*
+  One row for one subject: when it was published, what it is called, and every
+  format it exists in. Shared by Featured and Latest so a curated pick and a
+  recent one are the same object on the page.
+
+  Params:
+    page  the page whose date the row carries
+    lead  the page the title and link belong to; defaults to `page`
+
+  Latest passes the fullest form of the group as `lead` while keeping the date
+  of whichever member put the row there. Featured passes the curated pick as
+  both, because choosing the video and being shown the blog would be a surprise.
+*/ -}}
+{{- $p := .page -}}
+{{- $lead := .lead | default .page -}}
+{{- $group := partial "func/covers-group.html" $lead -}}
+{{- if .is_subjects_list -}}
+  {{- $group = sort $group "Type" "asc" -}}
+{{- end -}}
+<li class="latest-item">
+  <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
+  <a href="{{ $lead.RelPermalink }}">
+    {{- if and (eq $lead.Type "books") (isset $lead.Params "chapter") -}}
+      Chapter {{ $lead.Params.chapter }}: {{ $lead.Title }}
+    {{- else -}}
+      {{ $lead.Title }}
+    {{- end -}}
+  </a>
+  <span class="latest-section">
+    {{- if $group -}}
+      {{- range $i, $m := $group }}{{ if $i }} · {{ end }}
+      {{- $k := partial "func/page-kind.html" $m -}}
+      <a href="{{ $m.RelPermalink }}" {{- if $.is_subjects_list }} style="text-transform: capitalize;"{{ end -}}><span aria-hidden="true">{{ partial "func/kind-icon.html" $k }}</span> {{ $k | humanize | singularize }}</a>
+      {{- end -}}
+    {{- else -}}
+      {{- $k := partial "func/page-kind.html" $lead -}}
+      <span aria-hidden="true">{{ partial "func/kind-icon.html" $k }}</span> <span {{- if $.is_subjects_list }} style="text-transform: capitalize;"{{ end -}}>{{ $k | humanize | singularize }}</span>
+    {{- end -}}
+  </span>
+</li>
