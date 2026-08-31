@@ -7,8 +7,30 @@ date: 2026-08-25
 ---
 
 This is a curated list of articles structured as a learning path, guiding you
-from basic to advanced concepts. Each piece appears once, with every format
+from basic to advanced concepts.  
+Each piece appears once, with every format
 available on the same line.
+
+## Table of Contents
+
+- [Start with why](#start-with-why)
+- [The building blocks](#the-building-blocks)
+  - [Managing Money Flows](#managing-money-flows)
+  - [Emergency Fund](#emergency-fund)
+  - [Core Investments](#core-investments)
+- [Borrowing, and what it really costs](#borrowing-and-what-it-really-costs)
+  - [Credit Cards](#credit-cards)
+- [Build and run the portfolio](#build-and-run-the-portfolio)
+  - [The Perpetual Rebalancing Framework](#the-perpetual-rebalancing-framework)
+- [Investing beyond India](#investing-beyond-india)
+  - [The Global Indian Investor](#the-global-indian-investor)
+  - [Getting the money out, cheaply](#getting-the-money-out-cheaply)
+- [Then file the tax](#then-file-the-tax)
+- [Watch it happen](#watch-it-happen)
+- [Tools & Infrastructure](#tools--infrastructure)
+  - [Tracking & Planning](#tracking--planning)
+  - [Projection Engines](#projection-engines)
+  - [Open source projects](#open-source-projects)
 
 ## Start with why
 
@@ -91,12 +113,12 @@ book (*The Global Indian Investor*)**; the posts below are the parts that change
 after I wrote it.
 
 {{< subjects >}}
-/building-wealth/books/the-global-indian-investor/
-/building-wealth/videos/india-is-just-3-of-the-world-market-why-i-invest-globally/
 /building-wealth/blogs/how-to-invest-in-nasdaq-100-from-india-mutual-funds-etfs-and-ibkr-guide/
 {{< /subjects >}}
 
-## Getting the money out, cheaply
+{{< book-chapters "/building-wealth/books/the-global-indian-investor/" >}}
+
+### Getting the money out, cheaply
 
 Remittance is where the avoidable costs hide. This is the same journey, run
 several ways, with the numbers each time.
@@ -136,12 +158,6 @@ why. The framework above, applied to real money.
 
 Infrastructure and tooling projects that power the systems above.
 
-### Open source projects
-
-{{< subjects >}}
-/building-wealth/tools/xfina/
-{{< /subjects >}}
-
 ### Tracking & Planning
 
 {{< subjects >}}
@@ -155,4 +171,10 @@ Infrastructure and tooling projects that power the systems above.
 {{< subjects >}}
 /building-wealth/tools/realvalue-sip-engine/
 /building-wealth/tools/realvalue-emi-engine/
+{{< /subjects >}}
+
+### Open source projects
+
+{{< subjects >}}
+/building-wealth/tools/xfina/
 {{< /subjects >}}
