@@ -5,7 +5,7 @@ date: 2026-05-09
 draft: false
 subtitle: Setting up FX Retail and using it for cost-efficient forex
   remittances.
-title: "FX Retail - A Deep Dive"
+title: FX Retail - A Deep Dive
 type: books
 wealth_tags:
   - Forex
