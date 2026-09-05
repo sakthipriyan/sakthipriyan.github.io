@@ -125,6 +125,7 @@ What I actually hold, published monthly — allocation, drift, what I bought and
 why. The framework above, applied to real money.
 
 {{< subjects >}}
+/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-september-2026/
 /building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-august-2026/
 /building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-july-2026/
 /building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-june-2026/
