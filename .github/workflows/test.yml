@@ -1,15 +1,13 @@
-name: Deploy to GitHub Pages
+name: Approve PR
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:    # allows manual trigger from GitHub UI / gh CLI
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  deploy:
+  test:
+    name: Site
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout source
@@ -39,12 +37,3 @@ jobs:
 
       - name: Build
         run: hugo --minify
-
-      - name: Deploy to gh-pages
-        if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          publish_branch: gh-pages
-          cname: sakthipriyan.com
