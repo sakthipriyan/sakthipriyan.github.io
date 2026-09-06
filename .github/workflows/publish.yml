@@ -1,4 +1,8 @@
-name: Deploy Prod
+name: Publish
+
+# The site is published, not deployed: this builds it and hands the assets to
+# GitHub Pages via the gh-pages branch. Deploy is reserved for xsteer, the one
+# project with a runtime of its own and environments to deploy into.
 
 on:
   push:
@@ -6,7 +10,7 @@ on:
   workflow_dispatch:    # allows manual trigger from GitHub UI / gh CLI
 
 concurrency:
-  group: deploy-prod
+  group: publish
   cancel-in-progress: false
 
 # Read by default; the deploy job escalates to write for gh-pages alone.
