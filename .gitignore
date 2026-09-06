@@ -33,3 +33,7 @@ nav-price-evolution-*.csv
 # Local-only Hugo module replacement for theme development.
 # Copy config/development/module.yaml.example and set your own absolute path.
 config/development/module.yaml
+
+# Local-only Hugo workspace, the other way to develop against a local theme.
+# It points the build at ../hugo-continuum, a path CI does not have.
+hugo.work
