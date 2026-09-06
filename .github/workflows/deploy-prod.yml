@@ -1,13 +1,24 @@
-name: Approve PR
+name: Deploy Prod
 
 on:
-  pull_request:
-    branches: [ "main" ]
+  push:
+    branches: [main]
+  workflow_dispatch:    # allows manual trigger from GitHub UI / gh CLI
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+# Read by default; the deploy job escalates to write for gh-pages alone.
+permissions:
+  contents: read
 
 jobs:
-  test:
-    name: Site
+  deploy:
+    name: Deploy to sakthipriyan.com
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout source
@@ -36,4 +47,13 @@ jobs:
           restore-keys: ${{ runner.os }}-hugomod-
 
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --panicOnWarning
+
+      - name: Deploy to gh-pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          cname: sakthipriyan.com
