@@ -10,6 +10,7 @@ wealth_tags:
   - Rebalancing
   - State Of The 1 Portfolio
 summary: "September 2026 edition of “State of the 1 Portfolio” report covering portfolio returns, asset allocation, drift, and this month's eventful investment"
+covers: st1p-2026-09
 ---
 
 > **📖 [The Global Indian Investor](/building-wealth/books/the-global-indian-investor/)**
