@@ -2,7 +2,7 @@
 title: "Start Here"
 # One word in the nav, beside eight other one-word entries.
 linkTitle: "Start"
-summary: "Everything here, in the order it makes sense — from why compounding matters to filing the tax on it."
+summary: "A curated learning path from basic to advanced — each piece once, in every format."
 date: 2026-08-25
 ---
 
@@ -154,6 +154,8 @@ why. The framework above, applied to real money.
 /building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-may-2026/
 /building-wealth/blogs/state-of-the-portfolio-returns-allocation-and-strategy-edition-1/
 {{< /subjects >}}
+
+{{< subscribe >}}
 
 ## Tools & Infrastructure
 
