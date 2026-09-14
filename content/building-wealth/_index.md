@@ -19,6 +19,26 @@ accentLineDark: "#966f04"     # card left borders, rules, the footer line
 accentSurfaceDark: "#865f04"  # badges, buttons, pills
 onAccent: "#1a1408"
 
+# Newsletter sign-up, read by the theme: the third card on this landing page,
+# and the same card under every post and wherever {{< subscribe >}} is placed.
+# `action` is the Kit form's endpoint (form 9914970); Kit sends the
+# confirmation email itself, and its post-confirmation redirect is set in Kit
+# to https://sakthipriyan.com/building-wealth/?subscribed=1, which raises
+# `welcome` and turns the card to "Subscribed". Every other key falls back to
+# the theme's default. Keep each text to two lines on the narrowest card
+# (343px on a phone): a third makes every state, and the row beside it, taller.
+subscribe:
+  action: "https://app.kit.com/forms/9914970/subscriptions"
+  heading: "Building Wealth Digest"   # above the card under articles
+  welcome: "**You're in.** Thanks for confirming. The Building Wealth Digest arrives once a month; if it lands in Promotions, drag it to Primary."
+  form:
+    text: "Monthly: my portfolio update, new articles, videos and tools. No tips, no noise."
+    button: "Get Digest"
+  pending:
+    hint: "Not there? Check Promotions or Spam."
+  confirmed:
+    text: "Monthly. If it lands in Promotions, drag it to Primary. Unsubscribe from any issue."
+
 # Curated landing. Presence of this key is what switches the section from the
 # grouped listing to the front-page layout; every field below is optional.
 landing:
