@@ -22,7 +22,7 @@ Every portfolio question I have ever wanted to answer started the same way:
 gather the statements, and then spend an evening copying numbers out of PDFs.
 Xfina is the part I stopped doing by hand.
 
-🌐 **[xfina.dev](https://xfina.dev/)** · 💻 **[github.com/sakthipriyan/xfina](https://github.com/sakthipriyan/xfina)**
+🌐 **[xfina.dev](https://xfina.dev/)** · 💻 **[github.com/xfina-dev/xfina](https://github.com/xfina-dev/xfina)**
 
 ## Your files stay on your device
 

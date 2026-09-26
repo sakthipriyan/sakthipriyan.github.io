@@ -461,7 +461,7 @@ Because the Nasdaq 100 leg landed six days later than planned (Aug 13 vs. the Au
 ### Software
 | Item | Details |
 | :--- | :--- |
-| [Xfina](https://github.com/sakthipriyan/xfina) | A Rust-based, privacy-first financial statement parser, exposed through Rust, CLI, Python, JavaScript/WASM, and a browser-based web app. <br/><small>Read [Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser](/building-systems/blogs/xfina-one-rust-core-five-interfaces-building-a-privacy-first-financial-statement-parser/)</small> |
+| [Xfina](https://github.com/xfina-dev/xfina) | A Rust-based, privacy-first financial statement parser, exposed through Rust, CLI, Python, JavaScript/WASM, and a browser-based web app. <br/><small>Read [Xfina: One Rust Core, Five Interfaces — Building a Privacy-First Financial Statement Parser](/building-systems/blogs/xfina-one-rust-core-five-interfaces-building-a-privacy-first-financial-statement-parser/)</small> |
 | Minor fix to [RealValue Family SIP Allocator](/building-wealth/tools/realvalue-family-sip-allocator/) | The Even Drift solver is now capacity-aware of individual investor constraints, so an asset like international equities demanding more cash than eligible investors can provide no longer breaks the drift solve. <br/><small>See the [changelog](/building-wealth/tools/realvalue-family-sip-allocator/#changelog) for details.</small> |
 
 ## Transparency Note

@@ -21,7 +21,7 @@ This video provides a comprehensive update on the state of the "1 Portfolio" for
 
 Finally, I introduce three new open-source personal finance projects I'm building:
 - **[Xfina](https://xfina.dev)**: Parse financial statements directly in your browser with zero data uploads.
-- **[Xfingine](https://github.com/sakthipriyan/xfingine)**: Pure computation engine for personal finance planning.
+- **[Xfingine](https://github.com/xfina-dev/xfingine)**: Pure computation engine for personal finance planning.
 - **[Xsteer](https://xsteer.in)**: A privacy-first cashflow planner that turns your statements into a monthly money to-do list.
 
 ### What You'll Learn

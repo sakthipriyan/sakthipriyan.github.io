@@ -27,7 +27,7 @@ I wanted a **fast, privacy-first, local, open-source parser** that could turn th
 
 My first attempt was for my [RealValue Portfolio](https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/) project, where I built a browser-only parser using `pdf.js`. It kept financial data entirely on the user's machine, but was difficult to develop and limited to CAMS mutual funds and IBKR.
 
-That led to **[Xfina](https://github.com/sakthipriyan/xfina)**: a Rust-based parsing engine with a single core exposed through Rust, CLI, Python, JavaScript/WASM, and a browser-based web app. Rust provides the performance and strong typing; WASM lets the same core run locally in the browser; comprehensive tests keep rapid development safe.
+That led to **[Xfina](https://github.com/xfina-dev/xfina)**: a Rust-based parsing engine with a single core exposed through Rust, CLI, Python, JavaScript/WASM, and a browser-based web app. Rust provides the performance and strong typing; WASM lets the same core run locally in the browser; comprehensive tests keep rapid development safe.
 
 Xfina is now the data-extraction foundation for a larger **stealth project** I’m building to automate financial workflows. The goal was simple: **fast to run, fast to build, and fast to evolve—without compromising privacy.**
 
@@ -55,7 +55,7 @@ As of v0.2.1:
 
 ### Output Schema
 
-One important decision was to build on top of the [Sahamati Account Aggregator (AA) and ReBIT standards](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an `xfina` extension rather than forcing those fields into an incompatible model or discarding them. (CSV export support will be added soon as part of GitHub issue [#42](https://github.com/sakthipriyan/xfina/issues/42)).
+One important decision was to build on top of the [Sahamati Account Aggregator (AA) and ReBIT standards](https://api.rebit.org.in/) rather than inventing another financial data model. It provided a solid, existing foundation for representing accounts and transactions, while still leaving room for Xfina-specific extensions. Where the current schema cannot express useful institution-specific or parser-derived information, Xfina adds an `xfina` extension rather than forcing those fields into an incompatible model or discarding them. (CSV export support will be added soon as part of GitHub issue [#42](https://github.com/xfina-dev/xfina/issues/42)).
 
 ## Why Rust: One Core, Five Interfaces
 
@@ -172,7 +172,7 @@ A Vue 3 application that imports the NPM package and parses files locally on dro
 
 ## Architecture
 
-The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and [`xtask`](https://github.com/sakthipriyan/xfina/tree/main/xtask) (the build tool) — plus the `web/` Vue app:
+The project is a **Cargo workspace** with four crates — `xfina` (the core library), `xfina-wasm`, `xfina-py`, and [`xtask`](https://github.com/xfina-dev/xfina/tree/main/xtask) (the build tool) — plus the `web/` Vue app:
 
 ```
 xfina/
@@ -289,7 +289,7 @@ On this workload, Xfina was roughly 13× faster. When you are processing hundred
 
 ## Links
 
-- **GitHub**: [github.com/sakthipriyan/xfina](https://github.com/sakthipriyan/xfina)
+- **GitHub**: [github.com/xfina-dev/xfina](https://github.com/xfina-dev/xfina)
 - **Web App**: [xfina.dev](https://xfina.dev/)
 - **Crates.io**: [crates.io/crates/xfina](https://crates.io/crates/xfina)
 - **NPM**: [npmjs.com/package/xfina-wasm](https://www.npmjs.com/package/xfina-wasm)

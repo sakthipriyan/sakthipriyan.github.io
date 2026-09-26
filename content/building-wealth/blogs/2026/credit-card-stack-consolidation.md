@@ -30,7 +30,7 @@ The design goal is deliberate coverage across **3 banks** (HDFC, ICICI, Axis) an
 One card swap ended up hitting three separate goals:
 1. I got the **Axis Neo** card from Axis to unlock the laptop's cashback offer and zero cost EMI.
 2. By selecting the RuPay variant and linking it inside my UPI app, I am able to use it at my office food court and the apartment's Hatsun vending machine — spots that only take UPI. These used to go straight through my bank account; routing them through the credit card instead reduces how much idle cash I need to keep sitting there.
-3. It'll also let me finally add Axis credit card statement support to [Xfina](https://github.com/sakthipriyan/xfina#initial-launch-targets), as promised
+3. It'll also let me finally add Axis credit card statement support to [Xfina](https://github.com/xfina-dev/xfina#initial-launch-targets), as promised
 
 ## EMI as a Cashflow Tool
 
