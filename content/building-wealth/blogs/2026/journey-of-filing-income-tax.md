@@ -292,7 +292,7 @@ This is my first time doing Schedule FA, so it took me more time to understand a
 
 I had to make two key decision points here:
 1. **Reporting Level**: For Table A2, I chose to report the full broker account-level details. (Some sources/tools suggest reporting only the cash balance, but I decided to be comprehensive).
-2. **Peak Balance Computation**: To compute the peak balance, I found the peak USD balance and then converted that specific peak into INR using the SBI TT BUY rate. (I actually cloned a tool earlier to parse SBI rate PDFs and generate a historical dataset for this exact purpose, available at [data.xfina.dev](https://data.xfina.dev)). Some sources suggest applying the SBI TT BUY rate to the balance every single day to find the absolute INR peak, which I think is an incorrect interpretation.
+2. **Peak Balance Computation**: To compute the peak balance, I found the peak USD balance and then converted that specific peak into INR using the SBI TT BUY rate. (I actually cloned a tool earlier to parse SBI rate PDFs and generate a yearly JSON for this exact purpose, originally available at [data.sakthipriyan.com](https://data.sakthipriyan.com) and now moved to [data.xfina.dev](https://data.xfina.dev)). Some sources suggest applying the SBI TT BUY rate to the balance every single day to find the absolute INR peak, which I think is an incorrect interpretation.
 
 #### Table A2: Details of Foreign Custodial Accounts
 
