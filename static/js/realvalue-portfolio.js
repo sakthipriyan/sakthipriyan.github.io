@@ -1520,6 +1520,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     }
 
                     const response = await fetch('https://data.xfina.dev/v1/inflation/in-cpi.csv');
+                    if (!response.ok) throw new Error(`CPI fetch failed (HTTP ${response.status})`);
                     const csvText = await response.text();
                     
                     const lines = csvText.trim().split('\n');
@@ -2424,15 +2425,21 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
                 return null;
             },
-            async fetchSbiRateSeries() {
+            // The whole SBI TT series (one CSV, 2020-01-06 onward), cached for a
+            // week. A date later than the cached series ends refetches it, at most
+            // once an hour, so a fresh statement isn't priced at a week-old rate.
+            async fetchSbiRateSeries(throughDate) {
                 const cacheKey = `realvalue-sbi-fx-all`;
                 const cacheTimeKey = `realvalue-sbi-fx-all-time`;
                 const now = Date.now();
                 try {
-                    const cachedTime = localStorage.getItem(cacheTimeKey);
-                    if (cachedTime && now - parseInt(cachedTime) < 7 * 24 * 60 * 60 * 1000) {
-                        const cached = localStorage.getItem(cacheKey);
-                        if (cached) return JSON.parse(cached);
+                    const cachedTime = parseInt(localStorage.getItem(cacheTimeKey));
+                    const cached = localStorage.getItem(cacheKey);
+                    if (cached && cachedTime && now - cachedTime < 7 * 24 * 60 * 60 * 1000) {
+                        const json = JSON.parse(cached);
+                        const lastDate = json.data.length ? json.data[json.data.length - 1][0] : '';
+                        const fresh = now - cachedTime < 60 * 60 * 1000;
+                        if (!throughDate || throughDate <= lastDate || fresh) return json;
                     }
                 } catch(e) { /* ignore */ }
                 const url = `https://data.xfina.dev/v1/fx/sbi-forex-card-usd.csv`;
@@ -2455,17 +2462,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 return json;
             },
             async fetchSbiRateForDate(dateStr) {
-                const json = await this.fetchSbiRateSeries();
-                // data is sorted ascending by date; find the last entry <= dateStr
-                let best = null;
-                for (const entry of json.data) {
-                    if (entry[0] <= dateStr) best = entry;
-                    else break;
-                }
-                if (!best) best = json.data[0];
-                return { rate: best[1], date: best[0], tt_buy: best[1], tt_sell: best[2] };
+                const json = await this.fetchSbiRateSeries(dateStr);
+                const best = this.findSbiRateOnOrBefore(dateStr, json);
+                if (!best) throw new Error(this.sbiRangeMessage(dateStr, json));
+                return { rate: best.tt_buy, date: best.date, tt_buy: best.tt_buy, tt_sell: best.tt_sell };
+            },
+            sbiRangeMessage(dateStr, json) {
+                const first = json && json.data && json.data.length ? json.data[0][0] : '2020-01-06';
+                return `No SBI TT rate for ${dateStr}: the SBI rate history starts on ${first}, so earlier USD amounts can't be converted.`;
             },
             async warmSbiRateCache() {
+                try {
+                    for (let i = localStorage.length - 1; i >= 0; i--) {
+                        const key = localStorage.key(i);
+                        if (/^realvalue-sbi-fx-\d{4}$/.test(key)) localStorage.removeItem(key);
+                    }
+                } catch(e) { /* ignore */ }
                 try {
                     await this.fetchSbiRateSeries();
                 } catch(e) { /* background, ignore errors */ }
@@ -2485,7 +2497,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     if (entry[0] <= dateStr) best = entry;
                     else break;
                 }
-                if (!best) best = seriesJson.data[0];
+                // Before the series begins there is no rate: return nothing rather
+                // than the first one, which would price a 2018 trade at 2020's rate.
+                if (!best) return null;
                 return { date: best[0], tt_buy: best[1], tt_sell: best[2] };
             },
             async handleIbkrUpload(e) {
@@ -2592,45 +2606,28 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     }
                 }
 
-                const yearsNeeded = new Set();
-                yearsNeeded.add((reportEndDate || new Date().toISOString().slice(0, 10)).slice(0, 4));
+                // One SBI TT series covers every trade. A trade before it begins is
+                // refused for the whole report: converting it at some other day's
+                // rate would put a wrong rupee figure on a past cashflow.
+                let latestNeeded = reportEndDate || new Date().toISOString().slice(0, 10);
+                let earliestTrade = null;
                 for (const flows of Object.values(tradeCashflows)) {
                     for (const flow of flows) {
-                        if (flow.date && flow.date.length >= 4) yearsNeeded.add(flow.date.slice(0, 4));
+                        if (!flow.date) continue;
+                        if (!earliestTrade || flow.date < earliestTrade) earliestTrade = flow.date;
+                        if (flow.date > latestNeeded) latestNeeded = flow.date;
                     }
                 }
-
-                const yearRateSeries = {};
-                const dateRateCache = {};
-                for (const year of yearsNeeded) {
-                    try {
-                        yearRateSeries[year] = await this.fetchSbiRateSeriesByYear(year);
-                    } catch (e) {
-                        // If yearly series is unavailable, fallback to per-date fetch.
-                        yearRateSeries[year] = null;
-                    }
+                const sbiSeries = await this.fetchSbiRateSeries(latestNeeded);
+                if (earliestTrade && !this.findSbiRateOnOrBefore(earliestTrade, sbiSeries)) {
+                    throw new Error(this.sbiRangeMessage(earliestTrade, sbiSeries));
                 }
 
                 const resolveFxForDate = async (dateStr) => {
-                    const year = (dateStr || '').slice(0, 4);
-                    const series = yearRateSeries[year];
-                    let rateObj = this.findSbiRateOnOrBefore(dateStr, series);
-
-                    if ((!rateObj || !rateObj.tt_buy) && dateStr) {
-                        if (!dateRateCache[dateStr]) {
-                            try {
-                                dateRateCache[dateStr] = await this.fetchSbiRateForDate(dateStr);
-                            } catch (e) {
-                                dateRateCache[dateStr] = null;
-                            }
-                        }
-                        rateObj = dateRateCache[dateStr];
-                    }
+                    const rateObj = this.findSbiRateOnOrBefore(dateStr, sbiSeries);
+                    if (!rateObj) throw new Error(this.sbiRangeMessage(dateStr, sbiSeries));
                     // Return both rates; callers choose based on cashflow direction.
-                    return {
-                        tt_buy:  rateObj && rateObj.tt_buy  ? rateObj.tt_buy  : usdToInrBuy,
-                        tt_sell: rateObj && rateObj.tt_sell ? rateObj.tt_sell : usdToInrSell
-                    };
+                    return { tt_buy: rateObj.tt_buy, tt_sell: rateObj.tt_sell };
                 };
 
                 for (const pos of positions) {
