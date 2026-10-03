@@ -137,7 +137,7 @@ Your financial data never leaves your device.
 | **CAS PDF parsing** | Runs entirely in your browser using [PDF.js](https://mozilla.github.io/pdf.js/) — no file is ever uploaded |
 | **IBKR CSV parsing** | Processed locally in your browser |
 | **Tags & settings** | Saved only in your browser's local storage |
-| **IBKR FX conversion** | SBI historical TT Buy rates pre-fetched and cached locally on page load from [data.sakthipriyan.com](https://data.sakthipriyan.com/); no network needed after initial load |
+| **IBKR FX conversion** | SBI historical TT Buy rates pre-fetched and cached locally on page load from [data.xfina.dev](https://data.xfina.dev/); no network needed after initial load |
 
 ### How It Works
 
@@ -158,7 +158,7 @@ digraph RealValueComplete {
         label = "Static Hosting (Inbound Assets Only)";
         style = dashed; color = "#1976d2";
         SiteApp [label="sakthipriyan.com\n(App Logic)", fillcolor="#e1f5fe"];
-        SiteData [label="data.sakthipriyan.com\n(USD & CPI JSON)", fillcolor="#e1f5fe"];
+        SiteData [label="data.xfina.dev\n(USD & CPI CSV)", fillcolor="#e1f5fe"];
     }
 
     subgraph cluster_browser {

@@ -1519,7 +1519,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         return;
                     }
 
-                    const response = await fetch('https://data.sakthipriyan.com/inflation/IN.csv');
+                    const response = await fetch('https://data.xfina.dev/v1/inflation/in-cpi.csv');
                     const csvText = await response.text();
                     
                     const lines = csvText.trim().split('\n');
@@ -2424,22 +2424,38 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 }
                 return null;
             },
-            async fetchSbiRateSeriesByYear(year) {
-                const cacheKey = `realvalue-sbi-fx-${year}`;
+            async fetchSbiRateSeries() {
+                const cacheKey = `realvalue-sbi-fx-all`;
+                const cacheTimeKey = `realvalue-sbi-fx-all-time`;
+                const now = Date.now();
                 try {
-                    const cached = localStorage.getItem(cacheKey);
-                    if (cached) return JSON.parse(cached);
+                    const cachedTime = localStorage.getItem(cacheTimeKey);
+                    if (cachedTime && now - parseInt(cachedTime) < 7 * 24 * 60 * 60 * 1000) {
+                        const cached = localStorage.getItem(cacheKey);
+                        if (cached) return JSON.parse(cached);
+                    }
                 } catch(e) { /* ignore */ }
-                const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
+                const url = `https://data.xfina.dev/v1/fx/sbi-forex-card-usd.csv`;
                 const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`SBI yearly rate fetch failed for ${year} (HTTP ${resp.status})`);
-                const json = await resp.json();
-                try { localStorage.setItem(cacheKey, JSON.stringify(json)); } catch(e) { /* ignore */ }
+                if (!resp.ok) throw new Error(`SBI rate fetch failed (HTTP ${resp.status})`);
+                const csvText = await resp.text();
+                const lines = csvText.trim().split('\n');
+                const data = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const cols = lines[i].split(',');
+                    if (cols.length >= 3) {
+                        data.push([cols[0].trim(), parseFloat(cols[1].trim()), parseFloat(cols[2].trim())]);
+                    }
+                }
+                const json = { data: data };
+                try { 
+                    localStorage.setItem(cacheKey, JSON.stringify(json));
+                    localStorage.setItem(cacheTimeKey, now.toString());
+                } catch(e) { /* ignore */ }
                 return json;
             },
             async fetchSbiRateForDate(dateStr) {
-                const year = dateStr.slice(0, 4);
-                const json = await this.fetchSbiRateSeriesByYear(year);
+                const json = await this.fetchSbiRateSeries();
                 // data is sorted ascending by date; find the last entry <= dateStr
                 let best = null;
                 for (const entry of json.data) {
@@ -2450,20 +2466,9 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 return { rate: best[1], date: best[0], tt_buy: best[1], tt_sell: best[2] };
             },
             async warmSbiRateCache() {
-                const today = new Date();
-                const currentYear = today.getFullYear();
-                const jan8OfCurrentYear = new Date(currentYear, 0, 8);
-                const fetchAndStore = async (year) => {
-                    try {
-                        const url = `https://data.sakthipriyan.com/sbi-fx-card-rates/${year}/USD.json`;
-                        const resp = await fetch(url);
-                        if (!resp.ok) return;
-                        const json = await resp.json();
-                        localStorage.setItem(`realvalue-sbi-fx-${year}`, JSON.stringify(json));
-                    } catch(e) { /* background, ignore errors */ }
-                };
-                fetchAndStore(currentYear);
-                if (today < jan8OfCurrentYear) fetchAndStore(currentYear - 1);
+                try {
+                    await this.fetchSbiRateSeries();
+                } catch(e) { /* background, ignore errors */ }
             },
             async copyAiPrompt() {
                 const prompt = 'I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/index.html | https://sakthipriyan.com/js/realvalue-portfolio.js';
