@@ -66,17 +66,159 @@ The chart below covers the whole window, from the day before the attempt to the 
 
 ```echarts
 {
-  "title": { "text": "USD/INR — Mid-Market, FX Retail, and a Bank Card Rate", "left": "center", "textStyle": { "color": "#2c3e50", "fontSize": 15, "fontWeight": 600 } },
-  "tooltip": { "trigger": "axis" },
-  "legend": { "bottom": 0, "data": ["RBI Reference Rate", "My FX Retail Rate", "SBI TT Sell (card rate)"] },
-  "color": ["#2563EB", "#DC2626", "#F97316"],
-  "grid": { "left": "13%", "right": "6%", "top": "18%", "bottom": "17%" },
-  "xAxis": { "type": "category", "data": ["Jul 30","Jul 31","Aug 3","Aug 4","Aug 5","Aug 6","Aug 7","Aug 10","Aug 11","Aug 12","Aug 13","Aug 14"] },
-  "yAxis": { "type": "value", "scale": true, "name": "₹ per USD", "nameLocation": "middle", "nameGap": 50 },
+  "title": {
+    "text": "USD/INR \u2014 Mid-Market, FX Retail, and a Bank Card Rate",
+    "left": "center",
+    "textStyle": {
+      "color": "#888",
+      "fontSize": 15,
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "trigger": "axis"
+  },
+  "legend": {
+    "bottom": 0,
+    "data": [
+      "RBI Reference Rate",
+      "My FX Retail Rate",
+      "SBI TT Sell (card rate)"
+    ],
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "color": [
+    "#2563EB",
+    "#DC2626",
+    "#F97316"
+  ],
+  "grid": {
+    "left": "13%",
+    "right": "6%",
+    "top": "18%",
+    "bottom": "17%"
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "Jul 30",
+      "Jul 31",
+      "Aug 3",
+      "Aug 4",
+      "Aug 5",
+      "Aug 6",
+      "Aug 7",
+      "Aug 10",
+      "Aug 11",
+      "Aug 12",
+      "Aug 13",
+      "Aug 14"
+    ],
+    "axisLabel": {
+      "color": "#888"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "scale": true,
+    "name": "\u20b9 per USD",
+    "nameLocation": "middle",
+    "nameGap": 50,
+    "nameTextStyle": {
+      "color": "#888"
+    },
+    "axisLabel": {
+      "color": "#888"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
   "series": [
-    { "name": "RBI Reference Rate", "type": "line", "smooth": true, "data": [95.7327,95.3706,95.2601,95.3487,95.1237,95.2053,95.2135,95.2560,95.4321,95.4261,95.4098,95.4263] },
-    { "name": "My FX Retail Rate", "type": "scatter", "symbolSize": 12, "data": [null,{ "value": 95.6075, "label": { "show": true, "position": "top", "formatter": "Attempted", "fontSize": 11, "fontWeight": 600, "color": "#334155" } },null,null,null,null,null,null,null,{ "value": 95.5150, "label": { "show": true, "position": "top", "formatter": "Executed", "fontSize": 11, "fontWeight": 600, "color": "#334155" } },null,null] },
-    { "name": "SBI TT Sell (card rate)", "type": "line", "smooth": true, "lineStyle": { "type": "dashed" }, "data": [96.05,95.85,95.75,95.81,95.60,95.57,95.75,95.60,95.80,95.86,95.86,95.85] }
+    {
+      "name": "RBI Reference Rate",
+      "type": "line",
+      "smooth": true,
+      "data": [
+        95.7327,
+        95.3706,
+        95.2601,
+        95.3487,
+        95.1237,
+        95.2053,
+        95.2135,
+        95.256,
+        95.4321,
+        95.4261,
+        95.4098,
+        95.4263
+      ]
+    },
+    {
+      "name": "My FX Retail Rate",
+      "type": "scatter",
+      "symbolSize": 12,
+      "data": [
+        null,
+        {
+          "value": 95.6075,
+          "label": {
+            "show": true,
+            "position": "top",
+            "formatter": "Attempted",
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#334155"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "value": 95.515,
+          "label": {
+            "show": true,
+            "position": "top",
+            "formatter": "Executed",
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#334155"
+          }
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "name": "SBI TT Sell (card rate)",
+      "type": "line",
+      "smooth": true,
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "data": [
+        96.05,
+        95.85,
+        95.75,
+        95.81,
+        95.6,
+        95.57,
+        95.75,
+        95.6,
+        95.8,
+        95.86,
+        95.86,
+        95.85
+      ]
+    }
   ]
 }
 ```
@@ -85,16 +227,132 @@ My FX Retail bookings sit about midway between the mid-market benchmark and a ba
 
 ```echarts
 {
-  "title": { "text": "ANAU — Published NAV vs. My Entry Points", "left": "center", "textStyle": { "color": "#2c3e50", "fontSize": 15, "fontWeight": 600 } },
-  "tooltip": { "trigger": "axis" },
-  "legend": { "bottom": 0, "data": ["NAV (USD Acc)", "My Entry"] },
-  "color": ["#10B981", "#DC2626"],
-  "grid": { "left": "12%", "right": "6%", "top": "18%", "bottom": "17%" },
-  "xAxis": { "type": "category", "data": ["Jul 30","Jul 31","Aug 3","Aug 4","Aug 5","Aug 6","Aug 7","Aug 10","Aug 11","Aug 12","Aug 13"] },
-  "yAxis": { "type": "value", "scale": true, "name": "USD", "nameLocation": "middle", "nameGap": 45 },
+  "title": {
+    "text": "ANAU \u2014 Published NAV vs. My Entry Points",
+    "left": "center",
+    "textStyle": {
+      "color": "#888",
+      "fontSize": 15,
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "trigger": "axis"
+  },
+  "legend": {
+    "bottom": 0,
+    "data": [
+      "NAV (USD Acc)",
+      "My Entry"
+    ],
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "color": [
+    "#10B981",
+    "#DC2626"
+  ],
+  "grid": {
+    "left": "12%",
+    "right": "6%",
+    "top": "18%",
+    "bottom": "17%"
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "Jul 30",
+      "Jul 31",
+      "Aug 3",
+      "Aug 4",
+      "Aug 5",
+      "Aug 6",
+      "Aug 7",
+      "Aug 10",
+      "Aug 11",
+      "Aug 12",
+      "Aug 13"
+    ],
+    "axisLabel": {
+      "color": "#888"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "scale": true,
+    "name": "USD",
+    "nameLocation": "middle",
+    "nameGap": 45,
+    "nameTextStyle": {
+      "color": "#888"
+    },
+    "axisLabel": {
+      "color": "#888"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
   "series": [
-    { "name": "NAV (USD Acc)", "type": "line", "smooth": true, "data": [24.4689,24.6163,25.0537,25.8860,25.6722,25.5725,25.8763,25.7904,25.7065,25.8957,26.1935] },
-    { "name": "My Entry", "type": "scatter", "symbolSize": 12, "data": [null,{ "value": 24.4689, "label": { "show": true, "position": "bottom", "formatter": "Planned", "fontSize": 11, "fontWeight": 600, "color": "#334155" } },null,null,null,null,null,null,null,null,{ "value": 25.8999, "label": { "show": true, "position": "bottom", "formatter": "Executed", "fontSize": 11, "fontWeight": 600, "color": "#334155" } }] }
+    {
+      "name": "NAV (USD Acc)",
+      "type": "line",
+      "smooth": true,
+      "data": [
+        24.4689,
+        24.6163,
+        25.0537,
+        25.886,
+        25.6722,
+        25.5725,
+        25.8763,
+        25.7904,
+        25.7065,
+        25.8957,
+        26.1935
+      ]
+    },
+    {
+      "name": "My Entry",
+      "type": "scatter",
+      "symbolSize": 12,
+      "data": [
+        null,
+        {
+          "value": 24.4689,
+          "label": {
+            "show": true,
+            "position": "bottom",
+            "formatter": "Planned",
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#334155"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "value": 25.8999,
+          "label": {
+            "show": true,
+            "position": "bottom",
+            "formatter": "Executed",
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#334155"
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -126,19 +384,187 @@ Before the detail, the shape of it — every contact I initiated, by day and cha
 
 ```echarts
 {
-  "title": { "text": "What It Took: My Outbound Contacts by Day", "left": "center", "textStyle": { "color": "#2c3e50", "fontSize": 15, "fontWeight": 600 } },
-  "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
-  "legend": { "bottom": 0, "data": ["Email", "Call", "X", "X Chat", "Branch"] },
-  "color": ["#2563EB", "#F97316", "#DC2626", "#7C3AED", "#10B981"],
-  "grid": { "left": "10%", "right": "6%", "top": "18%", "bottom": "17%" },
-  "xAxis": { "type": "category", "data": ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D11","D12","D13"] },
-  "yAxis": { "type": "value", "name": "contacts", "nameLocation": "middle", "nameGap": 35, "minInterval": 1 },
+  "title": {
+    "text": "What It Took: My Outbound Contacts by Day",
+    "left": "center",
+    "textStyle": {
+      "color": "#888",
+      "fontSize": 15,
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "bottom": 0,
+    "data": [
+      "Email",
+      "Call",
+      "X",
+      "X Chat",
+      "Branch"
+    ],
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "color": [
+    "#2563EB",
+    "#F97316",
+    "#DC2626",
+    "#7C3AED",
+    "#10B981"
+  ],
+  "grid": {
+    "left": "10%",
+    "right": "6%",
+    "top": "18%",
+    "bottom": "17%"
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7",
+      "D8",
+      "D9",
+      "D10",
+      "D11",
+      "D12",
+      "D13"
+    ],
+    "axisLabel": {
+      "color": "#888"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "name": "contacts",
+    "nameLocation": "middle",
+    "nameGap": 35,
+    "minInterval": 1,
+    "nameTextStyle": {
+      "color": "#888"
+    },
+    "axisLabel": {
+      "color": "#888"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
   "series": [
-    { "name": "Email", "type": "bar", "stack": "t", "data": [1,1,0,4,3,1,1,1,0,0,3,0,2] },
-    { "name": "Call", "type": "bar", "stack": "t", "data": [0,1,0,3,1,2,3,0,0,0,0,0,0] },
-    { "name": "X", "type": "bar", "stack": "t", "data": [0,0,0,1,2,3,1,2,0,0,2,0,0] },
-    { "name": "X Chat", "type": "bar", "stack": "t", "data": [0,0,0,1,1,0,1,1,0,0,0,0,0] },
-    { "name": "Branch", "type": "bar", "stack": "t", "data": [0,0,0,1,0,0,0,0,0,0,0,0,0] }
+    {
+      "name": "Email",
+      "type": "bar",
+      "stack": "t",
+      "data": [
+        1,
+        1,
+        0,
+        4,
+        3,
+        1,
+        1,
+        1,
+        0,
+        0,
+        3,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "Call",
+      "type": "bar",
+      "stack": "t",
+      "data": [
+        0,
+        1,
+        0,
+        3,
+        1,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "X",
+      "type": "bar",
+      "stack": "t",
+      "data": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        1,
+        2,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "X Chat",
+      "type": "bar",
+      "stack": "t",
+      "data": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Branch",
+      "type": "bar",
+      "stack": "t",
+      "data": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
   ]
 }
 ```
@@ -148,10 +574,10 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
 ```echarts
 {
   "title": {
-    "text": "When the Work Happened — Hour by Day",
+    "text": "When the Work Happened \u2014 Hour by Day",
     "left": "center",
     "textStyle": {
-      "color": "#2c3e50",
+      "color": "#888",
       "fontSize": 15,
       "fontWeight": 600
     }
@@ -188,6 +614,9 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
     },
     "axisTick": {
       "show": false
+    },
+    "axisLabel": {
+      "color": "#888"
     }
   },
   "yAxis": {
@@ -215,6 +644,9 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
     },
     "axisTick": {
       "show": false
+    },
+    "axisLabel": {
+      "color": "#888"
     }
   },
   "visualMap": {
@@ -248,7 +680,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             4,
             1
           ],
-          "name": "Day 1, 11:00 — Email"
+          "name": "Day 1, 11:00 \u2014 Email"
         },
         {
           "value": [
@@ -256,7 +688,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             8,
             2
           ],
-          "name": "Day 2, 15:00 — Call, Email"
+          "name": "Day 2, 15:00 \u2014 Call, Email"
         },
         {
           "value": [
@@ -264,7 +696,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             4,
             1
           ],
-          "name": "Day 4, 11:00 — Call"
+          "name": "Day 4, 11:00 \u2014 Call"
         },
         {
           "value": [
@@ -272,7 +704,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             5,
             1
           ],
-          "name": "Day 4, 12:00 — Branch"
+          "name": "Day 4, 12:00 \u2014 Branch"
         },
         {
           "value": [
@@ -280,7 +712,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             9,
             4
           ],
-          "name": "Day 4, 16:00 — Email×2, Call×2"
+          "name": "Day 4, 16:00 \u2014 Email\u00d72, Call\u00d72"
         },
         {
           "value": [
@@ -288,7 +720,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             12,
             3
           ],
-          "name": "Day 4, 19:00 — Email, X, X Chat"
+          "name": "Day 4, 19:00 \u2014 Email, X, X Chat"
         },
         {
           "value": [
@@ -296,7 +728,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             14,
             1
           ],
-          "name": "Day 4, 21:00 — Email"
+          "name": "Day 4, 21:00 \u2014 Email"
         },
         {
           "value": [
@@ -304,7 +736,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             1,
             2
           ],
-          "name": "Day 5, 08:00 — Email, X"
+          "name": "Day 5, 08:00 \u2014 Email, X"
         },
         {
           "value": [
@@ -312,7 +744,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             5,
             1
           ],
-          "name": "Day 5, 12:00 — X Chat"
+          "name": "Day 5, 12:00 \u2014 X Chat"
         },
         {
           "value": [
@@ -320,7 +752,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             9,
             1
           ],
-          "name": "Day 5, 16:00 — Email"
+          "name": "Day 5, 16:00 \u2014 Email"
         },
         {
           "value": [
@@ -328,7 +760,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             10,
             2
           ],
-          "name": "Day 5, 17:00 — X, Call"
+          "name": "Day 5, 17:00 \u2014 X, Call"
         },
         {
           "value": [
@@ -336,7 +768,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             11,
             1
           ],
-          "name": "Day 5, 18:00 — Email"
+          "name": "Day 5, 18:00 \u2014 Email"
         },
         {
           "value": [
@@ -344,7 +776,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             4,
             1
           ],
-          "name": "Day 6, 11:00 — Email"
+          "name": "Day 6, 11:00 \u2014 Email"
         },
         {
           "value": [
@@ -352,7 +784,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             5,
             1
           ],
-          "name": "Day 6, 12:00 — X"
+          "name": "Day 6, 12:00 \u2014 X"
         },
         {
           "value": [
@@ -360,7 +792,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             6,
             2
           ],
-          "name": "Day 6, 13:00 — X×2"
+          "name": "Day 6, 13:00 \u2014 X\u00d72"
         },
         {
           "value": [
@@ -368,7 +800,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             10,
             1
           ],
-          "name": "Day 6, 17:00 — Call"
+          "name": "Day 6, 17:00 \u2014 Call"
         },
         {
           "value": [
@@ -376,7 +808,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             11,
             1
           ],
-          "name": "Day 6, 18:00 — Call"
+          "name": "Day 6, 18:00 \u2014 Call"
         },
         {
           "value": [
@@ -384,7 +816,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             3,
             1
           ],
-          "name": "Day 7, 10:00 — X"
+          "name": "Day 7, 10:00 \u2014 X"
         },
         {
           "value": [
@@ -392,7 +824,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             5,
             1
           ],
-          "name": "Day 7, 12:00 — Call"
+          "name": "Day 7, 12:00 \u2014 Call"
         },
         {
           "value": [
@@ -400,7 +832,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             7,
             1
           ],
-          "name": "Day 7, 14:00 — Call"
+          "name": "Day 7, 14:00 \u2014 Call"
         },
         {
           "value": [
@@ -408,7 +840,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             8,
             2
           ],
-          "name": "Day 7, 15:00 — Email, X Chat"
+          "name": "Day 7, 15:00 \u2014 Email, X Chat"
         },
         {
           "value": [
@@ -416,7 +848,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             10,
             1
           ],
-          "name": "Day 7, 17:00 — Call"
+          "name": "Day 7, 17:00 \u2014 Call"
         },
         {
           "value": [
@@ -424,7 +856,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             0,
             3
           ],
-          "name": "Day 8, 07:00 — X, X Chat, Email"
+          "name": "Day 8, 07:00 \u2014 X, X Chat, Email"
         },
         {
           "value": [
@@ -432,7 +864,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             10,
             1
           ],
-          "name": "Day 8, 17:00 — X"
+          "name": "Day 8, 17:00 \u2014 X"
         },
         {
           "value": [
@@ -440,7 +872,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             3,
             1
           ],
-          "name": "Day 11, 10:00 — Email"
+          "name": "Day 11, 10:00 \u2014 Email"
         },
         {
           "value": [
@@ -448,7 +880,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             4,
             3
           ],
-          "name": "Day 11, 11:00 — Email, X×2"
+          "name": "Day 11, 11:00 \u2014 Email, X\u00d72"
         },
         {
           "value": [
@@ -456,7 +888,7 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             9,
             1
           ],
-          "name": "Day 11, 16:00 — Email"
+          "name": "Day 11, 16:00 \u2014 Email"
         },
         {
           "value": [
@@ -464,14 +896,14 @@ Forty-three contacts I had to initiate across thirteen days, on top of everythin
             6,
             2
           ],
-          "name": "Day 13, 13:00 — Email×2"
+          "name": "Day 13, 13:00 \u2014 Email\u00d72"
         }
       ],
       "label": {
         "show": true,
         "formatter": "{@[2]}",
         "fontSize": 10,
-        "color": "#0f172a"
+        "color": "#888"
       },
       "itemStyle": {
         "borderColor": "#fff",

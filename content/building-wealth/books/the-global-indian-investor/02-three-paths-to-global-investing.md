@@ -6,6 +6,7 @@ chapter: 2
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
+covers: three-paths-to-global-investing
 wealth_tags:
   - Asset Allocation
   - International Investing
