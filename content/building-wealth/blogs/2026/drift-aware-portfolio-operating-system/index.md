@@ -269,147 +269,517 @@ The Buy Engine reduces aggregate portfolio drift from **2.13%** to **1.58%**, co
 
 ```echarts
 {
-    "height": "700px",
-    "title": { "text": "Drift Correction Impact", "left": "center" },
-    "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
-    "legend": { 
-        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening", "New Water Level"],
-        "bottom": 0 
+  "height": "700px",
+  "title": {
+    "text": "Drift Correction Impact",
+    "left": "center",
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": [
+      "Pre Drift",
+      "Post Drift",
+      "Improvement",
+      "Improvement (Evaporated)",
+      "Worsening",
+      "New Water Level"
+    ],
+    "bottom": 0,
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "grid": {
+    "left": "3%",
+    "right": "4%",
+    "bottom": "15%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "Nasdaq 100",
+      "Nifty 50",
+      "Next 50",
+      "Midcap 150",
+      "Smallcap 250",
+      "Debt",
+      "Gold"
+    ],
+    "axisLabel": {
+      "interval": 0,
+      "rotate": 30,
+      "color": "#888"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "name": "Drift (%)",
+    "min": -1.5,
+    "max": 1.25,
+    "axisLabel": {
+      "formatter": "{value}%",
+      "color": "#888"
     },
-    "grid": { "left": "3%", "right": "4%", "bottom": "15%", "containLabel": true },
-    "xAxis": {
-        "type": "category",
-        "data": ["Nasdaq 100", "Nifty 50", "Next 50", "Midcap 150", "Smallcap 250", "Debt", "Gold"],
-        "axisLabel": { "interval": 0, "rotate": 30 }
+    "nameTextStyle": {
+      "color": "#888"
     },
-    "yAxis": {
-        "type": "value",
-        "name": "Drift (%)",
-        "min": -1.5,
-        "max": 1.25,
-        "axisLabel": { "formatter": "{value}%" }
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "Pre Drift",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#3b82f6"
+      }
     },
-    "series": [
-        { "name": "Pre Drift", "type": "bar", "data": [], "itemStyle": { "color": "#3b82f6" } },
-        { "name": "Post Drift", "type": "bar", "data": [], "itemStyle": { "color": "#1e40af" } },
-        { "name": "Improvement", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e" } },
-        { "name": "Improvement (Evaporated)", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-        { "name": "Worsening", "type": "bar", "data": [], "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-        {
-            "name": "New Water Level",
-            "type": "line",
-            "data": [],
-            "itemStyle": { "color": "#1e40af" },
-            "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
-            "markLine": {
-                "symbol": "none",
-                "silent": true,
-                "label": { "show": false },
-                "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
-                "data": [
-                    { "yAxis": -0.39 }
-                ]
-            }
-        },
-        {
-            "name": "Empty",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [-0.39, 0, -0.36, -0.39, -0.08, 0, 0],
-            "itemStyle": { "color": "transparent" },
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Neg Delta",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                { "value": -0.86, "itemStyle": { "color": "#22c55e" } },
-                { "value": -0.22, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                { "value": -0.03, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                { "value": -0.05, "itemStyle": { "color": "#22c55e" } },
-                { "value": -0.11, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                0, 0
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Neg Base",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                { "value": -0.25, "itemStyle": { "color": "#3b82f6" } },
-                { "value": -1.28, "itemStyle": { "color": "#1e40af" } },
-                { "value": -1.11, "itemStyle": { "color": "#1e40af" } },
-                { "value": -1.06, "itemStyle": { "color": "#3b82f6" } },
-                { "value": -1.31, "itemStyle": { "color": "#1e40af" } },
-                { "value": -1.50, "itemStyle": { "color": "#1e40af" } },
-                { "value": -1.50, "itemStyle": { "color": "#1e40af" } }
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Pos Base",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                0, 0, 0, 0, 0, 
-                { "value": 1.02, "itemStyle": { "color": "#1e40af" } },
-                { "value": 0.55, "itemStyle": { "color": "#1e40af" } }
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Pos Delta",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                0,
-                { "value": 0.20, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                0, 0, 0,
-                { "value": 0.13, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                { "value": 0.23, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } }
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Pre Drift",
-            "type": "line",
-            "data": [-1.25, 0.20, -0.36, -0.44, -0.08, 1.15, 0.78],
-            "itemStyle": { "color": "#3b82f6" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
-        },
-        {
-            "name": "Post Drift",
-            "type": "line",
-            "data": [-0.39, -0.22, -0.39, -0.39, -0.19, 1.02, 0.55],
-            "itemStyle": { "color": "#1e40af" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
-        },
-        {
-            "name": "Improvement",
-            "type": "line",
-            "data": [0.86, "-", "-", 0.05, "-", 0.13, 0.23],
-            "itemStyle": { "color": "#22c55e" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
-        },
-        {
-            "name": "Worsening",
-            "type": "line",
-            "data": ["-", -0.42, -0.03, "-", -0.11, "-", "-"],
-            "itemStyle": { "color": "#ef4444" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
+    {
+      "name": "Post Drift",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#1e40af"
+      }
+    },
+    {
+      "name": "Improvement",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#22c55e"
+      }
+    },
+    {
+      "name": "Improvement (Evaporated)",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#22c55e",
+        "opacity": 0.4,
+        "decal": {
+          "symbol": "rect",
+          "color": "rgba(0,0,0,0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            4
+          ],
+          "rotation": 0.785
         }
-    ]
+      }
+    },
+    {
+      "name": "Worsening",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#ef4444",
+        "opacity": 0.4,
+        "decal": {
+          "symbol": "rect",
+          "color": "rgba(0,0,0,0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            4
+          ],
+          "rotation": 0.785
+        }
+      }
+    },
+    {
+      "name": "New Water Level",
+      "type": "line",
+      "data": [],
+      "itemStyle": {
+        "color": "#1e40af"
+      },
+      "lineStyle": {
+        "type": "dashed",
+        "color": "#1e40af",
+        "width": 2
+      },
+      "markLine": {
+        "symbol": "none",
+        "silent": true,
+        "label": {
+          "show": false
+        },
+        "lineStyle": {
+          "type": "dashed",
+          "color": "#1e40af",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": -0.39
+          }
+        ]
+      }
+    },
+    {
+      "name": "Empty",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        -0.39,
+        0,
+        -0.36,
+        -0.39,
+        -0.08,
+        0,
+        0
+      ],
+      "itemStyle": {
+        "color": "transparent"
+      },
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Neg Delta",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        {
+          "value": -0.86,
+          "itemStyle": {
+            "color": "#22c55e"
+          }
+        },
+        {
+          "value": -0.22,
+          "itemStyle": {
+            "color": "#ef4444",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        {
+          "value": -0.03,
+          "itemStyle": {
+            "color": "#ef4444",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        {
+          "value": -0.05,
+          "itemStyle": {
+            "color": "#22c55e"
+          }
+        },
+        {
+          "value": -0.11,
+          "itemStyle": {
+            "color": "#ef4444",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        0,
+        0
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Neg Base",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        {
+          "value": -0.25,
+          "itemStyle": {
+            "color": "#3b82f6"
+          }
+        },
+        {
+          "value": -1.28,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -1.11,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -1.06,
+          "itemStyle": {
+            "color": "#3b82f6"
+          }
+        },
+        {
+          "value": -1.31,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -1.5,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -1.5,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        }
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Pos Base",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        {
+          "value": 1.02,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": 0.55,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        }
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Pos Delta",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        0,
+        {
+          "value": 0.2,
+          "itemStyle": {
+            "color": "#ef4444",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        0,
+        0,
+        0,
+        {
+          "value": 0.13,
+          "itemStyle": {
+            "color": "#22c55e",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        {
+          "value": 0.23,
+          "itemStyle": {
+            "color": "#22c55e",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        }
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Pre Drift",
+      "type": "line",
+      "data": [
+        -1.25,
+        0.2,
+        -0.36,
+        -0.44,
+        -0.08,
+        1.15,
+        0.78
+      ],
+      "itemStyle": {
+        "color": "#3b82f6"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    },
+    {
+      "name": "Post Drift",
+      "type": "line",
+      "data": [
+        -0.39,
+        -0.22,
+        -0.39,
+        -0.39,
+        -0.19,
+        1.02,
+        0.55
+      ],
+      "itemStyle": {
+        "color": "#1e40af"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    },
+    {
+      "name": "Improvement",
+      "type": "line",
+      "data": [
+        0.86,
+        "-",
+        "-",
+        0.05,
+        "-",
+        0.13,
+        0.23
+      ],
+      "itemStyle": {
+        "color": "#22c55e"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    },
+    {
+      "name": "Worsening",
+      "type": "line",
+      "data": [
+        "-",
+        -0.42,
+        -0.03,
+        "-",
+        -0.11,
+        "-",
+        "-"
+      ],
+      "itemStyle": {
+        "color": "#ef4444"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    }
+  ]
 }
 ```
 
@@ -527,76 +897,208 @@ The following chart illustrates a hypothetical scenario. It shows the portfolio 
 
 ```echarts
 {
-    "height": "500px",
-    "title": { "text": "Sell Engine: Active Drift Ceiling and Execution", "left": "center" },
-    "tooltip": { "trigger": "axis" },
-    "legend": { "data": ["Portfolio Drift", "Active Ceiling"], "bottom": 0 },
-    "grid": { "left": "5%", "right": "5%", "bottom": "15%", "containLabel": true },
-    "xAxis": {
-        "type": "category",
-        "boundaryGap": false,
-        "data": ["M-3", "M-2", "M-1", "M1 (Trigger)", "M2", "M3", "M4", "M5", "M6 (Stop)", "M7", "M8"]
+  "height": "500px",
+  "title": {
+    "text": "Sell Engine: Active Drift Ceiling and Execution",
+    "left": "center",
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "tooltip": {
+    "trigger": "axis"
+  },
+  "legend": {
+    "data": [
+      "Portfolio Drift",
+      "Active Ceiling"
+    ],
+    "bottom": 0,
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "grid": {
+    "left": "5%",
+    "right": "5%",
+    "bottom": "15%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "boundaryGap": false,
+    "data": [
+      "M-3",
+      "M-2",
+      "M-1",
+      "M1 (Trigger)",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M6 (Stop)",
+      "M7",
+      "M8"
+    ],
+    "axisLabel": {
+      "color": "#888"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "name": "Aggregate Positive Drift (%)",
+    "min": 4,
+    "max": 12,
+    "axisLabel": {
+      "formatter": "{value}%",
+      "color": "#888"
     },
-    "yAxis": {
-        "type": "value",
-        "name": "Aggregate Positive Drift (%)",
-        "min": 4,
-        "max": 12,
-        "axisLabel": { "formatter": "{value}%" }
+    "nameTextStyle": {
+      "color": "#888"
     },
-    "series": [
-        {
-            "name": "Active Ceiling",
-            "type": "line",
-            "step": "end",
-            "data": [10, 10, 10, 10, 9, 8, 7, 6, 5, 10, 10],
-            "itemStyle": { "color": "#ef4444" },
-            "lineStyle": { "width": 2, "type": "dashed" },
-            "markArea": {
-                "itemStyle": { "color": "rgba(239, 68, 68, 0.05)" },
-                "data": [
-                    [
-                        { "name": "Sell Program Active", "xAxis": "M1 (Trigger)" },
-                        { "xAxis": "M6" }
-                    ]
-                ]
-            }
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "Active Ceiling",
+      "type": "line",
+      "step": "end",
+      "data": [
+        10,
+        10,
+        10,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        10,
+        10
+      ],
+      "itemStyle": {
+        "color": "#ef4444"
+      },
+      "lineStyle": {
+        "width": 2,
+        "type": "dashed"
+      },
+      "markArea": {
+        "itemStyle": {
+          "color": "rgba(239, 68, 68, 0.05)"
         },
-        {
-            "name": "Portfolio Drift",
-            "type": "line",
-            "data": [6.0, 8.0, 9.5, 10.8, 9.5, 8.5, 6.5, 6.2, 4.8, 5.5, 6.0],
-            "itemStyle": { "color": "#3b82f6" },
-            "lineStyle": { "width": 3 },
-            "symbol": "circle",
-            "symbolSize": 8,
-            "markPoint": {
-                "symbol": "circle",
-                "symbolSize": 1,
-                "label": {
-                    "show": true,
-                    "position": "top",
-                    "color": "#1e40af",
-                    "fontWeight": "bold",
-                    "formatter": "{b}",
-                    "distance": 10
-                },
-                "data": [
-                    { "name": "No Sell", "xAxis": "M-3", "yAxis": 6.0 },
-                    { "name": "No Sell", "xAxis": "M-2", "yAxis": 8.0 },
-                    { "name": "No Sell", "xAxis": "M-1", "yAxis": 9.5 },
-                    { "name": "Sell", "xAxis": "M1 (Trigger)", "yAxis": 10.8 },
-                    { "name": "Sell", "xAxis": "M2", "yAxis": 9.5 },
-                    { "name": "Sell", "xAxis": "M3", "yAxis": 8.5 },
-                    { "name": "No Sell", "xAxis": "M4", "yAxis": 6.5 },
-                    { "name": "Sell", "xAxis": "M5", "yAxis": 6.2 },
-                    { "name": "No Sell", "xAxis": "M6 (Stop)", "yAxis": 4.8 },
-                    { "name": "No Sell", "xAxis": "M7", "yAxis": 5.5 },
-                    { "name": "No Sell", "xAxis": "M8", "yAxis": 6.0 }
-                ]
+        "data": [
+          [
+            {
+              "name": "Sell Program Active",
+              "xAxis": "M1 (Trigger)"
+            },
+            {
+              "xAxis": "M6"
             }
-        }
-    ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Portfolio Drift",
+      "type": "line",
+      "data": [
+        6.0,
+        8.0,
+        9.5,
+        10.8,
+        9.5,
+        8.5,
+        6.5,
+        6.2,
+        4.8,
+        5.5,
+        6.0
+      ],
+      "itemStyle": {
+        "color": "#3b82f6"
+      },
+      "lineStyle": {
+        "width": 3
+      },
+      "symbol": "circle",
+      "symbolSize": 8,
+      "markPoint": {
+        "symbol": "circle",
+        "symbolSize": 1,
+        "label": {
+          "show": true,
+          "position": "top",
+          "color": "#1e40af",
+          "fontWeight": "bold",
+          "formatter": "{b}",
+          "distance": 10
+        },
+        "data": [
+          {
+            "name": "No Sell",
+            "xAxis": "M-3",
+            "yAxis": 6.0
+          },
+          {
+            "name": "No Sell",
+            "xAxis": "M-2",
+            "yAxis": 8.0
+          },
+          {
+            "name": "No Sell",
+            "xAxis": "M-1",
+            "yAxis": 9.5
+          },
+          {
+            "name": "Sell",
+            "xAxis": "M1 (Trigger)",
+            "yAxis": 10.8
+          },
+          {
+            "name": "Sell",
+            "xAxis": "M2",
+            "yAxis": 9.5
+          },
+          {
+            "name": "Sell",
+            "xAxis": "M3",
+            "yAxis": 8.5
+          },
+          {
+            "name": "No Sell",
+            "xAxis": "M4",
+            "yAxis": 6.5
+          },
+          {
+            "name": "Sell",
+            "xAxis": "M5",
+            "yAxis": 6.2
+          },
+          {
+            "name": "No Sell",
+            "xAxis": "M6 (Stop)",
+            "yAxis": 4.8
+          },
+          {
+            "name": "No Sell",
+            "xAxis": "M7",
+            "yAxis": 5.5
+          },
+          {
+            "name": "No Sell",
+            "xAxis": "M8",
+            "yAxis": 6.0
+          }
+        ]
+      }
+    }
+  ]
 }
 ```
 

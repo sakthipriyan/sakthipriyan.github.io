@@ -98,65 +98,212 @@ Data is compared to the previous [State of the 1 Portfolio (June 2026)](/buildin
 ```echarts
 {
   "title": [
-    { "text": "1 Portfolio Performance", "left": "center", "top": 0, "textStyle": { "color": "#2c3e50", "fontSize": 16, "fontWeight": 600 } },
-    { "text": "Market Value", "left": "center", "top": "37%", "textStyle": { "fontSize": 15, "fontWeight": 600, "color": "#444" } },
-    { "text": "Growth Share", "left": "center", "top": "57%", "textStyle": { "fontSize": 15, "fontWeight": 600, "color": "#444" } }
+    {
+      "text": "1 Portfolio Performance",
+      "left": "center",
+      "top": 0,
+      "textStyle": {
+        "color": "#888",
+        "fontSize": 16,
+        "fontWeight": 600
+      }
+    },
+    {
+      "text": "Market Value",
+      "left": "center",
+      "top": "37%",
+      "textStyle": {
+        "fontSize": 15,
+        "fontWeight": 600,
+        "color": "#888"
+      }
+    },
+    {
+      "text": "Growth Share",
+      "left": "center",
+      "top": "57%",
+      "textStyle": {
+        "fontSize": 15,
+        "fontWeight": 600,
+        "color": "#888"
+      }
+    }
   ],
-  "tooltip": { "trigger": "item" },
-  "color": ["#2563EB", "#F97316", "#F59E0B", "#10B981", "#047857", "#64748B", "#D4AF37"],
+  "tooltip": {
+    "trigger": "item"
+  },
+  "color": [
+    "#2563EB",
+    "#F97316",
+    "#F59E0B",
+    "#10B981",
+    "#047857",
+    "#64748B",
+    "#D4AF37"
+  ],
   "legend": {
-    "bottom": 0, "left": "center", "orient": "horizontal",
-    "data": ["Nasdaq 100", "Nifty 50", "Next 50", "Midcap 150", "Smallcap 250", "Debt", "Gold"]
+    "bottom": 0,
+    "left": "center",
+    "orient": "horizontal",
+    "data": [
+      "Nasdaq 100",
+      "Nifty 50",
+      "Next 50",
+      "Midcap 150",
+      "Smallcap 250",
+      "Debt",
+      "Gold"
+    ],
+    "textStyle": {
+      "color": "#888"
+    }
   },
   "series": [
     {
       "name": "Growth Contribution",
       "type": "pie",
-      "radius": ["36%", "58%"],
-      "center": ["50%", "52%"],
+      "radius": [
+        "36%",
+        "58%"
+      ],
+      "center": [
+        "50%",
+        "52%"
+      ],
       "startAngle": 180,
       "clockwise": false,
-      "label": { "show": true, "position": "outside", "formatter": "{b} ({c}%)" },
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b} ({c}%)",
+        "color": "#888"
+      },
       "data": [
-        { "name": "Nasdaq 100", "value": 61.39 },
-        { "name": "Nifty 50", "value": 4.88 },
-        { "name": "Next 50", "value": 3.53 },
-        { "name": "Midcap 150", "value": 3.35 },
-        { "name": "Smallcap 250", "value": 2.68 },
-        { "name": "Debt", "value": 3.81 },
-        { "name": "Gold", "value": 20.35 },
-        { "name": "__placeholder__", "value": 99.99, "itemStyle": { "color": "transparent" }, "label": { "show": false }, "tooltip": { "show": false }, "labelLine": { "show": false } }
+        {
+          "name": "Nasdaq 100",
+          "value": 61.39
+        },
+        {
+          "name": "Nifty 50",
+          "value": 4.88
+        },
+        {
+          "name": "Next 50",
+          "value": 3.53
+        },
+        {
+          "name": "Midcap 150",
+          "value": 3.35
+        },
+        {
+          "name": "Smallcap 250",
+          "value": 2.68
+        },
+        {
+          "name": "Debt",
+          "value": 3.81
+        },
+        {
+          "name": "Gold",
+          "value": 20.35
+        },
+        {
+          "name": "__placeholder__",
+          "value": 99.99,
+          "itemStyle": {
+            "color": "transparent"
+          },
+          "label": {
+            "show": false
+          },
+          "tooltip": {
+            "show": false
+          },
+          "labelLine": {
+            "show": false
+          }
+        }
       ]
     },
     {
       "name": "Market Value Allocation",
       "type": "pie",
-      "radius": ["36%", "58%"],
-      "center": ["50%", "48%"],
+      "radius": [
+        "36%",
+        "58%"
+      ],
+      "center": [
+        "50%",
+        "48%"
+      ],
       "startAngle": 180,
       "clockwise": true,
-      "label": { "show": true, "position": "outside", "formatter": "{b} ({c}%)" },
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b} ({c}%)",
+        "color": "#888"
+      },
       "data": [
-        { "name": "Nasdaq 100", "value": 39.22 },
-        { "name": "Nifty 50", "value": 19.91 },
-        { "name": "Next 50", "value": 9.50 },
-        { "name": "Midcap 150", "value": 9.51 },
-        { "name": "Smallcap 250", "value": 4.89 },
-        { "name": "Debt", "value": 6.13 },
-        { "name": "Gold", "value": 10.84 },
-        { "name": "__placeholder__", "value": 100.00, "itemStyle": { "color": "transparent" }, "label": { "show": false }, "tooltip": { "show": false }, "labelLine": { "show": false } }
+        {
+          "name": "Nasdaq 100",
+          "value": 39.22
+        },
+        {
+          "name": "Nifty 50",
+          "value": 19.91
+        },
+        {
+          "name": "Next 50",
+          "value": 9.5
+        },
+        {
+          "name": "Midcap 150",
+          "value": 9.51
+        },
+        {
+          "name": "Smallcap 250",
+          "value": 4.89
+        },
+        {
+          "name": "Debt",
+          "value": 6.13
+        },
+        {
+          "name": "Gold",
+          "value": 10.84
+        },
+        {
+          "name": "__placeholder__",
+          "value": 100.0,
+          "itemStyle": {
+            "color": "transparent"
+          },
+          "label": {
+            "show": false
+          },
+          "tooltip": {
+            "show": false
+          },
+          "labelLine": {
+            "show": false
+          }
+        }
       ]
     }
   ],
-"toolbox": {
-  "show": true,
-  "feature": {
-    "saveAsImage": {
-      "title": "Download Chart",
-      "show": true
+  "toolbox": {
+    "show": true,
+    "feature": {
+      "saveAsImage": {
+        "title": "Download Chart",
+        "show": true
+      }
+    },
+    "iconStyle": {
+      "borderColor": "#888"
     }
   }
-}
 }
 ```
   </div>
@@ -165,36 +312,149 @@ Data is compared to the previous [State of the 1 Portfolio (June 2026)](/buildin
   
 ```echarts
 {
-  "title": { "text": "1 Portfolio Drift", "left": "center", "top": 0, "textStyle": { "color": "#2c3e50", "fontSize": 16, "fontWeight": 600 } },
-  "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
-  "grid": { "left": "15%", "right": "15%", "bottom": "10%", "top": "16%", "containLabel": true },
-  "xAxis": { "type": "value", "name": "Drift %", "nameLocation": "middle", "nameGap": 30 },
-  "yAxis": { "type": "category", "data": ["Gold", "Debt", "Smallcap 250", "Midcap 150", "Next 50", "Nifty 50", "Nasdaq 100"] },
+  "title": {
+    "text": "1 Portfolio Drift",
+    "left": "center",
+    "top": 0,
+    "textStyle": {
+      "color": "#888",
+      "fontSize": 16,
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "grid": {
+    "left": "15%",
+    "right": "15%",
+    "bottom": "10%",
+    "top": "16%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "value",
+    "name": "Drift %",
+    "nameLocation": "middle",
+    "nameGap": 30,
+    "nameTextStyle": {
+      "color": "#888"
+    },
+    "axisLabel": {
+      "color": "#888"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
+  "yAxis": {
+    "type": "category",
+    "data": [
+      "Gold",
+      "Debt",
+      "Smallcap 250",
+      "Midcap 150",
+      "Next 50",
+      "Nifty 50",
+      "Nasdaq 100"
+    ],
+    "axisLabel": {
+      "color": "#888"
+    }
+  },
   "series": [
     {
       "name": "Drift",
       "type": "bar",
-      "label": { "show": true, "formatter": "{c}%" },
+      "label": {
+        "show": true,
+        "formatter": "{c}%",
+        "color": "#888"
+      },
       "data": [
-        { "value": 0.84, "itemStyle": { "color": "#D4AF37" }, "label": { "position": "left" } },
-        { "value": 1.13, "itemStyle": { "color": "#64748B" }, "label": { "position": "left" } },
-        { "value": -0.11, "itemStyle": { "color": "#047857" }, "label": { "position": "right" } },
-        { "value": -0.49, "itemStyle": { "color": "#10B981" }, "label": { "position": "right" } },
-        { "value": -0.50, "itemStyle": { "color": "#F59E0B" }, "label": { "position": "right" } },
-        { "value": -0.09, "itemStyle": { "color": "#F97316" }, "label": { "position": "right" } },
-        { "value": -0.78, "itemStyle": { "color": "#2563EB" }, "label": { "position": "right" } }
+        {
+          "value": 0.84,
+          "itemStyle": {
+            "color": "#D4AF37"
+          },
+          "label": {
+            "position": "left"
+          }
+        },
+        {
+          "value": 1.13,
+          "itemStyle": {
+            "color": "#64748B"
+          },
+          "label": {
+            "position": "left"
+          }
+        },
+        {
+          "value": -0.11,
+          "itemStyle": {
+            "color": "#047857"
+          },
+          "label": {
+            "position": "right"
+          }
+        },
+        {
+          "value": -0.49,
+          "itemStyle": {
+            "color": "#10B981"
+          },
+          "label": {
+            "position": "right"
+          }
+        },
+        {
+          "value": -0.5,
+          "itemStyle": {
+            "color": "#F59E0B"
+          },
+          "label": {
+            "position": "right"
+          }
+        },
+        {
+          "value": -0.09,
+          "itemStyle": {
+            "color": "#F97316"
+          },
+          "label": {
+            "position": "right"
+          }
+        },
+        {
+          "value": -0.78,
+          "itemStyle": {
+            "color": "#2563EB"
+          },
+          "label": {
+            "position": "right"
+          }
+        }
       ]
     }
   ],
-"toolbox": {
-  "show": true,
-  "feature": {
-    "saveAsImage": {
-      "title": "Download Chart",
-      "show": true
+  "toolbox": {
+    "show": true,
+    "feature": {
+      "saveAsImage": {
+        "title": "Download Chart",
+        "show": true
+      }
+    },
+    "iconStyle": {
+      "borderColor": "#888"
     }
   }
-}
 }
 ```
   </div>
@@ -244,154 +504,496 @@ The table below consolidates the current state, monthly investment allocation, p
 
 ```echarts
 {
-    "height": "700px",
-    "title": { "text": "Drift Correction aka Monthly Investment", "left": "center" },
-    "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
-    "legend": { 
-        "data": ["Pre Drift", "Post Drift", "Improvement", "Improvement (Evaporated)", "Worsening", "New Water Level"],
-        "bottom": 0 
+  "height": "700px",
+  "title": {
+    "text": "Drift Correction aka Monthly Investment",
+    "left": "center",
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": [
+      "Pre Drift",
+      "Post Drift",
+      "Improvement",
+      "Improvement (Evaporated)",
+      "Worsening",
+      "New Water Level"
+    ],
+    "bottom": 0,
+    "textStyle": {
+      "color": "#888"
+    }
+  },
+  "toolbox": {
+    "show": true,
+    "feature": {
+      "saveAsImage": {
+        "title": "Download Chart",
+        "show": true
+      }
     },
-    "toolbox": {
-        "show": true,
-        "feature": {
-            "saveAsImage": {
-                "title": "Download Chart",
-                "show": true
-            }
+    "iconStyle": {
+      "borderColor": "#888"
+    }
+  },
+  "grid": {
+    "left": "3%",
+    "right": "4%",
+    "bottom": "15%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "Nasdaq 100",
+      "Nifty 50",
+      "Next 50",
+      "Midcap 150",
+      "Smallcap 250",
+      "Debt",
+      "Gold"
+    ],
+    "axisLabel": {
+      "interval": 0,
+      "rotate": 30,
+      "color": "#888"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "name": "Drift (%)",
+    "min": -1.0,
+    "max": 1.25,
+    "axisLabel": {
+      "formatter": "{value}%",
+      "color": "#888"
+    },
+    "nameTextStyle": {
+      "color": "#888"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#666"
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "Pre Drift",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#3b82f6"
+      }
+    },
+    {
+      "name": "Post Drift",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#1e40af"
+      }
+    },
+    {
+      "name": "Improvement",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#22c55e"
+      }
+    },
+    {
+      "name": "Improvement (Evaporated)",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#22c55e",
+        "opacity": 0.4,
+        "decal": {
+          "symbol": "rect",
+          "color": "rgba(0,0,0,0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            4
+          ],
+          "rotation": 0.785
         }
+      }
     },
-    "grid": { "left": "3%", "right": "4%", "bottom": "15%", "containLabel": true },
-    "xAxis": {
-        "type": "category",
-        "data": ["Nasdaq 100", "Nifty 50", "Next 50", "Midcap 150", "Smallcap 250", "Debt", "Gold"],
-        "axisLabel": { "interval": 0, "rotate": 30 }
-    },
-    "yAxis": {
-        "type": "value",
-        "name": "Drift (%)",
-        "min": -1.0,
-        "max": 1.25,
-        "axisLabel": { "formatter": "{value}%" }
-    },
-    "series": [
-        { "name": "Pre Drift", "type": "bar", "data": [], "itemStyle": { "color": "#3b82f6" } },
-        { "name": "Post Drift", "type": "bar", "data": [], "itemStyle": { "color": "#1e40af" } },
-        { "name": "Improvement", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e" } },
-        { "name": "Improvement (Evaporated)", "type": "bar", "data": [], "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-        { "name": "Worsening", "type": "bar", "data": [], "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-        {
-            "name": "New Water Level",
-            "type": "line",
-            "data": [],
-            "itemStyle": { "color": "#1e40af" },
-            "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
-            "markLine": {
-                "symbol": "none",
-                "silent": true,
-                "label": { "show": false },
-                "lineStyle": { "type": "dashed", "color": "#1e40af", "width": 2 },
-                "data": [
-                    { "yAxis": -0.34 }
-                ]
-            }
-        },
-        {
-            "name": "Empty",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [-0.34, -0.09, -0.35, -0.35, -0.11, 0, 0],
-            "itemStyle": { "color": "transparent" },
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Neg Delta",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                { "value": -0.44, "itemStyle": { "color": "#22c55e" } },
-                { "value": -0.25, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                { "value": -0.15, "itemStyle": { "color": "#22c55e" } },
-                { "value": -0.14, "itemStyle": { "color": "#22c55e" } },
-                { "value": -0.11, "itemStyle": { "color": "#ef4444", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                0, 0
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Neg Base",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                { "value": -0.22, "itemStyle": { "color": "#3b82f6" } },
-                { "value": -0.66, "itemStyle": { "color": "#1e40af" } },
-                { "value": -0.50, "itemStyle": { "color": "#3b82f6" } },
-                { "value": -0.51, "itemStyle": { "color": "#3b82f6" } },
-                { "value": -0.78, "itemStyle": { "color": "#1e40af" } },
-                { "value": -1.00, "itemStyle": { "color": "#1e40af" } },
-                { "value": -1.00, "itemStyle": { "color": "#1e40af" } }
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Pos Base",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                0, 0, 0, 0, 0, 
-                { "value": 1.00, "itemStyle": { "color": "#1e40af" } },
-                { "value": 0.60, "itemStyle": { "color": "#1e40af" } }
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Pos Delta",
-            "type": "bar",
-            "barWidth": "70%",
-            "stack": "main",
-            "data": [
-                0, 0, 0, 0, 0,
-                { "value": 0.13, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } },
-                { "value": 0.24, "itemStyle": { "color": "#22c55e", "opacity": 0.4, "decal": { "symbol": "rect", "color": "rgba(0,0,0,0.2)", "dashArrayX": [1, 0], "dashArrayY": [2, 4], "rotation": 0.785 } } }
-            ],
-            "tooltip": { "show": false }
-        },
-        {
-            "name": "Pre Drift",
-            "type": "line",
-            "data": [-0.78, -0.09, -0.50, -0.49, -0.11, 1.13, 0.84],
-            "itemStyle": { "color": "#3b82f6" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
-        },
-        {
-            "name": "Post Drift",
-            "type": "line",
-            "data": [-0.34, -0.34, -0.35, -0.35, -0.22, 1.00, 0.60],
-            "itemStyle": { "color": "#1e40af" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
-        },
-        {
-            "name": "Improvement",
-            "type": "line",
-            "data": [0.44, "-", 0.15, 0.14, "-", 0.13, 0.24],
-            "itemStyle": { "color": "#22c55e" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
-        },
-        {
-            "name": "Worsening",
-            "type": "line",
-            "data": ["-", -0.25, "-", "-", -0.11, "-", "-"],
-            "itemStyle": { "color": "#ef4444" },
-            "lineStyle": { "opacity": 0 },
-            "symbol": "none"
+    {
+      "name": "Worsening",
+      "type": "bar",
+      "data": [],
+      "itemStyle": {
+        "color": "#ef4444",
+        "opacity": 0.4,
+        "decal": {
+          "symbol": "rect",
+          "color": "rgba(0,0,0,0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            4
+          ],
+          "rotation": 0.785
         }
-    ]
+      }
+    },
+    {
+      "name": "New Water Level",
+      "type": "line",
+      "data": [],
+      "itemStyle": {
+        "color": "#1e40af"
+      },
+      "lineStyle": {
+        "type": "dashed",
+        "color": "#1e40af",
+        "width": 2
+      },
+      "markLine": {
+        "symbol": "none",
+        "silent": true,
+        "label": {
+          "show": false
+        },
+        "lineStyle": {
+          "type": "dashed",
+          "color": "#1e40af",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": -0.34
+          }
+        ]
+      }
+    },
+    {
+      "name": "Empty",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        -0.34,
+        -0.09,
+        -0.35,
+        -0.35,
+        -0.11,
+        0,
+        0
+      ],
+      "itemStyle": {
+        "color": "transparent"
+      },
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Neg Delta",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        {
+          "value": -0.44,
+          "itemStyle": {
+            "color": "#22c55e"
+          }
+        },
+        {
+          "value": -0.25,
+          "itemStyle": {
+            "color": "#ef4444",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        {
+          "value": -0.15,
+          "itemStyle": {
+            "color": "#22c55e"
+          }
+        },
+        {
+          "value": -0.14,
+          "itemStyle": {
+            "color": "#22c55e"
+          }
+        },
+        {
+          "value": -0.11,
+          "itemStyle": {
+            "color": "#ef4444",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        0,
+        0
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Neg Base",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        {
+          "value": -0.22,
+          "itemStyle": {
+            "color": "#3b82f6"
+          }
+        },
+        {
+          "value": -0.66,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -0.5,
+          "itemStyle": {
+            "color": "#3b82f6"
+          }
+        },
+        {
+          "value": -0.51,
+          "itemStyle": {
+            "color": "#3b82f6"
+          }
+        },
+        {
+          "value": -0.78,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -1.0,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": -1.0,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        }
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Pos Base",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        {
+          "value": 1.0,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        },
+        {
+          "value": 0.6,
+          "itemStyle": {
+            "color": "#1e40af"
+          }
+        }
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Pos Delta",
+      "type": "bar",
+      "barWidth": "70%",
+      "stack": "main",
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        {
+          "value": 0.13,
+          "itemStyle": {
+            "color": "#22c55e",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        },
+        {
+          "value": 0.24,
+          "itemStyle": {
+            "color": "#22c55e",
+            "opacity": 0.4,
+            "decal": {
+              "symbol": "rect",
+              "color": "rgba(0,0,0,0.2)",
+              "dashArrayX": [
+                1,
+                0
+              ],
+              "dashArrayY": [
+                2,
+                4
+              ],
+              "rotation": 0.785
+            }
+          }
+        }
+      ],
+      "tooltip": {
+        "show": false
+      }
+    },
+    {
+      "name": "Pre Drift",
+      "type": "line",
+      "data": [
+        -0.78,
+        -0.09,
+        -0.5,
+        -0.49,
+        -0.11,
+        1.13,
+        0.84
+      ],
+      "itemStyle": {
+        "color": "#3b82f6"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    },
+    {
+      "name": "Post Drift",
+      "type": "line",
+      "data": [
+        -0.34,
+        -0.34,
+        -0.35,
+        -0.35,
+        -0.22,
+        1.0,
+        0.6
+      ],
+      "itemStyle": {
+        "color": "#1e40af"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    },
+    {
+      "name": "Improvement",
+      "type": "line",
+      "data": [
+        0.44,
+        "-",
+        0.15,
+        0.14,
+        "-",
+        0.13,
+        0.24
+      ],
+      "itemStyle": {
+        "color": "#22c55e"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    },
+    {
+      "name": "Worsening",
+      "type": "line",
+      "data": [
+        "-",
+        -0.25,
+        "-",
+        "-",
+        -0.11,
+        "-",
+        "-"
+      ],
+      "itemStyle": {
+        "color": "#ef4444"
+      },
+      "lineStyle": {
+        "opacity": 0
+      },
+      "symbol": "none"
+    }
+  ]
 }
 ```
 
