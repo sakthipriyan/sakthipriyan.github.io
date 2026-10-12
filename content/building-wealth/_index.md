@@ -32,7 +32,7 @@ subscribe:
   heading: "Building Wealth Digest"   # above the card under articles
   welcome: "**You're in.** Thanks for confirming. The Building Wealth Digest arrives once a month; if it lands in Promotions, drag it to Primary."
   form:
-    text: "Monthly: my portfolio update, new articles, videos and tools. No tips, no noise."
+    text: "Monthly: my portfolio update, new articles, books, videos and tools. No tips, no noise."
     button: "Get Digest"
   pending:
     hint: "Not there? Check Promotions or Spam."
