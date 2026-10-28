@@ -3,6 +3,7 @@ title: "FX Retail via Bharat Connect: Private Bank Speed at Public Bank Rates â€
 date: "2026-05-05"
 draft: false
 type: "blogs"
+covers: fx-retail-bharat-connect
 wealth_tags:
   - Bharat Connect
   - Cost Optimization

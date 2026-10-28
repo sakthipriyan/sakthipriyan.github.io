@@ -8,6 +8,7 @@ type: "slides"
 summary: "Mapping the Irish UCITS universe: which index, which fund and which provider for global equity, US equity, US Treasuries and gold, and how to combine them."
 js_tools:
  - gsap
+covers: selecting-the-global-indexes
 wealth_tags:
   - Index Funds
   - ETF

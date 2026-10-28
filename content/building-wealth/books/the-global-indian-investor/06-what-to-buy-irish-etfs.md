@@ -6,6 +6,7 @@ chapter: 6
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
+covers: what-to-buy-irish-etfs
 wealth_tags:
   - ETF
   - Tax Optimization

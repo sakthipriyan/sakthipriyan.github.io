@@ -6,6 +6,7 @@ draft: false
 layout: "slides"
 type: "slides"
 summary: "A live INR-to-USD remittance: lock the FX Retail rate through BHIM, wire it through ICICI Money2World, and invest in an Irish ETF on IBKR the same afternoon."
+covers: fx-retail-bharat-connect
 wealth_tags:
   - FX Retail
   - Bharat Connect
