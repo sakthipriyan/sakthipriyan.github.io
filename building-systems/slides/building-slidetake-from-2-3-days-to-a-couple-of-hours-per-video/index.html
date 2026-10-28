@@ -1,0 +1,163 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Building Slidetake — From 2-3 Days to a Couple of Hours per Video | Sakthi Priyan H</title><meta name=description content="How my video setup evolved from Google Slides and a bad mic to Slidetake: a markdown deck where every slide is a take, timeline editing is gone and the chapters …"><link rel=canonical href=https://sakthipriyan.com/building-systems/slides/building-slidetake-from-2-3-days-to-a-couple-of-hours-per-video/><meta property="og:site_name" content="Sakthi Priyan H"><meta property="og:title" content="Building Slidetake — From 2-3 Days to a Couple of Hours per Video"><meta property="og:description" content="How my video setup evolved from Google Slides and a bad mic to Slidetake: a markdown deck where every slide is a take, timeline editing is gone and the chapters …"><meta property="og:url" content="https://sakthipriyan.com/building-systems/slides/building-slidetake-from-2-3-days-to-a-couple-of-hours-per-video/"><meta property="og:type" content="article"><meta property="article:published_time" content="2026-10-28T00:00:00Z"><meta property="article:modified_time" content="2026-10-28T22:05:49+05:30"><meta property="article:tag" content="Design"><meta property="article:tag" content="JavaScript"><meta property="article:tag" content="OBS"><meta property="article:tag" content="ffmpeg"><meta property="og:image" content="https://sakthipriyan.com/images/profile.jpg"><meta name=twitter:card content="summary"><meta name=twitter:site content="@sakthipriyan"><meta name=twitter:creator content="@sakthipriyan"><meta name=twitter:title content="Building Slidetake — From 2-3 Days to a Couple of Hours per Video"><meta name=twitter:description content="How my video setup evolved from Google Slides and a bad mic to Slidetake: a markdown deck where every slide is a take, timeline editing is gone and the chapters …"><meta name=twitter:image content="https://sakthipriyan.com/images/profile.jpg"><link rel=icon href=https://sakthipriyan.com/img/sp.svg type=image/svg+xml><link rel=icon href=https://sakthipriyan.com/img/sp_32.png type=image/png sizes=32x32><link rel=icon href=https://sakthipriyan.com/img/favicon.png type=image/png sizes=16x16><link rel=alternate type=application/rss+xml href=https://sakthipriyan.com/feed.xml title="Sakthi Priyan H"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sakthi Priyan H","url":"https://sakthipriyan.com/"},"dateModified":"2026-10-28","datePublished":"2026-10-28","description":"How my video setup evolved from Google Slides and a bad mic to Slidetake: a markdown deck where every slide is a take, timeline editing is gone and the chapters …","headline":"Building Slidetake — From 2-3 Days to a Couple of Hours per Video","url":"https://sakthipriyan.com/building-systems/slides/building-slidetake-from-2-3-days-to-a-couple-of-hours-per-video/"}</script><script>(function(){var t,n,s="continuum-subscribe",i=7,o=document.documentElement,e=null;try{e=JSON.parse(localStorage.getItem(s))}catch{}!e||!e.at||e.state!=="pending"&&e.state!=="confirmed"?e=null:e.state==="pending"&&Date.now()-new Date(e.at).getTime()>i*864e5&&(e=null);try{if(t=new URL(window.location.href),t.searchParams.get("subscribed")==="1"){if(!e||e.state!=="confirmed"){e={state:"confirmed",at:(new Date).toISOString(),email:e&&e.email?e.email:0[0]};try{localStorage.setItem(s,JSON.stringify(e))}catch{}}o.classList.add("is-subscribe-welcome")}n=!1,["subscribed","ck_subscriber_id"].forEach(function(e){t.searchParams.has(e)&&(t.searchParams.delete(e),n=!0)}),n&&history.replaceState(history.state,"",t.pathname+t.search+t.hash)}catch{}e&&o.classList.add("is-subscribe-"+e.state)})()</script><script>(function(){var n,s="continuum-theme",e=document.documentElement,o=window.matchMedia("(prefers-color-scheme: dark)");function i(){try{return localStorage.getItem(s)}catch{return null}}function a(e){try{localStorage.setItem(s,e)}catch{}}try{n=localStorage.getItem("book-theme"),n&&!i()&&a(localStorage.getItem("book-theme-manual")?n:"auto"),localStorage.removeItem("book-theme"),localStorage.removeItem("book-theme-manual")}catch{}function r(){var e=i();return e==="light"||e==="dark"?e:"auto"}function t(){var t,n,i=r(),s=i==="auto"?o.matches:i==="dark";e.classList.toggle("dark",s);for(n=document.querySelectorAll(".theme-toggle"),t=0;t<n.length;t++)n[t].setAttribute("aria-pressed",s?"true":"false"),n[t].setAttribute("title",s?"Switch to light":"Switch to dark"),n[t].setAttribute("aria-label",s?"Switch to light theme":"Switch to dark theme")}t(),o.addEventListener("change",function(){r()==="auto"&&t()}),document.addEventListener("click",function(n){var s=n.target.closest&&n.target.closest(".theme-toggle");if(!s)return;a(e.classList.contains("dark")?"light":"dark"),e.classList.add("theme-switching"),t(),requestAnimationFrame(function(){requestAnimationFrame(function(){e.classList.remove("theme-switching")})})}),document.addEventListener("DOMContentLoaded",t)})()</script></head><body><script>window.SLIDETAKE={markdown:`
+<!-- camera: on, full, on -->
+
+# Building Slidetake
+
+**From 2-3 days to a couple of hours per video.** How my recording setup evolved, and why the last step removed timeline editing altogether.
+
+## ⏳ Where the days went
+
+When I started, one [Building Wealth](https://sakthipriyan.com/building-wealth/videos/) video took **2-3 days**. Very little of that was talking.
+
+<!-- steps -->
+- **Making slides**, box by box
+- **Fighting the setup** while recording
+- **Cutting out mistakes** on a timeline
+- **Going through YouTube again** to write the chapters and add info cards for related videos
+
+## 🛤️ How the setup evolved
+
+![Each piece of the setup, then and now](evolution.svg)
+
+### 1. Google Slides and OBS
+
+The first video: **Google Slides** recorded in **[OBS Studio](https://obsproject.com)**, with my webcam as a picture-in-picture.
+
+<!-- steps -->
+- A poor wireless mic
+- Temporary lights
+- Every fumble cut out on a timeline afterwards
+
+### 2. Better gear
+
+The cheapest improvement was hardware:
+
+<!-- steps -->
+- **Mic**: laptop, then a poor wireless one, then a decent USB one
+- **Camera**: the laptop's, then an external HD one
+- **Lighting**: temporary lights, then proper ones
+- **A 16:9 screen**: an external TV, later a virtual display with **[BetterDisplay](https://github.com/waydabber/BetterDisplay)**
+- Better videos straight away
+- **No faster to produce**
+
+### 3. Web-native slides: reveal.js
+
+Google Slides couldn't give me what I wanted:
+
+<!-- steps -->
+- **Faster to make**: text is quick to write and to generate
+- **On the website**: the deck beside the post it explains
+- **A progress bar**: not a simple option in Google Slides
+- **[reveal.js](https://revealjs.com)**: markdown in git, served from this site, a progress bar as a setting
+- At work I'd been using **[Slidev](https://sli.dev)**, for the same reasons, before building **[Slidetake](https://slidetake.com)**
+
+### 4. A presenter remote drives OBS
+
+To stop touching the screen, I wired a Bluetooth presenter remote through reveal.js to OBS's WebSocket API. One button moves the slides, another switches the scene:
+
+| Scene | What the viewer sees |
+|---|---|
+| **Screen Only** | the slides, full frame |
+| **Video RB** | the slides, me bottom-right |
+| **Video Only** | just me |
+
+But the mistakes were still in the recording.
+
+### 5. From iMovie to LosslessCut and ffmpeg
+
+Editing in **iMovie** meant importing every recording into its library and re-encoding on export: slow, and heavy on storage. So I split the job:
+
+<!-- steps -->
+- **[LosslessCut](https://github.com/mifi/lossless-cut)**: mark the segments to keep, straight on the OBS file
+- **[ffmpeg](https://ffmpeg.org)**: render the final video from those timestamps
+- Then **YouTube**: watch it again to type the chapters and add info cards
+
+**Less storage, faster editing**, and scriptable. But I still **watched the whole recording** to find each mistake.
+
+## 💡 The slide is the timeline marker
+
+Almost every cut was at a **slide boundary**. Every chapter started at a **section**. The deck already knew both.
+
+<!-- steps -->
+- Log each slide against OBS's recording clock
+- Going back to a slide records a new **take**
+- Picking the best take of each slide **is** the edit
+- The section headings **are** the chapters
+
+> **No timeline to scrub: the timeline is the list of slides.**
+
+## 🎬 Slidetake
+
+**Write in markdown. Present on a spatial canvas. Record without timeline editing.**
+
+### Write: a text file
+
+A deck is one markdown file: each heading is a card, laid out as a map. **O** zooms out to the whole talk, and a progress bar fills as you go.
+
+Because it's text, **AI drafts it** from a blog post or a book chapter, and I iterate on it like code. \`npx slidetake deck.md\` reloads the deck on every save.
+
+### Record: the deck drives OBS
+
+<!-- camera: 40%, full, on -->
+
+**● Record** starts OBS, follows the slides and stops at the end. The three OBS scenes became one comment:
+
+\`\`\`md
+### Record: the deck drives OBS
+<!-- camera: 40%, full, on -->
+\`\`\`
+
+OBS now records just the screen and audio: the camera is part of the deck, so Slidetake places it, not OBS. This slide just did it: large in the corner, full screen, back. Stumble? Press **←** and say it again. Recording never stops.
+
+### Review: pick, don't scrub
+
+Every slide's takes, the last one picked by default. Slidetake writes:
+
+<!-- steps -->
+- A **frame-exact ffmpeg command** that keeps only the picked takes
+- **Chapters**, timed to the final cut
+- A **publish pack**: title, description, chapters, links, tags
+
+One command, and the video is ready to upload.
+
+## 📊 What changed
+
+| | When I started | With Slidetake |
+|---|---|---|
+| **Slides** | Google Slides | markdown, drafted with AI |
+| **On the website** | a link to Google | a page on the site |
+| **Layout changes** | by hand, mid-recording | a \`camera:\` comment |
+| **Mistakes** | found in the recording | press ←, say it again |
+| **Cut points** | by watching | logged while recording |
+| **Chapters** | typed by hand | from the headings |
+| **Time per video** | 2-3 days | a couple of hours, the aim |
+
+## 📚 Examples: Building Wealth
+
+These [Building Wealth](https://sakthipriyan.com/building-wealth/slides/) decks are Slidetake decks, drafted from a blog post or a book chapter:
+
+| Deck | Made from |
+|---|---|
+| **[FX Retail via Bharat Connect](https://sakthipriyan.com/building-wealth/slides/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates/)** | a blog post, with its screenshots, a chart and a diagram |
+| **[Irish ETFs vs US ETFs](https://sakthipriyan.com/building-wealth/slides/irish-etfs-vs-us-etfs-what-indian-investors-should-buy/)** | a book chapter |
+| **[Selecting the Global Indexes](https://sakthipriyan.com/building-wealth/slides/selecting-the-global-indexes-irish-etfs-for-indian-investors/)** | a book chapter, with fund tables |
+| **[State of the 1 Portfolio, October 2026](https://sakthipriyan.com/building-wealth/slides/state-of-the-1-portfolio-october-2026/)** | a monthly portfolio post, with ECharts charts |
+
+## 🔜 What's next: info cards and end screens
+
+One manual step is left on YouTube: the **info cards** for related videos during the talk, and the **end screen** at the end.
+
+A deck can name the videos it points to, and on which slide, so these can come from the deck too.
+
+## 🌐 Try it
+
+<!-- camera: on, full -->
+
+| Where | |
+|---|---|
+| **[slidetake.com](https://slidetake.com)** | write, view and share in the browser |
+| **Your computer** | \`npx slidetake deck.md\` |
+| **Your website** | \`slidetake.js\`, or \`engine: slidetake\` in [hugo-continuum](https://github.com/sakthipriyan/hugo-continuum) |
+
+Open source, Apache 2.0: **[github.com/slidetake/slidetake](https://github.com/slidetake/slidetake)**
+`,settings:{brand:"sakthipriyan.com/building-systems",camera:"24%, 40%, full, off",date:"2026-10-28T00:00:00Z",draft:!1,duration:"12m",engine:"slidetake",iscjklanguage:!1,lastmod:"2026-10-28T22:05:49+05:30",layout:"slides",pip:"bottom-right",pip_size:"24%",publishdate:"2026-10-28T00:00:00Z",related:["[Slidetake](https://slidetake.com)","[Slidetake features](https://slidetake.com/features)","[Slidetake docs](https://slidetake.com/docs)","[Slidetake on GitHub](https://github.com/slidetake/slidetake)"],summary:"How my video setup evolved from Google Slides and a bad mic to Slidetake: a markdown deck where every slide is a take, timeline editing is gone and the chapters write themselves.",systems_tags:["Design","JavaScript","OBS","ffmpeg"],timer:"always",title:"Building Slidetake — From 2-3 Days to a Couple of Hours per Video",type:"slides",url:"/building-systems/slides/:slug/"},base:"https://sakthipriyan.com/building-systems/slides/building-slidetake-from-2-3-days-to-a-couple-of-hours-per-video/",trail:[{label:"Sakthi Priyan H",url:"/"},{label:"Building Systems",url:"/building-systems/"},{label:"Slides",url:"/building-systems/slides/"}],colors:{dark:{accent:"#80b1ff",accentSoft:"oklch(from #1e40af 0.85 c h)",header:"linear-gradient(135deg,oklch(from #1e40af 0.52 c h / 0.55) 0%,oklch(from #1e3a8a 0.46 c h / 0.55) 100%)",headerText:"#fafafa",line:"#496fd2",ring:"#80b1ff"},light:{accent:"#1e40af",accentSoft:"#1e40af",header:"linear-gradient(135deg,#1e40af 0%,#1e3a8a 100%)",headerText:"#ffffff",line:"#1e40af",ring:"#1e3a8a"}},themeKey:"continuum-theme"}</script><script src=/slidetake/slidetake.4a2a9bfa67a1663939954a2d168d3c960d3f1b1ad942c3b8f8803522e56ea935.js integrity="sha256-Siqb+mehZjk5lUotFo08lg0/GxrZQsO4+IA1IuVuqTU="></script><script>if(window.location.hostname!=="localhost"&&window.location.hostname!=="127.0.0.1"){var gaScript=document.createElement("script");gaScript.async=!0,gaScript.src="https://www.googletagmanager.com/gtag/js?id=G-5NGEJ767SK",document.head.appendChild(gaScript),window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5NGEJ767SK")}</script></body></html>
