@@ -9,6 +9,7 @@ summary: "October 2026 State of the 1 Portfolio in a few slides: returns, drift,
 js_tools:
   - gsap
   - echarts
+covers: st1p-2026-10
 wealth_tags:
   - Asset Allocation
   - Rebalancing

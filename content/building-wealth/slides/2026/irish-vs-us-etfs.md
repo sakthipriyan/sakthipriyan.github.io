@@ -8,6 +8,7 @@ type: "slides"
 summary: "Same index, two domiciles: why Irish-domiciled UCITS accumulating ETFs beat US-domiciled ETFs for Indian investors on estate tax, dividend tax drag and paperwork."
 js_tools:
  - gsap
+covers: what-to-buy-irish-etfs
 wealth_tags:
   - ETF
   - Tax Optimization

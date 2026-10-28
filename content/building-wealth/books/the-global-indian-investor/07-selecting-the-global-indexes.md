@@ -6,6 +6,7 @@ chapter: 7
 date: 2026-04-25
 author: "Sakthi Priyan H"
 draft: false
+covers: selecting-the-global-indexes
 wealth_tags:
   - Index Funds
   - Portfolio Construction
