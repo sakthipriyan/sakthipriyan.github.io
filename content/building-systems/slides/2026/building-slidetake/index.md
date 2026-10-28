@@ -42,7 +42,86 @@ When I started, one [Building Wealth](https://sakthipriyan.com/building-wealth/v
 
 ## 🛤️ How the setup evolved
 
-![Each piece of the setup, then and now](evolution.svg)
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1054 614" role="img" aria-label="Each piece of the setup, then and now">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" fill-opacity="0.5"/></marker></defs>
+<text x="325.0" y="26" text-anchor="middle" font-size="15" font-weight="700" letter-spacing="2" style="fill:var(--text-muted)">THEN</text>
+<text x="917.0" y="26" text-anchor="middle" font-size="15" font-weight="700" letter-spacing="2" style="fill:var(--text-muted)">NOW</text>
+<line x1="365.0" y1="21" x2="877.0" y2="21" stroke="currentColor" stroke-opacity="0.35" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="2" y="45" width="1050" height="58" rx="10" fill="currentColor" fill-opacity="0.04"/>
+<text x="16" y="79.0" font-size="15" font-weight="700" fill="currentColor">Slides</text>
+<line x1="454" y1="74.0" x2="490" y2="74.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="750" y1="74.0" x2="786" y2="74.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="52" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="79.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Google Slides</text>
+<rect x="496" y="52" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="621.0" y="79.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">reveal.js</text>
+<rect x="792" y="52" width="250" height="44" rx="10" fill="#29b685" fill-opacity="0.16" stroke="#29b685" stroke-width="1.5"/>
+<text x="917.0" y="79.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Slidetake</text>
+<text x="16" y="137.0" font-size="15" font-weight="700" fill="currentColor">Monitor</text>
+<line x1="454" y1="132.0" x2="786" y2="132.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="110" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="137.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">External TV (16:9)</text>
+<rect x="792" y="110" width="250" height="44" rx="10" style="fill:var(--accent);fill-opacity:0.14;stroke:var(--accent);stroke-width:1.5"/>
+<text x="917.0" y="137.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">BetterDisplay (virtual 16:9)</text>
+<rect x="2" y="161" width="1050" height="58" rx="10" fill="currentColor" fill-opacity="0.04"/>
+<text x="16" y="195.0" font-size="15" font-weight="700" fill="currentColor">Lighting</text>
+<line x1="454" y1="190.0" x2="786" y2="190.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="168" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="195.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Temporary lights</text>
+<rect x="792" y="168" width="250" height="44" rx="10" style="fill:var(--accent);fill-opacity:0.14;stroke:var(--accent);stroke-width:1.5"/>
+<text x="917.0" y="195.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Proper lighting</text>
+<text x="16" y="253.0" font-size="15" font-weight="700" fill="currentColor">Mic</text>
+<line x1="454" y1="248.0" x2="490" y2="248.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="750" y1="248.0" x2="786" y2="248.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="226" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="253.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Laptop mic</text>
+<rect x="496" y="226" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="621.0" y="253.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Poor wireless mic</text>
+<rect x="792" y="226" width="250" height="44" rx="10" style="fill:var(--accent);fill-opacity:0.14;stroke:var(--accent);stroke-width:1.5"/>
+<text x="917.0" y="253.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Decent USB mic</text>
+<rect x="2" y="277" width="1050" height="58" rx="10" fill="currentColor" fill-opacity="0.04"/>
+<text x="16" y="311.0" font-size="15" font-weight="700" fill="currentColor">Camera</text>
+<line x1="454" y1="306.0" x2="786" y2="306.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="284" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="311.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Laptop camera</text>
+<rect x="792" y="284" width="250" height="44" rx="10" style="fill:var(--accent);fill-opacity:0.14;stroke:var(--accent);stroke-width:1.5"/>
+<text x="917.0" y="311.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">External HD camera</text>
+<text x="16" y="369.0" font-size="15" font-weight="700" fill="currentColor">Slide &amp; scene switch</text>
+<line x1="454" y1="364.0" x2="786" y2="364.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="342" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="369.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Keyboard &amp; mouse</text>
+<rect x="792" y="342" width="250" height="44" rx="10" style="fill:var(--accent);fill-opacity:0.14;stroke:var(--accent);stroke-width:1.5"/>
+<text x="917.0" y="369.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Presenter clicker</text>
+<rect x="2" y="393" width="1050" height="58" rx="10" fill="currentColor" fill-opacity="0.04"/>
+<text x="16" y="427.0" font-size="15" font-weight="700" fill="currentColor">Recording</text>
+<line x1="454" y1="422.0" x2="786" y2="422.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="400" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="419.0" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">OBS: audio + video + screen</text>
+<text x="325.0" y="435.0" text-anchor="middle" font-size="12" style="fill:var(--text-muted)">picture-in-picture in OBS</text>
+<rect x="792" y="400" width="250" height="44" rx="10" fill="#29b685" fill-opacity="0.16" stroke="#29b685" stroke-width="1.5"/>
+<text x="917.0" y="419.0" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">OBS: screen + audio</text>
+<text x="917.0" y="435.0" text-anchor="middle" font-size="12" style="fill:var(--text-muted)">Slidetake places the camera</text>
+<text x="16" y="485.0" font-size="15" font-weight="700" fill="currentColor">Timeline editing</text>
+<line x1="454" y1="480.0" x2="490" y2="480.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="750" y1="480.0" x2="786" y2="480.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="458" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="485.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">iMovie: cut &amp; trim</text>
+<rect x="496" y="458" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="621.0" y="485.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">LosslessCut + ffmpeg</text>
+<rect x="792" y="458" width="250" height="44" rx="10" fill="#29b685" fill-opacity="0.16" stroke="#29b685" stroke-width="1.5"/>
+<text x="917.0" y="485.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Slidetake: pick takes</text>
+<rect x="2" y="509" width="1050" height="58" rx="10" fill="currentColor" fill-opacity="0.04"/>
+<text x="16" y="543.0" font-size="15" font-weight="700" fill="currentColor">YouTube chapters</text>
+<line x1="454" y1="538.0" x2="786" y2="538.0" stroke="currentColor" stroke-opacity="0.45" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="200" y="516" width="250" height="44" rx="10" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5"/>
+<text x="325.0" y="543.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Watch the private video</text>
+<rect x="792" y="516" width="250" height="44" rx="10" fill="#29b685" fill-opacity="0.16" stroke="#29b685" stroke-width="1.5"/>
+<text x="917.0" y="543.0" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Slidetake already knows</text>
+<rect x="16" y="589" width="14" height="14" rx="3" fill="#29b685" fill-opacity="0.16" stroke="#29b685"/><text x="38" y="600" font-size="13" style="fill:var(--text-muted)">Slidetake</text>
+<rect x="126" y="589" width="14" height="14" rx="3" style="fill:var(--accent);fill-opacity:0.14;stroke:var(--accent)"/><text x="148" y="600" font-size="13" style="fill:var(--text-muted)">Today's setup</text>
+</svg>
+```
 
 ### 1. Google Slides and OBS
 
