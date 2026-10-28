@@ -1,4 +1,4 @@
-/* Slidetake 0.3.3 · https://slidetake.com · Apache-2.0 */
+/* Slidetake 0.3.4 · https://slidetake.com · Apache-2.0 */
 "use strict";(()=>{var R=(e,t)=>()=>(e&&(t=e(e=0)),t);var Yt,Ga=R(()=>{Yt=`---
 title: Slidetake \u2014 write in markdown, record without timeline editing
 brand: slidetake
@@ -1436,6 +1436,9 @@ Recorded `+new Date(e.date).toLocaleString()+(e.outputPath?" \xB7 "+e.outputPath
   #credit .logo{width:18px;height:18px;fill:var(--accent);}
   #credit .word > span{color:var(--accent);}
   #credit:hover{opacity:.85;}
+  /* on a site's coloured header in light mode the accent is the band's own colour, so the credit takes the header's ink */
+  html:not(.dark) body.st-header-color #credit .logo{fill:currentColor;}
+  html:not(.dark) body.st-header-color #credit .word > span{color:inherit;opacity:.78;}
   html.embed .site-links, html.embed #btn-github, html.embed #btn-analytics{display:none !important;}
   /* a reader's page (embedded, not recording): no bottom bar, except the arrows on touch screens */
   html.embed.no-record #navbar{display:none;}
