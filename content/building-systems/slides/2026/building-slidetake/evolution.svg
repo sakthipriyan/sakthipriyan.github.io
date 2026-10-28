@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 648" font-family="Inter, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#71717a"/></marker></defs>
+<rect x="0.5" y="0.5" width="1081" height="647" rx="18" fill="#18181b" stroke="#3f3f46"/>
+<text x="337.0" y="44" text-anchor="middle" font-size="15" font-weight="700" fill="#a1a1aa" letter-spacing="2">THEN</text>
+<text x="929.0" y="44" text-anchor="middle" font-size="15" font-weight="700" fill="#a1a1aa" letter-spacing="2">NOW</text>
+<line x1="377.0" y1="39" x2="889.0" y2="39" stroke="#52525b" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="14" y="63" width="1054" height="58" rx="10" fill="#1f1f23"/>
+<text x="28" y="97.0" font-size="15" font-weight="700" fill="#e4e4e7">Slides</text>
+<line x1="466" y1="92.0" x2="502" y2="92.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="762" y1="92.0" x2="798" y2="92.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="70" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="97.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Google Slides</text>
+<rect x="508" y="70" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="633.0" y="97.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">reveal.js</text>
+<rect x="804" y="70" width="250" height="44" rx="10" fill="#0f3b2c" stroke="#29b685" stroke-width="1.5"/>
+<text x="929.0" y="97.0" text-anchor="middle" font-size="14" font-weight="600" fill="#c8f5e3">Slidetake</text>
+<text x="28" y="155.0" font-size="15" font-weight="700" fill="#e4e4e7">Monitor</text>
+<line x1="466" y1="150.0" x2="798" y2="150.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="128" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="155.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">External TV (16:9)</text>
+<rect x="804" y="128" width="250" height="44" rx="10" fill="#1b2a52" stroke="#80b1ff" stroke-width="1.5"/>
+<text x="929.0" y="155.0" text-anchor="middle" font-size="14" font-weight="600" fill="#dbe7ff">BetterDisplay (virtual 16:9)</text>
+<rect x="14" y="179" width="1054" height="58" rx="10" fill="#1f1f23"/>
+<text x="28" y="213.0" font-size="15" font-weight="700" fill="#e4e4e7">Lighting</text>
+<line x1="466" y1="208.0" x2="798" y2="208.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="186" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="213.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Temporary lights</text>
+<rect x="804" y="186" width="250" height="44" rx="10" fill="#1b2a52" stroke="#80b1ff" stroke-width="1.5"/>
+<text x="929.0" y="213.0" text-anchor="middle" font-size="14" font-weight="600" fill="#dbe7ff">Proper lighting</text>
+<text x="28" y="271.0" font-size="15" font-weight="700" fill="#e4e4e7">Mic</text>
+<line x1="466" y1="266.0" x2="502" y2="266.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="762" y1="266.0" x2="798" y2="266.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="244" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="271.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Laptop mic</text>
+<rect x="508" y="244" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="633.0" y="271.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Poor wireless mic</text>
+<rect x="804" y="244" width="250" height="44" rx="10" fill="#1b2a52" stroke="#80b1ff" stroke-width="1.5"/>
+<text x="929.0" y="271.0" text-anchor="middle" font-size="14" font-weight="600" fill="#dbe7ff">Decent USB mic</text>
+<rect x="14" y="295" width="1054" height="58" rx="10" fill="#1f1f23"/>
+<text x="28" y="329.0" font-size="15" font-weight="700" fill="#e4e4e7">Camera</text>
+<line x1="466" y1="324.0" x2="798" y2="324.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="302" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="329.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Laptop camera</text>
+<rect x="804" y="302" width="250" height="44" rx="10" fill="#1b2a52" stroke="#80b1ff" stroke-width="1.5"/>
+<text x="929.0" y="329.0" text-anchor="middle" font-size="14" font-weight="600" fill="#dbe7ff">External HD camera</text>
+<text x="28" y="387.0" font-size="15" font-weight="700" fill="#e4e4e7">Slide &amp; scene switch</text>
+<line x1="466" y1="382.0" x2="798" y2="382.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="360" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="387.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Keyboard &amp; mouse</text>
+<rect x="804" y="360" width="250" height="44" rx="10" fill="#1b2a52" stroke="#80b1ff" stroke-width="1.5"/>
+<text x="929.0" y="387.0" text-anchor="middle" font-size="14" font-weight="600" fill="#dbe7ff">Presenter clicker</text>
+<rect x="14" y="411" width="1054" height="58" rx="10" fill="#1f1f23"/>
+<text x="28" y="445.0" font-size="15" font-weight="700" fill="#e4e4e7">Recording</text>
+<line x1="466" y1="440.0" x2="798" y2="440.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="418" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="437.0" text-anchor="middle" font-size="13" font-weight="600" fill="#d4d4d8">OBS: audio + video + screen</text>
+<text x="337.0" y="453.0" text-anchor="middle" font-size="12" fill="#a1a1aa">picture-in-picture in OBS</text>
+<rect x="804" y="418" width="250" height="44" rx="10" fill="#0f3b2c" stroke="#29b685" stroke-width="1.5"/>
+<text x="929.0" y="437.0" text-anchor="middle" font-size="13" font-weight="600" fill="#c8f5e3">OBS: screen + audio</text>
+<text x="929.0" y="453.0" text-anchor="middle" font-size="12" fill="#7fd9b5">Slidetake places the camera</text>
+<text x="28" y="503.0" font-size="15" font-weight="700" fill="#e4e4e7">Timeline editing</text>
+<line x1="466" y1="498.0" x2="502" y2="498.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="762" y1="498.0" x2="798" y2="498.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="476" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="503.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">iMovie: cut &amp; trim</text>
+<rect x="508" y="476" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="633.0" y="503.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">LosslessCut + ffmpeg</text>
+<rect x="804" y="476" width="250" height="44" rx="10" fill="#0f3b2c" stroke="#29b685" stroke-width="1.5"/>
+<text x="929.0" y="503.0" text-anchor="middle" font-size="14" font-weight="600" fill="#c8f5e3">Slidetake: pick takes</text>
+<rect x="14" y="527" width="1054" height="58" rx="10" fill="#1f1f23"/>
+<text x="28" y="561.0" font-size="15" font-weight="700" fill="#e4e4e7">YouTube chapters</text>
+<line x1="466" y1="556.0" x2="798" y2="556.0" stroke="#71717a" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="212" y="534" width="250" height="44" rx="10" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="337.0" y="561.0" text-anchor="middle" font-size="14" font-weight="600" fill="#d4d4d8">Watch the private video</text>
+<rect x="804" y="534" width="250" height="44" rx="10" fill="#0f3b2c" stroke="#29b685" stroke-width="1.5"/>
+<text x="929.0" y="561.0" text-anchor="middle" font-size="14" font-weight="600" fill="#c8f5e3">Slidetake already knows</text>
+<rect x="28" y="611" width="14" height="14" rx="3" fill="#0f3b2c" stroke="#29b685"/><text x="50" y="622" font-size="13" fill="#a1a1aa">Slidetake</text>
+<rect x="138" y="611" width="14" height="14" rx="3" fill="#1b2a52" stroke="#80b1ff"/><text x="160" y="622" font-size="13" fill="#a1a1aa">Today's setup</text>
+</svg>
