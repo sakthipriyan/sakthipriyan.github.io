@@ -2,7 +2,7 @@
 title: "Selecting the Global Indexes — Irish ETFs for Indian Investors"
 engine: slidetake
 date: "2026-10-25"
-draft: true
+draft: false
 layout: "slides"
 type: "slides"
 summary: "Mapping the Irish UCITS universe: which index, which fund and which provider for global equity, US equity, US Treasuries and gold, and how to combine them."

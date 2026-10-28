@@ -2,7 +2,7 @@
 title: "State of the 1 Portfolio — October 2026"
 engine: slidetake
 date: "2026-10-25"
-draft: true
+draft: false
 layout: "slides"
 type: "slides"
 summary: "October 2026 State of the 1 Portfolio in a few slides: returns, drift, this month's drift-correcting investment and the allocation history."
