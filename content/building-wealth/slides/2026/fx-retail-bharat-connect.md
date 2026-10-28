@@ -2,7 +2,7 @@
 title: "FX Retail via Bharat Connect — Private Bank Speed at Public Bank Rates"
 engine: slidetake
 date: "2026-10-26"
-draft: true
+draft: false
 layout: "slides"
 type: "slides"
 summary: "A live INR-to-USD remittance: lock the FX Retail rate through BHIM, wire it through ICICI Money2World, and invest in an Irish ETF on IBKR the same afternoon."
@@ -60,6 +60,13 @@ related:
 | **Saved per $1,000** | **₹1,435** |
 
 For about **3 extra minutes** on BHIM.
+
+## ⚙️ How it works
+
+<!-- steps -->
+- The rate is discovered on **CCIL's FX Retail** platform
+- **Bharat Connect** exposes deal booking inside **BHIM**
+- The wire is executed by your relationship bank, **ICICI**
 
 ## 🔄 The hybrid flow
 
@@ -128,13 +135,6 @@ RateLocking.Deal -> WireTransfer.TradeNo: "Trade No. via SMS/Email" { style.stro
 WireTransfer.Wire -> InvestmentBlock.IBKR
 ```
 
-### Why it works
-
-<!-- steps -->
-- The rate is discovered on **CCIL's FX Retail** platform
-- **Bharat Connect** exposes deal booking inside **BHIM**
-- The wire is executed by your relationship bank, **ICICI**
-
 ## 📱 Step 1: Book the deal on BHIM
 
 <!-- steps -->
@@ -157,6 +157,8 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 > **9:33 AM** · ICICI: *Forex Deal … is available for utilisation*
 
 ## 🏦 Step 2: Wire via Money2World
+
+<!-- view: full -->
 
 <!-- steps -->
 - ![Money2World opens at ICICI's own rate, ₹96.54/USD: tap "Have an FX-Retail Trade No.?"](m2w_1.png)

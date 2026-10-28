@@ -2,7 +2,7 @@
 title: "Irish ETFs vs US ETFs — What Indian Investors Should Buy"
 engine: slidetake
 date: "2026-10-25"
-draft: true
+draft: false
 layout: "slides"
 type: "slides"
 summary: "Same index, two domiciles: why Irish-domiciled UCITS accumulating ETFs beat US-domiciled ETFs for Indian investors on estate tax, dividend tax drag and paperwork."
