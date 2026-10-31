@@ -1,6 +1,7 @@
 ---
 title: "Building Slidetake — From 2-3 Days to a Couple of Hours per Video"
 engine: slidetake
+accent: "#1e40af"          # the section's colour, so a recording matches the site
 date: "2026-10-28"
 draft: false
 layout: "slides"

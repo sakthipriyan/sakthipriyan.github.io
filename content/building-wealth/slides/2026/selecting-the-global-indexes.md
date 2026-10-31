@@ -1,6 +1,7 @@
 ---
 title: "Selecting the Global Indexes — Irish ETFs for Indian Investors"
 engine: slidetake
+accent: "#f5c542"          # the section's colour, so a recording matches the site
 date: "2026-10-25"
 draft: false
 layout: "slides"
