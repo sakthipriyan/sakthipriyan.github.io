@@ -1,6 +1,7 @@
 ---
 title: "FX Retail via Bharat Connect — Private Bank Speed at Public Bank Rates"
 engine: slidetake
+accent: "#f5c542"          # the section's colour, so a recording matches the site
 date: "2026-10-26"
 draft: false
 layout: "slides"
