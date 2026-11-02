@@ -1288,7 +1288,7 @@ Last month's fully domestic investment was simple. This month brought back the F
 | :--- | :--- | :--- |
 | 09:48 | ICICI&nbsp;SMS | One-time AutoPay mandate created towards Axis Bank for ₹XXXX, RRN XXXX |
 | 09:49 | ICICI&nbsp;SMS | Mandate of ₹XXXX raised by Axis Bank redeemed, RRN XXXX |
-| 09:49 | Clearcorp&nbsp;SMS | FX Retail Trade No. XXXX: bought USD XXXX at a final price of ₹94.8975 including bank fee, trade price ₹94.6975 |
+| 09:49 | Clearcorp&nbsp;SMS | FX Retail Trade No. XXXX: bought USD XXXX at a final price of ₹XXXX including bank fee, trade price ₹XXXX |
 | 09:49 | ICICI&nbsp;SMS | Forex deal Trade No. XXXX available for utilisation |
 | 09:53 | ICICI&nbsp;SMS | OTP XXXX for the Money2World request |
 | 09:54 | ICICI&nbsp;SMS | Overseas fund transfer request XXXX for USD XXXX received and in process |

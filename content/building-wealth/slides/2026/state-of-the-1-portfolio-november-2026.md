@@ -54,7 +54,7 @@ related:
 
 ### 📸 Snapshot
 
-Global multi-asset passive: <strong>Indian mutual funds</strong> + <strong>Irish ETFs</strong>
+Global multi-asset passive: <strong><a href="/building-wealth/books/the-global-indian-investor/02-three-paths-to-global-investing/">Indian mutual funds</a></strong> + <strong><a href="/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/">Irish ETFs</a></strong>
 
 | | Oct&nbsp;30&nbsp;EOD | Target | Last month |
 |---|---:|---:|---:|
@@ -420,7 +420,7 @@ Global multi-asset passive: <strong>Indian mutual funds</strong> + <strong>Irish
 
 ### 🎯 Monthly Investment
 
-Using <strong>perpetual rebalancing</strong>
+Using <strong><a href="/building-wealth/tags/perpetual-rebalancing/">perpetual rebalancing</a></strong>
 
 | Asset class | Pre drift | New invest | Post drift |
 |---|---:|---:|---:|
@@ -433,7 +433,7 @@ Using <strong>perpetual rebalancing</strong>
 | **Gold** | +0.35% | 0.00% | +0.21% |
 | **Total drift** | **1.97%** | **100%** | **1.47%** |
 
-<p class="fragment fade-up">A <strong>1.39%</strong> top-up cuts drift by <strong>0.50%</strong>, filling the four underweight sleeves to a <strong>−0.37%</strong> water level.</p>
+<p class="fragment fade-up">A <strong>1.39%</strong> top-up cuts drift by <strong>0.50%</strong>, filling the four underweight sleeves to a <strong>−0.37%</strong> <a href="/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/#drift-band-comparison">water level</a>.</p>
 
 --
 
@@ -1136,7 +1136,7 @@ Using <strong>perpetual rebalancing</strong>
  ]
 }'></div>
 
-<p class="fragment fade-up">Not forecasts: the <strong>mechanical output</strong> of the rebalancing algorithm, month after month.</p>
+<p class="fragment fade-up">Not forecasts: the <strong><a href="/building-wealth/tools/realvalue-family-sip-allocator/">mechanical output</a></strong> of the rebalancing algorithm, month after month.</p>
 
 ---
 
@@ -1144,23 +1144,23 @@ Using <strong>perpetual rebalancing</strong>
 
 | Step | Time |
 |---|---:|
-| Initiate the transfer | ~6 minutes |
+| Initiate the [transfer](/building-wealth/slides/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates/) | ~6 minutes |
 | Money lands in IBKR | ~6 hours |
 | Buy with a limit order | ~6 minutes |
-| TCS recovery paperwork | ~15 minutes |
-| **Buying a mutual fund on MF Central** | **~2 minutes** |
+| [TCS recovery paperwork](/building-wealth/books/the-global-indian-investor/05-tcs-opportunity-cost/#the-new-mechanism-adjusting-tcs-via-form-122) | ~15 minutes |
+| **Buying a mutual fund on [MF Central](https://www.mfcentral.com/)** | **~2 minutes** |
 
-<p class="fragment fade-up">Four domestic mutual fund transactions, and one <strong>day-long</strong> ANAU purchase.</p>
+<p class="fragment fade-up">Four domestic mutual fund transactions, and one <strong>day-long</strong> <a href="/building-wealth/blogs/how-to-invest-in-nasdaq-100-from-india-mutual-funds-etfs-and-ibkr-guide/">ANAU</a> purchase.</p>
 
 --
 
 ### 🌍 Back to International / Costs
 
-| | ICICI Nasdaq 100 (Direct) | Irish ETF (ANAU) |
+| | [ICICI Nasdaq 100 (Direct)](https://www.icicipruamc.com/mutual-fund/index-funds/icici-prudential-nasdaq-100-index-fund/1827) | [Irish ETF (ANAU)](/building-wealth/blogs/how-to-invest-in-nasdaq-100-from-india-mutual-funds-etfs-and-ibkr-guide/) |
 |---|---:|---:|
-| **One-time cost** | - | 1.05% |
+| **[One-time cost](/building-wealth/tools/realvalue-fx-engine/)** | - | 1.05% |
 | **Annual cost (TER)** | 0.53% | 0.14% |
-| **US dividend withholding** | 25% | 15% |
+| **[US dividend withholding](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#2-dividend-tax-leakage-the-growth-vs-idcw-comparison)** | 25% | 15% |
 | **LTCG** (2+ years) | Up to 14.95% | Up to 14.95% |
 | **STCG** (under 2 years) | Up to 35.88% | Up to 35.88% |
 
@@ -1170,7 +1170,7 @@ Using <strong>perpetual rebalancing</strong>
 
 ### 💭 Reflections
 
-- <!-- .element: class="fragment fade-up" --> <strong>First working day:</strong> plan, FX remittance and ETF purchase all on November 2
+- <!-- .element: class="fragment fade-up" --> <strong><a href="/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-october-2026/#shifting-the-investment-calendar">First working day</a>:</strong> plan, mutual funds, FX remittance and ETF purchase all on November 2
 - <!-- .element: class="fragment fade-up" --> <strong>Waiting for:</strong> Total Drift below <strong>1%</strong>, and the day I can resume buying <strong>Gold</strong>
 - <!-- .element: class="fragment fade-up" --> <strong>Debt</strong> seems likely to take longer, unless equity rebounds across the board
 
@@ -1178,10 +1178,10 @@ Using <strong>perpetual rebalancing</strong>
 
 ### 💭 Reflections / Building in Public
 
-- <!-- .element: class="fragment fade-up" --> <strong>Portfolio Engine</strong> design mock: bring your own data
-- <!-- .element: class="fragment fade-up" --> <strong>Xfina Data</strong>: central bank policy rates as the risk-free rate for Sharpe
-- <!-- .element: class="fragment fade-up" --> <strong>Slidetake</strong>: a side track to fast-track video publishing
-- <!-- .element: class="fragment fade-up" --> <strong>Newsletter</strong> starts this month; the <strong>book</strong> is stalled for now
+- <!-- .element: class="fragment fade-up" --> <strong><a href="https://labs.xfina.dev/portfolio-engine/">Portfolio Engine</a></strong> design mock: bring your own data
+- <!-- .element: class="fragment fade-up" --> <strong><a href="https://data.xfina.dev">Xfina Data</a></strong>: central bank policy rates as the risk-free rate for Sharpe
+- <!-- .element: class="fragment fade-up" --> <strong><a href="https://slidetake.com">Slidetake</a></strong>: a side track to fast-track video publishing
+- <!-- .element: class="fragment fade-up" --> <strong><a href="/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/#subscribe">Newsletter</a></strong> starts this month; the <strong><a href="/building-wealth/books/the-global-indian-investor/">book</a></strong> is stalled for now
 
 ---
 
