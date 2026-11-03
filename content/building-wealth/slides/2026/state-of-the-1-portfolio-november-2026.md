@@ -24,6 +24,7 @@ duration: 8m
 timer: always
 related:
   - "[Blog: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/)"
+  - "[Video: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/videos/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/)"
   - "[State of the 1 Portfolio (October 2026)](https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-october-2026/)"
   - "[Perpetual rebalancing](https://sakthipriyan.com/building-wealth/tags/perpetual-rebalancing/)"
   - "[RealValue Family SIP Allocator](https://sakthipriyan.com/building-wealth/tools/realvalue-family-sip-allocator/)"
@@ -70,6 +71,7 @@ Global multi-asset passive: <strong><a href="/building-wealth/books/the-global-i
 ---
 
 ### 📈 Performance
+<!-- camera: on, off, on -->
 
 <div id="st1p-nov-performance" class="echarts-container" data-chart='{
  "title": [
@@ -422,22 +424,23 @@ Global multi-asset passive: <strong><a href="/building-wealth/books/the-global-i
 
 Using <strong><a href="/building-wealth/tags/perpetual-rebalancing/">perpetual rebalancing</a></strong>
 
-| Asset class | Pre drift | New invest | Post drift |
-|---|---:|---:|---:|
-| **Nasdaq 100** | −0.41% | **42.78%** | −0.37% |
-| **Nifty 50** | +0.77% | 0.00% | +0.49% |
-| **Next 50** | −0.46% | **16.53%** | −0.37% |
-| **Midcap 150** | −0.54% | **22.41%** | −0.37% |
-| **Smallcap 250** | −0.55% | **18.27%** | −0.37% |
-| **Debt** | +0.85% | 0.00% | +0.77% |
-| **Gold** | +0.35% | 0.00% | +0.21% |
-| **Total drift** | **1.97%** | **100%** | **1.47%** |
+| Asset class | Pre drift | New invest | Post drift | Target |
+|---|---:|---:|---:|---:|
+| **Nasdaq 100** | −0.41% | **42.78%** | −0.37% | 40.00% |
+| **Nifty 50** | +0.77% | 0.00% | +0.49% | 20.00% |
+| **Next 50** | −0.46% | **16.53%** | −0.37% | 10.00% |
+| **Midcap 150** | −0.54% | **22.41%** | −0.37% | 10.00% |
+| **Smallcap 250** | −0.55% | **18.27%** | −0.37% | 5.00% |
+| **Debt** | +0.85% | 0.00% | +0.77% | 5.00% |
+| **Gold** | +0.35% | 0.00% | +0.21% | 10.00% |
+| **Total drift** | **1.97%** | **100%** | **1.47%** | **100%** |
 
 <p class="fragment fade-up">A <strong>1.39%</strong> top-up cuts drift by <strong>0.50%</strong>, filling the four underweight sleeves to a <strong>−0.37%</strong> <a href="/building-wealth/blogs/perpetual-rebalancing-engineering-a-mathematically-superior-sip-allocator/#drift-band-comparison">water level</a>.</p>
 
 --
 
 ### 🎯 Monthly Investment / Drift Correction
+<!-- camera: on, off, on -->
 
 <div id="st1p-nov-correction" class="echarts-container" data-chart='{
  "title": {
@@ -913,6 +916,7 @@ Using <strong><a href="/building-wealth/tags/perpetual-rebalancing/">perpetual r
 ---
 
 ### 🔁 Drift Correction History
+<!-- camera: on, off, on -->
 
 <div id="st1p-nov-history" class="echarts-container" data-chart='{
  "title": {
