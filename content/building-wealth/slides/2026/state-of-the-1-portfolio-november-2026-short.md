@@ -15,7 +15,7 @@ wealth_tags:
   - State Of The 1 Portfolio
 # Slidetake: a 9:16 Short, the words over the camera
 format: portrait
-pip: behind top          # one layout throughout: the words above, you below
+pip: bottom-right        # slides as cards with the camera in the corner; the opening slide puts it behind
 duration: 1m
 related:
   - "[Full video: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/videos/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/)"
@@ -24,6 +24,8 @@ related:
 ---
 
 # <span style="color:var(--accent)">I bought Nasdaq 100, not Nifty 50</span>
+
+<!-- camera: behind top -->
 
 State of the 1 Portfolio · November 2026
 
