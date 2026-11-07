@@ -55,11 +55,12 @@ State of the 1 Portfolio · November 2026
 
 ```echarts
 {
-  "grid": {"left": 10, "right": 10, "top": 30, "bottom": 30, "containLabel": true},
-  "xAxis": {"type": "category", "data": ["Last month", "Before investing", "After investing"], "axisLabel": {"fontSize": 16}},
-  "yAxis": {"type": "value", "show": false},
-  "series": [{"type": "bar", "barWidth": "55%", "data": ["3.30", "1.97", "1.47"],
-    "label": {"show": true, "position": "top", "fontSize": 22, "fontWeight": "bold", "formatter": "{c}%"}}]
+  "grid": {"left": 10, "right": 70, "top": 20, "bottom": 20, "containLabel": true},
+  "yAxis": {"type": "category", "inverse": true, "data": ["Oct, before", "Oct, after", "Nov, before", "Nov, after"],
+    "axisLabel": {"fontSize": 18}, "axisTick": {"show": false}},
+  "xAxis": {"type": "value", "show": false},
+  "series": [{"type": "bar", "barWidth": "60%", "data": ["3.30", "2.27", "1.97", "1.47"],
+    "label": {"show": true, "position": "right", "fontSize": 24, "fontWeight": "bold", "formatter": "{c}%"}}]
 }
 ```
 
