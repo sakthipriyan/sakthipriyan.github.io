@@ -1,5 +1,5 @@
 ---
-title: "I Bought Nasdaq 100, Not Nifty 50 — November 2026 (Short)"
+title: "This Month I Bought Nasdaq 100, Not Nifty 50 — November 2026 (Short)"
 engine: slidetake
 accent: "#f5c542"          # the section's colour, so a recording matches the site
 date: "2026-11-07"
@@ -16,14 +16,14 @@ wealth_tags:
 # Slidetake: a 9:16 Short, the words over the camera
 format: portrait
 pip: behind top          # the opening slide over the camera; then the card on top, the camera below (solid)
-duration: 1m
+duration: 45s             # a Short: about 9 seconds a slide
 related:
   - "[Full video: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/videos/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/)"
   - "[Slides: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/slides/2026/state-of-the-1-portfolio-november-2026/)"
   - "[Blog: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/blogs/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/)"
 ---
 
-# <span style="color:var(--accent)">I bought Nasdaq 100, not Nifty 50</span>
+# <span style="color:var(--accent)">This month I bought Nasdaq 100, not Nifty 50</span>
 
 <!-- camera: behind top -->
 
@@ -36,8 +36,8 @@ State of the 1 Portfolio · November 2026
 <!-- camera: behind top solid -->
 
 
-- **Nasdaq 100**: +1.89% → **−0.41%**, now below target
-- **Nifty 50**: −1.24% → **+0.77%**, now above
+- **Nasdaq 100**: +1.89% → **−0.41%**, below target
+- **Nifty 50**: −1.24% → **+0.77%**, above target
 
 ## <span style="color:var(--accent)">So the money followed</span>
 
@@ -46,7 +46,7 @@ State of the 1 Portfolio · November 2026
 
 - **Nasdaq 100**: 43%
 - **Nifty 50**: 0%
-- The rest to Midcap, Smallcap and Next 50
+- Rest: Midcap, Smallcap, Next 50
 
 ## <span style="color:var(--accent)">Drift, closer to target</span>
 
@@ -69,4 +69,4 @@ State of the 1 Portfolio · November 2026
 <!-- camera: behind top solid -->
 
 
-Returns, costs and the Irish ETF, in the full video.
+Returns, costs and the Irish ETF: in the full video.
