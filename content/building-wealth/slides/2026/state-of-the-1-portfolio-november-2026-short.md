@@ -15,7 +15,7 @@ wealth_tags:
   - State Of The 1 Portfolio
 # Slidetake: a 9:16 Short, the words over the camera
 format: portrait
-pip: behind top          # opens over the camera; then split screens (solid) that swap halves each slide
+pip: behind top          # the opening slide over the camera; then the card on top, the camera below (solid)
 duration: 1m
 related:
   - "[Full video: State of the 1 Portfolio (November 2026)](https://sakthipriyan.com/building-wealth/videos/state-of-the-1-portfolio-returns-allocation-rebalancing-november-2026/)"
@@ -33,7 +33,8 @@ State of the 1 Portfolio · November 2026
 
 ## <span style="color:var(--accent)">They swapped sides</span>
 
-<!-- camera: behind bottom solid -->
+<!-- camera: behind top solid -->
+
 
 - **Nasdaq 100**: +1.89% → **−0.41%**, now below target
 - **Nifty 50**: −1.24% → **+0.77%**, now above
@@ -42,20 +43,29 @@ State of the 1 Portfolio · November 2026
 
 <!-- camera: behind top solid -->
 
+
 - **Nasdaq 100**: 43%
 - **Nifty 50**: 0%
 - The rest to Midcap, Smallcap and Next 50
 
 ## <span style="color:var(--accent)">Drift, closer to target</span>
 
-<!-- camera: behind bottom solid -->
+<!-- view: full -->
+<!-- camera: off -->
 
-- Last month: **3.30%**
-- Before investing: **1.97%**
-- After this month's money: **1.47%**
+```echarts
+{
+  "grid": {"left": 10, "right": 10, "top": 30, "bottom": 30, "containLabel": true},
+  "xAxis": {"type": "category", "data": ["Last month", "Before investing", "After investing"], "axisLabel": {"fontSize": 16}},
+  "yAxis": {"type": "value", "show": false},
+  "series": [{"type": "bar", "barWidth": "55%", "data": ["3.30", "1.97", "1.47"],
+    "label": {"show": true, "position": "top", "fontSize": 22, "fontWeight": "bold", "formatter": "{c}%"}}]
+}
+```
 
 ## <span style="color:var(--accent)">The full breakdown ↓</span>
 
 <!-- camera: behind top solid -->
+
 
 Returns, costs and the Irish ETF, in the full video.
