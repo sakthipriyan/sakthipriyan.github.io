@@ -234,6 +234,7 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 <!-- steps -->
 - Up to **₹5 lakh** per transaction (the UPI limit)
+- **INR → USD only**: no other currency, and no USD → INR
 - Four parties: FX Retail, Bharat Connect, BHIM and ICICI. When it fails, it takes time: a later attempt took **11 days and 43 follow-ups** to unwind
 - A **₹0.10 buffer** in the quoted rate makes the USD amount slightly off
 
