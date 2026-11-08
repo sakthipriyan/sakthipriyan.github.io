@@ -64,7 +64,7 @@ related:
 | ICICI Bank Rate | 96.54 |
 | IBR | 94.905 |
 | + FX Retail markup | 0.20 |
-| **FX Retail/Bharat Connect** | **95.105** |
+| **FX Retail rate** | **95.105** |
 | **Saved per $1,000** | **₹1,435** |
 
 For about **3 extra minutes** on BHIM.
