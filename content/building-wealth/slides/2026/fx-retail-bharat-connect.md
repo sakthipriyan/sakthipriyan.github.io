@@ -59,12 +59,12 @@ related:
 
 <!-- camera: behind left solid -->
 
-Rates on **4 May 2026**, the day of the trade:
-
-| Channel | Rate (₹/USD) |
+| 4 May 2026 | ₹/USD |
 |---|---:|
 | ICICI Bank Rate | 96.54 |
-| FX Retail/Bharat Connect<br>IBR (94.905) + Markup (20p) | **95.105** |
+| IBR | 94.905 |
+| + FX Retail markup | 0.20 |
+| **FX Retail/Bharat Connect** | **95.105** |
 | **Saved per $1,000** | **₹1,435** |
 
 For about **3 extra minutes** on BHIM.
