@@ -59,92 +59,43 @@ State of the 1 Portfolio · November 2026
   {
    "text": "Nifty 50  ·  target 20%",
    "left": 10,
-   "top": 80,
+   "top": 60,
    "textStyle": {
     "fontSize": 24,
     "color": "#f5c542"
    }
-  },
-  {
-   "text": "Nasdaq 100  ·  target 40%",
-   "left": 10,
-   "top": 450,
-   "textStyle": {
-    "fontSize": 24,
-    "color": "#6e9ef7"
-   }
   }
  ],
- "grid": [
-  {
-   "left": 50,
-   "right": 50,
-   "top": 140,
-   "height": 270,
-   "containLabel": true
-  },
-  {
-   "left": 50,
-   "right": 50,
-   "top": 510,
-   "height": 270,
-   "containLabel": true
-  }
- ],
- "xAxis": [
-  {
-   "gridIndex": 0,
-   "type": "category",
-   "data": [
-    "Oct\nbefore",
-    "Oct\nafter",
-    "Nov\nbefore",
-    "Nov\nafter"
-   ],
-   "boundaryGap": false,
-   "axisTick": {
-    "show": false
-   },
-   "axisLabel": {
-    "fontSize": 16,
-    "lineHeight": 22
-   }
-  },
-  {
-   "gridIndex": 1,
-   "type": "category",
-   "data": [
-    "Oct\nbefore",
-    "Oct\nafter",
-    "Nov\nbefore",
-    "Nov\nafter"
-   ],
-   "boundaryGap": false,
-   "axisTick": {
-    "show": false
-   },
-   "axisLabel": {
-    "fontSize": 16,
-    "lineHeight": 22
-   }
-  }
- ],
- "yAxis": [
-  {
-   "gridIndex": 0,
-   "type": "value",
-   "min": 17.5,
-   "max": 22.5,
+ "grid": {
+  "left": 50,
+  "right": 50,
+  "top": 120,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "category",
+  "data": [
+   "Oct\nbefore",
+   "Oct\nafter",
+   "Nov\nbefore",
+   "Nov\nafter"
+  ],
+  "boundaryGap": false,
+  "axisTick": {
    "show": false
   },
-  {
-   "gridIndex": 1,
-   "type": "value",
-   "min": 37.5,
-   "max": 42.5,
-   "show": false
+  "axisLabel": {
+   "fontSize": 16,
+   "lineHeight": 22
   }
- ],
+ },
+ "yAxis": {
+  "type": "value",
+  "min": 17.5,
+  "max": 22.5,
+  "show": false
+ },
  "series": [
   {
    "name": "Nifty 50",
@@ -220,12 +171,62 @@ State of the 1 Portfolio · November 2026
      ]
     ]
    }
+  }
+ ]
+}
+```
+
+<!-- steps -->
+
+```echarts
+{
+ "title": [
+  {
+   "text": "Nasdaq 100  ·  target 40%",
+   "left": 10,
+   "top": 0,
+   "textStyle": {
+    "fontSize": 24,
+    "color": "#6e9ef7"
+   }
+  }
+ ],
+ "grid": {
+  "left": 50,
+  "right": 50,
+  "top": 60,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "category",
+  "data": [
+   "Oct\nbefore",
+   "Oct\nafter",
+   "Nov\nbefore",
+   "Nov\nafter"
+  ],
+  "boundaryGap": false,
+  "axisTick": {
+   "show": false
   },
+  "axisLabel": {
+   "fontSize": 16,
+   "lineHeight": 22
+  }
+ },
+ "yAxis": {
+  "type": "value",
+  "min": 37.5,
+  "max": 42.5,
+  "show": false
+ },
+ "series": [
   {
    "name": "Nasdaq 100",
    "type": "line",
-   "xAxisIndex": 1,
-   "yAxisIndex": 1,
+   "xAxisIndex": 0,
+   "yAxisIndex": 0,
    "color": "#6e9ef7",
    "data": [
     "41.89",
