@@ -233,4 +233,4 @@ One recurring step, optimised once: no change to the investment strategy at all.
 
 👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe
 
-📖 The full walkthrough is on the blog.
+📖 Full walkthrough: [FX Retail via Bharat Connect — a live transaction](https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/)
