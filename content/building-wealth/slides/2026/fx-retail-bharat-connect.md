@@ -72,8 +72,6 @@ For about **3 extra minutes** on BHIM.
 
 ## 🔄 The hybrid flow
 
-<!-- view: overview -->
-
 ```d2
 vars: {
   d2-config: {
