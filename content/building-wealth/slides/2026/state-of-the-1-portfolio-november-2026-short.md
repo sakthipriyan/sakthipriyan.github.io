@@ -31,27 +31,13 @@ State of the 1 Portfolio · November 2026
 
 *Educational, not financial advice*
 
-## <span style="color:var(--accent)">They swapped sides</span>
+## <span style="color:var(--accent)">New money goes to what's below target</span>
 
 <!-- camera: behind top solid -->
 
-Nasdaq 100 fell below target. Nifty 50 rose above it.
+**October:** Nifty 50 was below, so I bought Nifty 50.
 
-```echarts
-{
-  "legend": {"bottom": 0, "textStyle": {"fontSize": 16}},
-  "grid": {"left": 10, "right": 60, "top": 10, "bottom": 40, "containLabel": true},
-  "yAxis": {"type": "category", "inverse": true, "data": ["Nasdaq 100", "Nifty 50"],
-    "axisLabel": {"fontSize": 18}, "axisTick": {"show": false}},
-  "xAxis": {"type": "value", "show": false},
-  "series": [
-    {"name": "Last month", "type": "bar", "data": [1.89, -1.24],
-      "label": {"show": true, "position": "outside", "fontSize": 18, "formatter": "{c}%"}},
-    {"name": "This month", "type": "bar", "data": [-0.41, 0.77],
-      "label": {"show": true, "position": "outside", "fontSize": 18, "fontWeight": "bold", "formatter": "{c}%"}}
-  ]
-}
-```
+**November:** Nasdaq 100 is below, so I'm buying Nasdaq 100.
 
 ## <span style="color:var(--accent)">Rebalancing with new money</span>
 
