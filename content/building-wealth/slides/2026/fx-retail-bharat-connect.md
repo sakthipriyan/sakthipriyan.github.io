@@ -61,9 +61,9 @@ related:
 
 | 4 May 2026 | ₹/USD |
 |---|---:|
-| ICICI Bank Rate | 96.54  |
+| ICICI Bank Rate | 96.54&numsp; |
 | IBR | 94.905 |
-| + FX Retail markup | 0.20  |
+| + FX Retail markup | 0.20&numsp; |
 | **FX Retail rate** | **95.105** |
 | **Saved per $1,000** | **₹1,435** |
 
