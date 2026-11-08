@@ -66,6 +66,7 @@ related:
 | + ICICI Markup | 0.20&numsp; |
 | **FX Retail rate** | **95.105** |
 | **Saved per $1,000** | **₹1,435** |
+| **Saved in USD** | **$15.09**&numsp; |
 
 For about **3 extra minutes** on BHIM.
 
