@@ -32,7 +32,7 @@ related:
 
 **Private bank speed at public bank rates.** A live remittance, from INR to an Irish ETF on IBKR in one morning.
 
-📖 The Global Indian Investor · Building Wealth
+📖 [The Global Indian Investor · FX Retail - A Deep Dive](https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/04-fx-retail-a-deep-dive/)
 
 ## 📌 Disclaimer
 
@@ -59,11 +59,14 @@ related:
 
 <!-- camera: behind left solid -->
 
-| Channel | Rate (₹/USD) |
+| 4 May 2026 | ₹/USD |
 |---|---:|
-| ICICI default | 96.54 |
-| FX Retail + Bharat Connect | **95.105** |
+| ICICI Bank Rate | 96.54&numsp; |
+| Interbank rate | 94.905 |
+| + ICICI Markup | 0.20&numsp; |
+| **FX Retail rate** | **95.105** |
 | **Saved per $1,000** | **₹1,435** |
+| **Saved in USD** | **$15.09**&numsp; |
 
 For about **3 extra minutes** on BHIM.
 
@@ -234,6 +237,7 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 <!-- steps -->
 - Up to **₹5 lakh** per transaction (the UPI limit)
+- **INR → USD only**: no other currency, and no USD → INR
 - Four parties: FX Retail, Bharat Connect, BHIM and ICICI. When it fails, it takes time: a later attempt took **11 days and 43 follow-ups** to unwind
 - A **₹0.10 buffer** in the quoted rate makes the USD amount slightly off
 
@@ -249,6 +253,6 @@ One recurring step, optimised once: no change to the investment strategy at all.
 
 <!-- camera: on, full, on, off -->
 
-👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe
+👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe [YouTube](https://www.youtube.com/channel/UC2XqaTqSPfLwgTSf5sIF_BQ) | [Digest](https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/#subscribe)
 
 📖 Full walkthrough: [FX Retail via Bharat Connect — a live transaction](https://sakthipriyan.com/building-wealth/blogs/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates-a-live-transaction-walkthrough/)
