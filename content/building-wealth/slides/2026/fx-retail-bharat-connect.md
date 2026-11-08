@@ -48,7 +48,7 @@ related:
 
 ## ⚖️ The trade-off
 
-<!-- camera: behind right -->
+<!-- camera: behind right solid -->
 
 <!-- steps -->
 - **Public banks** (Bank of Baroda): the lowest FX spreads, but slow, manual execution
@@ -69,7 +69,7 @@ For about **3 extra minutes** on BHIM.
 
 ## ⚙️ How it works
 
-<!-- camera: behind left -->
+<!-- camera: behind left solid -->
 
 <!-- steps -->
 - The rate is discovered on **CCIL's FX Retail** platform
@@ -143,6 +143,8 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ## 📱 Step 1: Book the deal on BHIM
 
+<!-- camera: behind right solid -->
+
 <!-- steps -->
 - ![Bills & recharges](BHIM1.png)
 - ![Finances → Forex](BHIM2.png)
@@ -158,7 +160,7 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ### Confirmed in a minute
 
-<!-- camera: behind left -->
+<!-- camera: behind left solid -->
 
 > **9:32 AM** · FX-Retail: *Trade No 20260504XXXXXX Buy CASH for USD XXX @ 95.1050 INR*
 >
@@ -228,7 +230,7 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ## ⚠️ Downsides
 
-<!-- camera: behind left -->
+<!-- camera: behind left solid -->
 
 <!-- steps -->
 - Up to **₹5 lakh** per transaction (the UPI limit)
@@ -237,7 +239,7 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ## ✅ Summary
 
-<!-- camera: behind right -->
+<!-- camera: behind right solid -->
 
 > For remittances up to ₹5 lakh, FX Retail via Bharat Connect gives public-bank pricing at private-bank speed, with no negotiation.
 
