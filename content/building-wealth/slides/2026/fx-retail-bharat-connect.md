@@ -48,12 +48,16 @@ related:
 
 ## ⚖️ The trade-off
 
+<!-- camera: behind right solid -->
+
 <!-- steps -->
 - **Public banks** (Bank of Baroda): the lowest FX spreads, but slow, manual execution
 - **Private banks** (ICICI): fast, reliable remittance, but higher spreads
 - **FX Retail via Bharat Connect** breaks the trade-off: lock the public-bank rate on **BHIM**, wire it through **ICICI Money2World**
 
 ### What it saves
+
+<!-- camera: behind left solid -->
 
 | Channel | Rate (₹/USD) |
 |---|---:|
@@ -65,14 +69,14 @@ For about **3 extra minutes** on BHIM.
 
 ## ⚙️ How it works
 
+<!-- camera: behind left solid -->
+
 <!-- steps -->
 - The rate is discovered on **CCIL's FX Retail** platform
 - **Bharat Connect** exposes deal booking inside **BHIM**
 - The wire is executed by your relationship bank, **ICICI**
 
 ## 🔄 The hybrid flow
-
-<!-- view: overview -->
 
 ```d2
 vars: {
@@ -137,7 +141,9 @@ RateLocking.Deal -> WireTransfer.TradeNo: "Trade No. via SMS/Email" { style.stro
 WireTransfer.Wire -> InvestmentBlock.IBKR
 ```
 
-## 📱 Step 1: Book the deal on BHIM
+## 📱 Step 1: Book Deal
+
+<!-- camera: behind left solid -->
 
 <!-- steps -->
 - ![Bills & recharges](BHIM1.png)
@@ -154,6 +160,8 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ### Confirmed in a minute
 
+<!-- camera: behind left solid -->
+
 > **9:32 AM** · FX-Retail: *Trade No 20260504XXXXXX Buy CASH for USD XXX @ 95.1050 INR*
 >
 > **9:33 AM** · ICICI: *Forex Deal … is available for utilisation*
@@ -169,6 +177,8 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ## ⏱️ Two hours, end to end
 
+<!-- camera: on, full -->
+
 | Time | Event |
 |---|---|
 | **9:32** | Deal booked on BHIM @ ₹95.105 |
@@ -179,6 +189,8 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 > It felt like a domestic NEFT transfer.
 
 ### Invested the same afternoon
+
+<!-- camera: on -->
 
 | Field | Value |
 |---|---|
@@ -196,6 +208,8 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 | After 15% tax | $122,757 | **₹1.17 crore** |
 
 ### Growth of the savings
+
+<!-- view: full -->
 
 ```echarts
 {
@@ -216,12 +230,16 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ## ⚠️ Downsides
 
+<!-- camera: behind left solid -->
+
 <!-- steps -->
 - Up to **₹5 lakh** per transaction (the UPI limit)
 - Four parties: FX Retail, Bharat Connect, BHIM and ICICI. When it fails, it takes time: a later attempt took **11 days and 43 follow-ups** to unwind
 - A **₹0.10 buffer** in the quoted rate makes the USD amount slightly off
 
 ## ✅ Summary
+
+<!-- camera: behind right solid -->
 
 > For remittances up to ₹5 lakh, FX Retail via Bharat Connect gives public-bank pricing at private-bank speed, with no negotiation.
 
