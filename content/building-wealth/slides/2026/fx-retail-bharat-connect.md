@@ -141,7 +141,7 @@ RateLocking.Deal -> WireTransfer.TradeNo: "Trade No. via SMS/Email" { style.stro
 WireTransfer.Wire -> InvestmentBlock.IBKR
 ```
 
-## 📱 Step 1: Book the deal on BHIM
+## 📱 Step 1: Book Deal
 
 <!-- camera: behind right solid -->
 
