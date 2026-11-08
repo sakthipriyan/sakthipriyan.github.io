@@ -59,9 +59,11 @@ related:
 
 <!-- camera: behind left solid -->
 
+Rates on **4 May 2026**, the day of the trade:
+
 | Channel | Rate (₹/USD) |
 |---|---:|
-| ICICI default | 96.54 |
+| ICICI Bank Rate | 96.54 |
 | FX Retail + Bharat Connect | **95.105** |
 | **Saved per $1,000** | **₹1,435** |
 
