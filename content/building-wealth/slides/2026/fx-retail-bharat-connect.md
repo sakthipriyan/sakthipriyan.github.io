@@ -32,7 +32,7 @@ related:
 
 **Private bank speed at public bank rates.** A live remittance, from INR to an Irish ETF on IBKR in one morning.
 
-📖 The Global Indian Investor · Building Wealth
+📖 [The Global Indian Investor · FX Retail - A Deep Dive](https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/04-fx-retail-a-deep-dive/)
 
 ## 📌 Disclaimer
 
