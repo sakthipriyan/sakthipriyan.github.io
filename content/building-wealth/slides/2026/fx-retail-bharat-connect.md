@@ -143,7 +143,7 @@ WireTransfer.Wire -> InvestmentBlock.IBKR
 
 ## 📱 Step 1: Book Deal
 
-<!-- camera: behind right solid -->
+<!-- camera: behind left solid -->
 
 <!-- steps -->
 - ![Bills & recharges](BHIM1.png)
