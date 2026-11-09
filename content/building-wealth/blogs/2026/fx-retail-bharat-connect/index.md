@@ -24,6 +24,10 @@ js_tools:
 
 ---
 
+📺 [Watch on YouTube](https://youtu.be/ptRSwxIzqPo) · 🎞️ [Slides](/building-wealth/slides/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates/)
+
+{{< youtube ptRSwxIzqPo >}}
+
 When remitting money abroad, Indian investors face a persistent trade-off:
 
 - **Public banks** (e.g., Bank of Baroda): Lowest FX spreads on FX Retail, but slower manual execution
