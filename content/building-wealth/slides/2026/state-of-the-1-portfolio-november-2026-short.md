@@ -41,25 +41,15 @@ State of the 1 Portfolio · November 2026
 
 ## <span style="color:var(--accent)">Rebalancing with new money</span>
 
-<!-- view: full -->
-<!-- camera: off -->
+<!-- camera: behind top solid -->
 
 ```echarts
 {
  "title": [
   {
-   "text": "Market pushes away, new money pulls back",
-   "left": "center",
-   "top": 0,
-   "textStyle": {
-    "fontSize": 20,
-    "fontWeight": "normal"
-   }
-  },
-  {
    "text": "Nifty 50  ·  target 20%",
    "left": 10,
-   "top": 60,
+   "top": 0,
    "textStyle": {
     "fontSize": 24,
     "color": "#f5c542"
@@ -69,7 +59,7 @@ State of the 1 Portfolio · November 2026
  "grid": {
   "left": 50,
   "right": 50,
-  "top": 120,
+  "top": 60,
   "bottom": 10,
   "containLabel": true
  },
@@ -176,7 +166,9 @@ State of the 1 Portfolio · November 2026
 }
 ```
 
-<!-- steps -->
+## <span style="color:var(--accent)">Rebalancing with new money</span>
+
+<!-- camera: behind bottom solid -->
 
 ```echarts
 {
@@ -303,6 +295,6 @@ State of the 1 Portfolio · November 2026
 
 ## <span style="color:var(--accent)">The full breakdown ↓</span>
 
-<!-- camera: behind top solid -->
+<!-- camera: behind bottom solid -->
 
 Returns, costs and the Irish ETF: in the full video.
