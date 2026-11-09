@@ -28,7 +28,7 @@ For Indian investors, US-domiciled ETFs introduce three structural issues:
 
 The following table summarizes the key differences between US-domiciled ETFs and Irish-domiciled UCITS ETFs before we examine each in detail.
 
-|  | US-Domiciled ETFs ([VOO](https://investor.vanguard.com/investment-products/etfs/profile/voo)/[QQQ](https://invesco.com/qqq-etf/en/home.html)) | Irish UCITS (Acc) ETFs ([CSPX](https://ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund)/[CNDX](https://ishares.com/uk/individual/en/products/253741/ishares-nasdaq-100-ucits-etf)) |
+|  | US-Domiciled ETFs ([VOO](https://investor.vanguard.com/investment-products/etfs/profile/voo)/[QQQ](https://invesco.com/qqq-etf/en/home.html)) | Irish UCITS (Acc) ETFs ([VUAA](https://www.vanguard.co.uk/professional/product/etf/equity/9694/sp-500-ucits-etf-usd-accumulating)/[EQAC](https://www.invesco.com/uk/en/financial-products/etfs/invesco-eqqq-nasdaq-100-ucits-etf-acc.html)) |
 | :--- | :--- | :--- |
 | 1. **US Estate Tax Risk** | Up to 40% (on assets >$60k) | **0%** (No US Estate Tax exposure) |
 | 2. **Dividend Tax Leakage**| 25% withholding under the US-India DTAA in US and Foreign Tax Credit adjustment through Indian ITR | 15% withholding at the fund level (US-Ireland treaty); dividends reinvested inside the accumulating ETF |
