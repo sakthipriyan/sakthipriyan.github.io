@@ -242,7 +242,7 @@ window.initializeTool.fxTracker = function (container, config) {
                         <div v-if="preview.valid">
                             <table class="summary-table">
                                 <tbody>
-                                    <tr :style="form.amountUnit === 'usd' ? 'background: var(--warning-surface);' : 'background: var(--success-surface);'">
+                                    <tr>
                                         <td><strong>USD Amount</strong></td>
                                         <td class="highlight" style="text-align: right;">
                                             <strong style="font-size: 1.15em;" v-html="'&#36;' + formatUSDHtml(preview.usdAmount)"></strong>
@@ -265,24 +265,24 @@ window.initializeTool.fxTracker = function (container, config) {
                                             <span class="help-icon help-icon-wide" data-tooltip="The true exchange rate you are paying per dollar, factoring in the base rate, all markups, fees, and taxes (excluding TCS).">ℹ️</span>
                                         </td>
                                         <td style="text-align: right;">
-                                            <strong style="color: var(--secondary-color);">₹{{ preview.effectiveRate.toFixed(4) }}</strong>
+                                            <strong>₹{{ preview.effectiveRate.toFixed(4) }}</strong>
                                         </td>
                                     </tr>
-                                    <tr style="background: var(--info-surface);">
+                                    <tr style="background: var(--muted);">
                                         <td style="padding: 0.4rem 0.75rem; display: flex; justify-content: space-between; align-items: center;">
-                                            <strong style="color: var(--secondary-color);">🌐 FX Interbank</strong>
+                                            <strong>🌐 FX Interbank</strong>
                                             <span class="help-icon help-icon-wide" data-tooltip="What you'd pay at the mid-market (interbank) rate: USD amount × Interbank Rate. This is the baseline cost with no provider charges.">ℹ️</span>
                                         </td>
                                         <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                            <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml(preview.ibCost)"></strong>
+                                            <strong v-html="'₹' + formatINRHtml(preview.ibCost)"></strong>
                                         </td>
                                     </tr>
-                                    <tr style="background: var(--info-surface);">
+                                    <tr style="background: var(--muted);">
                                         <td style="padding: 0.4rem 0.75rem;">
-                                            <strong style="color: var(--secondary-color);">💸 FX Charges</strong>
+                                            <strong>💸 FX Charges</strong>
                                         </td>
                                         <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                            <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></strong>
+                                            <strong v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -299,12 +299,12 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.processingFee)"></td>
                                     </tr>
-                                    <tr style="background: var(--info-surface);">
+                                    <tr style="background: var(--muted);">
                                         <td style="padding: 0.4rem 0.75rem;">
-                                            <strong style="color: var(--secondary-color);">🏛️ Taxes</strong>
+                                            <strong>🏛️ Taxes</strong>
                                         </td>
                                         <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                            <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></strong>
+                                            <strong v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -322,12 +322,12 @@ window.initializeTool.fxTracker = function (container, config) {
                                         <td v-html="'₹' + formatINRHtml(preview.processingFeeGST)"></td>
                                     </tr>
                                     <template v-if="preview.tcs > 0">
-                                        <tr style="background: var(--info-surface);">
+                                        <tr style="background: var(--muted);">
                                             <td style="padding: 0.4rem 0.75rem;">
-                                                <strong style="color: var(--secondary-color);">Net INR Amount</strong>
+                                                <strong>Net INR Amount</strong>
                                             </td>
                                             <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                                <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml(preview.inrDebit - preview.tcs)"></strong>
+                                                <strong v-html="'₹' + formatINRHtml(preview.inrDebit - preview.tcs)"></strong>
                                             </td>
                                         </tr>
                                         <tr>
@@ -337,7 +337,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                             </td>
                                             <td style="padding: 0.4rem 0.75rem; text-align: right;" v-html="'₹' + formatINRHtml(preview.tcs)"></td>
                                         </tr>
-                                        <tr :style="form.amountUnit === 'inr' ? 'background: var(--warning-surface);' : 'background: var(--success-surface);'">
+                                        <tr>
                                             <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem;">
                                                 <span><strong>Gross INR Amount</strong></span>
                                                 <span class="help-icon help-icon-wide" data-tooltip="Total INR amount deducted from your account, including TCS.">ℹ️</span>
@@ -348,7 +348,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </tr>
                                     </template>
                                     <template v-else>
-                                        <tr :style="form.amountUnit === 'inr' ? 'background: var(--warning-surface);' : 'background: var(--success-surface);'">
+                                        <tr>
                                             <td style="padding: 0.4rem 0.75rem;"><strong>INR Amount</strong></td>
                                             <td class="highlight" style="padding: 0.4rem 0.75rem; text-align: right;">
                                                 <strong style="font-size: 1.15em;" v-html="'₹' + formatINRHtml(preview.inrDebit)"></strong>
@@ -543,7 +543,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             <div v-if="availableFYs.length > 0" style="display: flex; align-items: center; gap: 0.4rem;">
                                 <select
                                     v-model="selectedFY"
-                                    style="padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9em; background: var(--info-surface); color: var(--secondary-color); font-weight: 600; cursor: pointer;"
+                                    style="padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9em; background: var(--card); color: var(--foreground); font-weight: 600; cursor: pointer;"
                                 >
                                     <option :value="fy" v-for="fy in availableFYs" :key="fy">FY {{ fy }}-{{ String(fy + 1).slice(-2) }}</option>
                                 </select>
@@ -581,30 +581,30 @@ window.initializeTool.fxTracker = function (container, config) {
 
                     <!-- Summary Tiles -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                        <div style="background: var(--success-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total USD Bought</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--success-ink);" v-html="'$' + formatUSDHtml(summary.totalUSDBought)"></div>
-                            <div v-if="summary.totalUSDBought > 0" style="font-size: 0.8em; color: var(--success-ink); margin-top: 0.2rem;">Eff Rate: ₹{{ ((summary.totalINRSpent - summary.totalTCS) / summary.totalUSDBought).toFixed(4) }}</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--foreground-strong);" v-html="'$' + formatUSDHtml(summary.totalUSDBought)"></div>
+                            <div v-if="summary.totalUSDBought > 0" style="font-size: 0.8em; color: var(--muted-foreground); margin-top: 0.2rem;">Eff Rate: ₹{{ ((summary.totalINRSpent - summary.totalTCS) / summary.totalUSDBought).toFixed(4) }}</div>
                         </div>
-                        <div style="background: var(--info-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total INR Spent</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--secondary-color);" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: var(--secondary-color); margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--foreground-strong);" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: var(--muted-foreground); margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
                         </div>
-                        <div style="background: var(--warning-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total TCS Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--warning);" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: var(--warning); margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--foreground-strong);" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: var(--muted-foreground); margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: var(--danger-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total FX Charges</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);" v-html="'₹' + formatINRHtml(summary.totalBankCharges)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: var(--danger); margin-top: 0.2rem;">{{ (summary.totalBankCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--foreground-strong);" v-html="'₹' + formatINRHtml(summary.totalBankCharges)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: var(--muted-foreground); margin-top: 0.2rem;">{{ (summary.totalBankCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: var(--danger-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total GST Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: var(--danger); margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--foreground-strong);" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: var(--muted-foreground); margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
                     </div>
 
@@ -738,10 +738,10 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <div style="margin-bottom: 1.5rem; max-width: 320px;">
-                        <div style="background: var(--danger-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
                             <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">TCS Opp. Cost ({{ form.cagr || 12 }}%)</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);" v-html="'₹' + formatINRHtml(summary.totalOppCost)"></div>
-                            <div v-if="summary.totalINRSpent > summary.totalTCS" style="font-size: 0.8em; color: var(--danger); margin-top: 0.2rem;">{{ (summary.totalOppCost / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}% of Ex-TCS</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--foreground-strong);" v-html="'₹' + formatINRHtml(summary.totalOppCost)"></div>
+                            <div v-if="summary.totalINRSpent > summary.totalTCS" style="font-size: 0.8em; color: var(--muted-foreground); margin-top: 0.2rem;">{{ (summary.totalOppCost / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}% of Ex-TCS</div>
                         </div>
                     </div>
 

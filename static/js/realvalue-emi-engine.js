@@ -318,11 +318,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                     </tr>
                                     <tr>
                                         <td><strong>Interest Paid</strong></td>
-                                        <td style="background-color: var(--warning-surface); font-weight: 600;">
+                                        <td style="font-weight: 600;">
                                             <span class="help-icon" :data-tooltip="'₹ ' + (results.totalNominalEMIs - results.nominalLoanAmount).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalNominalEMIs - results.nominalLoanAmount) }}</span>
                                             <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (((results.totalNominalEMIs - results.nominalLoanAmount) / results.nominalLoanAmount) * 100).toFixed(1) }}%</div>
                                         </td>
-                                        <td style="background-color: var(--success-surface); font-weight: 600;">
+                                        <td style="font-weight: 600;">
                                             <span class="help-icon" :data-tooltip="'₹ ' + (results.totalRealEMIs - results.realLoanAmount).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalRealEMIs - results.realLoanAmount) }}</span>
                                             <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (((results.totalRealEMIs - results.realLoanAmount) / results.realLoanAmount) * 100).toFixed(1) }}%</div>
                                         </td>
@@ -588,17 +588,17 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                             </div>
                             
                             <div style="font-size: 0.95em; text-align: left; line-height: 1.4;">
-                                <div :style="item.inputs.calculationMode === 'loan' ? { fontWeight: 'bold', color: 'var(--secondary-color)' } : {}">
+                                <div :style="item.inputs.calculationMode === 'loan' ? { fontWeight: 'bold', color: 'var(--foreground-strong)' } : {}">
                                     <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Loan Amount</span>
                                     ₹{{ formatCurrencyFull(item.outputs.nominalLoanAmount) }}
                                 </div>
                                 
-                                <div :style="item.inputs.calculationMode === 'time' ? { fontWeight: 'bold', color: 'var(--secondary-color)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                <div :style="item.inputs.calculationMode === 'time' ? { fontWeight: 'bold', color: 'var(--foreground-strong)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
                                     <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Tenure</span>
                                     <span style="text-transform: capitalize;">{{ item.inputs.calculationMode === 'time' ? item.outputs.timeRequired : item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}</span>
                                 </div>
                                 
-                                <div :style="item.inputs.calculationMode === 'emi' ? { fontWeight: 'bold', color: 'var(--secondary-color)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                <div :style="item.inputs.calculationMode === 'emi' ? { fontWeight: 'bold', color: 'var(--foreground-strong)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
                                     <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">EMI</span>
                                     ₹{{ formatCurrencyFull(item.inputs.calculationMode === 'emi' ? item.outputs.calculatedValue : item.inputs.emiValue * (item.inputs.emiUnit === 'crores' ? 10000000 : item.inputs.emiUnit === 'lakhs' ? 100000 : 1000)) }}
                                 </div>
@@ -638,19 +638,19 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 </tr>
                                 <tr>
                                     <td><strong>Loan Amount</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'out-loan-'+item.id" :style="item.inputs.calculationMode === 'loan' ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                    <td v-for="item in comparisonItems" :key="'out-loan-'+item.id" :style="item.inputs.calculationMode === 'loan' ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--foreground-strong)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         ₹{{ formatCurrencyFull(item.outputs.nominalLoanAmount) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Tenure</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'out-time-'+item.id" :style="item.inputs.calculationMode === 'time' ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', textTransform: 'capitalize', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', textTransform: 'capitalize', fontSize: '1.1em' }">
+                                    <td v-for="item in comparisonItems" :key="'out-time-'+item.id" :style="item.inputs.calculationMode === 'time' ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--foreground-strong)', textTransform: 'capitalize', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', textTransform: 'capitalize', fontSize: '1.1em' }">
                                         {{ item.inputs.calculationMode === 'time' ? item.outputs.timeRequired : item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>EMI</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'out-emi-'+item.id" :style="item.inputs.calculationMode === 'emi' ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                    <td v-for="item in comparisonItems" :key="'out-emi-'+item.id" :style="item.inputs.calculationMode === 'emi' ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--foreground-strong)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         ₹{{ formatCurrencyFull(item.inputs.calculationMode === 'emi' ? item.outputs.calculatedValue : item.inputs.emiValue * (item.inputs.emiUnit === 'crores' ? 10000000 : item.inputs.emiUnit === 'lakhs' ? 100000 : 1000)) }}
                                     </td>
                                 </tr>

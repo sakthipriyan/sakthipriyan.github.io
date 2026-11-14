@@ -420,7 +420,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     </tr>
                                     <tr>
                                         <td><strong>Portfolio Value</strong></td>
-                                        <td style="background-color: var(--warning-surface); font-weight: 600;">
+                                        <td style="font-weight: 600;">
                                             <span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.expectedValue) }}</span>
                                             <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (results.expectedValue / results.totalInvestment).toFixed(2) }}x</div>
                                         </td>
@@ -435,7 +435,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                             <span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span>
                                             <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ ((results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) / results.totalInvestment).toFixed(2) }}x</div>
                                         </td>
-                                        <td style="background-color: var(--success-surface); font-weight: 600;">
+                                        <td style="font-weight: 600;">
                                             <span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span>
                                             <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (results.postTaxRealValue / results.realInvestment).toFixed(2) }}x</div>
                                         </td>
@@ -706,12 +706,12 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     ₹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                 </div>
 
-                                <div :style="item.inputs.targetTime && item.inputs.targetMoney ? { fontWeight: 'bold', color: 'var(--secondary-color)', marginTop: '0.5rem' } : { marginTop: '0.5rem' }">
+                                <div :style="item.inputs.targetTime && item.inputs.targetMoney ? { fontWeight: 'bold', color: 'var(--foreground-strong)', marginTop: '0.5rem' } : { marginTop: '0.5rem' }">
                                     <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Monthly SIP</span>
                                     {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                 </div>
 
-                                <div :style="item.inputs.targetMoney && !item.inputs.targetTime ? { fontWeight: 'bold', color: 'var(--secondary-color)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                <div :style="item.inputs.targetMoney && !item.inputs.targetTime ? { fontWeight: 'bold', color: 'var(--foreground-strong)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
                                     <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
                                     {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
                                 </div>
@@ -721,7 +721,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     {{ item.inputs.cagr }}% / {{ item.inputs.inflationRate }}%
                                 </div>
 
-                                <div :style="item.inputs.targetTime && !item.inputs.targetMoney ? { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold', color: 'var(--secondary-color)' } : { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold' }">
+                                <div :style="item.inputs.targetTime && !item.inputs.targetMoney ? { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold', color: 'var(--foreground-strong)' } : { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold' }">
                                     <span style="font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: normal; color: var(--muted-foreground);">Post Tax Real Value</span>
                                     ₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}
                                     <span style="font-size: 0.8em; font-weight: normal; margin-left: 2px; color: var(--muted-foreground);">({{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x)</span>
@@ -763,14 +763,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tr>
                                     <td><strong>Monthly SIP</strong></td>
                                     <td v-for="item in comparisonItems" :key="'sip-'+item.id"
-                                        :style="item.inputs.targetTime && item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        :style="item.inputs.targetTime && item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--foreground-strong)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Time Required</strong></td>
                                     <td v-for="item in comparisonItems" :key="'time-'+item.id"
-                                        :style="item.inputs.targetMoney && !item.inputs.targetTime ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        :style="item.inputs.targetMoney && !item.inputs.targetTime ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--foreground-strong)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
                                     </td>
                                 </tr>
@@ -858,7 +858,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tr>
                                     <td><strong>Post Tax</strong></td>
                                     <td v-for="item in comparisonItems" :key="'pt-r-'+item.id"
-                                        :style="item.inputs.targetTime && !item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        :style="item.inputs.targetTime && !item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--foreground-strong)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         <div style="font-size: 1.1em;">₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}</div>
                                         <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px; font-weight: normal;">{{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x</div>
                                     </td>

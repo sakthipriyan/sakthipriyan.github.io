@@ -107,7 +107,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem;">
                     <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
                         📑 Mutual Fund Portfolio
-                        <span v-if="funds.filter(f => f.marketValue > 0).length > 0" style="font-size: 0.7em; background: var(--info-surface); color: var(--secondary-color); padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
+                        <span v-if="funds.filter(f => f.marketValue > 0).length > 0" style="font-size: 0.7em; background: var(--muted); color: var(--foreground-strong); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
                             {{ funds.filter(f => f.marketValue > 0).length }} Funds
                         </span>
                     </h3>
@@ -137,22 +137,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 <!-- Privacy row: message left, verify button right -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
-                    <p style="font-size: 0.95em; color: var(--success-ink); font-weight: 500; margin: 0; line-height: 1.5; flex: 1; min-width: 200px;">
+                    <p style="font-size: 0.95em; color: var(--foreground); font-weight: 500; margin: 0; line-height: 1.5; flex: 1; min-width: 200px;">
                         🔒 Your sensitive financial files are processed entirely within your browser. <strong>Your data never leaves your device!</strong>
                     </p>
                     <button type="button" @click="showPrivacyDetails = !showPrivacyDetails"
-                        style="flex-shrink: 0; padding: 0.3rem 0.7rem; background: var(--success-surface); border: 1px solid var(--border); border-radius: 4px; font-size: 0.8em; font-weight: 600; color: var(--success-ink); cursor: pointer; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                        style="flex-shrink: 0; padding: 0.3rem 0.7rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-size: 0.8em; font-weight: 600; color: var(--foreground-strong); cursor: pointer; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;">
                         🔍 Verify It Yourself <span>{{ showPrivacyDetails ? '▲' : '▼' }}</span>
                     </button>
                 </div>
 
                 <!-- Expandable Privacy & Verification Panel -->
                 <div v-show="showPrivacyDetails" style="margin-bottom: 1rem; padding: 1rem; background: var(--muted); border: 1px solid var(--border); border-radius: 6px; font-size: 0.85em; color: var(--foreground-strong); line-height: 1.7;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; padding: 0.6rem 0.85rem; background: var(--success-surface); border: 1px solid var(--border); border-radius: 5px;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; padding: 0.6rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 5px;">
                         <span style="font-size: 1.1em;">🔒</span>
                         <div>
-                            <strong style="color: var(--success-ink);">100% Private. 100% Local.</strong>
-                            <ul style="margin: 0.25rem 0 0; padding-left: 1.2rem; color: var(--success-ink); line-height: 1.8;">
+                            <strong style="color: var(--foreground-strong);">100% Private. 100% Local.</strong>
+                            <ul style="margin: 0.25rem 0 0; padding-left: 1.2rem; color: var(--foreground); line-height: 1.8;">
                                 <li>Processed locally via JavaScript.</li>
                                 <li>No data ever leaves your device.</li>
                                 <li>Stored locally in your browser cache.</li>
@@ -160,7 +160,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             </ul>
                         </div>
                     </div>
-                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: var(--info-surface); border-left: 3px solid var(--secondary-color); border-radius: 4px; color: var(--secondary-color);">
+                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--secondary-color); border-radius: 4px; color: var(--foreground);">
                         💡 <strong>Try with a smaller window:</strong> Upload a CAS PDF covering just the first year or two — quicker to verify, and a great way to explore tagging, XIRR, and allocation views.
                     </div>
                     <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: var(--foreground-strong);">Three ways to verify your data stays private:</p>
