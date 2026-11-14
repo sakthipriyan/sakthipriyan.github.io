@@ -13,7 +13,7 @@ window.initializeTool.fxTracker = function (container, config) {
 
                     <!-- Left Column: Transaction Form -->
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div class="sip-inputs">
+                        <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
 
                         <!-- Header -->
                         <div style="margin-bottom: 1.5rem;">
@@ -151,7 +151,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Compare Rates Box (below inputs, same column) -->
-                    <div class="sip-inputs">
+                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Rates <span class="help-icon help-icon-wide" data-tooltip="Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.">ℹ️</span></h3>
                         <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0 0 0.75rem 0;">Uses the currently entered parameters. Overrides <strong>Bank Name</strong> if set.</p>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
@@ -183,7 +183,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Add Transaction Box -->
-                    <div class="sip-inputs">
+                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">📋 Add Transaction <span class="help-icon help-icon-wide" data-tooltip="Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.">ℹ️</span></h3>
                         <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0 0 0.75rem 0;">Uses the currently entered <strong>Bank Name</strong> and transaction details.</p>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
@@ -216,7 +216,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Right Column: FX Analysis -->
-                    <div class="sip-outputs">
+                    <div class="sip-outputs" style="border-left: 4px solid var(--secondary-color);">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                             <h3 style="margin: 0;">🧾 FX Analysis</h3>
                             <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">

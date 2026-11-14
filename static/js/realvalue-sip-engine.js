@@ -21,7 +21,7 @@ window.initializeTool.sipCalculator = function (container, config) {
                     <!-- Left Column: Inputs + Compare -->
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <!-- Input Fields -->
-                    <div class="sip-inputs">
+                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
 
                         <!-- Section: Goal -->
                         <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
@@ -310,7 +310,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     </div>
 
                     <!-- Compare Scenarios Box (below inputs, same column) -->
-                    <div class="sip-inputs">
+                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Scenario Name (Optional):</span>
@@ -342,7 +342,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     </div><!-- end left column wrapper -->
                     
                     <!-- Right Column: Output Results and Chart -->
-                    <div class="sip-outputs" v-if="results.calculated">
+                    <div class="sip-outputs" v-if="results.calculated" style="border-left: 4px solid var(--secondary-color);">
                         <div class="sip-summary">
                             <div v-if="isBothTargetsMode || results.timeRequired" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem;">
                                 <h3 style="margin: 0;">🎯 Target Results</h3>
@@ -456,7 +456,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                         </div>
                     </div>
                     
-                    <div class="sip-outputs placeholder" v-else>
+                    <div class="sip-outputs placeholder" v-else style="border-left: 4px solid var(--secondary-color);">
                         <div class="placeholder-content">
                             <h3 style="margin-top: 0;">🎯 Your Results Will Appear Here</h3>
                             <p>Fill in your SIP details on the left to see your investment growth projection</p>
