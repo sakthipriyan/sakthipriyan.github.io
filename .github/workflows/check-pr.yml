@@ -14,7 +14,8 @@ permissions:
 jobs:
   test:
     name: Site
-    runs-on: ubuntu-latest
+    # ubuntu-24.04-arm: free for public repos; bump to ubuntu-26.04-arm when 24.04 is retired.
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout source
