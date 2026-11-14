@@ -306,12 +306,12 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                             </div>
                         </div>
 
-                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
+                        <p style="font-size: 0.9em; color: var(--muted-foreground); margin-top: 1rem; font-style: italic;">💡 Results update automatically as you adjust inputs</p>
                     </div>
 
                     <!-- Compare Scenarios Box (below inputs, same column) -->
                     <div class="sip-inputs">
-                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Scenario Name (Optional):</span>
                         </label>
@@ -320,7 +320,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 type="text"
                                 v-model="formData.scenarioName"
                                 placeholder="e.g., Scenario 1"
-                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                                style="flex: 1; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem;">
                             <button
                                 type="button"
                                 @click="addToCompare"
@@ -420,38 +420,38 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     </tr>
                                     <tr>
                                         <td><strong>Portfolio Value</strong></td>
-                                        <td style="background-color: #fff3cd; font-weight: 600;">
+                                        <td style="background-color: var(--warning-surface); font-weight: 600;">
                                             <span class="help-icon" :data-tooltip="'₹ ' + results.expectedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.expectedValue) }}</span>
-                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.expectedValue / results.totalInvestment).toFixed(2) }}x</div>
+                                            <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (results.expectedValue / results.totalInvestment).toFixed(2) }}x</div>
                                         </td>
                                         <td>
                                             <span class="help-icon" :data-tooltip="'₹ ' + results.inflationAdjustedValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.inflationAdjustedValue) }}</span>
-                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.inflationAdjustedValue / results.realInvestment).toFixed(2) }}x</div>
+                                            <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (results.inflationAdjustedValue / results.realInvestment).toFixed(2) }}x</div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><strong>Post Tax</strong></td>
                                         <td>
                                             <span class="help-icon" :data-tooltip="'₹ ' + (results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) }}</span>
-                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ ((results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) / results.totalInvestment).toFixed(2) }}x</div>
+                                            <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ ((results.totalInvestment + (results.expectedValue - results.totalInvestment) * (1 - formData.taxRate / 100)) / results.totalInvestment).toFixed(2) }}x</div>
                                         </td>
-                                        <td style="background-color: #d4edda; font-weight: 600;">
+                                        <td style="background-color: var(--success-surface); font-weight: 600;">
                                             <span class="help-icon" :data-tooltip="'₹ ' + results.postTaxRealValue.toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1; font-size: 1.2em;">₹ {{ formatCurrency(results.postTaxRealValue) }}</span>
-                                            <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (results.postTaxRealValue / results.realInvestment).toFixed(2) }}x</div>
+                                            <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (results.postTaxRealValue / results.realInvestment).toFixed(2) }}x</div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div id="sip-breakdown-chart" style="width: 100%; height: 420px; margin-top: 1.5rem;"></div>
                             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Values</h3>
-                            <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
+                            <ul style="font-size: 0.9em; color: var(--muted-foreground); line-height: 1.8;">
                                 <li><strong>Nominal:</strong> Future value without adjusting for inflation.</li>
                                 <li><strong>Real:</strong> Today's purchasing power after adjusting for inflation.</li>
                             </ul>
-                            <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
-                                📚 Learn more: <a href="/building-wealth/blogs/realvalue-sip-engine-use-cases/" style="color: #0066cc; text-decoration: none;">Use Cases</a> | 
-                                <a href="#frequently-asked-questions-faqs" style="color: #0066cc; text-decoration: none;">FAQs</a> | 
-                                <a href="#help" style="color: #0066cc; text-decoration: none;">Help</a>
+                            <p style="font-size: 0.9em; color: var(--muted-foreground); margin-top: 0.5rem;">
+                                📚 Learn more: <a href="/building-wealth/blogs/realvalue-sip-engine-use-cases/" style="color: var(--secondary-color); text-decoration: none;">Use Cases</a> | 
+                                <a href="#frequently-asked-questions-faqs" style="color: var(--secondary-color); text-decoration: none;">FAQs</a> | 
+                                <a href="#help" style="color: var(--secondary-color); text-decoration: none;">Help</a>
                             </p>
                         </div>
                     </div>
@@ -644,7 +644,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     <td><strong>{{ yearRow.year }}</strong></td>
                                     <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex">
                                         <span v-if="amount !== null" class="help-icon" :data-tooltip="'₹ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {maximumFractionDigits: 0})" style="cursor: default; opacity: 1;">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
-                                        <span v-else style="color: #999;">-</span>
+                                        <span v-else style="color: var(--muted-foreground);">-</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -696,42 +696,42 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 title="Remove"
                                 style="position: absolute; top: 0.25rem; right: 0.25rem;">✕</button>
 
-                            <div style="font-size: 0.85em; font-weight: bold; color: #555; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;">
+                            <div style="font-size: 0.85em; font-weight: bold; color: var(--muted-foreground); margin-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;">
                                 {{ item.inputs.scenarioName || 'Scenario ' + (index + 1) }}
                             </div>
 
                             <div style="font-size: 0.95em; text-align: left; line-height: 1.4;">
                                 <div style="margin-top: 0.5rem;" v-if="item.inputs.currentInvestmentValue > 0">
-                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Lumpsum</span>
+                                    <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Lumpsum</span>
                                     ₹{{ formatCurrencyFull(item.inputs.currentInvestmentValue * (item.inputs.currentInvestmentUnit === 'crores' ? 10000000 : item.inputs.currentInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                 </div>
 
-                                <div :style="item.inputs.targetTime && item.inputs.targetMoney ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.5rem' } : { marginTop: '0.5rem' }">
-                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Monthly SIP</span>
+                                <div :style="item.inputs.targetTime && item.inputs.targetMoney ? { fontWeight: 'bold', color: 'var(--secondary-color)', marginTop: '0.5rem' } : { marginTop: '0.5rem' }">
+                                    <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Monthly SIP</span>
                                     {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                 </div>
 
-                                <div :style="item.inputs.targetMoney && !item.inputs.targetTime ? { fontWeight: 'bold', color: '#2980b9', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
-                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
+                                <div :style="item.inputs.targetMoney && !item.inputs.targetTime ? { fontWeight: 'bold', color: 'var(--secondary-color)', marginTop: '0.6rem' } : { marginTop: '0.6rem' }">
+                                    <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
                                     {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
                                 </div>
 
                                 <div style="margin-top: 0.6rem;">
-                                    <span style="color: #666; font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Growth / Inflation</span>
+                                    <span style="color: var(--muted-foreground); font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Growth / Inflation</span>
                                     {{ item.inputs.cagr }}% / {{ item.inputs.inflationRate }}%
                                 </div>
 
-                                <div :style="item.inputs.targetTime && !item.inputs.targetMoney ? { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold', color: '#2980b9' } : { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold' }">
-                                    <span style="font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: normal; color: #666;">Post Tax Real Value</span>
+                                <div :style="item.inputs.targetTime && !item.inputs.targetMoney ? { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold', color: 'var(--secondary-color)' } : { marginTop: '0.6rem', borderTop: '1px dashed rgba(0,0,0,0.15)', paddingTop: '0.5rem', fontWeight: 'bold' }">
+                                    <span style="font-size: 0.75em; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: normal; color: var(--muted-foreground);">Post Tax Real Value</span>
                                     ₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}
-                                    <span style="font-size: 0.8em; font-weight: normal; margin-left: 2px; color: #888;">({{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x)</span>
+                                    <span style="font-size: 0.8em; font-weight: normal; margin-left: 2px; color: var(--muted-foreground);">({{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Table View -->
-                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
                         <table class="summary-table">
                             <thead>
                                 <tr>
@@ -763,14 +763,14 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 <tr>
                                     <td><strong>Monthly SIP</strong></td>
                                     <td v-for="item in comparisonItems" :key="'sip-'+item.id"
-                                        :style="item.inputs.targetTime && item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        :style="item.inputs.targetTime && item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         {{ item.outputs.requiredMonthlyInvestment != null ? '₹' + formatCurrencyFull(item.outputs.requiredMonthlyInvestment) : '₹' + formatCurrencyFull(item.inputs.monthlyInvestmentValue * (item.inputs.monthlyInvestmentUnit === 'crores' ? 10000000 : item.inputs.monthlyInvestmentUnit === 'lakhs' ? 100000 : 1000)) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Time Required</strong></td>
                                     <td v-for="item in comparisonItems" :key="'time-'+item.id"
-                                        :style="item.inputs.targetMoney && !item.inputs.targetTime ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        :style="item.inputs.targetMoney && !item.inputs.targetTime ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         {{ item.outputs.timeRequired || item.inputs.timePeriodValue + ' ' + (item.inputs.timePeriodValue === 1 ? item.inputs.timePeriodUnit.slice(0, -1) : item.inputs.timePeriodUnit) }}
                                     </td>
                                 </tr>
@@ -788,24 +788,24 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                 </tr>
                                 <tr>
                                     <td><strong>Yearly Hike</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'hike-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'hike-'+item.id" style="text-align: right; color: var(--muted-foreground);">
                                         {{ item.inputs.yearlyHike }}%
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Inflation Rate</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'inf-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'inf-'+item.id" style="text-align: right; color: var(--muted-foreground);">
                                         {{ item.inputs.inflationRate }}%
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Exit Tax</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'tax-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'tax-'+item.id" style="text-align: right; color: var(--muted-foreground);">
                                         {{ item.inputs.taxRate }}%
                                     </td>
                                 </tr>
-                                <tr style="background: #f8f9fa;">
-                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888;">Nominal (Not Inflation Adjusted)</td>
+                                <tr style="background: var(--muted);">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted-foreground);">Nominal (Not Inflation Adjusted)</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Investment</strong></td>
@@ -823,44 +823,44 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                                     <td><strong>Portfolio Value</strong></td>
                                     <td v-for="item in comparisonItems" :key="'pv-n-'+item.id" style="text-align: right;">
                                         <div style="font-size: 1.05em;">₹{{ formatCurrencyFull(item.outputs.expectedValue) }}</div>
-                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ (item.outputs.expectedValue / item.outputs.totalInvestment).toFixed(2) }}x</div>
+                                        <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (item.outputs.expectedValue / item.outputs.totalInvestment).toFixed(2) }}x</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Post Tax</strong></td>
                                     <td v-for="item in comparisonItems" :key="'pt-n-'+item.id" style="text-align: right;">
                                         <div>₹{{ formatCurrencyFull(item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) }}</div>
-                                        <div style="font-size: 0.85em; color: #666; margin-top: 2px;">{{ ((item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) / item.outputs.totalInvestment).toFixed(2) }}x</div>
+                                        <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ ((item.outputs.totalInvestment + (item.outputs.expectedValue - item.outputs.totalInvestment) * (1 - item.inputs.taxRate / 100)) / item.outputs.totalInvestment).toFixed(2) }}x</div>
                                     </td>
                                 </tr>
-                                <tr style="background: #f8f9fa;">
-                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888;">Real (Inflation Adjusted)</td>
+                                <tr style="background: var(--muted);">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted-foreground);">Real (Inflation Adjusted)</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Investment</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'inv-r-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'inv-r-'+item.id" style="text-align: right; color: var(--muted-foreground);">
                                         ₹{{ formatCurrencyFull(item.outputs.realInvestment) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Growth</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'gro-r-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'gro-r-'+item.id" style="text-align: right; color: var(--muted-foreground);">
                                         ₹{{ formatCurrencyFull(item.outputs.inflationAdjustedValue - item.outputs.realInvestment) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Portfolio Value</strong></td>
-                                    <td v-for="item in comparisonItems" :key="'pv-r-'+item.id" style="text-align: right; color: #666;">
+                                    <td v-for="item in comparisonItems" :key="'pv-r-'+item.id" style="text-align: right; color: var(--muted-foreground);">
                                         <div>₹{{ formatCurrencyFull(item.outputs.inflationAdjustedValue) }}</div>
-                                        <div style="font-size: 0.85em; color: #888; margin-top: 2px;">{{ (item.outputs.inflationAdjustedValue / item.outputs.realInvestment).toFixed(2) }}x</div>
+                                        <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px;">{{ (item.outputs.inflationAdjustedValue / item.outputs.realInvestment).toFixed(2) }}x</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Post Tax</strong></td>
                                     <td v-for="item in comparisonItems" :key="'pt-r-'+item.id"
-                                        :style="item.inputs.targetTime && !item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: '#2980b9', background: '#f0f7ff', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
+                                        :style="item.inputs.targetTime && !item.inputs.targetMoney ? { textAlign: 'right', fontWeight: 'bold', color: 'var(--secondary-color)', background: 'var(--info-surface)', fontSize: '1.1em' } : { textAlign: 'right', fontWeight: 'bold', fontSize: '1.1em' }">
                                         <div style="font-size: 1.1em;">₹{{ formatCurrencyFull(item.outputs.postTaxRealValue) }}</div>
-                                        <div style="font-size: 0.85em; color: #999; margin-top: 2px; font-weight: normal;">{{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x</div>
+                                        <div style="font-size: 0.85em; color: var(--muted-foreground); margin-top: 2px; font-weight: normal;">{{ (item.outputs.postTaxRealValue / item.outputs.realInvestment).toFixed(2) }}x</div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -873,7 +873,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                         <h2 style="margin: 0;">⚖️ Compare Scenarios</h2>
                     </div>
-                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                    <div style="text-align: center; padding: 2rem 0; color: var(--muted-foreground);">
                         <p>No scenarios to compare yet. Click <strong>➕ Add</strong> under <strong>⚖️ Compare Scenarios</strong> with an optional scenario name to get started.</p>
                     </div>
                 </div>
@@ -1338,7 +1338,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">�
                 return Math.max(0, vals.indexOf(val));
             },
             getCompareCardStyle(item) {
-                return { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'left', minWidth: '180px', flex: '1', background: '#f8f9fa', border: '1px solid #dee2e6' };
+                return { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'left', minWidth: '180px', flex: '1', background: 'var(--muted)', border: '1px solid var(--border)' };
             },
 
             // URL Sharing Methods

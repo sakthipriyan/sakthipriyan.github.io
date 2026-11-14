@@ -62,7 +62,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 type="date"
                                 v-model="form.date"
                                 @change="ibRateError = ''; calculate()"
-                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                                style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem;">
                         </div>
 
                         <!-- Rates: Bank quoted + Interbank side by side -->
@@ -78,7 +78,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                         v-model.number="form.rate"
                                         min="1"
                                         step="0.01"
-                                        style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem;">
                                 </div>
                                 <div>
                                     <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
@@ -92,7 +92,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                             min="0.01"
                                             step="0.01"
                                             placeholder="e.g. 91.85"
-                                            style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;"
+                                            style="flex: 1; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem;"
                                             @input="debouncedCalculate">
                                         <button
                                             type="button"
@@ -103,14 +103,14 @@ window.initializeTool.fxTracker = function (container, config) {
                                             {{ ibRateLoading ? '…' : 'Auto' }}
                                         </button>
                                     </div>
-                                    <div v-if="ibRateError" style="font-size: 0.8em; color: #c0392b; margin-top: 0.25rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+                                    <div v-if="ibRateError" style="font-size: 0.8em; color: var(--danger); margin-top: 0.25rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
                                         <span>{{ ibRateError }}</span>
                                         <button
                                             type="button"
                                             @click="ibRateError = ''"
                                             title="Dismiss"
                                             aria-label="Dismiss message"
-                                            style="border: none; background: transparent; color: #c0392b; cursor: pointer; font-size: 0.9em; line-height: 1; padding: 0;">
+                                            style="border: none; background: transparent; color: var(--danger); cursor: pointer; font-size: 0.9em; line-height: 1; padding: 0;">
                                             ✕
                                         </button>
                                     </div>
@@ -142,18 +142,18 @@ window.initializeTool.fxTracker = function (container, config) {
                                 type="text"
                                 v-model="form.bank"
                                 placeholder="e.g., HDFC Bank, SBI..."
-                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; box-sizing: border-box;">
+                                style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem; box-sizing: border-box;">
                         </div>
 
-                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; margin-bottom: 0; font-style: italic;">
+                        <p style="font-size: 0.9em; color: var(--muted-foreground); margin-top: 1rem; margin-bottom: 0; font-style: italic;">
                             💡 Results update automatically as you adjust inputs
                         </p>
                     </div>
 
                     <!-- Compare Rates Box (below inputs, same column) -->
                     <div class="sip-inputs">
-                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Rates <span class="help-icon help-icon-wide" data-tooltip="Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.">ℹ️</span></h3>
-                        <p style="font-size: 0.85em; color: #666; margin: 0 0 0.75rem 0;">Uses the currently entered parameters. Overrides <strong>Bank Name</strong> if set.</p>
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Rates <span class="help-icon help-icon-wide" data-tooltip="Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.">ℹ️</span></h3>
+                        <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0 0 0.75rem 0;">Uses the currently entered parameters. Overrides <strong>Bank Name</strong> if set.</p>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Scenario Name (Optional):</span>
                         </label>
@@ -162,7 +162,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 type="text"
                                 v-model="form.compareName"
                                 placeholder="e.g., Target Rate A"
-                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                                style="flex: 1; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem;">
                             <button
                                 type="button"
                                 @click="addToCompare"
@@ -184,8 +184,8 @@ window.initializeTool.fxTracker = function (container, config) {
 
                     <!-- Add Transaction Box -->
                     <div class="sip-inputs">
-                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: #2c3e50; display: flex; align-items: center; gap: 0.4rem;">📋 Add Transaction <span class="help-icon help-icon-wide" data-tooltip="Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.">ℹ️</span></h3>
-                        <p style="font-size: 0.85em; color: #666; margin: 0 0 0.75rem 0;">Uses the currently entered <strong>Bank Name</strong> and transaction details.</p>
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">📋 Add Transaction <span class="help-icon help-icon-wide" data-tooltip="Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.">ℹ️</span></h3>
+                        <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0 0 0.75rem 0;">Uses the currently entered <strong>Bank Name</strong> and transaction details.</p>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Transaction ID (Optional):</span>
                         </label>
@@ -194,7 +194,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 type="text"
                                 v-model="form.txnId"
                                 placeholder="e.g., TXN-2026-001"
-                                style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: monospace;">
+                                style="flex: 1; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem; font-family: monospace;">
                             <button
                                 type="button"
                                 @click="addTransaction"
@@ -242,7 +242,7 @@ window.initializeTool.fxTracker = function (container, config) {
                         <div v-if="preview.valid">
                             <table class="summary-table">
                                 <tbody>
-                                    <tr :style="form.amountUnit === 'usd' ? 'background: #fffde7;' : 'background: #e8f5e9;'">
+                                    <tr :style="form.amountUnit === 'usd' ? 'background: var(--warning-surface);' : 'background: var(--success-surface);'">
                                         <td><strong>USD Amount</strong></td>
                                         <td class="highlight" style="text-align: right;">
                                             <strong style="font-size: 1.15em;" v-html="'&#36;' + formatUSDHtml(preview.usdAmount)"></strong>
@@ -265,24 +265,24 @@ window.initializeTool.fxTracker = function (container, config) {
                                             <span class="help-icon help-icon-wide" data-tooltip="The true exchange rate you are paying per dollar, factoring in the base rate, all markups, fees, and taxes (excluding TCS).">ℹ️</span>
                                         </td>
                                         <td style="text-align: right;">
-                                            <strong style="color: #2980b9;">₹{{ preview.effectiveRate.toFixed(4) }}</strong>
+                                            <strong style="color: var(--secondary-color);">₹{{ preview.effectiveRate.toFixed(4) }}</strong>
                                         </td>
                                     </tr>
-                                    <tr style="background: #f0f7ff;">
+                                    <tr style="background: var(--info-surface);">
                                         <td style="padding: 0.4rem 0.75rem; display: flex; justify-content: space-between; align-items: center;">
-                                            <strong style="color: #2980b9;">🌐 FX Interbank</strong>
+                                            <strong style="color: var(--secondary-color);">🌐 FX Interbank</strong>
                                             <span class="help-icon help-icon-wide" data-tooltip="What you'd pay at the mid-market (interbank) rate: USD amount × Interbank Rate. This is the baseline cost with no provider charges.">ℹ️</span>
                                         </td>
                                         <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                            <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml(preview.ibCost)"></strong>
+                                            <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml(preview.ibCost)"></strong>
                                         </td>
                                     </tr>
-                                    <tr style="background: #f0f7ff;">
+                                    <tr style="background: var(--info-surface);">
                                         <td style="padding: 0.4rem 0.75rem;">
-                                            <strong style="color: #2980b9;">💸 FX Charges</strong>
+                                            <strong style="color: var(--secondary-color);">💸 FX Charges</strong>
                                         </td>
                                         <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                            <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></strong>
+                                            <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml((preview.fxSpread || 0) + (preview.processingFee || 0))"></strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -299,12 +299,12 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </td>
                                         <td v-html="'₹' + formatINRHtml(preview.processingFee)"></td>
                                     </tr>
-                                    <tr style="background: #f0f7ff;">
+                                    <tr style="background: var(--info-surface);">
                                         <td style="padding: 0.4rem 0.75rem;">
-                                            <strong style="color: #2980b9;">🏛️ Taxes</strong>
+                                            <strong style="color: var(--secondary-color);">🏛️ Taxes</strong>
                                         </td>
                                         <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                            <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></strong>
+                                            <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml((preview.fxConvGST || 0) + (preview.processingFeeGST || 0))"></strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -322,12 +322,12 @@ window.initializeTool.fxTracker = function (container, config) {
                                         <td v-html="'₹' + formatINRHtml(preview.processingFeeGST)"></td>
                                     </tr>
                                     <template v-if="preview.tcs > 0">
-                                        <tr style="background: #f0f7ff;">
+                                        <tr style="background: var(--info-surface);">
                                             <td style="padding: 0.4rem 0.75rem;">
-                                                <strong style="color: #2980b9;">Net INR Amount</strong>
+                                                <strong style="color: var(--secondary-color);">Net INR Amount</strong>
                                             </td>
                                             <td style="padding: 0.4rem 0.75rem; text-align: right;">
-                                                <strong style="color: #2980b9;" v-html="'₹' + formatINRHtml(preview.inrDebit - preview.tcs)"></strong>
+                                                <strong style="color: var(--secondary-color);" v-html="'₹' + formatINRHtml(preview.inrDebit - preview.tcs)"></strong>
                                             </td>
                                         </tr>
                                         <tr>
@@ -337,7 +337,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                             </td>
                                             <td style="padding: 0.4rem 0.75rem; text-align: right;" v-html="'₹' + formatINRHtml(preview.tcs)"></td>
                                         </tr>
-                                        <tr :style="form.amountUnit === 'inr' ? 'background: #fffde7;' : 'background: #e8f5e9;'">
+                                        <tr :style="form.amountUnit === 'inr' ? 'background: var(--warning-surface);' : 'background: var(--success-surface);'">
                                             <td style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.75rem;">
                                                 <span><strong>Gross INR Amount</strong></span>
                                                 <span class="help-icon help-icon-wide" data-tooltip="Total INR amount deducted from your account, including TCS.">ℹ️</span>
@@ -348,7 +348,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                         </tr>
                                     </template>
                                     <template v-else>
-                                        <tr :style="form.amountUnit === 'inr' ? 'background: #fffde7;' : 'background: #e8f5e9;'">
+                                        <tr :style="form.amountUnit === 'inr' ? 'background: var(--warning-surface);' : 'background: var(--success-surface);'">
                                             <td style="padding: 0.4rem 0.75rem;"><strong>INR Amount</strong></td>
                                             <td class="highlight" style="padding: 0.4rem 0.75rem; text-align: right;">
                                                 <strong style="font-size: 1.15em;" v-html="'₹' + formatINRHtml(preview.inrDebit)"></strong>
@@ -361,7 +361,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             <div id="fx-breakdown-chart" style="width: 100%; height: 480px; margin-top: 1.5rem;"></div>
                         </div>
 
-                        <div v-else style="color: #999; padding: 2rem; text-align: center;">
+                        <div v-else style="color: var(--muted-foreground); padding: 2rem; text-align: center;">
                             <p>Enter rate and amount to see the live calculation.</p>
                         </div>
                     </div>
@@ -412,15 +412,15 @@ window.initializeTool.fxTracker = function (container, config) {
                                 style="position: absolute; top: 0.25rem; right: 0.25rem;"
                             >✕</button>
 
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem; padding: 0 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem; padding: 0 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                 {{ item.inputs.bank || 'Bank ' + (index + 1) }}
                             </div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #2980b9;" v-html="'&#36;' + formatUSDHtml(item.outputs.usdAmount)"></div>
-                            <div style="font-size: 0.8em; color: #2980b9; margin-top: 0.2rem;">{{ item.outputs.chargesPct.toFixed(2) }}%</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--secondary-color);" v-html="'&#36;' + formatUSDHtml(item.outputs.usdAmount)"></div>
+                            <div style="font-size: 0.8em; color: var(--secondary-color); margin-top: 0.2rem;">{{ item.outputs.chargesPct.toFixed(2) }}%</div>
                         </div>
                     </div>
 
-                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                    <div v-if="showComparisonTable" class="table-responsive" style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
                         <table class="summary-table">
                             <thead>
                                 <tr>
@@ -440,7 +440,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             <tbody>
                                 <tr>
                                     <td><strong>USD Amount</strong></td>
-                                    <td v-for="item in comparisonItems" :key="item.id" class="highlight" style="text-align: right; color: #2980b9;">
+                                    <td v-for="item in comparisonItems" :key="item.id" class="highlight" style="text-align: right; color: var(--secondary-color);">
                                         <strong style="font-size: 1.15em;" v-html="'&#36;' + formatUSDHtml(item.outputs.usdAmount)"></strong>
                                     </td>
                                 </tr>
@@ -450,22 +450,22 @@ window.initializeTool.fxTracker = function (container, config) {
                                 </tr>
                                 <tr>
                                     <td><strong>Interbank Rate</strong></td>
-                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; color: #666;">₹{{ parseFloat(item.inputs.interbankRate).toFixed(4) }}</td>
+                                    <td v-for="item in comparisonItems" :key="item.id" style="text-align: right; color: var(--muted-foreground);">₹{{ parseFloat(item.inputs.interbankRate).toFixed(4) }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Processing Fee</strong></td>
                                     <td v-for="item in comparisonItems" :key="item.id" style="text-align: right;" v-html="'₹' + formatINRHtml(item.inputs.serviceFee)"></td>
                                 </tr>
-                                <tr style="background: #f4f4f4;">
-                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #888; font-weight: bold;">Computed</td>
+                                <tr style="background: var(--muted);">
+                                    <td :colspan="1 + comparisonItems.length" style="padding: 0.3rem 1rem; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted-foreground); font-weight: bold;">Computed</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Transaction Cost %</strong></td>
                                     <td v-for="item in comparisonItems" :key="item.id" 
                                         :style="[
                                             { textAlign: 'right', fontWeight: 'bold' },
-                                            getCompareRank(item.outputs.chargesPct) === 0 ? { color: '#155724', background: '#d4edda', borderRadius: '4px' } : 
-                                            (getCompareRank(item.outputs.chargesPct) === 1 && comparisonItems.length > 2) ? { color: '#1e7e34', background: '#e8f5e9', borderRadius: '4px' } : 
+                                            getCompareRank(item.outputs.chargesPct) === 0 ? { color: 'var(--success-ink)', background: 'var(--success-surface)', borderRadius: '4px' } : 
+                                            (getCompareRank(item.outputs.chargesPct) === 1 && comparisonItems.length > 2) ? { color: 'var(--success-ink)', background: 'var(--success-surface)', borderRadius: '4px' } : 
                                             {}
                                         ]">
                                         {{ item.outputs.chargesPct.toFixed(2) }}%
@@ -528,7 +528,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 <h2 style="margin: 0;">⚖️ Compare Rates</h2>
                             </div>
                         </div>
-                        <div style="text-align: center; padding: 2rem 0; color: #999;">
+                        <div style="text-align: center; padding: 2rem 0; color: var(--muted-foreground);">
                             <p>No rates to compare. Fill in the form and click <strong>Compare</strong> to get started.</p>
                         </div>
                     </div>
@@ -543,7 +543,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             <div v-if="availableFYs.length > 0" style="display: flex; align-items: center; gap: 0.4rem;">
                                 <select
                                     v-model="selectedFY"
-                                    style="padding: 0.3rem 0.6rem; border: 1px solid #c3d9f5; border-radius: 6px; font-size: 0.9em; background: #f0f7ff; color: #2980b9; font-weight: 600; cursor: pointer;"
+                                    style="padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9em; background: var(--info-surface); color: var(--secondary-color); font-weight: 600; cursor: pointer;"
                                 >
                                     <option :value="fy" v-for="fy in availableFYs" :key="fy">FY {{ fy }}-{{ String(fy + 1).slice(-2) }}</option>
                                 </select>
@@ -581,30 +581,30 @@ window.initializeTool.fxTracker = function (container, config) {
 
                     <!-- Summary Tiles -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                        <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total USD Bought</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #155724;" v-html="'$' + formatUSDHtml(summary.totalUSDBought)"></div>
-                            <div v-if="summary.totalUSDBought > 0" style="font-size: 0.8em; color: #155724; margin-top: 0.2rem;">Eff Rate: ₹{{ ((summary.totalINRSpent - summary.totalTCS) / summary.totalUSDBought).toFixed(4) }}</div>
+                        <div style="background: var(--success-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total USD Bought</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--success-ink);" v-html="'$' + formatUSDHtml(summary.totalUSDBought)"></div>
+                            <div v-if="summary.totalUSDBought > 0" style="font-size: 0.8em; color: var(--success-ink); margin-top: 0.2rem;">Eff Rate: ₹{{ ((summary.totalINRSpent - summary.totalTCS) / summary.totalUSDBought).toFixed(4) }}</div>
                         </div>
-                        <div style="background: #f0f7ff; border: 1px solid #c3d9f5; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total INR Spent</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #2980b9;" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #2980b9; margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
+                        <div style="background: var(--info-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total INR Spent</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--secondary-color);" v-html="'₹' + formatINRHtml(summary.totalINRSpent)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: var(--secondary-color); margin-top: 0.2rem;" v-html="'Ex-TCS: ₹' + formatINRHtml(summary.totalINRSpent - summary.totalTCS)"></div>
                         </div>
-                        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total TCS Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #d97706;" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
-                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: #d97706; margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
+                        <div style="background: var(--warning-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total TCS Paid</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--warning);" v-html="'₹' + formatINRHtml(summary.totalTCS)"></div>
+                            <div v-if="summary.totalINRSpent > 0" style="font-size: 0.8em; color: var(--warning); margin-top: 0.2rem;">{{ (summary.totalTCS / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total FX Charges</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #ef4444;" v-html="'₹' + formatINRHtml(summary.totalBankCharges)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #ef4444; margin-top: 0.2rem;">{{ (summary.totalBankCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                        <div style="background: var(--danger-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total FX Charges</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);" v-html="'₹' + formatINRHtml(summary.totalBankCharges)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: var(--danger); margin-top: 0.2rem;">{{ (summary.totalBankCharges / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
-                        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">Total GST Paid</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #b91c1c;" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
-                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: #b91c1c; margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
+                        <div style="background: var(--danger-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">Total GST Paid</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);" v-html="'₹' + formatINRHtml(summary.totalGST)"></div>
+                            <div v-if="summary.totalIBCost > 0" style="font-size: 0.8em; color: var(--danger); margin-top: 0.2rem;">{{ (summary.totalGST / summary.totalIBCost * 100).toFixed(2) }}%</div>
                         </div>
                     </div>
 
@@ -675,7 +675,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             </tbody>
                         </table>
                     </div>
-                    <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
+                    <p style="font-size: 0.82em; color: var(--muted-foreground); margin-top: 0.75rem;">
                             ℹ️ There may be a difference of a couple of paise between the numbers shown here and your bank statement due to how rounding is applied at each step.
                     </p>
                 </div>
@@ -700,7 +700,7 @@ window.initializeTool.fxTracker = function (container, config) {
                                 max="50" 
                                 step="0.5"
                                 @input="debouncedCalculate"
-                                style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;"
+                                style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem;"
                             >
                         </div>
                         <div class="input-group" style="margin: 0; min-width: 200px;">
@@ -738,10 +738,10 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <div style="margin-bottom: 1.5rem; max-width: 320px;">
-                        <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 8px; padding: 1rem; text-align: center;">
-                            <div style="font-size: 0.8em; color: #888; margin-bottom: 0.25rem;">TCS Opp. Cost ({{ form.cagr || 12 }}%)</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #db2777;" v-html="'₹' + formatINRHtml(summary.totalOppCost)"></div>
-                            <div v-if="summary.totalINRSpent > summary.totalTCS" style="font-size: 0.8em; color: #db2777; margin-top: 0.2rem;">{{ (summary.totalOppCost / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}% of Ex-TCS</div>
+                        <div style="background: var(--danger-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center;">
+                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-bottom: 0.25rem;">TCS Opp. Cost ({{ form.cagr || 12 }}%)</div>
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);" v-html="'₹' + formatINRHtml(summary.totalOppCost)"></div>
+                            <div v-if="summary.totalINRSpent > summary.totalTCS" style="font-size: 0.8em; color: var(--danger); margin-top: 0.2rem;">{{ (summary.totalOppCost / (summary.totalINRSpent - summary.totalTCS) * 100).toFixed(2) }}% of Ex-TCS</div>
                         </div>
                     </div>
 
@@ -759,15 +759,15 @@ window.initializeTool.fxTracker = function (container, config) {
                             <tbody>
                                 <tr v-for="(row, i) in tcsDragSchedule" :key="i">
                                     <td style="white-space: nowrap;">{{ row.date }}</td>
-                                    <td style="text-align: right; color: #d35400;" v-html="row.paid > 0 ? '₹' + formatINRHtml(row.paid) : '–'"></td>
-                                    <td style="text-align: right; color: #27ae60;" v-html="row.adjusted > 0 ? '₹' + formatINRHtml(row.adjusted) : '–'"></td>
-                                    <td style="text-align: right; font-weight: 700; color: #2980b9;" v-html="'₹' + formatINRHtml(row.pending)"></td>
-                                    <td style="text-align: right; color: #db2777;" v-html="row.oppCost > 0 ? '₹' + formatINRHtml(row.oppCost) : '–'"></td>
+                                    <td style="text-align: right; color: var(--warning);" v-html="row.paid > 0 ? '₹' + formatINRHtml(row.paid) : '–'"></td>
+                                    <td style="text-align: right; color: var(--success);" v-html="row.adjusted > 0 ? '₹' + formatINRHtml(row.adjusted) : '–'"></td>
+                                    <td style="text-align: right; font-weight: 700; color: var(--secondary-color);" v-html="'₹' + formatINRHtml(row.pending)"></td>
+                                    <td style="text-align: right; color: var(--danger);" v-html="row.oppCost > 0 ? '₹' + formatINRHtml(row.oppCost) : '–'"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p style="font-size: 0.82em; color: #999; margin-top: 0.75rem;">
+                    <p style="font-size: 0.82em; color: var(--muted-foreground); margin-top: 0.75rem;">
                         <span v-if="form.use12BAA">ℹ️ TCS is adjusted linearly over the remaining months of the financial year.</span>
                         <span v-else>ℹ️ TCS adjustment date is computed as ITR Filing (July of next year) + Expected Refund Delay.</span>
                     </p>
@@ -798,7 +798,7 @@ window.initializeTool.fxTracker = function (container, config) {
                             </button>
                         </div>
                     </div>
-                    <div style="text-align: center; padding: 2rem 0; color: #999;">
+                    <div style="text-align: center; padding: 2rem 0; color: var(--muted-foreground);">
                         <p>No transactions yet. Fill in the form and click <strong>Transaction</strong> to get started.</p>
                     </div>
                 </div>
@@ -1243,11 +1243,11 @@ window.initializeTool.fxTracker = function (container, config) {
                 this.debounceTimer = setTimeout(() => this.calculate(), FX_DEBOUNCE_DELAY_MS);
             },
             getCostColorStyle(pct) {
-                if (pct <= 0.5) return { color: '#155724', background: '#d4edda', padding: '2px 6px', borderRadius: '4px' };
-                if (pct <= 1.0) return { color: '#1e7e34', background: '#e8f5e9', padding: '2px 6px', borderRadius: '4px' };
-                if (pct <= 1.5) return { color: '#856404', background: '#fff3cd', padding: '2px 6px', borderRadius: '4px' };
-                if (pct <= 2.0) return { color: '#d35400', background: '#ffe8d6', padding: '2px 6px', borderRadius: '4px' };
-                return { color: '#721c24', background: '#f8d7da', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 0.5) return { color: 'var(--success-ink)', background: 'var(--success-surface)', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 1.0) return { color: 'var(--success-ink)', background: 'var(--success-surface)', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 1.5) return { color: 'var(--warning)', background: 'var(--warning-surface)', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 2.0) return { color: 'var(--warning)', background: 'var(--warning-surface)', padding: '2px 6px', borderRadius: '4px' };
+                return { color: 'var(--danger)', background: 'var(--danger-surface)', padding: '2px 6px', borderRadius: '4px' };
             },
             getCompareRank(val) {
                 if (this.comparisonItems.length <= 1) return -1;
@@ -1258,11 +1258,11 @@ window.initializeTool.fxTracker = function (container, config) {
                 const rank = this.getCompareRank(item.outputs.chargesPct);
                 const baseStyle = { borderRadius: '8px', padding: '1rem', position: 'relative', textAlign: 'center', minWidth: '180px', flex: '1' };
                 if (rank === 0) {
-                    return { ...baseStyle, background: '#d4edda', border: '1px solid #c3e6cb' };
+                    return { ...baseStyle, background: 'var(--success-surface)', border: '1px solid var(--border)' };
                 } else if (rank === 1 && this.comparisonItems.length > 2) {
-                    return { ...baseStyle, background: '#e8f5e9', border: '1px solid #c8e6c9' };
+                    return { ...baseStyle, background: 'var(--success-surface)', border: '1px solid var(--border)' };
                 } else {
-                    return { ...baseStyle, background: '#f0f7ff', border: '1px solid #c3d9f5' };
+                    return { ...baseStyle, background: 'var(--info-surface)', border: '1px solid var(--border)' };
                 }
             },
 

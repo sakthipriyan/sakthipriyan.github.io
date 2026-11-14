@@ -297,7 +297,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 </tbody>
                             </table>
                             <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Values</h4>
-                            <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
+                            <ul style="font-size: 0.9em; color: var(--muted-foreground); line-height: 1.8;">
                                 <li><strong>Nominal:</strong> Future value without adjusting for inflation.</li>
                                 <li><strong>Real:</strong> Today's purchasing power after adjusting for inflation.</li>
                             </ul>
@@ -404,7 +404,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 <td style="text-align: right;"><strong>{{ yearRow.year }}</strong></td>
                                 <td v-for="(amount, monthIndex) in yearRow.months" :key="monthIndex" style="text-align: right;">
                                     <span v-if="amount !== null" :title="'â‚¹ ' + (contributionViewMode === 'nominal' ? amount.nominal : amount.real).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})">{{ formatCurrency(contributionViewMode === 'nominal' ? amount.nominal : amount.real) }}</span>
-                                    <span v-else style="color: #999;">-</span>
+                                    <span v-else style="color: var(--muted-foreground);">-</span>
                                 </td>
                             </tr>
                         </tbody>
