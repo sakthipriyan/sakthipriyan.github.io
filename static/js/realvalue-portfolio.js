@@ -160,7 +160,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             </ul>
                         </div>
                     </div>
-                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--secondary-color); border-radius: 4px; color: var(--foreground);">
+                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent-line, var(--secondary-color)); border-radius: 4px; color: var(--foreground);">
                         💡 <strong>Try with a smaller window:</strong> Upload a CAS PDF covering just the first year or two — quicker to verify, and a great way to explore tagging, XIRR, and allocation views.
                     </div>
                     <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: var(--foreground-strong);">Three ways to verify your data stays private:</p>
@@ -1340,8 +1340,20 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (this.calendarChart) this.calendarChart.resize();
             };
             window.addEventListener('resize', this.resizeHandler);
+
+            this.themeObserver = new MutationObserver(() => {
+                if (this.chart) this.renderOverallChart();
+                if (this.dualConcentricChart) this.renderDualConcentricChart();
+                if (this.driftAnalysisChart) this.renderDriftAnalysisChart();
+                if (this.calendarChart) this.renderCalendarChart();
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         },
         unmounted() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
             if (this.resizeHandler) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
@@ -3545,12 +3557,16 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     fundCount: item.fundCount
                 }));
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const cardBg = isDark ? '#18181b' : '#ffffff';
+
                 const option = {
                     title: {
                         text: 'Overall Performance',
                         left: 'center',
                         top: 0,
-                        textStyle: { color: '#2c3e50', fontSize: 16 }
+                        textStyle: { color: fgStrong, fontSize: 16 }
                     },
                     toolbox: {
                         right: 15,
@@ -3569,11 +3585,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                    ₹${Number(params.value).toLocaleString('en-IN')}<br/>
                                    ${params.percent}%<br/>
                                    ${params.data.fundCount} fund${params.data.fundCount !== 1 ? 's' : ''}`;
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         top: 'bottom',
-                        type: 'scroll'
+                        type: 'scroll',
+                        textStyle: { color: fgStrong }
                     },
                     color: [
                         '#2c3e50', '#0066cc', '#1890ff', '#13c2c2', '#52c41a', 
@@ -3588,12 +3608,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             avoidLabelOverlap: true,
                             itemStyle: {
                                 borderRadius: 10,
-                                borderColor: '#fff',
+                                borderColor: cardBg,
                                 borderWidth: 2
                             },
                             label: {
                                 show: true,
-                                formatter: '{b}\n{d}%'
+                                formatter: '{b}\n{d}%',
+                                color: fgStrong
                             },
                             emphasis: {
                                 label: {
@@ -3607,7 +3628,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     ]
                 };
 
-                this.chart.setOption(option);
+                this.chart.setOption(option, true);
             },
 
             renderDualConcentricChart() {
@@ -3693,6 +3714,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     ];
                 };
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const subMutedFg = isDark ? '#71717a' : '#94a3b8';
+
                 const option = {
                     animation: false,
                     title: [
@@ -3701,7 +3727,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             left: 'center',
                             top: 0,
                             textStyle: {
-                                color: '#2c3e50',
+                                color: fgStrong,
                                 fontSize: 16,
                                 fontWeight: 600
                             }
@@ -3713,7 +3739,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             textStyle: {
                                 fontSize: 15,
                                 fontWeight: 600,
-                                color: '#444'
+                                color: mutedFg
                             }
                         },
                         {
@@ -3723,7 +3749,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             textStyle: {
                                 fontSize: 15,
                                 fontWeight: 600,
-                                color: '#444'
+                                color: mutedFg
                             }
                         }
                     ],
@@ -3750,13 +3776,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 : (growthContribPercentByName[params.name] || 0);
                             return '<strong>' + params.name + ' - ' + seriesLabel + '</strong><br>' +
                                    fmt(amount) + ' (' + pct.toFixed(2) + '%)';
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         bottom: 0,
                         left: 'center',
                         orient: 'horizontal',
-                        data: legendItems
+                        data: legendItems,
+                        textStyle: { color: fgStrong }
                     },
                     color: [
                         '#2c3e50', '#0066cc', '#1890ff', '#13c2c2', '#52c41a', 
@@ -3774,13 +3804,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             label: {
                                 show: true,
                                 position: 'outside',
+                                color: fgStrong,
                                 formatter: function(params) {
                                     if (params.name === '__placeholder__') return '';
                                     const pct = growthContribPercentByName[params.name] || 0;
                                     return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            labelLine: { show: true, length: 8, length2: 8 },
+                            labelLine: { show: true, length: 8, length2: 8, lineStyle: { color: subMutedFg } },
                             labelLayout: function(params) {
                                 return {
                                     hideOverlap: false,
@@ -3800,13 +3831,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             label: {
                                 show: true,
                                 position: 'outside',
+                                color: fgStrong,
                                 formatter: function(params) {
                                     if (params.name === '__placeholder__') return '';
                                     const pct = marketValuePercentByName[params.name] || 0;
                                     return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            labelLine: { show: true, length: 8, length2: 8 },
+                            labelLine: { show: true, length: 8, length2: 8, lineStyle: { color: subMutedFg } },
                             labelLayout: function(params) {
                                 return {
                                     hideOverlap: false,
@@ -3846,13 +3878,19 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const driftValues = driftData.map(item => item.driftPercent);
                 const driftColors = driftData.map(item => this.getExploreColorForName(item.name) || '#3b82f6');
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+
                 const option = {
                     title: {
                         text: `${this.selectedReportArea} Drift`,
                         left: 'center',
                         top: 0,
                         textStyle: {
-                            color: '#2c3e50',
+                            color: fgStrong,
                             fontSize: 16,
                             fontWeight: 600
                         }
@@ -3875,7 +3913,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             const status = value > 0 ? '(over-weight)' : '(under-weight)';
                             return params.marker + ' <strong>' + params.name + '</strong><br/>' +
                                    'Drift: <strong>' + formattedValue + '</strong> ' + status;
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     grid: {
                         left: '15%',
@@ -3889,18 +3930,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         name: 'Drift %',
                         nameLocation: 'middle',
                         nameGap: 30,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: (value) => {
                                 return (value >= 0 ? '+' : '') + value.toFixed(1) + '%';
-                            }
+                            },
+                            color: mutedFg
                         },
                         splitLine: {
-                            lineStyle: { type: 'dashed' }
+                            lineStyle: { color: splitLine, type: 'dashed' }
                         }
                     },
                     yAxis: {
                         type: 'category',
-                        data: categories
+                        data: categories,
+                        axisLabel: { color: mutedFg },
+                        axisLine: { lineStyle: { color: borderLine } }
                     },
                     series: [
                         {
@@ -3916,6 +3961,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             label: {
                                 show: true,
                                 position: 'right',
+                                color: fgStrong,
                                 formatter: function(params) {
                                     return (params.value >= 0 ? '+' : '') + params.value.toFixed(2) + '%';
                                 }
@@ -3969,6 +4015,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     });
                 }
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+
                 const option = {
                     toolbox: {
                         right: 15,
@@ -3984,8 +4036,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         formatter: function(params) {
                             return `<strong>${params.name}</strong><br/>${params.marker} Investment: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
                         },
-                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
-                        borderColor: '#333',
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
                         borderWidth: 1,
                         textStyle: { color: '#fff' }
                     },
@@ -3996,7 +4048,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         axisLabel: {
                             rotate: 45,
                             fontSize: 10,
-                            interval: Math.max(0, Math.floor(categories.length / 24))
+                            interval: Math.max(0, Math.floor(categories.length / 24)),
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
@@ -4004,6 +4060,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         name: 'Amount (₹)',
                         nameLocation: 'middle',
                         nameGap: 50,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: function(value) {
                                 if (value >= 10000000) return (value / 10000000).toFixed(1) + ' Cr';
@@ -4011,7 +4068,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 else if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
                                 return value.toLocaleString('en-IN');
                             },
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: [{

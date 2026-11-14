@@ -13,7 +13,7 @@ window.initializeTool.fxTracker = function (container, config) {
 
                     <!-- Left Column: Transaction Form -->
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                        <div class="sip-inputs">
 
                         <!-- Header -->
                         <div style="margin-bottom: 1.5rem;">
@@ -151,7 +151,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Compare Rates Box (below inputs, same column) -->
-                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-inputs">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Rates <span class="help-icon help-icon-wide" data-tooltip="Compared rates are saved in your browser so you can evaluate the best rates side-by-side before buying USD.">ℹ️</span></h3>
                         <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0 0 0.75rem 0;">Uses the currently entered parameters. Overrides <strong>Bank Name</strong> if set.</p>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
@@ -183,7 +183,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Add Transaction Box -->
-                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-inputs">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">📋 Add Transaction <span class="help-icon help-icon-wide" data-tooltip="Transactions are saved in your browser to track remittance for TCS computations when it crosses 10 lakhs in a FY.">ℹ️</span></h3>
                         <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0 0 0.75rem 0;">Uses the currently entered <strong>Bank Name</strong> and transaction details.</p>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
@@ -216,7 +216,7 @@ window.initializeTool.fxTracker = function (container, config) {
                     </div>
 
                     <!-- Right Column: FX Analysis -->
-                    <div class="sip-outputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-outputs">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                             <h3 style="margin: 0;">🧾 FX Analysis</h3>
                             <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
@@ -1186,9 +1186,18 @@ window.initializeTool.fxTracker = function (container, config) {
                     this.selectedFY = this.availableFYs[0];
                 }
             });
+            // Re-render chart on theme changes (light/dark toggle)
+            this.themeObserver = new MutationObserver(() => {
+                this.renderFXBreakdownChart();
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         },
 
         beforeUnmount() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
             if (this.fxBreakdownResizeHandler) {
                 window.removeEventListener('resize', this.fxBreakdownResizeHandler);
                 this.fxBreakdownResizeHandler = null;
@@ -1426,14 +1435,21 @@ window.initializeTool.fxTracker = function (container, config) {
                     }
                 }
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const subMutedFg = isDark ? '#71717a' : '#94a3b8';
+                const tooltipBg = isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)';
+                const tooltipBorder = isDark ? '#3f3f46' : '#333333';
+
                 const p = this.preview;
                 const data = [
-                    { value: Math.max(0, p.ibCost || 0), name: 'FX Interbank', itemStyle: { color: '#4CAF50' } },
-                    { value: Math.max(0, (p.fxSpread || 0) + (p.processingFee || 0)), name: 'FX Charges', itemStyle: { color: '#ef4444' } },
-                    { value: Math.max(0, (p.fxConvGST || 0) + (p.processingFeeGST || 0)), name: 'GST', itemStyle: { color: '#b91c1c' } }
+                    { value: Math.max(0, p.ibCost || 0), name: 'FX Interbank', itemStyle: { color: isDark ? '#4ade80' : '#22c55e' } },
+                    { value: Math.max(0, (p.fxSpread || 0) + (p.processingFee || 0)), name: 'FX Charges', itemStyle: { color: isDark ? '#f87171' : '#ef4444' } },
+                    { value: Math.max(0, (p.fxConvGST || 0) + (p.processingFeeGST || 0)), name: 'GST', itemStyle: { color: isDark ? '#fb923c' : '#ea580c' } }
                 ];
                 if ((p.tcs || 0) > 0) {
-                    data.push({ value: Math.max(0, p.tcs || 0), name: 'TCS', itemStyle: { color: '#FFC107' } });
+                    data.push({ value: Math.max(0, p.tcs || 0), name: 'TCS', itemStyle: { color: isDark ? '#facc15' : '#eab308' } });
                 }
 
                 const filtered = data.filter(d => d.value > 0);
@@ -1447,42 +1463,49 @@ window.initializeTool.fxTracker = function (container, config) {
                             text: 'Interbank',
                             left: '50%', top: '33%',
                             textAlign: 'center',
-                            textStyle: { fontSize: 11, fontWeight: '600', color: '#64748b' }
+                            textStyle: { fontSize: 11, fontWeight: '600', color: mutedFg }
                         },
                         {
                             text: '₹' + ibRateText,
                             left: '50%', top: '37%',
                             textAlign: 'center',
-                            textStyle: { fontSize: 19, fontWeight: '700', color: '#1f2937' }
+                            textStyle: { fontSize: 19, fontWeight: '700', color: fgStrong }
                         },
                         {
                             text: 'vs',
                             left: '50%', top: '44%',
                             textAlign: 'center',
-                            textStyle: { fontSize: 10, fontWeight: '600', color: '#94a3b8' }
+                            textStyle: { fontSize: 10, fontWeight: '600', color: subMutedFg }
                         },
                         {
                             text: 'Effective',
                             left: '50%', top: '48%',
                             textAlign: 'center',
-                            textStyle: { fontSize: 11, fontWeight: '600', color: '#64748b' }
+                            textStyle: { fontSize: 11, fontWeight: '600', color: mutedFg }
                         },
                         {
                             text: '₹' + effRateText,
                             left: '50%', top: '52%',
                             textAlign: 'center',
-                            textStyle: { fontSize: 19, fontWeight: '700', color: '#1f2937' }
+                            textStyle: { fontSize: 19, fontWeight: '700', color: fgStrong }
                         }
                     ],
                     toolbox: {
                         feature: { saveAsImage: { title: 'Save as Image' } }
                     },
                     tooltip: {
+                        backgroundColor: tooltipBg,
+                        borderColor: tooltipBorder,
+                        borderWidth: 1,
+                        textStyle: { color: '#ffffff' },
                         formatter: function (x) {
                             return x.marker + '<strong>' + x.name + '</strong><br>' + fmt(x.value) + ' (' + x.percent.toFixed(2) + '%)';
                         }
                     },
-                    legend: { bottom: 0 },
+                    legend: {
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
+                    },
                     series: [
                         {
                             name: 'FX Cost Composition',
@@ -1491,14 +1514,20 @@ window.initializeTool.fxTracker = function (container, config) {
                             center: ['50%', '44%'],
                             avoidLabelOverlap: true,
                             label: {
+                                color: fgStrong,
                                 formatter: function (x) {
                                     return x.name + '\n' + x.percent.toFixed(2) + '%';
+                                }
+                            },
+                            labelLine: {
+                                lineStyle: {
+                                    color: subMutedFg
                                 }
                             },
                             data: filtered
                         }
                     ]
-                });
+                }, true);
             },
 
             addTransaction() {

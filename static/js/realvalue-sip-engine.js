@@ -21,7 +21,7 @@ window.initializeTool.sipCalculator = function (container, config) {
                     <!-- Left Column: Inputs + Compare -->
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <!-- Input Fields -->
-                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-inputs">
 
                         <!-- Section: Goal -->
                         <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
@@ -310,7 +310,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     </div>
 
                     <!-- Compare Scenarios Box (below inputs, same column) -->
-                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-inputs">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">‚öñÔ∏è Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">‚ÑπÔ∏è</span></h3>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Scenario Name (Optional):</span>
@@ -342,7 +342,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     </div><!-- end left column wrapper -->
                     
                     <!-- Right Column: Output Results and Chart -->
-                    <div class="sip-outputs" v-if="results.calculated" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
                             <div v-if="isBothTargetsMode || results.timeRequired" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem;">
                                 <h3 style="margin: 0;">üéØ Target Results</h3>
@@ -456,7 +456,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         </div>
                     </div>
                     
-                    <div class="sip-outputs placeholder" v-else style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-outputs placeholder" v-else>
                         <div class="placeholder-content">
                             <h3 style="margin-top: 0;">üéØ Your Results Will Appear Here</h3>
                             <p>Fill in your SIP details on the left to see your investment growth projection</p>
@@ -1299,6 +1299,22 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     this.calculateResults();
                 });
             });
+
+            // Re-render charts on theme change (light/dark mode toggle)
+            this.themeObserver = new MutationObserver(() => {
+                if (this.results.calculated) {
+                    this.renderChart();
+                    this.renderContributionChart();
+                    this.renderBreakdownChart();
+                }
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        },
+        beforeUnmount() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
         },
         methods: {
             // Compare Scenarios Methods
@@ -2122,6 +2138,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
 
                         // Get view mode label
                         const granularityLabel = this.planGranularity === 'yearly' ? 'Yearly' : 'Monthly';
+                        const isDark = document.documentElement.classList.contains('dark');
+                        const fgStrong = isDark ? '#fafafa' : '#111827';
+                        const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                        const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                        const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
                         
                         const option = {
                             toolbox: {
@@ -2140,15 +2161,16 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                         backgroundColor: '#6a7985'
                                     }
                                 },
-                                backgroundColor: 'rgba(50, 50, 50, 0.9)',
-                                borderColor: '#333',
+                                backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                                borderColor: isDark ? '#3f3f46' : '#333',
                                 borderWidth: 1,
                                 textStyle: {
                                     color: '#fff'
                                 }
                             },
                             legend: {
-                                data: ['Accumulated Investment', 'Portfolio Value']
+                                data: ['Accumulated Investment', 'Portfolio Value'],
+                                textStyle: { color: fgStrong }
                             },
                             grid: {
                                 left: '3%',
@@ -2163,7 +2185,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 data: this.displayedPlan.map(d => d.period),
                                 axisLabel: {
                                     fontSize: 11,
-                                    rotate: this.planGranularity === 'monthly' ? 45 : 0
+                                    rotate: this.planGranularity === 'monthly' ? 45 : 0,
+                                    color: mutedFg
+                                },
+                                axisLine: {
+                                    lineStyle: { color: borderLine }
                                 }
                             },
                             yAxis: {
@@ -2171,6 +2197,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 name: 'Amount (‚Çπ)',
                                 nameLocation: 'middle',
                                 nameGap: 50,
+                                nameTextStyle: { color: mutedFg },
                                 axisLabel: {
                                     formatter: function(value) {
                                         if (value >= 10000000) {
@@ -2180,7 +2207,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                         }
                                         return value.toLocaleString('en-IN');
                                     },
-                                    fontSize: 11
+                                    fontSize: 11,
+                                    color: mutedFg
+                                },
+                                splitLine: {
+                                    lineStyle: { color: splitLine }
                                 }
                             },
                             series: [
@@ -2284,6 +2315,12 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     contributions.push(value);
                 });
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+
                 const option = {
                     toolbox: {
                         feature: {
@@ -2295,8 +2332,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         formatter: function(params) {
                             return `<strong>${params.name}</strong><br/>${params.marker} Contribution: ‚Çπ${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
                         },
-                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
-                        borderColor: '#333',
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
                         borderWidth: 1,
                         textStyle: {
                             color: '#fff'
@@ -2315,7 +2352,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         axisLabel: {
                             rotate: 45,
                             fontSize: 10,
-                            interval: Math.max(0, Math.floor(this.contributionChartCategories.length / 24)) // Show ~24 labels max
+                            interval: Math.max(0, Math.floor(this.contributionChartCategories.length / 24)),
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
@@ -2323,6 +2364,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                         name: 'Amount (‚Çπ)',
                         nameLocation: 'middle',
                         nameGap: 50,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: function(value) {
                                 if (value >= 10000000) {
@@ -2334,7 +2376,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                                 }
                                 return value.toLocaleString('en-IN');
                             },
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: [{
@@ -2394,27 +2440,39 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                     'Real (Inflation Adjusted)|Tax':      'Real Tax'
                 };
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+
                 this.breakdownChart.setOption({
                     toolbox: {
                         feature: { saveAsImage: { title: 'Save as Image' } }
                     },
                     tooltip: {
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' },
                         formatter: function(p) {
                             const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
                             return p.marker + '<strong>' + label + '</strong><br>' +
                                    fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
                         }
                     },
-                    legend: { bottom: 0 },
+                    legend: {
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
+                    },
                     series: [
                         {
                             name: 'Nominal',
                             type: 'pie',
                             radius: ['55%', '80%'],
-                            label: { formatter: function(p) {
-                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
-                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
-                            }},
+                            label: {
+                                color: fgStrong,
+                                formatter: function(p) {
+                                    const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                    return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                                }
+                            },
                             data: [
                                 { value: Math.round(r.totalInvestment), name: 'Invested', itemStyle: { color: '#FFE082' } },
                                 { value: Math.round(nominalGrowth),     name: 'Growth',   itemStyle: { color: '#81C784' } },
@@ -2425,10 +2483,13 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             name: 'Real (Inflation Adjusted)',
                             type: 'pie',
                             radius: ['30%', '50%'],
-                            label: { formatter: function(p) {
-                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
-                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
-                            }},
+                            label: {
+                                color: fgStrong,
+                                formatter: function(p) {
+                                    const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                    return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                                }
+                            },
                             data: [
                                 { value: Math.round(r.realInvestment), name: 'Invested', itemStyle: { color: '#FFC107' } },
                                 { value: Math.round(realGrowth),       name: 'Growth',   itemStyle: { color: '#4CAF50' } },
@@ -2444,7 +2505,8 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">‚
                             text: 'Real vs\nNominal',
                             textAlign: 'center',
                             fontSize: 16,
-                            fontWeight: 600
+                            fontWeight: 600,
+                            fill: fgStrong
                         }
                     }
                 }, true);

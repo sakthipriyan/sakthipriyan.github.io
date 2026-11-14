@@ -641,8 +641,19 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
         },
         mounted() {
             this.calculate();
+            this.themeObserver = new MutationObserver(() => {
+                if (this.results.calculated) {
+                    this.renderPortfolioChart();
+                    this.renderDriftChart();
+                }
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         },
         unmounted() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
             if (this.resizeHandler) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
@@ -1660,6 +1671,11 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 }
                 
                 const isPercentage = this.portfolioViewMode === 'percentage';
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
                 
                 const portfolioOption = {
                     toolbox: {
@@ -1676,11 +1692,15 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 : '₹' + Math.round(parseFloat(value)).toLocaleString('en-IN');
                             return params.marker + ' <strong>' + params.seriesName + '</strong><br/>' +
                                    params.name + ': <strong>' + formattedValue + '</strong>';
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         data: isPercentage ? ['Pre Allocation', 'Post Allocation', 'Target'] : ['Pre Allocation', 'Post Allocation'],
-                        bottom: 0
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
                     },
                     grid: {
                         left: '3%',
@@ -1695,19 +1715,28 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         axisLabel: {
                             interval: 0,
                             rotate: 45,
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
                         type: 'value',
                         name: isPercentage ? 'Percentage (%)' : 'Amount (₹)',
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: isPercentage ? '{value}%' : (value) => {
                                 if (value >= 10000000) return (value / 10000000).toFixed(1) + 'Cr';
                                 if (value >= 100000) return (value / 100000).toFixed(1) + 'L';
                                 if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
                                 return value;
-                            }
+                            },
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: isPercentage ? [
@@ -1763,11 +1792,15 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 : (value >= 0 ? '+' : '-') + '₹' + Math.abs(Math.round(parseFloat(value))).toLocaleString('en-IN');
                             return params.marker + ' <strong>' + params.seriesName + '</strong><br/>' +
                                    params.name + ': <strong>' + formattedValue + '</strong>';
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         data: ['Pre Allocation Drift', 'Post Allocation Drift'],
-                        bottom: 0
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
                     },
                     grid: {
                         left: '3%',
@@ -1779,6 +1812,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     xAxis: {
                         type: 'value',
                         name: isPercentage ? 'Drift (%)' : 'Drift (₹)',
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: isPercentage ? '{value}%' : (value) => {
                                 const absValue = Math.abs(value);
@@ -1786,15 +1820,18 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 if (absValue >= 100000) return (value >= 0 ? '+' : '-') + (absValue / 100000).toFixed(1) + 'L';
                                 if (absValue >= 1000) return (value >= 0 ? '+' : '-') + (absValue / 1000).toFixed(1) + 'K';
                                 return value;
-                            }
+                            },
+                            color: mutedFg
                         },
                         splitLine: {
-                            lineStyle: { type: 'dashed' }
+                            lineStyle: { color: splitLine, type: 'dashed' }
                         }
                     },
                     yAxis: {
                         type: 'category',
-                        data: this.results.summary.map(s => s.assetClass).reverse()
+                        data: this.results.summary.map(s => s.assetClass).reverse(),
+                        axisLabel: { color: mutedFg },
+                        axisLine: { lineStyle: { color: borderLine } }
                     },
                     series: isPercentage ? [
                         {

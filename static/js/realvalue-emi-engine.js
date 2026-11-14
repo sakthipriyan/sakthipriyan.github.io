@@ -21,7 +21,7 @@ window.initializeTool.emiCalculator = function (container, config) {
                     <!-- Left Column: Inputs + Compare -->
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <!-- Input Fields -->
-                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-inputs">
 
                         <!-- Section: Calculation Mode -->
                         <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
@@ -221,7 +221,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     </div>
 
                     <!-- Compare Scenarios Box (below inputs, same column) -->
-                    <div class="sip-inputs" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-inputs">
                         <h3 style="margin: 0 0 0.75rem 0; font-size: 1.1em; color: var(--foreground-strong); display: flex; align-items: center; gap: 0.4rem;">⚖️ Compare Scenarios <span class="help-icon help-icon-wide" data-tooltip="Save this scenario to compare side-by-side with others. Up to 6 scenarios. Saved in your browser.">ℹ️</span></h3>
                         <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                             <span>Scenario Name (Optional):</span>
@@ -253,7 +253,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     </div><!-- end left column wrapper -->
                     
                     <!-- Right Column: Output Results and Chart -->
-                    <div class="sip-outputs" v-if="results.calculated" style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-outputs" v-if="results.calculated">
                         <div class="sip-summary">
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem;">
                                 <h3 style="margin: 0;">🎯 Calculated Result</h3>
@@ -354,7 +354,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         </div>
                     </div>
                     
-                    <div class="sip-outputs placeholder" v-else style="border-left: 4px solid var(--secondary-color);">
+                    <div class="sip-outputs placeholder" v-else>
                         <div class="placeholder-content">
                             <h3 style="margin-top: 0;">🎯 Your Results Will Appear Here</h3>
                             <p>Fill in your loan details on the left to see your EMI analysis</p>
@@ -1280,6 +1280,12 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     }
                 });
                 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+
                 const option = {
                     toolbox: {
                         feature: {
@@ -1297,15 +1303,16 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 backgroundColor: '#6a7985'
                             }
                         },
-                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
-                        borderColor: '#333',
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
                         borderWidth: 1,
                         textStyle: {
                             color: '#fff'
                         }
                     },
                     legend: {
-                        data: ['Outstanding EMI', 'Outstanding Principal']
+                        data: ['Outstanding EMI', 'Outstanding Principal'],
+                        textStyle: { color: fgStrong }
                     },
                     grid: {
                         left: '3%',
@@ -1320,7 +1327,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         data: categories,
                         axisLabel: {
                             fontSize: 11,
-                            rotate: 45
+                            rotate: 45,
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
@@ -1328,6 +1339,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         name: 'Amount (₹)',
                         nameLocation: 'middle',
                         nameGap: 50,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: function(value) {
                                 if (value >= 10000000) {
@@ -1339,7 +1351,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 }
                                 return value.toLocaleString('en-IN');
                             },
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: [
@@ -1382,7 +1398,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     ]
                 };
                 
-                this.chart.setOption(option);
+                this.chart.setOption(option, true);
             },
             
             formatCurrency(value) {
@@ -1633,27 +1649,39 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     'Real (Inflation Adjusted)|Interest':  'Real Interest'
                 };
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+
                 this.breakdownChart.setOption({
                     toolbox: {
                         feature: { saveAsImage: { title: 'Save as Image' } }
                     },
                     tooltip: {
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' },
                         formatter: function(p) {
                             const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
                             return p.marker + '<strong>' + label + '</strong><br>' +
                                    fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
                         }
                     },
-                    legend: { bottom: 0 },
+                    legend: {
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
+                    },
                     series: [
                         {
                             name: 'Nominal',
                             type: 'pie',
                             radius: ['55%', '80%'],
-                            label: { formatter: function(p) {
-                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
-                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
-                            }},
+                            label: {
+                                color: fgStrong,
+                                formatter: function(p) {
+                                    const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                    return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                                }
+                            },
                             data: [
                                 { value: Math.round(nominalPrincipal), name: 'Principal', itemStyle: { color: '#FFE082' } },
                                 { value: Math.round(nominalInterest),  name: 'Interest',  itemStyle: { color: '#fca5a5' } }
@@ -1663,10 +1691,13 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                             name: 'Real (Inflation Adjusted)',
                             type: 'pie',
                             radius: ['30%', '50%'],
-                            label: { formatter: function(p) {
-                                const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
-                                return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
-                            }},
+                            label: {
+                                color: fgStrong,
+                                formatter: function(p) {
+                                    const label = labelMap[p.seriesName + '|' + p.name] || (p.seriesName + ' ' + p.name);
+                                    return label + '\n' + fmt(p.value) + ' (' + p.percent.toFixed(2) + '%)';
+                                }
+                            },
                             data: [
                                 { value: Math.round(realPrincipal), name: 'Principal', itemStyle: { color: '#FFC107' } },
                                 { value: Math.round(realInterest),  name: 'Interest',  itemStyle: { color: '#dc2626' } }
@@ -1681,10 +1712,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                             text: 'Real vs\nNominal',
                             textAlign: 'center',
                             fontSize: 16,
-                            fontWeight: 600
+                            fontWeight: 600,
+                            fill: fgStrong
                         }
                     }
-                });
+                }, true);
             },
 
             renderEMIPlanChart() {
@@ -1702,6 +1734,12 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                     emiData.push(this.emiViewMode === 'nominal' ? row.emi : row.realEMI);
                 });
                 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+
                 const option = {
                     toolbox: {
                         feature: {
@@ -1713,8 +1751,8 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         formatter: function(params) {
                             return `<strong>${params.name}</strong><br/>${params.marker} EMI: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
                         },
-                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
-                        borderColor: '#333',
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
                         borderWidth: 1,
                         textStyle: {
                             color: '#fff'
@@ -1733,7 +1771,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         axisLabel: {
                             rotate: 45,
                             fontSize: 10,
-                            interval: Math.max(0, Math.floor(categories.length / 24))
+                            interval: Math.max(0, Math.floor(categories.length / 24)),
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
@@ -1741,6 +1783,7 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                         name: 'Amount (₹)',
                         nameLocation: 'middle',
                         nameGap: 50,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: function(value) {
                                 if (value >= 10000000) {
@@ -1752,7 +1795,11 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                                 }
                                 return value.toLocaleString('en-IN');
                             },
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: [{
@@ -1810,8 +1857,22 @@ Loan Amount: Calculate loan amount you can borrow">ℹ️</span>
                 if (this.breakdownChart) this.breakdownChart.resize();
             };
             window.addEventListener('resize', this.handleResize);
+
+            // Re-render charts on theme change (light/dark mode toggle)
+            this.themeObserver = new MutationObserver(() => {
+                if (this.results.calculated) {
+                    this.updateChart();
+                    this.renderBreakdownChart();
+                    this.renderEMIPlanChart();
+                }
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         },
         beforeUnmount() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
             // Clean up event listeners
             if (this.handleResize) {
                 window.removeEventListener('resize', this.handleResize);

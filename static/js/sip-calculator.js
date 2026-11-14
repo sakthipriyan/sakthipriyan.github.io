@@ -578,6 +578,21 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
         },
         mounted() {
             this.calculateResults();
+            this.themeObserver = new MutationObserver(() => {
+                if (this.results.calculated) {
+                    this.renderChart();
+                }
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        },
+        beforeUnmount() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
+            if (this.resizeHandler) {
+                window.removeEventListener('resize', this.resizeHandler);
+            }
         },
         methods: {
             toggleTarget(type) {
@@ -1067,13 +1082,20 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
 
                 this.chart = echarts.init(chartDom);
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const fgStrong = isDark ? '#fafafa' : '#111827';
+                const mutedFg = isDark ? '#a1a1aa' : '#64748b';
+                const splitLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+                const borderLine = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+
                 const option = {
                     title: {
                         text: 'Investment Growth Over Time',
                         left: 'center',
                         textStyle: {
                             fontSize: 16,
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: fgStrong
                         }
                     },
                     tooltip: {
@@ -1087,13 +1109,19 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 result += `${param.marker} ${param.seriesName}: â‚¹${param.value.toLocaleString('en-IN')}<br/>`;
                             });
                             return result;
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: {
+                            color: '#fff'
                         }
                     },
                     legend: {
                         data: ['Nominal Portfolio', 'Real Portfolio', 'Nominal Investment', 'Real Investment'],
                         bottom: 10,
                         textStyle: {
-                            fontSize: 12
+                            fontSize: 12,
+                            color: fgStrong
                         }
                     },
                     grid: {
@@ -1108,8 +1136,15 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         name: 'Years',
                         nameLocation: 'middle',
                         nameGap: 30,
+                        nameTextStyle: {
+                            color: mutedFg
+                        },
                         axisLabel: {
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
@@ -1117,6 +1152,9 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                         name: 'Amount (â‚¹)',
                         nameLocation: 'middle',
                         nameGap: 50,
+                        nameTextStyle: {
+                            color: mutedFg
+                        },
                         axisLabel: {
                             formatter: function(value) {
                                 if (value >= 10000000) {
@@ -1126,7 +1164,11 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                                 }
                                 return value.toLocaleString('en-IN');
                             },
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: [
@@ -1199,7 +1241,7 @@ Time+Money: Calculate monthly SIP needed to reach target amount in fixed time">â
                     ]
                 };
 
-                this.chart.setOption(option);
+                this.chart.setOption(option, true);
 
                 // Make chart responsive
                 this.resizeHandler = () => this.chart?.resize();
