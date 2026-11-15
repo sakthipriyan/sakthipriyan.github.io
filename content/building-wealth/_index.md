@@ -54,7 +54,7 @@ landing:
     - page: /building-wealth/tools/realvalue-portfolio/
     - page: /building-wealth/tools/xfina/
     - page: /building-wealth/blogs/the-perpetual-rebalancing-framework/
-    - page: /building-wealth/videos/stop-paying-1.5/usd-cut-forex-markup-when-funding-ibkr-india-guide/
+    - page: /building-wealth/videos/fx-retail-via-bharat-connect-private-bank-speed-at-public-bank-rates/
   # Each format block leads with these, then fills with the newest. Anything
   # already shown further up the page is skipped, so a pick that also appears
   # in Featured quietly gives way to the next candidate.

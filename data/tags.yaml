@@ -35,7 +35,7 @@ wealth_tags:
   - Emergency Fund  # 4
   - EMI  # 4
   - Equity  # 2
-  - ETF  # 4
+  - ETF  # 9
   - Financial Literacy  # 1
   - Financial Planning  # 10
   - Financial Tools  # 4
@@ -43,7 +43,7 @@ wealth_tags:
   - Forex  # 10
   - Form 12baa  # 1
   - FX Retail  # 10
-  - Global Indian Investor  # 2
+  - Global Indian Investor  # 3
   - Goal Based Investing  # 2
   - Gold  # 4
   - GST  # 1
@@ -53,7 +53,7 @@ wealth_tags:
   - Income Tax  # 1
   - Index Funds  # 6
   - Inflation  # 5
-  - International Investing  # 16
+  - International Investing  # 18
   - Investment  # 4
   - ISO 20022  # 1
   - ITR Filing  # 1
@@ -83,7 +83,7 @@ wealth_tags:
   - State Of The 1 Portfolio  # 5
   - State Of The Portfolio  # 1
   - Tax Efficient Investing  # 1
-  - Tax Optimization  # 3
+  - Tax Optimization  # 6
   - Taxation  # 3
   - TCS  # 6
   - USD  # 1

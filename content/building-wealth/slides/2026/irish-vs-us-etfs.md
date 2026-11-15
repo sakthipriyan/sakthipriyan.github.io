@@ -31,7 +31,7 @@ related:
 <!-- camera: on, full, on -->
 
 <h2 class="title-scramble">Irish ETFs vs US ETFs</h2>
-<h4 class="subtitle-fade2" style="color: var(--r-heading-color, var(--text))" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2}'>📖 The Global Indian Investor · Chapter 6</h4>
+<h4 class="subtitle-fade2" style="color: var(--r-heading-color, var(--text))" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2}'>📖 <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/" target="_blank">The Global Indian Investor</a> · <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/" target="_blank">Chapter 6</a></h4>
 <br/>
 <h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Same index, two domiciles: which one should you buy?</h4>
 <h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Oct 25, 2026</h4>
@@ -53,6 +53,8 @@ related:
 
 ### Contents
 
+<!-- camera: behind right solid -->
+
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 🧭 The Choice: Same Index, Two Domiciles
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 🏛️ US Estate Tax Risk
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 💸 Dividend Tax Leakage
@@ -62,20 +64,27 @@ related:
 
 ---
 
+### 🧭 Be the Benchmark
+
+<!-- camera: behind bottom -->
+
+> <span style="font-size: 1.4em;"><strong>I am not trying to beat the benchmark; I am trying to be the benchmark.</strong></span>
+
+--
+
 ### 🧭 The Choice: Same Index, Two Domiciles
 
-> **I am not trying to beat the benchmark; I am trying to be the benchmark.**
-> Index funds and ETFs only, no stock picking.
+<!-- camera: behind solid -->
 
 - <!-- .element: class="fragment fade-up" --> <strong>US-domiciled ETFs</strong>, listed in the US: <strong>VOO</strong>, <strong>QQQ</strong>
-- <!-- .element: class="fragment fade-up" --> <strong>Irish-domiciled UCITS ETFs</strong>, same indices: <strong>CSPX</strong>, <strong>CNDX</strong>
+- <!-- .element: class="fragment fade-up" --> <strong>Irish-domiciled UCITS ETFs</strong>, same indices: <strong>VUAA</strong>, <strong>EQAC</strong>
 - <!-- .element: class="fragment fade-up" --> Same companies inside. Different <strong>tax, estate and paperwork</strong> outcomes.
 
 --
 
 ### 🧭 The Choice / Quick Comparison
 
-| | US ETFs (VOO / QQQ) | Irish UCITS Acc (CSPX / CNDX) |
+| | US ETFs (VOO / QQQ) | Irish UCITS Acc (VUAA / EQAC) |
 |---|---|---|
 | **US Estate Tax** | Up to **40%** above $60k | **0%** |
 | **Dividend Tax** | **25%** US withholding + Indian slab top-up | **15%** at fund level, reinvested |
@@ -88,36 +97,86 @@ related:
 
 ### 🏛️ US Estate Tax Risk
 
-India has **no estate or inheritance tax**. The US taxes **NRAs** (non-resident aliens) on US-situs assets upon the demise of the investor.
+<!-- camera: behind solid -->
 
-- <!-- .element: class="fragment fade-up" --> <strong>Affected:</strong> US stocks (NVDA, GOOGL) and US ETFs (VOO, QQQ), even at a foreign broker
-- <!-- .element: class="fragment fade-up" --> <strong>NRA exemption:</strong> just <strong>$60,000</strong> ($13,000 unified credit), unchanged since <strong>1976</strong>, vs <strong>$15 million</strong> for US citizens and residents (2026)
-- <!-- .element: class="fragment fade-up" --> <strong>Penalty:</strong> up to <strong>40%</strong> of the value above $60,000, before heirs receive anything
+India has **no estate tax**. The US taxes **NRAs** (non-resident aliens) on US assets at death.
+
+- <!-- .element: class="fragment fade-up" --> <strong>Affected:</strong> US stocks and ETFs (VOO, QQQ), even at a foreign broker
+- <!-- .element: class="fragment fade-up" --> <strong>Exempt:</strong> just <strong>$60,000</strong>, unchanged since <strong>1976</strong>
+- <!-- .element: class="fragment fade-up" --> <strong>Tax:</strong> up to <strong>40%</strong> above that, before heirs get anything
+
+--
+
+### 🏛️ US Estate Tax Risk / $60,000 vs $15 Million
+
+```echarts
+{
+ "grid": {"left": 10, "right": 150, "top": 10, "bottom": 10, "containLabel": true},
+ "xAxis": {"type": "value", "show": false, "max": 15},
+ "yAxis": {"type": "category", "inverse": true, "axisTick": {"show": false}, "axisLine": {"show": false},
+  "axisLabel": {"fontSize": 18, "fontWeight": "bold"},
+  "data": ["US citizen / resident", "Indian investor (NRA)"]},
+ "series": [{"type": "bar", "barWidth": 48,
+  "label": {"show": true, "position": "right", "fontSize": 22, "fontWeight": "bold"},
+  "data": [
+   {"value": 15, "itemStyle": {"color": "#3bb273"}, "label": {"formatter": "$15 million"}},
+   {"value": 0.06, "itemStyle": {"color": "#e8735a"}, "label": {"formatter": "$60,000"}}
+  ]}]
+}
+```
+
+<p class="fragment fade-up">Exempt from US estate tax: <strong>250×</strong> less for you, and no India–US treaty to fix it.</p>
 
 --
 
 ### 🏛️ US Estate Tax Risk / India vs US
 
-| | India | United States (NRAs) |
+<!-- camera: behind solid -->
+
+| | 🇮🇳 India | 🇺🇸 US |
 |---|---|---|
-| Estate / inheritance tax | None | **Yes** |
-| Exemption threshold | Unlimited | **$60,000** |
-| Marginal rates | 0% | **26% – 40%** |
-| Applies to | — | US-situs assets at market value |
-| Treaty relief | — | **None for India** |
+| Estate tax | None | **26–40%** |
+| Exempt up to | All | **$60k** |
+| Treaty relief | — | **None** |
 
 --
 
 ### 🏛️ US Estate Tax Risk / What It Costs
 
-| US portfolio at demise | Marginal rate | Estimated tax (after $13k credit) |
-|---|---|---|
-| Up to $60,000 | — | **$0** |
-| $100,000 | 28% | **$10,800** |
-| $250,000 | 32% | **$57,800** |
-| $500,000 | 34% | **$142,800** |
-| $1,000,000 | 39% | **$332,800** |
-| Over $1,000,000 | 40% | **$332,800 + 40% of excess** |
+US estate tax on a US portfolio at demise, after the $13,000 credit
+
+```echarts
+{
+ "legend": {"top": 0, "textStyle": {"fontSize": 16}},
+ "grid": {"left": 10, "right": 10, "top": 44, "bottom": 10, "containLabel": true},
+ "xAxis": {"type": "category", "axisTick": {"show": false},
+  "axisLabel": {"fontSize": 18, "fontWeight": "bold"},
+  "data": ["$60k", "$100k", "$250k", "$500k", "$1M", "$2M"]},
+ "yAxis": {"type": "value", "show": false, "max": 2250},
+ "series": [
+  {"name": "Heirs receive", "type": "bar", "stack": "p", "barWidth": "55%", "color": "#3bb273",
+   "label": {"show": true, "position": "inside", "fontSize": 17, "fontWeight": "bold", "color": "#fff", "lineHeight": 22},
+   "data": [
+    {"value": 60, "label": {"show": false}},
+    {"value": 89.2, "label": {"show": false}},
+    {"value": 192.2, "label": {"show": false}},
+    {"value": 357.2, "label": {"formatter": "$357,200"}},
+    {"value": 667.2, "label": {"formatter": "$667,200\n67%"}},
+    {"value": 1267.2, "label": {"formatter": "$1.27M\n63%"}}]},
+  {"name": "US estate tax", "type": "bar", "stack": "p", "color": "#e8735a",
+   "label": {"show": true, "position": "top", "fontSize": 17, "fontWeight": "bold", "color": "#e8735a", "lineHeight": 22},
+   "data": [
+    {"value": 0, "label": {"formatter": "$0"}},
+    {"value": 10.8, "label": {"formatter": "$10,800\n11%"}},
+    {"value": 57.8, "label": {"formatter": "$57,800\n23%"}},
+    {"value": 142.8, "label": {"formatter": "$142,800\n29%"}},
+    {"value": 332.8, "label": {"formatter": "$332,800\n33%"}},
+    {"value": 732.8, "label": {"formatter": "$732,800\n37%"}}]}
+ ]
+}
+```
+
+<p class="fragment fade-up">Marginal rate climbs from <strong>26%</strong> to <strong>40%</strong>; above $1M, every extra dollar loses 40%.</p>
 
 <small>Source: IRS, Estate tax for nonresidents not citizens of the US; Form 706 Table A</small>
 
@@ -127,12 +186,20 @@ India has **no estate or inheritance tax**. The US taxes **NRAs** (non-resident 
 
 **12%** growth (S&P 500, USD) · **10%** annual step-up · **30 years**
 
-| Monthly SIP | Total invested | Final portfolio | Crosses $60k |
-|---:|---:|---:|---|
-| $100 | $197,364 | $798,334 | Year 14 |
-| $500 | $986,964 | $3,992,988 | Year 6 |
-| $1,000 | $1,973,916 | $7,985,892 | Year 4 |
-| $5,000 | $9,869,664 | $39,929,214 | Year 1 |
+```echarts
+{
+ "grid": {"left": 10, "right": 110, "top": 10, "bottom": 10, "containLabel": true},
+ "xAxis": {"type": "value", "show": false, "max": 15},
+ "yAxis": {"type": "category", "inverse": true, "axisTick": {"show": false}, "axisLine": {"show": false},
+  "axisLabel": {"fontSize": 18, "fontWeight": "bold"},
+  "data": ["$100 / month", "$500 / month", "$1,000 / month", "$5,000 / month"]},
+ "series": [{"type": "bar", "barWidth": 34, "color": "#e8735a",
+  "label": {"show": true, "position": "right", "fontSize": 20, "fontWeight": "bold", "formatter": "Year {c}"},
+  "data": [14, 6, 4, 1]}]
+}
+```
+
+<p class="fragment fade-up">Even <strong>$100 a month</strong> crosses $60k in year 14, and grows to <strong>~$798k</strong> by year 30.</p>
 
 <small>Project your own numbers with the <a href="https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/" target="_blank">RealValue SIP Engine</a>.</small>
 
@@ -140,10 +207,26 @@ India has **no estate or inheritance tax**. The US taxes **NRAs** (non-resident 
 
 ### 🏛️ US Estate Tax Risk / How Long Heirs Wait
 
-| | Timeline | Bottleneck |
-|---|---|---|
-| **US assets** | **12 – 24 months** | IRS Transfer Certificate (Form 5173); accounts frozen until issued |
-| **Irish UCITS** | **2 weeks – 12 months** | Joint / TOD: 2–6 weeks · Individual: 6–12 months (succession proof) |
+```echarts
+{
+ "grid": {"left": 10, "right": 30, "top": 10, "bottom": 30, "containLabel": true},
+ "xAxis": {"type": "value", "min": 0, "max": 24, "interval": 6,
+  "axisLabel": {"fontSize": 16, "formatter": "{value} mo"}, "splitLine": {"lineStyle": {"type": "dashed", "opacity": 0.3}}},
+ "yAxis": {"type": "category", "inverse": true, "axisTick": {"show": false},
+  "axisLabel": {"fontSize": 17, "fontWeight": "bold", "lineHeight": 22},
+  "data": ["US ETFs\nForm 5173, frozen", "Irish · Individual\nsuccession proof", "Irish · Joint / TOD"]},
+ "series": [
+  {"type": "bar", "stack": "t", "silent": true, "itemStyle": {"color": "transparent"}, "data": [12, 6, 0.5]},
+  {"type": "bar", "stack": "t", "barWidth": 34,
+   "label": {"show": true, "position": "inside", "fontSize": 17, "fontWeight": "bold", "color": "#fff"},
+   "data": [
+    {"value": 12, "itemStyle": {"color": "#e8735a"}, "label": {"formatter": "12 – 24 months"}},
+    {"value": 6, "itemStyle": {"color": "#3bb273"}, "label": {"formatter": "6 – 12 months"}},
+    {"value": 1, "itemStyle": {"color": "#3bb273"}, "label": {"position": "right", "color": "#3bb273", "formatter": "2 – 6 weeks"}}
+   ]}
+ ]
+}
+```
 
 > <!-- .element: class="fragment fade-up" --> Irish ETFs <strong>remove US estate tax</strong> and <strong>shorten the wait</strong> for your family.
 
@@ -151,6 +234,8 @@ India has **no estate or inheritance tax**. The US taxes **NRAs** (non-resident 
 
 
 ### 💸 Dividend Tax Leakage
+
+<!-- camera: behind solid -->
 
 It is the **Growth vs IDCW** choice you already know from Indian mutual funds.
 
@@ -163,14 +248,29 @@ It is the **Growth vs IDCW** choice you already know from Indian mutual funds.
 
 Top Indian slab: 30% + 15% surcharge + 4% cess = **35.88%**
 
-| | US ETF | Irish Acc ETF |
-|---|---|---|
-| US withholding | **25%** (US–India treaty) | **15%** (US–Ireland treaty) |
-| Indian tax on top | **10.88%** after FTC | **0%** (deferred until sale) |
-| **Total tax** | **35.88%** | **15%** |
-| Dividend | 2% | 2% |
-| Tax Drag | 0.72% | **0.30%** |
-| Dividend reinvested | 1.28% | **1.70%** |
+US ETF: **25%** US withholding + **10.88%** Indian top-up · Irish Acc: **15%**, nothing in India until sale
+
+```echarts
+{
+ "legend": {"top": 0, "textStyle": {"fontSize": 15}},
+ "grid": {"left": 10, "right": 20, "top": 44, "bottom": 10, "containLabel": true},
+ "xAxis": {"type": "value", "show": false, "max": 2},
+ "yAxis": {"type": "category", "inverse": true, "axisTick": {"show": false}, "axisLine": {"show": false},
+  "axisLabel": {"fontSize": 18, "fontWeight": "bold", "lineHeight": 22},
+  "data": ["US ETF\n35.88% tax", "Irish Acc ETF\n15% tax"]},
+ "series": [
+  {"name": "US withholding", "type": "bar", "stack": "d", "barWidth": 46, "color": "#e8735a",
+   "label": {"show": true, "fontSize": 17, "fontWeight": "bold", "color": "#fff", "formatter": "{c}%"},
+   "data": [0.50, 0.30]},
+  {"name": "Indian tax", "type": "bar", "stack": "d", "color": "#b8452f",
+   "label": {"show": true, "fontSize": 17, "fontWeight": "bold", "color": "#fff", "formatter": "{c}%"},
+   "data": [0.22, {"value": 0, "label": {"show": false}}]},
+  {"name": "Reinvested", "type": "bar", "stack": "d", "color": "#3bb273",
+   "label": {"show": true, "fontSize": 18, "fontWeight": "bold", "color": "#fff", "formatter": "{c}% reinvested"},
+   "data": [1.28, 1.70]}
+ ]
+}
+```
 
 <p class="fragment fade-up"><strong>+0.42%</strong> extra reinvestment by saving the tax drag</p>
 
@@ -178,20 +278,35 @@ Top Indian slab: 30% + 15% surcharge + 4% cess = **35.88%**
 
 ### 💸 Dividend Tax Leakage / Over 30 Years
 
+<!-- view: full -->
+
 S&P 500 · **10%** price growth + **2%** dividend · **10%** annual step-up · **30 years**
 
-| Monthly SIP | US ETF (11.28%) | Irish ETF (11.70%) | Tax&nbsp;drag&nbsp;saved |
-|---:|---:|---:|---:|
-| $100 | $719,561 | $764,427 | $44,865 |
-| $500 | $3,597,806 | $3,822,133 | $224,327 |
-| $1,000 | $7,195,611 | $7,644,266 | $448,654 |
-| $5,000 | $35,978,057 | $38,221,328 | $2,243,270 |
+Extra wealth in the Irish ETF (11.70%) over the US ETF (11.28%), **$1,000 monthly SIP**
 
-> <!-- .element: class="fragment fade-up" --> A small yearly difference compounds into <strong>~6% more wealth</strong> at every SIP size.
+```echarts
+{
+ "grid": {"left": 10, "right": 30, "top": 40, "bottom": 30, "containLabel": true},
+ "xAxis": {"type": "category", "boundaryGap": false, "axisTick": {"show": false},
+  "axisLabel": {"fontSize": 15, "formatter": "Yr {value}", "interval": 4},
+  "data": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]},
+ "yAxis": {"type": "value", "axisLabel": {"fontSize": 15, "formatter": "${value}k"},
+  "splitLine": {"lineStyle": {"type": "dashed", "opacity": 0.3}}},
+ "series": [{"type": "line", "smooth": true, "symbol": "none", "color": "#3bb273",
+  "lineStyle": {"width": 4}, "areaStyle": {"opacity": 0.2},
+  "data": [0,0,0,1,1,1,2,3,5,6,8,11,14,18,23,30,37,46,57,70,86,105,127,153,185,222,266,317,378,
+   {"value": 449, "symbol": "circle", "symbolSize": 12,
+    "label": {"show": true, "position": "left", "fontSize": 22, "fontWeight": "bold", "formatter": "+$448,654"}}]}]
+}
+```
+
+> <!-- .element: class="fragment fade-up" --> <strong>~6% more wealth</strong> at every SIP size: $100 → +$44,865 · $500 → +$224,327 · $5,000 → +$2.24M
 
 --
 
 ### 💸 Dividend Tax Leakage / It Depends on the Index
+
+<!-- camera: behind solid -->
 
 - <!-- .element: class="fragment fade-up" --> <strong>S&P 500</strong> yields <strong>~1.7–2.0%</strong> → larger tax drag
 - <!-- .element: class="fragment fade-up" --> <strong>Nasdaq-100</strong> yields <strong>~0.6–0.8%</strong> → smaller tax drag
@@ -202,27 +317,16 @@ S&P 500 · **10%** price growth + **2%** dividend · **10%** annual step-up · *
 
 ### 📄 Taxation Paperwork
 
-<div style="display: flex; gap: 32px; text-align: left;">
-<div style="flex: 1;">
+<!-- camera: off -->
 
-#### US ETFs, every year
-
-- **W-8BEN** with the broker, renewed every **3 years**
-- **Form 67** before filing, to claim the foreign tax credit
-- **ITR:** Schedule **FA**, **FSI** and **TR**
-- **Advance tax** on dividends (if tax due exceeds ₹10,000)
-
-</div>
-<div style="flex: 1;" class="fragment fade-left">
-
-#### Irish Acc ETFs
-
-- **ITR:** Schedule **FA** every year
-- **Schedule FSI** only in the year you **sell**
-- No dividends to report, no Form 67, no W-8BEN
-
-</div>
-</div>
+| | US ETFs | Irish Acc ETFs |
+|---|---|---|
+| **W-8BEN** with the broker | 📄 every 3 years | ✅ not needed |
+| **Form 67** for the foreign tax credit | 📄 every year | ✅ not needed |
+| **Schedule TR** (tax relief for US tax withheld) | 📄 every year | ✅ not needed |
+| **Schedule FA** (foreign assets) | 📄 every year | 📄 every year |
+| **Schedule FSI** (foreign source income) | 📄 every year | 📄 only the year you sell |
+| **Advance tax** on dividends | 📄 if due > ₹10,000 | ✅ none |
 
 > <!-- .element: class="fragment fade-up" --> Accumulating Irish ETFs remove <strong>annual dividend taxation</strong> and most of the <strong>compliance work</strong>.
 
@@ -230,6 +334,8 @@ S&P 500 · **10%** price growth + **2%** dividend · **10%** annual step-up · *
 
 
 ### 🇮🇪 Why Ireland Is the ETF Hub
+
+<!-- camera: on -->
 
 **UCITS** rules, strong tax treaties, and infrastructure built for global investors: **~75–80%** of Europe's ETFs, the **largest ETF domicile outside the US**.
 
@@ -245,39 +351,29 @@ S&P 500 · **10%** price growth + **2%** dividend · **10%** annual step-up · *
 
 ### 🇮🇪 Why Ireland / Same Index, Both Domiciles
 
-The same providers run both versions of their flagship funds.
-
 | Index | Provider | US ETF (Dist) | TER | Irish UCITS (Acc) | TER |
 |---|---|---|---|---|---|
-| **S&P 500** | Vanguard | VOO | 0.03% | **VUAA** | 0.07% |
-| **Nasdaq-100** | Invesco | QQQ | 0.20% | **EQAC** | 0.30% |
-| **MSCI World** | iShares (BlackRock) | URTH | 0.24% | **IWDA** | 0.20% |
+| **MSCI ACWI** | iShares (BlackRock) | <a href="https://www.ishares.com/us/products/239600/ishares-msci-acwi-etf" target="_blank">ACWI</a> | 0.32% | <strong><a href="https://www.ishares.com/uk/individual/en/products/251850/ishares-msci-acwi-ucits-etf" target="_blank">SSAC</a></strong> | 0.20% |
+| **MSCI World** | iShares (BlackRock) | <a href="https://www.ishares.com/us/products/239696/ishares-msci-world-etf" target="_blank">URTH</a> | 0.24% | <strong><a href="https://www.ishares.com/uk/individual/en/products/251882/ishares-msci-world-ucits-etf-acc-fund" target="_blank">IWDA</a></strong> | 0.20% |
+| **S&P 500** | Vanguard | <a href="https://investor.vanguard.com/investment-products/etfs/profile/voo" target="_blank">VOO</a> | 0.03% | <strong><a href="https://www.vanguard.co.uk/professional/product/etf/equity/9694/sp-500-ucits-etf-usd-accumulating" target="_blank">VUAA</a></strong> | 0.07% |
+| **Nasdaq-100** | Invesco | <a href="https://www.invesco.com/qqq-etf/en/about.html" target="_blank">QQQ</a> | 0.20% | <strong><a href="https://www.invesco.com/uk/en/financial-products/etfs/invesco-eqqq-nasdaq-100-ucits-etf-acc.html" target="_blank">EQAC</a></strong> | 0.30% |
 
-<p class="fragment fade-up">A few basis points more in fees, for <strong>no estate tax, less dividend drag and less paperwork</strong>.</p>
+<p class="fragment fade-up">The same-issuer twin can cost a little more, but you don't have to buy the twin.</p>
 
 <p class="fragment fade-up">Every Irish fund for each index, with providers, AUM and TER: read <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/" target="_blank">Chapter 7: Selecting the Global Indexes</a>.</p>
-
 
 ---
 
 ### 📝 Summary
 
-<div style="font-size: 1.4em; margin: 40px 0;">
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 0.5}'>
-🧭 Same index, different domicile: it matters
-</p>
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 1.5}'>
-🏛️ US ETFs: up to 40% estate tax above $60k
-</p>
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 2.5}'>
-💸 Irish Acc: 15% vs 35.88% on dividends
-</p>
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 3.5}'>
-📄 Irish Acc: Schedule FA, FSI only when you sell
-</p>
-<p data-gsap='{"from": {"opacity": 0, "scale": 0.5}, "duration": 1, "delay": 4.5}'>
-✅ For Indian investors: Irish UCITS Accumulating ETFs
-</p>
+<!-- camera: behind bottom -->
+
+<div class="r-stack" style="font-size: 1.6em; font-weight: 700;">
+<p class="fragment current-visible">🧭 Same index, different domicile: it matters</p>
+<p class="fragment current-visible">🏛️ Irish Acc: avoids up to 40% US estate tax</p>
+<p class="fragment current-visible">💸 Irish Acc: ~6% more wealth on S&P 500 over 30 years, from less dividend tax drag</p>
+<p class="fragment current-visible">📄 Irish Acc: ~1 working day of tax paperwork saved a year, ~30 days over 30 years</p>
+<p class="fragment current-visible">✅ For Indian investors: Irish UCITS Accumulating ETFs</p>
 </div>
 
 ---
@@ -291,8 +387,8 @@ The same providers run both versions of their flagship funds.
 </div>
 
 <div style="font-size: 1.3em; margin: 30px 0;">
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 0.6, "delay": 2}'>📖 The Global Indian Investor · Chapter 6</p>
-<p data-gsap='{"from": {"opacity": 0, "scale": 0}, "duration": 0.6, "delay": 2.6, "ease": "back.out(2)"}'>👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe</p>
+<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 0.6, "delay": 2}'>📖 <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/" target="_blank">The Global Indian Investor</a> · <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/" target="_blank">Chapter 6</a></p>
+<p data-gsap='{"from": {"opacity": 0, "scale": 0}, "duration": 0.6, "delay": 2.6, "ease": "back.out(2)"}'>👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe <a href="https://www.youtube.com/channel/UC2XqaTqSPfLwgTSf5sIF_BQ" target="_blank">YouTube</a> | <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/#subscribe" target="_blank">Digest</a></p>
 </div>
 
 <h3 data-gsap='{"from": {"opacity": 0, "scale": 3, "rotation": 360}, "duration": 1.5, "delay": 3.4, "ease": "elastic.out(1, 0.3)"}'>
