@@ -32,7 +32,7 @@ related:
 <!-- camera: on, full, on -->
 
 <h2 class="title-scramble">Selecting the Global Indexes</h2>
-<h4 class="subtitle-fade2" style="color: var(--r-heading-color, var(--text))" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2}'>📖 The Global Indian Investor · Chapter 7</h4>
+<h4 class="subtitle-fade2" style="color: var(--r-heading-color, var(--text))" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2}'>📖 <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/" target="_blank">The Global Indian Investor</a> · <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/" target="_blank">Chapter 7</a></h4>
 <br/>
 <h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Which index, which fund, which provider: the Irish UCITS universe</h4>
 <h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Oct 25, 2026</h4>
@@ -53,6 +53,8 @@ related:
 --
 
 ### Contents
+
+<!-- camera: behind right solid -->
 
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 🏗️ Index Providers: MSCI vs FTSE
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 🌍 Global Equity ETFs
@@ -121,13 +123,104 @@ For a **one-fund** portfolio, MSCI vs FTSE makes no real difference. Splitting i
 
 Global Markets = Developed + Emerging (overlaps a little with your Indian equity)
 
-| Index | Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---|---:|---:|
-| FTSE All-World | Vanguard | FTSE All-World UCITS ETF (USD) Acc | **48,526** | 0.19% |
-| MSCI ACWI | iShares (BlackRock) | MSCI ACWI UCITS ETF USD (Acc) | 33,730 | 0.20% |
-| MSCI ACWI | State Street (SPDR) | MSCI All Country World UCITS ETF (Acc) | 15,800 | **0.12%** |
-| MSCI ACWI IMI | State Street (SPDR) | MSCI ACWI Investable Market UCITS ETF (Acc) | 6,804 | 0.17% |
-| FTSE All-World | Invesco | FTSE All-World UCITS ETF Acc | 3,893 | 0.15% |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 49.5
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "Vanguard · FTSE All-World",
+   "iShares · MSCI ACWI",
+   "SPDR · MSCI ACWI",
+   "SPDR · MSCI ACWI IMI",
+   "Invesco · FTSE All-World"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 48.53,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$48.5B · 0.19%"
+     }
+    },
+    {
+     "value": 33.73,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$33.7B · 0.20%"
+     }
+    },
+    {
+     "value": 15.8,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$15.8B · 0.12%"
+     }
+    },
+    {
+     "value": 6.8,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$6.8B · 0.17%"
+     }
+    },
+    {
+     "value": 3.89,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$3.9B · 0.15%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 --
 
@@ -135,14 +228,114 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
 
 No overlap with Indian equity: let your Indian portfolio stand in for EM.
 
-| Index | Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---|---:|---:|
-| MSCI World | iShares (BlackRock) | Core MSCI World UCITS ETF USD (Acc) | **141,574** | 0.20% |
-| MSCI World | Xtrackers (DWS) | MSCI World UCITS ETF 1C | 22,388 | 0.12% |
-| MSCI World | State Street (SPDR) | MSCI World UCITS ETF USD Unhedged | 19,233 | 0.12% |
-| MSCI World | UBS | Core MSCI World UCITS ETF USD acc | 10,677 | 0.06% |
-| MSCI World | Invesco | MSCI World UCITS ETF Acc | 8,263 | **0.05%** |
-| FTSE Developed World | Vanguard | FTSE Developed World UCITS ETF Acc | 6,400 | 0.12% |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 144.4
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "iShares · MSCI World",
+   "Xtrackers · MSCI World",
+   "SPDR · MSCI World",
+   "UBS · MSCI World",
+   "Invesco · MSCI World",
+   "Vanguard · FTSE Developed"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 141.57,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$141.6B · 0.20%"
+     }
+    },
+    {
+     "value": 22.39,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$22.4B · 0.12%"
+     }
+    },
+    {
+     "value": 19.23,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$19.2B · 0.12%"
+     }
+    },
+    {
+     "value": 10.68,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$10.7B · 0.06%"
+     }
+    },
+    {
+     "value": 8.26,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$8.3B · 0.05%"
+     }
+    },
+    {
+     "value": 6.4,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$6.4B · 0.12%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 --
 
@@ -150,24 +343,197 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
 
 For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea weigh more).
 
-| Index | Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---|---:|---:|
-| MSCI EM IMI | iShares (BlackRock) | Core MSCI EM IMI UCITS ETF (Acc) | **43,825** | 0.18% |
-| MSCI EM | Xtrackers (DWS) | MSCI Emerging Markets UCITS ETF 1C | 13,825 | 0.18% |
-| MSCI EM | iShares (BlackRock) | MSCI EM UCITS ETF (Acc) | 10,037 | 0.18% |
-| FTSE Emerging | Vanguard | FTSE Emerging Markets UCITS ETF (USD) Acc | 2,174 | 0.17% |
-| MSCI EM | State Street (SPDR) | MSCI Emerging Markets UCITS ETF USD | 2,167 | 0.18% |
-| MSCI EM | HSBC | MSCI Emerging Markets UCITS ETF USD (Acc) | 1,389 | **0.15%** |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 44.7
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "iShares · MSCI EM IMI",
+   "Xtrackers · MSCI EM",
+   "iShares · MSCI EM",
+   "Vanguard · FTSE Emerging",
+   "SPDR · MSCI EM",
+   "HSBC · MSCI EM"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 43.83,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$43.8B · 0.18%"
+     }
+    },
+    {
+     "value": 13.82,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$13.8B · 0.18%"
+     }
+    },
+    {
+     "value": 10.04,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$10.0B · 0.18%"
+     }
+    },
+    {
+     "value": 2.17,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$2.2B · 0.17%"
+     }
+    },
+    {
+     "value": 2.17,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$2.2B · 0.18%"
+     }
+    },
+    {
+     "value": 1.39,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$1.4B · 0.15%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 ---
 
 
 ### 🇺🇸 US Equity / Already Inside Global Funds
 
-| Index | Market | US share |
-|---|---|---:|
-| **MSCI World** | Developed only | **~67%** |
-| **MSCI ACWI** | Developed + Emerging | **~60%** |
+```echarts
+{
+ "legend": {
+  "top": 0,
+  "textStyle": {
+   "fontSize": 15
+  }
+ },
+ "grid": {
+  "left": 10,
+  "right": 20,
+  "top": 40,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 100
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 17,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "MSCI World",
+   "MSCI ACWI"
+  ]
+ },
+ "series": [
+  {
+   "name": "US",
+   "type": "bar",
+   "stack": "s",
+   "barWidth": 36,
+   "color": "#2563EB",
+   "label": {
+    "show": true,
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "color": "#fff",
+    "formatter": "US ~{c}%"
+   },
+   "data": [
+    67,
+    60
+   ]
+  },
+  {
+   "name": "Rest of the world",
+   "type": "bar",
+   "stack": "s",
+   "color": "#64748B",
+   "label": {
+    "show": true,
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "color": "#fff",
+    "formatter": "{c}%"
+   },
+   "data": [
+    33,
+    40
+   ]
+  }
+ ]
+}
+```
 
 Why hold the US separately?
 
@@ -192,44 +558,429 @@ Why hold the US separately?
 
 ### 🇺🇸 US Equity / MSCI USA
 
-| Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---:|---:|
-| Xtrackers (DWS) | MSCI USA UCITS ETF 1C | **12,332** | **0.03%** |
-| iShares (BlackRock) | MSCI USA UCITS ETF (Acc) | 4,644 | **0.03%** |
-| Amundi | Core MSCI USA UCITS ETF Acc | 4,007 | **0.03%** |
-| UBS | Core MSCI USA UCITS ETF USD acc | 2,961 | **0.03%** |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 12.6
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "Xtrackers",
+   "iShares",
+   "Amundi",
+   "UBS"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 12.33,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$12.3B · 0.03%"
+     }
+    },
+    {
+     "value": 4.64,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$4.6B · 0.03%"
+     }
+    },
+    {
+     "value": 4.01,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$4.0B · 0.03%"
+     }
+    },
+    {
+     "value": 2.96,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$3.0B · 0.03%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 --
 
 ### 🇺🇸 US Equity / S&P 500
 
-| Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---:|---:|
-| iShares (BlackRock) | Core S&P 500 UCITS ETF USD (Acc) | **144,695** | 0.07% |
-| Vanguard | S&P 500 UCITS ETF (USD) Accumulating | 32,613 | 0.07% |
-| State Street (SPDR) | S&P 500 UCITS ETF USD Unhedged (Acc) | 16,962 | **0.03%** |
-| UBS | Core S&P 500 UCITS ETF USD acc | 1,716 | **0.03%** |
-| Xtrackers (DWS) | S&P 500 UCITS ETF 4C | 1,483 | **0.03%** |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 147.6
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "iShares",
+   "Vanguard",
+   "SPDR",
+   "UBS",
+   "Xtrackers"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 144.69,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$144.7B · 0.07%"
+     }
+    },
+    {
+     "value": 32.61,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$32.6B · 0.07%"
+     }
+    },
+    {
+     "value": 16.96,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$17.0B · 0.03%"
+     }
+    },
+    {
+     "value": 1.72,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$1.7B · 0.03%"
+     }
+    },
+    {
+     "value": 1.48,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$1.5B · 0.03%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 --
 
 ### 🇺🇸 US Equity / Nasdaq 100
 
-| Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---:|---:|
-| iShares (BlackRock) | Nasdaq 100 UCITS ETF (Acc) | **25,956** | 0.30% |
-| Invesco | EQQQ Nasdaq-100 UCITS ETF Acc | 4,254 | 0.30% |
-| BNP Paribas | Easy II NASDAQ 100 UCITS ETF USD Acc | 2,776 | **0.14%** |
-| Xtrackers (DWS) | Nasdaq 100 UCITS ETF 1C | 2,198 | 0.20% |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 26.5
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "iShares",
+   "Invesco",
+   "BNP Paribas",
+   "Xtrackers"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 25.96,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$26.0B · 0.30%"
+     }
+    },
+    {
+     "value": 4.25,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$4.3B · 0.30%"
+     }
+    },
+    {
+     "value": 2.78,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$2.8B · 0.14%"
+     }
+    },
+    {
+     "value": 2.2,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$2.2B · 0.20%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 --
 
 ### 🇺🇸 US Equity / What the Tables Say
 
-- <!-- .element: class="fragment fade-up" --> S&P 500 is more popular than MSCI USA, despite covering fewer companies
-- <!-- .element: class="fragment fade-up" --> Several MSCI USA and S&P 500 funds above $10B cost just <strong>0.03%</strong>
-- <!-- .element: class="fragment fade-up" --> Nasdaq 100 funds cost <strong>~5×</strong> more; the cheapest charges 0.14%
-- <!-- .element: class="fragment fade-up" --> Concentrated growth exposure comes at a <strong>premium</strong>
+<!-- camera: behind solid -->
+
+- <!-- .element: class="fragment fade-up" --> S&P 500 is more popular than MSCI USA, with fewer companies
+- <!-- .element: class="fragment fade-up" --> MSCI USA and S&P 500: $10B+ funds at just <strong>0.03%</strong>
+- <!-- .element: class="fragment fade-up" --> Nasdaq 100 costs <strong>~5×</strong> more; cheapest 0.14%
+- <!-- .element: class="fragment fade-up" --> Concentrated growth comes at a <strong>premium</strong>
+
+--
+
+### 🇺🇸 US Equity / Irish vs US-Listed Fees
+
+The lowest-TER fund on each side, same index
+
+```echarts
+{
+ "legend": {
+  "top": 0,
+  "textStyle": {
+   "fontSize": 16
+  }
+ },
+ "grid": {
+  "left": 10,
+  "right": 10,
+  "top": 50,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "category",
+  "axisTick": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 18,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "MSCI ACWI",
+   "MSCI World",
+   "S&P 500",
+   "Nasdaq-100"
+  ]
+ },
+ "yAxis": {
+  "type": "value",
+  "show": false,
+  "max": 0.38
+ },
+ "series": [
+  {
+   "name": "Cheapest US ETF",
+   "type": "bar",
+   "barGap": "15%",
+   "color": "#e8735a",
+   "label": {
+    "show": true,
+    "position": "top",
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "lineHeight": 22
+   },
+   "data": [
+    {
+     "value": 0.32,
+     "label": {
+      "formatter": "0.32%\nACWI"
+     }
+    },
+    {
+     "value": 0.24,
+     "label": {
+      "formatter": "0.24%\nURTH"
+     }
+    },
+    {
+     "value": 0.02,
+     "label": {
+      "formatter": "0.02%\nSPYM"
+     }
+    },
+    {
+     "value": 0.15,
+     "label": {
+      "formatter": "0.15%\nQQQM"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Cheapest Irish UCITS Acc",
+   "type": "bar",
+   "color": "#3bb273",
+   "label": {
+    "show": true,
+    "position": "top",
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "lineHeight": 22
+   },
+   "data": [
+    {
+     "value": 0.12,
+     "label": {
+      "formatter": "0.12%\nSPDR"
+     }
+    },
+    {
+     "value": 0.05,
+     "label": {
+      "formatter": "0.05%\nInvesco"
+     }
+    },
+    {
+     "value": 0.03,
+     "label": {
+      "formatter": "0.03%\nSPDR"
+     }
+    },
+    {
+     "value": 0.14,
+     "label": {
+      "formatter": "0.14%\nBNP"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<p class="fragment fade-up">Within <strong>1 basis point</strong> on S&P 500 and Nasdaq-100, and <strong>cheaper</strong> on MSCI ACWI and MSCI World: going Irish costs nothing extra.</p>
+
+<small>Irish TERs: June 2026 · US TERs: November 2026</small>
 
 --
 
@@ -249,24 +1000,135 @@ Why hold the US separately?
 
 Debt is the **defensive** allocation: stability, liquidity and **dry powder** for rebalancing, not returns.
 
-| Provider | Fund (Irish UCITS, Acc) | AUM ($M) | TER |
-|---|---|---:|---:|
-| iShares (BlackRock) | USD Treasury Bond **0-1yr** UCITS ETF (Acc) | **19,050** | 0.07% |
-| iShares (BlackRock) | USD Treasury Bond 3-7yr UCITS ETF (Acc) | 8,142 | 0.07% |
-| iShares (BlackRock) | USD Treasury Bond 1-3yr UCITS ETF (Acc) | 7,321 | 0.07% |
-| iShares (BlackRock) | USD Treasury Bond 7-10yr UCITS ETF (Acc) | 5,095 | 0.07% |
-| iShares (BlackRock) | USD Treasury Bond 20+yr UCITS ETF USD (Acc) | 2,659 | 0.07% |
-| Vanguard | U.S. Treasury **0-1 Year** Bond UCITS ETF (USD) Acc | 2,434 | **0.05%** |
-| Vanguard | USD Treasury Bond UCITS ETF Accumulating | 1,497 | **0.05%** |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 19.4
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "iShares · 0-1yr",
+   "iShares · 3-7yr",
+   "iShares · 1-3yr",
+   "iShares · 7-10yr",
+   "iShares · 20+yr",
+   "Vanguard · 0-1yr",
+   "Vanguard · all maturities"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 19.05,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$19.1B · 0.07%"
+     }
+    },
+    {
+     "value": 8.14,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$8.1B · 0.07%"
+     }
+    },
+    {
+     "value": 7.32,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$7.3B · 0.07%"
+     }
+    },
+    {
+     "value": 5.09,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$5.1B · 0.07%"
+     }
+    },
+    {
+     "value": 2.66,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$2.7B · 0.07%"
+     }
+    },
+    {
+     "value": 2.43,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$2.4B · 0.05%"
+     }
+    },
+    {
+     "value": 1.5,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$1.5B · 0.05%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 --
 
 ### 🛡️ US Treasury ETFs / Keep It Short
 
-- <!-- .element: class="fragment fade-up" --> Pick iShares or Vanguard <strong>0-1 year</strong> Treasuries, by your preference for AUM or TER
-- <!-- .element: class="fragment fade-up" --> 7-10yr and 20+yr funds add <strong>interest-rate risk</strong>: stay with 0-1 or 1-3 years
-- <!-- .element: class="fragment fade-up" --> Short Treasuries avoid the credit, duration, hedging and geopolitical risks of other bonds
-- <!-- .element: class="fragment fade-up" --> Already holding INR debt for defence? A US debt allocation may not be needed
+<!-- camera: behind solid -->
+
+- <!-- .element: class="fragment fade-up" --> iShares or Vanguard <strong>0-1 year</strong>, by AUM or TER
+- <!-- .element: class="fragment fade-up" --> 7-10yr and 20+yr add <strong>interest-rate risk</strong>: stay at 0-1 or 1-3 years
+- <!-- .element: class="fragment fade-up" --> Short Treasuries skip credit, duration, hedging and geopolitical risk
+- <!-- .element: class="fragment fade-up" --> Already hold INR debt? You may not need US debt
 
 ---
 
@@ -283,29 +1145,218 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 ### 🥇 Gold / Why Hold It in USD?
 
-- <!-- .element: class="fragment fade-up" --> Equities and gold both in USD: rebalance <strong>without INR–USD conversions</strong>
-- <!-- .element: class="fragment fade-up" --> Equities fall, gold rises → sell gold in USD, buy equities
+<!-- camera: behind solid -->
+
+- <!-- .element: class="fragment fade-up" --> Gold and equities both in USD: rebalance <strong>without converting INR</strong>
+- <!-- .element: class="fragment fade-up" --> Equities fall, gold rises → sell gold, buy equities
 - <!-- .element: class="fragment fade-up" --> Equities rally, gold lags → trim equities, add gold
-- <!-- .element: class="fragment fade-up" --> A diversifier, a crisis hedge, and a <strong>low-friction rebalancing buffer</strong>
+- <!-- .element: class="fragment fade-up" --> Diversifier, crisis hedge, <strong>rebalancing buffer</strong>
 
 --
 
 ### 🥇 Gold / Irish Gold ETCs
 
-| Provider | ETC | AUM ($M) | TER |
-|---|---|---:|---:|
-| iShares (BlackRock) | Physical Gold ETC | **37,627** | 0.12% |
-| Invesco | Physical Gold ETC | 29,100 | 0.12% |
-| Amundi | Physical Gold ETC (C) | 12,229 | 0.12% |
-| Xtrackers (DWS) | IE Physical Gold ETC Securities | 6,949 | **0.11%** |
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 38.4
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "iShares",
+   "Invesco",
+   "Amundi",
+   "Xtrackers"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 37.63,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$37.6B · 0.12%"
+     }
+    },
+    {
+     "value": 29.1,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$29.1B · 0.12%"
+     }
+    },
+    {
+     "value": 12.23,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$12.2B · 0.12%"
+     }
+    },
+    {
+     "value": 6.95,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$6.9B · 0.11%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
 
-| | AUM range ($M) | TER range |
-|---|---:|---:|
-| Indian Gold Mutual Funds (FoFs) | 3 – 1,640 | 0.45% – 0.90% |
-| Indian Gold ETFs | 2 – 5,804 | 0.29% – 0.80% |
-| **Irish Gold ETCs** | **6,949 – 37,627** | **0.11% – 0.12%** |
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
-<small>Data from late May 2026 · 1 USD = ₹95.70 for Indian AUM</small>
+
+<small>Data from late May 2026</small>
+
+--
+
+### 🥇 Gold / TER: India vs Ireland
+
+Yearly fee (TER) range of each option
+
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 30,
+  "top": 10,
+  "bottom": 30,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "min": 0,
+  "max": 1,
+  "interval": 0.1,
+  "axisLabel": {
+   "fontSize": 15,
+   "formatter": "{value}%"
+  },
+  "splitLine": {
+   "lineStyle": {
+    "type": "dashed",
+    "opacity": 0.3
+   }
+  }
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 17,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "Indian Gold FoFs",
+   "Indian Gold ETFs",
+   "Irish Gold ETCs"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "stack": "t",
+   "silent": true,
+   "itemStyle": {
+    "color": "transparent"
+   },
+   "data": [
+    0.45,
+    0.29,
+    0.11
+   ]
+  },
+  {
+   "type": "bar",
+   "stack": "t",
+   "barWidth": 36,
+   "label": {
+    "show": true,
+    "position": "inside",
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "color": "#fff"
+   },
+   "data": [
+    {
+     "value": 0.45,
+     "itemStyle": {
+      "color": "#e8735a"
+     },
+     "label": {
+      "formatter": "0.45% – 0.90%"
+     }
+    },
+    {
+     "value": 0.51,
+     "itemStyle": {
+      "color": "#e8735a"
+     },
+     "label": {
+      "formatter": "0.29% – 0.80%"
+     }
+    },
+    {
+     "value": 0.01,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "position": "right",
+      "color": "#3bb273",
+      "formatter": "0.11% – 0.12%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<p class="fragment fade-up">Indian gold funds cost <strong>3.7× to 7.5×</strong> more than Irish gold ETCs.</p>
 
 --
 
@@ -313,10 +1364,194 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 ₹1 lakh lump sum · 7% gold (USD) + 4% USD/INR
 
-| Structure | Net INR CAGR | After 30 years |
-|---|---:|---:|
-| Indian Gold Fund (0.90% TER) | 10.38% | ₹19.35 lakh |
-| Low-cost Gold ETC (0.12% TER) | **11.16%** | **₹23.90 lakh** |
+```echarts
+{
+ "legend": {
+  "top": 0,
+  "textStyle": {
+   "fontSize": 15
+  }
+ },
+ "tooltip": {
+  "trigger": "axis"
+ },
+ "grid": {
+  "left": 10,
+  "right": 30,
+  "top": 40,
+  "bottom": 30,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "category",
+  "boundaryGap": false,
+  "axisTick": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "formatter": "Yr {value}",
+   "interval": 5
+  },
+  "data": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30
+  ]
+ },
+ "yAxis": {
+  "type": "value",
+  "axisLabel": {
+   "fontSize": 15,
+   "formatter": "₹{value}L"
+  },
+  "splitLine": {
+   "lineStyle": {
+    "type": "dashed",
+    "opacity": 0.3
+   }
+  }
+ },
+ "series": [
+  {
+   "name": "Low-cost Gold ETC (0.12%)",
+   "type": "line",
+   "smooth": true,
+   "symbol": "none",
+   "color": "#3bb273",
+   "lineStyle": {
+    "width": 4
+   },
+   "data": [
+    1.0,
+    1.11,
+    1.24,
+    1.37,
+    1.53,
+    1.7,
+    1.89,
+    2.1,
+    2.33,
+    2.59,
+    2.88,
+    3.2,
+    3.56,
+    3.96,
+    4.4,
+    4.89,
+    5.43,
+    6.04,
+    6.72,
+    7.46,
+    8.3,
+    9.22,
+    10.25,
+    11.4,
+    12.67,
+    14.08,
+    15.66,
+    17.4,
+    19.34,
+    21.5,
+    {
+     "value": 23.9,
+     "symbol": "circle",
+     "symbolSize": 10,
+     "label": {
+      "show": true,
+      "position": "left",
+      "fontSize": 18,
+      "fontWeight": "bold",
+      "formatter": "₹23.90L"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Indian Gold Fund (0.90%)",
+   "type": "line",
+   "smooth": true,
+   "symbol": "none",
+   "color": "#e8735a",
+   "lineStyle": {
+    "width": 4
+   },
+   "data": [
+    1.0,
+    1.1,
+    1.22,
+    1.34,
+    1.48,
+    1.64,
+    1.81,
+    2.0,
+    2.2,
+    2.43,
+    2.68,
+    2.96,
+    3.27,
+    3.61,
+    3.99,
+    4.4,
+    4.86,
+    5.36,
+    5.92,
+    6.53,
+    7.21,
+    7.96,
+    8.78,
+    9.69,
+    10.7,
+    11.81,
+    13.04,
+    14.39,
+    15.88,
+    17.53,
+    {
+     "value": 19.35,
+     "symbol": "circle",
+     "symbolSize": 10,
+     "label": {
+      "show": true,
+      "position": "bottom",
+      "fontSize": 18,
+      "fontWeight": "bold",
+      "formatter": "₹19.35L"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
 
 <p class="fragment fade-up"><strong>₹4.55 lakh (23%) more</strong>, from structure alone. Weigh it against the possible <strong>slab-rate tax</strong> on Irish ETCs.</p>
 
@@ -355,12 +1590,61 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 **Concentrated diversification:** two growth engines, ~600 companies.
 
-| Asset | Allocation |
-|---|---:|
-| **India** (Nifty 50, Next 50, Midcap 150, Smallcap 250) | 45% |
-| **Nasdaq 100** | 40% |
-| **Gold** | 10% |
-| **Debt** | 5% |
+```echarts
+{
+ "series": [
+  {
+   "type": "pie",
+   "radius": [
+    "42%",
+    "72%"
+   ],
+   "center": [
+    "50%",
+    "52%"
+   ],
+   "label": {
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "formatter": "{b}\n{c}%",
+    "lineHeight": 22
+   },
+   "data": [
+    {
+     "name": "India",
+     "value": 45,
+     "itemStyle": {
+      "color": "#F97316"
+     }
+    },
+    {
+     "name": "Nasdaq 100",
+     "value": 40,
+     "itemStyle": {
+      "color": "#2563EB"
+     }
+    },
+    {
+     "name": "Gold",
+     "value": 10,
+     "itemStyle": {
+      "color": "#D4AF37"
+     }
+    },
+    {
+     "name": "Debt",
+     "value": 5,
+     "itemStyle": {
+      "color": "#64748B"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>India: Nifty 50, Next 50, Midcap 150, Smallcap 250</small>
 
 <p class="fragment fade-up"><strong>50% INR, 50% USD · 85% equity, 15% defensive.</strong> My own goals and conviction, not a recommendation.</p>
 
@@ -368,22 +1652,14 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 ### 📝 Summary
 
-<div style="font-size: 1.35em; margin: 36px 0;">
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 0.5}'>
-🏗️ Pick one index family: never mix MSCI and FTSE for DM + EM
-</p>
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 1.5}'>
-🌍 One global fund, or DM + India, from $1B+ accumulating funds
-</p>
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 2.5}'>
-🇺🇸 Broad US at 0.03%, or Nasdaq 100 as a deliberate growth bet
-</p>
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 1, "delay": 3.5}'>
-🛡️ Short Treasuries for dry powder · 🥇 gold in USD for rebalancing
-</p>
-<p data-gsap='{"from": {"opacity": 0, "scale": 0.5}, "duration": 1, "delay": 4.5}'>
-✅ Choose an allocation you can hold through bull and bear markets
-</p>
+<!-- camera: behind bottom -->
+
+<div class="r-stack" style="font-size: 1.6em; font-weight: 700;">
+<p class="fragment current-visible">🏗️ Pick one index family: never mix MSCI and FTSE for DM + EM</p>
+<p class="fragment current-visible">🌍 One global fund, or DM + India, from $1B+ accumulating funds</p>
+<p class="fragment current-visible">🇺🇸 Broad US at 0.03%, or Nasdaq 100 as a deliberate growth bet</p>
+<p class="fragment current-visible">🛡️ Short Treasuries for dry powder · 🥇 gold in USD for rebalancing</p>
+<p class="fragment current-visible">✅ Choose an allocation you can hold through bull and bear markets</p>
 </div>
 
 ---
@@ -397,8 +1673,8 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 </div>
 
 <div style="font-size: 1.3em; margin: 30px 0;">
-<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 0.6, "delay": 2}'>📖 The Global Indian Investor · Chapter 7</p>
-<p data-gsap='{"from": {"opacity": 0, "scale": 0}, "duration": 0.6, "delay": 2.6, "ease": "back.out(2)"}'>👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe</p>
+<p data-gsap='{"from": {"opacity": 0, "x": -100}, "duration": 0.6, "delay": 2}'>📖 <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/" target="_blank">The Global Indian Investor</a> · <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/" target="_blank">Chapter 7</a></p>
+<p data-gsap='{"from": {"opacity": 0, "scale": 0}, "duration": 0.6, "delay": 2.6, "ease": "back.out(2)"}'>👍 Like · 💬 Comment · 🔄 Share · 📌 Subscribe <a href="https://www.youtube.com/channel/UC2XqaTqSPfLwgTSf5sIF_BQ" target="_blank">YouTube</a> | <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/#subscribe" target="_blank">Digest</a></p>
 </div>
 
 <h3 data-gsap='{"from": {"opacity": 0, "scale": 3, "rotation": 360}, "duration": 1.5, "delay": 3.4, "ease": "elastic.out(1, 0.3)"}'>
