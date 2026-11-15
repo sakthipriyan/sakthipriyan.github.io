@@ -1,4 +1,19 @@
 // RealValue Portfolio Tracker (Vue.js + ECharts + PDF.js)
+// Chart colours come from the site theme's tokens, read at render time, so
+// the charts follow the theme in light and dark (and any later palette change).
+function toolChartColors() {
+    const css = getComputedStyle(document.documentElement);
+    const v = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+    return {
+        fgStrong: v('--foreground-strong', '#2c3e50'),
+        mutedFg: v('--foreground', '#333'),
+        subMutedFg: v('--muted-foreground', '#95a5a6'),
+        splitLine: v('--border', '#ecf0f1'),
+        borderLine: v('--muted-foreground', '#95a5a6'),
+        cardBg: v('--card', '#fff')
+    };
+}
+
 window.initializeTool = window.initializeTool || {};
 
 window.initializeTool.portfolioTracker = async function (container, config) {
@@ -53,37 +68,37 @@ window.initializeTool.portfolioTracker = async function (container, config) {
             }
 
             .loading-text { 
-                color: var(--state-success, #4CAF50); 
+                color: var(--success); 
                 font-weight: bold; 
                 margin-top: 1rem;
             }
             .error-text { 
-                color: var(--state-danger, #ff5252); 
+                color: var(--danger); 
                 font-weight: bold; 
                 margin-top: 1rem;
             }
             .fund-input {
                 width: 100%;
                 padding: 0.4rem;
-                border: 1px solid var(--gray-medium, #ddd);
+                border: 1px solid var(--border);
                 border-radius: 4px;
                 font-size: 0.9em;
-                background: var(--bg-primary, #fff);
-                color: var(--text-primary, #333);
+                background: var(--card);
+                color: var(--foreground-strong);
             }
             .unit-buttons button.active-buy {
-                border-color: #27ae60;
-                background: #27ae60;
+                border-color: var(--success);
+                background: var(--success);
                 color: white;
             }
             .unit-buttons button.active-hold {
-                border-color: #f39c12;
-                background: #f39c12;
+                border-color: var(--warning);
+                background: var(--warning);
                 color: white;
             }
             .unit-buttons button.active-sell {
-                border-color: #c0392b;
-                background: #c0392b;
+                border-color: var(--danger);
+                background: var(--danger);
                 color: white;
             }
         `;
@@ -107,7 +122,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem;">
                     <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
                         📑 Mutual Fund Portfolio
-                        <span v-if="funds.filter(f => f.marketValue > 0).length > 0" style="font-size: 0.7em; background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
+                        <span v-if="funds.filter(f => f.marketValue > 0).length > 0" style="font-size: 0.7em; background: var(--muted); color: var(--foreground-strong); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">
                             {{ funds.filter(f => f.marketValue > 0).length }} Funds
                         </span>
                     </h3>
@@ -115,17 +130,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                         
 
-\n                        <div style="display: flex; border: 2px solid var(--secondary-color); border-radius: 4px; overflow: hidden; background: var(--bg-primary, #fff);">
-                            <div style="padding: 0.5rem 0.6rem; background: #f8f9fa; border-right: 1px solid #ddd; font-size: 0.85em; color: #555; display: flex; align-items: center;">
+\n                        <div style="display: flex; border: 2px solid var(--accent-line, var(--secondary-color)); border-radius: 8px; overflow: hidden; background: var(--card);">
+                            <div style="padding: 0.5rem 0.6rem; background: var(--muted); border-right: 1px solid var(--border); font-size: 0.85em; color: var(--muted-foreground); display: flex; align-items: center;">
                                 🔒
                             </div>
                             <input 
                                 type="password" 
                                 v-model="pdfPassword" 
                                 placeholder="CAS Password (opt)" 
-                                style="border: none; padding: 0.5rem; outline: none; width: 130px; font-size: 0.9em;"
+                                style="border: none; padding: 0.5rem; outline: none; width: 130px; font-size: 0.9em; background: var(--card); color: var(--foreground-strong);"
                             >
-                            <button type="button" class="share-button" @click="$refs.pdfInput.click()" style="border-radius: 0; border-left: 1px solid #ddd; border-top: none; border-bottom: none; border-right: none;">
+                            <button type="button" class="share-button" @click="$refs.pdfInput.click()" style="border-radius: 0; border-left: 1px solid var(--border); border-top: none; border-bottom: none; border-right: none;">
                                 🔄 Import CAS PDF
                             </button>
                         </div>
@@ -137,22 +152,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                 <!-- Privacy row: message left, verify button right -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
-                    <p style="font-size: 0.95em; color: #15803d; font-weight: 500; margin: 0; line-height: 1.5; flex: 1; min-width: 200px;">
+                    <p style="font-size: 0.95em; color: var(--foreground); font-weight: 500; margin: 0; line-height: 1.5; flex: 1; min-width: 200px;">
                         🔒 Your sensitive financial files are processed entirely within your browser. <strong>Your data never leaves your device!</strong>
                     </p>
                     <button type="button" @click="showPrivacyDetails = !showPrivacyDetails"
-                        style="flex-shrink: 0; padding: 0.3rem 0.7rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; font-size: 0.8em; font-weight: 600; color: #15803d; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                        style="flex-shrink: 0; padding: 0.3rem 0.7rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-size: 0.8em; font-weight: 600; color: var(--foreground-strong); cursor: pointer; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;">
                         🔍 Verify It Yourself <span>{{ showPrivacyDetails ? '▲' : '▼' }}</span>
                     </button>
                 </div>
 
                 <!-- Expandable Privacy & Verification Panel -->
-                <div v-show="showPrivacyDetails" style="margin-bottom: 1rem; padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.85em; color: #374151; line-height: 1.7;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; padding: 0.6rem 0.85rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px;">
+                <div v-show="showPrivacyDetails" style="margin-bottom: 1rem; padding: 1rem; background: var(--muted); border: 1px solid var(--border); border-radius: 6px; font-size: 0.85em; color: var(--foreground-strong); line-height: 1.7;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; padding: 0.6rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 5px;">
                         <span style="font-size: 1.1em;">🔒</span>
                         <div>
-                            <strong style="color: #15803d;">100% Private. 100% Local.</strong>
-                            <ul style="margin: 0.25rem 0 0; padding-left: 1.2rem; color: #166534; line-height: 1.8;">
+                            <strong style="color: var(--foreground-strong);">100% Private. 100% Local.</strong>
+                            <ul style="margin: 0.25rem 0 0; padding-left: 1.2rem; color: var(--foreground); line-height: 1.8;">
                                 <li>Processed locally via JavaScript.</li>
                                 <li>No data ever leaves your device.</li>
                                 <li>Stored locally in your browser cache.</li>
@@ -160,43 +175,43 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             </ul>
                         </div>
                     </div>
-                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: #eff6ff; border-left: 3px solid #3b82f6; border-radius: 4px; color: #1e40af;">
+                    <div style="margin-bottom: 0.75rem; padding: 0.5rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent-line, var(--secondary-color)); border-radius: 4px; color: var(--foreground);">
                         💡 <strong>Try with a smaller window:</strong> Upload a CAS PDF covering just the first year or two — quicker to verify, and a great way to explore tagging, XIRR, and allocation views.
                     </div>
-                    <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: #374151;">Three ways to verify your data stays private:</p>
-                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 5px;">
+                    <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: var(--foreground-strong);">Three ways to verify your data stays private:</p>
+                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 5px;">
                         <p style="margin: 0 0 0.35rem 0; font-weight: 600;">📴 Approach 1: Go Offline</p>
                         <ol style="margin: 0 0 0.35rem 0; padding-left: 1.4rem;">
                             <li>Load the page fully</li>
                             <li>Disconnect from the internet</li>
                             <li>Upload your CAS file</li>
                         </ol>
-                        <p style="margin: 0; color: #15803d;">✅ Analysis completes — no network needed.</p>
+                        <p style="margin: 0; color: var(--success-ink);">✅ Analysis completes — no network needed.</p>
                     </div>
-                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 5px;">
+                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 5px;">
                         <p style="margin: 0 0 0.35rem 0; font-weight: 600;">🔍 Approach 2: Check Network Activity</p>
                         <ol style="margin: 0 0 0.35rem 0; padding-left: 1.4rem;">
-                            <li>Open developer tools (<code style="background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 3px;">F12</code> or <code style="background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 3px;">Ctrl+Shift+I</code>)</li>
+                            <li>Open developer tools (<code style="background: var(--muted); padding: 0.1rem 0.3rem; border-radius: 3px;">F12</code> or <code style="background: var(--muted); padding: 0.1rem 0.3rem; border-radius: 3px;">Ctrl+Shift+I</code>)</li>
                             <li>Go to the <strong>Network</strong> tab</li>
                             <li>Upload your CAS file</li>
                         </ol>
-                        <p style="margin: 0; color: #15803d;">✅ No file upload request appears in the Network tab.</p>
+                        <p style="margin: 0; color: var(--success-ink);">✅ No file upload request appears in the Network tab.</p>
                     </div>
-                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 5px;">
+                    <div style="margin-bottom: 0.75rem; padding: 0.6rem 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: 5px;">
                         <p style="margin: 0 0 0.35rem 0; font-weight: 600;">📚 Approach 3: Read the Source</p>
                         <ul style="margin: 0 0 0.35rem 0; padding-left: 1.4rem;">
                             <li>This site is hosted on <strong>GitHub Pages</strong> — a static file host. It cannot run server-side code or receive uploads.</li>
-                            <li>The full source is open on GitHub. Browse the <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">HTML</a> and <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">JavaScript</a> — there is no upload or network-send code.</li>
+                            <li>The full source is open on GitHub. Browse the <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/building-wealth/tools/realvalue-portfolio/index.html" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color);">HTML</a> and <a href="https://github.com/sakthipriyan/sakthipriyan.github.io/blob/master/docs/js/realvalue-portfolio.js" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color);">JavaScript</a> — there is no upload or network-send code.</li>
                             <li>
                                 Ask any AI tool (ChatGPT, Gemini, etc.) — copy this prompt:
-                                <div style="display: flex; align-items: stretch; gap: 0; margin-top: 0.4rem; border: 1px solid #d1d5db; border-radius: 4px; overflow: hidden; font-size: 0.9em;">
-                                    <span style="flex: 1; padding: 0.4rem 0.6rem; background: #f9fafb; color: #374151; font-style: italic; line-height: 1.4;">I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/index.html | https://sakthipriyan.com/js/realvalue-portfolio.js</span>
-                                    <button type="button" @click="copyAiPrompt" style="flex-shrink: 0; border: none; border-left: 1px solid #d1d5db; background: #f3f4f6; padding: 0.4rem 0.7rem; cursor: pointer; font-size: 0.85em; color: #374151; white-space: nowrap;">{{ promptCopied ? '✅ Copied' : '📋 Copy' }}</button>
+                                <div style="display: flex; align-items: stretch; gap: 0; margin-top: 0.4rem; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; font-size: 0.9em;">
+                                    <span style="flex: 1; padding: 0.4rem 0.6rem; background: var(--muted); color: var(--foreground-strong); font-style: italic; line-height: 1.4;">I want to verify this tool is completely private. When I upload my files and use this tool, does it send any of my data to a server or the internet? Please review these files and confirm: https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/ | https://sakthipriyan.com/building-wealth/tools/realvalue-portfolio/index.html | https://sakthipriyan.com/js/realvalue-portfolio.js</span>
+                                    <button type="button" @click="copyAiPrompt" style="flex-shrink: 0; border: none; border-left: 1px solid var(--border); background: var(--muted); padding: 0.4rem 0.7rem; cursor: pointer; font-size: 0.85em; color: var(--foreground-strong); white-space: nowrap;">{{ promptCopied ? '✅ Copied' : '📋 Copy' }}</button>
                                 </div>
                             </li>
-                            <li>📦 Uses <a href="https://mozilla.github.io/pdf.js/" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">PDF.js</a> — all PDF parsing runs locally in your browser, no server needed.</li>
+                            <li>📦 Uses <a href="https://mozilla.github.io/pdf.js/" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color);">PDF.js</a> — all PDF parsing runs locally in your browser, no server needed.</li>
                         </ul>
-                        <p style="margin: 0; color: #15803d;">✅ The code confirms it — your data never leaves your device.</p>
+                        <p style="margin: 0; color: var(--success-ink);">✅ The code confirms it — your data never leaves your device.</p>
                     </div>
                 </div>
 
@@ -224,53 +239,53 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     <div v-show="activeTab === 'summary'">
                         <!-- Goal Cards (above Investors) -->
                         <div v-if="goals.length > 0" style="margin-bottom: 2rem;">
-                            <h3 style="margin: 0 0 1rem 0; color: var(--primary-color); font-size: 1.1em; letter-spacing: 0.02em;">
+                            <h3 style="margin: 0 0 1rem 0; color: var(--foreground-strong); font-size: 1.1em; letter-spacing: 0.02em;">
                                 🎯 Goal{{ goals.length > 1 ? 's' : '' }}
                             </h3>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
 
                                 <!-- Combined Goals card (only when multiple goals) -->
-                                <div v-if="goals.length > 1" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                                    <h3 style="margin: 0 0 0.25rem 0; color: var(--primary-color);">✨ Combined Goals</h3>
-                                    <p style="margin: 0 0 0.75rem 0; color: var(--text-secondary); font-size: 0.85em;">Sum of all goal-assigned funds</p>
+                                <div v-if="goals.length > 1" style="background: var(--card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                    <h3 style="margin: 0 0 0.25rem 0; color: var(--foreground-strong);">✨ Combined Goals</h3>
+                                    <p style="margin: 0 0 0.75rem 0; color: var(--muted-foreground); font-size: 0.85em;">Sum of all goal-assigned funds</p>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Total Value</span>
+                                        <span style="color: var(--muted-foreground);">Total Value</span>
                                         <strong style="font-size: 1.2em;">₹{{ formatNumber(Object.values(goalCurrentValues).reduce((s, v) => s + v, 0)) }}</strong>
                                     </div>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                        <span style="color: var(--text-secondary); font-size: 0.85em;">Next Milestone</span>
+                                        <span style="color: var(--muted-foreground); font-size: 0.85em;">Next Milestone</span>
                                         <span style="font-size: 0.85em;">₹{{ formatNumber(calculateNextMilestone(Object.values(goalCurrentValues).reduce((s, v) => s + v, 0), 'INR')) }}</span>
                                     </div>
-                                    <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem;">
-                                        <div :style="{ width: Math.min(100, (Object.values(goalCurrentValues).reduce((s,v) => s+v, 0) / calculateNextMilestone(Object.values(goalCurrentValues).reduce((s,v) => s+v, 0), 'INR')) * 100) + '%', backgroundColor: '#3b82f6', height: '100%', borderRadius: '4px' }"></div>
+                                    <div style="width: 100%; background-color: var(--muted); border-radius: 4px; height: 8px; margin-bottom: 0.2rem;">
+                                        <div :style="{ width: Math.min(100, (Object.values(goalCurrentValues).reduce((s,v) => s+v, 0) / calculateNextMilestone(Object.values(goalCurrentValues).reduce((s,v) => s+v, 0), 'INR')) * 100) + '%', backgroundColor: 'var(--secondary-color)', height: '100%', borderRadius: '4px' }"></div>
                                     </div>
-                                    <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary);">
+                                    <div style="text-align: right; font-size: 0.75em; color: var(--muted-foreground);">
                                         {{ formatPercent((Object.values(goalCurrentValues).reduce((s,v) => s+v, 0) / calculateNextMilestone(Object.values(goalCurrentValues).reduce((s,v) => s+v, 0), 'INR')) * 100) }} to milestone
                                     </div>
                                 </div>
 
                                 <!-- Individual goal cards -->
-                                <div v-for="goal in goals" :key="goal.id" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                                    <h3 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">🎯 {{ goal.name }}</h3>
-                                    <p v-if="goal.description" style="margin: 0 0 0.75rem 0; color: var(--text-secondary); font-size: 0.9em;">{{ goal.description }}</p>
+                                <div v-for="goal in goals" :key="goal.id" style="background: var(--card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                    <h3 style="margin: 0 0 0.5rem 0; color: var(--foreground-strong);">🎯 {{ goal.name }}</h3>
+                                    <p v-if="goal.description" style="margin: 0 0 0.75rem 0; color: var(--muted-foreground); font-size: 0.9em;">{{ goal.description }}</p>
 
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Current Value</span>
+                                        <span style="color: var(--muted-foreground);">Current Value</span>
                                         <strong style="font-size: 1.2em;">₹{{ formatNumber(goalCurrentValues[goal.id] || 0) }}</strong>
                                     </div>
 
                                     <!-- Has target amount → amount progress bar -->
                                     <template v-if="getGoalTargetAmount(goal) > 0">
                                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                            <span style="color: var(--text-secondary); font-size: 0.85em;">Target Amount</span>
+                                            <span style="color: var(--muted-foreground); font-size: 0.85em;">Target Amount</span>
                                             <span style="font-size: 0.85em;">₹{{ formatNumber(getGoalTargetAmount(goal)) }}</span>
                                         </div>
                                         <!-- Two-segment bar: green up to target, amber for overflow -->
-                                        <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem; display: flex; overflow: hidden;">
-                                            <div :style="{ width: ((goalCurrentValues[goal.id] || 0) >= getGoalTargetAmount(goal) ? (getGoalTargetAmount(goal) / (goalCurrentValues[goal.id] || 1)) * 100 : ((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) + '%', backgroundColor: '#4CAF50', height: '100%', flexShrink: 0 }"></div>
-                                            <div v-if="(goalCurrentValues[goal.id] || 0) > getGoalTargetAmount(goal)" :style="{ width: (((goalCurrentValues[goal.id] || 0) - getGoalTargetAmount(goal)) / (goalCurrentValues[goal.id] || 1)) * 100 + '%', backgroundColor: '#f59e0b', height: '100%', flexShrink: 0 }"></div>
+                                        <div style="width: 100%; background-color: var(--muted); border-radius: 4px; height: 8px; margin-bottom: 0.2rem; display: flex; overflow: hidden;">
+                                            <div :style="{ width: ((goalCurrentValues[goal.id] || 0) >= getGoalTargetAmount(goal) ? (getGoalTargetAmount(goal) / (goalCurrentValues[goal.id] || 1)) * 100 : ((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) + '%', backgroundColor: 'var(--success)', height: '100%', flexShrink: 0 }"></div>
+                                            <div v-if="(goalCurrentValues[goal.id] || 0) > getGoalTargetAmount(goal)" :style="{ width: (((goalCurrentValues[goal.id] || 0) - getGoalTargetAmount(goal)) / (goalCurrentValues[goal.id] || 1)) * 100 + '%', backgroundColor: 'var(--warning)', height: '100%', flexShrink: 0 }"></div>
                                         </div>
-                                        <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                        <div style="text-align: right; font-size: 0.75em; color: var(--muted-foreground); margin-bottom: 0.5rem;">
                                             {{ formatPercent(((goalCurrentValues[goal.id] || 0) / getGoalTargetAmount(goal)) * 100) }} of target
                                         </div>
                                     </template>
@@ -278,13 +293,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <!-- No target amount AND no target date → next milestone bar -->
                                     <template v-else-if="!goal.targetDate">
                                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                            <span style="color: var(--text-secondary); font-size: 0.85em;">Next Milestone</span>
+                                            <span style="color: var(--muted-foreground); font-size: 0.85em;">Next Milestone</span>
                                             <span style="font-size: 0.85em;">₹{{ formatNumber(calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) }}</span>
                                         </div>
-                                        <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem;">
-                                            <div :style="{ width: Math.min(100, ((goalCurrentValues[goal.id] || 0) / calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) * 100) + '%', backgroundColor: '#3b82f6', height: '100%', borderRadius: '4px' }"></div>
+                                        <div style="width: 100%; background-color: var(--muted); border-radius: 4px; height: 8px; margin-bottom: 0.2rem;">
+                                            <div :style="{ width: Math.min(100, ((goalCurrentValues[goal.id] || 0) / calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) * 100) + '%', backgroundColor: 'var(--secondary-color)', height: '100%', borderRadius: '4px' }"></div>
                                         </div>
-                                        <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                        <div style="text-align: right; font-size: 0.75em; color: var(--muted-foreground); margin-bottom: 0.5rem;">
                                             {{ formatPercent(((goalCurrentValues[goal.id] || 0) / calculateNextMilestone(goalCurrentValues[goal.id] || 0, 'INR')) * 100) }} to milestone
                                         </div>
                                     </template>
@@ -293,14 +308,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <template v-if="goal.targetDate">
                                         <div style="margin-top: 0.25rem;">
                                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                                <span style="color: var(--text-secondary); font-size: 0.85em;">⏱ Time Progress</span>
-                                                <span style="font-size: 0.85em; color: var(--text-secondary);">Target: {{ formatNavDate(goal.targetDate) }}</span>
+                                                <span style="color: var(--muted-foreground); font-size: 0.85em;">⏱ Time Progress</span>
+                                                <span style="font-size: 0.85em; color: var(--muted-foreground);">Target: {{ formatNavDate(goal.targetDate) }}</span>
                                             </div>
-                                            <div style="width: 100%; background-color: #e0e0e0; border-radius: 4px; height: 8px; margin-bottom: 0.2rem; display: flex; overflow: hidden;">
-                                                <div :style="{ width: (getGoalTimePercent(goal) >= 100 ? 85 : getGoalTimePercent(goal)) + '%', backgroundColor: '#4CAF50', height: '100%', flexShrink: 0 }"></div>
-                                                <div v-if="getGoalTimePercent(goal) >= 100" style="width: 15%; background-color: #f59e0b; height: 100%; flex-shrink: 0;"></div>
+                                            <div style="width: 100%; background-color: var(--muted); border-radius: 4px; height: 8px; margin-bottom: 0.2rem; display: flex; overflow: hidden;">
+                                                <div :style="{ width: (getGoalTimePercent(goal) >= 100 ? 85 : getGoalTimePercent(goal)) + '%', backgroundColor: 'var(--success)', height: '100%', flexShrink: 0 }"></div>
+                                                <div v-if="getGoalTimePercent(goal) >= 100" style="width: 15%; background-color: var(--warning); height: 100%; flex-shrink: 0;"></div>
                                             </div>
-                                            <div style="text-align: right; font-size: 0.75em; color: var(--text-secondary);">
+                                            <div style="text-align: right; font-size: 0.75em; color: var(--muted-foreground);">
                                                 {{ formatPercent(getGoalTimePercent(goal)) }} elapsed
                                             </div>
                                         </div>
@@ -312,23 +327,23 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                         <!-- Investor Cards -->
                         <div v-if="investorCards.length > 0" style="margin-bottom: 2rem;">
-                            <h3 style="margin: 0 0 1rem 0; color: var(--primary-color); font-size: 1.1em; letter-spacing: 0.02em;">
+                            <h3 style="margin: 0 0 1rem 0; color: var(--foreground-strong); font-size: 1.1em; letter-spacing: 0.02em;">
                                 👤 Investor{{ investorCards.length > 1 ? 's' : '' }}
                             </h3>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                                <div v-for="inv in investorCards" :key="inv.name" style="background: var(--bg-primary, #fff); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gray-medium, #ddd); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                                    <h3 style="margin: 0 0 1rem 0; color: var(--primary-color);">👤 {{ inv.name }}</h3>
+                                <div v-for="inv in investorCards" :key="inv.name" style="background: var(--card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                                    <h3 style="margin: 0 0 1rem 0; color: var(--foreground-strong);">👤 {{ inv.name }}</h3>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Market Value</span>
+                                        <span style="color: var(--muted-foreground);">Market Value</span>
                                         <strong style="font-size: 1.1em;">₹{{ formatNumber(inv.marketValue) }}</strong>
                                     </div>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="color: var(--text-secondary);">Invested Value</span>
+                                        <span style="color: var(--muted-foreground);">Invested Value</span>
                                         <span>₹{{ formatNumber(inv.investedValue) }}</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid #eee;">
-                                        <span style="color: var(--text-secondary);">Absolute Return</span>
-                                        <strong :style="{ color: inv.marketValue >= inv.investedValue ? 'var(--state-success, #4CAF50)' : 'var(--state-danger, #ff5252)' }">
+                                    <div style="display: flex; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid var(--border);">
+                                        <span style="color: var(--muted-foreground);">Absolute Return</span>
+                                        <strong :style="{ color: inv.marketValue >= inv.investedValue ? 'var(--success)' : 'var(--danger)' }">
                                             {{ inv.marketValue >= inv.investedValue ? '+' : '' }}₹{{ formatNumber(inv.marketValue - inv.investedValue) }}
                                         </strong>
                                     </div>
@@ -404,25 +419,25 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                 <span v-if="getExploreColorForName(row.name)" :style="{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '2px', backgroundColor: getExploreColorForName(row.name), marginRight: '0.45rem', border: '1px solid rgba(0,0,0,0.15)' }"></span>{{ row.name || 'Unclassified' }}
                                             </strong>
                                         </td>
-                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--text-secondary);">{{ row.targetPercent !== null ? formatPercent(row.targetPercent) : '—' }}</td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right; color: var(--muted-foreground);">{{ row.targetPercent !== null ? formatPercent(row.targetPercent) : '—' }}</td>
                                         <td v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" style="text-align: right;">{{ row.fundCount }}</td>
                                         <td style="text-align: right;">
                                             <div>₹{{ formatNumber(row.investedValue) }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatPercent(row.investedPercent) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);">{{ formatPercent(row.investedPercent) }}</div>
                                         </td>
                                         <td style="text-align: right;">
                                             <div>₹{{ formatNumber(row.value) }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ formatPercent(row.percent) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);">{{ formatPercent(row.percent) }}</div>
                                         </td>
                                         <td style="text-align: right;">
-                                            <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: row.xirrInr === null || row.xirrInr === undefined ? 'var(--text-secondary)' : (Number(row.xirrInr) >= 0 ? '#15803d' : '#b91c1c') }">{{ formatXirr(row.xirrInr) }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);" :style="row.growthValue < 0 ? 'color: #ef4444;' : ''">₹{{ formatNumber(Math.abs(row.growthValue)) }}</div>
+                                            <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: row.xirrInr === null || row.xirrInr === undefined ? 'var(--muted-foreground)' : (Number(row.xirrInr) >= 0 ? 'var(--success-ink)' : 'var(--danger)') }">{{ formatXirr(row.xirrInr) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);" :style="row.growthValue < 0 ? 'color: var(--danger);' : ''">₹{{ formatNumber(Math.abs(row.growthValue)) }}</div>
                                         </td>
                                         <td v-if="summaryData.length > 1" style="text-align: right;">
-                                            <div style="font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--text-secondary)' : (row.contributionPercent >= 0 ? '#15803d' : '#b91c1c') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);">{{ (row.contributionPercent !== null && row.investedPercent > 0) ? (row.contributionPercent / row.investedPercent).toFixed(2) + 'x' : '—' }}</div>
+                                            <div style="font-weight: 600;" :style="{ color: row.contributionPercent === null ? 'var(--muted-foreground)' : (row.contributionPercent >= 0 ? 'var(--success-ink)' : 'var(--danger)') }">{{ row.contributionPercent === null ? '—' : formatPercent(row.contributionPercent) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);">{{ (row.contributionPercent !== null && row.investedPercent > 0) ? (row.contributionPercent / row.investedPercent).toFixed(2) + 'x' : '—' }}</div>
                                         </td>
-                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;" :style="{ color: row.driftPercent === null ? 'var(--text-secondary)' : (row.driftPercent < 0 ? '#b91c1c' : '#15803d') }">{{ row.driftPercent === null ? '—' : formatPercent(row.driftPercent) }}</td>
+                                        <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;" :style="{ color: row.driftPercent === null ? 'var(--muted-foreground)' : (row.driftPercent < 0 ? 'var(--danger)' : 'var(--success-ink)') }">{{ row.driftPercent === null ? '—' : formatPercent(row.driftPercent) }}</td>
                                     </tr>
                                     <tr v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" class="total-row">
                                         <td><strong>Total Portfolio</strong></td>
@@ -430,15 +445,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <td v-if="selectedReportArea === 'overview' || (selectedReportArea !== 'overview' && summaryData.length > 1)" style="text-align: right;"><strong>{{ totalPortfolioFundCount }}</strong></td>
                                         <td style="text-align: right;">
                                             <div><strong>₹{{ formatNumber(totalPortfolioInvestedValue) }}</strong></div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);"><strong>100.00%</strong></div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);"><strong>100.00%</strong></div>
                                         </td>
                                         <td style="text-align: right;">
                                             <div><strong>₹{{ formatNumber(totalPortfolioValue) }}</strong></div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);"><strong>100.00%</strong></div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);"><strong>100.00%</strong></div>
                                         </td>
                                         <td style="text-align: right;">
-                                            <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: totalPortfolioXirrInr === null || totalPortfolioXirrInr === undefined ? 'var(--text-secondary)' : (Number(totalPortfolioXirrInr) >= 0 ? '#15803d' : '#b91c1c') }"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></div>
-                                            <div style="font-size: 0.8em; color: var(--text-secondary);" :style="(totalPortfolioValue - totalPortfolioInvestedValue) < 0 ? 'color: #ef4444;' : ''"><strong>₹{{ formatNumber(Math.abs(totalPortfolioValue - totalPortfolioInvestedValue)) }}</strong></div>
+                                            <div style="font-weight: 700; font-size: 1.02em;" :style="{ color: totalPortfolioXirrInr === null || totalPortfolioXirrInr === undefined ? 'var(--muted-foreground)' : (Number(totalPortfolioXirrInr) >= 0 ? 'var(--success-ink)' : 'var(--danger)') }"><strong>{{ formatXirr(totalPortfolioXirrInr) }}</strong></div>
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground);" :style="(totalPortfolioValue - totalPortfolioInvestedValue) < 0 ? 'color: var(--danger);' : ''"><strong>₹{{ formatNumber(Math.abs(totalPortfolioValue - totalPortfolioInvestedValue)) }}</strong></div>
                                         </td>
                                         <td v-if="summaryData.length > 1" style="text-align: right;"><strong>{{ totalPortfolioValue !== totalPortfolioInvestedValue ? '100.00%' : '—' }}</strong></td>
                                         <td v-if="selectedReportArea !== 'overview' && summaryData.length > 1" style="text-align: right;"><strong><span :style="[getTotalDriftColorStyle(totalPositiveDrift()), { cursor: 'default', opacity: 1, display: 'inline-block' }]">{{ formatPercent(totalPositiveDrift()) }}</span></strong></td>
@@ -531,7 +546,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     </div>
                                 </div>
                                 <div v-if="uniqueInvestorsCalendar.length > 0" style="display: flex; gap: 0.5rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem;">
-                                    <span style="font-size: 0.85em; color: var(--text-secondary);">Select Investors:</span>
+                                    <span style="font-size: 0.85em; color: var(--muted-foreground);">Select Investors:</span>
                                     <div class="mode-toggle">
                                         <button 
                                             type="button"
@@ -572,12 +587,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <tr v-for="row in investmentCalendarData" :key="row.year">
                                             <td><strong>{{ row.year }}</strong></td>
                                             <td v-for="(val, idx) in row.months" :key="idx">
-                                                <span v-if="val !== 0" class="help-icon" :data-tooltip="(val < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(val), 0)" @click="jumpToMonthlyMonth(row.year, idx)" style="cursor: pointer; opacity: 1; text-decoration: underline dotted; text-underline-offset: 2px;" :style="val < 0 ? 'color: #ef4444;' : ''">
+                                                <span v-if="val !== 0" class="help-icon" :data-tooltip="(val < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(val), 0)" @click="jumpToMonthlyMonth(row.year, idx)" style="cursor: pointer; opacity: 1; text-decoration: underline dotted; text-underline-offset: 2px;" :style="val < 0 ? 'color: var(--danger);' : ''">
                                                     {{ formatCurrency(val) }}
                                                 </span>
-                                                <span v-else style="color: #999;">—</span>
+                                                <span v-else style="color: var(--muted-foreground);">—</span>
                                             </td>
-                                            <td style="font-weight: bold;" :style="row.total < 0 ? 'color: #ef4444;' : 'color: var(--primary-color);'">
+                                            <td style="font-weight: bold;" :style="row.total < 0 ? 'color: var(--danger);' : 'color: var(--foreground-strong);'">
                                                 <span class="help-icon" :data-tooltip="(row.total < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(row.total), 0)" style="cursor: default; opacity: 1;">
                                                     {{ formatCurrency(row.total) }}
                                                 </span>
@@ -602,12 +617,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <tbody>
                                         <template v-for="(row, idx) in investmentCalendarMonthlyDetail" :key="row.date + row.fundName + idx">
                                             <tr v-if="idx === 0 || investmentCalendarMonthlyDetail[idx - 1].monthKey !== row.monthKey">
-                                                <td :id="'calendar-month-' + row.monthKey" style="background: #f5f5f5; font-weight: bold; color: var(--primary-color); padding: 0.4rem 0.6rem; white-space: nowrap;">
+                                                <td :id="'calendar-month-' + row.monthKey" style="background: var(--muted); font-weight: bold; color: var(--foreground-strong); padding: 0.4rem 0.6rem; white-space: nowrap;">
                                                     {{ row.monthKey }}
                                                 </td>
-                                                <td colspan="3" style="background: #f5f5f5; padding: 0.4rem 0.6rem;"></td>
-                                                <td style="background: #f5f5f5; font-weight: bold; text-align: right; padding: 0.4rem 0.6rem; white-space: nowrap;"
-                                                    :style="investmentCalendarMonthlyDetail.filter(r => r.monthKey === row.monthKey).reduce((s, r) => s + r.amount, 0) < 0 ? 'color: #ef4444;' : 'color: var(--primary-color);'">
+                                                <td colspan="3" style="background: var(--muted); padding: 0.4rem 0.6rem;"></td>
+                                                <td style="background: var(--muted); font-weight: bold; text-align: right; padding: 0.4rem 0.6rem; white-space: nowrap;"
+                                                    :style="investmentCalendarMonthlyDetail.filter(r => r.monthKey === row.monthKey).reduce((s, r) => s + r.amount, 0) < 0 ? 'color: var(--danger);' : 'color: var(--foreground-strong);'">
                                                     <span class="help-icon"
                                                         :data-tooltip="'₹ ' + formatNumber(Math.abs(investmentCalendarMonthlyDetail.filter(r => r.monthKey === row.monthKey).reduce((s, r) => s + r.amount, 0)), 0)"
                                                         style="cursor: default; opacity: 1;">
@@ -616,11 +631,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="white-space: nowrap; font-size: 0.9em; color: #555;">{{ row.date }}</td>
-                                                <td style="text-align: left; font-size: 0.9em; white-space: nowrap; color: #555;">{{ row.investor || '—' }}</td>
-                                                <td style="text-align: right; font-size: 0.9em; white-space: nowrap; color: #555;">{{ row.folioNo || '—' }}</td>
+                                                <td style="white-space: nowrap; font-size: 0.9em; color: var(--muted-foreground);">{{ row.date }}</td>
+                                                <td style="text-align: left; font-size: 0.9em; white-space: nowrap; color: var(--muted-foreground);">{{ row.investor || '—' }}</td>
+                                                <td style="text-align: right; font-size: 0.9em; white-space: nowrap; color: var(--muted-foreground);">{{ row.folioNo || '—' }}</td>
                                                 <td style="text-align: left; font-size: 0.9em;">{{ row.fundName }}</td>
-                                                <td style="text-align: right; white-space: nowrap; font-weight: 500;" :style="row.amount < 0 ? 'color: #ef4444;' : ''">
+                                                <td style="text-align: right; white-space: nowrap; font-weight: 500;" :style="row.amount < 0 ? 'color: var(--danger);' : ''">
                                                     <span class="help-icon" :data-tooltip="(row.amount < 0 ? '-₹ ' : '₹ ') + formatNumber(Math.abs(row.amount), 0)" style="cursor: default; opacity: 1;">
                                                         {{ formatCurrency(row.amount) }}
                                                     </span>
@@ -628,7 +643,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                             </tr>
                                         </template>
                                         <tr v-if="investmentCalendarMonthlyDetail.length === 0">
-                                            <td colspan="5" style="text-align: center; color: #999; padding: 1rem;">No transaction data available.</td>
+                                            <td colspan="5" style="text-align: center; color: var(--muted-foreground); padding: 1rem;">No transaction data available.</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -645,7 +660,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
 
                     <!-- TAB 4: SETUP -->
                     <div v-show="activeTab === 'setup'">
-                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
                                 <h3 style="margin: 0;">💾 Export & Import Setup</h3>
                                 <div style="display: flex; gap: 0.5rem;">
@@ -658,7 +673,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     </button>
                                 </div>
                             </div>
-                            <ul style="color: #666; font-size: 0.85em; margin: 0; padding-left: 1.5rem; line-height: 1.6;">
+                            <ul style="color: var(--muted-foreground); font-size: 0.85em; margin: 0; padding-left: 1.5rem; line-height: 1.6;">
                                 <li>Export your Setup as a JSON file to safely back up your Investors, Goals, and Tagging mappings.</li>
                                 <li>Import this file to restore these configurations after clearing browser data or to sync across devices.</li>
                                 <li><em>Note: You must still re-upload your CAS/IBKR files to view your portfolio data.</em></li>
@@ -669,20 +684,20 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                             <div style="display: flex; flex-direction: column;">
                                 <h3 style="margin: 0 0 0.2rem 0;">👥 Investors Setup</h3>
-                                <p style="color: #666; font-size: 0.85em; margin: 0;">Define investors and their full names to enable automated statement tagging.</p>
+                                <p style="color: var(--muted-foreground); font-size: 0.85em; margin: 0;">Define investors and their full names to enable automated statement tagging.</p>
                             </div>
                             <button type="button" class="share-button" @click="addInvestor">
                                 ➕ Investor
                             </button>
                         </div>
-                        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
                             
                             <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.95em;">
                                 <thead>
-                                    <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
-                                        <th style="padding: 0.75rem; text-align: center; width: 40px; color: #6b7280;">↕</th>
-                                        <th style="padding: 0.75rem; text-align: left; width: 25%; color: #374151;">Name</th>
-                                        <th style="padding: 0.75rem; text-align: left; color: #374151;">Full Name(s)</th>
+                                    <tr style="background-color: var(--muted); border-bottom: 1px solid var(--border);">
+                                        <th style="padding: 0.75rem; text-align: center; width: 40px; color: var(--muted-foreground);">↕</th>
+                                        <th style="padding: 0.75rem; text-align: left; width: 25%; color: var(--foreground-strong);">Name</th>
+                                        <th style="padding: 0.75rem; text-align: left; color: var(--foreground-strong);">Full Name(s)</th>
                                         <th style="padding: 0.75rem; text-align: center; width: 50px;"></th>
                                     </tr>
                                 </thead>
@@ -693,39 +708,39 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         @dragend="dragEnd($event)"
                                         @dragover.prevent
                                         @drop="drop($event, index, 'investor')"
-                                        style="cursor: move; border-bottom: 1px solid #f3f4f6; transition: background-color 0.2s;">
+                                        style="cursor: move; border-bottom: 1px solid var(--border); transition: background-color 0.2s;">
                                         
-                                        <td style="padding: 0.75rem; text-align: center; color: #9ca3af; cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--muted-foreground); cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">
                                             ⋮⋮
                                         </td>
                                         
                                         <td style="padding: 0.75rem;">
                                             <input type="text" v-model="inv.name" placeholder="Investor Name" @change="saveSettings"
-                                                   style="width: 100%; padding: 0.4rem; border: 1px solid #d1d5db; border-radius: 4px;">
+                                                   style="width: 100%; padding: 0.4rem; border: 1px solid var(--border); border-radius: 4px; background: var(--card); color: var(--foreground-strong);">
                                         </td>
                                         
                                         <td style="padding: 0.75rem;">
                                             <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
                                                 <span v-for="(fName, fnIdx) in inv.fullNames" :key="fnIdx" 
-                                                      style="background-color: #e5e7eb; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; display: flex; align-items: center; gap: 0.3rem;">
+                                                      style="background-color: var(--muted); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; display: flex; align-items: center; gap: 0.3rem;">
                                                     {{ fName }}
-                                                    <button type="button" @click="removeFullName(index, fnIdx)" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 0; font-size: 1.1em; line-height: 1;">&times;</button>
+                                                    <button type="button" @click="removeFullName(index, fnIdx)" style="background: none; border: none; color: var(--danger); cursor: pointer; padding: 0; font-size: 1.1em; line-height: 1;">&times;</button>
                                                 </span>
                                                 <div style="display: flex; align-items: center; gap: 0.25rem;">
                                                     <input type="text" v-model="inv.newFullName" placeholder="Add full name..." @keyup.enter="addFullName(index)"
-                                                           style="padding: 0.3rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.9em; width: 150px;">
-                                                    <button type="button" @click="addFullName(index)" style="background: #e5e7eb; border: none; border-radius: 4px; padding: 0.3rem 0.5rem; cursor: pointer;">+</button>
+                                                           style="padding: 0.3rem; border: 1px solid var(--border); border-radius: 4px; font-size: 0.9em; width: 150px; background: var(--card); color: var(--foreground-strong);">
+                                                    <button type="button" @click="addFullName(index)" style="background: var(--muted); border: none; border-radius: 4px; padding: 0.3rem 0.5rem; cursor: pointer;">+</button>
                                                 </div>
                                             </div>
                                         </td>
                                         
                                         <td style="padding: 0.75rem; text-align: center;">
-                                            <button type="button" @click="removeInvestor(index)" style="background: none; border: none; color: #ef4444; font-size: 1.2em; cursor: pointer;" title="Remove Investor">&times;</button>
+                                            <button type="button" @click="removeInvestor(index)" style="background: none; border: none; color: var(--danger); font-size: 1.2em; cursor: pointer;" title="Remove Investor">&times;</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div v-if="investors.length === 0" style="text-align: center; padding: 1rem; color: #6b7280; font-style: italic;">
+                            <div v-if="investors.length === 0" style="text-align: center; padding: 1rem; color: var(--muted-foreground); font-style: italic;">
                                 No investors defined.
                             </div>
                         </div>
@@ -734,18 +749,18 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                             <div style="display: flex; flex-direction: column;">
                                 <h3 style="margin: 0 0 0.2rem 0;">🎯 Financial Goals</h3>
-                                <p style="color: #666; font-size: 0.85em; margin: 0;">Define your portfolio targets and asset allocation structures.</p>
+                                <p style="color: var(--muted-foreground); font-size: 0.85em; margin: 0;">Define your portfolio targets and asset allocation structures.</p>
                             </div>
                             <button type="button" class="share-button" @click="addNewGoal">
                                 ➕ Goal
                             </button>
                         </div>
                         
-                        <div v-if="goals.length === 0" style="padding: 2rem; text-align: center; background: white; border-radius: 8px; border: 1px dashed #ccc; color: #666;">
+                        <div v-if="goals.length === 0" style="padding: 2rem; text-align: center; background: var(--card); border-radius: 8px; border: 1px dashed var(--border); color: var(--muted-foreground);">
                             No goals defined yet. Create your first goal to track progress and assign asset allocation.
                         </div>
 
-                        <div v-for="(goal, index) in goals" :key="goal.id" style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <div v-for="(goal, index) in goals" :key="goal.id" style="background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
                             <div style="display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.5rem;">
                                 <!-- LEFT SIDE: Goal Metadata and Amount Setup -->
                                 <div>
@@ -757,7 +772,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         <div>
                                             <label style="display: block; font-size: 0.85em; font-weight: bold; margin-bottom: 0.25rem;">Goal Color</label>
                                             <div style="display: flex; align-items: center; gap: 0.6rem;">
-                                                <input type="color" :value="goal.color || '#2c7be5'" @input="goal.color = $event.target.value; saveGoalsAndTags()" style="width: 2.5rem; height: 2rem; padding: 0.1rem; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">
+                                                <input type="color" :value="goal.color || '#2c7be5'" @input="goal.color = $event.target.value; saveGoalsAndTags()" style="width: 2.5rem; height: 2rem; padding: 0.1rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">
                                                 <input type="text" :value="goal.color || '#2c7be5'" @input="goal.color = $event.target.value; saveGoalsAndTags()" @change="saveGoalsAndTags()" class="fund-input" style="width: 110px; font-family: monospace;" placeholder="#2c7be5" maxlength="7">
                                             </div>
                                         </div>
@@ -773,7 +788,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                         </div>
 
                                         <div v-if="!goal.targetMoney && !goal.targetTime" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-                                            <p style="font-size: 0.85em; color: #666; margin: 0;">Just track the next milestone</p>
+                                            <p style="font-size: 0.85em; color: var(--muted-foreground); margin: 0;">Just track the next milestone</p>
                                         </div>
 
                                         <div v-if="goal.targetTime" style="margin-top: 1.25rem;">
@@ -789,8 +804,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                             </div>
                                             
                                             <div style="margin-bottom: 1.25rem;">
-                                                <p v-if="goal.amountType === 'FLAT'" style="font-size: 0.85em; color: #666; margin: 0;">Define a specific overall corpus size as your final target.</p>
-                                                <p v-if="goal.amountType === 'MONTHS'" style="font-size: 0.85em; color: #666; margin: 0;">Target is derived dynamically by multiplying an exact month count by a monthly expense.</p>
+                                                <p v-if="goal.amountType === 'FLAT'" style="font-size: 0.85em; color: var(--muted-foreground); margin: 0;">Define a specific overall corpus size as your final target.</p>
+                                                <p v-if="goal.amountType === 'MONTHS'" style="font-size: 0.85em; color: var(--muted-foreground); margin: 0;">Target is derived dynamically by multiplying an exact month count by a monthly expense.</p>
                                             </div>
                                             
                                             <div v-if="goal.amountType === 'FLAT'">
@@ -819,7 +834,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="font-size: 0.95em; color: #15803d; margin-top: 0.2rem;">
+                                                <div style="font-size: 0.95em; color: var(--success-ink); margin-top: 0.2rem;">
                                                     <strong>Computed Goal Target: </strong> ₹{{ formatNumber(getGoalTargetAmount(goal)) }}
                                                 </div>
                                             </div>
@@ -836,7 +851,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                                         <h4 style="margin: 0; font-size: 1em;">Asset Allocation</h4>
                                     </div>
-                                    <div v-if="verifyTotalAllocation(goal) && goal.allocations.length > 0" style="color: var(--state-danger, #ff5252); font-size: 0.85em; margin-bottom: 1rem; font-weight: 500;">
+                                    <div v-if="verifyTotalAllocation(goal) && goal.allocations.length > 0" style="color: var(--danger); font-size: 0.85em; margin-bottom: 1rem; font-weight: 500;">
                                         ⚠️ Warning: Total computed allocation is {{ formatPercent(getTotalAllocationPercent(goal)) }}
                                     </div>
                                     <table class="asset-table">
@@ -863,18 +878,18 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                 @dragover.prevent
                                                 @drop="drop($event, aIdx, 'allocation_' + goal.id)"
                                                 style="cursor: move;">
-                                                <td style="text-align: center; color: #aaa; cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">⋮⋮</td>
+                                                <td style="text-align: center; color: var(--muted-foreground); cursor: grab;" @mousedown="$event.target.style.cursor='grabbing'" @mouseup="$event.target.style.cursor='grab'">⋮⋮</td>
                                                 <td>
                                                     <input type="text" v-model="alloc.assetClass" list="asset-class-options" @change="saveGoalsAndTags" style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; outline: none;" placeholder="Asset name">
                                                 </td>
                                                 <td>
                                                     <input type="number" v-model.number="alloc.value" @change="saveGoalsAndTags" style="width: 100%; border: none; background: transparent; padding: 0.25rem; font-size: inherit; outline: none;">
                                                 </td>
-                                                <td v-if="goal.amountType === 'MONTHS'" style="font-weight: bold; color: var(--primary-color);">
+                                                <td v-if="goal.amountType === 'MONTHS'" style="font-weight: bold; color: var(--foreground-strong);">
                                                     {{ formatPercent(computeAllocationPercent(goal, aIdx)) }}
                                                 </td>
                                                 <td style="text-align: center; white-space: nowrap;">
-                                                    <input type="color" :value="alloc.color || '#cccccc'" @input="alloc.color = $event.target.value; saveGoalsAndTags()" style="width: 1.8rem; height: 1.6rem; padding: 0.05rem; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; vertical-align: middle;">
+                                                    <input type="color" :value="alloc.color || '#cccccc'" @input="alloc.color = $event.target.value; saveGoalsAndTags()" style="width: 1.8rem; height: 1.6rem; padding: 0.05rem; border: 1px solid var(--border); border-radius: 3px; cursor: pointer; vertical-align: middle;">
                                                     <input type="text" :value="alloc.color || ''" @input="alloc.color = $event.target.value; saveGoalsAndTags()" @change="saveGoalsAndTags()" style="width: 68px; border: none; background: transparent; padding: 0.25rem 0.1rem; font-size: 0.8em; font-family: monospace; outline: none; vertical-align: middle;" placeholder="#cccccc" maxlength="7">
                                                 </td>
                                                 <td style="text-align: center;">
@@ -882,42 +897,42 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                 </td>
                                             </tr>
                                             <tr v-if="!goal.allocations || goal.allocations.length === 0">
-                                                <td :colspan="goal.amountType === 'MONTHS' ? 6 : 5" style="text-align: center; color: #999; font-style: italic; padding: 1rem;">No asset class allocations defined</td>
+                                                <td :colspan="goal.amountType === 'MONTHS' ? 6 : 5" style="text-align: center; color: var(--muted-foreground); font-style: italic; padding: 1rem;">No asset class allocations defined</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             
-                            <div style="text-align: right; border-top: 1px solid #ddd; padding-top: 1.25rem; margin-top: 1.5rem;">
+                            <div style="text-align: right; border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 1.5rem;">
                                 <button type="button" class="share-button btn-clear-all" @click="deleteGoal(index)">🗑️ Delete Goal</button>
                             </div>
                         </div>
 
                         <!-- TAGGING SETUP (Hierarchical) -->
                         <div v-if="funds.length > 0" style="margin-top: 3rem; margin-bottom: 2rem;">
-                            <h3 style="margin: 0 0 1rem 0; border-bottom: 2px solid #ddd; padding-bottom: 0.5rem;">🏷️ Tag Your Holdings</h3>
+                            <h3 style="margin: 0 0 1rem 0; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">🏷️ Tag Your Holdings</h3>
                             
                             <div v-if="dataHierarchyCAS.length > 0" style="margin-bottom: 2rem;">
-                                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🇮🇳 India Mutual Funds (CAS)</h4>
-                                <div v-for="house in dataHierarchyCAS.filter(h => h.marketValue > 0)" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
-                                    <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em;">
+                                <h4 style="margin-bottom: 1rem; color: var(--foreground-strong);">🇮🇳 India Mutual Funds (CAS)</h4>
+                                <div v-for="house in dataHierarchyCAS.filter(h => h.marketValue > 0)" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--card);">
+                                    <div style="background: var(--muted); padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em;">
                                         🏦 {{ house.name }}
                                     </div>
-                                    <div v-for="folio in house.folios.filter(f => f.marketValue > 0)" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
-                                        <div style="padding: 0.5rem 1rem; background: #fafafa; font-weight: 500; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                    <div v-for="folio in house.folios.filter(f => f.marketValue > 0)" :key="folio.folioNo" style="border-top: 1px solid var(--border); padding: 0;">
+                                        <div style="padding: 0.5rem 1rem; background: var(--muted); font-weight: 500; display: flex; justify-content: space-between; flex-wrap: wrap;">
                                             <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
                                                 <span>Folio: {{ folio.folioNo }}</span>
                                                 <span v-if="folioMappings[folio.folioNo]">Investor: {{ folioMappings[folio.folioNo] }}</span>
                                             </div>
                                             <span>₹{{ formatNumber(folio.marketValue) }}</span>
                                         </div>
-                                        <div v-for="fund in folio.funds.filter(f => f.marketValue > 0)" :key="fund.id" style="padding: 0.75rem 1rem 0.75rem 2rem; border-top: 1px dotted #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                        <div v-for="fund in folio.funds.filter(f => f.marketValue > 0)" :key="fund.id" style="padding: 0.75rem 1rem 0.75rem 2rem; border-top: 1px dotted var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
                                             <div style="flex: 1; min-width: 250px;">
-                                                <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
-                                                <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
-                                                <div style="font-size: 0.85em; color: #555;">
-                                                    Market Value: <span style="font-weight: bold; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</span>
+                                                <div style="font-size: 0.75em; color: var(--muted-foreground); margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
+                                                <div style="font-weight: 600; font-size: 1.0em; color: var(--foreground-strong); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
+                                                <div style="font-size: 0.85em; color: var(--muted-foreground);">
+                                                    Market Value: <span style="font-weight: bold; color: var(--foreground-strong);">₹{{ formatNumber(fund.marketValue) }}</span>
                                                 </div>
                                             </div>
                                             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -941,21 +956,21 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             </div>
                             
                             <div v-if="dataHierarchyIBKR.length > 0" style="margin-bottom: 2rem;">
-                                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">🌎 International Stocks (IBKR)</h4>
-                                <div v-for="account in dataHierarchyIBKR" :key="account.accountNo" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
-                                    <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                <h4 style="margin-bottom: 1rem; color: var(--foreground-strong);">🌎 International Stocks (IBKR)</h4>
+                                <div v-for="account in dataHierarchyIBKR" :key="account.accountNo" style="margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--card);">
+                                    <div style="background: var(--muted); padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
                                         <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
                                             <span>📂 Account: {{ account.accountNo }}</span>
                                             <span v-if="folioMappings[account.accountNo]">Investor: {{ folioMappings[account.accountNo] }}</span>
                                         </div>
                                         <span>₹{{ formatNumber(account.marketValue) }}</span>
                                     </div>
-                                    <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.75rem 1rem; border-top: 1px solid #eee; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                                    <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.75rem 1rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
                                         <div style="flex: 1; min-width: 250px;">
-                                            <div style="font-size: 0.75em; color: #888; margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
-                                            <div style="font-weight: 600; font-size: 1.0em; color: var(--text-primary); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
-                                            <div style="font-size: 0.85em; color: #555;">
-                                                Market Value: <span style="font-weight: bold; color: var(--text-primary);">₹{{ formatNumber(fund.marketValue) }}</span>
+                                            <div style="font-size: 0.75em; color: var(--muted-foreground); margin-bottom: 0.2rem;">ISIN: {{ fund.isin }}</div>
+                                            <div style="font-weight: 600; font-size: 1.0em; color: var(--foreground-strong); margin-bottom: 0.2rem;">{{ fund.fundName }}</div>
+                                            <div style="font-size: 0.85em; color: var(--muted-foreground);">
+                                                Market Value: <span style="font-weight: bold; color: var(--foreground-strong);">₹{{ formatNumber(fund.marketValue) }}</span>
                                             </div>
                                         </div>
                                         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -1003,45 +1018,45 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
                         
                         <div v-if="dataHierarchyCAS.length > 0" style="margin-bottom: 2rem;">
-                            <h4 style="border-bottom: 2px solid var(--gray-medium, #ddd); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--primary-color);">🇮🇳 India Mutual Funds (CAS)</h4>
+                            <h4 style="border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--foreground-strong);">🇮🇳 India Mutual Funds (CAS)</h4>
                             
-                            <div v-for="house in dataHierarchyCAS.filter(h => showZeroBalance || h.marketValue > 0)" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
-                                <div style="background: #f5f5f5; padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                            <div v-for="house in dataHierarchyCAS.filter(h => showZeroBalance || h.marketValue > 0)" :key="house.name" style="margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--card);">
+                                <div style="background: var(--muted); padding: 0.75rem 1rem; font-weight: bold; font-size: 1.05em; display: flex; justify-content: space-between; flex-wrap: wrap;">
                                     <span>🏦 {{ house.name }}</span>
                                     <span>₹{{ formatNumber(house.marketValue) }}</span>
                                 </div>
-                                <div v-for="folio in house.folios.filter(f => showZeroBalance || f.marketValue > 0)" :key="folio.folioNo" style="border-top: 1px solid #eee; padding: 0;">
-                                    <div style="padding: 0.5rem 1rem; background: #fafafa; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                                <div v-for="folio in house.folios.filter(f => showZeroBalance || f.marketValue > 0)" :key="folio.folioNo" style="border-top: 1px solid var(--border); padding: 0;">
+                                    <div style="padding: 0.5rem 1rem; background: var(--muted); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
                                         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                                             <span style="font-weight: 500;">Folio: {{ folio.folioNo }}</span>
                                             <div style="display: flex; align-items: center; gap: 0.25rem;">
                                                 <span style="font-weight: 500;">Investor: {{ folioMappings[folio.folioNo] || 'Unassigned' }}</span>
-                                                <span v-if="folio.funds.length > 0 && folio.funds[0].originalName" style="color: #6b7280; font-weight: normal; font-size: 0.85em;">({{ folio.funds[0].originalName }})</span>
+                                                <span v-if="folio.funds.length > 0 && folio.funds[0].originalName" style="color: var(--muted-foreground); font-weight: normal; font-size: 0.85em;">({{ folio.funds[0].originalName }})</span>
                                             </div>
                                         </div>
                                         <span style="font-size: 0.9em; font-weight: bold;">₹{{ formatNumber(folio.marketValue) }}</span>
                                     </div>
-                                    <div v-for="fund in folio.funds.filter(f => showZeroBalance || f.marketValue > 0)" :key="fund.id" style="padding: 0.5rem 1rem 0.5rem 2rem; border-top: 1px dotted #eee; overflow-x: auto;">
+                                    <div v-for="fund in folio.funds.filter(f => showZeroBalance || f.marketValue > 0)" :key="fund.id" style="padding: 0.5rem 1rem 0.5rem 2rem; border-top: 1px dotted var(--border); overflow-x: auto;">
                                         <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: flex-start; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
                                             <div>
                                                 <div>{{ expandedDataRows[fund.id] ? '▼' : '▶' }} <strong>{{ fund.fundName }}</strong></div>
-                                                <div style="font-size: 0.8em; color: #666; margin-left: 1.2rem; margin-top: 0.2rem;">
+                                                <div style="font-size: 0.8em; color: var(--muted-foreground); margin-left: 1.2rem; margin-top: 0.2rem;">
                                                     <span>{{ formatNumber(fund.closingUnits, 3) }} units</span>
                                                     <span style="margin: 0 0.4rem;">·</span>
                                                     <span>NAV ₹{{ formatNumber(getFundNavInr(fund), 4) }}</span>
                                                     <span v-if="fund.valuationDate" style="margin: 0 0.4rem;">·</span>
-                                                    <span v-if="fund.valuationDate" style="color: #999;">as of {{ formatNavDate(fund.valuationDate) }}</span>
+                                                    <span v-if="fund.valuationDate" style="color: var(--muted-foreground);">as of {{ formatNavDate(fund.valuationDate) }}</span>
                                                 </div>
                                             </div>
                                             <div style="text-align: right;">
                                                 <div style="font-weight: bold;">₹{{ formatNumber(fund.marketValue) }}</div>
-                                                <div style="font-size: 0.8em; color: #666;">Inv: ₹{{ formatNumber(fund.investedValue) }}</div>
+                                                <div style="font-size: 0.8em; color: var(--muted-foreground);">Inv: ₹{{ formatNumber(fund.investedValue) }}</div>
                                             </div>
                                         </div>
                                         
-                                        <div v-if="expandedDataRows[fund.id]" style="margin-top: 0.5rem; margin-left: 1.2rem; background: #fdfdfd; border-radius: 4px; padding: 0.5rem; font-size: 0.85em;">
+                                        <div v-if="expandedDataRows[fund.id]" style="margin-top: 0.5rem; margin-left: 1.2rem; background: var(--muted); border-radius: 4px; padding: 0.5rem; font-size: 0.85em;">
                                             <table style="width: 100%; border-collapse: collapse; min-width: 300px;">
-                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                <tr style="border-bottom: 1px solid var(--border);">
                                                     <th style="text-align: left; padding: 2px;">Date</th>
                                                     <th style="text-align: right; padding: 2px;">Units</th>
                                                     <th style="text-align: right; padding: 2px;">NAV (₹)</th>
@@ -1049,22 +1064,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                 </tr>
                                                 <tr v-for="(cf, idx) in fund.transactionCashflowsInr" :key="cf.date">
                                                     <td style="padding: 2px;">{{ formatNavDate(cf.date) }}</td>
-                                                    <td style="text-align: right; padding: 2px;" :style="{ color: cf.amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                    <td style="text-align: right; padding: 2px;" :style="{ color: cf.amount > 0 ? 'var(--danger)' : 'var(--success)' }">
                                                         <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx]">
                                                             {{ cf.amount > 0 ? '-' : '+' }}{{ formatNumber(Math.abs(fund.transactionUnitFlows[idx].amount), 3) }}
                                                         </template>
                                                         <template v-else>—</template>
                                                     </td>
-                                                    <td style="text-align: right; padding: 2px; color: #666;">
+                                                    <td style="text-align: right; padding: 2px; color: var(--muted-foreground);">
                                                         <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx] && fund.transactionUnitFlows[idx].amount !== 0">
                                                             ₹{{ formatNumber(Math.abs(cf.amount) / Math.abs(fund.transactionUnitFlows[idx].amount), 4) }}
                                                         </template>
                                                         <template v-else>—</template>
                                                     </td>
-                                                    <td style="text-align: right; padding: 2px;" :style="{ color: cf.amount > 0 ? '#c0392b' : '#27ae60' }">{{ cf.amount > 0 ? '-' : '+' }}₹{{ formatNumber(Math.abs(cf.amount)) }}</td>
+                                                    <td style="text-align: right; padding: 2px;" :style="{ color: cf.amount > 0 ? 'var(--danger)' : 'var(--success)' }">{{ cf.amount > 0 ? '-' : '+' }}₹{{ formatNumber(Math.abs(cf.amount)) }}</td>
                                                 </tr>
                                                 <tr v-if="!fund.transactionCashflowsInr || fund.transactionCashflowsInr.length === 0">
-                                                    <td colspan="4" style="text-align: center; color: #999; padding: 5px;">No transactions</td>
+                                                    <td colspan="4" style="text-align: center; color: var(--muted-foreground); padding: 5px;">No transactions</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -1074,53 +1089,53 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         </div>
 
                         <div v-if="dataHierarchyIBKR.length > 0" style="margin-bottom: 2rem;">
-                            <h4 style="border-bottom: 2px solid var(--gray-medium, #ddd); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--primary-color);">🌎 International Stocks (IBKR)</h4>
+                            <h4 style="border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--foreground-strong);">🌎 International Stocks (IBKR)</h4>
                             
-                            <div v-for="account in dataHierarchyIBKR" :key="account.accountNo" style="margin-bottom: 1rem; border: 1px solid var(--gray-medium, #e0e0e0); border-radius: 6px; overflow: hidden; background: white;">
-                                <div style="background: #f5f5f5; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <div v-for="account in dataHierarchyIBKR" :key="account.accountNo" style="margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--card);">
+                                <div style="background: var(--muted); padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                                     <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                                         <span style="font-weight: bold; font-size: 1.05em;">📂 Account: {{ account.accountNo }}</span>
                                         <div style="display: flex; align-items: center; gap: 0.25rem;">
                                             <span style="font-weight: bold; font-size: 1.05em;">Investor: {{ folioMappings[account.accountNo] || 'Unassigned' }}</span>
-                                            <span v-if="account.funds.length > 0 && account.funds[0].originalName" style="color: #6b7280; font-weight: normal; font-size: 0.85em;">({{ account.funds[0].originalName }})</span>
+                                            <span v-if="account.funds.length > 0 && account.funds[0].originalName" style="color: var(--muted-foreground); font-weight: normal; font-size: 0.85em;">({{ account.funds[0].originalName }})</span>
                                         </div>
                                     </div>
                                     <span style="font-weight: bold;">₹{{ formatNumber(account.marketValue) }} / &#36;{{ formatNumber(account.marketValueUsd) }}</span>
                                 </div>
-                                <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.5rem 1rem; border-top: 1px solid #eee; overflow-x: auto;">
+                                <div v-for="fund in account.funds" :key="fund.id" style="padding: 0.5rem 1rem; border-top: 1px solid var(--border); overflow-x: auto;">
                                     <div style="display: flex; justify-content: space-between; cursor: pointer; align-items: flex-start; min-width: 300px;" @click="toggleDataRowExpand(fund.id)">
                                         <div>
                                             <div>{{ expandedDataRows[fund.id] ? '▼' : '▶' }} <strong>{{ fund.fundName }}</strong></div>
-                                            <div style="font-size: 0.8em; color: #666; margin-left: 1.2rem; margin-top: 0.2rem;">
+                                            <div style="font-size: 0.8em; color: var(--muted-foreground); margin-left: 1.2rem; margin-top: 0.2rem;">
                                                 <span>{{ formatNumber(fund.closingUnits, 0) }} shares</span>
                                                 <span style="margin: 0 0.4rem;">·</span>
                                                 <span>&#36;{{ formatNumber(getFundNavUsd(fund), 4) }} / share</span>
                                                 <span v-if="fund.navUsd && fund.nav" style="margin: 0 0.4rem;">·</span>
-                                                <span v-if="fund.navUsd && fund.nav" style="color: #0284c7;">SBI Ref Rate ₹{{ formatNumber(fund.nav / fund.navUsd, 2) }}/&#36;</span>
+                                                <span v-if="fund.navUsd && fund.nav" style="color: var(--secondary-color);">SBI Ref Rate ₹{{ formatNumber(fund.nav / fund.navUsd, 2) }}/&#36;</span>
                                                 <span v-if="fund.valuationDate" style="margin: 0 0.4rem;">·</span>
-                                                <span v-if="fund.valuationDate" style="color: #999;">as of {{ formatNavDate(fund.valuationDate) }}</span>
+                                                <span v-if="fund.valuationDate" style="color: var(--muted-foreground);">as of {{ formatNavDate(fund.valuationDate) }}</span>
                                             </div>
                                         </div>
                                         <div style="text-align: right;">
                                             <div style="font-weight: bold;">₹{{ formatNumber(fund.marketValue) }}</div>
-                                            <div style="font-size: 0.8em; color: #0284c7;">&#36;{{ formatNumber(fund.marketValueUsd, 2) }}</div>
+                                            <div style="font-size: 0.8em; color: var(--secondary-color);">&#36;{{ formatNumber(fund.marketValueUsd, 2) }}</div>
                                         </div>
                                     </div>
-                                    <div v-if="expandedDataRows[fund.id]" style="margin-top: 0.5rem; margin-left: 1.2rem; background: #fdfdfd; border-radius: 4px; padding: 0.5rem; font-size: 0.85em;">
+                                    <div v-if="expandedDataRows[fund.id]" style="margin-top: 0.5rem; margin-left: 1.2rem; background: var(--muted); border-radius: 4px; padding: 0.5rem; font-size: 0.85em;">
                                         <table style="width: 100%; border-collapse: collapse; min-width: 500px;">
-                                            <tr style="border-bottom: 1px solid #ddd;">
+                                            <tr style="border-bottom: 1px solid var(--border);">
                                                 <th style="text-align: left; padding: 2px;">Date</th>
                                                 <th style="text-align: right; padding: 2px;">Units</th>
                                                 <th style="text-align: right; padding: 2px;">NAV ($)</th>
                                                 <th style="text-align: right; padding: 2px;">Value ($)</th>
-                                                <th style="text-align: right; padding: 2px; color: #0284c7;">Rate (&#8377;/$)</th>
+                                                <th style="text-align: right; padding: 2px; color: var(--secondary-color);">Rate (&#8377;/$)</th>
                                                 <th style="text-align: right; padding: 2px;">NAV (&#8377;)</th>
                                                 <th style="text-align: right; padding: 2px;">Value (&#8377;)</th>
                                             </tr>
                                             <tr v-for="(cfUsd, idx) in normalizeDatedFlows(fund.transactionCashflowsUsd)" :key="cfUsd.date">
                                                 <td style="padding: 2px;">{{ formatNavDate(cfUsd.date) }}</td>
                                                 <!-- Units -->
-                                                <td style="text-align: right; padding: 2px;" :style="{ color: cfUsd.amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                <td style="text-align: right; padding: 2px;" :style="{ color: cfUsd.amount > 0 ? 'var(--danger)' : 'var(--success)' }">
                                                     <template v-if="fund.transactionUnitFlows && fund.transactionUnitFlows[idx]">
                                                         {{ cfUsd.amount > 0 ? '-' : '+' }}{{ formatNumber(Math.abs(fund.transactionUnitFlows[idx].amount), 4) }}
                                                     </template>
@@ -1134,10 +1149,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                     <template v-else>&#8212;</template>
                                                 </td>
                                                 <!-- Value ($) -->
-                                                <td style="text-align: right; padding: 2px;" :style="{ color: cfUsd.amount > 0 ? '#c0392b' : '#27ae60' }">{{ cfUsd.amount > 0 ? '-' : '+' }}&#36;{{ formatNumber(Math.abs(cfUsd.amount), 2) }}</td>
+                                                <td style="text-align: right; padding: 2px;" :style="{ color: cfUsd.amount > 0 ? 'var(--danger)' : 'var(--success)' }">{{ cfUsd.amount > 0 ? '-' : '+' }}&#36;{{ formatNumber(Math.abs(cfUsd.amount), 2) }}</td>
                                                 <template v-if="normalizeDatedFlows(fund.transactionCashflowsInr)[idx]">
                                                     <!-- Rate (₹/$) = INR / USD -->
-                                                    <td style="text-align: right; padding: 2px; color: #0284c7;">
+                                                    <td style="text-align: right; padding: 2px; color: var(--secondary-color);">
                                                         {{ cfUsd.amount !== 0 ? '&#8377;' + formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount) / Math.abs(cfUsd.amount), 2) : '&#8212;' }}
                                                     </td>
                                                     <!-- NAV (₹) = INR / Units -->
@@ -1148,14 +1163,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                                         <template v-else>&#8212;</template>
                                                     </td>
                                                     <!-- Value (₹) -->
-                                                    <td style="text-align: right; padding: 2px;" :style="{ color: normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount > 0 ? '#c0392b' : '#27ae60' }">
+                                                    <td style="text-align: right; padding: 2px;" :style="{ color: normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount > 0 ? 'var(--danger)' : 'var(--success)' }">
                                                         {{ normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount > 0 ? '-' : '+' }}&#8377;{{ formatNumber(Math.abs(normalizeDatedFlows(fund.transactionCashflowsInr)[idx].amount)) }}
                                                     </td>
                                                 </template>
                                                 <td style="text-align: right; padding: 2px;" v-else colspan="3">&#8212;</td>
                                             </tr>
                                             <tr v-if="!fund.transactionCashflowsUsd || fund.transactionCashflowsUsd.length === 0">
-                                                <td colspan="7" style="text-align: center; color: #999; padding: 5px;">No transactions</td>
+                                                <td colspan="7" style="text-align: center; color: var(--muted-foreground); padding: 5px;">No transactions</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -1340,8 +1355,20 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 if (this.calendarChart) this.calendarChart.resize();
             };
             window.addEventListener('resize', this.resizeHandler);
+
+            this.themeObserver = new MutationObserver(() => {
+                if (this.chart) this.renderOverallChart();
+                if (this.dualConcentricChart) this.renderDualConcentricChart();
+                if (this.driftAnalysisChart) this.renderDriftAnalysisChart();
+                if (this.calendarChart) this.renderCalendarChart();
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         },
         unmounted() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
             if (this.resizeHandler) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
@@ -2031,12 +2058,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 return this.summaryData.reduce((sum, row) => sum + Math.max(0, Number(row.driftPercent) || 0), 0);
             },
             getTotalDriftColorStyle(pct) {
-                if (!isFinite(pct) || pct <= 0) return { color: 'var(--text-secondary)' };
-                if (pct <= 2.5) return { color: '#155724', background: '#d4edda', padding: '2px 6px', borderRadius: '4px' };
-                if (pct <= 5.0) return { color: '#1e7e34', background: '#e8f5e9', padding: '2px 6px', borderRadius: '4px' };
-                if (pct <= 7.5) return { color: '#856404', background: '#fff3cd', padding: '2px 6px', borderRadius: '4px' };
-                if (pct <= 10.0) return { color: '#d35400', background: '#ffe8d6', padding: '2px 6px', borderRadius: '4px' };
-                return { color: '#721c24', background: '#f8d7da', padding: '2px 6px', borderRadius: '4px' };
+                if (!isFinite(pct) || pct <= 0) return { color: 'var(--muted-foreground)' };
+                if (pct <= 2.5) return { color: 'var(--success-ink)', background: 'var(--success-surface)', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 5.0) return { color: 'var(--success-ink)', background: 'var(--success-surface)', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 7.5) return { color: 'var(--warning)', background: 'var(--warning-surface)', padding: '2px 6px', borderRadius: '4px' };
+                if (pct <= 10.0) return { color: 'var(--warning)', background: 'var(--warning-surface)', padding: '2px 6px', borderRadius: '4px' };
+                return { color: 'var(--danger)', background: 'var(--danger-surface)', padding: '2px 6px', borderRadius: '4px' };
             },
             formatNavDate(dateStr) {
                 if (!dateStr) return '-';
@@ -3545,12 +3572,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     fundCount: item.fundCount
                 }));
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const colors = toolChartColors();
+                const fgStrong = colors.fgStrong;
+                const cardBg = colors.cardBg;
+
                 const option = {
                     title: {
                         text: 'Overall Performance',
                         left: 'center',
                         top: 0,
-                        textStyle: { color: '#2c3e50', fontSize: 16 }
+                        textStyle: { color: fgStrong, fontSize: 16 }
                     },
                     toolbox: {
                         right: 15,
@@ -3569,11 +3601,15 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                    ₹${Number(params.value).toLocaleString('en-IN')}<br/>
                                    ${params.percent}%<br/>
                                    ${params.data.fundCount} fund${params.data.fundCount !== 1 ? 's' : ''}`;
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         top: 'bottom',
-                        type: 'scroll'
+                        type: 'scroll',
+                        textStyle: { color: fgStrong }
                     },
                     color: [
                         '#2c3e50', '#0066cc', '#1890ff', '#13c2c2', '#52c41a', 
@@ -3588,12 +3624,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             avoidLabelOverlap: true,
                             itemStyle: {
                                 borderRadius: 10,
-                                borderColor: '#fff',
+                                borderColor: cardBg,
                                 borderWidth: 2
                             },
                             label: {
                                 show: true,
-                                formatter: '{b}\n{d}%'
+                                formatter: '{b}\n{d}%',
+                                color: fgStrong
                             },
                             emphasis: {
                                 label: {
@@ -3607,7 +3644,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     ]
                 };
 
-                this.chart.setOption(option);
+                this.chart.setOption(option, true);
             },
 
             renderDualConcentricChart() {
@@ -3693,6 +3730,12 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     ];
                 };
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const colors = toolChartColors();
+                const fgStrong = colors.fgStrong;
+                const mutedFg = colors.mutedFg;
+                const subMutedFg = colors.subMutedFg;
+
                 const option = {
                     animation: false,
                     title: [
@@ -3701,7 +3744,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             left: 'center',
                             top: 0,
                             textStyle: {
-                                color: '#2c3e50',
+                                color: fgStrong,
                                 fontSize: 16,
                                 fontWeight: 600
                             }
@@ -3713,7 +3756,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             textStyle: {
                                 fontSize: 15,
                                 fontWeight: 600,
-                                color: '#444'
+                                color: mutedFg
                             }
                         },
                         {
@@ -3723,7 +3766,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             textStyle: {
                                 fontSize: 15,
                                 fontWeight: 600,
-                                color: '#444'
+                                color: mutedFg
                             }
                         }
                     ],
@@ -3750,13 +3793,17 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 : (growthContribPercentByName[params.name] || 0);
                             return '<strong>' + params.name + ' - ' + seriesLabel + '</strong><br>' +
                                    fmt(amount) + ' (' + pct.toFixed(2) + '%)';
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         bottom: 0,
                         left: 'center',
                         orient: 'horizontal',
-                        data: legendItems
+                        data: legendItems,
+                        textStyle: { color: fgStrong }
                     },
                     color: [
                         '#2c3e50', '#0066cc', '#1890ff', '#13c2c2', '#52c41a', 
@@ -3774,13 +3821,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             label: {
                                 show: true,
                                 position: 'outside',
+                                color: fgStrong,
                                 formatter: function(params) {
                                     if (params.name === '__placeholder__') return '';
                                     const pct = growthContribPercentByName[params.name] || 0;
                                     return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            labelLine: { show: true, length: 8, length2: 8 },
+                            labelLine: { show: true, length: 8, length2: 8, lineStyle: { color: subMutedFg } },
                             labelLayout: function(params) {
                                 return {
                                     hideOverlap: false,
@@ -3800,13 +3848,14 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             label: {
                                 show: true,
                                 position: 'outside',
+                                color: fgStrong,
                                 formatter: function(params) {
                                     if (params.name === '__placeholder__') return '';
                                     const pct = marketValuePercentByName[params.name] || 0;
                                     return params.name + ' (' + pct.toFixed(2) + '%)';
                                 }
                             },
-                            labelLine: { show: true, length: 8, length2: 8 },
+                            labelLine: { show: true, length: 8, length2: 8, lineStyle: { color: subMutedFg } },
                             labelLayout: function(params) {
                                 return {
                                     hideOverlap: false,
@@ -3846,13 +3895,20 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                 const driftValues = driftData.map(item => item.driftPercent);
                 const driftColors = driftData.map(item => this.getExploreColorForName(item.name) || '#3b82f6');
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const colors = toolChartColors();
+                const fgStrong = colors.fgStrong;
+                const mutedFg = colors.mutedFg;
+                const splitLine = colors.splitLine;
+                const borderLine = colors.borderLine;
+
                 const option = {
                     title: {
                         text: `${this.selectedReportArea} Drift`,
                         left: 'center',
                         top: 0,
                         textStyle: {
-                            color: '#2c3e50',
+                            color: fgStrong,
                             fontSize: 16,
                             fontWeight: 600
                         }
@@ -3875,7 +3931,10 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             const status = value > 0 ? '(over-weight)' : '(under-weight)';
                             return params.marker + ' <strong>' + params.name + '</strong><br/>' +
                                    'Drift: <strong>' + formattedValue + '</strong> ' + status;
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     grid: {
                         left: '15%',
@@ -3889,18 +3948,22 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         name: 'Drift %',
                         nameLocation: 'middle',
                         nameGap: 30,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: (value) => {
                                 return (value >= 0 ? '+' : '') + value.toFixed(1) + '%';
-                            }
+                            },
+                            color: mutedFg
                         },
                         splitLine: {
-                            lineStyle: { type: 'dashed' }
+                            lineStyle: { color: splitLine, type: 'dashed' }
                         }
                     },
                     yAxis: {
                         type: 'category',
-                        data: categories
+                        data: categories,
+                        axisLabel: { color: mutedFg },
+                        axisLine: { lineStyle: { color: borderLine } }
                     },
                     series: [
                         {
@@ -3916,6 +3979,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                             label: {
                                 show: true,
                                 position: 'right',
+                                color: fgStrong,
                                 formatter: function(params) {
                                     return (params.value >= 0 ? '+' : '') + params.value.toFixed(2) + '%';
                                 }
@@ -3969,6 +4033,13 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                     });
                 }
 
+                const isDark = document.documentElement.classList.contains('dark');
+                const colors = toolChartColors();
+                const fgStrong = colors.fgStrong;
+                const mutedFg = colors.mutedFg;
+                const splitLine = colors.splitLine;
+                const borderLine = colors.borderLine;
+
                 const option = {
                     toolbox: {
                         right: 15,
@@ -3984,8 +4055,8 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         formatter: function(params) {
                             return `<strong>${params.name}</strong><br/>${params.marker} Investment: ₹${params.value.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
                         },
-                        backgroundColor: 'rgba(50, 50, 50, 0.9)',
-                        borderColor: '#333',
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
                         borderWidth: 1,
                         textStyle: { color: '#fff' }
                     },
@@ -3996,7 +4067,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         axisLabel: {
                             rotate: 45,
                             fontSize: 10,
-                            interval: Math.max(0, Math.floor(categories.length / 24))
+                            interval: Math.max(0, Math.floor(categories.length / 24)),
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
@@ -4004,6 +4079,7 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                         name: 'Amount (₹)',
                         nameLocation: 'middle',
                         nameGap: 50,
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: function(value) {
                                 if (value >= 10000000) return (value / 10000000).toFixed(1) + ' Cr';
@@ -4011,7 +4087,11 @@ window.initializeTool.portfolioTracker = async function (container, config) {
                                 else if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
                                 return value.toLocaleString('en-IN');
                             },
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: [{
