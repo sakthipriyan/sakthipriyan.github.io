@@ -1,4 +1,19 @@
 // RealValue Family SIP Allocator (Vue.js + ECharts)
+// Chart colours come from the site theme's tokens, read at render time, so
+// the charts follow the theme in light and dark (and any later palette change).
+function toolChartColors() {
+    const css = getComputedStyle(document.documentElement);
+    const v = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+    return {
+        fgStrong: v('--foreground-strong', '#2c3e50'),
+        mutedFg: v('--foreground', '#333'),
+        subMutedFg: v('--muted-foreground', '#95a5a6'),
+        splitLine: v('--border', '#ecf0f1'),
+        borderLine: v('--muted-foreground', '#95a5a6'),
+        cardBg: v('--card', '#fff')
+    };
+}
+
 window.initializeTool = window.initializeTool || {};
 
 window.initializeTool.multiAssetAllocator = function (container, config) {
@@ -278,7 +293,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 </span>
                                                 <div style="flex-basis: 100%; height: 0;"></div>
                                                 <select @change="addAssetToGroup(index, $event)" 
-                                                        style="border: 1px solid #ddd; border-radius: 4px; padding: 0.25rem 0.5rem; font-size: 0.875rem; background: white; flex-shrink: 0;">
+                                                        style="border: 1px solid var(--border); border-radius: 4px; padding: 0.25rem 0.5rem; font-size: 0.875rem; background: var(--card); flex-shrink: 0;">
                                                     <option value="">+ Add</option>
                                                     <option v-for="asset in getAvailableAssetsForGroup(group)" 
                                                             :key="asset.name" 
@@ -288,7 +303,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                                 </select>
                                             </div>
                                         </td>
-                                        <td style="text-align: center; font-weight: 600; color: #666;">
+                                        <td style="text-align: center; font-weight: 600; color: var(--muted-foreground);">
                                             {{ getGroupMaxPercent(group) }}%
                                         </td>
                                         <td style="text-align: center;">
@@ -326,7 +341,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             </div>
                         </div>
                         
-                        <p style="font-size: 0.9em; color: #666; margin-top: 1rem; font-style: italic;">💡 Allocations update automatically as you adjust inputs</p>
+                        <p style="font-size: 0.9em; color: var(--muted-foreground); margin-top: 1rem; font-style: italic;">💡 Allocations update automatically as you adjust inputs</p>
                     </div>
                     
                     <!-- Right Column: Output Results -->
@@ -413,7 +428,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                             
                             <div v-if="getTotalInternationalRequired() > 0" class="investment-plan" style="margin-bottom: 2rem;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                                    <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1em; color: #2c3e50;">
+                                    <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1em; color: var(--foreground-strong);">
                                         💱 FX Transaction
                                     </h3>
                                     <a :href="getFxEngineLink()" target="_blank" class="share-button" style="text-decoration: none; white-space: nowrap;">
@@ -432,22 +447,22 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                     </table>
                                 </div>
                                 
-                                <p style="margin: 0; font-size: 0.9em; color: #666;">
-                                    💡 Compute exact USD purchasable via the <a :href="getFxEngineLink()" target="_blank" style="color: #0066cc; text-decoration: none;">RealValue FX Engine</a>
+                                <p style="margin: 0; font-size: 0.9em; color: var(--muted-foreground);">
+                                    💡 Compute exact USD purchasable via the <a :href="getFxEngineLink()" target="_blank" style="color: var(--secondary-color); text-decoration: none;">RealValue FX Engine</a>
                                 </p>
                             </div>
                             
                             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Understanding Terms</h3>
-                            <ul style="font-size: 0.9em; color: #666; line-height: 1.8;">
+                            <ul style="font-size: 0.9em; color: var(--muted-foreground); line-height: 1.8;">
                                 <li><strong>Pre Allocation:</strong> Portfolio state before new investments.</li>
                                 <li><strong>Post Allocation:</strong> Portfolio state after new investments.</li>
                                 <li><strong>Drift:</strong> Deviation from target allocation.</li>
                                 <li><strong>TCS:</strong> Tax Collected at Source on international investments.</li>
                             </ul>
-                            <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
-                                📚 Learn more: <a href="/building-wealth/tools/realvalue-family-sip-allocator/#algorithm" style="color: #0066cc; text-decoration: none;">Algorithm</a> | 
-                                <a href="/building-wealth/tools/realvalue-family-sip-allocator/#faq" style="color: #0066cc; text-decoration: none;">FAQ</a> | 
-                                <a href="/building-wealth/tools/realvalue-family-sip-allocator/#usage-guide" style="color: #0066cc; text-decoration: none;">Usage Guide</a>
+                            <p style="font-size: 0.9em; color: var(--muted-foreground); margin-top: 0.5rem;">
+                                📚 Learn more: <a href="/building-wealth/tools/realvalue-family-sip-allocator/#algorithm" style="color: var(--secondary-color); text-decoration: none;">Algorithm</a> | 
+                                <a href="/building-wealth/tools/realvalue-family-sip-allocator/#faq" style="color: var(--secondary-color); text-decoration: none;">FAQ</a> | 
+                                <a href="/building-wealth/tools/realvalue-family-sip-allocator/#usage-guide" style="color: var(--secondary-color); text-decoration: none;">Usage Guide</a>
                             </p>
                         </div>
                     </div>
@@ -641,8 +656,19 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
         },
         mounted() {
             this.calculate();
+            this.themeObserver = new MutationObserver(() => {
+                if (this.results.calculated) {
+                    this.renderPortfolioChart();
+                    this.renderDriftChart();
+                }
+            });
+            this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         },
         unmounted() {
+            if (this.themeObserver) {
+                this.themeObserver.disconnect();
+                this.themeObserver = null;
+            }
             if (this.resizeHandler) {
                 window.removeEventListener('resize', this.resizeHandler);
             }
@@ -1660,6 +1686,12 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                 }
                 
                 const isPercentage = this.portfolioViewMode === 'percentage';
+                const isDark = document.documentElement.classList.contains('dark');
+                const colors = toolChartColors();
+                const fgStrong = colors.fgStrong;
+                const mutedFg = colors.mutedFg;
+                const splitLine = colors.splitLine;
+                const borderLine = colors.borderLine;
                 
                 const portfolioOption = {
                     toolbox: {
@@ -1676,11 +1708,15 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 : '₹' + Math.round(parseFloat(value)).toLocaleString('en-IN');
                             return params.marker + ' <strong>' + params.seriesName + '</strong><br/>' +
                                    params.name + ': <strong>' + formattedValue + '</strong>';
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         data: isPercentage ? ['Pre Allocation', 'Post Allocation', 'Target'] : ['Pre Allocation', 'Post Allocation'],
-                        bottom: 0
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
                     },
                     grid: {
                         left: '3%',
@@ -1695,19 +1731,28 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                         axisLabel: {
                             interval: 0,
                             rotate: 45,
-                            fontSize: 11
+                            fontSize: 11,
+                            color: mutedFg
+                        },
+                        axisLine: {
+                            lineStyle: { color: borderLine }
                         }
                     },
                     yAxis: {
                         type: 'value',
                         name: isPercentage ? 'Percentage (%)' : 'Amount (₹)',
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: isPercentage ? '{value}%' : (value) => {
                                 if (value >= 10000000) return (value / 10000000).toFixed(1) + 'Cr';
                                 if (value >= 100000) return (value / 100000).toFixed(1) + 'L';
                                 if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
                                 return value;
-                            }
+                            },
+                            color: mutedFg
+                        },
+                        splitLine: {
+                            lineStyle: { color: splitLine }
                         }
                     },
                     series: isPercentage ? [
@@ -1763,11 +1808,15 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 : (value >= 0 ? '+' : '-') + '₹' + Math.abs(Math.round(parseFloat(value))).toLocaleString('en-IN');
                             return params.marker + ' <strong>' + params.seriesName + '</strong><br/>' +
                                    params.name + ': <strong>' + formattedValue + '</strong>';
-                        }
+                        },
+                        backgroundColor: isDark ? '#27272a' : 'rgba(50, 50, 50, 0.9)',
+                        borderColor: isDark ? '#3f3f46' : '#333',
+                        textStyle: { color: '#fff' }
                     },
                     legend: {
                         data: ['Pre Allocation Drift', 'Post Allocation Drift'],
-                        bottom: 0
+                        bottom: 0,
+                        textStyle: { color: fgStrong }
                     },
                     grid: {
                         left: '3%',
@@ -1779,6 +1828,7 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                     xAxis: {
                         type: 'value',
                         name: isPercentage ? 'Drift (%)' : 'Drift (₹)',
+                        nameTextStyle: { color: mutedFg },
                         axisLabel: {
                             formatter: isPercentage ? '{value}%' : (value) => {
                                 const absValue = Math.abs(value);
@@ -1786,15 +1836,18 @@ window.initializeTool.multiAssetAllocator = function (container, config) {
                                 if (absValue >= 100000) return (value >= 0 ? '+' : '-') + (absValue / 100000).toFixed(1) + 'L';
                                 if (absValue >= 1000) return (value >= 0 ? '+' : '-') + (absValue / 1000).toFixed(1) + 'K';
                                 return value;
-                            }
+                            },
+                            color: mutedFg
                         },
                         splitLine: {
-                            lineStyle: { type: 'dashed' }
+                            lineStyle: { color: splitLine, type: 'dashed' }
                         }
                     },
                     yAxis: {
                         type: 'category',
-                        data: this.results.summary.map(s => s.assetClass).reverse()
+                        data: this.results.summary.map(s => s.assetClass).reverse(),
+                        axisLabel: { color: mutedFg },
+                        axisLine: { lineStyle: { color: borderLine } }
                     },
                     series: isPercentage ? [
                         {
