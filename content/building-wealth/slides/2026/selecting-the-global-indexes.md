@@ -35,7 +35,7 @@ related:
 <h4 class="subtitle-fade2" style="color: var(--r-heading-color, var(--text))" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2}'>📖 <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/" target="_blank">The Global Indian Investor</a> · <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/" target="_blank">Chapter 7</a></h4>
 <br/>
 <h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Which index, which fund, which provider: the Irish UCITS universe</h4>
-<h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Oct 25, 2026</h4>
+<h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Oct 25, 2026 · Updated Nov 19, 2026</h4>
 <br/>
 --
 
@@ -69,11 +69,12 @@ related:
 
 | | |
 |---|---|
-| **Domicile** | Ireland (UCITS) |
+| **Domicile** | Ireland (UCITS), physically replicated |
 | **Share class** | Accumulating, traded in **USD** |
 | **Size** | AUM above **$1 billion** (liquidity, low closure risk) |
+| **Gold** | Funds and trusts only (Swiss, Canadian), not debt-like ETCs |
 | **Shortlist** | Top 3 by AUM and Top 3 by lowest TER |
-| **Data** | Fund size and TER from the 3rd week of **June 2026** |
+| **Data** | justETF, 3rd week of **November 2026** |
 
 ---
 
@@ -112,9 +113,9 @@ For a **one-fund** portfolio, MSCI vs FTSE makes no real difference. Splitting i
 | **MSCI** | MSCI ACWI | MSCI World | MSCI Emerging Markets |
 | **MSCI IMI** | MSCI ACWI IMI | MSCI World IMI | MSCI EM IMI |
 | **FTSE** | FTSE All-World | FTSE Developed | FTSE Emerging |
-| **FTSE All Cap** | FTSE Global All Cap | FTSE Developed All Cap | FTSE Emerging All Cap |
+| **FTSE All Cap** | FTSE Global All Cap ✨ | FTSE Developed All Cap | FTSE Emerging All Cap |
 
-<small>Index providers publish many indexes, but ETFs exist only where there is demand: MSCI ACWI ex India exists, with no ETF tracking it.</small>
+<small>Index providers publish many indexes, but ETFs exist only where there is demand: MSCI ACWI ex India exists, with no ETF tracking it. ✨ Vanguard launched the first plain FTSE Global All Cap ETF (VALU) in August 2026.</small>
 
 ---
 
@@ -135,7 +136,7 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 49.5
+  "max": 64.0
  },
  "yAxis": {
   "type": "category",
@@ -155,7 +156,7 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
    "iShares · MSCI ACWI",
    "SPDR · MSCI ACWI",
    "SPDR · MSCI ACWI IMI",
-   "Invesco · FTSE All-World"
+   "Vanguard · FTSE Global All Cap"
   ]
  },
  "series": [
@@ -170,48 +171,48 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
    },
    "data": [
     {
-     "value": 48.53,
+     "value": 62.71,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$48.5B · 0.19%"
+      "formatter": "$62.7B · 0.14%"
      }
     },
     {
-     "value": 33.73,
+     "value": 34.71,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$33.7B · 0.20%"
+      "formatter": "$34.7B · 0.20%"
      }
     },
     {
-     "value": 15.8,
+     "value": 21.16,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$21.2B · 0.12%"
+     }
+    },
+    {
+     "value": 9.46,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$9.5B · 0.17%"
+     }
+    },
+    {
+     "value": 4.98,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$15.8B · 0.12%"
-     }
-    },
-    {
-     "value": 6.8,
-     "itemStyle": {
-      "color": "#6e9ef7"
-     },
-     "label": {
-      "formatter": "$6.8B · 0.17%"
-     }
-    },
-    {
-     "value": 3.89,
-     "itemStyle": {
-      "color": "#6e9ef7"
-     },
-     "label": {
-      "formatter": "$3.9B · 0.15%"
+      "formatter": "$5.0B · 0.07%"
      }
     }
    ]
@@ -221,6 +222,8 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
 ```
 
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
+
+<p class="fragment fade-up">🆕 <strong>VALU</strong>: ~6,400 stocks, large to small cap, at <strong>0.07%</strong>. Launched Aug 2026, already ~$5B. And VWRA cut its TER from 0.19% to 0.14%.</p>
 
 --
 
@@ -240,7 +243,7 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 144.4
+  "max": 144.8
  },
  "yAxis": {
   "type": "category",
@@ -276,57 +279,57 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
    },
    "data": [
     {
-     "value": 141.57,
+     "value": 141.93,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$141.6B · 0.20%"
+      "formatter": "$141.9B · 0.20%"
      }
     },
     {
-     "value": 22.39,
+     "value": 24.05,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$22.4B · 0.12%"
+      "formatter": "$24.0B · 0.12%"
      }
     },
     {
-     "value": 19.23,
+     "value": 20.46,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$19.2B · 0.12%"
+      "formatter": "$20.5B · 0.12%"
      }
     },
     {
-     "value": 10.68,
+     "value": 13.27,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$10.7B · 0.06%"
+      "formatter": "$13.3B · 0.06%"
      }
     },
     {
-     "value": 8.26,
+     "value": 10.55,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$8.3B · 0.05%"
+      "formatter": "$10.6B · 0.05%"
      }
     },
     {
-     "value": 6.4,
+     "value": 6.69,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$6.4B · 0.12%"
+      "formatter": "$6.7B · 0.12%"
      }
     }
    ]
@@ -355,7 +358,7 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 44.7
+  "max": 40.6
  },
  "yAxis": {
   "type": "category",
@@ -391,57 +394,57 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
    },
    "data": [
     {
-     "value": 43.83,
+     "value": 39.83,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$43.8B · 0.18%"
+      "formatter": "$39.8B · 0.18%"
      }
     },
     {
-     "value": 13.82,
+     "value": 12.59,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$13.8B · 0.18%"
+      "formatter": "$12.6B · 0.18%"
      }
     },
     {
-     "value": 10.04,
+     "value": 9.71,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$10.0B · 0.18%"
+      "formatter": "$9.7B · 0.18%"
      }
     },
     {
-     "value": 2.17,
+     "value": 2.38,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$2.2B · 0.17%"
+      "formatter": "$2.4B · 0.17%"
      }
     },
     {
-     "value": 2.17,
+     "value": 2.0,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$2.2B · 0.18%"
+      "formatter": "$2.0B · 0.18%"
      }
     },
     {
-     "value": 1.39,
+     "value": 1.71,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.4B · 0.15%"
+      "formatter": "$1.7B · 0.15%"
      }
     }
    ]
@@ -570,7 +573,7 @@ Why hold the US separately?
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 12.6
+  "max": 14.1
  },
  "yAxis": {
   "type": "category",
@@ -604,39 +607,39 @@ Why hold the US separately?
    },
    "data": [
     {
-     "value": 12.33,
+     "value": 13.84,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$12.3B · 0.03%"
+      "formatter": "$13.8B · 0.03%"
      }
     },
     {
-     "value": 4.64,
+     "value": 5.15,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$4.6B · 0.03%"
+      "formatter": "$5.2B · 0.03%"
      }
     },
     {
-     "value": 4.01,
+     "value": 4.8,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$4.0B · 0.03%"
+      "formatter": "$4.8B · 0.03%"
      }
     },
     {
-     "value": 2.96,
+     "value": 3.23,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$3.0B · 0.03%"
+      "formatter": "$3.2B · 0.03%"
      }
     }
    ]
@@ -663,7 +666,7 @@ Why hold the US separately?
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 147.6
+  "max": 153.1
  },
  "yAxis": {
   "type": "category",
@@ -682,8 +685,8 @@ Why hold the US separately?
    "iShares",
    "Vanguard",
    "SPDR",
-   "UBS",
-   "Xtrackers"
+   "Xtrackers",
+   "UBS"
   ]
  },
  "series": [
@@ -698,48 +701,48 @@ Why hold the US separately?
    },
    "data": [
     {
-     "value": 144.69,
+     "value": 150.11,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$144.7B · 0.07%"
+      "formatter": "$150.1B · 0.07%"
      }
     },
     {
-     "value": 32.61,
+     "value": 36.5,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$32.6B · 0.07%"
+      "formatter": "$36.5B · 0.07%"
      }
     },
     {
-     "value": 16.96,
+     "value": 19.68,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$17.0B · 0.03%"
+      "formatter": "$19.7B · 0.03%"
      }
     },
     {
-     "value": 1.72,
+     "value": 2.94,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.7B · 0.03%"
+      "formatter": "$2.9B · 0.03%"
      }
     },
     {
-     "value": 1.48,
+     "value": 2.46,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.5B · 0.03%"
+      "formatter": "$2.5B · 0.03%"
      }
     }
    ]
@@ -766,7 +769,7 @@ Why hold the US separately?
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 26.5
+  "max": 28.3
  },
  "yAxis": {
   "type": "category",
@@ -784,8 +787,8 @@ Why hold the US separately?
   "data": [
    "iShares",
    "Invesco",
-   "BNP Paribas",
-   "Xtrackers"
+   "Xtrackers",
+   "BNP Paribas"
   ]
  },
  "series": [
@@ -800,39 +803,39 @@ Why hold the US separately?
    },
    "data": [
     {
-     "value": 25.96,
+     "value": 27.75,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$26.0B · 0.30%"
+      "formatter": "$27.7B · 0.30%"
      }
     },
     {
-     "value": 4.25,
+     "value": 4.86,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$4.3B · 0.30%"
+      "formatter": "$4.9B · 0.30%"
      }
     },
     {
-     "value": 2.78,
+     "value": 3.06,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$3.1B · 0.20%"
+     }
+    },
+    {
+     "value": 2.9,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$2.8B · 0.14%"
-     }
-    },
-    {
-     "value": 2.2,
-     "itemStyle": {
-      "color": "#6e9ef7"
-     },
-     "label": {
-      "formatter": "$2.2B · 0.20%"
+      "formatter": "$2.9B · 0.14%"
      }
     }
    ]
@@ -980,7 +983,7 @@ The lowest-TER fund on each side, same index
 
 <p class="fragment fade-up">Within <strong>1 basis point</strong> on S&P 500 and Nasdaq-100, and <strong>cheaper</strong> on MSCI ACWI and MSCI World: going Irish costs nothing extra.</p>
 
-<small>Irish TERs: June 2026 · US TERs: November 2026</small>
+<small>Irish and US TERs: November 2026</small>
 
 --
 
@@ -1012,7 +1015,7 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 19.4
+  "max": 21.0
  },
  "yAxis": {
   "type": "category",
@@ -1049,16 +1052,16 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
    },
    "data": [
     {
-     "value": 19.05,
+     "value": 20.61,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$19.1B · 0.07%"
+      "formatter": "$20.6B · 0.07%"
      }
     },
     {
-     "value": 8.14,
+     "value": 8.1,
      "itemStyle": {
       "color": "#6e9ef7"
      },
@@ -1067,48 +1070,48 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
      }
     },
     {
-     "value": 7.32,
+     "value": 7.7,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$7.3B · 0.07%"
+      "formatter": "$7.7B · 0.07%"
      }
     },
     {
-     "value": 5.09,
+     "value": 5.04,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$5.1B · 0.07%"
+      "formatter": "$5.0B · 0.07%"
      }
     },
     {
-     "value": 2.66,
+     "value": 3.39,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$2.7B · 0.07%"
+      "formatter": "$3.4B · 0.07%"
      }
     },
     {
-     "value": 2.43,
+     "value": 2.69,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$2.4B · 0.05%"
+      "formatter": "$2.7B · 0.05%"
      }
     },
     {
-     "value": 1.5,
+     "value": 1.61,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.5B · 0.05%"
+      "formatter": "$1.6B · 0.05%"
      }
     }
    ]
@@ -1133,13 +1136,17 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 ---
 
 
-### 🥇 Gold / August 2026 Update
+### 🥇 Gold / Structure Decides the Tax
 
-> Irish Gold ETCs are legally <b>zero-coupon bonds</b>, so they risk being taxed as debt under <b>Section 50AA</b>, at your slab rate, whatever the holding period.
+| Structure | You own | Tax in India (my reading) |
+|---|---|---|
+| **Irish Gold ETC** | A <b>debt note</b> backed by gold | Risk of <b>Section 50AA</b>: slab rate, any holding period |
+| **Swiss gold ETF** | Units of a <b>fund</b> | Foreign ETF: <b>12.5% LTCG</b> after 24 months |
+| **Canadian trust (PHYS)** | Units of a <b>trust</b> | Foreign ETF: <b>12.5% LTCG</b> after 24 months |
 
-- <!-- .element: class="fragment fade-up" --> I now look at the Canadian <strong>Sprott Physical Gold Trust (PHYS)</strong>
-- <!-- .element: class="fragment fade-up" --> A trust, not debt: qualifies for the unified <strong>12.5% LTCG</strong> after 24 months
-- <!-- .element: class="fragment fade-up" --> Higher TER (<strong>0.41%</strong>), but <strong>~$7.5B</strong> AUM for liquidity and safety
+- <!-- .element: class="fragment fade-up" --> UCITS rules bar single-commodity funds, so Ireland only has ETCs
+- <!-- .element: class="fragment fade-up" --> Swiss law allows real gold funds, traded in <strong>USD on SIX</strong>
+- <!-- .element: class="fragment fade-up" --> Filter: fund or trust, USD, AUM above <strong>$1B</strong>
 
 --
 
@@ -1154,7 +1161,7 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 --
 
-### 🥇 Gold / Irish Gold ETCs
+### 🥇 Gold / Swiss & Canadian Gold Funds
 
 ```echarts
 {
@@ -1168,7 +1175,112 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 38.4
+  "max": 16.0
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 15,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "Sprott PHYS · Canada",
+   "UBS · Switzerland",
+   "Swisscanto · Switzerland",
+   "iShares · Switzerland",
+   "Raiffeisen · Switzerland"
+  ]
+ },
+ "series": [
+  {
+   "type": "bar",
+   "barWidth": "62%",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 15.64,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$15.6B · 0.39%"
+     }
+    },
+    {
+     "value": 5.47,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$5.5B · 0.23%"
+     }
+    },
+    {
+     "value": 4.51,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$4.5B · 0.40%"
+     }
+    },
+    {
+     "value": 1.5,
+     "itemStyle": {
+      "color": "#3bb273"
+     },
+     "label": {
+      "formatter": "$1.5B · 0.19%"
+     }
+    },
+    {
+     "value": 1.01,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$1.0B · 0.29%"
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span> · PHYS: Sep 30, 2026; others: justETF, Nov 2026</small>
+
+<p class="fragment fade-up">My shortlist: <strong>CSGOLD</strong> for the lowest cost, <strong>PHYS</strong> for the largest pool of gold.</p>
+
+--
+
+### 🥇 Gold / Irish Gold ETCs (Reference Only)
+
+```echarts
+{
+ "grid": {
+  "left": 10,
+  "right": 150,
+  "top": 10,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 36.3
  },
  "yAxis": {
   "type": "category",
@@ -1202,39 +1314,39 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
    },
    "data": [
     {
-     "value": 37.63,
+     "value": 35.61,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$37.6B · 0.12%"
+      "formatter": "$35.6B · 0.12%"
      }
     },
     {
-     "value": 29.1,
+     "value": 28.27,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$29.1B · 0.12%"
+      "formatter": "$28.3B · 0.12%"
      }
     },
     {
-     "value": 12.23,
+     "value": 11.37,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$12.2B · 0.12%"
+      "formatter": "$11.4B · 0.12%"
      }
     },
     {
-     "value": 6.95,
+     "value": 6.37,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$6.9B · 0.11%"
+      "formatter": "$6.4B · 0.11%"
      }
     }
    ]
@@ -1246,11 +1358,11 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
 
-<small>Data from late May 2026</small>
+<small>Cheapest, but debt securities: they fail the structure filter · justETF, Nov 2026</small>
 
 --
 
-### 🥇 Gold / TER: India vs Ireland
+### 🥇 Gold / TER: India vs Global
 
 Yearly fee (TER) range of each option
 
@@ -1292,7 +1404,8 @@ Yearly fee (TER) range of each option
   "data": [
    "Indian Gold FoFs",
    "Indian Gold ETFs",
-   "Irish Gold ETCs"
+   "Global Gold Funds",
+   "Irish Gold ETCs*"
   ]
  },
  "series": [
@@ -1306,6 +1419,7 @@ Yearly fee (TER) range of each option
    "data": [
     0.45,
     0.29,
+    0.19,
     0.11
    ]
   },
@@ -1340,13 +1454,22 @@ Yearly fee (TER) range of each option
      }
     },
     {
-     "value": 0.01,
+     "value": 0.21,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
+      "formatter": "0.19% – 0.40%"
+     }
+    },
+    {
+     "value": 0.01,
+     "itemStyle": {
+      "color": "#9aa5b1"
+     },
+     "label": {
       "position": "right",
-      "color": "#3bb273",
+      "color": "#9aa5b1",
       "formatter": "0.11% – 0.12%"
      }
     }
@@ -1356,7 +1479,24 @@ Yearly fee (TER) range of each option
 }
 ```
 
-<p class="fragment fade-up">Indian gold funds cost <strong>3.7× to 7.5×</strong> more than Irish gold ETCs.</p>
+<p class="fragment fade-up">Indian gold FoFs cost <strong>2.4× to 4.7×</strong> more than iShares Gold (CH) at 0.19%.</p>
+
+<small>* Irish ETCs shown for reference: cheapest, but debt-tax risk</small>
+
+--
+
+### 🥇 Gold / Import Duty Distorts Indian Gold
+
+Indian gold NAV = global price × USD/INR <strong>+ import duty</strong>
+
+| When | Duty | Indian gold NAV |
+|---|---|---|
+| **July 2024** | 15% → 6% | Fell overnight, global gold flat |
+| **May 2026** | 6% → 15% | Rose overnight, global gold flat |
+
+- <!-- .element: class="fragment fade-up" --> After the hike: domestic gold at a <strong>~$150/oz discount</strong> to the landed price (WGC)
+- <!-- .element: class="fragment fade-up" --> Duty is <strong>policy risk, not return</strong>: buy at 15%, sell after a cut, and you lose
+- <!-- .element: class="fragment fade-up" --> Global gold funds track the <strong>real international price</strong> in USD
 
 --
 
@@ -1442,7 +1582,7 @@ Yearly fee (TER) range of each option
  },
  "series": [
   {
-   "name": "Low-cost Gold ETC (0.12%)",
+   "name": "Global Gold Fund (0.19%)",
    "type": "line",
    "smooth": true,
    "symbol": "none",
@@ -1453,36 +1593,36 @@ Yearly fee (TER) range of each option
    "data": [
     1.0,
     1.11,
-    1.24,
+    1.23,
     1.37,
-    1.53,
-    1.7,
-    1.89,
-    2.1,
-    2.33,
-    2.59,
-    2.88,
-    3.2,
-    3.56,
-    3.96,
-    4.4,
-    4.89,
-    5.43,
-    6.04,
-    6.72,
-    7.46,
-    8.3,
-    9.22,
-    10.25,
-    11.4,
-    12.67,
-    14.08,
-    15.66,
-    17.4,
-    19.34,
-    21.5,
+    1.52,
+    1.69,
+    1.88,
+    2.09,
+    2.32,
+    2.57,
+    2.86,
+    3.18,
+    3.53,
+    3.92,
+    4.35,
+    4.84,
+    5.37,
+    5.97,
+    6.63,
+    7.36,
+    8.18,
+    9.09,
+    10.09,
+    11.21,
+    12.45,
+    13.83,
+    15.37,
+    17.07,
+    18.96,
+    21.06,
     {
-     "value": 23.9,
+     "value": 23.39,
      "symbol": "circle",
      "symbolSize": 10,
      "label": {
@@ -1490,7 +1630,7 @@ Yearly fee (TER) range of each option
       "position": "left",
       "fontSize": 18,
       "fontWeight": "bold",
-      "formatter": "₹23.90L"
+      "formatter": "₹23.39L"
      }
     }
    ]
@@ -1553,7 +1693,7 @@ Yearly fee (TER) range of each option
 }
 ```
 
-<p class="fragment fade-up"><strong>₹4.55 lakh (23%) more</strong>, from structure alone. Weigh it against the possible <strong>slab-rate tax</strong> on Irish ETCs.</p>
+<p class="fragment fade-up"><strong>₹4.04 lakh (21%) more</strong> with a 0.19% Swiss gold fund, from structure alone, without the debt-tax risk of Irish ETCs.</p>
 
 ---
 
