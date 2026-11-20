@@ -6,7 +6,7 @@ date: "2026-10-25"
 draft: false
 layout: "slides"
 type: "slides"
-summary: "Mapping the Irish UCITS universe: which index, which fund and which provider for global equity, US equity, US Treasuries and gold, and how to combine them."
+summary: "Equity, debt and gold for Indian investors: which index, which fund and which provider for global equity, US equity and US Treasuries (Irish UCITS), gold (Swiss and Canadian funds), and how to combine them."
 js_tools:
  - gsap
 covers: selecting-the-global-indexes
@@ -34,8 +34,8 @@ related:
 <h2 class="title-scramble">Selecting the Global Indexes</h2>
 <h4 class="subtitle-fade2" style="color: var(--r-heading-color, var(--text))" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2}'>📖 <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/" target="_blank">The Global Indian Investor</a> · <a href="https://sakthipriyan.com/building-wealth/books/the-global-indian-investor/07-selecting-the-global-indexes/" target="_blank">Chapter 7</a></h4>
 <br/>
-<h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Which index, which fund, which provider: the Irish UCITS universe</h4>
-<h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Oct 25, 2026</h4>
+<h4 class="subtitle-fade" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 2.5}'>Equity, Debt and Gold: which index, which fund, which provider</h4>
+<h4 class="subtitle-fade2" data-gsap='{"from": {"opacity": 0, "y": 30}, "duration": 1, "delay": 3}'>Oct 25, 2026 · Updated Nov 19, 2026</h4>
 <br/>
 --
 
@@ -63,61 +63,1873 @@ related:
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 🥇 Gold
 - <!-- .element: class="fragment fade-up" style="list-style:none" --> 🧩 Portfolio Construction
 
+---
+
+### 🏗️ Index Providers: The Blueprint
+
+The **index provider** (MSCI, FTSE) is the architect; the **ETF provider** (iShares, Vanguard, …) is the builder.
+
+| Family | Covers | Coverage | Global (DM + EM) | Developed (DM) | Emerging (EM) |
+|---|---|---:|---|---|---|
+| **MSCI** | Large + Mid | ~85% | MSCI ACWI | MSCI World | MSCI Emerging Markets |
+| **MSCI IMI** | + Small | ~99% | MSCI ACWI IMI | MSCI World IMI* | MSCI EM IMI |
+| **FTSE** | Large + Mid | ~90–95% | FTSE All-World | FTSE Developed | FTSE Emerging |
+| **FTSE All Cap** | + Small | ~99% | FTSE Global All Cap | FTSE Developed All Cap* | FTSE Emerging All Cap* |
+
+<small>Index providers publish many indexes, but ETFs exist only where there is demand: MSCI ACWI ex India exists, with no ETF tracking it.<br/>* No plain fund above $1B.</small>
+
+---
+
+
+### 🌍 Global Equity / Global Markets by Country
+
+<!-- view: full -->
+
+<small>Global (DM + EM) · Countries above 1%, the rest as Other · US bar broken to fit · One large fund per index · justETF · <strong>as of 30 Sep 2026</strong></small>
+
+```echarts
+{
+ "title": [
+  {
+   "text": "FTSE All-World",
+   "subtext": "Vanguard · LSE: VWRA",
+   "left": "23.8%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  },
+  {
+   "text": "FTSE Global All Cap",
+   "subtext": "Vanguard · LSE: VALU · EBS: VALL",
+   "left": "44.6%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  },
+  {
+   "text": "MSCI ACWI",
+   "subtext": "iShares · LSE: ISAC · EBS: SSAC",
+   "left": "65.4%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  },
+  {
+   "text": "MSCI ACWI IMI",
+   "subtext": "SPDR · LSE: IMID · EBS: IMID",
+   "left": "86.2%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  }
+ ],
+ "tooltip": {
+  "show": false
+ },
+ "grid": [
+  {
+   "left": "16.0%",
+   "width": "19.6%",
+   "top": 58,
+   "bottom": 6
+  },
+  {
+   "left": "36.8%",
+   "width": "19.6%",
+   "top": 58,
+   "bottom": 6
+  },
+  {
+   "left": "57.6%",
+   "width": "19.6%",
+   "top": 58,
+   "bottom": 6
+  },
+  {
+   "left": "78.4%",
+   "width": "19.6%",
+   "top": 58,
+   "bottom": 6
+  }
+ ],
+ "xAxis": [
+  {
+   "type": "value",
+   "gridIndex": 0,
+   "show": false,
+   "max": 18.85
+  },
+  {
+   "type": "value",
+   "gridIndex": 1,
+   "show": false,
+   "max": 18.85
+  },
+  {
+   "type": "value",
+   "gridIndex": 2,
+   "show": false,
+   "max": 18.85
+  },
+  {
+   "type": "value",
+   "gridIndex": 3,
+   "show": false,
+   "max": 18.85
+  }
+ ],
+ "yAxis": [
+  {
+   "type": "category",
+   "gridIndex": 0,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": true,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "United States 🇺🇸",
+    "Japan 🇯🇵",
+    "Taiwan 🇹🇼",
+    "United Kingdom 🇬🇧",
+    "Canada 🇨🇦",
+    "South Korea 🇰🇷",
+    "China 🇨🇳",
+    "Switzerland 🇨🇭",
+    "Germany 🇩🇪",
+    "France 🇫🇷",
+    "Australia 🇦🇺",
+    "India 🇮🇳",
+    "Netherlands 🇳🇱",
+    "Ireland 🇮🇪",
+    "Other 🌐"
+   ]
+  },
+  {
+   "type": "category",
+   "gridIndex": 1,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": false,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "United States 🇺🇸",
+    "Japan 🇯🇵",
+    "Taiwan 🇹🇼",
+    "United Kingdom 🇬🇧",
+    "Canada 🇨🇦",
+    "South Korea 🇰🇷",
+    "China 🇨🇳",
+    "Switzerland 🇨🇭",
+    "Germany 🇩🇪",
+    "France 🇫🇷",
+    "Australia 🇦🇺",
+    "India 🇮🇳",
+    "Netherlands 🇳🇱",
+    "Ireland 🇮🇪",
+    "Other 🌐"
+   ]
+  },
+  {
+   "type": "category",
+   "gridIndex": 2,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": false,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "United States 🇺🇸",
+    "Japan 🇯🇵",
+    "Taiwan 🇹🇼",
+    "United Kingdom 🇬🇧",
+    "Canada 🇨🇦",
+    "South Korea 🇰🇷",
+    "China 🇨🇳",
+    "Switzerland 🇨🇭",
+    "Germany 🇩🇪",
+    "France 🇫🇷",
+    "Australia 🇦🇺",
+    "India 🇮🇳",
+    "Netherlands 🇳🇱",
+    "Ireland 🇮🇪",
+    "Other 🌐"
+   ]
+  },
+  {
+   "type": "category",
+   "gridIndex": 3,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": false,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "United States 🇺🇸",
+    "Japan 🇯🇵",
+    "Taiwan 🇹🇼",
+    "United Kingdom 🇬🇧",
+    "Canada 🇨🇦",
+    "South Korea 🇰🇷",
+    "China 🇨🇳",
+    "Switzerland 🇨🇭",
+    "Germany 🇩🇪",
+    "France 🇫🇷",
+    "Australia 🇦🇺",
+    "India 🇮🇳",
+    "Netherlands 🇳🇱",
+    "Ireland 🇮🇪",
+    "Other 🌐"
+   ]
+  }
+ ],
+ "series": [
+  {
+   "type": "bar",
+   "xAxisIndex": 0,
+   "yAxisIndex": 0,
+   "stack": "s0",
+   "barWidth": "68%",
+   "name": "FTSE All-World",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 8.06,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": 0
+     },
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 6.04,
+     "itemStyle": {
+      "color": "#d95926",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.53,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.16,
+     "itemStyle": {
+      "color": "#c98500",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.84,
+     "itemStyle": {
+      "color": "#d55181",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.6,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.44,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.18,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.75,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.74,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.5,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.5,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.46,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "<1%"
+     }
+    },
+    {
+     "value": 8.93,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 0,
+   "yAxisIndex": 0,
+   "stack": "s0",
+   "barWidth": "68%",
+   "name": "FTSE All-World",
+   "silent": true,
+   "itemStyle": {
+    "color": "rgba(57,135,229,0.18)",
+    "decal": {
+     "symbol": "rect",
+     "symbolSize": 1,
+     "dashArrayX": [
+      1,
+      0
+     ],
+     "dashArrayY": [
+      2,
+      4
+     ],
+     "rotation": -0.785,
+     "color": "#3987e5"
+    }
+   },
+   "label": {
+    "show": false
+   },
+   "tooltip": {
+    "show": false
+   },
+   "data": [
+    {
+     "value": 1.04
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 0,
+   "yAxisIndex": 0,
+   "stack": "s0",
+   "barWidth": "68%",
+   "name": "FTSE All-World",
+   "label": {
+    "show": false,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 3.8999999999999995,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "show": true,
+      "formatter": "60.33%"
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 1,
+   "yAxisIndex": 1,
+   "stack": "s1",
+   "barWidth": "68%",
+   "name": "FTSE Global All Cap",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 8.06,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": 0
+     },
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 5.83,
+     "itemStyle": {
+      "color": "#d95926",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.36,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.14,
+     "itemStyle": {
+      "color": "#c98500",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.81,
+     "itemStyle": {
+      "color": "#d55181",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.45,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.3,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.05,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.6,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.63,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.45,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.54,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.4,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "<1%"
+     }
+    },
+    {
+     "value": 12.07,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 1,
+   "yAxisIndex": 1,
+   "stack": "s1",
+   "barWidth": "68%",
+   "name": "FTSE Global All Cap",
+   "silent": true,
+   "itemStyle": {
+    "color": "rgba(57,135,229,0.18)",
+    "decal": {
+     "symbol": "rect",
+     "symbolSize": 1,
+     "dashArrayX": [
+      1,
+      0
+     ],
+     "dashArrayY": [
+      2,
+      4
+     ],
+     "rotation": -0.785,
+     "color": "#3987e5"
+    }
+   },
+   "label": {
+    "show": false
+   },
+   "tooltip": {
+    "show": false
+   },
+   "data": [
+    {
+     "value": 1.04
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 1,
+   "yAxisIndex": 1,
+   "stack": "s1",
+   "barWidth": "68%",
+   "name": "FTSE Global All Cap",
+   "label": {
+    "show": false,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 3.8999999999999995,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "show": true,
+      "formatter": "58.37%"
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 2,
+   "yAxisIndex": 2,
+   "stack": "s2",
+   "barWidth": "68%",
+   "name": "MSCI ACWI",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 8.06,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": 0
+     },
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 5.22,
+     "itemStyle": {
+      "color": "#d95926",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.44,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.12,
+     "itemStyle": {
+      "color": "#c98500",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.86,
+     "itemStyle": {
+      "color": "#d55181",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.57,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.11,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.21,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.81,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.76,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.34,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.25,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.49,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.03,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 7.4,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 2,
+   "yAxisIndex": 2,
+   "stack": "s2",
+   "barWidth": "68%",
+   "name": "MSCI ACWI",
+   "silent": true,
+   "itemStyle": {
+    "color": "rgba(57,135,229,0.18)",
+    "decal": {
+     "symbol": "rect",
+     "symbolSize": 1,
+     "dashArrayX": [
+      1,
+      0
+     ],
+     "dashArrayY": [
+      2,
+      4
+     ],
+     "rotation": -0.785,
+     "color": "#3987e5"
+    }
+   },
+   "label": {
+    "show": false
+   },
+   "tooltip": {
+    "show": false
+   },
+   "data": [
+    {
+     "value": 1.04
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 2,
+   "yAxisIndex": 2,
+   "stack": "s2",
+   "barWidth": "68%",
+   "name": "MSCI ACWI",
+   "label": {
+    "show": false,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 3.8999999999999995,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "show": true,
+      "formatter": "62.39%"
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 3,
+   "yAxisIndex": 3,
+   "stack": "s3",
+   "barWidth": "68%",
+   "name": "MSCI ACWI IMI",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 8.06,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": 0
+     },
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 5.83,
+     "itemStyle": {
+      "color": "#d95926",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.45,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.28,
+     "itemStyle": {
+      "color": "#c98500",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.02,
+     "itemStyle": {
+      "color": "#d55181",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.5,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.96,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.1,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.78,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.76,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.47,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.46,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.47,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "<1%"
+     }
+    },
+    {
+     "value": 8.31,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 3,
+   "yAxisIndex": 3,
+   "stack": "s3",
+   "barWidth": "68%",
+   "name": "MSCI ACWI IMI",
+   "silent": true,
+   "itemStyle": {
+    "color": "rgba(57,135,229,0.18)",
+    "decal": {
+     "symbol": "rect",
+     "symbolSize": 1,
+     "dashArrayX": [
+      1,
+      0
+     ],
+     "dashArrayY": [
+      2,
+      4
+     ],
+     "rotation": -0.785,
+     "color": "#3987e5"
+    }
+   },
+   "label": {
+    "show": false
+   },
+   "tooltip": {
+    "show": false
+   },
+   "data": [
+    {
+     "value": 1.04
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 3,
+   "yAxisIndex": 3,
+   "stack": "s3",
+   "barWidth": "68%",
+   "name": "MSCI ACWI IMI",
+   "label": {
+    "show": false,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold"
+   },
+   "data": [
+    {
+     "value": 3.8999999999999995,
+     "itemStyle": {
+      "color": "#3987e5",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "show": true,
+      "formatter": "61.61%"
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    },
+    {
+     "value": 0,
+     "label": {
+      "show": false
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<p class="fragment fade-up">Global funds are already <strong>~60% US</strong>; India is only <strong>~1.5%</strong>.</p>
+
 --
 
 ### How the Funds Were Picked
 
 | | |
 |---|---|
-| **Domicile** | Ireland (UCITS) |
+| **Domicile** | Ireland (UCITS), physically replicated |
 | **Share class** | Accumulating, traded in **USD** |
 | **Size** | AUM above **$1 billion** (liquidity, low closure risk) |
+| **Gold** | Funds and trusts only (Swiss, Canadian), not debt-like ETCs |
 | **Shortlist** | Top 3 by AUM and Top 3 by lowest TER |
-| **Data** | Fund size and TER from the 3rd week of **June 2026** |
-
----
-
-
-### 🏗️ Index Providers: Architect vs Builder
-
-The **index provider** (MSCI, FTSE) is the architect; the **ETF provider** (iShares, Vanguard, …) is the builder executing the blueprint.
-
-| Index tier | Covers | Market coverage |
-|---|---|---|
-| **MSCI** | Large + Mid cap | ~85% |
-| **MSCI IMI** | Large + Mid + Small | ~99% |
-| **FTSE** | Large + Mid (slightly deeper) | ~90–95% |
-| **FTSE All Cap** | Large + Mid + Small | ~99% |
+| **Data** | justETF, 3rd week of **November 2026** |
 
 --
-
-### 🏗️ Index Providers / Never Mix MSCI and FTSE
-
-For a **one-fund** portfolio, MSCI vs FTSE makes no real difference. Splitting into **DM + EM**? Pick one family.
-
-| | South Korea & Poland are… |
-|---|---|
-| **FTSE** | Developed Markets |
-| **MSCI** | Emerging Markets |
-
-- <!-- .element: class="fragment fade-up" --> FTSE Developed + MSCI EM → South Korea <strong>twice</strong>
-- <!-- .element: class="fragment fade-up" --> MSCI World + FTSE EM → South Korea <strong>missing</strong>
-
---
-
-### 🏗️ Index Providers / The Blueprint
-
-| Family | Global (DM + EM) | Developed (DM) | Emerging (EM) |
-|---|---|---|---|
-| **MSCI** | MSCI ACWI | MSCI World | MSCI Emerging Markets |
-| **MSCI IMI** | MSCI ACWI IMI | MSCI World IMI | MSCI EM IMI |
-| **FTSE** | FTSE All-World | FTSE Developed | FTSE Emerging |
-| **FTSE All Cap** | FTSE Global All Cap | FTSE Developed All Cap | FTSE Emerging All Cap |
-
-<small>Index providers publish many indexes, but ETFs exist only where there is demand: MSCI ACWI ex India exists, with no ETF tracking it.</small>
-
----
-
 
 ### 🌍 Global Equity / One Fund for the World
 
@@ -135,7 +1947,7 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 49.5
+  "max": 64.0
  },
  "yAxis": {
   "type": "category",
@@ -147,15 +1959,27 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "Vanguard · FTSE All-World",
-   "iShares · MSCI ACWI",
-   "SPDR · MSCI ACWI",
-   "SPDR · MSCI ACWI IMI",
-   "Invesco · FTSE All-World"
+   "{t|Vanguard · FTSE All-World}\n{k|LSE: VWRA}",
+   "{t|iShares · MSCI ACWI}\n{k|LSE: ISAC · EBS: SSAC}",
+   "{t|SPDR · MSCI ACWI}\n{k|LSE: ACWD}",
+   "{t|SPDR · MSCI ACWI IMI}\n{k|LSE: IMID · EBS: IMID}",
+   "{t|Vanguard · FTSE Global All Cap}\n{k|LSE: VALU · EBS: VALL}"
   ]
  },
  "series": [
@@ -170,48 +1994,48 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
    },
    "data": [
     {
-     "value": 48.53,
+     "value": 62.71,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$48.5B · 0.19%"
+      "formatter": "$62.7B · 0.14%"
      }
     },
     {
-     "value": 33.73,
+     "value": 34.71,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$33.7B · 0.20%"
+      "formatter": "$34.7B · 0.20%"
      }
     },
     {
-     "value": 15.8,
+     "value": 21.16,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$21.2B · 0.12%"
+     }
+    },
+    {
+     "value": 9.46,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$9.5B · 0.17%"
+     }
+    },
+    {
+     "value": 4.98,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$15.8B · 0.12%"
-     }
-    },
-    {
-     "value": 6.8,
-     "itemStyle": {
-      "color": "#6e9ef7"
-     },
-     "label": {
-      "formatter": "$6.8B · 0.17%"
-     }
-    },
-    {
-     "value": 3.89,
-     "itemStyle": {
-      "color": "#6e9ef7"
-     },
-     "label": {
-      "formatter": "$3.9B · 0.15%"
+      "formatter": "$5.0B · 0.07%"
      }
     }
    ]
@@ -221,6 +2045,8 @@ Global Markets = Developed + Emerging (overlaps a little with your Indian equity
 ```
 
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
+
+<p class="fragment fade-up">🆕 <strong>VALU</strong>: ~6,400 stocks, large to small cap, at <strong>0.07%</strong>. Launched Aug 2026, already ~$5B. And VWRA cut its TER from 0.19% to 0.14%.</p>
 
 --
 
@@ -240,7 +2066,7 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 144.4
+  "max": 144.8
  },
  "yAxis": {
   "type": "category",
@@ -252,16 +2078,28 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "iShares · MSCI World",
-   "Xtrackers · MSCI World",
-   "SPDR · MSCI World",
-   "UBS · MSCI World",
-   "Invesco · MSCI World",
-   "Vanguard · FTSE Developed"
+   "{t|iShares · MSCI World}\n{k|LSE: IWDA · EBS: SWDA}",
+   "{t|Xtrackers · MSCI World}\n{k|LSE: XDWD · EBS: XDWD}",
+   "{t|SPDR · MSCI World}\n{k|LSE: SWRD · EBS: SWRD}",
+   "{t|UBS · MSCI World}\n{k|LSE: WRDB · EBS: WRDUSW}",
+   "{t|Invesco · MSCI World}\n{k|LSE: MXWO · EBS: MXWO}",
+   "{t|Vanguard · FTSE Developed}\n{k|LSE: VHVE}"
   ]
  },
  "series": [
@@ -276,57 +2114,57 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
    },
    "data": [
     {
-     "value": 141.57,
+     "value": 141.93,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$141.6B · 0.20%"
+      "formatter": "$141.9B · 0.20%"
      }
     },
     {
-     "value": 22.39,
+     "value": 24.05,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$22.4B · 0.12%"
+      "formatter": "$24.0B · 0.12%"
      }
     },
     {
-     "value": 19.23,
+     "value": 20.46,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$19.2B · 0.12%"
+      "formatter": "$20.5B · 0.12%"
      }
     },
     {
-     "value": 10.68,
+     "value": 13.27,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$10.7B · 0.06%"
+      "formatter": "$13.3B · 0.06%"
      }
     },
     {
-     "value": 8.26,
+     "value": 10.55,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$8.3B · 0.05%"
+      "formatter": "$10.6B · 0.05%"
      }
     },
     {
-     "value": 6.4,
+     "value": 6.69,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$6.4B · 0.12%"
+      "formatter": "$6.7B · 0.12%"
      }
     }
    ]
@@ -336,6 +2174,778 @@ No overlap with Indian equity: let your Indian portfolio stand in for EM.
 ```
 
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
+
+--
+
+### 🌍 Global Equity / Emerging Markets by Country
+
+<!-- view: full -->
+
+<small>Emerging Markets · Countries above 1%, the rest as Other · One large fund per index · justETF · <strong>as of 30 Sep 2026</strong></small>
+
+```echarts
+{
+ "title": [
+  {
+   "text": "MSCI EM",
+   "subtext": "iShares · LSE: IEMA · EBS: SEMA",
+   "left": "27.3%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  },
+  {
+   "text": "MSCI EM IMI",
+   "subtext": "iShares · LSE: EIMI · EBS: EIMI",
+   "left": "54.9%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  },
+  {
+   "text": "FTSE Emerging",
+   "subtext": "Vanguard · LSE: VFEA",
+   "left": "82.6%",
+   "top": 0,
+   "textAlign": "center",
+   "textStyle": {
+    "fontSize": 16,
+    "fontWeight": "bold"
+   },
+   "subtextStyle": {
+    "fontSize": 12
+   }
+  }
+ ],
+ "tooltip": {
+  "show": false
+ },
+ "grid": [
+  {
+   "left": "17.0%",
+   "width": "25.7%",
+   "top": 58,
+   "bottom": 6
+  },
+  {
+   "left": "44.7%",
+   "width": "25.7%",
+   "top": 58,
+   "bottom": 6
+  },
+  {
+   "left": "72.3%",
+   "width": "25.7%",
+   "top": 58,
+   "bottom": 6
+  }
+ ],
+ "xAxis": [
+  {
+   "type": "value",
+   "gridIndex": 0,
+   "show": false,
+   "max": 48.96
+  },
+  {
+   "type": "value",
+   "gridIndex": 1,
+   "show": false,
+   "max": 48.96
+  },
+  {
+   "type": "value",
+   "gridIndex": 2,
+   "show": false,
+   "max": 48.96
+  }
+ ],
+ "yAxis": [
+  {
+   "type": "category",
+   "gridIndex": 0,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": true,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "Taiwan 🇹🇼",
+    "China 🇨🇳",
+    "South Korea 🇰🇷",
+    "India 🇮🇳",
+    "Brazil 🇧🇷",
+    "South Africa 🇿🇦",
+    "Saudi Arabia 🇸🇦",
+    "Mexico 🇲🇽",
+    "UAE 🇦🇪",
+    "Malaysia 🇲🇾",
+    "Thailand 🇹🇭",
+    "Hong Kong 🇭🇰",
+    "Poland 🇵🇱",
+    "Other 🌐"
+   ]
+  },
+  {
+   "type": "category",
+   "gridIndex": 1,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": false,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "Taiwan 🇹🇼",
+    "China 🇨🇳",
+    "South Korea 🇰🇷",
+    "India 🇮🇳",
+    "Brazil 🇧🇷",
+    "South Africa 🇿🇦",
+    "Saudi Arabia 🇸🇦",
+    "Mexico 🇲🇽",
+    "UAE 🇦🇪",
+    "Malaysia 🇲🇾",
+    "Thailand 🇹🇭",
+    "Hong Kong 🇭🇰",
+    "Poland 🇵🇱",
+    "Other 🌐"
+   ]
+  },
+  {
+   "type": "category",
+   "gridIndex": 2,
+   "inverse": true,
+   "axisTick": {
+    "show": false
+   },
+   "axisLine": {
+    "show": false
+   },
+   "axisLabel": {
+    "show": false,
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "margin": 10
+   },
+   "data": [
+    "Taiwan 🇹🇼",
+    "China 🇨🇳",
+    "South Korea 🇰🇷",
+    "India 🇮🇳",
+    "Brazil 🇧🇷",
+    "South Africa 🇿🇦",
+    "Saudi Arabia 🇸🇦",
+    "Mexico 🇲🇽",
+    "UAE 🇦🇪",
+    "Malaysia 🇲🇾",
+    "Thailand 🇹🇭",
+    "Hong Kong 🇭🇰",
+    "Poland 🇵🇱",
+    "Other 🌐"
+   ]
+  }
+ ],
+ "series": [
+  {
+   "type": "bar",
+   "xAxisIndex": 0,
+   "yAxisIndex": 0,
+   "stack": "s0",
+   "barWidth": "68%",
+   "name": "MSCI EM",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 28.71,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 17.64,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 21.27,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 10.56,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 4.0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.46,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.29,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.56,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.22,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "<1%"
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "<1%"
+     }
+    },
+    {
+     "value": 1.2,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.04,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 8.05,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 1,
+   "yAxisIndex": 1,
+   "stack": "s1",
+   "barWidth": "68%",
+   "name": "MSCI EM IMI",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 28.63,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 16.3,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 20.55,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 11.75,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.95,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.55,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.38,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.55,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.23,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.09,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.12,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.34,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.12,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 6.44,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "type": "bar",
+   "xAxisIndex": 2,
+   "yAxisIndex": 2,
+   "stack": "s2",
+   "barWidth": "68%",
+   "name": "FTSE Emerging",
+   "label": {
+    "show": true,
+    "position": "right",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "formatter": "{c}%"
+   },
+   "data": [
+    {
+     "value": 34.97,
+     "itemStyle": {
+      "color": "#199e70",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 24.09,
+     "itemStyle": {
+      "color": "#9085e9",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#0ca30c",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "0%"
+     }
+    },
+    {
+     "value": 14.9,
+     "itemStyle": {
+      "color": "#e66767",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 4.42,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.09,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 3.06,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 2.04,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.7,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.49,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.43,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 1.13,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    },
+    {
+     "value": 0,
+     "itemStyle": {
+      "color": "#6b7079",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     },
+     "label": {
+      "formatter": "0%"
+     }
+    },
+    {
+     "value": 7.68,
+     "itemStyle": {
+      "color": "#43474d",
+      "borderRadius": [
+       0,
+       4,
+       4,
+       0
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
+```
+
+<p class="fragment fade-up">South Korea is <strong>~21%</strong> of MSCI EM and <strong>absent</strong> from FTSE Emerging: never mix providers.</p>
 
 --
 
@@ -355,7 +2965,7 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 44.7
+  "max": 40.6
  },
  "yAxis": {
   "type": "category",
@@ -367,16 +2977,28 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "iShares · MSCI EM IMI",
-   "Xtrackers · MSCI EM",
-   "iShares · MSCI EM",
-   "Vanguard · FTSE Emerging",
-   "SPDR · MSCI EM",
-   "HSBC · MSCI EM"
+   "{t|iShares · MSCI EM IMI}\n{k|LSE: EIMI · EBS: EIMI}",
+   "{t|Xtrackers · MSCI EM}\n{k|LSE: XMME}",
+   "{t|iShares · MSCI EM}\n{k|LSE: IEMA · EBS: SEMA}",
+   "{t|Vanguard · FTSE Emerging}\n{k|LSE: VFEA}",
+   "{t|SPDR · MSCI EM}\n{k|LSE: EMRD · EBS: EMRD}",
+   "{t|HSBC · MSCI EM}\n{k|LSE: HEMA}"
   ]
  },
  "series": [
@@ -391,57 +3013,57 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
    },
    "data": [
     {
-     "value": 43.83,
+     "value": 39.83,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$43.8B · 0.18%"
+      "formatter": "$39.8B · 0.18%"
      }
     },
     {
-     "value": 13.82,
+     "value": 12.59,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$13.8B · 0.18%"
+      "formatter": "$12.6B · 0.18%"
      }
     },
     {
-     "value": 10.04,
+     "value": 9.71,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$10.0B · 0.18%"
+      "formatter": "$9.7B · 0.18%"
      }
     },
     {
-     "value": 2.17,
+     "value": 2.38,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$2.2B · 0.17%"
+      "formatter": "$2.4B · 0.17%"
      }
     },
     {
-     "value": 2.17,
+     "value": 2.0,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$2.2B · 0.18%"
+      "formatter": "$2.0B · 0.18%"
      }
     },
     {
-     "value": 1.39,
+     "value": 1.71,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.4B · 0.15%"
+      "formatter": "$1.7B · 0.15%"
      }
     }
    ]
@@ -451,6 +3073,114 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
 ```
 
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
+
+--
+
+### 🌍 Global Equity / How Much India?
+
+<!-- view: full -->
+
+<small>India's weight in each index · justETF · <strong>as of 30 Sep 2026</strong></small>
+
+
+```echarts
+{
+ "legend": {
+  "top": 0,
+  "textStyle": {
+   "fontSize": 15
+  }
+ },
+ "grid": {
+  "left": 10,
+  "right": 20,
+  "top": 40,
+  "bottom": 10,
+  "containLabel": true
+ },
+ "xAxis": {
+  "type": "value",
+  "show": false,
+  "max": 100
+ },
+ "yAxis": {
+  "type": "category",
+  "inverse": true,
+  "axisTick": {
+   "show": false
+  },
+  "axisLine": {
+   "show": false
+  },
+  "axisLabel": {
+   "fontSize": 17,
+   "fontWeight": "bold"
+  },
+  "data": [
+   "MSCI ACWI",
+   "MSCI ACWI IMI",
+   "FTSE All-World",
+   "FTSE Global All Cap",
+   "MSCI EM",
+   "MSCI EM IMI",
+   "FTSE Emerging"
+  ]
+ },
+ "series": [
+  {
+   "name": "India",
+   "type": "bar",
+   "stack": "s",
+   "barWidth": 30,
+   "color": "#e66767",
+   "label": {
+    "show": true,
+    "position": "right",
+    "distance": 6,
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "color": "#fff",
+    "formatter": "India {c}%"
+   },
+   "data": [
+    1.25,
+    1.46,
+    1.5,
+    1.54,
+    10.56,
+    11.75,
+    14.9
+   ]
+  },
+  {
+   "name": "Rest of the index",
+   "type": "bar",
+   "stack": "s",
+   "color": "#64748B",
+   "label": {
+    "show": true,
+    "position": "insideRight",
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "color": "#fff",
+    "formatter": "{c}%"
+   },
+   "data": [
+    98.75,
+    98.54,
+    98.5,
+    98.46,
+    89.44,
+    88.25,
+    85.1
+   ]
+  }
+ ]
+}
+```
+
+
+<p class="fragment fade-up">~1.5% of a global fund: <strong>little overlap</strong> with your Indian portfolio.</p>
 
 ---
 
@@ -492,7 +3222,9 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
   },
   "data": [
    "MSCI World",
-   "MSCI ACWI"
+   "FTSE Developed",
+   "MSCI ACWI",
+   "FTSE All-World"
   ]
  },
  "series": [
@@ -500,7 +3232,7 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
    "name": "US",
    "type": "bar",
    "stack": "s",
-   "barWidth": 36,
+   "barWidth": 30,
    "color": "#2563EB",
    "label": {
     "show": true,
@@ -510,7 +3242,9 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
     "formatter": "US ~{c}%"
    },
    "data": [
+    71,
     67,
+    62,
     60
    ]
   },
@@ -527,13 +3261,17 @@ For more EM beyond India (EM IMI holds ~11% India; Taiwan, China, South Korea we
     "formatter": "{c}%"
    },
    "data": [
+    29,
     33,
+    38,
     40
    ]
   }
  ]
 }
 ```
+
+<small>DM: MSCI World, FTSE Developed · Global: MSCI ACWI, FTSE All-World · justETF · <strong>as of 30 Sep 2026</strong></small>
 
 Why hold the US separately?
 
@@ -570,7 +3308,7 @@ Why hold the US separately?
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 12.6
+  "max": 14.1
  },
  "yAxis": {
   "type": "category",
@@ -582,14 +3320,26 @@ Why hold the US separately?
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "Xtrackers",
-   "iShares",
-   "Amundi",
-   "UBS"
+   "{t|Xtrackers}\n{k|LSE: XD9U · EBS: XD9U}",
+   "{t|iShares}\n{k|LSE: CSUS · EBS: CSUS}",
+   "{t|Amundi}\n{k|XETRA: WEBL}",
+   "{t|UBS}\n{k|LSE: 4UBB · EBS: USAUSW}"
   ]
  },
  "series": [
@@ -604,39 +3354,39 @@ Why hold the US separately?
    },
    "data": [
     {
-     "value": 12.33,
+     "value": 13.84,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$12.3B · 0.03%"
+      "formatter": "$13.8B · 0.03%"
      }
     },
     {
-     "value": 4.64,
+     "value": 5.15,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$4.6B · 0.03%"
+      "formatter": "$5.2B · 0.03%"
      }
     },
     {
-     "value": 4.01,
+     "value": 4.8,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$4.0B · 0.03%"
+      "formatter": "$4.8B · 0.03%"
      }
     },
     {
-     "value": 2.96,
+     "value": 3.23,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$3.0B · 0.03%"
+      "formatter": "$3.2B · 0.03%"
      }
     }
    ]
@@ -663,7 +3413,7 @@ Why hold the US separately?
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 147.6
+  "max": 153.1
  },
  "yAxis": {
   "type": "category",
@@ -675,15 +3425,27 @@ Why hold the US separately?
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "iShares",
-   "Vanguard",
-   "SPDR",
-   "UBS",
-   "Xtrackers"
+   "{t|iShares}\n{k|LSE: CSPX · EBS: CSSPX}",
+   "{t|Vanguard}\n{k|LSE: VUAA}",
+   "{t|SPDR}\n{k|LSE: SPYL · EBS: SPYL}",
+   "{t|Xtrackers}\n{k|LSE: XDPU}",
+   "{t|UBS}\n{k|LSE: S5UU · EBS: SP5AU}"
   ]
  },
  "series": [
@@ -698,48 +3460,48 @@ Why hold the US separately?
    },
    "data": [
     {
-     "value": 144.69,
+     "value": 150.11,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$144.7B · 0.07%"
+      "formatter": "$150.1B · 0.07%"
      }
     },
     {
-     "value": 32.61,
+     "value": 36.5,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$32.6B · 0.07%"
+      "formatter": "$36.5B · 0.07%"
      }
     },
     {
-     "value": 16.96,
+     "value": 19.68,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$17.0B · 0.03%"
+      "formatter": "$19.7B · 0.03%"
      }
     },
     {
-     "value": 1.72,
+     "value": 2.94,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.7B · 0.03%"
+      "formatter": "$2.9B · 0.03%"
      }
     },
     {
-     "value": 1.48,
+     "value": 2.46,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.5B · 0.03%"
+      "formatter": "$2.5B · 0.03%"
      }
     }
    ]
@@ -766,7 +3528,7 @@ Why hold the US separately?
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 26.5
+  "max": 28.3
  },
  "yAxis": {
   "type": "category",
@@ -778,14 +3540,26 @@ Why hold the US separately?
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "iShares",
-   "Invesco",
-   "BNP Paribas",
-   "Xtrackers"
+   "{t|iShares}\n{k|LSE: CNDX · EBS: CSNDX}",
+   "{t|Invesco}\n{k|EBS: EQAC}",
+   "{t|Xtrackers}\n{k|LSE: XNAS}",
+   "{t|BNP Paribas}\n{k|LSE: ANAU · EBS: ANAU}"
   ]
  },
  "series": [
@@ -800,39 +3574,39 @@ Why hold the US separately?
    },
    "data": [
     {
-     "value": 25.96,
+     "value": 27.75,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$26.0B · 0.30%"
+      "formatter": "$27.7B · 0.30%"
      }
     },
     {
-     "value": 4.25,
+     "value": 4.86,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$4.3B · 0.30%"
+      "formatter": "$4.9B · 0.30%"
      }
     },
     {
-     "value": 2.78,
+     "value": 3.06,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$3.1B · 0.20%"
+     }
+    },
+    {
+     "value": 2.9,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$2.8B · 0.14%"
-     }
-    },
-    {
-     "value": 2.2,
-     "itemStyle": {
-      "color": "#6e9ef7"
-     },
-     "label": {
-      "formatter": "$2.2B · 0.20%"
+      "formatter": "$2.9B · 0.14%"
      }
     }
    ]
@@ -843,16 +3617,7 @@ Why hold the US separately?
 
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
---
-
-### 🇺🇸 US Equity / What the Tables Say
-
-<!-- camera: behind solid -->
-
-- <!-- .element: class="fragment fade-up" --> S&P 500 is more popular than MSCI USA, with fewer companies
-- <!-- .element: class="fragment fade-up" --> MSCI USA and S&P 500: $10B+ funds at just <strong>0.03%</strong>
-- <!-- .element: class="fragment fade-up" --> Nasdaq 100 costs <strong>~5×</strong> more; cheapest 0.14%
-- <!-- .element: class="fragment fade-up" --> Concentrated growth comes at a <strong>premium</strong>
+<p class="fragment fade-up">MSCI USA and S&P 500: $10B+ funds at <strong>0.03%</strong>. Nasdaq 100 costs <strong>~5×</strong> more (cheapest 0.14%): a premium for concentrated growth.</p>
 
 --
 
@@ -980,18 +3745,7 @@ The lowest-TER fund on each side, same index
 
 <p class="fragment fade-up">Within <strong>1 basis point</strong> on S&P 500 and Nasdaq-100, and <strong>cheaper</strong> on MSCI ACWI and MSCI World: going Irish costs nothing extra.</p>
 
-<small>Irish TERs: June 2026 · US TERs: November 2026</small>
-
---
-
-### 🇺🇸 US Equity / India vs USA vs ACWI
-
-- <!-- .element: class="fragment fade-up" --> <strong>MSCI ACWI:</strong> broad diversification across developed and emerging markets
-- <!-- .element: class="fragment fade-up" --> <strong>MSCI USA:</strong> the strongest decade, driven by mega-cap technology
-- <!-- .element: class="fragment fade-up" --> <strong>MSCI India:</strong> bursts of outperformance, with more volatility
-- <!-- .element: class="fragment fade-up" --> <strong>Leadership rotates:</strong> last decade's winner rarely leads the next
-
-> <!-- .element: class="fragment fade-up" --> A global index is not about maximizing returns from one market. It is about <b>reducing concentration risk</b> while participating in global growth.
+<small>Irish and US TERs: November 2026</small>
 
 ---
 
@@ -1012,7 +3766,7 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 19.4
+  "max": 21.0
  },
  "yAxis": {
   "type": "category",
@@ -1024,17 +3778,29 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "iShares · 0-1yr",
-   "iShares · 3-7yr",
-   "iShares · 1-3yr",
-   "iShares · 7-10yr",
-   "iShares · 20+yr",
-   "Vanguard · 0-1yr",
-   "Vanguard · all maturities"
+   "{t|iShares · 0-1yr}\n{k|LSE: IB01 · EBS: IB01}",
+   "{t|iShares · 3-7yr}\n{k|LSE: CBU7 · EBS: CSBGU7}",
+   "{t|iShares · 1-3yr}\n{k|LSE: IBTA}",
+   "{t|iShares · 7-10yr}\n{k|LSE: CBU0 · EBS: CSBGU0}",
+   "{t|iShares · 20+yr}\n{k|LSE: DTLA}",
+   "{t|Vanguard · 0-1yr}\n{k|LSE: VDST · EBS: VDST}",
+   "{t|Vanguard · all maturities}\n{k|LSE: VDTA}"
   ]
  },
  "series": [
@@ -1049,16 +3815,16 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
    },
    "data": [
     {
-     "value": 19.05,
+     "value": 20.61,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$19.1B · 0.07%"
+      "formatter": "$20.6B · 0.07%"
      }
     },
     {
-     "value": 8.14,
+     "value": 8.1,
      "itemStyle": {
       "color": "#6e9ef7"
      },
@@ -1067,48 +3833,48 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
      }
     },
     {
-     "value": 7.32,
+     "value": 7.7,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$7.3B · 0.07%"
+      "formatter": "$7.7B · 0.07%"
      }
     },
     {
-     "value": 5.09,
+     "value": 5.04,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$5.1B · 0.07%"
+      "formatter": "$5.0B · 0.07%"
      }
     },
     {
-     "value": 2.66,
+     "value": 3.39,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$2.7B · 0.07%"
+      "formatter": "$3.4B · 0.07%"
      }
     },
     {
-     "value": 2.43,
+     "value": 2.69,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$2.4B · 0.05%"
+      "formatter": "$2.7B · 0.05%"
      }
     },
     {
-     "value": 1.5,
+     "value": 1.61,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$1.5B · 0.05%"
+      "formatter": "$1.6B · 0.05%"
      }
     }
    ]
@@ -1119,29 +3885,10 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 <small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
 
---
-
-### 🛡️ US Treasury ETFs / Keep It Short
-
-<!-- camera: behind solid -->
-
-- <!-- .element: class="fragment fade-up" --> iShares or Vanguard <strong>0-1 year</strong>, by AUM or TER
-- <!-- .element: class="fragment fade-up" --> 7-10yr and 20+yr add <strong>interest-rate risk</strong>: stay at 0-1 or 1-3 years
+- <!-- .element: class="fragment fade-up" --> 7-10yr and 20+yr add <strong>interest-rate risk</strong>: stay at 0-1 year
 - <!-- .element: class="fragment fade-up" --> Short Treasuries skip credit, duration, hedging and geopolitical risk
-- <!-- .element: class="fragment fade-up" --> Already hold INR debt? You may not need US debt
 
 ---
-
-
-### 🥇 Gold / August 2026 Update
-
-> Irish Gold ETCs are legally <b>zero-coupon bonds</b>, so they risk being taxed as debt under <b>Section 50AA</b>, at your slab rate, whatever the holding period.
-
-- <!-- .element: class="fragment fade-up" --> I now look at the Canadian <strong>Sprott Physical Gold Trust (PHYS)</strong>
-- <!-- .element: class="fragment fade-up" --> A trust, not debt: qualifies for the unified <strong>12.5% LTCG</strong> after 24 months
-- <!-- .element: class="fragment fade-up" --> Higher TER (<strong>0.41%</strong>), but <strong>~$7.5B</strong> AUM for liquidity and safety
-
---
 
 ### 🥇 Gold / Why Hold It in USD?
 
@@ -1154,7 +3901,22 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 
 --
 
-### 🥇 Gold / Irish Gold ETCs
+
+### 🥇 Gold / Structure Decides the Tax
+
+| Structure | You own | Tax in India (my reading) |
+|---|---|---|
+| **Irish Gold ETC** | A <b>debt note</b> backed by gold | Risk of <b>Section 50AA</b>: slab rate, any holding period |
+| **Swiss gold ETF** | Units of a <b>fund</b> | Foreign ETF: <b>12.5% LTCG</b> after 24 months |
+| **Canadian trust (PHYS)** | Units of a <b>trust</b> | Foreign ETF: <b>12.5% LTCG</b> after 24 months |
+
+- <!-- .element: class="fragment fade-up" --> UCITS rules bar single-commodity funds, so Ireland only has ETCs
+- <!-- .element: class="fragment fade-up" --> Swiss law allows real gold funds, traded in <strong>USD on SIX</strong>
+- <!-- .element: class="fragment fade-up" --> Filter: fund or trust, USD, AUM above <strong>$1B</strong>
+
+--
+
+### 🥇 Gold / Swiss & Canadian Gold Funds
 
 ```echarts
 {
@@ -1168,7 +3930,7 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
  "xAxis": {
   "type": "value",
   "show": false,
-  "max": 38.4
+  "max": 16.0
  },
  "yAxis": {
   "type": "category",
@@ -1180,14 +3942,27 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
    "show": false
   },
   "axisLabel": {
-   "fontSize": 15,
-   "fontWeight": "bold"
+   "rich": {
+    "t": {
+     "fontSize": 15,
+     "fontWeight": "bold",
+     "lineHeight": 19,
+     "align": "right"
+    },
+    "k": {
+     "fontSize": 12,
+     "color": "#a1a1aa",
+     "lineHeight": 15,
+     "align": "right"
+    }
+   }
   },
   "data": [
-   "iShares",
-   "Invesco",
-   "Amundi",
-   "Xtrackers"
+   "{t|Sprott PHYS · Canada}\n{k|NYSE Arca: PHYS}",
+   "{t|UBS · Switzerland}\n{k|EBS: AUUSI}",
+   "{t|Swisscanto · Switzerland}\n{k|EBS: ZGLDUS}",
+   "{t|iShares · Switzerland}\n{k|EBS: CSGOLD}",
+   "{t|Raiffeisen · Switzerland}\n{k|EBS: RGRTU}"
   ]
  },
  "series": [
@@ -1202,39 +3977,48 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
    },
    "data": [
     {
-     "value": 37.63,
+     "value": 15.64,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$37.6B · 0.12%"
+      "formatter": "$15.6B · 0.39%"
      }
     },
     {
-     "value": 29.1,
+     "value": 5.47,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$29.1B · 0.12%"
+      "formatter": "$5.5B · 0.23%"
      }
     },
     {
-     "value": 12.23,
+     "value": 4.51,
      "itemStyle": {
       "color": "#6e9ef7"
      },
      "label": {
-      "formatter": "$12.2B · 0.12%"
+      "formatter": "$4.5B · 0.40%"
      }
     },
     {
-     "value": 6.95,
+     "value": 1.5,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
-      "formatter": "$6.9B · 0.11%"
+      "formatter": "$1.5B · 0.19%"
+     }
+    },
+    {
+     "value": 1.01,
+     "itemStyle": {
+      "color": "#6e9ef7"
+     },
+     "label": {
+      "formatter": "$1.0B · 0.29%"
      }
     }
    ]
@@ -1243,14 +4027,13 @@ Debt is the **defensive** allocation: stability, liquidity and **dry powder** fo
 }
 ```
 
-<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span></small>
+<small>Bar: fund size (AUM) · label: AUM · TER · <span style="color:#3bb273">green: lowest TER</span> · PHYS: Sep 30, 2026; others: justETF, Nov 2026</small>
 
-
-<small>Data from late May 2026</small>
+<p class="fragment fade-up">My shortlist: <strong>CSGOLD</strong> for the lowest cost, <strong>PHYS</strong> for the largest pool of gold.</p>
 
 --
 
-### 🥇 Gold / TER: India vs Ireland
+### 🥇 Gold / TER: India vs Global
 
 Yearly fee (TER) range of each option
 
@@ -1292,7 +4075,8 @@ Yearly fee (TER) range of each option
   "data": [
    "Indian Gold FoFs",
    "Indian Gold ETFs",
-   "Irish Gold ETCs"
+   "Global Gold Funds",
+   "Irish Gold ETCs*"
   ]
  },
  "series": [
@@ -1306,6 +4090,7 @@ Yearly fee (TER) range of each option
    "data": [
     0.45,
     0.29,
+    0.19,
     0.11
    ]
   },
@@ -1340,13 +4125,22 @@ Yearly fee (TER) range of each option
      }
     },
     {
-     "value": 0.01,
+     "value": 0.21,
      "itemStyle": {
       "color": "#3bb273"
      },
      "label": {
+      "formatter": "0.19% – 0.40%"
+     }
+    },
+    {
+     "value": 0.01,
+     "itemStyle": {
+      "color": "#9aa5b1"
+     },
+     "label": {
       "position": "right",
-      "color": "#3bb273",
+      "color": "#9aa5b1",
       "formatter": "0.11% – 0.12%"
      }
     }
@@ -1356,7 +4150,23 @@ Yearly fee (TER) range of each option
 }
 ```
 
-<p class="fragment fade-up">Indian gold funds cost <strong>3.7× to 7.5×</strong> more than Irish gold ETCs.</p>
+<p class="fragment fade-up">Indian gold FoFs cost <strong>2.4× to 4.7×</strong> more than iShares Gold (CH) at 0.19%.</p>
+
+<small>* Irish ETCs shown for reference: cheapest, but debt-tax risk</small>
+
+--
+
+### 🥇 Gold / Import Duty Distorts Indian Gold
+
+Indian gold NAV = global price × USD/INR <strong>+ import duty</strong>
+
+| When | Duty | Indian gold NAV |
+|---|---|---|
+| **July 2024** | 15% → 6% | Fell overnight, global gold flat |
+| **May 2026** | 6% → 15% | Rose overnight, global gold flat |
+
+- <!-- .element: class="fragment fade-up" --> Duty is <strong>policy risk, not return</strong>: buy at 15%, sell after a cut, and you lose
+- <!-- .element: class="fragment fade-up" --> Global gold funds track the <strong>real international price</strong> in USD
 
 --
 
@@ -1442,7 +4252,7 @@ Yearly fee (TER) range of each option
  },
  "series": [
   {
-   "name": "Low-cost Gold ETC (0.12%)",
+   "name": "Global Gold Fund (0.19%)",
    "type": "line",
    "smooth": true,
    "symbol": "none",
@@ -1453,36 +4263,36 @@ Yearly fee (TER) range of each option
    "data": [
     1.0,
     1.11,
-    1.24,
+    1.23,
     1.37,
-    1.53,
-    1.7,
-    1.89,
-    2.1,
-    2.33,
-    2.59,
-    2.88,
-    3.2,
-    3.56,
-    3.96,
-    4.4,
-    4.89,
-    5.43,
-    6.04,
-    6.72,
-    7.46,
-    8.3,
-    9.22,
-    10.25,
-    11.4,
-    12.67,
-    14.08,
-    15.66,
-    17.4,
-    19.34,
-    21.5,
+    1.52,
+    1.69,
+    1.88,
+    2.09,
+    2.32,
+    2.57,
+    2.86,
+    3.18,
+    3.53,
+    3.92,
+    4.35,
+    4.84,
+    5.37,
+    5.97,
+    6.63,
+    7.36,
+    8.18,
+    9.09,
+    10.09,
+    11.21,
+    12.45,
+    13.83,
+    15.37,
+    17.07,
+    18.96,
+    21.06,
     {
-     "value": 23.9,
+     "value": 23.39,
      "symbol": "circle",
      "symbolSize": 10,
      "label": {
@@ -1490,7 +4300,7 @@ Yearly fee (TER) range of each option
       "position": "left",
       "fontSize": 18,
       "fontWeight": "bold",
-      "formatter": "₹23.90L"
+      "formatter": "₹23.39L"
      }
     }
    ]
@@ -1553,7 +4363,7 @@ Yearly fee (TER) range of each option
 }
 ```
 
-<p class="fragment fade-up"><strong>₹4.55 lakh (23%) more</strong>, from structure alone. Weigh it against the possible <strong>slab-rate tax</strong> on Irish ETCs.</p>
+<p class="fragment fade-up"><strong>₹4.04 lakh (21%) more</strong> with a 0.19% Swiss gold fund, from structure alone, without the debt-tax risk of Irish ETCs.</p>
 
 ---
 
@@ -1568,21 +4378,9 @@ Yearly fee (TER) range of each option
 | **USA + India** | MSCI USA / S&P 500 | India | Simple two-region |
 | **Nasdaq 100 + India** | Nasdaq 100 | India | Concentrated growth |
 
---
+<p class="fragment fade-up"><strong>Concentration ladder:</strong> GM → DM → MSCI USA → S&P 500 → Nasdaq 100. Fewer countries and companies at each step; more top-10 weight, technology and volatility.</p>
 
-### 🧩 Portfolio Construction / The Concentration Ladder
-
-**GM → DM → MSCI USA → S&P 500 → Nasdaq 100**
-
-- <!-- .element: class="fragment fade-up" --> Fewer countries and fewer companies at each step
-- <!-- .element: class="fragment fade-up" --> More weight in the top 10, more technology, more volatility
-- <!-- .element: class="fragment fade-up" --> Bigger potential outperformance, and bigger risk of underperforming
-
-| Asset | Role |
-|---|---|
-| **Equity** | Long-term growth |
-| **Gold** | Crisis hedge and rebalancing asset |
-| **Debt** | Stability, liquidity and dry powder |
+<p class="fragment fade-up"><strong>Equity</strong> for long-term growth · <strong>Gold</strong> as crisis hedge and rebalancing asset · <strong>Debt</strong> for stability and dry powder</p>
 
 --
 
@@ -1647,20 +4445,6 @@ Yearly fee (TER) range of each option
 <small>India: Nifty 50, Next 50, Midcap 150, Smallcap 250</small>
 
 <p class="fragment fade-up"><strong>50% INR, 50% USD · 85% equity, 15% defensive.</strong> My own goals and conviction, not a recommendation.</p>
-
----
-
-### 📝 Summary
-
-<!-- camera: behind bottom -->
-
-<div class="r-stack" style="font-size: 1.6em; font-weight: 700;">
-<p class="fragment current-visible">🏗️ Pick one index family: never mix MSCI and FTSE for DM + EM</p>
-<p class="fragment current-visible">🌍 One global fund, or DM + India, from $1B+ accumulating funds</p>
-<p class="fragment current-visible">🇺🇸 Broad US at 0.03%, or Nasdaq 100 as a deliberate growth bet</p>
-<p class="fragment current-visible">🛡️ Short Treasuries for dry powder · 🥇 gold in USD for rebalancing</p>
-<p class="fragment current-visible">✅ Choose an allocation you can hold through bull and bear markets</p>
-</div>
 
 ---
 
