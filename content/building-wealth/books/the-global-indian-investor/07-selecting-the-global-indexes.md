@@ -454,8 +454,6 @@ Indian Gold ETFs value their gold at the **domestic price**: the international (
 | July 2024 (Union Budget) | Cut from 15% to 6% | Fell overnight, while global gold was flat |
 | May 2026 | Raised from 6% to 15%, the [steepest increase on record](https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening) | Rose overnight, while global gold was flat |
 
-Duty is not the only distortion. After the May 2026 hike, the World Gold Council reported domestic gold trading at a discount of [nearly $150/oz to the landed price](https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening) (~₹4,600 per 10 g, at ₹95.70 per USD) (international price plus duty), as demand dried up.
-
 What this means for an investor:
 
 * **Duty is policy risk, not return.** A gain from a duty hike can reverse at the next Budget. Over a 20–30 year holding, you are exposed to every policy cycle in between.
