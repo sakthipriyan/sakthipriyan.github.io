@@ -16,9 +16,10 @@ In the previous chapter, we saw that Irish ETFs are more efficient for Indian in
 
 > **ETF Selection & Data Criteria**
 > * **Currency**: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.
-> * **Liquidity & Safety**: To ensure robust liquidity and minimize fund closure risk, the ETFs shortlisted exclusively feature accumulating Irish-domiciled UCITS ETFs with an **AUM exceeding $1 Billion**.
+> * **Liquidity & Safety**: To ensure robust liquidity and minimize fund closure risk, the equity and debt ETFs shortlisted exclusively feature physically replicated, accumulating Irish-domiciled UCITS ETFs with an **AUM exceeding $1 Billion**.
+> * **Gold Exception**: Gold is shortlisted by legal structure instead of domicile. Only funds and trusts (Swiss and Canadian) make the cut; Irish Gold ETCs are debt securities and are shown for reference only. See [Gold](#gold-funds-and-etcs) below.
 > * **Ranking**: Across the various indexes, the tables list the Top 3 funds by AUM and the Top 3 by lowest TER.
-> * **Data Vintage**: Fund size, TER, and rankings are based on data taken in the **3rd week of June 2026**.
+> * **Data Vintage**: Fund size, TER, and rankings are based on [justETF](https://www.justetf.com/) data taken in the **3rd week of November 2026** (first published with June 2026 data).
 
 ## Global Equity ETFs
 
@@ -57,12 +58,12 @@ This table shows exactly how both MSCI and FTSE apply their standard and small-c
 | **MSCI** | Large + Mid | ~85% | [MSCI ACWI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BAll%2BCountry%2BWorld%2B%2528ACWI%2529&quoteCurrency=USD) | [MSCI World](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BWorld&quoteCurrency=USD) | [MSCI Emerging Markets](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BEmerging%2BMarkets&quoteCurrency=USD) |
 | **MSCI IMI** | Large&nbsp;+&nbsp;Mid&nbsp;+&nbsp;Small | ~99% | [MSCI ACWI IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BAll%2BCountry%2BWorld%2BInvestable%2BMarket%2B%2528ACWI%2BIMI%2529&quoteCurrency=USD) | [MSCI World IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BWorld%2BIMI&quoteCurrency=USD) | [MSCI&nbsp;Emerging&nbsp;Markets&nbsp;IMI](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=MSCI%2BEmerging%2BMarkets%2BInvestable%2BMarket%2B%28IMI%29&quoteCurrency=USD) |
 | **FTSE**¹ | Large + Mid | ~90-95% | [FTSE All-World](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BAll-World&quoteCurrency=USD) | [FTSE Developed](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BDeveloped&quoteCurrency=USD) | [FTSE Emerging](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BEmerging&quoteCurrency=USD) |
-| **FTSE&nbsp;All&nbsp;Cap**² | Large + Mid + Small | ~99% | FTSE&nbsp;Global&nbsp;All&nbsp;Cap | FTSE&nbsp;Developed&nbsp;All&nbsp;Cap | FTSE Emerging All Cap |
+| **FTSE&nbsp;All&nbsp;Cap**² | Large + Mid + Small | ~99% | [FTSE&nbsp;Global&nbsp;All&nbsp;Cap](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&index=FTSE%2BGlobal%2BAll%2BCap&quoteCurrency=USD) | FTSE&nbsp;Developed&nbsp;All&nbsp;Cap | FTSE Emerging All Cap |
 
 **Notes**
 
 1. While the standard FTSE indices officially target Large and Mid-caps, their methodology naturally dips slightly deeper down the market-cap spectrum than standard MSCI, capturing a broader slice of the total market.
-2. No plain-vanilla, standard ETF tracking these exact indexes exist as of writing this chapter. Some variants exist for [FTSE Global All Cap Choice](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&index=FTSE%2BGlobal%2BAll%2BCap%2BChoice) and [FTSE Emerging All Cap Choice](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&index=FTSE%2BEmerging%2BAll%2BCap%2BChoice). I would rather use FTSE ones if at all.
+2. In August 2026, Vanguard launched the [Vanguard FTSE Global All-Cap UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000VAHT5T0) (ticker `VALU` on LSE in USD), the first plain-vanilla Irish ETF on FTSE Global All Cap. It crossed $1 Billion AUM within three months. FTSE Developed All Cap and FTSE Emerging All Cap still have only ESG variants, such as [FTSE Emerging All Cap Choice](https://www.justetf.com/en/search.html?search=ETFS&assetClass=class-equity&dc=IE&ls=any&distributionPolicy=distributionPolicy-accumulating&quoteCurrency=USD&index=FTSE%2BEmerging%2BAll%2BCap%2BChoice). I would rather use the standard FTSE ones.
 
 Index providers build various indexes but ETF issuer only issue ETFs which have real demand. For example: [MSCI ACWI ex India Index (USD)](https://www.msci.com/documents/10199/a789e2c1-0f2e-4582-a821-fd1f0ac13261) exists but there is no ETF.
 
@@ -77,46 +78,120 @@ Here is how those blueprints translate into actual, investable Irish-domiciled U
 
 | Index              |ETF                                                                                                                                                      | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **FTSE&nbsp;All&#8209;World** | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                                    |              48,526 |        1 |   0.19% |          |
-| **MSCI ACWI**      | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                                   |              33,730 |        2 |   0.20% |          |
-| **MSCI ACWI**      | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48)                   |              15,800 |        3 |   0.12% |        1 |
-| **MSCI ACWI IMI**  | [State Street SPDR MSCI All Country World Investable Market UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) |               6,804 |          |   0.17% |        3 |
-| **FTSE&nbsp;All&#8209;World** | [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7)                                                    |               3,893 |          |   0.15% |        2 |
+| **FTSE&nbsp;All&#8209;World** | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80)                                    |              62,706 |        1 |   0.14% |        3 |
+| **MSCI ACWI**      | [iShares MSCI All Country World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259)                                      |              34,712 |        2 |   0.20% |          |
+| **MSCI ACWI**      | [State Street SPDR MSCI All Country World UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B44Z5B48)                   |              21,161 |        3 |   0.12% |        2 |
+| **MSCI ACWI IMI**  | [State Street SPDR MSCI All Country World Investable Market UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66) |               9,460 |          |   0.17% |          |
+| **FTSE&nbsp;Global&nbsp;All&nbsp;Cap** | [Vanguard FTSE Global All-Cap UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000VAHT5T0)                         |               4,982 |          |   0.07% |        1 |
 
 If you want to pick one index fund for your equity portfolio, pick one of these based on your preference (Index/AUM/TER). Since there is no ETF tracking MSCI ACWI ex India Index (USD), picking this will have slight overlap with your Indian Equity holding. But this is the simplest way to get exposure to Global Equity investing.
+
+Two things changed since the first version of this table:
+
+* **Vanguard cut the TER** of its FTSE All-World ETF (`VWRA`) from 0.19% to 0.14%. That pushed the [Invesco FTSE All-World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7) (0.15%) out of the Top 3 by TER.
+* **Vanguard FTSE Global All-Cap** (`VALU`) is now the cheapest *and* the broadest one-fund option: ~6,400 holdings across large, mid and small caps at 0.07%. It is FTSE's answer to MSCI ACWI IMI, at less than half the cost of the SPDR ACWI IMI (0.17%). The catch is a short track record, since it launched in August 2026. I still list the SPDR ACWI IMI (outside the Top 3) as the only MSCI IMI option.
 
 #### Developed Markets (DM) only
 | Index                    | ETF                                                                                                                  | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **MSCI World**           | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)         |             141,574 |        1 |   0.20% |          |
-| **MSCI World**           | [Xtrackers MSCI World UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDQ92)                   |              22,388 |        2 |   0.12% |          |
-| **MSCI World**           | [State Street SPDR MSCI World UCITS ETF USD Unhedged](https://www.justetf.com/en/etf-profile.html?isin=IE00BFY0GT14) |              19,233 |        3 |   0.12% |          |
-| **MSCI World**           | [UBS Core MSCI World UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXV59)               |              10,677 |          |   0.06% |        2 |
-| **MSCI World**           | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                    |               8,263 |          |   0.05% |        1 |
-| **FTSE Developed World** | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)         |               6,400 |          |   0.12% |        3 |
+| **MSCI World**           | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983)         |             141,934 |        1 |   0.20% |          |
+| **MSCI World**           | [Xtrackers MSCI World UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDQ92)                   |              24,045 |        2 |   0.12% |          |
+| **MSCI World**           | [State Street SPDR MSCI World UCITS ETF USD Unhedged](https://www.justetf.com/en/etf-profile.html?isin=IE00BFY0GT14) |              20,456 |        3 |   0.12% |          |
+| **MSCI World**           | [UBS Core MSCI World UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXV59)               |              13,269 |          |   0.06% |        2 |
+| **MSCI World**           | [Invesco MSCI World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00B60SX394)                    |              10,553 |          |   0.05% |        1 |
+| **FTSE Developed World** | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03)         |               6,686 |          |   0.12% |        3 |
 
 Since these are Developed Market indexes they won't have any overlap with Indian Equity portfolio. If you want to pick one DM index fund and use Indian Equity portfolio to proxy EM, then pick one of these based on your preference (Index/AUM/TER). 
 
 #### Emerging Markets (EM) only
 | Index                         | ETF                                                                                                                          | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **MSCI Emerging Markets IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)      |              43,825 |        1 |   0.18% |          |
-| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                |              13,825 |        2 |   0.18% |          |
-| **MSCI Emerging Markets**     | [iShares MSCI EM UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5YC18)                             |              10,037 |        3 |   0.18% |          |
-| **FTSE Emerging Markets**     | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733) |               2,174 |          |   0.17% |        2 |
-| **MSCI Emerging Markets**     | [State Street SPDR MSCI Emerging Markets UCITS ETF USD](https://www.justetf.com/en/etf-profile.html?isin=IE00B469F816)       |               2,167 |          |   0.18% |        3 |
-| **MSCI Emerging Markets**     | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)              |               1,389 |          |   0.15% |        1 |
+| **MSCI Emerging Markets IMI** | [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66)      |              39,827 |        1 |   0.18% |          |
+| **MSCI Emerging Markets**     | [Xtrackers MSCI Emerging Markets UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BTJRMP35)                |              12,590 |        2 |   0.18% |          |
+| **MSCI Emerging Markets**     | [iShares MSCI EM UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5YC18)                             |               9,710 |        3 |   0.18% |          |
+| **FTSE Emerging Markets**     | [Vanguard FTSE Emerging Markets UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733) |               2,381 |          |   0.17% |        2 |
+| **MSCI Emerging Markets**     | [State Street SPDR MSCI Emerging Markets UCITS ETF USD](https://www.justetf.com/en/etf-profile.html?isin=IE00B469F816)       |               2,002 |          |   0.18% |        3 |
+| **MSCI Emerging Markets**     | [HSBC MSCI Emerging Markets UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000KCS7J59)              |               1,705 |          |   0.15% |        1 |
 
 If you want more Emerging Markets exposure beyond India you can pick one of these. See the holdings of [iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66#holdings) to know which countries it covers. It has ~11% of India and Taiwan/China/South Korea with higher allocation. 
 
+### Country Allocation by Index
+
+Where does the money actually go? These are the country weights of one large fund per index, *as of 30 September 2026* ([justETF](https://www.justetf.com/), which lists every country above 1%; the rest is grouped as Other). Click an index name to see its fund's holdings. "<1%" means the country is in the index but below 1%; "0%" means the provider classifies it elsewhere (South Korea and Poland are Developed for FTSE, Emerging for MSCI).
+
+#### Global Markets (DM + EM)
+
+| Country | [FTSE All-World](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80#holdings) | [FTSE Global All Cap](https://www.justetf.com/en/etf-profile.html?isin=IE000VAHT5T0#holdings) | [MSCI ACWI](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) | [MSCI ACWI IMI](https://www.justetf.com/en/etf-profile.html?isin=IE00B3YLTY66#holdings) |
+| --- | ---: | ---: | ---: | ---: |
+| United States | 60.33% | 58.37% | 62.39% | 61.61% |
+| Japan | 6.04% | 5.83% | 5.22% | 5.83% |
+| Taiwan | 3.53% | 3.36% | 3.44% | 3.45% |
+| United Kingdom | 3.16% | 3.14% | 3.12% | 3.28% |
+| Canada | 2.84% | 2.81% | 2.86% | 3.02% |
+| South Korea | 2.60% | 2.45% | 2.57% | 2.50% |
+| China | 2.44% | 2.30% | 2.11% | 1.96% |
+| Switzerland | 2.18% | 2.05% | 2.21% | 2.10% |
+| Germany | 1.75% | 1.60% | 1.81% | 1.78% |
+| France | 1.74% | 1.63% | 1.76% | 1.76% |
+| India | 1.50% | 1.54% | 1.25% | 1.46% |
+| Australia | 1.50% | 1.45% | 1.34% | 1.47% |
+| Netherlands | 1.46% | 1.40% | 1.49% | 1.47% |
+| Ireland | <1% | <1% | 1.03% | <1% |
+| *Other (each <1%)* | 8.93% | 12.07% | 7.40% | 8.31% |
+
+#### Developed Markets (DM)
+
+| Country | [MSCI World](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) | [FTSE Developed](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03#holdings) |
+| --- | ---: | ---: |
+| United States | 70.81% | 66.58% |
+| Japan | 5.91% | 6.67% |
+| United Kingdom | 3.60% | 3.48% |
+| Canada | 3.24% | 3.13% |
+| South Korea | 0% | 2.86% |
+| Switzerland | 2.47% | 2.38% |
+| Germany | 2.03% | 1.93% |
+| France | 2.01% | 1.92% |
+| Netherlands | 1.69% | 1.60% |
+| Australia | 1.52% | 1.66% |
+| Ireland | 1.09% | <1% |
+| *Other (each <1%)* | 5.63% | 7.79% |
+
+#### Emerging Markets (EM)
+
+| Country | [MSCI EM](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5YC18#holdings) | [MSCI EM IMI](https://www.justetf.com/en/etf-profile.html?isin=IE00BKM4GZ66#holdings) | [FTSE Emerging](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BR733#holdings) |
+| --- | ---: | ---: | ---: |
+| Taiwan | 28.71% | 28.63% | 34.97% |
+| China | 17.64% | 16.30% | 24.09% |
+| South Korea | 21.27% | 20.55% | 0% |
+| India | 10.56% | 11.75% | 14.90% |
+| Brazil | 4.00% | 3.95% | 4.42% |
+| South Africa | 2.46% | 2.55% | 3.09% |
+| Saudi Arabia | 2.29% | 2.38% | 3.06% |
+| Mexico | 1.56% | 1.55% | 2.04% |
+| UAE | 1.22% | 1.23% | 1.70% |
+| Malaysia | <1% | 1.09% | 1.49% |
+| Thailand | <1% | 1.12% | 1.43% |
+| Hong Kong | 1.20% | 1.34% | 1.13% |
+| Poland | 1.04% | 1.12% | 0% |
+| *Other (each <1%)* | 8.05% | 6.44% | 7.68% |
+
+**What stands out:**
+
+* **South Korea shows the classification split in numbers.** It is ~21% of MSCI EM but absent from FTSE Emerging, and it is in FTSE Developed (2.86%) but not MSCI World. Mix providers and you hold it twice or not at all.
+* **India barely registers globally.** At 1.25–1.54% of the global indexes, a global fund overlaps very little with an Indian portfolio. In EM funds India is 10.6–14.9%.
+* **A global fund is ~60% US already**, and MSCI World is ~71%. Adding a separate US fund on top concentrates further.
+* **Small caps spread the weight.** FTSE Global All Cap has the lowest US share (58.4%) and the largest "Other" (12.1%).
+
 ## US Equity ETFs
 
-US equities dominate both Developed Market (DM) and Global (DM + EM) equity indexes, accounting for ~67% of developed-market capitalization and ~60% of global market capitalization.
+US equities dominate both Developed Market (DM) and Global (DM + EM) equity indexes, accounting for ~67–71% of developed-market capitalization and ~60–62% of global market capitalization (as of 30 September 2026).
 
 | Index | Market | US Contribution (%) | Example UCITS ETF |
 | --- | --- | ---: | --- |
-| **MSCI World** | DM only | ~67% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
-| **MSCI ACWI** | DM + EM | ~60% | [iShares MSCI ACWI UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
+| **MSCI World** | DM only | 70.81% | [iShares Core MSCI World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B4L5Y983#holdings) |
+| **FTSE Developed** | DM only | 66.58% | [Vanguard FTSE Developed World UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQV03#holdings) |
+| **MSCI ACWI** | DM + EM | 62.39% | [iShares MSCI All Country World UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259#holdings) |
+| **FTSE All-World** | DM + EM | 60.33% | [Vanguard FTSE All-World UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BK5BQT80#holdings) |
 
 For many investors, a broad global ETF already provides substantial exposure to the United States. However, some investors prefer to control their US allocation separately.
 
@@ -159,27 +234,27 @@ Unlike MSCI USA and S&P 500, the Nasdaq 100 is not intended to represent the bro
 
 | ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | --- | ---: | ---: | ---: | ---: |
-| [Xtrackers MSCI USA UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDR00) | 12,332 | 1 | 0.03% | 1 |
-| [iShares MSCI USA UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B52SFT06) | 4,644 | 2 | 0.03% | 1 |
-| [Amundi Core MSCI USA UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000FSN19U2) | 4,007 | 3 | 0.03% | 1 |
-| [UBS Core MSCI USA UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXS21) | 2,961 |  | 0.03% | 1 |
+| [Xtrackers MSCI USA UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BJ0KDR00) | 13,841 | 1 | 0.03% | 1 |
+| [iShares MSCI USA UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B52SFT06) | 5,153 | 2 | 0.03% | 1 |
+| [Amundi Core MSCI USA UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000FSN19U2) | 4,803 | 3 | 0.03% | 1 |
+| [UBS Core MSCI USA UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXS21) | 3,234 |  | 0.03% | 1 |
 
 ### S&P 500
 | ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | --- | ---: | ---: | ---: | ---: |
-| [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | 144,695 | 1 | 0.07% | 2 |
-| [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | 32,613 | 2 | 0.07% | 2 |
-| [State Street SPDR S&P 500 UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000XZSV718) | 16,962 | 3 | 0.03% | 1 |
-| [UBS Core S&P 500 UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXW66) | 1,716 |  | 0.03% | 1 |
-| [Xtrackers S&P 500 UCITS ETF 4C](https://www.justetf.com/en/etf-profile.html?isin=IE000Z9SJA06) | 1,483 |  | 0.03% | 1 |
+| [iShares Core S&P 500 UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B5BMR087) | 150,110 | 1 | 0.07% | 2 |
+| [Vanguard S&P 500 UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BFMXXD54) | 36,503 | 2 | 0.07% | 2 |
+| [State Street SPDR S&P 500 UCITS ETF USD Unhedged (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE000XZSV718) | 19,679 | 3 | 0.03% | 1 |
+| [Xtrackers S&P 500 UCITS ETF 4C](https://www.justetf.com/en/etf-profile.html?isin=IE000Z9SJA06) | 2,938 |  | 0.03% | 1 |
+| [UBS Core S&P 500 UCITS ETF USD acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BD4TXW66) | 2,457 |  | 0.03% | 1 |
 
 ### Nasdaq 100
 | ETF | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | --- | ---: | ---: | ---: | ---: |
-| [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | 25,956 | 1 | 0.30% | 3 |
-| [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | 4,254 | 2 | 0.30% | 3 |
-| [BNP Paribas Easy II NASDAQ 100 UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000QDFFK00) | 2,776 | 3 | 0.14% | 1 |
-| [Xtrackers Nasdaq 100 UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BMFKG444) | 2,198 |  | 0.20% | 2 |
+| [iShares Nasdaq 100 UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B53SZB19) | 27,747 | 1 | 0.30% | 3 |
+| [Invesco EQQQ Nasdaq-100 UCITS ETF Acc](https://www.justetf.com/en/etf-profile.html?isin=IE00BFZXGZ54) | 4,855 | 2 | 0.30% | 3 |
+| [Xtrackers Nasdaq 100 UCITS ETF 1C](https://www.justetf.com/en/etf-profile.html?isin=IE00BMFKG444) | 3,065 | 3 | 0.20% | 2 |
+| [BNP Paribas Easy II NASDAQ 100 UCITS ETF USD Acc](https://www.justetf.com/en/etf-profile.html?isin=IE000QDFFK00) | 2,904 |  | 0.14% | 1 |
 
 For most long-term investors, the practical difference between MSCI USA and S&P 500 is relatively small. The more consequential decision is whether to own the broad US market (MSCI USA/S&P 500) or to make a deliberate growth bet through the Nasdaq 100.
 
@@ -216,26 +291,20 @@ Filtering on [USD-denominated, US government bond ETFs, accumulating share class
 
 | ETF                                                                                                                                       | AUM<br/>($ million) | AUM Rank | TER (%) | TER Rank |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ------: | -------: |
-| **[iShares USD Treasury Bond 0-1yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BGSF1X88)**                   |              19,050 |        1 |   0.07% |        2 |
-| [iShares USD Treasury Bond 3-7yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3VWN393)                   |               8,142 |        2 |   0.07% |        2 |
-| [iShares USD Treasury Bond 1-3yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BYXPSP02)                   |               7,321 |        3 |   0.07% |        2 |
-| [iShares USD Treasury Bond 7-10yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3VWN518)                  |               5,095 |         |   0.07% |        2 |
-| [iShares USD Treasury Bond 20+yr UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BFM6TC58)               |               2,659 |         |   0.07% |        2 |
-| **[Vanguard U.S. Treasury 0-1 Year Bond UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BLRPPV00)** |               2,434 |         |   0.05% |        1 |
-| [Vanguard USD Treasury Bond UCITS ETF Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BGYWFS63)                 |               1,497 |         |   0.05% |        1 |
+| **[iShares USD Treasury Bond 0-1yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BGSF1X88)**                   |              20,614 |        1 |   0.07% |        2 |
+| [iShares USD Treasury Bond 3-7yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3VWN393)                   |               8,102 |        2 |   0.07% |        2 |
+| [iShares USD Treasury Bond 1-3yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BYXPSP02)                   |               7,698 |        3 |   0.07% |        2 |
+| [iShares USD Treasury Bond 7-10yr UCITS ETF (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00B3VWN518)                  |               5,042 |         |   0.07% |        2 |
+| [iShares USD Treasury Bond 20+yr UCITS ETF USD (Acc)](https://www.justetf.com/en/etf-profile.html?isin=IE00BFM6TC58)               |               3,388 |         |   0.07% |        2 |
+| **[Vanguard U.S. Treasury 0-1 Year Bond UCITS ETF (USD) Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BLRPPV00)** |               2,693 |         |   0.05% |        1 |
+| [Vanguard USD Treasury Bond UCITS ETF Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BGYWFS63)                 |               1,610 |         |   0.05% |        1 |
 
 Based on your preference for TER/AUM you can pick the iShares or Vanguard for 0-1 year Treasury bond ETFs.
 Picking up long term debt ETFs such as 7-10yr or 20+yr will expose you more to interest rate risks. So stick to short term (0-1 or 1-3yr) bond ETFs if you are investing in debt.
 
 Depending on your overall portfolio construction/goals, you may also choose to keep the entire defensive allocation in INR-denominated debt instruments and use global equities and global gold (discussed below) as the primary rebalancing assets. In such a setup, a dedicated international debt allocation may not be necessary.
 
-## Gold ETCs (Exchange Traded Commodities)
-
-### Aug 30, 2026 Update
-
-Irish Gold ETCs are legally structured as zero-coupon bonds, meaning they risk being taxed as debt instruments under Section 50AA at your **income tax slab rates regardless of the holding period**. When buying international gold, I look at Canadian alternatives like the **Sprott Physical Gold Trust (PHYS)**. Because `PHYS` is structured as a trust rather than debt, it avoids this classification and qualifies for the unified 12.5% LTCG rate after 24 months. Note that while `PHYS` comes with a higher TER (**0.41%**) than Irish ETCs—making its cost comparable to lower-TER Indian Gold ETFs—it offers the liquidity and structural safety of a massive **~$7.5 Billion AUM**.
-
-*(Note: I will come back and rewrite this section to fully detail these Canadian vs Irish structuring nuances.)*
+## Gold Funds and ETCs
 
 ### Why do we need international gold?
 
@@ -249,23 +318,74 @@ Because both assets are denominated in the same currency, this process avoids re
 
 In this way, international gold acts not only as a **diversifier and crisis hedge**, but also as a **liquidity buffer that enables low-friction portfolio rebalancing within the global allocation**.
 
-### What is Gold ETC
+### Structure Decides the Tax: Fund vs ETC
 
-Gold ETCs are exchange-traded securities designed to track the price of gold. They trade on stock exchanges like regular stocks and allow investors to gain exposure to gold without physically buying, storing, or insuring gold bars.
+For equities and debt, domicile (Ireland) is the filter. For gold, the **legal structure** matters more, because it decides how India taxes the gain.
 
-Unlike traditional exchange-traded funds (ETFs), Gold ETCs are legally structured as **debt securities issued by financial institutions**, not as investment funds. This structural difference exists because European UCITS fund rules do not allow a fund to hold a single commodity like gold directly.
+| Structure | Examples | What you legally own | How I expect it to be taxed in India |
+| --- | --- | --- | --- |
+| **Gold ETC** (Exchange Traded Commodity) | Irish ETCs from iShares, Invesco, Amundi, Xtrackers | A **debt security** (zero-coupon note) issued by a special-purpose company, backed by gold | Risk of being treated as an unlisted debenture under **Section 50AA**: slab rate, whatever the holding period |
+| **Swiss gold ETF** | iShares Gold (CH), UBS ETF (CH) Gold | **Units of a fund** that owns physical gold | Like any foreign ETF: **12.5% LTCG** after 24 months |
+| **Canadian gold trust** | Sprott Physical Gold Trust (PHYS) | **Units of a closed-end trust** that owns physical gold | Like any foreign ETF: **12.5% LTCG** after 24 months |
 
-Most modern gold ETCs are **physically backed**, meaning that gold bullion is held in secure vaults (typically in London) and acts as collateral for the securities issued to investors.
+* **Why Ireland has only ETCs:** European UCITS rules do not allow a fund to hold a single commodity like gold. Issuers work around it with ETCs, which are notes rather than funds.
+* **Why Switzerland has real gold funds:** Swiss fund law has no such restriction, so iShares, UBS and others run physically backed gold ETFs domiciled in Switzerland, traded in USD on the SIX Swiss Exchange.
+* **Canada:** The Sprott trusts are structured as closed-end mutual fund trusts, with the gold held at the Royal Canadian Mint. `PHYS` is listed on NYSE Arca and TSX in USD.
+
+> **Gold Filter**: Physically backed gold **funds or trusts** (not ETCs), traded in **USD**, with an **AUM exceeding $1 Billion**. Since gold pays no dividends, distributing vs accumulating share classes make no practical difference here.
+
+This is my reading of the rules, not tax advice. Section 50AA was introduced in 2023 and amended in 2024 and 2025, so check the current position (or ask a CA) before you buy.
+
+#### Taxes in Switzerland and Canada (as a Non-Resident)
+
+As far as I can tell, neither country takes anything from an Indian resident holding a gold fund. Gold earns no income, so there is nothing to withhold tax on, and neither country taxes non-residents on these gains or on death. This is the same advantage Irish ETFs have over US ETFs ([Chapter 6](/building-wealth/books/the-global-indian-investor/06-what-to-buy-irish-etfs/)).
+
+| | Swiss gold ETFs (`CSGOLD`, `AUUSI`, …) | Canadian trust (`PHYS`) |
+| --- | --- | --- |
+| **Capital gains tax there** | None for non-residents on fund units | None, as long as the units are not "taxable Canadian property" (value mostly from Canadian real estate or resources), which bullion is not ([Sprott F-10](https://www.sec.gov/Archives/edgar/data/1477049/000183988222017744/phys-f10_080922.htm)) |
+| **Withholding tax** | 35% on dividend or interest payouts, cut to 10% under the India–Switzerland DTAA via a slow refund claim. A gold fund has no income, so in practice nil | 25% on distributions, reduced by treaty. `PHYS` does not normally distribute, so in practice nil |
+| **Estate / inheritance tax** | No federal inheritance tax; cantonal taxes follow the deceased's domicile, so a non-resident's fund units are not caught | No estate tax; the deemed sale on death reaches non-residents only through taxable Canadian property |
+| **US estate tax** | Not applicable | Not applicable, even though `PHYS` trades on NYSE Arca: it is a Canadian trust, not US property |
+| **Other** | Swiss stamp duty (~0.075% per trade) applies only when a Swiss securities dealer is involved; check your broker's trade confirmations | Can trade at a small premium or discount to the value of its gold |
+
+**In India:**
+
+* **Capital gains:** 12.5% LTCG after 24 months (no indexation); STCG at slab rate.
+* **Foreign tax credit:** normally nothing to claim. If Swiss tax is ever withheld, claim the 10% treaty rate through Form 67.
+* **Disclosure:** report the holdings in Schedule FA, like any other foreign asset.
+
+**Estate processing:** The real hurdle is the broker, not the fund's country. Your heirs go through the broker's process for a deceased account holder (death certificate, and possibly a succession certificate or probate). That is the same whether you hold Irish ETFs, Swiss ETFs or `PHYS`, so keep nominees and documents in order.
+
+### Shortlisted Global Gold Funds (Swiss and Canadian)
+
+Top 3 by AUM and Top 3 by TER are listed here.
+
+| Fund | Domicile | Ticker (USD) | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| [Sprott Physical Gold Trust](https://sprott.com/investment-strategies/exchange-listed-products/physical-bullion-funds/gold/) | Canada | `PHYS` (NYSE Arca) | 15,640 | 1 | 0.39 | |
+| [UBS ETF (CH) Gold (USD) A-dis](https://www.justetf.com/en/etf-profile.html?isin=CH0106027193) | Switzerland | `AUUSI` (SIX) | 5,471 | 2 | 0.23 | 2 |
+| [Swisscanto (CH) Gold ETF EA USD](https://www.justetf.com/en/etf-profile.html?isin=CH0047533549) | Switzerland | `ZGLDUS` (SIX) | 4,511 | 3 | 0.40 | |
+| [iShares Gold (CH)](https://www.justetf.com/en/etf-profile.html?isin=CH0104136236) | Switzerland | `CSGOLD` (SIX) | 1,502 | | 0.19 | 1 |
+| [Raiffeisen ETF Solid Gold Responsibly Sourced & Traceable A USD](https://www.justetf.com/en/etf-profile.html?isin=CH1122756740) | Switzerland | `RGRTU` (SIX) | 1,011 | | 0.29 | 3 |
+
+> TER ranges from 0.19% to 0.40%, higher than Irish ETCs, in exchange for a cleaner tax structure.
+
+- Source: [justETF](https://www.justetf.com/en/search.html?search=ETFS&index=Gold&quoteCurrency=USD&ls=any&sortOrder=desc&sortField=fundSize&currencyHedged=none) for the Swiss funds (3rd week of November 2026). Swisscanto's AUM is for its USD share class only.
+- `PHYS` net assets are as of September 30, 2026, from its interim report; its TER is the management expense ratio (0.35% management fee plus trust expenses).
+- `PHYS` is a closed-end trust, so it can trade at a small premium or discount to the value of its gold. The Swiss ETFs create and redeem units, so they stay close to NAV.
+- The other big Canadian option, Sprott Physical Gold and Silver Trust (`CEF`, ~$7.4B), holds silver too, so it is not a pure gold holding. Canadian-listed gold ETFs such as iShares `CGL.C` trade in CAD, adding another currency conversion.
+
+I am choosing between `CSGOLD` for the lowest cost and `PHYS` for the largest pool of gold.
 
 ### A Gold Comparison
 
-Let's compare Indian Gold ETFs/Mutual Funds vs Irish Gold ETCs.
+Let's compare Indian Gold ETFs/Mutual Funds against the global options.
 
 #### Indian Gold Mutual Funds (FoFs)
 
 Top 3 by AUM and Top 3 by TER are listed here.
 
-| Fund Name                          | AUM<br/>(₹ Cr) | AUM<br/>($ million) | AUM Rank | Fund TER <br/>(%) | ETF Name                   | ETF TER <br/>(%) | Total TER <br/>(%) | TER Rank |
+| Fund Name                          | AUM<br/>(₹ Cr) | AUM<br/>($ million) | AUM Rank | Fund TER <br/>(%) | ETF Name                   | ETF TER <br/>(%) | Total TER <br/>(%) | TER Rank |
 | ---------------------------------- | -------------: | ------------------: | -------: | ----------------: | -------------------------- | ---------------: | -----------------: | -------: |
 | **SBI Gold Fund**                  |         15,691 |               1,640 |        1 |              0.25 | SBI Gold ETF               |             0.65 |               0.90 |          |
 | **HDFC Gold Fund**                 |         11,464 |               1,198 |        2 |              0.20 | HDFC Gold ETF              |             0.59 |               0.79 |          |
@@ -280,7 +400,7 @@ Top 3 by AUM and Top 3 by TER are listed here.
 
 Top 3 by AUM and Top 3 by TER are listed here.
 
-| ETF Name                                        | ISIN         | AUM<br/>(₹ Cr) | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
+| ETF Name                                        | ISIN         | AUM<br/>(₹ Cr) | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
 | ----------------------------------------------- | ------------ | -------------: | ------------------: | -------: | ----------: | -------: |
 | Nippon India ETF Gold BeES                      | INF204KB17I5 |         55,540 |               5,804 |        1 |        0.80 |          |
 | ICICI Prudential Gold ETF                       | INF109KC1NT3 |         26,380 |               2,757 |        2 |        0.49 |          |
@@ -291,46 +411,60 @@ Top 3 by AUM and Top 3 by TER are listed here.
 
 > Indian Gold ETF TER ranges from 0.29% to 0.80% as shown in the table
 
-#### Irish Gold ETCs
+- Indian fund data is from the last week of May 2026, with 1 USD = 95.70 INR used for the AUM conversions to USD.
 
-Top 3 by AUM and Top 3 by TER are listed here.
+#### Irish Gold ETCs (for reference)
 
-| ETC Name                                                                                                   | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
+These fail the structure filter above, but they remain the cheapest way to hold gold if the tax treatment ever becomes clear. Top 3 by AUM and Top 3 by TER are listed here.
+
+| ETC Name                                                                                                   | AUM<br/>($ million) | AUM Rank | TER<br/>(%) | TER Rank |
 | ---------------------------------------------------------------------------------------------------------- | ------------------: | -------: | ----------: | -------: |
-| [iShares Physical Gold ETC](https://www.justetf.com/en/etf-profile.html?isin=IE00B4ND3602)                 |              37,627 |        1 |        0.12 |        2 |
-| [Invesco Physical Gold ETC](https://www.justetf.com/en/etf-profile.html?isin=IE00B579F325)                 |              29,100 |        2 |        0.12 |        2 |
-| [Amundi Physical Gold ETC (C)](https://www.justetf.com/en/etf-profile.html?isin=FR0013416716)              |              12,229 |        3 |        0.12 |        2 |
-| [Xtrackers IE Physical Gold ETC Securities](https://www.justetf.com/en/etf-profile.html?isin=DE000A2T0VU5) |               6,949 |          |        0.11 |        1 |
+| [iShares Physical Gold ETC](https://www.justetf.com/en/etf-profile.html?isin=IE00B4ND3602)                 |              35,610 |        1 |        0.12 |        2 |
+| [Invesco Physical Gold ETC](https://www.justetf.com/en/etf-profile.html?isin=IE00B579F325)                 |              28,266 |        2 |        0.12 |        2 |
+| [Amundi Physical Gold ETC (C)](https://www.justetf.com/en/etf-profile.html?isin=FR0013416716)              |              11,365 |        3 |        0.12 |        2 |
+| [Xtrackers IE Physical Gold ETC Securities](https://www.justetf.com/en/etf-profile.html?isin=DE000A2T0VU5) |               6,365 |          |        0.11 |        1 |
 
-> TER is very competitive globally, ranging from just 0.11% to 0.12%
-
-- Source: [justETF](https://www.justetf.com/en/search.html?search=ETFS&index=Gold&dc=IE&quoteCurrency=USD&resetPage=true) as of May 2026 filtered for Ireland Domicile and Gold asset class.
-- ISIN prefixes reflect where the instrument was initially registered or the parent entity's location, while the legal domicile of the vehicle remains in Ireland
+- Source: [justETF](https://www.justetf.com/en/search.html?search=ETFS&index=Gold&dc=IE&quoteCurrency=USD&resetPage=true) as of the 3rd week of November 2026, filtered for Ireland Domicile and Gold asset class.
+- ISIN prefixes reflect where the instrument was initially registered or the parent entity's location, while the legal domicile of the vehicle remains in Ireland.
 
 #### Comparing the AUM and TER
-Min and Max cost and AUM are based on the filtered list of Top 3 AUM and Top 3 TER rankings below.
+Min and Max cost and AUM are based on the filtered list of Top 3 AUM and Top 3 TER rankings above.
 
 | Instrument | Min AUM<br/>($ million) | Max AUM<br/>($ million) | Min TER<br/>(%) | Max TER<br/>(%) |
 | --- | ---: | ---: | ---: | ---: |
 | Indian Gold Mutual Funds (FoFs) | 3 | 1,640 | 0.45 | 0.90 |
 | Indian Gold ETFs | 2 | 5,804 | 0.29 | 0.80 |
-| Irish Gold ETCs | 6,949 | 37,627 | 0.11 | 0.12 |
+| **Global Gold Funds (Swiss & Canadian)** | 1,011 | 15,640 | 0.19 | 0.40 |
+| Irish Gold ETCs (reference) | 6,365 | 35,610 | 0.11 | 0.12 |
 
 **The Scale & Cost Gap:**
-When looking at the numbers, the structural advantage of global markets becomes obvious:
 
-* **Scale:** The largest Indian Gold ETF **~$5.8B** is **~6.5x smaller** than the largest Irish Gold ETC **~$37.6B**, while the largest Indian Gold Mutual Fund is **nearly 23x smaller**.
-* **Cost:** Because the gold in global ETCs is held in massive institutional bars (~12.5kg) with high operational efficiency, their costs are rock bottom. Indian Gold Mutual Funds are anywhere from **3.7x to 7.5x costlier** than their Irish counterparts, with Total TERs dragging at up to 0.90% annually compared to a flat 0.12%.
+* **Scale:** The largest Indian Gold ETF (**~$5.8B**) is **~2.7x smaller** than `PHYS` (**~$15.6B**), while the largest Indian Gold Mutual Fund is **nearly 10x smaller**.
+* **Cost:** Indian Gold Mutual Funds are **2.4x to 4.7x costlier** than iShares Gold (CH) at 0.19%. At 0.39%, `PHYS` costs about the same as the cheaper Indian options; what you get there is scale, USD liquidity and a price that tracks global gold (see the next section).
 
 #### Notes
-- **The Domicile Note:**
-Unlike global equity ETFs (where an Ireland domicile slashes US Dividend Withholding Tax from 30% to 15%), gold does not pay dividends. Therefore, there is **no specific tax treaty advantage** to domiciling gold in Ireland. However, if you are already building a global passive equity portfolio using Ireland-domiciled UCITS ETFs, routing your gold allocation to an Irish ETC is highly recommended for **portfolio consolidation**
-- 1 USD = 95.70 INR used for Indian AUM conversions to USD
-- Data is taken by last week of May 2026
+- **The Domicile Note:** Unlike global equity ETFs (where an Ireland domicile slashes US Dividend Withholding Tax from 30% to 15%), gold does not pay dividends. So there is **no tax-treaty advantage** to any domicile for gold. Pick the structure first and the domicile follows: Switzerland or Canada for a fund, Ireland only for an ETC.
+
+### Import Duty: Indian Gold Does Not Track the Global Price
+
+Indian Gold ETFs value their gold at the **domestic price**: the international (LBMA) price, converted to INR, **plus import duty**. So every Budget-day change in duty moves your Indian gold NAV overnight, with no change in the actual price of gold.
+
+| Date | Import duty change | Effect on Indian Gold ETF NAVs |
+| --- | --- | --- |
+| July 2024 (Union Budget) | Cut from 15% to 6% | Fell overnight, while global gold was flat |
+| May 2026 | Raised from 6% to 15%, the [steepest increase on record](https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening) | Rose overnight, while global gold was flat |
+
+Duty is not the only distortion. After the May 2026 hike, the World Gold Council reported domestic gold trading at a discount of [nearly $150/oz to the landed price](https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening) (~₹4,600 per 10 g, at ₹95.70 per USD) (international price plus duty), as demand dried up.
+
+What this means for an investor:
+
+* **Duty is policy risk, not return.** A gain from a duty hike can reverse at the next Budget. Over a 20–30 year holding, you are exposed to every policy cycle in between.
+* **Buy high, sell low, by accident.** If you buy while duty is 15% and sell after a cut, you lose the difference even if gold itself rose.
+* **Global gold funds price gold at the international price in USD.** Your INR return is just gold's USD return plus the USD/INR move, which is what the TER drag calculation below assumes.
 
 ### TER Drag Compounds Hard Over Long Durations
 
-At first glance, the difference between a 0.12% TER Global Gold ETC and a 0.90% Indian Gold Fund may appear small. But gold is usually a long-duration holding, and recurring costs compound aggressively over time.
+At first glance, the difference between a 0.19% Global Gold Fund and a 0.90% Indian Gold Fund may appear small. But gold is usually a long-duration holding, and recurring costs compound aggressively over time.
 
 Historically, gross INR gold returns are driven by two compounding components:
 
@@ -340,7 +474,7 @@ Historically, gross INR gold returns are driven by two compounding components:
 
 Crucially, the investment structure dictates exactly *where* the Total Expense Ratio (TER) is deducted, which alters the final math.
 
-For a **Global Gold ETC**, the 0.12% TER is deducted directly from the underlying USD gold return, meaning you still get the full, un-taxed benefit of the currency depreciation on that net USD amount. For an **Indian Gold Fund**, the 0.90% TER is deducted from the *total combined* INR return.
+For a **Global Gold Fund**, the 0.19% TER is deducted directly from the underlying USD gold return, meaning you still get the full benefit of the currency depreciation on that net USD amount. For an **Indian Gold Fund**, the 0.90% TER is deducted from the *total combined* INR return.
 
 Here is how that structural difference impacts the effective return rate:
 
@@ -348,12 +482,12 @@ Here is how that structural difference impacts the effective return rate:
 
 | Structure | Gross USD Growth | TER | Net USD Growth | USD/INR Growth | Effective Net INR CAGR |
 | --- | --- | --- | --- | --- | --- |
-| **Low-cost Gold ETC** | 7.00% | 0.12% | 6.88% | 4.00% | **11.16%**  *[(1.0688 * 1.04) - 1]* |
+| **Low-cost Global Gold Fund** | 7.00% | 0.19% | 6.81% | 4.00% | **11.08%**  *[(1.0681 * 1.04) - 1]* |
 | **Indian Gold Fund** | 7.00% | N/A* | 7.00% | 4.00% | **10.38%**  *[11.28% - 0.90%]* |
 
 *(Note: The Indian Fund's TER is applied to the final INR return, not the USD leg).*
 
-While a ~0.78% difference in net CAGR might sound easily ignorable, time amplifies this gap significantly.
+While a ~0.70% difference in net CAGR might sound easily ignorable, time amplifies this gap significantly.
 
 #### 2. Comparison of Long-Term Growth
 
@@ -362,17 +496,17 @@ For a simple ₹1 lakh lump sum held for 30 years, here is how that effective ra
 | Structure | Effective Net INR CAGR | Final Value (Nominal) | Additional (₹) | Additional (%) |
 | --- | --- | --- | --- | --- |
 | **Indian Gold Fund** | [10.38%](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202605c1lm0kg10.38h0i6t15p30y) | **₹19.35 lakh** | - | - |
-| **Low-cost Gold ETC** | [11.16%](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202605c1lm0kg11.16h0i6t15p30y) | **₹23.90 lakh** | **₹4.55 lakh** | **23%** |
+| **Low-cost Global Gold Fund** | [11.08%](https://sakthipriyan.com/building-wealth/tools/realvalue-sip-engine/#v1otd30yf202605c1lm0kg11.08h0i6t15p30y) | **₹23.39 lakh** | **₹4.04 lakh** | **21%** |
 
-By switching from an Indian Gold Fund to a low-cost Global Gold ETC, the investor pockets an extra **₹4.55 lakh**—yielding a final portfolio value nearly **23% higher** over 30 years, simply through structural efficiency.
+By switching from an Indian Gold Fund to a low-cost Global Gold Fund, the investor pockets an extra **₹4.04 lakh**, a final portfolio value nearly **21% higher** over 30 years, simply through structural efficiency. An Irish ETC at 0.12% would add a little more (₹23.90 lakh), but only if it escapes slab-rate taxation, which is exactly the risk the structure filter avoids.
 
 This is why recurring structural costs matter enormously for long-term passive assets like gold. One-time forex conversion and routing costs to access global markets may hurt initially, but the recurring TER drag of domestic funds compounds against the investor every single year.
 
-**Note**: These calculations exclude the initial one-time forex conversion and brokerage costs required to access global markets. However, the recurring TER savings from lower-cost Global Gold ETCs typically offset these upfront costs within the first 2–3 years of holding. In practice, the effective forex cost may be even lower when gold investments are piggybacked on existing international equity allocations, since the same USD balance can be reused across assets without repeated INR–USD conversions. There is no forex cost involved when rebalancing from Global Equity to Gold. 
+**Note**: These calculations exclude the initial one-time forex conversion and brokerage costs required to access global markets, and any import-duty swings on the Indian side. However, the recurring TER savings from lower-cost Global Gold Funds typically offset these upfront costs within the first few years of holding. In practice, the effective forex cost may be even lower when gold investments are piggybacked on existing international equity allocations, since the same USD balance can be reused across assets without repeated INR–USD conversions. There is no forex cost involved when rebalancing from Global Equity to Gold.
 
 ### Notes
-- Indian gold prices include the impact of import duties, GST, and other local market factors. Changes to these policies can affect domestic gold prices independently of global gold prices, introducing an additional source of tracking variation for Indian investors.
-- Currently, my gold allocation sits in Indian Mutual Funds. While I initially planned to upgrade to Indian ETFs, I am routing all my future gold investments into Irish ETCs to eliminate the heavy domestic cost drag and avoid arbitrary tax distortions entirely.
+- Indian gold prices include the impact of import duties, GST, and other local market factors (see [Import Duty](#import-duty-indian-gold-does-not-track-the-global-price) above), so they can move independently of global gold prices.
+- Currently, my gold allocation sits in Indian Mutual Funds. I had planned to route future gold investments into Irish ETCs, but the Section 50AA risk changed that. My future gold investments go into gold funds structured as funds or trusts (Swiss ETFs or `PHYS`), to eliminate the domestic cost drag, the import-duty distortion and the debt-tax risk together.
 
 ## Portfolio Construction
 
