@@ -300,7 +300,7 @@ Filtering on [USD-denominated, US government bond ETFs, accumulating share class
 | [Vanguard USD Treasury Bond UCITS ETF Accumulating](https://www.justetf.com/en/etf-profile.html?isin=IE00BGYWFS63)                 |               1,610 |         |   0.05% |        1 |
 
 Based on your preference for TER/AUM you can pick the iShares or Vanguard for 0-1 year Treasury bond ETFs.
-Picking up long term debt ETFs such as 7-10yr or 20+yr will expose you more to interest rate risks. So stick to short term (0-1 or 1-3yr) bond ETFs if you are investing in debt.
+Picking up long term debt ETFs such as 7-10yr or 20+yr will expose you more to interest rate risks. So stick to short term (0-1yr) bond ETFs if you are investing in debt.
 
 Depending on your overall portfolio construction/goals, you may also choose to keep the entire defensive allocation in INR-denominated debt instruments and use global equities and global gold (discussed below) as the primary rebalancing assets. In such a setup, a dedicated international debt allocation may not be necessary.
 
