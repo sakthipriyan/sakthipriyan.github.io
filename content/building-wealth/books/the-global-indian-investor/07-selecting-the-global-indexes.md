@@ -381,6 +381,8 @@ I am choosing between `CSGOLD` for the lowest cost and `PHYS` for the largest po
 
 Let's compare Indian Gold ETFs/Mutual Funds against the global options.
 
+> **Data dates differ:** the Indian fund numbers below are older, from the last week of May 2026 (1 USD = 95.70 INR for the AUM conversions). The global gold funds and Irish ETCs are from the 3rd week of November 2026. Indian AUMs have likely moved since, so treat them as indicative; the TERs change less often.
+
 #### Indian Gold Mutual Funds (FoFs)
 
 Top 3 by AUM and Top 3 by TER are listed here.
@@ -410,8 +412,6 @@ Top 3 by AUM and Top 3 by TER are listed here.
 | Angel One Gold ETF                              | INF1J2R01114 |             83 |                   9 |          |        0.35 |        3 |
 
 > Indian Gold ETF TER ranges from 0.29% to 0.80% as shown in the table
-
-- Indian fund data is from the last week of May 2026, with 1 USD = 95.70 INR used for the AUM conversions to USD.
 
 #### Irish Gold ETCs (for reference)
 
