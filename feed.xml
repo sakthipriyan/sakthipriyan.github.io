@@ -73,9 +73,10 @@ compared to standard bank remittance rates.&lt;/p&gt;</description></item><item>
 &lt;p&gt;&lt;strong&gt;ETF Selection &amp;amp; Data Criteria&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Currency&lt;/strong&gt;: When you pick the TICKER, ensure it is traded in USD to avoid additional currency conversions.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Liquidity &amp;amp; Safety&lt;/strong&gt;: To ensure robust liquidity and minimize fund closure risk, the ETFs shortlisted exclusively feature accumulating Irish-domiciled UCITS ETFs with an &lt;strong&gt;AUM exceeding $1 Billion&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Liquidity &amp;amp; Safety&lt;/strong&gt;: To ensure robust liquidity and minimize fund closure risk, the equity and debt ETFs shortlisted exclusively feature physically replicated, accumulating Irish-domiciled UCITS ETFs with an &lt;strong&gt;AUM exceeding $1 Billion&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gold Exception&lt;/strong&gt;: Gold is shortlisted by legal structure instead of domicile. Only funds and trusts (Swiss and Canadian) make the cut; Irish Gold ETCs are debt securities and are shown for reference only. See &lt;a href="#gold-funds-and-etcs"&gt;Gold&lt;/a&gt; below.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Ranking&lt;/strong&gt;: Across the various indexes, the tables list the Top 3 funds by AUM and the Top 3 by lowest TER.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data Vintage&lt;/strong&gt;: Fund size, TER, and rankings are based on data taken in the &lt;strong&gt;3rd week of June 2026&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Vintage&lt;/strong&gt;: Fund size, TER, and rankings are based on &lt;a href="https://www.justetf.com/"&gt;justETF&lt;/a&gt; data taken in the &lt;strong&gt;3rd week of November 2026&lt;/strong&gt; (first published with June 2026 data).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;h2 id="global-equity-etfs"&gt;&lt;a class="anchor-link" href="#global-equity-etfs" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;Global Equity ETFs&lt;/h2&gt;
